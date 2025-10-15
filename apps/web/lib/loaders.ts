@@ -34,7 +34,7 @@ export function safeReadJSON<T>(...segments: string[]): T | null {
 export function listTickers(): string[] {
   const arr = safeReadJSON<string[]>("_tickers.json");
   if (Array.isArray(arr) && arr.length) return arr;
-  // fallback (prevents build failure)
+  // fallback so SSG never fails
   return ["AAPL", "MSFT", "GOOGL"];
 }
 
@@ -47,7 +47,6 @@ export function loadTicker(symbol: string): TickerJson {
 export function loadPortfolio(): PortfolioJson | null {
   const p = safeReadJSON<PortfolioJson>("portfolio.json");
   if (!p) return null;
-  // normalize arrays
   p.dates = Array.isArray(p.dates) ? p.dates : [];
   p.equity = Array.isArray(p.equity) ? p.equity : [];
   p.ret = Array.isArray(p.ret) ? p.ret : [];
