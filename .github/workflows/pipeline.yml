@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: src
-      HF_HOME: "${{ runner.temp }}/hf-home"
       HF_HUB_DISABLE_TELEMETRY: "1"
 
     steps:
@@ -49,6 +48,10 @@ jobs:
           pip install --no-cache-dir -r requirements.txt
           pip check
 
+      # Set a fresh HF cache dir for each run without using expressions in env:
+      - name: Set Hugging Face cache dir
+        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> $GITHUB_ENV
+
       - name: Sanity check Python deps
         run: |
           python -c "import sys; print('PY', sys.version)"
@@ -58,7 +61,7 @@ jobs:
 
       - name: Set dates (last 365 days)
         run: |
-          echo "START=$(date -u -d '365 days ago' +%F)" >> $GITHUB_ENV || echo "START=$(python - <<'PY'
+          echo "START=$(date -u -d '365 days ago' +%F 2>/dev/null || python - <<'PY'
           from datetime import datetime, timedelta
           print((datetime.utcnow() - timedelta(days=365)).strftime('%Y-%m-%d'))
           PY
@@ -78,7 +81,7 @@ jobs:
 
       - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
         env:
-          HF_HOME: "${{ env.HF_HOME }}"
+          HF_HOME: ${{ env.HF_HOME }}
         run: |
           python -m market_sentiment.cli.build_json \
             --universe data/sp500.csv \
