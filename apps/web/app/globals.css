@@ -10,3 +10,10 @@ body { @apply bg-gray-50 text-gray-900; }
 .kpi-sub { @apply text-sm text-gray-500; }
 .btn { @apply px-3 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50; }
 .btn-primary { @apply px-3 py-2 rounded-xl bg-black text-white hover:bg-gray-800; }
+
+/* cards / tiles / buttons */
+.card { @apply rounded-2xl border border-gray-200 p-4 bg-white shadow-sm; }
+.btn { @apply px-3 py-1.5 rounded-lg border border-gray-300 hover:bg-gray-50; }
+.tile { @apply rounded-xl border border-gray-200 p-3 hover:bg-gray-50 transition; }
+.tile-title { @apply font-semibold; }
+.tile-sub { @apply text-xs text-gray-500; }
