@@ -57,6 +57,7 @@ jobs:
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
         run: npm run build
 
       - name: Upload artifact for Pages
