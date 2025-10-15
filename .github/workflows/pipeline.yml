@@ -2,7 +2,7 @@ name: Build Data & Deploy Site
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   workflow_dispatch:
   schedule:
     - cron: "0 12 * * 1"  # weekly; change to "0 6 * * *" for daily 06:00 UTC
@@ -13,11 +13,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
-  build-data-and-site:
+  build:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: src
@@ -29,7 +29,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install Python deps
         run: |
@@ -47,19 +47,17 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install web deps
         working-directory: apps/web
-        run: |
-          npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund
 
-      - name: Build site (static via output: export)
+      - name: Build static site (output: export)
         working-directory: apps/web
         env:
-          NEXT_TELEMETRY_DISABLED: 1
-        run: |
-          npm run build
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: npm run build
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
@@ -67,12 +65,10 @@ jobs:
           path: apps/web/out
 
   deploy:
-    needs: build-data-and-site
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
