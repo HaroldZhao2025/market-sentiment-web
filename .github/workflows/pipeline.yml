@@ -5,7 +5,7 @@ on:
     branches: ["main"]
   workflow_dispatch:
   schedule:
-    - cron: "0 12 * * 1"  # Mondays 12:00 UTC
+    - cron: "0 12 * * 1"
 
 permissions:
   contents: read
@@ -27,7 +27,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ---------- Python ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -48,16 +47,8 @@ jobs:
           pip install --no-cache-dir -r requirements.txt
           pip check
 
-      # Set a fresh HF cache dir for each run without using expressions in env:
       - name: Set Hugging Face cache dir
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> $GITHUB_ENV
-
-      - name: Sanity check Python deps
-        run: |
-          python -c "import sys; print('PY', sys.version)"
-          python -c "import torch; print('torch', torch.__version__)"
-          python -c "import transformers, tokenizers; print('transformers', transformers.__version__, 'tokenizers', tokenizers.__version__)"
-          python -c "import pandas, yfinance, bs4, lxml; print('pandas', pandas.__version__)"
 
       - name: Set dates (last 365 days)
         run: |
@@ -72,13 +63,6 @@ jobs:
       - name: Build S&P 500 universe
         run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
 
-      - name: Sanity check package layout
-        run: |
-          echo "Listing src/market_sentiment:"
-          ls -la src/market_sentiment
-          echo "Listing src/market_sentiment/cli:"
-          ls -la src/market_sentiment/cli
-
       - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
         env:
           HF_HOME: ${{ env.HF_HOME }}
@@ -90,7 +74,12 @@ jobs:
             --batch 16 \
             --limit 200
 
-      # ---------- Web ----------
+      - name: Inspect output (debug)
+        run: |
+          ls -lah apps/web/public/data || true
+          head -n 20 apps/web/public/data/_tickers.json || true
+          head -n 20 apps/web/public/data/portfolio.json || true
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -100,7 +89,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: "Build static site (Next.js output: export)"
+      - name: Build static site (Next.js output: export)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
