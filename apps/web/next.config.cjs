@@ -1,11 +1,14 @@
+// apps/web/next.config.cjs
 /** @type {import('next').NextConfig} */
-const base = process.env.NEXT_PUBLIC_BASE_PATH || ""; // e.g. "/market-sentiment-web"
+const NEXT_PUBLIC_BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 module.exports = {
-  output: "export",               // static export target (we’ll copy from .next → out/)
-  basePath: base,
-  assetPrefix: base ? `${base}/` : undefined,
-  trailingSlash: true,
+  output: "export",
+  basePath: NEXT_PUBLIC_BASE_PATH || undefined,
   images: { unoptimized: true },
-  reactStrictMode: true
+  trailingSlash: true,
+  experimental: {
+    // keep App Router static export friendly
+    manualClientBasePath: true,
+  },
 };
