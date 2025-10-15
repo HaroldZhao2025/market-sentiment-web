@@ -83,6 +83,14 @@ jobs:
           (test -f apps/web/public/data/_tickers.json && head -n 20 apps/web/public/data/_tickers.json) || true
           (test -f apps/web/public/data/portfolio.json && head -n 20 apps/web/public/data/portfolio.json) || true
 
+      - name: Guard non-empty data
+        run: |
+          test -f apps/web/public/data/_tickers.json || { echo "::error::_tickers.json missing"; exit 1; }
+          n=$(jq length apps/web/public/data/_tickers.json || echo 0)
+          echo "Tickers generated: $n"
+          [ "$n" -ge 5 ] || { echo "::error::Too few tickers ($n). Failing build to avoid empty site."; exit 1; }
+          test -f apps/web/public/data/portfolio.json || { echo "::error::portfolio.json missing"; exit 1; }
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
