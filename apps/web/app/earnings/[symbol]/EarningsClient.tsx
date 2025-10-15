@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { assetPath } from "../../lib/paths";
+import { assetPath } from "../../../lib/paths"; // up three levels from app/earnings/[symbol] to lib
 
 export default function EarningsClient({ symbol }: { symbol: string }) {
   const s = symbol.toUpperCase();
