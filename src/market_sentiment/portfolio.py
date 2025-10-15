@@ -2,103 +2,50 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-
-def _to_eastern_day(s: pd.Series) -> pd.Series:
-    """Coerce to tz-aware America/New_York and normalize to day."""
-    dt = pd.to_datetime(s, errors="coerce")
-    try:
-        has_tz = dt.dt.tz is not None
-    except Exception:
-        has_tz = False
-    if not has_tz:
-        dt = dt.dt.tz_localize("America/New_York", nonexistent="shift_forward", ambiguous="NaT")
-    else:
-        dt = dt.dt.tz_convert("America/New_York")
-    return dt.dt.normalize()
-
-
-def daily_long_short(
-    panel: pd.DataFrame,
-    q_hi: float = 0.90,
-    q_lo: float = 0.10,
-    costs_bps: float = 0.0,
-) -> pd.DataFrame:
+def daily_long_short(panel: pd.DataFrame, q_hi: float = 0.9, q_lo: float = 0.1, fee_bps: float = 1.0) -> pd.DataFrame:
     """
-    Simple daily long/short backtest.
-
-    Parameters
-    ----------
-    panel : DataFrame with columns ['date','ticker','score','y']
-        date  : datetime-like; will be coerced to Eastern day
-        score : signal used for ranking each day
-        y     : next-day close-to-close return (already aligned to 'date')
-    q_hi, q_lo : quantile thresholds for long / short
-    costs_bps  : (optional) one-way trading cost in basis points, applied on turnover
-
-    Returns
-    -------
-    DataFrame with columns ['date','ret','ret_net','equity'].
+    panel columns: ['date','ticker','score','y']  (score -> signal; y -> next-day return)
+    Long top decile, short bottom decile. Equal weight within sides.
+    fee_bps: per-trade bps transaction cost (round-turn approximated via weight turnover).
+    Returns: ['date','ret','cost','ret_net','equity']
     """
     if panel.empty:
-        return pd.DataFrame(columns=["date", "ret", "ret_net", "equity"])
+        return pd.DataFrame(columns=["date","ret","cost","ret_net","equity"])
 
     df = panel.copy()
-    # Normalize dates to day-level
-    df["date"] = _to_eastern_day(df["date"])
+    df["date"] = pd.to_datetime(df["date"], utc=True)
+    df = df.dropna(subset=["score","y"])
 
-    # Keep only required columns and drop rows with missing essentials
-    df = df[["date", "ticker", "score", "y"]].dropna(subset=["date", "ticker", "score", "y"])
+    # compute daily quantiles
+    qhi = df.groupby("date")["score"].transform(lambda s: s.quantile(q_hi))
+    qlo = df.groupby("date")["score"].transform(lambda s: s.quantile(q_lo))
 
-    # Rank into long/short buckets per day
-    def _weights_for_day(g: pd.DataFrame) -> pd.DataFrame:
-        sc = g["score"].astype(float)
-        hi = np.nanquantile(sc, q_hi)
-        lo = np.nanquantile(sc, q_lo)
-        long_mask = sc >= hi
-        short_mask = sc <= lo
+    longs  = df["score"] >= qhi
+    shorts = df["score"] <= qlo
 
-        w = np.zeros(len(g), dtype=float)
-        n_long = int(long_mask.sum())
-        n_short = int(short_mask.sum())
+    # counts per side
+    n_long  = longs.groupby(df["date"]).transform("sum").replace(0, np.nan)
+    n_short = shorts.groupby(df["date"]).transform("sum").replace(0, np.nan)
 
-        # dollar-neutral: 50% long, 50% short
-        if n_long > 0:
-            w[long_mask.to_numpy()] = 0.5 / n_long
-        if n_short > 0:
-            w[short_mask.to_numpy()] = -0.5 / n_short
+    # raw weights (+1 / n_long, -1 / n_short)
+    w = np.where(longs,  1.0 / n_long, 0.0) + np.where(shorts, -1.0 / n_short, 0.0)
+    w = np.nan_to_num(w, nan=0.0)
+    df["w"] = w
 
-        out = g.copy()
-        out["w"] = w
-        return out[["date", "ticker", "w", "y"]]
+    # daily gross return
+    ret = (df["w"] * df["y"]).groupby(df["date"]).sum().rename("ret").reset_index()
 
-    try:
-        bt = df.groupby("date").apply(_weights_for_day, include_groups=False)
-    except TypeError:  # pandas < 2.2 fallback
-        bt = df.groupby("date").apply(_weights_for_day)
-    bt = bt.reset_index(drop=True)
+    # turnover cost (sum abs(dw) across tickers)
+    df = df.sort_values(["ticker","date"])
+    df["w_prev"] = df.groupby("ticker")["w"].shift(1).fillna(0.0)
+    df["turn"] = (df["w"] - df["w_prev"]).abs()
+    # per-date turnover = sum abs(dw)
+    turn = df.groupby("date")["turn"].sum().rename("turn").reset_index()
+    fee = fee_bps / 10000.0
+    cost = turn.assign(cost=lambda d: d["turn"] * fee)[["date","cost"]]
 
-    # Daily gross return
-    bt["gross"] = bt["w"] * bt["y"]
-    pnl = (
-        bt.groupby("date", as_index=False)["gross"]
-        .sum()
-        .rename(columns={"gross": "ret"})
-        .sort_values("date")
-        .reset_index(drop=True)
-    )
-
-    # (Optional) simple turnover-based costs
-    if costs_bps and costs_bps > 0:
-        # estimate turnover = sum |w_t - w_{t-1}| over all tickers (requires wide view)
-        wid = bt.pivot_table(index="date", columns="ticker", values="w", fill_value=0.0).sort_index()
-        dw = wid.diff().abs().sum(axis=1)  # total weight moved each day
-        # cost per day (two-sided bps on moved notional)
-        cost = (costs_bps / 10000.0) * dw
-        cost = cost.reindex(pnl["date"]).fillna(0.0).to_numpy()
-    else:
-        cost = np.zeros(len(pnl), dtype=float)
-
-    pnl["ret_net"] = pnl["ret"] - cost
+    pnl = ret.merge(cost, on="date", how="left").fillna({"cost": 0.0})
+    pnl["ret_net"] = pnl["ret"] - pnl["cost"]
+    pnl = pnl.sort_values("date").reset_index(drop=True)
     pnl["equity"] = (1.0 + pnl["ret_net"]).cumprod()
-
-    return pnl[["date", "ret", "ret_net", "equity"]]
+    return pnl
