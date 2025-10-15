@@ -1,134 +1,131 @@
-# src/market_sentiment/finbert.py
+# src/market_sentiment/news.py
 from __future__ import annotations
 
-import os
-import math
-from typing import List, Sequence, Union
+import time
+from datetime import datetime, timezone
+from typing import List, Tuple
+import re
 
-import torch
-import numpy as np
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import pandas as pd
 
+# yfinance is allowed (free)
+import yfinance as yf
 
-# Avoid tokenizer multi-thread noise on CI
-os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-
-
-def _as_list(x: Union[str, Sequence[str]]) -> List[str]:
-    if x is None:
-        return []
-    if isinstance(x, str):
-        return [x]
-    return list(x)
+# Free RSS fallback (no key)
+import feedparser
 
 
-class FinBERT:
+def _norm_ts_utc(x) -> pd.Timestamp:
     """
-    Thin wrapper over ProsusAI/finbert that returns a scalar sentiment score per text.
-
-    Score definition:
-        S = P(positive) - P(negative) ∈ [-1, 1]
+    Normalize to tz-aware UTC Timestamp.
+    Accepts epoch seconds or date-like strings.
     """
-
-    def __init__(
-        self,
-        model_name: str | None = None,
-        device: str | None = None,
-        max_length: int = 256,
-    ) -> None:
-        self.model_name = model_name or os.getenv("FINBERT_MODEL", "ProsusAI/finbert")
-        self.max_length = int(max_length)
-
-        # Device resolution (CPU on CI; CUDA if available locally)
-        if device is not None:
-            self.device = torch.device(device)
-        else:
-            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-        # Load model/tokenizer
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, use_fast=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained(self.model_name)
-        self.model.to(self.device)
-        self.model.eval()
-
-        # Determine label indices
-        # Expected labels something like: {0: 'negative', 1: 'neutral', 2: 'positive'}
-        id2label = self.model.config.id2label
-        self.idx_pos = None
-        self.idx_neg = None
-        for i, lab in id2label.items():
-            name = str(lab).lower()
-            if "pos" in name:
-                self.idx_pos = int(i)
-            elif "neg" in name:
-                self.idx_neg = int(i)
-
-        if self.idx_pos is None or self.idx_neg is None:
-            # Fallback guess (ProsusAI/finbert standard order)
-            self.idx_neg, self.idx_pos = 0, 2
-
-    @torch.no_grad()
-    def score(
-        self,
-        texts: Union[str, Sequence[str]],
-        *,
-        batch: int = 16,
-        max_length: int | None = None,
-    ) -> List[float]:
-        """
-        Compute sentiment for a list of texts.
-
-        Args:
-            texts: str or list[str]
-            batch: batch size for tokenization/inference (default 16)
-            max_length: optional override of truncation length (default: self.max_length)
-
-        Returns:
-            list[float]: sentiment S per text in [-1, 1]
-        """
-        items = _as_list(texts)
-        if not items:
-            return []
-
-        batch = max(int(batch), 1)
-        max_len = int(max_length or self.max_length)
-
-        out_scores: List[float] = []
-        for i in range(0, len(items), batch):
-            chunk = items[i : i + batch]
-
-            # Replace None/NaN/whitespace with empty to avoid tokenization errors
-            clean = []
-            for t in chunk:
-                if t is None:
-                    clean.append("")
-                elif isinstance(t, float) and (math.isnan(t) or math.isinf(t)):
-                    clean.append("")
-                else:
-                    s = str(t)
-                    clean.append(s if s.strip() else "")
-
-            enc = self.tokenizer(
-                clean,
-                padding=True,
-                truncation=True,
-                max_length=max_len,
-                return_tensors="pt",
-            ).to(self.device)
-
-            logits = self.model(**enc).logits  # [B, 3]
-            # softmax -> probs
-            probs = torch.softmax(logits, dim=-1)  # [B, 3]
-            p_pos = probs[:, self.idx_pos]
-            p_neg = probs[:, self.idx_neg]
-            s = (p_pos - p_neg).detach().cpu().numpy().astype(np.float32)
-            out_scores.extend([float(v) for v in s])
-
-        return out_scores
+    if pd.isna(x):
+        return pd.NaT
+    # epoch
+    try:
+        xi = int(x)
+        return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
+    except Exception:
+        pass
+    # anything else we let pandas parse
+    ts = pd.to_datetime(x, utc=True, errors="coerce")
+    return ts
 
 
-def score_texts(fb: FinBERT, texts: Union[str, Sequence[str]], batch: int = 16) -> List[float]:
+def _clean_text(s: str) -> str:
+    if s is None:
+        return ""
+    s = re.sub(r"\s+", " ", str(s)).strip()
+    return s
+
+
+def fetch_news_yf(ticker: str, start: str, end: str) -> pd.DataFrame:
     """
-    Backwards-compatible helper so older code can call score_texts(fb, texts, batch=...).
+    Yahoo Finance news via yfinance (free).
+    Returns columns: ticker, ts (UTC), title, url, text
     """
-    return fb.score(texts, batch=batch)
+    try:
+        t = yf.Ticker(ticker)
+        raw = getattr(t, "news", None)
+    except Exception:
+        raw = None
+
+    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    if isinstance(raw, list):
+        for item in raw:
+            ts = _norm_ts_utc(item.get("providerPublishTime"))
+            if ts is pd.NaT:
+                continue
+            title = item.get("title") or ""
+            url = item.get("link") or item.get("url") or ""
+            summary = item.get("summary") or ""
+            rows.append((ts, title, url, summary))
+
+    if not rows:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+
+    df = pd.DataFrame(rows, columns=["ts", "title", "url", "text"])
+    df["ticker"] = ticker
+    s = pd.to_datetime(start, utc=True)
+    e = pd.to_datetime(end, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+    df = df[(df["ts"] >= s) & (df["ts"] <= e)]
+    df["title"] = df["title"].map(_clean_text)
+    df["text"] = df["text"].map(_clean_text)
+    df = df.drop_duplicates(["title", "url"])
+    df = df[["ticker", "ts", "title", "url", "text"]].reset_index(drop=True)
+    return df
+
+
+def fetch_news_google(ticker: str, start: str, end: str, company: str | None = None) -> pd.DataFrame:
+    """
+    Free Google News RSS fallback (no keys).
+    Query includes ticker and optional company name.
+    Returns columns: ticker, ts (UTC), title, url, text
+    """
+    q = f'"{ticker}"'
+    if company:
+        q += f' OR "{company}"'
+    # 2-week window helps relevancy; we still filter by [start, end]
+    url = f"https://news.google.com/rss/search?q={q}+when:14d&hl=en-US&gl=US&ceid=US:en"
+    feed = feedparser.parse(url)
+
+    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    for entry in getattr(feed, "entries", []):
+        published = getattr(entry, "published", None) or getattr(entry, "updated", None)
+        ts = _norm_ts_utc(published)
+        if ts is pd.NaT:
+            continue
+        title = _clean_text(getattr(entry, "title", ""))
+        link = getattr(entry, "link", "") or ""
+        summary = _clean_text(getattr(entry, "summary", "") or getattr(entry, "description", ""))
+        rows.append((ts, title, link, summary))
+
+    if not rows:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+
+    df = pd.DataFrame(rows, columns=["ts", "title", "url", "text"])
+    df["ticker"] = ticker
+    s = pd.to_datetime(start, utc=True)
+    e = pd.to_datetime(end, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+    df = df[(df["ts"] >= s) & (df["ts"] <= e)]
+    df = df.drop_duplicates(["title", "url"])
+    df = df[["ticker", "ts", "title", "url", "text"]].reset_index(drop=True)
+    return df
+
+
+def fetch_news(ticker: str, start: str, end: str, company: str | None = None) -> pd.DataFrame:
+    """
+    Combine YF + Google RSS with fallback, normalized schema.
+    """
+    a = fetch_news_yf(ticker, start, end)
+    b = fetch_news_google(ticker, start, end, company=company)
+    if a.empty and b.empty:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+    df = pd.concat([a, b], ignore_index=True)
+    # Final clean & de-dupe
+    df["title"] = df["title"].map(_clean_text)
+    df["text"] = df["text"].map(_clean_text)
+    df = df.drop_duplicates(["title", "url"])
+    df = df.sort_values("ts").reset_index(drop=True)
+    return df
