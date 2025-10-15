@@ -43,12 +43,13 @@ jobs:
       - name: Install Python deps
         run: |
           python -m pip install --upgrade pip wheel setuptools
+          # CPU torch for CI (no CUDA)
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
           pip check
 
       - name: Set Hugging Face cache dir
-        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> $GITHUB_ENV
+        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
 
       - name: Set dates (last 365 days)
         run: |
@@ -96,7 +97,16 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-        run: npm run build
+        run: |
+          echo "Config files present:"
+          ls -lah | egrep 'next.config' || true
+          node -v
+          npm -v
+          npm run build
+          echo "Contents after build:"
+          ls -lah
+          # Guard: ensure 'out' exists (export target)
+          test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
