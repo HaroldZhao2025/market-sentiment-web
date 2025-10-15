@@ -20,7 +20,6 @@ jobs:
   build-data-and-site:
     runs-on: ubuntu-latest
 
-    # <<< IMPORTANT: add src to Python path so the package is importable
     env:
       PYTHONPATH: src
 
@@ -50,10 +49,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install web deps
+        working-directory: apps/web
+        run: |
+          npm install --no-audit --no-fund
+
       - name: Build and Export site
         working-directory: apps/web
         run: |
-          npm ci || npm install
           npm run build
           npm run export
 
