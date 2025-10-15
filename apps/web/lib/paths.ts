@@ -1,18 +1,12 @@
 // apps/web/lib/paths.ts
-
-/**
- * Build a URL under the configured basePath (for GitHub Pages or other prefixes).
- * If NEXT_PUBLIC_BASE_PATH is empty, it falls back to root.
- */
 export function assetPath(p: string): string {
   const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/+$/, "");
   const rel = p.replace(/^\/+/, "");
   return base ? `${base}/${rel}` : `/${rel}`;
 }
 
-/**
- * Convenience helper for assets in /public/data
- */
 export function dataPath(file: string): string {
-  return assetPath(`data/${file}`);
+  // Static export serves from /public; at runtime the JSONs are relative to basePath.
+  // We always point into /public/data via basePath.
+  return assetPath(`data/${file.replace(/^\/+/, "")}`);
 }
