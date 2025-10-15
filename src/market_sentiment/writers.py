@@ -1,117 +1,96 @@
 from __future__ import annotations
-from pathlib import Path
-import numpy as np
 import pandas as pd
-from .utils import dump_json
+from typing import Dict, Any
 
-def _flatten(df: pd.DataFrame) -> pd.DataFrame:
-    if isinstance(df.columns, pd.MultiIndex):
-        df = df.copy()
-        df.columns = [c[0] if isinstance(c, tuple) else c for c in df.columns]
-    return df
+from .aggregate import normalize_date_local, _ensure_plain_columns
 
-def _to_eastern_day(series: pd.Series) -> pd.Series:
-    s = pd.to_datetime(series, errors="coerce")
-    try:
-        tzinfo = s.dt.tz
-    except Exception:
-        tzinfo = None
-    if tzinfo is None:
-        s = s.dt.tz_localize("America/New_York", nonexistent="shift_forward", ambiguous="NaT")
-    else:
-        s = s.dt.tz_convert("America/New_York")
-    return s.dt.normalize()
+NY_TZ = "America/New_York"
 
-def _clip_to_price_dates(d: pd.DataFrame, p: pd.DataFrame) -> pd.DataFrame:
-    if d.empty or p.empty:
-        return d
-    lo, hi = p["date"].min(), p["date"].max()
-    return d[(d["date"] >= lo) & (d["date"] <= hi)].reset_index(drop=True)
-
-def build_ticker_json(ticker: str, prices: pd.DataFrame, daily_combined: pd.DataFrame,
-                      recent_news: pd.DataFrame, earnings_events: pd.DataFrame | None = None) -> dict:
-    p = _flatten(prices).copy()
-    d = _flatten(daily_combined).copy()
-    p["date"] = _to_eastern_day(p["date"])
-    if "date" in d.columns:
-        d["date"] = _to_eastern_day(d["date"])
-        d = _clip_to_price_dates(d, p)
-
-    series = (
-        p[["date","close"]]
-        .merge(d, on="date", how="left")
-        .sort_values("date")
-        .reset_index(drop=True)
-    )
-
-    for col in ["S_news","S_earn","S_total","news_count"]:
-        if col not in series.columns:
-            series[col] = 0.0 if col != "news_count" else 0
-    series["S_news"] = series["S_news"].fillna(0.0)
-    series["S_earn"] = series["S_earn"].fillna(0.0)
-    series["S_total"] = series["S_total"].fillna(0.0)
-    series["news_count"] = series["news_count"].fillna(0).astype(int)
-
-    # rolling means
-    def _ma(x, w): return x.rolling(w, min_periods=1).mean()
-    s_news7  = _ma(series["S_news"], 7)
-    s_earn7  = _ma(series["S_earn"], 7)
-    s_total7 = _ma(series["S_total"], 7)
-
-    last_total7 = float(s_total7.iloc[-1]) if len(series) else 0.0
-    predicted_return = float(np.tanh(last_total7 / 2.0) * 0.02)
-
-    # headlines
-    news = recent_news.copy()
-    if not news.empty:
-        ts = pd.to_datetime(news["ts"], errors="coerce", utc=True).dt.tz_convert("America/New_York")
-        news["ts"] = ts
-        news = news.sort_values("ts", ascending=False)
-    top_news = news.head(30)[["ts","title","source","url"]] if not news.empty else pd.DataFrame(
-        columns=["ts","title","source","url"]
-    )
-
-    return {
-        "ticker": ticker,
-        "meta": {
-            "last_updated": pd.Timestamp.now(tz="America/New_York").isoformat(),
-            "S_total_7d": last_total7,
-            "news_7d": int(series["news_count"].rolling(7, min_periods=1).sum().iloc[-1]) if len(series) else 0,
-        },
-        "insights": {
-            "live_sentiment": "Positive" if last_total7 > 0.5 else ("Negative" if last_total7 < -0.5 else "Neutral"),
-            "predicted_return": predicted_return,
-            "advisory": ("Strong Buy" if last_total7 > 2 else ("Buy" if last_total7 > 0.5 else ("Hold" if last_total7 > -0.5 else "Sell"))),
-        },
+def build_ticker_json(ticker: str,
+                      prices: pd.DataFrame,
+                      daily_sent: pd.DataFrame,
+                      recent_news: pd.DataFrame) -> Dict[str, Any]:
+    """
+    Create a compact JSON blob used by the Next.js site.
+    Structure:
+      {
+        "symbol": "AAPL",
         "series": {
-            "date": series["date"].astype(str).tolist(),
-            "price": series["close"].astype(float).tolist(),
-            "sentiment_total": series["S_total"].astype(float).tolist(),
-            "sentiment_total_ma7": s_total7.astype(float).tolist(),
-            "sentiment_news": series["S_news"].astype(float).tolist(),
-            "sentiment_news_ma7": s_news7.astype(float).tolist(),
-            "sentiment_earnings": series["S_earn"].astype(float).tolist(),
-            "sentiment_earnings_ma7": s_earn7.astype(float).tolist(),
-            "news_count": series["news_count"].astype(int).tolist(),
+          "date": [... ISO yyyy-mm-dd ...],
+          "close": [...],
+          "S": [...],             # combined daily signal
+          "S_news": [...],
+          "S_earn": [...],
+          "news_count": [...],
+          "earn_count": [...]
         },
-        "recent_headlines": top_news.to_dict(orient="records"),
+        "recent_headlines": [
+           {"ts": "...", "title":"...", "url":"...", "score":{"pos":..., "neg":..., "conf":...}},
+           ...
+        ]
+      }
+    """
+    p = _ensure_plain_columns(prices)
+    s = _ensure_plain_columns(daily_sent)
+
+    # Normalize dates to naive yyyy-mm-dd (local NY date)
+    p["date"] = normalize_date_local(p["date"])
+    s["date"] = pd.to_datetime(s["date"]).dt.tz_localize(None)
+
+    # Join price close with S (some dates may have S missing -> fill 0)
+    base = (
+        p[["date", "close"]]
+        .merge(s[["date","S","S_news","S_earn","news_count","earn_count"]],
+               on="date", how="left")
+        .sort_values("date")
+    )
+    for col, fillv in [
+        ("S", 0.0), ("S_news", 0.0), ("S_earn", 0.0),
+        ("news_count", 0), ("earn_count", 0),
+    ]:
+        if col not in base.columns:
+            base[col] = fillv
+        base[col] = base[col].fillna(fillv)
+
+    # Recent headlines (top N by recency)
+    headlines = []
+    if recent_news is not None and not recent_news.empty:
+        rn = recent_news.copy()
+        rn["ts"] = pd.to_datetime(rn["ts"], utc=True, errors="coerce")
+        rn = rn.sort_values("ts", ascending=False).head(30)
+        # accept optional per-row S_item if already computed upstream
+        if "S_item" in rn.columns:
+            def pack(row):
+                pos = float(max(row.get("S_item", 0.0), 0.0))
+                neg = float(max(-row.get("S_item", 0.0), 0.0))
+                return {
+                    "ts": row["ts"].isoformat(),
+                    "title": str(row.get("title", ""))[:300],
+                    "url": str(row.get("url", "")),
+                    "score": {"pos": pos, "neg": neg}
+                }
+            headlines = [pack(r) for _, r in rn.iterrows()]
+        else:
+            headlines = [
+                {
+                    "ts": r["ts"].isoformat(),
+                    "title": str(r.get("title", ""))[:300],
+                    "url": str(r.get("url", "")),
+                }
+                for _, r in rn.iterrows()
+            ]
+
+    obj = {
+        "symbol": ticker,
+        "series": {
+            "date": base["date"].astype(str).tolist(),
+            "close": [float(x) if pd.notna(x) else None for x in base["close"]],
+            "S": [float(x) if pd.notna(x) else 0.0 for x in base["S"]],
+            "S_news": [float(x) if pd.notna(x) else 0.0 for x in base["S_news"]],
+            "S_earn": [float(x) if pd.notna(x) else 0.0 for x in base["S_earn"]],
+            "news_count": [int(x) if pd.notna(x) else 0 for x in base["news_count"]],
+            "earn_count": [int(x) if pd.notna(x) else 0 for x in base["earn_count"]],
+        },
+        "recent_headlines": headlines,
     }
-
-def write_ticker_json(obj: dict, out_dir: Path) -> Path:
-    out = Path(out_dir) / f"{obj['ticker'].upper()}.json"
-    dump_json(obj, out)
-    return out
-
-def write_index_json(summary_df: pd.DataFrame, out_dir: Path) -> Path:
-    out = Path(out_dir) / "index.json"
-    dump_json(summary_df.to_dict(orient="records"), out)
-    return out
-
-def write_portfolio_json(pnl_df: pd.DataFrame, out_dir: Path) -> Path:
-    out = Path(out_dir) / "portfolio.json"
-    dump_json({
-        "date": pnl_df["date"].astype(str).tolist(),
-        "equity": pnl_df["equity"].astype(float).tolist(),
-        "ret_net": pnl_df["ret_net"].astype(float).tolist(),
-    }, out)
-    return out
+    return obj
