@@ -2,175 +2,133 @@
 from __future__ import annotations
 
 import os
-from typing import Iterable, List, Optional, Tuple
+import math
+from typing import List, Sequence, Union
 
-import numpy as np
 import torch
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
-
-# Keep CI stable:
-# - Use CPU by default
-# - Keep cache controllable by HF_HOME
-# - Disable HF telemetry with HF_HUB_DISABLE_TELEMETRY=1 (already in your workflow)
-_DEFAULT_MODEL_NAME = os.getenv("FINBERT_MODEL", "ProsusAI/finbert")
+import numpy as np
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 
-def _softmax(x: np.ndarray, axis: int = -1) -> np.ndarray:
-    x = x - np.max(x, axis=axis, keepdims=True)
-    e = np.exp(x)
-    return e / np.sum(e, axis=axis, keepdims=True)
+# Avoid tokenizer multi-thread noise on CI
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+
+
+def _as_list(x: Union[str, Sequence[str]]) -> List[str]:
+    if x is None:
+        return []
+    if isinstance(x, str):
+        return [x]
+    return list(x)
 
 
 class FinBERT:
     """
-    Thin wrapper around ProsusAI/finbert for batch scoring.
+    Thin wrapper over ProsusAI/finbert that returns a scalar sentiment score per text.
 
-    Produces:
-      - probs: (N,3) array with columns ordered [P(neg), P(neu), P(pos)] based on model's id2label
-      - score S: P(pos) - P(neg)  in [-1, 1]
+    Score definition:
+        S = P(positive) - P(negative) ∈ [-1, 1]
     """
 
-    def __init__(self, model_name: str = _DEFAULT_MODEL_NAME, device: Optional[str] = None) -> None:
-        self.model_name = model_name
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
+    def __init__(
+        self,
+        model_name: str | None = None,
+        device: str | None = None,
+        max_length: int = 256,
+    ) -> None:
+        self.model_name = model_name or os.getenv("FINBERT_MODEL", "ProsusAI/finbert")
+        self.max_length = int(max_length)
+
+        # Device resolution (CPU on CI; CUDA if available locally)
+        if device is not None:
+            self.device = torch.device(device)
+        else:
+            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+        # Load model/tokenizer
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, use_fast=True)
+        self.model = AutoModelForSequenceClassification.from_pretrained(self.model_name)
+        self.model.to(self.device)
         self.model.eval()
 
-        if device is None:
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.device = torch.device(device)
-        self.model.to(self.device)
+        # Determine label indices
+        # Expected labels something like: {0: 'negative', 1: 'neutral', 2: 'positive'}
+        id2label = self.model.config.id2label
+        self.idx_pos = None
+        self.idx_neg = None
+        for i, lab in id2label.items():
+            name = str(lab).lower()
+            if "pos" in name:
+                self.idx_pos = int(i)
+            elif "neg" in name:
+                self.idx_neg = int(i)
 
-        # Map ids to canonical order [neg, neu, pos] using id2label at runtime
-        id2label = {int(k): v.lower() for k, v in self.model.config.id2label.items()}
-        self._neg_idx = [k for k, v in id2label.items() if "neg" in v][0]
-        self._neu_idx = [k for k, v in id2label.items() if "neu" in v][0]
-        self._pos_idx = [k for k, v in id2label.items() if "pos" in v][0]
-        self._reorder = np.array([self._neg_idx, self._neu_idx, self._pos_idx], dtype=int)
+        if self.idx_pos is None or self.idx_neg is None:
+            # Fallback guess (ProsusAI/finbert standard order)
+            self.idx_neg, self.idx_pos = 0, 2
 
     @torch.no_grad()
-    def predict_proba(
+    def score(
         self,
-        texts: Iterable[Optional[str]],
-        batch_size: int = 32,
-        max_length: int = 256,
-    ) -> np.ndarray:
+        texts: Union[str, Sequence[str]],
+        *,
+        batch: int = 16,
+        max_length: int | None = None,
+    ) -> List[float]:
         """
-        Returns probabilities with shape (N, 3) ordered as [P(neg), P(neu), P(pos)].
-        Any None/empty text returns [1/3, 1/3, 1/3] (neutral prior).
+        Compute sentiment for a list of texts.
+
+        Args:
+            texts: str or list[str]
+            batch: batch size for tokenization/inference (default 16)
+            max_length: optional override of truncation length (default: self.max_length)
+
+        Returns:
+            list[float]: sentiment S per text in [-1, 1]
         """
-        texts_list: List[str] = []
-        mask: List[bool] = []
-        for t in texts:
-            if t is None:
-                texts_list.append("")
-                mask.append(False)
-            else:
-                s = str(t).strip()
-                texts_list.append(s)
-                mask.append(bool(s))
+        items = _as_list(texts)
+        if not items:
+            return []
 
-        N = len(texts_list)
-        out = np.full((N, 3), 1.0 / 3.0, dtype=np.float32)  # default neutral prior
+        batch = max(int(batch), 1)
+        max_len = int(max_length or self.max_length)
 
-        if N == 0:
-            return out
+        out_scores: List[float] = []
+        for i in range(0, len(items), batch):
+            chunk = items[i : i + batch]
 
-        # Collect indices of non-empty texts for batching
-        idxs = [i for i, ok in enumerate(mask) if ok]
-        if not idxs:
-            return out
-
-        for start in range(0, len(idxs), batch_size):
-            chunk_idx = idxs[start : start + batch_size]
-            batch_texts = [texts_list[i] for i in chunk_idx]
+            # Replace None/NaN/whitespace with empty to avoid tokenization errors
+            clean = []
+            for t in chunk:
+                if t is None:
+                    clean.append("")
+                elif isinstance(t, float) and (math.isnan(t) or math.isinf(t)):
+                    clean.append("")
+                else:
+                    s = str(t)
+                    clean.append(s if s.strip() else "")
 
             enc = self.tokenizer(
-                batch_texts,
+                clean,
                 padding=True,
                 truncation=True,
-                max_length=max_length,
+                max_length=max_len,
                 return_tensors="pt",
             ).to(self.device)
 
-            logits = self.model(**enc).logits  # (B, C)
-            logits_np = logits.detach().cpu().numpy()  # (B, C)
-            # Reorder to [neg, neu, pos]
-            logits_np = logits_np[:, self._reorder]
-            probs = _softmax(logits_np, axis=1).astype(np.float32)  # (B, 3)
+            logits = self.model(**enc).logits  # [B, 3]
+            # softmax -> probs
+            probs = torch.softmax(logits, dim=-1)  # [B, 3]
+            p_pos = probs[:, self.idx_pos]
+            p_neg = probs[:, self.idx_neg]
+            s = (p_pos - p_neg).detach().cpu().numpy().astype(np.float32)
+            out_scores.extend([float(v) for v in s])
 
-            out[np.array(chunk_idx, dtype=int)] = probs
-
-        return out
-
-    def score(
-        self,
-        texts: Iterable[Optional[str]],
-        batch_size: int = 32,
-        max_length: int = 256,
-    ) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Returns (S, probs):
-          - S = P(pos) - P(neg)  (shape (N,))
-          - probs = (N,3) [P(neg), P(neu), P(pos)]
-        """
-        probs = self.predict_proba(texts, batch_size=batch_size, max_length=max_length)
-        s = probs[:, 2] - probs[:, 0]  # pos - neg
-        return s.astype(np.float32), probs
+        return out_scores
 
 
-# ---- Module-level helper expected by your CLI ----
-def score_texts(*args, **kwargs) -> List[float]:
+def score_texts(fb: FinBERT, texts: Union[str, Sequence[str]], batch: int = 16) -> List[float]:
     """
-    Flexible wrapper that supports BOTH calling conventions:
-
-      1) Old style (your CLI right now):
-           score_texts(fb, texts, batch_size=..., max_length=...)
-             - first positional arg is a FinBERT instance
-
-      2) Newer style:
-           score_texts(texts, batch=..., max_length=..., fb=...)
-
-    Accepted aliases:
-      - batch_size or batch
-      - max_length or max_len
+    Backwards-compatible helper so older code can call score_texts(fb, texts, batch=...).
     """
-    fb: Optional[FinBERT] = None
-    texts: Iterable[Optional[str]] = []
-    # Aliases
-    batch_size = kwargs.pop("batch_size", None)
-    if batch_size is None:
-        batch_size = kwargs.pop("batch", 32)
-    max_length = kwargs.pop("max_length", None)
-    if max_length is None:
-        max_length = kwargs.pop("max_len", 256)
-
-    # Detect style
-    if args and isinstance(args[0], FinBERT):
-        # Style #1: score_texts(fb, texts, ...)
-        fb = args[0]
-        if len(args) > 1:
-            texts = args[1]
-        else:
-            texts = []
-    elif args:
-        # Style #2: score_texts(texts, ...)
-        texts = args[0]
-        fb = kwargs.pop("fb", None)
-    else:
-        # All via kwargs (unlikely in your code, but supported)
-        texts = kwargs.get("texts", [])
-        fb = kwargs.get("fb", None)
-
-    created = False
-    if fb is None:
-        fb = FinBERT()
-        created = True
-
-    try:
-        s, _ = fb.score(texts, batch_size=int(batch_size), max_length=int(max_length))
-        return [float(v) for v in s]
-    finally:
-        # nothing to close explicitly, but keep pattern if you later add resources
-        if created:
-            pass
+    return fb.score(texts, batch=batch)
