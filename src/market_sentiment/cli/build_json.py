@@ -103,8 +103,11 @@ def main():
     prices = pd.concat(all_prices, ignore_index=True)
     prices = add_forward_returns(prices)
 
-    daily = pd.concat(all_daily, ignore_index=True) if all_daily else pd.DataFrame(columns=["date","ticker","S","S_news","S_earn","news_count","earn_count"])
-
+    _daily = [d for d in all_daily if d is not None and not d.empty]
+    daily = pd.concat(_daily, ignore_index=True) if _daily else pd.DataFrame(
+        columns=["date","ticker","S","S_news","S_earn","news_count","earn_count"]
+    )
+    
     # panel for portfolio
     panel = prices[["date","ticker","close","ret_cc_1d"]].merge(
         daily[["date","ticker","S"]], on=["date","ticker"], how="left"
