@@ -1,16 +1,31 @@
-import os, requests, pandas as pd
+from __future__ import annotations
+import os
+import requests
+import pandas as pd
 
-def fetch_transcripts_fmp(ticker:str) -> pd.DataFrame:
-    key = os.environ.get('FMP_API_KEY')
-    if not key: return pd.DataFrame(columns=['ticker','ts','quarter','year','text'])
-    url = f'https://financialmodelingprep.com/api/v3/earning_call_transcript/{ticker}?apikey={key}'
-    r = requests.get(url, timeout=30)
-    if not r.ok: return pd.DataFrame(columns=['ticker','ts','quarter','year','text'])
+def fetch_transcripts(ticker: str) -> pd.DataFrame:
+    """
+    Earnings call transcripts via FMP.
+    Returns columns: ['ts','quarter','year','text'] (tz-aware UTC).
+    """
+    api_key = os.getenv("FMP_API_KEY", "")
+    if not api_key:
+        return pd.DataFrame(columns=["ts","quarter","year","text"])
+
+    url = f"https://financialmodelingprep.com/api/v3/earning_call_transcript/{ticker}"
+    try:
+        r = requests.get(url, params={"apikey": api_key}, timeout=30)
+        data = r.json() if r.status_code == 200 else []
+    except Exception:
+        data = []
+
     rows = []
-    for it in r.json() or []:
-        ts = pd.to_datetime(it.get('date')).tz_localize('America/New_York')
-        rows.append((ticker, ts, it.get('quarter'), it.get('year'), it.get('content','')))
-    return pd.DataFrame(rows, columns=['ticker','ts','quarter','year','text'])
-
-def fetch_transcripts(ticker:str) -> pd.DataFrame:
-    return fetch_transcripts_fmp(ticker)
+    for it in (data or [])[:12]:  # last 12 calls
+        dt = it.get("date")
+        q = it.get("quarter") or it.get("quarterNumber")
+        y = it.get("year")
+        txt = it.get("content") or it.get("text") or ""
+        if not dt or not txt:
+            continue
+        rows.append((pd.to_datetime(dt, utc=True), q, y, txt))
+    return pd.DataFrame(rows, columns=["ts","quarter","year","text"])
