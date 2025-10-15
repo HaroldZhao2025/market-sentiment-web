@@ -65,16 +65,17 @@ jobs:
       - name: Build S&P 500 universe
         run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
 
-      - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
+      - name: Build JSON (FinBERT + Yahoo News)
         env:
           HF_HOME: ${{ env.HF_HOME }}
-          SEC_EMAIL: ${{ secrets.SEC_EMAIL }}   # required by SEC; set in repo secrets to a real email string
         run: |
           python -m market_sentiment.cli.build_json \
             --universe data/sp500.csv \
             --start "$START" --end "$END" \
             --out apps/web/public/data \
-            --batch 16
+            --batch 16 \
+            --max-workers 8 \
+            --max-tickers 0
 
       - name: Inspect raw files (quick peek)
         run: |
