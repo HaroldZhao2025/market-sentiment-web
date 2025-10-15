@@ -1,144 +1,91 @@
 # src/market_sentiment/edgar.py
 from __future__ import annotations
 import time, re
-from typing import Dict, List
+from typing import List, Tuple
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 
-# Pure API access. No email anywhere.
-_UA = "Mozilla/5.0 (compatible; MarketSentimentBot/0.2; +https://github.com/)"
+# No email anywhere; generic UA only.
+_UA = "Mozilla/5.0 (compatible; MarketSentimentBot/0.3; +https://github.com/)"
 _SESS = requests.Session()
 _SESS.headers.update({
     "User-Agent": _UA,
-    "Accept": "*/*",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Connection": "keep-alive",
     "Referer": "https://www.sec.gov/",
 })
 
+# Heuristics for earnings-like exhibits / transcripts
 _INDEX_RE = re.compile(r"(ex99|press|earnings|prepared|remarks|transcript)", re.I)
 
-def _sec_get(url: str, params: dict | None = None, sleep: float = 0.25):
-    """
-    Minimal polite GET with short backoff on 429/503 and explicit Referer/UA.
-    """
-    tries = 3
-    last_exc: Exception | None = None
-    for i in range(tries):
-        try:
-            r = _SESS.get(url, params=params or {}, timeout=30)
-            # Retry on common throttling codes
-            if r.status_code in (429, 503):
-                time.sleep(0.8 * (i + 1))
-                continue
-            r.raise_for_status()
-            if sleep:
-                time.sleep(sleep)
-            return r
-        except Exception as e:
-            last_exc = e
+def _get(url: str, sleep: float = 0.25) -> requests.Response:
+    """Polite GET with tiny backoff on 429/503."""
+    for i in range(3):
+        r = _SESS.get(url, timeout=30)
+        if r.status_code in (429, 503):
             time.sleep(0.8 * (i + 1))
-    if last_exc:
-        raise last_exc
-    raise RuntimeError("SEC GET failed unexpectedly")
-
-def _load_ticker_map_from_json() -> pd.DataFrame:
-    """
-    Primary source (can 403 in CI): company_tickers.json
-    """
-    url = "https://www.sec.gov/files/company_tickers.json"
-    r = _sec_get(url)
-    j = r.json()
-    rows = [(v["ticker"].upper(), int(v["cik_str"])) for v in j.values()]
-    return pd.DataFrame(rows, columns=["ticker","cik"])
-
-def _load_ticker_map_from_txt() -> pd.DataFrame:
-    """
-    Fallback source (very reliable): https://www.sec.gov/include/ticker.txt
-    Format: 'aapl|320193' per line.
-    """
-    url = "https://www.sec.gov/include/ticker.txt"
-    r = _sec_get(url)
-    rows = []
-    for line in r.text.splitlines():
-        line = line.strip()
-        if not line or "|" not in line:
             continue
-        t, c = line.split("|", 1)
-        try:
-            rows.append((t.upper(), int(c)))
-        except ValueError:
+        r.raise_for_status()
+        if sleep:
+            time.sleep(sleep)
+        return r
+    r.raise_for_status()  # last one
+
+def _atom_entries_for_ticker(ticker: str) -> List[dict]:
+    """
+    Use EDGAR Atom feed directly with ticker (no CIK mapping).
+    URL example:
+      https://www.sec.gov/cgi-bin/browse-edgar?CIK=AAPL&owner=exclude&action=getcompany&output=atom
+    """
+    url = f"https://www.sec.gov/cgi-bin/browse-edgar?CIK={ticker}&owner=exclude&action=getcompany&output=atom"
+    r = _get(url)
+    soup = BeautifulSoup(r.content, "xml")  # Atom XML
+    out = []
+    for e in soup.find_all("entry"):
+        form = (e.find("category")["term"] if e.find("category") and e.find("category").has_attr("term") else "").strip()
+        updated = (e.updated.text if e.updated else "").strip()
+        filing_href = (e.find("link", {"rel": "alternate"})["href"] if e.find("link", {"rel": "alternate"}) else "").strip()
+        title = (e.title.text if e.title else "").strip()
+        out.append({"form": form, "updated": updated, "href": filing_href, "title": title})
+    return out
+
+def _doc_links_from_filing_index(index_url: str) -> List[Tuple[str, str]]:
+    """
+    From the filing index page (…-index.htm), scrape the Documents table.
+    Returns list of (name, absolute_url).
+    """
+    r = _get(index_url)
+    soup = BeautifulSoup(r.content, "lxml")
+    links = []
+    # The index page usually has a table with document links (a[href*='/Archives/edgar/data/'])
+    for a in soup.select("a[href*='/Archives/edgar/data/']"):
+        href = a.get("href", "")
+        name = (a.text or "").strip()
+        if not href:
             continue
-    return pd.DataFrame(rows, columns=["ticker","cik"])
+        if not href.startswith("http"):
+            href = "https://www.sec.gov" + href
+        links.append((name, href))
+    # Deduplicate while preserving order
+    seen = set(); uniq = []
+    for name, href in links:
+        if href in seen: 
+            continue
+        seen.add(href)
+        uniq.append((name, href))
+    return uniq
 
-def _load_ticker_map() -> pd.DataFrame:
+def _read_html_or_text(url: str) -> str:
     """
-    Try JSON first; on any failure (e.g., 403), fall back to ticker.txt.
+    Fetch and extract plain text (works for .htm/.html/.txt).
     """
     try:
-        df = _load_ticker_map_from_json()
-        if not df.empty:
-            return df
-    except Exception:
-        pass
-    # Fallback
-    return _load_ticker_map_from_txt()
-
-def _get_cik(ticker: str, cache: Dict[str, int]) -> int | None:
-    t = ticker.upper()
-    if t in cache:
-        return cache[t]
-    df = _load_ticker_map()
-    m = df[df["ticker"] == t]
-    if m.empty:
-        return None
-    cik = int(m["cik"].iloc[0])
-    cache[t] = cik
-    return cik
-
-def _recent_filings(cik: int) -> pd.DataFrame:
-    """
-    Pull the submissions file (JSON) and flatten the 'recent' table.
-    """
-    url = f"https://data.sec.gov/submissions/CIK{cik:010d}.json"
-    r = _sec_get(url)
-    j = r.json()
-    recent = j.get("filings", {}).get("recent", {})
-    acc  = recent.get("accessionNumber", [])
-    prim = recent.get("primaryDocument", [])
-    form = recent.get("form", [])
-    filed= recent.get("filingDate", [])
-    rows = [(a, p, f, d) for a, p, f, d in zip(acc, prim, form, filed)]
-    return pd.DataFrame(rows, columns=["accession","primary","form","filed"])
-
-def _file_list(cik: int, accession: str) -> List[dict]:
-    """
-    Directory listing JSON for a filing; if not available, return [].
-    """
-    acc_nodash = accession.replace("-", "")
-    url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc_nodash}/index.json"
-    try:
-        r = _sec_get(url, sleep=0.0)
-        j = r.json()
-        items = j.get("directory", {}).get("item", [])
-        if isinstance(items, list):
-            return items
-    except Exception:
-        pass
-    return []
-
-def _read_html_text(cik: int, accession: str, filename: str) -> str:
-    """
-    Retrieve the document and extract plain text. Handles .htm/.html/.txt.
-    """
-    acc_nodash = accession.replace("-", "")
-    url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc_nodash}/{filename}"
-    try:
-        r = _sec_get(url, sleep=0.0)
+        r = _get(url, sleep=0.0)
     except Exception:
         return ""
     content = r.content
-    # Try HTML parser first (works on many .txt too), fall back to raw decode.
+    # Try HTML parser first; fallback to raw text
     try:
         soup = BeautifulSoup(content, "lxml")
         for t in soup(["script", "style", "noscript"]):
@@ -156,56 +103,59 @@ def _read_html_text(cik: int, accession: str, filename: str) -> str:
 
 def fetch_earnings_docs(ticker: str, start: str, end: str) -> pd.DataFrame:
     """
-    Free-only EDGAR harvest for likely earnings docs:
-      - Uses 'submissions' JSON
-      - Filters date window
-      - Keeps ['8-K','10-Q','10-K'] and scans exhibits / primary doc for earnings-like names
-    Output columns: ['ts','title','url','text']
+    Free-only, no-email EDGAR harvesting via Atom feed (ticker-based).
+    Returns DataFrame columns: ['ts','title','url','text'].
+    Filters forms ∈ {8-K, 10-Q, 10-K} and keeps likely earnings/transcript exhibits.
     """
-    cache: Dict[str,int] = getattr(fetch_earnings_docs, "_cache", {})
-    cik = _get_cik(ticker, cache)
-    fetch_earnings_docs._cache = cache
-    if not cik:
+    entries = _atom_entries_for_ticker(ticker)
+    if not entries:
         return pd.DataFrame(columns=["ts","title","url","text"])
 
-    rec = _recent_filings(cik)
-    if rec.empty:
-        return pd.DataFrame(columns=["ts","title","url","text"])
-
-    # filter date window
     s = pd.to_datetime(start)
     e = pd.to_datetime(end)
-    rec["filed"] = pd.to_datetime(rec["filed"], errors="coerce")
-    rec = rec[(rec["filed"] >= s) & (rec["filed"] <= e)]
-    # keep forms most likely to contain earnings PR/exhibits
-    rec = rec[rec["form"].isin(["8-K","10-Q","10-K"])]
-    if rec.empty:
-        return pd.DataFrame(columns=["ts","title","url","text"])
 
     rows = []
-    for _, r in rec.iterrows():
-        files = _file_list(cik, r["accession"])
-        # Always include the primary document as a candidate (especially for 8-K)
-        if not files:
-            files = [{"name": r["primary"]}]
-        for f in files:
-            name = f.get("name") or ""
-            if not name.lower().endswith((".htm",".html",".txt")):
+    for ent in entries:
+        form = (ent.get("form") or "").strip().upper()
+        if form not in {"8-K", "10-Q", "10-K"}:
+            continue
+        ts = pd.to_datetime(ent.get("updated") or "", utc=True, errors="coerce")
+        if pd.isna(ts) or (ts.tz_localize(None) < s) or (ts.tz_localize(None) > e):
+            continue
+
+        index_url = ent.get("href") or ""
+        if not index_url:
+            continue
+
+        # Scrape the filing index page to find documents
+        try:
+            docs = _doc_links_from_filing_index(index_url)
+        except Exception:
+            continue
+
+        # Prefer earnings-like exhibits; if none match, allow primary HTML/TXT doc
+        picked = []
+        for name, href in docs:
+            nlow = name.lower()
+            if not (nlow.endswith(".htm") or nlow.endswith(".html") or nlow.endswith(".txt")):
                 continue
-            # Prefer earnings-like exhibits; allow 8-K primary too
-            if not _INDEX_RE.search(name):
-                if r["form"] != "8-K" or name != r["primary"]:
-                    continue
-            text = _read_html_text(cik, r["accession"], name)
+            if _INDEX_RE.search(nlow):
+                picked.append((name, href))
+
+        # If nothing matched the heuristic, try the first HTML/TXT doc (often the 8-K body)
+        if not picked:
+            for name, href in docs:
+                nlow = name.lower()
+                if nlow.endswith(".htm") or nlow.endswith(".html") or nlow.endswith(".txt"):
+                    picked.append((name, href))
+                    break
+
+        for name, href in picked[:4]:  # cap per filing to be polite
+            text = _read_html_or_text(href)
             if not text:
                 continue
-            ts = pd.to_datetime(r["filed"], utc=True, errors="coerce")
-            if pd.isna(ts):
-                continue
-            acc_nodash = r["accession"].replace("-", "")
-            url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc_nodash}/{name}"
-            title = f"{r['form']} {name}"
-            rows.append((ts, title, url, text))
+            title = f"{form} {name}"
+            rows.append((ts, title, href, text))
 
     if not rows:
         return pd.DataFrame(columns=["ts","title","url","text"])
