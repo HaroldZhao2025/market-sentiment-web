@@ -1,86 +1,41 @@
 from __future__ import annotations
+import json
 import pandas as pd
-from typing import Dict, Any
-
+from typing import Dict, Any, List
 from .aggregate import normalize_date_local, _ensure_plain_columns
 
-NY_TZ = "America/New_York"
-
-def build_ticker_json(ticker: str,
-                      prices: pd.DataFrame,
-                      daily_sent: pd.DataFrame,
-                      recent_news: pd.DataFrame) -> Dict[str, Any]:
-    """
-    Create a compact JSON blob used by the Next.js site.
-    Structure:
-      {
-        "symbol": "AAPL",
-        "series": {
-          "date": [... ISO yyyy-mm-dd ...],
-          "close": [...],
-          "S": [...],             # combined daily signal
-          "S_news": [...],
-          "S_earn": [...],
-          "news_count": [...],
-          "earn_count": [...]
-        },
-        "recent_headlines": [
-           {"ts": "...", "title":"...", "url":"...", "score":{"pos":..., "neg":..., "conf":...}},
-           ...
-        ]
-      }
-    """
-    p = _ensure_plain_columns(prices)
-    s = _ensure_plain_columns(daily_sent)
-
-    # Normalize dates to naive yyyy-mm-dd (local NY date)
+def build_ticker_json(ticker: str, prices: pd.DataFrame, daily_sent: pd.DataFrame, recent_news: pd.DataFrame) -> Dict[str, Any]:
+    p = _ensure_plain_columns(prices); s = _ensure_plain_columns(daily_sent)
     p["date"] = normalize_date_local(p["date"])
     s["date"] = pd.to_datetime(s["date"]).dt.tz_localize(None)
-
-    # Join price close with S (some dates may have S missing -> fill 0)
-    base = (
-        p[["date", "close"]]
-        .merge(s[["date","S","S_news","S_earn","news_count","earn_count"]],
-               on="date", how="left")
-        .sort_values("date")
-    )
-    for col, fillv in [
-        ("S", 0.0), ("S_news", 0.0), ("S_earn", 0.0),
-        ("news_count", 0), ("earn_count", 0),
-    ]:
-        if col not in base.columns:
-            base[col] = fillv
-        base[col] = base[col].fillna(fillv)
-
-    # Recent headlines (top N by recency)
-    headlines = []
+    base = (p[["date","close"]]
+            .merge(s[["date","S","S_news","S_earn","news_count","earn_count"]], on="date", how="left")
+            .sort_values("date"))
+    for col, fill in [("S",0.0),("S_news",0.0),("S_earn",0.0),("news_count",0),("earn_count",0)]:
+        if col not in base.columns: base[col]=fill
+        base[col]=base[col].fillna(fill)
+    headlines=[]
     if recent_news is not None and not recent_news.empty:
-        rn = recent_news.copy()
-        rn["ts"] = pd.to_datetime(rn["ts"], utc=True, errors="coerce")
-        rn = rn.sort_values("ts", ascending=False).head(30)
-        # accept optional per-row S_item if already computed upstream
+        rn=recent_news.copy()
+        rn["ts"]=pd.to_datetime(rn["ts"], utc=True, errors="coerce")
+        rn=rn.sort_values("ts", ascending=False).head(30)
         if "S_item" in rn.columns:
-            def pack(row):
-                pos = float(max(row.get("S_item", 0.0), 0.0))
-                neg = float(max(-row.get("S_item", 0.0), 0.0))
-                return {
-                    "ts": row["ts"].isoformat(),
-                    "title": str(row.get("title", ""))[:300],
-                    "url": str(row.get("url", "")),
-                    "score": {"pos": pos, "neg": neg}
-                }
-            headlines = [pack(r) for _, r in rn.iterrows()]
-        else:
-            headlines = [
-                {
+            for _,r in rn.iterrows():
+                s_item=float(r.get("S_item",0.0))
+                headlines.append({
                     "ts": r["ts"].isoformat(),
-                    "title": str(r.get("title", ""))[:300],
-                    "url": str(r.get("url", "")),
-                }
-                for _, r in rn.iterrows()
-            ]
-
-    obj = {
+                    "title": str(r.get("title",""))[:300],
+                    "url": str(r.get("url","")),
+                    "score": {"pos": max(s_item,0.0), "neg": max(-s_item,0.0)}
+                })
+        else:
+            for _,r in rn.iterrows():
+                headlines.append({
+                    "ts": r["ts"].isoformat(),
+                    "title": str(r.get("title",""))[:300],
+                    "url": str(r.get("url","")),
+                })
+    return {
         "symbol": ticker,
         "series": {
             "date": base["date"].astype(str).tolist(),
@@ -93,4 +48,22 @@ def build_ticker_json(ticker: str,
         },
         "recent_headlines": headlines,
     }
-    return obj
+
+def write_index(out_dir, tickers: List[str]):
+    path = out_dir / "_tickers.json"
+    with open(path, "w") as f:
+        json.dump(sorted(tickers), f)
+    return path
+
+def write_portfolio_json(out_dir, pnl_df: pd.DataFrame, top_syms: List[str], bot_syms: List[str]):
+    obj = {
+        "series": {
+            "date": pnl_df["date"].astype(str).tolist(),
+            "daily_ret": [float(x) for x in pnl_df["ret"].fillna(0.0)],
+            "cumret": [float(x) for x in pnl_df["cumret"].fillna(0.0)],
+        },
+        "top": top_syms,
+        "bottom": bot_syms,
+    }
+    with open(out_dir / "portfolio.json", "w") as f:
+        json.dump(obj, f, separators=(",",":"))
