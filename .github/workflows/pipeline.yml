@@ -77,15 +77,27 @@ jobs:
             --max-workers 8 \
             --max-tickers 0
 
+# .github/workflows/pipeline.yml  (replace the web steps with these)
       - name: Inspect output (debug)
         run: |
           echo "Data dir listing:"
           ls -lah apps/web/public/data || true
-          echo "Manifest head:"
-          (test -f apps/web/public/data/_tickers.json && head -n 100 apps/web/public/data/_tickers.json) || true
-          echo "One sample ticker file (if exists):"
-          f=$(ls apps/web/public/data/*.json | grep -v '_tickers.json' | head -n 1 || true)
-          if [ -n "$f" ]; then head -n 80 "$f"; fi
+          python - <<'PY'
+          import json, os, glob
+          d="apps/web/public/data"
+          tickers=json.load(open(os.path.join(d,"_tickers.json"))) if os.path.exists(os.path.join(d,"_tickers.json")) else []
+          print("Tickers listed:", len(tickers))
+          sample=[p for p in tickers[:5]]
+          for t in sample:
+              p=os.path.join(d,f"{t}.json")
+              if os.path.exists(p):
+                  j=json.load(open(p))
+                  s=j.get("series",{})
+                  S=s.get("S",[])
+                  meanS = round(sum(abs(x) for x in S)/len(S),4) if S else 0.0
+                  print(f"  {t}: points={len(S)}, mean|S|={meanS}")
+          print("Portfolio present:", os.path.exists(os.path.join(d,"portfolio.json")))
+          PY
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -108,9 +120,8 @@ jobs:
           npm run build
           echo "Contents after build:"
           ls -lah
-          # Guard
+          # out/ must exist with output: 'export'
           test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
