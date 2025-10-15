@@ -6,7 +6,5 @@ export function assetPath(p: string): string {
 }
 
 export function dataPath(file: string): string {
-  // Static export serves from /public; at runtime the JSONs are relative to basePath.
-  // We always point into /public/data via basePath.
   return assetPath(`data/${file.replace(/^\/+/, "")}`);
 }
