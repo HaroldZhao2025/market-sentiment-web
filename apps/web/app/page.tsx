@@ -1,37 +1,32 @@
 // apps/web/app/page.tsx
 import Link from "next/link";
-import { listTickers, loadPortfolio } from "../lib/loaders";
-import { assetPath } from "../lib/paths";
+import { listTickers } from "../lib/loaders";
 
 export default function HomePage() {
-  const tickers = listTickers();
-  const portfolio = loadPortfolio();
-
+  const syms = listTickers();
   return (
-    <main className="max-w-6xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-4">Market Sentiment — S&amp;P 500</h1>
-
-      <section className="mb-8">
-        <Link className="underline text-blue-600" href={assetPath("portfolio")}>
+    <main className="p-6 space-y-6">
+      <header className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Market Sentiment — S&P 500</h1>
+        <Link href="/portfolio" className="underline">
           Portfolio
         </Link>
-        {!portfolio ? (
-          <p className="mt-2 text-sm text-gray-500">No portfolio data generated yet.</p>
-        ) : (
-          <p className="mt-2 text-sm text-gray-600">Last {portfolio.dates.length} days.</p>
-        )}
-      </section>
-
-      <h2 className="text-lg font-semibold mb-2">Browse Tickers</h2>
-      <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
-        {tickers.map((t) => (
-          <li key={t}>
-            <Link className="block border rounded px-2 py-1 hover:bg-gray-50" href={assetPath(`ticker/${t}`)}>
-              {t}
+      </header>
+      {syms.length === 0 ? (
+        <div className="text-sm text-gray-500">No data generated yet.</div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
+          {syms.map((s) => (
+            <Link
+              key={s}
+              className="border rounded px-2 py-1 text-sm hover:bg-gray-50"
+              href={`/ticker/${encodeURIComponent(s)}`}
+            >
+              {s}
             </Link>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+      )}
     </main>
   );
 }
