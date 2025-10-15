@@ -14,10 +14,9 @@ yfinance>=0.2.50
 
 # NLP / HF
 transformers==4.45.2
-tokenizers==0.19.1
+tokenizers==0.20.3           # <-- bump to satisfy transformers 4.45.2 (>=0.20,<0.21)
 huggingface-hub>=0.25.0
+safetensors>=0.4.1
 
-# Torch CPU for inference on GitHub runner
-# We'll install the wheel from the CPU index in the workflow step below,
-# but keeping the pin here helps local dev as well.
+# Torch CPU for inference on GitHub runner (installed from CPU index in workflow too)
 torch==2.3.1
