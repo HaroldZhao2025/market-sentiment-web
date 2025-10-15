@@ -1,71 +1,113 @@
+// apps/web/components/LineChart.tsx
 "use client";
 
+import { useMemo } from "react";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend,
-  type ChartOptions, type ChartData,
+  LineElement,
+  PointElement,
+  LinearScale,
+  TimeSeriesScale,
+  CategoryScale,
+  Tooltip,
+  Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
-import { useMemo } from "react";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
+ChartJS.register(LineElement, PointElement, LinearScale, TimeSeriesScale, CategoryScale, Tooltip, Legend);
+
+type Series = { x: string | number | Date; y: number }[];
 
 export default function LineChart({
-  dates,
-  price,
-  sentiment,
-  sentiment_ma7,
-  overlay = true,
-  label = "Sentiment",
+  left,
+  right,
+  overlay,
+  height = 280,
 }: {
-  dates: string[];
-  price: number[];
-  sentiment: number[];
-  sentiment_ma7?: number[];
-  overlay?: boolean;
-  label?: string;
+  left?: Series;
+  right?: Series;
+  overlay?: Series;
+  height?: number;
 }) {
-  const data = useMemo<ChartData<"line">>(() => {
-    const labels = dates.map((d) => new Date(d).toLocaleDateString());
-    const ds: ChartData<"line">["datasets"] = [
-      {
-        label: "Price",
-        data: price,
-        yAxisID: "y",
-        borderWidth: 2,
-        tension: 0.2,
-        borderColor: "rgb(33, 150, 243)",
-        pointRadius: 0,
+  const empty: Series = [];
+  const L = Array.isArray(left) ? left : empty;
+  const R = Array.isArray(right) ? right : empty;
+  const O = Array.isArray(overlay) ? overlay : empty;
+
+  const labels = (L.length ? L : R).map((p) => p.x);
+
+  const data = useMemo(
+    () => ({
+      labels,
+      datasets: [
+        {
+          label: "Close",
+          data: L.map((p) => p.y),
+          borderWidth: 1.5,
+          tension: 0.2,
+          yAxisID: "y",
+        },
+        {
+          label: "Signal S",
+          data: R.map((p) => p.y),
+          borderWidth: 1.2,
+          borderDash: [4, 3],
+          tension: 0.2,
+          yAxisID: "y1",
+        },
+        ...(O.length
+          ? [
+              {
+                label: "Overlay",
+                data: O.map((p) => p.y),
+                borderWidth: 1,
+                borderDash: [2, 2],
+                tension: 0.2,
+                yAxisID: "y",
+              },
+            ]
+          : []),
+      ],
+    }),
+    [labels, L, R, O]
+  );
+
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      interaction: { mode: "index" as const, intersect: false },
+      plugins: { legend: { display: true } },
+      scales: {
+        y: {
+          type: "linear" as const,
+          display: true,
+          position: "left" as const,
+          ticks: {
+            callback: (v: any) => (typeof v === "number" ? v.toFixed(2) : v),
+          },
+        },
+        y1: {
+          type: "linear" as const,
+          display: true,
+          position: "right" as const,
+          grid: { drawOnChartArea: false },
+          ticks: {
+            callback: (v: any) => (typeof v === "number" ? v.toFixed(2) : v),
+          },
+        },
+        x: { type: "category" as const },
       },
-    ];
-    const s = sentiment ?? [];
-    const s7 = sentiment_ma7 ?? [];
-    ds.push({
-      label: `${label} ${s7.length ? "(MA7)" : ""}`,
-      data: s7.length ? s7 : s,
-      yAxisID: "y1",
-      borderWidth: 2,
-      borderDash: s7.length ? [] : [4, 4],
-      tension: 0.2,
-      borderColor: "rgb(76, 175, 80)",
-      pointRadius: 0,
-    });
-    return { labels, datasets: ds };
-  }, [dates, price, sentiment, sentiment_ma7, label]);
+    }),
+    []
+  );
 
-  const options = useMemo<ChartOptions<"line">>(() => ({
-    responsive: true,
-    interaction: { mode: "index" as const, intersect: false },
-    plugins: { legend: { display: true } },
-    scales: {
-      y: { type: "linear", display: true, position: "left",
-        ticks: { callback: (v: unknown) => typeof v === "number" ? `$${v.toFixed(0)}` : String(v) } },
-      y1: { type: "linear", display: true, position: "right", grid: { drawOnChartArea: false },
-        suggestedMin: -3, suggestedMax: 3, title: { display: true, text: "Sentiment" },
-        ticks: { callback: (v: unknown) => typeof v === "number" ? v.toFixed(1) : String(v) } },
-      x: { display: true },
-    },
-  }), []);
+  if (!labels.length) {
+    return (
+      <div className="w-full border rounded p-6 text-sm text-gray-500" style={{ height }}>
+        No series available.
+      </div>
+    );
+  }
 
-  return <Line options={options} data={data} />;
+  return <Line options={options} data={data} height={height} />;
 }
