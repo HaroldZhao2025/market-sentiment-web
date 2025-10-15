@@ -10,8 +10,8 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 # Keep CI stable:
 # - Use CPU by default
-# - Keep cache controllable by HF_HOME (already set in workflow)
-# - Disable HF telemetry (your workflow sets HF_HUB_DISABLE_TELEMETRY=1)
+# - Keep cache controllable by HF_HOME
+# - Disable HF telemetry with HF_HUB_DISABLE_TELEMETRY=1 (already in your workflow)
 _DEFAULT_MODEL_NAME = os.getenv("FINBERT_MODEL", "ProsusAI/finbert")
 
 
@@ -43,7 +43,6 @@ class FinBERT:
 
         # Map ids to canonical order [neg, neu, pos] using id2label at runtime
         id2label = {int(k): v.lower() for k, v in self.model.config.id2label.items()}
-        # Build index mapping so we can create a stable [neg, neu, pos] order
         self._neg_idx = [k for k, v in id2label.items() if "neg" in v][0]
         self._neu_idx = [k for k, v in id2label.items() if "neu" in v][0]
         self._pos_idx = [k for k, v in id2label.items() if "pos" in v][0]
@@ -121,28 +120,57 @@ class FinBERT:
 
 
 # ---- Module-level helper expected by your CLI ----
-def score_texts(
-    texts: Iterable[Optional[str]],
-    batch: int = 32,
-    max_length: int = 256,
-    fb: Optional[FinBERT] = None,
-) -> List[float]:
+def score_texts(*args, **kwargs) -> List[float]:
     """
-    Convenience wrapper so callers can do:
-        from market_sentiment.finbert import score_texts
-    and get List[float] sentiment S in [-1,1].
+    Flexible wrapper that supports BOTH calling conventions:
 
-    If a FinBERT instance is provided, reuse it; otherwise create one.
+      1) Old style (your CLI right now):
+           score_texts(fb, texts, batch_size=..., max_length=...)
+             - first positional arg is a FinBERT instance
+
+      2) Newer style:
+           score_texts(texts, batch=..., max_length=..., fb=...)
+
+    Accepted aliases:
+      - batch_size or batch
+      - max_length or max_len
     """
-    close_fb = False
+    fb: Optional[FinBERT] = None
+    texts: Iterable[Optional[str]] = []
+    # Aliases
+    batch_size = kwargs.pop("batch_size", None)
+    if batch_size is None:
+        batch_size = kwargs.pop("batch", 32)
+    max_length = kwargs.pop("max_length", None)
+    if max_length is None:
+        max_length = kwargs.pop("max_len", 256)
+
+    # Detect style
+    if args and isinstance(args[0], FinBERT):
+        # Style #1: score_texts(fb, texts, ...)
+        fb = args[0]
+        if len(args) > 1:
+            texts = args[1]
+        else:
+            texts = []
+    elif args:
+        # Style #2: score_texts(texts, ...)
+        texts = args[0]
+        fb = kwargs.pop("fb", None)
+    else:
+        # All via kwargs (unlikely in your code, but supported)
+        texts = kwargs.get("texts", [])
+        fb = kwargs.get("fb", None)
+
+    created = False
     if fb is None:
         fb = FinBERT()
-        close_fb = True
+        created = True
 
     try:
-        s, _ = fb.score(texts, batch_size=batch, max_length=max_length)
+        s, _ = fb.score(texts, batch_size=int(batch_size), max_length=int(max_length))
         return [float(v) for v in s]
     finally:
         # nothing to close explicitly, but keep pattern if you later add resources
-        if close_fb:
+        if created:
             pass
