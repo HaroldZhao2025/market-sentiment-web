@@ -1,23 +1,47 @@
-import fs from "fs";
-import path from "path";
-import EarningsClient from "./EarningsClient";
+// apps/web/app/earnings/[symbol]/page.tsx
+import { listTickers, loadTicker } from "../../../lib/loaders";
+import { assetPath } from "../../../lib/paths";
 
-type Params = { symbol: string };
+export const dynamicParams = true;
 
-export async function generateStaticParams(): Promise<Params[]> {
-  try {
-    const p = path.join(process.cwd(), "public", "data", "index.json");
-    const raw = fs.readFileSync(p, "utf-8");
-    const arr = JSON.parse(raw) as { ticker: string }[];
-    return arr.map((r) => ({ symbol: r.ticker }));
-  } catch {
-    return [{ symbol: "MSFT" }];
-  }
+export async function generateStaticParams() {
+  const tickers = listTickers();
+  return tickers.map((t) => ({ symbol: t }));
 }
 
-export const dynamicParams = false;
+export default function EarningsPage({ params }: { params: { symbol: string } }) {
+  const symbol = (params.symbol || "").toUpperCase();
+  const data = loadTicker(symbol); // reuse ticker json for now; shows earnings-doc news if present
 
-export default function Page({ params }: { params: Params }) {
-  const symbol = (params.symbol || "MSFT").toUpperCase();
-  return <EarningsClient symbol={symbol} />;
+  const earningsNews = data.news.filter((n) =>
+    /earnings|transcript|remarks|prepared/i.test(n.title || "")
+  );
+
+  return (
+    <main className="max-w-5xl mx-auto p-6">
+      <h1 className="text-xl font-semibold mb-4">{symbol} — Earnings</h1>
+
+      {earningsNews.length === 0 ? (
+        <p className="text-sm text-gray-500">No earnings documents captured for this window.</p>
+      ) : (
+        <ul className="space-y-2">
+          {earningsNews.map((n, idx) => (
+            <li key={idx} className="border rounded p-3">
+              <div className="text-sm text-gray-500">{new Date(n.ts).toLocaleString()}</div>
+              <a href={n.url} target="_blank" rel="noreferrer" className="font-medium underline">
+                {n.title}
+              </a>
+              <div className="text-sm text-gray-600">Sentiment: {n.s.toFixed(3)} {n.source ? ` • ${n.source}` : ""}</div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="mt-8">
+        <a className="underline text-blue-600" href={assetPath("")}>
+          ← Back
+        </a>
+      </div>
+    </main>
+  );
 }
