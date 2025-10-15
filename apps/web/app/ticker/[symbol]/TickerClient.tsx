@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import LineChart from "../../../components/LineChart";
-import { assetPath } from "../../lib/paths";
+import { assetPath } from "../../../lib/paths"; // up three levels from app/ticker/[symbol] to lib
 
 export default function TickerClient({ symbol }: { symbol: string }) {
   const s = symbol.toUpperCase();
