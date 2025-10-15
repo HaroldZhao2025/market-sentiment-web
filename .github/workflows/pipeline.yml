@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: src
+      HF_HOME: ${{ runner.temp }}/hf-home   # fresh HF cache each run
+      HF_HUB_DISABLE_TELEMETRY: "1"
 
     steps:
       - name: Checkout
@@ -43,9 +45,7 @@ jobs:
       - name: Install Python deps
         run: |
           python -m pip install --upgrade pip wheel setuptools
-          # Install CPU torch from the official CPU wheel index first
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
-          # Install the rest from requirements (includes transformers==4.45.2 and tokenizers==0.20.3)
           pip install --no-cache-dir -r requirements.txt
           pip check
 
@@ -55,23 +55,6 @@ jobs:
           python -c "import torch; print('torch', torch.__version__)"
           python -c "import transformers, tokenizers; print('transformers', transformers.__version__, 'tokenizers', tokenizers.__version__)"
           python -c "import pandas, yfinance, bs4, lxml; print('pandas', pandas.__version__)"
-          python - <<'PY'
-          import importlib, json
-          mods = ['market_sentiment', 'market_sentiment.cli.build_json',
-                  'market_sentiment.finbert', 'market_sentiment.news',
-                  'market_sentiment.edgar', 'market_sentiment.prices']
-          for m in mods:
-              importlib.import_module(m)
-              print('import ok:', m)
-          PY
-
-      - name: Cache HuggingFace models
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface
-          key: hf-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            hf-${{ runner.os }}-
 
       - name: Set dates (last 365 days)
         run: |
@@ -95,9 +78,7 @@ jobs:
 
       - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
         env:
-          TRANSFORMERS_CACHE: ~/.cache/huggingface
-          # Optional: add NEWS_API_KEY later if you adopt NewsAPI (free tier)
-          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          HF_HOME: ${{ env.HF_HOME }}   # ensure subprocesses see it
         run: |
           python -m market_sentiment.cli.build_json \
             --universe data/sp500.csv \
