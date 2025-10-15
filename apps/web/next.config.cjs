@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
-const isGH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const base = process.env.NEXT_PUBLIC_BASE_PATH || ""; // e.g. "/market-sentiment-web"
+
 module.exports = {
   output: "export",
-  basePath: isGH, // e.g. "/market-sentiment-web"
-  assetPrefix: isGH ? `${isGH}/` : undefined,
+  basePath: base,
+  assetPrefix: base ? `${base}/` : undefined,
   trailingSlash: true,
   images: { unoptimized: true },
   reactStrictMode: true,
