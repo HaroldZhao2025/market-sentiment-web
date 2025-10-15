@@ -3,10 +3,11 @@ import os
 import requests
 import pandas as pd
 
+
 def fetch_transcripts(ticker: str) -> pd.DataFrame:
     """
-    Earnings call transcripts via FMP.
-    Returns columns: ['ts','quarter','year','text'] (tz-aware UTC).
+    FMP earnings call transcripts for ticker.
+    Returns: ['ts','quarter','year','text'] tz-aware UTC
     """
     api_key = os.getenv("FMP_API_KEY", "")
     if not api_key:
@@ -20,10 +21,8 @@ def fetch_transcripts(ticker: str) -> pd.DataFrame:
         data = []
 
     rows = []
-    for it in (data or [])[:12]:  # last 12 calls
-        dt = it.get("date")
-        q = it.get("quarter") or it.get("quarterNumber")
-        y = it.get("year")
+    for it in (data or [])[:16]:
+        dt = it.get("date"); q = it.get("quarter") or it.get("quarterNumber"); y = it.get("year")
         txt = it.get("content") or it.get("text") or ""
         if not dt or not txt:
             continue
