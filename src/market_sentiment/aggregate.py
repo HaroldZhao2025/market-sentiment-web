@@ -4,20 +4,24 @@ import pandas as pd
 import numpy as np
 
 
-# ---------- helpers for price normalization ----------
+# ----------------- helpers -----------------
 
-def _dedupe_columns(df: pd.DataFrame) -> pd.DataFrame:
-    """Drop duplicate-named columns keeping the first occurrence."""
-    if df is None or df.empty:
-        return df
-    return df.loc[:, ~df.columns.duplicated()].copy()
+def _flatten_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """Flatten MultiIndex columns into single strings if needed."""
+    if isinstance(df.columns, pd.MultiIndex):
+        df = df.copy()
+        df.columns = [
+            "_".join([str(x) for x in tup if x is not None and str(x) != ""]).strip("_")
+            for tup in df.columns.to_list()
+        ]
+    return df
 
 
-def _ensure_date_column(df: pd.DataFrame) -> pd.DataFrame:
+def _materialize_date_column(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Ensure a tz-naive 'date' column exists.
-    - If index is DatetimeIndex, reset_index -> 'date'
-    - Else rename common variants.
+    Ensure a tz-naive 'date' column exists:
+      - If index is DatetimeIndex, move it to a column named 'date'
+      - Else try common variants; coerce to datetime and drop tz
     """
     df = df.copy()
     if "date" not in df.columns:
@@ -35,81 +39,85 @@ def _ensure_date_column(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _ensure_ticker_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Ensure a 'ticker' column exists (fallback to single placeholder if missing)."""
-    df = df.copy()
-    if "ticker" not in df.columns:
-        # Try common alternatives
-        for cand in ("symbol", "Symbol", "SYMBOL"):
-            if cand in df.columns:
-                df = df.rename(columns={cand: "ticker"})
-                break
-        if "ticker" not in df.columns:
-            df["ticker"] = "TICKER"  # fallback; upstream should pass per-ticker frames anyway
-    df["ticker"] = df["ticker"].astype(str)
-    return df
-
-
-def _ensure_close_column(df: pd.DataFrame) -> pd.DataFrame:
+def _resolve_close_series(df: pd.DataFrame) -> pd.Series:
     """
-    Guarantee a numeric 'close' column from common alternatives.
-    Order of preference: 'close', 'Close', 'adj_close', 'Adj Close', 'price', 'Price', first numeric col.
+    Return a SINGLE numeric Series for 'close', robust to:
+      - duplicate 'close' columns (returns first)
+      - alternative names: 'adj_close', 'Adj Close', 'price', 'Price', 'Close'
+      - fallback to first numeric column if none found
     """
-    df = df.copy()
-    # normalize some names
-    rename = {}
-    if "Adj Close" in df.columns and "adj_close" not in df.columns:
-        rename["Adj Close"] = "adj_close"
-    if "Close" in df.columns and "close" not in df.columns:
-        rename["Close"] = "close"
-    if "Price" in df.columns and "price" not in df.columns:
-        rename["Price"] = "price"
-    if rename:
-        df = df.rename(columns=rename)
+    # try direct 'close' (may be Series or DataFrame if duplicate names)
+    if "close" in df.columns:
+        obj = df["close"]
+        if isinstance(obj, pd.DataFrame):  # duplicates; pick first
+            s = pd.to_numeric(obj.iloc[:, 0], errors="coerce")
+            return s
+        return pd.to_numeric(obj, errors="coerce")
 
-    if "close" not in df.columns:
-        for cand in ("close", "adj_close", "price", "Adj Close", "Close", "Price"):
-            if cand in df.columns:
-                df["close"] = df[cand]
-                break
+    # normalize common names
+    candidates = []
+    for name in ("adj_close", "Adj Close", "Close", "price", "Price"):
+        if name in df.columns:
+            candidates.append(name)
+    if candidates:
+        return pd.to_numeric(df[candidates[0]], errors="coerce")
 
-    if "close" not in df.columns:
-        # last resort: first numeric column
-        num_cols = [c for c in df.columns if pd.api.types.is_numeric_dtype(df[c])]
-        df["close"] = df[num_cols[0]] if num_cols else np.nan
+    # fallback: first numeric column
+    num_cols = [c for c in df.columns if pd.api.types.is_numeric_dtype(df[c])]
+    if num_cols:
+        return pd.to_numeric(df[num_cols[0]], errors="coerce")
 
-    df["close"] = pd.to_numeric(df["close"], errors="coerce")
-    return df
+    # last resort: empty numeric series with correct index
+    return pd.Series(np.nan, index=df.index, dtype="float64")
 
 
-# ---------- public API ----------
+# ----------------- public API -----------------
 
 def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Adds forward 1D close-to-close return per ticker.
-    Output column: 'ret_cc_1d'
-    Robust to:
-      - duplicate/ambiguous columns
-      - date in index vs column
-      - missing/alternate close column names
+    Adds forward 1D returns per ticker.
+
+    Output columns:
+      - ret_cc_1d : next-day close-to-close return
+      - ret_oc_1d : next-day (close/open - 1) using same-day open & close
+                    (computed if 'open' is present)
+
+    Safe against duplicate/ambiguous 'close' columns and pandas 2.x changes.
     """
     if df is None or df.empty:
         return df
 
-    out = _dedupe_columns(df)
-    out = _ensure_date_column(out)
-    out = _ensure_ticker_column(out)
-    out = _ensure_close_column(out)
+    out = _flatten_columns(df).copy()
+    out = _materialize_date_column(out)
 
-    out = out.sort_values(["ticker", "date"]).copy()
+    if "ticker" not in out.columns:
+        # We need ticker to compute per-ticker returns
+        # If upstream forgot to include, bail gracefully
+        out["ret_cc_1d"] = np.nan
+        if "open" in out.columns:
+            out["ret_oc_1d"] = np.nan
+        return out
 
-    # Explicit behavior to avoid pandas FutureWarning on pct_change
-    ret = (
-        out.groupby("ticker", group_keys=False)["close"]
-           .apply(lambda s: s.pct_change(fill_method=None).shift(-1))
-    )
-    # ret is a Series aligned with out's index; safe to assign
-    out["ret_cc_1d"] = ret
+    # Resolve a single 'close' series and attach as a temporary column
+    s_close = _resolve_close_series(out)
+    out["_px_close_"] = s_close
+
+    # Sort for proper pct_change/shift alignment
+    out = out.sort_values(["ticker", "date"])
+
+    # Forward close-to-close return; avoid implicit ffill to silence FutureWarning
+    grp_close = out.groupby("ticker", sort=False)["_px_close_"]
+    out["ret_cc_1d"] = grp_close.pct_change(fill_method=None).shift(-1)
+
+    # Optional: next-day (close/open - 1)
+    if "open" in out.columns:
+        # Normalize 'open' to numeric safely
+        out["_px_open_"] = pd.to_numeric(out["open"], errors="coerce")
+        roc = (out["_px_close_"] / out["_px_open_"] - 1.0)
+        out["ret_oc_1d"] = roc.groupby(out["ticker"], sort=False).shift(-1)
+
+    # Clean up temp columns
+    out = out.drop(columns=[c for c in ["_px_close_", "_px_open_"] if c in out.columns])
 
     return out
 
@@ -119,7 +127,7 @@ def daily_sentiment_from_rows(rows: pd.DataFrame, kind: str) -> pd.DataFrame:
     Aggregate row-level FinBERT scores to daily per-ticker signals.
 
     Input rows must contain: ['ts','ticker','s','conf']  (ts is tz-aware UTC)
-    Output: ['date','ticker', f'S_{kind}', f'{kind}_count']
+    Output columns: ['date','ticker', f'S_{kind}', f'{kind}_count']
     """
     cols_needed = {"ts", "ticker", "s", "conf"}
     if rows is None or rows.empty or not cols_needed.issubset(set(rows.columns)):
@@ -132,8 +140,8 @@ def daily_sentiment_from_rows(rows: pd.DataFrame, kind: str) -> pd.DataFrame:
         .dt.normalize()
         .dt.tz_localize(None)
     )
-    d["w"] = pd.to_numeric(d["s"], errors="coerce") * pd.to_numeric(d["conf"], errors="coerce")
 
+    d["w"] = d["s"].astype(float) * d["conf"].astype(float)
     agg = (
         d.groupby(["ticker", "date"], as_index=False)
          .agg(w_sum=("w", "sum"),
@@ -152,7 +160,7 @@ def daily_sentiment_from_rows(rows: pd.DataFrame, kind: str) -> pd.DataFrame:
 def combine_news_earn(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFrame:
     """
     Outer-join daily news & earnings aggregates and produce a composite signal S.
-    Missing values are filled with zeros.
+    Missing values are filled with zeros. Earnings gets 2x weight (tunable).
     """
     if d_news is None or d_news.empty:
         d_news = pd.DataFrame(columns=["date", "ticker", "S_news", "news_count"])
@@ -161,18 +169,14 @@ def combine_news_earn(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFram
 
     df = pd.merge(d_news, d_earn, on=["date", "ticker"], how="outer")
 
-    # fill and types
-    for col, val in [("S_news", 0.0), ("S_earn", 0.0), ("news_count", 0), ("earn_count", 0)]:
-        if col not in df.columns:
-            df[col] = val
-        else:
-            if isinstance(val, float):
-                df[col] = pd.to_numeric(df[col], errors="coerce").fillna(val).astype(float)
-            else:
-                df[col] = pd.to_numeric(df[col], errors="coerce").fillna(val).astype(int)
+    # Fill with correct dtypes
+    def _num(series, default):
+        return pd.to_numeric(series, errors="coerce").fillna(default)
 
-    # composite signal: earnings has higher weight (tune later)
-    df["S"] = df["S_news"].astype(float) + 2.0 * df["S_earn"].astype(float)
+    for col, default in [("S_news", 0.0), ("S_earn", 0.0)]:
+        df[col] = _num(df.get(col, default), default).astype(float)
+    for col, default in [("news_count", 0), ("earn_count", 0)]:
+        df[col] = _num(df.get(col, default), default).astype(int)
 
-    df = df.sort_values(["ticker", "date"]).reset_index(drop=True)
-    return df
+    df["S"] = df["S_news"] + 2.0 * df["S_earn"]
+    return df.sort_values(["ticker", "date"]).reset_index(drop=True)
