@@ -34,7 +34,6 @@ export function safeReadJSON<T>(...segments: string[]): T | null {
 export function listTickers(): string[] {
   const arr = safeReadJSON<string[]>("_tickers.json");
   if (Array.isArray(arr) && arr.length) return arr;
-  // fallback so SSG never fails
   return ["AAPL", "MSFT", "GOOGL"];
 }
 
