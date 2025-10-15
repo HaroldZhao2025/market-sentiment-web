@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ""; // set in CI for GH Pages
+
 const nextConfig = {
-  output: 'export',        // write static site to ./out on build
-  trailingSlash: true,     // friendlier paths on GitHub Pages
-  // If you later want to host under a subpath and keep absolute links,
-  // set NEXT_PUBLIC_BASE_PATH in Actions → Variables and uncomment below:
-  // basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  output: "export",       // writes to ./out
+  trailingSlash: true,    // needed for static hosting
+  basePath,               // e.g. "/market-sentiment-web" on Pages, "" locally
 };
 
 export default nextConfig;
-
