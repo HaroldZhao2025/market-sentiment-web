@@ -80,7 +80,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site (Next.js output: export)
+      - name: "Build static site (Next.js output: export)"
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
