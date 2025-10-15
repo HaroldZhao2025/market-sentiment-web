@@ -1,22 +1,14 @@
-# Core
 pandas>=2.1
 numpy>=1.26
 requests>=2.31
 tqdm>=4.66
-
-# HTML parsing (EDGAR & general)
 beautifulsoup4>=4.12
 lxml>=5.2
 html5lib>=1.1
-
-# Market data
 yfinance>=0.2.50
-
-# NLP / HF
 transformers==4.45.2
-tokenizers==0.20.3           # <-- bump to satisfy transformers 4.45.2 (>=0.20,<0.21)
+tokenizers==0.20.3
 huggingface-hub>=0.25.0
 safetensors>=0.4.1
-
-# Torch CPU for inference on GitHub runner (installed from CPU index in workflow too)
+readability-lxml>=0.8.1
 torch==2.3.1
