@@ -13,16 +13,10 @@ _SRC_WEIGHT = {
 }
 
 def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Add next-day close-to-close return as 'ret_cc_1d'.
-    Works whether or not a 'ticker' column exists.
-    """
     if df.empty:
         return df.copy()
-
     out = df.copy()
     out["date"] = pd.to_datetime(out["date"], errors="coerce")
-    # sort + pct_change per ticker if present; otherwise across the single series
     if "ticker" in out.columns:
         out = out.sort_values(["ticker", "date"])
         out["ret_cc_1d"] = out.groupby("ticker")["close"].pct_change().shift(-1)
@@ -32,19 +26,13 @@ def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 def apply_cutoff_and_roll(news_df: pd.DataFrame, cutoff_min: int) -> pd.DataFrame:
-    """
-    Items published within [close - cutoff_min, close] roll into T+1.
-    Market close: 16:00 America/New_York.
-    """
     if news_df.empty:
         return news_df
-
     news = news_df.copy()
     ts = pd.to_datetime(news["ts"], errors="coerce", utc=True).dt.tz_convert(_EASTERN)
     news["ts_local"] = ts
     close_time = ts.dt.normalize() + pd.Timedelta(hours=16)
     threshold = close_time - pd.Timedelta(minutes=cutoff_min)
-
     eff = np.where(ts > threshold, (ts + pd.Timedelta(days=1)), ts)
     eff = pd.to_datetime(eff).tz_convert(_EASTERN).normalize()
     news["effective_date"] = eff
@@ -57,9 +45,8 @@ def _src_w(s: str | float | None) -> float:
 
 def aggregate_daily(scored_news: pd.DataFrame) -> pd.DataFrame:
     """
-    Input scored_news columns:
-      ['ticker','ts','source','title','url','pos','neg','neu','conf', 'effective_date'(from cutoff)]
-    Returns: ['date','ticker','S','news_count']
+    expects: ['ticker','ts','source','title','url','pos','neg','neu','conf','effective_date']
+    returns: ['date','ticker','S','news_count']
     """
     if scored_news.empty:
         return pd.DataFrame({"date": [], "ticker": [], "S": [], "news_count": []})
@@ -68,17 +55,17 @@ def aggregate_daily(scored_news: pd.DataFrame) -> pd.DataFrame:
     if "effective_date" not in x.columns:
         x = apply_cutoff_and_roll(x, cutoff_min=30)
 
-    for col in ["pos","neg","neu","conf"]:
+    for col in ("pos", "neg", "neu", "conf"):
         if col not in x.columns:
             x[col] = 0.0
 
     x["w_src"] = x["source"].map(_src_w).fillna(1.0)
     x["w"] = x["conf"].fillna(1.0) * x["w_src"]
+    # signed FinBERT signal (your notebook’s spirit)
     x["signed"] = x["w"] * (x["pos"].astype(float) - x["neg"].astype(float))
 
-    g = x.groupby(["effective_date","ticker"], as_index=False).agg(
-        S=("signed","sum"),
-        news_count=("title","count"),
+    g = x.groupby(["effective_date", "ticker"], as_index=False).agg(
+        S=("signed", "sum"), news_count=("title", "count")
     )
-    g = g.rename(columns={"effective_date":"date"})
-    return g.sort_values(["ticker","date"]).reset_index(drop=True)
+    g = g.rename(columns={"effective_date": "date"})
+    return g.sort_values(["ticker", "date"]).reset_index(drop=True)
