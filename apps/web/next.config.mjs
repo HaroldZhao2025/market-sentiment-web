@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const isGH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+module.exports = {
   output: "export",
+  basePath: isGH, // e.g. "/market-sentiment-web"
+  assetPrefix: isGH ? `${isGH}/` : undefined,
   trailingSlash: true,
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
+  images: { unoptimized: true },
+  reactStrictMode: true,
 };
-
-export default nextConfig;
