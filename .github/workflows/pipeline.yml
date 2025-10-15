@@ -54,11 +54,12 @@ jobs:
         run: |
           npm install --no-audit --no-fund
 
-      - name: Build and Export site
+      - name: Build site (static export via output: export)
         working-directory: apps/web
         run: |
           npm run build
-          npm run export
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
