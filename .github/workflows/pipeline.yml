@@ -103,10 +103,11 @@ jobs:
           node -v
           npm -v
           npm run build
-          echo "Contents after build:"
+          npm run export
+          echo "Contents after export:"
           ls -lah
           # Guard: ensure 'out' exists (export target)
-          test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
+          test -d out || { echo "::error::Expected 'apps/web/out' to exist after build+export, but it does not."; exit 1; }
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
