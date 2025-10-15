@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { assetPath } from "../lib/paths";
 
 export default function PortfolioClient() {
   const [data, setData] = useState<any | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("data/portfolio.json")
+    fetch(assetPath("data/portfolio.json"))
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${r.status} ${r.statusText}`))))
       .then(setData)
       .catch((e) => setErr(e.message));
@@ -30,16 +31,13 @@ export default function PortfolioClient() {
 }
 
 function SimpleLine({ dates, values }: { dates: string[]; values: number[] }) {
-  // ultra-simple SVG sparkline avoids bundling chart libs on this page
   const w = 800, h = 200, pad = 20;
   const xs = dates.map((_, i) => pad + (i / Math.max(1, dates.length - 1)) * (w - pad * 2));
   const min = Math.min(...values), max = Math.max(...values);
   const ys = values.map(v => h - pad - ((v - min) / Math.max(1e-9, (max - min))) * (h - pad * 2));
-  const d = xs.map((x, i) => `${i ? "L" : "M"} ${x.toFixed(1)} ${ys[i].toFixed(1)}`).join(" ");
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-56">
       <polyline points={xs.map((x,i)=>`${x},${ys[i]}`).join(" ")} fill="none" stroke="currentColor" strokeWidth="2" />
-      <path d={d} fill="none" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
 }
