@@ -111,3 +111,4 @@ export default function LineChart({
 
   return <Line options={options} data={data} height={height} />;
 }
+
