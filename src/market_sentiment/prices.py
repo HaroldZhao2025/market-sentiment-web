@@ -1,36 +1,70 @@
 # src/market_sentiment/prices.py
 from __future__ import annotations
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List
+
+from typing import Iterable, List
 import pandas as pd
 import yfinance as yf
 
-def _one_ticker_hist(ticker: str, start: str, end: str) -> pd.DataFrame:
-    try:
-        t = yf.Ticker(ticker)
-        df = t.history(start=start, end=end, interval="1d", auto_adjust=False)
-        if df is None or df.empty:
-            return pd.DataFrame()
-        df = df.reset_index().rename(columns=str.lower)
-        # yfinance returns 'date' tz-aware UTC or tz-naive; normalize to date (naive)
-        df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce").dt.tz_convert("America/New_York").dt.normalize().dt.tz_localize(None)
-        df["ticker"] = ticker
-        # keep standard columns
-        keep = ["date","ticker","open","high","low","close","volume"]
-        return df[keep].dropna(subset=["date","close"])
-    except Exception:
-        return pd.DataFrame()
 
-def fetch_prices_yf(tickers: List[str], start: str, end: str, max_workers: int = 8) -> pd.DataFrame:
-    dfs = []
-    with ThreadPoolExecutor(max_workers=max_workers) as ex:
-        futs = {ex.submit(_one_ticker_hist, t, start, end): t for t in tickers}
-        for fut in as_completed(futs):
-            df = fut.result()
-            if df is not None and not df.empty:
-                dfs.append(df)
-    if not dfs:
-        return pd.DataFrame(columns=["date","ticker","open","high","low","close","volume"])
-    out = pd.concat(dfs, ignore_index=True)
-    out = out.drop_duplicates(["ticker","date"]).sort_values(["ticker","date"])
+def _normalize_download(df: pd.DataFrame, tickers: List[str]) -> pd.DataFrame:
+    """
+    yfinance.download(...) returns:
+      - MultiIndex columns when multiple tickers requested
+      - Single-index columns when one ticker
+    Normalize to long tidy frame with columns: date,ticker,open,high,low,close,adj_close,volume
+    """
+    if df.empty:
+        return pd.DataFrame(columns=["date","ticker","open","high","low","close","adj_close","volume"])
+
+    if isinstance(df.columns, pd.MultiIndex):
+        frames = []
+        top = set([lvl for lvl in df.columns.get_level_values(0)])
+        for t in tickers:
+            if t not in top:
+                continue
+            sub = df[t].reset_index()
+            sub.columns = [c.lower().replace(" ", "_") for c in sub.columns]
+            sub["ticker"] = t
+            # Ensure adj_close present
+            if "adj_close" not in sub.columns and "adj close" in sub.columns:
+                sub = sub.rename(columns={"adj close": "adj_close"})
+            frames.append(sub)
+        out = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+    else:
+        # single ticker path
+        sub = df.reset_index()
+        sub.columns = [c.lower().replace(" ", "_") for c in sub.columns]
+        sub["ticker"] = tickers[0] if tickers else ""
+        if "adj_close" not in sub.columns and "adj close" in sub.columns:
+            sub = sub.rename(columns={"adj close": "adj_close"})
+        out = sub
+
+    if out.empty:
+        return pd.DataFrame(columns=["date","ticker","open","high","low","close","adj_close","volume"])
+
+    # Minimal set guaranteed
+    for c in ["open","high","low","close","adj_close","volume"]:
+        if c not in out.columns:
+            out[c] = pd.NA
+
+    out["date"] = pd.to_datetime(out["date"]).dt.tz_localize(None)
+    out = out[["date","ticker","open","high","low","close","adj_close","volume"]].sort_values(["ticker","date"]).reset_index(drop=True)
     return out
+
+
+def fetch_prices_yf(tickers: Iterable[str], start: str, end: str) -> pd.DataFrame:
+    ts = [t for t in tickers if isinstance(t, str) and t]
+    if not ts:
+        return pd.DataFrame(columns=["date","ticker","open","high","low","close","adj_close","volume"])
+
+    raw = yf.download(
+        ts,
+        start=start,
+        end=end,
+        interval="1d",
+        group_by="ticker",
+        auto_adjust=False,
+        progress=False,
+        threads=False,  # more predictable on CI
+    )
+    return _normalize_download(raw, ts)
