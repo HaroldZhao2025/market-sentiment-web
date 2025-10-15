@@ -1,48 +1,88 @@
 # src/market_sentiment/edgar.py
 from __future__ import annotations
-import time, re, json
+import time, re
 from typing import Dict, List
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 
-# We DO NOT use any email in headers. Pure API access + generic UA.
+# Pure API access. No email anywhere.
 _UA = "Mozilla/5.0 (compatible; MarketSentimentBot/0.2; +https://github.com/)"
 _SESS = requests.Session()
 _SESS.headers.update({
     "User-Agent": _UA,
     "Accept": "*/*",
     "Connection": "keep-alive",
+    "Referer": "https://www.sec.gov/",
 })
 
 _INDEX_RE = re.compile(r"(ex99|press|earnings|prepared|remarks|transcript)", re.I)
 
 def _sec_get(url: str, params: dict | None = None, sleep: float = 0.25):
-    """Minimal polite GET with short backoff on 429/503; no email."""
-    tries = 3
-    for i in range(tries):
-        r = _SESS.get(url, params=params or {}, timeout=30)
-        if r.status_code in (429, 503) and i < tries - 1:
-            time.sleep(0.8 * (i + 1))
-            continue
-        r.raise_for_status()
-        if sleep:
-            time.sleep(sleep)
-        return r
-    # last attempt returned non-OK already raised_for_status
-    return r
-
-def _load_ticker_map() -> pd.DataFrame:
     """
-    SEC's public mapping of tickers to CIKs.
-    Returns DataFrame[ticker, cik].
+    Minimal polite GET with short backoff on 429/503 and explicit Referer/UA.
+    """
+    tries = 3
+    last_exc: Exception | None = None
+    for i in range(tries):
+        try:
+            r = _SESS.get(url, params=params or {}, timeout=30)
+            # Retry on common throttling codes
+            if r.status_code in (429, 503):
+                time.sleep(0.8 * (i + 1))
+                continue
+            r.raise_for_status()
+            if sleep:
+                time.sleep(sleep)
+            return r
+        except Exception as e:
+            last_exc = e
+            time.sleep(0.8 * (i + 1))
+    if last_exc:
+        raise last_exc
+    raise RuntimeError("SEC GET failed unexpectedly")
+
+def _load_ticker_map_from_json() -> pd.DataFrame:
+    """
+    Primary source (can 403 in CI): company_tickers.json
     """
     url = "https://www.sec.gov/files/company_tickers.json"
     r = _sec_get(url)
     j = r.json()
-    # format: {"0": {"ticker":"A", "cik_str":320193, "title":"..."}, ...}
     rows = [(v["ticker"].upper(), int(v["cik_str"])) for v in j.values()]
     return pd.DataFrame(rows, columns=["ticker","cik"])
+
+def _load_ticker_map_from_txt() -> pd.DataFrame:
+    """
+    Fallback source (very reliable): https://www.sec.gov/include/ticker.txt
+    Format: 'aapl|320193' per line.
+    """
+    url = "https://www.sec.gov/include/ticker.txt"
+    r = _sec_get(url)
+    rows = []
+    for line in r.text.splitlines():
+        line = line.strip()
+        if not line or "|" not in line:
+            continue
+        t, c = line.split("|", 1)
+        try:
+            rows.append((t.upper(), int(c)))
+        except ValueError:
+            continue
+    return pd.DataFrame(rows, columns=["ticker","cik"])
+
+def _load_ticker_map() -> pd.DataFrame:
+    """
+    Try JSON first; on any failure (e.g., 403), fall back to ticker.txt.
+    """
+    try:
+        df = _load_ticker_map_from_json()
+        if not df.empty:
+            return df
+    except Exception:
+        pass
+    # Fallback
+    return _load_ticker_map_from_txt()
 
 def _get_cik(ticker: str, cache: Dict[str, int]) -> int | None:
     t = ticker.upper()
@@ -64,10 +104,10 @@ def _recent_filings(cik: int) -> pd.DataFrame:
     r = _sec_get(url)
     j = r.json()
     recent = j.get("filings", {}).get("recent", {})
-    acc = recent.get("accessionNumber", [])
+    acc  = recent.get("accessionNumber", [])
     prim = recent.get("primaryDocument", [])
     form = recent.get("form", [])
-    filed = recent.get("filingDate", [])
+    filed= recent.get("filingDate", [])
     rows = [(a, p, f, d) for a, p, f, d in zip(acc, prim, form, filed)]
     return pd.DataFrame(rows, columns=["accession","primary","form","filed"])
 
@@ -98,7 +138,7 @@ def _read_html_text(cik: int, accession: str, filename: str) -> str:
     except Exception:
         return ""
     content = r.content
-    # Try HTML first; fall back to decode text
+    # Try HTML parser first (works on many .txt too), fall back to raw decode.
     try:
         soup = BeautifulSoup(content, "lxml")
         for t in soup(["script", "style", "noscript"]):
@@ -152,7 +192,7 @@ def fetch_earnings_docs(ticker: str, start: str, end: str) -> pd.DataFrame:
             name = f.get("name") or ""
             if not name.lower().endswith((".htm",".html",".txt")):
                 continue
-            # Heuristic: prefer earnings-like exhibits; still allow primary on 8-K
+            # Prefer earnings-like exhibits; allow 8-K primary too
             if not _INDEX_RE.search(name):
                 if r["form"] != "8-K" or name != r["primary"]:
                     continue
@@ -171,6 +211,5 @@ def fetch_earnings_docs(ticker: str, start: str, end: str) -> pd.DataFrame:
         return pd.DataFrame(columns=["ts","title","url","text"])
 
     df = pd.DataFrame(rows, columns=["ts","title","url","text"])
-    # Deduplicate on title; newest first
     df = df.sort_values("ts", ascending=False).drop_duplicates(["title"]).reset_index(drop=True)
     return df
