@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { assetPath } from "../lib/paths";
 
 type Row = { ticker: string; S?: number; predicted_return?: number };
 
@@ -10,8 +11,7 @@ export default function HomeClient() {
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
-    // RELATIVE fetch so it resolves to /market-sentiment-web/data/index.json on Pages
-    fetch("data/index.json")
+    fetch(assetPath("data/index.json"))
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${r.status} ${r.statusText}`))))
       .then((d) => setRows(Array.isArray(d) ? d : []))
       .catch((e) => setErr(e.message));
@@ -33,7 +33,6 @@ export default function HomeClient() {
           <h1 className="text-2xl font-semibold">Market Sentiment — S&amp;P 500</h1>
           <p className="text-sm text-gray-500">Daily aggregated news sentiment and price overlay</p>
         </div>
-        {/* absolute paths are OK now because basePath is set in next.config during CI */}
         <Link href="/portfolio" className="btn">Portfolio</Link>
       </header>
 
@@ -45,7 +44,7 @@ export default function HomeClient() {
           <div className="text-sm text-gray-500">{rows.length} tickers</div>
         </div>
         {rows.length === 0 ? (
-          <div className="text-sm text-gray-500">No data yet. If you just deployed, give the data job one full run.</div>
+          <div className="text-sm text-gray-500">No data yet.</div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
             {rows.slice(0, 36).map((r) => (
