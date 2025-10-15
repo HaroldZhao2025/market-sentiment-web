@@ -61,30 +61,22 @@ def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
         raise KeyError("prices must have a 'ticker' column.")
 
     out = prices.copy()
-    # Normalize date to naive daily
+
+    # Normalize date to naive daily (America/New_York)
     d = pd.to_datetime(out["date"], errors="coerce", utc=True)
-    # if already naive, this converts treating as UTC; ok for daily use
     d = d.dt.tz_convert("America/New_York").dt.normalize().dt.tz_localize(None)
     out["date"] = d
 
     close_col = _pick_close_column(out)
-    # Ensure it's numeric
     out[close_col] = pd.to_numeric(out[close_col], errors="coerce")
 
-    # Compute forward return
-    # Note: pct_change default fill_method='ffill' will change in future pandas;
-    # we neutralize by filling missing values *before* pct_change, then shifting.
-    def _group_forward(g: pd.DataFrame) -> pd.Series:
-        cc = g[close_col].astype(float)
-        # safe pct change
-        r = cc.pct_change(fill_method=None).shift(-1)
-        return r
+    # Sort first so the forward shift is meaningful inside each ticker
+    out = out.sort_values(["ticker", "date"])
 
+    # Use transform (not apply) so we always get a 1D Series aligned to rows.
     out["ret_cc_1d"] = (
-        out.sort_values(["ticker", "date"])
-           .groupby("ticker", group_keys=False)
-           .apply(_group_forward)
-           .reset_index(drop=True)
+        out.groupby("ticker")[close_col]
+           .transform(lambda s: s.pct_change(fill_method=None).shift(-1))
     )
 
     return out
@@ -137,11 +129,10 @@ def combine_daily(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFrame:
         d_earn = pd.DataFrame(columns=["date","ticker","S_earn","earn_count"])
 
     # Ensure proper types
-    for col in ["date"]:
-        if col in d_news.columns:
-            d_news[col] = pd.to_datetime(d_news[col]).dt.normalize()
-        if col in d_earn.columns:
-            d_earn[col] = pd.to_datetime(d_earn[col]).dt.normalize()
+    if "date" in d_news.columns:
+        d_news["date"] = pd.to_datetime(d_news["date"]).dt.normalize()
+    if "date" in d_earn.columns:
+        d_earn["date"] = pd.to_datetime(d_earn["date"]).dt.normalize()
 
     daily = (
         d_news.merge(d_earn, on=["date","ticker"], how="outer")
@@ -163,7 +154,7 @@ def combine_daily(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFrame:
 
     return daily[["date","ticker","S","S_news","S_earn","news_count","earn_count"]]
 
-# --------- safe merges for writer/portfolio ---------
+# --------- safe merge for writer/portfolio ---------
 
 def safe_merge_prices_daily(prices: pd.DataFrame, daily: pd.DataFrame) -> pd.DataFrame:
     """
