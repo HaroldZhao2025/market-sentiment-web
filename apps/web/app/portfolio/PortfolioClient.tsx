@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { assetPath } from "../lib/paths";
+import { assetPath } from "../../lib/paths"; // up two levels from app/portfolio to lib
 
 export default function PortfolioClient() {
   const [data, setData] = useState<any | null>(null);
