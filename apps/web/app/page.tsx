@@ -1,46 +1,37 @@
 // apps/web/app/page.tsx
-import fs from "node:fs";
-import path from "node:path";
 import Link from "next/link";
-// REMOVE the unused import that caused the error:
-// import { dataPath } from "../lib/paths";
+import { listTickers, loadPortfolio } from "../lib/loaders";
+import { assetPath } from "../lib/paths";
 
-type Tickers = string[];
+export default function HomePage() {
+  const tickers = listTickers();
+  const portfolio = loadPortfolio();
 
-export const revalidate = false;
-
-function loadTickers(): Tickers {
-  try {
-    const p = path.join(process.cwd(), "public", "data", "_tickers.json");
-    const s = fs.readFileSync(p, "utf8");
-    return JSON.parse(s);
-  } catch {
-    return [];
-  }
-}
-
-export default function Home() {
-  const tickers = loadTickers();
   return (
-    <main className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Market Sentiment — S&amp;P 500</h1>
-      <div className="flex gap-4 mb-6">
-        <Link className="underline" href="/portfolio">Portfolio</Link>
-      </div>
-      {tickers.length === 0 ? (
-        <p>No data generated yet.</p>
-      ) : (
-        <>
-          <div className="mb-2 text-sm text-gray-600">Tickers ({tickers.length})</div>
-          <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
-            {tickers.map(sym => (
-              <li key={sym}>
-                <Link className="underline" href={`/ticker/${encodeURIComponent(sym)}`}>{sym}</Link>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+    <main className="max-w-6xl mx-auto p-6">
+      <h1 className="text-2xl font-semibold mb-4">Market Sentiment — S&amp;P 500</h1>
+
+      <section className="mb-8">
+        <Link className="underline text-blue-600" href={assetPath("portfolio")}>
+          Portfolio
+        </Link>
+        {!portfolio ? (
+          <p className="mt-2 text-sm text-gray-500">No portfolio data generated yet.</p>
+        ) : (
+          <p className="mt-2 text-sm text-gray-600">Last {portfolio.dates.length} days.</p>
+        )}
+      </section>
+
+      <h2 className="text-lg font-semibold mb-2">Browse Tickers</h2>
+      <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
+        {tickers.map((t) => (
+          <li key={t}>
+            <Link className="block border rounded px-2 py-1 hover:bg-gray-50" href={assetPath(`ticker/${t}`)}>
+              {t}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }
