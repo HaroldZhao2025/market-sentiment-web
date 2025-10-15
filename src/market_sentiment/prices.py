@@ -6,104 +6,163 @@ import pandas as pd
 import yfinance as yf
 
 
-def _normalize_price_frame(df: pd.DataFrame, ticker: str) -> pd.DataFrame:
+def _select_open_close_columns(df: pd.DataFrame) -> tuple[Optional[str], Optional[str]]:
     """
-    Take any yfinance price frame and return a standardized DataFrame with:
-        columns: ["date", "ticker", "open", "close"]
-        date: tz-naive, normalized to midnight (YYYY-MM-DD 00:00:00)
-    If df is empty, returns an empty DataFrame with the same columns.
+    Return column names for open and close in df, preferring:
+      - 'Open' for open
+      - 'Close' for close; fallback to 'Adj Close' if missing
+    If none found, try fuzzy contains for 'open'/'close'.
+    """
+    cols = list(df.columns)
+    # Prefer exact
+    open_col = "Open" if "Open" in cols else None
+    close_col = "Close" if "Close" in cols else None
+
+    # Fallback for Close: use 'Adj Close' if present
+    if close_col is None and "Adj Close" in cols:
+        close_col = "Adj Close"
+
+    # Fuzzy fallback
+    if open_col is None:
+        cands = [c for c in cols if "open" in c.lower()]
+        open_col = cands[0] if cands else None
+    if close_col is None:
+        cands = [c for c in cols if "close" in c.lower()]
+        # avoid picking 'adj close' if a generic 'close' exists
+        cands_sorted = sorted(cands, key=lambda c: (c.lower() != "close", len(c)))
+        close_col = cands_sorted[0] if cands_sorted else None
+
+    return open_col, close_col
+
+
+def _extract_date_column(df: pd.DataFrame) -> tuple[pd.DataFrame, str]:
+    """
+    Ensure there is a concrete date column in the frame.
+    Strategy:
+      1) reset_index() to bring index out
+      2) prefer first datetime-like column; else look for common names
+      3) if still not found, attempt to parse the 'index' column as datetime
+    Returns (df_with_date_col, date_col_name)
+    """
+    # Bring index out as a column (named by index name or 'index')
+    df = df.reset_index(drop=False)
+
+    # Pick datetime-like column if present
+    datetime_cols = [c for c in df.columns if pd.api.types.is_datetime64_any_dtype(df[c])]
+    if datetime_cols:
+        return df, datetime_cols[0]
+
+    # Common names that may hold date strings
+    common_names = ["Date", "Datetime", "date", "INDEX", "index"]
+    for name in common_names:
+        if name in df.columns:
+            # Try to coerce to datetime
+            try:
+                as_dt = pd.to_datetime(df[name], errors="coerce", utc=True)
+                if as_dt.notna().any():
+                    df[name] = as_dt
+                    return df, name
+            except Exception:
+                pass
+
+    # Last resort: try to datetime-convert any column with 'date' in the name
+    for c in df.columns:
+        if "date" in c.lower():
+            try:
+                as_dt = pd.to_datetime(df[c], errors="coerce", utc=True)
+                if as_dt.notna().any():
+                    df[c] = as_dt
+                    return df, c
+            except Exception:
+                pass
+
+    # Could not infer
+    # Make a synthetic empty result; caller will handle empties.
+    return df, ""
+
+
+def _normalize_price_frame(raw: pd.DataFrame, ticker: str) -> pd.DataFrame:
+    """
+    Normalize any yfinance output into:
+      columns: ["date", "ticker", "open", "close"]
+      date: tz-naive, America/New_York midnight
     """
     cols = ["date", "ticker", "open", "close"]
-    if df is None or df.empty:
+    if raw is None or raw.empty:
         return pd.DataFrame(columns=cols)
 
-    # If we got multi-index columns (common when group_by is not 'column'),
-    # collapse them. We only need the Open/Close for the (single) ticker.
+    df = raw.copy()
+
+    # If MultiIndex columns, collapse to a 2-col frame with Open/Close
     if isinstance(df.columns, pd.MultiIndex):
-        # Try to pick the first level as field name if df has a single ticker level
-        # Typical shapes: columns like ('Open', 'AAPL'), ('Close','AAPL') or ('AAPL','Open')
-        # We'll try both possible layouts:
-        if "Open" in df.columns.get_level_values(0) and "Close" in df.columns.get_level_values(0):
-            # Layout: level0 = field, level1 = ticker
-            # Select the column for this ticker if present; else take the first column across tickers
+        # Two main common layouts:
+        #   (Field, Ticker)  OR  (Ticker, Field)
+        lv0, lv1 = df.columns.get_level_values(0), df.columns.get_level_values(1)
+        if "Open" in lv0 and "Close" in lv0:
+            # (Field, Ticker)
             try:
                 open_series = df[("Open", ticker)]
                 close_series = df[("Close", ticker)]
             except Exception:
-                # fallback: take the first ticker column if the specific one is missing
+                # fallback: first ticker column for each field
                 open_series = df["Open"].iloc[:, 0]
                 close_series = df["Close"].iloc[:, 0]
             df = pd.DataFrame({"Open": open_series, "Close": close_series})
-        elif "Open" in df.columns.get_level_values(1) and "Close" in df.columns.get_level_values(1):
-            # Layout: level0 = ticker, level1 = field
+        elif "Open" in lv1 and "Close" in lv1:
+            # (Ticker, Field)
             try:
                 open_series = df[(ticker, "Open")]
                 close_series = df[(ticker, "Close")]
             except Exception:
-                # fallback: take the first ticker level available
                 first_ticker = df.columns.get_level_values(0)[0]
                 open_series = df[(first_ticker, "Open")]
                 close_series = df[(first_ticker, "Close")]
             df = pd.DataFrame({"Open": open_series, "Close": close_series})
         else:
-            # Unknown multiindex layout; best effort attempt to flatten
-            df.columns = ["_".join([str(x) for x in c if str(x) != ""]) for c in df.columns]
-            # look for any variant of Open/Close
-            cand_open = [c for c in df.columns if c.lower().endswith("open")]
-            cand_close = [c for c in df.columns if c.lower().endswith("close")]
-            if not cand_open or not cand_close:
-                return pd.DataFrame(columns=cols)
-            df = pd.DataFrame({"Open": df[cand_open[0]], "Close": df[cand_close[0]]})
+            # Generic flatten
+            df.columns = ["_".join([str(x) for x in tup if str(x) != ""]).strip("_") for tup in df.columns]
 
-    # Ensure index -> date column
-    if "Date" in df.columns:
-        df = df.rename(columns={"Date": "date"})
-    else:
-        df = df.reset_index().rename(columns={"index": "date"})
+    # Ensure we have a concrete date column name
+    df, date_col = _extract_date_column(df)
+    if not date_col:
+        return pd.DataFrame(columns=cols)
 
-    # Normalize column names to lower-case
-    df = df.rename(columns={"Open": "open", "Close": "close"})
+    # Identify open/close columns
+    open_col, close_col = _select_open_close_columns(df)
+    if open_col is None or close_col is None:
+        return pd.DataFrame(columns=cols)
 
-    # If open/close are missing, attempt common variants or bail to empty
-    if "open" not in df.columns or "close" not in df.columns:
-        lc = {c.lower(): c for c in df.columns}
-        open_col = lc.get("open")
-        close_col = lc.get("close")
-        if open_col and close_col:
-            df = df.rename(columns={open_col: "open", close_col: "close"})
-        else:
-            return pd.DataFrame(columns=cols)
+    # Coerce date to NY tz-naive midnight
+    d = pd.to_datetime(df[date_col], errors="coerce", utc=True)
+    # If all NaT, bail out
+    if d.isna().all():
+        return pd.DataFrame(columns=cols)
 
-    # Clean datetimes: make tz-naive midnight (normalize)
-    d = pd.to_datetime(df["date"], errors="coerce", utc=True)
-    # Convert to NY then normalize, then drop tz
-    d = d.tz_convert("America/New_York").normalize().tz_localize(None)
-    df["date"] = d
+    d = d.dt.tz_convert("America/New_York").dt.normalize().dt.tz_localize(None)
 
-    # Add ticker and keep only required columns
-    df["ticker"] = ticker
-    out = df[["date", "ticker", "open", "close"]].dropna().reset_index(drop=True)
+    out = pd.DataFrame(
+        {
+            "date": d,
+            "ticker": ticker,
+            "open": pd.to_numeric(df[open_col], errors="coerce"),
+            "close": pd.to_numeric(df[close_col], errors="coerce"),
+        }
+    )
+    out = out.dropna(subset=["date", "open", "close"])
+    if out.empty:
+        return pd.DataFrame(columns=cols)
 
-    # Drop duplicated dates if any (keep last)
-    if not out.empty:
-        out = out.sort_values("date").drop_duplicates(["ticker", "date"], keep="last")
+    # Deduplicate on (ticker, date)
+    out = out.sort_values("date").drop_duplicates(["ticker", "date"], keep="last").reset_index(drop=True)
     return out
 
 
-def _try_download(
-    ticker: str,
-    start: str,
-    end: str,
-    *,
-    use_download: bool = True
-) -> pd.DataFrame:
+def _try_download(ticker: str, start: str, end: str, *, use_download: bool = True) -> pd.DataFrame:
     """
-    Try yf.download first (single ticker to avoid MultiIndex), then fallback
-    to Ticker.history if needed.
+    Try yf.download first (single ticker, single-level columns), then fallback to Ticker.history.
     """
     start_dt = pd.to_datetime(start)
-    # yfinance end is exclusive for download; add a day to include 'end'
-    end_dt = pd.to_datetime(end) + pd.Timedelta(days=1)
+    end_dt = pd.to_datetime(end) + pd.Timedelta(days=1)  # yfinance end is exclusive
 
     if use_download:
         try:
@@ -123,16 +182,9 @@ def _try_download(
         except Exception:
             pass
 
-    # fallback to Ticker.history
     try:
         t = yf.Ticker(ticker)
-        df = t.history(
-            start=start_dt,
-            end=end_dt,
-            interval="1d",
-            actions=False,
-            auto_adjust=False,
-        )
+        df = t.history(start=start_dt, end=end_dt, interval="1d", actions=False, auto_adjust=False)
         return df
     except Exception:
         return pd.DataFrame()
@@ -140,8 +192,7 @@ def _try_download(
 
 def fetch_prices_yf(ticker: str, start: str, end: str) -> pd.DataFrame:
     """
-    Public function used by the CLI.
-    Always returns a DataFrame with columns: ["date","ticker","open","close"].
+    Public entry used by the CLI. Always returns columns: ["date","ticker","open","close"].
     """
     raw = _try_download(ticker, start, end, use_download=True)
     norm = _normalize_price_frame(raw, ticker)
