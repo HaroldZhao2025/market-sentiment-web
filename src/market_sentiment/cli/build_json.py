@@ -1,4 +1,3 @@
-# src/market_sentiment/cli/build_json.py
 from __future__ import annotations
 import argparse
 from pathlib import Path
@@ -49,45 +48,42 @@ def main():
         try:
             from market_sentiment.finbert import FinBERT  # noqa: WPS433
             fb = FinBERT()
-        except Exception as e:  # torch/transformers may be missing on CI
+        except Exception as e:
             print(
-                f"Warning: FinBERT unavailable ({e!r}). Falling back to lexicon sentiment.",
+                f"Warning: FinBERT unavailable ({e!r}). Falling back to lexicon.",
                 file=sys.stderr,
             )
             use_finbert = False
             fb = None
 
     summary_rows: list[dict] = []
-    all_scores: list[dict] = []  # for portfolio construction
+    panel_parts: list[pd.DataFrame] = []  # for portfolio: per-day per-ticker scores + returns
 
     for t in tqdm(tickers, desc="Build JSON"):
-        # 1) Prices
+        # 1) Prices + forward returns (y on T for T+1 move)
         prices = fetch_prices(t, args.start, args.end)
         if prices.empty:
             continue
         prices = add_forward_returns(prices)
+        rets = prices[["date", "ret_cc_1d"]].rename(columns={"ret_cc_1d": "y"}).copy()
+        rets["ticker"] = t
 
         # 2) News
         news = fetch_news(t, args.start, args.end)
         if news.empty:
             news = pd.DataFrame(columns=["ticker", "ts", "source", "title", "url"])
 
-        # 3) Sentiment scoring (batch if FinBERT)
+        # 3) Sentiment scoring
         if use_finbert and len(news) > 0:
-            probs = fb.score_batch(
-                news["title"].fillna("").tolist(), batch_size=args.batch
+            probs = fb.score_batch(news["title"].fillna("").tolist(), batch_size=args.batch)
+            scored = pd.DataFrame(probs).rename(
+                columns={"positive": "pos", "negative": "neg", "neutral": "neu"}
             )
-            scored = pd.DataFrame(probs)  # columns: positive, negative, neutral, conf
-            if not scored.empty:
-                # Align with aggregator expected column names
-                scored = scored.rename(
-                    columns={"positive": "pos", "negative": "neg", "neutral": "neu"}
-                )
-                scored.insert(0, "ticker", t)
-                scored.insert(1, "ts", news["ts"].values)
-                scored.insert(2, "source", news["source"].values)
-                scored.insert(3, "title", news["title"].values)
-                scored.insert(4, "url", news["url"].values)
+            scored.insert(0, "ticker", t)
+            scored.insert(1, "ts", news["ts"].values)
+            scored.insert(2, "source", news["source"].values)
+            scored.insert(3, "title", news["title"].values)
+            scored.insert(4, "url", news["url"].values)
         else:
             rows = []
             for _, r in news.iterrows():
@@ -98,48 +94,46 @@ def main():
                 columns=["ticker", "ts", "source", "title", "url", "pos", "neg", "neu", "conf"],
             )
 
-        # 4) Daily aggregation
+        # 4) Daily aggregation -> S(t, d)
         if scored.empty:
             daily = pd.DataFrame({"date": [], "ticker": [], "S": []})
         else:
             scored = apply_cutoff_and_roll(scored, args.cutoff)
             daily = aggregate_daily(scored)
 
-        # 5) Write per-ticker JSON for the website
+        # 5) Per-ticker JSON for the site
         obj = build_ticker_json(t, prices, daily, news)
         write_ticker_json(obj, args.out)
 
-        # 6) Earnings transcripts JSON (if available)
+        # 6) Earnings transcripts JSON
         er = fetch_transcripts(t)
         if not er.empty:
             write_earnings_json(t, er, args.out)
 
-        # 7) Summary row for home/overview page
+        # 7) Latest summary for home page
         last_s = daily[daily["ticker"] == t]["S"].tail(1)
         S = float(last_s.values[0]) if len(last_s) > 0 else 0.0
-        pred = float(np.tanh(S / 5.0) * 0.01)
-        summary_rows.append({"ticker": t, "S": S, "predicted_return": pred})
+        pred_last = float(np.tanh(S / 5.0) * 0.01)
+        summary_rows.append({"ticker": t, "S": S, "predicted_return": pred_last})
 
-        # 8) Portfolio inputs (toy: use latest label y we have)
-        last = prices.tail(1)
-        if len(last) > 0:
-            all_scores.append(
-                {
-                    "date": last["date"].iloc[0],
-                    "ticker": t,
-                    "score": pred,
-                    "y": last["ret_cc_1d"].iloc[0],
-                }
-            )
+        # 8) Portfolio panel: merge daily scores with same-day forward return y
+        if not daily.empty:
+            sig = daily[["date", "ticker", "S"]].copy()
+            sig["score"] = np.tanh(sig["S"] / 5.0) * 0.01
+            joined = sig.merge(rets, on=["date", "ticker"], how="left")
+            panel_parts.append(joined[["date", "ticker", "score", "y"]])
 
-    # Write overview & portfolio JSONs
+    # Overview JSON
     idx = pd.DataFrame(summary_rows).sort_values("predicted_return", ascending=False)
     write_index_json(idx, args.out)
 
-    port_df = pd.DataFrame(all_scores)
-    if not port_df.empty:
-        pnl = daily_long_short(port_df, 0.9, 0.1)
-        write_portfolio_json(pnl, args.out)
+    # Portfolio JSON (proper timeseries)
+    if len(panel_parts) > 0:
+        panel = pd.concat(panel_parts, ignore_index=True)
+        panel = panel.dropna(subset=["y"])
+        pnl = daily_long_short(panel, 0.9, 0.1)  # long top decile, short bottom decile
+        if not pnl.empty:
+            write_portfolio_json(pnl, args.out)
 
     print("Done ->", args.out)
 
