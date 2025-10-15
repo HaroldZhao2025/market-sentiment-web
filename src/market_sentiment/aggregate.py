@@ -5,7 +5,6 @@ import pandas as pd
 _EASTERN = "America/New_York"
 
 _SRC_WEIGHT = {
-    # adjustable source reliability weights
     "Reuters": 1.2,
     "Bloomberg": 1.2,
     "CNBC": 1.1,
@@ -14,9 +13,23 @@ _SRC_WEIGHT = {
 }
 
 def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.sort_values(["ticker","date"]).copy()
-    df["ret_cc_1d"] = df.groupby("ticker")["close"].pct_change().shift(-1)
-    return df
+    """
+    Add next-day close-to-close return as 'ret_cc_1d'.
+    Works whether or not a 'ticker' column exists.
+    """
+    if df.empty:
+        return df.copy()
+
+    out = df.copy()
+    out["date"] = pd.to_datetime(out["date"], errors="coerce")
+    # sort + pct_change per ticker if present; otherwise across the single series
+    if "ticker" in out.columns:
+        out = out.sort_values(["ticker", "date"])
+        out["ret_cc_1d"] = out.groupby("ticker")["close"].pct_change().shift(-1)
+    else:
+        out = out.sort_values(["date"])
+        out["ret_cc_1d"] = out["close"].pct_change().shift(-1)
+    return out
 
 def apply_cutoff_and_roll(news_df: pd.DataFrame, cutoff_min: int) -> pd.DataFrame:
     """
@@ -46,7 +59,7 @@ def aggregate_daily(scored_news: pd.DataFrame) -> pd.DataFrame:
     """
     Input scored_news columns:
       ['ticker','ts','source','title','url','pos','neg','neu','conf', 'effective_date'(from cutoff)]
-    Returns daily per-ticker DataFrame: ['date','ticker','S','news_count']
+    Returns: ['date','ticker','S','news_count']
     """
     if scored_news.empty:
         return pd.DataFrame({"date": [], "ticker": [], "S": [], "news_count": []})
@@ -59,7 +72,6 @@ def aggregate_daily(scored_news: pd.DataFrame) -> pd.DataFrame:
         if col not in x.columns:
             x[col] = 0.0
 
-    # weight and signed score
     x["w_src"] = x["source"].map(_src_w).fillna(1.0)
     x["w"] = x["conf"].fillna(1.0) * x["w_src"]
     x["signed"] = x["w"] * (x["pos"].astype(float) - x["neg"].astype(float))
