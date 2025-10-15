@@ -65,7 +65,7 @@ jobs:
       - name: Build S&P 500 universe
         run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
 
-      - name: Build JSON (FinBERT + Yahoo News)
+      - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
@@ -77,56 +77,15 @@ jobs:
             --max-workers 8 \
             --max-tickers 0
 
-      - name: Inspect raw files (quick peek)
+      - name: Inspect output (debug)
         run: |
+          echo "Data dir listing:"
           ls -lah apps/web/public/data || true
-          (test -f apps/web/public/data/_tickers.json && head -n 40 apps/web/public/data/_tickers.json) || true
-          (test -f apps/web/public/data/portfolio.json && head -n 40 apps/web/public/data/portfolio.json) || true
-
-      - name: Summarize output (news & sentiment QA)
-        run: |
-          python - <<'PY'
-          import os, json, math, glob
-          from statistics import mean
-          DATA="apps/web/public/data"
-          tickers_file=os.path.join(DATA,"_tickers.json")
-          if not os.path.exists(tickers_file):
-              print("::warning ::_tickers.json missing")
-              tickers=[]
-          else:
-              tickers=json.load(open(tickers_file))
-          print(f"Tickers listed: {len(tickers)}")
-
-          files=sorted(glob.glob(os.path.join(DATA,"*.json")))
-          files=[f for f in files if not os.path.basename(f).startswith(("_","portfolio"))]
-
-          total=len(files)
-          with_news=0
-          with_nonzeroS=0
-          examples=[]
-          for f in files:
-              j=json.load(open(f))
-              sym=j.get("ticker") or os.path.splitext(os.path.basename(f))[0]
-              news=j.get("news") or []
-              ser=j.get("series") or []
-              if news: with_news+=1
-              if ser:
-                  S=[abs((pt.get("S") or 0.0)) for pt in ser]
-                  nz=[s for s in S if s and not math.isclose(s, 0.0, abs_tol=1e-12)]
-                  if nz: 
-                      with_nonzeroS+=1
-                      if len(examples)<5:
-                          examples.append((sym, round(mean(nz), 4), len(nz)))
-          print(f"Ticker JSON files: {total}")
-          print(f"Tickers with any news: {with_news}/{total}")
-          print(f"Tickers with non-zero sentiment S: {with_nonzeroS}/{total}")
-          if examples:
-              print("Sample tickers with mean|S| > 0:")
-              for sym,m,n in examples:
-                  print(f"  {sym}: mean|S|={m} (nz_points={n})")
-          port=os.path.join(DATA,"portfolio.json")
-          print(f"Portfolio present: {'yes' if os.path.exists(port) else 'no'}")
-          PY
+          echo "Manifest head:"
+          (test -f apps/web/public/data/_tickers.json && head -n 100 apps/web/public/data/_tickers.json) || true
+          echo "One sample ticker file (if exists):"
+          f=$(ls apps/web/public/data/*.json | grep -v '_tickers.json' | head -n 1 || true)
+          if [ -n "$f" ]; then head -n 80 "$f"; fi
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -147,7 +106,9 @@ jobs:
           node -v
           npm -v
           npm run build
-          echo "Contents after build:" && ls -lah
+          echo "Contents after build:"
+          ls -lah
+          # Guard
           test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
 
       - name: Configure Pages
