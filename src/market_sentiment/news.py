@@ -1,95 +1,94 @@
 from __future__ import annotations
+from typing import List
 import os
+import math
 import requests
 import pandas as pd
 import yfinance as yf
 
-
-def _to_eastern_from_epoch_seconds_or_str(v) -> pd.Timestamp:
-    """
-    Robustly parse a timestamp that may be epoch-seconds or an ISO string.
-    Fallback to 'now' if missing/invalid. Always return tz-aware America/New_York.
-    """
-    # Try epoch-seconds first (most common in yfinance)
-    ts = pd.to_datetime(v, unit="s", errors="coerce", utc=True)
-    if pd.isna(ts):
-        # Try generic parse (ISO8601 string)
-        ts = pd.to_datetime(v, errors="coerce", utc=True)
-    if pd.isna(ts):
-        # Final fallback: now (UTC) then convert
-        ts = pd.Timestamp.now(tz="UTC")
-    return ts.tz_convert("America/New_York")
-
+def _to_utc(s: pd.Series) -> pd.Series:
+    dt = pd.to_datetime(s, errors="coerce", utc=True)
+    return dt
 
 def news_yfinance(ticker: str) -> pd.DataFrame:
     """
-    Fetch news via Yahoo Finance. Fields vary; timestamps can be missing.
-    We robustly coerce timestamp and fill with 'now' if needed.
+    yfinance news (best-effort, sometimes sparse).
+    Columns: ['ticker','ts','source','title','url']
     """
     try:
         items = yf.Ticker(ticker).news or []
     except Exception:
         items = []
-
     rows = []
     for it in items:
-        ts_raw = it.get("providerPublishTime")  # epoch seconds
-        ts = _to_eastern_from_epoch_seconds_or_str(ts_raw)
+        ts = it.get("providerPublishTime")
+        title = it.get("title")
+        url = it.get("link")
+        src = (it.get("publisher") or it.get("provider") or "").strip()
+        if ts is None or not title or not url:
+            continue
+        rows.append((ticker, pd.to_datetime(int(ts), unit="s", utc=True), src, title, url))
+    return pd.DataFrame(rows, columns=["ticker","ts","source","title","url"])
 
-        src = (it.get("publisher") or "unknown").strip()
-        title = (it.get("title") or "").strip()
-        url = (it.get("link") or "").strip()
-
-        rows.append((ticker, ts, src, title, url))
-
-    return pd.DataFrame(rows, columns=["ticker", "ts", "source", "title", "url"])
-
-
-def news_newsapi(ticker: str, api_key: str, start: str, end: str) -> pd.DataFrame:
-    """
-    Fetch news via NewsAPI (if NEWS_API_KEY is set). Timestamps are ISO strings.
-    We coerce and fallback similarly to yfinance.
-    """
-    url = "https://newsapi.org/v2/everything"
-    params = {
-        "q": ticker,
-        "from": start,
-        "to": end,
-        "language": "en",
-        "pageSize": 100,
-        "sortBy": "publishedAt",
-        "apiKey": api_key,
-    }
-
+def _get_json(url: str, params: dict) -> List[dict]:
     try:
-        r = requests.get(url, params=params, timeout=30)
-        r.raise_for_status()
-        arts = r.json().get("articles", [])
+        r = requests.get(url, params=params, timeout=20)
+        if r.status_code == 200:
+            return r.json() or []
     except Exception:
-        arts = []
+        pass
+    return []
 
+def news_fmp(ticker: str, start: str, end: str, api_key: str | None) -> pd.DataFrame:
+    """
+    FinancialModelingPrep stock news + press releases.
+    """
+    if not api_key:
+        return pd.DataFrame(columns=["ticker","ts","source","title","url"])
+
+    # Stock news
+    url_news = "https://financialmodelingprep.com/api/v3/stock_news"
+    news = _get_json(url_news, {"tickers": ticker, "from": start, "to": end, "limit": 250, "apikey": api_key})
     rows = []
-    for a in arts:
-        ts = _to_eastern_from_epoch_seconds_or_str(a.get("publishedAt"))
-        src = ((a.get("source") or {}).get("name") or "unknown").strip()
-        # Combine title + description (like your original approach)
-        title = f"{a.get('title') or ''} {a.get('description') or ''}".strip()
-        url = (a.get("url") or "").strip()
-        rows.append((ticker, ts, src, title, url))
+    for it in news:
+        title = it.get("title")
+        url = it.get("url")
+        src = (it.get("site") or it.get("source") or "FMP").strip()
+        dt = it.get("publishedDate")  # e.g., "2024-02-29 14:32:00"
+        if not title or not url or not dt:
+            continue
+        rows.append((ticker, pd.to_datetime(dt, utc=True), src, title, url))
 
-    return pd.DataFrame(rows, columns=["ticker", "ts", "source", "title", "url"])
+    # Press releases (optional)
+    url_pr = f"https://financialmodelingprep.com/api/v3/press-releases/{ticker}"
+    prs = _get_json(url_pr, {"from": start, "to": end, "page": 0, "apikey": api_key})
+    for it in prs:
+        title = it.get("title")
+        url = it.get("link") or it.get("url")
+        dt = it.get("date")
+        if not title or not url or not dt:
+            continue
+        rows.append((ticker, pd.to_datetime(dt, utc=True), "Press Release", title, url))
 
+    return pd.DataFrame(rows, columns=["ticker","ts","source","title","url"])
 
 def fetch_news(ticker: str, start: str, end: str) -> pd.DataFrame:
     """
-    Try NewsAPI (if key is present), else fall back to yfinance.
+    Union(FMP, yfinance) → UTC ts → dedupe by (title, minute-windows)
     """
-    key = os.environ.get("NEWS_API_KEY")
-    if key:
-        try:
-            df = news_newsapi(ticker, key, start, end)
-            if not df.empty:
-                return df
-        except Exception:
-            pass
-    return news_yfinance(ticker)
+    api_key = os.getenv("FMP_API_KEY", "")
+    a = news_fmp(ticker, start, end, api_key)
+    b = news_yfinance(ticker)
+
+    if a.empty and b.empty:
+        return pd.DataFrame(columns=["ticker","ts","source","title","url"])
+
+    df = pd.concat([a, b], ignore_index=True)
+    df["ts"] = _to_utc(df["ts"])
+
+    # round to minute and dedupe on (title, rounded_ts)
+    x = df.copy()
+    x["ts_min"] = x["ts"].dt.floor("min")
+    x = x.sort_values("ts", ascending=False).drop_duplicates(["title","ts_min"])
+    x = x.drop(columns=["ts_min"])
+    return x.reset_index(drop=True)
