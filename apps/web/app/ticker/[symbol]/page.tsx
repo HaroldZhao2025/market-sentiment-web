@@ -1,82 +1,56 @@
-import fs from "node:fs";
+// apps/web/app/ticker/[symbol]/page.tsx
 import path from "node:path";
-import Link from "next/link";
+import fs from "node:fs";
+import LineChart from "../../../components/LineChart";
+import { listTickers, loadTicker } from "../../../lib/loaders";
+import { assetPath } from "../../../lib/paths";
 
-type TickerData = {
-  symbol: string;
-  series: { date: string[]; close: number[]; S: number[]; S_news: number[]; S_earn: number[]; news_count: number[]; earn_count: number[]; };
-  recent_headlines: { ts: string; title: string; url: string; score?: { pos: number; neg: number } }[];
-};
+export const dynamicParams = true;
 
-export const dynamicParams = false;
-
+// Pre-generate params from _tickers.json if present.
+// If missing, we still export a minimal set to avoid build failure.
 export async function generateStaticParams() {
-  const p = path.join(process.cwd(), "public", "data", "_tickers.json");
-  const syms: string[] = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : [];
-  return syms.map(s => ({ symbol: s }));
-}
-
-function loadTicker(sym: string): TickerData | null {
-  try {
-    const p = path.join(process.cwd(), "public", "data", `${sym}.json`);
-    return JSON.parse(fs.readFileSync(p, "utf8"));
-  } catch { return null; }
+  const tickers = listTickers();
+  return tickers.map((t) => ({ symbol: t }));
 }
 
 export default function TickerPage({ params }: { params: { symbol: string } }) {
-  const sym = params.symbol;
-  const data = loadTicker(sym);
-  if (!data) return (
-    <main className="p-6 max-w-4xl mx-auto">
-      <p>No data for {sym}.</p>
-      <Link className="underline" href="/">Back</Link>
-    </main>
-  );
+  const symbol = (params.symbol || "").toUpperCase();
+  const data = loadTicker(symbol); // safe, never undefined
 
-  const last = data.series.date.length ? data.series.date[data.series.date.length-1] : "";
+  const priceSeries = data.series.map((p) => ({ x: p.date, y: p.close }));
+  const signalSeries = data.series.map((p) => ({ x: p.date, y: p.S }));
+
   return (
-    <main className="p-6 max-w-5xl mx-auto">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">{data.symbol}</h1>
-        <Link className="underline" href="/">Home</Link>
+    <main className="max-w-5xl mx-auto p-6">
+      <h1 className="text-xl font-semibold mb-4">{symbol}</h1>
+
+      <div className="mb-6">
+        <LineChart left={priceSeries} right={signalSeries} height={300} />
       </div>
 
-      <section className="mt-6">
-        <h2 className="font-semibold mb-2">Signal vs Close</h2>
-        <div className="text-sm text-gray-600 mb-2">Last date: {last || "—"}</div>
-        <div className="rounded border p-3 overflow-x-auto">
-          {/* simple table view; you can swap to Chart.js component again */}
-          <table className="min-w-[600px] text-sm">
-            <thead><tr><th className="px-2 py-1 text-left">Date</th><th className="px-2 py-1 text-right">Close</th><th className="px-2 py-1 text-right">S</th><th className="px-2 py-1 text-right">News</th><th className="px-2 py-1 text-right">Earn</th></tr></thead>
-            <tbody>
-              {data.series.date.map((d,i)=>(
-                <tr key={d}>
-                  <td className="px-2 py-1">{d}</td>
-                  <td className="px-2 py-1 text-right">{data.series.close[i]?.toFixed(2)}</td>
-                  <td className="px-2 py-1 text-right">{data.series.S[i]?.toFixed(4)}</td>
-                  <td className="px-2 py-1 text-right">{data.series.S_news[i]?.toFixed(4)}</td>
-                  <td className="px-2 py-1 text-right">{data.series.S_earn[i]?.toFixed(4)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <h2 className="text-lg font-semibold mb-2">Recent News</h2>
+      {data.news.length === 0 ? (
+        <p className="text-sm text-gray-500">No news captured for this window.</p>
+      ) : (
+        <ul className="space-y-2">
+          {data.news.slice(0, 20).map((n, idx) => (
+            <li key={idx} className="border rounded p-3">
+              <div className="text-sm text-gray-500">{new Date(n.ts).toLocaleString()}</div>
+              <a href={n.url} target="_blank" rel="noreferrer" className="font-medium underline">
+                {n.title}
+              </a>
+              <div className="text-sm text-gray-600">Sentiment: {n.s.toFixed(3)} {n.source ? ` • ${n.source}` : ""}</div>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <section className="mt-6">
-        <h2 className="font-semibold mb-2">Recent headlines</h2>
-        {data.recent_headlines?.length ? (
-          <ul className="space-y-2">
-            {data.recent_headlines.map((h,idx)=>(
-              <li key={idx} className="border rounded p-2">
-                <div className="text-xs text-gray-600">{new Date(h.ts).toLocaleString()}</div>
-                <a href={h.url} target="_blank" rel="noreferrer" className="underline">{h.title}</a>
-                {h.score && <div className="text-xs mt-1">pos: {h.score.pos.toFixed(3)} · neg: {h.score.neg.toFixed(3)}</div>}
-              </li>
-            ))}
-          </ul>
-        ) : <p>No headlines captured.</p>}
-      </section>
+      <div className="mt-8">
+        <a className="underline text-blue-600" href={assetPath("")}>
+          ← Back
+        </a>
+      </div>
     </main>
   );
 }
