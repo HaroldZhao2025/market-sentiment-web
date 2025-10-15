@@ -5,17 +5,13 @@ import numpy as np
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-
 _SENT_SPLIT = re.compile(r"(?<=[\.\!\?])\s+")
 
-
-def _split_sentences(text: str, max_sentences: int = 60) -> List[str]:
+def _split_sentences(text: str, max_sentences: int = 120) -> List[str]:
     if not text:
         return []
-    # basic sentence split; cap to avoid huge transcripts
     sents = [s.strip() for s in _SENT_SPLIT.split(text) if s.strip()]
     return sents[:max_sentences]
-
 
 class FinBERT:
     """
@@ -60,14 +56,10 @@ class FinBERT:
 
     @torch.inference_mode()
     def score_long_text(self, text: str, batch_size: int = 16, max_length: int = 128) -> Dict[str, float]:
-        """
-        Split long earnings text to sentences, score, and average.
-        """
         sents = _split_sentences(text, max_sentences=120)
         if not sents:
             return {"positive": 0.0, "negative": 0.0, "neutral": 1.0, "confidence": 0.0}
         rows = self.score_batch(sents, batch_size=batch_size, max_length=max_length)
-        # mean across sentences
         pos = float(np.mean([r["positive"] for r in rows]))
         neg = float(np.mean([r["negative"] for r in rows]))
         neu = float(np.mean([r["neutral"] for r in rows]))
