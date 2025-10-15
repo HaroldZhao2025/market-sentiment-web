@@ -2,11 +2,14 @@ pandas>=2.2
 numpy>=1.26
 requests>=2.31
 beautifulsoup4>=4.12
+lxml>=4.9     # HTML parser for pandas.read_html (fast, preferred)
+html5lib>=1.1 # Backup HTML parser for pandas.read_html
 yfinance>=0.2
 python-dateutil>=2.8
 pyarrow>=15.0
 tqdm>=4.66
-# FinBERT (optional): enable locally, not in CI by default
-transformers>=4.44
-torch>=2.2
 scipy>=1.10
+
+# Optional: enable FinBERT locally (kept commented to keep CI light)
+# transformers>=4.44
+# torch>=2.2
