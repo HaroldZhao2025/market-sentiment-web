@@ -28,7 +28,8 @@ def _clip_to_price_dates(d: pd.DataFrame, p: pd.DataFrame) -> pd.DataFrame:
     lo, hi = p["date"].min(), p["date"].max()
     return d[(d["date"] >= lo) & (d["date"] <= hi)].reset_index(drop=True)
 
-def build_ticker_json(ticker: str, prices: pd.DataFrame, daily_combined: pd.DataFrame, recent_news: pd.DataFrame) -> dict:
+def build_ticker_json(ticker: str, prices: pd.DataFrame, daily_combined: pd.DataFrame,
+                      recent_news: pd.DataFrame, earnings_events: pd.DataFrame | None = None) -> dict:
     p = _flatten(prices).copy()
     d = _flatten(daily_combined).copy()
     p["date"] = _to_eastern_day(p["date"])
@@ -51,13 +52,12 @@ def build_ticker_json(ticker: str, prices: pd.DataFrame, daily_combined: pd.Data
     series["S_total"] = series["S_total"].fillna(0.0)
     series["news_count"] = series["news_count"].fillna(0).astype(int)
 
-    # rolling stats
+    # rolling means
     def _ma(x, w): return x.rolling(w, min_periods=1).mean()
     s_news7  = _ma(series["S_news"], 7)
     s_earn7  = _ma(series["S_earn"], 7)
     s_total7 = _ma(series["S_total"], 7)
 
-    last_total = float(series["S_total"].iloc[-1]) if len(series) else 0.0
     last_total7 = float(s_total7.iloc[-1]) if len(series) else 0.0
     predicted_return = float(np.tanh(last_total7 / 2.0) * 0.02)
 
@@ -75,7 +75,6 @@ def build_ticker_json(ticker: str, prices: pd.DataFrame, daily_combined: pd.Data
         "ticker": ticker,
         "meta": {
             "last_updated": pd.Timestamp.now(tz="America/New_York").isoformat(),
-            "S_total_1d": last_total,
             "S_total_7d": last_total7,
             "news_7d": int(series["news_count"].rolling(7, min_periods=1).sum().iloc[-1]) if len(series) else 0,
         },
@@ -100,11 +99,13 @@ def build_ticker_json(ticker: str, prices: pd.DataFrame, daily_combined: pd.Data
 
 def write_ticker_json(obj: dict, out_dir: Path) -> Path:
     out = Path(out_dir) / f"{obj['ticker'].upper()}.json"
-    dump_json(obj, out); return out
+    dump_json(obj, out)
+    return out
 
 def write_index_json(summary_df: pd.DataFrame, out_dir: Path) -> Path:
     out = Path(out_dir) / "index.json"
-    dump_json(summary_df.to_dict(orient="records"), out); return out
+    dump_json(summary_df.to_dict(orient="records"), out)
+    return out
 
 def write_portfolio_json(pnl_df: pd.DataFrame, out_dir: Path) -> Path:
     out = Path(out_dir) / "portfolio.json"
@@ -114,8 +115,3 @@ def write_portfolio_json(pnl_df: pd.DataFrame, out_dir: Path) -> Path:
         "ret_net": pnl_df["ret_net"].astype(float).tolist(),
     }, out)
     return out
-
-def write_earnings_json(ticker: str, df: pd.DataFrame, out_dir: Path) -> Path:
-    out = Path(out_dir) / "earnings" / f"{ticker.upper()}.json"
-    events = df.sort_values("ts").assign(ts=lambda d: d["ts"].astype(str))[["ts","quarter","year","text"]]
-    dump_json({"ticker": ticker, "events": events.to_dict(orient="records")}, out); return out
