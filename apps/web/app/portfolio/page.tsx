@@ -1,41 +1,33 @@
 // apps/web/app/portfolio/page.tsx
-import LineChart from "../../components/LineChart";
 import { loadPortfolio } from "../../lib/loaders";
-import { assetPath } from "../../lib/paths";
+import LineChart from "../../components/LineChart";
 
 export default function PortfolioPage() {
   const p = loadPortfolio();
 
-  return (
-    <main className="max-w-5xl mx-auto p-6">
-      <h1 className="text-xl font-semibold mb-4">Long/Short Portfolio</h1>
+  const left =
+    p && p.dates && p.equity
+      ? p.dates.map((d, i) => ({ x: d, y: Number.isFinite(p.equity[i]) ? p.equity[i] : 0 }))
+      : [];
 
-      {!p ? (
-        <p className="text-sm text-gray-500">No portfolio data generated yet.</p>
+  const right =
+    p && p.dates && p.ret
+      ? p.dates.map((d, i) => ({ x: d, y: Number.isFinite(p.ret[i]) ? p.ret[i] : 0 }))
+      : [];
+
+  return (
+    <main className="p-6 space-y-6">
+      <h2 className="text-xl font-bold">Portfolio (Top/Bottom Decile, 1d)</h2>
+      {left.length === 0 ? (
+        <div className="text-sm text-gray-500">No data generated yet.</div>
       ) : (
         <>
-          <div className="mb-6">
-            <LineChart
-              left={p.dates.map((d, i) => ({ x: d, y: p.equity[i] ?? 0 }))}
-              height={300}
-            />
-          </div>
-          {p.stats ? (
-            <div className="text-sm text-gray-700">
-              <div>Ann. Return: {p.stats.ann_return?.toFixed(2)}</div>
-              <div>Ann. Vol: {p.stats.ann_vol?.toFixed(2)}</div>
-              <div>Sharpe: {p.stats.sharpe?.toFixed(2)}</div>
-              <div>Max Drawdown: {p.stats.max_dd?.toFixed(2)}</div>
-            </div>
-          ) : null}
+          <h3 className="font-semibold">Equity Curve</h3>
+          <LineChart left={left} height={300} />
+          <h3 className="font-semibold mt-6">Daily Returns</h3>
+          <LineChart right={right} height={300} />
         </>
       )}
-
-      <div className="mt-8">
-        <a className="underline text-blue-600" href={assetPath("")}>
-          ← Back
-        </a>
-      </div>
     </main>
   );
 }
