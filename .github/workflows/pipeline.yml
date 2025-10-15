@@ -52,13 +52,15 @@ jobs:
 
       - name: Set dates (last 365 days)
         run: |
-          echo "START=$(date -u -d '365 days ago' +%F 2>/dev/null || python - <<'PY'
-          from datetime import datetime, timedelta
-          print((datetime.utcnow() - timedelta(days=365)).strftime('%Y-%m-%d'))
+          python - <<'PY'
+          import os
+          from datetime import datetime, timedelta, timezone
+          start=(datetime.now(timezone.utc)-timedelta(days=365)).strftime('%Y-%m-%d')
+          end=datetime.now(timezone.utc).strftime('%Y-%m-%d')
+          with open(os.environ['GITHUB_ENV'],'a') as f:
+              f.write(f"START={start}\nEND={end}\n")
+          print("START", start, "END", end)
           PY
-          )" >> $GITHUB_ENV
-          echo "END=$(date -u +%F)" >> $GITHUB_ENV
-          echo "Using START=$START END=$END"
 
       - name: Build S&P 500 universe
         run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
@@ -77,8 +79,8 @@ jobs:
       - name: Inspect output (debug)
         run: |
           ls -lah apps/web/public/data || true
-          head -n 20 apps/web/public/data/_tickers.json || true
-          head -n 20 apps/web/public/data/portfolio.json || true
+          (test -f apps/web/public/data/_tickers.json && head -n 20 apps/web/public/data/_tickers.json) || true
+          (test -f apps/web/public/data/portfolio.json && head -n 20 apps/web/public/data/portfolio.json) || true
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -89,7 +91,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site (Next.js output: export)
+      - name: "Build static site (Next.js output: export)"
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
