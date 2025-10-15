@@ -43,7 +43,7 @@ def _resolve_close_series(df: pd.DataFrame) -> pd.Series:
     """
     Return a SINGLE numeric Series for 'close', robust to:
       - duplicate 'close' columns (returns first)
-      - alternative names: 'adj_close', 'Adj Close', 'price', 'Price', 'Close'
+      - alternative names: 'adj_close', 'Adj Close', 'Close', 'price', 'Price'
       - fallback to first numeric column if none found
     """
     # try direct 'close' (may be Series or DataFrame if duplicate names)
@@ -75,14 +75,12 @@ def _resolve_close_series(df: pd.DataFrame) -> pd.Series:
 
 def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Adds forward 1D returns per ticker.
+    Adds forward 1D returns per ticker and guarantees a 'close' column exists.
 
-    Output columns:
-      - ret_cc_1d : next-day close-to-close return
-      - ret_oc_1d : next-day (close/open - 1) using same-day open & close
-                    (computed if 'open' is present)
-
-    Safe against duplicate/ambiguous 'close' columns and pandas 2.x changes.
+    Output columns (in addition to existing):
+      - close       : numeric close we resolved (kept for downstream merges)
+      - ret_cc_1d   : next-day close-to-close return
+      - ret_oc_1d   : next-day (close/open - 1) using same-day open & close (if 'open' present)
     """
     if df is None or df.empty:
         return df
@@ -90,34 +88,30 @@ def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
     out = _flatten_columns(df).copy()
     out = _materialize_date_column(out)
 
+    # Ensure a 'close' column is present and numeric
+    s_close = _resolve_close_series(out)
+    out["close"] = s_close  # KEEP in output for downstream selection
+
     if "ticker" not in out.columns:
-        # We need ticker to compute per-ticker returns
-        # If upstream forgot to include, bail gracefully
+        # If upstream forgot, we can’t compute per-ticker returns
         out["ret_cc_1d"] = np.nan
         if "open" in out.columns:
             out["ret_oc_1d"] = np.nan
         return out
 
-    # Resolve a single 'close' series and attach as a temporary column
-    s_close = _resolve_close_series(out)
-    out["_px_close_"] = s_close
-
     # Sort for proper pct_change/shift alignment
     out = out.sort_values(["ticker", "date"])
 
     # Forward close-to-close return; avoid implicit ffill to silence FutureWarning
-    grp_close = out.groupby("ticker", sort=False)["_px_close_"]
+    grp_close = out.groupby("ticker", sort=False)["close"]
     out["ret_cc_1d"] = grp_close.pct_change(fill_method=None).shift(-1)
 
     # Optional: next-day (close/open - 1)
     if "open" in out.columns:
-        # Normalize 'open' to numeric safely
         out["_px_open_"] = pd.to_numeric(out["open"], errors="coerce")
-        roc = (out["_px_close_"] / out["_px_open_"] - 1.0)
+        roc = (out["close"] / out["_px_open_"] - 1.0)
         out["ret_oc_1d"] = roc.groupby(out["ticker"], sort=False).shift(-1)
-
-    # Clean up temp columns
-    out = out.drop(columns=[c for c in ["_px_close_", "_px_open_"] if c in out.columns])
+        out = out.drop(columns=["_px_open_"])
 
     return out
 
@@ -141,7 +135,7 @@ def daily_sentiment_from_rows(rows: pd.DataFrame, kind: str) -> pd.DataFrame:
         .dt.tz_localize(None)
     )
 
-    d["w"] = d["s"].astype(float) * d["conf"].astype(float)
+    d["w"] = pd.to_numeric(d["s"], errors="coerce").fillna(0.0) * pd.to_numeric(d["conf"], errors="coerce").fillna(0.0)
     agg = (
         d.groupby(["ticker", "date"], as_index=False)
          .agg(w_sum=("w", "sum"),
@@ -169,7 +163,6 @@ def combine_news_earn(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFram
 
     df = pd.merge(d_news, d_earn, on=["date", "ticker"], how="outer")
 
-    # Fill with correct dtypes
     def _num(series, default):
         return pd.to_numeric(series, errors="coerce").fillna(default)
 
