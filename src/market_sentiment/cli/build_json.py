@@ -1,123 +1,126 @@
 # src/market_sentiment/cli/build_json.py
 from __future__ import annotations
-import argparse
+import argparse, sys
 from pathlib import Path
 import pandas as pd
 from tqdm import tqdm
 
-from market_sentiment.finbert import FinBERT
-from market_sentiment.news import news_yfinance
+from market_sentiment.prices import fetch_prices_yf
+from market_sentiment.news import fetch_news
 from market_sentiment.edgar import fetch_earnings_docs
-from market_sentiment.prices import fetch_panel_yf, add_forward_returns
-from market_sentiment.aggregate import aggregate_daily
-from market_sentiment.writers import build_ticker_json, write_json, write_portfolio
+from market_sentiment.finbert import FinBERT
+from market_sentiment.aggregate import add_forward_returns, daily_sentiment_from_rows, combine_news_earn
 from market_sentiment.portfolio import daily_long_short
+from market_sentiment.writers import build_ticker_json, write_json, write_tickers
 
-def parse_args():
+def _read_universe(path: str) -> list[str]:
+    df = pd.read_csv(path)
+    for c in ("symbol","Symbol","ticker","Ticker"):
+        if c in df.columns:
+            return [str(x).upper() for x in df[c].dropna().tolist()]
+    # fallback: treat first column as ticker
+    return [str(x).upper() for x in df.iloc[:,0].dropna().tolist()]
+
+def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--universe", required=True, help="CSV with 'ticker' or 'Symbol' column")
+    ap.add_argument("--universe", required=True)
     ap.add_argument("--start", required=True)
     ap.add_argument("--end", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--limit", type=int, default=200)
-    ap.add_argument("--cutoff", type=int, default=30)
-    return ap.parse_args()
+    ap.add_argument("--batch", type=int, default=16)
+    args = ap.parse_args()
 
-def _read_universe(path: str, limit: int | None) -> list[str]:
-    df = pd.read_csv(path)
-    col = "ticker" if "ticker" in df.columns else "Symbol" if "Symbol" in df.columns else None
-    if col is None:
-        raise ValueError("Universe CSV must have 'ticker' or 'Symbol'")
-    ticks = [str(x).upper() for x in df[col].tolist()]
-    if limit:
-        ticks = ticks[:limit]
-    # ensure some high-news names are present
-    seeds = ["MSFT","AAPL","GOOGL","AMZN","META"]
-    for s in reversed(seeds):
-        if s in ticks:
-            ticks.remove(s)
-            ticks.insert(0, s)
-        else:
-            ticks.insert(0, s)
-    seen=set(); out=[]
-    for t in ticks:
-        if t not in seen:
-            out.append(t); seen.add(t)
-    return out
+    out_dir = Path(args.out)
+    tickers = _read_universe(args.universe)[: args.limit]
 
-def _signed_scores_from_preds(preds) -> list[float]:
-    out=[]
-    for p in preds:
-        lab = (p.get("label") or "").lower()
-        sc  = float(p.get("score", 0.0))
-        out.append(sc if lab.startswith("pos") else (-sc if lab.startswith("neg") else 0.0))
-    return out
+    fb = FinBERT(batch_size=args.batch)
 
-def main():
-    a = parse_args()
-    outdir = Path(a.out); outdir.mkdir(parents=True, exist_ok=True)
-    tickers = _read_universe(a.universe, a.limit)
-
-    # 1) Prices (batch)
-    prices = fetch_panel_yf(tickers, a.start, a.end)
-    prices = add_forward_returns(prices)
-    if prices.empty:
-        # Fail clearly here so we know to investigate networking / Yahoo
-        raise SystemExit("Prices were empty from yfinance. Check network or date window.")
-
-    # 2) FinBERT once
-    fb = FinBERT()
-
+    all_prices = []
     all_daily = []
-    news_all = []
-    earn_all = []
+    all_news_rows = []
 
     for t in tqdm(tickers, desc="Build JSON"):
-        p = prices[prices["ticker"] == t]
+        # Prices
+        p = fetch_prices_yf(t, args.start, args.end)
         if p.empty:
             continue
+        all_prices.append(p)
 
-        # NEWS (free, Yahoo)
-        nd = news_yfinance(t, a.start, a.end)
-        if not nd.empty:
-            nd["ticker"] = t
-            preds = fb.predict(nd["text"].astype(str).tolist())
-            nd["S"] = _signed_scores_from_preds(preds)
-            news_all.append(nd[["ts","ticker","title","url","S"]])
+        # NEWS (multi-source)
+        n = fetch_news(t, args.start, args.end)
+        # EARNINGS via EDGAR (may be empty if SEC blocks)
+        try:
+            er = fetch_earnings_docs(t, args.start, args.end)
+        except Exception:
+            er = pd.DataFrame(columns=["ts","title","url","text"])
 
-        # EARNINGS (free, EDGAR)
-        er = fetch_earnings_docs(t, a.start, a.end)
+        # tag ticker
+        if not n.empty: n["ticker"] = t
+        if not er.empty: er["ticker"] = t
+
+        # If everything empty, still produce price-only JSON later
+        scored_news = pd.DataFrame()
+        scored_er = pd.DataFrame()
+
+        # Score NEWS with FinBERT
+        if not n.empty:
+            sn = fb.score(n["text"].tolist())
+            n = n.reset_index(drop=True).join(sn.drop(columns=["text"]))
+            scored_news = n
+
+        # Score EARNINGS with FinBERT
         if not er.empty:
-            er["ticker"] = t
-            preds = fb.predict(er["text"].astype(str).tolist())
-            er["S"] = _signed_scores_from_preds(preds)
-            earn_all.append(er[["ts","ticker","title","url","S"]])
+            se = fb.score(er["text"].tolist())
+            er = er.reset_index(drop=True).join(se.drop(columns=["text"]))
+            scored_er = er
 
-        daily = aggregate_daily(nd if not nd.empty else None,
-                                er if not er.empty else None,
-                                cutoff_minutes_before_close=a.cutoff)
-        if daily.empty:
-            # emit zeros aligned to price dates to keep UI populated
-            z = p[["date"]].copy(); z["ticker"] = t
-            for col in ["S_news","news_count","S_earn","earn_count","S_total","S_ew"]:
-                z[col] = 0.0 if col.startswith("S_") else 0
-            daily = z
-        all_daily.append(daily)
+        # Heuristic fallback: if EDGAR blocked, try to classify “earnings transcript” articles from news
+        if scored_er.empty and not scored_news.empty:
+            mask = scored_news["title"].str.contains(r"earnings", case=False, na=False) & \
+                   scored_news["title"].str.contains(r"transcript", case=False, na=False)
+            tmp = scored_news[mask].copy()
+            if not tmp.empty:
+                tmp = tmp.rename(columns={"ts":"ts","title":"title","url":"url"})
+                scored_er = tmp[["ts","title","url","text","p_pos","p_neg","p_neu","s","label","conf","ticker"]]
 
-        obj = build_ticker_json(t, prices, daily, nd if not nd.empty else None, er if not er.empty else None)
-        if len(obj.get("series", [])) > 0:
-            write_json(outdir / f"{t}.json", obj)
+        # Aggregate daily
+        d_news = daily_sentiment_from_rows(scored_news, "news")
+        d_earn = daily_sentiment_from_rows(scored_er, "earn")
+        d = combine_news_earn(d_news, d_earn)
+        all_daily.append(d)
 
-    # Index & Portfolio
-    saved = sorted({p["ticker"] for p in prices[prices["date"].notna()]})  # use price presence as proxy
-    write_json(outdir / "_tickers.json", saved)
+        # Keep some news rows for UI
+        top_news = scored_news.copy() if not scored_news.empty else pd.DataFrame(columns=["ts","title","url","s","source","ticker"])
 
-    panel = pd.concat(all_daily, ignore_index=True)
-    rets = prices[["date","ticker","ret_cc_1d"]]
-    joined = pd.merge(panel[["date","ticker","S_ew"]], rets, on=["date","ticker"], how="left")
-    port = daily_long_short(joined, 0.9, 0.1, score_col="S_ew", ret_col="ret_cc_1d")
-    write_portfolio(outdir / "portfolio.json", port)
+        # Build ticker JSON object and write
+        obj = build_ticker_json(t, p, d, top_news)
+        write_json(out_dir, t, obj)
+
+    if not all_prices:
+        print("No prices fetched; nothing to write."); sys.exit(0)
+
+    prices = pd.concat(all_prices, ignore_index=True)
+    prices = add_forward_returns(prices)
+
+    daily = pd.concat(all_daily, ignore_index=True) if all_daily else pd.DataFrame(columns=["date","ticker","S","S_news","S_earn","news_count","earn_count"])
+
+    # panel for portfolio
+    panel = prices[["date","ticker","close","ret_cc_1d"]].merge(
+        daily[["date","ticker","S"]], on=["date","ticker"], how="left"
+    )
+    panel["S"] = panel["S"].fillna(0.0)
+
+    # portfolio json
+    pnl = daily_long_short(panel, 0.9, 0.1)
+    portfolio = {
+        "series": [{"date": str(r["date"]).split(" ")[0], "ret": float(r["ret"]), "cum": float(r["cum"])} for _, r in pnl.iterrows()],
+        "meta": {"long_q": 0.9, "short_q": 0.1}
+    }
+    write_json(out_dir, "portfolio", portfolio)
+
+    # tickers list for web
+    write_tickers(out_dir, sorted(set(prices["ticker"].unique().tolist())))
 
 if __name__ == "__main__":
     main()
