@@ -58,7 +58,7 @@ jobs:
 
       - name: Set dates (last 365 days)
         run: |
-          echo "START=$(date -u -d '365 days ago' +%F)" >> $GITHUB_ENV || echo "START=$(python - <<PY
+          echo "START=$(date -u -d '365 days ago' +%F)" >> $GITHUB_ENV || echo "START=$(python - <<'PY'
           from datetime import datetime, timedelta
           print((datetime.utcnow() - timedelta(days=365)).strftime('%Y-%m-%d'))
           PY
@@ -97,7 +97,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site (Next.js output: export)
+      - name: "Build static site (Next.js output: export)"
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
