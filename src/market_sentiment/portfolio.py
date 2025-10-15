@@ -1,40 +1,24 @@
 # src/market_sentiment/portfolio.py
 from __future__ import annotations
-import pandas as pd, numpy as np
+import pandas as pd
+import numpy as np
 
-def daily_long_short(panel: pd.DataFrame, long_q: float = 0.9, short_q: float = 0.1,
-                     score_col: str = "S_ew", ret_col: str = "ret_cc_1d") -> dict:
+def daily_long_short(panel: pd.DataFrame, long_q: float = 0.9, short_q: float = 0.1) -> pd.DataFrame:
     """
-    panel columns: ['date','ticker', score_col, ret_col]
-    Build a simple daily long-short PnL: +1/N on top quantile, -1/N on bottom quantile.
-    Returns { 'equity': [{'date':..., 'equity':...}, ...], 'meta': {...} }
+    panel columns: ['date','ticker','S','ret_cc_1d']
     """
     df = panel.copy()
-    df = df.dropna(subset=[score_col, ret_col])
-    if df.empty:
-        return {"equity": [], "meta": {"long_q": long_q, "short_q": short_q}}
-
-    def _weights(g: pd.DataFrame) -> pd.DataFrame:
-        q_hi = g[score_col].quantile(long_q)
-        q_lo = g[score_col].quantile(short_q)
-        long = g[g[score_col] >= q_hi].copy()
-        short = g[g[score_col] <= q_lo].copy()
-        if long.empty and short.empty:
-            g["w"] = 0.0
-            return g[["ticker","w", ret_col]]
-        if not long.empty:
-            long["w"] =  1.0 / max(len(long), 1)
-        if not short.empty:
-            short["w"] = -1.0 / max(len(short), 1)
-        out = pd.concat([long, short], ignore_index=True)
-        return out[["ticker","w", ret_col]]
-
-    bt = df.groupby("date", group_keys=False).apply(_weights)
-    bt = bt.reset_index().rename(columns={ret_col: "y"})
-    # daily pnl = sum_i (w_i * y_i); make sure groups exclude 'date' col per pandas future change
-    pnl = bt.groupby("date", as_index=False).apply(lambda x: float((x["w"] * x["y"]).sum()))
-    pnl = pnl.rename(columns={0: "ret"})
-    pnl = pnl.sort_values("date")
-    pnl["equity"] = (1.0 + pnl["ret"].fillna(0.0)).cumprod()
-    eq = [{"date": d.strftime("%Y-%m-%d"), "equity": float(e)} for d, e in zip(pnl["date"], pnl["equity"])]
-    return {"equity": eq, "meta": {"long_q": long_q, "short_q": short_q, "score_col": score_col}}
+    df["date"] = pd.to_datetime(df["date"]).dt.normalize()
+    # per-day quantiles on S
+    q = df.groupby("date")["S"].quantile([short_q, long_q]).unstack()
+    q = q.rename(columns={short_q:"q_short", long_q:"q_long"}).reset_index()
+    df = df.merge(q, on="date", how="left")
+    df["side"] = np.where(df["S"] >= df["q_long"], 1.0, np.where(df["S"] <= df["q_short"], -1.0, 0.0))
+    # equal-weight within long and short each day
+    w = df.groupby(["date","side"])["ticker"].transform(lambda s: 1.0 / max(len(s), 1.0))
+    df["w"] = np.where(df["side"]==0.0, 0.0, w)
+    df["y"] = df["ret_cc_1d"].fillna(0.0)
+    pnl = df.groupby("date", as_index=False).apply(lambda g: float((g["w"]*g["side"]*g["y"]).sum()))
+    pnl = pnl.rename(columns={None:"ret"}).reset_index(drop=True)
+    pnl["cum"] = (1.0 + pnl["ret"]).cumprod()
+    return pnl
