@@ -1,38 +1,40 @@
 # src/market_sentiment/aggregate.py
 from __future__ import annotations
-import pandas as pd, numpy as np
+import pandas as pd
+import numpy as np
 
-NY = "America/New_York"
+def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.sort_values(["ticker","date"]).copy()
+    # close-to-close forward return
+    df["ret_cc_1d"] = df.groupby("ticker")["close"].pct_change().shift(-1)
+    return df
 
-def effective_trading_date(ts: pd.Series, cutoff_minutes_before_close: int = 30) -> pd.Series:
-    z = pd.to_datetime(ts, utc=True).dt.tz_convert(NY)
-    close_time = z.dt.normalize() + pd.Timedelta(hours=16)
-    threshold = close_time - pd.Timedelta(minutes=cutoff_minutes_before_close)
-    eff = np.where(z > threshold, (z + pd.Timedelta(days=1)), z)
-    return pd.to_datetime(eff).tz_localize(None).normalize()
+def daily_sentiment_from_rows(rows: pd.DataFrame, kind: str) -> pd.DataFrame:
+    """
+    rows: columns ['ts','title','url','text','s','conf','ticker']
+    kind: 'news' or 'earn'
+    output: ['date','ticker', f'S_{kind}', f'{kind}_count']
+    """
+    if rows is None or rows.empty:
+        return pd.DataFrame(columns=["date","ticker",f"S_{kind}",f"{kind}_count"])
+    d = rows.copy()
+    d["date"] = pd.to_datetime(d["ts"]).dt.tz_convert("America/New_York").dt.tz_localize(None)
+    g = d.groupby(["ticker", d["date"].dt.normalize()], as_index=False).apply(
+        lambda g: pd.Series({
+            f"S_{kind}": float((g["s"] * g["conf"]).sum() / max(g["conf"].sum(), 1e-9)),
+            f"{kind}_count": int(len(g))
+        })
+    ).reset_index().rename(columns={"level_1":"date"})
+    g["date"] = pd.to_datetime(g["date"]).dt.normalize()
+    return g[["date","ticker",f"S_{kind}",f"{kind}_count"]]
 
-def aggregate_daily(news_df: pd.DataFrame | None, earn_df: pd.DataFrame | None, cutoff_minutes_before_close: int = 30) -> pd.DataFrame:
-    frames = []
-    if news_df is not None and not news_df.empty:
-        n = news_df.copy()
-        n["date"] = effective_trading_date(n["ts"], cutoff_minutes_before_close)
-        grp = n.groupby(["date","ticker"], as_index=False).agg(S_news=("S","sum"), news_count=("S","size"))
-        frames.append(grp)
-    if earn_df is not None and not earn_df.empty:
-        e = earn_df.copy()
-        e["date"] = effective_trading_date(e["ts"], cutoff_minutes_before_close=0)
-        grp = e.groupby(["date","ticker"], as_index=False).agg(S_earn=("S","sum"), earn_count=("S","size"))
-        frames.append(grp)
-    if not frames:
-        return pd.DataFrame(columns=["date","ticker","S_news","news_count","S_earn","earn_count","S_total","S_ew"])
-    daily = frames[0]
-    for f in frames[1:]:
-        daily = pd.merge(daily, f, on=["date","ticker"], how="outer")
-    for col, dflt, typ in [("S_news",0.0,float),("news_count",0,int),("S_earn",0.0,float),("earn_count",0,int)]:
-        if col not in daily: daily[col] = dflt
-        daily[col] = daily[col].fillna(dflt).astype(typ, copy=False)
-    daily["S_total"] = daily["S_news"].astype(float) + daily["S_earn"].astype(float)
-    daily["S_ew"] = np.where((daily["news_count"]>0)&(daily["earn_count"]>0),
-                             0.5*daily["S_news"].astype(float) + 0.5*daily["S_earn"].astype(float),
-                             daily["S_news"].astype(float) + daily["S_earn"].astype(float))
-    return daily.sort_values(["ticker","date"]).reset_index(drop=True)
+def combine_news_earn(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFrame:
+    # full outer; fill NaNs -> 0; create S = weighted combo
+    df = pd.merge(d_news, d_earn, on=["date","ticker"], how="outer")
+    for col, val in [("S_news",0.0),("S_earn",0.0),("news_count",0),("earn_count",0)]:
+        if col in df: df[col] = df[col].fillna(val)
+        else: df[col] = val
+    # simple weight: earnings gets 2x weight on the day it occurs
+    df["S"] = df["S_news"] + 2.0*df["S_earn"]
+    df = df.sort_values(["ticker","date"]).reset_index(drop=True)
+    return df
