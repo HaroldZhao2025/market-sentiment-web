@@ -1,15 +1,23 @@
-pandas>=2.2
+# Core
+pandas>=2.1
 numpy>=1.26
 requests>=2.31
-beautifulsoup4>=4.12
-lxml>=4.9     # HTML parser for pandas.read_html (fast, preferred)
-html5lib>=1.1 # Backup HTML parser for pandas.read_html
-yfinance>=0.2
-python-dateutil>=2.8
-pyarrow>=15.0
 tqdm>=4.66
-scipy>=1.10
 
-# Optional: enable FinBERT locally (kept commented to keep CI light)
-# transformers>=4.44
-# torch>=2.2
+# HTML parsing (EDGAR & general)
+beautifulsoup4>=4.12
+lxml>=5.2
+html5lib>=1.1
+
+# Market data
+yfinance>=0.2.50
+
+# NLP / HF
+transformers==4.45.2
+tokenizers==0.19.1
+huggingface-hub>=0.25.0
+
+# Torch CPU for inference on GitHub runner
+# We'll install the wheel from the CPU index in the workflow step below,
+# but keeping the pin here helps local dev as well.
+torch==2.3.1
