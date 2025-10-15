@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
   schedule:
-    - cron: "0 12 * * 1"  # weekly; change to "0 6 * * *" for daily 06:00 UTC
+    - cron: "0 12 * * 1"
 
 permissions:
   contents: read
@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
           python -m pip install -U pip
           pip install -r requirements.txt
 
-      - name: Build S&P 500 + JSON (lexicon for CI speed)
+      - name: Build S&P500 and JSON
         env:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
@@ -53,7 +53,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site (output: export)
+      - name: Build static site
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
