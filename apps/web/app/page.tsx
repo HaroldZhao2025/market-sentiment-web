@@ -1,7 +1,9 @@
+// apps/web/app/page.tsx
 import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
-import { dataPath } from "../lib/paths";
+// REMOVE the unused import that caused the error:
+// import { dataPath } from "../lib/paths";
 
 type Tickers = string[];
 
