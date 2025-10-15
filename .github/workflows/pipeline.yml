@@ -43,20 +43,27 @@ jobs:
       - name: Install Python deps
         run: |
           python -m pip install --upgrade pip wheel setuptools
-          # Install CPU torch from the official CPU wheel index
+          # Install CPU torch from the official CPU wheel index first
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
-          # Install the rest (transformers, tokenizers, pandas, yfinance, bs4, lxml, etc.)
+          # Install the rest from requirements (includes transformers==4.45.2 and tokenizers==0.20.3)
           pip install --no-cache-dir -r requirements.txt
-          # Extra safety: ensure transformers/tokenizers/hf-hub are present & recent
-          pip install --no-cache-dir "transformers==4.45.2" "tokenizers==0.19.1" "huggingface-hub>=0.25.0"
+          pip check
 
       - name: Sanity check Python deps
         run: |
           python -c "import sys; print('PY', sys.version)"
           python -c "import torch; print('torch', torch.__version__)"
-          python -c "import transformers; print('transformers', transformers.__version__)"
+          python -c "import transformers, tokenizers; print('transformers', transformers.__version__, 'tokenizers', tokenizers.__version__)"
           python -c "import pandas, yfinance, bs4, lxml; print('pandas', pandas.__version__)"
-          python -c "import importlib.util, json; print('ok')"
+          python - <<'PY'
+          import importlib, json
+          mods = ['market_sentiment', 'market_sentiment.cli.build_json',
+                  'market_sentiment.finbert', 'market_sentiment.news',
+                  'market_sentiment.edgar', 'market_sentiment.prices']
+          for m in mods:
+              importlib.import_module(m)
+              print('import ok:', m)
+          PY
 
       - name: Cache HuggingFace models
         uses: actions/cache@v4
@@ -89,7 +96,7 @@ jobs:
       - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
         env:
           TRANSFORMERS_CACHE: ~/.cache/huggingface
-          # Optional: if you later add a free NewsAPI key
+          # Optional: add NEWS_API_KEY later if you adopt NewsAPI (free tier)
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
         run: |
           python -m market_sentiment.cli.build_json \
