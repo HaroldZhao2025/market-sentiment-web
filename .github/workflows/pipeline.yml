@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: src
-      HF_HOME: ${{ runner.temp }}/hf-home   # fresh HF cache each run
+      HF_HOME: "${{ runner.temp }}/hf-home"
       HF_HUB_DISABLE_TELEMETRY: "1"
 
     steps:
@@ -78,7 +78,7 @@ jobs:
 
       - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
         env:
-          HF_HOME: ${{ env.HF_HOME }}   # ensure subprocesses see it
+          HF_HOME: "${{ env.HF_HOME }}"
         run: |
           python -m market_sentiment.cli.build_json \
             --universe data/sp500.csv \
@@ -97,7 +97,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: "Build static site (Next.js output: export)"
+      - name: Build static site (Next.js output: export)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
