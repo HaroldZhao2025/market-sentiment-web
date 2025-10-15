@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import LineChart from "../../../components/LineChart";
+import { assetPath } from "../../lib/paths";
 
 export default function TickerClient({ symbol }: { symbol: string }) {
   const s = symbol.toUpperCase();
@@ -11,7 +12,7 @@ export default function TickerClient({ symbol }: { symbol: string }) {
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`data/${s}.json`)
+    fetch(assetPath(`data/${s}.json`))
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("No data"))))
       .then(setData)
       .catch((e) => setErr(e.message));
@@ -27,15 +28,9 @@ export default function TickerClient({ symbol }: { symbol: string }) {
       <div className="card flex items-center justify-between">
         <h2 className="text-xl font-semibold">Market Sentiment for {s}</h2>
         <div className="flex gap-2">
-          <button className="btn" onClick={() => setOverlay(false)}>
-            Separate View
-          </button>
-          <button className="btn" onClick={() => setOverlay(true)}>
-            Overlayed View
-          </button>
-          <Link href={`/earnings/${s}`} className="btn">
-            Earnings
-          </Link>
+          <button className="btn" onClick={() => setOverlay(false)}>Separate View</button>
+          <button className="btn" onClick={() => setOverlay(true)}>Overlayed View</button>
+          <Link href={`/earnings/${s}`} className="btn">Earnings</Link>
         </div>
       </div>
 
@@ -51,16 +46,12 @@ export default function TickerClient({ symbol }: { symbol: string }) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="card">
-          <div className="kpi">
-            {ins.live_sentiment || "—"}
-          </div>
+          <div className="kpi">{ins.live_sentiment || "—"}</div>
           <div className="kpi-sub">Live Market Sentiment</div>
         </div>
         <div className="card">
           <div className="kpi">
-            {typeof ins.predicted_return === "number"
-              ? (ins.predicted_return * 100).toFixed(2) + "%"
-              : "—"}
+            {typeof ins.predicted_return === "number" ? (ins.predicted_return * 100).toFixed(2) + "%" : "—"}
           </div>
           <div className="kpi-sub">Predicted Return</div>
         </div>
@@ -80,22 +71,20 @@ export default function TickerClient({ symbol }: { symbol: string }) {
               <th className="py-1">Source</th>
             </tr>
           </thead>
-          <tbody>
-            {data.recent_headlines?.map((h: any, i: number) => (
-              <tr key={i} className="border-t">
-                <td className="py-2">
-                  {new Date(h.ts).toLocaleString()}
-                </td>
-                <td className="py-2">
-                  <a className="text-blue-600 underline" href={h.url} target="_blank">
-                    {h.title}
-                  </a>
-                </td>
-                <td className="py-2">{h.source}</td>
-              </tr>
-            ))}
-          </tbody>
         </table>
+        <div className="divide-y">
+          {data.recent_headlines?.map((h: any, i: number) => (
+            <div key={i} className="py-2 flex items-start gap-3">
+              <div className="w-48 text-xs text-gray-500">{new Date(h.ts).toLocaleString()}</div>
+              <div className="flex-1">
+                <a className="text-blue-600 underline" href={h.url} target="_blank" rel="noreferrer">
+                  {h.title}
+                </a>
+                <div className="text-xs text-gray-500">{h.source}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
