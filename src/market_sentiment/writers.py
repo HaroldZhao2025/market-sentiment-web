@@ -1,3 +1,4 @@
+# src/market_sentiment/writers.py
 from __future__ import annotations
 from pathlib import Path
 import numpy as np
@@ -12,46 +13,78 @@ def _flatten(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def build_ticker_json(ticker: str,
-                      price_df: pd.DataFrame,
-                      daily_sent: pd.DataFrame,
-                      recent_news: pd.DataFrame) -> dict:
+def _to_eastern_day(series: pd.Series) -> pd.Series:
+    """
+    Robustly convert a datetime Series to America/New_York and normalize to day-level.
+    Handles both tz-naive and tz-aware inputs.
+    """
+    s = pd.to_datetime(series, errors="coerce")
+
+    # If tz-naive → localize; if tz-aware → convert
+    try:
+        tzinfo = s.dt.tz  # None if tz-naive
+    except Exception:
+        tzinfo = None
+
+    if tzinfo is None:
+        s = s.dt.tz_localize("America/New_York", nonexistent="shift_forward", ambiguous="NaT")
+    else:
+        s = s.dt.tz_convert("America/New_York")
+
+    return s.dt.normalize()
+
+
+def build_ticker_json(
+    ticker: str,
+    price_df: pd.DataFrame,
+    daily_sent: pd.DataFrame,
+    recent_news: pd.DataFrame,
+) -> dict:
     # Defensive: flatten possible MultiIndex columns
     p = _flatten(price_df).copy()
     d = _flatten(daily_sent).copy()
 
-    # Normalize date to day-level (tz-aware retained)
-    p["date"] = pd.to_datetime(p["date"]).dt.tz_convert("America/New_York").dt.normalize()
+    # Normalize dates to Eastern day-level
+    p["date"] = _to_eastern_day(p["date"])
     if "date" in d.columns:
-        d["date"] = pd.to_datetime(d["date"]).dt.tz_convert("America/New_York").dt.normalize()
+        d["date"] = _to_eastern_day(d["date"])
     else:
         d["date"] = pd.NaT
 
     # Merge price with sentiment score S
     left = p[["date", "close"]].copy()
     right = d[["date", "S"]].copy() if "S" in d.columns else pd.DataFrame({"date": [], "S": []})
-    s = (left.merge(right, on="date", how="left")
-              .sort_values("date")
-              .reset_index(drop=True))
+    s = (
+        left.merge(right, on="date", how="left")
+            .sort_values("date")
+            .reset_index(drop=True)
+    )
     s["S"] = s["S"].fillna(0.0)
 
-    # Last sentiment → toy predicted return
+    # Last sentiment → simple predicted return
     last_S = float(s["S"].iloc[-1]) if len(s) else 0.0
     predicted_return = float(np.tanh(last_S / 5.0) * 0.01)
 
-    # Recent headlines
+    # Recent headlines (ts to Eastern)
     news = recent_news.copy()
     if not news.empty:
-        news["ts"] = pd.to_datetime(news["ts"], errors="coerce", utc=True).dt.tz_convert("America/New_York")
+        ts = pd.to_datetime(news["ts"], errors="coerce", utc=True)
+        news["ts"] = ts.dt.tz_convert("America/New_York")
         news = news.sort_values("ts", ascending=False)
-    top_news = news.head(20)[["ts", "title", "source", "url"]] if not news.empty else pd.DataFrame(columns=["ts","title","source","url"])
+    top_news = (
+        news.head(20)[["ts", "title", "source", "url"]] if not news.empty
+        else pd.DataFrame(columns=["ts", "title", "source", "url"])
+    )
 
     return {
         "ticker": ticker,
         "insights": {
             "live_sentiment": "Positive" if last_S > 0 else ("Negative" if last_S < 0 else "Neutral"),
             "predicted_return": predicted_return,
-            "advisory": "Strong Buy" if last_S > 1 else ("Buy" if last_S > 0.3 else ("Hold" if last_S > -0.3 else "Sell")),
+            "advisory": (
+                "Strong Buy" if last_S > 1 else
+                ("Buy" if last_S > 0.3 else ("Hold" if last_S > -0.3 else "Sell"))
+            ),
         },
         "series": {
             "date": s["date"].astype(str).tolist(),
