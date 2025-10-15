@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { assetPath } from "../../lib/paths";
 
 export default function EarningsClient({ symbol }: { symbol: string }) {
   const s = symbol.toUpperCase();
   const [data, setData] = useState<any | null>(null);
 
   useEffect(() => {
-    fetch(`data/earnings/${s}.json`)
+    fetch(assetPath(`data/earnings/${s}.json`))
       .then((r) => (r.ok ? r.json() : null))
       .then(setData)
       .catch(() => setData(null));
@@ -36,9 +37,7 @@ export default function EarningsClient({ symbol }: { symbol: string }) {
             <tbody>
               {data.events?.map((e: any, i: number) => (
                 <tr key={i} className="border-t">
-                  <td className="py-2">
-                    {new Date(e.ts).toLocaleDateString()}
-                  </td>
+                  <td className="py-2">{new Date(e.ts).toLocaleDateString()}</td>
                   <td className="py-2">{e.quarter || "-"}</td>
                   <td className="py-2">{e.year || "-"}</td>
                   <td className="py-2">{(e.text || "").slice(0, 160)}…</td>
