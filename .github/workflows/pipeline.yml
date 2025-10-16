@@ -4,6 +4,11 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      SAMPLE_TICKER:
+        description: "Run a lightweight sample build for AAPL only"
+        required: false
+        default: "false"
   schedule:
     - cron: "0 12 * * 1"
 
@@ -16,12 +21,14 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  PYTHONPATH: src
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  SAMPLE_TICKER: ${{ github.event.inputs.SAMPLE_TICKER || 'false' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: src
-      HF_HUB_DISABLE_TELEMETRY: "1"
 
     steps:
       - name: Checkout
@@ -65,53 +72,40 @@ jobs:
       - name: Build S&P 500 universe
         run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
 
-      - name: Build JSON (FinBERT + Yahoo News + SEC/EDGAR)
+      - name: Prepare sample universe (AAPL) if requested
+        if: env.SAMPLE_TICKER == 'true'
+        run: |
+          mkdir -p data
+          printf "ticker\nAAPL\n" > data/sample_aapl.csv
+
+      - name: Build JSON (Full or Sample)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
-          python -m market_sentiment.cli.build_json \
-            --universe data/sp500.csv \
-            --start "$START" --end "$END" \
-            --out apps/web/public/data \
-            --batch 16 \
-            --max-workers 8 \
-            --max-tickers 0
+          if [ "${SAMPLE_TICKER}" = "true" ]; then
+            echo "⚠️ Running sample build for AAPL only..."
+            python -m market_sentiment.cli.build_json \
+              --universe data/sample_aapl.csv \
+              --start "$START" --end "$END" \
+              --out apps/web/public/data \
+              --batch 16 --max-workers 8 --max-tickers 1
+          else
+            echo "🏗️ Running full build for all tickers..."
+            python -m market_sentiment.cli.build_json \
+              --universe data/sp500.csv \
+              --start "$START" --end "$END" \
+              --out apps/web/public/data \
+              --batch 16 --max-workers 8
+          fi
 
-# .github/workflows/pipeline.yml  (replace the web steps with these)
       - name: Inspect output (debug)
         run: |
           echo "== List data dir =="
-          ls -lah apps/web/public/data || true
-          echo "== Peek at _tickers.json & a couple of ticker files =="
-          head -c 400 apps/web/public/data/_tickers.json || true
+          ls -lah apps/web/public/data
+          echo "== Peek a few =="
+          head -c 120 apps/web/public/data/_tickers.json; echo
+          ls apps/web/public/data/ticker | head -n 5
           echo
-          python - <<'PY'
-          import os, json, numpy as np
-          base="apps/web/public/data"
-          tickers_path=os.path.join(base,"_tickers.json")
-          if not os.path.exists(tickers_path):
-              print("No _tickers.json written.")
-              raise SystemExit(0)
-          tickers=json.load(open(tickers_path))
-          print("Tickers listed:", len(tickers))
-          nz=0; sample=[]
-          for t in tickers:
-              fp=os.path.join(base,"ticker",f"{t}.json")
-              if not os.path.exists(fp): 
-                  continue
-              obj=json.load(open(fp))
-              s=obj.get("series",{}).get("sentiment",[])
-              if any(abs(x)>1e-12 for x in s): nz+=1
-              if s:
-                  m=float(np.mean([abs(x) for x in s]))
-                  k=sum(1 for x in s if abs(x)>1e-12)
-                  sample.append((t,m,k))
-          print(f"Tickers with any non-zero sentiment: {nz}/{len(tickers)}")
-          sample.sort(key=lambda x: x[1], reverse=True)
-          for t,m,k in sample[:5]:
-              print(f"  {t}: mean|S|={m:.4f} (nz_points={k})")
-          PY
-
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -122,26 +116,25 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: "Build static site (Next.js output: export)"
+      - name: "Build static site (Next 13 export)"
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
         run: |
           echo "==== next.config.cjs (contents) ===="
-          sed -n '1,200p' next.config.cjs || true
+          cat next.config.cjs || true
           echo "==== Node/NPM ===="
           node -v
           npm -v
           echo "==== Building ===="
           npm run build
-          echo "==== After build (ls) ===="
+          echo "==== After export (ls) ===="
           ls -lah
-          # Guard: ensure 'out' exists (export target)
-          if [ ! -d "out" ]; then
-            echo "::error::Expected 'apps/web/out' to exist after build, but it does not."
-            exit 1
-          fi
+          test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
