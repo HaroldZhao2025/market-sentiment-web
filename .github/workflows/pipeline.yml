@@ -80,24 +80,38 @@ jobs:
 # .github/workflows/pipeline.yml  (replace the web steps with these)
       - name: Inspect output (debug)
         run: |
-          echo "Data dir listing:"
+          echo "== List data dir =="
           ls -lah apps/web/public/data || true
+          echo "== Peek at _tickers.json & a couple of ticker files =="
+          head -c 400 apps/web/public/data/_tickers.json || true
+          echo
           python - <<'PY'
-          import json, os, glob
-          d="apps/web/public/data"
-          tickers=json.load(open(os.path.join(d,"_tickers.json"))) if os.path.exists(os.path.join(d,"_tickers.json")) else []
+          import os, json, numpy as np
+          base="apps/web/public/data"
+          tickers_path=os.path.join(base,"_tickers.json")
+          if not os.path.exists(tickers_path):
+              print("No _tickers.json written.")
+              raise SystemExit(0)
+          tickers=json.load(open(tickers_path))
           print("Tickers listed:", len(tickers))
-          sample=[p for p in tickers[:5]]
-          for t in sample:
-              p=os.path.join(d,f"{t}.json")
-              if os.path.exists(p):
-                  j=json.load(open(p))
-                  s=j.get("series",{})
-                  S=s.get("S",[])
-                  meanS = round(sum(abs(x) for x in S)/len(S),4) if S else 0.0
-                  print(f"  {t}: points={len(S)}, mean|S|={meanS}")
-          print("Portfolio present:", os.path.exists(os.path.join(d,"portfolio.json")))
+          nz=0; sample=[]
+          for t in tickers:
+              fp=os.path.join(base,"ticker",f"{t}.json")
+              if not os.path.exists(fp): 
+                  continue
+              obj=json.load(open(fp))
+              s=obj.get("series",{}).get("sentiment",[])
+              if any(abs(x)>1e-12 for x in s): nz+=1
+              if s:
+                  m=float(np.mean([abs(x) for x in s]))
+                  k=sum(1 for x in s if abs(x)>1e-12)
+                  sample.append((t,m,k))
+          print(f"Tickers with any non-zero sentiment: {nz}/{len(tickers)}")
+          sample.sort(key=lambda x: x[1], reverse=True)
+          for t,m,k in sample[:5]:
+              print(f"  {t}: mean|S|={m:.4f} (nz_points={k})")
           PY
+
 
       - name: Setup Node
         uses: actions/setup-node@v4
