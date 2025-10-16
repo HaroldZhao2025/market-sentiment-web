@@ -114,16 +114,20 @@ jobs:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
         run: |
-          echo "Config files present:" && ls -lah | egrep 'next.config' || true
+          echo "==== next.config.cjs (contents) ===="
+          sed -n '1,200p' next.config.cjs || true
+          echo "==== Node/NPM ===="
           node -v
           npm -v
+          echo "==== Building ===="
           npm run build
-          echo "Contents after build:"
+          echo "==== After build (ls) ===="
           ls -lah
-          # out/ must exist with output: 'export'
-          test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+          # Guard: ensure 'out' exists (export target)
+          if [ ! -d "out" ]; then
+            echo "::error::Expected 'apps/web/out' to exist after build, but it does not."
+            exit 1
+          fi
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
