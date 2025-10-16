@@ -1,199 +1,133 @@
 # src/market_sentiment/prices.py
 from __future__ import annotations
 
-from typing import Optional
 import pandas as pd
+import numpy as np
 import yfinance as yf
 
 
-def _select_open_close_columns(df: pd.DataFrame) -> tuple[Optional[str], Optional[str]]:
-    """
-    Return column names for open and close in df, preferring:
-      - 'Open' for open
-      - 'Close' for close; fallback to 'Adj Close' if missing
-    If none found, try fuzzy contains for 'open'/'close'.
-    """
-    cols = list(df.columns)
-    # Prefer exact
-    open_col = "Open" if "Open" in cols else None
-    close_col = "Close" if "Close" in cols else None
-
-    # Fallback for Close: use 'Adj Close' if present
-    if close_col is None and "Adj Close" in cols:
-        close_col = "Adj Close"
-
-    # Fuzzy fallback
-    if open_col is None:
-        cands = [c for c in cols if "open" in c.lower()]
-        open_col = cands[0] if cands else None
-    if close_col is None:
-        cands = [c for c in cols if "close" in c.lower()]
-        # avoid picking 'adj close' if a generic 'close' exists
-        cands_sorted = sorted(cands, key=lambda c: (c.lower() != "close", len(c)))
-        close_col = cands_sorted[0] if cands_sorted else None
-
-    return open_col, close_col
-
-
-def _extract_date_column(df: pd.DataFrame) -> tuple[pd.DataFrame, str]:
-    """
-    Ensure there is a concrete date column in the frame.
-    Strategy:
-      1) reset_index() to bring index out
-      2) prefer first datetime-like column; else look for common names
-      3) if still not found, attempt to parse the 'index' column as datetime
-    Returns (df_with_date_col, date_col_name)
-    """
-    # Bring index out as a column (named by index name or 'index')
-    df = df.reset_index(drop=False)
-
-    # Pick datetime-like column if present
-    datetime_cols = [c for c in df.columns if pd.api.types.is_datetime64_any_dtype(df[c])]
-    if datetime_cols:
-        return df, datetime_cols[0]
-
-    # Common names that may hold date strings
-    common_names = ["Date", "Datetime", "date", "INDEX", "index"]
-    for name in common_names:
-        if name in df.columns:
-            # Try to coerce to datetime
-            try:
-                as_dt = pd.to_datetime(df[name], errors="coerce", utc=True)
-                if as_dt.notna().any():
-                    df[name] = as_dt
-                    return df, name
-            except Exception:
-                pass
-
-    # Last resort: try to datetime-convert any column with 'date' in the name
-    for c in df.columns:
-        if "date" in c.lower():
-            try:
-                as_dt = pd.to_datetime(df[c], errors="coerce", utc=True)
-                if as_dt.notna().any():
-                    df[c] = as_dt
-                    return df, c
-            except Exception:
-                pass
-
-    # Could not infer
-    # Make a synthetic empty result; caller will handle empties.
-    return df, ""
+def _empty_prices(ticker: str) -> pd.DataFrame:
+    return pd.DataFrame(columns=["date", "ticker", "open", "close"])
 
 
 def _normalize_price_frame(raw: pd.DataFrame, ticker: str) -> pd.DataFrame:
     """
-    Normalize any yfinance output into:
-      columns: ["date", "ticker", "open", "close"]
-      date: tz-naive, America/New_York midnight
+    Normalize yfinance output into columns: date (naive, normalized), ticker, open, close.
+    We DO NOT apply any timezone conversion here — we treat the daily index as a trading-day
+    calendar date and just normalize to 00:00.
     """
-    cols = ["date", "ticker", "open", "close"]
-    if raw is None or raw.empty:
-        return pd.DataFrame(columns=cols)
+    if raw is None or len(raw) == 0:
+        return _empty_prices(ticker)
 
     df = raw.copy()
 
-    # If MultiIndex columns, collapse to a 2-col frame with Open/Close
-    if isinstance(df.columns, pd.MultiIndex):
-        # Two main common layouts:
-        #   (Field, Ticker)  OR  (Ticker, Field)
-        lv0, lv1 = df.columns.get_level_values(0), df.columns.get_level_values(1)
-        if "Open" in lv0 and "Close" in lv0:
-            # (Field, Ticker)
-            try:
-                open_series = df[("Open", ticker)]
-                close_series = df[("Close", ticker)]
-            except Exception:
-                # fallback: first ticker column for each field
-                open_series = df["Open"].iloc[:, 0]
-                close_series = df["Close"].iloc[:, 0]
-            df = pd.DataFrame({"Open": open_series, "Close": close_series})
-        elif "Open" in lv1 and "Close" in lv1:
-            # (Ticker, Field)
-            try:
-                open_series = df[(ticker, "Open")]
-                close_series = df[(ticker, "Close")]
-            except Exception:
-                first_ticker = df.columns.get_level_values(0)[0]
-                open_series = df[(first_ticker, "Open")]
-                close_series = df[(first_ticker, "Close")]
-            df = pd.DataFrame({"Open": open_series, "Close": close_series})
-        else:
-            # Generic flatten
-            df.columns = ["_".join([str(x) for x in tup if str(x) != ""]).strip("_") for tup in df.columns]
+    # yfinance.download(...) returns Date in the index for daily bars
+    if isinstance(df.index, pd.DatetimeIndex):
+        df = df.reset_index()
 
-    # Ensure we have a concrete date column name
-    df, date_col = _extract_date_column(df)
-    if not date_col:
-        return pd.DataFrame(columns=cols)
+    # Harmonize column names
+    # Common yfinance columns: Date/Open/High/Low/Close/Adj Close/Volume
+    rename = {}
+    if "Date" in df.columns:
+        rename["Date"] = "date"
+    if "Datetime" in df.columns:
+        rename["Datetime"] = "date"
 
-    # Identify open/close columns
-    open_col, close_col = _select_open_close_columns(df)
-    if open_col is None or close_col is None:
-        return pd.DataFrame(columns=cols)
+    # Map any case variants to our canonical names
+    for col in list(df.columns):
+        low = col.lower()
+        if low == "open":
+            rename[col] = "open"
+        elif low == "close":
+            rename[col] = "close"
 
-    # Coerce date to NY tz-naive midnight
-    d = pd.to_datetime(df[date_col], errors="coerce", utc=True)
-    # If all NaT, bail out
-    if d.isna().all():
-        return pd.DataFrame(columns=cols)
+    df = df.rename(columns=rename)
 
-    d = d.dt.tz_convert("America/New_York").dt.normalize().dt.tz_localize(None)
+    # If "close" missing, fall back to "Adj Close"
+    if "close" not in df.columns and "Adj Close" in df.columns:
+        df["close"] = df["Adj Close"]
 
-    out = pd.DataFrame(
-        {
-            "date": d,
-            "ticker": ticker,
-            "open": pd.to_numeric(df[open_col], errors="coerce"),
-            "close": pd.to_numeric(df[close_col], errors="coerce"),
-        }
-    )
-    out = out.dropna(subset=["date", "open", "close"])
-    if out.empty:
-        return pd.DataFrame(columns=cols)
+    # Ensure numeric
+    for c in ("open", "close"):
+        if c in df.columns:
+            df[c] = pd.to_numeric(df[c], errors="coerce")
 
-    # Deduplicate on (ticker, date)
-    out = out.sort_values("date").drop_duplicates(["ticker", "date"], keep="last").reset_index(drop=True)
+    # Parse dates as naive, normalized calendar dates (no tz math!)
+    if "date" not in df.columns:
+        # As a last resort, try to find the first datetime-like column
+        for c in df.columns:
+            if "date" in c.lower():
+                df = df.rename(columns={c: "date"})
+                break
+    if "date" not in df.columns:
+        # If we still don't have a date, bail out
+        return _empty_prices(ticker)
+
+    d = pd.to_datetime(df["date"], errors="coerce")
+    d = d.dt.normalize()  # keep as naive
+    df["date"] = d
+
+    # Attach ticker and keep required columns
+    df["ticker"] = ticker
+    out = df[["date", "ticker", "open", "close"]].dropna(subset=["date", "close"]).copy()
     return out
-
-
-def _try_download(ticker: str, start: str, end: str, *, use_download: bool = True) -> pd.DataFrame:
-    """
-    Try yf.download first (single ticker, single-level columns), then fallback to Ticker.history.
-    """
-    start_dt = pd.to_datetime(start)
-    end_dt = pd.to_datetime(end) + pd.Timedelta(days=1)  # yfinance end is exclusive
-
-    if use_download:
-        try:
-            df = yf.download(
-                ticker,
-                start=start_dt,
-                end=end_dt,
-                interval="1d",
-                progress=False,
-                auto_adjust=False,
-                actions=False,
-                group_by="column",  # single-level columns for single ticker
-                threads=False,
-            )
-            if df is not None and not df.empty:
-                return df
-        except Exception:
-            pass
-
-    try:
-        t = yf.Ticker(ticker)
-        df = t.history(start=start_dt, end=end_dt, interval="1d", actions=False, auto_adjust=False)
-        return df
-    except Exception:
-        return pd.DataFrame()
 
 
 def fetch_prices_yf(ticker: str, start: str, end: str) -> pd.DataFrame:
     """
-    Public entry used by the CLI. Always returns columns: ["date","ticker","open","close"].
+    Fetch 1D OHLC for [start, end] inclusive using yfinance (free),
+    normalize to (date, ticker, open, close).
     """
-    raw = _try_download(ticker, start, end, use_download=True)
+    # yfinance end is exclusive; add one day to include 'end'
+    end_excl = (pd.to_datetime(end) + pd.Timedelta(days=1)).strftime("%Y-%m-%d")
+    try:
+        raw = yf.download(
+            tickers=ticker,
+            start=start,
+            end=end_excl,
+            progress=False,
+            auto_adjust=False,
+            actions=False,
+            interval="1d",
+            group_by="ticker",
+            threads=False,
+        )
+    except Exception:
+        raw = pd.DataFrame()
+
     norm = _normalize_price_frame(raw, ticker)
+
+    # Final calendar filter (inclusive)
+    s = pd.to_datetime(start).normalize()
+    e = pd.to_datetime(end).normalize()
+    norm = norm[(norm["date"] >= s) & (norm["date"] <= e)].reset_index(drop=True)
     return norm
+
+
+def add_forward_returns(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add forward returns:
+      - ret_cc_1d: (next close / current close - 1)
+      - ret_oc_1d: (current close / current open - 1), shifted forward to align with 'next day'
+    """
+    if df is None or df.empty:
+        return df.copy()
+
+    out = df.sort_values(["ticker", "date"]).copy()
+
+    # Make sure required columns exist
+    if "open" not in out.columns:
+        out["open"] = np.nan
+    if "close" not in out.columns:
+        out["close"] = np.nan
+
+    # Close-to-close next day
+    # pct_change(fill_method=None) avoids the FutureWarning and doesn't forward-fill NAs
+    ret_cc = out.groupby("ticker", group_keys=False)["close"].pct_change(fill_method=None).shift(-1)
+    out["ret_cc_1d"] = ret_cc
+
+    # Open-to-close on the same day, aligned to next day (so the signal at T maps to ret at T+1)
+    oc = (out["close"] / out["open"]) - 1.0
+    out["ret_oc_1d"] = oc.shift(-1)
+
+    return out
