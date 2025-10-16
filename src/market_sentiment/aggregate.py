@@ -5,25 +5,37 @@ import numpy as np
 import pandas as pd
 
 
+# ---------- time helpers ----------
+
+def _to_utc_series(ts_like) -> pd.Series:
+    """Coerce to tz-aware UTC pandas Series of datetimes."""
+    return pd.to_datetime(ts_like, errors="coerce", utc=True)
+
+
+def _to_ny_naive(ts_like) -> pd.Series:
+    """
+    Convert timestamps to America/New_York midnight (tz-naive date series).
+    Works with Series/array-like of timestamps.
+    """
+    s = _to_utc_series(ts_like)
+    # On Series, use the .dt accessor for tz conversion + normalize
+    s = s.dt.tz_convert("America/New_York").dt.normalize().dt.tz_localize(None)
+    return s
+
+
+# ---------- sentiment aggregation ----------
+
 def _effective_date(ts: pd.Series | pd.Index, cutoff_minutes: int = 5) -> pd.Series:
     """
     Convert timestamps to effective trading date in America/New_York:
-    1) ensure tz-aware UTC
-    2) subtract cutoff minutes
-    3) convert to NY time, normalize to midnight
-    4) return tz-naive dates (so merges on 'date' match prices)
+      1) ensure tz-aware UTC
+      2) subtract cutoff minutes
+      3) convert to NY midnight
+      4) return tz-naive dates
     """
-    # 1) ensure tz-aware UTC
-    t = pd.to_datetime(ts, errors="coerce", utc=True)
-
-    # 2) cutoff shift
-    eff = t - pd.to_timedelta(cutoff_minutes, unit="m")
-
-    # 3) convert to NY and normalize to date
-    eff_ny = eff.tz_convert("America/New_York").normalize()
-
-    # 4) remove tz (naive date)
-    return eff_ny.tz_localize(None)
+    s = _to_utc_series(ts)
+    s = s - pd.to_timedelta(cutoff_minutes, unit="m")
+    return _to_ny_naive(s)
 
 
 def daily_sentiment_from_rows(
@@ -32,10 +44,10 @@ def daily_sentiment_from_rows(
     """
     Aggregate per (ticker, date) daily sentiment.
     rows must have columns: ['ticker','ts','S'].
-    kind: 'news' or 'earn' (controls output column names).
-    Returns columns:
-      - for news: ['date','ticker','S_news','news_count']
-      - for earn: ['date','ticker','S_earn','earn_count']
+    kind: 'news' or 'earn'.
+    Returns:
+      news -> ['date','ticker','S_news','news_count']
+      earn -> ['date','ticker','S_earn','earn_count']
     """
     required = {"ticker", "ts", "S"}
     if rows is None or len(rows) == 0:
@@ -43,15 +55,14 @@ def daily_sentiment_from_rows(
             return pd.DataFrame(columns=["date", "ticker", "S_news", "news_count"])
         elif kind == "earn":
             return pd.DataFrame(columns=["date", "ticker", "S_earn", "earn_count"])
-        else:
-            return pd.DataFrame(columns=["date", "ticker", "S", "count"])
+        return pd.DataFrame(columns=["date", "ticker", "S", "count"])
 
     missing = required - set(rows.columns)
     if missing:
         raise KeyError(f"{kind} rows must have columns: ticker, ts, S.")
 
     d = rows.copy()
-    d["ts"] = pd.to_datetime(d["ts"], errors="coerce", utc=True)
+    d["ts"] = _to_utc_series(d["ts"])
     d = d.dropna(subset=["ts"])
     d["ticker"] = d["ticker"].astype(str).str.upper()
     d["S"] = pd.to_numeric(d["S"], errors="coerce").fillna(0.0)
@@ -110,6 +121,8 @@ def join_and_fill_daily(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFr
     return df[base_cols + ["S", "S_news", "S_earn", "news_count", "earn_count"]]
 
 
+# ---------- prices -> forward returns ----------
+
 def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
     """
     Adds forward 1D close-to-close return (ret_cc_1d) and same-day open-to-close (ret_oc_1d).
@@ -122,13 +135,11 @@ def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
     df = prices.copy()
 
     # Normalize date to NY trading day (naive)
-    d = pd.to_datetime(df["date"], errors="coerce", utc=True)
-    d = d.tz_convert("America/New_York").normalize().tz_localize(None)
-    df["date"] = d
+    df["date"] = _to_ny_naive(df["date"])
 
     df["ticker"] = df["ticker"].astype(str).str.upper()
 
-    # Allow 'Open'/'Close' fallback names
+    # Allow 'Open'/'Close' fallback spellings
     if "close" not in df.columns and "Close" in df.columns:
         df["close"] = df["Close"]
     if "open" not in df.columns and "Open" in df.columns:
