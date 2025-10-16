@@ -81,12 +81,21 @@ def fetch_news_google(ticker: str, start: str, end: str, company: str | None = N
     return df[["ticker", "ts", "title", "url", "text"]].reset_index(drop=True)
 
 def fetch_news(ticker: str, start: str, end: str, company: str | None = None) -> pd.DataFrame:
+    """
+    Combine YF + Google RSS with fallback, normalized schema.
+    Returns columns: ticker, ts, title, url, text (ts is tz-aware UTC)
+    """
     a = fetch_news_yf(ticker, start, end)
     b = fetch_news_google(ticker, start, end, company=company)
-    if a.empty and b.empty:
+
+    parts = [x for x in (a, b) if x is not None and not x.empty]
+    if not parts:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-    df = pd.concat([a, b], ignore_index=True)
+
+    df = pd.concat(parts, ignore_index=True)
+
+    # Final clean & de-dupe
     df["title"] = df["title"].map(_clean_text)
-    df["text"] = df["text"].map(_clean_text)
-    df = df.drop_duplicates(["title", "url"]).sort_values("ts")
-    return df.reset_index(drop=True)
+    df["text"]  = df["text"].map(_clean_text)
+    df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
+    return df
