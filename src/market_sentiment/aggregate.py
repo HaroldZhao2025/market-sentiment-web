@@ -12,7 +12,8 @@ def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
       ret_cc_1d: close(t+1)/close(t) - 1 (next-day close-to-close, aligned to t)
     """
     df = prices.copy()
-    df["date"] = pd.to_datetime(df["date"], utc=True).dt.tz_convert("UTC").dt.tz_localize(None)
+    # normalize dates to tz-naive (UTC date)
+    df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce").dt.tz_convert("UTC").dt.tz_localize(None)
     df = df.sort_values(["ticker", "date"]).reset_index(drop=True)
 
     # same-day open→close
@@ -26,24 +27,36 @@ def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
 
 # ---------- Sentiment aggregation ----------
 
-def _effective_date(ts: pd.Series | pd.DatetimeIndex, cutoff_minutes: int = 5) -> pd.Series:
+def _effective_date(ts, cutoff_minutes: int = 5) -> pd.Series:
     """
     Map timestamps to effective trading dates (US/Eastern), applying a cutoff.
 
-    - If news hits after 'cutoff_minutes' before midnight ET, push to next day.
-      (e.g., treats very-late news as next-day signal.)
+    Always returns a pandas Series of tz-naive dates (YYYY-MM-DD).
+    Handles input as Series, DatetimeIndex, list/array, etc., without losing index alignment.
     """
-    # normalize to tz-aware UTC series
-    s = pd.to_datetime(ts, utc=True, errors="coerce")
-    # convert to US/Eastern for cutoff logic
-    et = s.tz_convert("America/New_York")
-    # midnight ET of each day
-    midnight = et.normalize()
-    # if ts is within the last 'cutoff' minutes of the day -> move to next day
+    # Convert to tz-aware UTC
+    ts_utc = pd.to_datetime(ts, utc=True, errors="coerce")
+
+    # Ensure we work with a Series and preserve the original index when possible
+    idx = getattr(ts, "index", None)
+    if isinstance(ts_utc, pd.Series):
+        s = ts_utc
+    else:
+        s = pd.Series(ts_utc, index=idx)
+
+    # Convert to US/Eastern using Series .dt accessor
+    et = s.dt.tz_convert("America/New_York")
+
+    # Midnight ET of each day
+    midnight = et.dt.normalize()
+
+    # If within the last 'cutoff_minutes' of the day, push to the next day
     too_late = (midnight + pd.Timedelta(days=1) - et) <= pd.Timedelta(minutes=cutoff_minutes)
     eff = et.where(~too_late, et + pd.Timedelta(days=1))
-    # return tz-naive date (YYYY-MM-DD)
-    return eff.normalize().tz_localize(None)
+
+    # Return tz-naive normalized date
+    out = eff.dt.normalize().dt.tz_localize(None)
+    return out
 
 def daily_sentiment_from_rows(
     rows: pd.DataFrame,
@@ -72,10 +85,10 @@ def daily_sentiment_from_rows(
 
     if kind == "news":
         g = g.rename(columns={"S_mean": "S_news", "count": "news_count"})
+        return g[["date", "ticker", "S_news", "news_count"]]
     else:
         g = g.rename(columns={"S_mean": "S_earn", "count": "earn_count"})
-    return g[["date", "ticker"] + ([f"S_{kind}"] if kind in ("news", "earn") else []) +
-             ([f"{kind}_count"] if kind in ("news", "earn") else [])]
+        return g[["date", "ticker", "S_earn", "earn_count"]]
 
 def join_and_fill_daily(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFrame:
     """
@@ -84,6 +97,7 @@ def join_and_fill_daily(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFr
       date, ticker, S_news, S_earn, news_count, earn_count, S
     """
     cols = ["date", "ticker"]
+    # both inputs have disjoint S_* column names, so no suffix collision
     df = pd.merge(d_news, d_earn, on=cols, how="outer")
 
     for c, default in [
