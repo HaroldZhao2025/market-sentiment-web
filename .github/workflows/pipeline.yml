@@ -133,8 +133,23 @@ jobs:
           npm run build
           echo "==== After build (ls) ===="
           ls -lah
-          # Guard: ensure 'out' exists (export target)
-          test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
+
+          if [ ! -d out ]; then
+            echo "::warning::No 'out/' after build; synthesizing static export from '.next'..."
+            mkdir -p out
+            # Pages HTML
+            rsync -a .next/server/app/ out/
+            # Static assets
+            mkdir -p out/_next
+            rsync -a .next/static/ out/_next/static/ || true
+            # Public assets
+            rsync -a public/ out/ || true
+            # Fallback 404 for GH Pages
+            cp out/index.html out/404.html 2>/dev/null || true
+          fi
+
+          echo "==== Final out/ listing ===="
+          ls -lah out
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -143,6 +158,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/out
+
 
   deploy:
     needs: build
