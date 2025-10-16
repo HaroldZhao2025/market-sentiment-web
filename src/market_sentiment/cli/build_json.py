@@ -1,50 +1,62 @@
+# src/market_sentiment/cli/build_json.py
 from __future__ import annotations
+
 import argparse
 from pathlib import Path
-import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.news import fetch_news
 from market_sentiment.edgar import fetch_earnings_docs
-from market_sentiment.finbert import FinBERT, add_finbert_score
+from market_sentiment.finbert import FinBERT
 from market_sentiment.aggregate import (
-    add_forward_returns, daily_sentiment_from_rows, join_and_fill_daily
+    daily_sentiment_from_rows,
+    join_and_fill_daily,
+    add_forward_returns,
 )
 from market_sentiment.writers import build_ticker_json, write_outputs
 
-def _load_universe(path: str | Path) -> pd.DataFrame:
-    df = pd.read_csv(path)
-    # accept Symbol or ticker column
-    if "Symbol" in df.columns:
-        df = df.rename(columns={"Symbol":"ticker"})
-    elif "ticker" not in df.columns:
-        raise ValueError("Universe must have a 'Symbol' or 'ticker' column")
-    df["ticker"] = df["ticker"].astype(str).str.upper()
-    return df
 
-def _fetch_all_prices(tickers: list[str], start: str, end: str, max_workers: int = 8) -> pd.DataFrame:
+# ---------- NEW: tiny helper to align date dtypes ----------
+def _to_naive_midnight(s: pd.Series) -> pd.Series:
+    """
+    Make a date-like Series tz-naive (no timezone) and normalized to midnight.
+    Works whether input is tz-aware, tz-naive, strings, or timestamps.
+    """
+    # Force to UTC-aware first (handles both aware and naive inputs)
+    s2 = pd.to_datetime(s, errors="coerce", utc=True)
+    # Drop timezone (becomes naive) and normalize to 00:00:00
+    return s2.dt.tz_localize(None).dt.normalize()
+# -----------------------------------------------------------
+
+
+def _fetch_all_prices(tickers, start, end, max_workers: int = 8) -> pd.DataFrame:
     rows = []
     with ThreadPoolExecutor(max_workers=max_workers) as ex:
         futs = {ex.submit(fetch_prices_yf, t, start, end): t for t in tickers}
         for f in tqdm(as_completed(futs), total=len(futs), desc="Prices"):
             rows.append(f.result())
-    if not rows:
-        return pd.DataFrame(columns=["date","ticker","open","close"])
-    df = pd.concat(rows, ignore_index=True)
-    return df.drop_duplicates(["date","ticker"]).sort_values(["ticker","date"]).reset_index(drop=True)
+    out = pd.concat(rows, ignore_index=True) if rows else pd.DataFrame(
+        columns=["date", "ticker", "open", "close"]
+    )
+    return out
 
-def _score_rows_inplace(fb: FinBERT, rows: pd.DataFrame, text_col: str, batch_size: int):
-    scored = add_finbert_score(rows, text_col=text_col, fb=fb, batch_size=batch_size)
-    # ensure required columns are present
-    for c in ("S",):
-        if c not in scored.columns:
-            scored[c] = 0.0
-    return scored
+
+def _score_rows_inplace(fb: FinBERT, df: pd.DataFrame, text_col: str, batch: int = 16) -> pd.DataFrame:
+    if df.empty:
+        return df
+    texts = (df[text_col].fillna("").astype(str)).tolist()
+    # Be tolerant of older/newer FinBERT.score signatures
+    try:
+        scores = fb.score(texts, batch=batch)
+    except TypeError:
+        scores = fb.score(texts)
+    df["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
+    return df
+
 
 def main():
     ap = argparse.ArgumentParser("Build JSON artifacts for the web app")
@@ -54,82 +66,72 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--cutoff-minutes", type=int, default=5)
-    ap.add_argument("--max-tickers", type=int, default=0, help="0 = full")
+    ap.add_argument("--max-tickers", type=int, default=0)
     ap.add_argument("--max-workers", type=int, default=8)
-    args = ap.parse_args()
+    a = ap.parse_args()
 
-    out_dir = Path(args.out)
+    out_dir = Path(a.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    uni = _load_universe(args.universe)
-    tickers = sorted(uni["ticker"].astype(str).str.upper().unique().tolist())
-    if args.max_tickers and args.max_tickers > 0:
-        tickers = tickers[:args.max_tickers]
+    # Universe
+    u = pd.read_csv(a.universe)
+    tick_col = "ticker" if "ticker" in u.columns else ("Symbol" if "Symbol" in u.columns else None)
+    if not tick_col:
+        raise ValueError("Universe CSV must have 'ticker' or 'Symbol' column.")
+    tickers = u[tick_col].astype(str).str.upper().dropna().unique().tolist()
+    if a.max_tickers and a.max_tickers > 0:
+        tickers = tickers[: a.max_tickers]
 
-    print(f"Build JSON for {len(tickers)} tickers | batch={args.batch} cutoff_min={args.cutoff_minutes} max_workers={args.max_workers}")
+    print(f"\nBuild JSON for {len(tickers)} tickers | batch={a.batch} cutoff_min={a.cutoff_minutes} max_workers={a.max_workers}")
 
     # Prices
-    prices = _fetch_all_prices(tickers, args.start, args.end, max_workers=args.max_workers)
-    prices = add_forward_returns(prices)
+    prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers).copy()
+    # ---------- KEY FIX #1: make prices['date'] tz-naive midnight ----------
+    prices["date"] = _to_naive_midnight(prices["date"])
 
-    # Prepare FinBERT once
+    # News + Earnings + FinBERT
     fb = FinBERT()
-
-    # Collect scored texts
-    all_news, all_earn = [], []
-
+    news_rows = []
+    earn_rows = []
     for t in tqdm(tickers, desc="News+Earnings"):
-        news = fetch_news(t, args.start, args.end)
-        earn = fetch_earnings_docs(t, args.start, args.end)
+        n = fetch_news(t, a.start, a.end)
+        e = fetch_earnings_docs(t, a.start, a.end)
+        if not n.empty:
+            n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
+            news_rows.append(n[["ticker", "ts", "title", "url", "text", "S"]])
+        if not e.empty:
+            e = _score_rows_inplace(fb, e, text_col="text", batch=a.batch)
+            earn_rows.append(e[["ticker", "ts", "title", "url", "text", "S"]])
 
-        if not news.empty:
-            news = _score_rows_inplace(fb, news.assign(kind="news"), text_col="text", batch_size=args.batch)
-            all_news.append(news)
+    news_rows = pd.concat(news_rows, ignore_index=True) if news_rows else pd.DataFrame(
+        columns=["ticker", "ts", "title", "url", "text", "S"]
+    )
+    earn_rows = pd.concat(earn_rows, ignore_index=True) if earn_rows else pd.DataFrame(
+        columns=["ticker", "ts", "title", "url", "text", "S"]
+    )
 
-        if not earn.empty:
-            earn = _score_rows_inplace(fb, earn.assign(kind="earn"), text_col="text", batch_size=args.batch)
-            all_earn.append(earn)
-
-    news_rows = pd.concat(all_news, ignore_index=True) if all_news else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
-    earn_rows = pd.concat(all_earn, ignore_index=True) if all_earn else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
-
-    # Daily aggregates
-    d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=args.cutoff_minutes)
-    d_earn = daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=args.cutoff_minutes)
+    # Aggregate to daily
+    d_news = daily_sentiment_from_rows(news_rows, kind="news", cutoff_minutes=a.cutoff_minutes)
+    d_earn = daily_sentiment_from_rows(earn_rows, kind="earn", cutoff_minutes=a.cutoff_minutes)
     daily = join_and_fill_daily(d_news, d_earn)
 
-    # Panel for portfolio join on returns
-    panel = prices.merge(daily, on=["date","ticker"], how="left").fillna({"S":0.0})
+    # ---------- KEY FIX #2: make daily['date'] tz-naive midnight ----------
+    daily["date"] = _to_naive_midnight(daily["date"])
 
-    # Top news per ticker by |S|
-    if not news_rows.empty:
-        top_news = news_rows.copy()
-        top_news["absS"] = top_news["S"].abs()
-    else:
-        top_news = pd.DataFrame(columns=["ticker","ts","title","url","text","S","absS"])
+    # Merge & compute returns
+    panel = prices.merge(daily, on=["date", "ticker"], how="left").fillna({"S": 0.0})
+    panel = add_forward_returns(panel)
 
-    # Build per-ticker JSON
-    per_ticker = {}
-    for t in tqdm(tickers, desc="WriteTicker"):
-        obj = build_ticker_json(t, prices, daily, top_news)
-        per_ticker[t] = obj
+    # Write all outputs expected by the web app
+    write_outputs(panel, news_rows, earn_rows, out_dir)
 
-    # Write outputs (tickers, portfolio, per-ticker files)
-    write_outputs(out_dir, tickers, panel, per_ticker)
+    # Small summary to the logs
+    by_t = panel.groupby("ticker")["S"].apply(lambda s: (s.abs() > 0).sum())
+    nz = int((by_t > 0).sum())
+    print("\nSummary:")
+    print(f"  Tickers listed: {len(tickers)}")
+    print(f"  Tickers with non-zero daily S: {nz}/{len(tickers)}")
 
-    # Summary for CI logs
-    tick_files = [p.name[:-5] for p in out_dir.glob("*.json") if p.name not in ("_tickers.json","portfolio.json")]
-    have_sent = daily.groupby("ticker")["S"].apply(lambda s: (s != 0).any() if not s.empty else False)
-    print("Summary:")
-    print("  Tickers listed:", len(tickers))
-    print("  Ticker JSON files:", len(tick_files))
-    print(f"  Tickers with any news: {news_rows['ticker'].nunique() if not news_rows.empty else 0}/{len(tickers)}")
-    nz = have_sent[have_sent].index.tolist()
-    print(f"  Tickers with non-zero daily S: {len(nz)}/{len(tickers)}")
-    samp = daily.groupby("ticker")["S"].apply(lambda s: np.mean(np.abs(s)) if not s.empty else 0.0).sort_values(ascending=False).head(5)
-    for sym, v in samp.items():
-        cnt = (daily.query("ticker==@sym and S!=0").shape[0])
-        print(f"   {sym}: mean|S|={v:.4f} (nz_points={cnt})")
 
 if __name__ == "__main__":
     main()
