@@ -1,81 +1,66 @@
+# src/market_sentiment/writers.py
 from __future__ import annotations
-import json
-from pathlib import Path
+
 import pandas as pd
 
-def _price_sent_series(ticker: str, prices: pd.DataFrame, daily: pd.DataFrame) -> dict:
-    p = prices[prices["ticker"] == ticker][["date","close"]].copy()
-    d = daily[daily["ticker"] == ticker][["date","S"]].copy()
 
-    left = p.rename(columns={"close":"price"})
-    right = d.rename(columns={"S":"sentiment"})
+def _as_date_col(x: pd.Series) -> pd.Series:
+    # Ensure naive normalized dates for joining/JSON
+    d = pd.to_datetime(x, errors="coerce")
+    return d.dt.normalize()
 
-    ser = pd.merge(left, right, on="date", how="left").sort_values("date").reset_index(drop=True)
-    ser["sentiment"] = ser["sentiment"].fillna(0.0)
-    ser["sentiment_ma7"] = ser["sentiment"].rolling(7, min_periods=1).mean()
 
-    out = {
-        "date": ser["date"].dt.strftime("%Y-%m-%d").tolist(),
-        "price": ser["price"].astype(float).round(6).tolist(),
-        "sentiment": ser["sentiment"].astype(float).round(6).tolist(),
-        "sentiment_ma7": ser["sentiment_ma7"].astype(float).round(6).tolist(),
+def build_ticker_json(
+    ticker: str,
+    prices: pd.DataFrame,          # columns: date, ticker, close (open optional)
+    daily_sent: pd.DataFrame,      # columns: date, ticker, S (daily combined sentiment)
+    top_news: pd.DataFrame | None  # columns: ts, title, url, S (optional), etc.
+) -> dict:
+    """
+    Create the JSON object the web app expects:
+    {
+      symbol, series: { date[], price[], sentiment[], sentiment_ma7[] }, top_news: [...]
     }
-    return out
+    Merge is on naive normalized calendar date; we DO NOT use any tz conversion here.
+    """
 
-def _top_news_payload(top_news: pd.DataFrame, ticker: str) -> list[dict]:
-    tn = top_news[top_news["ticker"] == ticker].copy()
-    if tn.empty:
-        return []
-    tn = tn.sort_values("absS", ascending=False).head(8)
-    tn["date"] = pd.to_datetime(tn["ts"]).dt.tz_convert("UTC").dt.strftime("%Y-%m-%d %H:%M:%S UTC")
-    return [
-        {
-            "date": r["date"],
-            "title": r["title"],
-            "url": r["url"],
-            "S": float(r["S"]),
-        }
-        for _, r in tn.iterrows()
-    ]
+    # Filter relevant ticker and normalize dates
+    p = prices[prices["ticker"] == ticker].copy()
+    p["date"] = _as_date_col(p["date"])
 
-def build_ticker_json(ticker: str, prices: pd.DataFrame, daily: pd.DataFrame, top_news: pd.DataFrame) -> dict:
-    series = _price_sent_series(ticker, prices, daily)
-    news_items = _top_news_payload(top_news, ticker)
-    return {
+    d = daily_sent[daily_sent["ticker"] == ticker].copy()
+    d["date"] = _as_date_col(d["date"])
+
+    # Merge price & daily S
+    ser = (
+        p[["date", "close"]]
+        .merge(d[["date", "S"]], on="date", how="left")
+        .sort_values("date")
+        .reset_index(drop=True)
+    )
+
+    # If no sentiment for a date, set to 0
+    ser["S"] = ser["S"].fillna(0.0).astype(float)
+    ser["S_ma7"] = ser["S"].rolling(7, min_periods=1).mean()
+
+    # Prepare news list (limit top N to keep files small)
+    news_list = []
+    if isinstance(top_news, pd.DataFrame) and not top_news.empty:
+        cols = [c for c in ["ts", "title", "url", "S"] if c in top_news.columns]
+        news_list = top_news[cols].copy()
+        if "ts" in news_list.columns:
+            news_list["ts"] = pd.to_datetime(news_list["ts"], errors="coerce").dt.strftime("%Y-%m-%d %H:%M:%S")
+        # keep only a few
+        news_list = news_list.head(12).to_dict("records")
+
+    obj = {
         "symbol": ticker,
-        "series": series,
-        "topNews": news_items,
+        "series": {
+            "date": ser["date"].dt.strftime("%Y-%m-%d").tolist(),
+            "price": ser["close"].astype(float).round(6).tolist(),
+            "sentiment": ser["S"].round(6).tolist(),
+            "sentiment_ma7": ser["S_ma7"].round(6).tolist(),
+        },
+        "top_news": news_list,
     }
-
-def write_outputs(out_dir: Path, tickers: list[str], panel: pd.DataFrame, per_ticker_objs: dict[str, dict]):
-    out_dir.mkdir(parents=True, exist_ok=True)
-    # list of tickers
-    (out_dir / "_tickers.json").write_text(json.dumps(tickers, indent=2))
-    # portfolio (if present)
-    if not panel.empty and "ret_cc_1d" in panel.columns and "S" in panel.columns:
-        # trivial daily long-short portfolio on S (top/bottom decile)
-        df = panel.copy()
-        def _weights(group: pd.DataFrame):
-            cut_hi = group["S"].quantile(0.9)
-            cut_lo = group["S"].quantile(0.1)
-            w = (group["S"] >= cut_hi).astype(float) - (group["S"] <= cut_lo).astype(float)
-            # normalize long and short separately if both sides present
-            pos = (w > 0).sum()
-            neg = (w < 0).sum()
-            w = w.where(w<=0, w/pos if pos else 0).where(w>=0, w/neg if neg else 0)
-            return w
-        wt = df.groupby("date", group_keys=False).apply(_weights).rename("w")
-        df = df.join(wt)
-        df["ret"] = df["w"] * df["ret_cc_1d"]
-        pnl = df.groupby("date", as_index=False)["ret"].sum().rename(columns={"ret":"daily_return"})
-        pnl["cum_return"] = (1.0 + pnl["daily_return"]).cumprod() - 1.0
-        port = {
-            "date": pnl["date"].dt.strftime("%Y-%m-%d").tolist(),
-            "daily_return": pnl["daily_return"].round(6).tolist(),
-            "cum_return": pnl["cum_return"].round(6).tolist(),
-        }
-        (out_dir / "portfolio.json").write_text(json.dumps(port, indent=2))
-
-    # per-ticker files
-    for t, obj in per_ticker_objs.items():
-        (out_dir / f"{t}.json").write_text(json.dumps(obj))
+    return obj
