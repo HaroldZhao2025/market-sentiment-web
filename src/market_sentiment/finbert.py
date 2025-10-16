@@ -1,73 +1,111 @@
+# src/market_sentiment/cli/build_json.py
 from __future__ import annotations
-import os
-import numpy as np
-import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-HF_MODEL = os.getenv("FINBERT_MODEL", "ProsusAI/finbert")
+import argparse
+import json
+from pathlib import Path
+from typing import List
 
-class FinBERT:
-    def __init__(self, model_name: str = HF_MODEL, device: str | None = None):
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-        self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
-        self.model.eval()
-        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-        self.model.to(self.device)
+import pandas as pd
+from tqdm import tqdm
 
-        # Map indices to labels, then find positions of pos/neu/neg
-        id2label = {int(k): v for k, v in self.model.config.id2label.items()}
-        lab = {v.lower(): k for k, v in id2label.items()}
-        # FinBERT label names vary: "positive", "neutral", "negative"
-        self.idx_pos = lab.get("positive")
-        self.idx_neu = lab.get("neutral")
-        self.idx_neg = lab.get("negative")
-        if self.idx_pos is None or self.idx_neu is None or self.idx_neg is None:
-            # Fallback: assume 0=neg,1=neu,2=pos
-            self.idx_neg, self.idx_neu, self.idx_pos = 0, 1, 2
+from market_sentiment.prices import fetch_prices_yf_many
+from market_sentiment.news import fetch_news
+from market_sentiment.edgar import fetch_earnings_docs
+from market_sentiment.finbert import FinBERT
+from market_sentiment.aggregate import (
+    daily_sentiment_from_rows,
+    join_and_fill_daily,
+    add_forward_returns,
+)
+from market_sentiment.writers import write_outputs
 
-    @torch.no_grad()
-    def score(self, texts: list[str], batch_size: int = 16, max_length: int = 256) -> np.ndarray:
-        """
-        Returns probs numpy array shape [N,3] in model's label order.
-        """
-        if not texts:
-            return np.zeros((0, 3), dtype=float)
 
-        out = []
-        for i in range(0, len(texts), batch_size):
-            chunk = texts[i:i + batch_size]
-            enc = self.tokenizer(
-                chunk, return_tensors="pt", truncation=True,
-                max_length=max_length, padding=True
-            ).to(self.device)
-            logits = self.model(**enc).logits
-            probs = torch.softmax(logits, dim=-1).cpu().numpy()
-            out.append(probs)
-        return np.vstack(out)
+def main():
+    ap = argparse.ArgumentParser("Build JSON artifacts for the web app")
+    ap.add_argument("--universe", required=True)
+    ap.add_argument("--start", required=True)
+    ap.add_argument("--end", required=True)
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--batch", type=int, default=16)
+    ap.add_argument("--cutoff-minutes", type=int, default=5)
+    ap.add_argument("--max-tickers", type=int, default=0)   # 0 = all
+    ap.add_argument("--max-workers", type=int, default=8)   # kept for compatibility (not used directly)
+    ap.add_argument("--chunk-size", type=int, default=50)
+    ap.add_argument("--tries", type=int, default=3)
+    args = ap.parse_args()
 
-def add_finbert_score(df, text_col: str = "text", fb: FinBERT | None = None, batch_size: int = 16):
-    """
-    Adds columns: pos, neu, neg, S  (S = pos - neg)
-    """
-    fb = fb or FinBERT()
-    if df.empty:
-        df = df.copy()
-        for c in ("pos", "neu", "neg", "S"):
-            df[c] = 0.0
-        return df
+    uni = pd.read_csv(args.universe)
+    tickers: List[str] = sorted([str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist()])
+    if args.max_tickers and args.max_tickers > 0:
+        tickers = tickers[: args.max_tickers]
 
-    texts = df[text_col].fillna("").astype(str).tolist()
-    probs = fb.score(texts, batch_size=batch_size)
+    print(f"\nBuild JSON for {len(tickers)} tickers | batch={args.batch} cutoff_min={args.cutoff_minutes} max_workers={args.max_workers}")
+    print("Prices:")
 
-    df = df.copy()
-    if probs.shape[0] == 0:
-        for c in ("pos", "neu", "neg", "S"):
-            df[c] = 0.0
-        return df
+    prices = fetch_prices_yf_many(
+        tickers=tickers,
+        start=args.start,
+        end=args.end,
+        chunk_size=args.chunk_size,
+        tries=args.tries,
+        pause=2.0,
+    )
+    if prices.empty:
+        raise RuntimeError("No prices downloaded.")
+    print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
 
-    pos = probs[:, fb.idx_pos]
-    neu = probs[:, fb.idx_neu]
-    neg = probs[:, fb.idx_neg]
-    df["pos"], df["neu"], df["neg"] = pos, neu, neg
-    df["S"] = df["pos"] - df["neg"]
-    return df
+    prices = add_forward_returns(prices)
+
+    fb = FinBERT()
+    print("News+Earnings:")
+    news_rows_all = []
+    earn_rows_all = []
+    for t in tqdm(tickers, desc="News+Earnings"):
+        n = fetch_news(t, args.start, args.end)
+        e = fetch_earnings_docs(t, args.start, args.end)
+
+        if n is not None and not n.empty:
+            n = n.copy()
+            # NOTE: pass batch_size (not 'batch')
+            n["S"] = fb.score(n["text"].astype(str).tolist(), batch_size=args.batch)
+            news_rows_all.append(n[["ticker", "ts", "title", "url", "text", "S"]])
+
+        if e is not None and not e.empty:
+            e = e.copy()
+            e["S"] = fb.score(e["text"].astype(str).tolist(), batch_size=args.batch)
+            earn_rows_all.append(e[["ticker", "ts", "title", "url", "text", "S"]])
+
+    news_rows = pd.concat(news_rows_all, ignore_index=True) if news_rows_all else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
+    earn_rows = pd.concat(earn_rows_all, ignore_index=True) if earn_rows_all else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
+
+    d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=args.cutoff_minutes)
+    d_earn = daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=args.cutoff_minutes)
+    daily = join_and_fill_daily(d_news, d_earn)
+
+    panel = prices.merge(daily, on=["date", "ticker"], how="left")
+    for c, default in [("S", 0.0), ("news_count", 0), ("earn_count", 0)]:
+        panel[c] = pd.to_numeric(panel.get(c, default), errors="coerce").fillna(default)
+
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    write_outputs(panel, news_rows, earn_rows, out_dir)
+
+    # Summary & smoke checks
+    tickers_listed = sorted(panel["ticker"].unique().tolist())
+    ticker_files = list((out_dir / "ticker").glob("*.json"))
+    with_news = (daily.groupby("ticker")["news_count"].sum() > 0) if not daily.empty else pd.Series(dtype=bool)
+    nz = (daily.groupby("ticker")["S"].apply(lambda s: (s.abs() > 0).sum()).fillna(0).astype(int)) if not daily.empty else pd.Series(dtype=int)
+
+    print("\nSummary:")
+    print(f"  Tickers listed: {len(tickers_listed)}")
+    print(f"  Ticker JSON files: {len(ticker_files)}")
+    print(f"  Tickers with any news: {int(with_news.sum())}/{len(tickers_listed)}" if len(tickers_listed) else "  Tickers with any news: 0/0")
+    print(f"  Tickers with non-zero daily S: {int((nz > 0).sum())}/{len(tickers_listed)}" if len(tickers_listed) else "  Tickers with non-zero daily S: 0/0")
+
+    with open(out_dir / "_tickers.json", "w") as f:
+        json.dump(tickers_listed, f)
+
+
+if __name__ == "__main__":
+    main()
