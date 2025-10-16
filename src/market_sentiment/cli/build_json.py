@@ -1,11 +1,10 @@
-# src/market_sentiment/cli/build_json.py
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+from typing import List
 
-import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
@@ -18,97 +17,29 @@ from market_sentiment.aggregate import (
     join_and_fill_daily,
     add_forward_returns,
 )
-from market_sentiment.writers import build_ticker_json, write_outputs
+from market_sentiment.writers import write_outputs
 
 
-def _to_naive_midnight(s: pd.Series) -> pd.Series:
-    """Make a date-like Series tz-naive and normalized to midnight."""
-    s2 = pd.to_datetime(s, errors="coerce", utc=True)
-    return s2.dt.tz_localize(None).dt.normalize()
-
-
-def _fetch_all_prices(tickers, start, end, max_workers: int = 8) -> pd.DataFrame:
+def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int = 8) -> pd.DataFrame:
     rows = []
     with ThreadPoolExecutor(max_workers=max_workers) as ex:
-        futs = {ex.submit(fetch_prices_yf, t, start, end): t for t in tickers}
-        for f in tqdm(as_completed(futs), total=len(futs), desc="Prices"):
+        futs = [ex.submit(fetch_prices_yf, t, start, end) for t in tickers]
+        for f in as_completed(futs):
             rows.append(f.result())
-    out = (
-        pd.concat(rows, ignore_index=True)
-        if rows
-        else pd.DataFrame(columns=["date", "ticker", "open", "close"])
-    )
-    return out
+    if not rows:
+        return pd.DataFrame(columns=["date", "ticker", "open", "close"])
+    return pd.concat(rows, ignore_index=True).dropna()
 
 
-def _collapse_scores_to_scalar(scores) -> np.ndarray:
-    """
-    Convert various FinBERT score shapes into a 1-D scalar sentiment S per text.
-    Preferred definition: S = P(pos) - P(neg).
-      - np.array (N,3): assume [neg, neu, pos]
-      - list of dicts: keys like 'positive'/'pos', 'negative'/'neg'
-      - list of tuples/lists len>=3: [neg, neu, pos]
-      - list of string labels: 'positive'/'negative'/'neutral'
-      - 1-D scores: already scalar
-    Fallback: zeros.
-    """
-    try:
-        arr = np.asarray(scores)
-        if arr.ndim == 2 and arr.shape[1] >= 3:
-            neg = arr[:, 0].astype(float)
-            pos = arr[:, 2].astype(float)
-            return (pos - neg).astype(float)
-        if arr.ndim == 1:
-            return arr.astype(float)
-    except Exception:
-        pass
-
-    if isinstance(scores, (list, tuple)) and scores and isinstance(scores[0], dict):
-        def g(d, *names):
-            for n in names:
-                if n in d:
-                    return float(d[n])
-            return 0.0
-        out = [g(d, "positive", "pos") - g(d, "negative", "neg") for d in scores]
-        return np.array(out, dtype=float)
-
-    if (
-        isinstance(scores, (list, tuple))
-        and scores
-        and isinstance(scores[0], (list, tuple))
-        and len(scores[0]) >= 3
-    ):
-        out = [float(s[-1]) - float(s[0]) for s in scores]
-        return np.array(out, dtype=float)
-
-    if isinstance(scores, (list, tuple)) and scores and isinstance(scores[0], str):
-        m = {"positive": 1.0, "pos": 1.0, "negative": -1.0, "neg": -1.0, "neutral": 0.0, "neu": 0.0}
-        out = [m.get(s.lower(), 0.0) for s in scores]
-        return np.array(out, dtype=float)
-
-    try:
-        n = len(scores)
-    except Exception:
-        n = 0
-    return np.zeros(n, dtype=float)
-
-
-def _score_rows_inplace(fb: FinBERT, df: pd.DataFrame, text_col: str, batch: int = 16) -> pd.DataFrame:
-    """Score df[text_col] with FinBERT and write a scalar column df['S']."""
-    if df.empty:
-        df["S"] = []
+def _score_inplace(fb: FinBERT, df: pd.DataFrame, text_col: str, batch: int) -> pd.DataFrame:
+    if df is None or df.empty:
         return df
-
-    texts = (df[text_col].fillna("").astype(str)).tolist()
-    try:
-        scores = fb.score(texts, batch=batch)  # prefer batch param if supported
-    except TypeError:
-        scores = fb.score(texts)               # fallback if signature lacks 'batch'
-
-    S = _collapse_scores_to_scalar(scores)
-    if S.shape[0] != len(df):
-        S = np.resize(S, len(df))
-    df["S"] = pd.to_numeric(pd.Series(S), errors="coerce").fillna(0.0)
+    texts = df[text_col].astype(str).tolist()
+    # fb.score returns a list[float] (values in [-1,1])
+    scores = fb.score(texts, batch=batch)
+    s = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
+    df = df.copy()
+    df["S"] = s.values
     return df
 
 
@@ -120,76 +51,76 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--cutoff-minutes", type=int, default=5)
-    ap.add_argument("--max-tickers", type=int, default=0)
+    ap.add_argument("--max-tickers", type=int, default=0)   # 0 = all
     ap.add_argument("--max-workers", type=int, default=8)
     a = ap.parse_args()
 
-    out_dir = Path(a.out)
-    out_dir.mkdir(parents=True, exist_ok=True)
-
-    u = pd.read_csv(a.universe)
-    tick_col = "ticker" if "ticker" in u.columns else ("Symbol" if "Symbol" in u.columns else None)
-    if not tick_col:
-        raise ValueError("Universe CSV must have 'ticker' or 'Symbol' column.")
-    tickers = u[tick_col].astype(str).str.upper().dropna().unique().tolist()
+    uni = pd.read_csv(a.universe)
+    tickers = sorted([str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist()])
     if a.max_tickers and a.max_tickers > 0:
         tickers = tickers[: a.max_tickers]
 
     print(f"\nBuild JSON for {len(tickers)} tickers | batch={a.batch} cutoff_min={a.cutoff_minutes} max_workers={a.max_workers}")
 
-    # Prices
-    prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers).copy()
-    prices["date"] = _to_naive_midnight(prices["date"])
+    # 1) Prices
+    print("Prices:")
+    prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers)
+    prices = prices.dropna()
+    if prices.empty:
+        raise RuntimeError("No prices downloaded.")
+    prices = add_forward_returns(prices)
 
-    # News + Earnings + FinBERT
+    # 2) News + Earnings -> score with FinBERT
     fb = FinBERT()
-    news_rows = []
-    earn_rows = []
+    print("News+Earnings:")
+    news_rows_all = []
+    earn_rows_all = []
     for t in tqdm(tickers, desc="News+Earnings"):
         n = fetch_news(t, a.start, a.end)
         e = fetch_earnings_docs(t, a.start, a.end)
-        if not n.empty:
-            n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
-            news_rows.append(n[["ticker", "ts", "title", "url", "text", "S"]])
-        if not e.empty:
-            e = _score_rows_inplace(fb, e, text_col="text", batch=a.batch)
-            earn_rows.append(e[["ticker", "ts", "title", "url", "text", "S"]])
+        # Score texts (title+text best; we already have 'text' normalized)
+        n = _score_inplace(fb, n, text_col="text", batch=a.batch)
+        e = _score_inplace(fb, e, text_col="text", batch=a.batch)
+        if n is not None and not n.empty:
+            news_rows_all.append(n[["ticker", "ts", "title", "url", "text", "S"]])
+        if e is not None and not e.empty:
+            earn_rows_all.append(e[["ticker", "ts", "title", "url", "text", "S"]])
 
-    news_rows = (
-        pd.concat(news_rows, ignore_index=True)
-        if news_rows
-        else pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
-    )
-    earn_rows = (
-        pd.concat(earn_rows, ignore_index=True)
-        if earn_rows
-        else pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
-    )
+    news_rows = pd.concat(news_rows_all, ignore_index=True) if news_rows_all else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
+    earn_rows = pd.concat(earn_rows_all, ignore_index=True) if earn_rows_all else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
 
-    d_news = daily_sentiment_from_rows(news_rows, kind="news", cutoff_minutes=a.cutoff_minutes)
-    d_earn = daily_sentiment_from_rows(earn_rows, kind="earn", cutoff_minutes=a.cutoff_minutes)
+    # 3) Daily aggregates
+    d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
+    d_earn = daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
     daily = join_and_fill_daily(d_news, d_earn)
-    daily["date"] = _to_naive_midnight(daily["date"])
 
-    # Merge & compute returns
-    panel = prices.merge(daily, on=["date", "ticker"], how="left").fillna({"S": 0.0})
-    panel = add_forward_returns(panel)
+    # 4) Join panel
+    panel = prices.merge(daily, on=["date", "ticker"], how="left")
+    for c, default in [("S", 0.0), ("news_count", 0), ("earn_count", 0)]:
+        panel[c] = pd.to_numeric(panel.get(c, default), errors="coerce").fillna(default)
 
-    # Write outputs (be tolerant to different function signatures)
-    try:
-        # Signature 1 (commonly used in your repo): (out_dir, panel, news_rows, earn_rows)
-        write_outputs(out_dir, panel, news_rows, earn_rows)
-    except TypeError:
-        # Signature 2 (older advice I gave): (panel, news_rows, earn_rows, out_dir)
-        write_outputs(panel, news_rows, earn_rows, out_dir)
+    # 5) Write all outputs
+    out_dir = Path(a.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    write_outputs(panel, news_rows, earn_rows, out_dir)
 
-    # Summary in logs
-    by_t = panel.groupby("ticker")["S"].apply(lambda s: (s.abs() > 0).sum())
-    nz = int((by_t > 0).sum())
+    # 6) Summary
+    tickers_listed = sorted(panel["ticker"].unique().tolist())
+    ticker_files = list((out_dir / "ticker").glob("*.json"))
+    tickers_with_files = sorted([p.stem for p in ticker_files])
+
+    nz = (daily.groupby("ticker")["S"].apply(lambda s: (s.abs() > 0).sum()).fillna(0).astype(int))
+    with_news = (daily.groupby("ticker")["news_count"].sum() > 0)
+
     print("\nSummary:")
-    print(f"  Tickers listed: {len(tickers)}")
-    print(f"  Tickers with non-zero daily S: {nz}/{len(tickers)}")
-    print(f"  Wrote outputs to: {out_dir.resolve()}")
+    print(f"  Tickers listed: {len(tickers_listed)}")
+    print(f"  Ticker JSON files: {len(tickers_with_files)}")
+    print(f"  Tickers with any news: {with_news.sum()}/{len(tickers_listed)}")
+    print(f"  Tickers with non-zero daily S: {(nz > 0).sum()}/{len(tickers_listed)}")
+
+    # write _tickers.json again for sanity (list of strings)
+    with open(out_dir / "_tickers.json", "w") as f:
+        json.dump(tickers_listed, f)
 
 
 if __name__ == "__main__":
