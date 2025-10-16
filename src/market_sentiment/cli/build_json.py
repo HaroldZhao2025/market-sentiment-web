@@ -52,21 +52,17 @@ def _collapse_scores_to_scalar(scores) -> np.ndarray:
       - 1-D scores: already scalar
     Fallback: zeros.
     """
-    # NumPy array or array-like first
     try:
         arr = np.asarray(scores)
         if arr.ndim == 2 and arr.shape[1] >= 3:
-            # assume [neg, neu, pos]
             neg = arr[:, 0].astype(float)
             pos = arr[:, 2].astype(float)
             return (pos - neg).astype(float)
         if arr.ndim == 1:
-            # already scalar
             return arr.astype(float)
     except Exception:
         pass
 
-    # list of dicts
     if isinstance(scores, (list, tuple)) and scores and isinstance(scores[0], dict):
         def g(d, *names):
             for n in names:
@@ -76,23 +72,20 @@ def _collapse_scores_to_scalar(scores) -> np.ndarray:
         out = [g(d, "positive", "pos") - g(d, "negative", "neg") for d in scores]
         return np.array(out, dtype=float)
 
-    # list of tuples/lists length>=3
     if (
         isinstance(scores, (list, tuple))
         and scores
         and isinstance(scores[0], (list, tuple))
         and len(scores[0]) >= 3
     ):
-        out = [float(s[-1]) - float(s[0]) for s in scores]  # pos - neg
+        out = [float(s[-1]) - float(s[0]) for s in scores]
         return np.array(out, dtype=float)
 
-    # list of string labels
     if isinstance(scores, (list, tuple)) and scores and isinstance(scores[0], str):
         m = {"positive": 1.0, "pos": 1.0, "negative": -1.0, "neg": -1.0, "neutral": 0.0, "neu": 0.0}
         out = [m.get(s.lower(), 0.0) for s in scores]
         return np.array(out, dtype=float)
 
-    # fallback
     try:
         n = len(scores)
     except Exception:
@@ -107,15 +100,13 @@ def _score_rows_inplace(fb: FinBERT, df: pd.DataFrame, text_col: str, batch: int
         return df
 
     texts = (df[text_col].fillna("").astype(str)).tolist()
-    # Be tolerant to either score(texts, batch=...) or score(texts)
     try:
-        scores = fb.score(texts, batch=batch)
+        scores = fb.score(texts, batch=batch)  # prefer batch param if supported
     except TypeError:
-        scores = fb.score(texts)
+        scores = fb.score(texts)               # fallback if signature lacks 'batch'
 
     S = _collapse_scores_to_scalar(scores)
     if S.shape[0] != len(df):
-        # Defensive: align lengths if a scorer returns fewer/extra
         S = np.resize(S, len(df))
     df["S"] = pd.to_numeric(pd.Series(S), errors="coerce").fillna(0.0)
     return df
@@ -136,7 +127,6 @@ def main():
     out_dir = Path(a.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Universe
     u = pd.read_csv(a.universe)
     tick_col = "ticker" if "ticker" in u.columns else ("Symbol" if "Symbol" in u.columns else None)
     if not tick_col:
@@ -185,15 +175,21 @@ def main():
     panel = prices.merge(daily, on=["date", "ticker"], how="left").fillna({"S": 0.0})
     panel = add_forward_returns(panel)
 
-    # Write outputs for the web app
-    write_outputs(panel, news_rows, earn_rows, out_dir)
+    # Write outputs (be tolerant to different function signatures)
+    try:
+        # Signature 1 (commonly used in your repo): (out_dir, panel, news_rows, earn_rows)
+        write_outputs(out_dir, panel, news_rows, earn_rows)
+    except TypeError:
+        # Signature 2 (older advice I gave): (panel, news_rows, earn_rows, out_dir)
+        write_outputs(panel, news_rows, earn_rows, out_dir)
 
-    # Summary for logs
+    # Summary in logs
     by_t = panel.groupby("ticker")["S"].apply(lambda s: (s.abs() > 0).sum())
     nz = int((by_t > 0).sum())
     print("\nSummary:")
     print(f"  Tickers listed: {len(tickers)}")
     print(f"  Tickers with non-zero daily S: {nz}/{len(tickers)}")
+    print(f"  Wrote outputs to: {out_dir.resolve()}")
 
 
 if __name__ == "__main__":
