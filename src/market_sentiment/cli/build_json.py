@@ -66,11 +66,11 @@ def main():
         e = fetch_earnings_docs(t, args.start, args.end)
         if n is not None and not n.empty:
             n = n.copy()
-            n["S"] = fb.score(n["text"].astype(str).tolist(), batch=args.batch)
+            n["S"] = fb.score(n["text"].astype(str).tolist(), batch_size=args.batch)
             news_rows_all.append(n[["ticker", "ts", "title", "url", "text", "S"]])
         if e is not None and not e.empty:
             e = e.copy()
-            e["S"] = fb.score(e["text"].astype(str).tolist(), batch=args.batch)
+            e["S"] = fb.score(e["text"].astype(str).tolist(), batch_size=args.batch)
             earn_rows_all.append(e[["ticker", "ts", "title", "url", "text", "S"]])
 
     news_rows = pd.concat(news_rows_all, ignore_index=True) if news_rows_all else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
