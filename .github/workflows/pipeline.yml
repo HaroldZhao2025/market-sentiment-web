@@ -4,11 +4,6 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
-    inputs:
-      SAMPLE_TICKER:
-        description: "Run a lightweight sample build for AAPL only"
-        required: false
-        default: "false"
   schedule:
     - cron: "0 12 * * 1"
 
@@ -21,14 +16,14 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-env:
-  PYTHONPATH: src
-  HF_HUB_DISABLE_TELEMETRY: "1"
-  SAMPLE_TICKER: ${{ github.event.inputs.SAMPLE_TICKER || 'false' }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: src
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      # Toggle sample run by setting repo variable SAMPLE_TICKER=true
+      SAMPLE_TICKER: ${{ vars.SAMPLE_TICKER || 'false' }}
 
     steps:
       - name: Checkout
@@ -72,40 +67,47 @@ jobs:
       - name: Build S&P 500 universe
         run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
 
-      - name: Prepare sample universe (AAPL) if requested
-        if: env.SAMPLE_TICKER == 'true'
+      - name: (Optional) Narrow to AAPL if SAMPLE_TICKER=true
         run: |
-          mkdir -p data
-          printf "ticker\nAAPL\n" > data/sample_aapl.csv
+          if [ "${SAMPLE_TICKER}" = "true" ]; then
+            echo "SAMPLE_TICKER=true → restricting universe to AAPL"
+            { head -n 1 data/sp500.csv && awk -F, 'NR>1 && $1=="AAPL"' data/sp500.csv; } > data/sp500.sample.csv
+            mv data/sp500.sample.csv data/sp500.csv
+          else
+            echo "SAMPLE_TICKER=false → full universe"
+          fi
+          echo "Universe size:"
+          wc -l data/sp500.csv
+          echo "First few lines:"
+          head -n 5 data/sp500.csv
 
-      - name: Build JSON (Full or Sample)
+      - name: Build JSON (FinBERT + Yahoo/Google News + SEC/EDGAR)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
-          if [ "${SAMPLE_TICKER}" = "true" ]; then
-            echo "⚠️ Running sample build for AAPL only..."
-            python -m market_sentiment.cli.build_json \
-              --universe data/sample_aapl.csv \
-              --start "$START" --end "$END" \
-              --out apps/web/public/data \
-              --batch 16 --max-workers 8 --max-tickers 1
-          else
-            echo "🏗️ Running full build for all tickers..."
-            python -m market_sentiment.cli.build_json \
-              --universe data/sp500.csv \
-              --start "$START" --end "$END" \
-              --out apps/web/public/data \
-              --batch 16 --max-workers 8
-          fi
+          echo "Running build_json for $(($(wc -l < data/sp500.csv)-1)) tickers"
+          python -m market_sentiment.cli.build_json \
+            --universe data/sp500.csv \
+            --start "$START" --end "$END" \
+            --out apps/web/public/data \
+            --batch 16 \
+            --cutoff-minutes 5 \
+            --max-workers 8
 
       - name: Inspect output (debug)
         run: |
           echo "== List data dir =="
-          ls -lah apps/web/public/data
-          echo "== Peek a few =="
-          head -c 120 apps/web/public/data/_tickers.json; echo
-          ls apps/web/public/data/ticker | head -n 5
-          echo
+          ls -lah apps/web/public/data || true
+          echo "== Peek tickers json =="
+          if [ -f apps/web/public/data/_tickers.json ]; then
+            head -c 400 apps/web/public/data/_tickers.json; echo
+          fi
+          echo "== Portfolio present? =="
+          if [ -f apps/web/public/data/portfolio.json ]; then
+            echo "Yes"; head -c 400 apps/web/public/data/portfolio.json; echo
+          else
+            echo "No"
+          fi
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -116,7 +118,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: "Build static site (Next 13 export)"
+      - name: "Build static site (Next output: export)"
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -129,8 +131,9 @@ jobs:
           npm -v
           echo "==== Building ===="
           npm run build
-          echo "==== After export (ls) ===="
+          echo "==== After build (ls) ===="
           ls -lah
+          # Guard: ensure 'out' exists (export target)
           test -d out || { echo "::error::Expected 'apps/web/out' to exist after build, but it does not."; exit 1; }
 
       - name: Configure Pages
