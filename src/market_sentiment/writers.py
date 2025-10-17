@@ -1,123 +1,100 @@
 # src/market_sentiment/writers.py
 from __future__ import annotations
-import json
 from pathlib import Path
-from typing import Dict, List
-
+import json
 import pandas as pd
+from typing import Dict
 
-from .aggregate import build_portfolio_timeseries
+# panel: columns ['date','ticker','open','close','ret_cc_1d','ret_oc_1d','S', ...]
+# news_rows: ['ticker','ts','title','url','text','S']
+# earn_rows: ['ticker','ts','title','url','text','S'] (optional)
 
-def _safe_float(x) -> float:
-    try:
-        return float(x)
-    except Exception:
-        return 0.0
+def _ensure_dt_str(series: pd.Series) -> list[str]:
+    d = pd.to_datetime(series, utc=False, errors="coerce")
+    # normalize to date-only
+    return d.dt.tz_localize(None).dt.strftime("%Y-%m-%d").tolist()
 
-def _series_for_ticker(prices: pd.DataFrame, daily: pd.DataFrame) -> Dict[str, List]:
-    """
-    Build the time series for a ticker combining price + daily S.
-    Returns a dict with arrays: date, price, S, ma7
-    """
-    p = prices.copy()
-    p["date"] = pd.to_datetime(p["date"]).dt.tz_localize(None)
-    p = p[["date", "close"]].rename(columns={"close": "price"})
+def build_ticker_json(symbol: str, panel: pd.DataFrame, news_rows: pd.DataFrame) -> Dict:
+    df = panel[panel["ticker"] == symbol].copy()
+    if df.empty:
+        return {"dates": [], "price": [], "sentiment": [], "sentiment_ma7": [], "news": []}
 
-    d = daily.copy()
-    d["date"] = pd.to_datetime(d["date"]).dt.tz_localize(None)
-    d = d[["date", "S"]]
-
-    ser = p.merge(d, on="date", how="left").sort_values("date")
-    ser["S"] = ser["S"].fillna(0.0).astype(float)
-    ser["ma7"] = ser["S"].rolling(7, min_periods=1).mean()
-
-    return {
-        "date": ser["date"].dt.strftime("%Y-%m-%d").tolist(),
-        "price": [ _safe_float(v) for v in ser["price"].tolist() ],
-        "S": [ _safe_float(v) for v in ser["S"].tolist() ],
-        "ma7": [ _safe_float(v) for v in ser["ma7"].tolist() ],
+    df = df.sort_values("date")
+    out = {
+        "dates": _ensure_dt_str(df["date"]),
+        "price": df["close"].astype(float).tolist(),
+        "sentiment": df["S"].astype(float).fillna(0.0).tolist(),
+        "sentiment_ma7": (
+            df["S"].astype(float).rolling(7, min_periods=1).mean().fillna(0.0).tolist()
+        ),
+        "news": [],
     }
 
-def build_ticker_json(
-    ticker: str,
-    prices: pd.DataFrame,
-    daily: pd.DataFrame,
-    top_news: pd.DataFrame | None = None
-) -> Dict:
-    """
-    A compact JSON per-ticker for the UI.
-    """
-    ser = _series_for_ticker(prices, daily)
+    if not news_rows.empty:
+        n = news_rows[news_rows["ticker"] == symbol].copy()
+        if not n.empty:
+            n = n.sort_values("ts").tail(50)  # keep light
+            out["news"] = [
+                {
+                    "ts": pd.to_datetime(r["ts"], utc=True).tz_convert("US/Eastern").strftime("%Y-%m-%d %H:%M"),
+                    "title": str(r.get("title") or ""),
+                    "url": str(r.get("url") or ""),
+                    "S": float(r.get("S") or 0.0),
+                }
+                for _, r in n.iterrows()
+            ]
 
-    news_items = []
-    if top_news is not None and not top_news.empty:
-        # keep a few most recent items
-        n = top_news.sort_values("ts", ascending=False).head(10)
-        for _, r in n.iterrows():
-            news_items.append({
-                "ts": pd.to_datetime(r["ts"], utc=True).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "title": str(r.get("title", "")),
-                "url": str(r.get("url", "")),
-                "S": _safe_float(r.get("S", 0.0)),
-            })
+    return out
 
+def build_portfolio(panel: pd.DataFrame) -> Dict:
+    # Simple equal-weight long-short: long top 20% S, short bottom 20% S, next-day OC return
+    if panel.empty:
+        return {"dates": [], "long": [], "short": [], "long_short": []}
+    df = panel.copy()
+    df["date"] = pd.to_datetime(df["date"])
+    def one_day(g: pd.DataFrame):
+        if g.empty:
+            return pd.Series({"long": 0.0, "short": 0.0, "long_short": 0.0})
+        g = g.dropna(subset=["S","ret_oc_1d"]).copy()
+        if g.empty:
+            return pd.Series({"long": 0.0, "short": 0.0, "long_short": 0.0})
+        q20 = g["S"].quantile(0.2)
+        q80 = g["S"].quantile(0.8)
+        long = g[g["S"] >= q80]["ret_oc_1d"].mean()
+        short = -g[g["S"] <= q20]["ret_oc_1d"].mean()
+        ls = (long if pd.notna(long) else 0.0) + (short if pd.notna(short) else 0.0)
+        return pd.Series({
+            "long": float(long if pd.notna(long) else 0.0),
+            "short": float(short if pd.notna(short) else 0.0),
+            "long_short": float(ls),
+        })
+    daily = df.groupby("date", as_index=False).apply(one_day).reset_index(drop=True)
     return {
-        "ticker": ticker,
-        "series": ser,
-        "news": news_items
+        "dates": daily["date"].dt.strftime("%Y-%m-%d").tolist(),
+        "long": daily["long"].tolist(),
+        "short": daily["short"].tolist(),
+        "long_short": daily["long_short"].tolist(),
     }
 
-def write_outputs(
-    panel: pd.DataFrame,
-    news_rows: pd.DataFrame,
-    earn_rows: pd.DataFrame,
-    out_dir: str
-) -> None:
-    """
-    Writes:
-      - _tickers.json                  (list of tickers)
-      - ticker/<SYMBOL>.json           (per-ticker timeseries + top news)
-      - earnings/<SYMBOL>.json         (raw scored earnings rows)
-      - portfolio.json                 (long/short/ls daily series)
-    """
+def write_outputs(panel: pd.DataFrame, news_rows: pd.DataFrame, out_dir: str | Path) -> None:
     base = Path(out_dir)
     (base / "ticker").mkdir(parents=True, exist_ok=True)
     (base / "earnings").mkdir(parents=True, exist_ok=True)
 
-    # Ticker list
-    tickers = sorted(panel["ticker"].unique().tolist())
-    (base / "_tickers.json").write_text(json.dumps(tickers), encoding="utf-8")
+    # tickers list
+    tickers = sorted(panel["ticker"].dropna().unique().tolist())
+    (base / "_tickers.json").write_text(json.dumps(tickers))
 
-    # Portfolio series (daily)
-    port = build_portfolio_timeseries(panel)
-    port_out = {
-        "dates": port["date"].dt.strftime("%Y-%m-%d").tolist() if not port.empty else [],
-        "long": [ _safe_float(v) for v in (port["long"].tolist() if not port.empty else []) ],
-        "short": [ _safe_float(v) for v in (port["short"].tolist() if not port.empty else []) ],
-        "long_short": [ _safe_float(v) for v in (port["long_short"].tolist() if not port.empty else []) ],
-    }
-    (base / "portfolio.json").write_text(json.dumps(port_out), encoding="utf-8")
-
-    # Per-ticker JSONs
-    # Prepare helpers keyed by ticker to avoid repeated filtering
-    prices_by = {t: g[["date","close","open"]].copy() for t, g in panel.groupby("ticker", sort=False)}
-    daily_by  = {t: g[["date","ticker","S"]].copy() for t, g in panel.groupby("ticker", sort=False)}
-
-    # Top news per ticker (optional)
-    if news_rows is not None and not news_rows.empty:
-        news_by = {t: g[["ts","title","url","S"]].copy() for t, g in news_rows.groupby("ticker", sort=False)}
-    else:
-        news_by = {}
-
+    # per-ticker
     for t in tickers:
-        p = prices_by.get(t, pd.DataFrame(columns=["date","close","open"]))
-        d = daily_by.get(t, pd.DataFrame(columns=["date","ticker","S"]))
-        top_news = news_by.get(t, pd.DataFrame(columns=["ts","title","url","S"]))
-        obj = build_ticker_json(t, p, d, top_news)
-        (base / "ticker" / f"{t}.json").write_text(json.dumps(obj), encoding="utf-8")
+        obj = build_ticker_json(t, panel, news_rows)
+        (base / "ticker" / f"{t}.json").write_text(json.dumps(obj))
 
-    # Raw earnings per ticker (optional file, useful for debugging)
-    if earn_rows is not None and not earn_rows.empty:
-        for t, g in earn_rows.groupby("ticker", sort=False):
-            rows = g.sort_values("ts").to_dict(orient="records")
-            (base / "earnings" / f"{t}.json").write_text(json.dumps(rows), encoding="utf-8")
+    # earnings (optional – keep file present even if empty)
+    if "earn_count" in panel.columns:
+        # derive minimal items per symbol from news_rows tagged as earnings if you have them
+        pass
+
+    # portfolio
+    port = build_portfolio(panel)
+    (base / "portfolio.json").write_text(json.dumps(port))
