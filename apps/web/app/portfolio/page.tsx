@@ -1,32 +1,65 @@
 // apps/web/app/portfolio/page.tsx
-import { loadPortfolio } from "../../lib/loaders";
-import LineChart from "../../components/LineChart";
+import fs from "node:fs/promises";
+import path from "node:path";
 
-export default function PortfolioPage() {
-  const p = loadPortfolio();
+export const dynamic = "error";
+export const revalidate = false;
 
-  const left =
-    p && p.dates && p.equity
-      ? p.dates.map((d, i) => ({ x: d, y: Number.isFinite(p.equity[i]) ? p.equity[i] : 0 }))
-      : [];
+type Portfolio = {
+  dates: string[];
+  long: number[];
+  short: number[];
+  long_short: number[];
+};
 
-  const right =
-    p && p.dates && p.ret
-      ? p.dates.map((d, i) => ({ x: d, y: Number.isFinite(p.ret[i]) ? p.ret[i] : 0 }))
-      : [];
+async function loadPortfolio(): Promise<Portfolio | null> {
+  try {
+    const p = path.join(process.cwd(), "public", "data", "portfolio.json");
+    const raw = await fs.readFile(p, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+export default async function PortfolioPage() {
+  const pf = await loadPortfolio();
 
   return (
-    <main className="p-6 space-y-6">
-      <h2 className="text-xl font-bold">Portfolio (Top/Bottom Decile, 1d)</h2>
-      {left.length === 0 ? (
-        <div className="text-sm text-gray-500">No data generated yet.</div>
+    <main className="mx-auto max-w-5xl p-6">
+      <h1 className="text-2xl font-bold mb-4">Portfolio</h1>
+      {!pf || pf.dates.length === 0 ? (
+        <p className="text-sm text-gray-500">Portfolio series is empty.</p>
       ) : (
-        <>
-          <h3 className="font-semibold">Equity Curve</h3>
-          <LineChart left={left} height={300} />
-          <h3 className="font-semibold mt-6">Daily Returns</h3>
-          <LineChart right={right} height={300} />
-        </>
+        <div className="space-y-3">
+          <p className="text-sm">Points: {pf.dates.length}</p>
+          <div className="rounded-xl border p-4 bg-white">
+            <h3 className="font-semibold mb-2">Last 5 rows</h3>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-gray-500">
+                  <th className="py-1 pr-4">Date</th>
+                  <th className="py-1 pr-4">Long</th>
+                  <th className="py-1 pr-4">Short</th>
+                  <th className="py-1 pr-4">L/S</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pf.dates.slice(-5).map((d, i) => {
+                  const idx = pf.dates.length - 5 + i;
+                  return (
+                    <tr key={d}>
+                      <td className="py-1 pr-4">{d}</td>
+                      <td className="py-1 pr-4">{pf.long[idx]?.toFixed(4)}</td>
+                      <td className="py-1 pr-4">{pf.short[idx]?.toFixed(4)}</td>
+                      <td className="py-1 pr-4">{pf.long_short[idx]?.toFixed(4)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
     </main>
   );
