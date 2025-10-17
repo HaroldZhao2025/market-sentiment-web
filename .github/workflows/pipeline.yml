@@ -24,9 +24,9 @@ concurrency:
 env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
-  # Set this to true in 'Run workflow' to build only AAPL
+  # Set to true in “Run workflow” to build only AAPL
   SAMPLE_TICKER: ${{ github.event.inputs.sample_ticker || 'false' }}
-  # GitHub Pages subpath for this repo
+  # GitHub Pages subpath
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ---------- Python & deps ----------
+      # ---------- Python ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -55,7 +55,6 @@ jobs:
         run: |
           set -euxo pipefail
           python -m pip install --upgrade pip wheel setuptools
-          # CPU torch to avoid GPU wheel pulls
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
           pip check
@@ -86,7 +85,8 @@ jobs:
           set -euxo pipefail
           echo "ticker" > data/sp500.csv
           echo "AAPL" >> data/sp500.csv
-          echo "Using sample universe: "; cat data/sp500.csv
+          echo "Using sample universe:"
+          cat data/sp500.csv
 
       # ---------- Data build ----------
       - name: Build JSON (FinBERT + News + Earnings)
@@ -102,7 +102,7 @@ jobs:
             --cutoff-minutes 5 \
             --max-workers 8
 
-      # ---------- Inspect outputs (pure Python; no jq) ----------
+      # ---------- Inspect outputs (pure Python; prints AAPL + first non-zero) ----------
       - name: Inspect output (summary + samples)
         run: |
           set -euxo pipefail
@@ -137,7 +137,14 @@ jobs:
               except Exception as e:
                   print("Portfolio parse error:", e)
 
-          # Sample: AAPL first/last
+          # AAPL sample (first/last)
+          import math
+          def nz(x): 
+              try: 
+                  return x is not None and not math.isclose(float(x), 0.0, abs_tol=1e-6)
+              except Exception:
+                  return False
+
           aapl_file = os.path.join(tdir, "AAPL.json")
           if os.path.exists(aapl_file):
               aapl = json.load(open(aapl_file))
@@ -146,6 +153,7 @@ jobs:
                   "len": len(s),
                   "first": (s[0] if s else None),
                   "last": (s[-1] if s else None),
+                  "non_zero_points": sum(1 for v in s if nz(v))
               })
           else:
               print("AAPL.json not found")
@@ -153,20 +161,20 @@ jobs:
           # Guaranteed non-zero sample (if any exist)
           print("== Find first ticker with any non-zero sentiment ==")
           found = False
-          for p in files[:300]:
+          for p in files[:500]:
               try:
                   j = json.load(open(p))
               except Exception:
                   continue
               arr = j.get("sentiment") or j.get("S") or []
-              nz = [abs(float(x)) for x in arr if x is not None and abs(float(x)) > 1e-6]
-              if nz:
+              nzvals = [abs(float(x)) for x in arr if nz(x)]
+              if nzvals:
                   from os.path import basename
-                  print("Sample:", basename(p), "len=", len(arr), "first_nonzero=", nz[0])
+                  print("Sample:", basename(p), "len=", len(arr), "first_nonzero=", nzvals[0])
                   found = True
                   break
           if not found:
-              print("No non-zero sentiment found in first 300 files.")
+              print("No non-zero sentiment found in first 500 files.")
           PY
 
       # ---------- Node / Next build ----------
@@ -179,7 +187,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site (Next.js output: export)
+      - name: "Build static site (Next.js output: export)"
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -203,11 +211,11 @@ jobs:
           if [ ! -d "out" ]; then
             echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
             mkdir -p out/_next/static
-            # Copy Next static assets
+            # Next static assets
             rsync -a .next/static/ out/_next/static/ || true
-            # Copy pre-rendered app routes (RSC build output)
+            # Pre-rendered app routes (RSC build output)
             rsync -a .next/server/app/ out/ || true
-            # Ensure public/ is present (contains /data JSON)
+            # Public assets (incl. /data JSON)
             rsync -a public/ out/ || true
           fi
 
