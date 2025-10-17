@@ -6,28 +6,29 @@ export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
 
-type EarnDoc = { ts: string; title: string; url: string; S: number };
+type EarnDoc = { ts?: string; title?: string; url?: string; S?: number };
 
-async function loadTickers(): Promise<string[]> {
+async function readJson(filePath: string): Promise<any | null> {
   try {
-    const p = path.join(process.cwd(), "public", "data", "_tickers.json");
-    const raw = await fs.readFile(p, "utf8");
-    const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : [];
+    const raw = await fs.readFile(filePath, "utf8");
+    return JSON.parse(raw);
   } catch {
-    return [];
+    return null;
   }
 }
 
+async function loadTickers(): Promise<string[]> {
+  const p = path.join(process.cwd(), "public", "data", "_tickers.json");
+  const raw = await readJson(p);
+  return Array.isArray(raw) ? (raw as string[]) : [];
+}
+
 async function loadEarnings(sym: string): Promise<EarnDoc[]> {
-  try {
-    const p = path.join(process.cwd(), "public", "data", "earnings", `${sym}.json`);
-    const raw = await fs.readFile(p, "utf8");
-    const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : [];
-  } catch {
-    return [];
-  }
+  const p = path.join(process.cwd(), "public", "data", "earnings", `${sym}.json`);
+  const raw = await readJson(p);
+  if (Array.isArray(raw)) return raw as EarnDoc[];
+  if (raw && Array.isArray(raw.docs)) return raw.docs as EarnDoc[];
+  return [];
 }
 
 export async function generateStaticParams() {
@@ -46,15 +47,21 @@ export default async function EarningsPage({ params }: { params: { symbol: strin
         <p className="text-sm text-gray-500">No earnings/transcripts detected.</p>
       ) : (
         <ul className="space-y-2">
-          {docs.slice(0, 15).map((d, i) => (
+          {docs.slice(0, 20).map((d, i) => (
             <li key={i} className="rounded-xl border p-3 bg-white">
-              <div className="text-sm text-gray-500">{d.ts}</div>
+              <div className="text-sm text-gray-500">{d.ts ?? ""}</div>
               <div className="font-medium">
-                <a href={d.url} target="_blank" rel="noreferrer" className="underline">
-                  {d.title}
-                </a>
+                {d.url ? (
+                  <a href={d.url} target="_blank" rel="noreferrer" className="underline">
+                    {d.title ?? d.url}
+                  </a>
+                ) : (
+                  <span>{d.title ?? "Untitled doc"}</span>
+                )}
               </div>
-              <div className="text-sm">S (FinBERT): {Number(d.S).toFixed(3)}</div>
+              {"S" in d && typeof d.S === "number" && (
+                <div className="text-sm">S (FinBERT): {Number(d.S).toFixed(3)}</div>
+              )}
             </li>
           ))}
         </ul>
