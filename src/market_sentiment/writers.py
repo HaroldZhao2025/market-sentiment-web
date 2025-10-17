@@ -9,19 +9,33 @@ import pandas as pd
 # -------- Helpers --------
 def _ensure_dt_str(series: pd.Series) -> List[str]:
     d = pd.to_datetime(series, utc=False, errors="coerce")
+    # normalize to date (naive), then ISO date string
     return d.dt.tz_localize(None).dt.strftime("%Y-%m-%d").tolist()
 
 
 def _fmt_eastern(ts_utc) -> str:
+    """
+    Accepts scalar ts (epoch/int/str/Timestamp/NaT).
+    Returns 'YYYY-MM-DD HH:MM' in America/New_York or '' if invalid.
+    """
+    # Parse; coerce invalid -> NaT. Force UTC so tz_convert works.
     ts = pd.to_datetime(ts_utc, utc=True, errors="coerce")
-    if pd.isna(ts).all():
+    if ts is pd.NaT or pd.isna(ts):
         return ""
-    # Format to US/Eastern for display
+    # If somehow naive slipped through, localize to UTC
+    if getattr(ts, "tzinfo", None) is None:
+        try:
+            ts = ts.tz_localize("UTC")
+        except Exception:
+            return ""
     try:
-        return ts.tz_convert("US/Eastern").strftime("%Y-%m-%d %H:%M")
+        return ts.tz_convert("America/New_York").strftime("%Y-%m-%d %H:%M")
     except Exception:
-        # If naive slipped through, just stringify date
-        return pd.to_datetime(ts_utc, errors="coerce").strftime("%Y-%m-%d")
+        # As a last resort, just date
+        try:
+            return ts.tz_convert("America/New_York").strftime("%Y-%m-%d")
+        except Exception:
+            return ""
 
 
 # -------- Ticker JSON builder (what the web UI consumes) --------
@@ -30,7 +44,6 @@ def build_ticker_json(symbol: str, panel: pd.DataFrame, news_rows: pd.DataFrame)
     if df.empty:
         return {"dates": [], "price": [], "sentiment": [], "sentiment_ma7": [], "news": []}
 
-    # required columns, with safe defaults
     df = df.sort_values("date")
     if "close" not in df.columns:
         df["close"] = 0.0
@@ -50,7 +63,7 @@ def build_ticker_json(symbol: str, panel: pd.DataFrame, news_rows: pd.DataFrame)
     if isinstance(news_rows, pd.DataFrame) and not news_rows.empty:
         n = news_rows[news_rows.get("ticker") == symbol].copy()
         if not n.empty:
-            n = n.sort_values("ts").tail(50)  # keep light
+            n = n.sort_values("ts").tail(50)  # limit size
             out["news"] = [
                 {
                     "ts": _fmt_eastern(r.get("ts")),
@@ -71,7 +84,6 @@ def build_portfolio(panel: pd.DataFrame) -> Dict:
 
     df = panel.copy()
     if "ret_oc_1d" not in df.columns:
-        # fall back to 0 if returns are missing
         df["ret_oc_1d"] = 0.0
     if "S" not in df.columns:
         df["S"] = 0.0
@@ -93,7 +105,6 @@ def build_portfolio(panel: pd.DataFrame) -> Dict:
         return pd.Series({"long": long, "short": short, "long_short": long + short})
 
     daily = df.groupby("date", as_index=False).apply(one_day).reset_index(drop=True)
-
     return {
         "dates": daily["date"].dt.strftime("%Y-%m-%d").tolist(),
         "long": daily["long"].tolist(),
@@ -110,10 +121,10 @@ def write_outputs(
     out_dir: str | Path,
 ) -> None:
     """
-    panel:     wide daily panel with ['date','ticker','close','S', 'ret_oc_1d', ...]
-    news_rows: rows with ['ticker','ts','title','url','S']
-    earn_rows: rows with ['ticker','ts','title','url','S']  (can be empty)
-    out_dir:   destination directory (public/data)
+    panel:     daily panel with ['date','ticker','close','S','ret_oc_1d',...]
+    news_rows: ['ticker','ts','title','url','S']   (can be empty)
+    earn_rows: ['ticker','ts','title','url','S']   (can be empty)
+    out_dir:   destination directory (apps/web/public/data)
     """
     base = Path(out_dir)
     (base / "ticker").mkdir(parents=True, exist_ok=True)
@@ -128,10 +139,10 @@ def write_outputs(
         obj = build_ticker_json(t, panel, news_rows)
         (base / "ticker" / f"{t}.json").write_text(json.dumps(obj))
 
-    # ---- earnings files (minimal, one per ticker) ----
-    if isinstance(earn_rows, pd.DataFrame):
+    # ---- earnings files (minimal) ----
+    if isinstance(earn_rows, pd.DataFrame) and not earn_rows.empty:
         for t in tickers:
-            e = earn_rows[earn_rows.get("ticker") == t].copy() if not earn_rows.empty else pd.DataFrame()
+            e = earn_rows[earn_rows.get("ticker") == t].copy()
             items = []
             if not e.empty:
                 e = e.sort_values("ts").tail(50)
@@ -146,7 +157,6 @@ def write_outputs(
                 ]
             (base / "earnings" / f"{t}.json").write_text(json.dumps({"items": items}))
     else:
-        # still create empty files so routes don't 404
         for t in tickers:
             (base / "earnings" / f"{t}.json").write_text(json.dumps({"items": []}))
 
