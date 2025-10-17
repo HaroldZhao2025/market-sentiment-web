@@ -2,15 +2,18 @@
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "/market-sentiment-web";
 
 module.exports = {
-  // Static export into apps/web/out
+  // Static export
   output: "export",
-  // Required for GitHub Pages subpath
+
+  // GitHub Pages subpath
   basePath: BASE,
-  assetPrefix: BASE,
+  // IMPORTANT: do NOT set assetPrefix here; it breaks _next static URLs on Pages.
+  // assetPrefix: BASE,
+
   trailingSlash: true,
   images: { unoptimized: true },
 
   // Keep CI green
   eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true }
+  typescript: { ignoreBuildErrors: true },
 };
