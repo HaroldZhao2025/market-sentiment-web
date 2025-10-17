@@ -1,56 +1,85 @@
 // apps/web/app/ticker/[symbol]/page.tsx
+import fs from "node:fs/promises";
 import path from "node:path";
-import fs from "node:fs";
-import LineChart from "../../../components/LineChart";
-import { listTickers, loadTicker } from "../../../lib/loaders";
-import { assetPath } from "../../../lib/paths";
 
-export const dynamicParams = true;
+export const dynamic = "error";
+export const dynamicParams = false;
+export const revalidate = false;
 
-// Pre-generate params from _tickers.json if present.
-// If missing, we still export a minimal set to avoid build failure.
-export async function generateStaticParams() {
-  const tickers = listTickers();
-  return tickers.map((t) => ({ symbol: t }));
+type TickerSeries = {
+  date: string[];        // yyyy-mm-dd
+  price: number[];
+  S: number[];           // combined daily sentiment
+  S_news?: number[];
+  S_earn?: number[];
+};
+
+async function loadTickers(): Promise<string[]> {
+  try {
+    const p = path.join(process.cwd(), "public", "data", "_tickers.json");
+    const raw = await fs.readFile(p, "utf8");
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
 }
 
-export default function TickerPage({ params }: { params: { symbol: string } }) {
-  const symbol = (params.symbol || "").toUpperCase();
-  const data = loadTicker(symbol); // safe, never undefined
+async function loadTickerJson(sym: string): Promise<TickerSeries | null> {
+  try {
+    const p = path.join(process.cwd(), "public", "data", "ticker", `${sym}.json`);
+    const raw = await fs.readFile(p, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
 
-  const priceSeries = data.series.map((p) => ({ x: p.date, y: p.close }));
-  const signalSeries = data.series.map((p) => ({ x: p.date, y: p.S }));
+export async function generateStaticParams() {
+  const list = await loadTickers();
+  return list.map((symbol) => ({ symbol }));
+}
+
+export default async function TickerPage({ params }: { params: { symbol: string } }) {
+  const { symbol } = params;
+  const data = await loadTickerJson(symbol);
 
   return (
-    <main className="max-w-5xl mx-auto p-6">
-      <h1 className="text-xl font-semibold mb-4">{symbol}</h1>
-
-      <div className="mb-6">
-        <LineChart left={priceSeries} right={signalSeries} height={300} />
-      </div>
-
-      <h2 className="text-lg font-semibold mb-2">Recent News</h2>
-      {data.news.length === 0 ? (
-        <p className="text-sm text-gray-500">No news captured for this window.</p>
+    <main className="mx-auto max-w-5xl p-6">
+      <h1 className="text-2xl font-bold mb-4">Ticker: {symbol}</h1>
+      {!data ? (
+        <p className="text-sm text-gray-500">No data file found for {symbol}.</p>
+      ) : data.date.length === 0 ? (
+        <p className="text-sm text-gray-500">No time series for {symbol}.</p>
       ) : (
-        <ul className="space-y-2">
-          {data.news.slice(0, 20).map((n, idx) => (
-            <li key={idx} className="border rounded p-3">
-              <div className="text-sm text-gray-500">{new Date(n.ts).toLocaleString()}</div>
-              <a href={n.url} target="_blank" rel="noreferrer" className="font-medium underline">
-                {n.title}
-              </a>
-              <div className="text-sm text-gray-600">Sentiment: {n.s.toFixed(3)} {n.source ? ` • ${n.source}` : ""}</div>
-            </li>
-          ))}
-        </ul>
+        <div className="space-y-3">
+          <p className="text-sm">Points: {data.date.length}</p>
+          <div className="rounded-xl border p-4 bg-white">
+            <h3 className="font-semibold mb-2">Last 5 rows</h3>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-gray-500">
+                  <th className="py-1 pr-4">Date</th>
+                  <th className="py-1 pr-4">Price</th>
+                  <th className="py-1 pr-4">S</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.date.slice(-5).map((d, i) => {
+                  const idx = data.date.length - 5 + i;
+                  return (
+                    <tr key={d}>
+                      <td className="py-1 pr-4">{d}</td>
+                      <td className="py-1 pr-4">{data.price[idx]?.toFixed(2)}</td>
+                      <td className="py-1 pr-4">{data.S[idx]?.toFixed(3)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
-
-      <div className="mt-8">
-        <a className="underline text-blue-600" href={assetPath("")}>
-          ← Back
-        </a>
-      </div>
     </main>
   );
 }
