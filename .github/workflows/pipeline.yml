@@ -4,6 +4,11 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      sample_ticker:
+        description: "Build only AAPL (fast sample)"
+        required: false
+        default: "false"
   schedule:
     - cron: "0 12 * * 1"
 
@@ -16,19 +21,23 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  PYTHONPATH: src
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  # Set this to true in 'Run workflow' to build only AAPL
+  SAMPLE_TICKER: ${{ github.event.inputs.sample_ticker || 'false' }}
+  # GitHub Pages subpath for this repo
+  NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: src
-      HF_HUB_DISABLE_TELEMETRY: "1"
-      # Toggle sample run by setting repo variable SAMPLE_TICKER=true
-      SAMPLE_TICKER: ${{ vars.SAMPLE_TICKER || 'false' }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # ---------- Python & deps ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -44,48 +53,47 @@ jobs:
 
       - name: Install Python deps
         run: |
+          set -euxo pipefail
           python -m pip install --upgrade pip wheel setuptools
+          # CPU torch to avoid GPU wheel pulls
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
           pip check
 
       - name: Set Hugging Face cache dir
-        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> $GITHUB_ENV
+        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
 
-      - name: Set dates (last 365 days)
+      - name: Set date window (last 365 days)
         run: |
           python - <<'PY'
           import os
           from datetime import datetime, timedelta, timezone
-          start=(datetime.now(timezone.utc)-timedelta(days=365)).strftime('%Y-%m-%d')
-          end=datetime.now(timezone.utc).strftime('%Y-%m-%d')
+          end = datetime.now(timezone.utc)
+          start = end - timedelta(days=365)
           with open(os.environ['GITHUB_ENV'],'a') as f:
-              f.write(f"START={start}\nEND={end}\n")
-          print("START", start, "END", end)
+              f.write(f"START={start.strftime('%Y-%m-%d')}\n")
+              f.write(f"END={end.strftime('%Y-%m-%d')}\n")
+          print("START:", start.date(), "END:", end.date())
           PY
 
+      # ---------- Universe ----------
       - name: Build S&P 500 universe
         run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
 
-      - name: (Optional) Narrow to AAPL if SAMPLE_TICKER=true
+      - name: (Optional) Reduce universe to AAPL only
+        if: env.SAMPLE_TICKER == 'true'
         run: |
-          if [ "${SAMPLE_TICKER}" = "true" ]; then
-            echo "SAMPLE_TICKER=true → restricting universe to AAPL"
-            { head -n 1 data/sp500.csv && awk -F, 'NR>1 && $1=="AAPL"' data/sp500.csv; } > data/sp500.sample.csv
-            mv data/sp500.sample.csv data/sp500.csv
-          else
-            echo "SAMPLE_TICKER=false → full universe"
-          fi
-          echo "Universe size:"
-          wc -l data/sp500.csv
-          echo "First few lines:"
-          head -n 5 data/sp500.csv
+          set -euxo pipefail
+          echo "ticker" > data/sp500.csv
+          echo "AAPL" >> data/sp500.csv
+          echo "Using sample universe: "; cat data/sp500.csv
 
-      - name: Build JSON (FinBERT + Yahoo/Google News + SEC/EDGAR)
+      # ---------- Data build ----------
+      - name: Build JSON (FinBERT + News + Earnings)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
-          echo "Running build_json for $(($(wc -l < data/sp500.csv)-1)) tickers"
+          set -euxo pipefail
           python -m market_sentiment.cli.build_json \
             --universe data/sp500.csv \
             --start "$START" --end "$END" \
@@ -94,62 +102,74 @@ jobs:
             --cutoff-minutes 5 \
             --max-workers 8
 
-      - name: Inspect output (debug)
+      # ---------- Inspect outputs (pure Python; no jq) ----------
+      - name: Inspect output (summary + samples)
         run: |
+          set -euxo pipefail
           echo "== List data dir =="
           ls -lah apps/web/public/data || true
-          echo "== Peek tickers json =="
-          if [ -f apps/web/public/data/_tickers.json ]; then
-            head -c 400 apps/web/public/data/_tickers.json; echo
-          fi
-          echo "== Portfolio present? =="
-          if [ -f apps/web/public/data/portfolio.json ]; then
-            echo "Yes"; head -c 400 apps/web/public/data/portfolio.json; echo
-          else
-            echo "No"
-          fi
-          echo "== Find first ticker with any non-zero sentiment =="
+
           python - <<'PY'
           import json, os, glob
           base = "apps/web/public/data"
-          cand = sorted(glob.glob(os.path.join(base, "ticker", "*.json")))[:200]
+          tickers_file = os.path.join(base, "_tickers.json")
+
+          # Summary
+          tickers = []
+          if os.path.exists(tickers_file):
+              try:
+                  tickers = json.load(open(tickers_file))
+              except Exception:
+                  tickers = []
+          print("Tickers listed:", len(tickers))
+
+          tdir = os.path.join(base, "ticker")
+          files = sorted(glob.glob(os.path.join(tdir, "*.json")))
+          print("Ticker JSON files:", len(files))
+
+          # Portfolio presence
+          pfile = os.path.join(base, "portfolio.json")
+          print("Portfolio present:", os.path.exists(pfile))
+          if os.path.exists(pfile):
+              try:
+                  p = json.load(open(pfile))
+                  print("Portfolio dates:", len(p.get("dates", [])))
+              except Exception as e:
+                  print("Portfolio parse error:", e)
+
+          # Sample: AAPL first/last
+          aapl_file = os.path.join(tdir, "AAPL.json")
+          if os.path.exists(aapl_file):
+              aapl = json.load(open(aapl_file))
+              s = aapl.get("sentiment") or aapl.get("S") or []
+              print("AAPL sentiment sample:", {
+                  "len": len(s),
+                  "first": (s[0] if s else None),
+                  "last": (s[-1] if s else None),
+              })
+          else:
+              print("AAPL.json not found")
+
+          # Guaranteed non-zero sample (if any exist)
+          print("== Find first ticker with any non-zero sentiment ==")
           found = False
-          for p in cand:
-              j = json.load(open(p))
-              s = [abs(float(x)) for x in j.get("sentiment", []) if x is not None]
-              if any(x > 1e-6 for x in s):
-                  print("Sample:", os.path.basename(p), "len=", len(s), "first_nonzero=", next(x for x in s if x>1e-6))
+          for p in files[:300]:
+              try:
+                  j = json.load(open(p))
+              except Exception:
+                  continue
+              arr = j.get("sentiment") or j.get("S") or []
+              nz = [abs(float(x)) for x in arr if x is not None and abs(float(x)) > 1e-6]
+              if nz:
+                  from os.path import basename
+                  print("Sample:", basename(p), "len=", len(arr), "first_nonzero=", nz[0])
                   found = True
                   break
           if not found:
-              print("No non-zero sentiment found in first 200 files.")
-          fi
-          echo "== Inspect AAPL sample =="
-          AAPL_JSON="apps/web/public/data/ticker/AAPL.json"
-          if [ -f "$AAPL_JSON" ]; then
-              jq '{len: ((.S // .sentiment // []) | length),
-                  first: ((.S // .sentiment // [])[0]),
-                  last: ((.S // .sentiment // [])[length-1])}' "$AAPL_JSON" || true
-          else
-              echo "AAPL.json missing"
-          fi
-          echo "== Find a ticker with non-zero S =="
-          python - <<'PY'
-          import json, os, glob
-          base="apps/web/public/data/ticker"
-          for p in sorted(glob.glob(os.path.join(base, "*.json")))[:100]:
-              j=json.load(open(p))
-              s = j.get("S") or j.get("sentiment") or []
-              if s and any(abs(x) > 1e-9 for x in s if isinstance(x,(int,float))):
-                  name=os.path.basename(p)
-                  print(f"Sample {name}: len={len(s)}, first={s[0]}, last={s[-1]}")
-                  break
-          else:
-              print("No ticker with non-zero S found in first 100 files.")
+              print("No non-zero sentiment found in first 300 files.")
           PY
 
-
-
+      # ---------- Node / Next build ----------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -159,39 +179,42 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: "Build static site (Next output: export)"
+      - name: Build static site (Next.js output: export)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
-          NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+          NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
         run: |
+          set -euxo pipefail
           echo "==== next.config.cjs (contents) ===="
           cat next.config.cjs || true
+
           echo "==== Node/NPM ===="
           node -v
           npm -v
+
           echo "==== Building ===="
           npm run build
+
           echo "==== After build (ls) ===="
           ls -lah
 
-          if [ ! -d out ]; then
-            echo "::warning::No 'out/' after build; synthesizing static export from '.next'..."
-            mkdir -p out
-            # Pages HTML
-            rsync -a .next/server/app/ out/
-            # Static assets
-            mkdir -p out/_next
+          # Guard & fallback: ensure 'out' exists, else synthesize
+          if [ ! -d "out" ]; then
+            echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
+            mkdir -p out/_next/static
+            # Copy Next static assets
             rsync -a .next/static/ out/_next/static/ || true
-            # Public assets
+            # Copy pre-rendered app routes (RSC build output)
+            rsync -a .next/server/app/ out/ || true
+            # Ensure public/ is present (contains /data JSON)
             rsync -a public/ out/ || true
-            # Fallback 404 for GH Pages
-            cp out/index.html out/404.html 2>/dev/null || true
           fi
 
           echo "==== Final out/ listing ===="
-          ls -lah out
+          ls -lah out || { echo "::error::No 'out/' directory after synthesis"; exit 1; }
 
+      # ---------- Pages ----------
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -199,7 +222,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/out
-
 
   deploy:
     needs: build
