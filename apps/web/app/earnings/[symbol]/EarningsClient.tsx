@@ -1,51 +1,48 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { assetPath } from "../../../lib/paths"; // up three levels from app/earnings/[symbol] to lib
+
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+type Row = { ts: string; title: string; url: string; S?: number };
 
 export default function EarningsClient({ symbol }: { symbol: string }) {
-  const s = symbol.toUpperCase();
-  const [data, setData] = useState<any | null>(null);
+  const [rows, setRows] = useState<Row[] | null>(null);
+  const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(assetPath(`data/earnings/${s}.json`))
-      .then((r) => (r.ok ? r.json() : null))
-      .then(setData)
-      .catch(() => setData(null));
-  }, [s]);
+    const url = `${BASE}/data/earnings/${symbol}.json`;
+    fetch(url, { cache: "no-store" })
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
+        return r.json();
+      })
+      .then((j) => (Array.isArray(j) ? setRows(j) : setErr("Bad earnings json shape")))
+      .catch((e) => setErr(e.message));
+  }, [symbol]);
 
   return (
-    <div className="space-y-6">
-      <div className="card flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Earnings Sentiment — {s}</h2>
-        <Link href={`/ticker/${s}`} className="btn">Back</Link>
+    <div className="max-w-5xl mx-auto px-4 py-8 space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Earnings — {symbol}</h1>
+        <Link href={`/ticker/${symbol}/`} className="text-sm underline hover:no-underline">← {symbol}</Link>
       </div>
-      {!data ? (
-        <div className="card">No transcripts available.</div>
-      ) : (
-        <div className="card">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-left text-gray-500">
-                <th className="py-1">Date</th>
-                <th className="py-1">Quarter</th>
-                <th className="py-1">Year</th>
-                <th className="py-1">Excerpt</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.events?.map((e: any, i: number) => (
-                <tr key={i} className="border-t">
-                  <td className="py-2">{new Date(e.ts).toLocaleDateString()}</td>
-                  <td className="py-2">{e.quarter || "-"}</td>
-                  <td className="py-2">{e.year || "-"}</td>
-                  <td className="py-2">{(e.text || "").slice(0, 160)}…</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+
+      {err && <div className="text-sm text-red-600">Failed to load: {err}</div>}
+      {!rows && !err && <div className="text-sm text-neutral-500">Loading…</div>}
+
+      {rows && rows.length === 0 && <div className="text-sm text-neutral-500">No earnings docs in range.</div>}
+
+      {rows && rows.length > 0 && (
+        <ul className="space-y-2">
+          {rows.map((r, i) => (
+            <li key={i} className="border rounded-xl p-3">
+              <div className="text-xs text-neutral-500">{r.ts}</div>
+              <a href={r.url} target="_blank" className="text-sm underline">{r.title}</a>
+              {"S" in r && <div className="text-xs">S: {r.S}</div>}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
