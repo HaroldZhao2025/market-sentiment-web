@@ -1,8 +1,9 @@
-// apps/web/app/portfolio/PortfolioClient.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 type PortfolioJSON = {
   dates: string[];
@@ -16,10 +17,10 @@ export default function PortfolioClient() {
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
-    // IMPORTANT: relative path – works with GitHub Pages basePath
-    fetch("data/portfolio.json", { cache: "no-store" })
+    const url = `${BASE}/data/portfolio.json`;
+    fetch(url, { cache: "no-store" })
       .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
         return r.json();
       })
       .then(setData)
@@ -35,13 +36,11 @@ export default function PortfolioClient() {
 
       {err && <div className="text-sm text-red-600">Failed to load: {err}</div>}
       {!data && !err && <div className="text-sm text-neutral-500">Loading…</div>}
-      {data && data.dates?.length === 0 && (
-        <div className="text-sm text-neutral-500">No data.</div>
-      )}
+      {data && data.dates?.length === 0 && <div className="text-sm text-neutral-500">No data.</div>}
 
       {data && data.dates?.length > 0 && (
         <div className="text-sm">
-          <p>Points: <b>{data.dates.length}</b> — Long/Short series available.</p>
+          Points: <b>{data.dates.length}</b> — long/short series loaded from <code>{BASE}/data/portfolio.json</code>
         </div>
       )}
     </div>
