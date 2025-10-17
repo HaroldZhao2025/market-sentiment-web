@@ -12,14 +12,26 @@ type Portfolio = {
   long_short: number[];
 };
 
-async function loadPortfolio(): Promise<Portfolio | null> {
+async function readJson(filePath: string): Promise<any | null> {
   try {
-    const p = path.join(process.cwd(), "public", "data", "portfolio.json");
-    const raw = await fs.readFile(p, "utf8");
+    const raw = await fs.readFile(filePath, "utf8");
     return JSON.parse(raw);
   } catch {
     return null;
   }
+}
+
+async function loadPortfolio(): Promise<Portfolio | null> {
+  const p = path.join(process.cwd(), "public", "data", "portfolio.json");
+  const raw = await readJson(p);
+  if (!raw || typeof raw !== "object") return null;
+  const dates = raw.dates || raw.date || [];
+  return {
+    dates: Array.isArray(dates) ? dates : [],
+    long: Array.isArray(raw.long) ? raw.long.map(Number) : [],
+    short: Array.isArray(raw.short) ? raw.short.map(Number) : [],
+    long_short: Array.isArray(raw.long_short) ? raw.long_short.map(Number) : [],
+  };
 }
 
 export default async function PortfolioPage() {
