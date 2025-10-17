@@ -7,19 +7,40 @@ import { assetPath } from "../lib/paths";
 export const dynamic = "error"; // fully static
 export const revalidate = false;
 
-async function getTickers(): Promise<string[]> {
+async function readJson(filePath: string): Promise<any | null> {
   try {
-    const p = path.join(process.cwd(), "public", "data", "_tickers.json");
-    const raw = await fs.readFile(p, "utf8");
-    const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : [];
+    const raw = await fs.readFile(filePath, "utf8");
+    return JSON.parse(raw);
   } catch {
-    return [];
+    return null;
   }
 }
 
+function hasNonEmptySeries(j: any): boolean {
+  if (!j || typeof j !== "object") return false;
+  const dates = j.date || j.dates || j.DATE || j.DATES;
+  return Array.isArray(dates) && dates.length > 0;
+}
+
+async function getRenderableTickers(): Promise<string[]> {
+  const tickersPath = path.join(process.cwd(), "public", "data", "_tickers.json");
+  const raw = await readJson(tickersPath);
+  const all = Array.isArray(raw) ? (raw as string[]) : [];
+  if (all.length === 0) return [];
+
+  // Only show tickers that actually have a non-empty file
+  const base = path.join(process.cwd(), "public", "data", "ticker");
+  const ok: string[] = [];
+  for (const t of all) {
+    const p = path.join(base, `${t}.json`);
+    const j = await readJson(p);
+    if (hasNonEmptySeries(j)) ok.push(t);
+  }
+  return ok;
+}
+
 export default async function HomePage() {
-  const tickers = await getTickers();
+  const tickers = await getRenderableTickers();
 
   return (
     <main className="mx-auto max-w-5xl p-6">
@@ -27,7 +48,7 @@ export default async function HomePage() {
 
       <div className="flex items-center gap-4 mb-6">
         <Link
-          href={`${assetPath("/portfolio/")}`}
+          href={assetPath("/portfolio/")}
           className="px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-sm font-medium"
         >
           Portfolio
@@ -42,7 +63,7 @@ export default async function HomePage() {
           {tickers.map((t) => (
             <li key={t}>
               <Link
-                href={`${assetPath(`/ticker/${t}/`)}`}
+                href={assetPath(`/ticker/${t}/`)}
                 className="inline-block px-2 py-1 rounded-md bg-gray-100 hover:bg-gray-200 text-sm font-medium"
               >
                 {t}
