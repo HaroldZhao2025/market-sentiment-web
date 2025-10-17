@@ -108,6 +108,22 @@ jobs:
           else
             echo "No"
           fi
+          echo "== Find first ticker with any non-zero sentiment =="
+          python - <<'PY'
+          import json, os, glob
+          base = "apps/web/public/data"
+          cand = sorted(glob.glob(os.path.join(base, "ticker", "*.json")))[:200]
+          found = False
+          for p in cand:
+              j = json.load(open(p))
+              s = [abs(float(x)) for x in j.get("sentiment", []) if x is not None]
+              if any(x > 1e-6 for x in s):
+                  print("Sample:", os.path.basename(p), "len=", len(s), "first_nonzero=", next(x for x in s if x>1e-6))
+                  found = True
+                  break
+          if not found:
+              print("No non-zero sentiment found in first 200 files.")
+          fi
           echo "== Inspect AAPL sample =="
           AAPL_JSON="apps/web/public/data/ticker/AAPL.json"
           if [ -f "$AAPL_JSON" ]; then
