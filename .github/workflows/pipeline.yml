@@ -108,6 +108,14 @@ jobs:
           else
             echo "No"
           fi
+          echo "== Inspect AAPL sample =="
+          if [ -f apps/web/public/data/ticker/AAPL.json ]; then
+            echo "First 1, last 1 sentiment points for AAPL:"
+            jq '{len: (.S // .sentiment // [] | length), first: ((.S // .sentiment // [])[0]), last: ((.S // .sentiment // [])[length-1])}' \
+              apps/web/public/data/ticker/AAPL.json || true
+          else
+            echo "AAPL.json missing"
+          fi
 
       - name: Setup Node
         uses: actions/setup-node@v4
