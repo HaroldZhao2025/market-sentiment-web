@@ -1,47 +1,64 @@
 // apps/web/app/earnings/[symbol]/page.tsx
-import { listTickers, loadTicker } from "../../../lib/loaders";
-import { assetPath } from "../../../lib/paths";
+import fs from "node:fs/promises";
+import path from "node:path";
 
-export const dynamicParams = true;
+export const dynamic = "error";
+export const dynamicParams = false;
+export const revalidate = false;
 
-export async function generateStaticParams() {
-  const tickers = listTickers();
-  return tickers.map((t) => ({ symbol: t }));
+type EarnDoc = { ts: string; title: string; url: string; S: number };
+
+async function loadTickers(): Promise<string[]> {
+  try {
+    const p = path.join(process.cwd(), "public", "data", "_tickers.json");
+    const raw = await fs.readFile(p, "utf8");
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
 }
 
-export default function EarningsPage({ params }: { params: { symbol: string } }) {
-  const symbol = (params.symbol || "").toUpperCase();
-  const data = loadTicker(symbol); // reuse ticker json for now; shows earnings-doc news if present
+async function loadEarnings(sym: string): Promise<EarnDoc[]> {
+  try {
+    const p = path.join(process.cwd(), "public", "data", "earnings", `${sym}.json`);
+    const raw = await fs.readFile(p, "utf8");
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
 
-  const earningsNews = data.news.filter((n) =>
-    /earnings|transcript|remarks|prepared/i.test(n.title || "")
-  );
+export async function generateStaticParams() {
+  const list = await loadTickers();
+  return list.map((symbol) => ({ symbol }));
+}
+
+export default async function EarningsPage({ params }: { params: { symbol: string } }) {
+  const { symbol } = params;
+  const docs = await loadEarnings(symbol);
 
   return (
-    <main className="max-w-5xl mx-auto p-6">
-      <h1 className="text-xl font-semibold mb-4">{symbol} — Earnings</h1>
-
-      {earningsNews.length === 0 ? (
-        <p className="text-sm text-gray-500">No earnings documents captured for this window.</p>
+    <main className="mx-auto max-w-5xl p-6">
+      <h1 className="text-2xl font-bold mb-4">Earnings docs: {symbol}</h1>
+      {docs.length === 0 ? (
+        <p className="text-sm text-gray-500">No earnings/transcripts detected.</p>
       ) : (
         <ul className="space-y-2">
-          {earningsNews.map((n, idx) => (
-            <li key={idx} className="border rounded p-3">
-              <div className="text-sm text-gray-500">{new Date(n.ts).toLocaleString()}</div>
-              <a href={n.url} target="_blank" rel="noreferrer" className="font-medium underline">
-                {n.title}
-              </a>
-              <div className="text-sm text-gray-600">Sentiment: {n.s.toFixed(3)} {n.source ? ` • ${n.source}` : ""}</div>
+          {docs.slice(0, 15).map((d, i) => (
+            <li key={i} className="rounded-xl border p-3 bg-white">
+              <div className="text-sm text-gray-500">{d.ts}</div>
+              <div className="font-medium">
+                <a href={d.url} target="_blank" rel="noreferrer" className="underline">
+                  {d.title}
+                </a>
+              </div>
+              <div className="text-sm">S (FinBERT): {Number(d.S).toFixed(3)}</div>
             </li>
           ))}
         </ul>
       )}
-
-      <div className="mt-8">
-        <a className="underline text-blue-600" href={assetPath("")}>
-          ← Back
-        </a>
-      </div>
     </main>
   );
 }
