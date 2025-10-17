@@ -1,4 +1,3 @@
-// apps/web/app/ticker/[symbol]/page.tsx
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import TickerClient from "./TickerClient";
@@ -12,6 +11,7 @@ export async function generateStaticParams() {
     const arr = JSON.parse(buf) as string[];
     return (arr || []).map((t) => ({ symbol: t }));
   } catch {
+    // fall back – at least build one page
     return [{ symbol: "AAPL" }];
   }
 }
