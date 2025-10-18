@@ -1,151 +1,192 @@
 # src/market_sentiment/aggregate.py
 from __future__ import annotations
+
+from typing import Iterable, Optional, Tuple
 import pandas as pd
 
-# ---------- Prices ----------
 
-def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
-    """
-    Expect columns: date (tz-naive or tz-aware), ticker, open, close
-    Output adds:
-      ret_oc_1d: close/open - 1 (same day)
-      ret_cc_1d: close(t+1)/close(t) - 1 (next-day close-to-close, aligned to t)
-    """
-    df = prices.copy()
-    # normalize dates to tz-naive (UTC date)
-    df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce").dt.tz_convert("UTC").dt.tz_localize(None)
-    df = df.sort_values(["ticker", "date"]).reset_index(drop=True)
+# --------------------------
+# Internal helpers
+# --------------------------
 
-    # same-day open→close
-    df["ret_oc_1d"] = (df["close"] / df["open"]) - 1.0
+def _as_series(x) -> pd.Series:
+    """Ensure x is a Series for vectorized ops."""
+    if isinstance(x, pd.Series):
+        return x
+    if isinstance(x, pd.DatetimeIndex):
+        return pd.Series(x)
+    return pd.Series(x)
 
-    # next-day close/close aligned to day t
-    df["ret_cc_1d"] = (
-        df.groupby("ticker", group_keys=False)["close"].apply(lambda s: s.pct_change().shift(-1))
-    )
-    return df
-
-# ---------- Sentiment aggregation ----------
 
 def _effective_date(ts, cutoff_minutes: int = 5) -> pd.Series:
     """
-    Map timestamps to effective trading dates (US/Eastern), applying a cutoff.
-
-    Always returns a pandas Series of tz-naive dates (YYYY-MM-DD).
-    Handles input as Series, DatetimeIndex, list/array, etc., without losing index alignment.
+    Map UTC timestamps to an *effective* New York date with a small cutoff.
+      1) Coerce to tz-aware UTC
+      2) Convert to America/New_York
+      3) Subtract cutoff minutes
+      4) Normalize to date, drop tz
+    Returns tz-naive datetime64[ns].
     """
-    # Convert to tz-aware UTC
-    ts_utc = pd.to_datetime(ts, utc=True, errors="coerce")
+    s = pd.to_datetime(_as_series(ts), utc=True, errors="coerce")
+    # If any tz-naive slipped in, localize to UTC
+    if getattr(s.dt, "tz", None) is None:
+        s = s.dt.tz_localize("UTC")
 
-    # Ensure we work with a Series and preserve the original index when possible
-    idx = getattr(ts, "index", None)
-    if isinstance(ts_utc, pd.Series):
-        s = ts_utc
-    else:
-        s = pd.Series(ts_utc, index=idx)
+    local = s.dt.tz_convert("America/New_York")
+    eff_local = (local - pd.to_timedelta(cutoff_minutes, unit="m")).dt.normalize()
+    # Return tz-naive datetime64[ns] dates
+    return eff_local.dt.tz_localize(None)
 
-    # Convert to US/Eastern using Series .dt accessor
-    et = s.dt.tz_convert("America/New_York")
 
-    # Midnight ET of each day
-    midnight = et.dt.normalize()
+def _ensure_date_dtype(df: pd.DataFrame, col: str = "date") -> pd.DataFrame:
+    """
+    Force df[col] to tz-naive datetime64[ns] normalized to midnight.
+    Works if df[col] is already a datetime, string, or object.
+    """
+    if col not in df.columns:
+        return df
+    d = pd.to_datetime(df[col], utc=False, errors="coerce")
+    # If still tz-aware, drop tz
+    try:
+        d = d.dt.tz_localize(None)
+    except Exception:
+        # d might already be tz-naive
+        pass
+    df[col] = d.dt.normalize()
+    return df
 
-    # If within the last 'cutoff_minutes' of the day, push to the next day
-    too_late = (midnight + pd.Timedelta(days=1) - et) <= pd.Timedelta(minutes=cutoff_minutes)
-    eff = et.where(~too_late, et + pd.Timedelta(days=1))
 
-    # Return tz-naive normalized date
-    out = eff.dt.normalize().dt.tz_localize(None)
-    return out
+# --------------------------
+# Public helpers used by CLI
+# --------------------------
 
 def daily_sentiment_from_rows(
     rows: pd.DataFrame,
-    kind: str,  # "news" or "earn"
+    kind: str,
     cutoff_minutes: int = 5,
 ) -> pd.DataFrame:
     """
-    Input rows columns: ['ticker','ts','S'] (+ any)
+    Aggregate raw rows -> daily per-ticker sentiment.
+
+    Input columns expected:
+      - ticker (str)
+      - ts (UTC timestamps or parseable)
+      - S (float sentiment per item)
+
     Output columns:
-      date (tz-naive), ticker, S_news/S_earn, news_count/earn_count
+      - date (tz-naive datetime64[ns])
+      - ticker
+      - S   (daily mean sentiment for the kind)
     """
+    if rows is None or rows.empty:
+        return pd.DataFrame(columns=["date", "ticker", "S"])
+
     required = {"ticker", "ts", "S"}
-    have = set(rows.columns)
-    if not required.issubset(have):
-        raise KeyError(f"{kind} rows must have columns: ticker, ts, S.")
+    missing = required - set(rows.columns)
+    if missing:
+        raise KeyError(f"{kind} rows must have columns: ticker, ts, S. Missing: {sorted(missing)}")
 
-    d = rows[["ticker", "ts", "S"]].copy()
-    d["date"] = _effective_date(d["ts"], cutoff_minutes=cutoff_minutes)
-    d = d.dropna(subset=["date"])
+    df = rows.copy()
 
-    # average S by (ticker, date); also count items per day
-    g = (
-        d.groupby(["ticker", "date"], as_index=False)
-         .agg(S_mean=("S", "mean"), count=("S", "size"))
+    # Coerce S to float; drop invalid
+    df["S"] = pd.to_numeric(df["S"], errors="coerce")
+    df = df.dropna(subset=["S"])
+
+    # Effective New York date
+    df["date"] = _effective_date(df["ts"], cutoff_minutes=cutoff_minutes)
+
+    # Keep only necessary columns and drop NA dates
+    df = df.dropna(subset=["date"])[["date", "ticker", "S"]]
+
+    # Daily aggregation per ticker (mean)
+    def one_day(g: pd.DataFrame) -> pd.DataFrame:
+        return pd.DataFrame({
+            "date": [g["date"].iloc[0]],
+            "ticker": [g["ticker"].iloc[0]],
+            "S": [float(g["S"].mean())],
+        })
+
+    daily = (
+        df.groupby(["date", "ticker"], as_index=False)
+          .apply(one_day)
+          .reset_index(drop=True)
     )
 
-    if kind == "news":
-        g = g.rename(columns={"S_mean": "S_news", "count": "news_count"})
-        return g[["date", "ticker", "S_news", "news_count"]]
-    else:
-        g = g.rename(columns={"S_mean": "S_earn", "count": "earn_count"})
-        return g[["date", "ticker", "S_earn", "earn_count"]]
+    # Ensure consistent date dtype
+    daily = _ensure_date_dtype(daily, "date")
+
+    return daily[["date", "ticker", "S"]]
+
 
 def join_and_fill_daily(d_news: pd.DataFrame, d_earn: pd.DataFrame) -> pd.DataFrame:
     """
-    Merge daily news/earn sentiment; fill missing zeros and compute combined S.
-    Output columns:
-      date, ticker, S_news, S_earn, news_count, earn_count, S
+    Outer-join daily news and earnings sentiment on (date, ticker),
+    coerce dates to a consistent dtype, and fill missing with 0.0.
+
+    Returns columns:
+      - date, ticker, S_news, S_earn, S  (where S = S_news + S_earn)
     """
+    dn = (d_news or pd.DataFrame(columns=["date", "ticker", "S"])).copy()
+    de = (d_earn or pd.DataFrame(columns=["date", "ticker", "S"])).copy()
+
+    dn = _ensure_date_dtype(dn, "date")
+    de = _ensure_date_dtype(de, "date")
+
+    if "S" in dn.columns:
+        dn = dn.rename(columns={"S": "S_news"})
+    else:
+        dn["S_news"] = 0.0
+
+    if "S" in de.columns:
+        de = de.rename(columns={"S": "S_earn"})
+    else:
+        de["S_earn"] = 0.0
+
     cols = ["date", "ticker"]
-    # both inputs have disjoint S_* column names, so no suffix collision
-    df = pd.merge(d_news, d_earn, on=cols, how="outer")
+    # Guarantee key columns exist even if empty
+    for df in (dn, de):
+        for c in cols:
+            if c not in df.columns:
+                df[c] = pd.NaT if c == "date" else ""
 
-    for c, default in [
-        ("S_news", 0.0), ("S_earn", 0.0),
-        ("news_count", 0), ("earn_count", 0),
-    ]:
-        if c not in df.columns:
-            df[c] = default
-        df[c] = df[c].fillna(default)
+    # Merge with consistent dtypes
+    out = pd.merge(dn[cols + ["S_news"]], de[cols + ["S_earn"]], on=cols, how="outer")
 
-    # Weighted by counts (if both zero, S=0)
-    total = df["news_count"].astype(float) + df["earn_count"].astype(float)
-    n = df["S_news"].astype(float) * df["news_count"].astype(float)
-    e = df["S_earn"].astype(float) * df["earn_count"].astype(float)
-    df["S"] = (n + e) / total.replace(0.0, pd.NA)
-    df["S"] = df["S"].fillna(0.0)
+    # Fill missing with zeros
+    for c in ("S_news", "S_earn"):
+        if c not in out.columns:
+            out[c] = 0.0
+        out[c] = pd.to_numeric(out[c], errors="coerce").fillna(0.0)
 
-    # tidy
-    df = df.sort_values(["date", "ticker"]).reset_index(drop=True)
-    return df[["date","ticker","S","S_news","S_earn","news_count","earn_count"]]
+    # Re-coerce date dtype after merge (can regress to object)
+    out = _ensure_date_dtype(out, "date")
 
-# ---------- Portfolio ----------
+    out["S"] = out["S_news"] + out["S_earn"]
+    out = out.sort_values(["ticker", "date"]).reset_index(drop=True)
+    return out[["date", "ticker", "S_news", "S_earn", "S"]]
 
-def build_portfolio_timeseries(panel: pd.DataFrame, top_q: float = 0.9, bot_q: float = 0.1) -> pd.DataFrame:
+
+def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
     """
-    panel columns expected: date, ticker, S, ret_cc_1d
-    Returns DataFrame: date, long, short, long_short  (daily returns)
+    Given daily prices [date, ticker, open, close], compute forward returns:
+      - ret_oc_1d: (close/open) - 1 for same day
+      - ret_cc_1d: next_day_close / close - 1
+
+    Returns the same frame with added columns.
     """
-    df = panel[["date", "ticker", "S", "ret_cc_1d"]].copy()
-    if df.empty:
-        return pd.DataFrame(columns=["date","long","short","long_short"])
+    if prices is None or prices.empty:
+        return pd.DataFrame(columns=["date", "ticker", "open", "close", "ret_oc_1d", "ret_cc_1d"])
 
-    df["date"] = pd.to_datetime(df["date"]).dt.normalize()
-    df = df.dropna(subset=["S", "ret_cc_1d"])
-    if df.empty:
-        return pd.DataFrame(columns=["date","long","short","long_short"])
+    df = prices.copy()
+    df = _ensure_date_dtype(df, "date")
 
-    def one_day(g: pd.DataFrame) -> pd.Series:
-        if len(g) < 20:  # avoid tiny cross-sections
-            return pd.Series({"long": 0.0, "short": 0.0})
-        q_hi = g["S"].quantile(top_q)
-        q_lo = g["S"].quantile(bot_q)
-        long = g.loc[g["S"] >= q_hi, "ret_cc_1d"].mean()
-        short = -g.loc[g["S"] <= q_lo, "ret_cc_1d"].mean()
-        long = float(0.0 if pd.isna(long) else long)
-        short = float(0.0 if pd.isna(short) else short)
-        return pd.Series({"long": long, "short": short})
+    # Basic O->C same-day
+    df["ret_oc_1d"] = pd.to_numeric(df["close"], errors="coerce") / pd.to_numeric(df["open"], errors="coerce") - 1.0
 
-    daily = df.groupby("date", as_index=False).apply(one_day).reset_index(drop=True)
-    daily["long_short"] = daily["long"] + daily["short"]
-    return daily[["date", "long", "short", "long_short"]].sort_values("date").reset_index(drop=True)
+    # Next-day close / close
+    df = df.sort_values(["ticker", "date"])
+    df["next_close"] = df.groupby("ticker")["close"].shift(-1)
+    df["ret_cc_1d"] = (pd.to_numeric(df["next_close"], errors="coerce") / pd.to_numeric(df["close"], errors="coerce")) - 1.0
+    df = df.drop(columns=["next_close"])
+
+    return df
