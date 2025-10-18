@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "Run mode"
+        description: "Run mode: sample (AAPL only) or full (all tickers)"
         required: true
         default: "sample"
         type: choice
@@ -31,7 +31,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,20 +48,20 @@ jobs:
           restore-keys: |
             pip-${{ runner.os }}-
 
-      - name: Install Python deps
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip wheel setuptools
           # Torch CPU
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           # Project deps
           pip install --no-cache-dir -r requirements.txt
-          # Ensure free-news deps exist
+          # Free-news deps
           pip install --no-cache-dir feedparser requests yfinance
 
-      - name: Set HF cache dir
-        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> $GITHUB_ENV
+      - name: Configure HF cache directory
+        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
 
-      - name: Set dates (≈ last 365 days)
+      - name: Set date range (last 365 days)
         run: |
           python - <<'PY'
           import os
@@ -74,21 +73,19 @@ jobs:
           print("START", start, "END", end)
           PY
 
-      - name: Select mode (sample/full)
-        id: select_mode
+      - name: Select mode and universe
         run: |
-          if [ "${{ inputs.mode }}" = "sample" ]; then
-            echo "MODE=sample" >> $GITHUB_ENV
-            echo "TICKER_CSV=data/sample_one.csv" >> $GITHUB_ENV
-            printf "symbol\nAAPL\n" > data/sample_one.csv
+          if [ "${{ inputs.mode }}" = "full" ]; then
+            echo "MODE=full" >> "$GITHUB_ENV"
+            echo "TICKER_CSV=data/sp500.csv" >> "$GITHUB_ENV"
           else
-            echo "MODE=full" >> $GITHUB_ENV
-            echo "TICKER_CSV=data/sp500.csv" >> $GITHUB_ENV
+            echo "MODE=sample" >> "$GITHUB_ENV"
+            echo "TICKER_CSV=data/sample_one.csv" >> "$GITHUB_ENV"
+            printf "symbol\nAAPL\n" > data/sample_one.csv
           fi
-          echo "Mode: ${{ inputs.mode }}  Universe: $TICKER_CSV"
+          echo "Mode: ${MODE:-sample} | Universe: ${TICKER_CSV}"
 
-      # --- SMOKE TEST: verify news fetching & FinBERT scoring ---
-      - name: News / FinBERT smoke test (AAPL)
+      - name: News and FinBERT smoke test (AAPL)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
@@ -104,14 +101,14 @@ jobs:
           START="${{ env.START }}"
           END="${{ env.END }}"
 
-          print("== Smoke: yfinance AAPL raw news length ==")
+          print("== yfinance AAPL raw news count ==")
           try:
               raw = yf.Ticker("AAPL").news or []
               print(len(raw))
           except Exception as e:
-              print("yf error:", e)
+              print("yfinance error:", e)
 
-          print("== Smoke: multi-source fetch_news(AAPL) ==")
+          print("== Multi-source fetch_news(AAPL) count ==")
           try:
               df = fetch_news("AAPL", START, END, company="Apple Inc.", max_per_provider=30, max_workers=6)
               print("rows:", len(df))
@@ -126,19 +123,19 @@ jobs:
               try:
                   fb = FinBERT()
                   try:
-                      S = fb.score(texts, batch=8)
+                      S = fb.score(texts, batch=8)   # if supported
                   except TypeError:
-                      S = fb.score(texts)
+                      S = fb.score(texts)            # fallback
                   s = pd.Series(S).astype(float)
                   print("FinBERT S sample:", s.round(4).tolist())
-                  print("S mean:", float(s.mean()), "nonzero:", int((s.abs()>1e-12).sum()))
+                  print("S mean:", float(s.mean()), "nonzero:", int((s.abs() > 1e-12).sum()))
               except Exception as e:
                   print("FinBERT error:", e)
           else:
               print("Skip FinBERT (no texts or FinBERT missing).")
           PY
 
-      - name: Build JSON (prices + news + earnings)
+      - name: Build JSON data (prices + news + earnings)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
@@ -151,7 +148,7 @@ jobs:
             --cutoff-minutes 5 \
             --max-workers 8
 
-      - name: Inspect output (AAPL sample)
+      - name: Inspect generated data (AAPL)
         run: |
           set -e
           echo "== List data dir =="
@@ -159,27 +156,27 @@ jobs:
           python - <<'PY'
           import json, os
           base="apps/web/public/data"
-          aapl=os.path.join(base,"ticker","AAPL.json")
-          if os.path.exists(aapl):
-              obj=json.load(open(aapl))
+          j=os.path.join(base,"ticker","AAPL.json")
+          if os.path.exists(j):
+              obj=json.load(open(j))
               S=obj.get("S") or obj.get("sentiment") or []
               nz=sum(1 for x in S if abs(x or 0)>1e-12)
-              print("AAPL sentiment sample: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
+              print("AAPL sentiment: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
               print("AAPL news items:", len(obj.get("news") or []))
           else:
-              print("AAPL.json not found.")
+              print("AAPL.json not found")
           PY
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install web deps
+      - name: Install web dependencies
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site (Next.js output: export)
+      - name: Build static site
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -196,10 +193,10 @@ jobs:
           echo "==== After build (ls) ===="
           ls -lah
           if [ ! -d out ]; then
-            echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
+            echo "No 'out/' after build; synthesizing from '.next'..."
             mkdir -p out
             rsync -a .next/static out/_next/static || true
-            # try to preserve key app routes
+            # copy app route HTML where available
             find .next/server/app -maxdepth 3 -name 'index.html' -print0 | while IFS= read -r -d '' f; do
               d="${f%.html}"
               d="${d#.next/server/app}"
@@ -207,13 +204,10 @@ jobs:
               cp "$f" "out/$d/index.html" || true
             done
             # ship data
-            cp -r public/data out/data || true
-            cp -r public/earnings out/earnings || true
-            cp -r public/ticker out/ticker || true
-            cp -r public/portfolio out/portfolio || true
-            # root index as fallback
+            mkdir -p out/data
+            cp -r public/data/* out/data/ || true
+            # fallback root index
             if [ ! -f out/index.html ] && [ -f .next/server/app/index.html ]; then
-              mkdir -p out
               cp .next/server/app/index.html out/index.html || true
             fi
           fi
@@ -235,5 +229,4 @@ jobs:
       name: github-pages
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
