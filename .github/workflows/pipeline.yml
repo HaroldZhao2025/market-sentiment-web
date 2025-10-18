@@ -3,35 +3,16 @@ name: Build Data & Deploy Site
 on:
   push:
     branches: ["main"]
-  schedule:
-    - cron: "0 12 * * 1"
   workflow_dispatch:
     inputs:
-      sample_mode:
-        description: "Build sample only (AAPL)?"
-        type: boolean
-        default: true
+      mode:
+        description: "Run mode"
         required: true
-      sample_tickers:
-        description: "Comma-separated tickers for sample mode"
-        type: string
-        default: "AAPL"
-        required: false
-      days:
-        description: "How many days of history"
-        type: number
-        default: 365
-        required: false
-      max_workers:
-        description: "Max workers for parallel fetch"
-        type: number
-        default: 8
-        required: false
-      batch:
-        description: "FinBERT scoring batch size"
-        type: number
-        default: 16
-        required: false
+        default: "sample"
+        type: choice
+        options: ["sample", "full"]
+  schedule:
+    - cron: "0 12 * * 1"
 
 permissions:
   contents: read
@@ -42,14 +23,14 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  PYTHONPATH: src
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: src
-      HF_HUB_DISABLE_TELEMETRY: "1"
-      # site under /market-sentiment-web on GitHub Pages
-      NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
 
     steps:
       - name: Checkout
@@ -75,104 +56,112 @@ jobs:
           pip install --no-cache-dir -r requirements.txt
           pip check
 
-      - name: Set Hugging Face cache dir
-        run: echo "HF_HOME=${{ runner.temp }}/hf-home" >> $GITHUB_ENV
+      - name: Set HF cache dir
+        run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> $GITHUB_ENV
 
-      - name: Resolve inputs (sample/full) and dates
-        shell: bash
+      - name: Set dates (≈ last 250 trading days)
         run: |
-          # Normalize workflow_dispatch inputs with safe defaults for push/schedule
-          SAMPLE_MODE="${{ github.event.inputs.sample_mode || 'false' }}"
-          SAMPLE_TICKERS="${{ github.event.inputs.sample_tickers || 'AAPL' }}"
-          DAYS="${{ github.event.inputs.days || '365' }}"
-          MAX_WORKERS="${{ github.event.inputs.max_workers || '8' }}"
-          BATCH="${{ github.event.inputs.batch || '16' }}"
-
-          # Compute START/END in UTC
           python - <<'PY'
           import os
           from datetime import datetime, timedelta, timezone
-          days = int(os.environ.get("DAYS","365"))
-          end  = datetime.now(timezone.utc)
-          start = end - timedelta(days=days)
-          with open(os.environ["GITHUB_ENV"], "a") as f:
-              f.write(f"START={start.strftime('%Y-%m-%d')}\n")
-              f.write(f"END={end.strftime('%Y-%m-%d')}\n")
-          print("START", start.strftime('%Y-%m-%d'), "END", end.strftime('%Y-%m-%d'))
+          start=(datetime.now(timezone.utc)-timedelta(days=365)).strftime('%Y-%m-%d')
+          end=datetime.now(timezone.utc).strftime('%Y-%m-%d')
+          with open(os.environ['GITHUB_ENV'],'a') as f:
+              f.write(f"START={start}\nEND={end}\n")
+          print("START", start, "END", end)
           PY
 
-          # Persist to env for later steps
-          {
-            echo "SAMPLE_MODE=${SAMPLE_MODE}"
-            echo "SAMPLE_TICKERS=${SAMPLE_TICKERS}"
-            echo "DAYS=${DAYS}"
-            echo "MAX_WORKERS=${MAX_WORKERS}"
-            echo "BATCH=${BATCH}"
-          } >> "$GITHUB_ENV"
+      - name: Build S&P 500 universe
+        run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
 
-      - name: Build universe (sample or full)
-        shell: bash
+      - name: Select mode (sample/full)
+        id: sel
         run: |
-          mkdir -p data
-          if [ "${SAMPLE_MODE}" = "true" ]; then
-            echo "ticker" > data/universe.csv
-            # Split comma list to lines
-            echo "${SAMPLE_TICKERS}" | tr ',' '\n' | sed 's/ //g' | sed '/^$/d' >> data/universe.csv
-            echo "[Sample mode] Universe:"
-            cat data/universe.csv
+          if [ "${{ inputs.mode }}" = "sample" ]; then
+            echo "MODE=sample" >> $GITHUB_ENV
+            echo "TICKER_CSV=data/sample_one.csv" >> $GITHUB_ENV
+            printf "symbol\nAAPL\n" > data/sample_one.csv
           else
-            echo "[Full mode] Building S&P 500 universe..."
-            python -m market_sentiment.cli.build_universe --out data/universe.csv
-            head -n 10 data/universe.csv
+            echo "MODE=full" >> $GITHUB_ENV
+            echo "TICKER_CSV=data/sp500.csv" >> $GITHUB_ENV
           fi
+          echo "Mode: ${{ inputs.mode }}  Universe: $TICKER_CSV"
 
-      - name: Build JSON (prices, news, earnings, sentiment)
+      # 🔎 SMOKE TEST: is news fetch working? is FinBERT scoring non-zero?
+      - name: News / FinBERT smoke test (AAPL)
         env:
           HF_HOME: ${{ env.HF_HOME }}
-          # RSS timeout knobs (seconds) to keep providers snappy
-          NEWS_CONNECT_TIMEOUT: "3.5"
-          NEWS_READ_TIMEOUT: "6.0"
-          NEWS_ITEMS_PER_SOURCE: "60"
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          import yfinance as yf
+          from market_sentiment.news import fetch_news
+          try:
+              from market_sentiment.finbert import FinBERT
+          except Exception:
+              FinBERT = None
+
+          START="${{ env.START }}"
+          END="${{ env.END }}"
+
+          print("== Smoke: yfinance AAPL raw news length ==")
+          try:
+              print(len(yf.Ticker("AAPL").news or []))
+          except Exception as e:
+              print("yf error:", e)
+
+          print("== Smoke: multi-source fetch_news(AAPL) ==")
+          df = fetch_news("AAPL", START, END, company="Apple Inc.", max_per_provider=30, max_workers=6)
+          print("rows:", len(df))
+          print(df[["ts","title"]].tail(3).to_string(index=False))
+
+          if len(df) > 0 and FinBERT is not None:
+              texts = df["text"].fillna(df["title"]).astype(str).tolist()[:8]
+              try:
+                  fb = FinBERT()
+                  try:
+                      S = fb.score(texts, batch=8)
+                  except TypeError:
+                      S = fb.score(texts)
+                  s = pd.Series(S).astype(float)
+                  print("FinBERT S sample:", s.round(4).tolist())
+                  print("S mean:", float(s.mean()), "nonzero:", int((s.abs()>1e-12).sum()))
+              except Exception as e:
+                  print("FinBERT error:", e)
+          else:
+              print("Skip FinBERT (no texts or FinBERT missing).")
+          PY
+
+      - name: Build JSON (FinBERT + news + earnings)
+        env:
+          HF_HOME: ${{ env.HF_HOME }}
         run: |
           set -euxo pipefail
-          echo "Build JSON for $(($(wc -l < data/universe.csv)-1)) tickers | batch=${BATCH} cutoff_min=5 max_workers=${MAX_WORKERS}"
           python -m market_sentiment.cli.build_json \
-            --universe data/universe.csv \
-            --start "$START" \
-            --end "$END" \
+            --universe "$TICKER_CSV" \
+            --start "$START" --end "$END" \
             --out apps/web/public/data \
-            --batch "${BATCH}" \
+            --batch 16 \
             --cutoff-minutes 5 \
-            --max-workers "${MAX_WORKERS}"
+            --max-workers 8
 
-      - name: Inspect output (counts + AAPL/sample peek)
-        shell: bash
+      - name: Inspect output (AAPL sample)
         run: |
+          set -e
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
-          import json, os, glob
-          base = "apps/web/public/data"
-          with open(os.path.join(base, "_tickers.json")) as f:
-              tickers = json.load(f)
-          print("Tickers listed:", len(tickers))
-
-          # portfolio
-          pf = json.load(open(os.path.join(base, "portfolio.json")))
-          print("Portfolio present:", "dates" in pf)
-          if "dates" in pf:
-              print("Portfolio dates:", len(pf["dates"]))
-
-          # sample ticker to preview
-          prefer = os.environ.get("SAMPLE_TICKERS","AAPL").split(",")[0].strip() or "AAPL"
-          p = os.path.join(base, "ticker", prefer + ".json")
-          if os.path.exists(p):
-              t = json.load(open(p))
-              s = t.get("sentiment", [])
-              nz = sum(1 for x in s if abs(x) > 1e-9)
-              print(f"{prefer} sentiment sample: len={len(s)}, non_zero={nz}, first={s[0] if s else None}, last={s[-1] if s else None}")
+          import json, os
+          base="apps/web/public/data"
+          aapl=os.path.join(base,"ticker","AAPL.json")
+          if os.path.exists(aapl):
+              obj=json.load(open(aapl))
+              S=obj.get("S") or obj.get("sentiment") or []
+              nz=sum(1 for x in S if abs(x or 0)>1e-12)
+              print("AAPL sentiment sample: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
+              print("AAPL news items:", len(obj.get("news") or []))
           else:
-              print("No JSON for sample ticker", prefer)
+              print("AAPL.json not found.")
           PY
 
       - name: Setup Node
@@ -184,7 +173,7 @@ jobs:
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site (Next.js export)
+      - name: Build static site (Next.js output: export)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -200,26 +189,18 @@ jobs:
           npm run build
           echo "==== After build (ls) ===="
           ls -lah
-          # Guard for 'out/' (Next output: 'export' should write it)
           if [ ! -d out ]; then
             echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
             mkdir -p out
-            # copy public assets (includes /data)
-            cp -r public/* out/ 2>/dev/null || true
-            # copy next static
-            mkdir -p out/_next
-            cp -r .next/static out/_next/static 2>/dev/null || true
-            # copy pre-rendered pages (html/js/rsc) from server/app
-            rsync -a --prune-empty-dirs --include '*/' --include '*.html' --include '*.rsc' --include '*.js' --exclude '*' .next/server/app/ out/ || true
+            rsync -a .next/static out/_next/static || true
+            find .next/server/app -maxdepth 2 -name 'index.html' -exec bash -lc 'd=${1%.html}; d=${d#.next/server/app}; mkdir -p "out/$d"; cp "$1" "out/$d/index.html"' _ {} \; || true
+            cp -r public/data out/data || true
+            cp -r public/earnings out/earnings || true
+            cp -r public/ticker out/ticker || true
+            cp -r public/portfolio out/portfolio || true
           fi
           echo "==== Final out/ listing ===="
           ls -lah out
-          # If sample mode, assert AAPL page exists
-          if [ "${SAMPLE_MODE}" = "true" ]; then
-            test -f out/ticker/AAPL/index.html || { echo "::error::Missing AAPL page at out/ticker/AAPL/index.html"; exit 1; }
-            echo "AAPL page present. Previewing first lines:"
-            head -n 20 out/ticker/AAPL/index.html || true
-          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
