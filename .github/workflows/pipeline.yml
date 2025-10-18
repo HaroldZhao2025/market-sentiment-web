@@ -75,6 +75,7 @@ jobs:
 
       - name: Select mode and universe
         run: |
+          mkdir -p data
           if [ "${{ inputs.mode }}" = "full" ]; then
             echo "MODE=full" >> "$GITHUB_ENV"
             echo "TICKER_CSV=data/sp500.csv" >> "$GITHUB_ENV"
@@ -110,7 +111,7 @@ jobs:
 
           print("== Multi-source fetch_news(AAPL) count ==")
           try:
-              df = fetch_news("AAPL", START, END, company="Apple Inc.", max_per_provider=30, max_workers=6)
+              df = fetch_news("AAPL", START, END, company="Apple Inc.", max_per_provider=30)
               print("rows:", len(df))
               if len(df):
                   print(df[["ts","title"]].tail(3).to_string(index=False))
