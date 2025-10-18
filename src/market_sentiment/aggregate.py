@@ -1,116 +1,95 @@
 # src/market_sentiment/aggregate.py
 from __future__ import annotations
+
 import pandas as pd
+import numpy as np
 
-TZ_NY = "America/New_York"
+# ---------- date helpers ----------
 
-def _to_utc(series) -> pd.DatetimeIndex:
-    """Coerce to UTC-aware DateTimeIndex."""
-    return pd.to_datetime(series, utc=True, errors="coerce")
+def _ensure_date_dtype(df: pd.DataFrame, col: str = "date") -> pd.DataFrame:
+    """Ensure a tz-naive daily datetime64[ns] column."""
+    out = df.copy()
+    if col not in out.columns:
+        raise KeyError(f"Missing '{col}' in DataFrame.")
 
-def _effective_date(ts_like, cutoff_minutes: int = 5) -> pd.Series:
+    d = pd.to_datetime(out[col], errors="coerce", utc=True)
+    # normalize to midnight UTC, then drop tz (daily index)
+    d = d.dt.normalize().dt.tz_localize(None)
+    out[col] = d
+    return out
+
+
+def _effective_date(ts: pd.Series | list | pd.DatetimeIndex, cutoff_minutes: int = 5) -> pd.Series:
+    """Shift timestamps by cutoff (NY time) then take the trading day (NY)."""
+    s = pd.to_datetime(ts, errors="coerce", utc=True)
+    if not isinstance(s, pd.Series):
+        s = pd.Series(s, copy=False)
+    et = s.dt.tz_convert("America/New_York")
+    eff = (et - pd.Timedelta(minutes=cutoff_minutes)).dt.normalize().dt.tz_localize(None)
+    return eff
+
+# ---------- sentiment aggregation ----------
+
+def daily_sentiment_from_rows(rows: pd.DataFrame, kind: str, cutoff_minutes: int = 5) -> pd.DataFrame:
     """
-    Convert timestamps to an 'effective' Eastern DATE (naive midnight).
-    We first convert to America/New_York, subtract a small cutoff to push
-    just-after-midnight items back to the previous calendar day, normalize(),
-    then drop tz (naive date).
+    Aggregate raw rows (ticker, ts, S) into daily NY dates.
+    kind in {'news','earn'} -> output col 'S_NEWS' or 'S_EARN'
     """
-    s = _to_utc(ts_like)
-    et = s.tz_convert(TZ_NY) - pd.to_timedelta(cutoff_minutes, unit="m")
-    day = et.normalize()
-    return day.tz_localize(None)
+    if rows is None or rows.empty:
+        return pd.DataFrame(columns=["date", "ticker", "S_NEWS" if kind == "news" else "S_EARN"])
 
-def daily_sentiment_from_rows(rows: pd.DataFrame,
-                              kind: str = "news",
-                              cutoff_minutes: int = 5) -> pd.DataFrame:
-    """
-    Input rows must have: ['ticker','ts','S'].
-    Returns per-(date,ticker) averages as:
-      - 'S_NEWS' when kind='news'
-      - 'S_EARN' when kind='earn'
-    """
-    col = "S_NEWS" if kind == "news" else "S_EARN"
-    if rows is None or len(rows) == 0:
-        return pd.DataFrame(columns=["date", "ticker", col])
+    req = {"ticker", "ts", "S"}
+    if not req.issubset(rows.columns):
+        raise KeyError(f"{kind} rows must have columns: ticker, ts, S.")
 
-    required = {"ticker", "ts", "S"}
-    missing = required - set(rows.columns)
-    if missing:
-        raise KeyError(f"{kind} rows must have columns: ticker, ts, S. Missing: {sorted(missing)}")
-
-    df = rows[["ticker", "ts", "S"]].copy()
+    df = rows.copy()
     df["date"] = _effective_date(df["ts"], cutoff_minutes=cutoff_minutes)
-    df = df.dropna(subset=["date"])
+    df = df.dropna(subset=["date", "ticker"])
 
-    # Stable, non-deprecated aggregation
-    out = (
+    out_col = "S_NEWS" if kind == "news" else "S_EARN"
+    daily = (
         df.groupby(["date", "ticker"], as_index=False)["S"]
-          .mean()
-          .rename(columns={"S": col})
+        .mean(numeric_only=True)
+        .rename(columns={"S": out_col})
     )
+    return _ensure_date_dtype(daily, "date")
 
-    out["date"] = pd.to_datetime(out["date"], errors="coerce")
-    out["ticker"] = out["ticker"].astype(str).str.upper()
-    return out.sort_values(["ticker", "date"]).reset_index(drop=True)
 
-def join_and_fill_daily(d_news: pd.DataFrame | None,
-                        d_earn: pd.DataFrame | None) -> pd.DataFrame:
-    """
-    Outer-join per-day sentiment from news/earnings and create a combined 'S'.
-    Ensures both 'date' columns are datetime64[ns] NAIVE and fills missing with 0.0.
-    """
-    if d_news is None or d_news.empty:
-        d_news = pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
-    if d_earn is None or d_earn.empty:
-        d_earn = pd.DataFrame(columns=["date", "ticker", "S_EARN"])
-
-    for df in (d_news, d_earn):
-        if "date" in df.columns:
-            df["date"] = pd.to_datetime(df["date"], errors="coerce")
-        if "ticker" in df.columns:
-            df["ticker"] = df["ticker"].astype(str).str.upper()
-
+def join_and_fill_daily(d_news: pd.DataFrame | None, d_earn: pd.DataFrame | None) -> pd.DataFrame:
+    """Outer-join daily sources; fill NaNs; compute total S."""
     cols = ["date", "ticker"]
-    df = pd.merge(d_news, d_earn, on=cols, how="outer")
+    dn = d_news.copy() if d_news is not None and not d_news.empty else pd.DataFrame(columns=cols + ["S_NEWS"])
+    de = d_earn.copy() if d_earn is not None and not d_earn.empty else pd.DataFrame(columns=cols + ["S_EARN"])
 
-    # Ensure the columns exist, then fill NaN with 0.0
-    for c in ("S_NEWS", "S_EARN"):
-        if c not in df.columns:
-            df[c] = 0.0
-    df[["S_NEWS", "S_EARN"]] = df[["S_NEWS", "S_EARN"]].fillna(0.0)
+    if "date" in dn.columns:
+        dn = _ensure_date_dtype(dn, "date")
+    if "date" in de.columns:
+        de = _ensure_date_dtype(de, "date")
 
-    # Combined score (simple sum; change to weighted if desired)
+    df = pd.merge(dn, de, on=cols, how="outer")
+    df["S_NEWS"] = pd.to_numeric(df.get("S_NEWS"), errors="coerce").fillna(0.0)
+    df["S_EARN"] = pd.to_numeric(df.get("S_EARN"), errors="coerce").fillna(0.0)
     df["S"] = df["S_NEWS"] + df["S_EARN"]
+    return df.sort_values(cols).reset_index(drop=True)
 
-    return df.sort_values(["ticker", "date"]).reset_index(drop=True)
+# ---------- prices / returns ----------
 
 def add_forward_returns(prices: pd.DataFrame) -> pd.DataFrame:
     """
-    Expect columns: ['date','ticker','open','close'].
-    Produces:
-      - 'ret_oc_1d' = close/open - 1 (same day)
-      - 'ret_cc_1d' = next_close/close - 1 (next trading day)
+    Require columns: date, ticker, open, close
+    Adds: ret_oc_1d (open->close same day), ret_cc_1d (close->next close)
     """
-    if prices is None or prices.empty:
-        return prices
+    req = {"date", "ticker", "open", "close"}
+    if not req.issubset(prices.columns):
+        raise KeyError("prices must have columns: date, ticker, open, close")
 
-    df = prices.copy()
-    df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    df["ticker"] = df["ticker"].astype(str).str.upper()
-    df = df.dropna(subset=["date"]).sort_values(["ticker", "date"]).reset_index(drop=True)
+    df = _ensure_date_dtype(prices, "date").sort_values(["ticker", "date"]).reset_index(drop=True)
 
-    df["ret_oc_1d"] = (df["close"] / df["open"] - 1.0).astype(float)
-    df["next_close"] = df.groupby("ticker")["close"].shift(-1)
-    df["ret_cc_1d"] = (df["next_close"] / df["close"] - 1.0).astype(float)
-    df = df.drop(columns=["next_close"])
-    return df
+    def _one(g: pd.DataFrame) -> pd.DataFrame:
+        g = g.sort_values("date").copy()
+        g["ret_oc_1d"] = (g["close"] - g["open"]) / g["open"]
+        g["ret_cc_1d"] = g["close"].shift(-1) / g["close"] - 1.0
+        return g
 
-def build_daily_sentiment(news_rows: pd.DataFrame | None,
-                          earn_rows: pd.DataFrame | None,
-                          cutoff_minutes: int = 5) -> pd.DataFrame:
-    """Helper to generate the combined daily frame in one call."""
-    dn = daily_sentiment_from_rows(news_rows if news_rows is not None else pd.DataFrame(),
-                                   "news", cutoff_minutes)
-    de = daily_sentiment_from_rows(earn_rows if earn_rows is not None else pd.DataFrame(),
-                                   "earn", cutoff_minutes)
-    return join_and_fill_daily(dn, de)
+    out = df.groupby("ticker", group_keys=False).apply(_one).reset_index(drop=True)
+    return out
