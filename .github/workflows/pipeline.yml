@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "Run mode: sample (AAPL only) or full (all tickers)"
+        description: "Run mode: sample (AAPL) or full (S&P500)"
         required: true
         default: "sample"
         type: choice
@@ -51,11 +51,8 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip wheel setuptools
-          # Torch CPU
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
-          # Project deps
           pip install --no-cache-dir -r requirements.txt
-          # Free-news deps
           pip install --no-cache-dir feedparser requests yfinance
 
       - name: Configure HF cache directory
@@ -75,6 +72,7 @@ jobs:
 
       - name: Select mode and universe
         run: |
+          set -eux
           mkdir -p data
           if [ "${{ inputs.mode }}" = "full" ]; then
             echo "MODE=full" >> "$GITHUB_ENV"
@@ -82,18 +80,21 @@ jobs:
           else
             echo "MODE=sample" >> "$GITHUB_ENV"
             echo "TICKER_CSV=data/sample_one.csv" >> "$GITHUB_ENV"
-            printf "symbol\nAAPL\n" > data/sample_one.csv
+            # IMPORTANT: header MUST be 'ticker' (not 'symbol')
+            printf "ticker\nAAPL\n" > data/sample_one.csv
           fi
           echo "Mode: ${MODE:-sample} | Universe: ${TICKER_CSV}"
 
-      - name: News and FinBERT smoke test (AAPL)
+      - name: News + FinBERT smoke test (AAPL provider breakdown)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
           python - <<'PY'
           import pandas as pd
           import yfinance as yf
-          from market_sentiment.news import fetch_news
+          from market_sentiment.news import (
+              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss, _prov_bizinsider_rss, fetch_news
+          )
           try:
               from market_sentiment.finbert import FinBERT
           except Exception:
@@ -102,41 +103,62 @@ jobs:
           START="${{ env.START }}"
           END="${{ env.END }}"
 
-          print("== yfinance AAPL raw news count ==")
+          print("== yfinance raw count ==")
           try:
               raw = yf.Ticker("AAPL").news or []
-              print(len(raw))
+              print("yfinance.Ticker('AAPL').news:", len(raw))
+              if raw:
+                  sample = raw[0]
+                  print("sample keys:", sorted(list(sample.keys())))
+                  print("sample providerPublishTime:", sample.get("providerPublishTime"))
           except Exception as e:
               print("yfinance error:", e)
 
-          print("== Multi-source fetch_news(AAPL) count ==")
+          providers = [
+              ("yfinance", _prov_yfinance),
+              ("google_rss", _prov_google_rss),
+              ("yahoo_rss", _prov_yahoo_rss),
+              ("nasdaq_rss", _prov_nasdaq_rss),
+              ("bizinsider_rss", _prov_bizinsider_rss),
+          ]
+          frames=[]
+          for name, fn in providers:
+              try:
+                  df = fn("AAPL", START, END, "Apple Inc.", 60)
+                  print(f"{name:15s} rows:", len(df))
+                  if len(df):
+                      print(df[["ts","title"]].tail(2).to_string(index=False))
+                  frames.append(df)
+              except Exception as e:
+                  print(f"{name} error:", e)
+
           try:
-              df = fetch_news("AAPL", START, END, company="Apple Inc.", max_per_provider=30)
-              print("rows:", len(df))
-              if len(df):
-                  print(df[["ts","title"]].tail(3).to_string(index=False))
+              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=60)
+              print("fetch_news rows:", len(all_df))
+              if len(all_df):
+                  print(all_df[["ts","title"]].tail(3).to_string(index=False))
           except Exception as e:
               print("fetch_news error:", e)
-              df = pd.DataFrame()
+              all_df = pd.DataFrame()
 
-          if len(df) > 0 and FinBERT is not None:
-              texts = df["text"].fillna(df["title"]).astype(str).tolist()[:8]
+          if len(all_df) and FinBERT is not None:
+              texts = all_df["text"].fillna(all_df["title"]).astype(str).tolist()[:16]
               try:
                   fb = FinBERT()
                   try:
-                      S = fb.score(texts, batch=8)   # if supported
+                      S = fb.score(texts, batch=16)
                   except TypeError:
-                      S = fb.score(texts)            # fallback
+                      S = fb.score(texts)
                   s = pd.Series(S).astype(float)
                   print("FinBERT S sample:", s.round(4).tolist())
-                  print("S mean:", float(s.mean()), "nonzero:", int((s.abs() > 1e-12).sum()))
+                  print("S mean:", float(s.mean()), "nonzero:", int((s.abs()>1e-12).sum()))
               except Exception as e:
                   print("FinBERT error:", e)
           else:
               print("Skip FinBERT (no texts or FinBERT missing).")
           PY
 
-      - name: Build JSON data (prices + news + earnings)
+      - name: Build JSON data (prices + news)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
@@ -173,11 +195,11 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install web dependencies
+      - name: Install web deps
         working-directory: apps/web
         run: npm install --no-audit --no-fund
 
-      - name: Build static site
+      - name: Build static site (export)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -197,17 +219,14 @@ jobs:
             echo "No 'out/' after build; synthesizing from '.next'..."
             mkdir -p out
             rsync -a .next/static out/_next/static || true
-            # copy app route HTML where available
             find .next/server/app -maxdepth 3 -name 'index.html' -print0 | while IFS= read -r -d '' f; do
               d="${f%.html}"
               d="${d#.next/server/app}"
               mkdir -p "out/$d"
               cp "$f" "out/$d/index.html" || true
             done
-            # ship data
             mkdir -p out/data
             cp -r public/data/* out/data/ || true
-            # fallback root index
             if [ ! -f out/index.html ] && [ -f .next/server/app/index.html ]; then
               cp .next/server/app/index.html out/index.html || true
             fi
