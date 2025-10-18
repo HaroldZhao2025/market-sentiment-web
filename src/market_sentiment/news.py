@@ -41,7 +41,7 @@ def _norm_ts_utc(x) -> pd.Timestamp:
     # epoch seconds / millis in str or int
     try:
         xi = int(x)
-        if xi > 10_000_000_000:  # ms
+        if xi > 10_000_000_000:  # likely ms
             return pd.Timestamp(xi / 1000.0, unit="s", tz="UTC")
         return pd.Timestamp(xi, unit="s", tz="UTC")
     except Exception:
@@ -75,9 +75,6 @@ def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.Da
 # ------------------------
 
 def _prov_yfinance(ticker: str, start: str, end: str, company: Optional[str] = None, limit: int = 80) -> pd.DataFrame:
-    """
-    yfinance .news
-    """
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     try:
         raw = getattr(yf.Ticker(ticker), "news", None)
@@ -100,7 +97,6 @@ def _prov_yfinance(ticker: str, start: str, end: str, company: Optional[str] = N
 
 
 def _prov_google_rss(ticker: str, start: str, end: str, company: Optional[str] = None, limit: int = 80) -> pd.DataFrame:
-    # Encode query safely
     q = f'"{ticker}"' + (f' OR "{company}"' if company else "")
     url = f"https://news.google.com/rss/search?q={quote_plus(q)}+when:30d&hl=en-US&gl=US&ceid=US:en"
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
@@ -175,7 +171,7 @@ def _prov_nasdaq_rss(ticker: str, start: str, end: str, company: Optional[str] =
 
 
 def _prov_bi_rss(ticker: str, start: str, end: str, company: Optional[str] = None, limit: int = 60) -> pd.DataFrame:
-    # Business Insider ticker feed (best effort)
+    # Business Insider (best effort)
     url = f"https://www.businessinsider.com/s?q={quote_plus(ticker)}&op=1&type=article&sort=time&max={limit}&format=rss"
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     try:
@@ -199,7 +195,7 @@ def _prov_bi_rss(ticker: str, start: str, end: str, company: Optional[str] = Non
 
 
 def _prov_sa_rss(ticker: str, start: str, end: str, company: Optional[str] = None, limit: int = 60) -> pd.DataFrame:
-    # Seeking Alpha RSS search (best effort)
+    # Seeking Alpha (best effort)
     url = f"https://seekingalpha.com/api/sa/combined/{quote_plus(ticker)}.xml"
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     try:
@@ -222,6 +218,10 @@ def _prov_sa_rss(ticker: str, start: str, end: str, company: Optional[str] = Non
     except Exception:
         pass
     return _window(_mk_df(rows, ticker), start, end)
+
+
+# Back-compat alias so your smoke test continues to work
+_prov_bizinsider_rss = _prov_bi_rss  # alias name expected by your test
 
 
 Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
@@ -248,7 +248,6 @@ def fetch_news(ticker: str, start: str, end: str, company: Optional[str] = None,
             if not df.empty:
                 frames.append(df)
         except Exception:
-            # hard isolate provider failures
             continue
 
     if not frames:
@@ -259,3 +258,15 @@ def fetch_news(ticker: str, start: str, end: str, company: Optional[str] = None,
     df["text"] = df["text"].map(_clean_text)
     df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
     return df
+
+
+__all__ = [
+    "fetch_news",
+    "_prov_yfinance",
+    "_prov_google_rss",
+    "_prov_yahoo_rss",
+    "_prov_nasdaq_rss",
+    "_prov_bi_rss",
+    "_prov_bizinsider_rss",  # explicitly exported alias
+    "_prov_sa_rss",
+]
