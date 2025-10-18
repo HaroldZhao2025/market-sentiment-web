@@ -98,15 +98,13 @@ jobs:
           import yfinance as yf
 
           from market_sentiment.news import fetch_news
-          # providers conditionally (avoid ImportError if not present in this commit)
+          # providers conditionally (avoid ImportError if not present)
           try: from market_sentiment.news import _prov_google_rss
           except Exception: _prov_google_rss=None
           try: from market_sentiment.news import _prov_yahoo_rss
           except Exception: _prov_yahoo_rss=None
           try: from market_sentiment.news import _prov_nasdaq_rss
           except Exception: _prov_nasdaq_rss=None
-          try: from market_sentiment.news import _prov_bizinsider_rss
-          except Exception: _prov_bizinsider_rss=None
           try: from market_sentiment.news import _prov_yfinance
           except Exception: _prov_yfinance=None
 
@@ -128,14 +126,13 @@ jobs:
           for name, fn in [("google_rss", _prov_google_rss),
                            ("yahoo_rss", _prov_yahoo_rss),
                            ("nasdaq_rss", _prov_nasdaq_rss),
-                           ("bizinsider_rss", _prov_bizinsider_rss),
                            ("yfinance", _prov_yfinance)]:
               if fn is not None:
                   providers.append((name, fn))
 
           for name, fn in providers:
               try:
-                  df = fn("AAPL", START, END, "Apple Inc.", 120)
+                  df = fn("AAPL", START, END, "Apple Inc.", 160)
                   print(f"{name:15s} rows:", len(df))
                   if len(df):
                       print(df[["ts","title"]].tail(3).to_string(index=False))
@@ -143,9 +140,12 @@ jobs:
                   print(f"{name} error:", e)
 
           try:
-              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=120)
+              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=160)
               print("fetch_news rows:", len(all_df))
               if len(all_df):
+                  # coverage days (UTC date of timestamp)
+                  days = pd.to_datetime(all_df["ts"]).dt.tz_convert("UTC").dt.date.nunique()
+                  print("fetch_news coverage days:", days)
                   print(all_df[["ts","title"]].tail(3).to_string(index=False))
           except Exception as e:
               print("fetch_news error:", e)
@@ -197,7 +197,7 @@ jobs:
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
-          import json, os
+          import json, os, pandas as pd
           base="apps/web/public/data"
           tfile=os.path.join(base,"ticker","AAPL.json")
           if os.path.exists(tfile):
@@ -205,7 +205,9 @@ jobs:
               S = obj.get("S") or obj.get("sentiment") or []
               nz=sum(1 for x in S if abs(x or 0)>1e-12)
               print("AAPL sentiment: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
-              print("AAPL news items:", len(obj.get("news") or []))
+              print("AAPL news items saved (trimmed):", len(obj.get("news") or []))
+              print("AAPL news_total (all fetched):", obj.get("news_total"))
+              print("AAPL news_day_count (unique days with news):", obj.get("news_day_count"))
           else:
               print("AAPL.json not found")
           print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
@@ -217,8 +219,7 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: |
-            **/package-lock.json
+          cache-dependency-path: apps/web/package-lock.json
 
       - name: Install web deps
         working-directory: apps/web
