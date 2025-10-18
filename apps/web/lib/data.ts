@@ -2,81 +2,69 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export type Series = {
-  date: string[];
-  price: number[];
-  sentiment: number[];
-  sentiment_ma7: number[];
-};
+const DATA_DIR = path.join(process.cwd(), "public", "data");
 
-export type NewsItem = {
-  ts?: string;
-  title?: string;
-  url?: string;
-  S?: number;
-  [k: string]: unknown;
-};
-
-export type TickerJson = {
-  // tolerate multiple historical shapes
-  dates?: string[];
-  date?: string[];
-  price?: number[];
-  open?: number[];
-  close?: number[];
-  sentiment?: number[];
-  S?: number[];
-  sentiment_ma7?: number[];
-  S_ma7?: number[];
-  news?: NewsItem[];
-  [k: string]: unknown;
-};
-
-function dataDir(): string {
-  // Build-time FS path (static export)
-  return path.join(process.cwd(), "public", "data");
-}
-
-export function loadTickers(): string[] {
+export async function loadTickers(): Promise<string[]> {
   try {
-    const file = path.join(dataDir(), "_tickers.json");
-    const raw = fs.readFileSync(file, "utf-8");
-    const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : [];
+    const p = path.join(DATA_DIR, "_tickers.json");
+    const raw = await fs.promises.readFile(p, "utf-8");
+    return JSON.parse(raw) as string[];
   } catch {
     return [];
   }
 }
 
-export function loadTickerSeries(symbol: string): Series {
-  const file = path.join(dataDir(), "ticker", `${symbol}.json`);
-  let j: TickerJson = {};
-  try {
-    j = JSON.parse(fs.readFileSync(file, "utf-8"));
-  } catch {
-    // empty
-  }
-  const dates = (j.dates ?? j.date ?? []) as string[];
-  // prefer explicit "price", else fall back to "close"
-  const price = (j.price ?? j.close ?? []) as number[];
-  const sentiment = (j.sentiment ?? j.S ?? []) as number[];
-  const sentiment_ma7 = (j.sentiment_ma7 ?? j.S_ma7 ?? []) as number[];
+export type Portfolio = {
+  dates: string[];
+  long: number[];
+  short: number[];
+  long_short: number[];
+};
 
-  return { date: dates, price, sentiment, sentiment_ma7 };
+export async function loadPortfolio(): Promise<Portfolio | null> {
+  try {
+    const p = path.join(DATA_DIR, "portfolio.json");
+    const raw = await fs.promises.readFile(p, "utf-8");
+    return JSON.parse(raw) as Portfolio;
+  } catch {
+    return null;
+  }
 }
 
-export function loadTickerNews(symbol: string): NewsItem[] {
-  // merge news embedded in ticker file + earnings file (if present)
-  const tf = path.join(dataDir(), "ticker", `${symbol}.json`);
-  const ef = path.join(dataDir(), "earnings", `${symbol}.json`);
-  let news: NewsItem[] = [];
+export type TickerSeries = {
+  date: string[];
+  price: number[];
+  sentiment: number[];
+  sentiment_ma7: number[];
+  label: string; // e.g., "Daily S"
+};
+
+export type TickerNewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  sentiment?: number;
+};
+
+export async function loadTicker(symbol: string): Promise<{
+  series: TickerSeries | null;
+  news: TickerNewsItem[];
+}> {
+  const p = path.join(DATA_DIR, "ticker", `${symbol}.json`);
   try {
-    const tj = JSON.parse(fs.readFileSync(tf, "utf-8"));
-    if (Array.isArray(tj?.news)) news = news.concat(tj.news);
-  } catch {}
-  try {
-    const ej = JSON.parse(fs.readFileSync(ef, "utf-8"));
-    if (Array.isArray(ej)) news = news.concat(ej);
-  } catch {}
-  return news;
+    const raw = await fs.promises.readFile(p, "utf-8");
+    const obj = JSON.parse(raw);
+    return {
+      series: {
+        date: obj.date ?? obj.dates ?? [],
+        price: obj.price ?? [],
+        sentiment: obj.S ?? obj.sentiment ?? [],
+        sentiment_ma7: obj.S_ma7 ?? obj.sentiment_ma7 ?? [],
+        label: "Daily S",
+      },
+      news: obj.news ?? [],
+    };
+  } catch {
+    return { series: null, news: [] };
+  }
 }
