@@ -3,44 +3,44 @@ import Link from "next/link";
 import { loadTickers, loadPortfolio } from "../lib/data";
 
 export default async function Home() {
-  const tickers = await loadTickers();
-  const portfolio = (await loadPortfolio()) || { dates: [], long_short: [] };
+  const [tickers, portfolio] = await Promise.all([
+    loadTickers(),
+    loadPortfolio(),
+  ]);
 
   return (
     <main className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Market Sentiment — S&amp;P 500</h1>
+      <h1 className="text-3xl font-bold mb-4">Market Sentiment — S&amp;P 500</h1>
 
-      <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="rounded-2xl p-4 shadow bg-white">
-          <div className="text-sm text-gray-500">Coverage</div>
-          <div className="text-2xl font-semibold">{tickers.length} tickers</div>
-        </div>
-        <div className="rounded-2xl p-4 shadow bg-white">
-          <div className="text-sm text-gray-500">Portfolio series</div>
-          <div className="text-2xl font-semibold">{portfolio.dates?.length ?? 0} days</div>
-        </div>
-        <div className="rounded-2xl p-4 shadow bg-white">
-          <div className="text-sm text-gray-500">Status</div>
-          <div className="text-2xl font-semibold">OK</div>
-        </div>
-      </div>
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-2">Portfolio</h2>
+        {!portfolio ? (
+          <p className="text-sm text-neutral-500">No portfolio yet.</p>
+        ) : (
+          <p className="text-sm text-neutral-600">
+            Points: {portfolio.dates?.length ?? 0}
+          </p>
+        )}
+      </section>
 
-      <h2 className="text-xl font-semibold mb-3">Tickers</h2>
-      {tickers.length === 0 ? (
-        <p className="text-gray-600">No data generated yet.</p>
-      ) : (
-        <div className="flex flex-wrap gap-2">
-          {tickers.map((t) => (
-            <Link
-              key={t}
-              href={`/ticker/${t}`}
-              className="px-2 py-1 rounded border hover:bg-gray-50 text-sm"
-            >
-              {t}
-            </Link>
-          ))}
-        </div>
-      )}
+      <section>
+        <h2 className="text-xl font-semibold mb-3">Tickers</h2>
+        {tickers.length === 0 ? (
+          <p className="text-sm text-neutral-500">No data generated yet.</p>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {tickers.map((t) => (
+              <Link
+                key={t}
+                href={`/ticker/${t}`}
+                className="px-3 py-2 rounded-lg bg-neutral-50 hover:bg-neutral-100 border text-sm"
+              >
+                {t}
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
     </main>
   );
 }
