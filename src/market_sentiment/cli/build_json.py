@@ -2,26 +2,48 @@
 from __future__ import annotations
 
 import argparse
-import json
-from pathlib import Path
+import sys
 from typing import List
-
 import pandas as pd
-from tqdm import tqdm
 
-from market_sentiment.prices import fetch_prices_yf_many
-from market_sentiment.news import fetch_news
-from market_sentiment.edgar import fetch_earnings_docs
 from market_sentiment.finbert import FinBERT
+from market_sentiment.news import fetch_news
 from market_sentiment.aggregate import (
+    add_forward_returns,
     daily_sentiment_from_rows,
     join_and_fill_daily,
-    add_forward_returns,
 )
+from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
 
 
-def main():
+def _read_universe(path: str) -> List[str]:
+    df = pd.read_csv(path, dtype=str)
+    cols = [c.lower().strip() for c in df.columns.tolist()]
+    df.columns = cols
+    # Accept both 'ticker' and 'symbol'
+    col = None
+    if "ticker" in df.columns:
+        col = "ticker"
+    elif "symbol" in df.columns:
+        col = "symbol"
+    elif len(df.columns) == 1:
+        # Single unnamed column -> treat as tickers
+        col = df.columns[0]
+    else:
+        raise ValueError(
+            f"Universe CSV must contain 'ticker' or 'symbol' column. Found columns: {df.columns.tolist()}"
+        )
+    tickers = (
+        df[col].dropna().map(lambda s: str(s).strip().upper()).tolist()
+    )
+    tickers = [t for t in tickers if t]
+    if not tickers:
+        raise ValueError("No tickers found in universe CSV.")
+    return sorted(list(dict.fromkeys(tickers)))
+
+
+def main() -> None:
     ap = argparse.ArgumentParser("Build JSON artifacts for the web app")
     ap.add_argument("--universe", required=True)
     ap.add_argument("--start", required=True)
@@ -29,80 +51,69 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--cutoff-minutes", type=int, default=5)
-    ap.add_argument("--max-tickers", type=int, default=0)   # 0 = all
-    ap.add_argument("--max-workers", type=int, default=8)   # kept for compatibility (not used here)
-    ap.add_argument("--chunk-size", type=int, default=50)
-    ap.add_argument("--tries", type=int, default=3)
+    ap.add_argument("--max-workers", type=int, default=8)
     args = ap.parse_args()
 
-    uni = pd.read_csv(args.universe)
-    tickers: List[str] = sorted([str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist()])
-    if args.max_tickers and args.max_tickers > 0:
-        tickers = tickers[: args.max_tickers]
+    tickers = _read_universe(args.universe)
+    print(f"Build JSON for {len(tickers)} tickers | batch={args.batch} cutoff_min={args.cutoff_minutes} max_workers={args.max_workers}")
 
-    print(f"\nBuild JSON for {len(tickers)} tickers | batch={args.batch} cutoff_min={args.cutoff_minutes} max_workers={args.max_workers}")
+    # 1) Prices (vectorized by ticker via yfinance)
     print("Prices:")
-
-    prices = fetch_prices_yf_many(
-        tickers=tickers,
-        start=args.start,
-        end=args.end,
-        chunk_size=args.chunk_size,
-        tries=args.tries,
-        pause=2.0,
-    )
+    prices_rows = []
+    for t in tickers:
+        try:
+            dfp = fetch_prices_yf(t, args.start, args.end)
+        except Exception as e:
+            dfp = pd.DataFrame(columns=["date","ticker","open","close"])
+        if not dfp.empty:
+            prices_rows.append(dfp)
+    prices = pd.concat(prices_rows, ignore_index=True) if prices_rows else pd.DataFrame(columns=["date","ticker","open","close"])
     if prices.empty:
         raise RuntimeError("No prices downloaded.")
-    print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
-
     prices = add_forward_returns(prices)
+    print(f"  ✓ Downloaded prices for {len(tickers)} tickers, {len(prices)} rows.")
 
-    fb = FinBERT()
+    # 2) News + FinBERT
     print("News+Earnings:")
-    news_rows_all = []
-    earn_rows_all = []
-    for t in tqdm(tickers, desc="News+Earnings"):
-        n = fetch_news(t, args.start, args.end)
-        e = fetch_earnings_docs(t, args.start, args.end)
-        if n is not None and not n.empty:
-            n = n.copy()
-            n["S"] = fb.score(n["text"].astype(str).tolist(), batch_size=args.batch)
-            news_rows_all.append(n[["ticker", "ts", "title", "url", "text", "S"]])
-        if e is not None and not e.empty:
-            e = e.copy()
-            e["S"] = fb.score(e["text"].astype(str).tolist(), batch_size=args.batch)
-            earn_rows_all.append(e[["ticker", "ts", "title", "url", "text", "S"]])
+    fb = FinBERT()
+    news_rows = []
+    for t in tickers:
+        df = fetch_news(t, args.start, args.end, company=None, max_per_provider=120)
+        if df.empty:
+            news_rows.append(pd.DataFrame(columns=["ticker","ts","title","url","text","S"]))
+            continue
+        texts = df["text"].astype(str).tolist()
+        try:
+            S = fb.score(texts, batch=args.batch)  # if supported
+        except TypeError:
+            S = fb.score(texts)                     # fallback
+        df["S"] = pd.to_numeric(pd.Series(S), errors="coerce").fillna(0.0)
+        news_rows.append(df)
+    news_all = pd.concat(news_rows, ignore_index=True) if news_rows else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
 
-    news_rows = pd.concat(news_rows_all, ignore_index=True) if news_rows_all else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
-    earn_rows = pd.concat(earn_rows_all, ignore_index=True) if earn_rows_all else pd.DataFrame(columns=["ticker","ts","title","url","text","S"])
-
-    d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=args.cutoff_minutes)
-    d_earn = daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=args.cutoff_minutes)
+    # 3) Aggregate to daily
+    d_news = daily_sentiment_from_rows(news_all, kind="news", cutoff_minutes=args.cutoff_minutes)
+    d_earn = pd.DataFrame(columns=["date","ticker","S","count"])  # keep earnings path pluggable
     daily = join_and_fill_daily(d_news, d_earn)
 
-    panel = prices.merge(daily, on=["date", "ticker"], how="left")
-    for c, default in [("S", 0.0), ("news_count", 0), ("earn_count", 0)]:
-        panel[c] = pd.to_numeric(panel.get(c, default), errors="coerce").fillna(default)
+    # 4) Join with prices to create panel & write outputs
+    panel = prices.merge(daily.rename(columns={"count":"news_count"}), on=["date","ticker"], how="left") \
+                  .fillna({"S":0.0, "news_count":0})
+    write_outputs(panel, news_all, args.out)
 
-    out_dir = Path(args.out)
-    out_dir.mkdir(parents=True, exist_ok=True)
-    write_outputs(panel, news_rows, earn_rows, out_dir)
-
-    # Summary & smoke checks
-    tickers_listed = sorted(panel["ticker"].unique().tolist())
-    ticker_files = list((out_dir / "ticker").glob("*.json"))
-    with_news = (daily.groupby("ticker")["news_count"].sum() > 0) if not daily.empty else pd.Series(dtype=bool)
-    nz = (daily.groupby("ticker")["S"].apply(lambda s: (s.abs() > 0).sum()).fillna(0).astype(int)) if not daily.empty else pd.Series(dtype=int)
-
-    print("\nSummary:")
-    print(f"  Tickers listed: {len(tickers_listed)}")
-    print(f"  Ticker JSON files: {len(ticker_files)}")
-    print(f"  Tickers with any news: {int(with_news.sum())}/{len(tickers_listed)}" if len(tickers_listed) else "  Tickers with any news: 0/0")
-    print(f"  Tickers with non-zero daily S: {int((nz > 0).sum())}/{len(tickers_listed)}" if len(tickers_listed) else "  Tickers with non-zero daily S: 0/0")
-
-    with open(out_dir / "_tickers.json", "w") as f:
-        json.dump(tickers_listed, f)
+    # 5) Summary
+    have_news_per_t = news_all.groupby("ticker")["S"].apply(lambda s: (s.abs() > 1e-12).any()).reset_index()
+    nz = int(have_news_per_t["S"].sum())
+    print("Summary:")
+    print(f"  Tickers listed: {len(tickers)}")
+    print(f"  Ticker JSON files: {len(tickers)}")
+    print(f"  Tickers with any news: {nz}/{len(tickers)}")
+    print(f"  Tickers with non-zero daily S: {int((daily.groupby('ticker')['S'].apply(lambda s: (s.abs()>1e-12).any())).sum())}/{len(tickers)}")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print("FATAL:", repr(e), file=sys.stderr)
+        raise
