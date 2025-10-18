@@ -53,7 +53,7 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
-          pip install --no-cache-dir feedparser requests yfinance
+          pip install --no-cache-dir feedparser requests yfinance pandas_datareader
 
       - name: Configure HF cache directory
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
@@ -83,13 +83,12 @@ jobs:
             TICKER_CSV="data/sample_one.csv"
             printf "ticker\nAAPL\n" > "$TICKER_CSV"
           fi
-          # Make variables available to the rest of THIS step and later steps
           export MODE TICKER_CSV
           echo "MODE=$MODE" >> "$GITHUB_ENV"
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
 
-      - name: News + FinBERT smoke test (AAPL provider breakdown)
+      - name: Smoke test — AAPL news providers + FinBERT
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
@@ -97,50 +96,46 @@ jobs:
           import pandas as pd
           import yfinance as yf
           from market_sentiment.news import (
-              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss, _prov_bizinsider_rss, fetch_news
+              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss,
+              _prov_nasdaq_rss, _prov_bizinsider_rss, fetch_news
           )
           try:
               from market_sentiment.finbert import FinBERT
           except Exception:
               FinBERT = None
 
-          START="${{ env.START }}"
-          END="${{ env.END }}"
+          START="${{ env.START }}"; END="${{ env.END }}"
 
           print("== yfinance raw count ==")
           try:
               raw = yf.Ticker("AAPL").news or []
               print("yfinance.Ticker('AAPL').news:", len(raw))
               if raw:
-                  sample = raw[0]
-                  print("sample keys:", sorted(list(sample.keys())))
-                  print("sample providerPublishTime:", sample.get("providerPublishTime"))
+                  print("first keys:", list(raw[0].keys())[:5])
           except Exception as e:
               print("yfinance error:", e)
 
           providers = [
-              ("yfinance", _prov_yfinance),
               ("google_rss", _prov_google_rss),
               ("yahoo_rss", _prov_yahoo_rss),
               ("nasdaq_rss", _prov_nasdaq_rss),
               ("bizinsider_rss", _prov_bizinsider_rss),
+              ("yfinance", _prov_yfinance),
           ]
-          frames=[]
+          total = 0
           for name, fn in providers:
               try:
                   df = fn("AAPL", START, END, "Apple Inc.", 60)
                   print(f"{name:15s} rows:", len(df))
                   if len(df):
                       print(df[["ts","title"]].tail(2).to_string(index=False))
-                  frames.append(df)
+                  total += len(df)
               except Exception as e:
                   print(f"{name} error:", e)
 
           try:
               all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=60)
               print("fetch_news rows:", len(all_df))
-              if len(all_df):
-                  print(all_df[["ts","title"]].tail(3).to_string(index=False))
           except Exception as e:
               print("fetch_news error:", e)
               all_df = pd.DataFrame()
@@ -154,12 +149,22 @@ jobs:
                   except TypeError:
                       S = fb.score(texts)
                   s = pd.Series(S).astype(float)
-                  print("FinBERT S sample:", s.round(4).tolist())
-                  print("S mean:", float(s.mean()), "nonzero:", int((s.abs()>1e-12).sum()))
+                  print("FinBERT sample:", s.round(4).tolist(), "mean:", float(s.mean()))
               except Exception as e:
                   print("FinBERT error:", e)
           else:
               print("Skip FinBERT (no texts or FinBERT missing).")
+          PY
+
+      - name: Smoke test — AAPL prices
+        run: |
+          python - <<'PY'
+          from market_sentiment.prices import fetch_prices_yf
+          p = fetch_prices_yf("AAPL", "${{ env.START }}", "${{ env.END }}")
+          print("AAPL prices rows:", len(p))
+          if not p.empty:
+              print(p.head(2).to_string(index=False))
+              print(p.tail(2).to_string(index=False))
           PY
 
       - name: Build JSON data (prices + news)
@@ -167,6 +172,7 @@ jobs:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
           set -euo pipefail
+          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | batch=16 cutoff_min=5 max_workers=8"
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
             --start "$START" --end "$END" \
@@ -181,17 +187,16 @@ jobs:
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
-          import json, os
+          import json, os, glob
           base="apps/web/public/data"
-          j=os.path.join(base,"ticker","AAPL.json")
-          if os.path.exists(j):
-              obj=json.load(open(j))
-              S=obj.get("S") or obj.get("sentiment") or []
+          tfile=os.path.join(base,"ticker","AAPL.json")
+          if os.path.exists(tfile):
+              obj=json.load(open(tfile))
+              S = obj.get("S") or obj.get("sentiment") or []
               nz=sum(1 for x in S if abs(x or 0)>1e-12)
               print("AAPL sentiment: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
               print("AAPL news items:", len(obj.get("news") or []))
-          else:
-              print("AAPL.json not found")
+          print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
           PY
 
       - name: Setup Node.js
@@ -223,9 +228,8 @@ jobs:
             echo "No 'out/' after build; synthesizing from '.next'..."
             mkdir -p out
             rsync -a .next/static out/_next/static || true
-            find .next/server/app -maxdepth 3 -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-              d="${f%.html}"
-              d="${d#.next/server/app}"
+            find .next/server/app -maxdepth 4 -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+              d="${f%.html}"; d="${d#.next/server/app}"
               mkdir -p "out/$d"
               cp "$f" "out/$d/index.html" || true
             done
