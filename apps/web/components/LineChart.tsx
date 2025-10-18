@@ -1,49 +1,43 @@
 // apps/web/components/LineChart.tsx
 "use client";
 
-type Series = { dates: string[]; values: number[]; label: string };
+import { SeriesIn } from "../lib/data";
+import {
+  LineChart as RCLineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 
-type Props = {
-  // Support both call styles:
-  series?: Series;
-  left?: Series;
-  right?: Series;
-  overlay?: Series;
-  height?: number;
-};
+export default function LineChart({ series, height = 360 }: { series: SeriesIn; height?: number }) {
+  const { left, right, overlay } = series;
 
-export default function LineChart(props: Props) {
-  const height = props.height ?? 320;
-
-  // Normalize input
-  const series =
-    props.series ??
-    (() => {
-      const { left, right, overlay } = props;
-      // combine into multi-series; render simple list if needed
-      return null;
-    })();
-
-  // Minimal fail-safe rendering to avoid build errors if no data:
-  const rows: { label: string; len: number }[] = [];
-  if (props.series) rows.push({ label: props.series.label, len: props.series.values?.length ?? 0 });
-  if (props.left) rows.push({ label: props.left.label, len: props.left.values?.length ?? 0 });
-  if (props.right) rows.push({ label: props.right.label, len: props.right.values?.length ?? 0 });
-  if (props.overlay) rows.push({ label: props.overlay.label, len: props.overlay.values?.length ?? 0 });
+  // build a single array of points keyed by date
+  const len = Math.min(left.dates.length, left.values.length, right.dates.length, right.values.length);
+  const data = Array.from({ length: len }).map((_, i) => ({
+    date: left.dates[i],
+    price: left.values[i],
+    s: right.values[i],
+    sma: overlay?.values?.[i] ?? null,
+  }));
 
   return (
-    <div style={{ height }} className="w-full flex flex-col gap-1 text-sm text-neutral-700">
-      {rows.length === 0 ? (
-        <div className="text-neutral-500">No series.</div>
-      ) : (
-        rows.map((r) => (
-          <div key={r.label} className="flex justify-between border-b py-1">
-            <span>{r.label}</span>
-            <span>{r.len} pts</span>
-          </div>
-        ))
-      )}
-      {/* TODO: replace with your real SVG/canvas chart (kept minimal here to fix types and builds). */}
+    <div style={{ width: "100%", height }}>
+      <ResponsiveContainer>
+        <RCLineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" minTickGap={30} />
+          <YAxis yAxisId="L" orientation="left" />
+          <YAxis yAxisId="R" orientation="right" />
+          <Tooltip />
+          <Line yAxisId="L" type="monotone" dataKey="price" dot={false} strokeWidth={1.6} />
+          <Line yAxisId="R" type="monotone" dataKey="s" dot={false} strokeWidth={1.4} />
+          {overlay ? <Line yAxisId="R" type="monotone" dataKey="sma" dot={false} strokeWidth={1.2} /> : null}
+        </RCLineChart>
+      </ResponsiveContainer>
     </div>
   );
 }
