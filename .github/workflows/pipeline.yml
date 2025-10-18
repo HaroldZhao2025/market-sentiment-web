@@ -86,20 +86,24 @@ jobs:
           set -euxo pipefail
           echo "== List data dir =="
           ls -lah apps/web/public/data
-          python - << 'PY'
-import json, pathlib
-base = pathlib.Path("apps/web/public/data")
-tickers = json.loads((base/"_tickers.json").read_text())
-print("Tickers listed:", len(tickers))
-aapl = json.loads((base/"ticker"/"AAPL.json").read_text())
-S = aapl.get("S") or aapl.get("sentiment") or []
-print("AAPL sentiment sample:", {
-  "len": len(S),
-  "first": (S[0] if S else None),
-  "last": (S[-1] if S else None),
-  "non_zero_points": sum(1 for x in S if abs(x) > 1e-9)
-})
-PY
+          python - <<'PY'
+          import json, pathlib
+
+          base = pathlib.Path("apps/web/public/data")
+          tickers = json.loads((base / "_tickers.json").read_text())
+          print("Tickers listed:", len(tickers))
+
+          aapl = json.loads((base / "ticker" / "AAPL.json").read_text())
+          S = aapl.get("S") or aapl.get("sentiment") or []
+          print("AAPL sentiment sample:", {
+              "len": len(S),
+              "first": (S[0] if S else None),
+              "last": (S[-1] if S else None),
+              "non_zero_points": sum(1 for x in S if abs(x) > 1e-9)
+          })
+          PY
+
+
 
       # ---------- Node/Next.js build ----------
       - name: Setup Node
