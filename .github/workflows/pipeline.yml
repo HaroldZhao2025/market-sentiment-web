@@ -1,8 +1,8 @@
-name: Build & Deploy (AAPL sample)
+name: Build & Deploy — Sample AAPL
 
 on:
   push:
-    branches: ["main"]
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -11,144 +11,128 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages-sample
   cancel-in-progress: true
 
-env:
-  NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  PYTHONUNBUFFERED: "1"
-
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: src
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      HF_HOME: ${{ runner.temp }}/hf-home
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      PIP_NO_PYTHON_VERSION_WARNING: "1"
+      NEXT_PUBLIC_BASE_PATH: /market-sentiment-web
+      TSC_COMPILE_ON_ERROR: "true"
+      # keep sample fast but non-empty
+      NEWS_ITEMS_PER_SOURCE: "30"
+      NEWS_SOURCES: "yfinance,google,bing,yahoofin,nasdaq"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ---------------- Python: build JSON for AAPL only ----------------
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
-      - name: Install Python deps
+      - name: Install Python dependencies
         run: |
-          python -m pip install --upgrade pip wheel setuptools
-          if [ -f requirements.txt ]; then
-            pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
-            pip install --no-cache-dir -r requirements.txt
-            pip check
-          else
-            pip install --no-cache-dir pandas yfinance feedparser tqdm requests \
-              torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-            pip install --no-cache-dir transformers
-          fi
+          python -m pip install -U pip wheel
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install pandas==2.2.2 numpy==1.26.4 yfinance==0.2.43 feedparser==6.0.11 tqdm==4.66.4 transformers==4.44.2 beautifulsoup4==4.12.3
+          pip install -e .
 
-      - name: Set dates (last 365 days)
-        run: |
-          if date -u -d "365 days ago" +%F >/dev/null 2>&1; then
-            START=$(date -u -d "365 days ago" +%F)
-            END=$(date -u +%F)
-          else
-            START=$(python -c 'from datetime import datetime,timedelta;print((datetime.utcnow()-timedelta(days=365)).strftime("%Y-%m-%d"))')
-            END=$(python -c 'from datetime import datetime;print(datetime.utcnow().strftime("%Y-%m-%d"))')
-          fi
-          echo "START=$START" >> $GITHUB_ENV
-          echo "END=$END" >> $GITHUB_ENV
-          echo "Using range: $START .. $END"
-
-      - name: Build JSON (AAPL only)
-        env:
-          PYTHONPATH: src
-          HF_HUB_DISABLE_TELEMETRY: "1"
-          HF_HOME: ${{ runner.temp }}/hf-home
-        run: |
-          set -euxo pipefail
-          mkdir -p data
-          echo "AAPL" > data/_sample_universe.csv
-          python -m market_sentiment.cli.build_json \
-            --universe data/_sample_universe.csv \
-            --start "$START" --end "$END" \
-            --out apps/web/public/data \
-            --batch 16 \
-            --cutoff-minutes 5 \
-            --max-workers 8
-          echo "== List data dir =="
-          ls -lah apps/web/public/data
-
-      - name: Inspect generated data (quick checks)
-        run: |
-          python -c 'import json,os; p="apps/web/public/data/_tickers.json"; print("Tickers listed:", len(json.load(open(p))))'
-          python -c 'import json,os,math; p="apps/web/public/data/ticker/AAPL.json"; d=json.load(open(p)) if os.path.exists(p) else {}; S=d.get("S",[]) or d.get("sentiment",[]); nz=sum(1 for x in S if abs(x)>1e-9); print({"AAPL_len":len(S),"first":(S[0] if S else None),"last":(S[-1] if S else None),"non_zero_points":nz})'
-
-      # ---------------- Node: build static Next.js site ----------------
-      - name: Setup Node
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: "apps/web/package-lock.json"
 
-      - name: Install web deps
-        working-directory: apps/web
+      - name: Install Node dependencies
         run: npm ci --no-audit --no-fund
 
-      - name: Build static site (Next.js output: export)
-        working-directory: apps/web
+      - name: Build JSON (AAPL only)
         env:
-          NEXT_TELEMETRY_DISABLED: "1"
-          NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
+          # 1-year window ending today (UTC)
+          END: ${{ env.GITHUB_RUN_ATTEMPT }}
         run: |
           set -euxo pipefail
-          echo "==== next.config.cjs ===="
-          cat next.config.cjs || true
-          node -v; npm -v
-          npm run build
-          # Fallback: synthesize out/ if Next didn't emit it
-          if [ ! -d out ]; then
-            echo "No 'out/' after build; assembling export for GH Pages..."
-            mkdir -p out/_next/static
-            [ -d ".next/static" ] && cp -R .next/static/* out/_next/static/ || true
-            [ -d "public" ] && rsync -a public/ out/ || true
-            # root + portfolio
-            for p in "" "portfolio"; do
-              SRC=".next/server/app/${p}/index.html"
-              if [ -f "$SRC" ]; then
-                DST="out/${p}"
-                mkdir -p "$DST"
-                cp "$SRC" "$DST/index.html"
-              fi
-            done
-            # AAPL ticker & earnings
-            for sym in AAPL aapl; do
-              for route in "ticker" "earnings"; do
-                SRC=".next/server/app/${route}/${sym}/index.html"
-                if [ -f "$SRC" ]; then
-                  mkdir -p "out/${route}/${sym}"
-                  cp "$SRC" "out/${route}/${sym}/index.html"
-                fi
-              done
-            done
-          fi
-          echo "==== Final out/ listing ===="; ls -lah out
-          test -d out/data || (echo "::error::out/data missing"; exit 1)
+          END=$(date -u +%F)
+          START=$(date -u -d "$END -365 days" +%F)
+          mkdir -p data
+          printf "ticker\nAAPL\n" > data/sample.csv
+          python -m market_sentiment.cli.build_json \
+            --universe data/sample.csv \
+            --start "$START" --end "$END" \
+            --out apps/web/public/data \
+            --batch 16 \
+            --cutoff-minutes 5 \
+            --max-workers 4
 
-      # ---------------- Deploy to GitHub Pages ----------------
-      - name: Configure Pages
+      - name: Inspect generated data (AAPL)
+        run: |
+          python - << 'PY'
+          import json, pathlib
+          base = pathlib.Path("apps/web/public/data")
+          tickers = json.loads(base.joinpath("_tickers.json").read_text())
+          print("Tickers listed:", len(tickers))
+          aapl_path = base / "ticker" / "AAPL.json"
+          aapl = json.loads(aapl_path.read_text())
+          ser = aapl.get("sentiment") or aapl.get("S") or []
+          nz = sum(1 for x in ser if abs(x) > 1e-9)
+          print("AAPL sentiment points:", len(ser))
+          print("Non-zero points:", nz)
+          if ser:
+              print("First:", ser[0], "Last:", ser[-1])
+          # show a couple of news titles if present
+          news = aapl.get("news") or []
+          print("News items:", len(news))
+          print("Sample titles:", [n.get("title") for n in news[:3]])
+          PY
+
+      - name: Build static site (Next.js output: export)
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_PUBLIC_BASE_PATH: /market-sentiment-web
+        run: |
+          set -euxo pipefail
+          echo "==== next.config.cjs (contents) ===="
+          cat next.config.cjs || true
+          echo "Node: $(node -v)  NPM: $(npm -v)"
+          npm run build
+
+          # If Next didn't produce out/, synthesize from .next + public
+          if [ ! -d out ]; then
+            echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
+            mkdir -p out
+            # prerendered routes from app dir
+            if [ -d .next/server/app ]; then
+              cp -r .next/server/app/* out/ || true
+            fi
+            # static assets for _next
+            mkdir -p out/_next
+            [ -d .next/static ] && cp -r .next/static out/_next/ || true
+            # public assets (includes data/)
+            [ -d public ] && cp -r public/* out/ || true
+            # ensure base index
+            if [ -f .next/server/app/index.html ]; then
+              cp .next/server/app/index.html out/index.html || true
+            fi
+          fi
+
+          echo "==== Final out/ listing (top) ===="
+          find out -maxdepth 2 -type d -print
+
+      - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact for Pages
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/web/out
+          path: ./out
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
