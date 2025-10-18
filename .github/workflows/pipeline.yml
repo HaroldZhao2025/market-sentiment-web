@@ -31,6 +31,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,7 +56,7 @@ jobs:
           pip install --no-cache-dir -r requirements.txt
           pip install --no-cache-dir feedparser requests yfinance pandas_datareader
 
-      - name: Configure HF cache directory
+      - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
 
       - name: Set date range (last 365 days)
@@ -83,7 +84,6 @@ jobs:
             TICKER_CSV="data/sample_one.csv"
             printf "ticker\nAAPL\n" > "$TICKER_CSV"
           fi
-          export MODE TICKER_CSV
           echo "MODE=$MODE" >> "$GITHUB_ENV"
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
@@ -125,17 +125,19 @@ jobs:
           total = 0
           for name, fn in providers:
               try:
-                  df = fn("AAPL", START, END, "Apple Inc.", 60)
+                  df = fn("AAPL", START, END, "Apple Inc.", 100)
                   print(f"{name:15s} rows:", len(df))
                   if len(df):
-                      print(df[["ts","title"]].tail(2).to_string(index=False))
+                      print(df[["ts","title"]].tail(3).to_string(index=False))
                   total += len(df)
               except Exception as e:
                   print(f"{name} error:", e)
 
           try:
-              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=60)
+              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=100)
               print("fetch_news rows:", len(all_df))
+              if len(all_df):
+                  print(all_df[["ts","title"]].tail(3).to_string(index=False))
           except Exception as e:
               print("fetch_news error:", e)
               all_df = pd.DataFrame()
@@ -187,7 +189,7 @@ jobs:
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
-          import json, os, glob
+          import json, os
           base="apps/web/public/data"
           tfile=os.path.join(base,"ticker","AAPL.json")
           if os.path.exists(tfile):
@@ -196,6 +198,8 @@ jobs:
               nz=sum(1 for x in S if abs(x or 0)>1e-12)
               print("AAPL sentiment: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
               print("AAPL news items:", len(obj.get("news") or []))
+          else:
+              print("AAPL.json not found")
           print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
           PY
 
