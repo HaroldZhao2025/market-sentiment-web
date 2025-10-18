@@ -52,14 +52,17 @@ jobs:
       - name: Install Python deps
         run: |
           python -m pip install --upgrade pip wheel setuptools
+          # Torch CPU
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
+          # Project deps
           pip install --no-cache-dir -r requirements.txt
-          pip check
+          # Ensure free-news deps exist
+          pip install --no-cache-dir feedparser requests yfinance
 
       - name: Set HF cache dir
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> $GITHUB_ENV
 
-      - name: Set dates (≈ last 250 trading days)
+      - name: Set dates (≈ last 365 days)
         run: |
           python - <<'PY'
           import os
@@ -71,11 +74,8 @@ jobs:
           print("START", start, "END", end)
           PY
 
-      - name: Build S&P 500 universe
-        run: python -m market_sentiment.cli.build_universe --out data/sp500.csv
-
       - name: Select mode (sample/full)
-        id: sel
+        id: select_mode
         run: |
           if [ "${{ inputs.mode }}" = "sample" ]; then
             echo "MODE=sample" >> $GITHUB_ENV
@@ -87,7 +87,7 @@ jobs:
           fi
           echo "Mode: ${{ inputs.mode }}  Universe: $TICKER_CSV"
 
-      # 🔎 SMOKE TEST: is news fetch working? is FinBERT scoring non-zero?
+      # --- SMOKE TEST: verify news fetching & FinBERT scoring ---
       - name: News / FinBERT smoke test (AAPL)
         env:
           HF_HOME: ${{ env.HF_HOME }}
@@ -106,14 +106,20 @@ jobs:
 
           print("== Smoke: yfinance AAPL raw news length ==")
           try:
-              print(len(yf.Ticker("AAPL").news or []))
+              raw = yf.Ticker("AAPL").news or []
+              print(len(raw))
           except Exception as e:
               print("yf error:", e)
 
           print("== Smoke: multi-source fetch_news(AAPL) ==")
-          df = fetch_news("AAPL", START, END, company="Apple Inc.", max_per_provider=30, max_workers=6)
-          print("rows:", len(df))
-          print(df[["ts","title"]].tail(3).to_string(index=False))
+          try:
+              df = fetch_news("AAPL", START, END, company="Apple Inc.", max_per_provider=30, max_workers=6)
+              print("rows:", len(df))
+              if len(df):
+                  print(df[["ts","title"]].tail(3).to_string(index=False))
+          except Exception as e:
+              print("fetch_news error:", e)
+              df = pd.DataFrame()
 
           if len(df) > 0 and FinBERT is not None:
               texts = df["text"].fillna(df["title"]).astype(str).tolist()[:8]
@@ -132,7 +138,7 @@ jobs:
               print("Skip FinBERT (no texts or FinBERT missing).")
           PY
 
-      - name: Build JSON (FinBERT + news + earnings)
+      - name: Build JSON (prices + news + earnings)
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
@@ -193,11 +199,23 @@ jobs:
             echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
             mkdir -p out
             rsync -a .next/static out/_next/static || true
-            find .next/server/app -maxdepth 2 -name 'index.html' -exec bash -lc 'd=${1%.html}; d=${d#.next/server/app}; mkdir -p "out/$d"; cp "$1" "out/$d/index.html"' _ {} \; || true
+            # try to preserve key app routes
+            find .next/server/app -maxdepth 3 -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+              d="${f%.html}"
+              d="${d#.next/server/app}"
+              mkdir -p "out/$d"
+              cp "$f" "out/$d/index.html" || true
+            done
+            # ship data
             cp -r public/data out/data || true
             cp -r public/earnings out/earnings || true
             cp -r public/ticker out/ticker || true
             cp -r public/portfolio out/portfolio || true
+            # root index as fallback
+            if [ ! -f out/index.html ] && [ -f .next/server/app/index.html ]; then
+              mkdir -p out
+              cp .next/server/app/index.html out/index.html || true
+            fi
           fi
           echo "==== Final out/ listing ===="
           ls -lah out
