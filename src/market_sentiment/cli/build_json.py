@@ -54,11 +54,11 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 
 def _score_rows_inplace(fb: FinBERT, df: pd.DataFrame, text_col: str, batch: int) -> pd.DataFrame:
     if df is None or df.empty:
-        df = pd.DataFrame(columns=["ticker", "ts", "title", "url", text_col, "S"])
-        return df
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", text_col, "S"])
 
     texts = df[text_col].astype(str).fillna("").tolist()
     if len(texts) == 0:
+        df = df.copy()
         df["S"] = 0.0
         return df
 
@@ -105,24 +105,26 @@ def main():
     print("News+Earnings:")
     fb = FinBERT()
     news_all: List[pd.DataFrame] = []
-    # (If you add earnings rows, append them in a list and concat similarly.)
     for t in tickers:
-        # fetch, score
         n = fetch_news(t, a.start, a.end)
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
 
-    news_rows = pd.concat(news_all, ignore_index=True) if news_all else pd.DataFrame(
-        columns=["ticker", "ts", "title", "url", "text", "S"]
+    news_rows = (
+        pd.concat(news_all, ignore_index=True)
+        if news_all
+        else pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
+
+    # If/when you implement source for earnings rows, build it here; until then keep a schema-compatible empty frame.
+    earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
     # ---------------- Aggregate daily sentiment ----------------
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
-    # If you have earnings rows, compute d_earn similarly; otherwise use empty frame:
-    d_earn = pd.DataFrame(columns=["date", "ticker", "S"])
+    d_earn = daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes) if not earn_rows.empty else pd.DataFrame(columns=["date","ticker","S"])
 
     daily = join_and_fill_daily(d_news, d_earn)
-    # Safety: ensure S is present even if upstream changed join logic
+    # Safety: ensure S exists
     if "S" not in daily.columns:
         daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
         daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
@@ -135,18 +137,17 @@ def main():
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    # ---------------- Write outputs ----------------
-    write_outputs(panel, news_rows, a.out)
+    # ---------------- Write outputs (match writers signature!) ----------------
+    write_outputs(panel, news_rows, earn_rows, a.out)
 
     # ---------------- Summary ----------------
-    # count tickers file was written for is inferred by writers; here we recompute:
     listed = len(tickers)
     with_news = d_news["ticker"].nunique() if not d_news.empty else 0
     nz = panel.groupby("ticker")["S"].apply(lambda s: (s.abs() > 1e-12).any()).sum()
 
     print("Summary:")
     print(f"  Tickers listed: {listed}")
-    print(f"  Ticker JSON files: {listed}")  # writers produces one per ticker in the universe
+    print(f"  Ticker JSON files: {listed}")
     print(f"  Tickers with any news: {with_news}/{listed}")
     print(f"  Tickers with non-zero daily S: {nz}/{listed}")
 
