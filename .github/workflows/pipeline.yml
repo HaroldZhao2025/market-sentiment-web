@@ -1,9 +1,9 @@
-name: Deploy — Sample (AAPL only)
+name: Build & Deploy (Sample AAPL)
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch: {}
+    branches: [ "main" ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -15,14 +15,11 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PYTHONUNBUFFERED: "1"
-  PIP_DISABLE_PIP_VERSION_CHECK: "1"
-  HF_HOME: ${{ github.workspace }}/.hf-cache
-  HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  # News dials (tweak if you like)
+  PYTHONUNBUFFERED: "1"
+  # More free sources; raise for more coverage
   NEWS_ITEMS_PER_SOURCE: "60"
-  # NEWS_SOURCES: "yfinance,google,bing,yahoosearch,yahoofin,nasdaq,sa,globe,bw"
+  NEWS_SOURCES: "yfinance,google,bing,yahoosearch,yahoofin,nasdaq,sa,globe,bw"
 
 jobs:
   build:
@@ -31,85 +28,99 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ---------- Python for data build ----------
-      - name: Setup Python
+      # ---------- Python: build JSON for AAPL only ----------
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Cache pip & HF
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/pip
-            ${{ env.HF_HOME }}
-          key: pip-hf-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            pip-hf-${{ runner.os }}-
+          cache: "pip"
 
       - name: Install Python deps
         run: |
-          set -euxo pipefail
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           else
-            # Fallback if no requirements.txt (keeps CI green)
-            pip install pandas yfinance feedparser torch torchvision torchaudio transformers tqdm
+            # Minimal set the repo needs if requirements.txt isn't present
+            pip install pandas yfinance feedparser tqdm requests \
+              torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+            pip install transformers
           fi
 
-      - name: Build JSON data (AAPL only)
+      - name: Build JSON (AAPL only)
         env:
-          START: ${{ github.event_name == 'workflow_dispatch' && inputs.start || '' }}
-          END:   ${{ github.event_name == 'workflow_dispatch' && inputs.end || '' }}
+          PYTHONPATH: src
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          HF_HOME: ${{ runner.temp }}/hf-home
         run: |
           set -euxo pipefail
-          mkdir -p data
-          # Minimal universe hard-coded to AAPL
-          printf "AAPL\n" > data/sample.csv
-          # Date window: last 365 days
-          START=$(date -u -d "365 days ago" +%F)
-          END=$(date -u +%F)
-          echo "Building JSON for AAPL from $START to $END"
+          # 365d window
+          if date -u -d "365 days ago" +%F >/dev/null 2>&1; then
+            START=$(date -u -d "365 days ago" +%F)
+            END=$(date -u +%F)
+          else
+            START=$(python - <<'PY'
+from datetime import datetime, timedelta
+print((datetime.utcnow()-timedelta(days=365)).strftime("%Y-%m-%d"))
+PY
+)
+            END=$(python - <<'PY'
+from datetime import datetime
+print(datetime.utcnow().strftime("%Y-%m-%d"))
+PY
+)
+          fi
 
-          export PYTHONPATH=src
+          # Hard-coded universe for SAMPLE: just AAPL
+          mkdir -p data
+          echo "AAPL" > data/_sample_universe.csv
+
           python -m market_sentiment.cli.build_json \
-            --universe data/sample.csv \
+            --universe data/_sample_universe.csv \
             --start "$START" --end "$END" \
             --out apps/web/public/data \
             --batch 16 \
             --cutoff-minutes 5 \
             --max-workers 8
 
-      - name: Inspect data
+      - name: Inspect generated data (AAPL)
         run: |
-          set -euxo pipefail
+          set -e
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
-          import json, pathlib
+import json, os, statistics
+base = "apps/web/public/data"
+print("Tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
+pj = os.path.join(base, "portfolio.json")
+print("Portfolio present:", os.path.exists(pj))
+if os.path.exists(pj):
+    port = json.load(open(pj))
+    print("Portfolio dates:", len(port.get("dates",[])))
+ap = os.path.join(base,"ticker","AAPL.json")
+if os.path.exists(ap):
+    a = json.load(open(ap))
+    S = a.get("S",[]) or a.get("sentiment",[])
+    print("AAPL sentiment sample:", {
+        "len": len(S),
+        "first": (S[0] if S else None),
+        "last": (S[-1] if S else None),
+        "non_zero_points": sum(1 for x in S if abs(x)>1e-9),
+    })
+    # show a few latest non-zero points (value, idx-from-end)
+    nz = [(i, S[i]) for i in range(max(0,len(S)-30), len(S)) if abs(S[i])>1e-9]
+    print("Recent non-zero points (last 30 days):", nz[:5])
+else:
+    print("AAPL.json missing")
+PY
 
-          base = pathlib.Path("apps/web/public/data")
-          tickers = json.loads((base / "_tickers.json").read_text())
-          print("Tickers listed:", len(tickers))
-
-          aapl = json.loads((base / "ticker" / "AAPL.json").read_text())
-          S = aapl.get("S") or aapl.get("sentiment") or []
-          print("AAPL sentiment sample:", {
-              "len": len(S),
-              "first": (S[0] if S else None),
-              "last": (S[-1] if S else None),
-              "non_zero_points": sum(1 for x in S if abs(x) > 1e-9)
-          })
-          PY
-
-
-
-      # ---------- Node/Next.js build ----------
-      - name: Setup Node
+      # ---------- Node: build Next.js static site ----------
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "apps/web/package-lock.json"
 
       - name: Install web deps
         working-directory: apps/web
@@ -122,42 +133,59 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
         run: |
           set -euxo pipefail
-          echo "==== Node/NPM ===="; node -v; npm -v
-          echo "==== next.config.cjs (contents) ===="; cat next.config.cjs || true
+          echo "==== next.config.cjs (contents) ===="
+          cat next.config.cjs || true
+          echo "==== Node/NPM ===="
+          node -v
+          npm -v
+          echo "==== Building ===="
           npm run build
 
-          # If Next didn't produce out/, synthesize a static export
-          if [ ! -d out ] || [ ! -f out/index.html ]; then
-            echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
-            rm -rf out
+          # Robust fallback: create 'out/' if Next didn't emit it (App Router variations)
+          if [ ! -d out ]; then
+            echo "No 'out/' after build; assembling minimal export for GH Pages..."
             mkdir -p out/_next/static
-            # copy RSC/HTML shells
-            cp -r .next/server/app/* out/ 2>/dev/null || true
-            # copy client static assets
-            cp -r .next/static/* out/_next/static/ 2>/dev/null || true
-            # copy public (includes /data)
-            cp -r public/* out/ 2>/dev/null || true
+            # 1) static assets
+            if [ -d ".next/static" ]; then cp -R .next/static/* out/_next/static/; fi
+            # 2) public (incl. /data)
+            if [ -d "public" ]; then rsync -a public/ out/; fi
+            # 3) prerendered pages (root and portfolio)
+            for p in "" "portfolio"; do
+              src=".next/server/app/${p}/index.html"
+              if [ -f "$src" ]; then
+                dst="out/${p}"
+                mkdir -p "$dst"
+                cp "$src" "$dst/index.html"
+              fi
+            done
+            # 4) AAPL ticker & earnings pages
+            for sym in AAPL aapl; do
+              for route in "ticker" "earnings"; do
+                src=".next/server/app/${route}/${sym}/index.html"
+                if [ -f "$src" ]; then
+                  mkdir -p "out/${route}/${sym}"
+                  cp "$src" "out/${route}/${sym}/index.html"
+                fi
+              done
+            done
           fi
 
           echo "==== Final out/ listing ===="
           ls -lah out
-          find out -maxdepth 2 -type d -print
+          # data must be in out/data for GH Pages
+          test -d out/data || (echo "ERROR: out/data missing" && exit 1)
 
-      # ---------- Pages deploy ----------
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/out
 
   deploy:
-    runs-on: ubuntu-latest
-    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
