@@ -97,28 +97,21 @@ jobs:
           import pandas as pd
           import yfinance as yf
 
-          # Import providers robustly; some may not exist in the current commit
           from market_sentiment.news import fetch_news
-          try:
-              from market_sentiment.news import _prov_google_rss
-          except Exception: _prov_google_rss = None
-          try:
-              from market_sentiment.news import _prov_yahoo_rss
-          except Exception: _prov_yahoo_rss = None
-          try:
-              from market_sentiment.news import _prov_nasdaq_rss
-          except Exception: _prov_nasdaq_rss = None
-          try:
-              from market_sentiment.news import _prov_bizinsider_rss
-          except Exception: _prov_bizinsider_rss = None
-          try:
-              from market_sentiment.news import _prov_yfinance
-          except Exception: _prov_yfinance = None
+          # providers conditionally (avoid ImportError if not present in this commit)
+          try: from market_sentiment.news import _prov_google_rss
+          except Exception: _prov_google_rss=None
+          try: from market_sentiment.news import _prov_yahoo_rss
+          except Exception: _prov_yahoo_rss=None
+          try: from market_sentiment.news import _prov_nasdaq_rss
+          except Exception: _prov_nasdaq_rss=None
+          try: from market_sentiment.news import _prov_bizinsider_rss
+          except Exception: _prov_bizinsider_rss=None
+          try: from market_sentiment.news import _prov_yfinance
+          except Exception: _prov_yfinance=None
 
-          try:
-              from market_sentiment.finbert import FinBERT
-          except Exception:
-              FinBERT = None
+          try: from market_sentiment.finbert import FinBERT
+          except Exception: FinBERT=None
 
           START="${{ env.START }}"; END="${{ env.END }}"
 
@@ -131,7 +124,7 @@ jobs:
           except Exception as e:
               print("yfinance error:", e)
 
-          providers = []
+          providers=[]
           for name, fn in [("google_rss", _prov_google_rss),
                            ("yahoo_rss", _prov_yahoo_rss),
                            ("nasdaq_rss", _prov_nasdaq_rss),
@@ -140,14 +133,12 @@ jobs:
               if fn is not None:
                   providers.append((name, fn))
 
-          total = 0
           for name, fn in providers:
               try:
                   df = fn("AAPL", START, END, "Apple Inc.", 120)
                   print(f"{name:15s} rows:", len(df))
                   if len(df):
                       print(df[["ts","title"]].tail(3).to_string(index=False))
-                  total += len(df)
               except Exception as e:
                   print(f"{name} error:", e)
 
@@ -164,10 +155,8 @@ jobs:
               texts = (all_df["title"].fillna('') + ' ' + all_df["text"].fillna('')).astype(str).tolist()[:16]
               try:
                   fb = FinBERT()
-                  try:
-                      scores = fb.score(texts, batch=16)
-                  except TypeError:
-                      scores = fb.score(texts)
+                  try: scores = fb.score(texts, batch=16)
+                  except TypeError: scores = fb.score(texts)
                   s = pd.Series(scores).astype(float)
                   print("FinBERT sample:", s.round(4).tolist(), "mean:", float(s.mean()))
               except Exception as e:
@@ -228,7 +217,8 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: apps/web/package-lock.json
+          cache-dependency-path: |
+            **/package-lock.json
 
       - name: Install web deps
         working-directory: apps/web
@@ -251,7 +241,6 @@ jobs:
           npx next export
           echo "==== Verify export ===="
           test -f out/index.html
-          # assert AAPL page exists in sample mode
           if [ "${MODE}" = "sample" ]; then
             test -f out/ticker/AAPL/index.html
           fi
