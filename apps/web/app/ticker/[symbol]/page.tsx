@@ -4,29 +4,33 @@ import { loadTickers, loadTickerSeries, loadTickerNews } from "../../../lib/data
 import TickerClient from "./TickerClient";
 
 export async function generateStaticParams() {
-  const tickers: string[] = await loadTickers();
-  return tickers.slice(0, 1200).map((t) => ({ symbol: t }));
+  try {
+    const tickers = await loadTickers();
+    return tickers.slice(0, 1200).map((t) => ({ symbol: t }));
+  } catch {
+    return [];
+  }
 }
 
 export default async function TickerPage({ params }: { params: { symbol: string } }) {
   const symbol = params.symbol.toUpperCase();
-  const [series, news] = await Promise.all([
-    loadTickerSeries(symbol),
-    loadTickerNews(symbol),
-  ]);
+  const series = await loadTickerSeries(symbol);
+  const news = await loadTickerNews(symbol);
 
   return (
-    <main className="max-w-6xl mx-auto p-6">
-      <div className="mb-4">
-        <Link href="/" className="text-sm text-blue-600 hover:underline">← Back</Link>
+    <div className="max-w-6xl mx-auto p-6 space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Market Sentiment for {symbol}</h1>
+        <Link href="/" className="text-sm text-blue-600 hover:underline">
+          ← Back
+        </Link>
       </div>
-      <h1 className="text-2xl font-bold mb-4">{symbol}</h1>
 
       {series ? (
-        <TickerClient left={series.left} right={series.right} overlay={series.overlay} news={news} />
+        <TickerClient series={series} news={news} />
       ) : (
         <div className="text-neutral-500">No data for {symbol}.</div>
       )}
-    </main>
+    </div>
   );
 }
