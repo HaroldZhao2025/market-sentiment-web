@@ -71,19 +71,23 @@ jobs:
           PY
 
       - name: Select mode and universe
+        shell: bash
         run: |
-          set -eux
+          set -euo pipefail
           mkdir -p data
           if [ "${{ inputs.mode }}" = "full" ]; then
-            echo "MODE=full" >> "$GITHUB_ENV"
-            echo "TICKER_CSV=data/sp500.csv" >> "$GITHUB_ENV"
+            MODE="full"
+            TICKER_CSV="data/sp500.csv"
           else
-            echo "MODE=sample" >> "$GITHUB_ENV"
-            echo "TICKER_CSV=data/sample_one.csv" >> "$GITHUB_ENV"
-            # IMPORTANT: header MUST be 'ticker' (not 'symbol')
-            printf "ticker\nAAPL\n" > data/sample_one.csv
+            MODE="sample"
+            TICKER_CSV="data/sample_one.csv"
+            printf "ticker\nAAPL\n" > "$TICKER_CSV"
           fi
-          echo "Mode: ${MODE:-sample} | Universe: ${TICKER_CSV}"
+          # Make variables available to the rest of THIS step and later steps
+          export MODE TICKER_CSV
+          echo "MODE=$MODE" >> "$GITHUB_ENV"
+          echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
+          echo "Mode: $MODE | Universe: $TICKER_CSV"
 
       - name: News + FinBERT smoke test (AAPL provider breakdown)
         env:
@@ -162,7 +166,7 @@ jobs:
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
             --start "$START" --end "$END" \
@@ -205,7 +209,7 @@ jobs:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           echo "==== next.config.cjs (contents) ===="
           cat next.config.cjs || true
           echo "==== Node/NPM ===="
