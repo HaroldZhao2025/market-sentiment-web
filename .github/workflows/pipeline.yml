@@ -1,37 +1,9 @@
-name: Build Data & Deploy Site
+name: Deploy — Sample (AAPL only)
 
 on:
   push:
-    branches: ["main"]
-  schedule:
-    - cron: "0 12 * * 1"
-  workflow_dispatch:
-    inputs:
-      sample_mode:
-        description: "Build sample only (AAPL)?"
-        type: boolean
-        default: true
-        required: true
-      sample_tickers:
-        description: "Comma-separated tickers for sample mode"
-        type: string
-        default: "AAPL"
-        required: false
-      days:
-        description: "How many days of history"
-        type: number
-        default: 365
-        required: false
-      max_workers:
-        description: "Max workers for parallel fetch"
-        type: number
-        default: 8
-        required: false
-      batch:
-        description: "FinBERT scoring batch size"
-        type: number
-        default: 16
-        required: false
+    branches: [ main ]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -39,142 +11,97 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  HF_HOME: ${{ github.workspace }}/.hf-cache
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+  # News dials (tweak if you like)
+  NEWS_ITEMS_PER_SOURCE: "60"
+  # NEWS_SOURCES: "yfinance,google,bing,yahoosearch,yahoofin,nasdaq,sa,globe,bw"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: src
-      HF_HUB_DISABLE_TELEMETRY: "1"
-      # site under /market-sentiment-web on GitHub Pages
-      NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # ---------- Python for data build ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Cache pip
+      - name: Cache pip & HF
         uses: actions/cache@v4
         with:
-          path: ~/.cache/pip
-          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
+          path: |
+            ~/.cache/pip
+            ${{ env.HF_HOME }}
+          key: pip-hf-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
           restore-keys: |
-            pip-${{ runner.os }}-
+            pip-hf-${{ runner.os }}-
 
       - name: Install Python deps
         run: |
-          python -m pip install --upgrade pip wheel setuptools
-          pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
-          pip install --no-cache-dir -r requirements.txt
-          pip check
-
-      - name: Set Hugging Face cache dir
-        run: echo "HF_HOME=${{ runner.temp }}/hf-home" >> $GITHUB_ENV
-
-      - name: Resolve inputs (sample/full) and dates
-        shell: bash
-        run: |
-          # Normalize workflow_dispatch inputs with safe defaults for push/schedule
-          SAMPLE_MODE="${{ github.event.inputs.sample_mode || 'false' }}"
-          SAMPLE_TICKERS="${{ github.event.inputs.sample_tickers || 'AAPL' }}"
-          DAYS="${{ github.event.inputs.days || '365' }}"
-          MAX_WORKERS="${{ github.event.inputs.max_workers || '8' }}"
-          BATCH="${{ github.event.inputs.batch || '16' }}"
-
-          # Compute START/END in UTC
-          python - <<'PY'
-          import os
-          from datetime import datetime, timedelta, timezone
-          days = int(os.environ.get("DAYS","365"))
-          end  = datetime.now(timezone.utc)
-          start = end - timedelta(days=days)
-          with open(os.environ["GITHUB_ENV"], "a") as f:
-              f.write(f"START={start.strftime('%Y-%m-%d')}\n")
-              f.write(f"END={end.strftime('%Y-%m-%d')}\n")
-          print("START", start.strftime('%Y-%m-%d'), "END", end.strftime('%Y-%m-%d'))
-          PY
-
-          # Persist to env for later steps
-          {
-            echo "SAMPLE_MODE=${SAMPLE_MODE}"
-            echo "SAMPLE_TICKERS=${SAMPLE_TICKERS}"
-            echo "DAYS=${DAYS}"
-            echo "MAX_WORKERS=${MAX_WORKERS}"
-            echo "BATCH=${BATCH}"
-          } >> "$GITHUB_ENV"
-
-      - name: Build universe (sample or full)
-        shell: bash
-        run: |
-          mkdir -p data
-          if [ "${SAMPLE_MODE}" = "true" ]; then
-            echo "ticker" > data/universe.csv
-            # Split comma list to lines
-            echo "${SAMPLE_TICKERS}" | tr ',' '\n' | sed 's/ //g' | sed '/^$/d' >> data/universe.csv
-            echo "[Sample mode] Universe:"
-            cat data/universe.csv
+          set -euxo pipefail
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
           else
-            echo "[Full mode] Building S&P 500 universe..."
-            python -m market_sentiment.cli.build_universe --out data/universe.csv
-            head -n 10 data/universe.csv
+            # Fallback if no requirements.txt (keeps CI green)
+            pip install pandas yfinance feedparser torch torchvision torchaudio transformers tqdm
           fi
 
-      - name: Build JSON (prices, news, earnings, sentiment)
+      - name: Build JSON data (AAPL only)
         env:
-          HF_HOME: ${{ env.HF_HOME }}
-          # RSS timeout knobs (seconds) to keep providers snappy
-          NEWS_CONNECT_TIMEOUT: "3.5"
-          NEWS_READ_TIMEOUT: "6.0"
-          NEWS_ITEMS_PER_SOURCE: "60"
+          START: ${{ github.event_name == 'workflow_dispatch' && inputs.start || '' }}
+          END:   ${{ github.event_name == 'workflow_dispatch' && inputs.end || '' }}
         run: |
           set -euxo pipefail
-          echo "Build JSON for $(($(wc -l < data/universe.csv)-1)) tickers | batch=${BATCH} cutoff_min=5 max_workers=${MAX_WORKERS}"
-          python -m market_sentiment.cli.build_json \
-            --universe data/universe.csv \
-            --start "$START" \
-            --end "$END" \
-            --out apps/web/public/data \
-            --batch "${BATCH}" \
-            --cutoff-minutes 5 \
-            --max-workers "${MAX_WORKERS}"
+          mkdir -p data
+          # Minimal universe hard-coded to AAPL
+          printf "AAPL\n" > data/sample.csv
+          # Date window: last 365 days
+          START=$(date -u -d "365 days ago" +%F)
+          END=$(date -u +%F)
+          echo "Building JSON for AAPL from $START to $END"
 
-      - name: Inspect output (counts + AAPL/sample peek)
-        shell: bash
+          export PYTHONPATH=src
+          python -m market_sentiment.cli.build_json \
+            --universe data/sample.csv \
+            --start "$START" --end "$END" \
+            --out apps/web/public/data \
+            --batch 16 \
+            --cutoff-minutes 5 \
+            --max-workers 8
+
+      - name: Inspect data
         run: |
+          set -euxo pipefail
           echo "== List data dir =="
           ls -lah apps/web/public/data
-          python - <<'PY'
-          import json, os, glob
-          base = "apps/web/public/data"
-          with open(os.path.join(base, "_tickers.json")) as f:
-              tickers = json.load(f)
-          print("Tickers listed:", len(tickers))
+          python - << 'PY'
+import json, pathlib
+base = pathlib.Path("apps/web/public/data")
+tickers = json.loads((base/"_tickers.json").read_text())
+print("Tickers listed:", len(tickers))
+aapl = json.loads((base/"ticker"/"AAPL.json").read_text())
+S = aapl.get("S") or aapl.get("sentiment") or []
+print("AAPL sentiment sample:", {
+  "len": len(S),
+  "first": (S[0] if S else None),
+  "last": (S[-1] if S else None),
+  "non_zero_points": sum(1 for x in S if abs(x) > 1e-9)
+})
+PY
 
-          # portfolio
-          pf = json.load(open(os.path.join(base, "portfolio.json")))
-          print("Portfolio present:", "dates" in pf)
-          if "dates" in pf:
-              print("Portfolio dates:", len(pf["dates"]))
-
-          # sample ticker to preview
-          prefer = os.environ.get("SAMPLE_TICKERS","AAPL").split(",")[0].strip() or "AAPL"
-          p = os.path.join(base, "ticker", prefer + ".json")
-          if os.path.exists(p):
-              t = json.load(open(p))
-              s = t.get("sentiment", [])
-              nz = sum(1 for x in s if abs(x) > 1e-9)
-              print(f"{prefer} sentiment sample: len={len(s)}, non_zero={nz}, first={s[0] if s else None}, last={s[-1] if s else None}")
-          else:
-              print("No JSON for sample ticker", prefer)
-          PY
-
+      # ---------- Node/Next.js build ----------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -182,59 +109,51 @@ jobs:
 
       - name: Install web deps
         working-directory: apps/web
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
-      - name: Build static site (Next.js export)
+      - name: Build static site (Next.js output: export)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
         run: |
           set -euxo pipefail
-          echo "==== next.config.cjs (contents) ===="
-          cat next.config.cjs || true
-          echo "==== Node/NPM ===="
-          node -v
-          npm -v
-          echo "==== Building ===="
+          echo "==== Node/NPM ===="; node -v; npm -v
+          echo "==== next.config.cjs (contents) ===="; cat next.config.cjs || true
           npm run build
-          echo "==== After build (ls) ===="
-          ls -lah
-          # Guard for 'out/' (Next output: 'export' should write it)
-          if [ ! -d out ]; then
+
+          # If Next didn't produce out/, synthesize a static export
+          if [ ! -d out ] || [ ! -f out/index.html ]; then
             echo "Warning: No 'out/' after build; synthesizing static export from '.next'..."
-            mkdir -p out
-            # copy public assets (includes /data)
+            rm -rf out
+            mkdir -p out/_next/static
+            # copy RSC/HTML shells
+            cp -r .next/server/app/* out/ 2>/dev/null || true
+            # copy client static assets
+            cp -r .next/static/* out/_next/static/ 2>/dev/null || true
+            # copy public (includes /data)
             cp -r public/* out/ 2>/dev/null || true
-            # copy next static
-            mkdir -p out/_next
-            cp -r .next/static out/_next/static 2>/dev/null || true
-            # copy pre-rendered pages (html/js/rsc) from server/app
-            rsync -a --prune-empty-dirs --include '*/' --include '*.html' --include '*.rsc' --include '*.js' --exclude '*' .next/server/app/ out/ || true
           fi
+
           echo "==== Final out/ listing ===="
           ls -lah out
-          # If sample mode, assert AAPL page exists
-          if [ "${SAMPLE_MODE}" = "true" ]; then
-            test -f out/ticker/AAPL/index.html || { echo "::error::Missing AAPL page at out/ticker/AAPL/index.html"; exit 1; }
-            echo "AAPL page present. Previewing first lines:"
-            head -n 20 out/ticker/AAPL/index.html || true
-          fi
+          find out -maxdepth 2 -type d -print
 
-      - name: Configure Pages
+      # ---------- Pages deploy ----------
+      - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact for Pages
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/out
 
   deploy:
-    needs: build
     runs-on: ubuntu-latest
+    needs: build
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
