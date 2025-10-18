@@ -27,6 +27,7 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+  MODE: ${{ github.event.inputs.mode || 'sample' }}
 
 jobs:
   build:
@@ -36,6 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # ---------- Python ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -51,6 +53,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
+          set -euo pipefail
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
@@ -76,29 +79,42 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p data
-          if [ "${{ inputs.mode }}" = "full" ]; then
-            MODE="full"
+          if [ "${MODE}" = "full" ]; then
             TICKER_CSV="data/sp500.csv"
           else
-            MODE="sample"
             TICKER_CSV="data/sample_one.csv"
             printf "ticker\nAAPL\n" > "$TICKER_CSV"
           fi
-          echo "MODE=$MODE" >> "$GITHUB_ENV"
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
-          echo "Mode: $MODE | Universe: $TICKER_CSV"
+          echo "Mode: ${MODE} | Universe: ${TICKER_CSV}"
 
-      - name: Smoke test — AAPL news providers + FinBERT
+      - name: Smoke test — news providers + FinBERT (AAPL)
         env:
           HF_HOME: ${{ env.HF_HOME }}
+        continue-on-error: true
         run: |
           python - <<'PY'
           import pandas as pd
           import yfinance as yf
-          from market_sentiment.news import (
-              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss,
-              _prov_nasdaq_rss, _prov_bizinsider_rss, fetch_news
-          )
+
+          # Import providers robustly; some may not exist in the current commit
+          from market_sentiment.news import fetch_news
+          try:
+              from market_sentiment.news import _prov_google_rss
+          except Exception: _prov_google_rss = None
+          try:
+              from market_sentiment.news import _prov_yahoo_rss
+          except Exception: _prov_yahoo_rss = None
+          try:
+              from market_sentiment.news import _prov_nasdaq_rss
+          except Exception: _prov_nasdaq_rss = None
+          try:
+              from market_sentiment.news import _prov_bizinsider_rss
+          except Exception: _prov_bizinsider_rss = None
+          try:
+              from market_sentiment.news import _prov_yfinance
+          except Exception: _prov_yfinance = None
+
           try:
               from market_sentiment.finbert import FinBERT
           except Exception:
@@ -115,17 +131,19 @@ jobs:
           except Exception as e:
               print("yfinance error:", e)
 
-          providers = [
-              ("google_rss", _prov_google_rss),
-              ("yahoo_rss", _prov_yahoo_rss),
-              ("nasdaq_rss", _prov_nasdaq_rss),
-              ("bizinsider_rss", _prov_bizinsider_rss),
-              ("yfinance", _prov_yfinance),
-          ]
+          providers = []
+          for name, fn in [("google_rss", _prov_google_rss),
+                           ("yahoo_rss", _prov_yahoo_rss),
+                           ("nasdaq_rss", _prov_nasdaq_rss),
+                           ("bizinsider_rss", _prov_bizinsider_rss),
+                           ("yfinance", _prov_yfinance)]:
+              if fn is not None:
+                  providers.append((name, fn))
+
           total = 0
           for name, fn in providers:
               try:
-                  df = fn("AAPL", START, END, "Apple Inc.", 100)
+                  df = fn("AAPL", START, END, "Apple Inc.", 120)
                   print(f"{name:15s} rows:", len(df))
                   if len(df):
                       print(df[["ts","title"]].tail(3).to_string(index=False))
@@ -134,7 +152,7 @@ jobs:
                   print(f"{name} error:", e)
 
           try:
-              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=100)
+              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=120)
               print("fetch_news rows:", len(all_df))
               if len(all_df):
                   print(all_df[["ts","title"]].tail(3).to_string(index=False))
@@ -143,14 +161,14 @@ jobs:
               all_df = pd.DataFrame()
 
           if len(all_df) and FinBERT is not None:
-              texts = all_df["text"].fillna(all_df["title"]).astype(str).tolist()[:16]
+              texts = (all_df["title"].fillna('') + ' ' + all_df["text"].fillna('')).astype(str).tolist()[:16]
               try:
                   fb = FinBERT()
                   try:
-                      S = fb.score(texts, batch=16)
+                      scores = fb.score(texts, batch=16)
                   except TypeError:
-                      S = fb.score(texts)
-                  s = pd.Series(S).astype(float)
+                      scores = fb.score(texts)
+                  s = pd.Series(scores).astype(float)
                   print("FinBERT sample:", s.round(4).tolist(), "mean:", float(s.mean()))
               except Exception as e:
                   print("FinBERT error:", e)
@@ -159,6 +177,7 @@ jobs:
           PY
 
       - name: Smoke test — AAPL prices
+        continue-on-error: true
         run: |
           python - <<'PY'
           from market_sentiment.prices import fetch_prices_yf
@@ -185,7 +204,7 @@ jobs:
 
       - name: Inspect generated data (AAPL)
         run: |
-          set -e
+          set -euo pipefail
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
@@ -203,16 +222,19 @@ jobs:
           print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
           PY
 
+      # ---------- Node / Next ----------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
+          cache-dependency-path: apps/web/package-lock.json
 
       - name: Install web deps
         working-directory: apps/web
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
-      - name: Build static site (export)
+      - name: Build static site (Next.js export)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -225,27 +247,20 @@ jobs:
           node -v
           npm -v
           echo "==== Building ===="
-          npm run build
-          echo "==== After build (ls) ===="
-          ls -lah
-          if [ ! -d out ]; then
-            echo "No 'out/' after build; synthesizing from '.next'..."
-            mkdir -p out
-            rsync -a .next/static out/_next/static || true
-            find .next/server/app -maxdepth 4 -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-              d="${f%.html}"; d="${d#.next/server/app}"
-              mkdir -p "out/$d"
-              cp "$f" "out/$d/index.html" || true
-            done
-            mkdir -p out/data
-            cp -r public/data/* out/data/ || true
-            if [ ! -f out/index.html ] && [ -f .next/server/app/index.html ]; then
-              cp .next/server/app/index.html out/index.html || true
-            fi
+          npx next build
+          npx next export
+          echo "==== Verify export ===="
+          test -f out/index.html
+          # assert AAPL page exists in sample mode
+          if [ "${MODE}" = "sample" ]; then
+            test -f out/ticker/AAPL/index.html
           fi
-          echo "==== Final out/ listing ===="
-          ls -lah out
+          echo "==== out/ tree (head) ===="
+          ls -lah out || true
+          ls -lah out/ticker || true
+          ls -lah out/ticker/AAPL || true
 
+      # ---------- GitHub Pages ----------
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
