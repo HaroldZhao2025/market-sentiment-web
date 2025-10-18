@@ -2,14 +2,17 @@
 from __future__ import annotations
 
 import re
+import time
 import calendar
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List, Tuple, Optional, Callable
+from typing import List, Tuple, Callable, Optional, Any
 
 import pandas as pd
 import feedparser
-import requests
-import yfinance as yf
+import yfinance as yf  # free
+
+# ------------------------
+# Utils
+# ------------------------
 
 def _clean_text(s: Optional[str]) -> str:
     if not s:
@@ -18,149 +21,273 @@ def _clean_text(s: Optional[str]) -> str:
     return s
 
 def _norm_ts_utc(x) -> pd.Timestamp:
+    """
+    Normalize to tz-aware UTC Timestamp.
+    Accepts epoch (s/ms), struct_time, or date-like strings.
+    Returns pd.NaT on failure.
+    """
     if x is None:
         return pd.NaT
-    if hasattr(x, "tm_year"):
+
+    # feedparser: struct_time
+    if hasattr(x, "tm_year"):  # time.struct_time duck-typing
         try:
-            sec = calendar.timegm(x)
+            sec = calendar.timegm(x)  # treat as UTC
             return pd.Timestamp.utcfromtimestamp(sec).tz_localize("UTC")
         except Exception:
             return pd.NaT
+
+    # epoch (int-like or str)
     try:
         xi = int(x)
+        # Heuristic: large values are ms since epoch
         if xi > 10_000_000_000:
-            xi = xi / 1000.0
+            return pd.Timestamp.utcfromtimestamp(xi / 1000.0).tz_localize("UTC")
         return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
     except Exception:
         pass
-    return pd.to_datetime(x, utc=True, errors="coerce")
+
+    # generic parse
+    ts = pd.to_datetime(x, utc=True, errors="coerce")
+    return ts
+
+def _window_filter(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
+    if df.empty:
+        return df
+    s = pd.to_datetime(start, utc=True)
+    e = pd.to_datetime(end,   utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+    return df[(df["ts"] >= s) & (df["ts"] <= e)]
 
 def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.DataFrame:
     if not rows:
         return pd.DataFrame(columns=["ticker","ts","title","url","text"])
     df = pd.DataFrame(rows, columns=["ts","title","url","text"])
     df["ticker"] = ticker
-    df = df.dropna(subset=["ts"])
+    # final clean
     df["title"] = df["title"].map(_clean_text)
     df["text"]  = df["text"].map(_clean_text)
-    df = df.drop_duplicates(["title","url"]).sort_values("ts").reset_index(drop=True)
+    df = df.dropna(subset=["ts"])
+    df = df.drop_duplicates(["title","url"])
+    df = df.sort_values("ts").reset_index(drop=True)
     return df[["ticker","ts","title","url","text"]]
 
-def _window_filter(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
-    if df.empty: return df
-    s = pd.to_datetime(start, utc=True)
-    e = pd.to_datetime(end,   utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
-    return df[(df["ts"] >= s) & (df["ts"] <= e)]
+# ------------------------
+# Provider helpers
+# ------------------------
 
-def _rss(url: str, timeout: int = 6) -> feedparser.FeedParserDict:
+def _yf_extract_time(item: dict[str, Any]) -> pd.Timestamp:
+    """
+    yfinance news objects vary a lot. Try several fields in order.
+    """
+    for key in (
+        "providerPublishTime",
+        "provider_publish_time",
+        "publishTime",
+        "pubDate",
+        "published_at",
+        "published",
+        "updated",
+    ):
+        v = item.get(key)
+        if v is not None:
+            ts = _norm_ts_utc(v)
+            if ts is not pd.NaT:
+                return ts
+
+    # sometimes nested under content
+    content = item.get("content") or {}
+    for key in ("pubDate", "published", "updated", "timestamp"):
+        v = content.get(key)
+        if v is not None:
+            ts = _norm_ts_utc(v)
+            if ts is not pd.NaT:
+                return ts
+
+    return pd.NaT
+
+def _first_not_empty(*items: Any) -> str:
+    for it in items:
+        if it:
+            s = str(it).strip()
+            if s:
+                return s
+    return ""
+
+# ------------------------
+# Providers (free)
+# ------------------------
+
+def _prov_yfinance(ticker: str, start: str, end: str, company: str | None = None, limit: int = 120) -> pd.DataFrame:
+    """
+    yfinance .news (no key). Robust to field variations.
+    """
     try:
-        r = requests.get(url, timeout=timeout, headers={"User-Agent":"Mozilla/5.0"})
-        r.raise_for_status()
-        return feedparser.parse(r.content)
-    except Exception:
-        try:
-            return feedparser.parse(url)
-        except Exception:
-            return feedparser.parse(b"")
-
-def _rows_from_feed(feed: feedparser.FeedParserDict, limit: int = 40) -> List[Tuple[pd.Timestamp, str, str, str]]:
-    out: List[Tuple[pd.Timestamp, str, str, str]] = []
-    for i, entry in enumerate(getattr(feed, "entries", [])):
-        if i >= limit: break
-        ts = _norm_ts_utc(
-            getattr(entry, "published_parsed", None)
-            or getattr(entry, "updated_parsed", None)
-            or getattr(entry, "published", None)
-            or getattr(entry, "updated", None)
-        )
-        if ts is pd.NaT: continue
-        title = _clean_text(getattr(entry, "title", ""))
-        link  = getattr(entry, "link", "") or ""
-        summary = _clean_text(getattr(entry, "summary", "") or getattr(entry, "description", ""))
-        out.append((ts, title, link, summary))
-    return out
-
-# Providers
-def _prov_yfinance(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
-    try:
-        raw = getattr(yf.Ticker(ticker), "news", None)
+        t = yf.Ticker(ticker)
+        raw = getattr(t, "news", None)
     except Exception:
         raw = None
+
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     if isinstance(raw, list):
         for item in raw[:limit]:
-            ts = _norm_ts_utc(item.get("providerPublishTime"))
-            if ts is pd.NaT: continue
-            title = item.get("title") or ""
-            url   = item.get("link") or item.get("url") or ""
-            summary = item.get("summary") or ""
-            rows.append((ts, title, url, summary))
-    return _window_filter(_mk_df(rows, ticker), start, end)
+            ts = _yf_extract_time(item)
+            if ts is pd.NaT:
+                continue
+            title = _first_not_empty(item.get("title"), item.get("headline"))
+            link  = _first_not_empty(item.get("link"), item.get("url"))
+            # prefer summary/teaser; fallback to title to ensure FinBERT has text
+            summary = _first_not_empty(item.get("summary"), item.get("teaser"), title)
+            rows.append((ts, title, link, summary))
 
-def _prov_google_rss(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
-    q = f'"{ticker}"' + (f' OR "{company}"' if company else "")
+    df = _mk_df(rows, ticker)
+    return _window_filter(df, start, end)
+
+def _prov_google_rss(ticker: str, start: str, end: str, company: str | None = None, limit: int = 120) -> pd.DataFrame:
+    """
+    Google News RSS (no key)
+    """
+    q = f'"{ticker}"'
+    if company:
+        q += f' OR "{company}"'
     url = f"https://news.google.com/rss/search?q={q}+when:30d&hl=en-US&gl=US&ceid=US:en"
-    return _window_filter(_mk_df(_rows_from_feed(_rss(url), limit), ticker), start, end)
+    feed = feedparser.parse(url)
 
-def _prov_yahoo_rss(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
+    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    for i, entry in enumerate(getattr(feed, "entries", [])):
+        if i >= limit:
+            break
+        ts = _norm_ts_utc(getattr(entry, "published_parsed", None) or
+                          getattr(entry, "updated_parsed",   None) or
+                          getattr(entry, "published",         None) or
+                          getattr(entry, "updated",           None))
+        if ts is pd.NaT:
+            continue
+        title = _clean_text(getattr(entry, "title", ""))
+        link  = getattr(entry, "link", "") or ""
+        summary = _clean_text(getattr(entry, "summary", "") or getattr(entry, "description", "") or title)
+        rows.append((ts, title, link, summary))
+
+    df = _mk_df(rows, ticker)
+    return _window_filter(df, start, end)
+
+def _prov_yahoo_rss(ticker: str, start: str, end: str, company: str | None = None, limit: int = 120) -> pd.DataFrame:
+    """
+    Yahoo Finance RSS (no key)
+    """
     url = f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={ticker}&lang=en-US&region=US&count={limit}"
-    return _window_filter(_mk_df(_rows_from_feed(_rss(url), limit), ticker), start, end)
+    feed = feedparser.parse(url)
 
-def _prov_nasdaq_rss(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
-    return _window_filter(_mk_df(_rows_from_feed(_rss(f"https://www.nasdaq.com/feed/rssoutbound?symbol={ticker}"), limit), ticker), start, end)
+    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    for entry in getattr(feed, "entries", []):
+        ts = _norm_ts_utc(getattr(entry, "published_parsed", None) or
+                          getattr(entry, "updated_parsed",   None) or
+                          getattr(entry, "published",         None) or
+                          getattr(entry, "updated",           None))
+        if ts is pd.NaT:
+            continue
+        title = _clean_text(getattr(entry, "title", ""))
+        link  = getattr(entry, "link", "") or ""
+        summary = _clean_text(getattr(entry, "summary", "") or getattr(entry, "description", "") or title)
+        rows.append((ts, title, link, summary))
 
-def _prov_marketwatch_rss(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
-    q = requests.utils.quote(_clean_text(company or ticker))
-    return _window_filter(_mk_df(_rows_from_feed(_rss(f"https://www.marketwatch.com/rss/search?q={q}"), limit), ticker), start, end)
+    df = _mk_df(rows, ticker)
+    return _window_filter(df, start, end)
 
-def _prov_investopedia_rss(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
-    q = requests.utils.quote(_clean_text(company or ticker))
-    return _window_filter(_mk_df(_rows_from_feed(_rss(f"https://www.investopedia.com/search/rss?q={q}"), limit), ticker), start, end)
+def _prov_nasdaq_rss(ticker: str, start: str, end: str, company: str | None = None, limit: int = 120) -> pd.DataFrame:
+    """
+    Nasdaq RSS (no key)
+    """
+    url = f"https://www.nasdaq.com/feed/rssoutbound?symbol={ticker}"
+    feed = feedparser.parse(url)
 
-def _prov_prnewswire_rss(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
-    q = requests.utils.quote(_clean_text(company or ticker))
-    return _window_filter(_mk_df(_rows_from_feed(_rss(f"https://www.prnewswire.com/ap/rss/NewsSearch/{q}.rss"), limit), ticker), start, end)
+    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    for i, entry in enumerate(getattr(feed, "entries", [])):
+        if i >= limit:
+            break
+        ts = _norm_ts_utc(getattr(entry, "published_parsed", None) or
+                          getattr(entry, "updated_parsed",   None) or
+                          getattr(entry, "published",         None) or
+                          getattr(entry, "updated",           None))
+        if ts is pd.NaT:
+            continue
+        title = _clean_text(getattr(entry, "title", ""))
+        link  = getattr(entry, "link", "") or ""
+        summary = _clean_text(getattr(entry, "summary", "") or getattr(entry, "description", "") or title)
+        rows.append((ts, title, link, summary))
 
-def _prov_businesswire_rss(ticker: str, start: str, end: str, company: Optional[str], limit: int) -> pd.DataFrame:
-    q = requests.utils.quote(_clean_text(company or ticker))
-    url = ("https://www.businesswire.com/portal/site/home/template.RSS/"
-           "?javax.portlet.tpst=3475e9c8b0a4f8d4c86f0f10a4f8a62a_ws_MX"
-           "&javax.portlet.prp_3475e9c8b0a4f8d4c86f0f10a4f8a62a_viewID=MY_PORTAL_VIEW"
-           "&javax.portlet.prp_3475e9c8b0a4f8d4c86f0f10a4f8a62a_ndm=1"
-           "&javax.portlet.begCacheTok=com.vignette.cachetoken"
-           "&javax.portlet.endCacheTok=com.vignette.cachetoken"
-           f"&javax.portlet.prp_3475e9c8b0a4f8d4c86f0f10a4f8a62a_keywords={q}")
-    return _window_filter(_mk_df(_rows_from_feed(_rss(url), limit), ticker), start, end)
+    df = _mk_df(rows, ticker)
+    return _window_filter(df, start, end)
+
+def _prov_bizinsider_rss(ticker: str, start: str, end: str, company: str | None = None, limit: int = 120) -> pd.DataFrame:
+    """
+    Business Insider markets RSS (broad, we still filter by window)
+    """
+    url = "https://www.businessinsider.com/sai/rss"  # general feed; cheap, but filtered by date window
+    feed = feedparser.parse(url)
+
+    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    for i, entry in enumerate(getattr(feed, "entries", [])):
+        if i >= limit:
+            break
+        ts = _norm_ts_utc(getattr(entry, "published_parsed", None) or
+                          getattr(entry, "updated_parsed",   None) or
+                          getattr(entry, "published",         None) or
+                          getattr(entry, "updated",           None))
+        if ts is pd.NaT:
+            continue
+        title = _clean_text(getattr(entry, "title", ""))
+        link  = getattr(entry, "link", "") or ""
+        summary = _clean_text(getattr(entry, "summary", "") or getattr(entry, "description", "") or title)
+        # keep everything; downstream scoring will filter by ticker relevance when aggregating by ticker/day
+        rows.append((ts, title, link, summary))
+
+    df = _mk_df(rows, ticker)
+    return _window_filter(df, start, end)
+
+# ------------------------
+# Public API (kept stable)
+# ------------------------
 
 Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
+
 _PROVIDERS: List[Provider] = [
     _prov_yfinance,
     _prov_google_rss,
     _prov_yahoo_rss,
     _prov_nasdaq_rss,
-    _prov_marketwatch_rss,
-    _prov_investopedia_rss,
-    _prov_prnewswire_rss,
-    _prov_businesswire_rss,
+    _prov_bizinsider_rss,  # broad, but helps fill sparse days
 ]
 
-def fetch_news(ticker: str, start: str, end: str, company: Optional[str] = None, max_per_provider: int = 40, max_workers: int = 6) -> pd.DataFrame:
+def fetch_news(
+    ticker: str,
+    start: str,
+    end: str,
+    company: str | None = None,
+    max_per_provider: int = 120
+) -> pd.DataFrame:
+    """
+    Combine multiple free providers, normalize & dedupe.
+    Output columns: ticker, ts (UTC), title, url, text
+    """
     frames: List[pd.DataFrame] = []
-    def call(p: Provider) -> pd.DataFrame:
+    for prov in _PROVIDERS:
         try:
-            return p(ticker, start, end, company, max_per_provider)
+            df = prov(ticker, start, end, company, max_per_provider)
         except Exception:
-            return pd.DataFrame(columns=["ticker","ts","title","url","text"])
-    with ThreadPoolExecutor(max_workers=max_workers) as ex:
-        futs = [ex.submit(call, p) for p in _PROVIDERS]
-        for f in as_completed(futs):
-            df = f.result()
-            if not df.empty:
-                frames.append(df)
+            df = pd.DataFrame(columns=["ticker","ts","title","url","text"])
+        if not df.empty:
+            frames.append(df)
+
     if not frames:
         return pd.DataFrame(columns=["ticker","ts","title","url","text"])
+
     df = pd.concat(frames, ignore_index=True)
+    # Final cleanse/dedupe
     df["title"] = df["title"].map(_clean_text)
     df["text"]  = df["text"].map(_clean_text)
-    df = df.drop_duplicates(["title","url"]).sort_values("ts").reset_index(drop=True)
+    # ensure text available for FinBERT
+    mblank = (df["text"].str.len() == 0)
+    df.loc[mblank, "text"] = df.loc[mblank, "title"]
+    df = df.drop_duplicates(["title","url"])
+    df = df.sort_values("ts").reset_index(drop=True)
     return df
