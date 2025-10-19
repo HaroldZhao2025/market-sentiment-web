@@ -77,11 +77,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p data
-          if [ "${{ inputs.mode || 'sample' }}" = "full" ]; then
-            MODE="full"
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "${MODE:-}" ]; then MODE="sample"; fi
+          if [ "$MODE" = "full" ]; then
             TICKER_CSV="data/sp500.csv"
           else
-            MODE="sample"
             TICKER_CSV="data/sample_one.csv"
             printf "ticker\nAAPL\n" > "$TICKER_CSV"
           fi
@@ -207,23 +207,34 @@ jobs:
           PY
 
       # ---------- Node & web build ----------
-      - name: Setup Node.js
+      # Use cache ONLY if lockfile exists
+      - name: Setup Node.js (with npm cache)
+        if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
           cache-dependency-path: apps/web/package-lock.json
-          
-      # Fallback: no cache (avoids the "paths were not resolved" error)
+
+      # Fallback: no cache (avoids the “paths were not resolved” error)
       - name: Setup Node.js (no cache)
         if: ${{ hashFiles('apps/web/package-lock.json') == '' }}
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
-      - name: Install web deps
+      # Choose ci/install depending on lockfile; ensure TS types exist
+      - name: Install web deps (ci if lockfile, else install)
         working-directory: apps/web
-        run: npm ci --no-audit --no-fund
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
+          # Ensure types are present (prevents @types error on fresh runners)
+          npm i -D @types/react @types/node --no-audit --no-fund || true
 
       - name: Build static site (create out/ from .next)
         working-directory: apps/web
@@ -253,18 +264,17 @@ jobs:
           fi
 
           # App routes (.html files)
-          find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-            rel="${f#.next/server/app}"
-            dir="${rel%/index.html}"
-            mkdir -p "out/${dir}"
-            cp "$f" "out/${dir}/index.html"
-          done
-
-          # 404 fallback for GH Pages
-          if [ -f ".next/server/app/_not-found.html" ]; then
-            cp ".next/server/app/_not-found.html" "out/404.html" || true
-          elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
-            cp "out/index.html" "out/404.html" || true
+          if [ -d ".next/server/app" ]; then
+            find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+              rel="${f#.next/server/app}"
+              dir="${rel%/index.html}"
+              mkdir -p "out/${dir}"
+              cp "$f" "out/${dir}/index.html"
+            done
+            # 404 fallback for GH Pages
+            if [ -f ".next/server/app/_not-found.html" ]; then
+              cp ".next/server/app/_not-found.html" "out/404.html" || true
+            fi
           fi
 
           # Public assets (includes /data/**)
