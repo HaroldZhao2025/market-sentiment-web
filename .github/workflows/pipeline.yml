@@ -27,7 +27,8 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  USE_HF_DATASET: "1"  # enables FNSPID fallback in news.py
+  # IMPORTANT: keep HuggingFace dataset OFF in CI to avoid huge downloads
+  USE_HF_DATASET: "0"
 
 jobs:
   build:
@@ -36,6 +37,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # --- NEW: free up disk space early ------------------------------------
+      - name: Free up disk space
+        shell: bash
+        run: |
+          set -euxo pipefail
+          echo "Before cleanup:"
+          df -h
+          # Remove preinstalled SDKs we don't use (saves ~15-20GB)
+          sudo rm -rf /usr/share/dotnet || true
+          sudo rm -rf /usr/local/lib/android || true
+          sudo rm -rf /opt/ghc || true
+          sudo rm -rf /opt/hostedtoolcache/CodeQL || true
+          # Docker cleanup
+          docker system prune -af || true
+          echo "After cleanup:"
+          df -h
+      # ----------------------------------------------------------------------
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -118,13 +137,11 @@ jobs:
               ("nasdaq_rss", _prov_nasdaq_rss),
               ("yfinance", _prov_yfinance),
           ]
-          total = 0
           for name, fn in provs:
               try:
                   df = fn("AAPL", START, END, "Apple Inc.", 300)
                   days = df["ts"].dt.normalize().nunique() if not df.empty else 0
                   print(f"{name:12s} rows: {len(df):4d} | days: {days}")
-                  total += len(df)
               except Exception as e:
                   print(f"{name} error:", e)
 
@@ -171,6 +188,8 @@ jobs:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
           set -euo pipefail
+          echo "Disk before data build:"
+          df -h
           echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | batch=16 cutoff_min=5 max_workers=8"
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
@@ -179,6 +198,8 @@ jobs:
             --batch 16 \
             --cutoff-minutes 5 \
             --max-workers 8
+          echo "Disk after data build:"
+          df -h
 
       - name: Inspect generated data (AAPL)
         run: |
@@ -196,11 +217,10 @@ jobs:
               print(f"AAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {round(S[0],6) if S else None}  last= {round(S[-1],6) if S else None}")
               news = obj.get("news") or []
               print("AAPL news items saved (trimmed):", len(news))
-              # count total news days in saved file
-              from datetime import datetime, timezone
+              from datetime import datetime
               def just_date(s):
                   try:
-                      return datetime.fromisoformat(s.replace("Z","+00:00")).date()
+                      return datetime.fromisoformat(s.replace('Z','+00:00')).date()
                   except Exception:
                       return None
               days = len({just_date(n.get("ts","")) for n in news if n.get("ts")})
@@ -240,22 +260,17 @@ jobs:
           if [ ! -d out ]; then
             echo "No 'out/' after build; synthesizing from '.next'..."
             mkdir -p out/_next/static
-            # Copy static assets
             if [ -d .next/static ]; then
               rsync -a .next/static/ out/_next/static/
             fi
-            # Copy all HTML pages under app router output:
             while IFS= read -r -d '' f; do
               rel="${f#.next/server/app/}"
-              # Map foo.html -> foo/index.html
               dst="out/${rel%.html}/index.html"
               mkdir -p "$(dirname "$dst")"
               cp "$f" "$dst"
             done < <(find .next/server/app -type f -name '*.html' -print0)
-            # Ensure data is present
             mkdir -p out/data
             [ -d public/data ] && cp -r public/data/* out/data/ || true
-            # Fallback for homepage
             if [ ! -f out/index/index.html ] && [ -f .next/server/app/index.html ]; then
               mkdir -p out/index
               cp .next/server/app/index.html out/index/index.html
