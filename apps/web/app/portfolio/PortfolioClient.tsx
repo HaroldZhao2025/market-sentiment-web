@@ -1,48 +1,59 @@
+// apps/web/app/portfolio/PortfolioClient.tsx
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+import { dataUrl } from "../../lib/paths";
+import {
+  ResponsiveContainer,
+  LineChart,
+  CartesianGrid,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 
 type PortfolioJSON = {
   dates: string[];
-  long: number[];
-  short: number[];
-  long_short: number[];
+  equity?: number[];
+  value?: number[];
 };
 
 export default function PortfolioClient() {
-  const [data, setData] = useState<PortfolioJSON | null>(null);
-  const [err, setErr] = useState<string | null>(null);
+  const [data, setData] = useState<{ d: string; v: number }[]>([]);
 
   useEffect(() => {
-    const url = `${BASE}/data/portfolio.json`;
-    fetch(url, { cache: "no-store" })
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
-        return r.json();
+    fetch(dataUrl("portfolio.json"), { cache: "no-cache" })
+      .then((r) => r.json())
+      .then((obj: PortfolioJSON) => {
+        const v = obj.equity ?? obj.value ?? [];
+        const rows = (obj.dates || []).map((d, i) => ({
+          d,
+          v: typeof v[i] === "number" ? v[i] : Number(v[i] ?? 0) || 0,
+        }));
+        setData(rows);
       })
-      .then(setData)
-      .catch((e) => setErr(e.message));
+      .catch(() => setData([]));
   }, []);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Portfolio</h1>
-        <Link href="/" className="text-sm underline hover:no-underline">← Home</Link>
+    <div className="max-w-6xl mx-auto p-6">
+      <h1 className="text-2xl font-semibold mb-4">Portfolio</h1>
+      <div className="rounded-2xl p-4 shadow-sm border bg-white">
+        {data.length ? (
+          <ResponsiveContainer width="100%" height={420}>
+            <LineChart data={data} margin={{ top: 12, right: 24, bottom: 0, left: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="d" tick={{ fontSize: 11 }} minTickGap={28} />
+              <YAxis tick={{ fontSize: 11 }} width={56} />
+              <Tooltip />
+              <Line type="monotone" dataKey="v" name="Value" dot={false} strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="text-neutral-500">No portfolio data.</div>
+        )}
       </div>
-
-      {err && <div className="text-sm text-red-600">Failed to load: {err}</div>}
-      {!data && !err && <div className="text-sm text-neutral-500">Loading…</div>}
-      {data && data.dates?.length === 0 && <div className="text-sm text-neutral-500">No data.</div>}
-
-      {data && data.dates?.length > 0 && (
-        <div className="text-sm">
-          Points: <b>{data.dates.length}</b> — long/short series loaded from <code>{BASE}/data/portfolio.json</code>
-        </div>
-      )}
     </div>
   );
 }
