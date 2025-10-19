@@ -102,6 +102,15 @@ def _retry(fn, tries=2, delay=0.8):
                 raise
             time.sleep(delay)
 
+def _month_windows(start: str, end: str):
+    s = pd.Timestamp(start, tz="UTC").normalize()
+    e = pd.Timestamp(end, tz="UTC").normalize()
+    cur = s
+    while cur <= e:
+        w_end = min((cur + pd.offsets.MonthEnd(0)), e)
+        yield cur, w_end
+        cur = (w_end + pd.Timedelta(days=1)).normalize()
+
 # ------------------------
 # Providers
 # ------------------------
@@ -165,39 +174,54 @@ def _prov_yfinance(
 def _prov_google_rss(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 300
 ) -> pd.DataFrame:
-    # we ask for 365d; Google may still return a slice; dedupe later
+    # First attempt: a single 365d window (fast)
     q = f'"{ticker}"' + (f' OR "{company}"' if company else "")
     url = f"https://news.google.com/rss/search?q={quote_plus(q)}+when:365d&hl=en-US&gl=US&ceid=US:en"
 
-    def _get():
-        return feedparser.parse(url, request_headers={"User-Agent": "Mozilla/5.0"})
+    def _get(url_):
+        return feedparser.parse(url_, request_headers={"User-Agent": "Mozilla/5.0"})
 
     try:
-        feed = _retry(_get, tries=2, delay=0.6)
+        feed = _retry(lambda: _get(url), tries=2, delay=0.6)
     except Exception:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+        feed = None
 
-    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
-    for i, entry in enumerate(getattr(feed, "entries", [])):
-        if i >= limit:
-            break
-        ts = _norm_ts_utc(
-            getattr(entry, "published_parsed", None)
-            or getattr(entry, "updated_parsed", None)
-            or getattr(entry, "published", None)
-            or getattr(entry, "updated", None)
-        )
-        if pd.isna(ts):
-            continue
-        title = _first_str(getattr(entry, "title", None))
-        link  = _first_str(getattr(entry, "link", None))
-        text  = _first_str(getattr(entry, "summary", None), getattr(entry, "description", None), title)
-        if not title and not text:
-            continue
-        rows.append((ts, title or text, link, text or title))
+    def _consume(feed_) -> pd.DataFrame:
+        rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+        for i, entry in enumerate(getattr(feed_, "entries", []) if feed_ else []):
+            if i >= limit: break
+            ts = _norm_ts_utc(
+                getattr(entry, "published_parsed", None)
+                or getattr(entry, "updated_parsed", None)
+                or getattr(entry, "published", None)
+                or getattr(entry, "updated", None)
+            )
+            if pd.isna(ts): continue
+            title = _first_str(getattr(entry, "title", None))
+            link  = _first_str(getattr(entry, "link", None))
+            text  = _first_str(getattr(entry, "summary", None), getattr(entry, "description", None), title)
+            if not title and not text: continue
+            rows.append((ts, title or text, link, text or title))
+        return _mk_df(rows, ticker)
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
+    df = _consume(feed)
+
+    # Fallback: if coverage is thin (< 40 items), fetch month-by-month for the whole range
+    if len(df) < 40:
+        frames = []
+        for ws, we in _month_windows(start, end):
+            qp = f'"{ticker}"' + (f' OR "{company}"' if company else "")
+            qp = quote_plus(f"{qp} after:{ws.date()} before:{(we + pd.Timedelta(days=1)).date()}")
+            url_m = f"https://news.google.com/rss/search?q={qp}&hl=en-US&gl=US&ceid=US:en"
+            try:
+                feed_m = _retry(lambda: _get(url_m), tries=2, delay=0.6)
+                frames.append(_consume(feed_m))
+            except Exception:
+                continue
+        if frames:
+            df = pd.concat([df] + frames, ignore_index=True).drop_duplicates(["title", "url"])
+
+    return _window_filter(df.sort_values("ts").reset_index(drop=True), start, end)
 
 def _prov_yahoo_rss(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 300
