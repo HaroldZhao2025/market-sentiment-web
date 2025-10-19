@@ -1,26 +1,31 @@
-// server component
+// apps/web/app/ticker/[symbol]/page.tsx
 import { notFound } from "next/navigation";
 import TickerClient from "./TickerClient";
-import { loadTickers, loadTickerSeries, loadTickerNews } from "@/lib/data";
+import { loadTickerSeries, loadTickerNews } from "../../lib/data";
 
-export async function generateStaticParams() {
-  const tickers = await loadTickers();
-  return tickers.map((t) => ({ symbol: t }));
-}
+type Params = { params: { symbol: string } };
 
-export default async function TickerPage({ params }: { params: { symbol: string } }) {
-  const symbol = (params.symbol || "").toUpperCase();
-  const tickers = await loadTickers();
-  if (!tickers.includes(symbol)) {
-    notFound();
-  }
+export default async function Page({ params: { symbol } }: Params) {
+  const upper = (symbol || "").toUpperCase();
+  const [raw, news] = await Promise.all([
+    loadTickerSeries(upper),
+    loadTickerNews(upper),
+  ]);
 
-  const series = await loadTickerSeries(symbol);
-  const news = await loadTickerNews(symbol);
+  if (!raw) return notFound();
+
+  // Map your JSON (`S`) into the prop shape TickerClient expects (`sentiment`)
+  const series = {
+    date: raw.date ?? [],
+    price: raw.price ?? [],
+    sentiment: (raw.S ?? raw.sentiment ?? []).map((x: any) =>
+      typeof x === "number" ? x : Number(x || 0)
+    ),
+  };
 
   return (
     <div className="min-h-screen">
-      <TickerClient symbol={symbol} series={series} news={news} />
+      <TickerClient symbol={upper} series={series} news={news} />
     </div>
   );
 }
