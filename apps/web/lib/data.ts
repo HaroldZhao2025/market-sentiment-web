@@ -1,83 +1,71 @@
-// apps/web/lib/data.ts
-import fs from "node:fs/promises";
-import path from "node:path";
-
-export type Series = { dates: string[]; values: number[]; label: string };
-export type SeriesIn = { left: Series; right: Series; overlay?: Series };
-export type NewsItem = { ts: string; title: string; url: string; text?: string };
+import fs from "fs/promises";
+import path from "path";
 
 const DATA_DIR = path.join(process.cwd(), "public", "data");
-
-function pick<T = any>(obj: any, k: string): T | undefined {
-  return obj?.[k] ?? obj?.[k.toUpperCase()];
-}
-
-async function readJSON<T = any>(p: string): Promise<T> {
-  const raw = await fs.readFile(p, "utf8");
-  return JSON.parse(raw) as T;
-}
 
 export async function loadTickers(): Promise<string[]> {
   try {
     const p = path.join(DATA_DIR, "_tickers.json");
-    const arr = await readJSON<any[]>(p);
-    // tolerate string-array or object-array
-    if (Array.isArray(arr) && typeof arr[0] === "string") return arr;
-    if (Array.isArray(arr)) return arr.map((x: any) => String(x).toUpperCase());
-  } catch (_) {}
-  return [];
-}
-
-export async function loadPortfolio(): Promise<any | null> {
-  try {
-    const p = path.join(DATA_DIR, "portfolio.json");
-    return await readJSON<any>(p);
-  } catch {
-    return null;
-  }
-}
-
-export async function loadTickerNews(symbol: string): Promise<NewsItem[]> {
-  try {
-    const p = path.join(DATA_DIR, "ticker", `${symbol}.json`);
-    const j = await readJSON<any>(p);
-    const news = pick<any[]>(j, "news") ?? [];
-    return news.map((n) => ({
-      ts: n.ts ?? n.date ?? "",
-      title: n.title ?? "",
-      url: n.url ?? "",
-      text: n.text ?? "",
-    }));
+    const raw = await fs.readFile(p, "utf8");
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
   } catch {
     return [];
   }
 }
 
-export async function loadTickerSeries(symbol: string): Promise<SeriesIn | null> {
+export type Series = {
+  date: string[];
+  price: number[];
+  sentiment: number[];
+  sentiment_ma7?: number[];
+};
+
+export async function loadTickerSeries(symbol: string): Promise<Series | null> {
   try {
     const p = path.join(DATA_DIR, "ticker", `${symbol}.json`);
-    const j = await readJSON<any>(p);
+    const raw = JSON.parse(await fs.readFile(p, "utf8"));
 
-    const dates: string[] = pick<string[]>(j, "date") ?? [];
-    const close: number[] = pick<number[]>(j, "close") ?? pick<number[]>(j, "CLOSE") ?? [];
-    const s: number[] = pick<number[]>(j, "S") ?? [];
-    // compute 7-day MA defensively
-    const ma7: number[] = [];
-    for (let i = 0; i < s.length; i++) {
-      const start = Math.max(0, i - 6);
-      const slice = s.slice(start, i + 1);
-      const m = slice.length ? slice.reduce((a, b) => a + (b ?? 0), 0) / slice.length : 0;
-      ma7.push(Number.isFinite(m) ? m : 0);
-    }
+    // Support both legacy keys and new ones
+    const dates: string[] = raw.date ?? raw.dates ?? [];
+    const price: number[] = raw.close ?? raw.price ?? [];
+    const sentiment: number[] = raw.S ?? raw.sentiment ?? [];
+    const sentiment_ma7: number[] | undefined = raw.S_ma7 ?? raw.sentiment_ma7;
 
-    if (!dates.length || !close.length) return null;
+    if (!dates.length || !price.length || !sentiment.length) return null;
 
     return {
-      left: { dates, values: close, label: "Close" },
-      right: { dates, values: s, label: "Daily Sentiment" },
-      overlay: { dates, values: ma7, label: "Sentiment (7-day MA)" },
+      date: dates,
+      price,
+      sentiment,
+      sentiment_ma7,
     };
   } catch {
     return null;
+  }
+}
+
+export type NewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  s?: number | null;
+  source?: string | null;
+};
+
+export async function loadTickerNews(symbol: string): Promise<NewsItem[]> {
+  try {
+    const p = path.join(DATA_DIR, "ticker", `${symbol}.json`);
+    const raw = JSON.parse(await fs.readFile(p, "utf8"));
+    const news = (raw.news ?? []) as any[];
+    return news.map((r) => ({
+      ts: r.ts ?? r.date ?? "",
+      title: r.title ?? "",
+      url: r.url ?? "",
+      s: typeof r.s === "number" ? r.s : undefined,
+      source: r.source ?? null,
+    }));
+  } catch {
+    return [];
   }
 }
