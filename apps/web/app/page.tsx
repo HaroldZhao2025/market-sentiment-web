@@ -1,6 +1,7 @@
 // apps/web/app/page.tsx
 import Link from "next/link";
 import { loadTickers, loadPortfolio } from "../lib/data";
+import { hrefs } from "../lib/paths"; // add this
 
 export default async function Home() {
   const [tickers, portfolio] = await Promise.all([
@@ -32,7 +33,7 @@ export default async function Home() {
             {tickers.map((t) => (
               <Link
                 key={t}
-                href={`/ticker/${t}`}
+                href={hrefs.ticker(t)}  // use base-aware URL: /market-sentiment-web/ticker/AAPL
                 className="px-3 py-2 rounded-lg bg-neutral-50 hover:bg-neutral-100 border text-sm"
               >
                 {t}
