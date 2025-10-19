@@ -63,12 +63,14 @@ export default async function Page({
   const news = Array.isArray(obj.news) ? obj.news : [];
 
   const series = {
-    dates,
+    date: dates,      
+    dates,             
     price,
     sentiment,
     sentiment_ma7,
     label: "Daily S",
   };
+
 
   return (
     <div className="min-h-screen">
