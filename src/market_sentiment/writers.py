@@ -2,175 +2,258 @@
 from __future__ import annotations
 
 import json
+import math
 import os
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Iterable, List, Dict, Any, Tuple
 
 import pandas as pd
 
 
-def _ensure_dir(d: str) -> None:
-    os.makedirs(d, exist_ok=True)
-
-
-def _fmt_eastern(ts: pd.Timestamp) -> str:
-    """
-    Format a UTC timestamp to America/New_York ISO string.
-    Accepts tz-naive (assumed UTC) as well.
-    """
-    if ts is None or (isinstance(ts, float) and pd.isna(ts)):
-        return ""
-    t = pd.to_datetime(ts, utc=True, errors="coerce")
-    if t is pd.NaT:
-        return ""
+def _to_datestr(x) -> str:
     try:
-        et = t.tz_convert("America/New_York")
+        ts = pd.to_datetime(x, utc=True, errors="coerce")
+        if pd.isna(ts):
+            return ""
+        # we only need the date string (App charts use YYYY-MM-DD)
+        return ts.tz_convert("UTC").strftime("%Y-%m-%d") if ts.tzinfo else ts.strftime("%Y-%m-%d")
     except Exception:
-        # if naive: localize UTC then convert
-        et = t.tz_localize("UTC").tz_convert("America/New_York")
-    return et.strftime("%Y-%m-%d %H:%M:%S")
+        return ""
 
 
-def _safe_series(df: pd.DataFrame, col: str) -> pd.Series:
-    return df[col] if col in df.columns else pd.Series([], dtype=float)
+def _safe_num(x) -> float:
+    try:
+        f = float(x)
+        if math.isfinite(f):
+            return f
+        return 0.0
+    except Exception:
+        return 0.0
 
 
-def _build_one_ticker(
-    t: str,
-    panel: pd.DataFrame,
-    news_rows: Optional[pd.DataFrame],
-    max_news: int = 50,
-) -> Dict:
+def _roll_ma(arr: List[float], n: int = 7) -> List[float]:
+    out: List[float] = []
+    run = 0.0
+    q: List[float] = []
+    for v in arr:
+        v = 0.0 if v is None or (isinstance(v, float) and math.isnan(v)) else float(v)
+        q.append(v)
+        run += v
+        if len(q) > n:
+            run -= q.pop(0)
+        out.append(run / n if len(q) >= n else float("nan"))
+    return out
+
+
+def _ensure_cols(df: pd.DataFrame, cols: Iterable[str]) -> pd.DataFrame:
+    """Create missing columns with NA to keep downstream code simple."""
+    for c in cols:
+        if c not in df.columns:
+            df[c] = pd.NA
+    return df
+
+
+def _coerce_panel(panel: pd.DataFrame) -> pd.DataFrame:
     """
-    Build the ticker payload used by the Next.js page.
-    Expected panel columns (per ticker daily): date, ticker, close, S
-    Optional: S_ma7, price_ma5, ret1d, etc. We compute S_ma7 here if missing.
+    Expect at minimum: date, ticker, close.
+    Optional: open, S (daily sentiment).
     """
-    df = panel[panel["ticker"] == t].sort_values("date").reset_index(drop=True).copy()
-    if "date" not in df.columns:
-        return {}
+    if panel is None or panel.empty:
+        return pd.DataFrame(columns=["date", "ticker", "open", "close", "S"])
 
-    # enforce date dtype -> strings (YYYY-MM-DD)
-    df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce").dt.date.astype(str)
+    df = panel.copy()
 
-    # price
-    price = _safe_series(df, "close").astype(float).tolist()
+    # Standardize column names a bit (lowercase aliases)
+    lower = {str(c).lower(): c for c in df.columns}
+    date_col = lower.get("date") or "date"
+    tick_col = lower.get("ticker") or "ticker"
+    close_col = lower.get("close") or lower.get("adj close") or lower.get("adj_close") or "close"
+    open_col = lower.get("open") or "open"
 
-    # sentiment
-    if "S" not in df.columns and "sentiment" in df.columns:
-        df["S"] = df["sentiment"]
-    if "S" not in df.columns:
+    # Keep a narrow set of columns; create missing
+    df = df.rename(columns={
+        date_col: "date",
+        tick_col: "ticker",
+        close_col: "close",
+        open_col: "open",
+    })
+    _ensure_cols(df, ["date", "ticker", "open", "close"])
+
+    # Ensure dtypes
+    df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce")
+    df["ticker"] = df["ticker"].astype(str).str.upper()
+    df["close"] = pd.to_numeric(df["close"], errors="coerce")
+    df["open"] = pd.to_numeric(df["open"], errors="coerce")
+
+    # If panel already carries daily S (awesome), keep it; otherwise create 0s (neutral)
+    if "S" in df.columns:
+        df["S"] = pd.to_numeric(df["S"], errors="coerce").fillna(0.0)
+    else:
         df["S"] = 0.0
-    df["S"] = pd.to_numeric(df["S"], errors="coerce").fillna(0.0)
 
-    if "S_ma7" not in df.columns:
-        df["S_ma7"] = df["S"].rolling(7, min_periods=1).mean()
+    # Drop rows with no date or no ticker or no close
+    df = df.dropna(subset=["date", "ticker", "close"])
 
-    dates = df["date"].tolist()
-    S = df["S"].round(6).tolist()
-    S_ma7 = df["S_ma7"].round(6).tolist()
+    # Sort
+    df = df.sort_values(["ticker", "date"]).reset_index(drop=True)
+    return df[["date", "ticker", "open", "close", "S"]]
 
-    # news slice
-    out_news: List[Dict] = []
-    if news_rows is not None and len(news_rows) > 0:
-        nr = news_rows[news_rows["ticker"] == t].copy()
-        if len(nr) > 0:
-            nr = nr.sort_values("ts", ascending=False).head(int(max_news))
-            for _, r in nr.iterrows():
-                out_news.append(
-                    {
-                        "ts": _fmt_eastern(r.get("ts")),
-                        "title": r.get("title", ""),
-                        "url": r.get("url", ""),
-                        "text": r.get("text", ""),
-                    }
-                )
+
+def _coerce_news(news: pd.DataFrame) -> pd.DataFrame:
+    if news is None or news.empty:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+    df = news.copy()
+    # standardize columns (accept minor aliasing)
+    lower = {str(c).lower(): c for c in df.columns}
+    df = df.rename(columns={
+        lower.get("ticker") or "ticker": "ticker",
+        lower.get("ts") or lower.get("time") or lower.get("date"): "ts",
+        lower.get("title") or "title": "title",
+        lower.get("url") or "link": "url",
+        lower.get("text") or lower.get("summary") or "content": "text",
+    })
+    df["ticker"] = df["ticker"].astype(str).str.upper()
+    df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
+    df["title"] = df["title"].astype(str)
+    df["url"] = df["url"].astype(str)
+    df["text"] = df.get("text", pd.Series([""] * len(df))).astype(str)
+    df = df.dropna(subset=["ticker", "ts", "title"]).sort_values(["ticker", "ts"])
+    return df[["ticker", "ts", "title", "url", "text"]]
+
+
+def _union_tickers(panel: pd.DataFrame, news: pd.DataFrame) -> List[str]:
+    a = set((panel["ticker"].dropna().unique().tolist()) if not panel.empty else [])
+    b = set((news["ticker"].dropna().unique().tolist()) if not news.empty else [])
+    return sorted(t for t in (a | b) if isinstance(t, str) and t)
+
+
+def _one_ticker_obj(df_t: pd.DataFrame, news_t: pd.DataFrame) -> Dict[str, Any]:
+    """
+    Build the per-ticker JSON object consumed by the web app.
+    """
+    df_t = df_t.sort_values("date").reset_index(drop=True)
+
+    # Basic arrays
+    dates = [_to_datestr(x) for x in df_t["date"].tolist()]
+    price = [_safe_num(x) for x in df_t["close"].tolist()]
+    s = [_safe_num(x) for x in df_t["S"].tolist()]
+
+    # 7-day MA on S
+    s_ma7 = _roll_ma(s, n=7)
+
+    # News: latest 300 (enough for UI)
+    news_rows = []
+    if news_t is not None and not news_t.empty:
+        for _, r in news_t.tail(300).iterrows():
+            news_rows.append({
+                "ts": pd.to_datetime(r["ts"], utc=True, errors="coerce").isoformat(),
+                "title": str(r["title"]),
+                "url": str(r["url"]),
+                "text": str(r.get("text", "")),
+            })
 
     return {
-        "symbol": t,
-        "date": dates,              # x-axis labels
-        "price": price,             # close
-        "S": S,                     # daily sentiment
-        "S_ma7": S_ma7,             # 7-day MA for chart smoothing
-        "news": out_news,           # last N items
+        "date": dates,
+        "close": price,
+        "S": s,
+        "S_MA7": s_ma7,
+        "news": news_rows,
     }
 
 
-def _write_json(path: str, obj: Dict) -> None:
-    with open(path, "w", encoding="utf-8") as f:
+def _write_json(obj: Any, path_out: str) -> None:
+    os.makedirs(os.path.dirname(path_out), exist_ok=True)
+    with open(path_out, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False)
 
 
-def write_outputs(panel, news_rows, *rest):
+def _portfolio_from_panel(panel: pd.DataFrame, tickers: List[str]) -> Dict[str, Any]:
     """
-    Backwards-compatible wrapper.
-
-    Accepts either:
-      - write_outputs(panel, news_rows, out_dir)
-      - write_outputs(panel, news_rows, earn_rows, out_dir)
-
-    Only per-ticker JSON + _tickers.json + portfolio.json are emitted here,
-    which is all the web app requires. If `earn_rows` is provided, it will
-    also write simple earnings stubs under /earnings.
+    Equal-weight daily portfolio from S across all tickers.
+    If a ticker has no S on a day, treat as 0 (neutral).
     """
-    # detect signature
-    if len(rest) == 1:
-        earn_rows = None
-        out_dir = rest[0]
-    elif len(rest) >= 2:
-        earn_rows, out_dir = rest[0], rest[1]
-    else:
-        raise TypeError("write_outputs(panel, news_rows, [earn_rows,] out_dir)")
+    if panel.empty or not tickers:
+        return {"dates": [], "S": [], "S_MA7": [], "count": []}
 
-    if panel is None or len(panel) == 0:
-        raise ValueError("Empty panel passed to write_outputs")
+    # Build a pivot: rows=date, cols=ticker, values=S (fillna=0)
+    pvt = panel.pivot_table(index="date", columns="ticker", values="S", aggfunc="mean")
+    pvt = pvt.reindex(columns=tickers)  # consistent order
+    pvt = pvt.fillna(0.0)
 
-    out_dir = str(out_dir)
-    tick_dir = os.path.join(out_dir, "ticker")
-    earn_dir = os.path.join(out_dir, "earnings")
-    _ensure_dir(out_dir)
-    _ensure_dir(tick_dir)
-    _ensure_dir(earn_dir)
+    dates = [_to_datestr(d) for d in pvt.index]
+    s = _safe_list(pvt.mean(axis=1).tolist())
+    count = (pvt.notna()).sum(axis=1).astype(int).tolist()
+    s_ma7 = _roll_ma(s, n=7)
 
-    # standardize panel schema
-    panel = panel.copy()
-    if "date" not in panel.columns:
-        raise KeyError("panel must contain 'date' column")
-    if "ticker" not in panel.columns:
-        raise KeyError("panel must contain 'ticker' column")
-    panel["date"] = pd.to_datetime(panel["date"], utc=True, errors="coerce")
+    return {"dates": dates, "S": s, "S_MA7": s_ma7, "count": count}
 
-    tickers = sorted(panel["ticker"].dropna().astype(str).unique().tolist())
-    _write_json(os.path.join(out_dir, "_tickers.json"), tickers)
 
-    # portfolio (simple average S across tickers per date)
-    pf = (
-        panel.groupby("date", as_index=False)["S"]
-        .mean(numeric_only=True)
-        .rename(columns={"date": "dates"})
-        .sort_values("dates")
-    )
-    pf["dates"] = pf["dates"].dt.date.astype(str)
-    _write_json(
-        os.path.join(out_dir, "portfolio.json"),
-        {
-            "dates": pf["dates"].tolist(),
-            "S": pf["S"].fillna(0.0).round(6).tolist(),
-        },
-    )
+def _safe_list(xs: Iterable[Any]) -> List[float]:
+    return [_safe_num(x) for x in xs]
 
-    # per-ticker payloads
+
+def write_outputs(
+    panel: pd.DataFrame,
+    news_rows: pd.DataFrame,
+    out_dir: str,
+) -> Tuple[List[str], int]:
+    """
+    Minimal, robust writer.
+
+    - Always writes: public/data/_tickers.json
+    - Writes one JSON per ticker: public/data/ticker/<TICKER>.json
+    - Writes: public/data/portfolio.json (equal-weight from S)
+
+    Returns:
+        (tickers_written, n_files)
+    """
+    out_dir = os.fspath(out_dir)
+    os.makedirs(os.path.join(out_dir, "ticker"), exist_ok=True)
+
+    panel = _coerce_panel(panel)
+    news_rows = _coerce_news(news_rows)
+
+    # union of tickers present in *either* prices panel or news feeds
+    tickers = _union_tickers(panel, news_rows)
+
+    # per-ticker JSON
+    n_files = 0
     for t in tickers:
-        obj = _build_one_ticker(t, panel, news_rows, max_news=50)
-        _write_json(os.path.join(tick_dir, f"{t}.json"), obj)
+        df_t = panel.loc[panel["ticker"] == t].copy()
+        nt = news_rows.loc[news_rows["ticker"] == t].copy()
 
-    # optional: earnings (very light format)
-    if earn_rows is not None and len(earn_rows) > 0:
-        er = earn_rows.copy()
-        if "ticker" in er.columns and "date" in er.columns:
-            er["date"] = pd.to_datetime(er["date"], errors="coerce").dt.date.astype(str)
-            for t in tickers:
-                sub = er[er["ticker"] == t].copy()
-                if len(sub) == 0:
-                    continue
-                items = sub.sort_values("date")[["date"]].to_dict(orient="records")
-                _write_json(os.path.join(earn_dir, f"{t}.json"), {"earnings": items})
+        if df_t.empty and nt.empty:
+            continue  # nothing to write
+
+        # If we have only news (no prices), synthesize a minimal date series
+        if df_t.empty and not nt.empty:
+            # Use unique news dates; price is empty list
+            dates = sorted({_to_datestr(x) for x in nt["ts"] if pd.notna(x)})
+            obj = {
+                "date": dates,
+                "close": [],
+                "S": [],
+                "S_MA7": [],
+                "news": [
+                    {
+                        "ts": pd.to_datetime(r["ts"], utc=True, errors="coerce").isoformat(),
+                        "title": str(r["title"]),
+                        "url": str(r["url"]),
+                        "text": str(r.get("text", "")),
+                    }
+                    for _, r in nt.tail(300).iterrows()
+                ],
+            }
+        else:
+            obj = _one_ticker_obj(df_t, nt)
+
+        _write_json(obj, os.path.join(out_dir, "ticker", f"{t}.json"))
+        n_files += 1
+
+    # tickers list
+    _write_json(tickers, os.path.join(out_dir, "_tickers.json"))
+
+    # portfolio (from panel only; if empty, write an empty portfolio)
+    portfolio = _portfolio_from_panel(panel, tickers)
+    _write_json(portfolio, os.path.join(out_dir, "portfolio.json"))
+
+    return tickers, n_files
