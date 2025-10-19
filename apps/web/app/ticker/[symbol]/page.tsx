@@ -1,31 +1,78 @@
 // apps/web/app/ticker/[symbol]/page.tsx
-import { notFound } from "next/navigation";
+import fs from "node:fs";
+import path from "node:path";
 import TickerClient from "./TickerClient";
-import { loadTickerSeries, loadTickerNews } from "../../../lib/data"; // <-- up 3 levels
 
-type Params = { params: { symbol: string } };
+export const dynamic = "error"; // ensure static-only for export
 
-export default async function Page({ params: { symbol } }: Params) {
-  const upper = (symbol || "").toUpperCase();
-  const [raw, news] = await Promise.all([
-    loadTickerSeries(upper),
-    loadTickerNews(upper),
-  ]);
+type TickerJSON = {
+  dates?: string[];
+  date?: string[];
+  close?: number[];
+  price?: number[];
+  S?: number[];
+  sentiment?: number[];
+  S_MA7?: number[];
+  sentiment_ma7?: number[];
+  news?: Array<{
+    ts?: string;
+    title?: string;
+    url?: string;
+    text?: string;
+  }>;
+};
 
-  if (!raw) return notFound();
+function dataDir() {
+  // read from apps/web/public/data at build time
+  return path.join(process.cwd(), "public", "data");
+}
 
-  // Map your JSON (`S`) into the prop shape TickerClient expects (`sentiment`)
+function readJSON<T = any>(p: string): T | null {
+  try {
+    return JSON.parse(fs.readFileSync(p, "utf8")) as T;
+  } catch {
+    return null;
+  }
+}
+
+export async function generateStaticParams(): Promise<{ symbol: string }[]> {
+  // Pre-render only the tickers we actually have JSON for
+  const base = dataDir();
+  const tfile = path.join(base, "_tickers.json");
+  const arr = readJSON<string[]>(tfile) || ["AAPL"]; // safe fallback
+  return arr.slice(0, 1200).map((symbol) => ({ symbol }));
+}
+
+export default async function Page({
+  params,
+}: {
+  params: { symbol: string };
+}) {
+  const symbol = (params.symbol || "").toUpperCase();
+  const base = dataDir();
+  const tfile = path.join(base, "ticker", `${symbol}.json`);
+
+  const obj = (readJSON<TickerJSON>(tfile) || {}) as TickerJSON;
+
+  // Be defensive with field names
+  const dates = obj.dates ?? obj.date ?? [];
+  const price = obj.price ?? obj.close ?? [];
+  const sentiment = obj.S ?? obj.sentiment ?? [];
+  const sentiment_ma7 = obj.S_MA7 ?? obj.sentiment_ma7 ?? [];
+
+  const news = Array.isArray(obj.news) ? obj.news : [];
+
   const series = {
-    date: raw.date ?? [],
-    price: raw.price ?? [],
-    sentiment: (raw.S ?? raw.sentiment ?? []).map((x: any) =>
-      typeof x === "number" ? x : Number(x || 0)
-    ),
+    dates,
+    price,
+    sentiment,
+    sentiment_ma7,
+    label: "Daily S",
   };
 
   return (
     <div className="min-h-screen">
-      <TickerClient symbol={upper} series={series} news={news} />
+      <TickerClient symbol={symbol} series={series} news={news} />
     </div>
   );
 }
