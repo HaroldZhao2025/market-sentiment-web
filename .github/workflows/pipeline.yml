@@ -71,7 +71,6 @@ jobs:
           with open(os.environ['GITHUB_ENV'],'a') as f:
               f.write(f"START={start}\nEND={end}\n")
           print("START", start, "END", end)
-PY
 
       - name: Select mode and universe
         shell: bash
