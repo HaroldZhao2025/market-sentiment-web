@@ -88,31 +88,87 @@ jobs:
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
 
-      - name: Generate S&P500 CSV if needed (MODE=full)
+      - name: Generate S&P500 CSV if needed (MODE=full; multi-source, 403-safe)
         if: env.MODE == 'full'
         shell: python
         run: |
-          import os, pandas as pd
+          import os, sys, pandas as pd, requests
           from pathlib import Path
-          p = Path("data/sp500.csv")
-          if p.exists() and p.stat().st_size > 0:
-              print("data/sp500.csv already exists.")
-          else:
-              url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-              tables = pd.read_html(url)
+
+          outp = Path("data/sp500.csv")
+          if outp.exists() and outp.stat().st_size > 0:
+              print(f"{outp} already exists; skipping fetch.")
+              sys.exit(0)
+
+          UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Safari/537.36"}
+          candidates = []
+
+          # 1) Wikipedia via requests (avoid 403 on pandas' internal opener)
+          try:
+              print("Trying Wikipedia…")
+              r = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=30)
+              r.raise_for_status()
+              tables = pd.read_html(r.text)
               df = next((t for t in tables if "Symbol" in t.columns), None)
-              if df is None:
-                  raise RuntimeError("Could not find S&P 500 table on Wikipedia")
-              tickers = (df["Symbol"].astype(str).str.upper()
-                         .str.replace(".", "-", regex=False)
-                         .str.strip())
-              uniq = sorted(set(tickers))
-              p.parent.mkdir(parents=True, exist_ok=True)
-              with p.open("w") as f:
-                  f.write("ticker\n")
-                  for t in uniq:
-                      f.write(f"{t}\n")
-              print(f"Wrote {len(uniq)} tickers to {p}")
+              if df is not None:
+                  s = df["Symbol"].astype(str)
+                  candidates.append(s)
+                  print(f"Wikipedia ok: {len(s)} symbols")
+              else:
+                  print("Wikipedia: table with 'Symbol' not found")
+          except Exception as e:
+              print("Wikipedia failed:", e)
+
+          # 2) Slickcharts (also HTML with a Symbol column)
+          try:
+              print("Trying Slickcharts…")
+              r = requests.get("https://www.slickcharts.com/sp500", headers=UA, timeout=30)
+              r.raise_for_status()
+              tables = pd.read_html(r.text)
+              df = next((t for t in tables if "Symbol" in t.columns), None)
+              if df is None and len(tables):
+                  # some mirrors give the table as first one
+                  df = tables[0]
+              if df is not None:
+                  col = "Symbol" if "Symbol" in df.columns else df.columns[0]
+                  s = df[col].astype(str)
+                  candidates.append(s)
+                  print(f"Slickcharts ok: {len(s)} symbols")
+              else:
+                  print("Slickcharts: table not found")
+          except Exception as e:
+              print("Slickcharts failed:", e)
+
+          # 3) GitHub dataset (CSV)
+          for url in [
+              "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
+              "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv",
+          ]:
+              try:
+                  print(f"Trying dataset: {url}")
+                  df = pd.read_csv(url)
+                  col = "Symbol" if "Symbol" in df.columns else ("symbol" if "symbol" in df.columns else None)
+                  if col:
+                      s = df[col].astype(str)
+                      candidates.append(s)
+                      print(f"Dataset ok: {len(s)} symbols from {url}")
+                      break
+                  else:
+                      print(f"Dataset at {url}: no Symbol/symbol column")
+              except Exception as e:
+                  print(f"Dataset failed ({url}):", e)
+
+          if not candidates:
+              raise RuntimeError("All S&P500 sources failed (403/parse). Commit data/sp500.csv to repo to bypass network.")
+
+          ser = pd.concat(candidates, ignore_index=True)
+          ser = (ser.str.upper()
+                     .str.replace(".", "-", regex=False)
+                     .str.strip())
+          uniq = sorted(set(x for x in ser if x))
+          outp.parent.mkdir(parents=True, exist_ok=True)
+          outp.write_text("ticker\n" + "\n".join(uniq) + "\n", encoding="utf-8")
+          print(f"Wrote {len(uniq)} tickers to {outp}")
 
       # ---------- Smoke tests (debug news & prices) ----------
       - name: Smoke test — AAPL news providers + FinBERT
@@ -234,7 +290,6 @@ jobs:
           print("tickers listed:", len(tickers))
 
       # ---------- Node & web build ----------
-      # Use cache ONLY if lockfile exists
       - name: Setup Node.js (with npm cache)
         if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
         uses: actions/setup-node@v4
@@ -243,7 +298,6 @@ jobs:
           cache: "npm"
           cache-dependency-path: apps/web/package-lock.json
 
-      # Fallback: no cache (avoids the “paths were not resolved” error)
       - name: Setup Node.js (no cache)
         if: ${{ hashFiles('apps/web/package-lock.json') == '' }}
         uses: actions/setup-node@v4
@@ -276,7 +330,6 @@ jobs:
           node -v
           npm -v
 
-          # Build (Next 14 with output: export)
           npm run build
 
           echo "==== Prepare out/ ===="
@@ -296,16 +349,14 @@ jobs:
             # Copy public assets (includes /data/**)
             rsync -a public/ out/
 
-            # Copy App Router HTML:
+            # Copy App Router HTML to route-style folders
             if [ -d ".next/server/app" ]; then
-              # 1) index.html files
               find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app}"
                 dir="${rel%/index.html}"
                 mkdir -p "out/${dir}"
                 cp "$f" "out/${dir}/index.html"
               done
-              # 2) leaf *.html -> /path/index.html
               find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app/}"
                 rel_noext="${rel%.html}"
@@ -322,7 +373,6 @@ jobs:
             fi
           fi
 
-          # GH Pages needs this
           touch out/.nojekyll
 
           echo "==== Final out/ listing ===="
