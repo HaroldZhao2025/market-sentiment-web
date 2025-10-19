@@ -25,12 +25,7 @@ export async function loadPortfolio(): Promise<Portfolio | null> {
   }
 }
 
-export type TickerJSON = {
-  date: string[];
-  price: number[];
-  S: number[];
-  news?: { ts: string; title: string; url: string }[];
-};
+export type TickerJSON = { date: string[]; price: number[]; S?: number[]; sentiment?: number[]; news?: { ts: string; title: string; url: string }[] };
 
 export async function loadTickerSeries(symbol: string): Promise<TickerJSON | null> {
   try {
