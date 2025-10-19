@@ -1,109 +1,160 @@
 # src/market_sentiment/prices.py
 from __future__ import annotations
-from typing import List
-import io
+
+import os
+import time
+import random
+from typing import Iterable, List, Optional
+
 import pandas as pd
-import requests
+import yfinance as yf
 
-_UA = (
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/118.0 Safari/537.36"
-)
 
-def _normalize_price_frame(df: pd.DataFrame, ticker: str) -> pd.DataFrame:
+def _env_float(name: str, default: float) -> float:
+    try:
+        return float(os.getenv(name, str(default)))
+    except Exception:
+        return default
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.getenv(name, str(default)))
+    except Exception:
+        return default
+
+
+def _normalize_df(df: pd.DataFrame, ticker: str) -> pd.DataFrame:
+    """
+    Normalize yfinance output to:
+      columns: date, ticker, open, close, high, low, volume
+    """
     if df is None or df.empty:
-        return pd.DataFrame(columns=["date","ticker","open","close"])
+        return pd.DataFrame(columns=["date", "ticker", "open", "close", "high", "low", "volume"])
 
-    # Flatten columns
-    if isinstance(df.columns, pd.MultiIndex):
-        df.columns = ["_".join([str(x) for x in t if str(x) != ""]) for t in df.columns]
-
-    cols = {str(c).lower(): c for c in df.columns}
-    open_col  = cols.get("open") or cols.get("open_0") or cols.get("o") or cols.get("1. open")
-    close_col = cols.get("close") or cols.get("adj close") or cols.get("adj_close") or cols.get("c") or cols.get("4. close")
-
-    # build date
-    if "date" in df.columns:
-        d = pd.to_datetime(df["date"], utc=True, errors="coerce").dt.tz_localize(None).dt.normalize()
-    else:
-        idx = df.index
-        if getattr(idx, "tz", None) is not None:
-            d = pd.to_datetime(idx, utc=True, errors="coerce").tz_convert(None).normalize()
-        else:
-            d = pd.to_datetime(idx, errors="coerce").tz_localize(None).normalize()
-
-    out = pd.DataFrame({"date": d})
-    out["ticker"] = ticker
-    out["open"]  = pd.to_numeric(df[open_col], errors="coerce")  if open_col  in df.columns else pd.NA
-    out["close"] = pd.to_numeric(df[close_col], errors="coerce") if close_col in df.columns else pd.NA
-
-    out = out.dropna(subset=["close"]).drop_duplicates(subset=["date"]).sort_values("date").reset_index(drop=True)
-    return out[["date","ticker","open","close"]]
-
-def _stooq_http_csv(ticker: str) -> pd.DataFrame:
-    # robust CSV fallback: https://stooq.com/q/d/l/?s=aapl&i=d
-    variants = [
-        ticker,
-        ticker.lower(),
-        f"{ticker}.US",
-        f"{ticker.lower()}.us",
-    ]
-    for sym in variants:
-        url = f"https://stooq.com/q/d/l/?s={sym}&i=d"
+    # yfinance returns Date index; ensure naive datetime
+    df = df.copy()
+    if isinstance(df.index, pd.DatetimeIndex):
+        # Make timezone-naive for stable JSON
         try:
-            r = requests.get(url, headers={"User-Agent": _UA}, timeout=(8, 20))
-            if r.status_code == 200 and "Date,Open,High,Low,Close,Volume" in r.text:
-                df = pd.read_csv(io.StringIO(r.text))
-                df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-                df = df.rename(columns={"Date":"date","Open":"open","Close":"close"})
-                df = df.dropna(subset=["date","close"]).sort_values("date").reset_index(drop=True)
-                df["ticker"] = ticker
-                return df[["date","ticker","open","close"]]
+            # if already tz-aware, remove tz
+            if df.index.tz is not None:
+                df.index = df.index.tz_convert(None)
         except Exception:
-            continue
-    return pd.DataFrame()
+            # if tz_convert fails due to naive, ensure to_datetime
+            df.index = pd.to_datetime(df.index)
 
-def _yf_download(ticker: str, start: str, end: str) -> pd.DataFrame:
-    import yfinance as yf
-    return yf.download(
-        ticker, start=start, end=end,
-        interval="1d", auto_adjust=False, actions=False,
-        progress=False, threads=False
+    df = df.rename(
+        columns={
+            "Open": "open",
+            "Close": "close",
+            "High": "high",
+            "Low": "low",
+            "Adj Close": "adj_close",
+            "Volume": "volume",
+        }
     )
 
-def _yf_history(ticker: str, start: str, end: str) -> pd.DataFrame:
-    import yfinance as yf
-    return yf.Ticker(ticker).history(start=start, end=end, interval="1d", auto_adjust=False)
+    # Some providers may return lowercase already; ensure keys exist
+    for col in ["open", "close", "high", "low", "volume"]:
+        if col not in df.columns:
+            df[col] = pd.NA
 
-def fetch_prices_yf(ticker: str, start: str, end: str) -> pd.DataFrame:
-    # try stooq first (fast, robust in CI)
-    try:
-        stq = _stooq_http_csv(ticker)
-        if not stq.empty:
-            # constrain to window
-            m = (stq["date"] >= pd.to_datetime(start)) & (stq["date"] <= pd.to_datetime(end))
-            stq = stq.loc[m].reset_index(drop=True)
-            if not stq.empty:
-                return stq
-    except Exception:
-        pass
+    out = (
+        df.reset_index()
+        .rename(columns={"Date": "date"})
+        .loc[:, ["date", "open", "close", "high", "low", "volume"]]
+    )
+    out["ticker"] = ticker
+    # Ensure column order
+    out = out[["date", "ticker", "open", "close", "high", "low", "volume"]]
+    return out
 
-    # then yfinance download
-    try:
-        raw = _yf_download(ticker, start, end)
-        norm = _normalize_price_frame(raw, ticker)
-        if not norm.empty:
-            return norm
-    except Exception:
-        pass
 
-    # then yfinance history
-    try:
-        raw = _yf_history(ticker, start, end)
-        norm = _normalize_price_frame(raw, ticker)
-        if not norm.empty:
-            return norm
-    except Exception:
-        pass
+def fetch_prices_yf(
+    ticker: str,
+    start: str,
+    end: str,
+    *,
+    throttle_s: Optional[float] = None,
+    max_retries: Optional[int] = None,
+    backoff_base: Optional[float] = None,
+) -> pd.DataFrame:
+    """
+    Download daily prices for a single ticker with built-in throttling and retries.
 
-    return pd.DataFrame(columns=["date","ticker","open","close"])
+    - Respects env vars:
+        YF_THROTTLE_S   (default 0.8)   : base delay after *each* call
+        YF_MAX_RETRIES  (default 6)     : max attempts when rate-limited/empty
+        YF_BACKOFF_BASE (default 1.75)  : exponential backoff multiplier
+    - Never raises on rate-limit; returns empty DataFrame on final failure.
+    - Keeps the original function name and signature used across the project.
+    """
+    throttle = _env_float("YF_THROTTLE_S", 0.8) if throttle_s is None else float(throttle_s)
+    retries = _env_int("YF_MAX_RETRIES", 6) if max_retries is None else int(max_retries)
+    backoff = _env_float("YF_BACKOFF_BASE", 1.75) if backoff_base is None else float(backoff_base)
+
+    last_err: Optional[Exception] = None
+
+    for attempt in range(retries):
+        try:
+            # progress=False avoids flooding logs; threads=False keeps calls serialized
+            df = yf.download(
+                tickers=ticker,
+                start=start,
+                end=end,
+                interval="1d",
+                auto_adjust=False,
+                progress=False,
+                threads=False,
+            )
+            # yfinance sometimes returns empty on transient rate-limit; treat as retryable
+            if df is None or df.empty:
+                raise RuntimeError("Empty prices frame (transient).")
+
+            out = _normalize_df(df, ticker)
+            # Base throttle + small jitter to desynchronize
+            time.sleep(throttle + random.uniform(0, max(throttle * 0.5, 0.05)))
+            return out
+        except Exception as e:
+            last_err = e
+            # Exponential backoff with jitter
+            sleep_s = (throttle if throttle > 0 else 0.5) * (backoff ** attempt) + random.uniform(0, 0.35)
+            time.sleep(sleep_s)
+
+    # Final failure: return empty (do not crash entire pipeline)
+    # Caller can count successes and continue.
+    return pd.DataFrame(columns=["date", "ticker", "open", "close", "high", "low", "volume"])
+
+
+# Optional: batch helper if you later decide to switch build_json to group downloads
+def fetch_prices_many_yf(
+    tickers: Iterable[str],
+    start: str,
+    end: str,
+    *,
+    batch_size: int = 20,
+    throttle_s: float = None,
+    max_retries: int = None,
+    backoff_base: float = None,
+) -> pd.DataFrame:
+    """
+    Convenience wrapper that fetches multiple tickers sequentially (throttled).
+    Uses fetch_prices_yf internally so it inherits the same retry/backoff logic.
+    """
+    throttle = _env_float("YF_THROTTLE_S", 0.8) if throttle_s is None else float(throttle_s)
+    retries = _env_int("YF_MAX_RETRIES", 6) if max_retries is None else int(max_retries)
+    backoff = _env_float("YF_BACKOFF_BASE", 1.75) if backoff_base is None else float(backoff_base)
+
+    frames: List[pd.DataFrame] = []
+    tickers = [str(t).strip().upper() for t in tickers if str(t).strip()]
+
+    # Sequential by design to be friendlier to rate limits
+    for t in tickers:
+        df = fetch_prices_yf(t, start, end, throttle_s=throttle, max_retries=retries, backoff_base=backoff)
+        if not df.empty:
+            frames.append(df)
+
+    if not frames:
+        return pd.DataFrame(columns=["date", "ticker", "open", "close", "high", "low", "volume"])
+    return pd.concat(frames, ignore_index=True)
