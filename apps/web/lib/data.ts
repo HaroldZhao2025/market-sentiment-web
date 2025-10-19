@@ -1,48 +1,49 @@
 // apps/web/lib/data.ts
-import fs from "fs/promises";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
-const DATA_DIR = path.join(process.cwd(), "public", "data");
+const baseDir = path.join(process.cwd(), "public", "data");
+
+function readJSON<T = any>(p: string): T | null {
+  try {
+    return JSON.parse(fs.readFileSync(p, "utf8")) as T;
+  } catch {
+    return null;
+  }
+}
 
 export async function loadTickers(): Promise<string[]> {
-  try {
-    const s = await fs.readFile(path.join(DATA_DIR, "_tickers.json"), "utf8");
-    const arr = JSON.parse(s);
-    return Array.isArray(arr) && arr.length ? arr : ["AAPL"];
-  } catch {
-    return ["AAPL"];
-  }
+  const p = path.join(baseDir, "_tickers.json");
+  return readJSON<string[]>(p) ?? [];
 }
 
-export type Portfolio = { dates: string[]; long: number[]; short: number[]; long_short: number[] };
-
-export async function loadPortfolio(): Promise<Portfolio | null> {
-  try {
-    const s = await fs.readFile(path.join(DATA_DIR, "portfolio.json"), "utf8");
-    return JSON.parse(s);
-  } catch {
-    return null;
-  }
+export async function loadPortfolio(): Promise<any> {
+  const p = path.join(baseDir, "portfolio.json");
+  return readJSON<any>(p) ?? null;
 }
 
-export type TickerJSON = {
-  date: string[];
+export async function loadTicker(symbol: string): Promise<any | null> {
+  const p = path.join(baseDir, "ticker", `${symbol}.json`);
+  return readJSON<any>(p);
+}
+
+export async function loadTickerNews(symbol: string): Promise<any[]> {
+  const obj = await loadTicker(symbol);
+  return (obj?.news as any[]) ?? [];
+}
+
+export async function loadTickerSeries(symbol: string): Promise<{
+  dates: string[];
   price: number[];
-  S?: number[];
-  sentiment?: number[];
-  news?: { ts: string; title: string; url: string }[];
-};
-
-export async function loadTickerSeries(symbol: string): Promise<TickerJSON | null> {
-  try {
-    const s = await fs.readFile(path.join(DATA_DIR, "ticker", `${symbol}.json`), "utf8");
-    return JSON.parse(s);
-  } catch {
-    return null;
-  }
-}
-
-export async function loadTickerNews(symbol: string) {
-  const j = await loadTickerSeries(symbol);
-  return j?.news ?? [];
+  sentiment: number[];
+  sentiment_ma7: number[];
+  label: string;
+} | null> {
+  const obj = await loadTicker(symbol);
+  if (!obj) return null;
+  const dates = obj.dates ?? obj.date ?? [];
+  const price = obj.price ?? obj.close ?? [];
+  const sentiment = obj.S ?? obj.sentiment ?? [];
+  const sentiment_ma7 = obj.S_MA7 ?? obj.sentiment_ma7 ?? [];
+  return { dates, price, sentiment, sentiment_ma7, label: "Daily S" };
 }
