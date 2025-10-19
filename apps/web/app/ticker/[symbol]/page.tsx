@@ -1,7 +1,7 @@
 // apps/web/app/ticker/[symbol]/page.tsx
 import { notFound } from "next/navigation";
 import TickerClient from "./TickerClient";
-import { loadTickerSeries, loadTickerNews } from "../../lib/data";
+import { loadTickerSeries, loadTickerNews } from "../../../lib/data"; // <-- up 3 levels
 
 type Params = { params: { symbol: string } };
 
