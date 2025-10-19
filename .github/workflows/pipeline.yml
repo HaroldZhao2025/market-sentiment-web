@@ -55,6 +55,7 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
+          # ensure read_html works for Wikipedia S&P500 scrape
           pip install --no-cache-dir feedparser requests yfinance pandas_datareader lxml html5lib
 
       - name: Configure HF cache
@@ -79,41 +80,44 @@ PY
           mkdir -p data
           MODE="${{ github.event.inputs.mode }}"
           if [ -z "${MODE:-}" ]; then MODE="sample"; fi
-
           if [ "$MODE" = "full" ]; then
             TICKER_CSV="data/sp500.csv"
-            if [ ! -s "$TICKER_CSV" ]; then
-              echo "sp500.csv not found — generating from Wikipedia…"
-              python - <<'PY'
-import pandas as pd
-from pathlib import Path
-url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-tables = pd.read_html(url)
-df = next((t for t in tables if isinstance(t, pd.DataFrame) and "Symbol" in t.columns), None)
-if df is None:
-    raise RuntimeError("Could not find S&P 500 table on Wikipedia")
-tickers = (
-    df["Symbol"].astype(str).str.upper()
-      .str.replace(".", "-", regex=False)  # Yahoo-style
-      .str.strip()
-)
-uniq = sorted(set(tickers))
-Path("data").mkdir(exist_ok=True)
-with open("data/sp500.csv", "w") as f:
-    f.write("ticker\n")
-    for t in uniq:
-        f.write(f"{t}\n")
-print(f"Wrote {len(uniq)} tickers to data/sp500.csv")
-PY
-            fi
           else
             TICKER_CSV="data/sample_one.csv"
             printf "ticker\nAAPL\n" > "$TICKER_CSV"
           fi
-
           echo "MODE=$MODE" >> "$GITHUB_ENV"
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
+
+      # NEW: separate step to generate sp500.csv when MODE=full
+      - name: Generate S&P500 CSV if missing (full mode)
+        if: env.MODE == 'full'
+        run: |
+          if [ ! -s "data/sp500.csv" ]; then
+            echo "sp500.csv not found — generating from Wikipedia…"
+            python - <<'PY'
+            import pandas as pd
+            from pathlib import Path
+            url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+            tables = pd.read_html(url)
+            df = next((t for t in tables if isinstance(t, pd.DataFrame) and "Symbol" in t.columns), None)
+            if df is None:
+                raise RuntimeError("Could not find S&P 500 table on Wikipedia")
+            tickers = (
+                df["Symbol"].astype(str).str.upper()
+                  .str.replace(".", "-", regex=False)  # Yahoo Finance style
+                  .str.strip()
+            )
+            uniq = sorted(set(tickers))
+            Path("data").mkdir(exist_ok=True)
+            with open("data/sp500.csv", "w") as f:
+                f.write("ticker\n")
+                for t in uniq:
+                    f.write(f"{t}\n")
+            print(f"Wrote {len(uniq)} tickers to data/sp500.csv")
+PY
+          fi
 
       # ---------- Smoke tests (debug news & prices) ----------
       - name: Smoke test — AAPL news providers + FinBERT
@@ -249,7 +253,6 @@ PY
         with:
           node-version: "20"
 
-      # Choose ci/install depending on lockfile; ensure TS types exist
       - name: Install web deps (ci if lockfile, else install)
         working-directory: apps/web
         run: |
@@ -298,7 +301,6 @@ PY
                 mkdir -p "out/${dir}"
                 cp "$f" "out/${dir}/index.html"
               done
-
               find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app/}"
                 rel_noext="${rel%.html}"
