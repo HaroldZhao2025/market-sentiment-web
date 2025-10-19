@@ -27,8 +27,6 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  # IMPORTANT: keep HuggingFace dataset OFF in CI to avoid huge downloads
-  USE_HF_DATASET: "0"
 
 jobs:
   build:
@@ -38,24 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # --- NEW: free up disk space early ------------------------------------
-      - name: Free up disk space
-        shell: bash
-        run: |
-          set -euxo pipefail
-          echo "Before cleanup:"
-          df -h
-          # Remove preinstalled SDKs we don't use (saves ~15-20GB)
-          sudo rm -rf /usr/share/dotnet || true
-          sudo rm -rf /usr/local/lib/android || true
-          sudo rm -rf /opt/ghc || true
-          sudo rm -rf /opt/hostedtoolcache/CodeQL || true
-          # Docker cleanup
-          docker system prune -af || true
-          echo "After cleanup:"
-          df -h
-      # ----------------------------------------------------------------------
-
+      # ---------- Python setup ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -74,7 +55,7 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
-          pip install --no-cache-dir feedparser requests yfinance pandas_datareader datasets huggingface_hub
+          pip install --no-cache-dir feedparser requests yfinance pandas_datareader
 
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
@@ -96,7 +77,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p data
-          if [ "${{ inputs.mode }}" = "full" ]; then
+          if [ "${{ inputs.mode || 'sample' }}" = "full" ]; then
             MODE="full"
             TICKER_CSV="data/sp500.csv"
           else
@@ -108,12 +89,13 @@ jobs:
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
 
+      # ---------- Smoke tests (unchanged logic) ----------
       - name: Smoke test — AAPL news providers + FinBERT
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
           python - <<'PY'
-          import os, pandas as pd
+          import pandas as pd
           import yfinance as yf
           from market_sentiment.news import fetch_news, _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss
           try:
@@ -122,6 +104,7 @@ jobs:
               FinBERT = None
 
           START="${{ env.START }}"; END="${{ env.END }}"
+
           print("== yfinance raw count ==")
           try:
               raw = yf.Ticker("AAPL").news or []
@@ -132,44 +115,44 @@ jobs:
               print("yfinance error:", e)
 
           provs = [
-              ("google_rss", _prov_google_rss),
-              ("yahoo_rss", _prov_yahoo_rss),
-              ("nasdaq_rss", _prov_nasdaq_rss),
-              ("yfinance", _prov_yfinance),
+            ("google_rss", _prov_google_rss),
+            ("yahoo_rss",  _prov_yahoo_rss),
+            ("nasdaq_rss", _prov_nasdaq_rss),
+            ("yfinance",   _prov_yfinance),
           ]
           for name, fn in provs:
-              try:
-                  df = fn("AAPL", START, END, "Apple Inc.", 300)
-                  days = df["ts"].dt.normalize().nunique() if not df.empty else 0
-                  print(f"{name:12s} rows: {len(df):4d} | days: {days}")
-              except Exception as e:
-                  print(f"{name} error:", e)
+            try:
+              df = fn("AAPL", START, END, "Apple Inc.", 300)
+              days = 0 if df.empty else df["ts"].dt.date.nunique()
+              print(f"{name:11s} rows:{len(df):5d} | days: {days}")
+            except Exception as e:
+              print(f"{name} error:", e)
 
           try:
-              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=300)
-              days = all_df["ts"].dt.normalize().nunique() if not all_df.empty else 0
-              print("fetch_news rows:", len(all_df))
-              print("fetch_news coverage days:", days)
-              if len(all_df):
-                  print(all_df[["ts","title"]].tail(3).to_string(index=False))
+            all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=300)
+            days = 0 if all_df.empty else all_df["ts"].dt.date.nunique()
+            print("fetch_news rows:", len(all_df))
+            print("fetch_news coverage days:", days)
+            if len(all_df):
+              print(all_df[["ts","title"]].tail(3).to_string(index=False))
           except Exception as e:
-              print("fetch_news error:", e)
-              all_df = pd.DataFrame()
+            print("fetch_news error:", e)
+            all_df = pd.DataFrame()
 
           if len(all_df) and FinBERT is not None:
-              texts = all_df["text"].where(all_df["text"].str.len() > 0, all_df["title"]).astype(str).tolist()[:16]
+            texts = all_df["text"].fillna(all_df["title"]).astype(str).tolist()[:16]
+            try:
+              fb = FinBERT()
               try:
-                  fb = FinBERT()
-                  try:
-                      S = fb.score(texts, batch=16)
-                  except TypeError:
-                      S = fb.score(texts)
-                  s = pd.Series(S).astype(float)
-                  print("FinBERT sample:", [round(x,4) for x in s.tolist()], "mean:", float(s.mean()))
-              except Exception as e:
-                  print("FinBERT error:", e)
+                S = fb.score(texts, batch=16)
+              except TypeError:
+                S = fb.score(texts)
+              s = pd.Series(S).astype(float)
+              print("FinBERT sample:", s.round(4).tolist(), "mean:", float(s.mean()))
+            except Exception as e:
+              print("FinBERT error:", e)
           else:
-              print("Skip FinBERT (no texts or FinBERT missing).")
+            print("Skip FinBERT (no texts or FinBERT missing).")
           PY
 
       - name: Smoke test — AAPL prices
@@ -188,8 +171,6 @@ jobs:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
           set -euo pipefail
-          echo "Disk before data build:"
-          df -h
           echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | batch=16 cutoff_min=5 max_workers=8"
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
@@ -198,8 +179,6 @@ jobs:
             --batch 16 \
             --cutoff-minutes 5 \
             --max-workers 8
-          echo "Disk after data build:"
-          df -h
 
       - name: Inspect generated data (AAPL)
         run: |
@@ -213,87 +192,57 @@ jobs:
           if os.path.exists(tfile):
               obj=json.load(open(tfile))
               S = obj.get("S") or obj.get("sentiment") or []
-              nz=sum(1 for x in S if abs(x or 0)>1e-12)
-              print(f"AAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {round(S[0],6) if S else None}  last= {round(S[-1],6) if S else None}")
-              news = obj.get("news") or []
-              print("AAPL news items saved (trimmed):", len(news))
-              from datetime import datetime
-              def just_date(s):
-                  try:
-                      return datetime.fromisoformat(s.replace('Z','+00:00')).date()
-                  except Exception:
-                      return None
-              days = len({just_date(n.get("ts","")) for n in news if n.get("ts")})
-              print("AAPL news_day_count (unique days with news):", days)
+              nz=sum(1 for x in S if abs((x or 0))>1e-12)
+              print("AAPL sentiment: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
+              print("AAPL news items:", len(obj.get("news") or []))
           else:
               print("AAPL.json not found")
           print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
           PY
 
+      # ---------- Node / Next ----------
       - name: Setup Node.js
-        if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
         uses: actions/setup-node@v4
         with:
-            node-version: "20"
-            cache: "npm"
-            cache-dependency-path: apps/web/package-lock.json
-
-      # fallback without cache (in case the lockfile is truly missing)
-      - name: Setup Node.js (no cache)
-        if: ${{ hashFiles('apps/web/package-lock.json') == '' }}
-        uses: actions/setup-node@v4
-        with:
-            node-version: "20"
+          node-version: "20"
+          cache-dependency-path: |
+            apps/web/package-lock.json
 
       - name: Install web deps
         working-directory: apps/web
         run: |
-          # Try a clean install if a lockfile is present; otherwise fall back.
           if [ -f package-lock.json ]; then
-            npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+            npm ci --no-audit --no-fund
           else
             npm install --no-audit --no-fund
           fi
 
-
-      - name: Build static site (export)
+      - name: Build & Export static site
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
         run: |
           set -euo pipefail
-          echo "==== next.config.cjs (contents) ===="
-          cat next.config.cjs || true
+          echo "==== next.config.cjs ===="
+          cat next.config.cjs
           echo "==== Node/NPM ===="
           node -v
           npm -v
-          echo "==== Building ===="
-          npm run build
-          echo "==== After build (ls) ===="
-          ls -lah
-          if [ ! -d out ]; then
-            echo "No 'out/' after build; synthesizing from '.next'..."
-            mkdir -p out/_next/static
-            if [ -d .next/static ]; then
-              rsync -a .next/static/ out/_next/static/
-            fi
-            while IFS= read -r -d '' f; do
-              rel="${f#.next/server/app/}"
-              dst="out/${rel%.html}/index.html"
-              mkdir -p "$(dirname "$dst")"
-              cp "$f" "$dst"
-            done < <(find .next/server/app -type f -name '*.html' -print0)
-            mkdir -p out/data
-            [ -d public/data ] && cp -r public/data/* out/data/ || true
-            if [ ! -f out/index/index.html ] && [ -f .next/server/app/index.html ]; then
-              mkdir -p out/index
-              cp .next/server/app/index.html out/index/index.html
-            fi
-          fi
-          echo "==== Final out/ listing ===="
-          ls -lah out || true
-          find out -maxdepth 3 -type f -name 'index.html' -print
+
+          # Force real export to apps/web/out
+          npm run build:export
+
+          # Add .nojekyll so _next/ files are served
+          touch out/.nojekyll
+
+          echo "==== Verify exported routes exist ===="
+          test -f out/index.html
+          test -f out/ticker/AAPL/index.html
+          test -f out/earnings/AAPL/index.html
+
+          echo "==== Tree of out/ (top) ===="
+          find out -maxdepth 2 -type f | sort | sed 's#^#  #'
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
