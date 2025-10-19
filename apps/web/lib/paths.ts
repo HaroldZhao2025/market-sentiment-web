@@ -1,13 +1,8 @@
 // apps/web/lib/paths.ts
-// Utilities to construct correct URLs AND filesystem paths for data files,
-// plus helpers to build internal links that respect the GitHub Pages basePath.
-//
-// IMPORTANT: This module must be safe to import from client components.
-// Do NOT import Node built-ins at the top level (no `node:path`, no `fs`).
+// Client-safe helpers for basePath-aware routes and data files.
 
 const RAW_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const BASE = RAW_BASE.endsWith("/") ? RAW_BASE.slice(0, -1) : RAW_BASE;
-
 const isServer = typeof window === "undefined";
 
 function ensureLeadingSlash(p: string) {
@@ -34,13 +29,9 @@ export function dataUrl(rel: string): string {
   return `${prefix}/${clean}`;
 }
 
-/**
- * Filesystem path to a data file (used at build-time / server).
- * Implemented without importing 'node:path' so this file stays client-safe.
- */
+/** Filesystem path to a data file for server-only usage (lazy, no node: imports) */
 export function dataFsPath(rel: string): string {
   const clean = rel.replace(/^\/+/, "");
-  // process.cwd() resolves to apps/web during build
   const cwd =
     typeof process !== "undefined" && typeof process.cwd === "function"
       ? process.cwd().replace(/\/+$/, "")
@@ -48,33 +39,19 @@ export function dataFsPath(rel: string): string {
   return `${cwd}/public/data/${clean}`;
 }
 
-/**
- * Read JSON with a client-safe default.
- *
- * - On the client (or if fetch works), use fetch against /data/** (base-path aware).
- * - On the server, if fetch is unavailable (e.g., during certain build steps),
- *   we *optionally* fall back to fs, but we import it lazily and only on server.
- *
- * NOTE: We avoid any top-level `node:` imports. The lazy import is hidden from
- * bundlers and only runs when actually needed on the server.
- */
+/** Read JSON with a client-safe default (fetch first, server-only fs fallback) */
 export async function loadJson<T = unknown>(rel: string): Promise<T> {
   const url = dataUrl(rel);
 
-  // Try network fetch first (works both client-side and most server contexts).
   try {
     const res = await fetch(url, { cache: "no-cache" });
-    if (res.ok) {
-      return (await res.json()) as T;
-    }
+    if (res.ok) return (await res.json()) as T;
   } catch {
-    /* ignore and fall back below if server */
+    /* fall through */
   }
 
-  // Server-only fallback to fs if fetch path isn't available during build/SSG.
   if (isServer) {
     try {
-      // Lazy, string-based dynamic import so bundlers don't follow it in client builds.
       // eslint-disable-next-line no-new-func
       const importFS = new Function("m", "return import(m)");
       const fs = (await importFS("fs/promises")) as typeof import("fs/promises");
@@ -82,7 +59,7 @@ export async function loadJson<T = unknown>(rel: string): Promise<T> {
       const buf = await fs.readFile(p, "utf8");
       return JSON.parse(buf) as T;
     } catch {
-      // If even fs fails, fall through to a hard error.
+      /* fall through */
     }
   }
 
