@@ -55,15 +55,14 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
-          # ensure read_html works for Wikipedia S&P500 scrape
           pip install --no-cache-dir feedparser requests yfinance pandas_datareader lxml html5lib
 
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
 
       - name: Set date range (last 365 days)
+        shell: python
         run: |
-          python - <<'PY'
           import os
           from datetime import datetime, timedelta, timezone
           start=(datetime.now(timezone.utc)-timedelta(days=365)).strftime('%Y-%m-%d')
@@ -89,41 +88,38 @@ jobs:
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
 
-      # NEW: separate step to generate sp500.csv when MODE=full
-      - name: Generate S&P500 CSV if missing (full mode)
+      - name: Generate S&P500 CSV if needed (MODE=full)
         if: env.MODE == 'full'
+        shell: python
         run: |
-          if [ ! -s "data/sp500.csv" ]; then
-            echo "sp500.csv not found — generating from Wikipedia…"
-            python - <<'PY'
-            import pandas as pd
-            from pathlib import Path
-            url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-            tables = pd.read_html(url)
-            df = next((t for t in tables if isinstance(t, pd.DataFrame) and "Symbol" in t.columns), None)
-            if df is None:
-                raise RuntimeError("Could not find S&P 500 table on Wikipedia")
-            tickers = (
-                df["Symbol"].astype(str).str.upper()
-                  .str.replace(".", "-", regex=False)  # Yahoo Finance style
-                  .str.strip()
-            )
-            uniq = sorted(set(tickers))
-            Path("data").mkdir(exist_ok=True)
-            with open("data/sp500.csv", "w") as f:
-                f.write("ticker\n")
-                for t in uniq:
-                    f.write(f"{t}\n")
-            print(f"Wrote {len(uniq)} tickers to data/sp500.csv")
-PY
-          fi
+          import os, pandas as pd
+          from pathlib import Path
+          p = Path("data/sp500.csv")
+          if p.exists() and p.stat().st_size > 0:
+              print("data/sp500.csv already exists.")
+          else:
+              url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+              tables = pd.read_html(url)
+              df = next((t for t in tables if "Symbol" in t.columns), None)
+              if df is None:
+                  raise RuntimeError("Could not find S&P 500 table on Wikipedia")
+              tickers = (df["Symbol"].astype(str).str.upper()
+                         .str.replace(".", "-", regex=False)
+                         .str.strip())
+              uniq = sorted(set(tickers))
+              p.parent.mkdir(parents=True, exist_ok=True)
+              with p.open("w") as f:
+                  f.write("ticker\n")
+                  for t in uniq:
+                      f.write(f"{t}\n")
+              print(f"Wrote {len(uniq)} tickers to {p}")
 
       # ---------- Smoke tests (debug news & prices) ----------
       - name: Smoke test — AAPL news providers + FinBERT
         env:
           HF_HOME: ${{ env.HF_HOME }}
+        shell: python
         run: |
-          python - <<'PY'
           import pandas as pd
           import yfinance as yf
           from market_sentiment.news import (
@@ -184,23 +180,22 @@ PY
                   print("FinBERT error:", e)
           else:
               print("Skip FinBERT (no texts or FinBERT missing).")
-PY
 
       - name: Smoke test — AAPL prices
+        shell: python
         run: |
-          python - <<'PY'
           from market_sentiment.prices import fetch_prices_yf
           p = fetch_prices_yf("AAPL", "${{ env.START }}", "${{ env.END }}")
           print("AAPL prices rows:", len(p))
           if not p.empty:
               print(p.head(2).to_string(index=False))
               print(p.tail(2).to_string(index=False))
-PY
 
       # ---------- Build JSON data ----------
       - name: Build JSON data (prices + news)
         env:
           HF_HOME: ${{ env.HF_HOME }}
+        shell: bash
         run: |
           set -euo pipefail
           echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | batch=16 cutoff_min=5 max_workers=8"
@@ -213,13 +208,16 @@ PY
             --max-workers 8
 
       - name: Inspect generated data (AAPL)
+        shell: python
         run: |
-          set -euo pipefail
-          echo "== List data dir =="
-          ls -lah apps/web/public/data
-          python - <<'PY'
           import json, os
           base="apps/web/public/data"
+          print("== List data dir ==")
+          for root, dirs, files in os.walk(base):
+              for f in sorted(files):
+                  p=os.path.join(root,f)
+                  print(p)
+
           tfile=os.path.join(base,"ticker","AAPL.json")
           if os.path.exists(tfile):
               obj=json.load(open(tfile))
@@ -232,8 +230,8 @@ PY
               print("AAPL news_day_count (unique days with news):", days)
           else:
               print("AAPL.json not found")
-          print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
-PY
+          tickers = json.load(open(os.path.join(base,"_tickers.json")))
+          print("tickers listed:", len(tickers))
 
       # ---------- Node & web build ----------
       # Use cache ONLY if lockfile exists
@@ -254,6 +252,7 @@ PY
 
       - name: Install web deps (ci if lockfile, else install)
         working-directory: apps/web
+        shell: bash
         run: |
           set -euo pipefail
           if [ -f package-lock.json ]; then
@@ -268,6 +267,7 @@ PY
         env:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
+        shell: bash
         run: |
           set -euo pipefail
           echo "==== next.config.cjs ===="
@@ -276,6 +276,7 @@ PY
           node -v
           npm -v
 
+          # Build (Next 14 with output: export)
           npm run build
 
           echo "==== Prepare out/ ===="
@@ -286,20 +287,25 @@ PY
             rm -rf out
             mkdir -p out
 
+            # Copy static assets
             if [ -d ".next/static" ]; then
               mkdir -p out/_next
               rsync -a .next/static out/_next/static
             fi
 
+            # Copy public assets (includes /data/**)
             rsync -a public/ out/
 
+            # Copy App Router HTML:
             if [ -d ".next/server/app" ]; then
+              # 1) index.html files
               find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app}"
                 dir="${rel%/index.html}"
                 mkdir -p "out/${dir}"
                 cp "$f" "out/${dir}/index.html"
               done
+              # 2) leaf *.html -> /path/index.html
               find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app/}"
                 rel_noext="${rel%.html}"
@@ -308,6 +314,7 @@ PY
               done
             fi
 
+            # 404 fallback for GH Pages
             if [ -f ".next/server/app/_not-found.html" ]; then
               cp ".next/server/app/_not-found.html" "out/404.html" || true
             elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
@@ -315,6 +322,7 @@ PY
             fi
           fi
 
+          # GH Pages needs this
           touch out/.nojekyll
 
           echo "==== Final out/ listing ===="
