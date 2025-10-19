@@ -55,8 +55,7 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
-          pip install --no-cache-dir feedparser requests yfinance pandas_datareader \
-                                  lxml html5lib   # <-- added so read_html works
+          pip install --no-cache-dir feedparser requests yfinance pandas_datareader lxml html5lib
 
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
@@ -71,7 +70,7 @@ jobs:
           with open(os.environ['GITHUB_ENV'],'a') as f:
               f.write(f"START={start}\nEND={end}\n")
           print("START", start, "END", end)
-          PY
+PY
 
       - name: Select mode and universe
         shell: bash
@@ -86,26 +85,26 @@ jobs:
             if [ ! -s "$TICKER_CSV" ]; then
               echo "sp500.csv not found — generating from Wikipedia…"
               python - <<'PY'
-              import pandas as pd
-              from pathlib import Path
-              url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-              tables = pd.read_html(url)
-              df = next((t for t in tables if isinstance(t, pd.DataFrame) and "Symbol" in t.columns), None)
-              if df is None:
-                  raise RuntimeError("Could not find S&P 500 table on Wikipedia")
-              tickers = (
-                  df["Symbol"].astype(str).str.upper()
-                    .str.replace(".", "-", regex=False)  # match Yahoo Finance style
-                    .str.strip()
-              )
-              uniq = sorted(set(tickers))
-              Path("data").mkdir(exist_ok=True)
-              with open("data/sp500.csv", "w") as f:
-                  f.write("ticker\n")
-                  for t in uniq:
-                      f.write(f"{t}\n")
-              print(f"Wrote {len(uniq)} tickers to data/sp500.csv")
-              PY
+import pandas as pd
+from pathlib import Path
+url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+tables = pd.read_html(url)
+df = next((t for t in tables if isinstance(t, pd.DataFrame) and "Symbol" in t.columns), None)
+if df is None:
+    raise RuntimeError("Could not find S&P 500 table on Wikipedia")
+tickers = (
+    df["Symbol"].astype(str).str.upper()
+      .str.replace(".", "-", regex=False)  # Yahoo-style
+      .str.strip()
+)
+uniq = sorted(set(tickers))
+Path("data").mkdir(exist_ok=True)
+with open("data/sp500.csv", "w") as f:
+    f.write("ticker\n")
+    for t in uniq:
+        f.write(f"{t}\n")
+print(f"Wrote {len(uniq)} tickers to data/sp500.csv")
+PY
             fi
           else
             TICKER_CSV="data/sample_one.csv"
@@ -182,7 +181,7 @@ jobs:
                   print("FinBERT error:", e)
           else:
               print("Skip FinBERT (no texts or FinBERT missing).")
-          PY
+PY
 
       - name: Smoke test — AAPL prices
         run: |
@@ -193,7 +192,7 @@ jobs:
           if not p.empty:
               print(p.head(2).to_string(index=False))
               print(p.tail(2).to_string(index=False))
-          PY
+PY
 
       # ---------- Build JSON data ----------
       - name: Build JSON data (prices + news)
@@ -231,7 +230,7 @@ jobs:
           else:
               print("AAPL.json not found")
           print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
-          PY
+PY
 
       # ---------- Node & web build ----------
       # Use cache ONLY if lockfile exists
@@ -260,7 +259,6 @@ jobs:
           else
             npm install --no-audit --no-fund
           fi
-          # Ensure types are present (prevents @types error on fresh runners)
           npm i -D @types/react @types/node --no-audit --no-fund || true
 
       - name: Build static site (create out/ from .next)
@@ -276,7 +274,6 @@ jobs:
           node -v
           npm -v
 
-          # Build (Next 14 with output: export). If Next writes ./out, we'll use it as-is.
           npm run build
 
           echo "==== Prepare out/ ===="
@@ -287,17 +284,13 @@ jobs:
             rm -rf out
             mkdir -p out
 
-            # Copy static assets
             if [ -d ".next/static" ]; then
               mkdir -p out/_next
               rsync -a .next/static out/_next/static
             fi
 
-            # Copy public assets (includes /data/**)
             rsync -a public/ out/
 
-            # Copy App Router HTML:
-            # 1) index.html files keep their directory structure
             if [ -d ".next/server/app" ]; then
               find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app}"
@@ -306,7 +299,6 @@ jobs:
                 cp "$f" "out/${dir}/index.html"
               done
 
-              # 2) leaf *.html files map to /path/index.html so GH Pages serves /path/
               find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app/}"
                 rel_noext="${rel%.html}"
@@ -315,7 +307,6 @@ jobs:
               done
             fi
 
-            # 404 fallback for GH Pages
             if [ -f ".next/server/app/_not-found.html" ]; then
               cp ".next/server/app/_not-found.html" "out/404.html" || true
             elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
@@ -323,7 +314,6 @@ jobs:
             fi
           fi
 
-          # GH Pages needs this
           touch out/.nojekyll
 
           echo "==== Final out/ listing ===="
