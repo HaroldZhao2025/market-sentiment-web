@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "export": "next export -o out",
-    "build:export": "next build && next export -o out",
+    "export": "next export",            
+    "build:export": "next build && next export",   
     "start": "next start"
   },
   "dependencies": {
