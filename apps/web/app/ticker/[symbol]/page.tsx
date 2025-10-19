@@ -1,46 +1,123 @@
 // apps/web/app/ticker/[symbol]/page.tsx
-import fs from "node:fs";
-import path from "node:path";
+import fs from "fs/promises";
+import path from "path";
 import TickerClient from "./TickerClient";
 
-export const dynamic = "error"; // ensure static-only for export
-
-type TickerJSON = {
-  dates?: string[];
-  date?: string[];
-  close?: number[];
-  price?: number[];
-  S?: number[];
-  sentiment?: number[];
-  S_MA7?: number[];
-  sentiment_ma7?: number[];
-  news?: Array<{
-    ts?: string;
-    title?: string;
-    url?: string;
-    text?: string;
-  }>;
+// If TickerClient re-exports types, import them; otherwise declare here to match it.
+type SeriesIn = {
+  date: string[];           // required by TickerClient
+  price: number[];          // close prices
+  sentiment: number[];      // daily S
+  sentiment_ma7: number[];  // 7d MA of S
+  label: string;
 };
 
-function dataDir() {
-  // read from apps/web/public/data at build time
-  return path.join(process.cwd(), "public", "data");
+type NewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  text: string;
+};
+
+export const dynamic = "error";          // force SSG
+export const dynamicParams = false;      // only build known params
+export const revalidate = false;
+
+const DATA_ROOT = path.join(process.cwd(), "public", "data");
+
+// --- helpers -------------------------------------------------------------
+
+async function readJSON<T = any>(p: string): Promise<T> {
+  const raw = await fs.readFile(p, "utf8");
+  return JSON.parse(raw) as T;
 }
 
-function readJSON<T = any>(p: string): T | null {
+function coerceString(v: unknown, fallback = ""): string {
+  if (v === null || v === undefined) return fallback;
   try {
-    return JSON.parse(fs.readFileSync(p, "utf8")) as T;
+    const s = String(v).trim();
+    return s;
   } catch {
-    return null;
+    return fallback;
   }
 }
 
-export async function generateStaticParams(): Promise<{ symbol: string }[]> {
-  // Pre-render only the tickers we actually have JSON for
-  const base = dataDir();
-  const tfile = path.join(base, "_tickers.json");
-  const arr = readJSON<string[]>(tfile) || ["AAPL"]; // safe fallback
-  return arr.slice(0, 1200).map((symbol) => ({ symbol }));
+function coerceNumberArray(v: unknown): number[] {
+  if (Array.isArray(v)) {
+    return v.map((x) => (typeof x === "number" ? x : Number(x ?? 0))).map((x) =>
+      Number.isFinite(x) ? x : 0
+    );
+  }
+  return [];
+}
+
+function coerceStringArray(v: unknown): string[] {
+  if (Array.isArray(v)) {
+    return v.map((x) => coerceString(x, ""));
+  }
+  return [];
+}
+
+function buildSeries(obj: any): SeriesIn | null {
+  const dates =
+    coerceStringArray(obj?.date) || coerceStringArray(obj?.dates) || [];
+  const price =
+    coerceNumberArray(obj?.price) ||
+    coerceNumberArray(obj?.close) ||
+    coerceNumberArray(obj?.Close) ||
+    [];
+  const sentiment =
+    coerceNumberArray(obj?.S) || coerceNumberArray(obj?.sentiment) || [];
+  const sentiment_ma7 =
+    coerceNumberArray(obj?.S_ma7) ||
+    coerceNumberArray(obj?.sentiment_ma7) ||
+    [];
+
+  if (!dates.length || !price.length) return null;
+
+  // Make sure lengths line up (truncate to shortest to be safe)
+  const n = Math.min(dates.length, price.length, sentiment.length || Infinity, sentiment_ma7.length || Infinity);
+  const slice = (a: any[]) => (n === Infinity ? a : a.slice(0, n));
+
+  return {
+    date: slice(dates),
+    price: slice(price),
+    sentiment: slice(sentiment),
+    sentiment_ma7: slice(sentiment_ma7),
+    label: "Daily S",
+  };
+}
+
+function buildNews(obj: any): NewsItem[] {
+  const raw: any[] = Array.isArray(obj?.news) ? obj.news : [];
+  const rows: NewsItem[] = raw
+    .map((r) => {
+      const ts = coerceString(r?.ts || r?.date, "");
+      const title = coerceString(r?.title, "");
+      const url = coerceString(r?.url, "");
+      const text = coerceString(r?.text || r?.summary || r?.title, "");
+      return { ts, title, url, text };
+    })
+    // all required by the TickerClient NewsItem type:
+    .filter((r) => r.ts && r.title);
+  return rows;
+}
+
+// --- Next.js SSG hooks ---------------------------------------------------
+
+export async function generateStaticParams() {
+  // public/data/_tickers.json => ["AAPL", ...]
+  let tickers: string[] = [];
+  try {
+    tickers = await readJSON<string[]>(
+      path.join(DATA_ROOT, "_tickers.json")
+    );
+  } catch {
+    // fallback to AAPL if missing during preview
+    tickers = ["AAPL"];
+  }
+  // Only build pages that we actually have JSON for
+  return tickers.map((symbol) => ({ symbol }));
 }
 
 export default async function Page({
@@ -49,32 +126,40 @@ export default async function Page({
   params: { symbol: string };
 }) {
   const symbol = (params.symbol || "").toUpperCase();
-  const base = dataDir();
-  const tfile = path.join(base, "ticker", `${symbol}.json`);
 
-  const obj = (readJSON<TickerJSON>(tfile) || {}) as TickerJSON;
+  // public/data/ticker/SYM.json produced by writers.py
+  const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
 
-  // Be defensive with field names
-  const dates = obj.dates ?? obj.date ?? [];
-  const price = obj.price ?? obj.close ?? [];
-  const sentiment = obj.S ?? obj.sentiment ?? [];
-  const sentiment_ma7 = obj.S_MA7 ?? obj.sentiment_ma7 ?? [];
+  let obj: any = null;
+  try {
+    obj = await readJSON<any>(f);
+  } catch {
+    // If no data, render a soft empty state
+    return (
+      <div className="min-h-screen p-6">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="text-2xl font-semibold mb-4">{symbol}</h1>
+          <div className="text-neutral-500">No data for {symbol}.</div>
+        </div>
+      </div>
+    );
+  }
 
-  const news = Array.isArray(obj.news) ? obj.news : [];
-
-  const series = {
-    date: dates,      
-    dates,             
-    price,
-    sentiment,
-    sentiment_ma7,
-    label: "Daily S",
-  };
-
+  const series = buildSeries(obj);
+  const news: NewsItem[] = buildNews(obj);
 
   return (
-    <div className="min-h-screen">
-      <TickerClient symbol={symbol} series={series} news={news} />
+    <div className="min-h-screen p-6">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-2xl font-semibold mb-6 tracking-tight">
+          {symbol}
+        </h1>
+        {series ? (
+          <TickerClient symbol={symbol} series={series} news={news} />
+        ) : (
+          <div className="text-neutral-500">No time series for {symbol}.</div>
+        )}
+      </div>
     </div>
   );
 }
