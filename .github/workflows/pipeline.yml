@@ -27,7 +27,6 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  NEWS_LIMIT: "600"  # keep more news items per ticker in JSON
 
 jobs:
   build:
@@ -77,7 +76,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p data
-          if [ "${{ inputs.mode || 'sample' }}" = "full" ]; then
+          if [ "${{ inputs.mode }}" = "full" ]; then
             MODE="full"
             TICKER_CSV="data/sp500.csv"
           else
@@ -89,48 +88,62 @@ jobs:
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
 
-      - name: Smoke test — AAPL news providers + FinBERT
+      - name: Smoke test — AAPL news (providers + coverage) + FinBERT
         env:
           HF_HOME: ${{ env.HF_HOME }}
         run: |
           python - <<'PY'
           import pandas as pd
           import yfinance as yf
-          from market_sentiment.news import fetch_news
+          from market_sentiment.news import (
+              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss, fetch_news
+          )
           try:
               from market_sentiment.finbert import FinBERT
           except Exception:
               FinBERT = None
 
           START="${{ env.START }}"; END="${{ env.END }}"
+          def cov_days(df: pd.DataFrame) -> int:
+              if df is None or df.empty: return 0
+              return pd.to_datetime(df["ts"], utc=True, errors="coerce").dt.date.dropna().nunique()
+
           print("== yfinance raw count ==")
           try:
               raw = yf.Ticker("AAPL").news or []
               print("yfinance.Ticker('AAPL').news:", len(raw))
-              if raw:
-                  print("first keys:", list(raw[0].keys())[:5])
+              if raw: print("first keys:", list(raw[0].keys())[:5])
           except Exception as e:
               print("yfinance error:", e)
 
-          df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=100)
-          ndays = pd.to_datetime(df["ts"], utc=True, errors="coerce").dt.date.nunique() if len(df) else 0
-          print("fetch_news rows:", len(df))
-          print("fetch_news coverage days:", ndays)
-          if len(df):
-              print(df[["ts","title"]].tail(3).to_string(index=False))
-
-          if len(df) and FinBERT is not None:
-              texts = df["text"].fillna(df["title"]).astype(str).tolist()[:16]
+          provs = [
+              ("google_rss", _prov_google_rss),
+              ("yahoo_rss",  _prov_yahoo_rss),
+              ("nasdaq_rss", _prov_nasdaq_rss),
+              ("yfinance",   _prov_yfinance),
+          ]
+          for name, fn in provs:
               try:
-                  fb = FinBERT()
-                  try:
-                      S = fb.score(texts, batch=16)
-                  except TypeError:
-                      S = fb.score(texts)
-                  s = pd.Series(S).astype(float)
-                  print("FinBERT sample:", [round(x,4) for x in s.tolist()], "mean:", float(s.mean()))
+                  df = fn("AAPL", START, END, "Apple Inc.", 9999)
+                  print(f"{name:12s} rows: {len(df):4d} | days: {cov_days(df)}")
               except Exception as e:
-                  print("FinBERT error:", e)
+                  print(f"{name} error:", e)
+
+          df_all = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=9999)
+          print("fetch_news rows:", len(df_all))
+          print("fetch_news coverage days:", cov_days(df_all))
+          if not df_all.empty:
+              print(df_all[["ts","title"]].tail(3).to_string(index=False))
+
+          if not df_all.empty and FinBERT:
+              texts = df_all["text"].fillna(df_all["title"]).astype(str).tolist()[:16]
+              fb = FinBERT()
+              try:
+                  scores = fb.score(texts, batch=16)
+              except TypeError:
+                  scores = fb.score(texts)
+              s = pd.Series(scores, dtype=float)
+              print("FinBERT sample:", [round(x,4) for x in s.tolist()], "mean:", round(float(s.mean()),6))
           else:
               print("Skip FinBERT (no texts or FinBERT missing).")
           PY
@@ -162,27 +175,27 @@ jobs:
 
       - name: Inspect generated data (AAPL)
         run: |
-          set -e
+          set -euo pipefail
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
-          import json, os
+          import json, os, pandas as pd
           base="apps/web/public/data"
           tfile=os.path.join(base,"ticker","AAPL.json")
           if os.path.exists(tfile):
               obj=json.load(open(tfile))
               S = obj.get("S") or obj.get("sentiment") or []
-              nz=sum(1 for x in S if abs((x or 0))>1e-12)
-              print("AAPL sentiment: len=",len(S)," non_zero=",nz," first=",round(S[0],6) if S else None," last=",round(S[-1],6) if S else None)
-              print("AAPL news items saved (trimmed):", len(obj.get("news") or []))
+              nz=sum(1 for x in S if abs(x or 0)>1e-12)
+              print(f"AAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {round(S[0],6) if S else None}  last= {round(S[-1],6) if S else None}")
+              news=obj.get("news") or []
+              print("AAPL news items saved (trimmed):", len(news))
               print("AAPL news_total (all fetched):", obj.get("news_total"))
               print("AAPL news_day_count (unique days with news):", obj.get("news_day_count"))
           else:
               print("AAPL.json not found")
-          print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
           PY
 
-      - name: Setup Node.js (with cache)
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -211,18 +224,18 @@ jobs:
           ls -lah
           if [ ! -d out ]; then
             echo "No 'out/' after build; synthesizing from '.next'..."
-            mkdir -p out/_next/static
-            # static assets
-            rsync -a .next/static/ out/_next/static/ || true
-            # copy all html under app router
-            find .next/server/app -type f -name '*.html' -print0 | while IFS= read -r -d '' f; do
-              rel="${f#.next/server/app}"
-              rel="${rel%.html}"
-              mkdir -p "out/$rel"
-              cp "$f" "out/$rel/index.html"
+            mkdir -p out/_next
+            rsync -a .next/static out/_next/static || true
+            find .next/server/app -maxdepth 4 -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+              d="${f%.html}"; d="${d#.next/server/app}"
+              mkdir -p "out/$d"
+              cp "$f" "out/$d/index.html" || true
             done
-            # copy public (includes data/)
-            rsync -a public/ out/ || true
+            mkdir -p out/data
+            cp -r public/data/* out/data/ || true
+            if [ ! -f out/index.html ] && [ -f .next/server/app/index.html ]; then
+              cp .next/server/app/index.html out/index.html || true
+            fi
           fi
           echo "==== Final out/ listing ===="
           ls -lah out
