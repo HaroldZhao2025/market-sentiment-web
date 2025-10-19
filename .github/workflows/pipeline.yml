@@ -213,6 +213,13 @@ jobs:
           node-version: "20"
           cache: "npm"
           cache-dependency-path: apps/web/package-lock.json
+          
+      # Fallback: no cache (avoids the "paths were not resolved" error)
+      - name: Setup Node.js (no cache)
+        if: ${{ hashFiles('apps/web/package-lock.json') == '' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Install web deps
         working-directory: apps/web
