@@ -249,42 +249,60 @@ jobs:
           node -v
           npm -v
 
-          # Build (Next 14 with output: export)
+          # Build (Next 14 with output: export). If Next writes ./out, we'll use it as-is.
           npm run build
 
-          # Synthesize ./out from .next artifacts (robust for GH Actions)
-          echo "==== Synthesize out/ ===="
-          rm -rf out
-          mkdir -p out
+          echo "==== Prepare out/ ===="
+          if [ -d "out" ]; then
+            echo "Next produced out/ already. Using it."
+          else
+            echo "No out/ from Next; synthesizing from .next artifacts..."
+            rm -rf out
+            mkdir -p out
 
-          # Static assets
-          if [ -d ".next/static" ]; then
-            mkdir -p out/_next
-            rsync -a .next/static out/_next/static
-          fi
+            # Copy static assets
+            if [ -d ".next/static" ]; then
+              mkdir -p out/_next
+              rsync -a .next/static out/_next/static
+            fi
 
-          # App routes (.html files)
-          if [ -d ".next/server/app" ]; then
-            find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-              rel="${f#.next/server/app}"
-              dir="${rel%/index.html}"
-              mkdir -p "out/${dir}"
-              cp "$f" "out/${dir}/index.html"
-            done
+            # Copy public assets (includes /data/**)
+            rsync -a public/ out/
+
+            # Copy App Router HTML:
+            # 1) index.html files keep their directory structure
+            if [ -d ".next/server/app" ]; then
+              find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+                rel="${f#.next/server/app}"
+                dir="${rel%/index.html}"
+                mkdir -p "out/${dir}"
+                cp "$f" "out/${dir}/index.html"
+              done
+
+              # 2) leaf *.html files (e.g. .next/server/app/ticker/AAPL.html)
+              #    map to out/ticker/AAPL/index.html so GH Pages serves /ticker/AAPL/
+              find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+                rel="${f#.next/server/app/}"
+                rel_noext="${rel%.html}"
+                mkdir -p "out/${rel_noext}"
+                cp "$f" "out/${rel_noext}/index.html"
+              done
+            fi
+
             # 404 fallback for GH Pages
             if [ -f ".next/server/app/_not-found.html" ]; then
               cp ".next/server/app/_not-found.html" "out/404.html" || true
+            elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
+              cp "out/index.html" "out/404.html" || true
             fi
           fi
-
-          # Public assets (includes /data/**)
-          rsync -a public/ out/
 
           # GH Pages needs this
           touch out/.nojekyll
 
           echo "==== Final out/ listing ===="
           find out -maxdepth 3 -type f | sort
+
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
