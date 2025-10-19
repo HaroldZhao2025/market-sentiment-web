@@ -4,10 +4,8 @@
 
 import path from "node:path";
 
-// Normalize base path once. In CI it's "/market-sentiment-web", locally it's "".
 const RAW_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const BASE = RAW_BASE.endsWith("/") ? RAW_BASE.slice(0, -1) : RAW_BASE;
-
 const isServer = typeof window === "undefined";
 
 function ensureLeadingSlash(p: string) {
@@ -37,7 +35,7 @@ export function dataUrl(rel: string): string {
 /** Filesystem path to a data file (used at build-time / server) */
 export function dataFsPath(rel: string): string {
   const clean = rel.replace(/^\/+/, "");
-  // process.cwd() will be apps/web during build steps
+  // process.cwd() will be apps/web during build
   return path.join(process.cwd(), "public", "data", clean);
 }
 
@@ -46,14 +44,13 @@ export async function loadJson<T = unknown>(rel: string): Promise<T> {
   const url = dataUrl(rel);
 
   if (isServer) {
-    // Import fs only on the server to avoid bundling it for the client.
     try {
       const fs = await import("node:fs/promises");
       const p = dataFsPath(rel);
       const buf = await fs.readFile(p, "utf8");
       return JSON.parse(buf) as T;
     } catch {
-      // Fall through to fetch if the file isn't present (e.g., preview)
+      // fall through to fetch if missing (e.g., preview)
     }
   }
 
