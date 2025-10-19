@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ---------- Python setup ----------
+      # ---------- Python & deps ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -89,7 +89,7 @@ jobs:
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
           echo "Mode: $MODE | Universe: $TICKER_CSV"
 
-      # ---------- Smoke tests (unchanged logic) ----------
+      # ---------- Smoke tests (debug news & prices) ----------
       - name: Smoke test — AAPL news providers + FinBERT
         env:
           HF_HOME: ${{ env.HF_HOME }}
@@ -97,7 +97,9 @@ jobs:
           python - <<'PY'
           import pandas as pd
           import yfinance as yf
-          from market_sentiment.news import fetch_news, _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss
+          from market_sentiment.news import (
+              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss, fetch_news
+          )
           try:
               from market_sentiment.finbert import FinBERT
           except Exception:
@@ -114,45 +116,45 @@ jobs:
           except Exception as e:
               print("yfinance error:", e)
 
-          provs = [
-            ("google_rss", _prov_google_rss),
-            ("yahoo_rss",  _prov_yahoo_rss),
-            ("nasdaq_rss", _prov_nasdaq_rss),
-            ("yfinance",   _prov_yfinance),
+          providers = [
+              ("google_rss", _prov_google_rss),
+              ("yahoo_rss", _prov_yahoo_rss),
+              ("nasdaq_rss", _prov_nasdaq_rss),
+              ("yfinance", _prov_yfinance),
           ]
-          for name, fn in provs:
-            try:
-              df = fn("AAPL", START, END, "Apple Inc.", 300)
-              days = 0 if df.empty else df["ts"].dt.date.nunique()
-              print(f"{name:11s} rows:{len(df):5d} | days: {days}")
-            except Exception as e:
-              print(f"{name} error:", e)
+          for name, fn in providers:
+              try:
+                  df = fn("AAPL", START, END, "Apple Inc.", 300)
+                  days = 0 if df.empty else df["ts"].dt.date.nunique()
+                  print(f"{name:10s} rows:{len(df):5d} | days: {days}")
+              except Exception as e:
+                  print(f"{name} error:", e)
 
           try:
-            all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=300)
-            days = 0 if all_df.empty else all_df["ts"].dt.date.nunique()
-            print("fetch_news rows:", len(all_df))
-            print("fetch_news coverage days:", days)
-            if len(all_df):
-              print(all_df[["ts","title"]].tail(3).to_string(index=False))
+              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=300)
+              days = 0 if all_df.empty else all_df["ts"].dt.date.nunique()
+              print("fetch_news rows:", len(all_df))
+              print("fetch_news coverage days:", days)
+              if len(all_df):
+                  print(all_df[["ts","title"]].tail(3).to_string(index=False))
           except Exception as e:
-            print("fetch_news error:", e)
-            all_df = pd.DataFrame()
+              print("fetch_news error:", e)
+              all_df = pd.DataFrame()
 
           if len(all_df) and FinBERT is not None:
-            texts = all_df["text"].fillna(all_df["title"]).astype(str).tolist()[:16]
-            try:
-              fb = FinBERT()
+              texts = all_df["text"].fillna(all_df["title"]).astype(str).tolist()[:16]
               try:
-                S = fb.score(texts, batch=16)
-              except TypeError:
-                S = fb.score(texts)
-              s = pd.Series(S).astype(float)
-              print("FinBERT sample:", s.round(4).tolist(), "mean:", float(s.mean()))
-            except Exception as e:
-              print("FinBERT error:", e)
+                  fb = FinBERT()
+                  try:
+                      S = fb.score(texts, batch=16)
+                  except TypeError:
+                      S = fb.score(texts)
+                  s = pd.Series(S).astype(float)
+                  print("FinBERT sample:", s.round(4).tolist(), "mean:", float(s.mean()))
+              except Exception as e:
+                  print("FinBERT error:", e)
           else:
-            print("Skip FinBERT (no texts or FinBERT missing).")
+              print("Skip FinBERT (no texts or FinBERT missing).")
           PY
 
       - name: Smoke test — AAPL prices
@@ -166,6 +168,7 @@ jobs:
               print(p.tail(2).to_string(index=False))
           PY
 
+      # ---------- Build JSON data ----------
       - name: Build JSON data (prices + news)
         env:
           HF_HOME: ${{ env.HF_HOME }}
@@ -182,7 +185,7 @@ jobs:
 
       - name: Inspect generated data (AAPL)
         run: |
-          set -e
+          set -euo pipefail
           echo "== List data dir =="
           ls -lah apps/web/public/data
           python - <<'PY'
@@ -193,31 +196,29 @@ jobs:
               obj=json.load(open(tfile))
               S = obj.get("S") or obj.get("sentiment") or []
               nz=sum(1 for x in S if abs((x or 0))>1e-12)
-              print("AAPL sentiment: len=",len(S)," non_zero=",nz," first=",S[0] if S else None," last=",S[-1] if S else None)
-              print("AAPL news items:", len(obj.get("news") or []))
+              print(f"AAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {S[0] if S else None}  last= {S[-1] if S else None}")
+              news = obj.get("news") or []
+              print("AAPL news items saved (trimmed):", len(news))
+              days = len({ (n.get('ts') or '')[:10] for n in news if n.get('ts') })
+              print("AAPL news_day_count (unique days with news):", days)
           else:
               print("AAPL.json not found")
           print("tickers listed:", len(json.load(open(os.path.join(base,"_tickers.json")))))
           PY
 
-      # ---------- Node / Next ----------
+      # ---------- Node & web build ----------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache-dependency-path: |
-            apps/web/package-lock.json
+          cache: "npm"
+          cache-dependency-path: apps/web/package-lock.json
 
       - name: Install web deps
         working-directory: apps/web
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --no-audit --no-fund
-          else
-            npm install --no-audit --no-fund
-          fi
+        run: npm ci --no-audit --no-fund
 
-      - name: Build & Export static site
+      - name: Build static site (create out/ from .next)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -225,24 +226,48 @@ jobs:
         run: |
           set -euo pipefail
           echo "==== next.config.cjs ===="
-          cat next.config.cjs
+          cat next.config.cjs || true
           echo "==== Node/NPM ===="
           node -v
           npm -v
 
-          # Force real export to apps/web/out
-          npm run build:export
+          # Build (Next 14 with output: export)
+          npm run build
 
-          # Add .nojekyll so _next/ files are served
+          # Synthesize ./out from .next artifacts (robust for GH Actions)
+          echo "==== Synthesize out/ ===="
+          rm -rf out
+          mkdir -p out
+
+          # Static assets
+          if [ -d ".next/static" ]; then
+            mkdir -p out/_next
+            rsync -a .next/static out/_next/static
+          fi
+
+          # App routes (.html files)
+          find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+            rel="${f#.next/server/app}"
+            dir="${rel%/index.html}"
+            mkdir -p "out/${dir}"
+            cp "$f" "out/${dir}/index.html"
+          done
+
+          # 404 fallback for GH Pages
+          if [ -f ".next/server/app/_not-found.html" ]; then
+            cp ".next/server/app/_not-found.html" "out/404.html" || true
+          elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
+            cp "out/index.html" "out/404.html" || true
+          fi
+
+          # Public assets (includes /data/**)
+          rsync -a public/ out/
+
+          # GH Pages needs this
           touch out/.nojekyll
 
-          echo "==== Verify exported routes exist ===="
-          test -f out/index.html
-          test -f out/ticker/AAPL/index.html
-          test -f out/earnings/AAPL/index.html
-
-          echo "==== Tree of out/ (top) ===="
-          find out -maxdepth 2 -type f | sort | sed 's#^#  #'
+          echo "==== Final out/ listing ===="
+          find out -maxdepth 3 -type f | sort
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
