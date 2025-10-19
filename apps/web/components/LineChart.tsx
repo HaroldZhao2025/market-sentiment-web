@@ -1,41 +1,91 @@
-// apps/web/components/LineChart.tsx
 "use client";
 
-import { SeriesIn } from "../lib/data";
+import React from "react";
 import {
   LineChart as RCLineChart,
   Line,
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
+  Legend,
   CartesianGrid,
+  ResponsiveContainer,
 } from "recharts";
 
-export default function LineChart({ series, height = 360 }: { series: SeriesIn; height?: number }) {
-  const { left, right, overlay } = series;
+export type SeriesIn = {
+  date: string[];
+  price: number[];
+  sentiment: number[];
+  sentiment_ma7?: number[];
+  priceLabel?: string;
+  sentimentLabel?: string;
+};
 
-  // build a single array of points keyed by date
-  const len = Math.min(left.dates.length, left.values.length, right.dates.length, right.values.length);
-  const data = Array.from({ length: len }).map((_, i) => ({
-    date: left.dates[i],
-    price: left.values[i],
-    s: right.values[i],
-    sma: overlay?.values?.[i] ?? null,
+type Props = {
+  series: SeriesIn;
+  height?: number; // default 380
+};
+
+export default function LineChart({ series, height = 380 }: Props) {
+  // Build recharts row data
+  const len = Math.min(
+    series.date.length,
+    series.price.length,
+    series.sentiment.length
+  );
+  const rows = Array.from({ length: len }).map((_, i) => ({
+    d: series.date[i],
+    price: series.price[i],
+    s: series.sentiment[i],
+    s7: series.sentiment_ma7?.[i] ?? null,
   }));
 
+  // IMPORTANT: parent must have explicit height for ResponsiveContainer
   return (
-    <div style={{ width: "100%", height }}>
-      <ResponsiveContainer>
-        <RCLineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+    <div className="w-full" style={{ height }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <RCLineChart data={rows} margin={{ top: 10, right: 24, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" minTickGap={30} />
-          <YAxis yAxisId="L" orientation="left" />
-          <YAxis yAxisId="R" orientation="right" />
+          <XAxis dataKey="d" minTickGap={24} />
+          <YAxis
+            yAxisId="left"
+            orientation="left"
+            tickFormatter={(v) => (Math.abs(v) >= 1 ? v.toFixed(1) : v.toFixed(2))}
+          />
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+            tickFormatter={(v) => v.toFixed(0)}
+            allowDecimals={false}
+          />
           <Tooltip />
-          <Line yAxisId="L" type="monotone" dataKey="price" dot={false} strokeWidth={1.6} />
-          <Line yAxisId="R" type="monotone" dataKey="s" dot={false} strokeWidth={1.4} />
-          {overlay ? <Line yAxisId="R" type="monotone" dataKey="sma" dot={false} strokeWidth={1.2} /> : null}
+          <Legend />
+          <Line
+            yAxisId="left"
+            type="monotone"
+            dataKey="s"
+            name={series.sentimentLabel ?? "Daily Sentiment"}
+            dot={false}
+            strokeWidth={1.5}
+          />
+          {series.sentiment_ma7 && (
+            <Line
+              yAxisId="left"
+              type="monotone"
+              dataKey="s7"
+              name="Sentiment MA(7)"
+              dot={false}
+              strokeWidth={2}
+            />
+          )}
+          <Line
+            yAxisId="right"
+            type="monotone"
+            dataKey="price"
+            name={series.priceLabel ?? "Close"}
+            dot={false}
+            strokeWidth={1.5}
+          />
         </RCLineChart>
       </ResponsiveContainer>
     </div>
