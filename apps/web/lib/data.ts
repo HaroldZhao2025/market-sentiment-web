@@ -8,17 +8,13 @@ export async function loadTickers(): Promise<string[]> {
   try {
     const s = await fs.readFile(path.join(DATA_DIR, "_tickers.json"), "utf8");
     const arr = JSON.parse(s);
-    if (Array.isArray(arr) && arr.length) return arr;
-  } catch {}
-  return ["AAPL"]; // fallback for preview
+    return Array.isArray(arr) && arr.length ? arr : ["AAPL"];
+  } catch {
+    return ["AAPL"];
+  }
 }
 
-export type Portfolio = {
-  dates: string[];
-  long: number[];
-  short: number[];
-  long_short: number[];
-};
+export type Portfolio = { dates: string[]; long: number[]; short: number[]; long_short: number[] };
 
 export async function loadPortfolio(): Promise<Portfolio | null> {
   try {
@@ -32,7 +28,7 @@ export async function loadPortfolio(): Promise<Portfolio | null> {
 export type TickerJSON = {
   date: string[];
   price: number[];
-  S: number[]; // daily sentiment
+  S: number[];
   news?: { ts: string; title: string; url: string }[];
 };
 
