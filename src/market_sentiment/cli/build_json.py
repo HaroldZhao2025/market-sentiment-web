@@ -42,8 +42,13 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 
     if not rows:
         return pd.DataFrame(columns=["date", "ticker", "open", "close"])
+
     prices = pd.concat(rows, ignore_index=True)
     prices = _ensure_date_dtype(prices, "date")
+
+    # --- IMPORTANT: ensure tz-naive daily dates on the price side ---
+    prices["date"] = pd.to_datetime(prices["date"], utc=True, errors="coerce").dt.tz_localize(None)
+
     prices = add_forward_returns(prices)
     return prices
 
@@ -86,15 +91,15 @@ def _window(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
         return df
     s = pd.to_datetime(start, utc=True)
     e = pd.to_datetime(end, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
-    df = df.copy()
-    df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
-    return df[(df["ts"] >= s) & (df["ts"] <= e)]
+    out = df.copy()
+    out["ts"] = pd.to_datetime(out["ts"], utc=True, errors="coerce")
+    return out[(out["ts"] >= s) & (out["ts"] <= e)]
 
 
 def _daily_from_rows(news_rows: pd.DataFrame) -> pd.DataFrame:
     """
-    Explicit, robust aggregation: daily S = mean(S) by (date,ticker).
-    This bypasses any helper that may drop rows due to cutoff/timezone quirks.
+    Robust aggregation: daily S = mean(S) by (date,ticker).
+    Produces tz-NAIVE daily dates to match the prices side.
     """
     if news_rows is None or news_rows.empty:
         return pd.DataFrame(columns=["date", "ticker", "S"])
@@ -106,7 +111,10 @@ def _daily_from_rows(news_rows: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame(columns=["date", "ticker", "S"])
 
     df["S"] = pd.to_numeric(df.get("S", 0.0), errors="coerce").fillna(0.0)
-    df["date"] = df["ts"].dt.normalize()  # midnight UTC
+
+    # floor to day in UTC then DROP timezone (tz-naive) so merge matches prices
+    df["date"] = df["ts"].dt.floor("D").dt.tz_localize(None)
+
     daily = (
         df.groupby(["date", "ticker"], as_index=False)["S"]
         .mean(numeric_only=True)
@@ -134,7 +142,7 @@ def main():
     p.add_argument("--end", required=True)
     p.add_argument("--out", required=True, help="Output dir: apps/web/public/data")
     p.add_argument("--batch", type=int, default=16)
-    p.add_argument("--cutoff-minutes", type=int, default=5)  # accepted for compatibility
+    p.add_argument("--cutoff-minutes", type=int, default=5)  # kept for workflow compatibility
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
     a = p.parse_args()
@@ -186,10 +194,10 @@ def main():
         columns=["ticker", "ts", "title", "url", "text", "S"]
     )
 
-    # -------- Daily sentiment (robust) --------
+    # -------- Daily sentiment (tz-naive) --------
     daily = _daily_from_rows(news_rows)
 
-    # -------- Panel join --------
+    # -------- Panel join (no tz mismatch now) --------
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     panel["S"] = pd.to_numeric(panel.get("S", 0.0), errors="coerce").fillna(0.0)
 
