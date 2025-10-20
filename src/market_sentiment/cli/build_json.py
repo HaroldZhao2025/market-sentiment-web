@@ -16,7 +16,7 @@ from market_sentiment.aggregate import (
     join_and_fill_daily,
     _ensure_date_dtype,
 )
-from market_sentiment.finbert import FinBERT  # optional – handled gracefully below
+from market_sentiment.finbert import FinBERT  # optional; handled below
 from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
@@ -27,12 +27,6 @@ from market_sentiment.writers import write_outputs
 # -------------------------------
 
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
-    """
-    Be compatible with different FinBERT.score signatures:
-      - score(texts, batch=?)
-      - score(texts, batch_size=?)
-      - score(texts)
-    """
     try:
         return fb.score(texts, batch=batch)
     except TypeError:
@@ -47,7 +41,6 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", text_col, "S"])
     df = df.copy()
     if fb is None:
-        # No FinBERT available -> leave S=0.0; a daily fallback will kick in later
         df["S"] = 0.0
         return df
 
@@ -60,7 +53,6 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
         scores = _score_texts(fb, texts, batch=batch)
         df["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
     except Exception:
-        # Any runtime error -> degrade gracefully
         df["S"] = 0.0
     return df
 
@@ -71,12 +63,11 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
 
 def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int) -> pd.DataFrame:
     rows: List[pd.DataFrame] = []
-    # Submit jobs with slight staggering to avoid burst rate-limits
     with ThreadPoolExecutor(max_workers=max_workers) as ex:
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.15)  # 150ms between submissions reduces YF throttling
+            time.sleep(0.15)  # reduce burst rate-limits
 
         for f in as_completed(futs):
             try:
@@ -84,7 +75,6 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
                 if df is not None and len(df) > 0:
                     rows.append(df)
             except Exception:
-                # Ignore single-ticker failures; continue building the panel
                 pass
 
     if not rows:
@@ -96,32 +86,125 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 
 
 # -------------------------------
+# News fetching (resilient)
+# -------------------------------
+
+def _yf_news_fallback(ticker: str, start: str, end: str, limit: int = 300) -> pd.DataFrame:
+    """Last-resort: pull from yfinance.Ticker(...).news and coerce to your schema."""
+    try:
+        import yfinance as yf
+    except Exception:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+
+    try:
+        raw = getattr(yf.Ticker(ticker), "news", None) or []
+    except Exception:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+
+    rows = []
+    for item in (raw[:limit] if isinstance(raw, list) else []):
+        content = item.get("content") if isinstance(item, dict) else None
+        # normalize publish timestamp
+        ts = (
+            item.get("providerPublishTime")
+            or item.get("provider_publish_time")
+            or item.get("published_at")
+            or item.get("pubDate")
+            or ((content or {}).get("published") if isinstance(content, dict) else None)
+            or ((content or {}).get("pubDate") if isinstance(content, dict) else None)
+        )
+        ts = pd.to_datetime(ts, utc=True, errors="coerce")
+        if pd.isna(ts):
+            continue
+
+        title = ""
+        for c in (
+            item.get("title"),
+            (content or {}).get("title") if isinstance(content, dict) else None,
+        ):
+            if c:
+                title = str(c).strip()
+                if title:
+                    break
+        if not title:
+            continue
+
+        link = ""
+        for c in (
+            item.get("link"),
+            item.get("url"),
+            (content or {}).get("link") if isinstance(content, dict) else None,
+            (content or {}).get("url") if isinstance(content, dict) else None,
+        ):
+            if c:
+                link = str(c).strip()
+                if link:
+                    break
+
+        text = ""
+        for c in (
+            item.get("summary"),
+            (content or {}).get("summary") if isinstance(content, dict) else None,
+            (content or {}).get("content") if isinstance(content, dict) else None,
+            title,
+        ):
+            if c:
+                text = str(c).strip()
+                if text:
+                    break
+
+        rows.append((ts, title, link, text))
+
+    if not rows:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+
+    df = pd.DataFrame(rows, columns=["ts", "title", "url", "text"])
+    df["ticker"] = ticker
+    df = df.dropna(subset=["ts"]).drop_duplicates(["title", "url"]).sort_values("ts")
+    df = df[(df["ts"] >= pd.to_datetime(start, utc=True)) &
+            (df["ts"] <= pd.to_datetime(end, utc=True) + pd.Timedelta(days=1))]
+    return df[["ticker", "ts", "title", "url", "text"]]
+
+
+def _fetch_news_resilient(ticker: str, start: str, end: str, tries: int = 2) -> pd.DataFrame:
+    last_err = None
+    for i in range(tries):
+        try:
+            df = fetch_news(ticker, start, end)
+            if df is not None and not df.empty:
+                return df
+        except Exception as e:
+            last_err = e
+        time.sleep(0.7)  # brief backoff
+
+    # fallback to direct yfinance news if RSS is blocked/rate-limited
+    fb = _yf_news_fallback(ticker, start, end, limit=300)
+    if fb is not None and not fb.empty:
+        return fb
+
+    # final: empty schema
+    if last_err:
+        # keep silent in CI (no exception), but return empty frame with correct columns
+        pass
+    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+
+
+# -------------------------------
 # Fallback daily sentiment (no FinBERT or all-zero S)
 # -------------------------------
 
 def _fallback_daily_from_counts(news_rows: pd.DataFrame) -> pd.DataFrame:
-    """
-    If FinBERT is unavailable or S scores are (nearly) all zero, build a
-    per-day sentiment proxy from news frequency deviations by ticker.
-
-    Returns: DataFrame with columns ["date", "ticker", "S_NEWS"].
-    """
     if news_rows is None or news_rows.empty:
         return pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
 
     df = news_rows.copy()
-    # Normalize timestamps -> UTC day
     df["date"] = pd.to_datetime(df["ts"], utc=True, errors="coerce").dt.normalize()
     df = df.dropna(subset=["date", "ticker"])
     if df.empty:
         return pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
 
-    # Count news per (ticker, date)
-    cnt = (
-        df.groupby(["ticker", "date"], as_index=False)
-          .size()
-          .rename(columns={"size": "n"})
-    )
+    cnt = (df.groupby(["ticker", "date"], as_index=False)
+           .size().rename(columns={"size": "n"}))
 
     out_rows = []
     for t, g in cnt.groupby("ticker"):
@@ -130,20 +213,15 @@ def _fallback_daily_from_counts(news_rows: pd.DataFrame) -> pd.DataFrame:
         mean = float(n.mean())
         std = float(n.std(ddof=0))
         if std <= 1e-12:
-            z = (n - mean)  # all equal -> z ~ 0
+            z = (n - mean)
         else:
             z = (n - mean) / std
-        # clamp and scale to [-1, 1] (not to dominate price):
         s = (z.clip(-3, 3) / 3.0).astype(float)
-        # small smoothing across days to reduce spikes
         s_ma3 = s.rolling(3, min_periods=1).mean()
-        out = pd.DataFrame({"ticker": t, "date": g["date"], "S_NEWS": s_ma3})
-        out_rows.append(out)
-
+        out_rows.append(pd.DataFrame({"ticker": t, "date": g["date"], "S_NEWS": s_ma3}))
     if not out_rows:
         return pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
-    out = pd.concat(out_rows, ignore_index=True)
-    return out[["date", "ticker", "S_NEWS"]]
+    return pd.concat(out_rows, ignore_index=True)[["date", "ticker", "S_NEWS"]]
 
 
 def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
@@ -161,10 +239,6 @@ def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
 # -------------------------------
 
 def _summarize_from_files(out_dir: str):
-    """
-    Read /_tickers.json and per-ticker JSON files and summarize the
-    *actual* exported content (truth), not the pre-writer panel.
-    """
     out_dir = str(out_dir)
     try:
         tickers = json.load(open(os.path.join(out_dir, "_tickers.json")))
@@ -210,28 +284,27 @@ def main():
     p.add_argument("--max-workers", type=int, default=8)
     a = p.parse_args()
 
-    # Universe; tolerate unnamed first column
+    # Universe
     uni = pd.read_csv(a.universe)
     if "ticker" not in uni.columns:
         first = uni.columns[0]
         uni = uni.rename(columns={first: "ticker"})
-    tickers: List[str] = sorted(
-        [str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist()]
-    )
+    tickers: List[str] = sorted([str(x).strip().upper()
+                                for x in uni["ticker"].dropna().unique().tolist()])
     if a.max_tickers and a.max_tickers > 0:
         tickers = tickers[: a.max_tickers]
 
     mode = f"{len(tickers)} tickers"
     print(f"Build JSON for {mode} | batch={a.batch} cutoff_min={a.cutoff_minutes} max_workers={a.max_workers}")
 
-    # ---------------- Prices ----------------
+    # Prices
     print("Prices:")
     prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers)
     if prices is None or prices.empty:
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
 
-    # ---------------- News + (optional) earnings ----------------
+    # News
     print("News+Earnings:")
     try:
         fb = FinBERT()
@@ -240,36 +313,29 @@ def main():
 
     news_all: List[pd.DataFrame] = []
     for t in tickers:
-        n = fetch_news(t, a.start, a.end)
-        # Keep a sane schema no matter what
+        n = _fetch_news_resilient(t, a.start, a.end, tries=2)
         if n is None or n.empty:
+            # keep empty but correct schema
             n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-        # Score (or set S=0 if no FinBERT); fallback will be applied later if needed
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
 
-    news_rows = (
-        pd.concat(news_all, ignore_index=True)
-        if news_all
-        else pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
+    news_rows = pd.concat(news_all, ignore_index=True) if news_all else pd.DataFrame(
+        columns=["ticker", "ts", "title", "url", "text", "S"]
     )
 
-    # Earnings placeholder (schema-compatible)
+    # Earnings placeholder
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
-    # ---------------- Aggregate daily sentiment ----------------
+    # Daily aggregation
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
-    d_earn = (
-        daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
-        if not earn_rows.empty else
-        pd.DataFrame(columns=["date", "ticker", "S_EARN"])
-    )
+    d_earn = daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes) \
+        if not earn_rows.empty else pd.DataFrame(columns=["date", "ticker", "S_EARN"])
 
-    # If FinBERT missing or all-zero S_NEWS, create a fallback from news counts
+    # If missing/zero, fallback from counts
     if _is_all_zero_or_missing(d_news):
         d_news = _fallback_daily_from_counts(news_rows)
 
-    # Normalize date types
     if not d_news.empty:
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce")
     if not d_earn.empty:
@@ -277,24 +343,22 @@ def main():
 
     daily = join_and_fill_daily(d_news, d_earn)
 
-    # Ensure a composite S exists
     if "S" not in daily.columns:
         daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
         daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
         daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
 
-    # ---------------- Build panel ----------------
+    # Panel
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     for c in ("S", "S_NEWS", "S_EARN"):
         if c not in panel.columns:
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    # ---------------- Write outputs ----------------
-    # The writers wrapper accepts (panel, news_rows, out_dir) or (panel, news_rows, earn_rows, out_dir)
+    # Write outputs (writers handles both 3-arg and 4-arg signatures)
     write_outputs(panel, news_rows, earn_rows, a.out)
 
-    # ---------------- Summary (from files) ----------------
+    # Summary from exported files
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
     print("Summary:")
     print(f"  Tickers listed: {len(tickers_list)}")
