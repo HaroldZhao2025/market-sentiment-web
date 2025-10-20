@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import os
 import math
-from typing import Dict, Iterable, List, Optional, Tuple, Any
+from typing import Dict, Iterable, List, Optional, Any
 
 import pandas as pd
 
@@ -51,6 +51,7 @@ def _roll_ma(arr: List[float], n: int = 7) -> List[float]:
 
 
 def _all_almost_zero(vals: Iterable[float], eps: float = 1e-12) -> bool:
+    """True if there is no value whose absolute magnitude exceeds eps."""
     for v in vals:
         try:
             if abs(float(v)) > eps:
@@ -60,14 +61,15 @@ def _all_almost_zero(vals: Iterable[float], eps: float = 1e-12) -> bool:
     return True
 
 
-# ---------- core helpers ----------
+# ---------- fallback S from news intensity ----------
 
 def _news_fallback_S(dates_ts: List[pd.Timestamp], news_t: pd.DataFrame) -> List[float]:
     """
-    Fallback S from news intensity:
-      - count news per calendar day over the *full price window*,
-      - z-score across the window,
-      - squash to [-1, 1] with tanh(z/2).
+    Fallback S from news intensity over the *full price window*:
+      - count news per calendar day,
+      - within-window z-score,
+      - squash to [-1, 1] with tanh(z/2),
+      - produce one value per date in `dates_ts` (keeps chart continuous).
     """
     if news_t is None or news_t.empty or not dates_ts:
         return [0.0] * len(dates_ts)
@@ -77,83 +79,94 @@ def _news_fallback_S(dates_ts: List[pd.Timestamp], news_t: pd.DataFrame) -> List
         .groupby("day", as_index=False)
         .size()
         .rename(columns={"size": "cnt"})
+        .set_index("day")["cnt"]
     )
-    g = g.set_index("day")["cnt"]
 
     idx = pd.DatetimeIndex([pd.to_datetime(d, utc=True) for d in dates_ts])
     cnt = g.reindex(idx, fill_value=0).astype(float)
 
     mu = float(cnt.mean())
     sd = float(cnt.std(ddof=0))
-    if sd <= 1e-12:
-        z = (cnt - mu) * 0.0
-    else:
-        z = (cnt - mu) / sd
-
+    z = (cnt - mu) / sd if sd > 1e-12 else (cnt - mu)
     return [math.tanh(float(x) / 2.0) for x in z.tolist()]
 
+
+# ---------- per-ticker builder ----------
 
 def _build_one_ticker(
     t: str,
     panel: pd.DataFrame,
     news_rows: Optional[pd.DataFrame],
-    max_news: int = 400,  # year-scale
-) -> Dict:
+    max_news: int = 10,  # <- per your requirement: keep 10 headlines, but S covers every day
+) -> Dict[str, Any]:
     """
     Build the ticker payload used by the Next.js page.
-    Expected panel columns (per ticker daily): date, ticker, close, S (or sentiment).
-    If S is missing or ~all zeros and we have news, synthesize fallback S.
+    Expected `panel` columns (daily, per ticker): date, ticker, close, S (or sentiment).
+    If S is missing or ~all zeros and we have news, synthesize fallback S with day coverage.
     """
     df = panel[panel["ticker"] == t].copy()
     if df.empty or "date" not in df.columns:
         return {}
 
-    # normalize dtypes
-    df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce")
+    # Normalize dtypes and sort by day; enforce *day* granularity for alignment.
+    df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce").dt.floor("D")
     df = df.dropna(subset=["date"]).sort_values("date").reset_index(drop=True)
 
-    # price
+    # Price series (close) with daily coverage
     if "close" not in df.columns:
         df["close"] = pd.NA
-    price = pd.to_numeric(df["close"], errors="coerce").fillna(0.0).astype(float).tolist()
+    price = (
+        pd.to_numeric(df["close"], errors="coerce")
+        .fillna(0.0)
+        .astype(float)
+        .tolist()
+    )
 
-    # S (keep upstream if present)
+    # Sentiment S (use upstream if present; else zeros). We keep same length as df rows.
     if "S" not in df.columns and "sentiment" in df.columns:
         df["S"] = df["sentiment"]
     if "S" not in df.columns:
         df["S"] = 0.0
     df["S"] = pd.to_numeric(df["S"], errors="coerce").fillna(0.0)
 
-    # window for news filtering (DAY-LEVEL to avoid tz edge cases)
-    start_day = df["date"].min().floor("D")
-    end_day = df["date"].max().floor("D")
+    # Window for news filtering, **day-level** to avoid tz edge cases.
+    start_day = df["date"].min()
+    end_day = df["date"].max()
 
-    # select news for ticker, within window (day-based)
+    # Select news for ticker, in-window (day-based)
     nt = pd.DataFrame(columns=["ts", "title", "url", "text"])
     if news_rows is not None and len(news_rows) > 0:
         nr = news_rows[news_rows["ticker"] == t].copy()
         if len(nr) > 0:
             nr["ts"] = pd.to_datetime(nr["ts"], utc=True, errors="coerce")
             nr = nr.dropna(subset=["ts"])
-            # day-level filter
             nr["_day"] = nr["ts"].dt.floor("D")
             in_window = (nr["_day"] >= start_day) & (nr["_day"] <= end_day)
             nt = nr.loc[in_window, ["ts", "title", "url", "text"]].sort_values("ts")
 
-            # fallback: if day-filter discards all, still keep latest items we fetched
+            # If in-window filter discards everything, keep most recent 10 overall (so headlines never show empty)
             if nt.empty:
                 nt = nr.sort_values("ts", ascending=False)[["ts", "title", "url", "text"]].head(int(max_news))
                 nt = nt.sort_values("ts")
 
-    # fallback S from news intensity if upstream S is basically all zeros
-    s = pd.to_numeric(df["S"], errors="coerce").fillna(0.0).astype(float).tolist()
-    if _all_almost_zero(s) and not nt.empty:
-        s = _news_fallback_S(df["date"].tolist(), nt)
+    # Primary S from panel
+    s_raw = (
+        pd.to_numeric(df["S"], errors="coerce")
+        .fillna(0.0)
+        .astype(float)
+        .tolist()
+    )
 
-    # smoothing
+    # If upstream S is basically all zeros and we have news, synthesize a fallback with full daily coverage.
+    if _all_almost_zero(s_raw) and not nt.empty:
+        s = _news_fallback_S(df["date"].tolist(), nt)
+    else:
+        s = s_raw
+
+    # Smooth for chart
     s_ma7 = _roll_ma(s, n=7)
 
-    # news slice (keep newest first, cap)
+    # News slice (limit to 10 headlines, newest first)
     out_news: List[Dict[str, Any]] = []
     if not nt.empty:
         for _, r in nt.sort_values("ts", ascending=False).head(int(max_news)).iterrows():
@@ -166,18 +179,11 @@ def _build_one_ticker(
 
     return {
         "symbol": t,
-        "date": [
-            (
-                d.tz_convert("UTC").strftime("%Y-%m-%d")
-                if getattr(d, "tzinfo", None)
-                else pd.Timestamp(d, tz="UTC").strftime("%Y-%m-%d")
-            )
-            for d in df["date"]
-        ],
+        "date": [pd.Timestamp(d, tz="UTC").strftime("%Y-%m-%d") for d in df["date"]],
         "price": price,
-        "S": [round(_safe_num(x), 6) for x in s],
+        "S": [round(_safe_num(x), 6) for x in s],                     # one value per day
         "S_ma7": [round(x, 6) if math.isfinite(x) else 0.0 for x in s_ma7],
-        "news": out_news,
+        "news": out_news,                                             # only 10 headlines
     }
 
 
@@ -191,10 +197,15 @@ def _write_json(path: str, obj: Dict) -> None:
 
 def write_outputs(panel, news_rows, *rest):
     """
-    Compatible with both calling patterns seen in your pipeline:
+    Compatible with both calling patterns:
       - write_outputs(panel, news_rows, out_dir)
       - write_outputs(panel, news_rows, earn_rows, out_dir)
-    Emits: /ticker/<T>.json, _tickers.json, portfolio.json, and (if provided) earnings stubs.
+
+    Emits:
+      - /ticker/<T>.json
+      - _tickers.json
+      - portfolio.json (mean S across tickers per day)
+      - optional minimal earnings stubs (if provided)
     """
     # parse args
     if len(rest) == 1:
@@ -219,8 +230,10 @@ def write_outputs(panel, news_rows, *rest):
         raise KeyError("panel must contain 'date' column")
     if "ticker" not in panel.columns:
         raise KeyError("panel must contain 'ticker' column")
+
     panel["ticker"] = panel["ticker"].astype(str).str.upper()
-    panel["date"] = pd.to_datetime(panel["date"], utc=True, errors="coerce")
+    # Coerce to day-level (naive) for stable merges with client code
+    panel["date"] = pd.to_datetime(panel["date"], utc=True, errors="coerce").dt.floor("D")
 
     # normalize news frame columns if present
     if news_rows is not None and len(news_rows) > 0:
@@ -239,9 +252,9 @@ def write_outputs(panel, news_rows, *rest):
     # build per-ticker JSON and aggregate for portfolio from the final S we output
     pf_acc: Dict[pd.Timestamp, List[float]] = {}
     for t in tickers:
-        obj = _build_one_ticker(t, panel, news_rows, max_news=400)
-        # if the ticker had no usable data, skip file
-        if not obj or not obj.get("date", []) or (not obj.get("price", []) and not obj.get("S", [])):
+        obj = _build_one_ticker(t, panel, news_rows, max_news=10)  # 10 headlines; S covers all days
+        # skip if no usable data
+        if not obj or not obj.get("date", []):
             continue
 
         _write_json(os.path.join(tick_dir, f"{t}.json"), obj)
