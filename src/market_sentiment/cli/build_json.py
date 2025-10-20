@@ -93,6 +93,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 # ---------- fallback daily sentiment (news counts) ----------
 
 def _fallback_daily_from_counts(news_rows: pd.DataFrame) -> pd.DataFrame:
+    """Return ['date','ticker','S_NEWS_COUNTS'] built from per-day news frequency."""
     if news_rows is None or news_rows.empty:
         return pd.DataFrame(columns=["date", "ticker", "S_NEWS_COUNTS"])
 
@@ -100,15 +101,16 @@ def _fallback_daily_from_counts(news_rows: pd.DataFrame) -> pd.DataFrame:
     df["ticker"] = df["ticker"].astype(str).str.upper().str.strip()
     df["date"] = (
         pd.to_datetime(df["ts"], utc=True, errors="coerce")
-          .dt.tz_convert("UTC")
-          .dt.normalize()
-          .dt.tz_localize(None)
+        .dt.tz_convert("UTC")
+        .dt.normalize()
+        .dt.tz_localize(None)
     )
     df = df.dropna(subset=["date", "ticker"])
     if df.empty:
         return pd.DataFrame(columns=["date", "ticker", "S_NEWS_COUNTS"])
 
     cnt = df.groupby(["ticker", "date"], as_index=False).size().rename(columns={"size": "n"})
+
     outs: List[pd.DataFrame] = []
     for t, g in cnt.groupby("ticker"):
         g = g.sort_values("date").reset_index(drop=True)
@@ -247,28 +249,19 @@ def main():
 
     daily = join_and_fill_daily(d_news, d_earn)
 
-    # make sure numeric columns exist as Series (avoid .fillna on floats)
-    if "S_NEWS" not in daily.columns:
-        daily["S_NEWS"] = 0.0
-    else:
-        daily["S_NEWS"] = pd.to_numeric(daily["S_NEWS"], errors="coerce").fillna(0.0)
-
-    if "S_EARN" not in daily.columns:
-        daily["S_EARN"] = 0.0
-    else:
-        daily["S_EARN"] = pd.to_numeric(daily["S_EARN"], errors="coerce").fillna(0.0)
-
-    if "S" not in daily.columns:
-        daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
-    else:
+    # ensure proper numeric Series (avoid .fillna on floats)
+    daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
+    daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
+    if "S" in daily.columns:
         daily["S"] = pd.to_numeric(daily["S"], errors="coerce").fillna(0.0)
+    else:
+        daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
 
-    # inject count-based fallback where S ~ 0 (avoid name collision)
+    # inject count-based fallback where S ~ 0 (no name collision)
     if not news_rows.empty:
-        fb_counts = _fallback_daily_from_counts(news_rows)  # columns: date,ticker,S_NEWS_COUNTS
+        fb_counts = _fallback_daily_from_counts(news_rows)  # date,ticker,S_NEWS_COUNTS
         if not fb_counts.empty:
             daily = daily.merge(fb_counts, on=["date", "ticker"], how="left")
-            # series for fallback
             fallback = pd.to_numeric(daily.get("S_NEWS_COUNTS"), errors="coerce")
             s_abs = pd.to_numeric(daily["S"], errors="coerce").abs().fillna(0.0)
             need = s_abs <= 1e-12
