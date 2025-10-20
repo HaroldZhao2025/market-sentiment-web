@@ -6,41 +6,48 @@ import LineChart from "../../components/LineChart";
 type Props = {
   dates: string[];
   sentiment: number[];
-  price?: number[];           // optional – if you later add an index price
+  price?: number[]; // optional (SPY/^GSPC if available)
 };
 
-export default function PortfolioClient({ dates, sentiment, price = [] }: Props) {
+function ma7(arr: number[]) {
+  const out: number[] = [];
+  let run = 0;
+  for (let i = 0; i < arr.length; i++) {
+    run += Number(arr[i] || 0);
+    if (i >= 7) run -= Number(arr[i - 7] || 0);
+    out.push(i >= 6 ? run / 7 : NaN);
+  }
+  return out;
+}
+
+function label(v: number) {
+  if (v >= 0.4) return "Strong Positive";
+  if (v >= 0.1) return "Positive";
+  if (v <= -0.4) return "Strong Negative";
+  if (v <= -0.1) return "Negative";
+  return "Neutral";
+}
+
+export default function PortfolioClient({ dates, sentiment, price }: Props) {
   const [mode, setMode] = useState<"overlay" | "separate">("overlay");
+  const sMA7 = useMemo(() => ma7(sentiment), [sentiment]);
 
-  const ma7 = useMemo(() => {
-    const s = sentiment ?? [];
-    const out: number[] = [];
-    let run = 0;
-    for (let i = 0; i < s.length; i++) {
-      const v = Number.isFinite(s[i]) ? s[i] : 0;
-      run += v;
-      if (i >= 7) run -= (Number.isFinite(s[i - 7]) ? s[i - 7] : 0);
-      out.push(i >= 6 ? run / 7 : NaN);
-    }
-    return out;
-  }, [sentiment]);
-
-  const sNow = Number(sentiment.at(-1) ?? 0);
-  const sNowFmt = Number.isFinite(sNow) ? sNow.toFixed(2) : "0.00";
+  const lastS = Number(sentiment.at(-1) ?? 0);
+  const lastMA = Number(sMA7.at(-1) ?? 0);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">S&amp;P 500 — Aggregate Sentiment</h1>
-        <div className="flex gap-2">
+        <div className="inline-flex rounded-lg border overflow-hidden">
           <button
-            className={`px-3 py-1 rounded-lg border ${mode === "separate" ? "bg-black text-white" : ""}`}
+            className={`px-3 py-1 text-sm ${mode === "separate" ? "bg-black text-white" : "bg-white"}`}
             onClick={() => setMode("separate")}
           >
             Separate View
           </button>
           <button
-            className={`px-3 py-1 rounded-lg border ${mode === "overlay" ? "bg-black text-white" : ""}`}
+            className={`px-3 py-1 text-sm ${mode === "overlay" ? "bg-black text-white" : "bg-white"}`}
             onClick={() => setMode("overlay")}
           >
             Overlayed View
@@ -49,31 +56,32 @@ export default function PortfolioClient({ dates, sentiment, price = [] }: Props)
       </div>
 
       <div className="rounded-2xl p-5 shadow-sm border bg-white">
-        <h3 className="font-semibold mb-3">Sentiment and Price Analysis</h3>
+        <h3 className="font-semibold mb-3">Sentiment and Index Price</h3>
         <LineChart
           mode={mode}
           dates={dates}
           price={price}
           sentiment={sentiment}
-          sentimentMA7={ma7}
-          height={420}
+          sentimentMA7={sMA7}
+          height={400}
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 font-medium">Live Market Sentiment</div>
-          <div className={`text-3xl font-semibold mt-1 ${sNow >= 0 ? "text-emerald-600" : "text-rose-600"}`}>
-            {sNow >= 0 ? "Positive" : "Negative"} <span className="text-neutral-500 text-lg">({sNowFmt})</span>
+          <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
+          <div className="text-2xl font-semibold">
+            {label(lastS)}{" "}
+            <span className="text-neutral-500 text-lg align-middle">({lastS.toFixed(2)})</span>
           </div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 font-medium">Predicted Return</div>
-          <div className="text-3xl font-semibold mt-1">{(ma7.at(-1) ?? 0).toFixed(2)}%</div>
+          <div className="text-sm text-neutral-500 mb-1">Predicted Return</div>
+          <div className="text-2xl font-semibold">{(lastMA * 100).toFixed(2)}%</div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 font-medium">Our Recommendation</div>
-          <div className="text-3xl font-semibold mt-1">{(ma7.at(-1) ?? 0) >= 0 ? "Buy" : "Hold"}</div>
+          <div className="text-sm text-neutral-500 mb-1">Our Recommendation</div>
+          <div className="text-2xl font-semibold">{lastMA >= 0 ? "Buy" : "Hold"}</div>
         </div>
       </div>
     </div>
