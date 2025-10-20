@@ -3,13 +3,9 @@
 import { useMemo, useState } from "react";
 import LineChart from "../../components/LineChart";
 
-type Props = {
-  dates: string[];
-  sentiment: number[];
-  price?: number[]; // optional (SPY/^GSPC if available)
-};
+type Props = { dates: string[]; sentiment: number[]; price?: number[] };
 
-function ma7(arr: number[]) {
+const ma7 = (arr: number[]) => {
   const out: number[] = [];
   let run = 0;
   for (let i = 0; i < arr.length; i++) {
@@ -18,15 +14,10 @@ function ma7(arr: number[]) {
     out.push(i >= 6 ? run / 7 : NaN);
   }
   return out;
-}
+};
 
-function label(v: number) {
-  if (v >= 0.4) return "Strong Positive";
-  if (v >= 0.1) return "Positive";
-  if (v <= -0.4) return "Strong Negative";
-  if (v <= -0.1) return "Negative";
-  return "Neutral";
-}
+const label = (v: number) =>
+  v >= 0.4 ? "Strong Positive" : v >= 0.1 ? "Positive" : v <= -0.4 ? "Strong Negative" : v <= -0.1 ? "Negative" : "Neutral";
 
 export default function PortfolioClient({ dates, sentiment, price }: Props) {
   const [mode, setMode] = useState<"overlay" | "separate">("overlay");
@@ -40,16 +31,10 @@ export default function PortfolioClient({ dates, sentiment, price }: Props) {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">S&amp;P 500 — Aggregate Sentiment</h1>
         <div className="inline-flex rounded-lg border overflow-hidden">
-          <button
-            className={`px-3 py-1 text-sm ${mode === "separate" ? "bg-black text-white" : "bg-white"}`}
-            onClick={() => setMode("separate")}
-          >
+          <button className={`px-3 py-1 text-sm ${mode === "separate" ? "bg-black text-white" : "bg-white"}`} onClick={() => setMode("separate")}>
             Separate View
           </button>
-          <button
-            className={`px-3 py-1 text-sm ${mode === "overlay" ? "bg-black text-white" : "bg-white"}`}
-            onClick={() => setMode("overlay")}
-          >
+          <button className={`px-3 py-1 text-sm ${mode === "overlay" ? "bg-black text-white" : "bg-white"}`} onClick={() => setMode("overlay")}>
             Overlayed View
           </button>
         </div>
@@ -57,22 +42,14 @@ export default function PortfolioClient({ dates, sentiment, price }: Props) {
 
       <div className="rounded-2xl p-5 shadow-sm border bg-white">
         <h3 className="font-semibold mb-3">Sentiment and Index Price</h3>
-        <LineChart
-          mode={mode}
-          dates={dates}
-          price={price}
-          sentiment={sentiment}
-          sentimentMA7={sMA7}
-          height={400}
-        />
+        <LineChart mode={mode} dates={dates} price={price} sentiment={sentiment} sentimentMA7={sMA7} height={420} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
           <div className="text-2xl font-semibold">
-            {label(lastS)}{" "}
-            <span className="text-neutral-500 text-lg align-middle">({lastS.toFixed(2)})</span>
+            {label(lastS)} <span className="text-neutral-500 text-lg align-middle">({lastS.toFixed(2)})</span>
           </div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
