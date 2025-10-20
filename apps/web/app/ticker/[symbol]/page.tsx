@@ -1,65 +1,79 @@
 // apps/web/app/ticker/[symbol]/page.tsx
 import fs from "fs/promises";
 import path from "path";
-import TickerClient, { NewsItem, SeriesIn } from "./TickerClient";
+import TickerClient from "./TickerClient";
 
-export const dynamic = "error";          // SSG only
+type SeriesIn = {
+  date: string[];
+  price: number[];
+  sentiment: number[];
+  label?: string;
+};
+
+type NewsItem = { ts: string; title: string; url: string; text: string };
+
+export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
 
 const DATA_ROOT = path.join(process.cwd(), "public", "data");
 
-// small utils
-async function readJSON<T = any>(p: string): Promise<T | null> {
-  try {
-    const raw = await fs.readFile(p, "utf8");
-    return JSON.parse(raw) as T;
-  } catch {
-    return null;
-  }
+async function readJSON<T = any>(p: string): Promise<T> {
+  const raw = await fs.readFile(p, "utf8");
+  return JSON.parse(raw) as T;
 }
-const toNumArr = (v: any) =>
-  Array.isArray(v) ? v.map((x) => (typeof x === "number" ? x : Number(x ?? 0))).map((x) => (Number.isFinite(x) ? x : 0)) : [];
-const toStrArr = (v: any) => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
+
+function asNumArr(v: unknown): number[] {
+  if (!Array.isArray(v)) return [];
+  return v.map((x) => (typeof x === "number" ? x : Number(x ?? 0))).map((x) => (Number.isFinite(x) ? x : 0));
+}
+function asStrArr(v: unknown): string[] {
+  if (!Array.isArray(v)) return [];
+  return v.map((x) => (x == null ? "" : String(x)));
+}
 
 function buildSeries(obj: any): SeriesIn | null {
-  const date = toStrArr(obj?.date ?? obj?.dates);
-  const price = toNumArr(obj?.price ?? obj?.close);
-  const sentiment = toNumArr(obj?.S ?? obj?.sentiment);
-  if (!date.length || !price.length) return null;
-  const n = Math.min(date.length, price.length, sentiment.length || Infinity);
-  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
+  const dates = asStrArr(obj?.date ?? obj?.dates);
+  const price = asNumArr(obj?.price ?? obj?.close ?? obj?.Close);
+  const s = asNumArr(obj?.S ?? obj?.sentiment);
+
+  if (!dates.length) return null;
+  // trim to shortest so arrays align (Recharts needs consistent row objects)
+  const n = Math.min(dates.length, price.length || Infinity, s.length || Infinity);
+  const take = (a: any[]) => (n === Infinity ? a : a.slice(0, n));
+
+  return { date: take(dates), price: take(price), sentiment: take(s), label: "Daily S" };
 }
 
 function buildNews(obj: any): NewsItem[] {
   const raw: any[] = Array.isArray(obj?.news) ? obj.news : [];
   return raw
     .map((r) => ({
-      ts: String(r?.ts ?? ""),
+      ts: String(r?.ts ?? r?.date ?? ""),
       title: String(r?.title ?? ""),
       url: String(r?.url ?? ""),
-      text: r?.text ? String(r.text) : undefined,
+      text: String(r?.text ?? r?.summary ?? r?.title ?? ""),
     }))
     .filter((r) => r.ts && r.title);
 }
 
 export async function generateStaticParams() {
-  let tickers: string[] = [];
-  const tickersFile = path.join(DATA_ROOT, "_tickers.json");
   try {
-    const arr = await readJSON<string[]>(tickersFile);
-    tickers = Array.isArray(arr) ? arr : [];
-  } catch { /* noop */ }
-  if (!tickers.length) tickers = ["AAPL"];
-  return tickers.map((symbol) => ({ symbol }));
+    const tickers: string[] = await readJSON(path.join(DATA_ROOT, "_tickers.json"));
+    return tickers.map((symbol) => ({ symbol }));
+  } catch {
+    return [{ symbol: "AAPL" }];
+  }
 }
 
 export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
-  const file = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
-  const obj = await readJSON<any>(file);
+  const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
 
-  if (!obj) {
+  let obj: any;
+  try {
+    obj = await readJSON<any>(f);
+  } catch {
     return (
       <div className="min-h-screen p-6">
         <div className="max-w-5xl mx-auto">
@@ -76,7 +90,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-semibold mb-6 tracking-tight">{symbol}</h1>
+        <h1 className="sr-only">{symbol}</h1>
         {series ? (
           <TickerClient symbol={symbol} series={series} news={news} />
         ) : (
