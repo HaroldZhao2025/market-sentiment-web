@@ -1,112 +1,102 @@
 "use client";
 
 import {
+  ResponsiveContainer,
   LineChart as RC,
   Line,
+  Area,
   XAxis,
   YAxis,
   Tooltip,
   CartesianGrid,
-  ResponsiveContainer,
-  Legend,
   ReferenceLine,
+  Legend,
 } from "recharts";
 
 type Props = {
   mode: "overlay" | "separate";
   dates: string[];
-  price?: number[];          // optional for portfolio
+  price?: number[];        // optional for portfolio
   sentiment: number[];
-  sentimentMA7?: number[];
-  height?: number;
+  sentimentMA7?: number[]; // optional; caller can compute or omit
+  height?: number;         // chart height for each panel
 };
 
-function buildSeries(
-  dates: string[],
-  price: (number | undefined)[] = [],
-  sentiment: (number | undefined)[] = [],
-  sentimentMA7: (number | undefined)[] = []
-) {
-  const n = Math.min(
-    dates.length,
-    price.length || dates.length,
-    sentiment.length || dates.length
-  );
-  const rows = [];
-  for (let i = 0; i < n; i++) {
-    const d = dates[i];
-    const p = Number.isFinite(Number(price[i])) ? Number(price[i]) : null;
-    const s = Number.isFinite(Number(sentiment[i])) ? Number(sentiment[i]) : null;
-    const m = Number.isFinite(Number(sentimentMA7[i])) ? Number(sentimentMA7[i]) : null;
-    rows.push({ d, p, s, m });
+const fmtDate = (d: string) => {
+  // Expect "YYYY-MM-DD" strings; show month+day compactly.
+  try {
+    const o = new Date(d + "T00:00:00Z");
+    return o.toLocaleDateString(undefined, { month: "short", day: "2-digit" });
+  } catch {
+    return d;
   }
+};
+
+function buildData(dates: string[], price?: number[], s?: number[], m?: number[]) {
+  const n = dates.length;
+  const rows = new Array(Math.max(n, price?.length ?? 0, s?.length ?? 0)).fill(0).map((_, i) => ({
+    d: dates[i] ?? "",
+    p: price?.[i] ?? null,
+    s: s?.[i] ?? null,
+    m: m?.[i] ?? null,
+  }));
   return rows;
 }
 
-const AxisTickStyle = { fontSize: 11 };
-
-export default function LineChart({
-  mode,
-  dates,
-  price = [],
-  sentiment,
-  sentimentMA7 = [],
-  height = 360,
-}: Props) {
-  const data = buildSeries(dates, price, sentiment, sentimentMA7);
-
-  const Chart = (
+function OverlayChart({ data, height }: { data: any[]; height: number }) {
+  return (
     <ResponsiveContainer width="100%" height={height}>
-      <RC data={data} margin={{ top: 10, right: 20, bottom: 6, left: 6 }}>
+      <RC data={data} margin={{ top: 8, right: 20, bottom: 8, left: 8 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="d" tick={AxisTickStyle} minTickGap={28} />
-        {/* Left = sentiment in [-1, 1] with zero line */}
+        <XAxis dataKey="d" tick={{ fontSize: 11 }} tickFormatter={fmtDate} minTickGap={30} />
         <YAxis
           yAxisId="left"
           domain={[-1, 1]}
-          tick={AxisTickStyle}
           allowDataOverflow
-          width={40}
+          tick={{ fontSize: 11 }}
+          tickCount={5}
         />
-        {/* Right = price */}
         <YAxis
           yAxisId="right"
           orientation="right"
-          tick={AxisTickStyle}
-          allowDecimals
-          width={56}
+          tick={{ fontSize: 11 }}
+          tickFormatter={(v) => (v == null ? "" : Number(v).toFixed(0))}
         />
         <Tooltip
-          formatter={(val: any, name) => {
-            if (name === "Sentiment" || name === "7-day MA") {
-              return [Number(val).toFixed(2), name];
+          formatter={(value: any, name) => {
+            if (name === "Sentiment" || name === "Sentiment MA(7)") {
+              return [Number(value).toFixed(2), name];
             }
-            return [val, name];
+            if (name === "Price") {
+              return [Number(value).toFixed(2), name];
+            }
+            return [value, name];
           }}
-          labelFormatter={(v) => `Date: ${v}`}
+          labelFormatter={(l) => `Date: ${l}`}
         />
         <Legend />
-        <ReferenceLine yAxisId="left" y={0} strokeOpacity={0.4} />
-        {/* Sentiment (bars feel crowded on export sites; stick to lines) */}
-        <Line
+        {/* sentiment area + MA line (left axis) */}
+        <Area
           name="Sentiment"
           yAxisId="left"
           type="monotone"
           dataKey="s"
           dot={false}
-          strokeWidth={1.6}
+          strokeOpacity={0.55}
+          fillOpacity={0.15}
         />
         <Line
-          name="7-day MA"
+          name="Sentiment MA(7)"
           yAxisId="left"
           type="monotone"
           dataKey="m"
           dot={false}
-          strokeWidth={2.2}
+          strokeWidth={2}
         />
-        {/* Price */}
+        <ReferenceLine y={0} yAxisId="left" strokeOpacity={0.35} />
+        {/* price line (right axis) */}
         <Line
-          name="Stock Price"
+          name="Price"
           yAxisId="right"
           type="monotone"
           dataKey="p"
@@ -116,60 +106,59 @@ export default function LineChart({
       </RC>
     </ResponsiveContainer>
   );
+}
 
-  if (mode === "overlay") return Chart;
+function SingleChart({
+  data,
+  height,
+  which,
+}: {
+  data: any[];
+  height: number;
+  which: "sentiment" | "price";
+}) {
+  const left = which === "sentiment";
+  return (
+    <ResponsiveContainer width="100%" height={height}>
+      <RC data={data} margin={{ top: 8, right: 20, bottom: 8, left: 8 }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="d" tick={{ fontSize: 11 }} tickFormatter={fmtDate} minTickGap={30} />
+        <YAxis
+          domain={left ? [-1, 1] : ["auto", "auto"]}
+          tick={{ fontSize: 11 }}
+          tickFormatter={(v) => (left ? Number(v).toFixed(1) : Number(v).toFixed(0))}
+        />
+        <Tooltip labelFormatter={(l) => `Date: ${l}`} />
+        {left ? (
+          <>
+            <Area type="monotone" dataKey="s" dot={false} strokeOpacity={0.55} fillOpacity={0.15} />
+            <Line type="monotone" dataKey="m" dot={false} strokeWidth={2} />
+            <ReferenceLine y={0} strokeOpacity={0.35} />
+          </>
+        ) : (
+          <Line type="monotone" dataKey="p" dot={false} strokeWidth={2} />
+        )}
+      </RC>
+    </ResponsiveContainer>
+  );
+}
 
-  // “Separate” mode: show two smaller panels stacked
+export default function LineChart({
+  mode,
+  dates,
+  price,
+  sentiment,
+  sentimentMA7,
+  height = 360,
+}: Props) {
+  const data = buildData(dates, price, sentiment, sentimentMA7);
+  if (mode === "overlay") {
+    return <OverlayChart data={data} height={height} />;
+  }
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border p-3">
-        <ResponsiveContainer width="100%" height={220}>
-          <RC data={data} margin={{ top: 8, right: 18, bottom: 6, left: 6 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="d" tick={AxisTickStyle} minTickGap={28} />
-            <YAxis yAxisId="left" domain={[-1, 1]} tick={AxisTickStyle} />
-            <Tooltip labelFormatter={(v) => `Date: ${v}`} />
-            <Legend />
-            <ReferenceLine yAxisId="left" y={0} strokeOpacity={0.4} />
-            <Line
-              name="Sentiment"
-              yAxisId="left"
-              type="monotone"
-              dataKey="s"
-              dot={false}
-              strokeWidth={1.6}
-            />
-            <Line
-              name="7-day MA"
-              yAxisId="left"
-              type="monotone"
-              dataKey="m"
-              dot={false}
-              strokeWidth={2.2}
-            />
-          </RC>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="rounded-xl border p-3">
-        <ResponsiveContainer width="100%" height={220}>
-          <RC data={data} margin={{ top: 8, right: 18, bottom: 6, left: 6 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="d" tick={AxisTickStyle} minTickGap={28} />
-            <YAxis yAxisId="right" orientation="right" tick={AxisTickStyle} />
-            <Tooltip labelFormatter={(v) => `Date: ${v}`} />
-            <Legend />
-            <Line
-              name="Stock Price"
-              yAxisId="right"
-              type="monotone"
-              dataKey="p"
-              dot={false}
-              strokeWidth={2}
-            />
-          </RC>
-        </ResponsiveContainer>
-      </div>
+      <SingleChart data={data} height={Math.max(180, Math.floor(height * 0.55))} which="sentiment" />
+      <SingleChart data={data} height={Math.max(180, Math.floor(height * 0.55))} which="price" />
     </div>
   );
 }
