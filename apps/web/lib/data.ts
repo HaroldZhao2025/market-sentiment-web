@@ -29,7 +29,7 @@ export async function loadTicker(symbol: string): Promise<any | null> {
 
 export async function loadTickerNews(symbol: string): Promise<any[]> {
   const obj = await loadTicker(symbol);
-  return (obj?.news as any[]) ?? [];
+  return Array.isArray(obj?.news) ? (obj!.news as any[]) : [];
 }
 
 export async function loadTickerSeries(symbol: string): Promise<{
@@ -41,9 +41,9 @@ export async function loadTickerSeries(symbol: string): Promise<{
 } | null> {
   const obj = await loadTicker(symbol);
   if (!obj) return null;
-  const dates = obj.dates ?? obj.date ?? [];
+  const dates = obj.date ?? obj.dates ?? [];
   const price = obj.price ?? obj.close ?? [];
   const sentiment = obj.S ?? obj.sentiment ?? [];
-  const sentiment_ma7 = obj.S_MA7 ?? obj.sentiment_ma7 ?? [];
+  const sentiment_ma7 = obj.S_ma7 ?? obj.sentiment_ma7 ?? [];
   return { dates, price, sentiment, sentiment_ma7, label: "Daily S" };
 }
