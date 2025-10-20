@@ -86,7 +86,6 @@ def _window(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
         return df
     s = pd.to_datetime(start, utc=True)
     e = pd.to_datetime(end, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
-    # make sure ts is tz-aware UTC
     df = df.copy()
     df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
     return df[(df["ts"] >= s) & (df["ts"] <= e)]
@@ -107,7 +106,7 @@ def _daily_from_rows(news_rows: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame(columns=["date", "ticker", "S"])
 
     df["S"] = pd.to_numeric(df.get("S", 0.0), errors="coerce").fillna(0.0)
-    df["date"] = df["ts"].dt.normalize()  # midnight UTC, tz-aware
+    df["date"] = df["ts"].dt.normalize()  # midnight UTC
     daily = (
         df.groupby(["date", "ticker"], as_index=False)["S"]
         .mean(numeric_only=True)
@@ -122,11 +121,9 @@ def _safe_write_outputs(panel: pd.DataFrame, news_rows: pd.DataFrame, out_dir: s
     or (panel, news_rows, earn_rows, out_dir) depending on installed version.
     """
     try:
-        # Newer signature in your message
         empty_earn = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
         write_outputs(panel, news_rows, empty_earn, out_dir)
     except TypeError:
-        # Older signature: (panel, news_rows, out_dir)
         write_outputs(panel, news_rows, out_dir)
 
 
@@ -137,6 +134,7 @@ def main():
     p.add_argument("--end", required=True)
     p.add_argument("--out", required=True, help="Output dir: apps/web/public/data")
     p.add_argument("--batch", type=int, default=16)
+    p.add_argument("--cutoff-minutes", type=int, default=5)  # accepted for compatibility
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
     a = p.parse_args()
@@ -149,7 +147,7 @@ def main():
     if a.max_tickers and a.max_tickers > 0:
         tickers = tickers[: a.max_tickers]
 
-    print(f"Build JSON for {len(tickers)} tickers | batch={a.batch} max_workers={a.max_workers}")
+    print(f"Build JSON for {len(tickers)} tickers | batch={a.batch} cutoff_min={a.cutoff_minutes} max_workers={a.max_workers}")
 
     # -------- Prices --------
     print("Prices:")
@@ -158,7 +156,7 @@ def main():
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
 
-    # -------- News (robust path) --------
+    # -------- News --------
     print("News+Earnings:")
     try:
         fb = FinBERT()
@@ -171,15 +169,14 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         raw = fetch_news(t, a.start, a.end, company=comp, max_per_provider=300)
-        raw = _window(raw, a.start, a.end)  # hard window (defensive)
+        raw = _window(raw, a.start, a.end)
 
         scored = _score_rows_keep(raw, fb, text_col="text", batch=a.batch)
 
-        # Guarantee schema
+        # Ensure schema + correct ticker
         for c in ("ticker", "ts", "title", "url", "text", "S"):
             if c not in scored.columns:
                 scored[c] = "" if c in ("title", "url", "text") else (pd.NaT if c == "ts" else 0.0)
-        # Make sure ticker column is correct
         scored["ticker"] = t
 
         news_frames.append(scored)
@@ -189,7 +186,7 @@ def main():
         columns=["ticker", "ts", "title", "url", "text", "S"]
     )
 
-    # -------- Daily sentiment (explicit aggregation, no drops) --------
+    # -------- Daily sentiment (robust) --------
     daily = _daily_from_rows(news_rows)
 
     # -------- Panel join --------
