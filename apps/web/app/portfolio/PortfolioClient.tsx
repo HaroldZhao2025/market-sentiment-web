@@ -1,67 +1,100 @@
 // apps/web/app/portfolio/PortfolioClient.tsx
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  LineChart as RC,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  ResponsiveContainer,
-} from "recharts";
-import { dataUrl } from "../../lib/paths";
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
 
-type PortfolioJSON = {
+// Recharts must render client-side to avoid GH Pages SSR/hydration glitches
+const OverviewChart = dynamic(() => import("../../components/OverviewChart"), {
+  ssr: false,
+});
+
+type Props = {
   dates: string[];
-  S: number[];
-  S_MA7: number[];
-  count?: number[];
+  sentiment: number[];
+  price?: number[];
 };
 
-export default function PortfolioClient() {
-  const [data, setData] = useState<PortfolioJSON | null>(null);
-  const [err, setErr] = useState<string | null>(null);
+function movingAvg(vals: number[], n = 7): number[] {
+  const out: number[] = [];
+  let run = 0;
+  for (let i = 0; i < vals.length; i++) {
+    const v = Number.isFinite(vals[i]) ? vals[i] : 0;
+    run += v;
+    if (i >= n) run -= Number.isFinite(vals[i - n]) ? vals[i - n] : 0;
+    out.push(i >= n - 1 ? run / n : NaN);
+  }
+  return out;
+}
 
-  useEffect(() => {
-    const url = dataUrl("portfolio.json");
-    fetch(url, { cache: "no-cache" })
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.statusText)))
-      .then((j: PortfolioJSON) => setData(j))
-      .catch((e) => setErr(String(e)));
-  }, []);
+function advisoryText(x: number) {
+  if (x >= 0.5) return "Strong Buy";
+  if (x >= 0.15) return "Buy";
+  if (x <= -0.5) return "Strong Sell";
+  if (x <= -0.15) return "Sell";
+  return "Neutral";
+}
 
-  const rows =
-    data?.dates?.map((d, i) => ({
-      d,
-      s: data.S?.[i] ?? null,
-      m: data.S_MA7?.[i] ?? null,
-    })) ?? [];
+export default function PortfolioClient({ dates, sentiment, price }: Props) {
+  const sMA7 = useMemo(() => movingAvg(sentiment, 7), [sentiment]);
+
+  const live = Number.isFinite(sMA7.at(-1)!) ? (sMA7.at(-1) as number)
+              : Number.isFinite(sentiment.at(-1)!) ? (sentiment.at(-1) as number)
+              : 0;
+
+  const liveLabel = live >= 0 ? "Positive" : "Negative";
+  const predictedPct = (live * 100).toFixed(2);
 
   return (
-    <main className="max-w-6xl mx-auto p-6 space-y-6">
-      <h1 className="text-3xl font-semibold tracking-tight">Market Sentiment — S&amp;P 500 Portfolio</h1>
+    <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
+      <h1 className="text-2xl font-semibold tracking-tight">Market Sentiment — Portfolio</h1>
 
-      {!data || rows.length === 0 ? (
-        <div className="text-neutral-500">
-          {err ? `Failed to load portfolio: ${err}` : "No portfolio data yet."}
+      <div className="rounded-2xl p-4 shadow-sm border bg-white">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="font-semibold">Sentiment and Index Price</h3>
+          <div className="flex gap-2">
+            <button className="px-3 py-1 rounded-lg border">Separate View</button>
+            <button className="px-3 py-1 rounded-lg border bg-black text-white">
+              Overlayed View
+            </button>
+          </div>
         </div>
-      ) : (
-        <div className="rounded-2xl p-4 shadow-sm border">
-          <h3 className="font-semibold mb-3">Equal-Weight Daily Sentiment</h3>
-          <ResponsiveContainer width="100%" height={380}>
-            <RC data={rows} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="d" tick={{ fontSize: 11 }} minTickGap={28} />
-              <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip />
-              <Line yAxisId={0} type="monotone" dataKey="s" dot={false} strokeWidth={1.5} strokeOpacity={0.45} />
-              <Line yAxisId={0} type="monotone" dataKey="m" dot={false} strokeWidth={2} />
-            </RC>
-          </ResponsiveContainer>
+
+        {dates?.length ? (
+          <OverviewChart dates={dates} sentiment={sentiment} price={price} />
+        ) : (
+          <div className="text-sm text-neutral-500">No portfolio data yet.</div>
+        )}
+      </div>
+
+      {/* Insight cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="rounded-2xl p-4 shadow-sm border bg-white">
+          <div className="text-sm text-neutral-500">Live Market Sentiment</div>
+          <div className="text-2xl font-semibold mt-1">
+            {liveLabel} <span className="text-neutral-500 font-normal">({live.toFixed(2)})</span>
+          </div>
         </div>
-      )}
-    </main>
+        <div className="rounded-2xl p-4 shadow-sm border bg-white">
+          <div className="text-sm text-neutral-500">Predicted Return</div>
+          <div className="text-2xl font-semibold mt-1">{predictedPct}%</div>
+        </div>
+        <div className="rounded-2xl p-4 shadow-sm border bg-white">
+          <div className="text-sm text-neutral-500">Advisory Opinion</div>
+          <div className="text-2xl font-semibold mt-1">{advisoryText(live)}</div>
+        </div>
+        <div className="rounded-2xl p-4 shadow-sm border bg-white">
+          <div className="text-sm text-neutral-500">Our Recommendation</div>
+          <div className="text-2xl font-semibold mt-1">
+            {live >= 0.15 ? "Buy" : live <= -0.15 ? "Sell" : "Hold"}
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-2xl p-4 shadow-sm border bg-white text-sm text-neutral-600">
+        The portfolio sentiment is bounded in [-1, 1]. If available, the chart overlays SPY (or
+        ^GSPC) price on the right axis for context.
+      </div>
+    </div>
   );
 }
