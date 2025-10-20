@@ -27,16 +27,16 @@ export default function TickerClient({
     const out: number[] = [];
     let run = 0;
     for (let i = 0; i < s.length; i++) {
-      const v = Number.isFinite(s[i]) ? s[i] : 0;
+      const v = Number(s[i]) || 0;
       run += v;
-      if (i >= 7) run -= (Number.isFinite(s[i - 7]) ? s[i - 7] : 0);
+      if (i >= 7) run -= (Number(s[i - 7]) || 0);
       out.push(i >= 6 ? run / 7 : NaN);
     }
     return out;
   }, [series.sentiment]);
 
-  const lastS = series.sentiment.at(-1) ?? 0;
-  const lastMA = ma7.at(-1) ?? 0;
+  const lastS = Number(series.sentiment.at(-1) ?? 0);
+  const lastMA = Number(ma7.at(-1) ?? 0);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
@@ -73,7 +73,8 @@ export default function TickerClient({
         <div className="rounded-2xl p-4 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500">Live Market Sentiment</div>
           <div className="text-2xl font-semibold mt-1">
-            {Math.sign(lastS) >= 0 ? "Positive" : "Negative"}
+            {Math.sign(lastS) >= 0 ? "Positive" : "Negative"}{" "}
+            <span className="text-neutral-500 text-lg">({lastS.toFixed(2)})</span>
           </div>
         </div>
         <div className="rounded-2xl p-4 shadow-sm border bg-white">
