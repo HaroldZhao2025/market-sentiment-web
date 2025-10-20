@@ -1,3 +1,4 @@
+// apps/web/app/ticker/[symbol]/TickerClient.tsx
 "use client";
 
 import { useMemo, useState } from "react";
@@ -109,9 +110,12 @@ export default function TickerClient({
 
       <div className="rounded-2xl p-5 shadow-sm border bg-white">
         <h3 className="font-semibold mb-2">Recent Headlines for {symbol}</h3>
+        <p className="text-sm text-neutral-500 mb-3">
+          Latest 10 headlines shown. Daily sentiment uses all news across the period.
+        </p>
         {news?.length ? (
           <ul className="space-y-2">
-            {news.slice(0, 500).map((n, i) => (
+            {news.slice(0, 10).map((n, i) => (
               <li key={i} className="text-sm leading-6">
                 <span className="text-neutral-500 mr-2">{new Date(n.ts).toLocaleString()}</span>
                 <a className="underline decoration-dotted underline-offset-2" href={n.url} target="_blank" rel="noreferrer">
