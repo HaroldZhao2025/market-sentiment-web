@@ -1,16 +1,14 @@
-// apps/web/components/LineChart.tsx
 "use client";
 
 import {
-  LineChart as RC,
+  ResponsiveContainer,
+  ComposedChart,
+  Bar,
   Line,
   XAxis,
   YAxis,
   Tooltip,
   CartesianGrid,
-  ResponsiveContainer,
-  Area,
-  Legend,
 } from "recharts";
 
 export default function LineChart({
@@ -35,52 +33,49 @@ export default function LineChart({
     m: sentimentMA7[i] ?? null,
   }));
 
-  const separate = mode === "separate";
-
-  return (
+  const Chart = (
     <ResponsiveContainer width="100%" height={height}>
-      <RC data={data} margin={{ top: 12, right: 24, bottom: 0, left: 0 }}>
+      <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="d" tick={{ fontSize: 11 }} minTickGap={28} />
-        <YAxis
-          yAxisId="left"
-          tick={{ fontSize: 11 }}
-          width={48}
-          hide={!separate}
-        />
+        <YAxis yAxisId="left" tick={{ fontSize: 11 }} />
         <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11 }} />
         <Tooltip />
-        <Legend wrapperStyle={{ fontSize: 12 }} />
-
-        {/* Sentiment (area) */}
-        <Area
-          yAxisId={separate ? "left" : "right"}
-          type="monotone"
-          dataKey="s"
-          name="Sentiment"
-          fillOpacity={0.15}
-          strokeOpacity={0.35}
-          strokeWidth={1.5}
-        />
-        {/* Sentiment MA7 */}
-        <Line
-          yAxisId={separate ? "left" : "right"}
-          type="monotone"
-          dataKey="m"
-          name="Sentiment MA(7)"
-          dot={false}
-          strokeWidth={2}
-        />
-        {/* Price */}
-        <Line
-          yAxisId="right"
-          type="monotone"
-          dataKey="p"
-          name="Stock Price"
-          dot={false}
-          strokeWidth={2}
-        />
-      </RC>
+        {/* Sentiment as bars (left axis) */}
+        <Bar yAxisId="left" dataKey="s" opacity={0.35} />
+        {/* 7-day smoothed sentiment (left axis) */}
+        <Line yAxisId="left" type="monotone" dataKey="m" dot={false} strokeWidth={2} />
+        {/* Price (right axis) */}
+        <Line yAxisId="right" type="monotone" dataKey="p" dot={false} strokeWidth={2} />
+      </ComposedChart>
     </ResponsiveContainer>
+  );
+
+  if (mode === "overlay") return Chart;
+
+  // "Separate" = stack two mini-charts with shared x
+  return (
+    <div className="space-y-6">
+      <ResponsiveContainer width="100%" height={220}>
+        <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="d" tick={{ fontSize: 11 }} minTickGap={28} />
+          <YAxis tick={{ fontSize: 11 }} />
+          <Tooltip />
+          <Bar dataKey="s" opacity={0.35} />
+          <Line type="monotone" dataKey="m" dot={false} strokeWidth={2} />
+        </ComposedChart>
+      </ResponsiveContainer>
+
+      <ResponsiveContainer width="100%" height={220}>
+        <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="d" tick={{ fontSize: 11 }} minTickGap={28} />
+          <YAxis tick={{ fontSize: 11 }} />
+          <Tooltip />
+          <Line type="monotone" dataKey="p" dot={false} strokeWidth={2} />
+        </ComposedChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
