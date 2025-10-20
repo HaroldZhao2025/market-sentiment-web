@@ -1,13 +1,11 @@
-// apps/web/app/portfolio/page.tsx
+// SSG page for aggregate /portfolio with graceful fallback
 import fs from "node:fs/promises";
 import path from "node:path";
 import PortfolioClient from "./PortfolioClient";
 
-type PortfolioJson = { dates?: string[]; S?: number[]; sentiment?: number[] };
-
 const DATA_ROOT = path.join(process.cwd(), "public", "data");
 
-async function readJson<T = any>(p: string): Promise<T | null> {
+async function readJSON<T>(p: string): Promise<T | null> {
   try {
     return JSON.parse(await fs.readFile(p, "utf8")) as T;
   } catch {
@@ -16,20 +14,20 @@ async function readJson<T = any>(p: string): Promise<T | null> {
 }
 
 export default async function Page() {
-  // Aggregate sentiment (required)
-  const pf = (await readJson<PortfolioJson>(path.join(DATA_ROOT, "portfolio.json"))) || {};
-  const dates = pf.dates ?? [];
-  const sentiment = (pf.S ?? pf.sentiment ?? []).map((x) => Number(x) || 0);
+  const pf = await readJSON<{ dates: string[]; S: number[]; price?: number[] }>(
+    path.join(DATA_ROOT, "portfolio.json")
+  );
 
-  // Optional index price (SPY or ^GSPC if available)
-  let price: number[] | undefined;
-  const tryFiles = [path.join(DATA_ROOT, "ticker", "SPY.json"), path.join(DATA_ROOT, "ticker", "^GSPC.json")];
-  for (const f of tryFiles) {
-    const obj = await readJson<any>(f);
-    if (obj && (obj.price || obj.close)) {
-      price = (obj.price ?? obj.close ?? []).map((x: any) => Number(x) || 0);
-      break;
-    }
+  const dates = pf?.dates ?? [];
+  const sentiment = pf?.S ?? [];
+  const price = pf?.price ?? undefined;
+
+  if (!dates.length || !sentiment.length) {
+    return (
+      <div className="max-w-5xl mx-auto p-6 text-neutral-500">
+        No portfolio data yet.
+      </div>
+    );
   }
 
   return <PortfolioClient dates={dates} sentiment={sentiment} price={price} />;
