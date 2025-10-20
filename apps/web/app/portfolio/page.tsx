@@ -1,49 +1,35 @@
-// Server component: reads portfolio.json and (optionally) an index price JSON later.
+// apps/web/app/portfolio/page.tsx
 import fs from "node:fs/promises";
 import path from "node:path";
 import PortfolioClient from "./PortfolioClient";
 
-export const dynamic = "error";
-export const dynamicParams = false;
-export const revalidate = false;
+type PortfolioJson = { dates?: string[]; S?: number[]; sentiment?: number[] };
 
 const DATA_ROOT = path.join(process.cwd(), "public", "data");
 
-type PortfolioJSON = {
-  dates: string[];
-  S: number[];
-  price?: number[]; // optional if you later output index price
-};
-
-async function readJSON<T>(p: string): Promise<T | null> {
+async function readJson<T = any>(p: string): Promise<T | null> {
   try {
-    const raw = await fs.readFile(p, "utf8");
-    return JSON.parse(raw) as T;
+    return JSON.parse(await fs.readFile(p, "utf8")) as T;
   } catch {
     return null;
   }
 }
 
 export default async function Page() {
-  const pf = (await readJSON<PortfolioJSON>(path.join(DATA_ROOT, "portfolio.json"))) || {
-    dates: [],
-    S: [],
-  };
-
-  // If you later write an index price series, attach it here; otherwise this stays blank.
+  // Aggregate sentiment (required)
+  const pf = (await readJson<PortfolioJson>(path.join(DATA_ROOT, "portfolio.json"))) || {};
   const dates = pf.dates ?? [];
-  const sentiment = pf.S ?? [];
-  const price = pf.price ?? [];
+  const sentiment = (pf.S ?? pf.sentiment ?? []).map((x) => Number(x) || 0);
 
-  if (dates.length === 0 || sentiment.length === 0) {
-    return (
-      <div className="min-h-screen p-6">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-2xl font-semibold mb-4">S&amp;P 500 — Aggregate Sentiment</h1>
-          <div className="text-neutral-500">No portfolio data yet.</div>
-        </div>
-      </div>
-    );
+  // Optional index price (SPY or ^GSPC if available)
+  let price: number[] | undefined;
+  const tryFiles = [path.join(DATA_ROOT, "ticker", "SPY.json"), path.join(DATA_ROOT, "ticker", "^GSPC.json")];
+  for (const f of tryFiles) {
+    const obj = await readJson<any>(f);
+    if (obj && (obj.price || obj.close)) {
+      price = (obj.price ?? obj.close ?? []).map((x: any) => Number(x) || 0);
+      break;
+    }
   }
 
   return <PortfolioClient dates={dates} sentiment={sentiment} price={price} />;
