@@ -1,3 +1,4 @@
+# src/market_sentiment/writers.py
 from __future__ import annotations
 
 import json
@@ -78,35 +79,30 @@ def _smooth_and_scale_to_unit(series: pd.Series) -> pd.Series:
     arr = series.astype(float).values
     mu = float(np.mean(arr))
     sd = float(np.std(arr))
-    if sd <= 1e-12:
-        z = np.zeros_like(arr, dtype=float)
-    else:
-        z = (arr - mu) / sd
+    z = (arr - mu) / sd if sd > 1e-12 else np.zeros_like(arr, dtype=float)
     s = np.tanh(z / 2.0)
     return pd.Series(s, index=series.index, dtype=float)
 
 
-def _news_fallback_S_full_window(price_days: pd.DatetimeIndex, news_t: pd.DataFrame) -> List[float]:
+def _news_fallback_S_full_window(price_days_index: pd.DatetimeIndex, news_t: pd.DataFrame) -> List[float]:
     """
-    Build a daily S for *every trading day* by:
-      1) counting news at day granularity over the full date index,
-      2) convolving with a short gaussian kernel to “spread” sparse impulses,
+    Build a daily S for *every trading day*:
+      1) count news by day over full date index,
+      2) convolve with short gaussian kernel,
       3) z-score and squash into [-1, 1].
     """
-    if news_t is None or news_t.empty or len(price_days) == 0:
-        return [0.0] * len(price_days)
+    if news_t is None or news_t.empty or len(price_days_index) == 0:
+        return [0.0] * len(price_days_index)
 
     g = (
         news_t.assign(day=news_t["ts"].dt.floor("D"))
-        .groupby("day", as_index=False)
-        .size()
+        .groupby("day", as_index=False).size()
         .rename(columns={"size": "cnt"})
         .set_index("day")["cnt"]
     )
-    # align to full window (including days with zero news)
-    aligned = g.reindex(price_days, fill_value=0).astype(float)
 
-    # light smoothing / spreading so we have daily signal
+    aligned = g.reindex(price_days_index, fill_value=0).astype(float)
+
     k = _gaussian_kernel(days=7, sigma=2.0)
     smoothed = np.convolve(aligned.values, k, mode="same")
     smoothed = pd.Series(smoothed, index=aligned.index)
@@ -151,7 +147,8 @@ def _build_one_ticker(
     # window for news filtering (day-level)
     start_day = df["date"].min().floor("D")
     end_day = df["date"].max().floor("D")
-    price_days = pd.DatetimeIndex(df["date"].dt.floor("D").unique())
+    # *ordered* index matching output rows
+    price_days_index = pd.DatetimeIndex(df["date"].dt.floor("D"))
 
     # select news for ticker, within window (day-based)
     nt = pd.DataFrame(columns=["ts", "title", "url", "text"])
@@ -171,7 +168,11 @@ def _build_one_ticker(
     # upstream S (if almost all zero) -> synthesize a daily curve from sparse news
     s = pd.to_numeric(df["S"], errors="coerce").fillna(0.0).astype(float).tolist()
     if _all_almost_zero(s) and not nt.empty:
-        s = _news_fallback_S_full_window(price_days, nt)
+        s = _news_fallback_S_full_window(price_days_index, nt)
+
+    # safety: length match (rare, but guard)
+    if len(s) != len(df):
+        s = (s + [0.0] * len(df))[: len(df)]
 
     # final smoothing (MA7) for visualization
     s_ma7 = _roll_ma(s, n=7)
@@ -213,12 +214,12 @@ def _write_json(path: str, obj: Dict) -> None:
 
 def write_outputs(panel, news_rows, *rest):
     """
-    Compatible with both calling patterns in your pipeline:
+    Compatible with both calling patterns:
       - write_outputs(panel, news_rows, out_dir)
       - write_outputs(panel, news_rows, earn_rows, out_dir)
 
     Emits:
-      • /ticker/<T>.json  (includes daily “S” and “S_ma7” for the full window)
+      • /ticker/<T>.json  (daily “S” and “S_ma7” across FULL window)
       • _tickers.json
       • portfolio.json    (mean of per-ticker S by day)
       • /earnings/<T>.json (optional stub)
