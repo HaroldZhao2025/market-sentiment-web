@@ -6,7 +6,7 @@ import json
 import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 import pandas as pd
 
@@ -16,7 +16,7 @@ from market_sentiment.aggregate import (
     join_and_fill_daily,
     _ensure_date_dtype,
 )
-from market_sentiment.finbert import FinBERT  # optional; handled below
+from market_sentiment.finbert import FinBERT  # may be unavailable on CI; handled below
 from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
@@ -67,8 +67,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.15)  # reduce burst rate-limits
-
+            time.sleep(0.15)  # reduce burst rate-limits on yfinance
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -86,7 +85,39 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 
 
 # -------------------------------
-# News fetching (resilient)
+# Company lookup (best-effort)
+# -------------------------------
+
+_COMPANY_CACHE: Dict[str, Optional[str]] = {}
+
+def _company_name(ticker: str) -> Optional[str]:
+    """Lightweight best-effort lookup via yfinance; cached and throttled."""
+    if ticker in _COMPANY_CACHE:
+        return _COMPANY_CACHE[ticker]
+    name: Optional[str] = None
+    try:
+        import yfinance as yf
+        y = yf.Ticker(ticker)
+        # Try fast_info first (may not have name), then info (slower).
+        info = {}
+        try:
+            info = y.get_info() if hasattr(y, "get_info") else (y.info or {})
+        except Exception:
+            try:
+                info = y.info or {}
+            except Exception:
+                info = {}
+        name = info.get("longName") or info.get("shortName") or None
+    except Exception:
+        name = None
+    _COMPANY_CACHE[ticker] = name
+    # tiny sleep to avoid hammering yfinance in full mode
+    time.sleep(0.05)
+    return name
+
+
+# -------------------------------
+# News fetching (resilient, with company)
 # -------------------------------
 
 def _yf_news_fallback(ticker: str, start: str, end: str, limit: int = 300) -> pd.DataFrame:
@@ -104,7 +135,6 @@ def _yf_news_fallback(ticker: str, start: str, end: str, limit: int = 300) -> pd
     rows = []
     for item in (raw[:limit] if isinstance(raw, list) else []):
         content = item.get("content") if isinstance(item, dict) else None
-        # normalize publish timestamp
         ts = (
             item.get("providerPublishTime")
             or item.get("provider_publish_time")
@@ -117,42 +147,19 @@ def _yf_news_fallback(ticker: str, start: str, end: str, limit: int = 300) -> pd
         if pd.isna(ts):
             continue
 
-        title = ""
-        for c in (
-            item.get("title"),
-            (content or {}).get("title") if isinstance(content, dict) else None,
-        ):
-            if c:
-                title = str(c).strip()
-                if title:
-                    break
+        def _first(*vals) -> str:
+            for v in vals:
+                if v:
+                    s = str(v).strip()
+                    if s:
+                        return s
+            return ""
+
+        title = _first(item.get("title"), (content or {}).get("title"))
         if not title:
             continue
-
-        link = ""
-        for c in (
-            item.get("link"),
-            item.get("url"),
-            (content or {}).get("link") if isinstance(content, dict) else None,
-            (content or {}).get("url") if isinstance(content, dict) else None,
-        ):
-            if c:
-                link = str(c).strip()
-                if link:
-                    break
-
-        text = ""
-        for c in (
-            item.get("summary"),
-            (content or {}).get("summary") if isinstance(content, dict) else None,
-            (content or {}).get("content") if isinstance(content, dict) else None,
-            title,
-        ):
-            if c:
-                text = str(c).strip()
-                if text:
-                    break
-
+        link = _first(item.get("link"), item.get("url"), (content or {}).get("link"), (content or {}).get("url"))
+        text = _first(item.get("summary"), (content or {}).get("summary"), (content or {}).get("content"), title)
         rows.append((ts, title, link, text))
 
     if not rows:
@@ -166,25 +173,24 @@ def _yf_news_fallback(ticker: str, start: str, end: str, limit: int = 300) -> pd
     return df[["ticker", "ts", "title", "url", "text"]]
 
 
-def _fetch_news_resilient(ticker: str, start: str, end: str, tries: int = 2) -> pd.DataFrame:
+def _fetch_news_resilient(ticker: str, start: str, end: str, company: Optional[str], tries: int = 2) -> pd.DataFrame:
     last_err = None
-    for i in range(tries):
+    for _ in range(tries):
         try:
-            df = fetch_news(ticker, start, end)
+            # IMPORTANT: pass company (matches your smoke test behavior)
+            df = fetch_news(ticker, start, end, company=company, max_per_provider=300)
             if df is not None and not df.empty:
                 return df
         except Exception as e:
             last_err = e
-        time.sleep(0.7)  # brief backoff
+        time.sleep(0.7)
 
-    # fallback to direct yfinance news if RSS is blocked/rate-limited
     fb = _yf_news_fallback(ticker, start, end, limit=300)
     if fb is not None and not fb.empty:
         return fb
 
-    # final: empty schema
     if last_err:
-        # keep silent in CI (no exception), but return empty frame with correct columns
+        # swallow in CI; return empty schema
         pass
     return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
@@ -212,10 +218,7 @@ def _fallback_daily_from_counts(news_rows: pd.DataFrame) -> pd.DataFrame:
         n = g["n"].astype(float)
         mean = float(n.mean())
         std = float(n.std(ddof=0))
-        if std <= 1e-12:
-            z = (n - mean)
-        else:
-            z = (n - mean) / std
+        z = (n - mean) if std <= 1e-12 else (n - mean) / std
         s = (z.clip(-3, 3) / 3.0).astype(float)
         s_ma3 = s.rolling(3, min_periods=1).mean()
         out_rows.append(pd.DataFrame({"ticker": t, "date": g["date"], "S_NEWS": s_ma3}))
@@ -304,7 +307,7 @@ def main():
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
 
-    # News
+    # News (+ fallback sentiment)
     print("News+Earnings:")
     try:
         fb = FinBERT()
@@ -313,9 +316,9 @@ def main():
 
     news_all: List[pd.DataFrame] = []
     for t in tickers:
-        n = _fetch_news_resilient(t, a.start, a.end, tries=2)
+        comp = _company_name(t)  # <-- key difference vs previous file
+        n = _fetch_news_resilient(t, a.start, a.end, company=comp, tries=2)
         if n is None or n.empty:
-            # keep empty but correct schema
             n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
@@ -324,7 +327,7 @@ def main():
         columns=["ticker", "ts", "title", "url", "text", "S"]
     )
 
-    # Earnings placeholder
+    # Earnings placeholder (kept schema-compatible)
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
     # Daily aggregation
@@ -358,7 +361,7 @@ def main():
     # Write outputs (writers handles both 3-arg and 4-arg signatures)
     write_outputs(panel, news_rows, earn_rows, a.out)
 
-    # Summary from exported files
+    # Summary from exported files (what the site will actually use)
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
     print("Summary:")
     print(f"  Tickers listed: {len(tickers_list)}")
