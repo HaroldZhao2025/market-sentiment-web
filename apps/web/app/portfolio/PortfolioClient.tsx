@@ -9,7 +9,8 @@ const ma7 = (arr: number[]) => {
   const out: number[] = [];
   let run = 0;
   for (let i = 0; i < arr.length; i++) {
-    run += Number(arr[i] || 0);
+    const v = Number(arr[i] || 0);
+    run += v;
     if (i >= 7) run -= Number(arr[i - 7] || 0);
     out.push(i >= 6 ? run / 7 : NaN);
   }
@@ -22,7 +23,6 @@ const label = (v: number) =>
 export default function PortfolioClient({ dates, sentiment, price }: Props) {
   const [mode, setMode] = useState<"overlay" | "separate">("overlay");
   const sMA7 = useMemo(() => ma7(sentiment), [sentiment]);
-
   const lastS = Number(sentiment.at(-1) ?? 0);
   const lastMA = Number(sMA7.at(-1) ?? 0);
 
@@ -49,7 +49,7 @@ export default function PortfolioClient({ dates, sentiment, price }: Props) {
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
           <div className="text-2xl font-semibold">
-            {label(lastS)} <span className="text-neutral-500 text-lg align-middle">({lastS.toFixed(2)})</span>
+            {label(lastS)} <span className="text-neutral-500 text-lg">({lastS.toFixed(2)})</span>
           </div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
