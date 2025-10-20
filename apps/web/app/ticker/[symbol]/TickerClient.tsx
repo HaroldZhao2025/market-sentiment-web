@@ -22,7 +22,7 @@ function ma7(arr: number[]) {
   return out;
 }
 
-function trendWord(v: number) {
+function label(v: number) {
   if (v >= 0.4) return "Strong Positive";
   if (v >= 0.1) return "Positive";
   if (v <= -0.4) return "Strong Negative";
@@ -38,15 +38,7 @@ function recommend(v: number) {
   return "Hold";
 }
 
-export default function TickerClient({
-  symbol,
-  series,
-  news,
-}: {
-  symbol: string;
-  series: SeriesIn;
-  news: NewsItem[];
-}) {
+export default function TickerClient({ symbol, series, news }: { symbol: string; series: SeriesIn; news: NewsItem[] }) {
   const [mode, setMode] = useState<"overlay" | "separate">("overlay");
   const sMA7 = useMemo(() => ma7(series.sentiment), [series.sentiment]);
 
@@ -81,7 +73,7 @@ export default function TickerClient({
           price={series.price}
           sentiment={series.sentiment}
           sentimentMA7={sMA7}
-          height={400}
+          height={420}
         />
       </div>
 
@@ -89,7 +81,7 @@ export default function TickerClient({
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
           <div className="text-2xl font-semibold">
-            {trendWord(lastS)}{" "}
+            {label(lastS)}{" "}
             <span className="text-neutral-500 text-lg align-middle">({lastS.toFixed(2)})</span>
           </div>
         </div>
@@ -113,9 +105,7 @@ export default function TickerClient({
           <ul className="space-y-2">
             {news.slice(0, 30).map((n, i) => (
               <li key={i} className="text-sm leading-6">
-                <span className="text-neutral-500 mr-2">
-                  {new Date(n.ts).toLocaleString()}
-                </span>
+                <span className="text-neutral-500 mr-2">{new Date(n.ts).toLocaleString()}</span>
                 <a className="underline decoration-dotted underline-offset-2" href={n.url} target="_blank" rel="noreferrer">
                   {n.title}
                 </a>
