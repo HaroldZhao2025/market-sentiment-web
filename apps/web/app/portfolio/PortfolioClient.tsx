@@ -1,99 +1,80 @@
-// apps/web/app/portfolio/PortfolioClient.tsx
 "use client";
 
-import dynamic from "next/dynamic";
-import { useMemo } from "react";
-
-// Recharts must render client-side to avoid GH Pages SSR/hydration glitches
-const OverviewChart = dynamic(() => import("../../components/OverviewChart"), {
-  ssr: false,
-});
+import { useMemo, useState } from "react";
+import LineChart from "../../components/LineChart";
 
 type Props = {
   dates: string[];
   sentiment: number[];
-  price?: number[];
+  price?: number[];           // optional – if you later add an index price
 };
 
-function movingAvg(vals: number[], n = 7): number[] {
-  const out: number[] = [];
-  let run = 0;
-  for (let i = 0; i < vals.length; i++) {
-    const v = Number.isFinite(vals[i]) ? vals[i] : 0;
-    run += v;
-    if (i >= n) run -= Number.isFinite(vals[i - n]) ? vals[i - n] : 0;
-    out.push(i >= n - 1 ? run / n : NaN);
-  }
-  return out;
-}
+export default function PortfolioClient({ dates, sentiment, price = [] }: Props) {
+  const [mode, setMode] = useState<"overlay" | "separate">("overlay");
 
-function advisoryText(x: number) {
-  if (x >= 0.5) return "Strong Buy";
-  if (x >= 0.15) return "Buy";
-  if (x <= -0.5) return "Strong Sell";
-  if (x <= -0.15) return "Sell";
-  return "Neutral";
-}
+  const ma7 = useMemo(() => {
+    const s = sentiment ?? [];
+    const out: number[] = [];
+    let run = 0;
+    for (let i = 0; i < s.length; i++) {
+      const v = Number.isFinite(s[i]) ? s[i] : 0;
+      run += v;
+      if (i >= 7) run -= (Number.isFinite(s[i - 7]) ? s[i - 7] : 0);
+      out.push(i >= 6 ? run / 7 : NaN);
+    }
+    return out;
+  }, [sentiment]);
 
-export default function PortfolioClient({ dates, sentiment, price }: Props) {
-  const sMA7 = useMemo(() => movingAvg(sentiment, 7), [sentiment]);
-
-  const live = Number.isFinite(sMA7.at(-1)!) ? (sMA7.at(-1) as number)
-              : Number.isFinite(sentiment.at(-1)!) ? (sentiment.at(-1) as number)
-              : 0;
-
-  const liveLabel = live >= 0 ? "Positive" : "Negative";
-  const predictedPct = (live * 100).toFixed(2);
+  const sNow = Number(sentiment.at(-1) ?? 0);
+  const sNowFmt = Number.isFinite(sNow) ? sNow.toFixed(2) : "0.00";
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">Market Sentiment — Portfolio</h1>
-
-      <div className="rounded-2xl p-4 shadow-sm border bg-white">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold">Sentiment and Index Price</h3>
-          <div className="flex gap-2">
-            <button className="px-3 py-1 rounded-lg border">Separate View</button>
-            <button className="px-3 py-1 rounded-lg border bg-black text-white">
-              Overlayed View
-            </button>
-          </div>
-        </div>
-
-        {dates?.length ? (
-          <OverviewChart dates={dates} sentiment={sentiment} price={price} />
-        ) : (
-          <div className="text-sm text-neutral-500">No portfolio data yet.</div>
-        )}
-      </div>
-
-      {/* Insight cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="rounded-2xl p-4 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500">Live Market Sentiment</div>
-          <div className="text-2xl font-semibold mt-1">
-            {liveLabel} <span className="text-neutral-500 font-normal">({live.toFixed(2)})</span>
-          </div>
-        </div>
-        <div className="rounded-2xl p-4 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500">Predicted Return</div>
-          <div className="text-2xl font-semibold mt-1">{predictedPct}%</div>
-        </div>
-        <div className="rounded-2xl p-4 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500">Advisory Opinion</div>
-          <div className="text-2xl font-semibold mt-1">{advisoryText(live)}</div>
-        </div>
-        <div className="rounded-2xl p-4 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500">Our Recommendation</div>
-          <div className="text-2xl font-semibold mt-1">
-            {live >= 0.15 ? "Buy" : live <= -0.15 ? "Sell" : "Hold"}
-          </div>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold tracking-tight">S&amp;P 500 — Aggregate Sentiment</h1>
+        <div className="flex gap-2">
+          <button
+            className={`px-3 py-1 rounded-lg border ${mode === "separate" ? "bg-black text-white" : ""}`}
+            onClick={() => setMode("separate")}
+          >
+            Separate View
+          </button>
+          <button
+            className={`px-3 py-1 rounded-lg border ${mode === "overlay" ? "bg-black text-white" : ""}`}
+            onClick={() => setMode("overlay")}
+          >
+            Overlayed View
+          </button>
         </div>
       </div>
 
-      <div className="rounded-2xl p-4 shadow-sm border bg-white text-sm text-neutral-600">
-        The portfolio sentiment is bounded in [-1, 1]. If available, the chart overlays SPY (or
-        ^GSPC) price on the right axis for context.
+      <div className="rounded-2xl p-5 shadow-sm border bg-white">
+        <h3 className="font-semibold mb-3">Sentiment and Price Analysis</h3>
+        <LineChart
+          mode={mode}
+          dates={dates}
+          price={price}
+          sentiment={sentiment}
+          sentimentMA7={ma7}
+          height={420}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="rounded-2xl p-5 shadow-sm border bg-white">
+          <div className="text-sm text-neutral-500 font-medium">Live Market Sentiment</div>
+          <div className={`text-3xl font-semibold mt-1 ${sNow >= 0 ? "text-emerald-600" : "text-rose-600"}`}>
+            {sNow >= 0 ? "Positive" : "Negative"} <span className="text-neutral-500 text-lg">({sNowFmt})</span>
+          </div>
+        </div>
+        <div className="rounded-2xl p-5 shadow-sm border bg-white">
+          <div className="text-sm text-neutral-500 font-medium">Predicted Return</div>
+          <div className="text-3xl font-semibold mt-1">{(ma7.at(-1) ?? 0).toFixed(2)}%</div>
+        </div>
+        <div className="rounded-2xl p-5 shadow-sm border bg-white">
+          <div className="text-sm text-neutral-500 font-medium">Our Recommendation</div>
+          <div className="text-3xl font-semibold mt-1">{(ma7.at(-1) ?? 0) >= 0 ? "Buy" : "Hold"}</div>
+        </div>
       </div>
     </div>
   );
