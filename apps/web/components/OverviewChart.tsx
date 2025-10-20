@@ -2,15 +2,13 @@
 "use client";
 
 import {
-  ResponsiveContainer,
-  ComposedChart,
-  Area,
+  LineChart as RC,
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
+  CartesianGrid,
+  ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
 
@@ -18,7 +16,7 @@ export default function OverviewChart({
   dates,
   sentiment,
   price,
-  height = 320,
+  height = 380,
 }: {
   dates: string[];
   sentiment: number[];
@@ -27,29 +25,56 @@ export default function OverviewChart({
 }) {
   const data = dates.map((d, i) => ({
     d,
-    s: typeof sentiment[i] === "number" ? sentiment[i] : null,
-    p: Array.isArray(price) && typeof price[i] === "number" ? price[i] : null,
+    s: Number.isFinite(sentiment[i]) ? sentiment[i] : null,
+    p: price && Number.isFinite(price[i]) ? price[i] : null,
   }));
 
   return (
     <div style={{ width: "100%", height }}>
-      <ResponsiveContainer>
-        <ComposedChart data={data} margin={{ top: 12, right: 24, bottom: 0, left: 8 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <RC data={data} margin={{ top: 12, right: 20, bottom: 6, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="d" tick={{ fontSize: 11 }} minTickGap={28} />
-          <YAxis yAxisId="left" domain={[-1, 1]} tick={{ fontSize: 11 }} />
+          {/* Sentiment axis fixed to [-1, 1] */}
+          <YAxis
+            yAxisId="left"
+            domain={[-1, 1]}
+            allowDataOverflow={false}
+            tick={{ fontSize: 11 }}
+          />
+          {/* Price axis auto */}
           <YAxis
             yAxisId="right"
             orientation="right"
             tick={{ fontSize: 11 }}
-            hide={!(price && price.some((x) => typeof x === "number"))}
+            allowDecimals
           />
+          <ReferenceLine yAxisId="left" y={0} strokeOpacity={0.3} />
           <Tooltip />
-          <Legend />
-          <ReferenceLine yAxisId="left" y={0} strokeOpacity={0.4} />
-          <Area yAxisId="left" type="monotone" dataKey="s" name="Market Sentiment" connectNulls />
-          <Line yAxisId="right" type="monotone" dataKey="p" name="Index Price" dot={false} strokeWidth={2} connectNulls />
-        </ComposedChart>
+          {/* Sentiment line */}
+          <Line
+            yAxisId="left"
+            type="monotone"
+            dataKey="s"
+            dot={false}
+            strokeWidth={2}
+            strokeOpacity={0.9}
+            connectNulls
+            name="Sentiment"
+          />
+          {/* Price line (if provided) */}
+          {price && (
+            <Line
+              yAxisId="right"
+              type="monotone"
+              dataKey="p"
+              dot={false}
+              strokeWidth={2}
+              connectNulls
+              name="Price"
+            />
+          )}
+        </RC>
       </ResponsiveContainer>
     </div>
   );
