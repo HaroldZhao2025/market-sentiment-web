@@ -1,8 +1,10 @@
 // apps/web/app/ticker/[symbol]/TickerClient.tsx
 "use client";
 
+import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
-import LineChart from "../../../components/LineChart";
+
+const LineChart = dynamic(() => import("../../../components/LineChart"), { ssr: false });
 
 export type SeriesIn = {
   date: string[];
@@ -84,21 +86,16 @@ export default function TickerClient({
         <div className="rounded-2xl p-4 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500">Live Market Sentiment</div>
           <div className="text-2xl font-semibold mt-1">
-            {liveLabel}{" "}
-            <span className="text-neutral-500 font-normal">({live.toFixed(2)})</span>
+            {liveLabel} <span className="text-neutral-500 font-normal">({live.toFixed(2)})</span>
           </div>
         </div>
         <div className="rounded-2xl p-4 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500">Predicted Return</div>
-          <div className="text-2xl font-semibold mt-1">
-            {(lastNumber(ma7) * 100).toFixed(2)}%
-          </div>
+          <div className="text-2xl font-semibold mt-1">{(live * 100).toFixed(2)}%</div>
         </div>
         <div className="rounded-2xl p-4 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500">Our Recommendation</div>
-          <div className="text-2xl font-semibold mt-1">
-            {live >= 0 ? "Buy" : "Hold"}
-          </div>
+          <div className="text-2xl font-semibold mt-1">{live >= 0 ? "Buy" : "Hold"}</div>
         </div>
       </div>
 
@@ -106,22 +103,25 @@ export default function TickerClient({
         <h3 className="font-semibold mb-3">Recent Headlines for {symbol}</h3>
         <div className="space-y-2">
           {Array.isArray(news) && news.length > 0 ? (
-            news.slice(-20).reverse().map((n, i) => (
-              <div key={i} className="text-sm">
-                <span className="text-neutral-500 mr-2">
-                  {(() => {
-                    try {
-                      return new Date(n.ts).toLocaleString();
-                    } catch {
-                      return n.ts;
-                    }
-                  })()}
-                </span>
-                <a className="underline" href={n.url} target="_blank" rel="noreferrer">
-                  {n.title}
-                </a>
-              </div>
-            ))
+            news
+              .slice(-20)
+              .reverse()
+              .map((n, i) => (
+                <div key={i} className="text-sm">
+                  <span className="text-neutral-500 mr-2">
+                    {(() => {
+                      try {
+                        return new Date(n.ts).toLocaleString();
+                      } catch {
+                        return n.ts;
+                      }
+                    })()}
+                  </span>
+                  <a className="underline" href={n.url} target="_blank" rel="noreferrer">
+                    {n.title}
+                  </a>
+                </div>
+              ))
           ) : (
             <div className="text-neutral-500">No recent headlines found.</div>
           )}
