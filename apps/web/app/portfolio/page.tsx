@@ -2,7 +2,7 @@
 import { loadPortfolio, loadTicker } from "../../lib/data";
 import PortfolioClient from "./PortfolioClient";
 
-export const dynamic = "error";       // SSG
+export const dynamic = "error";  // SSG
 export const revalidate = false;
 
 export default async function Page() {
@@ -14,18 +14,12 @@ export default async function Page() {
   ]);
 
   const dates: string[] = portfolio?.dates ?? [];
-  const sentiment: number[] = portfolio?.S ?? portfolio?.sentiment ?? [];
+  const sentiment: number[] = (portfolio?.S ?? portfolio?.sentiment ?? []).map(Number);
 
-  // Overlay index price if available (prefer SPY over ^GSPC)
+  // Overlay index price if available (prefer SPY)
   const price: number[] | undefined =
     (spy?.price?.length ? spy.price : undefined) ??
     (spx?.price?.length ? spx.price : undefined);
 
-  return (
-    <PortfolioClient
-      dates={dates}
-      sentiment={sentiment}
-      price={price}
-    />
-  );
+  return <PortfolioClient dates={dates} sentiment={sentiment} price={price} />;
 }
