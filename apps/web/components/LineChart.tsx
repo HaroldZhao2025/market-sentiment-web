@@ -1,25 +1,22 @@
+// apps/web/components/LineChart.tsx
 "use client";
-
-/**
- * A robust, dependency-free dual-axis time-series chart:
- * - Left Y: sentiment in [-1, 1]
- * - Right Y: price (auto)
- * - Overlay and Separate modes
- * - Pure SVG + ResizeObserver -> no GH Pages / ResponsiveContainer issues
- */
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type Props = {
   mode: "overlay" | "separate";
-  dates: string[];           // ISO 'YYYY-MM-DD'
-  price?: number[];          // close; optional (portfolio)
-  sentiment: number[];       // daily S
-  sentimentMA7?: number[];   // 7d MA for S
-  height?: number;           // container height (overlay); each split uses ~55%
+  dates: string[];
+  price?: number[];
+  sentiment: number[];
+  sentimentMA7?: number[];
+  height?: number;
 };
 
 type Pt = { x: number; y: number };
+
+const COLOR_SENT = "#6c63ff";   // violet
+const COLOR_MA = "#4338ca";     // indigo-700
+const COLOR_PRICE = "#10b981";  // emerald-500
 
 function useMeasure() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -27,9 +24,7 @@ function useMeasure() {
   useEffect(() => {
     if (!ref.current) return;
     const ro = new ResizeObserver((entries) => {
-      for (const e of entries) {
-        if (e.contentRect?.width) setW(Math.max(320, Math.floor(e.contentRect.width)));
-      }
+      for (const e of entries) if (e.contentRect?.width) setW(Math.max(320, Math.floor(e.contentRect.width)));
     });
     ro.observe(ref.current);
     return () => ro.disconnect();
@@ -47,7 +42,7 @@ function monthTickLabel(d: string) {
 }
 
 function buildRows(dates: string[], price?: number[], s?: number[], m?: number[]) {
-  const n = Math.max(dates.length, price?.length ?? 0, s?.length ?? 0, m?.length ?? 0);
+  const n = Math.min(dates.length, (price?.length ?? dates.length), (s?.length ?? dates.length), (m?.length ?? dates.length));
   return Array.from({ length: n }, (_, i) => ({
     d: dates[i] ?? "",
     p: Number.isFinite(Number(price?.[i])) ? Number(price?.[i]) : null,
@@ -71,12 +66,16 @@ function ChartSVG({
   width,
   height,
   rows,
-  separate = false,
+  showSent,
+  showMA,
+  showPrice,
 }: {
   width: number;
   height: number;
   rows: { d: string; p: number | null; s: number | null; m: number | null }[];
-  separate?: boolean;
+  showSent: boolean;
+  showMA: boolean;
+  showPrice: boolean;
 }) {
   // layout
   const pad = { t: 14, r: 56, b: 26, l: 42 };
@@ -85,7 +84,7 @@ function ChartSVG({
   const W = w - pad.l - pad.r;
   const H = h - pad.t - pad.b;
 
-  // x mapping by index (dates already ordered)
+  // x mapping by index
   const N = rows.length || 1;
   const x = scaleLinear([0, Math.max(0, N - 1)], [0, W]);
 
@@ -120,60 +119,25 @@ function ChartSVG({
       <g transform={`translate(${pad.l},${pad.t})`}>
         {/* grid */}
         {yTicksL.map((t, i) => (
-          <line
-            key={`gy-${i}`}
-            x1={0}
-            y1={yL(t)}
-            x2={W}
-            y2={yL(t)}
-            stroke="currentColor"
-            strokeOpacity={0.1}
-          />
+          <line key={`gy-${i}`} x1={0} y1={yL(t)} x2={W} y2={yL(t)} stroke="currentColor" strokeOpacity={0.1} />
         ))}
         {[...Array(N)].map((_, i) =>
           i % monthEvery === 0 ? (
-            <line
-              key={`gx-${i}`}
-              x1={x(i)}
-              y1={0}
-              x2={x(i)}
-              y2={H}
-              stroke="currentColor"
-              strokeOpacity={0.06}
-            />
+            <line key={`gx-${i}`} x1={x(i)} y1={0} x2={x(i)} y2={H} stroke="currentColor" strokeOpacity={0.06} />
           ) : null
         )}
 
-        {/* axes */}
-        {/* left sentiment ticks */}
+        {/* axes labels */}
         {yTicksL.map((t, i) => (
-          <g key={`yl-${i}`}>
-            <text
-              x={-8}
-              y={yL(t)}
-              textAnchor="end"
-              dominantBaseline="middle"
-              className="fill-neutral-500"
-              fontSize={11}
-            >
-              {t.toFixed(1)}
-            </text>
-          </g>
+          <text key={`yl-${i}`} x={-8} y={yL(t)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>
+            {t.toFixed(1)}
+          </text>
         ))}
-        {/* right price ticks */}
-        {pVals.length
+        {showPrice && pVals.length
           ? [...Array(yTicksR)].map((_, i) => {
               const v = pMin - padP + ((pMax + padP - (pMin - padP)) * i) / (yTicksR - 1);
               return (
-                <text
-                  key={`yr-${i}`}
-                  x={W + 6}
-                  y={yR(v)}
-                  textAnchor="start"
-                  dominantBaseline="middle"
-                  className="fill-neutral-500"
-                  fontSize={11}
-                >
+                <text key={`yr-${i}`} x={W + 6} y={yR(v)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>
                   {Math.round(v)}
                 </text>
               );
@@ -183,14 +147,7 @@ function ChartSVG({
         {/* x labels */}
         {[...Array(N)].map((_, i) =>
           i % monthEvery === 0 ? (
-            <text
-              key={`xl-${i}`}
-              x={x(i)}
-              y={H + 16}
-              textAnchor="middle"
-              className="fill-neutral-500"
-              fontSize={11}
-            >
+            <text key={`xl-${i}`} x={x(i)} y={H + 16} textAnchor="middle" className="fill-neutral-500" fontSize={11}>
               {monthTickLabel(rows[i]?.d || "")}
             </text>
           ) : null
@@ -200,34 +157,33 @@ function ChartSVG({
         <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="currentColor" strokeOpacity={0.2} />
 
         {/* series */}
-        {/* sentiment area */}
-        {!separate && sPts.length ? (
-          <polyline
-            points={pointsToPolyline(sPts)}
-            fill="none"
-            stroke="currentColor"
-            strokeOpacity={0.4}
-            strokeWidth={1.5}
-          />
+        {showSent && sPts.length ? (
+          <polyline points={pointsToPolyline(sPts)} fill="none" stroke={COLOR_SENT} strokeOpacity={0.35} strokeWidth={1.5} />
         ) : null}
-        {/* sentiment MA */}
-        {mPts.length ? (
-          <polyline
-            points={pointsToPolyline(mPts)}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-          />
+        {showMA && mPts.length ? (
+          <polyline points={pointsToPolyline(mPts)} fill="none" stroke={COLOR_MA} strokeWidth={2} />
         ) : null}
-        {/* price */}
-        {pPts.length ? (
-          <polyline
-            points={pointsToPolyline(pPts)}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-          />
+        {showPrice && pPts.length ? (
+          <polyline points={pointsToPolyline(pPts)} fill="none" stroke={COLOR_PRICE} strokeWidth={2} />
         ) : null}
+      </g>
+
+      {/* legend */}
+      <g transform={`translate(${pad.l},${pad.t - 6})`} fontSize="11" className="fill-neutral-600">
+        <rect x={0} y={-10} width={10} height={2} fill={COLOR_MA} />
+        <text x={14} y={-8} dominantBaseline="central">Sentiment (MA7)</text>
+        {showSent && (
+          <>
+            <rect x={120} y={-10} width={10} height={2} fill={COLOR_SENT} />
+            <text x={134} y={-8} dominantBaseline="central" >Sentiment</text>
+          </>
+        )}
+        {showPrice && (
+          <>
+            <rect x={210} y={-10} width={10} height={2} fill={COLOR_PRICE} />
+            <text x={224} y={-8} dominantBaseline="central" >Price</text>
+          </>
+        )}
       </g>
     </svg>
   );
@@ -255,18 +211,18 @@ export default function LineChart({
   if (mode === "overlay") {
     return (
       <div ref={ref} className="w-full" style={{ height }}>
-        <ChartSVG width={width} height={height} rows={rows} />
+        <ChartSVG width={width} height={height} rows={rows} showSent showMA showPrice />
       </div>
     );
   }
 
-  // separate -> stack sentiment (with MA) then price
+  // separate -> top: Sentiment only; bottom: Price only
   const h1 = Math.max(180, Math.floor(height * 0.55));
   const h2 = Math.max(160, Math.floor(height * 0.45));
   return (
     <div ref={ref} className="w-full space-y-4">
-      <ChartSVG width={width} height={h1} rows={rows} separate />
-      <ChartSVG width={width} height={h2} rows={rows} />
+      <ChartSVG width={width} height={h1} rows={rows} showSent showMA showPrice={false} />
+      <ChartSVG width={width} height={h2} rows={rows} showSent={false} showMA={false} showPrice />
     </div>
   );
 }
