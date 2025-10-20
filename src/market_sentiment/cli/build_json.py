@@ -2,8 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import json
-import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Optional
@@ -22,10 +20,7 @@ from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
 
 
-# -------------------------------
-# FinBERT helpers (backward compat)
-# -------------------------------
-
+# ---------- FinBERT helpers (backward compatible) ----------
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
     try:
         return fb.score(texts, batch=batch)
@@ -35,20 +30,21 @@ def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
         except TypeError:
             return fb.score(texts)
 
-
 def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, batch: int) -> pd.DataFrame:
+    cols = ["ticker", "ts", "title", "url", text_col, "S"]
     if df is None or df.empty:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", text_col, "S"])
+        return pd.DataFrame(columns=cols)
     df = df.copy()
+    # normalize ts to UTC
+    df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
+    df = df.dropna(subset=["ts"])
     if fb is None:
         df["S"] = 0.0
         return df
-
     texts = df[text_col].astype(str).fillna("").tolist()
     if not texts:
         df["S"] = 0.0
         return df
-
     try:
         scores = _score_texts(fb, texts, batch=batch)
         df["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
@@ -57,38 +53,30 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
     return df
 
 
-# -------------------------------
-# Prices (gentle throttling to reduce YF rate-limits)
-# -------------------------------
-
+# ---------- Prices (gentle throttle to avoid YF bursts) ----------
 def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int) -> pd.DataFrame:
-    rows: List[pd.DataFrame] = []
+    frames: List[pd.DataFrame] = []
     with ThreadPoolExecutor(max_workers=max_workers) as ex:
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)  # small gap to avoid bursts
+            time.sleep(0.1)  # small gap reduces 429s in CI
         for f in as_completed(futs):
             try:
                 df = f.result()
                 if df is not None and len(df) > 0:
-                    rows.append(df)
+                    frames.append(df)
             except Exception:
                 pass
-
-    if not rows:
+    if not frames:
         return pd.DataFrame(columns=["date", "ticker", "open", "close"])
-    prices = pd.concat(rows, ignore_index=True)
+    prices = pd.concat(frames, ignore_index=True)
     prices = _ensure_date_dtype(prices, "date")
     prices = add_forward_returns(prices)
     return prices
 
 
-# -------------------------------
-# Company lookup for news queries
-# -------------------------------
-
-# minimal fallback map to guarantee good recall in CI/sample mode
+# ---------- Company lookup for better RSS recall ----------
 _FALLBACK_COMPANY: Dict[str, str] = {
     "AAPL": "Apple Inc.",
     "MSFT": "Microsoft Corporation",
@@ -102,12 +90,9 @@ _FALLBACK_COMPANY: Dict[str, str] = {
 }
 
 def _company_name(ticker: str) -> Optional[str]:
-    # Prefer explicit fallback for reliability in CI
     t = ticker.upper()
     if t in _FALLBACK_COMPANY:
         return _FALLBACK_COMPANY[t]
-
-    # Best-effort yfinance lookup
     try:
         import yfinance as yf
         y = yf.Ticker(t)
@@ -119,121 +104,33 @@ def _company_name(ticker: str) -> Optional[str]:
                 info = y.info or {}
             except Exception:
                 info = {}
-        name = info.get("longName") or info.get("shortName") or None
-        time.sleep(0.03)
-        return name
+        nm = info.get("longName") or info.get("shortName") or None
+        return nm
     except Exception:
         return None
 
 
-# -------------------------------
-# Robust news fetching
-# -------------------------------
-
-def _yf_news_fallback(ticker: str, start: str, end: str, limit: int = 300) -> pd.DataFrame:
-    """Last-resort: use yfinance .news; coerce to expected schema."""
-    try:
-        import yfinance as yf
-    except Exception:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-
-    try:
-        raw = getattr(yf.Ticker(ticker), "news", None) or []
-    except Exception:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-
-    rows = []
-    for item in (raw[:limit] if isinstance(raw, list) else []):
-        content = item.get("content") if isinstance(item, dict) else None
-        ts = (
-            item.get("providerPublishTime")
-            or item.get("provider_publish_time")
-            or item.get("published_at")
-            or item.get("pubDate")
-            or ((content or {}).get("published") if isinstance(content, dict) else None)
-            or ((content or {}).get("pubDate") if isinstance(content, dict) else None)
-        )
-        ts = pd.to_datetime(ts, utc=True, errors="coerce")
-        if pd.isna(ts):
-            continue
-
-        def _first(*vals) -> str:
-            for v in vals:
-                if v:
-                    s = str(v).strip()
-                    if s:
-                        return s
-            return ""
-
-        title = _first(item.get("title"), (content or {}).get("title"))
-        if not title:
-            continue
-        link = _first(item.get("link"), item.get("url"), (content or {}).get("link"), (content or {}).get("url"))
-        text = _first(item.get("summary"), (content or {}).get("summary"), (content or {}).get("content"), title)
-        rows.append((ts, title, link, text))
-
-    if not rows:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-
-    df = pd.DataFrame(rows, columns=["ts", "title", "url", "text"])
-    df["ticker"] = ticker
-    df = df.dropna(subset=["ts"]).drop_duplicates(["title", "url"]).sort_values("ts")
-    df = df[(df["ts"] >= pd.to_datetime(start, utc=True)) &
-            (df["ts"] <= pd.to_datetime(end, utc=True) + pd.Timedelta(days=1))]
-    return df[["ticker", "ts", "title", "url", "text"]]
-
-
-def _fetch_news_resilient(ticker: str, start: str, end: str, company: Optional[str], tries: int = 2) -> pd.DataFrame:
-    last_err = None
-    for _ in range(tries):
-        try:
-            df = fetch_news(ticker, start, end, company=company, max_per_provider=300)
-            if df is not None and not df.empty:
-                return df
-        except Exception as e:
-            last_err = e
-        time.sleep(0.6)
-
-    fb = _yf_news_fallback(ticker, start, end, limit=300)
-    if fb is not None and not fb.empty:
-        return fb
-
-    if last_err:
-        pass
-    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-
-
-# -------------------------------
-# Fallback daily sentiment (no FinBERT or all-zero S)
-# -------------------------------
-
+# ---------- Fallback daily sentiment from headline counts ----------
 def _fallback_daily_from_counts(news_rows: pd.DataFrame) -> pd.DataFrame:
     if news_rows is None or news_rows.empty:
         return pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
-
     df = news_rows.copy()
-    df["date"] = pd.to_datetime(df["ts"], utc=True, errors="coerce").dt.normalize()
-    df = df.dropna(subset=["date", "ticker"])
-    if df.empty:
-        return pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
-
-    cnt = (df.groupby(["ticker", "date"], as_index=False)
-           .size().rename(columns={"size": "n"}))
-
-    out_rows = []
+    df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
+    df = df.dropna(subset=["ts"])
+    df["date"] = df["ts"].dt.normalize()
+    cnt = df.groupby(["ticker", "date"], as_index=False).size().rename(columns={"size": "n"})
+    # z-score per ticker, then clip and scale to [-1, 1]
+    out = []
     for t, g in cnt.groupby("ticker"):
-        g = g.sort_values("date").reset_index(drop=True)
         n = g["n"].astype(float)
         mean = float(n.mean())
         std = float(n.std(ddof=0))
         z = (n - mean) if std <= 1e-12 else (n - mean) / std
         s = (z.clip(-3, 3) / 3.0).astype(float)
+        # light smoothing
         s_ma3 = s.rolling(3, min_periods=1).mean()
-        out_rows.append(pd.DataFrame({"ticker": t, "date": g["date"], "S_NEWS": s_ma3}))
-    if not out_rows:
-        return pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
-    return pd.concat(out_rows, ignore_index=True)[["date", "ticker", "S_NEWS"]]
-
+        out.append(pd.DataFrame({"ticker": t, "date": g["date"], "S_NEWS": s_ma3}))
+    return pd.concat(out, ignore_index=True) if out else pd.DataFrame(columns=["date", "ticker", "S_NEWS"])
 
 def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
     if d_news is None or d_news.empty:
@@ -245,42 +142,7 @@ def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
     return float(s.abs().max()) <= 1e-12
 
 
-# -------------------------------
-# Summary based on written files
-# -------------------------------
-
-def _summarize_from_files(out_dir: str, news_rows: pd.DataFrame):
-    out_dir = str(out_dir)
-    try:
-        tickers = json.load(open(os.path.join(out_dir, "_tickers.json")))
-    except Exception:
-        tickers = []
-    have_files = 0
-    with_nonzero_s = 0
-    for t in tickers:
-        f = os.path.join(out_dir, "ticker", f"{t}.json")
-        if not os.path.exists(f):
-            continue
-        have_files += 1
-        try:
-            obj = json.load(open(f))
-        except Exception:
-            continue
-        S = obj.get("S") or obj.get("sentiment") or []
-        try:
-            if any(abs(float(x or 0)) > 1e-12 for x in S):
-                with_nonzero_s += 1
-        except Exception:
-            pass
-    # “with any news” should reflect raw news presence, not the daily join
-    with_news = news_rows["ticker"].nunique() if not news_rows.empty else 0
-    return tickers, have_files, with_news, with_nonzero_s
-
-
-# -------------------------------
-# Main
-# -------------------------------
-
+# ---------- Main ----------
 def main():
     p = argparse.ArgumentParser("Build JSON artifacts for the web app")
     p.add_argument("--universe", required=True, help="CSV with ticker column (or first column)")
@@ -298,9 +160,7 @@ def main():
     if "ticker" not in uni.columns:
         first = uni.columns[0]
         uni = uni.rename(columns={first: "ticker"})
-    tickers: List[str] = sorted(
-        [str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist()]
-    )
+    tickers: List[str] = sorted([str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist()])
     if a.max_tickers and a.max_tickers > 0:
         tickers = tickers[: a.max_tickers]
 
@@ -314,29 +174,28 @@ def main():
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
 
-    # News
+    # News (+ scoring)
     print("News+Earnings:")
     try:
         fb = FinBERT()
     except Exception:
         fb = None
 
-    news_all: List[pd.DataFrame] = []
+    news_frames: List[pd.DataFrame] = []
     for t in tickers:
         comp = _company_name(t)
-        n = _fetch_news_resilient(t, a.start, a.end, company=comp, tries=2)
-        if n is None or n.empty:
-            n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-        n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
-        news_all.append(n)
+        try:
+            df = fetch_news(t, a.start, a.end, company=comp, max_per_provider=300)
+        except Exception:
+            df = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+        df = _score_rows_inplace(fb, df, text_col="text", batch=a.batch)
+        news_frames.append(df)
 
-    news_rows = (
-        pd.concat(news_all, ignore_index=True)
-        if news_all
-        else pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
+    news_rows = pd.concat(news_frames, ignore_index=True) if news_frames else pd.DataFrame(
+        columns=["ticker", "ts", "title", "url", "text", "S"]
     )
 
-    # Earnings placeholder (schema-compatible)
+    # Earnings: keep schema-compatible empty frame for now
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
     # Daily aggregation
@@ -344,10 +203,11 @@ def main():
     d_earn = daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes) \
         if not earn_rows.empty else pd.DataFrame(columns=["date", "ticker", "S_EARN"])
 
-    # If missing/zero, fallback from counts
+    # Fallback if FinBERT/S aggregation yields empty or all-zero
     if _is_all_zero_or_missing(d_news):
         d_news = _fallback_daily_from_counts(news_rows)
 
+    # Join and safety S
     if not d_news.empty:
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce")
     if not d_earn.empty:
@@ -359,23 +219,25 @@ def main():
         daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
         daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
 
-    # Panel
+    # Panel (merge with prices)
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     for c in ("S", "S_NEWS", "S_EARN"):
         if c not in panel.columns:
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    # Write outputs
+    # Write JSONs
     write_outputs(panel, news_rows, earn_rows, a.out)
 
-    # Summary based on what was written (truth for the web)
-    tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out, news_rows)
+    # Summary (truth from raw news)
+    with_news = news_rows["ticker"].nunique() if not news_rows.empty else 0
+    nz = panel.groupby("ticker")["S"].apply(lambda s: (pd.to_numeric(s, errors="coerce").fillna(0.0).abs() > 1e-12).any()).sum()
+
     print("Summary:")
-    print(f"  Tickers listed: {len(tickers_list)}")
-    print(f"  Ticker JSON files: {have_files}")
-    print(f"  Tickers with any news: {with_news}/{len(tickers_list)}")
-    print(f"  Tickers with non-zero daily S: {with_nonzero_s}/{len(tickers_list)}")
+    print(f"  Tickers listed: {len(tickers)}")
+    print(f"  Ticker JSON files: {len(tickers)}")
+    print(f"  Tickers with any news: {with_news}/{len(tickers)}")
+    print(f"  Tickers with non-zero daily S: {nz}/{len(tickers)}")
 
 
 if __name__ == "__main__":
