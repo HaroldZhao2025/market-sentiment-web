@@ -51,15 +51,13 @@ def _roll_ma(arr: List[float], n: int = 7) -> List[float]:
 
 
 def _all_almost_zero(vals: Iterable[float], eps: float = 1e-12) -> bool:
-    found_nonzero = False
     for v in vals:
         try:
             if abs(float(v)) > eps:
-                found_nonzero = True
-                break
+                return False
         except Exception:
             pass
-    return not found_nonzero
+    return True
 
 
 # ---------- core helpers ----------
@@ -126,19 +124,26 @@ def _build_one_ticker(
         df["S"] = 0.0
     df["S"] = pd.to_numeric(df["S"], errors="coerce").fillna(0.0)
 
-    # window for news filtering
-    start = df["date"].min()
-    end = df["date"].max() + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+    # window for news filtering (DAY-LEVEL to avoid tz edge cases)
+    start_day = df["date"].min().floor("D")
+    end_day = df["date"].max().floor("D")
 
-    # select news for ticker, within window
+    # select news for ticker, within window (day-based)
     nt = pd.DataFrame(columns=["ts", "title", "url", "text"])
     if news_rows is not None and len(news_rows) > 0:
         nr = news_rows[news_rows["ticker"] == t].copy()
         if len(nr) > 0:
             nr["ts"] = pd.to_datetime(nr["ts"], utc=True, errors="coerce")
             nr = nr.dropna(subset=["ts"])
-            nr = nr[(nr["ts"] >= start) & (nr["ts"] <= end)]
-            nt = nr.sort_values("ts")
+            # day-level filter
+            nr["_day"] = nr["ts"].dt.floor("D")
+            in_window = (nr["_day"] >= start_day) & (nr["_day"] <= end_day)
+            nt = nr.loc[in_window, ["ts", "title", "url", "text"]].sort_values("ts")
+
+            # fallback: if day-filter discards all, still keep latest items we fetched
+            if nt.empty:
+                nt = nr.sort_values("ts", ascending=False)[["ts", "title", "url", "text"]].head(int(max_news))
+                nt = nt.sort_values("ts")
 
     # fallback S from news intensity if upstream S is basically all zeros
     s = pd.to_numeric(df["S"], errors="coerce").fillna(0.0).astype(float).tolist()
@@ -161,9 +166,16 @@ def _build_one_ticker(
 
     return {
         "symbol": t,
-        "date": [d.tz_convert("UTC").strftime("%Y-%m-%d") if getattr(d, "tzinfo", None) else pd.Timestamp(d, tz="UTC").strftime("%Y-%m-%d") for d in df["date"]],
+        "date": [
+            (
+                d.tz_convert("UTC").strftime("%Y-%m-%d")
+                if getattr(d, "tzinfo", None)
+                else pd.Timestamp(d, tz="UTC").strftime("%Y-%m-%d")
+            )
+            for d in df["date"]
+        ],
         "price": price,
-        "S": [round(x, 6) for x in s],
+        "S": [round(_safe_num(x), 6) for x in s],
         "S_ma7": [round(x, 6) if math.isfinite(x) else 0.0 for x in s_ma7],
         "news": out_news,
     }
@@ -213,7 +225,6 @@ def write_outputs(panel, news_rows, *rest):
     # normalize news frame columns if present
     if news_rows is not None and len(news_rows) > 0:
         nr = news_rows.copy()
-        # ensure required cols exist
         for c in ("ticker", "ts", "title", "url", "text"):
             if c not in nr.columns:
                 nr[c] = pd.NA
