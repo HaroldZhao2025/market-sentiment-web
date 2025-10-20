@@ -15,7 +15,8 @@ function ma7(arr: number[]) {
   const out: number[] = [];
   let run = 0;
   for (let i = 0; i < arr.length; i++) {
-    run += Number(arr[i] || 0);
+    const v = Number(arr[i] || 0);
+    run += v;
     if (i >= 7) run -= Number(arr[i - 7] || 0);
     out.push(i >= 6 ? run / 7 : NaN);
   }
@@ -30,7 +31,7 @@ function label(v: number) {
   return "Neutral";
 }
 
-function recommend(v: number) {
+function recommendation(v: number) {
   if (v >= 0.4) return "Strong Buy";
   if (v >= 0.1) return "Buy";
   if (v <= -0.4) return "Strong Sell";
@@ -38,7 +39,15 @@ function recommend(v: number) {
   return "Hold";
 }
 
-export default function TickerClient({ symbol, series, news }: { symbol: string; series: SeriesIn; news: NewsItem[] }) {
+export default function TickerClient({
+  symbol,
+  series,
+  news,
+}: {
+  symbol: string;
+  series: SeriesIn;
+  news: NewsItem[];
+}) {
   const [mode, setMode] = useState<"overlay" | "separate">("overlay");
   const sMA7 = useMemo(() => ma7(series.sentiment), [series.sentiment]);
 
@@ -81,8 +90,7 @@ export default function TickerClient({ symbol, series, news }: { symbol: string;
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
           <div className="text-2xl font-semibold">
-            {label(lastS)}{" "}
-            <span className="text-neutral-500 text-lg align-middle">({lastS.toFixed(2)})</span>
+            {label(lastS)} <span className="text-neutral-500 text-lg">({lastS.toFixed(2)})</span>
           </div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
@@ -91,7 +99,7 @@ export default function TickerClient({ symbol, series, news }: { symbol: string;
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Advisory Opinion</div>
-          <div className="text-2xl font-semibold">{recommend(lastMA)}</div>
+          <div className="text-2xl font-semibold">{recommendation(lastMA)}</div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Our Recommendation</div>
@@ -103,7 +111,7 @@ export default function TickerClient({ symbol, series, news }: { symbol: string;
         <h3 className="font-semibold mb-2">Recent Headlines for {symbol}</h3>
         {news?.length ? (
           <ul className="space-y-2">
-            {news.slice(0, 30).map((n, i) => (
+            {news.slice(0, 500).map((n, i) => (
               <li key={i} className="text-sm leading-6">
                 <span className="text-neutral-500 mr-2">{new Date(n.ts).toLocaleString()}</span>
                 <a className="underline decoration-dotted underline-offset-2" href={n.url} target="_blank" rel="noreferrer">
