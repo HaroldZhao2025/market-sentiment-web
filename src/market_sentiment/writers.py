@@ -51,7 +51,6 @@ def _roll_ma(arr: List[float], n: int = 7) -> List[float]:
 
 
 def _all_almost_zero(vals: Iterable[float], eps: float = 1e-12) -> bool:
-    """True if there is no value whose absolute magnitude exceeds eps."""
     for v in vals:
         try:
             if abs(float(v)) > eps:
@@ -69,7 +68,7 @@ def _news_fallback_S(dates_ts: List[pd.Timestamp], news_t: pd.DataFrame) -> List
       - count news per calendar day,
       - within-window z-score,
       - squash to [-1, 1] with tanh(z/2),
-      - produce one value per date in `dates_ts` (keeps chart continuous).
+      - produce one value per date in `dates_ts`.
     """
     if news_t is None or news_t.empty or not dates_ts:
         return [0.0] * len(dates_ts)
@@ -97,7 +96,7 @@ def _build_one_ticker(
     t: str,
     panel: pd.DataFrame,
     news_rows: Optional[pd.DataFrame],
-    max_news: int = 10,  # <- per your requirement: keep 10 headlines, but S covers every day
+    max_news: int = 10,  # keep only 10 headlines; S covers every day
 ) -> Dict[str, Any]:
     """
     Build the ticker payload used by the Next.js page.
@@ -109,6 +108,7 @@ def _build_one_ticker(
         return {}
 
     # Normalize dtypes and sort by day; enforce *day* granularity for alignment.
+    # This yields tz-aware UTC timestamps.
     df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce").dt.floor("D")
     df = df.dropna(subset=["date"]).sort_values("date").reset_index(drop=True)
 
@@ -122,14 +122,14 @@ def _build_one_ticker(
         .tolist()
     )
 
-    # Sentiment S (use upstream if present; else zeros). We keep same length as df rows.
+    # Sentiment S (use upstream if present; else zeros). Same length as df rows.
     if "S" not in df.columns and "sentiment" in df.columns:
         df["S"] = df["sentiment"]
     if "S" not in df.columns:
         df["S"] = 0.0
     df["S"] = pd.to_numeric(df["S"], errors="coerce").fillna(0.0)
 
-    # Window for news filtering, **day-level** to avoid tz edge cases.
+    # Window for news filtering, **day-level**
     start_day = df["date"].min()
     end_day = df["date"].max()
 
@@ -144,7 +144,7 @@ def _build_one_ticker(
             in_window = (nr["_day"] >= start_day) & (nr["_day"] <= end_day)
             nt = nr.loc[in_window, ["ts", "title", "url", "text"]].sort_values("ts")
 
-            # If in-window filter discards everything, keep most recent 10 overall (so headlines never show empty)
+            # If in-window filter discards everything, keep most recent 10 overall
             if nt.empty:
                 nt = nr.sort_values("ts", ascending=False)[["ts", "title", "url", "text"]].head(int(max_news))
                 nt = nt.sort_values("ts")
@@ -157,7 +157,7 @@ def _build_one_ticker(
         .tolist()
     )
 
-    # If upstream S is basically all zeros and we have news, synthesize a fallback with full daily coverage.
+    # If upstream S is basically all zeros and we have news, synthesize fallback with full daily coverage.
     if _all_almost_zero(s_raw) and not nt.empty:
         s = _news_fallback_S(df["date"].tolist(), nt)
     else:
@@ -165,6 +165,16 @@ def _build_one_ticker(
 
     # Smooth for chart
     s_ma7 = _roll_ma(s, n=7)
+
+    # Prepare date strings SAFELY (works for tz-aware or tz-naive)
+    dates_ser = pd.to_datetime(df["date"], errors="coerce")
+    try:
+        # tz-aware path
+        dates_ser = dates_ser.dt.tz_convert("UTC")
+    except Exception:
+        # tz-naive path
+        dates_ser = dates_ser.dt.tz_localize("UTC")
+    date_strs = dates_ser.dt.strftime("%Y-%m-%d").tolist()
 
     # News slice (limit to 10 headlines, newest first)
     out_news: List[Dict[str, Any]] = []
@@ -179,11 +189,11 @@ def _build_one_ticker(
 
     return {
         "symbol": t,
-        "date": [pd.Timestamp(d, tz="UTC").strftime("%Y-%m-%d") for d in df["date"]],
+        "date": date_strs,                                           # ✅ safe tz handling
         "price": price,
-        "S": [round(_safe_num(x), 6) for x in s],                     # one value per day
+        "S": [round(_safe_num(x), 6) for x in s],                    # one value per day
         "S_ma7": [round(x, 6) if math.isfinite(x) else 0.0 for x in s_ma7],
-        "news": out_news,                                             # only 10 headlines
+        "news": out_news,                                            # only 10 headlines
     }
 
 
@@ -232,7 +242,7 @@ def write_outputs(panel, news_rows, *rest):
         raise KeyError("panel must contain 'ticker' column")
 
     panel["ticker"] = panel["ticker"].astype(str).str.upper()
-    # Coerce to day-level (naive) for stable merges with client code
+    # Coerce to day-level (UTC) for stable merges with client code
     panel["date"] = pd.to_datetime(panel["date"], utc=True, errors="coerce").dt.floor("D")
 
     # normalize news frame columns if present
