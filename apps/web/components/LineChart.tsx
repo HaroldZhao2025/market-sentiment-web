@@ -26,13 +26,9 @@ type Props = {
 function toNumOrNull(v: any): number | null {
   return typeof v === "number" && Number.isFinite(v) ? v : null;
 }
-
 function fmtDate(d: string) {
   try {
-    return new Date(d).toLocaleDateString(undefined, {
-      month: "short",
-      year: "2-digit",
-    });
+    return new Date(d).toLocaleDateString(undefined, { month: "short", year: "2-digit" });
   } catch {
     return d;
   }
@@ -87,9 +83,7 @@ export default function LineChart({
         {p != null && (
           <div>
             Price:{" "}
-            {Number(p).toLocaleString(undefined, {
-              maximumFractionDigits: 2,
-            })}
+            {Number(p).toLocaleString(undefined, { maximumFractionDigits: 2 })}
           </div>
         )}
       </div>
@@ -116,14 +110,16 @@ export default function LineChart({
             orientation="right"
             tick={{ fontSize: 11 }}
             tickFormatter={(v) =>
-              typeof v === "number" ? v.toLocaleString(undefined, { maximumFractionDigits: 2 }) : ""
+              typeof v === "number"
+                ? v.toLocaleString(undefined, { maximumFractionDigits: 2 })
+                : ""
             }
           />
           <Tooltip content={<TooltipBox />} />
           <Legend />
           <ReferenceLine yAxisId="left" y={0} strokeOpacity={0.4} />
 
-          {/* sentiment “area” plus its 7d MA line */}
+          {/* sentiment area + its 7d MA */}
           <Area yAxisId="left" type="monotone" dataKey="s" name="Sentiment Score" connectNulls />
           <Line yAxisId="left" type="monotone" dataKey="m" name="Sentiment (7d MA)" dot={false} strokeWidth={2} connectNulls />
           {/* price */}
