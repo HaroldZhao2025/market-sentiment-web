@@ -1,83 +1,65 @@
 // apps/web/app/ticker/[symbol]/page.tsx
 import fs from "fs/promises";
 import path from "path";
-import TickerClient from "./TickerClient";
+import TickerClient, { NewsItem, SeriesIn } from "./TickerClient";
 
-type SeriesIn = {
-  date: string[];
-  price: number[];
-  sentiment: number[];
-};
-
-type NewsItem = { ts: string; title: string; url: string; text: string };
-
-export const dynamic = "error";     // SSG only
-export const dynamicParams = false; // only build known params
+export const dynamic = "error";          // SSG only
+export const dynamicParams = false;
 export const revalidate = false;
 
 const DATA_ROOT = path.join(process.cwd(), "public", "data");
 
-async function readJSON<T = any>(p: string): Promise<T> {
-  const raw = await fs.readFile(p, "utf8");
-  return JSON.parse(raw) as T;
+// small utils
+async function readJSON<T = any>(p: string): Promise<T | null> {
+  try {
+    const raw = await fs.readFile(p, "utf8");
+    return JSON.parse(raw) as T;
+  } catch {
+    return null;
+  }
 }
-
-function s(v: unknown, fallback = ""): string {
-  if (v === null || v === undefined) return fallback;
-  try { return String(v).trim(); } catch { return fallback; }
-}
-function ns(a: unknown[]): number[] {
-  if (!Array.isArray(a)) return [];
-  return a.map((x) => (typeof x === "number" ? x : Number(x ?? 0))).map((x) => (Number.isFinite(x) ? x : 0));
-}
-function ss(a: unknown[]): string[] {
-  if (!Array.isArray(a)) return [];
-  return a.map((x) => s(x, ""));
-}
+const toNumArr = (v: any) =>
+  Array.isArray(v) ? v.map((x) => (typeof x === "number" ? x : Number(x ?? 0))).map((x) => (Number.isFinite(x) ? x : 0)) : [];
+const toStrArr = (v: any) => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
 
 function buildSeries(obj: any): SeriesIn | null {
-  const dates = (ss(obj?.date) || []).length ? ss(obj?.date) : ss(obj?.dates);
-  const price = ns(obj?.price ?? obj?.close ?? []);
-  const sentiment = ns(obj?.S ?? obj?.sentiment ?? []);
-  if (!dates?.length || !price?.length) return null;
-
-  const n = Math.min(dates.length, price.length, sentiment.length || Infinity);
-  const clip = (arr: any[]) => (n === Infinity ? arr : arr.slice(0, n));
-
-  return { date: clip(dates), price: clip(price), sentiment: clip(sentiment) };
+  const date = toStrArr(obj?.date ?? obj?.dates);
+  const price = toNumArr(obj?.price ?? obj?.close);
+  const sentiment = toNumArr(obj?.S ?? obj?.sentiment);
+  if (!date.length || !price.length) return null;
+  const n = Math.min(date.length, price.length, sentiment.length || Infinity);
+  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
 }
 
 function buildNews(obj: any): NewsItem[] {
   const raw: any[] = Array.isArray(obj?.news) ? obj.news : [];
   return raw
     .map((r) => ({
-      ts: s(r?.ts || r?.date, ""),
-      title: s(r?.title, ""),
-      url: s(r?.url, ""),
-      text: s(r?.text || r?.summary || r?.title, ""),
+      ts: String(r?.ts ?? ""),
+      title: String(r?.title ?? ""),
+      url: String(r?.url ?? ""),
+      text: r?.text ? String(r.text) : undefined,
     }))
     .filter((r) => r.ts && r.title);
 }
 
 export async function generateStaticParams() {
-  // public/data/_tickers.json => ["AAPL", ...]
   let tickers: string[] = [];
+  const tickersFile = path.join(DATA_ROOT, "_tickers.json");
   try {
-    tickers = await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"));
-  } catch {
-    tickers = ["AAPL"];
-  }
+    const arr = await readJSON<string[]>(tickersFile);
+    tickers = Array.isArray(arr) ? arr : [];
+  } catch { /* noop */ }
+  if (!tickers.length) tickers = ["AAPL"];
   return tickers.map((symbol) => ({ symbol }));
 }
 
 export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
-  const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
+  const file = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
+  const obj = await readJSON<any>(file);
 
-  let obj: any = null;
-  try {
-    obj = await readJSON<any>(f);
-  } catch {
+  if (!obj) {
     return (
       <div className="min-h-screen p-6">
         <div className="max-w-5xl mx-auto">
@@ -89,7 +71,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   }
 
   const series = buildSeries(obj);
-  const news: NewsItem[] = buildNews(obj);
+  const news = buildNews(obj);
 
   return (
     <div className="min-h-screen p-6">
