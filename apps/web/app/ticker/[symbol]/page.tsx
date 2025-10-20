@@ -1,14 +1,12 @@
 // apps/web/app/ticker/[symbol]/page.tsx
-import fs from "fs/promises";
-import path from "path";
+import fs from "node:fs/promises";
+import path from "node:path";
 import TickerClient from "./TickerClient";
 
 type SeriesIn = {
   date: string[];
   price: number[];
-  sentiment: number[];
-  sentiment_ma7?: number[];
-  label?: string;
+  sentiment: number[]; // daily S
 };
 
 type NewsItem = {
@@ -18,75 +16,65 @@ type NewsItem = {
   text?: string;
 };
 
-export const dynamic = "error";     // force SSG
+export const dynamic = "error";     // SSG only
 export const dynamicParams = false;
 export const revalidate = false;
 
 const DATA_ROOT = path.join(process.cwd(), "public", "data");
 
-async function readJSON<T = any>(p: string): Promise<T> {
-  const raw = await fs.readFile(p, "utf8");
-  return JSON.parse(raw) as T;
+// ---------- small helpers ----------
+async function readJSON<T = any>(p: string): Promise<T | null> {
+  try {
+    return JSON.parse(await fs.readFile(p, "utf8")) as T;
+  } catch {
+    return null;
+  }
 }
+const numArr = (v: unknown): number[] =>
+  Array.isArray(v) ? v.map((x) => Number(x) || 0) : [];
+const strArr = (v: unknown): string[] =>
+  Array.isArray(v) ? v.map((x) => String(x ?? "")) : [];
 
-function coerceStrings(a: unknown): string[] {
-  return Array.isArray(a) ? a.map((x) => String(x ?? "")) : [];
-}
-function coerceNums(a: unknown): number[] {
-  return Array.isArray(a)
-    ? a.map((x) => (typeof x === "number" && Number.isFinite(x) ? x : Number(x ?? 0) || 0))
-    : [];
-}
-
+// Build the exact shape TickerClient expects
 function buildSeries(obj: any): SeriesIn | null {
-  const date = coerceStrings(obj?.date ?? obj?.dates);
-  const price = coerceNums(obj?.price ?? obj?.close);
-  const sentiment = coerceNums(obj?.S ?? obj?.sentiment);
-  const sentiment_ma7 = coerceNums(obj?.S_ma7 ?? obj?.sentiment_ma7);
+  const date = strArr(obj?.date ?? obj?.dates);
+  const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
+  const sentiment = numArr(obj?.S ?? obj?.sentiment);
 
-  if (date.length === 0 || price.length === 0) return null;
-  const n = Math.min(date.length, price.length, sentiment.length || Infinity, sentiment_ma7.length || Infinity);
-  const slice = (arr: any[]) => (n === Infinity ? arr : arr.slice(0, n));
+  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);
+  if (!Number.isFinite(n) || n === 0) return null;
 
   return {
-    date: slice(date),
-    price: slice(price),
-    sentiment: slice(sentiment),
-    sentiment_ma7: slice(sentiment_ma7),
-    label: "Daily S",
+    date: date.slice(0, n),
+    price: price.slice(0, n),
+    sentiment: sentiment.slice(0, n),
   };
 }
 
 function buildNews(obj: any): NewsItem[] {
-  const raw: any[] = Array.isArray(obj?.news) ? obj.news : [];
+  const raw = Array.isArray(obj?.news) ? obj.news : [];
   return raw
-    .map((r) => ({
-      ts: String(r?.ts ?? ""),
+    .map((r: any) => ({
+      ts: String(r?.ts ?? r?.date ?? ""),
       title: String(r?.title ?? ""),
       url: String(r?.url ?? ""),
-      text: String(r?.text ?? ""),
+      text: r?.text ? String(r.text) : undefined,
     }))
-    .filter((r) => r.ts && r.title);
+    .filter((r: NewsItem) => r.ts && r.title);
 }
 
+// ---------- SSG hooks ----------
 export async function generateStaticParams() {
-  let tickers: string[] = [];
-  try {
-    tickers = await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"));
-  } catch {
-    tickers = ["AAPL"];
-  }
-  return tickers.map((symbol) => ({ symbol }));
+  const list = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
+  return list.map((symbol) => ({ symbol }));
 }
 
 export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
   const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
+  const obj = await readJSON<any>(f);
 
-  let obj: any = null;
-  try {
-    obj = await readJSON<any>(f);
-  } catch {
+  if (!obj) {
     return (
       <div className="min-h-screen p-6">
         <div className="max-w-5xl mx-auto">
@@ -107,12 +95,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
         {series ? (
           <TickerClient
             symbol={symbol}
-            series={{
-              date: series.date,
-              price: series.price,
-              sentiment: series.sentiment,
-              sentiment_ma7: series.sentiment_ma7,
-            }}
+            series={series}   // ✅ only {date, price, sentiment}
             news={news}
           />
         ) : (
