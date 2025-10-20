@@ -16,7 +16,7 @@ from market_sentiment.aggregate import (
     join_and_fill_daily,
     _ensure_date_dtype,
 )
-from market_sentiment.finbert import FinBERT  # may be unavailable on CI; handled below
+from market_sentiment.finbert import FinBERT
 from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
@@ -58,7 +58,7 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
 
 
 # -------------------------------
-# Prices (with gentle throttling)
+# Prices (gentle throttling to reduce YF rate-limits)
 # -------------------------------
 
 def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int) -> pd.DataFrame:
@@ -67,7 +67,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.15)  # reduce burst rate-limits on yfinance
+            time.sleep(0.12)  # small gap to avoid bursts
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -85,20 +85,32 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 
 
 # -------------------------------
-# Company lookup (best-effort)
+# Company lookup for news queries
 # -------------------------------
 
-_COMPANY_CACHE: Dict[str, Optional[str]] = {}
+# minimal fallback map to guarantee good recall in CI/sample mode
+_FALLBACK_COMPANY: Dict[str, str] = {
+    "AAPL": "Apple Inc.",
+    "MSFT": "Microsoft Corporation",
+    "AMZN": "Amazon.com, Inc.",
+    "GOOGL": "Alphabet Inc.",
+    "GOOG": "Alphabet Inc.",
+    "META": "Meta Platforms, Inc.",
+    "NVDA": "NVIDIA Corporation",
+    "TSLA": "Tesla, Inc.",
+    "AMD": "Advanced Micro Devices, Inc.",
+}
 
 def _company_name(ticker: str) -> Optional[str]:
-    """Lightweight best-effort lookup via yfinance; cached and throttled."""
-    if ticker in _COMPANY_CACHE:
-        return _COMPANY_CACHE[ticker]
-    name: Optional[str] = None
+    # Prefer explicit fallback for reliability in CI
+    t = ticker.upper()
+    if t in _FALLBACK_COMPANY:
+        return _FALLBACK_COMPANY[t]
+
+    # Best-effort yfinance lookup
     try:
         import yfinance as yf
-        y = yf.Ticker(ticker)
-        # Try fast_info first (may not have name), then info (slower).
+        y = yf.Ticker(t)
         info = {}
         try:
             info = y.get_info() if hasattr(y, "get_info") else (y.info or {})
@@ -108,20 +120,18 @@ def _company_name(ticker: str) -> Optional[str]:
             except Exception:
                 info = {}
         name = info.get("longName") or info.get("shortName") or None
+        time.sleep(0.03)
+        return name
     except Exception:
-        name = None
-    _COMPANY_CACHE[ticker] = name
-    # tiny sleep to avoid hammering yfinance in full mode
-    time.sleep(0.05)
-    return name
+        return None
 
 
 # -------------------------------
-# News fetching (resilient, with company)
+# Robust news fetching
 # -------------------------------
 
 def _yf_news_fallback(ticker: str, start: str, end: str, limit: int = 300) -> pd.DataFrame:
-    """Last-resort: pull from yfinance.Ticker(...).news and coerce to your schema."""
+    """Last-resort: use yfinance .news; coerce to expected schema."""
     try:
         import yfinance as yf
     except Exception:
@@ -177,20 +187,18 @@ def _fetch_news_resilient(ticker: str, start: str, end: str, company: Optional[s
     last_err = None
     for _ in range(tries):
         try:
-            # IMPORTANT: pass company (matches your smoke test behavior)
             df = fetch_news(ticker, start, end, company=company, max_per_provider=300)
             if df is not None and not df.empty:
                 return df
         except Exception as e:
             last_err = e
-        time.sleep(0.7)
+        time.sleep(0.6)
 
     fb = _yf_news_fallback(ticker, start, end, limit=300)
     if fb is not None and not fb.empty:
         return fb
 
     if last_err:
-        # swallow in CI; return empty schema
         pass
     return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
@@ -241,14 +249,13 @@ def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
 # Summary based on written files
 # -------------------------------
 
-def _summarize_from_files(out_dir: str):
+def _summarize_from_files(out_dir: str, news_rows: pd.DataFrame):
     out_dir = str(out_dir)
     try:
         tickers = json.load(open(os.path.join(out_dir, "_tickers.json")))
     except Exception:
         tickers = []
     have_files = 0
-    with_news = 0
     with_nonzero_s = 0
     for t in tickers:
         f = os.path.join(out_dir, "ticker", f"{t}.json")
@@ -259,15 +266,14 @@ def _summarize_from_files(out_dir: str):
             obj = json.load(open(f))
         except Exception:
             continue
-        news = obj.get("news") or []
-        if news:
-            with_news += 1
         S = obj.get("S") or obj.get("sentiment") or []
         try:
             if any(abs(float(x or 0)) > 1e-12 for x in S):
                 with_nonzero_s += 1
         except Exception:
             pass
+    # “with any news” should reflect raw news presence, not the daily join
+    with_news = news_rows["ticker"].nunique() if not news_rows.empty else 0
     return tickers, have_files, with_news, with_nonzero_s
 
 
@@ -292,8 +298,9 @@ def main():
     if "ticker" not in uni.columns:
         first = uni.columns[0]
         uni = uni.rename(columns={first: "ticker"})
-    tickers: List[str] = sorted([str(x).strip().upper()
-                                for x in uni["ticker"].dropna().unique().tolist()])
+    tickers: List[str] = sorted(
+        [str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist()]
+    )
     if a.max_tickers and a.max_tickers > 0:
         tickers = tickers[: a.max_tickers]
 
@@ -307,7 +314,7 @@ def main():
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
 
-    # News (+ fallback sentiment)
+    # News
     print("News+Earnings:")
     try:
         fb = FinBERT()
@@ -316,18 +323,20 @@ def main():
 
     news_all: List[pd.DataFrame] = []
     for t in tickers:
-        comp = _company_name(t)  # <-- key difference vs previous file
+        comp = _company_name(t)
         n = _fetch_news_resilient(t, a.start, a.end, company=comp, tries=2)
         if n is None or n.empty:
             n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
 
-    news_rows = pd.concat(news_all, ignore_index=True) if news_all else pd.DataFrame(
-        columns=["ticker", "ts", "title", "url", "text", "S"]
+    news_rows = (
+        pd.concat(news_all, ignore_index=True)
+        if news_all
+        else pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # Earnings placeholder (kept schema-compatible)
+    # Earnings placeholder (schema-compatible)
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
     # Daily aggregation
@@ -345,7 +354,6 @@ def main():
         d_earn["date"] = pd.to_datetime(d_earn["date"], utc=True, errors="coerce")
 
     daily = join_and_fill_daily(d_news, d_earn)
-
     if "S" not in daily.columns:
         daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
         daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
@@ -358,11 +366,11 @@ def main():
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    # Write outputs (writers handles both 3-arg and 4-arg signatures)
+    # Write outputs
     write_outputs(panel, news_rows, earn_rows, a.out)
 
-    # Summary from exported files (what the site will actually use)
-    tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
+    # Summary based on what was written (truth for the web)
+    tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out, news_rows)
     print("Summary:")
     print(f"  Tickers listed: {len(tickers_list)}")
     print(f"  Ticker JSON files: {have_files}")
