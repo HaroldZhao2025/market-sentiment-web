@@ -17,9 +17,12 @@ def _fmt_eastern(ts: pd.Timestamp) -> str:
     if ts is None or (isinstance(ts, float) and pd.isna(ts)):
         return ""
     t = pd.to_datetime(ts, utc=True, errors="coerce")
-    if pd.isna(t): return ""
-    try: et = t.tz_convert("America/New_York")
-    except Exception: et = t.tz_localize("UTC").tz_convert("America/New_York")
+    if pd.isna(t):
+        return ""
+    try:
+        et = t.tz_convert("America/New_York")
+    except Exception:
+        et = t.tz_localize("UTC").tz_convert("America/New_York")
     return et.strftime("%Y-%m-%d %H:%M:%S")
 
 def _safe_num(x) -> float:
@@ -30,37 +33,69 @@ def _safe_num(x) -> float:
         return 0.0
 
 def _roll_ma(arr: List[float], n: int = 7) -> List[float]:
-    out, run, q = [], 0.0, []
+    out: List[float] = []
+    run = 0.0
+    q: List[float] = []
     for v in arr:
         v = 0.0 if v is None or (isinstance(v, float) and math.isnan(v)) else float(v)
         q.append(v); run += v
-        if len(q) > n: run -= q.pop(0)
+        if len(q) > n:
+            run -= q.pop(0)
         out.append(run / n if len(q) >= n else float("nan"))
     return out
 
-def _all_almost_zero(vals: Iterable[float], eps: float = 1e-12) -> bool:
+def _nonzero_fraction(vals: Iterable[float], eps: float = 1e-12) -> float:
+    vals = list(vals)
+    if not vals:
+        return 0.0
+    nz = 0
     for v in vals:
         try:
-            if abs(float(v)) > eps: return False
+            if abs(float(v)) > eps:
+                nz += 1
         except Exception:
             pass
-    return True
+    return nz / max(1, len(vals))
+
+def _too_sparse(vals: Iterable[float], min_frac: float = 0.25, min_nz_days: int = 40) -> bool:
+    vals = list(vals)
+    nz = sum(1 for v in vals if abs(float(v or 0.0)) > 1e-12)
+    return (nz < min_nz_days) or (nz / max(1, len(vals)) < min_frac)
 
 # ---------- daily sentiment from news ----------
 
 def _gaussian_kernel(days: int = 5, sigma: float = 1.6) -> np.ndarray:
-    L = max(3, int(days) | 1)
+    L = max(3, int(days) | 1)  # odd
     r = (L - 1) // 2
     x = np.arange(-r, r + 1, dtype=float)
     k = np.exp(-(x**2) / (2.0 * float(sigma) ** 2))
     k /= k.sum()
     return k
 
+def _intensity_fallback(price_days: pd.DatetimeIndex, news_t: pd.DataFrame) -> List[float]:
+    """Use daily news counts -> z-score -> tanh, then smooth; yields [-1,1]."""
+    g = (
+        news_t.assign(day=news_t["ts"].dt.floor("D"))
+        .groupby("day", as_index=False)
+        .size()
+        .rename(columns={"size": "cnt"})
+        .set_index("day")["cnt"]
+    )
+    aligned = g.reindex(price_days, fill_value=0).astype(float)
+    arr = aligned.values
+    mu = float(np.mean(arr)); sd = float(np.std(arr))
+    z = (arr - mu) / (sd if sd > 1e-12 else 1.0)
+    s = np.tanh(z / 2.0)
+    k = _gaussian_kernel(5, 1.6)
+    out = np.convolve(s, k, mode="same")
+    return [float(np.clip(v, -1.0, 1.0)) for v in out.tolist()]
+
 def _news_daily_sentiment(price_days: pd.DatetimeIndex, news_t: pd.DataFrame) -> List[float]:
     """
-    Use *per-headline* FinBERT scores (already in [-1,1]) to compute a
-    day-level mean across the full price window. Light gaussian smoothing is
-    applied so the series isn't spiky, but values remain in [-1, 1].
+    Build a DAILY sentiment series across the full price window:
+      - Prefer per-headline FinBERT S (mean by day) if available/non-flat.
+      - Otherwise fall back to news intensity.
+      - Always smooth lightly and clip to [-1, 1].
     """
     if news_t is None or news_t.empty or len(price_days) == 0:
         return [0.0] * len(price_days)
@@ -73,13 +108,19 @@ def _news_daily_sentiment(price_days: pd.DatetimeIndex, news_t: pd.DataFrame) ->
         df["S"] = 0.0
     df["S"] = pd.to_numeric(df["S"], errors="coerce").fillna(0.0).clip(-1.0, 1.0)
 
+    # Per-day mean of headline scores
     daily = df.groupby("day", as_index=False)["S"].mean().set_index("day")["S"]
     aligned = daily.reindex(price_days, fill_value=0.0).astype(float)
+    arr = aligned.values
+
+    # If FinBERT isn’t present or all zeros/near-constant, use intensity fallback
+    if (np.allclose(arr, 0.0, atol=1e-6)) or (float(np.std(arr)) < 1e-6):
+        return _intensity_fallback(price_days, df)
 
     k = _gaussian_kernel(5, 1.6)
-    smoothed = np.convolve(aligned.values, k, mode="same")
-    smoothed = np.clip(smoothed, -1.0, 1.0)
-    return [float(v) for v in smoothed.tolist()]
+    out = np.convolve(arr, k, mode="same")
+    out = np.clip(out, -1.0, 1.0)
+    return [float(v) for v in out.tolist()]
 
 # ---------- core helpers ----------
 
@@ -96,20 +137,24 @@ def _build_one_ticker(
     df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce")
     df = df.dropna(subset=["date"]).sort_values("date").reset_index(drop=True)
 
+    # price
     if "close" not in df.columns:
         df["close"] = pd.NA
     price = pd.to_numeric(df["close"], errors="coerce").fillna(0.0).astype(float).tolist()
 
+    # upstream S
     if "S" not in df.columns and "sentiment" in df.columns:
         df["S"] = df["sentiment"]
     if "S" not in df.columns:
         df["S"] = 0.0
     df["S"] = pd.to_numeric(df["S"], errors="coerce").fillna(0.0)
 
+    # news window
     start_day = df["date"].min().floor("D")
     end_day   = df["date"].max().floor("D")
     price_days = pd.DatetimeIndex(df["date"].dt.floor("D").unique())
 
+    # select ALL news in window (headlines trimmed later)
     nt = pd.DataFrame(columns=["ts", "title", "url", "text", "S"])
     if news_rows is not None and len(news_rows) > 0:
         nr = news_rows[news_rows["ticker"] == t].copy()
@@ -119,16 +164,17 @@ def _build_one_ticker(
             nr["_day"] = nr["ts"].dt.floor("D")
             nt = nr.loc[(nr["_day"] >= start_day) & (nr["_day"] <= end_day), ["ts", "title", "url", "text", "S"]].sort_values("ts")
             if nt.empty:
-                nt = nr.sort_values("ts", ascending=False)[["ts", "title", "url", "text", "S"]].head(1000).sort_values("ts")
+                nt = nr.sort_values("ts", ascending=False)[["ts", "title", "url", "text", "S"]].head(2000).sort_values("ts")
 
     s = pd.to_numeric(df["S"], errors="coerce").fillna(0.0).astype(float).tolist()
-    if _all_almost_zero(s) and not nt.empty:
-        # compute daily S from ALL available headlines (mean per day)
+
+    # RECOMPUTE if the upstream daily S is too sparse or nearly all zeros
+    if (_too_sparse(s) or _nonzero_fraction(s) < 0.25) and not nt.empty:
         s = _news_daily_sentiment(price_days, nt)
 
     s_ma7 = _roll_ma(s, n=7)
 
-    # headlines: newest first, cap to 10
+    # News list for UI (10 newest)
     out_news: List[Dict[str, Any]] = []
     if not nt.empty:
         for _, r in nt.sort_values("ts", ascending=False).head(int(headlines_max)).iterrows():
@@ -221,6 +267,7 @@ def write_outputs(panel, news_rows, *rest):
             er["date"] = pd.to_datetime(er["date"], errors="coerce")
             for t in tickers:
                 sub = er[er["ticker"] == t].dropna(subset=["date"])
-                if len(sub) == 0: continue
+                if len(sub) == 0:
+                    continue
                 items = sub.sort_values("date")["date"].dt.date.astype(str).to_list()
                 _write_json(os.path.join(earn_dir, f"{t}.json"), {"earnings": [{"date": d} for d in items]})
