@@ -30,11 +30,11 @@ export default function PortfolioClient({ dates, sentiment, price }: Props) {
     <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">S&amp;P 500 — Aggregate Sentiment</h1>
-        <div className="inline-flex rounded-lg border overflow-hidden">
-          <button className={`px-3 py-1 text-sm ${mode === "separate" ? "bg-black text-white" : "bg-white"}`} onClick={() => setMode("separate")}>
+        <div className="inline-flex rounded-full border overflow-hidden bg-white">
+          <button className={`px-3 py-1.5 text-sm ${mode === "separate" ? "bg-black text-white" : "text-neutral-700"}`} onClick={() => setMode("separate")}>
             Separate View
           </button>
-          <button className={`px-3 py-1 text-sm ${mode === "overlay" ? "bg-black text-white" : "bg-white"}`} onClick={() => setMode("overlay")}>
+          <button className={`px-3 py-1.5 text-sm ${mode === "overlay" ? "bg-black text-white" : "text-neutral-700"}`} onClick={() => setMode("overlay")}>
             Overlayed View
           </button>
         </div>
@@ -42,7 +42,7 @@ export default function PortfolioClient({ dates, sentiment, price }: Props) {
 
       <div className="rounded-2xl p-5 shadow-sm border bg-white">
         <h3 className="font-semibold mb-3">Sentiment and Index Price</h3>
-        <LineChart mode={mode} dates={dates} price={price} sentiment={sentiment} sentimentMA7={sMA7} height={420} />
+        <LineChart mode={mode} dates={dates} price={price} sentiment={sentiment} sentimentMA7={sMA7} height={460} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
