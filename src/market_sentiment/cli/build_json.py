@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Optional, Tuple
@@ -111,32 +112,6 @@ def _best_effort_company(ticker: str) -> Optional[str]:
     return None
 
 
-def _sparsify_to_zero(daily: pd.DataFrame, min_fraction: float = 0.10) -> pd.DataFrame:
-    """
-    If a ticker has news sentiment on only a tiny fraction of days,
-    set S=0 for that ticker to trigger writers.py's full-window fallback
-    (which builds a smooth daily curve from news intensity).
-    """
-    if daily is None or daily.empty or "S" not in daily.columns:
-        return daily
-
-    daily = daily.copy()
-    # compute per-ticker share of non-zero days
-    g = (
-        daily.assign(Sv=pd.to_numeric(daily["S"], errors="coerce").fillna(0.0))
-             .assign(nz=lambda d: (d["Sv"].abs() > 1e-12).astype(int))
-             .groupby("ticker", as_index=False)
-             .agg(n_days=("date", "nunique"), nz_days=("nz", "sum"))
-    )
-    g["frac"] = g["nz_days"] / g["n_days"].where(g["n_days"] > 0, 1)
-    sparse = set(g.loc[g["frac"] < float(min_fraction), "ticker"].astype(str))
-
-    if sparse:
-        mask = daily["ticker"].astype(str).isin(sparse)
-        daily.loc[mask, "S"] = 0.0
-    return daily
-
-
 def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
     try:
         tickers = json.load(open(f"{out_dir}/_tickers.json", "r", encoding="utf-8"))
@@ -175,19 +150,13 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    p.add_argument(
-        "--news-per-provider",
-        type=int,
-        default=6000,
-        help="Target articles per provider (writers still cap visible headlines to ~10).",
-    )
-    p.add_argument(
-        "--sparse-min-fraction",
-        type=float,
-        default=0.10,
-        help="If non-zero daily S appears on fewer than this fraction of days, zero-out S so writers use fallback.",
-    )
+    p.add_argument("--news-per-provider", type=int, default=1000,
+                   help="Target articles per provider (writers still cap visible headlines).")
     a = p.parse_args()
+
+    # --- Signal whether Finnhub token is wired via env ---
+    token = (os.getenv("FINNHUB_TOKEN") or os.getenv("FINNHUB_API_KEY") or "").strip()
+    print(f"Finnhub token: {'detected' if token else 'MISSING'}")
 
     # Universe (tolerate unnamed first column)
     uni = pd.read_csv(a.universe)
@@ -220,7 +189,7 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         try:
-            # Request *deep* coverage; writers will use all days for S but show only ~10 headlines.
+            # Request deep coverage; writers use the full period for S but show only 10 headlines.
             n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
             if n is None or n.empty:
                 # paranoid second pass without company hint
@@ -265,13 +234,9 @@ def main():
     # Join + guarantee a composite S
     daily = join_and_fill_daily(d_news, d_earn)
     if "S" not in daily.columns:
-        # .get may return scalar -> wrap with Series then fill
         s_news = pd.to_numeric(daily.get("S_NEWS", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
         s_earn = pd.to_numeric(daily.get("S_EARN", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
         daily["S"] = s_news + s_earn
-
-    # Force fallback for sparse tickers so you get a *daily* signal across the period
-    daily = _sparsify_to_zero(daily, min_fraction=float(a.sparse_min_fraction))
 
     # -------- Build panel + write outputs --------
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
@@ -281,7 +246,7 @@ def main():
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
     # Writers:
-    #  • keep only ~10 headlines in JSON (for UI)
+    #  • keep only 10 headlines in JSON (for UI)
     #  • if S ~ 0 or FinBERT unavailable, synthesize a *daily* curve from news intensity
     write_outputs(panel, news_rows, earn_rows, a.out)
 
