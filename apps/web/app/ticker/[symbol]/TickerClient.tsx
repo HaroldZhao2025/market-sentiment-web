@@ -54,7 +54,6 @@ export default function TickerClient({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 space-y-8">
-      {/* Title + toggle */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-3xl font-bold tracking-tight">Market Sentiment for {symbol}</h1>
         <div className="inline-flex items-center rounded-xl bg-neutral-100 p-1">
@@ -77,7 +76,6 @@ export default function TickerClient({
         </div>
       </div>
 
-      {/* Chart card */}
       <div className="rounded-2xl p-6 shadow-sm border bg-white">
         <h3 className="font-semibold mb-3">Sentiment and Price Analysis</h3>
         <LineChart
@@ -90,7 +88,6 @@ export default function TickerClient({
         />
       </div>
 
-      {/* Insights row */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
@@ -112,7 +109,6 @@ export default function TickerClient({
         </div>
       </div>
 
-      {/* Headlines */}
       <div className="rounded-2xl p-6 shadow-sm border bg-white">
         <div className="flex items-baseline justify-between">
           <h3 className="font-semibold mb-1">Recent Headlines for {symbol}</h3>
