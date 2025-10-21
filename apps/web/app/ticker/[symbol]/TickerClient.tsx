@@ -1,4 +1,3 @@
-// apps/web/app/ticker/[symbol]/TickerClient.tsx
 "use client";
 
 import { useMemo, useState } from "react";
@@ -57,24 +56,28 @@ export default function TickerClient({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
-      <div className="flex items-center justify-between">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h1 className="text-2xl font-semibold tracking-tight">Market Sentiment for {symbol}</h1>
-        <div className="inline-flex rounded-lg border overflow-hidden">
+        <div className="inline-flex rounded-full border overflow-hidden bg-white">
           <button
-            className={`px-3 py-1 text-sm ${mode === "separate" ? "bg-black text-white" : "bg-white"}`}
+            className={`px-3 py-1.5 text-sm ${mode === "separate" ? "bg-black text-white" : "text-neutral-700"}`}
             onClick={() => setMode("separate")}
+            title="Show sentiment and price in two stacked charts"
           >
             Separate View
           </button>
           <button
-            className={`px-3 py-1 text-sm ${mode === "overlay" ? "bg-black text-white" : "bg-white"}`}
+            className={`px-3 py-1.5 text-sm ${mode === "overlay" ? "bg-black text-white" : "text-neutral-700"}`}
             onClick={() => setMode("overlay")}
+            title="Overlay price and sentiment on one chart"
           >
             Overlayed View
           </button>
         </div>
       </div>
 
+      {/* Chart card */}
       <div className="rounded-2xl p-5 shadow-sm border bg-white">
         <h3 className="font-semibold mb-3">Sentiment and Price Analysis</h3>
         <LineChart
@@ -83,13 +86,14 @@ export default function TickerClient({
           price={series.price}
           sentiment={series.sentiment}
           sentimentMA7={sMA7}
-          height={420}
+          height={460}
         />
       </div>
 
+      {/* Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
+          <div className="text-sm text-neutral-500 mb-1">Live Market Insights</div>
           <div className="text-2xl font-semibold">
             {label(lastS)} <span className="text-neutral-500 text-lg">({lastS.toFixed(2)})</span>
           </div>
@@ -100,18 +104,19 @@ export default function TickerClient({
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Advisory Opinion</div>
-          <div className="text-2xl font-semibold">{recommendation(lastMA)}</div>
+          <div className="text-2xl font-semibold text-violet-600">{recommendation(lastMA)}</div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Our Recommendation</div>
-          <div className="text-2xl font-semibold">{lastMA >= 0 ? "Buy" : "Hold"}</div>
+          <div className="text-2xl font-semibold text-emerald-600">{lastMA >= 0 ? "Buy" : "Hold"}</div>
         </div>
       </div>
 
+      {/* Headlines */}
       <div className="rounded-2xl p-5 shadow-sm border bg-white">
-        <h3 className="font-semibold mb-2">Recent Headlines for {symbol}</h3>
-        <p className="text-sm text-neutral-500 mb-3">
-          Latest 10 headlines shown. Daily sentiment uses all news across the period.
+        <h3 className="font-semibold mb-1">Recent Headlines for {symbol}</h3>
+        <p className="text-neutral-500 text-sm mb-3">
+          The list shows the most recent headlines; the chart sentiment uses headlines across the full period.
         </p>
         {news?.length ? (
           <ul className="space-y-2">
