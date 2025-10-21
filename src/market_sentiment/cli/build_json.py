@@ -146,7 +146,7 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         try:
-            # ask providers for *a lot* (headlines list will still be 10 in writers)
+            # ask providers for MANY (headline list stays 10 inside writers, but S uses whole window)
             n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=500)
             if n is None or n.empty:
                 n = fetch_news(t, a.start, a.end, company=None, max_per_provider=500)
