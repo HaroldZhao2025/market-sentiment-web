@@ -5,7 +5,7 @@
  *  - Left Y: sentiment [-1, 1] with zero line
  *  - Right Y: price (auto)
  *  - Daily sentiment bars + MA7 line + price line
- *  - Crosshair + tooltip
+ *  - Crosshair + tooltip (date, sentiment, MA7, price)
  *  - Responsive, no external libs (fixes GH Pages issues)
  */
 
@@ -118,7 +118,6 @@ export default function LineChart({
     const onLeave = () => { setHoverX(null); setHoverIdx(null); };
     const hover = hoverIdx != null ? rows[hoverIdx] : null;
 
-    // Build daily bar primitives once (no huge strings in state)
     const bars = rows.map((r, i) => {
       if (!Number.isFinite(r.s as number)) return null;
       const xi = x(i);
@@ -127,9 +126,7 @@ export default function LineChart({
       return <line key={`b-${i}`} x1={xi} y1={y0} x2={xi} y2={y1} stroke="#6B5BFF" strokeOpacity={0.28} strokeWidth={2} />;
     });
 
-    const path = (points: Pt[]) =>
-      points.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
-
+    const toPath = (pts: Pt[]) => pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
     const sPts: Pt[] = [];
     const mPts: Pt[] = [];
     const pPts: Pt[] = [];
@@ -181,11 +178,9 @@ export default function LineChart({
           <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="#000" strokeOpacity={0.12} />
 
           {/* series */}
-          {/* daily sentiment bars */}
           {!separate ? bars : null}
-          {/* MA7 and Price lines */}
-          {mPts.length ? <polyline points={path(mPts)} fill="none" stroke="#10B981" strokeWidth={2} /> : null}
-          {pPts.length ? <polyline points={path(pPts)} fill="none" stroke="#0EA5E9" strokeWidth={2} /> : null}
+          {mPts.length ? <polyline points={toPath(mPts)} fill="none" stroke="#10B981" strokeWidth={2} /> : null}
+          {pPts.length ? <polyline points={toPath(pPts)} fill="none" stroke="#0EA5E9" strokeWidth={2} /> : null}
 
           {/* hover */}
           <rect x={0} y={0} width={W} height={H} fill="transparent" onMouseMove={onMove} onMouseLeave={onLeave} style={{ cursor: "crosshair" }} />
@@ -237,7 +232,6 @@ export default function LineChart({
     return (
       <div ref={ref} className="w-full space-y-3">
         {makeChart(hOverlay, false)}
-        {/* Legend */}
         <div className="mt-1 flex items-center gap-6 text-sm text-neutral-600">
           <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#6B5BFF" }} /><span>Sentiment (daily bars)</span></div>
           <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#10B981" }} /><span>Sentiment (MA7)</span></div>
