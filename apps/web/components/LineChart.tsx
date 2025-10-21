@@ -1,22 +1,25 @@
-// apps/web/components/LineChart.tsx
 "use client";
+
+/**
+ * Dual-axis time-series chart (pure SVG, dependency-free)
+ * - Left Y: sentiment in [-1, 1] (zero line shown)
+ * - Right Y: price (auto)
+ * - Overlay / Separate modes
+ * - Hover crosshair with tooltip (date / sentiment / price)
+ */
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type Props = {
   mode: "overlay" | "separate";
-  dates: string[];
-  price?: number[];
-  sentiment: number[];
-  sentimentMA7?: number[];
-  height?: number;
+  dates: string[];           // ISO 'YYYY-MM-DD'
+  price?: number[];          // close; optional (portfolio)
+  sentiment: number[];       // daily S
+  sentimentMA7?: number[];   // 7d MA for S
+  height?: number;           // container height (overlay); each split uses ~55%
 };
 
 type Pt = { x: number; y: number };
-
-const COLOR_SENT = "#6c63ff";   // violet
-const COLOR_MA = "#4338ca";     // indigo-700
-const COLOR_PRICE = "#10b981";  // emerald-500
 
 function useMeasure() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -24,7 +27,9 @@ function useMeasure() {
   useEffect(() => {
     if (!ref.current) return;
     const ro = new ResizeObserver((entries) => {
-      for (const e of entries) if (e.contentRect?.width) setW(Math.max(320, Math.floor(e.contentRect.width)));
+      for (const e of entries) {
+        if (e.contentRect?.width) setW(Math.max(320, Math.floor(e.contentRect.width)));
+      }
     });
     ro.observe(ref.current);
     return () => ro.disconnect();
@@ -42,7 +47,12 @@ function monthTickLabel(d: string) {
 }
 
 function buildRows(dates: string[], price?: number[], s?: number[], m?: number[]) {
-  const n = Math.min(dates.length, (price?.length ?? dates.length), (s?.length ?? dates.length), (m?.length ?? dates.length));
+  const n = Math.min(
+    dates.length,
+    price?.length ?? dates.length,
+    s?.length ?? dates.length,
+    m?.length ?? dates.length
+  );
   return Array.from({ length: n }, (_, i) => ({
     d: dates[i] ?? "",
     p: Number.isFinite(Number(price?.[i])) ? Number(price?.[i]) : null,
@@ -58,6 +68,13 @@ function scaleLinear(domain: [number, number], range: [number, number]) {
   return (v: number) => r0 + (v - d0) * m;
 }
 
+function invertLinear(domain: [number, number], range: [number, number]) {
+  const [d0, d1] = domain;
+  const [r0, r1] = range;
+  const m = (d1 - d0) / (r1 - r0 || 1);
+  return (px: number) => d0 + (px - r0) * m;
+}
+
 function pointsToPolyline(pts: Pt[]) {
   return pts.map((p) => `${Math.round(p.x)},${Math.round(p.y)}`).join(" ");
 }
@@ -66,27 +83,26 @@ function ChartSVG({
   width,
   height,
   rows,
-  showSent,
-  showMA,
-  showPrice,
+  separate = false,
+  showLegend = true,
 }: {
   width: number;
   height: number;
   rows: { d: string; p: number | null; s: number | null; m: number | null }[];
-  showSent: boolean;
-  showMA: boolean;
-  showPrice: boolean;
+  separate?: boolean;
+  showLegend?: boolean;
 }) {
   // layout
-  const pad = { t: 14, r: 56, b: 26, l: 42 };
+  const pad = { t: 14, r: 64, b: 28, l: 46 };
   const w = Math.max(320, width);
-  const h = Math.max(160, height);
+  const h = Math.max(220, height);
   const W = w - pad.l - pad.r;
   const H = h - pad.t - pad.b;
 
-  // x mapping by index
+  // x mapping by index (dates already ordered)
   const N = rows.length || 1;
   const x = scaleLinear([0, Math.max(0, N - 1)], [0, W]);
+  const xInv = invertLinear([0, Math.max(0, N - 1)], [0, W]);
 
   // y-left: sentiment fixed [-1, 1]
   const yL = scaleLinear([1, -1], [0, H]);
@@ -112,28 +128,48 @@ function ChartSVG({
   // grid & ticks
   const yTicksL = [-1, -0.5, 0, 0.5, 1];
   const yTicksR = 5;
-  const monthEvery = Math.ceil(N / 8);
+  const monthEvery = Math.max(1, Math.ceil(N / 8));
+
+  // hover state
+  const [hover, setHover] = useState<number | null>(null);
+  const onMove = (e: React.MouseEvent<SVGRectElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mx = e.clientX - rect.left - pad.l;
+    if (mx < 0 || mx > W) { setHover(null); return; }
+    const idx = Math.round(xInv(mx));
+    setHover(Math.max(0, Math.min(N - 1, idx)));
+  };
+  const onLeave = () => setHover(null);
+
+  const hoverRow = hover != null ? rows[hover] : null;
 
   return (
-    <svg width={w} height={h} className="select-none">
+    <svg width={w} height={h} className="select-none text-neutral-800">
       <g transform={`translate(${pad.l},${pad.t})`}>
         {/* grid */}
         {yTicksL.map((t, i) => (
-          <line key={`gy-${i}`} x1={0} y1={yL(t)} x2={W} y2={yL(t)} stroke="currentColor" strokeOpacity={0.1} />
+          <line key={`gy-${i}`} x1={0} y1={yL(t)} x2={W} y2={yL(t)} stroke="currentColor" strokeOpacity={0.08} />
         ))}
         {[...Array(N)].map((_, i) =>
           i % monthEvery === 0 ? (
-            <line key={`gx-${i}`} x1={x(i)} y1={0} x2={x(i)} y2={H} stroke="currentColor" strokeOpacity={0.06} />
+            <line key={`gx-${i}`} x1={x(i)} y1={0} x2={x(i)} y2={H} stroke="currentColor" strokeOpacity={0.05} />
           ) : null
         )}
 
         {/* axes labels */}
+        <text x={-36} y={-6} textAnchor="start" className="fill-neutral-500 text-[11px]">Sentiment</text>
+        {pVals.length ? (
+          <text x={W + 6} y={-6} textAnchor="start" className="fill-neutral-500 text-[11px]">Price</text>
+        ) : null}
+
+        {/* left sentiment ticks */}
         {yTicksL.map((t, i) => (
           <text key={`yl-${i}`} x={-8} y={yL(t)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>
             {t.toFixed(1)}
           </text>
         ))}
-        {showPrice && pVals.length
+        {/* right price ticks */}
+        {pVals.length
           ? [...Array(yTicksR)].map((_, i) => {
               const v = pMin - padP + ((pMax + padP - (pMin - padP)) * i) / (yTicksR - 1);
               return (
@@ -154,36 +190,80 @@ function ChartSVG({
         )}
 
         {/* zero line for sentiment */}
-        <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="currentColor" strokeOpacity={0.2} />
+        <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="currentColor" strokeOpacity={0.25} />
 
-        {/* series */}
-        {showSent && sPts.length ? (
-          <polyline points={pointsToPolyline(sPts)} fill="none" stroke={COLOR_SENT} strokeOpacity={0.35} strokeWidth={1.5} />
-        ) : null}
-        {showMA && mPts.length ? (
-          <polyline points={pointsToPolyline(mPts)} fill="none" stroke={COLOR_MA} strokeWidth={2} />
-        ) : null}
-        {showPrice && pPts.length ? (
-          <polyline points={pointsToPolyline(pPts)} fill="none" stroke={COLOR_PRICE} strokeWidth={2} />
-        ) : null}
-      </g>
+        {/* sentiment bars (overlay mode) */}
+        {!separate &&
+          rows.map((r, i) =>
+            Number.isFinite(r.s as number) ? (
+              <line
+                key={`bar-${i}`}
+                x1={x(i)}
+                x2={x(i)}
+                y1={yL(0)}
+                y2={yL(r.s as number)}
+                stroke="#6F42C1"
+                strokeOpacity={0.35}
+                strokeWidth={1}
+              />
+            ) : null
+          )}
 
-      {/* legend */}
-      <g transform={`translate(${pad.l},${pad.t - 6})`} fontSize="11" className="fill-neutral-600">
-        <rect x={0} y={-10} width={10} height={2} fill={COLOR_MA} />
-        <text x={14} y={-8} dominantBaseline="central">Sentiment (MA7)</text>
-        {showSent && (
+        {/* sentiment MA line */}
+        {mPts.length ? (
+          <polyline points={pointsToPolyline(mPts)} fill="none" stroke="#6F42C1" strokeWidth={2} />
+        ) : null}
+
+        {/* price line */}
+        {pPts.length ? (
+          <polyline points={pointsToPolyline(pPts)} fill="none" stroke="#10B981" strokeWidth={2} />
+        ) : null}
+
+        {/* legend */}
+        {showLegend ? (
+          <g transform={`translate(0,${-4})`}>
+            <circle cx={0} cy={0} r={4} fill="#6F42C1" />
+            <text x={8} y={2} className="fill-neutral-700" fontSize={12}>Sentiment (MA7)</text>
+            {pPts.length ? (
+              <>
+                <circle cx={150} cy={0} r={4} fill="#10B981" />
+                <text x={158} y={2} className="fill-neutral-700" fontSize={12}>Stock Price</text>
+              </>
+            ) : null}
+          </g>
+        ) : null}
+
+        {/* hover crosshair & tooltip */}
+        <rect
+          x={0}
+          y={0}
+          width={W}
+          height={H}
+          fill="transparent"
+          onMouseMove={onMove}
+          onMouseLeave={onLeave}
+          style={{ cursor: "crosshair" }}
+        />
+        {hover != null ? (
           <>
-            <rect x={120} y={-10} width={10} height={2} fill={COLOR_SENT} />
-            <text x={134} y={-8} dominantBaseline="central" >Sentiment</text>
+            <line x1={x(hover)} x2={x(hover)} y1={0} y2={H} stroke="#111827" strokeOpacity={0.25} />
+            {/* tooltip box */}
+            <g transform={`translate(${Math.min(Math.max(8, x(hover) + 10), W - 180)},${8})`}>
+              <rect width={180} height={70} rx={8} fill="#ffffff" stroke="#e5e7eb" />
+              <text x={10} y={18} className="fill-neutral-900" fontSize={12} fontWeight={600}>
+                {new Date((rows[hover]?.d || "") + "T00:00:00Z").toLocaleDateString()}
+              </text>
+              <text x={10} y={36} className="fill-neutral-700" fontSize={12}>
+                Sentiment: {(rows[hover]?.s ?? 0).toFixed(2)}
+              </text>
+              {pPts.length ? (
+                <text x={10} y={54} className="fill-neutral-700" fontSize={12}>
+                  Price: {Number(rows[hover]?.p ?? 0).toFixed(2)}
+                </text>
+              ) : null}
+            </g>
           </>
-        )}
-        {showPrice && (
-          <>
-            <rect x={210} y={-10} width={10} height={2} fill={COLOR_PRICE} />
-            <text x={224} y={-8} dominantBaseline="central" >Price</text>
-          </>
-        )}
+        ) : null}
       </g>
     </svg>
   );
@@ -210,19 +290,19 @@ export default function LineChart({
 
   if (mode === "overlay") {
     return (
-      <div ref={ref} className="w-full" style={{ height }}>
-        <ChartSVG width={width} height={height} rows={rows} showSent showMA showPrice />
+      <div ref={ref} className="w-full overflow-visible" style={{ height }}>
+        <ChartSVG width={width} height={height} rows={rows} />
       </div>
     );
   }
 
-  // separate -> top: Sentiment only; bottom: Price only
-  const h1 = Math.max(180, Math.floor(height * 0.55));
-  const h2 = Math.max(160, Math.floor(height * 0.45));
+  // separate -> stack sentiment (with MA) then price
+  const h1 = Math.max(200, Math.floor(height * 0.58));
+  const h2 = Math.max(160, Math.floor(height * 0.42));
   return (
-    <div ref={ref} className="w-full space-y-4">
-      <ChartSVG width={width} height={h1} rows={rows} showSent showMA showPrice={false} />
-      <ChartSVG width={width} height={h2} rows={rows} showSent={false} showMA={false} showPrice />
+    <div ref={ref} className="w-full space-y-4 overflow-visible">
+      <ChartSVG width={width} height={h1} rows={rows} separate />
+      <ChartSVG width={width} height={h2} rows={rows} showLegend={false} />
     </div>
   );
 }
