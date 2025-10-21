@@ -1,3 +1,4 @@
+# src/market_sentiment/writers.py
 from __future__ import annotations
 
 import json
@@ -8,15 +9,10 @@ from typing import Dict, Iterable, List, Optional, Any
 import numpy as np
 import pandas as pd
 
-
-# ---------- small utils ----------
-
 def _ensure_dir(d: str) -> None:
     os.makedirs(d, exist_ok=True)
 
-
 def _fmt_eastern(ts: pd.Timestamp) -> str:
-    """Format a UTC timestamp to America/New_York ISO-like string."""
     if ts is None or (isinstance(ts, float) and pd.isna(ts)):
         return ""
     t = pd.to_datetime(ts, utc=True, errors="coerce")
@@ -28,14 +24,12 @@ def _fmt_eastern(ts: pd.Timestamp) -> str:
         et = t.tz_localize("UTC").tz_convert("America/New_York")
     return et.strftime("%Y-%m-%d %H:%M:%S")
 
-
 def _safe_num(x) -> float:
     try:
         v = float(x)
         return v if math.isfinite(v) else 0.0
     except Exception:
         return 0.0
-
 
 def _roll_ma(arr: List[float], n: int = 7) -> List[float]:
     out: List[float] = []
@@ -50,52 +44,24 @@ def _roll_ma(arr: List[float], n: int = 7) -> List[float]:
         out.append(run / n if len(q) >= n else float("nan"))
     return out
 
-
-def _all_almost_zero(vals: Iterable[float], eps: float = 1e-12) -> bool:
-    for v in vals:
-        try:
-            if abs(float(v)) > eps:
-                return False
-        except Exception:
-            pass
-    return True
-
-
-# ---------- sentiment fallback from sparse news ----------
-
 def _gaussian_kernel(days: int = 7, sigma: float = 2.0) -> np.ndarray:
-    """Odd-length symmetric kernel for smoothing/“spreading” sparse news counts."""
-    L = max(3, int(days) | 1)  # ensure odd
+    L = max(3, int(days) | 1)
     r = (L - 1) // 2
     x = np.arange(-r, r + 1, dtype=float)
     k = np.exp(-(x**2) / (2.0 * float(sigma) ** 2))
     k /= k.sum()
     return k
 
-
 def _smooth_and_scale_to_unit(series: pd.Series) -> pd.Series:
-    """Z-score -> tanh to [-1,1]."""
     arr = series.astype(float).values
     mu = float(np.mean(arr))
     sd = float(np.std(arr))
-    if sd <= 1e-12:
-        z = np.zeros_like(arr, dtype=float)
-    else:
-        z = (arr - mu) / sd
-    s = np.tanh(z / 2.0)
-    return pd.Series(s, index=series.index, dtype=float)
-
+    z = np.zeros_like(arr, dtype=float) if sd <= 1e-12 else (arr - mu) / sd
+    return pd.Series(np.tanh(z / 2.0), index=series.index, dtype=float)
 
 def _news_fallback_S_full_window(price_days: pd.DatetimeIndex, news_t: pd.DataFrame) -> List[float]:
-    """
-    Build a daily S for *every trading day* by:
-      1) counting news at day granularity over the full date index,
-      2) convolving with a short gaussian kernel to “spread” sparse impulses,
-      3) z-score and squash into [-1, 1].
-    """
     if news_t is None or news_t.empty or len(price_days) == 0:
         return [0.0] * len(price_days)
-
     g = (
         news_t.assign(day=news_t["ts"].dt.floor("D"))
         .groupby("day", as_index=False)
@@ -104,65 +70,41 @@ def _news_fallback_S_full_window(price_days: pd.DatetimeIndex, news_t: pd.DataFr
         .set_index("day")["cnt"]
     )
     aligned = g.reindex(price_days, fill_value=0).astype(float)
-
     k = _gaussian_kernel(days=7, sigma=2.0)
     smoothed = np.convolve(aligned.values, k, mode="same")
-    smoothed = pd.Series(smoothed, index=aligned.index)
-
-    S = _smooth_and_scale_to_unit(smoothed).clip(-1.0, 1.0)
+    S = _smooth_and_scale_to_unit(pd.Series(smoothed, index=aligned.index)).clip(-1, 1)
     return [float(x) for x in S.tolist()]
 
-
 def _daily_S_from_news_mean(price_days: pd.DatetimeIndex, news_t: pd.DataFrame) -> List[float]:
-    """
-    Primary path: use *FinBERT S means per calendar day*.
-    When a day has no news, fill 0 (neutral). This guarantees 1 value per trading day.
-    """
-    if news_t is None or news_t.empty or len(price_days) == 0 or "S" not in news_t.columns:
+    if news_t is None or news_t.empty or "S" not in news_t.columns:
         return [0.0] * len(price_days)
-
-    g = (
-        news_t.assign(day=news_t["ts"].dt.floor("D"))
-        .groupby("day")["S"]
-        .mean()
-        .astype(float)
-    )
-    s = g.reindex(price_days, fill_value=0.0)
+    g = news_t.assign(day=news_t["ts"].dt.floor("D")).groupby("day")["S"].mean().astype(float)
+    s = g.reindex(price_days, fill_value=np.nan)
+    # where no headlines: NaN → fall back to zero; we’ll also smooth with MA7 visually
+    s = s.fillna(0.0)
     return [float(x) for x in s.tolist()]
-
-
-# ---------- core helpers ----------
 
 def _build_one_ticker(
     t: str,
     panel: pd.DataFrame,
     news_rows: Optional[pd.DataFrame],
-    headlines_max: int = 10,  # UI shows 10 headlines
+    headlines_max: int = 10,
 ) -> Dict:
-    """
-    Build the ticker payload used by the Next.js page.
-    IMPORTANT: daily sentiment is derived DIRECTLY from news rows (mean FinBERT S per day),
-    not from the merged panel, so each day’s score reflects that day’s headlines.
-    """
     df = panel[panel["ticker"] == t].copy()
     if df.empty or "date" not in df.columns:
         return {}
 
-    # normalize dtypes
     df["date"] = pd.to_datetime(df["date"], utc=True, errors="coerce")
     df = df.dropna(subset=["date"]).sort_values("date").reset_index(drop=True)
 
-    # price
     if "close" not in df.columns:
         df["close"] = pd.NA
     price = pd.to_numeric(df["close"], errors="coerce").fillna(0.0).astype(float).tolist()
 
-    # trading-day index
     price_days = pd.DatetimeIndex(df["date"].dt.floor("D").unique())
     start_day = price_days.min()
     end_day = price_days.max()
 
-    # select news for ticker, within window (keep S!)
     nt = pd.DataFrame(columns=["ts", "title", "url", "text", "S"])
     if news_rows is not None and len(news_rows) > 0:
         nr = news_rows[news_rows["ticker"] == t].copy()
@@ -170,25 +112,20 @@ def _build_one_ticker(
             nr["ts"] = pd.to_datetime(nr["ts"], utc=True, errors="coerce")
             nr = nr.dropna(subset=["ts"])
             nr["_day"] = nr["ts"].dt.floor("D")
-            in_window = (nr["_day"] >= start_day) & (nr["_day"] <= end_day)
-            # include S so we can compute mean-by-day
+            keep = (nr["_day"] >= start_day) & (nr["_day"] <= end_day)
             keep_cols = [c for c in ("ts", "title", "url", "text", "S") if c in nr.columns]
-            nt = nr.loc[in_window, keep_cols].sort_values("ts")
-
-            # fallback: if filter erases all, still keep a backlog for headlines and for fallback S
+            nt = nr.loc[keep, keep_cols].sort_values("ts")
             if nt.empty:
-                nt = nr.sort_values("ts", ascending=False)[keep_cols].head(1200).sort_values("ts")
+                nt = nr.sort_values("ts", ascending=False)[keep_cols].head(2000).sort_values("ts")
 
-    # --- daily sentiment (primary: FinBERT mean per day; fallback: news intensity) ---
-    if not nt.empty and "S" in nt.columns:
+    # daily sentiment from per-day mean of scored headlines; if empty → count-based fallback
+    if not nt.empty and "S" in nt.columns and nt["S"].notna().any():
         s = _daily_S_from_news_mean(price_days, nt)
     else:
         s = _news_fallback_S_full_window(price_days, nt)
 
-    # MA7 for visualization
     s_ma7 = _roll_ma(s, n=7)
 
-    # news headlines list (newest first, capped to 10)
     out_news: List[Dict[str, Any]] = []
     if not nt.empty:
         for _, r in nt.sort_values("ts", ascending=False).head(int(headlines_max)).iterrows():
@@ -199,7 +136,6 @@ def _build_one_ticker(
                 "text": str(r.get("text", "")),
             })
 
-    # dates -> "YYYY-MM-DD" (explicit UTC)
     dates_str = [
         (d if getattr(d, "tzinfo", None) else d.tz_localize("UTC")).tz_convert("UTC").strftime("%Y-%m-%d")
         for d in df["date"]
@@ -214,28 +150,12 @@ def _build_one_ticker(
         "news": out_news,
     }
 
-
 def _write_json(path: str, obj: Dict) -> None:
     _ensure_dir(os.path.dirname(path))
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False)
 
-
-# ---------- public API ----------
-
 def write_outputs(panel, news_rows, *rest):
-    """
-    Compatible with both calling patterns:
-      - write_outputs(panel, news_rows, out_dir)
-      - write_outputs(panel, news_rows, earn_rows, out_dir)
-
-    Emits:
-      • /ticker/<T>.json  (includes daily “S” and “S_ma7” for the full window)
-      • _tickers.json
-      • portfolio.json    (mean of per-ticker *final* S by day)
-      • /earnings/<T>.json (optional stub)
-    """
-    # parse args
     if len(rest) == 1:
         earn_rows = None
         out_dir = rest[0]
@@ -252,7 +172,6 @@ def write_outputs(panel, news_rows, *rest):
     earn_dir = os.path.join(out_dir, "earnings")
     _ensure_dir(out_dir); _ensure_dir(tick_dir); _ensure_dir(earn_dir)
 
-    # standardize panel
     panel = panel.copy()
     if "date" not in panel.columns:
         raise KeyError("panel must contain 'date' column")
@@ -261,7 +180,6 @@ def write_outputs(panel, news_rows, *rest):
     panel["ticker"] = panel["ticker"].astype(str).str.upper()
     panel["date"] = pd.to_datetime(panel["date"], utc=True, errors="coerce")
 
-    # normalize news rows columns if present
     if news_rows is not None and len(news_rows) > 0:
         nr = news_rows.copy()
         for c in ("ticker", "ts", "title", "url", "text", "S"):
@@ -275,10 +193,9 @@ def write_outputs(panel, news_rows, *rest):
     tickers = sorted(panel["ticker"].dropna().unique().tolist())
     _write_json(os.path.join(out_dir, "_tickers.json"), tickers)
 
-    # per-ticker JSON + aggregate portfolio from the *final* S we output
     pf_acc: Dict[pd.Timestamp, List[float]] = {}
     for t in tickers:
-        obj = _build_one_ticker(t, panel, news_rows, headlines_max=10)  # 10 headlines; S spans all days
+        obj = _build_one_ticker(t, panel, news_rows, headlines_max=10)
         if not obj or not obj.get("date", []) or (not obj.get("price", []) and not obj.get("S", [])):
             continue
         _write_json(os.path.join(tick_dir, f"{t}.json"), obj)
@@ -288,7 +205,6 @@ def write_outputs(panel, news_rows, *rest):
         for d, s in zip(dates, svals):
             pf_acc.setdefault(d, []).append(s)
 
-    # portfolio.json = mean of S across tickers per day
     if pf_acc:
         days_sorted = sorted(pf_acc.keys())
         pf_dates = [d.strftime("%Y-%m-%d") for d in days_sorted]
@@ -297,7 +213,6 @@ def write_outputs(panel, news_rows, *rest):
         pf_dates, pf_S = [], []
     _write_json(os.path.join(out_dir, "portfolio.json"), {"dates": pf_dates, "S": pf_S})
 
-    # optional minimal earnings stub
     if earn_rows is not None and len(earn_rows) > 0:
         er = earn_rows.copy()
         if "ticker" in er.columns and "date" in er.columns:
