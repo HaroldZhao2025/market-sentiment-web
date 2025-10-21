@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import LineChart from "../components/LineChart"; // ← fixed import path
+import LineChart from "../../components/LineChart"; // ← fixed import path
 
 type Props = { dates: string[]; sentiment: number[]; price?: number[] };
 
