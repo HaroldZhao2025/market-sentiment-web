@@ -2,11 +2,11 @@
 
 /**
  * Dual-axis SVG chart:
- *  - Left Y: sentiment [-1, 1] with zero line
+ *  - Left Y: sentiment in [-1, 1] with zero line
  *  - Right Y: price (auto)
  *  - Daily sentiment bars + MA7 line + price line
  *  - Crosshair + tooltip (date, sentiment, MA7, price)
- *  - Responsive, no external libs (fixes GH Pages issues)
+ *  - Responsive (pure SVG + ResizeObserver) — works on GH Pages
  */
 
 import { useMemo, useRef, useState, useEffect } from "react";
@@ -118,6 +118,7 @@ export default function LineChart({
     const onLeave = () => { setHoverX(null); setHoverIdx(null); };
     const hover = hoverIdx != null ? rows[hoverIdx] : null;
 
+    // daily bars for sentiment
     const bars = rows.map((r, i) => {
       if (!Number.isFinite(r.s as number)) return null;
       const xi = x(i);
@@ -230,12 +231,12 @@ export default function LineChart({
 
   if (mode === "overlay") {
     return (
-      <div ref={ref} className="w-full space-y-3">
+      <div ref={ref} className="w-full space-y-4">
         {makeChart(hOverlay, false)}
-        <div className="mt-1 flex items-center gap-6 text-sm text-neutral-600">
-          <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#6B5BFF" }} /><span>Sentiment (daily bars)</span></div>
-          <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#10B981" }} /><span>Sentiment (MA7)</span></div>
-          <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#0EA5E9" }} /><span>Stock Price</span></div>
+        <div className="legend">
+          <span className="dot" style={{ background: "#6B5BFF" }} /> Sentiment (daily bars)
+          <span className="dot" style={{ background: "#10B981" }} /> Sentiment (MA7)
+          <span className="dot" style={{ background: "#0EA5E9" }} /> Stock Price
         </div>
       </div>
     );
@@ -245,10 +246,10 @@ export default function LineChart({
     <div ref={ref} className="w-full space-y-6">
       {makeChart(hTop, true)}
       {makeChart(hBottom, false)}
-      <div className="flex items-center gap-6 text-sm text-neutral-600">
-        <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#6B5BFF" }} /><span>Sentiment (daily bars)</span></div>
-        <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#10B981" }} /><span>Sentiment (MA7)</span></div>
-        <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full" style={{ background: "#0EA5E9" }} /><span>Stock Price</span></div>
+      <div className="legend">
+        <span className="dot" style={{ background: "#6B5BFF" }} /> Sentiment (daily bars)
+        <span className="dot" style={{ background: "#10B981" }} /> Sentiment (MA7)
+        <span className="dot" style={{ background: "#0EA5E9" }} /> Stock Price
       </div>
     </div>
   );
