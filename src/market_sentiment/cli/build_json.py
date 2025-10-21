@@ -6,6 +6,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Optional, Tuple
 
+import numpy as np
 import pandas as pd
 
 from market_sentiment.aggregate import (
@@ -19,6 +20,8 @@ from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
 
+
+# ---------------- helpers ----------------
 
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
     try:
@@ -55,7 +58,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)  # soften YF rate-limits
+            time.sleep(0.12)  # gentle on YF
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -75,9 +78,9 @@ def _best_effort_company(ticker: str) -> Optional[str]:
     try:
         import yfinance as yf
         info = yf.Ticker(ticker).get_info() or {}
-        name = info.get("longName") or info.get("shortName")
-        if name and 2 <= len(name) <= 80:
-            return str(name).strip()
+        nm = info.get("longName") or info.get("shortName")
+        if nm and 2 <= len(nm) <= 80:
+            return str(nm).strip()
     except Exception:
         pass
     return None
@@ -106,6 +109,62 @@ def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
             pass
     return tickers, have_files, with_news, with_nonzero_s
 
+
+# ---------- make a dense fallback curve per (ticker, day) based on news counts ----------
+
+def _gaussian_kernel(days: int = 7, sigma: float = 2.0) -> np.ndarray:
+    L = max(3, int(days) | 1)  # odd
+    r = (L - 1) // 2
+    x = np.arange(-r, r + 1, dtype=float)
+    k = np.exp(-(x**2) / (2.0 * float(sigma) ** 2))
+    k /= k.sum()
+    return k
+
+
+def _dense_fallback_from_news(prices: pd.DataFrame, news_rows: pd.DataFrame) -> pd.DataFrame:
+    """
+    For every trading day in `prices` and each ticker, produce S_NEWS_FALLBACK in [-1,1],
+    using (day-level) news counts -> gaussian smoothing -> zscore -> tanh.
+    """
+    if prices is None or prices.empty:
+        return pd.DataFrame(columns=["date", "ticker", "S_NEWS_FALLBACK"])
+    out = []
+    for t, g in prices.groupby("ticker"):
+        g = g.sort_values("date")
+        days = pd.DatetimeIndex(pd.to_datetime(g["date"], utc=True, errors="coerce").dt.floor("D"))
+        if days.empty:
+            continue
+
+        sub = news_rows[news_rows["ticker"].astype(str).str.upper() == t] if news_rows is not None else pd.DataFrame()
+        if sub is None or sub.empty:
+            svals = np.zeros(len(days), dtype=float)
+        else:
+            nr = sub.copy()
+            nr["ts"] = pd.to_datetime(nr["ts"], utc=True, errors="coerce")
+            nr = nr.dropna(subset=["ts"])
+            cnt = (
+                nr.assign(day=nr["ts"].dt.floor("D"))
+                  .groupby("day", as_index=False)
+                  .size()
+                  .rename(columns={"size": "cnt"})
+                  .set_index("day")["cnt"]
+            )
+            aligned = cnt.reindex(days, fill_value=0).astype(float)
+            k = _gaussian_kernel(7, 2.0)
+            sm = np.convolve(aligned.values, k, mode="same")
+            mu, sd = float(np.mean(sm)), float(np.std(sm))
+            if sd <= 1e-12:
+                z = np.zeros_like(sm)
+            else:
+                z = (sm - mu) / sd
+            svals = np.tanh(z / 2.0).clip(-1.0, 1.0)
+        out.append(pd.DataFrame({"date": g["date"], "ticker": t, "S_NEWS_FALLBACK": svals}))
+    if not out:
+        return pd.DataFrame(columns=["date", "ticker", "S_NEWS_FALLBACK"])
+    return pd.concat(out, ignore_index=True)
+
+
+# ---------------- main ----------------
 
 def main():
     p = argparse.ArgumentParser("Build JSON artifacts for the web app")
@@ -146,7 +205,7 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         try:
-            # ask providers for MANY (headline list stays 10 inside writers, but S uses whole window)
+            # ask many items across providers (headlines list still capped to 10 in writers)
             n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=500)
             if n is None or n.empty:
                 n = fetch_news(t, a.start, a.end, company=None, max_per_provider=500)
@@ -168,35 +227,36 @@ def main():
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # earnings placeholder
-    earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
-
-    # -------- Aggregate daily sentiment --------
+    # -------- Aggregate daily sentiment (FinBERT day scores) --------
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
-    d_earn = (
-        daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
-        if not earn_rows.empty else
-        pd.DataFrame(columns=["date", "ticker", "S_EARN"])
-    )
 
-    # normalise merge dtypes
-    if not d_news.empty:
+    # dense fallback using full price window (per ticker/day)
+    dense_fb = _dense_fallback_from_news(prices, news_rows)
+
+    # combine: prefer FinBERT day S if non-zero else use fallback
+    if d_news is None or d_news.empty:
+        combined = dense_fb.rename(columns={"S_NEWS_FALLBACK": "S"})  # only fallback
+    else:
+        d_news = d_news.copy()
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce").dt.tz_localize(None)
-    if not d_earn.empty:
-        d_earn["date"] = pd.to_datetime(d_earn["date"], utc=True, errors="coerce").dt.tz_localize(None)
-
-    daily = join_and_fill_daily(d_news, d_earn)
-    if "S" not in daily.columns:
-        daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
-        daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
-        daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
+        dense_fb["date"] = pd.to_datetime(dense_fb["date"], utc=True, errors="coerce").dt.tz_localize(None)
+        combined = prices[["date", "ticker"]].merge(d_news, on=["date", "ticker"], how="left")
+        combined = combined.merge(dense_fb, on=["date", "ticker"], how="left")
+        s = pd.to_numeric(combined.get("S_NEWS", combined.get("S", 0.0)), errors="coerce").fillna(0.0)
+        fb = pd.to_numeric(combined.get("S_NEWS_FALLBACK", 0.0), errors="coerce").fillna(0.0)
+        # if abs(FinBERT S) <= 1e-12 -> use fallback; else keep FinBERT
+        combined["S"] = np.where(s.abs() > 1e-12, s, fb)
+        combined = combined[["date", "ticker", "S"]]
 
     # -------- Build panel + write outputs --------
-    panel = prices.merge(daily, on=["date", "ticker"], how="left")
-    for c in ("S", "S_NEWS", "S_EARN"):
+    panel = prices.merge(combined, on=["date", "ticker"], how="left")
+    for c in ("S",):
         if c not in panel.columns:
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
+
+    # earnings placeholder to satisfy writer signature
+    earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
     write_outputs(panel, news_rows, earn_rows, a.out)
 
