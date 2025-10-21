@@ -11,8 +11,14 @@ on:
         default: "sample"
         type: choice
         options: ["sample", "full"]
+      news_per_provider:
+        description: "Max news per provider (deep crawl)"
+        required: false
+        default: "6000"
+        type: choice
+        options: ["800", "2000", "4000", "6000", "8000"]
   schedule:
-    - cron: "0 12 * * 1"
+    - cron: "0 12 * * 1" # Mondays 12:00 UTC
 
 permissions:
   contents: read
@@ -31,6 +37,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -103,7 +110,7 @@ jobs:
           UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Safari/537.36"}
           candidates = []
 
-          # 1) Wikipedia via requests (avoid 403 on pandas' internal opener)
+          # 1) Wikipedia via requests
           try:
               print("Trying Wikipedia…")
               r = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=30)
@@ -119,7 +126,7 @@ jobs:
           except Exception as e:
               print("Wikipedia failed:", e)
 
-          # 2) Slickcharts (also HTML with a Symbol column)
+          # 2) Slickcharts
           try:
               print("Trying Slickcharts…")
               r = requests.get("https://www.slickcharts.com/sp500", headers=UA, timeout=30)
@@ -127,7 +134,6 @@ jobs:
               tables = pd.read_html(r.text)
               df = next((t for t in tables if "Symbol" in t.columns), None)
               if df is None and len(tables):
-                  # some mirrors give the table as first one
                   df = tables[0]
               if df is not None:
                   col = "Symbol" if "Symbol" in df.columns else df.columns[0]
@@ -171,20 +177,19 @@ jobs:
           print(f"Wrote {len(uniq)} tickers to {outp}")
 
       # ---------- Smoke tests (debug news & prices) ----------
-      - name: Smoke test — AAPL news providers + FinBERT
+      - name: Smoke test — AAPL news providers
         env:
           HF_HOME: ${{ env.HF_HOME }}
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
         shell: python
         run: |
           import pandas as pd
           import yfinance as yf
           from market_sentiment.news import (
-              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss, fetch_news
+              _prov_yfinance, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss, _prov_gdelt, _prov_finnhub, fetch_news
           )
-          try:
-              from market_sentiment.finbert import FinBERT
-          except Exception:
-              FinBERT = None
 
           START="${{ env.START }}"; END="${{ env.END }}"
 
@@ -198,6 +203,8 @@ jobs:
               print("yfinance error:", e)
 
           providers = [
+              ("finnhub", _prov_finnhub),
+              ("gdelt", _prov_gdelt),
               ("google_rss", _prov_google_rss),
               ("yahoo_rss", _prov_yahoo_rss),
               ("nasdaq_rss", _prov_nasdaq_rss),
@@ -212,7 +219,7 @@ jobs:
                   print(f"{name} error:", e)
 
           try:
-              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=300)
+              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=600)
               days = 0 if all_df.empty else all_df["ts"].dt.date.nunique()
               print("fetch_news rows:", len(all_df))
               print("fetch_news coverage days:", days)
@@ -220,22 +227,6 @@ jobs:
                   print(all_df[["ts","title"]].tail(3).to_string(index=False))
           except Exception as e:
               print("fetch_news error:", e)
-              all_df = pd.DataFrame()
-
-          if len(all_df) and FinBERT is not None:
-              texts = all_df["text"].fillna(all_df["title"]).astype(str).tolist()[:16]
-              try:
-                  fb = FinBERT()
-                  try:
-                      S = fb.score(texts, batch=16)
-                  except TypeError:
-                      S = fb.score(texts)
-                  s = pd.Series(S).astype(float)
-                  print("FinBERT sample:", s.round(4).tolist(), "mean:", float(s.mean()))
-              except Exception as e:
-                  print("FinBERT error:", e)
-          else:
-              print("Skip FinBERT (no texts or FinBERT missing).")
 
       - name: Smoke test — AAPL prices
         shell: python
@@ -251,17 +242,24 @@ jobs:
       - name: Build JSON data (prices + news)
         env:
           HF_HOME: ${{ env.HF_HOME }}
+          # Finnhub tokens (any one variable is sufficient; news.py checks all three)
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
         shell: bash
         run: |
           set -euo pipefail
-          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | batch=16 cutoff_min=5 max_workers=8"
+          NEWS_PER="${{ github.event.inputs.news_per_provider }}"
+          if [ -z "${NEWS_PER:-}" ]; then NEWS_PER="6000"; fi
+          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | news_per_provider=$NEWS_PER"
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
             --start "$START" --end "$END" \
             --out apps/web/public/data \
             --batch 16 \
             --cutoff-minutes 5 \
-            --max-workers 8
+            --max-workers 8 \
+            --news-per-provider "$NEWS_PER"
 
       - name: Inspect generated data (AAPL)
         shell: python
