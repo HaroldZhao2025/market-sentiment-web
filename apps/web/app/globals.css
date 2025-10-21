@@ -2,16 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Subtle improvements */
-:root {
-  --card-bg: #ffffff;
-  --card-border: rgba(0,0,0,.08);
+@layer components {
+  .page { @apply min-h-screen bg-neutral-50; }
+  .page-title { @apply mx-auto max-w-6xl px-4 pt-8 pb-2 text-3xl font-bold tracking-tight; }
+  .muted { @apply mx-auto max-w-6xl px-4 text-neutral-500; }
+
+  .card { @apply rounded-2xl border bg-white shadow-sm; }
+  .kpi  { @apply rounded-2xl p-5 border bg-white shadow-sm; }
+  .kpi-label { @apply text-sm text-neutral-500 mb-1; }
+  .kpi-value { @apply text-2xl md:text-3xl font-semibold; }
+  .kpi-sub   { @apply text-neutral-500 text-lg; }
+
+  .legend { @apply mt-1 flex flex-wrap items-center gap-6 text-sm text-neutral-600; }
+  .legend .dot { @apply bainline-block h-2 w-2 rounded-full mr-2; }
+
+  .pill { @apply px-3 py-1.5 text-sm rounded-lg transition text-neutral-700; }
+  .pill-active { @apply bg-black text-white shadow-sm; }
+
+  .hl { @apply underline decoration-dotted underline-offset-2; }
 }
-.card {
-  @apply rounded-2xl border shadow-sm bg-[var(--card-bg)];
-  border-color: var(--card-border);
-}
-.kpi {
-  @apply card p-5;
-}
-.hl a { @apply underline decoration-dotted underline-offset-2 }
