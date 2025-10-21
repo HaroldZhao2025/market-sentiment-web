@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Optional, Tuple
@@ -101,7 +102,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 def _best_effort_company(ticker: str) -> Optional[str]:
     """Try to get a readable company name for better news queries."""
     try:
-        import yfinance as yf
+        import yfinance as yf  # local import so the module isn't required for unit tests
         info = yf.Ticker(ticker).get_info() or {}
         name = info.get("longName") or info.get("shortName")
         if name and 2 <= len(name) <= 80:
@@ -109,20 +110,6 @@ def _best_effort_company(ticker: str) -> Optional[str]:
     except Exception:
         pass
     return None
-
-
-def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
-    """
-    True if daily news sentiment is missing or ~all zeros,
-    in which case writers.py will synthesize a daily curve from news counts.
-    """
-    if d_news is None or d_news.empty:
-        return True
-    col = "S_NEWS" if "S_NEWS" in d_news.columns else ("S" if "S" in d_news.columns else None)
-    if col is None:
-        return True
-    s = pd.to_numeric(d_news[col], errors="coerce").fillna(0.0)
-    return float(s.abs().max()) <= 1e-12
 
 
 def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
@@ -163,9 +150,15 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    p.add_argument("--news-per-provider", type=int, default=800,
-                   help="Target articles per provider (the writers will still cap visible headlines).")
+    p.add_argument("--news-per-provider", type=int, default=6000,
+                   help="Target articles per provider (UI still caps visible headlines).")
     a = p.parse_args()
+
+    # Show which sources are enabled (for CI visibility)
+    has_fh = bool(os.getenv("FINNHUB_TOKEN") or os.getenv("FINNHUB_API_KEY") or os.getenv("FINNHUB_KEY"))
+    print(f"News sources: {'Finnhub, ' if has_fh else ''}GDELT, Yahoo Finance, Google RSS, Yahoo RSS, Nasdaq RSS")
+    if not has_fh:
+        print("  (Finnhub token not set; set FINNHUB_TOKEN to unlock deeper historical coverage)")
 
     # Universe (tolerate unnamed first column)
     uni = pd.read_csv(a.universe)
