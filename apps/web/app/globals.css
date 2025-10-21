@@ -2,20 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light; }
-body { @apply bg-gray-50 text-gray-900; }
-.container { @apply max-w-7xl mx-auto px-4; }
-.card { @apply bg-white rounded-2xl shadow-sm p-6 border border-gray-100; }
-.kpi { @apply text-2xl font-bold; }
-.kpi-sub { @apply text-sm text-gray-500; }
-.btn { @apply px-3 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50; }
-.btn-primary { @apply px-3 py-2 rounded-xl bg-black text-white hover:bg-gray-800; }
-
-/* cards / tiles / buttons */
-.card { @apply rounded-2xl border border-gray-200 p-4 bg-white shadow-sm; }
-.btn { @apply px-3 py-1.5 rounded-lg border border-gray-300 hover:bg-gray-50; }
-.tile { @apply rounded-xl border border-gray-200 p-3 hover:bg-gray-50 transition; }
-.tile-title { @apply font-semibold; }
-.tile-sub { @apply text-xs text-gray-500; }
-.kpi { @apply text-2xl font-semibold; }
-.kpi-sub { @apply text-xs text-gray-500; }
+/* Subtle improvements */
+:root {
+  --card-bg: #ffffff;
+  --card-border: rgba(0,0,0,.08);
+}
+.card {
+  @apply rounded-2xl border shadow-sm bg-[var(--card-bg)];
+  border-color: var(--card-border);
+}
+.kpi {
+  @apply card p-5;
+}
+.hl a { @apply underline decoration-dotted underline-offset-2 }
