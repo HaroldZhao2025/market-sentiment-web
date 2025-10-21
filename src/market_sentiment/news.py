@@ -8,6 +8,7 @@ from urllib.parse import quote_plus
 
 import pandas as pd
 import feedparser
+import requests
 import yfinance as yf
 
 # ------------------------
@@ -23,10 +24,6 @@ def _clean_text(x) -> str:
     return s
 
 def _first_str(*candidates) -> str:
-    """
-    Return the first candidate that can be turned into a non-empty string.
-    Never rely on Python truthiness of arrays/objects.
-    """
     for v in candidates:
         if v is None:
             continue
@@ -42,11 +39,6 @@ def _first_str(*candidates) -> str:
     return ""
 
 def _norm_ts_utc(x) -> pd.Timestamp:
-    """
-    Normalize to tz-aware UTC Timestamp.
-    Accepts epoch seconds/ms, struct_time, or date-like strings.
-    Returns pd.NaT if unparseable.
-    """
     if x is None:
         return pd.NaT
 
@@ -61,13 +53,12 @@ def _norm_ts_utc(x) -> pd.Timestamp:
     # epoch seconds / ms
     try:
         xi = int(x)
-        if xi > 10_000_000_000:  # likely ms
+        if xi > 10_000_000_000:
             xi = xi / 1000.0
         return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
     except Exception:
         pass
 
-    # generic parse
     try:
         ts = pd.to_datetime(x, utc=True, errors="coerce")
         return ts
@@ -115,27 +106,64 @@ def _month_windows(start: str, end: str):
 # Providers
 # ------------------------
 
+def _prov_gdelt(
+    ticker: str, start: str, end: str, company: str | None = None, limit: int = 6000
+) -> pd.DataFrame:
+    """
+    GDELT Doc API – no API key; good coverage & date filters.
+    We query month-by-month to harvest many items (up to `limit` total).
+    """
+    q = quote_plus((company or ticker).replace("&", " and "))
+    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+
+    fetched = 0
+    for ws, we in _month_windows(start, end):
+        if fetched >= limit:
+            break
+        startdt = ws.strftime("%Y%m%d%H%M%S")
+        enddt   = (we + pd.Timedelta(hours=23, minutes=59, seconds=59)).strftime("%Y%m%d%H%M%S")
+        # per-month max (GDELT caps anyway); keep requests light
+        per = min(1000, limit - fetched)
+        url = (
+            "https://api.gdeltproject.org/api/v2/doc/doc"
+            f"?query={q}&mode=artlist&format=json&maxrecords={per}"
+            f"&startdatetime={startdt}&enddatetime={enddt}"
+        )
+        try:
+            r = requests.get(url, timeout=30)
+            if not r.ok:
+                continue
+            js = r.json() or {}
+            arts = js.get("articles") or []
+            for a in arts:
+                ts = _norm_ts_utc(a.get("seendate") or a.get("date"))
+                title = _first_str(a.get("title"))
+                link  = _first_str(a.get("url"))
+                if pd.isna(ts) or not title:
+                    continue
+                rows.append((ts, title, link, title))
+            fetched += len(arts)
+        except Exception:
+            continue
+
+    df = _mk_df(rows, ticker)
+    return _window_filter(df, start, end)
+
 def _prov_yfinance(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 300
 ) -> pd.DataFrame:
-    """
-    yfinance .news (no key).
-    Structure is inconsistent across versions – be extremely defensive.
-    """
     def _get():
         try:
             t = yf.Ticker(ticker)
             return getattr(t, "news", None)
         except Exception:
             return None
-
     raw = _retry(_get, tries=2, delay=0.6)
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     if isinstance(raw, list):
         for item in raw[:limit]:
             content = item.get("content") if isinstance(item, dict) else None
-            # Many possible fields for publish time
             ts = _norm_ts_utc(
                 (item.get("providerPublishTime") if isinstance(item, dict) else None)
                 or (item.get("provider_publish_time") if isinstance(item, dict) else None)
@@ -144,26 +172,18 @@ def _prov_yfinance(
                 or ((content or {}).get("published") if isinstance(content, dict) else None)
                 or ((content or {}).get("pubDate") if isinstance(content, dict) else None)
             )
-            # If still NaT, assign a recent timestamp to avoid dropping otherwise useful items
             if pd.isna(ts):
                 ts = pd.Timestamp.utcnow().tz_localize("UTC")
-
-            title = _first_str(
-                (item.get("title") if isinstance(item, dict) else None),
-                ((content or {}).get("title") if isinstance(content, dict) else None),
-            )
-            link = _first_str(
-                (item.get("link") if isinstance(item, dict) else None),
-                (item.get("url") if isinstance(item, dict) else None),
-                ((content or {}).get("link") if isinstance(content, dict) else None),
-                ((content or {}).get("url") if isinstance(content, dict) else None),
-            )
-            text = _first_str(
-                (item.get("summary") if isinstance(item, dict) else None),
-                ((content or {}).get("summary") if isinstance(content, dict) else None),
-                ((content or {}).get("content") if isinstance(content, dict) else None),
-                title,
-            )
+            title = _first_str((item.get("title") if isinstance(item, dict) else None),
+                               ((content or {}).get("title") if isinstance(content, dict) else None))
+            link  = _first_str((item.get("link") if isinstance(item, dict) else None),
+                               (item.get("url") if isinstance(item, dict) else None),
+                               ((content or {}).get("link") if isinstance(content, dict) else None),
+                               ((content or {}).get("url") if isinstance(content, dict) else None))
+            text  = _first_str((item.get("summary") if isinstance(item, dict) else None),
+                               ((content or {}).get("summary") if isinstance(content, dict) else None),
+                               ((content or {}).get("content") if isinstance(content, dict) else None),
+                               title)
             if not title and not text:
                 continue
             rows.append((ts, title or text, link, text or title))
@@ -174,7 +194,6 @@ def _prov_yfinance(
 def _prov_google_rss(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 300
 ) -> pd.DataFrame:
-    # First attempt: a single 365d window (fast)
     q = f'"{ticker}"' + (f' OR "{company}"' if company else "")
     url = f"https://news.google.com/rss/search?q={quote_plus(q)}+when:365d&hl=en-US&gl=US&ceid=US:en"
 
@@ -206,7 +225,6 @@ def _prov_google_rss(
 
     df = _consume(feed)
 
-    # Fallback: if coverage is thin (< 40 items), fetch month-by-month for the whole range
     if len(df) < 40:
         frames = []
         for ws, we in _month_windows(start, end):
@@ -300,6 +318,7 @@ def _prov_nasdaq_rss(
 Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
 
 _PROVIDERS: List[Provider] = [
+    _prov_gdelt,       # ⬅️ put first for depth/coverage
     _prov_yfinance,
     _prov_google_rss,
     _prov_yahoo_rss,
@@ -311,7 +330,7 @@ def fetch_news(
     start: str,
     end: str,
     company: str | None = None,
-    max_per_provider: int = 300,
+    max_per_provider: int = 6000,  # ⬅️ allow deep harvest
 ) -> pd.DataFrame:
     frames: List[pd.DataFrame] = []
     for prov in _PROVIDERS:
