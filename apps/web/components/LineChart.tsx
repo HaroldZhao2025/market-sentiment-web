@@ -1,21 +1,22 @@
+// apps/web/components/LineChart.tsx
 "use client";
 
 /**
  * Dual-axis SVG chart (sentiment [-1,1] + price) with:
  *  • Overlay / Separate view
  *  • Crosshair + tooltip (date, sentiment, MA7, price)
- *  • Padded axes to avoid clipping on GH Pages
+ *  • Clipping & padding so labels never overlap the next section
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type Props = {
   mode: "overlay" | "separate";
-  dates: string[];           // ISO 'YYYY-MM-DD'
-  price?: number[];          // close; optional (portfolio)
-  sentiment: number[];       // daily S
-  sentimentMA7?: number[];   // 7d MA for S
-  height?: number;           // container height (overlay); stacked when separate
+  dates: string[];
+  price?: number[];
+  sentiment: number[];
+  sentimentMA7?: number[];
+  height?: number;
 };
 
 type Pt = { x: number; y: number };
@@ -81,7 +82,7 @@ function Legend() {
         <span>Sentiment (MA7)</span>
       </div>
       <div className="flex items-center gap-2">
-        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#0EA5E9" }} />
+        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#22C55E" }} />
         <span>Stock Price</span>
       </div>
     </div>
@@ -99,9 +100,9 @@ function ChartSVG({
   rows: { d: string; p: number | null; s: number | null; m: number | null }[];
   separate?: boolean;
 }) {
-  const pad = { t: 20, r: 68, b: 32, l: 52 };
+  const pad = { t: 20, r: 72, b: 36, l: 56 };
   const w = Math.max(560, width);
-  const h = Math.max(240, height);
+  const h = Math.max(260, height);
   const W = Math.max(1, w - pad.l - pad.r);
   const H = Math.max(1, h - pad.t - pad.b);
 
@@ -139,15 +140,16 @@ function ChartSVG({
     const idx = Math.round(x.invert(clamped));
     setHoverIdx(Math.max(0, Math.min(N - 1, idx)));
   };
-  const onLeave = () => {
-    setHoverX(null);
-    setHoverIdx(null);
-  };
-
+  const onLeave = () => { setHoverX(null); setHoverIdx(null); };
   const hover = hoverIdx != null ? rows[hoverIdx] : null;
 
   return (
     <svg width={w} height={h} className="select-none">
+      <defs>
+        <clipPath id="plot-clip">
+          <rect x="0" y="0" width={W} height={H} />
+        </clipPath>
+      </defs>
       <g transform={`translate(${pad.l},${pad.t})`}>
         {/* grid */}
         {yTicksL.map((t, i) => (
@@ -161,7 +163,7 @@ function ChartSVG({
 
         {/* axes */}
         {yTicksL.map((t, i) => (
-          <text key={`yl-${i}`} x={-10} y={yL(t)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={12}>
+          <text key={`yl-${i}`} x={-12} y={yL(t)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={12}>
             {t.toFixed(1)}
           </text>
         ))}
@@ -169,7 +171,7 @@ function ChartSVG({
           ? [...Array(yTicksR)].map((_, i) => {
               const v = pMin - padP + ((pMax + padP - (pMin - padP)) * i) / (yTicksR - 1);
               return (
-                <text key={`yr-${i}`} x={W + 8} y={yR(v)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={12}>
+                <text key={`yr-${i}`} x={W + 10} y={yR(v)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={12}>
                   {Math.round(v)}
                 </text>
               );
@@ -177,7 +179,7 @@ function ChartSVG({
           : null}
         {rows.map((r, i) =>
           i % monthEvery === 0 ? (
-            <text key={`xl-${i}`} x={x(i)} y={H + 18} textAnchor="middle" className="fill-neutral-500" fontSize={12}>
+            <text key={`xl-${i}`} x={x(i)} y={H + 20} textAnchor="middle" className="fill-neutral-500" fontSize={12}>
               {monthTickLabel(r.d)}
             </text>
           ) : null
@@ -186,12 +188,14 @@ function ChartSVG({
         {/* zero line */}
         <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="#000" strokeOpacity={0.12} />
 
-        {/* series */}
-        {!separate && sPts.length ? (
-          <polyline points={pointsToPolyline(sPts)} fill="none" stroke="#6B5BFF" strokeOpacity={0.35} strokeWidth={1.5} />
-        ) : null}
-        {mPts.length ? <polyline points={pointsToPolyline(mPts)} fill="none" stroke="#10B981" strokeWidth={2} /> : null}
-        {pPts.length ? <polyline points={pointsToPolyline(pPts)} fill="none" stroke="#0EA5E9" strokeWidth={2} /> : null}
+        {/* series (clipped to plot) */}
+        <g clipPath="url(#plot-clip)">
+          {!separate && sPts.length ? (
+            <polyline points={pointsToPolyline(sPts)} fill="none" stroke="#6B5BFF" strokeOpacity={0.35} strokeWidth={1.5} />
+          ) : null}
+          {mPts.length ? <polyline points={pointsToPolyline(mPts)} fill="none" stroke="#10B981" strokeWidth={2} /> : null}
+          {pPts.length ? <polyline points={pointsToPolyline(pPts)} fill="none" stroke="#22C55E" strokeWidth={2} /> : null}
+        </g>
 
         {/* hover layer */}
         <rect x={0} y={0} width={W} height={H} fill="transparent" onMouseMove={onMove} onMouseLeave={onLeave} style={{ cursor: "crosshair" }} />
@@ -199,37 +203,15 @@ function ChartSVG({
           <>
             <line x1={hoverX} y1={0} x2={hoverX} y2={H} stroke="#000" strokeOpacity={0.15} />
             {Number.isFinite(hover.m as number) ? <circle cx={hoverX} cy={yL(hover.m as number)} r={3} fill="#10B981" /> : null}
-            {Number.isFinite(hover.p as number) ? <circle cx={hoverX} cy={yR(hover.p as number)} r={3} fill="#0EA5E9" /> : null}
-            <foreignObject x={Math.min(Math.max(hoverX + 10, 0), Math.max(0, W - 220))} y={10} width={220} height={96}>
+            {Number.isFinite(hover.p as number) ? <circle cx={hoverX} cy={yR(hover.p as number)} r={3} fill="#22C55E" /> : null}
+            <foreignObject x={Math.min(Math.max(hoverX + 10, 0), Math.max(0, W - 230))} y={10} width={230} height={98}>
               <div className="rounded-lg border bg-white/95 shadow-sm p-2 text-xs leading-5">
                 <div className="font-semibold mb-1">
-                  {(() => {
-                    try {
-                      const d = new Date(rows[hoverIdx!].d + "T00:00:00Z");
-                      return d.toLocaleDateString(undefined, { month: "short", day: "2-digit" });
-                    } catch {
-                      return rows[hoverIdx!].d;
-                    }
-                  })()}
+                  {(() => { try { const d = new Date(rows[hoverIdx!].d + "T00:00:00Z"); return d.toLocaleDateString(undefined, { month: "short", day: "2-digit", year: "2-digit" }); } catch { return rows[hoverIdx!].d; } })()}
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-neutral-600">Sentiment</span>
-                  <span className="font-medium" style={{ color: "#6B5BFF" }}>
-                    {Number.isFinite(hover.s as number) ? (hover.s as number).toFixed(2) : "—"}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-neutral-600">Sentiment (MA7)</span>
-                  <span className="font-medium" style={{ color: "#10B981" }}>
-                    {Number.isFinite(hover.m as number) ? (hover.m as number).toFixed(2) : "—"}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-neutral-600">Stock Price</span>
-                  <span className="font-medium" style={{ color: "#0EA5E9" }}>
-                    {Number.isFinite(hover.p as number) ? (hover.p as number).toFixed(2) : "—"}
-                  </span>
-                </div>
+                <div className="flex items-center justify-between"><span className="text-neutral-600">Sentiment</span><span className="font-medium" style={{ color: "#6B5BFF" }}>{Number.isFinite(hover.s as number) ? (hover.s as number).toFixed(2) : "—"}</span></div>
+                <div className="flex items-center justify-between"><span className="text-neutral-600">Sentiment (MA7)</span><span className="font-medium" style={{ color: "#10B981" }}>{Number.isFinite(hover.m as number) ? (hover.m as number).toFixed(2) : "—"}</span></div>
+                <div className="flex items-center justify-between"><span className="text-neutral-600">Stock Price</span><span className="font-medium" style={{ color: "#22C55E" }}>{Number.isFinite(hover.p as number) ? (hover.p as number).toFixed(2) : "—"}</span></div>
               </div>
             </foreignObject>
           </>
@@ -239,28 +221,17 @@ function ChartSVG({
   );
 }
 
-export default function LineChart({
-  mode,
-  dates,
-  price,
-  sentiment,
-  sentimentMA7,
-  height = 480,
-}: Props) {
+export default function LineChart({ mode, dates, price, sentiment, sentimentMA7, height = 480 }: Props) {
   const rows = useMemo(() => buildRows(dates, price, sentiment, sentimentMA7), [dates, price, sentiment, sentimentMA7]);
   const { ref, width } = useMeasure();
 
   if (!rows.length) {
-    return (
-      <div className="w-full grid place-items-center text-neutral-400 text-sm" style={{ height }}>
-        No chart data.
-      </div>
-    );
+    return <div className="w-full grid place-items-center text-neutral-400 text-sm" style={{ height }}>No chart data.</div>;
   }
 
   if (mode === "overlay") {
     return (
-      <div ref={ref} className="w-full" style={{ height }}>
+      <div ref={ref} className="w-full overflow-hidden" style={{ height }}>
         <ChartSVG width={width} height={height} rows={rows} />
         <Legend />
       </div>
@@ -270,7 +241,7 @@ export default function LineChart({
   const h1 = Math.max(220, Math.floor(height * 0.58));
   const h2 = Math.max(200, Math.floor(height * 0.42));
   return (
-    <div ref={ref} className="w-full space-y-6">
+    <div ref={ref} className="w-full space-y-6 overflow-hidden">
       <ChartSVG width={width} height={h1} rows={rows} separate />
       <ChartSVG width={width} height={h2} rows={rows} />
       <Legend />
