@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import LineChart from "../../components/LineChart";  // ← fixed import path
+import LineChart from "../../../components/LineChart";  // ← fixed import path
 
 export type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
 export type NewsItem = { ts: string; title: string; url: string; text?: string };
