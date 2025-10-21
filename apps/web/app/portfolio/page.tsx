@@ -2,7 +2,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import LineChart from "../../../components/LineChart";
+import LineChart from "../../components/LineChart";
 
 export type SeriesIn = { date: string[]; price: number[]; sentiment: number[]; };
 export type NewsItem = { ts: string; title: string; url: string; text?: string };
