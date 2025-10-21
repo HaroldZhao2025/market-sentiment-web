@@ -46,13 +46,9 @@ function monthTickLabel(d: string) {
   }
 }
 
+// IMPORTANT: build to the full dates length (do NOT truncate to min length)
 function buildRows(dates: string[], price?: number[], s?: number[], m?: number[]) {
-  const n = Math.min(
-    dates.length,
-    price?.length ?? dates.length,
-    s?.length ?? dates.length,
-    m?.length ?? dates.length
-  );
+  const n = dates.length;
   return Array.from({ length: n }, (_, i) => ({
     d: dates[i] ?? "",
     p: Number.isFinite(Number(price?.[i])) ? Number(price?.[i]) : null,
@@ -93,9 +89,9 @@ function ChartSVG({
   showLegend?: boolean;
 }) {
   // layout
-  const pad = { t: 14, r: 64, b: 28, l: 46 };
+  const pad = { t: 18, r: 66, b: 34, l: 50 };
   const w = Math.max(320, width);
-  const h = Math.max(220, height);
+  const h = Math.max(260, height);
   const W = w - pad.l - pad.r;
   const H = h - pad.t - pad.b;
 
@@ -156,15 +152,15 @@ function ChartSVG({
           ) : null
         )}
 
-        {/* axes labels */}
-        <text x={-36} y={-6} textAnchor="start" className="fill-neutral-500 text-[11px]">Sentiment</text>
+        {/* axis labels */}
+        <text x={-36} y={-8} textAnchor="start" className="fill-neutral-500 text-[11px]">Sentiment</text>
         {pVals.length ? (
-          <text x={W + 6} y={-6} textAnchor="start" className="fill-neutral-500 text-[11px]">Price</text>
+          <text x={W + 6} y={-8} textAnchor="start" className="fill-neutral-500 text-[11px]">Price</text>
         ) : null}
 
         {/* left sentiment ticks */}
         {yTicksL.map((t, i) => (
-          <text key={`yl-${i}`} x={-8} y={yL(t)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>
+          <text key={`yl-${i}`} x={-10} y={yL(t)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>
             {t.toFixed(1)}
           </text>
         ))}
@@ -173,26 +169,26 @@ function ChartSVG({
           ? [...Array(yTicksR)].map((_, i) => {
               const v = pMin - padP + ((pMax + padP - (pMin - padP)) * i) / (yTicksR - 1);
               return (
-                <text key={`yr-${i}`} x={W + 6} y={yR(v)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>
+                <text key={`yr-${i}`} x={W + 8} y={yR(v)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>
                   {Math.round(v)}
                 </text>
               );
             })
           : null}
 
-        {/* x labels */}
+        {/* x month labels */}
         {[...Array(N)].map((_, i) =>
           i % monthEvery === 0 ? (
-            <text key={`xl-${i}`} x={x(i)} y={H + 16} textAnchor="middle" className="fill-neutral-500" fontSize={11}>
+            <text key={`xl-${i}`} x={x(i)} y={H + 18} textAnchor="middle" className="fill-neutral-500" fontSize={11}>
               {monthTickLabel(rows[i]?.d || "")}
             </text>
           ) : null
         )}
 
         {/* zero line for sentiment */}
-        <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="currentColor" strokeOpacity={0.25} />
+        <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="currentColor" strokeOpacity={0.28} />
 
-        {/* sentiment bars (overlay mode) */}
+        {/* sentiment impulse bars (overlay mode) */}
         {!separate &&
           rows.map((r, i) =>
             Number.isFinite(r.s as number) ? (
@@ -214,9 +210,12 @@ function ChartSVG({
           <polyline points={pointsToPolyline(mPts)} fill="none" stroke="#6F42C1" strokeWidth={2} />
         ) : null}
 
-        {/* price line */}
+        {/* price line + head markers */}
         {pPts.length ? (
-          <polyline points={pointsToPolyline(pPts)} fill="none" stroke="#10B981" strokeWidth={2} />
+          <>
+            <polyline points={pointsToPolyline(pPts)} fill="none" stroke="#10B981" strokeWidth={2} />
+            {pPts.map((pt, i) => (i % Math.max(1, Math.floor(N / 60)) === 0 ? <circle key={`pm-${i}`} cx={pt.x} cy={pt.y} r={2} fill="#10B981" /> : null))}
+          </>
         ) : null}
 
         {/* legend */}
@@ -247,17 +246,20 @@ function ChartSVG({
         {hover != null ? (
           <>
             <line x1={x(hover)} x2={x(hover)} y1={0} y2={H} stroke="#111827" strokeOpacity={0.25} />
-            {/* tooltip box */}
-            <g transform={`translate(${Math.min(Math.max(8, x(hover) + 10), W - 180)},${8})`}>
-              <rect width={180} height={70} rx={8} fill="#ffffff" stroke="#e5e7eb" />
-              <text x={10} y={18} className="fill-neutral-900" fontSize={12} fontWeight={600}>
+            {/* marker circles at hover */}
+            {Number.isFinite(rows[hover]?.m as number) ? <circle cx={x(hover)} cy={yL(rows[hover]?.m as number)} r={3} fill="#6F42C1" /> : null}
+            {Number.isFinite(rows[hover]?.p as number) ? <circle cx={x(hover)} cy={yR(rows[hover]?.p as number)} r={3} fill="#10B981" /> : null}
+            {/* tooltip */}
+            <g transform={`translate(${Math.min(Math.max(8, x(hover) + 12), W - 200)},${10})`}>
+              <rect width={200} height={76} rx={10} fill="#ffffff" stroke="#e5e7eb" />
+              <text x={12} y={20} className="fill-neutral-900" fontSize={12} fontWeight={700}>
                 {new Date((rows[hover]?.d || "") + "T00:00:00Z").toLocaleDateString()}
               </text>
-              <text x={10} y={36} className="fill-neutral-700" fontSize={12}>
+              <text x={12} y={38} className="fill-neutral-700" fontSize={12}>
                 Sentiment: {(rows[hover]?.s ?? 0).toFixed(2)}
               </text>
               {pPts.length ? (
-                <text x={10} y={54} className="fill-neutral-700" fontSize={12}>
+                <text x={12} y={56} className="fill-neutral-700" fontSize={12}>
                   Price: {Number(rows[hover]?.p ?? 0).toFixed(2)}
                 </text>
               ) : null}
@@ -275,7 +277,7 @@ export default function LineChart({
   price,
   sentiment,
   sentimentMA7,
-  height = 420,
+  height = 460,
 }: Props) {
   const rows = useMemo(() => buildRows(dates, price, sentiment, sentimentMA7), [dates, price, sentiment, sentimentMA7]);
   const { ref, width } = useMeasure();
@@ -297,8 +299,8 @@ export default function LineChart({
   }
 
   // separate -> stack sentiment (with MA) then price
-  const h1 = Math.max(200, Math.floor(height * 0.58));
-  const h2 = Math.max(160, Math.floor(height * 0.42));
+  const h1 = Math.max(220, Math.floor(height * 0.58));
+  const h2 = Math.max(180, Math.floor(height * 0.42));
   return (
     <div ref={ref} className="w-full space-y-4 overflow-visible">
       <ChartSVG width={width} height={h1} rows={rows} separate />
