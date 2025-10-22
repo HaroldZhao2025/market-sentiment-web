@@ -18,6 +18,7 @@ from market_sentiment.aggregate import (
 )
 from market_sentiment.finbert import FinBERT  # optional — handled defensively
 from market_sentiment.news import fetch_news
+from market_sentiment.news_finnhub_daily import fetch_finnhub_daily_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
 
@@ -135,12 +136,11 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    # Non-Finnhub providers are capped to 240 by requirement.
     p.add_argument("--news-per-provider", type=int, default=240,
-                   help="Per-provider cap for NON-Finnhub sources (Finnhub uncapped; date-windowed).")
+                   help="Per-provider cap for NON-Finnhub sources (Finnhub is per-day, uncapped by count).")
+    p.add_argument("--skip-yfinance", action="store_true", help="If set, do not union yfinance.get_news results.")
     a = p.parse_args()
 
-    # Visibility: show whether Finnhub credential is set
     token_present = any((os.environ.get(k) or "").strip() for k in ("FINNHUB_TOKEN", "FINNHUB_API_KEY", "FINNHUB_KEY"))
     print(f"Finnhub token: {'detected' if token_present else 'NOT set'}")
 
@@ -165,7 +165,7 @@ def main():
     print(f"  ✓ Downloaded prices for {prices['ticker'].nunique()} tickers, {len(prices)} rows.")
 
     # -------- News --------
-    print("News+Earnings:")
+    print("News:")
     try:
         fb = FinBERT()
     except Exception:
@@ -174,22 +174,34 @@ def main():
     news_all: List[pd.DataFrame] = []
     for t in tickers:
         comp = _best_effort_company(t)
-        try:
-            # Finnhub first (uncapped by count, exact API call, iterated by month);
-            # all other providers capped to <= 240.
-            n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
-            if (n is None or n.empty) and comp:
-                n = fetch_news(t, a.start, a.end, company=None, max_per_provider=a.news_per_provider)
-        except Exception:
-            n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
+        # 1) Finnhub per-day (exact sample call)
+        n_fh = fetch_finnhub_daily_news(t, a.start, a.end)
+
+        # 2) yfinance.get_news(count=240, tab="all") + other capped sources (optional)
+        n_other = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+        try:
+            if not a.skip_yfinance:
+                n_other = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
+        except Exception:
+            pass
+
+        # Union & de-dup
+        if n_fh is None or n_fh.empty:
+            n = n_other
+        elif n_other is None or n_other.empty:
+            n = n_fh
+        else:
+            n = pd.concat([n_fh, n_other], ignore_index=True).drop_duplicates(["title", "url"]).sort_values("ts")
+
+        # Logging
         if n is None or n.empty:
             print(f"  {t}: news rows=0 | days=0 | company={'-' if not comp else comp}")
         else:
-            dcount = n["ts"].dt.date.nunique() if "ts" in n.columns else 0
+            dcount = n["ts"].dt.tz_convert("UTC").dt.date.nunique() if "ts" in n.columns else 0
             print(f"  {t}: news rows={len(n)} | days={dcount} | company={'-' if not comp else comp}")
 
-        # Score with FinBERT (robust to absence)
+        # Score with FinBERT per article
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
 
@@ -199,27 +211,19 @@ def main():
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # (Optional) earnings placeholder
-    earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
-
     # -------- Daily sentiment aggregation --------
+    # This will average per-day per-ticker FinBERT scores (plus any non-Finnhub rows)
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
-    d_earn = (
-        daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
-        if not earn_rows.empty else
-        pd.DataFrame(columns=["date", "ticker", "S_EARN"])
-    )
+    d_earn = pd.DataFrame(columns=["date", "ticker", "S_EARN"])  # placeholder
 
     if not d_news.empty:
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce").dt.tz_localize(None)
-    if not d_earn.empty:
-        d_earn["date"] = pd.to_datetime(d_earn["date"], utc=True, errors="coerce").dt.tz_localize(None)
 
     daily = join_and_fill_daily(d_news, d_earn)
     if "S" not in daily.columns:
-        s_news = pd.to_numeric(daily.get("S_NEWS", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
-        s_earn = pd.to_numeric(daily.get("S_EARN", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
-        daily["S"] = s_news + s_earn
+        daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
+        daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
+        daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
 
     # -------- Emit site artifacts --------
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
@@ -228,9 +232,9 @@ def main():
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    write_outputs(panel, news_rows, earn_rows, a.out)
+    write_outputs(panel, news_rows, None, a.out)
 
-    # Summary from outputs
+    # -------- Summary from outputs --------
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
     print("Summary:")
     print(f"  Tickers listed: {len(tickers_list)}")
