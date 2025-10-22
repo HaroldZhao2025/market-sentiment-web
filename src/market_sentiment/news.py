@@ -12,26 +12,25 @@ import feedparser
 import requests
 import yfinance as yf
 
-# Finnhub SDK:
-#   pip install finnhub-python
+# Finnhub: pip install finnhub (or finnhub-python) ; usage MUST match:
 #   import finnhub
-#   finnhub.Client(api_key="...").company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+#   finnhub_client = finnhub.Client(api_key="xxxx")
+#   finnhub_client.company_news('AAPL', _from="2025-06-01", to="2025-06-30")
 try:
-    import finnhub  # type: ignore
+    import finnhub  # noqa: F401
 except Exception:
     finnhub = None
 
-# --------------------------------------------------------------------
+# ------------------------
 # Helpers
-# --------------------------------------------------------------------
+# ------------------------
 
 def _clean_text(x) -> str:
     try:
         s = str(x)
     except Exception:
         return ""
-    s = " ".join(s.split())
-    return s
+    return " ".join(s.split())
 
 def _first_str(*candidates) -> str:
     for v in candidates:
@@ -71,8 +70,7 @@ def _norm_ts_utc(x) -> pd.Timestamp:
 
     # generic parse
     try:
-        ts = pd.to_datetime(x, utc=True, errors="coerce")
-        return ts
+        return pd.to_datetime(x, utc=True, errors="coerce")
     except Exception:
         return pd.NaT
 
@@ -105,68 +103,68 @@ def _retry(fn, tries=2, delay=0.8):
             time.sleep(delay)
 
 def _month_windows(start: str, end: str):
+    """Yield [start_of_month, end_of_month] windows as strings 'YYYY-MM-DD'."""
     s = pd.Timestamp(start, tz="UTC").normalize()
     e = pd.Timestamp(end, tz="UTC").normalize()
     cur = s
     while cur <= e:
-        w_end = min((cur + pd.offsets.MonthEnd(0)), e)
-        yield cur, w_end
+        w_end = min(cur + pd.offsets.MonthEnd(0), e)
+        yield cur.date().isoformat(), w_end.date().isoformat()
         cur = (w_end + pd.Timedelta(days=1)).normalize()
 
 def _get_finnhub_key() -> Optional[str]:
-    # Primary: FINNHUB_TOKEN; Fallback: FINNHUB_API_KEY
-    key = os.environ.get("FINNHUB_TOKEN") or os.environ.get("FINNHUB_API_KEY")
-    key = (key or "").strip()
-    return key or None
+    # Primary per requirement: FINNHUB_TOKEN; also accept typical variants.
+    for k in ("FINNHUB_TOKEN", "FINNHUB_API_KEY", "FINNHUB_KEY"):
+        v = (os.environ.get(k) or "").strip()
+        if v:
+            return v
+    return None
 
-# --------------------------------------------------------------------
+# ------------------------
 # Providers
-# --------------------------------------------------------------------
+# ------------------------
 
 def _prov_finnhub(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 0
 ) -> pd.DataFrame:
     """
-    EXACTLY the official usage:
+    EXACT Finnhub usage (no count cap; we iterate by month with the same call):
         import finnhub
-        finnhub_client = finnhub.Client(api_key="...")
-        finnhub_client.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
-
-    Implementation detail:
-      • We call `company_news` **per month** across the range to ensure complete coverage.
-      • No item-count cap is applied here (limit arg ignored by design).
-      • If FINNHUB_TOKEN is missing or finnhub is not installed, return empty frame.
+        finnhub_client = finnhub.Client(api_key="xxxx")
+        finnhub_client.company_news('AAPL', _from="2025-06-01", to="2025-06-30")
     """
     if finnhub is None:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-    key = _get_finnhub_key()
-    if not key:
+    api_key = _get_finnhub_key()
+    if not api_key:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
     try:
-        client = finnhub.Client(api_key=key)
+        finnhub_client = finnhub.Client(api_key=api_key)
     except Exception:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
-    for ws, we in _month_windows(start, end):
-        s = ws.date().isoformat()
-        e = we.date().isoformat()
+    # Iterate by month to ensure full coverage over long ranges
+    for s, e in _month_windows(start, end):
         try:
-            data = client.company_news(ticker, _from=s, to=e) or []
+            data = finnhub_client.company_news(ticker, _from=s, to=e) or []
         except Exception:
             continue
-        for it in data:
-            ts   = _norm_ts_utc(it.get("datetime"))
-            head = _first_str(it.get("headline"))
-            url  = _first_str(it.get("url"))
-            summ = _first_str(it.get("summary"), head)
+        # Expect a list of dicts (as in the sample output)
+        for item in data:
+            ts = _norm_ts_utc(item.get("datetime"))
+            head = _first_str(item.get("headline"))
+            url  = _first_str(item.get("url"))
+            summ = _first_str(item.get("summary"), head)
             if pd.isna(ts) or not head:
                 continue
             rows.append((ts, head, url, summ or head))
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
+        # Light courtesy delay to avoid 429s on month-by-month loops
+        time.sleep(0.15)
+
+    return _window_filter(_mk_df(rows, ticker), start, end)
 
 
 def _prov_gdelt(
@@ -175,11 +173,11 @@ def _prov_gdelt(
     q = quote_plus((company or ticker).replace("&", " and "))
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     fetched = 0
-    for ws, we in _month_windows(start, end):
+    for s, e in _month_windows(start, end):
         if fetched >= limit:
             break
-        startdt = ws.strftime("%Y%m%d%H%M%S")
-        enddt   = (we + pd.Timedelta(hours=23, minutes=59, seconds=59)).strftime("%Y%m%d%H%M%S")
+        startdt = pd.Timestamp(s + "T00:00:00Z").strftime("%Y%m%d%H%M%S")
+        enddt   = pd.Timestamp(e + "T23:59:59Z").strftime("%Y%m%d%H%M%S")
         per = min(240, limit - fetched)
         url = (
             "https://api.gdeltproject.org/api/v2/doc/doc"
@@ -203,8 +201,7 @@ def _prov_gdelt(
         except Exception:
             continue
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
+    return _window_filter(_mk_df(rows, ticker), start, end)
 
 def _prov_yfinance(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
@@ -251,8 +248,7 @@ def _prov_yfinance(
                 continue
             rows.append((ts, title or text, link, text or title))
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
+    return _window_filter(_mk_df(rows, ticker), start, end)
 
 def _prov_google_rss(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
@@ -288,13 +284,14 @@ def _prov_google_rss(
 
     df = _consume(feed)
 
+    # Optional month split if coverage is thin and limit suggests depth
     if len(df) < 40 and int(limit) > 40:
         frames = []
-        for ws, we in _month_windows(start, end):
+        for s, e in _month_windows(start, end):
             if sum(len(x) for x in frames) >= int(limit):
                 break
             qp = f'"{ticker}"' + (f' OR "{company}"' if company else "")
-            qp = quote_plus(f"{qp} after:{ws.date()} before:{(we + pd.Timedelta(days=1)).date()}")
+            qp = quote_plus(f"{qp} after:{s} before:{pd.to_datetime(e) + pd.Timedelta(days=1):%Y-%m-%d}")
             url_m = f"https://news.google.com/rss/search?q={qp}&hl=en-US&gl=US&ceid=US:en"
             try:
                 feed_m = _retry(lambda: _get(url_m), tries=2, delay=0.6)
@@ -336,8 +333,7 @@ def _prov_yahoo_rss(
             continue
         rows.append((ts, title or text, link, text or title))
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
+    return _window_filter(_mk_df(rows, ticker), start, end)
 
 def _prov_nasdaq_rss(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
@@ -369,16 +365,15 @@ def _prov_nasdaq_rss(
             continue
         rows.append((ts, title or text, link, text or title))
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
+    return _window_filter(_mk_df(rows, ticker), start, end)
 
-# --------------------------------------------------------------------
+# ------------------------
 # Public API
-# --------------------------------------------------------------------
+# ------------------------
 
 Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
 
-# Finnhub first (uncapped by count); others capped to <= 240 each.
+# Finnhub first (no count cap); all others capped to <= 240.
 _PROVIDERS: List[Provider] = [
     _prov_finnhub,
     _prov_gdelt,
@@ -396,13 +391,12 @@ def fetch_news(
     max_per_provider: int = 240,
 ) -> pd.DataFrame:
     frames: List[pd.DataFrame] = []
-    cap = int(max_per_provider) if max_per_provider and max_per_provider > 0 else 240
     for prov in _PROVIDERS:
         try:
             if prov is _prov_finnhub:
-                df = prov(ticker, start, end, company, limit=0)      # uncapped by count
+                df = prov(ticker, start, end, company, limit=0)  # Finnhub uncapped by count
             else:
-                df = prov(ticker, start, end, company, limit=min(240, cap))  # <=240
+                df = prov(ticker, start, end, company, limit=min(240, int(max_per_provider or 240)))
         except Exception:
             df = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
         if not df.empty:
@@ -411,6 +405,6 @@ def fetch_news(
     if not frames:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-    df = pd.concat(frames, ignore_index=True)
-    df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
-    return df
+    out = pd.concat(frames, ignore_index=True)
+    out = out.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
+    return out
