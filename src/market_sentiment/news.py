@@ -1,3 +1,4 @@
+# src/market_sentiment/news.py
 from __future__ import annotations
 
 import os
@@ -7,11 +8,16 @@ from typing import Callable, List, Optional, Tuple
 import pandas as pd
 import yfinance as yf
 
+# Optional dependency (follow Finnhub docs)
 try:
-    import finnhub
+    import finnhub  # pip install finnhub-python
 except Exception:
     finnhub = None
 
+
+# ------------------------
+# Helpers
+# ------------------------
 
 def _clean_text(x) -> str:
     try:
@@ -21,33 +27,51 @@ def _clean_text(x) -> str:
     return " ".join(s.split())
 
 
-def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.DataFrame:
+def _norm_ts(x) -> pd.Timestamp:
+    """Accept epoch seconds/ms or ISO strings -> tz-aware UTC Timestamp."""
+    if x is None:
+        return pd.NaT
+    # epoch seconds / ms
+    try:
+        xi = int(x)
+        if xi > 10_000_000_000:
+            xi = xi / 1000.0
+        return pd.Timestamp.utcfromtimestamp(float(xi)).tz_localize("UTC")
+    except Exception:
+        pass
+    # generic parse
+    try:
+        return pd.to_datetime(x, utc=True, errors="coerce")
+    except Exception:
+        return pd.NaT
+
+
+def _mk_df(
+    rows: List[Tuple[pd.Timestamp, str, str, str, str]],
+    ticker: str,
+    keep_source: bool = False,
+) -> pd.DataFrame:
+    """
+    rows: (ts, title, url, text, src)
+    """
     if not rows:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-    df = pd.DataFrame(rows, columns=["ts", "title", "url", "text"])
+        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
+        return pd.DataFrame(columns=cols)
+
+    df = pd.DataFrame(rows, columns=["ts", "title", "url", "text", "src"])
     df["ticker"] = ticker
     df = df.dropna(subset=["ts"])
     df["title"] = df["title"].map(_clean_text)
     df["text"] = df["text"].map(_clean_text)
     df["url"] = df["url"].fillna("")
-    df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
-    return df[["ticker", "ts", "title", "url", "text"]]
 
+    # Deduplicate on (title,url)
+    df = df.sort_values("ts").drop_duplicates(["title", "url"]).reset_index(drop=True)
 
-def _norm_ts_epoch_or_iso(x) -> pd.Timestamp:
-    if x is None:
-        return pd.NaT
-    try:
-        xi = int(x)
-        if xi > 10_000_000_000:
-            xi = xi / 1000.0
-        return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
-    except Exception:
-        pass
-    try:
-        return pd.to_datetime(x, utc=True, errors="coerce")
-    except Exception:
-        return pd.NaT
+    cols = ["ticker", "ts", "title", "url", "text"]
+    if keep_source:
+        cols.append("src")
+    return df[cols]
 
 
 def _window_filter(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
@@ -58,28 +82,44 @@ def _window_filter(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
     return df[(df["ts"] >= s) & (df["ts"] <= e)].copy()
 
 
-def _prov_finnhub(
+# ------------------------
+# Providers
+# ------------------------
+
+def _prov_finnhub_daily(
     ticker: str,
     start: str,
     end: str,
-    company: Optional[str] = None,
-    limit: int = 240,
+    *,
+    rps_env: str = "FINNHUB_RPS",
+    keep_source: bool = False,
 ) -> pd.DataFrame:
+    """
+    EXACT Finnhub usage per docs:
+        import finnhub
+        client = finnhub.Client(api_key="...")
+        client.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+    We call this ONCE PER DAY across the full range to guarantee daily coverage.
+    Rate limited by FINNHUB_RPS (default 10; hard-capped at 30).
+    """
     token = (
         os.getenv("FINNHUB_TOKEN")
         or os.getenv("FINNHUB_API_KEY")
         or os.getenv("FINNHUB_KEY")
     )
     if finnhub is None or not token:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
+        return pd.DataFrame(columns=cols)
 
     try:
         client = finnhub.Client(api_key=token)
     except Exception:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
+        return pd.DataFrame(columns=cols)
 
+    # Throttle (requests per second)
     try:
-        rps = int(os.getenv("FINNHUB_RPS", "10"))
+        rps = int(os.getenv(rps_env, "10"))
     except Exception:
         rps = 10
     rps = max(1, min(30, rps))
@@ -89,15 +129,16 @@ def _prov_finnhub(
     e = pd.Timestamp(end, tz="UTC").normalize()
     days = list(pd.date_range(s, e, freq="D", tz="UTC"))
 
-    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    rows: List[Tuple[pd.Timestamp, str, str, str, str]] = []
     last = 0.0
 
     for d in days:
-        day_str = d.date().isoformat()
+        day_str = d.date().isoformat()  # 'YYYY-MM-DD'
+        # rate-limit
         now = time.time()
-        gap = (last + min_gap) - now
-        if gap > 0:
-            time.sleep(gap)
+        delay = (last + min_gap) - now
+        if delay > 0:
+            time.sleep(delay)
         last = time.time()
 
         arr = None
@@ -111,7 +152,7 @@ def _prov_finnhub(
             arr = []
 
         for it in arr:
-            ts = _norm_ts_epoch_or_iso(it.get("datetime"))
+            ts = _norm_ts(it.get("datetime"))
             if pd.isna(ts):
                 continue
             title = _clean_text(it.get("headline") or "")
@@ -119,21 +160,27 @@ def _prov_finnhub(
                 continue
             url = it.get("url") or ""
             text = _clean_text(it.get("summary") or title)
-            rows.append((ts, title, url, text))
+            rows.append((ts, title, url, text, "finnhub"))
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
+    return _window_filter(_mk_df(rows, ticker, keep_source), start, end)
 
 
-def _prov_yfinance(
+def _prov_yfinance_all(
     ticker: str,
     start: str,
     end: str,
-    company: Optional[str] = None,
-    limit: int = 240,
+    *,
+    count: int = 240,
+    keep_source: bool = False,
 ) -> pd.DataFrame:
-    cnt = max(1, min(int(limit or 240), 240))
-    rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    """
+    Yahoo Finance via yfinance:
+        t = yf.Ticker("MSFT")
+        items = t.get_news(count=240, tab="all")
+    Fallback to .news if get_news unavailable.
+    """
+    cnt = max(1, min(int(count or 240), 240))
+    rows: List[Tuple[pd.Timestamp, str, str, str, str]] = []
     try:
         t = yf.Ticker(ticker)
         if hasattr(t, "get_news"):
@@ -145,10 +192,11 @@ def _prov_yfinance(
 
     for it in items:
         content = it.get("content") if isinstance(it, dict) else None
-        ts = _norm_ts_epoch_or_iso(
+
+        # Best-effort time extraction
+        ts = _norm_ts(
             (it.get("providerPublishTime") if isinstance(it, dict) else None)
             or (it.get("provider_publish_time") if isinstance(it, dict) else None)
-            or (it.get("published_at") if isinstance(it, dict) else None)
             or (content or {}).get("displayTime")
             or (content or {}).get("published")
             or (content or {}).get("pubDate")
@@ -167,55 +215,41 @@ def _prov_yfinance(
             or it.get("url")
             or ""
         )
-        summary = _clean_text(
+        text = _clean_text(
             (content or {}).get("summary")
             or (content or {}).get("description")
             or it.get("summary")
             or title
         )
-        rows.append((ts, title, link, summary))
+        rows.append((ts, title, link, text, "yfinance"))
 
-    df = _mk_df(rows, ticker)
-    return _window_filter(df, start, end)
-
-
-# (other providers kept as empty stubs for compatibility)
-def _prov_google_rss(*args, **kwargs) -> pd.DataFrame:
-    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-def _prov_yahoo_rss(*args, **kwargs) -> pd.DataFrame:
-    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-def _prov_nasdaq_rss(*args, **kwargs) -> pd.DataFrame:
-    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-def _prov_gdelt(*args, **kwargs) -> pd.DataFrame:
-    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+    return _window_filter(_mk_df(rows, ticker, keep_source), start, end)
 
 
-Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
-
-_PROVIDERS: List[Provider] = [
-    _prov_finnhub,   # day-by-day (required)
-    _prov_yfinance,  # newest ~200
-]
+# Public types/registry (keep minimal and exact)
+Provider = Callable[..., pd.DataFrame]
+PROVIDERS: List[Provider] = []  # not used by default path; we fetch explicitly
 
 
 def fetch_news(
     ticker: str,
     start: str,
     end: str,
-    company: str | None = None,
-    max_per_provider: int = 240,
+    *,
+    finnhub_rps_env: str = "FINNHUB_RPS",
+    yfinance_count: int = 240,
+    keep_source: bool = False,
 ) -> pd.DataFrame:
-    frames: List[pd.DataFrame] = []
-    for prov in _PROVIDERS:
-        try:
-            df = prov(ticker, start, end, company, max_per_provider)
-        except Exception:
-            df = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-        if not df.empty:
-            frames.append(df)
+    """
+    Merge Finnhub (day-by-day) + yfinance(count=240) for full coverage, de-duped.
+    """
+    df_fh = _prov_finnhub_daily(ticker, start, end, rps_env=finnhub_rps_env, keep_source=keep_source)
+    df_yf = _prov_yfinance_all(ticker, start, end, count=yfinance_count, keep_source=keep_source)
 
+    frames = [df for df in (df_fh, df_yf) if df is not None and not df.empty]
     if not frames:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
+        return pd.DataFrame(columns=cols)
 
     out = pd.concat(frames, ignore_index=True)
     out["url"] = out["url"].fillna("")
