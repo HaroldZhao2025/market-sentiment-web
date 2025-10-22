@@ -6,20 +6,18 @@ import time
 from typing import Callable, List, Optional, Tuple
 
 import pandas as pd
-
-# yfinance (pip: yfinance)
 import yfinance as yf
 
-# finnhub (pip: finnhub-python ; import name: finnhub)
+# Finnhub official SDK (pip name: finnhub-python; import name: finnhub)
 try:
     import finnhub
-except Exception:
+except Exception:  # keep import safe in CI
     finnhub = None
 
 
-# --------------------------------------------------------------------
-# Common helpers
-# --------------------------------------------------------------------
+# =========================================================
+# Small helpers
+# =========================================================
 
 def _clean_text(x) -> str:
     try:
@@ -44,7 +42,7 @@ def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.Da
 
 def _norm_ts_epoch_or_iso(x) -> pd.Timestamp:
     """
-    Accepts epoch seconds or ISO8601 strings; returns tz-aware UTC or NaT.
+    Accepts epoch seconds or ISO strings; returns tz-aware UTC Timestamp or NaT.
     """
     if x is None:
         return pd.NaT
@@ -56,7 +54,7 @@ def _norm_ts_epoch_or_iso(x) -> pd.Timestamp:
         return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
     except Exception:
         pass
-    # ISO
+    # ISO8601
     try:
         return pd.to_datetime(x, utc=True, errors="coerce")
     except Exception:
@@ -71,25 +69,27 @@ def _window_filter(df: pd.DataFrame, start: str, end: str) -> pd.DataFrame:
     return df[(df["ts"] >= s) & (df["ts"] <= e)].copy()
 
 
-# --------------------------------------------------------------------
-# Providers (the smoke test imports these by name)
+# =========================================================
+# Providers (keep these names for your smoke test)
 #   Signature: (ticker, start, end, company, limit) -> DataFrame
-# --------------------------------------------------------------------
+# =========================================================
 
 def _prov_finnhub(
     ticker: str,
     start: str,
     end: str,
     company: Optional[str] = None,
-    limit: int = 240,  # not used for Finnhub (per-day API), kept for signature compatibility
+    limit: int = 240,  # Finnhub uses day-by-day windows; limit kept for signature consistency
 ) -> pd.DataFrame:
     """
-    EXACT logic:
-        import finnhub
-        c = finnhub.Client(api_key="...")
-        c.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+    EXACT Finnhub usage per your spec:
 
-    We iterate day-by-day, with a safe rate limit (default 10 rps; hard cap 30 rps).
+        import finnhub
+        finnhub_client = finnhub.Client(api_key=TOKEN)
+        finnhub_client.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+
+    We iterate day-by-day across [start, end] with a strict rate-limit
+    (default 10 rps, configurable via FINNHUB_RPS, never > 30).
     """
     token = (
         os.getenv("FINNHUB_TOKEN")
@@ -104,12 +104,12 @@ def _prov_finnhub(
     except Exception:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-    # throttle: rps <= 30 (we choose 10 rps by default)
-    rps_env = os.getenv("FINNHUB_RPS")
+    # 30 rps limit => we default to 10 rps for safety; configurable via FINNHUB_RPS
     try:
-        rps = max(1, min(30, int(rps_env))) if rps_env else 10
+        rps = int(os.getenv("FINNHUB_RPS", "10"))
     except Exception:
         rps = 10
+    rps = max(1, min(30, rps))
     min_gap = 1.0 / float(rps)
 
     s = pd.Timestamp(start, tz="UTC").normalize()
@@ -122,9 +122,9 @@ def _prov_finnhub(
     for d in days:
         day_str = d.date().isoformat()
 
-        # simple rate limiter
+        # rate limit
         now = time.time()
-        wait = max(0.0, (last + min_gap) - now)
+        wait = (last + min_gap) - now
         if wait > 0:
             time.sleep(wait)
         last = time.time()
@@ -156,18 +156,20 @@ def _prov_yfinance(
     limit: int = 240,
 ) -> pd.DataFrame:
     """
-    EXACT logic:
+    EXACT yfinance usage per your spec:
+
         t = yf.Ticker("MSFT")
-        items = t.get_news(count=240, tab="all")   # fallback to `.news` if needed
-    Then window-filter to [start, end].
+        items = t.get_news(count=240, tab="all")
+
+    Fallback to the legacy `.news` attribute if needed.
     """
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
-    count = max(1, min(int(limit or 240), 240))
+    cnt = max(1, min(int(limit or 240), 240))
 
     try:
         t = yf.Ticker(ticker)
         if hasattr(t, "get_news"):
-            items = t.get_news(count=count, tab="all") or []
+            items = t.get_news(count=cnt, tab="all") or []
         else:
             items = getattr(t, "news", None) or []
     except Exception:
@@ -179,9 +181,9 @@ def _prov_yfinance(
             (it.get("providerPublishTime") if isinstance(it, dict) else None)
             or (it.get("provider_publish_time") if isinstance(it, dict) else None)
             or (it.get("published_at") if isinstance(it, dict) else None)
-            or (content or {}).get("pubDate")
-            or (content or {}).get("displayTime")
             or (content or {}).get("published")
+            or (content or {}).get("displayTime")
+            or (content or {}).get("pubDate")
         )
         if pd.isna(ts):
             continue
@@ -213,9 +215,7 @@ def _prov_yfinance(
     return _window_filter(df, start, end)
 
 
-# The following provider stubs keep your existing smoke test intact.
-# They return empty frames (you can swap in your previous implementations later).
-
+# Stubs for compatibility with your smoke test (return empty frames)
 def _prov_google_rss(ticker: str, start: str, end: str, company: Optional[str] = None, limit: int = 300) -> pd.DataFrame:
     return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
@@ -229,16 +229,16 @@ def _prov_gdelt(ticker: str, start: str, end: str, company: Optional[str] = None
     return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
 
-# --------------------------------------------------------------------
-# Public API that your build script uses
-# --------------------------------------------------------------------
+# =========================================================
+# Public aggregator (kept for existing callers)
+# =========================================================
 
 Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
 
 _PROVIDERS: List[Provider] = [
-    _prov_finnhub,     # freshest, day-by-day
-    _prov_yfinance,    # ~200 recent items
-    _prov_google_rss,  # stubs retained for compatibility / smoke test
+    _prov_finnhub,
+    _prov_yfinance,
+    _prov_google_rss,
     _prov_yahoo_rss,
     _prov_nasdaq_rss,
     _prov_gdelt,
@@ -253,7 +253,8 @@ def fetch_news(
     max_per_provider: int = 240,
 ) -> pd.DataFrame:
     """
-    Merge Finnhub + yfinance (plus stubs), de-dup by (title, url), keep within window.
+    Merge Finnhub (day-by-day) + yfinance (count=240, tab='all'), dedup by (title,url),
+    then window-filter. Other providers currently stubbed (you can swap your old ones back in).
     """
     frames: List[pd.DataFrame] = []
     for prov in _PROVIDERS:
