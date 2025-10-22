@@ -48,7 +48,7 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
         out["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
     except Exception:
         out["S"] = 0.0
-    # keep 4-decimal precision
+    # 4-decimal precision as requested
     out["S"] = out["S"].astype(float).round(4)
     return out
 
@@ -61,7 +61,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)
+            time.sleep(0.12)  # soften YF rate limits
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -126,10 +126,11 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    p.add_argument("--finnhub-rps", type=int, default=10, help="Requests per second for Finnhub (≤30)")
-    p.add_argument("--yf-count", type=int, default=240, help="yfinance get_news(count=...)")
+    p.add_argument("--news-per-provider", type=int, default=240,
+                   help="Max items per provider (yfinance uses this as count=, Finnhub is day-by-day).")
     a = p.parse_args()
 
+    # Universe
     uni = pd.read_csv(a.universe)
     if "ticker" not in uni.columns:
         uni = uni.rename(columns={uni.columns[0]: "ticker"})
@@ -145,7 +146,7 @@ def main():
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Prices for {prices['ticker'].nunique()} tickers, rows={len(prices)}")
 
-    # FinBERT (optional)
+    # FinBERT
     try:
         fb = FinBERT()
     except Exception:
@@ -154,21 +155,13 @@ def main():
     # News
     news_all: List[pd.DataFrame] = []
     for t in tickers:
-        comp = _best_effort_company(t)
+        _ = _best_effort_company(t)  # not used now, but kept for parity
         try:
-            n = fetch_news(
-                t,
-                a.start,
-                a.end,
-                finnhub_rps=a.finnhub_rps,
-                finnhub_max_days=None,
-                yf_count=a.yf_count,
-            )
+            n = fetch_news(t, a.start, a.end, company=None, max_per_provider=a.news_per_provider)
         except Exception:
             n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-
         days = 0 if n.empty else n["ts"].dt.date.nunique()
-        print(f"  {t}: news rows={len(n)} | days={days} | company={'-' if not comp else comp}")
+        print(f"  {t}: news rows={len(n)} | days={days}")
 
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
@@ -179,16 +172,15 @@ def main():
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # Aggregate daily sentiment
+    # Aggregate daily sentiment (4 decimals kept)
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
     if not d_news.empty:
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce").dt.tz_localize(None)
-        # keep 4-decimal precision
         for c in ("S_NEWS", "S"):
             if c in d_news.columns:
                 d_news[c] = pd.to_numeric(d_news[c], errors="coerce").fillna(0.0).round(4)
 
-    # no earnings yet, but keep shape
+    # no earnings yet
     d_earn = pd.DataFrame(columns=["date", "ticker", "S_EARN"])
 
     # Join with prices
@@ -204,8 +196,10 @@ def main():
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0).round(4)
 
-    write_outputs(panel, news_rows, d_earn, a.out)
+    # Write artifacts
+    write_outputs(panel, news_rows, None, a.out)
 
+    # Summary from files
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
     print("Summary:")
     print(f"  Tickers listed: {len(tickers_list)}")
