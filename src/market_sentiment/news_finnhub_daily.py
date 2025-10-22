@@ -4,29 +4,22 @@ from __future__ import annotations
 import os
 import time
 from typing import List, Tuple
+
 import pandas as pd
 
+# pip name: finnhub-python ; import name: finnhub
 try:
-    import finnhub  # pip install finnhub-python
-except Exception as e:
+    import finnhub
+except Exception:
     finnhub = None
 
 
-def _get_token() -> str | None:
-    for k in ("FINNHUB_TOKEN", "FINNHUB_API_KEY", "FINNHUB_KEY"):
-        v = os.environ.get(k)
-        if v and isinstance(v, str) and v.strip():
-            return v.strip()
-    return None
-
-
-def _epoch_to_utc_ts(x) -> pd.Timestamp:
+def _clean_text(x) -> str:
     try:
-        x = int(x)
-        # Finnhub 'datetime' is seconds (not ms)
-        return pd.to_datetime(x, unit="s", utc=True)
+        s = str(x)
     except Exception:
-        return pd.NaT
+        return ""
+    return " ".join(s.split())
 
 
 def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.DataFrame:
@@ -34,63 +27,95 @@ def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.Da
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
     df = pd.DataFrame(rows, columns=["ts", "title", "url", "text"])
     df["ticker"] = ticker
-    df = df.dropna(subset=["ts"]).drop_duplicates(["title", "url"])
-    df = df.sort_values("ts").reset_index(drop=True)
+    df = df.dropna(subset=["ts"])
+    df["title"] = df["title"].map(_clean_text)
+    df["text"] = df["text"].map(_clean_text)
+    # safe de-dup (URL can be missing)
+    df["url"] = df["url"].fillna("")
+    df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
     return df[["ticker", "ts", "title", "url", "text"]]
 
 
-def fetch_finnhub_daily_news(
+def _norm_ts_utc_epoch(x) -> pd.Timestamp:
+    """
+    Finnhub 'datetime' is seconds since epoch (UTC).
+    """
+    try:
+        xi = int(x)
+    except Exception:
+        return pd.NaT
+    try:
+        return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
+    except Exception:
+        return pd.NaT
+
+
+def fetch_finnhub_daily(
     ticker: str,
     start: str,
     end: str,
-    rps: float = 20.0,           # 20 req/s < 30 req/s Finnhub cap
-    max_retries: int = 3,
+    *,
+    rps: int = 10,            # MUST be <= 30 (Finnhub free is 30 req/sec)
+    max_days: int | None = None,
 ) -> pd.DataFrame:
     """
-    EXACT daily call per your requirement:
-        finnhub.Client(...).company_news(ticker, _from=YYYY-MM-DD, to=YYYY-MM-DD)
+    EXACT Finnhub usage (one request per day):
 
-    - Walks day-by-day [start, end] inclusive
-    - Global rate-limit via a fixed delay (1/rps)
-    - Retries with exponential backoff (handles HTTP 429 / transient faults)
+        import finnhub
+        c = finnhub.Client(api_key="...")
+        c.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+
+    We iterate each day from start..end, rate-limit to `rps`.
     """
-    token = _get_token()
+    token = (
+        os.getenv("FINNHUB_TOKEN")
+        or os.getenv("FINNHUB_API_KEY")
+        or os.getenv("FINNHUB_KEY")
+    )
     if finnhub is None or not token:
-        # Return empty, so the rest of the pipeline still works
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-    client = finnhub.Client(api_key=token)
+    try:
+        client = finnhub.Client(api_key=token)
+    except Exception:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-    s = pd.to_datetime(start, utc=True).normalize()
-    e = pd.to_datetime(end,   utc=True).normalize()
-    days = pd.date_range(s, e, freq="D", inclusive="both")
+    rps = max(1, min(30, int(rps)))
+    min_gap = 1.0 / float(rps)
 
-    delay = max(1.0 / max(rps, 1.0), 0.05)  # 0.05s => 20 req/s
+    s = pd.Timestamp(start, tz="UTC").normalize()
+    e = pd.Timestamp(end, tz="UTC").normalize()
+    days = list(pd.date_range(s, e, freq="D", tz="UTC"))
+    if max_days is not None and len(days) > max_days:
+        days = days[:max_days]
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
-    for day in days:
-        ds = day.date().isoformat()
-        de = ds  # per-day request
-        # retry loop
-        wait = 0.5
-        for attempt in range(max_retries):
-            try:
-                items = client.company_news(ticker, _from=ds, to=de) or []
-                for it in items:
-                    ts = _epoch_to_utc_ts(it.get("datetime"))
-                    title = str(it.get("headline") or "").strip()
-                    url = str(it.get("url") or "").strip()
-                    text = str(it.get("summary") or title).strip()
-                    if not title and not text:
-                        continue
-                    rows.append((ts, title or text, url, text or title))
-                break  # success
-            except Exception:
-                if attempt == max_retries - 1:
-                    # give up this day; continue to next day
-                    break
-                time.sleep(wait)
-                wait = min(wait * 2.0, 4.0)
-        time.sleep(delay)
+    last = 0.0
+
+    for d in days:
+        day = d.date().isoformat()
+
+        # simple rate limiter
+        now = time.time()
+        wait = max(0.0, (last + min_gap) - now)
+        if wait > 0:
+            time.sleep(wait)
+        last = time.time()
+
+        try:
+            arr = client.company_news(ticker, _from=day, to=day) or []
+        except Exception:
+            continue
+
+        for it in arr:
+            ts = _norm_ts_utc_epoch(it.get("datetime"))
+            if pd.isna(ts):
+                continue
+            title = _clean_text(it.get("headline") or "")
+            if not title:
+                continue
+            url = it.get("url") or ""
+            text = _clean_text(it.get("summary") or title)
+            rows.append((ts, title, url, text))
 
     return _mk_df(rows, ticker)
