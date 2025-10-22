@@ -13,6 +13,25 @@ type Props = {
 
 type Pt = { x: number; y: number };
 
+export function ChartLegend() {
+  return (
+    <div className="flex flex-wrap items-center gap-4 text-sm">
+      <div className="flex items-center gap-2">
+        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#6B5BFF" }} />
+        <span className="text-neutral-700">Sentiment</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#10B981" }} />
+        <span className="text-neutral-700">Sentiment (MA7)</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#0EA5E9" }} />
+        <span className="text-neutral-700">Price</span>
+      </div>
+    </div>
+  );
+}
+
 function useMeasure() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [w, setW] = useState(960);
@@ -62,25 +81,6 @@ function pointsToPolyline(pts: Pt[]) {
   return pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
 }
 
-function Legend() {
-  return (
-    <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
-      <div className="flex items-center gap-2">
-        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#6B5BFF" }} />
-        <span className="text-neutral-700">Sentiment</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#10B981" }} />
-        <span className="text-neutral-700">Sentiment (MA7)</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#0EA5E9" }} />
-        <span className="text-neutral-700">Price</span>
-      </div>
-    </div>
-  );
-}
-
 function ChartSVG({
   width,
   height,
@@ -101,7 +101,8 @@ function ChartSVG({
   const N = rows.length || 1;
   const x = scaleLinear([0, Math.max(0, N - 1)], [0, W]);
 
-  const yL = scaleLinear([1, -1], [0, H]); // sentiment fixed range
+  // L: Sentiment [-1, 1] / R: Price autoscale
+  const yL = scaleLinear([1, -1], [0, H]);
   const pVals = rows.map((r) => r.p).filter((v): v is number => Number.isFinite(v));
   const pMin = pVals.length ? Math.min(...pVals) : 0;
   const pMax = pVals.length ? Math.max(...pVals) : 1;
@@ -186,7 +187,7 @@ function ChartSVG({
         {mPts.length ? <polyline points={pointsToPolyline(mPts)} fill="none" stroke="#10B981" strokeWidth={2} /> : null}
         {pPts.length ? <polyline points={pointsToPolyline(pPts)} fill="none" stroke="#0EA5E9" strokeWidth={2} /> : null}
 
-        {/* hover */}
+        {/* hover layer */}
         <rect x={0} y={0} width={W} height={H} fill="transparent" onMouseMove={onMove} onMouseLeave={onLeave} style={{ cursor: "crosshair" }} />
         {hover && hoverX != null ? (
           <>
@@ -255,7 +256,6 @@ export default function LineChart({
     return (
       <div ref={ref} className="w-full">
         <ChartSVG width={width} height={height} rows={rows} />
-        <Legend />
       </div>
     );
   }
@@ -266,7 +266,6 @@ export default function LineChart({
     <div ref={ref} className="w-full space-y-6">
       <ChartSVG width={width} height={h1} rows={rows} separate />
       <ChartSVG width={width} height={h2} rows={rows} />
-      <Legend />
     </div>
   );
 }
