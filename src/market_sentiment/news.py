@@ -102,15 +102,16 @@ def _month_windows(start: str, end: str):
         cur = (w_end + pd.Timedelta(days=1)).normalize()
 
 # ------------------------
-# Providers (each capped to <= 240)
+# Providers (non-Finnhub; each capped to <= 240)
 # ------------------------
 
-def _prov_yfinance_getnews(
+def _prov_yfinance(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
 ) -> pd.DataFrame:
     """
-    EXACT call per your spec:
-        t = yf.Ticker(ticker).get_news(count=240, tab="all")
+    EXACT call you asked for:
+        t = yf.Ticker(ticker)
+        items = t.get_news(count=240, tab="all")
     """
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     try:
@@ -141,10 +142,6 @@ def _prov_yfinance_getnews(
 
     return _window_filter(_mk_df(rows, ticker), start, end)
 
-# Alias so the smoke test import works:
-def _prov_yfinance(ticker: str, start: str, end: str, company: str | None = None, limit: int = 240) -> pd.DataFrame:
-    return _prov_yfinance_getnews(ticker, start, end, company, limit)
-
 def _prov_google_rss(
     ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
 ) -> pd.DataFrame:
@@ -172,7 +169,6 @@ def _prov_google_rss(
         text  = _first_str(getattr(entry, "summary", None), getattr(entry, "description", None), title)
         if not title and not text: continue
         rows.append((ts, title or text, link, text or title))
-
     return _window_filter(_mk_df(rows, ticker), start, end)
 
 def _prov_yahoo_rss(
@@ -201,7 +197,6 @@ def _prov_yahoo_rss(
         text  = _first_str(getattr(entry, "summary", None), getattr(entry, "description", None), title)
         if not title and not text: continue
         rows.append((ts, title or text, link, text or title))
-
     return _window_filter(_mk_df(rows, ticker), start, end)
 
 def _prov_nasdaq_rss(
@@ -230,19 +225,11 @@ def _prov_nasdaq_rss(
         text  = _first_str(getattr(entry, "summary", None), getattr(entry, "description", None), title)
         if not title and not text: continue
         rows.append((ts, title or text, link, text or title))
-
     return _window_filter(_mk_df(rows, ticker), start, end)
 
-# ------------------------
-# Extra providers for smoke test compatibility
-# ------------------------
+# ---- Smoke-test compatibility shims ----
 
-def _prov_gdelt(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
-) -> pd.DataFrame:
-    """
-    Lightweight GDELT (month buckets), capped by `limit`.
-    """
+def _prov_gdelt(ticker: str, start: str, end: str, company: str | None = None, limit: int = 240) -> pd.DataFrame:
     q = quote_plus((company or ticker).replace("&", " and "))
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     fetched = 0
@@ -275,28 +262,22 @@ def _prov_gdelt(
             continue
     return _window_filter(_mk_df(rows, ticker), start, end)
 
-def _prov_finnhub(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
-) -> pd.DataFrame:
-    """
-    Wrapper so the workflow's smoke test can import `_prov_finnhub`.
-    Internally delegates to the exact per-day sample call implemented in news_finnhub_daily.fetch_finnhub_daily_news.
-    """
+def _prov_finnhub(ticker: str, start: str, end: str, company: str | None = None, limit: int = 240) -> pd.DataFrame:
+    # Delegates to daily per-day exact call implemented in news_finnhub_daily.py
     try:
         from .news_finnhub_daily import fetch_finnhub_daily_news
     except Exception:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-    return fetch_finnhub_daily_news(ticker, start, end)
+    return fetch_finnhub_daily_news(ticker, start, end, rps=20.0)
 
 # ------------------------
-# Public API
+# Public API (non-Finnhub aggregation)
 # ------------------------
 
 Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
 
-# Finnhub is invoked per-day in build_json.py; keep non-Finnhub providers here.
 _PROVIDERS: List[Provider] = [
-    _prov_yfinance_getnews,
+    _prov_yfinance,    # uses count=240, tab="all"
     _prov_google_rss,
     _prov_yahoo_rss,
     _prov_nasdaq_rss,
@@ -309,8 +290,8 @@ def fetch_news(
     company: str | None = None,
     max_per_provider: int = 240,
 ) -> pd.DataFrame:
-    frames: List[pd.DataFrame] = []
     cap = min(240, int(max_per_provider or 240))
+    frames: List[pd.DataFrame] = []
     for prov in _PROVIDERS:
         try:
             df = prov(ticker, start, end, company, limit=cap)
