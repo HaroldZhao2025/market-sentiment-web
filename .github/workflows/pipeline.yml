@@ -11,12 +11,18 @@ on:
         default: "sample"
         type: choice
         options: ["sample", "full"]
-      news_per_provider:
-        description: "Max news per provider (deep crawl)"
+      yfinance_count:
+        description: "Yahoo Finance items per ticker"
         required: false
-        default: "6000"
+        default: "240"
         type: choice
-        options: ["800", "2000", "4000", "6000", "8000"]
+        options: ["120", "180", "200", "220", "240"]
+      finnhub_rps:
+        description: "Finnhub requests per second (≤30)"
+        required: false
+        default: "10"
+        type: choice
+        options: ["5", "8", "10", "15", "20", "30"]
   schedule:
     - cron: "0 12 * * 1" # Mondays 12:00 UTC
 
@@ -33,8 +39,6 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  # Finnhub token for news.py providers (_prov_finnhub)
-  FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
 
 jobs:
   build:
@@ -66,9 +70,7 @@ jobs:
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           # Project deps
           pip install --no-cache-dir -r requirements.txt
-          # Explicit extras used in CI (some are already in requirements.txt)
-          pip install --no-cache-dir feedparser requests yfinance pandas_datareader lxml html5lib
-          # Ensure Finnhub SDK present: pip name is finnhub-python, import name is 'finnhub'
+          # Ensure Finnhub SDK present (pip name 'finnhub-python', import name 'finnhub')
           pip install --no-cache-dir finnhub-python
 
       - name: Configure HF cache
@@ -184,56 +186,29 @@ jobs:
           print(f"Wrote {len(uniq)} tickers to {outp}")
 
       # ---------- Smoke tests (debug news & prices) ----------
-      - name: Smoke test — AAPL news providers
+      - name: Smoke test — AAPL news (Finnhub daily + yfinance 240)
         env:
-          HF_HOME: ${{ env.HF_HOME }}
-          # news.py checks FINNHUB_TOKEN and FINNHUB_API_KEY (fallback)
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
-          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
         shell: python
         run: |
-          import pandas as pd
-          import yfinance as yf
-          from market_sentiment.news import (
-              _prov_finnhub, _prov_gdelt, _prov_google_rss, _prov_yahoo_rss, _prov_nasdaq_rss, _prov_yfinance, fetch_news
-          )
+          import os
+          from market_sentiment.news_finnhub_daily import fetch_finnhub_daily
+          from market_sentiment.news_yfinance import fetch_yfinance_recent
+          from market_sentiment.news import fetch_news
 
-          START="${{ env.START }}"; END="${{ env.END }}"
+          START=os.environ["START"]; END=os.environ["END"]
 
-          print("== yfinance raw count ==")
-          try:
-              raw = yf.Ticker("AAPL").news or []
-              print("yfinance.Ticker('AAPL').news:", len(raw))
-              if raw:
-                  print("first keys:", list(raw[0].keys())[:5])
-          except Exception as e:
-              print("yfinance error:", e)
+          df_fh = fetch_finnhub_daily("AAPL", START, END, rps=int(os.getenv("FINNHUB_RPS","10")))
+          df_yf = fetch_yfinance_recent("AAPL", START, END, count=int(os.getenv("YF_COUNT","240")))
+          print(f"finnhub  rows: {len(df_fh):5d} | days: {0 if df_fh.empty else df_fh['ts'].dt.date.nunique()}")
+          print(f"yfinance rows: {len(df_yf):5d} | days: {0 if df_yf.empty else df_yf['ts'].dt.date.nunique()}")
 
-          providers = [
-              ("finnhub", _prov_finnhub),
-              ("gdelt", _prov_gdelt),
-              ("google_rss", _prov_google_rss),
-              ("yahoo_rss", _prov_yahoo_rss),
-              ("nasdaq_rss", _prov_nasdaq_rss),
-              ("yfinance", _prov_yfinance),
-          ]
-          for name, fn in providers:
-              try:
-                  df = fn("AAPL", START, END, "Apple Inc.", 300)
-                  days = 0 if df.empty else df["ts"].dt.date.nunique()
-                  print(f"{name:10s} rows:{len(df):5d} | days: {days}")
-              except Exception as e:
-                  print(f"{name} error:", e)
-
-          try:
-              all_df = fetch_news("AAPL", START, END, "Apple Inc.", max_per_provider=600)
-              days = 0 if all_df.empty else all_df["ts"].dt.date.nunique()
-              print("fetch_news rows:", len(all_df))
-              print("fetch_news coverage days:", days)
-              if len(all_df):
-                  print(all_df[["ts","title"]].tail(3).to_string(index=False))
-          except Exception as e:
-              print("fetch_news error:", e)
+          merged = fetch_news("AAPL", START, END, yfinance_count=int(os.getenv("YF_COUNT","240")), finnhub_rps=int(os.getenv("FINNHUB_RPS","10")), keep_source=True)
+          days = 0 if merged.empty else merged["ts"].dt.date.nunique()
+          print("fetch_news rows:", len(merged))
+          print("fetch_news coverage days:", days)
+          if len(merged):
+              print(merged[["ts","title","url"]].tail(3).to_string(index=False))
 
       - name: Smoke test — AAPL prices
         shell: python
@@ -242,22 +217,21 @@ jobs:
           p = fetch_prices_yf("AAPL", "${{ env.START }}", "${{ env.END }}")
           print("AAPL prices rows:", len(p))
           if not p.empty:
-              print(p.head(2).to_string(index=False))
-              print(p.tail(2).to_string(index=False))
+            print(p.head(2).to_string(index=False))
+            print(p.tail(2).to_string(index=False))
 
       # ---------- Build JSON data ----------
       - name: Build JSON data (prices + news)
         env:
-          HF_HOME: ${{ env.HF_HOME }}
-          # Make sure FINNHUB token is available at runtime
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
-          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          YF_COUNT: ${{ github.event.inputs.yfinance_count }}
+          FINNHUB_RPS: ${{ github.event.inputs.finnhub_rps }}
         shell: bash
         run: |
           set -euo pipefail
-          NEWS_PER="${{ github.event.inputs.news_per_provider }}"
-          if [ -z "${NEWS_PER:-}" ]; then NEWS_PER="6000"; fi
-          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | news_per_provider=$NEWS_PER"
+          YF_COUNT="${YF_COUNT:-240}"
+          FINNHUB_RPS="${FINNHUB_RPS:-10}"
+          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | yfinance_count=$YF_COUNT finnhub_rps=$FINNHUB_RPS"
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
             --start "$START" --end "$END" \
@@ -265,7 +239,9 @@ jobs:
             --batch 16 \
             --cutoff-minutes 5 \
             --max-workers 8 \
-            --news-per-provider "$NEWS_PER"
+            --yfinance-count "$YF_COUNT" \
+            --finnhub-rps "$FINNHUB_RPS" \
+            --diagnostics
 
       - name: Inspect generated data (AAPL)
         shell: python
@@ -278,12 +254,18 @@ jobs:
                   p=os.path.join(root,f)
                   print(p)
 
+          # diagnostics
+          dfile=os.path.join(base,"diagnostics.json")
+          if os.path.exists(dfile):
+              print("\n== diagnostics.json ==")
+              print(open(dfile, encoding="utf-8").read())
+
           tfile=os.path.join(base,"ticker","AAPL.json")
           if os.path.exists(tfile):
               obj=json.load(open(tfile))
               S = obj.get("S") or obj.get("sentiment") or []
               nz=sum(1 for x in S if abs((x or 0))>1e-12)
-              print(f"AAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {S[0] if S else None}  last= {S[-1] if S else None}")
+              print(f"\nAAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {S[0] if S else None}  last= {S[-1] if S else None}")
               news = obj.get("news") or []
               print("AAPL news items saved (trimmed):", len(news))
               days = len({ (n.get('ts') or '')[:10] for n in news if n.get('ts') })
