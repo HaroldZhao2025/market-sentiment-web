@@ -112,6 +112,20 @@ def _best_effort_company(ticker: str) -> Optional[str]:
     return None
 
 
+def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
+    """
+    True if daily news sentiment is missing or ~all zeros,
+    in which case writers.py will synthesize a daily curve from news counts.
+    """
+    if d_news is None or d_news.empty:
+        return True
+    col = "S_NEWS" if "S_NEWS" in d_news.columns else ("S" if "S" in d_news.columns else None)
+    if col is None:
+        return True
+    s = pd.to_numeric(d_news[col], errors="coerce").fillna(0.0)
+    return float(s.abs().max()) <= 1e-12
+
+
 def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
     try:
         tickers = json.load(open(f"{out_dir}/_tickers.json", "r", encoding="utf-8"))
@@ -150,13 +164,14 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    p.add_argument("--news-per-provider", type=int, default=1000,
-                   help="Target articles per provider (writers still cap visible headlines).")
+    # Non-Finnhub providers are capped to <= 240; this flag lets you reduce further if needed.
+    p.add_argument("--news-per-provider", type=int, default=240,
+                   help="Non-Finnhub per-provider cap (Finnhub is uncapped by count).")
     a = p.parse_args()
 
-    # --- Signal whether Finnhub token is wired via env ---
-    token = (os.getenv("FINNHUB_TOKEN") or os.getenv("FINNHUB_API_KEY") or "").strip()
-    print(f"Finnhub token: {'detected' if token else 'MISSING'}")
+    # Info: whether a Finnhub token is present
+    finnhub_present = bool((os.environ.get("FINNHUB_TOKEN") or os.environ.get("FINNHUB_API_KEY") or "").strip())
+    print(f"Finnhub token: {'detected' if finnhub_present else 'NOT set (Finnhub provider will be skipped)'}")
 
     # Universe (tolerate unnamed first column)
     uni = pd.read_csv(a.universe)
@@ -189,9 +204,11 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         try:
-            # Request deep coverage; writers use the full period for S but show only 10 headlines.
+            # Providers logic:
+            #   • Finnhub is uncapped by count (date window only), implemented inside fetch_news.
+            #   • All other providers are capped (<= 240 or the flag value if smaller).
             n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
-            if n is None or n.empty:
+            if (n is None or n.empty) and comp:
                 # paranoid second pass without company hint
                 n = fetch_news(t, a.start, a.end, company=None, max_per_provider=a.news_per_provider)
         except Exception:
@@ -234,11 +251,13 @@ def main():
     # Join + guarantee a composite S
     daily = join_and_fill_daily(d_news, d_earn)
     if "S" not in daily.columns:
+        # .get may return scalar -> wrap with Series then fill
         s_news = pd.to_numeric(daily.get("S_NEWS", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
         s_earn = pd.to_numeric(daily.get("S_EARN", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
         daily["S"] = s_news + s_earn
 
     # -------- Build panel + write outputs --------
+    # prices.date is already naive (UTC day)
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     for c in ("S", "S_NEWS", "S_EARN"):
         if c not in panel.columns:
