@@ -23,7 +23,7 @@ from market_sentiment.writers import write_outputs
 
 
 # -------------------------------
-# FinBERT helpers (version-safe)
+# FinBERT helpers
 # -------------------------------
 
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
@@ -57,7 +57,7 @@ def _score_rows_inplace(
 
 
 # -------------------------------
-# Prices (gentle throttling)
+# Prices
 # -------------------------------
 
 def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int) -> pd.DataFrame:
@@ -66,7 +66,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)
+            time.sleep(0.12)  # soften YF rate-limits
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -77,7 +77,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
     if not rows:
         return pd.DataFrame(columns=["date", "ticker", "open", "close"])
     prices = pd.concat(rows, ignore_index=True)
-    prices = _ensure_date_dtype(prices, "date")  # -> naive date (UTC day)
+    prices = _ensure_date_dtype(prices, "date")  # naive date (UTC day)
     prices = add_forward_returns(prices)
     return prices
 
@@ -135,13 +135,13 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    # Non-Finnhub providers are capped to <= 240; this lets you lower the cap if you want.
+    # Non-Finnhub providers are capped to 240 by requirement.
     p.add_argument("--news-per-provider", type=int, default=240,
-                   help="Per-provider cap for NON-Finnhub sources (Finnhub is uncapped by count).")
+                   help="Per-provider cap for NON-Finnhub sources (Finnhub uncapped; date-windowed).")
     a = p.parse_args()
 
-    # Log whether Finnhub token is present (code will still run without it)
-    token_present = bool((os.environ.get("FINNHUB_TOKEN") or os.environ.get("FINNHUB_API_KEY") or "").strip())
+    # Visibility: show whether Finnhub credential is set
+    token_present = any((os.environ.get(k) or "").strip() for k in ("FINNHUB_TOKEN", "FINNHUB_API_KEY", "FINNHUB_KEY"))
     print(f"Finnhub token: {'detected' if token_present else 'NOT set'}")
 
     # Universe
@@ -175,8 +175,8 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         try:
-            # Finnhub uses the official client/company_news API (uncapped by count);
-            # all other providers are capped to <= 240 by fetch_news.
+            # Finnhub first (uncapped by count, exact API call, iterated by month);
+            # all other providers capped to <= 240.
             n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
             if (n is None or n.empty) and comp:
                 n = fetch_news(t, a.start, a.end, company=None, max_per_provider=a.news_per_provider)
@@ -189,6 +189,7 @@ def main():
             dcount = n["ts"].dt.date.nunique() if "ts" in n.columns else 0
             print(f"  {t}: news rows={len(n)} | days={dcount} | company={'-' if not comp else comp}")
 
+        # Score with FinBERT (robust to absence)
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
 
@@ -198,10 +199,10 @@ def main():
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # Placeholder earnings frame for now
+    # (Optional) earnings placeholder
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
-    # -------- Aggregate daily sentiment --------
+    # -------- Daily sentiment aggregation --------
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
     d_earn = (
         daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
@@ -220,7 +221,7 @@ def main():
         s_earn = pd.to_numeric(daily.get("S_EARN", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
         daily["S"] = s_news + s_earn
 
-    # -------- Build panel + write outputs --------
+    # -------- Emit site artifacts --------
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     for c in ("S", "S_NEWS", "S_EARN"):
         if c not in panel.columns:
@@ -229,7 +230,7 @@ def main():
 
     write_outputs(panel, news_rows, earn_rows, a.out)
 
-    # -------- Summary from output files --------
+    # Summary from outputs
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
     print("Summary:")
     print(f"  Tickers listed: {len(tickers_list)}")
