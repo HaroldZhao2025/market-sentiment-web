@@ -1,14 +1,21 @@
 # src/market_sentiment/news.py
 from __future__ import annotations
 
-from typing import Callable, List, Optional
+from typing import List
 
 import pandas as pd
 
 from .news_finnhub_daily import fetch_finnhub_daily
 from .news_yfinance import fetch_yfinance_recent
 
-# Public merged fetch ----------------------------------------------------------
+
+def _dedup_and_sort(df: pd.DataFrame) -> pd.DataFrame:
+    if df is None or df.empty:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+    df["url"] = df["url"].fillna("")
+    df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
+    return df[["ticker", "ts", "title", "url", "text"]]
+
 
 def fetch_news(
     ticker: str,
@@ -17,48 +24,35 @@ def fetch_news(
     *,
     yfinance_count: int = 240,
     finnhub_rps: int = 10,
-    keep_source: bool = False,  # for debugging
+    keep_source: bool = False,
 ) -> pd.DataFrame:
-    df_fh = fetch_finnhub_daily(ticker, start, end, rps=finnhub_rps)
-    df_yf = fetch_yfinance_recent(ticker, start, end, count=yfinance_count)
+    """
+    Merge Finnhub (daily loop) + Yahoo Finance (count=240) for full coverage of [start, end].
+    """
+    frames: List[pd.DataFrame] = []
 
-    frames = [d for d in (df_fh, df_yf) if d is not None and not d.empty]
+    # Finnhub day-by-day
+    try:
+        fh = fetch_finnhub_daily(ticker, start, end, rps=int(finnhub_rps))
+        if keep_source and not fh.empty:
+            fh = fh.assign(_src="finnhub")
+    except Exception:
+        fh = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+    if not fh.empty:
+        frames.append(fh)
+
+    # Yahoo Finance recent
+    try:
+        yf = fetch_yfinance_recent(ticker, start, end, count=int(yfinance_count), tab="all")
+        if keep_source and not yf.empty:
+            yf = yf.assign(_src="yfinance")
+    except Exception:
+        yf = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+    if not yf.empty:
+        frames.append(yf)
+
     if not frames:
-        cols = ["ticker", "ts", "title", "url", "text"]
-        if keep_source:
-            cols += ["src"]
-        return pd.DataFrame(columns=cols)
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-    out = pd.concat(frames, ignore_index=True)
-    out["url"] = out["url"].fillna("")
-    out = out.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
-    if keep_source:
-        # annotate which source; best-effort by URL/domain presence
-        def src_guess(row):
-            u = (row.get("url") or "").lower()
-            if "finnhub.io/api/news" in u:
-                return "finnhub"
-            if "finance.yahoo.com" in u or "yahoo.com" in u:
-                return "yfinance"
-            return "merged"
-        out["src"] = out.apply(src_guess, axis=1)
-    return out
-
-# Back-compat provider names expected in older smoke tests ---------------------
-
-def _prov_finnhub(ticker: str, start: str, end: str, *_, **__) -> pd.DataFrame:
-    """Wrapper so old smoke tests keep working (ignores extra args)."""
-    return fetch_finnhub_daily(ticker, start, end)
-
-def _prov_yfinance(ticker: str, start: str, end: str, *_, **__) -> pd.DataFrame:
-    """Wrapper for legacy test; always asks for 240 + tab=all."""
-    return fetch_yfinance_recent(ticker, start, end, count=240)
-
-# Leave the other legacy names present as no-ops to avoid import errors.
-def _empty_provider(*args, **kwargs) -> pd.DataFrame:
-    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-
-_prov_google_rss = _empty_provider
-_prov_yahoo_rss  = _empty_provider
-_prov_nasdaq_rss = _empty_provider
-_prov_gdelt      = _empty_provider
+    merged = pd.concat(frames, ignore_index=True)
+    return _dedup_and_sort(merged)
