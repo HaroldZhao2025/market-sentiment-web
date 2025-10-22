@@ -8,7 +8,7 @@ from typing import Callable, List, Optional, Tuple
 import pandas as pd
 import yfinance as yf
 
-# Optional dependency (follow Finnhub docs)
+# Optional per Finnhub docs
 try:
     import finnhub  # pip install finnhub-python
 except Exception:
@@ -28,10 +28,10 @@ def _clean_text(x) -> str:
 
 
 def _norm_ts(x) -> pd.Timestamp:
-    """Accept epoch seconds/ms or ISO strings -> tz-aware UTC Timestamp."""
+    """Epoch seconds/ms or ISO string -> tz-aware UTC Timestamp."""
     if x is None:
         return pd.NaT
-    # epoch seconds / ms
+    # epoch
     try:
         xi = int(x)
         if xi > 10_000_000_000:
@@ -54,9 +54,9 @@ def _mk_df(
     """
     rows: (ts, title, url, text, src)
     """
+    base_cols = ["ticker", "ts", "title", "url", "text"]
     if not rows:
-        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
-        return pd.DataFrame(columns=cols)
+        return pd.DataFrame(columns=base_cols + (["src"] if keep_source else []))
 
     df = pd.DataFrame(rows, columns=["ts", "title", "url", "text", "src"])
     df["ticker"] = ticker
@@ -64,13 +64,9 @@ def _mk_df(
     df["title"] = df["title"].map(_clean_text)
     df["text"] = df["text"].map(_clean_text)
     df["url"] = df["url"].fillna("")
-
-    # Deduplicate on (title,url)
     df = df.sort_values("ts").drop_duplicates(["title", "url"]).reset_index(drop=True)
 
-    cols = ["ticker", "ts", "title", "url", "text"]
-    if keep_source:
-        cols.append("src")
+    cols = base_cols + (["src"] if keep_source else [])
     return df[cols]
 
 
@@ -95,12 +91,12 @@ def _prov_finnhub_daily(
     keep_source: bool = False,
 ) -> pd.DataFrame:
     """
-    EXACT Finnhub usage per docs:
-        import finnhub
+    EXACT Finnhub usage (docs):
         client = finnhub.Client(api_key="...")
         client.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
-    We call this ONCE PER DAY across the full range to guarantee daily coverage.
-    Rate limited by FINNHUB_RPS (default 10; hard-capped at 30).
+
+    We call once per DAY across the entire window to guarantee daily coverage.
+    Rate limited by FINNHUB_RPS (default 10; max 30).
     """
     token = (
         os.getenv("FINNHUB_TOKEN")
@@ -108,16 +104,16 @@ def _prov_finnhub_daily(
         or os.getenv("FINNHUB_KEY")
     )
     if finnhub is None or not token:
-        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
-        return pd.DataFrame(columns=cols)
+        base = ["ticker", "ts", "title", "url", "text"]
+        return pd.DataFrame(columns=base + (["src"] if keep_source else []))
 
     try:
         client = finnhub.Client(api_key=token)
     except Exception:
-        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
-        return pd.DataFrame(columns=cols)
+        base = ["ticker", "ts", "title", "url", "text"]
+        return pd.DataFrame(columns=base + (["src"] if keep_source else []))
 
-    # Throttle (requests per second)
+    # throttle
     try:
         rps = int(os.getenv(rps_env, "10"))
     except Exception:
@@ -133,7 +129,8 @@ def _prov_finnhub_daily(
     last = 0.0
 
     for d in days:
-        day_str = d.date().isoformat()  # 'YYYY-MM-DD'
+        day_str = d.date().isoformat()
+
         # rate-limit
         now = time.time()
         delay = (last + min_gap) - now
@@ -141,6 +138,7 @@ def _prov_finnhub_daily(
             time.sleep(delay)
         last = time.time()
 
+        # robust retry
         arr = None
         for attempt in range(3):
             try:
@@ -177,7 +175,7 @@ def _prov_yfinance_all(
     Yahoo Finance via yfinance:
         t = yf.Ticker("MSFT")
         items = t.get_news(count=240, tab="all")
-    Fallback to .news if get_news unavailable.
+    Falls back to .news if get_news is unavailable.
     """
     cnt = max(1, min(int(count or 240), 240))
     rows: List[Tuple[pd.Timestamp, str, str, str, str]] = []
@@ -192,8 +190,6 @@ def _prov_yfinance_all(
 
     for it in items:
         content = it.get("content") if isinstance(it, dict) else None
-
-        # Best-effort time extraction
         ts = _norm_ts(
             (it.get("providerPublishTime") if isinstance(it, dict) else None)
             or (it.get("provider_publish_time") if isinstance(it, dict) else None)
@@ -203,11 +199,9 @@ def _prov_yfinance_all(
         )
         if pd.isna(ts):
             continue
-
         title = _clean_text((content or {}).get("title") or it.get("title") or "")
         if not title:
             continue
-
         link = (
             ((content or {}).get("canonicalUrl") or {}).get("url")
             or ((content or {}).get("clickThroughUrl") or {}).get("url")
@@ -226,10 +220,24 @@ def _prov_yfinance_all(
     return _window_filter(_mk_df(rows, ticker, keep_source), start, end)
 
 
-# Public types/registry (keep minimal and exact)
-Provider = Callable[..., pd.DataFrame]
-PROVIDERS: List[Provider] = []  # not used by default path; we fetch explicitly
+# ---- Legacy provider names (safe no-ops so older smoke tests don't break) ----
 
+def _empty_provider(*args, **kwargs) -> pd.DataFrame:
+    base = ["ticker", "ts", "title", "url", "text"]
+    keep_source = bool(kwargs.get("keep_source", False))
+    return pd.DataFrame(columns=base + (["src"] if keep_source else []))
+
+# Stubs:
+_prov_google_rss = _empty_provider
+_prov_yahoo_rss = _empty_provider
+_prov_nasdaq_rss = _empty_provider
+_prov_gdelt = _empty_provider
+
+
+# ---- Public merge and back-compat aliases ----
+
+Provider = Callable[..., pd.DataFrame]
+PROVIDERS: List[Provider] = []  # not used in this simplified path
 
 def fetch_news(
     ticker: str,
@@ -240,16 +248,14 @@ def fetch_news(
     yfinance_count: int = 240,
     keep_source: bool = False,
 ) -> pd.DataFrame:
-    """
-    Merge Finnhub (day-by-day) + yfinance(count=240) for full coverage, de-duped.
-    """
+    """Merge Finnhub (day-by-day) + yfinance(count=240), de-dup, time-filter."""
     df_fh = _prov_finnhub_daily(ticker, start, end, rps_env=finnhub_rps_env, keep_source=keep_source)
     df_yf = _prov_yfinance_all(ticker, start, end, count=yfinance_count, keep_source=keep_source)
 
     frames = [df for df in (df_fh, df_yf) if df is not None and not df.empty]
     if not frames:
-        cols = ["ticker", "ts", "title", "url", "text"] + (["src"] if keep_source else [])
-        return pd.DataFrame(columns=cols)
+        base = ["ticker", "ts", "title", "url", "text"]
+        return pd.DataFrame(columns=base + (["src"] if keep_source else []))
 
     out = pd.concat(frames, ignore_index=True)
     out["url"] = out["url"].fillna("")
@@ -260,3 +266,7 @@ def fetch_news(
         .reset_index(drop=True)
     )
     return out
+
+# Back-compat names used in older scripts/workflows:
+_prov_finnhub = _prov_finnhub_daily
+_prov_yfinance = _prov_yfinance_all
