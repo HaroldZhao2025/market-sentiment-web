@@ -210,85 +210,45 @@ jobs:
           if len(merged):
               print(merged[["ts","title","url"]].tail(3).to_string(index=False))
 
-          - name: Smoke test — Finnhub single-day (exact sample)
-            env:
-              FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}  # make sure the repo secret exists
-              SYMBOL: AAPL
-              # Optional: override the day; else it uses "yesterday UTC"
-              # FINNHUB_FROM: "2025-06-01"
-              # FINNHUB_TO:   "2025-06-01"
-            shell: python
-            run: |
-              import os, sys, datetime as dt
-              import finnhub
-              def ts_iso(t):
-                  try: return dt.datetime.utcfromtimestamp(int(t)).isoformat()+"Z"
-                  except: return "NA"
+      - name: Smoke test — Finnhub single-day (exact sample)
+        env:
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}  # make sure the repo secret exists
+          SYMBOL: AAPL
+          # Optional: override the day; else it uses "yesterday UTC"
+          # FINNHUB_FROM: "2025-06-01"
+          # FINNHUB_TO:   "2025-06-01"
+        shell: python
+        run: |
+          import os, sys, datetime as dt
+          import finnhub
+          def ts_iso(t):
+              try: return dt.datetime.utcfromtimestamp(int(t)).isoformat()+"Z"
+              except: return "NA"
 
-              token = os.environ.get("FINNHUB_TOKEN")
-              if not token:
-                  print("ERROR: FINNHUB_TOKEN is missing", file=sys.stderr)
-                  sys.exit(1)
+          token = os.environ.get("FINNHUB_TOKEN")
+          if not token:
+              print("ERROR: FINNHUB_TOKEN is missing", file=sys.stderr)
+              sys.exit(1)
 
-              c = finnhub.Client(api_key=token)
-              sym = os.environ.get("SYMBOL", "AAPL")
-              default_day = (dt.datetime.utcnow() - dt.timedelta(days=1)).strftime("%Y-%m-%d")
-              day_from = os.environ.get("FINNHUB_FROM", default_day)
-              day_to   = os.environ.get("FINNHUB_TO",   day_from)
+          c = finnhub.Client(api_key=token)
+          sym = os.environ.get("SYMBOL", "AAPL")
+          default_day = (dt.datetime.utcnow() - dt.timedelta(days=1)).strftime("%Y-%m-%d")
+          day_from = os.environ.get("FINNHUB_FROM", default_day)
+          day_to   = os.environ.get("FINNHUB_TO",   day_from)
 
-              print(f"Finnhub: company_news('{sym}', _from='{day_from}', to='{day_to}')")
-              try:
-                  arr = c.company_news(sym, _from=day_from, to=day_to) or []
-              except Exception as e:
-                  print(f"ERROR calling finnhub.company_news: {e}", file=sys.stderr)
-                  sys.exit(1)
+          print(f"Finnhub: company_news('{sym}', _from='{day_from}', to='{day_to}')")
+          try:
+              arr = c.company_news(sym, _from=day_from, to=day_to) or []
+          except Exception as e:
+              print(f"ERROR calling finnhub.company_news: {e}", file=sys.stderr)
+              sys.exit(1)
 
-              print(f"Items: {len(arr)}")
-              for i, it in enumerate(arr[:5]):
-                  print(f"[{i}] {ts_iso(it.get('datetime'))} | {it.get('source')} | {it.get('headline')}")
-                  print(f"     {it.get('url')}")
-              if not arr:
-                  sys.exit(2)
-                  
-          - name: Smoke test — Finnhub single-day (exact sample)
-            env:
-              FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}  # make sure the repo secret exists
-              SYMBOL: AAPL
-              # Optional: override the day; else it uses "yesterday UTC"
-              # FINNHUB_FROM: "2025-06-01"
-              # FINNHUB_TO:   "2025-06-01"
-            shell: python
-            run: |
-              import os, sys, datetime as dt
-              import finnhub
-              def ts_iso(t):
-                  try: return dt.datetime.utcfromtimestamp(int(t)).isoformat()+"Z"
-                  except: return "NA"
-
-              token = os.environ.get("FINNHUB_TOKEN")
-              if not token:
-                  print("ERROR: FINNHUB_TOKEN is missing", file=sys.stderr)
-                  sys.exit(1)
-
-              c = finnhub.Client(api_key=token)
-              sym = os.environ.get("SYMBOL", "AAPL")
-              default_day = (dt.datetime.utcnow() - dt.timedelta(days=1)).strftime("%Y-%m-%d")
-              day_from = os.environ.get("FINNHUB_FROM", default_day)
-              day_to   = os.environ.get("FINNHUB_TO",   day_from)
-
-              print(f"Finnhub: company_news('{sym}', _from='{day_from}', to='{day_to}')")
-              try:
-                  arr = c.company_news(sym, _from=day_from, to=day_to) or []
-              except Exception as e:
-                  print(f"ERROR calling finnhub.company_news: {e}", file=sys.stderr)
-                  sys.exit(1)
-
-              print(f"Items: {len(arr)}")
-              for i, it in enumerate(arr[:5]):
-                  print(f"[{i}] {ts_iso(it.get('datetime'))} | {it.get('source')} | {it.get('headline')}")
-                  print(f"     {it.get('url')}")
-              if not arr:
-                  sys.exit(2)
+          print(f"Items: {len(arr)}")
+          for i, it in enumerate(arr[:5]):
+              print(f"[{i}] {ts_iso(it.get('datetime'))} | {it.get('source')} | {it.get('headline')}")
+              print(f"     {it.get('url')}")
+          if not arr:
+              sys.exit(2)
 
 
       - name: Smoke test — AAPL prices
