@@ -12,9 +12,18 @@ import feedparser
 import requests
 import yfinance as yf
 
-# ------------------------
+# Finnhub SDK: pip package name = "finnhub-python"; import name = "finnhub"
+# This provider follows the official sample exactly:
+#   import finnhub
+#   finnhub_client = finnhub.Client(api_key="..."); finnhub_client.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+try:
+    import finnhub  # type: ignore
+except Exception:
+    finnhub = None
+
+# --------------------------------------------------------------------
 # Helpers
-# ------------------------
+# --------------------------------------------------------------------
 
 def _clean_text(x) -> str:
     try:
@@ -27,7 +36,7 @@ def _clean_text(x) -> str:
 def _first_str(*candidates) -> str:
     """
     Return the first candidate that can be turned into a non-empty string.
-    Avoid relying on Python truthiness of arrays/objects.
+    Never rely on Python truthiness of arrays/objects.
     """
     for v in candidates:
         if v is None:
@@ -105,9 +114,6 @@ def _retry(fn, tries=2, delay=0.8):
             time.sleep(delay)
 
 def _month_windows(start: str, end: str):
-    """
-    Yield [start_of_month, end_of_month] within [start,end].
-    """
     s = pd.Timestamp(start, tz="UTC").normalize()
     e = pd.Timestamp(end, tz="UTC").normalize()
     cur = s
@@ -116,67 +122,68 @@ def _month_windows(start: str, end: str):
         yield cur, w_end
         cur = (w_end + pd.Timedelta(days=1)).normalize()
 
-# ------------------------
+def _get_finnhub_key() -> Optional[str]:
+    """
+    Pull Finnhub token from common env names.
+    Primary: FINNHUB_TOKEN
+    Fallback: FINNHUB_API_KEY
+    """
+    key = os.environ.get("FINNHUB_TOKEN") or os.environ.get("FINNHUB_API_KEY")
+    key = (key or "").strip()
+    return key or None
+
+# --------------------------------------------------------------------
 # Providers
-# ------------------------
+# --------------------------------------------------------------------
 
 def _prov_finnhub(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 6000
+    ticker: str, start: str, end: str, company: str | None = None, limit: int = 0
 ) -> pd.DataFrame:
     """
-    Finnhub company_news across monthly windows.
-    Install: pip install finnhub-python
-    Import:  import finnhub
-    Token:   FINNHUB_TOKEN (preferred) or FINNHUB_API_KEY (fallback)
+    Finnhub provider implemented *exactly* like the official sample:
+        import finnhub
+        finnhub_client = finnhub.Client(api_key="...")
+        finnhub_client.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+
+    Notes:
+      • We **do not** apply any item-count limit here (date window only), per requirements.
+      • Requires env FINNHUB_TOKEN (or FINNHUB_API_KEY).
     """
-    token = (os.getenv("FINNHUB_TOKEN") or os.getenv("FINNHUB_API_KEY") or "").strip()
-    if not token:
-        # No token -> return empty (pipeline stays resilient)
+    if finnhub is None:
+        return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+    key = _get_finnhub_key()
+    if not key:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
+    s = pd.to_datetime(start, utc=True).date().isoformat()
+    e = pd.to_datetime(end,   utc=True).date().isoformat()
+
     try:
-        import finnhub  # module is 'finnhub' even though PyPI package is 'finnhub-python'
+        client = finnhub.Client(api_key=key)
+        data = client.company_news(ticker, _from=s, to=e) or []
     except Exception:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-    client = finnhub.Client(api_key=token)
-
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
-    fetched = 0
-    for ws, we in _month_windows(start, end):
-        if fetched >= limit:
-            break
-        _from = ws.date().isoformat()
-        _to   = we.date().isoformat()
-
-        try:
-            items = client.company_news(ticker, _from=_from, to=_to) or []
-        except Exception:
-            items = []
-
-        for it in items:
-            ts = _norm_ts_utc(it.get("datetime") or it.get("time") or it.get("publishedTime"))
-            title = _first_str(it.get("headline"), it.get("title"), it.get("summary"))
-            url   = _first_str(it.get("url"))
-            text  = _first_str(it.get("summary"), title)
-            if pd.isna(ts) or not title:
-                continue
-            rows.append((ts, title, url, text))
-            fetched += 1
-            if fetched >= limit:
-                break
-
-        time.sleep(0.15)  # be gentle with rate limits
+    for it in data:
+        # Finnhub fields as in sample output
+        ts   = _norm_ts_utc(it.get("datetime"))
+        head = _first_str(it.get("headline"))
+        url  = _first_str(it.get("url"))
+        summ = _first_str(it.get("summary"), head)
+        if pd.isna(ts) or not head:
+            continue
+        rows.append((ts, head, url, summ or head))
 
     df = _mk_df(rows, ticker)
     return _window_filter(df, start, end)
 
+
 def _prov_gdelt(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 6000
+    ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
 ) -> pd.DataFrame:
     """
-    GDELT Doc API – no API key; good coverage & date filters.
-    We query month-by-month to harvest many items (up to `limit` total).
+    GDELT Doc API – capped to 240 per requirements (other providers limited).
     """
     q = quote_plus((company or ticker).replace("&", " and "))
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
@@ -187,7 +194,7 @@ def _prov_gdelt(
             break
         startdt = ws.strftime("%Y%m%d%H%M%S")
         enddt   = (we + pd.Timedelta(hours=23, minutes=59, seconds=59)).strftime("%Y%m%d%H%M%S")
-        per = min(1000, limit - fetched)
+        per = min(240, limit - fetched)  # enforce cap
         url = (
             "https://api.gdeltproject.org/api/v2/doc/doc"
             f"?query={q}&mode=artlist&format=json&maxrecords={per}"
@@ -213,11 +220,12 @@ def _prov_gdelt(
     df = _mk_df(rows, ticker)
     return _window_filter(df, start, end)
 
+
 def _prov_yfinance(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 300
+    ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
 ) -> pd.DataFrame:
     """
-    yfinance .news (no key). Structure varies across versions—defensive parsing.
+    yfinance .news – limited to 240.
     """
     def _get():
         try:
@@ -225,11 +233,12 @@ def _prov_yfinance(
             return getattr(t, "news", None)
         except Exception:
             return None
+
     raw = _retry(_get, tries=2, delay=0.6)
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     if isinstance(raw, list):
-        for item in raw[:limit]:
+        for item in raw[: max(0, int(limit))]:
             content = item.get("content") if isinstance(item, dict) else None
             ts = _norm_ts_utc(
                 (item.get("providerPublishTime") if isinstance(item, dict) else None)
@@ -240,7 +249,7 @@ def _prov_yfinance(
                 or ((content or {}).get("pubDate") if isinstance(content, dict) else None)
             )
             if pd.isna(ts):
-                ts = pd.Timestamp.utcnow().tz_localize("UTC")
+                continue
             title = _first_str(
                 (item.get("title") if isinstance(item, dict) else None),
                 ((content or {}).get("title") if isinstance(content, dict) else None),
@@ -264,9 +273,11 @@ def _prov_yfinance(
     df = _mk_df(rows, ticker)
     return _window_filter(df, start, end)
 
+
 def _prov_google_rss(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 300
+    ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
 ) -> pd.DataFrame:
+    # Fast pass (365d)
     q = f'"{ticker}"' + (f' OR "{company}"' if company else "")
     url = f"https://news.google.com/rss/search?q={quote_plus(q)}+when:365d&hl=en-US&gl=US&ceid=US:en"
 
@@ -281,7 +292,7 @@ def _prov_google_rss(
     def _consume(feed_) -> pd.DataFrame:
         rows: List[Tuple[pd.Timestamp, str, str, str]] = []
         for i, entry in enumerate(getattr(feed_, "entries", []) if feed_ else []):
-            if i >= limit: break
+            if i >= max(0, int(limit)): break
             ts = _norm_ts_utc(
                 getattr(entry, "published_parsed", None)
                 or getattr(entry, "updated_parsed", None)
@@ -298,10 +309,12 @@ def _prov_google_rss(
 
     df = _consume(feed)
 
-    # If coverage is thin, fall back to month-by-month queries
-    if len(df) < 40:
+    # Fallback month-by-month (still respect cap)
+    if len(df) < 40 and int(limit) > 40:
         frames = []
         for ws, we in _month_windows(start, end):
+            if sum(len(x) for x in frames) >= int(limit):
+                break
             qp = f'"{ticker}"' + (f' OR "{company}"' if company else "")
             qp = quote_plus(f"{qp} after:{ws.date()} before:{(we + pd.Timedelta(days=1)).date()}")
             url_m = f"https://news.google.com/rss/search?q={qp}&hl=en-US&gl=US&ceid=US:en"
@@ -315,10 +328,11 @@ def _prov_google_rss(
 
     return _window_filter(df.sort_values("ts").reset_index(drop=True), start, end)
 
+
 def _prov_yahoo_rss(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 300
+    ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
 ) -> pd.DataFrame:
-    url = f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={quote_plus(ticker)}&lang=en-US&region=US&count={limit}"
+    url = f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={quote_plus(ticker)}&lang=en-US&region=US&count={max(0,int(limit))}"
 
     def _get():
         return feedparser.parse(url, request_headers={"User-Agent": "Mozilla/5.0"})
@@ -330,7 +344,7 @@ def _prov_yahoo_rss(
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     for i, entry in enumerate(getattr(feed, "entries", [])):
-        if i >= limit:
+        if i >= max(0, int(limit)):
             break
         ts = _norm_ts_utc(
             getattr(entry, "published_parsed", None)
@@ -350,8 +364,9 @@ def _prov_yahoo_rss(
     df = _mk_df(rows, ticker)
     return _window_filter(df, start, end)
 
+
 def _prov_nasdaq_rss(
-    ticker: str, start: str, end: str, company: str | None = None, limit: int = 200
+    ticker: str, start: str, end: str, company: str | None = None, limit: int = 240
 ) -> pd.DataFrame:
     url = f"https://www.nasdaq.com/feed/rssoutbound?symbol={quote_plus(ticker)}"
 
@@ -365,7 +380,7 @@ def _prov_nasdaq_rss(
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
     for i, entry in enumerate(getattr(feed, "entries", [])):
-        if i >= limit:
+        if i >= max(0, int(limit)):
             break
         ts = _norm_ts_utc(
             getattr(entry, "published_parsed", None)
@@ -385,19 +400,20 @@ def _prov_nasdaq_rss(
     df = _mk_df(rows, ticker)
     return _window_filter(df, start, end)
 
-# ------------------------
+# --------------------------------------------------------------------
 # Public API
-# ------------------------
+# --------------------------------------------------------------------
 
 Provider = Callable[[str, str, str, Optional[str], int], pd.DataFrame]
 
+# Finnhub first (no cap); all others are capped at 240 per requirements.
 _PROVIDERS: List[Provider] = [
-    _prov_finnhub,   # ✅ Finnhub (reads FINNHUB_TOKEN / FINNHUB_API_KEY)
-    _prov_gdelt,     # breadth
-    _prov_yfinance,  # supplemental
-    _prov_google_rss,
-    _prov_yahoo_rss,
-    _prov_nasdaq_rss,
+    _prov_finnhub,   # unlimited by count; bounded by date window only
+    _prov_gdelt,     # <= 240
+    _prov_google_rss,# <= 240
+    _prov_yahoo_rss, # <= 240
+    _prov_nasdaq_rss,# <= 240
+    _prov_yfinance,  # <= 240
 ]
 
 def fetch_news(
@@ -405,12 +421,22 @@ def fetch_news(
     start: str,
     end: str,
     company: str | None = None,
-    max_per_provider: int = 6000,
+    max_per_provider: int = 240,
 ) -> pd.DataFrame:
+    """
+    Fetch & merge from all providers.
+    Rules:
+      • Finnhub: NO item cap (exact sample behavior), date window only.
+      • Others: cap to <= 240 (or the passed max_per_provider if smaller).
+    """
     frames: List[pd.DataFrame] = []
+    cap = int(max_per_provider) if max_per_provider and max_per_provider > 0 else 240
     for prov in _PROVIDERS:
         try:
-            df = prov(ticker, start, end, company, max_per_provider)
+            if prov is _prov_finnhub:
+                df = prov(ticker, start, end, company, limit=0)  # no cap
+            else:
+                df = prov(ticker, start, end, company, limit=min(cap, 240))
         except Exception:
             df = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
         if not df.empty:
