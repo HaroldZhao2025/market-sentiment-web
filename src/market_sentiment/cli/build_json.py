@@ -27,7 +27,6 @@ from market_sentiment.writers import write_outputs
 # -------------------------------
 
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
-    """Handle FinBERT.score(*args) signature differences across versions."""
     try:
         return fb.score(texts, batch=batch)
     except TypeError:
@@ -36,28 +35,19 @@ def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
         except TypeError:
             return fb.score(texts)
 
-
 def _score_rows_inplace(
     fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, batch: int
 ) -> pd.DataFrame:
-    """
-    Adds column 'S' in place.
-      • If FinBERT missing or any error -> S=0.0 (writers will build a daily fallback).
-      • Works even with empty frames (returns proper schema).
-    """
     if df is None or df.empty:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", text_col, "S"])
-
     out = df.copy()
     if fb is None:
         out["S"] = 0.0
         return out
-
     texts = out[text_col].astype(str).fillna("").tolist()
     if not texts:
         out["S"] = 0.0
         return out
-
     try:
         scores = _score_texts(fb, texts, batch=batch)
         out["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
@@ -76,19 +66,16 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)  # soften YF rate-limits
+            time.sleep(0.12)
         for f in as_completed(futs):
             try:
                 df = f.result()
                 if df is not None and len(df) > 0:
                     rows.append(df)
             except Exception:
-                # Continue on single-ticker failures
                 pass
-
     if not rows:
         return pd.DataFrame(columns=["date", "ticker", "open", "close"])
-
     prices = pd.concat(rows, ignore_index=True)
     prices = _ensure_date_dtype(prices, "date")  # -> naive date (UTC day)
     prices = add_forward_returns(prices)
@@ -100,7 +87,6 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
 # -------------------------------
 
 def _best_effort_company(ticker: str) -> Optional[str]:
-    """Try to get a readable company name for better news queries."""
     try:
         import yfinance as yf
         info = yf.Ticker(ticker).get_info() or {}
@@ -110,21 +96,6 @@ def _best_effort_company(ticker: str) -> Optional[str]:
     except Exception:
         pass
     return None
-
-
-def _is_all_zero_or_missing(d_news: pd.DataFrame) -> bool:
-    """
-    True if daily news sentiment is missing or ~all zeros,
-    in which case writers.py will synthesize a daily curve from news counts.
-    """
-    if d_news is None or d_news.empty:
-        return True
-    col = "S_NEWS" if "S_NEWS" in d_news.columns else ("S" if "S" in d_news.columns else None)
-    if col is None:
-        return True
-    s = pd.to_numeric(d_news[col], errors="coerce").fillna(0.0)
-    return float(s.abs().max()) <= 1e-12
-
 
 def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
     try:
@@ -164,16 +135,16 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    # Non-Finnhub providers are capped to <= 240; this flag lets you reduce further if needed.
+    # Non-Finnhub providers are capped to <= 240; this lets you lower the cap if you want.
     p.add_argument("--news-per-provider", type=int, default=240,
-                   help="Non-Finnhub per-provider cap (Finnhub is uncapped by count).")
+                   help="Per-provider cap for NON-Finnhub sources (Finnhub is uncapped by count).")
     a = p.parse_args()
 
-    # Info: whether a Finnhub token is present
-    finnhub_present = bool((os.environ.get("FINNHUB_TOKEN") or os.environ.get("FINNHUB_API_KEY") or "").strip())
-    print(f"Finnhub token: {'detected' if finnhub_present else 'NOT set (Finnhub provider will be skipped)'}")
+    # Log whether Finnhub token is present (code will still run without it)
+    token_present = bool((os.environ.get("FINNHUB_TOKEN") or os.environ.get("FINNHUB_API_KEY") or "").strip())
+    print(f"Finnhub token: {'detected' if token_present else 'NOT set'}")
 
-    # Universe (tolerate unnamed first column)
+    # Universe
     uni = pd.read_csv(a.universe)
     if "ticker" not in uni.columns:
         uni = uni.rename(columns={uni.columns[0]: "ticker"})
@@ -204,24 +175,20 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         try:
-            # Providers logic:
-            #   • Finnhub is uncapped by count (date window only), implemented inside fetch_news.
-            #   • All other providers are capped (<= 240 or the flag value if smaller).
+            # Finnhub uses the official client/company_news API (uncapped by count);
+            # all other providers are capped to <= 240 by fetch_news.
             n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
             if (n is None or n.empty) and comp:
-                # paranoid second pass without company hint
                 n = fetch_news(t, a.start, a.end, company=None, max_per_provider=a.news_per_provider)
         except Exception:
             n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-        # visibility for CI logs
         if n is None or n.empty:
             print(f"  {t}: news rows=0 | days=0 | company={'-' if not comp else comp}")
         else:
             dcount = n["ts"].dt.date.nunique() if "ts" in n.columns else 0
             print(f"  {t}: news rows={len(n)} | days={dcount} | company={'-' if not comp else comp}")
 
-        # Score with FinBERT (graceful if missing)
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
 
@@ -231,7 +198,7 @@ def main():
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # Placeholder earnings frame (kept schema-compatible for future use)
+    # Placeholder earnings frame for now
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
     # -------- Aggregate daily sentiment --------
@@ -242,34 +209,27 @@ def main():
         pd.DataFrame(columns=["date", "ticker", "S_EARN"])
     )
 
-    # normalize date dtype to naive (merge key)
     if not d_news.empty:
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce").dt.tz_localize(None)
     if not d_earn.empty:
         d_earn["date"] = pd.to_datetime(d_earn["date"], utc=True, errors="coerce").dt.tz_localize(None)
 
-    # Join + guarantee a composite S
     daily = join_and_fill_daily(d_news, d_earn)
     if "S" not in daily.columns:
-        # .get may return scalar -> wrap with Series then fill
         s_news = pd.to_numeric(daily.get("S_NEWS", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
         s_earn = pd.to_numeric(daily.get("S_EARN", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
         daily["S"] = s_news + s_earn
 
     # -------- Build panel + write outputs --------
-    # prices.date is already naive (UTC day)
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     for c in ("S", "S_NEWS", "S_EARN"):
         if c not in panel.columns:
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    # Writers:
-    #  • keep only 10 headlines in JSON (for UI)
-    #  • if S ~ 0 or FinBERT unavailable, synthesize a *daily* curve from news intensity
     write_outputs(panel, news_rows, earn_rows, a.out)
 
-    # -------- Summary read from outputs (truth) --------
+    # -------- Summary from output files --------
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
     print("Summary:")
     print(f"  Tickers listed: {len(tickers_list)}")
