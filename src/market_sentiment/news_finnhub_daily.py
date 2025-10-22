@@ -30,16 +30,13 @@ def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.Da
     df = df.dropna(subset=["ts"])
     df["title"] = df["title"].map(_clean_text)
     df["text"] = df["text"].map(_clean_text)
-    # safe de-dup (URL can be missing)
     df["url"] = df["url"].fillna("")
     df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
     return df[["ticker", "ts", "title", "url", "text"]]
 
 
 def _norm_ts_utc_epoch(x) -> pd.Timestamp:
-    """
-    Finnhub 'datetime' is seconds since epoch (UTC).
-    """
+    """Finnhub `datetime` is seconds since epoch (UTC)."""
     try:
         xi = int(x)
     except Exception:
@@ -55,17 +52,18 @@ def fetch_finnhub_daily(
     start: str,
     end: str,
     *,
-    rps: int = 10,            # MUST be <= 30 (Finnhub free is 30 req/sec)
-    max_days: int | None = None,
+    rps: int = 25,              # ≤ 30 req/sec (Finnhub rate limit)
+    max_days: int | None = None # for debugging; None = all days
 ) -> pd.DataFrame:
     """
-    EXACT Finnhub usage (one request per day):
+    EXACT Finnhub flow (one request per day):
 
         import finnhub
         c = finnhub.Client(api_key="...")
         c.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
 
-    We iterate each day from start..end, rate-limit to `rps`.
+    We iterate every day from start..end and rate-limit to `rps`.
+    Token is read from FINNHUB_TOKEN / FINNHUB_API_KEY / FINNHUB_KEY.
     """
     token = (
         os.getenv("FINNHUB_TOKEN")
@@ -95,17 +93,18 @@ def fetch_finnhub_daily(
     for d in days:
         day = d.date().isoformat()
 
-        # simple rate limiter
+        # Simple RPS throttling
         now = time.time()
         wait = max(0.0, (last + min_gap) - now)
         if wait > 0:
             time.sleep(wait)
         last = time.time()
 
+        # EXACT call as per docs:
         try:
             arr = client.company_news(ticker, _from=day, to=day) or []
         except Exception:
-            continue
+            arr = []
 
         for it in arr:
             ts = _norm_ts_utc_epoch(it.get("datetime"))
