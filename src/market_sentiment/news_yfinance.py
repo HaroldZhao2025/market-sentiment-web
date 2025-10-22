@@ -17,20 +17,19 @@ def _clean_text(x) -> str:
 
 def _norm_ts_any(x) -> pd.Timestamp:
     """
-    yfinance news timestamps come in a variety of fields, frequently
-    ISO8601 in content['pubDate'] or epoch fields such as providerPublishTime.
+    yfinance timestamps vary: providerPublishTime (epoch), content.pubDate (ISO), etc.
     """
     if x is None:
         return pd.NaT
-    # epoch?
+    # epoch seconds or ms
     try:
         xi = int(x)
         if xi > 10_000_000_000:
             xi = xi / 1000.0
-        return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
+        return pd.Timestamp.utcfromtimestamp(float(xi)).tz_localize("UTC")
     except Exception:
         pass
-    # ISO8601 string
+    # ISO 8601
     try:
         return pd.to_datetime(x, utc=True, errors="coerce")
     except Exception:
@@ -55,7 +54,7 @@ def fetch_yfinance_recent(
     start: str,
     end: str,
     *,
-    count: int = 240,          # your requirement
+    count: int = 240,          # EXACT requirement
     tab: str = "all",          # "news" | "press releases" | "all"
 ) -> pd.DataFrame:
     """
@@ -64,7 +63,7 @@ def fetch_yfinance_recent(
         t = yf.Ticker("MSFT")
         items = t.get_news(count=240, tab="all")
 
-    We still filter to [start, end] in UTC.
+    We still filter to [start, end] (UTC).
     """
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
 
@@ -73,7 +72,7 @@ def fetch_yfinance_recent(
         if hasattr(t, "get_news"):
             items = t.get_news(count=int(count), tab=tab) or []
         else:
-            # fallback (older yfinance returns ~10 items)
+            # fallback; older yfinance only exposes ~10 via .news
             items = getattr(t, "news", None) or []
     except Exception:
         items = []
@@ -116,7 +115,7 @@ def fetch_yfinance_recent(
         rows.append((ts, title, link, text))
 
     df = _mk_df(rows, ticker)
-    # window filter
+
     s = pd.to_datetime(start, utc=True)
     e = pd.to_datetime(end, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
     return df[(df["ts"] >= s) & (df["ts"] <= e)]
