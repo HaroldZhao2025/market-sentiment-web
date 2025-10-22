@@ -15,7 +15,7 @@ from market_sentiment.aggregate import (
     join_and_fill_daily,
     _ensure_date_dtype,
 )
-from market_sentiment.finbert import FinBERT  # optional
+from market_sentiment.finbert import FinBERT
 from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
@@ -45,10 +45,11 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
         return out
     try:
         scores = _score_texts(fb, texts, batch=batch)
-        # keep precision; UI will round to 4 dp
         out["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
     except Exception:
         out["S"] = 0.0
+    # keep 4-decimal precision
+    out["S"] = out["S"].astype(float).round(4)
     return out
 
 
@@ -60,7 +61,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)  # soften YF rate-limits
+            time.sleep(0.12)
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -125,8 +126,8 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    p.add_argument("--news-per-provider", type=int, default=600,
-                   help="Provider limit (finnhub uses it as a *day cap*, yfinance uses it as count)")
+    p.add_argument("--finnhub-rps", type=int, default=10, help="Requests per second for Finnhub (≤30)")
+    p.add_argument("--yf-count", type=int, default=240, help="yfinance get_news(count=...)")
     a = p.parse_args()
 
     uni = pd.read_csv(a.universe)
@@ -136,7 +137,7 @@ def main():
     if a.max_tickers and a.max_tickers > 0:
         tickers = tickers[: a.max_tickers]
 
-    print(f"Build JSON for {len(tickers)} tickers | news_per_provider={a.news_per_provider}")
+    print(f"Build JSON for {len(tickers)} tickers")
 
     # Prices
     prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers)
@@ -144,26 +145,30 @@ def main():
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Prices for {prices['ticker'].nunique()} tickers, rows={len(prices)}")
 
-    # News + scoring
+    # FinBERT (optional)
     try:
         fb = FinBERT()
     except Exception:
         fb = None
 
+    # News
     news_all: List[pd.DataFrame] = []
     for t in tickers:
         comp = _best_effort_company(t)
         try:
-            # Finnhub (day-by-day) + yfinance(get_news) + RSS providers
-            n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
+            n = fetch_news(
+                t,
+                a.start,
+                a.end,
+                finnhub_rps=a.finnhub_rps,
+                finnhub_max_days=None,
+                yf_count=a.yf_count,
+            )
         except Exception:
             n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-        if n is None or n.empty:
-            print(f"  {t}: news rows=0 | days=0 | company={'-' if not comp else comp}")
-        else:
-            dcount = n["ts"].dt.date.nunique() if "ts" in n.columns else 0
-            print(f"  {t}: news rows={len(n)} | days={dcount} | company={'-' if not comp else comp}")
+        days = 0 if n.empty else n["ts"].dt.date.nunique()
+        print(f"  {t}: news rows={len(n)} | days={days} | company={'-' if not comp else comp}")
 
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
@@ -174,35 +179,32 @@ def main():
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # No earnings yet (schema preserved)
-    earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
-
-    # Daily aggregation
+    # Aggregate daily sentiment
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
-    d_earn = (
-        daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
-        if not earn_rows.empty else
-        pd.DataFrame(columns=["date", "ticker", "S_EARN"])
-    )
-
     if not d_news.empty:
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce").dt.tz_localize(None)
-    if not d_earn.empty:
-        d_earn["date"] = pd.to_datetime(d_earn["date"], utc=True, errors="coerce").dt.tz_localize(None)
+        # keep 4-decimal precision
+        for c in ("S_NEWS", "S"):
+            if c in d_news.columns:
+                d_news[c] = pd.to_numeric(d_news[c], errors="coerce").fillna(0.0).round(4)
 
+    # no earnings yet, but keep shape
+    d_earn = pd.DataFrame(columns=["date", "ticker", "S_EARN"])
+
+    # Join with prices
     daily = join_and_fill_daily(d_news, d_earn)
     if "S" not in daily.columns:
         daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
         daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
-        daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
+        daily["S"] = (daily["S_NEWS"] + daily["S_EARN"]).round(4)
 
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     for c in ("S", "S_NEWS", "S_EARN"):
         if c not in panel.columns:
             panel[c] = 0.0
-        panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
+        panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0).round(4)
 
-    write_outputs(panel, news_rows, earn_rows, a.out)
+    write_outputs(panel, news_rows, d_earn, a.out)
 
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
     print("Summary:")
@@ -210,6 +212,7 @@ def main():
     print(f"  Ticker JSON files: {have_files}")
     print(f"  Tickers with any news: {with_news}/{len(tickers_list)}")
     print(f"  Tickers with non-zero daily S: {with_nonzero_s}/{len(tickers_list)}")
+
 
 if __name__ == "__main__":
     main()
