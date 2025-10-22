@@ -7,9 +7,9 @@ from typing import List, Tuple
 
 import pandas as pd
 
-# pip name: finnhub-python ; import name: finnhub
+# pip package name: finnhub-python ; import name: finnhub
 try:
-    import finnhub
+    import finnhub  # type: ignore
 except Exception:
     finnhub = None
 
@@ -35,13 +35,14 @@ def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.Da
     return df[["ticker", "ts", "title", "url", "text"]]
 
 
-def _norm_ts_utc_epoch(x) -> pd.Timestamp:
-    """Finnhub `datetime` is seconds since epoch (UTC)."""
-    try:
-        xi = int(x)
-    except Exception:
+def _norm_ts_epoch_to_utc(x) -> pd.Timestamp:
+    """Finnhub 'datetime' is seconds since epoch (UTC)."""
+    if x is None:
         return pd.NaT
     try:
+        xi = int(x)
+        if xi > 10_000_000_000:  # just in case ms is ever returned
+            xi = xi / 1000.0
         return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
     except Exception:
         return pd.NaT
@@ -52,18 +53,17 @@ def fetch_finnhub_daily(
     start: str,
     end: str,
     *,
-    rps: int = 25,              # ≤ 30 req/sec (Finnhub rate limit)
-    max_days: int | None = None # for debugging; None = all days
+    rps: int = 10,             # ≤ 30 per Finnhub limits
+    max_days: int | None = None,
 ) -> pd.DataFrame:
     """
-    EXACT Finnhub flow (one request per day):
+    EXACT Finnhub usage (one request per day):
 
         import finnhub
         c = finnhub.Client(api_key="...")
         c.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
 
-    We iterate every day from start..end and rate-limit to `rps`.
-    Token is read from FINNHUB_TOKEN / FINNHUB_API_KEY / FINNHUB_KEY.
+    Iterates day-by-day from start..end, rate-limited to `rps`.
     """
     token = (
         os.getenv("FINNHUB_TOKEN")
@@ -71,6 +71,7 @@ def fetch_finnhub_daily(
         or os.getenv("FINNHUB_KEY")
     )
     if finnhub is None or not token:
+        # No SDK or no token → empty DF
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
     try:
@@ -93,21 +94,20 @@ def fetch_finnhub_daily(
     for d in days:
         day = d.date().isoformat()
 
-        # Simple RPS throttling
+        # basic rate limiter
         now = time.time()
         wait = max(0.0, (last + min_gap) - now)
         if wait > 0:
             time.sleep(wait)
         last = time.time()
 
-        # EXACT call as per docs:
         try:
             arr = client.company_news(ticker, _from=day, to=day) or []
         except Exception:
-            arr = []
+            continue
 
         for it in arr:
-            ts = _norm_ts_utc_epoch(it.get("datetime"))
+            ts = _norm_ts_epoch_to_utc(it.get("datetime"))
             if pd.isna(ts):
                 continue
             title = _clean_text(it.get("headline") or "")
