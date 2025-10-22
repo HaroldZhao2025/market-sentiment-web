@@ -174,8 +174,10 @@ def _build_one_ticker(
 
     s_ma7 = _roll_ma(s, n=7)
 
-    # News list for UI (10 newest)
+    # news headlines (newest first, STILL cap to 10 for UI)
     out_news: List[Dict[str, Any]] = []
+    news_total = int(nt.shape[0])
+    news_days = int(nt["ts"].dt.floor("D").nunique()) if not nt.empty else 0
     if not nt.empty:
         for _, r in nt.sort_values("ts", ascending=False).head(int(headlines_max)).iterrows():
             out_news.append({
@@ -185,6 +187,7 @@ def _build_one_ticker(
                 "text": str(r.get("text", "")),
             })
 
+    # dates -> "YYYY-MM-DD" (explicit UTC)
     dates_str = [
         (d if getattr(d, "tzinfo", None) else d.tz_localize("UTC")).tz_convert("UTC").strftime("%Y-%m-%d")
         for d in df["date"]
@@ -194,10 +197,13 @@ def _build_one_ticker(
         "symbol": t,
         "date": dates_str,
         "price": price,
-        "S": [round(_safe_num(x), 6) for x in s],
-        "S_ma7": [round(x, 6) if math.isfinite(x) else 0.0 for x in s_ma7],
+        "S": [round(_safe_num(x), 4) for x in s],                # <- 4 decimals
+        "S_ma7": [round(x, 4) if math.isfinite(x) else 0.0 for x in s_ma7],  # <- 4 decimals
         "news": out_news,
+        "news_total": news_total,     # <- NEW
+        "news_days": news_days,       # <- NEW
     }
+
 
 def _write_json(path: str, obj: Dict) -> None:
     _ensure_dir(os.path.dirname(path))
