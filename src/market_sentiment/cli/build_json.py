@@ -15,21 +15,18 @@ from market_sentiment.aggregate import (
     join_and_fill_daily,
     _ensure_date_dtype,
 )
-from market_sentiment.finbert import FinBERT
-from market_sentiment.news import (
-    fetch_news,
-    _prov_finnhub_daily,
-    _prov_yfinance_all,
-)
+from market_sentiment.finbert import FinBERT  # optional — handled defensively
+from market_sentiment.news import fetch_news
+from market_sentiment.news_finnhub_daily import fetch_finnhub_daily
+from market_sentiment.news_yfinance import fetch_yfinance_recent
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
 
 
-# -------------------------------
-# FinBERT helpers
-# -------------------------------
+# ------------------------------- FinBERT helpers ------------------------------
 
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
+    """Handle FinBERT.score signature differences across versions."""
     try:
         return fb.score(texts, batch=batch)
     except TypeError:
@@ -44,26 +41,26 @@ def _score_rows_inplace(
 ) -> pd.DataFrame:
     if df is None or df.empty:
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", text_col, "S"])
+
     out = df.copy()
     if fb is None:
         out["S"] = 0.0
         return out
+
     texts = out[text_col].astype(str).fillna("").tolist()
     if not texts:
         out["S"] = 0.0
         return out
+
     try:
         scores = _score_texts(fb, texts, batch=batch)
         out["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
     except Exception:
         out["S"] = 0.0
-    out["S"] = out["S"].astype(float).round(4)
     return out
 
 
-# -------------------------------
-# Prices
-# -------------------------------
+# ------------------------------- Prices ---------------------------------------
 
 def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int) -> pd.DataFrame:
     rows: List[pd.DataFrame] = []
@@ -82,95 +79,34 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
     if not rows:
         return pd.DataFrame(columns=["date", "ticker", "open", "close"])
     prices = pd.concat(rows, ignore_index=True)
-    prices = _ensure_date_dtype(prices, "date")
+    prices = _ensure_date_dtype(prices, "date")  # -> naive date
     prices = add_forward_returns(prices)
     return prices
 
 
-# -------------------------------
-# Diagnostics writers
-# -------------------------------
+# ------------------------------- Diagnostics ----------------------------------
 
-def _write_diag_per_ticker(
-    out_dir: str,
-    ticker: str,
-    start: str,
-    end: str,
-    df_fh: pd.DataFrame,
-    df_yf: pd.DataFrame,
-    merged_scored: pd.DataFrame,
-) -> Dict:
-    """Write <out>/_diag/<TICKER>.json for inspection."""
-    diag_dir = f"{out_dir}/_diag"
-    os = __import__("os")
-    os.makedirs(diag_dir, exist_ok=True)
-
-    def _count_days(df: pd.DataFrame) -> int:
-        return 0 if df is None or df.empty else df["ts"].dt.date.nunique()
-
-    def _by_day_counts(df: pd.DataFrame) -> Dict[str, int]:
-        if df is None or df.empty:
-            return {}
-        s = df.copy()
-        s["d"] = s["ts"].dt.date.astype(str)
-        return s.groupby("d")["title"].size().to_dict()
-
-    def _first_last_ts(df: pd.DataFrame) -> Tuple[str, str]:
-        if df is None or df.empty:
-            return "", ""
-        return (
-            str(pd.to_datetime(df["ts"].min()).tz_convert("UTC")),
-            str(pd.to_datetime(df["ts"].max()).tz_convert("UTC")),
-        )
-
-    fh_first, fh_last = _first_last_ts(df_fh)
-    yf_first, yf_last = _first_last_ts(df_yf)
-    mg_first, mg_last = _first_last_ts(merged_scored)
-
-    doc = {
-        "ticker": ticker,
-        "period": {"start": start, "end": end},
-        "counts": {
-            "finnhub_rows": 0 if df_fh is None or df_fh.empty else int(len(df_fh)),
-            "finnhub_days": _count_days(df_fh),
-            "yfinance_rows": 0 if df_yf is None or df_yf.empty else int(len(df_yf)),
-            "yfinance_days": _count_days(df_yf),
-            "merged_rows": 0 if merged_scored is None or merged_scored.empty else int(len(merged_scored)),
-            "merged_days": _count_days(merged_scored),
-        },
-        "ranges": {
-            "finnhub_first_ts": fh_first,
-            "finnhub_last_ts": fh_last,
-            "yfinance_first_ts": yf_first,
-            "yfinance_last_ts": yf_last,
-            "merged_first_ts": mg_first,
-            "merged_last_ts": mg_last,
-        },
-        "by_day": {
-            "finnhub": _by_day_counts(df_fh),
-            "yfinance": _by_day_counts(df_yf),
-            "merged": _by_day_counts(merged_scored),
-        },
-        # Light preview of the last few merged headlines:
-        "merged_tail": [] if merged_scored is None or merged_scored.empty
-        else merged_scored.sort_values("ts").tail(5)[["ts", "title", "url"]].assign(
-            ts=lambda d: d["ts"].dt.strftime("%Y-%m-%d %H:%M:%S%z")
-        ).to_dict(orient="records"),
+def _diag_emit_ticker(diag: Dict, ticker: str, fh_rows: int, fh_days: int, yf_rows: int, yf_days: int, merged_rows: int, merged_days: int):
+    diag["tickers"][ticker] = {
+        "finnhub_rows": fh_rows,
+        "finnhub_days": fh_days,
+        "yfinance_rows": yf_rows,
+        "yfinance_days": yf_days,
+        "merged_rows": merged_rows,
+        "merged_days": merged_days,
     }
 
-    path = f"{diag_dir}/{ticker}.json"
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(doc, f, ensure_ascii=False, indent=2)
+def _save_json(obj, path: str) -> None:
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(obj, f, indent=2, ensure_ascii=False, default=str)
+    except Exception:
+        pass
 
-    return doc
 
-
-# -------------------------------
-# Main
-# -------------------------------
+# ------------------------------- Main -----------------------------------------
 
 def main():
-    import os
     p = argparse.ArgumentParser("Build JSON artifacts for the web app")
     p.add_argument("--universe", required=True, help="CSV with 'ticker' column (first col accepted)")
     p.add_argument("--start", required=True)
@@ -180,14 +116,13 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-    p.add_argument("--yfinance-count", type=int, default=240,
-                   help="Number of yahoo finance items to request (max 240).")
-    p.add_argument("--finnhub-rps", type=int, default=10,
-                   help="Requests per second for Finnhub day-by-day fetch (<=30).")
-    a = p.parse_args()
 
-    # Make Finnhub RPS available to provider
-    os.environ["FINNHUB_RPS"] = str(max(1, min(a.finnhub_rps, 30)))
+    # NEW flags (replace old --news-per-provider)
+    p.add_argument("--yfinance-count", type=int, default=240, help="How many Yahoo Finance items to request per ticker.")
+    p.add_argument("--finnhub-rps", type=int, default=10, help="Finnhub requests per second (≤30).")
+    p.add_argument("--diagnostics", action="store_true", help="Write diagnostics.json with provider coverage by ticker.")
+
+    a = p.parse_args()
 
     # Universe
     uni = pd.read_csv(a.universe)
@@ -197,137 +132,96 @@ def main():
     if a.max_tickers and a.max_tickers > 0:
         tickers = tickers[: a.max_tickers]
 
-    print(f"Build JSON for {len(tickers)} tickers")
+    print(
+        f"Build JSON for {len(tickers)} tickers"
+    )
 
-    # Prices
+    # -------- Prices --------
     prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers)
     if prices is None or prices.empty:
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Prices for {prices['ticker'].nunique()} tickers, rows={len(prices)}")
 
-    # FinBERT (graceful if load fails)
+    # -------- News (Finnhub daily + yfinance recent) --------
     try:
         fb = FinBERT()
     except Exception:
         fb = None
 
-    all_diag = []
+    diag = {"tickers": {}, "start": a.start, "end": a.end}
     news_all: List[pd.DataFrame] = []
 
     for t in tickers:
-        # 1) Pull providers explicitly to diagnose
-        try:
-            df_fh = _prov_finnhub_daily(t, a.start, a.end, keep_source=True)
-        except Exception:
-            df_fh = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "src"])
+        # Providers (exact requirements)
+        df_fh = fetch_finnhub_daily(t, a.start, a.end, rps=int(a.finnhub_rps))
+        df_yf = fetch_yfinance_recent(t, a.start, a.end, count=int(a.yfinance_count))
 
-        try:
-            df_yf = _prov_yfinance_all(t, a.start, a.end, count=a.yfinance_count, keep_source=True)
-        except Exception:
-            df_yf = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "src"])
+        fh_days = 0 if df_fh.empty else df_fh["ts"].dt.date.nunique()
+        yf_days = 0 if df_yf.empty else df_yf["ts"].dt.date.nunique()
 
-        # 2) Merge (Finnhub + yfinance) and de-dup
-        if len(df_fh) or len(df_yf):
-            merged = pd.concat([df_fh, df_yf], ignore_index=True)
-            merged["url"] = merged["url"].fillna("")
-            merged = (
-                merged
-                .drop_duplicates(["title", "url"])
-                .sort_values("ts")
-                .reset_index(drop=True)
-            )
-            merged = merged[
-                (merged["ts"] >= pd.to_datetime(a.start, utc=True)) &
-                (merged["ts"] <= pd.to_datetime(a.end, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1))
-            ]
-        else:
-            # Shouldn't happen, but keep a single-API convenience path:
-            merged = fetch_news(t, a.start, a.end, keep_source=True)
+        merged = pd.concat([d for d in (df_fh, df_yf) if not d.empty], ignore_index=True) if (not df_fh.empty or not df_yf.empty) else pd.DataFrame(columns=["ticker","ts","title","url","text"])
+        merged["url"] = merged["url"].fillna("")
+        merged = merged.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
+        m_days = 0 if merged.empty else merged["ts"].dt.date.nunique()
 
-        days = 0 if merged.empty else merged["ts"].dt.date.nunique()
-        print(
-            f"  {t}: finnhub_rows={len(df_fh):4d}, "
-            f"yfinance_rows={len(df_yf):4d} | merged_rows={len(merged):4d} | days={days}"
-        )
+        print(f"  {t}: finnhub rows={len(df_fh)} days={fh_days} | yfinance rows={len(df_yf)} days={yf_days} | merged rows={len(merged)} days={m_days}")
+        _diag_emit_ticker(diag, t, len(df_fh), fh_days, len(df_yf), yf_days, len(merged), m_days)
 
-        # 3) Score with FinBERT (4 decimals)
-        scored = merged.drop(columns=["src"], errors="ignore").copy()
-        scored = _score_rows_inplace(fb, scored, text_col="text", batch=a.batch)
+        # FinBERT scoring (4-decimal in logs)
+        scored = _score_rows_inplace(fb, merged, text_col="text", batch=a.batch)
+        if not scored.empty:
+            s = pd.to_numeric(scored["S"], errors="coerce").fillna(0.0)
+            print(f"    FinBERT: n={len(s)} mean={s.mean():.4f} min={s.min():.4f} max={s.max():.4f}")
         news_all.append(scored)
 
-        # 4) Diagnostics
-        doc = _write_diag_per_ticker(
-            a.out, t, a.start, a.end, df_fh=df_fh, df_yf=df_yf, merged_scored=scored
-        )
-        all_diag.append(doc)
-
-    # Merge all news
     news_rows = (
         pd.concat(news_all, ignore_index=True)
         if news_all else
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # Daily aggregation (4 decimals)
+    # Placeholder earnings
+    earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
+
+    # -------- Aggregate daily sentiment --------
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
+    d_earn = (
+        daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
+        if not earn_rows.empty else
+        pd.DataFrame(columns=["date", "ticker", "S_EARN"])
+    )
+
     if not d_news.empty:
         d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce").dt.tz_localize(None)
-        for c in ("S_NEWS", "S"):
-            if c in d_news.columns:
-                d_news[c] = pd.to_numeric(d_news[c], errors="coerce").fillna(0.0).round(4)
-
-    # Earnings placeholder
-    d_earn = pd.DataFrame(columns=["date", "ticker", "S_EARN"])
+    if not d_earn.empty:
+        d_earn["date"] = pd.to_datetime(d_earn["date"], utc=True, errors="coerce").dt.tz_localize(None)
 
     daily = join_and_fill_daily(d_news, d_earn)
     if "S" not in daily.columns:
-        daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
-        daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
-        daily["S"] = (daily["S_NEWS"] + daily["S_EARN"]).round(4)
+        s_news = pd.to_numeric(daily.get("S_NEWS", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
+        s_earn = pd.to_numeric(daily.get("S_EARN", pd.Series(0.0, index=daily.index)), errors="coerce").fillna(0.0)
+        daily["S"] = s_news + s_earn
 
+    # -------- Panel + outputs --------
     panel = prices.merge(daily, on=["date", "ticker"], how="left")
     for c in ("S", "S_NEWS", "S_EARN"):
         if c not in panel.columns:
             panel[c] = 0.0
-        panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0).round(4)
+        panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    # Write site data (writers keeps only 10 headlines in UI JSON; that's OK)
-    write_outputs(panel, news_rows, None, a.out)
+    write_outputs(panel, news_rows, earn_rows, a.out)
 
-    # Also write a compact run summary diagnostics file
-    diag_summary_path = f"{a.out}/_diag/_summary.json"
-    os = __import__("os")
-    os.makedirs(f"{a.out}/_diag", exist_ok=True)
-    with open(diag_summary_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "period": {"start": a.start, "end": a.end},
-                "tickers": [d["ticker"] for d in all_diag],
-                "by_ticker_counts": {
-                    d["ticker"]: d["counts"] for d in all_diag
-                },
-            },
-            f,
-            ensure_ascii=False,
-            indent=2,
-        )
+    if a.diagnostics:
+        _save_json(diag, f"{a.out}/diagnostics.json")
 
-    tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
-    print("Summary:")
-    print(f"  Tickers listed: {len(tickers_list)}")
-    print(f"  Ticker JSON files: {have_files}")
-    print(f"  Tickers with any news: {with_news}/{len(tickers_list)}")
-    print(f"  Tickers with non-zero daily S: {with_nonzero_s}/{len(tickers_list)}")
-
-
-def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
+    # -------- Summary from outputs --------
     try:
-        tickers = json.load(open(f"{out_dir}/_tickers.json", "r", encoding="utf-8"))
+        tickers_list = json.load(open(f"{a.out}/_tickers.json", "r", encoding="utf-8"))
     except Exception:
-        tickers = []
+        tickers_list = []
     have_files = with_news = with_nonzero_s = 0
-    for t in tickers:
-        f = f"{out_dir}/ticker/{t}.json"
+    for t in tickers_list:
+        f = f"{a.out}/ticker/{t}.json"
         try:
             obj = json.load(open(f, "r", encoding="utf-8"))
         except Exception:
@@ -341,7 +235,12 @@ def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
                 with_nonzero_s += 1
         except Exception:
             pass
-    return tickers, have_files, with_news, with_nonzero_s
+
+    print("Summary:")
+    print(f"  Tickers listed: {len(tickers_list)}")
+    print(f"  Ticker JSON files: {have_files}")
+    print(f"  Tickers with any news: {with_news}/{len(tickers_list)}")
+    print(f"  Tickers with non-zero daily S: {with_nonzero_s}/{len(tickers_list)}")
 
 
 if __name__ == "__main__":
