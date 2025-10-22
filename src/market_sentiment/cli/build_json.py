@@ -15,11 +15,13 @@ from market_sentiment.aggregate import (
     join_and_fill_daily,
     _ensure_date_dtype,
 )
-from market_sentiment.finbert import FinBERT
+from market_sentiment.finbert import FinBERT  # optional
 from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
 
+
+# ---------- FinBERT helpers ----------
 
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
     try:
@@ -43,10 +45,14 @@ def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, 
         return out
     try:
         scores = _score_texts(fb, texts, batch=batch)
+        # keep precision; UI will round to 4 dp
         out["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
     except Exception:
         out["S"] = 0.0
     return out
+
+
+# ---------- Prices ----------
 
 def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int) -> pd.DataFrame:
     rows: List[pd.DataFrame] = []
@@ -54,7 +60,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)
+            time.sleep(0.12)  # soften YF rate-limits
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -68,6 +74,9 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
     prices = _ensure_date_dtype(prices, "date")
     prices = add_forward_returns(prices)
     return prices
+
+
+# ---------- Utilities ----------
 
 def _best_effort_company(ticker: str) -> Optional[str]:
     try:
@@ -103,18 +112,21 @@ def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
             pass
     return tickers, have_files, with_news, with_nonzero_s
 
+
+# ---------- Main ----------
+
 def main():
     p = argparse.ArgumentParser("Build JSON artifacts for the web app")
-    p.add_argument("--universe", required=True)
+    p.add_argument("--universe", required=True, help="CSV with 'ticker' column (first col accepted)")
     p.add_argument("--start", required=True)
     p.add_argument("--end", required=True)
-    p.add_argument("--out", required=True)
+    p.add_argument("--out", required=True, help="Output dir: apps/web/public/data")
     p.add_argument("--batch", type=int, default=16)
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
     p.add_argument("--news-per-provider", type=int, default=600,
-                   help="For yfinance: count; for Finnhub: day cap; RSS: item cap.")
+                   help="Provider limit (finnhub uses it as a *day cap*, yfinance uses it as count)")
     a = p.parse_args()
 
     uni = pd.read_csv(a.universe)
@@ -126,11 +138,13 @@ def main():
 
     print(f"Build JSON for {len(tickers)} tickers | news_per_provider={a.news_per_provider}")
 
+    # Prices
     prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers)
     if prices is None or prices.empty:
         raise RuntimeError("No prices downloaded.")
-    print(f"  ✓ Prices for {prices['ticker'].nunique()} tickers; rows={len(prices)}")
+    print(f"  ✓ Prices for {prices['ticker'].nunique()} tickers, rows={len(prices)}")
 
+    # News + scoring
     try:
         fb = FinBERT()
     except Exception:
@@ -140,14 +154,17 @@ def main():
     for t in tickers:
         comp = _best_effort_company(t)
         try:
+            # Finnhub (day-by-day) + yfinance(get_news) + RSS providers
             n = fetch_news(t, a.start, a.end, company=comp, max_per_provider=a.news_per_provider)
         except Exception:
             n = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-        if n.empty:
+
+        if n is None or n.empty:
             print(f"  {t}: news rows=0 | days=0 | company={'-' if not comp else comp}")
         else:
-            dcount = n["ts"].dt.date.nunique()
+            dcount = n["ts"].dt.date.nunique() if "ts" in n.columns else 0
             print(f"  {t}: news rows={len(n)} | days={dcount} | company={'-' if not comp else comp}")
+
         n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
         news_all.append(n)
 
@@ -156,8 +173,11 @@ def main():
         if news_all else
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
+
+    # No earnings yet (schema preserved)
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
+    # Daily aggregation
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
     d_earn = (
         daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
