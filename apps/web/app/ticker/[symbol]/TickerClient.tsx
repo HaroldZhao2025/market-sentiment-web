@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import LineChart from "../../../components/LineChart";
+import LineChart, { ChartLegend } from "../../../components/LineChart";
 
 export type SeriesIn = {
   date: string[];
@@ -81,7 +81,11 @@ export default function TickerClient({
 
       {/* Chart Card */}
       <div className="rounded-2xl p-6 shadow-sm border bg-white">
-        <h3 className="font-semibold mb-4">Sentiment &amp; Price</h3>
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <h3 className="font-semibold">Sentiment &amp; Price</h3>
+          {/* Always-visible legend */}
+          <ChartLegend />
+        </div>
         <LineChart
           mode={mode}
           dates={series.date}
@@ -97,8 +101,7 @@ export default function TickerClient({
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
           <div className="text-sm text-neutral-500 mb-1">Live Market Sentiment</div>
           <div className="text-2xl md:text-3xl font-semibold">
-            {label(lastS)}{" "}
-            <span className="text-neutral-500 text-lg">({lastS.toFixed(4)})</span>
+            {label(lastS)} <span className="text-neutral-500 text-lg">({lastS.toFixed(4)})</span>
           </div>
         </div>
         <div className="rounded-2xl p-5 shadow-sm border bg-white">
@@ -120,7 +123,7 @@ export default function TickerClient({
         <div className="flex items-baseline justify-between">
           <h3 className="font-semibold mb-1">Recent Headlines for {symbol}</h3>
           <p className="text-xs text-neutral-500">
-            The list shows up to 10 latest headlines; daily sentiment uses all news in the period.
+            The list shows up to 10 latest headlines; daily sentiment uses all news in the period (Finnhub + Yahoo Finance).
           </p>
         </div>
         {news?.length ? (
