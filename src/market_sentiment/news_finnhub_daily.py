@@ -3,15 +3,23 @@ from __future__ import annotations
 
 import os
 import time
-from typing import List, Tuple
+import random
+from typing import List, Tuple, Optional
 
 import pandas as pd
 
-# pip package name: finnhub-python ; import name: finnhub
+# pip name: finnhub-python ; import name: finnhub
 try:
-    import finnhub  # type: ignore
+    import finnhub
+    try:
+        from finnhub.exceptions import FinnhubAPIException  # present in current SDKs
+    except Exception:  # fallback: not all client versions expose this
+        class FinnhubAPIException(Exception):
+            pass
 except Exception:
     finnhub = None
+    class FinnhubAPIException(Exception):
+        pass
 
 
 def _clean_text(x) -> str:
@@ -35,17 +43,64 @@ def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.Da
     return df[["ticker", "ts", "title", "url", "text"]]
 
 
-def _norm_ts_epoch_to_utc(x) -> pd.Timestamp:
+def _norm_ts_utc_epoch(x) -> pd.Timestamp:
     """Finnhub 'datetime' is seconds since epoch (UTC)."""
-    if x is None:
-        return pd.NaT
     try:
         xi = int(x)
-        if xi > 10_000_000_000:  # just in case ms is ever returned
-            xi = xi / 1000.0
+    except Exception:
+        return pd.NaT
+    try:
         return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
     except Exception:
         return pd.NaT
+
+
+class _RateLimiter:
+    """
+    Simple token-bucket/spacing limiter:
+      - rps: max requests per second (soft cap)
+      - jitter: random micro jitter to avoid thundering herd
+    """
+    def __init__(self, rps: float = 5.0, jitter: float = 0.10):
+        self.min_gap = 1.0 / max(1.0, float(rps))
+        self.last = 0.0
+        self.jitter = float(jitter)
+
+    def sleep(self):
+        now = time.time()
+        # target next slot + small jitter
+        target = self.last + self.min_gap + random.random() * self.jitter * self.min_gap
+        wait = max(0.0, target - now)
+        if wait > 0:
+            time.sleep(wait)
+        self.last = time.time()
+
+
+def _extract_retry_after_sec(e: Exception, default: int = 60) -> int:
+    """Try to read Retry-After or estimate a safe backoff window."""
+    # finnhub SDK often provides HTTPResponse on e.response (not guaranteed).
+    try:
+        resp = getattr(e, "response", None)
+        if resp is not None:
+            heads = getattr(resp, "headers", {}) or {}
+            ra = heads.get("Retry-After") or heads.get("retry-after")
+            if ra:
+                try:
+                    return max(default, int(float(ra)))
+                except Exception:
+                    pass
+    except Exception:
+        pass
+    # Parse common text like 'Remaining Limit: 0' (not reliable, but helpful)
+    try:
+        msg = str(e)
+        if "Remaining Limit: 0" in msg:
+            # be conservative: 90 seconds
+            return max(default, 90)
+    except Exception:
+        pass
+    # Default fallback
+    return default
 
 
 def fetch_finnhub_daily(
@@ -53,17 +108,21 @@ def fetch_finnhub_daily(
     start: str,
     end: str,
     *,
-    rps: int = 10,             # ≤ 30 per Finnhub limits
-    max_days: int | None = None,
+    rps: int = 5,                 # ≤ 30; keep conservative for CI stability
+    on_429: str = "skip",         # "skip" -> move to next day; "wait" -> sleep until reset then retry once
+    max_days: Optional[int] = None,
+    verbose: bool = False,
 ) -> pd.DataFrame:
     """
     EXACT Finnhub usage (one request per day):
 
-        import finnhub
-        c = finnhub.Client(api_key="...")
-        c.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+        client = finnhub.Client(api_key=TOKEN)
+        client.company_news('AAPL', _from='YYYY-MM-DD', to='YYYY-MM-DD')
 
-    Iterates day-by-day from start..end, rate-limited to `rps`.
+    This iterates every UTC day from start..end (inclusive), rate-limiting requests.
+    Handles 429 either by skipping the day or waiting and retrying once.
+
+    Returns a frame with columns: [ticker, ts (UTC), title, url, text].
     """
     token = (
         os.getenv("FINNHUB_TOKEN")
@@ -71,16 +130,19 @@ def fetch_finnhub_daily(
         or os.getenv("FINNHUB_KEY")
     )
     if finnhub is None or not token:
-        # No SDK or no token → empty DF
+        if verbose:
+            print(f"[finnhub] SDK not available or token missing; returning empty for {ticker}")
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
     try:
         client = finnhub.Client(api_key=token)
-    except Exception:
+    except Exception as e:
+        if verbose:
+            print(f"[finnhub] init error for {ticker}: {e}")
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
     rps = max(1, min(30, int(rps)))
-    min_gap = 1.0 / float(rps)
+    limiter = _RateLimiter(rps=rps)
 
     s = pd.Timestamp(start, tz="UTC").normalize()
     e = pd.Timestamp(end, tz="UTC").normalize()
@@ -89,25 +151,53 @@ def fetch_finnhub_daily(
         days = days[:max_days]
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
-    last = 0.0
 
     for d in days:
         day = d.date().isoformat()
 
-        # basic rate limiter
-        now = time.time()
-        wait = max(0.0, (last + min_gap) - now)
-        if wait > 0:
-            time.sleep(wait)
-        last = time.time()
+        limiter.sleep()  # soft spacing
+
+        if verbose:
+            print(f"[finnhub] {ticker} day={day} …", end="", flush=True)
 
         try:
             arr = client.company_news(ticker, _from=day, to=day) or []
-        except Exception:
-            continue
+        except FinnhubAPIException as ex:
+            # Rate limit or other API faults
+            if "429" in str(ex) or "limit" in str(ex).lower():
+                if on_429 == "wait":
+                    backoff = _extract_retry_after_sec(ex, default=60)
+                    if verbose:
+                        print(f" 429 -> waiting {backoff}s then retry", flush=True)
+                    time.sleep(backoff)
+                    # retry once
+                    try:
+                        arr = client.company_news(ticker, _from=day, to=day) or []
+                    except Exception as ex2:
+                        if verbose:
+                            print(f" retry failed ({ex2}); skipping")
+                        arr = []
+                else:
+                    if verbose:
+                        print(" 429 -> skip")
+                    arr = []
+            else:
+                if verbose:
+                    print(f" ERROR {ex}; skip")
+                arr = []
+        except Exception as e2:
+            if verbose:
+                print(f" ERROR {e2}; skip")
+            arr = []
 
+        if verbose and not isinstance(arr, list):
+            # safety: some SDK versions could return non-list on error
+            print(" unexpected response type; coerced to []")
+            arr = []
+
+        cnt = 0
         for it in arr:
-            ts = _norm_ts_epoch_to_utc(it.get("datetime"))
+            ts = _norm_ts_utc_epoch(it.get("datetime"))
             if pd.isna(ts):
                 continue
             title = _clean_text(it.get("headline") or "")
@@ -116,5 +206,9 @@ def fetch_finnhub_daily(
             url = it.get("url") or ""
             text = _clean_text(it.get("summary") or title)
             rows.append((ts, title, url, text))
+            cnt += 1
+
+        if verbose:
+            print(f" {cnt} items")
 
     return _mk_df(rows, ticker)
