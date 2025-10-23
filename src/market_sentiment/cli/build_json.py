@@ -16,9 +16,9 @@ from market_sentiment.aggregate import (
     _ensure_date_dtype,
 )
 from market_sentiment.finbert import FinBERT
+from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
-from market_sentiment.news import fetch_news  # <- restored API name
 
 
 def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
@@ -56,7 +56,7 @@ def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int
         futs = []
         for t in tickers:
             futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)  # soften YF rate-limits
+            time.sleep(0.12)  # gentle YF
         for f in as_completed(futs):
             try:
                 df = f.result()
@@ -118,17 +118,14 @@ def main():
     p.add_argument("--cutoff-minutes", type=int, default=5)
     p.add_argument("--max-tickers", type=int, default=0)
     p.add_argument("--max-workers", type=int, default=8)
-
-    # knobs (kept simple and explicit)
     p.add_argument("--yfinance-count", type=int, default=240,
                    help="yfinance get_news(count=...) size (default 240).")
-    p.add_argument("--finnhub-rps", type=int, default=5,
-                   help="Max requests/sec for Finnhub per-day calls (≤30, default 5).")
-    p.add_argument("--finnhub-on429", choices=["skip", "wait"], default="skip",
-                   help="On Finnhub 429 rate-limit: skip day or wait+retry once.")
-    # API-compat flag from earlier workflows (accepted but not strictly needed)
-    p.add_argument("--news-per-provider", type=int, default=6000,
-                   help="Kept for compatibility; not used directly (we pull full daily + 240 YF).")
+    p.add_argument("--finnhub-rps", type=int, default=1,
+                   help="Requests/sec for Finnhub daily calls (≤30; default 1).")
+    p.add_argument("--finnhub-on429", choices=["wait"], default="wait",
+                   help="On Finnhub 429 rate-limit: always wait and retry (no skip).")
+    p.add_argument("--news-per-provider", type=int, default=0,
+                   help="Kept for API compat; ignored.")
 
     a = p.parse_args()
 
@@ -141,13 +138,13 @@ def main():
 
     print(f"Build JSON for {len(tickers)} tickers")
 
-    # -------- Prices --------
+    # Prices
     prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers)
     if prices is None or prices.empty:
         raise RuntimeError("No prices downloaded.")
     print(f"  ✓ Prices for {prices['ticker'].nunique()} tickers, rows={len(prices)}")
 
-    # -------- News (Finnhub daily + yfinance) --------
+    # News (Finnhub daily + yfinance recent)
     try:
         fb = FinBERT()
     except Exception:
@@ -160,9 +157,7 @@ def main():
         n = fetch_news(
             t, a.start, a.end,
             company=comp,
-            max_per_provider=a.news_per_provider,  # accepted but not used
             finnhub_rps=a.finnhub_rps,
-            finnhub_on429=a.finnhub_on429,
             yfinance_count=a.yfinance_count,
             verbose=True,
         )
@@ -178,10 +173,10 @@ def main():
         pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
     )
 
-    # (earnings placeholder)
+    # Earnings placeholder
     earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
 
-    # -------- Aggregate daily sentiment --------
+    # Aggregate daily sentiment
     d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
     d_earn = (
         daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
