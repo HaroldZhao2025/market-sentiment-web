@@ -1,215 +1,131 @@
-# src/market_sentiment/cli/build_json.py
 from __future__ import annotations
-
-import argparse
-import json
-import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List, Optional, Tuple
-
+from typing import List, Optional
 import pandas as pd
 
-from market_sentiment.aggregate import (
-    add_forward_returns,
-    daily_sentiment_from_rows,
-    join_and_fill_daily,
-    _ensure_date_dtype,
-)
-from market_sentiment.finbert import FinBERT
-from market_sentiment.news import fetch_news
-from market_sentiment.prices import fetch_prices_yf
-from market_sentiment.writers import write_outputs
+from .news_finnhub_daily import fetch_finnhub_daily
+from .news_yfinance import fetch_yfinance_recent
 
 
-def _score_texts(fb: FinBERT, texts: List[str], batch: int) -> List[float]:
+def _empty() -> pd.DataFrame:
+    return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
+
+
+# ------- Provider wrappers with the 5-arg signature your smoke tests use -------
+
+def _prov_finnhub(
+    ticker: str,
+    start: str,
+    end: str,
+    company: Optional[str] = None,  # unused (kept for signature compatibility)
+    limit: int = 0,                  # unused
+    **kwargs,
+) -> pd.DataFrame:
+    # kwargs pass-through: finnhub_rps, max_wait_sec, cache_dir, verbose
+    return fetch_finnhub_daily(
+        ticker=ticker,
+        start=start,
+        end=end,
+        rps=int(kwargs.get("finnhub_rps", 1)),
+        max_wait_sec=int(kwargs.get("finnhub_max_wait_sec", 600)),
+        cache_dir=kwargs.get("cache_dir", "data/news_cache"),
+        verbose=bool(kwargs.get("verbose", False)),
+    )
+
+
+def _prov_yfinance(
+    ticker: str,
+    start: str,
+    end: str,
+    company: Optional[str] = None,   # unused
+    limit: int = 240,
+    **kwargs,
+) -> pd.DataFrame:
+    return fetch_yfinance_recent(
+        ticker=ticker,
+        start=start,
+        end=end,
+        count=int(kwargs.get("yfinance_count", limit or 240)),
+        tab="all",
+    )
+
+
+# Legacy names kept as no-ops so old imports don’t break
+def _prov_gdelt(*_args, **_kwargs) -> pd.DataFrame: return _empty()
+def _prov_google_rss(*_args, **_kwargs) -> pd.DataFrame: return _empty()
+def _prov_yahoo_rss(*_args, **_kwargs) -> pd.DataFrame: return _empty()
+def _prov_nasdaq_rss(*_args, **_kwargs) -> pd.DataFrame: return _empty()
+
+
+# ---------------- Public API ----------------
+
+def fetch_news_all_sources(
+    ticker: str,
+    start: str,
+    end: str,
+    *,
+    finnhub_rps: int = 1,
+    finnhub_max_wait_sec: int = 600,
+    yfinance_count: int = 240,
+    cache_dir: str = "data/news_cache",
+    verbose: bool = False,
+) -> pd.DataFrame:
+    frames: List[pd.DataFrame] = []
+
+    # Finnhub (historical, daily)
     try:
-        return fb.score(texts, batch=batch)
-    except TypeError:
-        try:
-            return fb.score(texts, batch_size=batch)
-        except TypeError:
-            return fb.score(texts)
-
-
-def _score_rows_inplace(fb: Optional[FinBERT], df: pd.DataFrame, text_col: str, batch: int) -> pd.DataFrame:
-    if df is None or df.empty:
-        return pd.DataFrame(columns=["ticker", "ts", "title", "url", text_col, "S"])
-    out = df.copy()
-    if fb is None:
-        out["S"] = 0.0
-        return out
-    texts = out[text_col].astype(str).fillna("").tolist()
-    if not texts:
-        out["S"] = 0.0
-        return out
-    try:
-        scores = _score_texts(fb, texts, batch=batch)
-        out["S"] = pd.to_numeric(pd.Series(scores), errors="coerce").fillna(0.0)
-    except Exception:
-        out["S"] = 0.0
-    return out
-
-
-def _fetch_all_prices(tickers: List[str], start: str, end: str, max_workers: int) -> pd.DataFrame:
-    rows: List[pd.DataFrame] = []
-    with ThreadPoolExecutor(max_workers=max_workers) as ex:
-        futs = []
-        for t in tickers:
-            futs.append(ex.submit(fetch_prices_yf, t, start, end))
-            time.sleep(0.12)  # gentle YF
-        for f in as_completed(futs):
-            try:
-                df = f.result()
-                if df is not None and len(df) > 0:
-                    rows.append(df)
-            except Exception:
-                pass
-    if not rows:
-        return pd.DataFrame(columns=["date", "ticker", "open", "close"])
-    prices = pd.concat(rows, ignore_index=True)
-    prices = _ensure_date_dtype(prices, "date")
-    prices = add_forward_returns(prices)
-    return prices
-
-
-def _best_effort_company(ticker: str) -> Optional[str]:
-    try:
-        import yfinance as yf
-        info = yf.Ticker(ticker).get_info() or {}
-        name = info.get("longName") or info.get("shortName")
-        if name and 2 <= len(name) <= 80:
-            return str(name).strip()
-    except Exception:
-        pass
-    return None
-
-
-def _summarize_from_files(out_dir: str) -> Tuple[List[str], int, int, int]:
-    try:
-        tickers = json.load(open(f"{out_dir}/_tickers.json", "r", encoding="utf-8"))
-    except Exception:
-        tickers = []
-    have_files = with_news = with_nonzero_s = 0
-    for t in tickers:
-        f = f"{out_dir}/ticker/{t}.json"
-        try:
-            obj = json.load(open(f, "r", encoding="utf-8"))
-        except Exception:
-            continue
-        have_files += 1
-        if obj.get("news"):
-            with_news += 1
-        S = obj.get("S") or obj.get("sentiment") or []
-        try:
-            if any(abs(float(x or 0.0)) > 1e-12 for x in S):
-                with_nonzero_s += 1
-        except Exception:
-            pass
-    return tickers, have_files, with_news, with_nonzero_s
-
-
-def main():
-    p = argparse.ArgumentParser("Build JSON artifacts for the web app")
-    p.add_argument("--universe", required=True, help="CSV with 'ticker' column (first col accepted)")
-    p.add_argument("--start", required=True)
-    p.add_argument("--end", required=True)
-    p.add_argument("--out", required=True, help="Output dir: apps/web/public/data")
-    p.add_argument("--batch", type=int, default=16)
-    p.add_argument("--cutoff-minutes", type=int, default=5)
-    p.add_argument("--max-tickers", type=int, default=0)
-    p.add_argument("--max-workers", type=int, default=8)
-    p.add_argument("--yfinance-count", type=int, default=240,
-                   help="yfinance get_news(count=...) size (default 240).")
-    p.add_argument("--finnhub-rps", type=int, default=1,
-                   help="Requests/sec for Finnhub daily calls (≤30; default 1).")
-    p.add_argument("--finnhub-on429", choices=["wait"], default="wait",
-                   help="On Finnhub 429 rate-limit: always wait and retry (no skip).")
-    p.add_argument("--news-per-provider", type=int, default=0,
-                   help="Kept for API compat; ignored.")
-
-    a = p.parse_args()
-
-    uni = pd.read_csv(a.universe)
-    if "ticker" not in uni.columns:
-        uni = uni.rename(columns={uni.columns[0]: "ticker"})
-    tickers = sorted(str(x).strip().upper() for x in uni["ticker"].dropna().unique().tolist())
-    if a.max_tickers and a.max_tickers > 0:
-        tickers = tickers[: a.max_tickers]
-
-    print(f"Build JSON for {len(tickers)} tickers")
-
-    # Prices
-    prices = _fetch_all_prices(tickers, a.start, a.end, max_workers=a.max_workers)
-    if prices is None or prices.empty:
-        raise RuntimeError("No prices downloaded.")
-    print(f"  ✓ Prices for {prices['ticker'].nunique()} tickers, rows={len(prices)}")
-
-    # News (Finnhub daily + yfinance recent)
-    try:
-        fb = FinBERT()
-    except Exception:
-        fb = None
-
-    news_all: List[pd.DataFrame] = []
-    for t in tickers:
-        comp = _best_effort_company(t)
-        print(f"  News for {t} …")
-        n = fetch_news(
-            t, a.start, a.end,
-            company=comp,
-            finnhub_rps=a.finnhub_rps,
-            yfinance_count=a.yfinance_count,
-            verbose=True,
+        df_fh = _prov_finnhub(
+            ticker, start, end,
+            finnhub_rps=finnhub_rps,
+            finnhub_max_wait_sec=finnhub_max_wait_sec,
+            cache_dir=cache_dir,
+            verbose=verbose,
         )
-        dcount = n["ts"].dt.date.nunique() if not n.empty else 0
-        print(f"    -> rows={len(n)} | days={dcount}")
+        if df_fh is not None and not df_fh.empty:
+            frames.append(df_fh)
+            if verbose:
+                print(f"[merge] finnhub rows={len(df_fh)} days={df_fh['ts'].dt.date.nunique()}")
+    except Exception as e:
+        if verbose:
+            print(f"[merge] finnhub error: {e}")
 
-        n = _score_rows_inplace(fb, n, text_col="text", batch=a.batch)
-        news_all.append(n)
+    # yfinance (recent ~200)
+    try:
+        df_yf = _prov_yfinance(
+            ticker, start, end,
+            yfinance_count=yfinance_count,
+        )
+        if df_yf is not None and not df_yf.empty:
+            frames.append(df_yf)
+            if verbose:
+                print(f"[merge] yfinance rows={len(df_yf)} days={df_yf['ts'].dt.date.nunique()}")
+    except Exception as e:
+        if verbose:
+            print(f"[merge] yfinance error: {e}")
 
-    news_rows = (
-        pd.concat(news_all, ignore_index=True)
-        if news_all else
-        pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
+    if not frames:
+        return _empty()
+
+    df = pd.concat(frames, ignore_index=True)
+    df["url"] = df["url"].fillna("")
+    df = df.drop_duplicates(["title", "url"]).sort_values("ts").reset_index(drop=True)
+    return df[["ticker", "ts", "title", "url", "text"]]
+
+
+def fetch_news(
+    ticker: str,
+    start: str,
+    end: str,
+    company: Optional[str] = None,   # kept for compatibility
+    max_per_provider: int = 0,       # ignored (Finnhub is per-day; yfinance uses count)
+    **kwargs,
+) -> pd.DataFrame:
+    return fetch_news_all_sources(
+        ticker=ticker,
+        start=start,
+        end=end,
+        finnhub_rps=int(kwargs.get("finnhub_rps", 1)),
+        finnhub_max_wait_sec=int(kwargs.get("finnhub_max_wait_sec", 600)),
+        yfinance_count=int(kwargs.get("yfinance_count", 240)),
+        cache_dir=kwargs.get("cache_dir", "data/news_cache"),
+        verbose=bool(kwargs.get("verbose", False)),
     )
-
-    # Earnings placeholder
-    earn_rows = pd.DataFrame(columns=["ticker", "ts", "title", "url", "text", "S"])
-
-    # Aggregate daily sentiment
-    d_news = daily_sentiment_from_rows(news_rows, "news", cutoff_minutes=a.cutoff_minutes)
-    d_earn = (
-        daily_sentiment_from_rows(earn_rows, "earn", cutoff_minutes=a.cutoff_minutes)
-        if not earn_rows.empty else
-        pd.DataFrame(columns=["date", "ticker", "S_EARN"])
-    )
-
-    if not d_news.empty:
-        d_news["date"] = pd.to_datetime(d_news["date"], utc=True, errors="coerce").dt.tz_localize(None)
-    if not d_earn.empty:
-        d_earn["date"] = pd.to_datetime(d_earn["date"], utc=True, errors="coerce").dt.tz_localize(None)
-
-    daily = join_and_fill_daily(d_news, d_earn)
-    if "S" not in daily.columns:
-        daily["S_NEWS"] = pd.to_numeric(daily.get("S_NEWS", 0.0), errors="coerce").fillna(0.0)
-        daily["S_EARN"] = pd.to_numeric(daily.get("S_EARN", 0.0), errors="coerce").fillna(0.0)
-        daily["S"] = daily["S_NEWS"] + daily["S_EARN"]
-
-    panel = prices.merge(daily, on=["date", "ticker"], how="left")
-    for c in ("S", "S_NEWS", "S_EARN"):
-        if c not in panel.columns:
-            panel[c] = 0.0
-        panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
-
-    write_outputs(panel, news_rows, earn_rows, a.out)
-
-    tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
-    print("Summary:")
-    print(f"  Tickers listed: {len(tickers_list)}")
-    print(f"  Ticker JSON files: {have_files}")
-    print(f"  Tickers with any news: {with_news}/{len(tickers_list)}")
-    print(f"  Tickers with non-zero daily S: {with_nonzero_s}/{len(tickers_list)}")
-
-
-if __name__ == "__main__":
-    main()
