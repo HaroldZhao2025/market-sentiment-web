@@ -27,7 +27,7 @@ on:
     - cron: "0 12 * * 1" # Mondays 12:00 UTC
 
 permissions:
-  contents: read
+  contents: write         # allow committing /data history back to repo
   pages: write
   id-token: write
 
@@ -44,11 +44,14 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
       # ---------- Python & deps ----------
       - name: Setup Python
@@ -69,7 +72,7 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
-          pip install --no-cache-dir finnhub-python
+          pip install --no-cache-dir finnhub-python yfinance
 
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
@@ -90,6 +93,14 @@ jobs:
         run: |
           echo "YF_COUNT=${{ github.event.inputs.yfinance_count || '240' }}" >> "$GITHUB_ENV"
           echo "FINNHUB_RPS=${{ github.event.inputs.finnhub_rps || '10' }}" >> "$GITHUB_ENV"
+
+      - name: Ensure repo data directories (persisted history)
+        run: |
+          mkdir -p data
+          mkdir -p data/history/news
+          mkdir -p data/history/sentiment
+          mkdir -p data/history/prices
+          ls -la data || true
 
       - name: Select mode and universe
         shell: bash
@@ -123,7 +134,6 @@ jobs:
           UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Safari/537.36"}
           candidates = []
 
-          # 1) Wikipedia via requests
           try:
               print("Trying Wikipedia…")
               r = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=30)
@@ -134,31 +144,23 @@ jobs:
                   s = df["Symbol"].astype(str)
                   candidates.append(s)
                   print(f"Wikipedia ok: {len(s)} symbols")
-              else:
-                  print("Wikipedia: table with 'Symbol' not found")
           except Exception as e:
               print("Wikipedia failed:", e)
 
-          # 2) Slickcharts
           try:
               print("Trying Slickcharts…")
               r = requests.get("https://www.slickcharts.com/sp500", headers=UA, timeout=30)
               r.raise_for_status()
               tables = pd.read_html(r.text)
-              df = next((t for t in tables if "Symbol" in t.columns), None)
-              if df is None and len(tables):
-                  df = tables[0]
+              df = next((t for t in tables if "Symbol" in t.columns), None) or (tables[0] if tables else None)
               if df is not None:
                   col = "Symbol" if "Symbol" in df.columns else df.columns[0]
                   s = df[col].astype(str)
                   candidates.append(s)
                   print(f"Slickcharts ok: {len(s)} symbols")
-              else:
-                  print("Slickcharts: table not found")
           except Exception as e:
               print("Slickcharts failed:", e)
 
-          # 3) GitHub dataset (CSV)
           for url in [
               "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
               "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv",
@@ -172,24 +174,116 @@ jobs:
                       candidates.append(s)
                       print(f"Dataset ok: {len(s)} symbols from {url}")
                       break
-                  else:
-                      print(f"Dataset at {url}: no Symbol/symbol column")
               except Exception as e:
                   print(f"Dataset failed ({url}):", e)
 
           if not candidates:
-              raise RuntimeError("All S&P500 sources failed (403/parse). Commit data/sp500.csv to repo to bypass network.")
+              raise RuntimeError("All S&P500 sources failed. Commit data/sp500.csv to repo to bypass network.")
 
           ser = pd.concat(candidates, ignore_index=True)
-          ser = (ser.str.upper()
-                     .str.replace(".", "-", regex=False)
-                     .str.strip())
+          ser = ser.str.upper().str.replace(".", "-", regex=False).str.strip()
           uniq = sorted(set(x for x in ser if x))
           outp.parent.mkdir(parents=True, exist_ok=True)
           outp.write_text("ticker\n" + "\n".join(uniq) + "\n", encoding="utf-8")
           print(f"Wrote {len(uniq)} tickers to {outp}")
 
-      # ---------- Smoke tests (direct API calls; no repo imports) ----------
+      # ---------- Historical backfill: Finnhub (daily) + yfinance (latest ~200) ----------
+      - name: Historical backfill to data/history (rate-limited, idempotent)
+        env:
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+        shell: python
+        run: |
+          import os, sys, time, json, pathlib, pandas as pd, datetime as dt
+          import yfinance as yf
+          try:
+            import finnhub
+          except Exception:
+            finnhub = None
+
+          START = os.environ["START"]
+          END   = os.environ["END"]
+          TICKER_CSV = os.environ["TICKER_CSV"]
+          YF_COUNT = int(os.environ.get("YF_COUNT","240"))
+          RPS = max(1, min(30, int(os.environ.get("FINNHUB_RPS","10"))))
+          MIN_GAP = 1.0 / RPS
+          MAX_TICKERS = int(os.environ.get("MAX_TICKERS","500"))
+
+          def ensure_dir(p): pathlib.Path(p).mkdir(parents=True, exist_ok=True)
+
+          tickers = pd.read_csv(TICKER_CSV)["ticker"].astype(str).str.upper().tolist()[:MAX_TICKERS]
+          print("Backfill tickers:", len(tickers))
+
+          # Finnhub client
+          token = os.environ.get("FINNHUB_TOKEN")
+          client = finnhub.Client(api_key=token) if (token and finnhub is not None) else None
+          if client is None:
+            print("WARN: Finnhub token missing or finnhub not installed; skipping finnhub backfill.", file=sys.stderr)
+
+          days = list(pd.date_range(pd.Timestamp(START, tz="UTC").normalize(),
+                                    pd.Timestamp(END, tz="UTC").normalize(),
+                                    freq="D"))
+
+          last_call = 0.0
+          def call_finnhub(tkr, dstr):
+              nonlocal last_call
+              # rate limit
+              now = time.time()
+              wait = max(0.0, (last_call + MIN_GAP) - now)
+              if wait > 0: time.sleep(wait)
+              last_call = time.time()
+              return client.company_news(tkr, _from=dstr, to=dstr) or []
+
+          for tkr in tickers:
+              tdir = f"data/history/news/{tkr}"
+              ensure_dir(tdir)
+
+              # yfinance latest (roughly ~200)
+              try:
+                  t = yf.Ticker(tkr)
+                  try:
+                      items = t.get_news(count=YF_COUNT, tab="all")
+                  except TypeError:
+                      items = t.news or []
+                  with open(f"{tdir}/yfinance.latest.json", "w", encoding="utf-8") as f:
+                      json.dump(items or [], f, ensure_ascii=False)
+                  print(f"[yfinance] {tkr}: {len(items or [])} items saved -> {tdir}/yfinance.latest.json")
+              except Exception as e:
+                  print(f"[yfinance] {tkr}: ERROR {e}", file=sys.stderr)
+
+              # per-day finnhub backfill
+              if client is None: 
+                  continue
+              wrote = 0
+              for d in days:
+                  dstr = d.date().isoformat()
+                  outp = f"{tdir}/{dstr}.finnhub.json"
+                  if os.path.exists(outp) and os.path.getsize(outp) > 2:
+                      continue
+                  try:
+                      arr = call_finnhub(tkr, dstr)
+                      # Minimal sleep backoff on bursts/limits
+                      if not isinstance(arr, list):
+                          arr = []
+                      with open(outp, "w", encoding="utf-8") as f:
+                          json.dump(arr, f, ensure_ascii=False)
+                      wrote += 1
+                  except Exception as e:
+                      # On 429, backoff and retry once
+                      msg = str(e)
+                      if "429" in msg:
+                          time.sleep(2.0)
+                          try:
+                              arr = call_finnhub(tkr, dstr)
+                              with open(outp, "w", encoding="utf-8") as f:
+                                  json.dump(arr or [], f, ensure_ascii=False)
+                              wrote += 1
+                          except Exception as e2:
+                              print(f"[finnhub] {tkr} {dstr}: second attempt failed {e2}", file=sys.stderr)
+                      else:
+                          print(f"[finnhub] {tkr} {dstr}: ERROR {e}", file=sys.stderr)
+              print(f"[finnhub] {tkr}: wrote {wrote} day-files into {tdir}")
+
+      # ---------- Smoke tests (brief) ----------
       - name: Smoke test — yfinance (count from input)
         shell: python
         run: |
@@ -200,50 +294,28 @@ jobs:
             items = t.get_news(count=c, tab="all")
           except TypeError:
             items = t.news or []
-          n = 0 if not items else len(items)
-          print(f"yfinance.get_news(count={c}, tab='all') -> {n} items")
-          if n:
-            it = items[0]
-            title = (it.get("content") or {}).get("title") or it.get("title")
-            print("first_title:", title)
+          print(f"yfinance.get_news(count={c}, tab='all') -> {len(items or [])} items")
 
-      - name: Smoke test — Finnhub single-day (exact sample)
+      - name: Smoke test — Finnhub single-day (reads history if present)
         env:
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
-          SYMBOL: AAPL
-        shell: python
+        shell: bash
         run: |
-          import os, sys, datetime as dt
-          import finnhub
-          def ts_iso(t):
-            try: return dt.datetime.utcfromtimestamp(int(t)).isoformat()+"Z"
-            except: return "NA"
-          token = os.environ.get("FINNHUB_TOKEN")
-          if not token:
-            print("ERROR: FINNHUB_TOKEN is missing", file=sys.stderr); sys.exit(1)
-          c = finnhub.Client(api_key=token)
-          sym = os.environ.get("SYMBOL", "AAPL")
-          default_day = (dt.datetime.utcnow() - dt.timedelta(days=1)).strftime("%Y-%m-%d")
-          day_from = os.environ.get("FINNHUB_FROM", default_day)
-          day_to   = os.environ.get("FINNHUB_TO",   day_from)
-          print(f"Finnhub: company_news('{sym}', _from='{day_from}', to='{day_to}')")
-          arr = c.company_news(sym, _from=day_from, to=day_to) or []
-          print(f"Items: {len(arr)}")
-          for i, it in enumerate(arr[:5]):
-            print(f"[{i}] {ts_iso(it.get('datetime'))} | {it.get('source')} | {it.get('headline')}")
-            print(f"     {it.get('url')}")
+          set -euo pipefail
+          DAY="$(date -u -d '1 day ago' +%F || gdate -u -d '1 day ago' +%F 2>/dev/null || python - <<'PY'
+import datetime as dt
+print((dt.datetime.utcnow()-dt.timedelta(days=1)).date().isoformat())
+PY
+          )"
+          FILE="data/history/news/AAPL/${DAY}.finnhub.json"
+          if [ -s "$FILE" ]; then
+            echo "Found historical Finnhub file: $FILE"
+            head -c 400 "$FILE" || true
+          else
+            echo "No historical file for $DAY; will proceed (may rely on live fetch in CLI)."
+          fi
 
-      - name: Smoke test — AAPL prices
-        shell: python
-        run: |
-          from market_sentiment.prices import fetch_prices_yf
-          p = fetch_prices_yf("AAPL", "${{ env.START }}", "${{ env.END }}")
-          print("AAPL prices rows:", len(p))
-          if not p.empty:
-            print(p.head(2).to_string(index=False))
-            print(p.tail(2).to_string(index=False))
-
-      # ---------- Build JSON data ----------
+      # ---------- Build JSON data (will *merge* historical + fresh) ----------
       - name: Build JSON data (prices + news)
         env:
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
@@ -251,7 +323,6 @@ jobs:
         run: |
           set -euo pipefail
           echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | yfinance_count=${YF_COUNT:-240} finnhub_rps=${FINNHUB_RPS:-10}"
-          # removed --diagnostics (unsupported by CLI)
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
             --start "$START" --end "$END" \
@@ -259,33 +330,48 @@ jobs:
             --batch 16 \
             --cutoff-minutes 5 \
             --max-workers 3 \
+            --cache-dir data/history \
             --yfinance-count "${YF_COUNT:-240}" \
             --finnhub-rps "${FINNHUB_RPS:-10}"
 
-      - name: Inspect generated data (AAPL)
+      - name: Persist historical sentiment (CSV) into data/history/sentiment
         shell: python
         run: |
-          import json, os
-          base="apps/web/public/data"
-          print("== List data dir ==")
-          for root, dirs, files in os.walk(base):
-            for f in sorted(files):
-              p=os.path.join(root,f)
-              print(p)
-          tfile=os.path.join(base,"ticker","AAPL.json")
-          if os.path.exists(tfile):
-            obj=json.load(open(tfile))
-            S = obj.get("S") or obj.get("sentiment") or []
-            nz=sum(1 for x in S if abs((x or 0))>1e-12)
-            print(f"\nAAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {S[0] if S else None}  last= {S[-1] if S else None}")
-            news = obj.get("news") or []
-            print("AAPL news items saved (trimmed):", len(news))
-            days = len({ (n.get('ts') or '')[:10] for n in news if n.get('ts') })
-            print("AAPL news_day_count (unique days with news):", days)
-          else:
-            print("AAPL.json not found")
-          tickers = json.load(open(os.path.join(base,"_tickers.json")))
-          print("tickers listed:", len(tickers))
+          import os, json, pandas as pd, pathlib
+          base="apps/web/public/data/ticker"
+          outdir="data/history/sentiment"
+          pathlib.Path(outdir).mkdir(parents=True, exist_ok=True)
+          if not os.path.isdir(base):
+              raise SystemExit("No ticker data folder found.")
+          for fn in sorted(os.listdir(base)):
+              if not fn.endswith(".json"): 
+                  continue
+              tkr = fn[:-5]
+              j = json.load(open(os.path.join(base, fn)))
+              S = j.get("S") or j.get("sentiment") or []
+              days = j.get("days") or j.get("dates") or []
+              if not S or not days: 
+                  continue
+              # Normalize to DataFrame
+              df = pd.DataFrame({"date": days, "S": S})
+              # MA7 for convenience (4 decimals)
+              df["MA7"] = pd.Series(df["S"]).rolling(7, min_periods=1).mean().round(4)
+              df.to_csv(os.path.join(outdir, f"{tkr}.csv"), index=False)
+              print(f"Wrote {tkr} -> {outdir}/{tkr}.csv")
+
+      - name: Commit & push data/history changes
+        if: always()
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/history || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit in data/history."
+          else
+            git commit -m "chore(ci): backfill news + persist historical sentiment"
+            git push
+          fi
 
       # ---------- Node & web build ----------
       - name: Setup Node.js (with npm cache)
@@ -327,7 +413,9 @@ jobs:
           echo "==== Node/NPM ===="
           node -v
           npm -v
+
           npm run build
+
           echo "==== Prepare out/ ===="
           if [ -d "out" ]; then
             echo "Next produced out/ already. Using it."
@@ -335,6 +423,7 @@ jobs:
             echo "No out/ from Next; synthesizing from .next artifacts..."
             rm -rf out
             mkdir -p out
+
             if [ -d ".next/static" ]; then
               mkdir -p out/_next
               rsync -a .next/static out/_next/static
@@ -360,6 +449,7 @@ jobs:
               cp "out/index.html" "out/404.html" || true
             fi
           fi
+
           touch out/.nojekyll
           echo "==== Final out/ listing ===="
           find out -maxdepth 3 -type f | sort
