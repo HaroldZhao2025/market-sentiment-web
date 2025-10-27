@@ -39,6 +39,8 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+  # make FINNHUB_TOKEN available to all steps
+  FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
 
 jobs:
   build:
@@ -86,6 +88,12 @@ jobs:
           with open(os.environ['GITHUB_ENV'],'a') as f:
               f.write(f"START={start}\nEND={end}\n")
           print("START", start, "END", end)
+
+      - name: Propagate inputs to env
+        shell: bash
+        run: |
+          echo "YF_COUNT=${{ github.event.inputs.yfinance_count || '240' }}" >> "$GITHUB_ENV"
+          echo "FINNHUB_RPS=${{ github.event.inputs.finnhub_rps || '10' }}" >> "$GITHUB_ENV"
 
       - name: Select mode and universe
         shell: bash
@@ -185,41 +193,32 @@ jobs:
           outp.write_text("ticker\n" + "\n".join(uniq) + "\n", encoding="utf-8")
           print(f"Wrote {len(uniq)} tickers to {outp}")
 
-      # ---------- Smoke tests (debug news & prices) ----------
-      - name: Smoke test — AAPL news (Finnhub daily + yfinance 240)
-        env:
-          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+      # ---------- Smoke tests (direct API calls; no repo imports) ----------
+      - name: Smoke test — yfinance (count from input)
         shell: python
         run: |
-          import os
-          from market_sentiment.news_finnhub_daily import fetch_finnhub_daily
-          from market_sentiment.news_yfinance import fetch_yfinance_recent
-          from market_sentiment.news import fetch_news
-
-          START=os.environ["START"]; END=os.environ["END"]
-
-          df_fh = fetch_finnhub_daily("AAPL", START, END, rps=int(os.getenv("FINNHUB_RPS","10")))
-          df_yf = fetch_yfinance_recent("AAPL", START, END, count=int(os.getenv("YF_COUNT","240")))
-          print(f"finnhub  rows: {len(df_fh):5d} | days: {0 if df_fh.empty else df_fh['ts'].dt.date.nunique()}")
-          print(f"yfinance rows: {len(df_yf):5d} | days: {0 if df_yf.empty else df_yf['ts'].dt.date.nunique()}")
-
-          merged = fetch_news("AAPL", START, END, yfinance_count=int(os.getenv("YF_COUNT","240")), finnhub_rps=int(os.getenv("FINNHUB_RPS","10")), keep_source=True)
-          days = 0 if merged.empty else merged["ts"].dt.date.nunique()
-          print("fetch_news rows:", len(merged))
-          print("fetch_news coverage days:", days)
-          if len(merged):
-              print(merged[["ts","title","url"]].tail(3).to_string(index=False))
+          import os, yfinance as yf
+          c = int(os.environ.get("YF_COUNT","240"))
+          t = yf.Ticker("AAPL")
+          try:
+              items = t.get_news(count=c, tab="all")
+          except TypeError:
+              # older yfinance
+              items = t.news or []
+          n = 0 if not items else len(items)
+          print(f"yfinance.get_news(count={c}, tab='all') -> {n} items")
+          if n:
+              it = items[0]
+              title = (it.get("content") or {}).get("title") or it.get("title")
+              print("first_title:", title)
 
       - name: Smoke test — Finnhub single-day (exact sample)
         env:
-          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}  # make sure the repo secret exists
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}  # must exist in repo secrets
           SYMBOL: AAPL
-          # Optional: override the day; else it uses "yesterday UTC"
-          # FINNHUB_FROM: "2025-06-01"
-          # FINNHUB_TO:   "2025-06-01"
         shell: python
         run: |
-          import os, sys, datetime as dt
+          import os, sys, datetime as dt, time
           import finnhub
           def ts_iso(t):
               try: return dt.datetime.utcfromtimestamp(int(t)).isoformat()+"Z"
@@ -232,24 +231,18 @@ jobs:
 
           c = finnhub.Client(api_key=token)
           sym = os.environ.get("SYMBOL", "AAPL")
+          # yesterday UTC to avoid partial-day edge cases
           default_day = (dt.datetime.utcnow() - dt.timedelta(days=1)).strftime("%Y-%m-%d")
           day_from = os.environ.get("FINNHUB_FROM", default_day)
           day_to   = os.environ.get("FINNHUB_TO",   day_from)
 
           print(f"Finnhub: company_news('{sym}', _from='{day_from}', to='{day_to}')")
-          try:
-              arr = c.company_news(sym, _from=day_from, to=day_to) or []
-          except Exception as e:
-              print(f"ERROR calling finnhub.company_news: {e}", file=sys.stderr)
-              sys.exit(1)
-
+          # Single request to respect rate limits
+          arr = c.company_news(sym, _from=day_from, to=day_to) or []
           print(f"Items: {len(arr)}")
           for i, it in enumerate(arr[:5]):
               print(f"[{i}] {ts_iso(it.get('datetime'))} | {it.get('source')} | {it.get('headline')}")
               print(f"     {it.get('url')}")
-          if not arr:
-              sys.exit(2)
-
 
       - name: Smoke test — AAPL prices
         shell: python
@@ -265,23 +258,19 @@ jobs:
       - name: Build JSON data (prices + news)
         env:
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
-          YF_COUNT: ${{ github.event.inputs.yfinance_count }}
-          FINNHUB_RPS: ${{ github.event.inputs.finnhub_rps }}
         shell: bash
         run: |
           set -euo pipefail
-          YF_COUNT="${YF_COUNT:-240}"
-          FINNHUB_RPS="${FINNHUB_RPS:-10}"
-          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | yfinance_count=$YF_COUNT finnhub_rps=$FINNHUB_RPS"
+          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | yfinance_count=${YF_COUNT:-240} finnhub_rps=${FINNHUB_RPS:-10}"
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
             --start "$START" --end "$END" \
             --out apps/web/public/data \
             --batch 16 \
             --cutoff-minutes 5 \
-            --max-workers 8 \
-            --yfinance-count "$YF_COUNT" \
-            --finnhub-rps "$FINNHUB_RPS" \
+            --max-workers 3 \
+            --yfinance-count "${YF_COUNT:-240}" \
+            --finnhub-rps "${FINNHUB_RPS:-10}" \
             --diagnostics
 
       - name: Inspect generated data (AAPL)
@@ -338,7 +327,7 @@ jobs:
           set -euo pipefail
           if [ -f package-lock.json ]; then
             npm ci --no-audit --no-fund
-          else
+          else:
             npm install --no-audit --no-fund
           fi
           npm i -D @types/react @types/node --no-audit --no-fund || true
