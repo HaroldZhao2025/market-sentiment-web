@@ -27,7 +27,7 @@ on:
     - cron: "0 12 * * 1" # Mondays 12:00 UTC
 
 permissions:
-  contents: write         # allow committing /data history back to repo
+  contents: write
   pages: write
   id-token: write
 
@@ -213,7 +213,6 @@ jobs:
           tickers = pd.read_csv(TICKER_CSV)["ticker"].astype(str).str.upper().tolist()[:MAX_TICKERS]
           print("Backfill tickers:", len(tickers))
 
-          # Finnhub client
           token = os.environ.get("FINNHUB_TOKEN")
           client = finnhub.Client(api_key=token) if (token and finnhub is not None) else None
           if client is None:
@@ -226,7 +225,6 @@ jobs:
           last_call = 0.0
           def call_finnhub(tkr, dstr):
               nonlocal last_call
-              # rate limit
               now = time.time()
               wait = max(0.0, (last_call + MIN_GAP) - now)
               if wait > 0: time.sleep(wait)
@@ -237,7 +235,7 @@ jobs:
               tdir = f"data/history/news/{tkr}"
               ensure_dir(tdir)
 
-              # yfinance latest (roughly ~200)
+              # yfinance latest
               try:
                   t = yf.Ticker(tkr)
                   try:
@@ -250,8 +248,8 @@ jobs:
               except Exception as e:
                   print(f"[yfinance] {tkr}: ERROR {e}", file=sys.stderr)
 
-              # per-day finnhub backfill
-              if client is None: 
+              # finnhub per-day files
+              if client is None:
                   continue
               wrote = 0
               for d in days:
@@ -261,14 +259,12 @@ jobs:
                       continue
                   try:
                       arr = call_finnhub(tkr, dstr)
-                      # Minimal sleep backoff on bursts/limits
                       if not isinstance(arr, list):
                           arr = []
                       with open(outp, "w", encoding="utf-8") as f:
                           json.dump(arr, f, ensure_ascii=False)
                       wrote += 1
                   except Exception as e:
-                      # On 429, backoff and retry once
                       msg = str(e)
                       if "429" in msg:
                           time.sleep(2.0)
@@ -283,7 +279,7 @@ jobs:
                           print(f"[finnhub] {tkr} {dstr}: ERROR {e}", file=sys.stderr)
               print(f"[finnhub] {tkr}: wrote {wrote} day-files into {tdir}")
 
-      # ---------- Smoke tests (brief) ----------
+      # ---------- Smoke tests ----------
       - name: Smoke test — yfinance (count from input)
         shell: python
         run: |
@@ -297,25 +293,32 @@ jobs:
           print(f"yfinance.get_news(count={c}, tab='all') -> {len(items or [])} items")
 
       - name: Smoke test — Finnhub single-day (reads history if present)
-        env:
-          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
-        shell: bash
+        shell: python
         run: |
-          set -euo pipefail
-          DAY="$(date -u -d '1 day ago' +%F || gdate -u -d '1 day ago' +%F 2>/dev/null || python - <<'PY'
-import datetime as dt
-print((dt.datetime.utcnow()-dt.timedelta(days=1)).date().isoformat())
-PY
-          )"
-          FILE="data/history/news/AAPL/${DAY}.finnhub.json"
-          if [ -s "$FILE" ]; then
-            echo "Found historical Finnhub file: $FILE"
-            head -c 400 "$FILE" || true
-          else
-            echo "No historical file for $DAY; will proceed (may rely on live fetch in CLI)."
-          fi
+          import os, json, datetime as dt
+          day = (dt.datetime.utcnow()-dt.timedelta(days=1)).date().isoformat()
+          path = f"data/history/news/AAPL/{day}.finnhub.json"
+          if os.path.exists(path) and os.path.getsize(path) > 2:
+              print(f"Found historical Finnhub file: {path}")
+              with open(path, encoding="utf-8") as f:
+                  arr = json.load(f)
+              print(f"Items: {len(arr)}")
+              for it in (arr[:3] if isinstance(arr, list) else []):
+                  print(it.get("headline") or it.get("title") or "")
+          else:
+              print(f"No historical Finnhub file for {day} (this is OK if first run).")
 
-      # ---------- Build JSON data (will *merge* historical + fresh) ----------
+      - name: Smoke test — AAPL prices
+        shell: python
+        run: |
+          from market_sentiment.prices import fetch_prices_yf
+          p = fetch_prices_yf("AAPL", "${{ env.START }}", "${{ env.END }}")
+          print("AAPL prices rows:", len(p))
+          if not p.empty:
+            print(p.head(2).to_string(index=False))
+            print(p.tail(2).to_string(index=False))
+
+      # ---------- Build JSON data ----------
       - name: Build JSON data (prices + news)
         env:
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
@@ -352,9 +355,7 @@ PY
               days = j.get("days") or j.get("dates") or []
               if not S or not days: 
                   continue
-              # Normalize to DataFrame
               df = pd.DataFrame({"date": days, "S": S})
-              # MA7 for convenience (4 decimals)
               df["MA7"] = pd.Series(df["S"]).rolling(7, min_periods=1).mean().round(4)
               df.to_csv(os.path.join(outdir, f"{tkr}.csv"), index=False)
               print(f"Wrote {tkr} -> {outdir}/{tkr}.csv")
@@ -368,7 +369,7 @@ PY
           git add -A data/history || true
           if git diff --cached --quiet; then
             echo "No changes to commit in data/history."
-          else
+          else:
             git commit -m "chore(ci): backfill news + persist historical sentiment"
             git push
           fi
