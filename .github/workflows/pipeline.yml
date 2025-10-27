@@ -360,19 +360,33 @@ jobs:
               df.to_csv(os.path.join(outdir, f"{tkr}.csv"), index=False)
               print(f"Wrote {tkr} -> {outdir}/{tkr}.csv")
 
-      - name: Commit & push data/history changes
+      - name: Commit & push data/history changes (force-add ignored)
         if: always()
+        shell: bash
         run: |
-          set -e
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/history || true
+          set -euo pipefail
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global pull.rebase true
+          git config --global advice.addIgnoredFile false
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+          # Force-add because data/ is ignored by .gitignore
+          if [ -d data/history ]; then
+            git add -f data/history/** || true
+            git add -f data/history/*  || true
+          fi
+
+          # Nothing staged? exit quietly
           if git diff --cached --quiet; then
             echo "No changes to commit in data/history."
-          else:
-            git commit -m "chore(ci): backfill news + persist historical sentiment"
+          else
+            git commit -m "chore(ci): backfill news + persist historical sentiment [skip ci]"
+            # Rebase-pull to reduce non-fast-forward failures on concurrent runs
+            git pull --rebase || true
             git push
           fi
+
 
       # ---------- Node & web build ----------
       - name: Setup Node.js (with npm cache)
