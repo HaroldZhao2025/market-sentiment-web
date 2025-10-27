@@ -1,13 +1,14 @@
-# src/market_sentiment/news_finnhub_daily.py
 from __future__ import annotations
 
+import json
 import os
 import time
-from typing import List, Tuple, Iterable, Optional
+from pathlib import Path
+from typing import List, Tuple, Optional
 
 import pandas as pd
 
-# pip package: finnhub-python ; import name: finnhub
+# pip dist: finnhub-python ; import name: finnhub
 try:
     import finnhub
 except Exception:
@@ -20,6 +21,18 @@ def _clean_text(x) -> str:
     except Exception:
         return ""
     return " ".join(s.split())
+
+
+def _norm_ts_epoch_to_utc(x) -> pd.Timestamp:
+    """Finnhub 'datetime' is seconds since epoch (UTC)."""
+    try:
+        xi = int(x)
+    except Exception:
+        return pd.NaT
+    try:
+        return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
+    except Exception:
+        return pd.NaT
 
 
 def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.DataFrame:
@@ -35,39 +48,36 @@ def _mk_df(rows: List[Tuple[pd.Timestamp, str, str, str]], ticker: str) -> pd.Da
     return df[["ticker", "ts", "title", "url", "text"]]
 
 
-def _norm_ts_utc_epoch(x) -> pd.Timestamp:
-    """Finnhub 'datetime' is seconds since epoch (UTC)."""
+def _get_token() -> Optional[str]:
+    return (
+        os.getenv("FINNHUB_TOKEN")
+        or os.getenv("FINNHUB_API_KEY")
+        or os.getenv("FINNHUB_KEY")
+    )
+
+
+def _cache_path(cache_dir: str | Path, ticker: str, day: str) -> Path:
+    p = Path(cache_dir) / "finnhub" / ticker.upper() / f"{day}.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def _read_cache(cache_dir: str | Path, ticker: str, day: str) -> list:
+    f = _cache_path(cache_dir, ticker, day)
+    if f.exists() and f.stat().st_size > 0:
+        try:
+            return json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            return []
+    return []
+
+
+def _write_cache(cache_dir: str | Path, ticker: str, day: str, arr: list) -> None:
+    f = _cache_path(cache_dir, ticker, day)
     try:
-        xi = int(x)
+        f.write_text(json.dumps(arr, ensure_ascii=False), encoding="utf-8")
     except Exception:
-        return pd.NaT
-    try:
-        return pd.Timestamp.utcfromtimestamp(xi).tz_localize("UTC")
-    except Exception:
-        return pd.NaT
-
-
-class _RateLimiter:
-    """Simple per-process RPS limiter (single thread)."""
-    def __init__(self, rps: int):
-        rps = max(1, min(30, int(rps)))  # Finnhub docs: ≤30 req/sec
-        self._gap = 1.0 / float(rps)
-        self._last = 0.0
-
-    def wait(self):
-        now = time.time()
-        to_wait = max(0.0, (self._last + self._gap) - now)
-        if to_wait > 0:
-            time.sleep(to_wait)
-        self._last = time.time()
-
-
-def _date_range(s: pd.Timestamp, e: pd.Timestamp) -> Iterable[str]:
-    cur = s.normalize()
-    end = e.normalize()
-    while cur <= end:
-        yield cur.date().isoformat()
-        cur += pd.Timedelta(days=1)
+        pass
 
 
 def fetch_finnhub_daily(
@@ -75,36 +85,27 @@ def fetch_finnhub_daily(
     start: str,
     end: str,
     *,
-    rps: int = 1,               # default ultra-safe; you can raise to 3–5 later
-    on_429: str = "wait",       # "wait" only (no skip), kept param for clarity
+    rps: int = 1,                 # Finnhub free: <= 30 req/sec. We stay conservative.
+    max_wait_sec: int = 600,      # upper bound for exponential backoff on 429
+    cache_dir: str | Path = "data/news_cache",
     verbose: bool = False,
-    max_wait_sec: Optional[int] = None,
 ) -> pd.DataFrame:
     """
-    EXACT Finnhub usage (one request per day):
+    EXACT usage per your requirement (one API call per day):
 
-        import finnhub
-        c = finnhub.Client(api_key="...")
-        c.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
+        finnhub_client = finnhub.Client(api_key="...")
+        finnhub_client.company_news('AAPL', _from="YYYY-MM-DD", to="YYYY-MM-DD")
 
-    Never skips on 429: backs off and retries (bounded by max_wait_sec).
+    We do that for every day between start..end (UTC), with:
+      • local per-day JSON cache
+      • rate limiting (rps)
+      • 429 exponential backoff (capped by max_wait_sec)
     """
-    token = (
-        os.getenv("FINNHUB_TOKEN")
-        or os.getenv("FINNHUB_API_KEY")
-        or os.getenv("FINNHUB_KEY")
-    )
+    token = _get_token()
     if finnhub is None or not token:
         if verbose:
-            print("[finnhub] SDK missing or token not set; returning empty frame.")
+            print("[finnhub] no SDK or token; returning empty frame")
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
-
-    # External override for long waits, default 15 minutes
-    if max_wait_sec is None:
-        try:
-            max_wait_sec = int(os.getenv("FINNHUB_MAX_WAIT_SEC", "900"))
-        except Exception:
-            max_wait_sec = 900
 
     try:
         client = finnhub.Client(api_key=token)
@@ -113,71 +114,76 @@ def fetch_finnhub_daily(
             print(f"[finnhub] client init error: {e}")
         return pd.DataFrame(columns=["ticker", "ts", "title", "url", "text"])
 
-    limiter = _RateLimiter(rps=rps)
-    s = pd.Timestamp(start, tz="UTC")
-    e = pd.Timestamp(end, tz="UTC")
+    rps = max(1, min(30, int(rps)))
+    min_gap = 1.0 / float(rps)
+
+    s = pd.Timestamp(start, tz="UTC").normalize()
+    e = pd.Timestamp(end, tz="UTC").normalize()
+    days = list(pd.date_range(s, e, freq="D", tz="UTC"))
 
     rows: List[Tuple[pd.Timestamp, str, str, str]] = []
+    last_call = 0.0
 
-    for day in _date_range(s, e):
-        # Always enforce RPS
-        limiter.wait()
+    for dts in days:
+        day = dts.date().isoformat()
 
-        # Robust 429 handling with exponential backoff
-        attempt = 0
-        sleep_total = 0.0
-        backoff = 2.0  # start small
+        # 1) try cache first
+        cached = _read_cache(cache_dir, ticker, day)
+        if cached:
+            if verbose:
+                print(f"[finnhub] cache hit {ticker} {day}: {len(cached)}")
+            arr = cached
+        else:
+            # 2) call API with rate limit + backoff
+            #    ensure rps by spacing calls
+            now = time.time()
+            wait = max(0.0, (last_call + min_gap) - now)
+            if wait > 0:
+                time.sleep(wait)
+            last_call = time.time()
 
-        while True:
-            try:
-                arr = client.company_news(ticker, _from=day, to=day) or []
-                break  # success
-            except Exception as ex:
-                msg = str(ex)
-                # FinnhubAPIException(status_code: 429) ... Remaining Limit: 0
-                is_429 = ("status_code: 429" in msg) or ("API limit reached" in msg)
-                attempt += 1
-
-                if not is_429:
-                    # Other transient network errors: small backoff
-                    wait_for = min(10.0, backoff)
-                else:
-                    # When ratelimited, wait longer (try to catch window reset)
-                    wait_for = min(90.0, max(backoff, 60.0))
-
-                sleep_total += wait_for
-                if verbose:
-                    print(f"[finnhub] day={day} error: {ex} | attempt={attempt} | sleep={wait_for:.1f}s | slept={sleep_total:.1f}/{max_wait_sec}s")
-
-                if sleep_total >= max_wait_sec:
-                    # We do NOT skip the provider entirely; we stop retrying
-                    # this day to respect workflow time, but we still proceed
-                    # to the next date so the whole year is attempted.
+            backoff = 2.0
+            total_wait = 0.0
+            while True:
+                try:
+                    arr = client.company_news(ticker, _from=day, to=day) or []
+                    _write_cache(cache_dir, ticker, day, arr)
                     if verbose:
-                        print(f"[finnhub] day={day} reached max_wait_sec={max_wait_sec}; continuing to next day.")
-                    arr = []
+                        print(f"[finnhub] fetched {ticker} {day}: {len(arr)}")
                     break
+                except Exception as e:
+                    msg = str(e)
+                    if "status_code: 429" in msg or "API limit reached" in msg:
+                        # exponential backoff but don't blow CI minutes
+                        if total_wait >= max_wait_sec:
+                            if verbose:
+                                print(f"[finnhub] 429 giving up for {day} after {total_wait:.0f}s; caching empty")
+                            _write_cache(cache_dir, ticker, day, [])
+                            arr = []
+                            break
+                        sleep_for = min(backoff, max_wait_sec - total_wait)
+                        if verbose:
+                            print(f"[finnhub] 429 on {day}; sleeping {sleep_for:.1f}s")
+                        time.sleep(sleep_for)
+                        total_wait += sleep_for
+                        backoff = min(backoff * 2.0, 60.0)
+                        continue
+                    else:
+                        if verbose:
+                            print(f"[finnhub] error on {day}: {e}; caching empty")
+                        _write_cache(cache_dir, ticker, day, [])
+                        arr = []
+                        break
 
-                time.sleep(wait_for)
-                backoff = min(backoff * 1.6, 180.0)
-
-        # Collect for the day
         for it in arr:
-            ts = _norm_ts_utc_epoch(it.get("datetime"))
+            ts = _norm_ts_epoch_to_utc(it.get("datetime"))
             if pd.isna(ts):
                 continue
             title = _clean_text(it.get("headline") or "")
             if not title:
                 continue
             url = it.get("url") or ""
-            text = _clean_text((it.get("summary") or "") or title)
+            text = _clean_text(it.get("summary") or title)
             rows.append((ts, title, url, text))
-
-    if verbose:
-        try:
-            dcount = len(pd.Series([r[0].date() for r in rows]).unique()) if rows else 0
-        except Exception:
-            dcount = 0
-        print(f"[finnhub] DONE {ticker}: rows={len(rows)} | days={dcount}")
 
     return _mk_df(rows, ticker)
