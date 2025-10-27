@@ -39,7 +39,6 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  # make FINNHUB_TOKEN available to all steps
   FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
 
 jobs:
@@ -68,11 +67,8 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip wheel setuptools
-          # CPU torch to keep runners fast/small
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
-          # Project deps
           pip install --no-cache-dir -r requirements.txt
-          # Ensure Finnhub SDK present (pip name 'finnhub-python', import name 'finnhub')
           pip install --no-cache-dir finnhub-python
 
       - name: Configure HF cache
@@ -201,48 +197,41 @@ jobs:
           c = int(os.environ.get("YF_COUNT","240"))
           t = yf.Ticker("AAPL")
           try:
-              items = t.get_news(count=c, tab="all")
+            items = t.get_news(count=c, tab="all")
           except TypeError:
-              # older yfinance
-              items = t.news or []
+            items = t.news or []
           n = 0 if not items else len(items)
           print(f"yfinance.get_news(count={c}, tab='all') -> {n} items")
           if n:
-              it = items[0]
-              title = (it.get("content") or {}).get("title") or it.get("title")
-              print("first_title:", title)
+            it = items[0]
+            title = (it.get("content") or {}).get("title") or it.get("title")
+            print("first_title:", title)
 
       - name: Smoke test — Finnhub single-day (exact sample)
         env:
-          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}  # must exist in repo secrets
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
           SYMBOL: AAPL
         shell: python
         run: |
-          import os, sys, datetime as dt, time
+          import os, sys, datetime as dt
           import finnhub
           def ts_iso(t):
-              try: return dt.datetime.utcfromtimestamp(int(t)).isoformat()+"Z"
-              except: return "NA"
-
+            try: return dt.datetime.utcfromtimestamp(int(t)).isoformat()+"Z"
+            except: return "NA"
           token = os.environ.get("FINNHUB_TOKEN")
           if not token:
-              print("ERROR: FINNHUB_TOKEN is missing", file=sys.stderr)
-              sys.exit(1)
-
+            print("ERROR: FINNHUB_TOKEN is missing", file=sys.stderr); sys.exit(1)
           c = finnhub.Client(api_key=token)
           sym = os.environ.get("SYMBOL", "AAPL")
-          # yesterday UTC to avoid partial-day edge cases
           default_day = (dt.datetime.utcnow() - dt.timedelta(days=1)).strftime("%Y-%m-%d")
           day_from = os.environ.get("FINNHUB_FROM", default_day)
           day_to   = os.environ.get("FINNHUB_TO",   day_from)
-
           print(f"Finnhub: company_news('{sym}', _from='{day_from}', to='{day_to}')")
-          # Single request to respect rate limits
           arr = c.company_news(sym, _from=day_from, to=day_to) or []
           print(f"Items: {len(arr)}")
           for i, it in enumerate(arr[:5]):
-              print(f"[{i}] {ts_iso(it.get('datetime'))} | {it.get('source')} | {it.get('headline')}")
-              print(f"     {it.get('url')}")
+            print(f"[{i}] {ts_iso(it.get('datetime'))} | {it.get('source')} | {it.get('headline')}")
+            print(f"     {it.get('url')}")
 
       - name: Smoke test — AAPL prices
         shell: python
@@ -262,6 +251,7 @@ jobs:
         run: |
           set -euo pipefail
           echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | yfinance_count=${YF_COUNT:-240} finnhub_rps=${FINNHUB_RPS:-10}"
+          # removed --diagnostics (unsupported by CLI)
           python -m market_sentiment.cli.build_json \
             --universe "$TICKER_CSV" \
             --start "$START" --end "$END" \
@@ -270,8 +260,7 @@ jobs:
             --cutoff-minutes 5 \
             --max-workers 3 \
             --yfinance-count "${YF_COUNT:-240}" \
-            --finnhub-rps "${FINNHUB_RPS:-10}" \
-            --diagnostics
+            --finnhub-rps "${FINNHUB_RPS:-10}"
 
       - name: Inspect generated data (AAPL)
         shell: python
@@ -280,28 +269,21 @@ jobs:
           base="apps/web/public/data"
           print("== List data dir ==")
           for root, dirs, files in os.walk(base):
-              for f in sorted(files):
-                  p=os.path.join(root,f)
-                  print(p)
-
-          # diagnostics
-          dfile=os.path.join(base,"diagnostics.json")
-          if os.path.exists(dfile):
-              print("\n== diagnostics.json ==")
-              print(open(dfile, encoding="utf-8").read())
-
+            for f in sorted(files):
+              p=os.path.join(root,f)
+              print(p)
           tfile=os.path.join(base,"ticker","AAPL.json")
           if os.path.exists(tfile):
-              obj=json.load(open(tfile))
-              S = obj.get("S") or obj.get("sentiment") or []
-              nz=sum(1 for x in S if abs((x or 0))>1e-12)
-              print(f"\nAAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {S[0] if S else None}  last= {S[-1] if S else None}")
-              news = obj.get("news") or []
-              print("AAPL news items saved (trimmed):", len(news))
-              days = len({ (n.get('ts') or '')[:10] for n in news if n.get('ts') })
-              print("AAPL news_day_count (unique days with news):", days)
+            obj=json.load(open(tfile))
+            S = obj.get("S") or obj.get("sentiment") or []
+            nz=sum(1 for x in S if abs((x or 0))>1e-12)
+            print(f"\nAAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {S[0] if S else None}  last= {S[-1] if S else None}")
+            news = obj.get("news") or []
+            print("AAPL news items saved (trimmed):", len(news))
+            days = len({ (n.get('ts') or '')[:10] for n in news if n.get('ts') })
+            print("AAPL news_day_count (unique days with news):", days)
           else:
-              print("AAPL.json not found")
+            print("AAPL.json not found")
           tickers = json.load(open(os.path.join(base,"_tickers.json")))
           print("tickers listed:", len(tickers))
 
@@ -327,7 +309,7 @@ jobs:
           set -euo pipefail
           if [ -f package-lock.json ]; then
             npm ci --no-audit --no-fund
-          else:
+          else
             npm install --no-audit --no-fund
           fi
           npm i -D @types/react @types/node --no-audit --no-fund || true
@@ -345,9 +327,7 @@ jobs:
           echo "==== Node/NPM ===="
           node -v
           npm -v
-
           npm run build
-
           echo "==== Prepare out/ ===="
           if [ -d "out" ]; then
             echo "Next produced out/ already. Using it."
@@ -355,17 +335,11 @@ jobs:
             echo "No out/ from Next; synthesizing from .next artifacts..."
             rm -rf out
             mkdir -p out
-
-            # Copy static assets
             if [ -d ".next/static" ]; then
               mkdir -p out/_next
               rsync -a .next/static out/_next/static
             fi
-
-            # Copy public assets (includes /data/**)
             rsync -a public/ out/
-
-            # Copy App Router HTML to route-style folders
             if [ -d ".next/server/app" ]; then
               find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
                 rel="${f#.next/server/app}"
@@ -380,17 +354,13 @@ jobs:
                 cp "$f" "out/${rel_noext}/index.html"
               done
             fi
-
-            # 404 fallback for GH Pages
             if [ -f ".next/server/app/_not-found.html" ]; then
               cp ".next/server/app/_not-found.html" "out/404.html" || true
             elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
               cp "out/index.html" "out/404.html" || true
             fi
           fi
-
           touch out/.nojekyll
-
           echo "==== Final out/ listing ===="
           find out -maxdepth 3 -type f | sort
 
