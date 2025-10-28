@@ -9,13 +9,6 @@ type SeriesIn = {
   sentiment: number[];
 };
 
-type NewsItem = {
-  ts: string;
-  title: string;
-  url: string;
-  text?: string;
-};
-
 export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
@@ -29,32 +22,34 @@ async function readJSON<T = any>(p: string): Promise<T | null> {
     return null;
   }
 }
-const numArr = (v: unknown): number[] => (Array.isArray(v) ? v.map((x) => Number(x) || 0) : []);
-const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
+
+const numArr = (v: unknown): number[] =>
+  Array.isArray(v) ? v.map((x) => Number(x) || 0) : [];
+const strArr = (v: unknown): string[] =>
+  Array.isArray(v) ? v.map((x) => String(x ?? "")) : [];
 
 function buildSeries(obj: any): SeriesIn | null {
   const date = strArr(obj?.date ?? obj?.dates);
   const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
   const sentiment = numArr(obj?.S ?? obj?.sentiment);
-  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);
+  const n = Math.min(
+    date.length,
+    price.length || Infinity,
+    sentiment.length || Infinity
+  );
   if (!Number.isFinite(n) || n === 0) return null;
-  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
-}
-
-function buildNews(obj: any): NewsItem[] {
-  const raw = Array.isArray(obj?.news) ? obj.news : [];
-  return raw
-    .map((r: any) => ({
-      ts: String(r?.ts ?? r?.date ?? ""),
-      title: String(r?.title ?? ""),
-      url: String(r?.url ?? ""),
-      text: r?.text ? String(r.text) : undefined,
-    }))
-    .filter((r: NewsItem) => r.ts && r.title);
+  return {
+    date: date.slice(0, n),
+    price: price.slice(0, n),
+    sentiment: sentiment.slice(0, n),
+  };
 }
 
 export async function generateStaticParams() {
-  const list = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
+  const list =
+    (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || [
+      "AAPL",
+    ];
   return list.map((symbol) => ({ symbol }));
 }
 
@@ -72,18 +67,16 @@ export default async function Page({ params }: { params: { symbol: string } }) {
         </div>
       </div>
     );
-  }
+    }
 
   const series = buildSeries(obj);
-  const news = buildNews(obj);
-  const newsTotal = Number(obj?.news_total ?? 0);
 
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="sr-only">{symbol}</h1>
         {series ? (
-          <TickerClient symbol={symbol} series={series} news={news} newsTotal={newsTotal} />
+          <TickerClient symbol={symbol} series={series} />
         ) : (
           <div className="text-neutral-500">No time series for {symbol}.</div>
         )}
