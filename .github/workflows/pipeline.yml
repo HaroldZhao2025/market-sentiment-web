@@ -12,7 +12,7 @@ on:
         type: choice
         options: ["sample", "full"]
       yfinance_count:
-        description: "Yahoo Finance items per ticker (used by CLI build step only)"
+        description: "Yahoo Finance items per ticker (saved + used by CLI)"
         required: false
         default: "240"
         type: choice
@@ -24,9 +24,9 @@ on:
         type: choice
         options: ["5", "8", "10", "15", "20", "30"]
       max_days_per_ticker:
-        description: "Limit historical backfill days per ticker (Finnhub-only backfill)"
+        description: "Historical backfill days per ticker (Finnhub-only backfill)"
         required: false
-        default: "240"
+        default: "365"
         type: choice
         options: ["120", "180", "240", "300", "365"]
   schedule:
@@ -74,8 +74,7 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
-          # Ensure Finnhub SDK (pip name 'finnhub-python', import name 'finnhub')
-          pip install --no-cache-dir finnhub-python
+          pip install --no-cache-dir finnhub-python yfinance
 
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
@@ -123,7 +122,6 @@ jobs:
           UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Safari/537.36"}
           candidates = []
 
-          # 1) Wikipedia via requests
           try:
               print("Trying Wikipedia…")
               r = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=30)
@@ -131,66 +129,50 @@ jobs:
               tables = pd.read_html(r.text)
               df = next((t for t in tables if "Symbol" in t.columns), None)
               if df is not None:
-                  s = df["Symbol"].astype(str)
-                  candidates.append(s)
-                  print(f"Wikipedia ok: {len(s)} symbols")
-              else:
-                  print("Wikipedia: table with 'Symbol' not found")
+                  candidates.append(df["Symbol"].astype(str))
+                  print(f"Wikipedia ok: {len(df)} rows")
           except Exception as e:
               print("Wikipedia failed:", e)
 
-          # 2) Slickcharts
           try:
               print("Trying Slickcharts…")
               r = requests.get("https://www.slickcharts.com/sp500", headers=UA, timeout=30)
               r.raise_for_status()
               tables = pd.read_html(r.text)
-              df = next((t for t in tables if "Symbol" in t.columns), None)
-              if df is None and len(tables):
-                  df = tables[0]
+              df = next((t for t in tables if "Symbol" in t.columns), tables[0] if tables else None)
               if df is not None:
-                  col = "Symbol" if "Symbol" in df.columns else df.columns[0]
-                  s = df[col].astype(str)
-                  candidates.append(s)
-                  print(f"Slickcharts ok: {len(s)} symbols")
-              else:
-                  print("Slickcharts: table not found")
+                  candidates.append(df[( "Symbol" if "Symbol" in df.columns else df.columns[0])].astype(str))
+                  print(f"Slickcharts ok: {len(df)} rows")
           except Exception as e:
               print("Slickcharts failed:", e)
 
-          # 3) GitHub dataset (CSV)
           for url in [
               "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
               "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv",
           ]:
               try:
-                  print(f"Trying dataset: {url}")
+                  print("Trying dataset:", url)
                   df = pd.read_csv(url)
                   col = "Symbol" if "Symbol" in df.columns else ("symbol" if "symbol" in df.columns else None)
                   if col:
-                      s = df[col].astype(str)
-                      candidates.append(s)
-                      print(f"Dataset ok: {len(s)} symbols from {url}")
+                      candidates.append(df[col].astype(str))
+                      print(f"Dataset ok: {len(df)} rows")
                       break
-                  else:
-                      print(f"Dataset at {url}: no Symbol/symbol column")
               except Exception as e:
-                  print(f"Dataset failed ({url}):", e)
+                  print("Dataset failed:", e)
 
           if not candidates:
-              raise RuntimeError("All S&P500 sources failed (403/parse). Commit data/sp500.csv to repo to bypass network.")
+              raise RuntimeError("All sources failed; commit data/sp500.csv to repo.")
 
           ser = pd.concat(candidates, ignore_index=True)
-          ser = (ser.str.upper()
-                     .str.replace(".", "-", regex=False)
-                     .str.strip())
+          ser = (ser.str.upper().str.replace(".", "-", regex=False).str.strip())
           uniq = sorted(set(x for x in ser if x))
           outp.parent.mkdir(parents=True, exist_ok=True)
           outp.write_text("ticker\n" + "\n".join(uniq) + "\n", encoding="utf-8")
           print(f"Wrote {len(uniq)} tickers to {outp}")
 
-      # ---------- Backfill & persist HISTORICAL NEWS (Finnhub ONLY) ----------
-      - name: Backfill historical news to data/{ticker}/news/finnhub/YYYY-MM-DD.json
+      # ---------- HISTORICAL BACKFILL (SAVE FILES) ----------
+      - name: Backfill historical Finnhub per-day JSON
         env:
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
           FINNHUB_RPS: ${{ github.event.inputs.finnhub_rps }}
@@ -208,7 +190,7 @@ jobs:
           START = os.environ["START"]
           END   = os.environ["END"]
           FINNHUB_RPS = max(1, min(30, int(os.environ.get("FINNHUB_RPS") or "8")))
-          MAX_DAYS = int(os.environ.get("MAX_DAYS_PER_TICKER") or "240")
+          MAX_DAYS = int(os.environ.get("MAX_DAYS_PER_TICKER") or "365")
           TICKER_CSV = os.environ["TICKER_CSV"]
 
           def read_universe(csv_path: str) -> list[str]:
@@ -217,23 +199,11 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True)
-              with path.open("w", encoding="utf-8") as f:
-                  json.dump(obj, f, ensure_ascii=False, indent=2)
-
-          tickers = read_universe(TICKER_CSV)
-          if not tickers:
-              raise SystemExit("No tickers in universe")
-
           token = os.getenv("FINNHUB_TOKEN")
           if finnhub is None or not token:
               raise SystemExit("Missing finnhub or FINNHUB_TOKEN")
 
-          try:
-              client = finnhub.Client(api_key=token)
-          except Exception as e:
-              raise SystemExit(f"Finnhub init failed: {e}")
+          client = finnhub.Client(api_key=token)
 
           s_all = pd.Timestamp(START, tz="UTC").normalize()
           e_all = pd.Timestamp(END, tz="UTC").normalize()
@@ -244,34 +214,42 @@ jobs:
           min_gap = 1.0 / float(FINNHUB_RPS)
           last_call = 0.0
 
+          def save_json(path: Path, obj):
+              path.parent.mkdir(parents=True, exist_ok=True)
+              with path.open("w", encoding="utf-8") as f:
+                  json.dump(obj, f, ensure_ascii=False, indent=2)
+
+          tickers = read_universe(TICKER_CSV)
           for t in tickers:
               base = Path(f"data/{t}/news/finnhub")
               base.mkdir(parents=True, exist_ok=True)
+              saved = 0
               for dts in days:
                   day = dts.date().isoformat()
                   out = base / f"{day}.json"
                   if out.exists() and out.stat().st_size > 0:
                       continue
 
+                  # Rate-limit
                   now = time.time()
                   wait = max(0.0, (last_call + min_gap) - now)
-                  if wait > 0:
-                      time.sleep(wait)
+                  if wait > 0: time.sleep(wait)
+
+                  # Call Finnhub (EXACT sample API)
                   try:
                       arr = client.company_news(t, _from=day, to=day) or []
                   except Exception as e:
                       msg = str(e)
-                      # Backoff on rate-limit
                       if "429" in msg or "limit" in msg.lower():
-                          time.sleep(1.0)
+                          time.sleep(1.5)
                           try:
                               arr = client.company_news(t, _from=day, to=day) or []
                           except Exception as e2:
-                              print(f"[finnhub] {t} {day} error after backoff: {e2}")
+                              print(f"[FH] {t} {day} rate-limited again: {e2}")
                               last_call = time.time()
                               continue
                       else:
-                          print(f"[finnhub] {t} {day} error: {e}")
+                          print(f"[FH] {t} {day} error: {e}")
                           last_call = time.time()
                           continue
                   last_call = time.time()
@@ -292,18 +270,20 @@ jobs:
                         "raw": it
                       })
                   save_json(out, cleaned)
-              print(f"[finnhub] {t}: backfilled {len(days)} day-files into {base}")
+                  saved += 1
+              print(f"[FH] {t}: wrote {saved} new day-files to {base}")
 
-      # ---------- Compute & persist daily FinBERT sentiment (4 decimals) ----------
-      - name: Compute daily sentiment to data/{ticker}/sentiment/YYYY-MM-DD.json
+      - name: Save yfinance recent (max ~200) into per-day JSON
+        env:
+          YF_COUNT: ${{ github.event.inputs.yfinance_count }}
         shell: python
         run: |
-          import os, json, glob, pandas as pd
+          import os, json, pandas as pd, yfinance as yf
           from pathlib import Path
-          from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
-          TICKER_CSV = os.environ["TICKER_CSV"]
           START=os.environ["START"]; END=os.environ["END"]
+          TICKER_CSV=os.environ["TICKER_CSV"]
+          YF_COUNT = int(os.environ.get("YF_COUNT") or "240")
 
           def read_universe(csv_path: str) -> list[str]:
               df = pd.read_csv(csv_path)
@@ -311,57 +291,166 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          tickers = read_universe(TICKER_CSV)
-          if not tickers:
-              raise SystemExit("No tickers in universe")
+          def norm_ts(v):
+              if v is None: return None
+              try:
+                  vi = int(v)
+                  if vi > 10_000_000_000: vi = vi/1000.0
+                  return pd.Timestamp.utcfromtimestamp(vi).tz_localize("UTC")
+              except Exception:
+                  try:
+                      return pd.to_datetime(v, utc=True, errors="coerce")
+                  except Exception:
+                      return None
+
+          def save_json(path: Path, obj):
+              path.parent.mkdir(parents=True, exist_ok=True)
+              with path.open("w", encoding="utf-8") as f:
+                  json.dump(obj, f, ensure_ascii=False, indent=2)
+
+          s = pd.to_datetime(START, utc=True)
+          e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+
+          for t in read_universe(TICKER_CSV):
+              try:
+                  items = yf.Ticker(t).get_news(count=YF_COUNT, tab="all") or []
+              except Exception:
+                  items = []
+              rows = []
+              for it in items:
+                  content = it.get("content", {})
+                  ts = (norm_ts(it.get("providerPublishTime"))
+                        or norm_ts(content.get("pubDate"))
+                        or norm_ts(content.get("displayTime"))
+                        or norm_ts(content.get("published")))
+                  if ts is None or pd.isna(ts) or ts < s or ts > e: 
+                      continue
+                  title = (content.get("title") or it.get("title") or "").strip()
+                  if not title: 
+                      continue
+                  url = ((content.get("canonicalUrl") or {}).get("url")
+                         or (content.get("clickThroughUrl") or {}).get("url")
+                         or it.get("link") or it.get("url") or "")
+                  summary = (content.get("summary") or content.get("description") or it.get("summary") or title).strip()
+                  rows.append({
+                      "ts": ts.isoformat(),
+                      "headline": title,
+                      "summary": summary,
+                      "url": url,
+                      "source": (content.get("provider") or {}).get("displayName") if isinstance(content.get("provider"), dict) else "Yahoo",
+                      "provider": "yfinance",
+                      "raw": it
+                  })
+
+              if not rows:
+                  print(f"[YF] {t}: 0 items in window")
+                  continue
+
+              df = pd.DataFrame(rows)
+              for day, grp in df.groupby(df["ts"].str.slice(0,10)):
+                  out = Path(f"data/{t}/news/yfinance/{day}.json")
+                  # merge if exists
+                  merged = grp.to_dict(orient="records")
+                  if out.exists() and out.stat().st_size>0:
+                      try:
+                          old = json.load(open(out, encoding="utf-8"))
+                      except Exception:
+                          old = []
+                      # de-dup by (headline,url)
+                      seen = {(o.get("headline",""),o.get("url","")) for o in old}
+                      for r in merged:
+                          key=(r.get("headline",""),r.get("url",""))
+                          if key not in seen:
+                              old.append(r); seen.add(key)
+                      merged = old
+                  save_json(out, merged)
+              print(f"[YF] {t}: saved recent news per-day under data/{t}/news/yfinance")
+
+      # ---------- DAILY SENTIMENT (4 decimals) ----------
+      - name: Compute daily sentiment (Finnhub + yfinance) per day
+        shell: python
+        run: |
+          import os, json, glob, pandas as pd
+          from pathlib import Path
+          from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+
+          START=os.environ["START"]; END=os.environ["END"]
+          TICKER_CSV=os.environ["TICKER_CSV"]
+
+          def read_universe(csv_path: str) -> list[str]:
+              df = pd.read_csv(csv_path)
+              col = [c for c in df.columns if c.lower()=="ticker"]
+              if not col: return []
+              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
           model_name = "ProsusAI/finbert"
           tok = AutoTokenizer.from_pretrained(model_name)
           mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
           clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
 
-          for t in tickers:
+          s = pd.to_datetime(START, utc=True).date()
+          e = pd.to_datetime(END, utc=True).date()
+
+          for t in read_universe(TICKER_CSV):
               base = Path(f"data/{t}")
               sent_dir = base/"sentiment"
               sent_dir.mkdir(parents=True, exist_ok=True)
 
-              # Only Finnhub for historical day files
-              news_dir = base/"news"/"finnhub"
-              if not news_dir.exists():
-                  print(f"[finbert] no finnhub news for {t}; skipping")
-                  continue
+              news_dirs = [base/"news"/"finnhub", base/"news"/"yfinance"]
+              # Map day -> list[texts] with provider counts
+              day_texts = {}
 
-              for p in sorted(glob.glob(str(news_dir/"*.json"))):
-                  day = Path(p).stem
-                  if not (START <= day <= END):
+              for nd in news_dirs:
+                  prov = nd.parts[-1] if nd.exists() else None
+                  if not nd.exists(): 
                       continue
+                  for p in sorted(glob.glob(str(nd/"*.json"))):
+                      day = Path(p).stem
+                      try:
+                          ddate = pd.to_datetime(day, utc=True).date()
+                      except Exception:
+                          continue
+                      if ddate < s or ddate > e: 
+                          continue
+                      try:
+                          arr = json.load(open(p, encoding="utf-8")) or []
+                      except Exception:
+                          arr = []
+                      if day not in day_texts:
+                          day_texts[day] = {"texts": [], "counts": {"finnhub":0, "yfinance":0}}
+                      for it in arr:
+                          title = (it.get("headline") or "").strip()
+                          if title:
+                              day_texts[day]["texts"].append(title)
+                              if prov in ("finnhub","yfinance"):
+                                  day_texts[day]["counts"][prov] += 1
+
+              for day, obj in day_texts.items():
                   out = sent_dir/f"{day}.json"
                   if out.exists() and out.stat().st_size>0:
                       continue
-                  try:
-                      arr = json.load(open(p, encoding="utf-8")) or []
-                  except Exception:
-                      arr = []
-                  texts = []
-                  for it in arr:
-                      title = (it.get("headline") or "").strip()
-                      summ  = (it.get("summary") or title).strip()
-                      if title:
-                          texts.append(title)
+                  texts = obj["texts"]
                   if not texts:
-                      json.dump({"date": day, "ticker": t, "n": 0, "score_mean": 0.0}, open(out,"w"), indent=2)
+                      json.dump({"date": day, "ticker": t, "n_total": 0, "n_finnhub": 0, "n_yfinance": 0, "score_mean": 0.0}, open(out,"w"), indent=2)
                       continue
                   preds = clf(texts, batch_size=16)
                   vals = []
                   for per in preds:
                       d = {x["label"].lower(): float(x["score"]) for x in per}
-                      s = d.get("positive",0.0) - d.get("negative",0.0)
-                      vals.append(s)
+                      s_val = d.get("positive",0.0) - d.get("negative",0.0)
+                      vals.append(s_val)
                   mean = round(float(pd.Series(vals).mean()), 4)
-                  json.dump({"date": day, "ticker": t, "n": len(texts), "score_mean": mean}, open(out,"w"), indent=2)
-              print(f"[finbert] {t}: sentiment written to {sent_dir}")
+                  json.dump({
+                    "date": day,
+                    "ticker": t,
+                    "n_total": len(texts),
+                    "n_finnhub": obj["counts"]["finnhub"],
+                    "n_yfinance": obj["counts"]["yfinance"],
+                    "score_mean": mean
+                  }, open(out,"w"), indent=2)
+              print(f"[SENT] {t}: daily sentiment saved under data/{t}/sentiment")
 
-      # ---------- Commit & push data tree ----------
+      # ---------- Commit & push data directory ----------
       - name: Commit & push data directory (force-add ignored)
         if: always()
         shell: bash
@@ -378,74 +467,26 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit in data/."
           else
-            git commit -m "chore(data): persist historical Finnhub news and daily sentiment [skip ci]"
+            git commit -m "chore(data): persist historical Finnhub & yfinance news + daily sentiment [skip ci]"
             git pull --rebase || true
             git push || true
           fi
 
-      # ---------- Build JSON for web (this step may still use yfinance for RECENT, separate from historical backfill) ----------
-      - name: Smoke test — AAPL prices
-        shell: python
-        run: |
-          from market_sentiment.prices import fetch_prices_yf
-          import os
-          p = fetch_prices_yf("AAPL", os.environ["START"], os.environ["END"])
-          print("AAPL prices rows:", len(p))
-          if not p.empty:
-            print(p.head(2).to_string(index=False))
-            print(p.tail(2).to_string(index=False))
-
-      - name: Build JSON data (prices + news)
-        env:
-          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
-          YF_COUNT: ${{ github.event.inputs.yfinance_count }}
-          FINNHUB_RPS: ${{ github.event.inputs.finnhub_rps }}
+      # ---------- Smoke inspect ----------
+      - name: Inspect saved historical artifacts (AAPL)
         shell: bash
         run: |
           set -euo pipefail
-          YF_COUNT="${YF_COUNT:-240}"
-          FINNHUB_RPS="${FINNHUB_RPS:-8}"
-          echo "Build JSON for $(wc -l < "$TICKER_CSV" | tr -d ' ') tickers | yfinance_count=$YF_COUNT finnhub_rps=$FINNHUB_RPS"
-          python -m market_sentiment.cli.build_json \
-            --universe "$TICKER_CSV" \
-            --start "$START" --end "$END" \
-            --out apps/web/public/data \
-            --batch 8 \
-            --cutoff-minutes 5 \
-            --max-workers 4 \
-            --cache-dir ".cache" \
-            --yfinance-count "$YF_COUNT" \
-            --finnhub-rps "$FINNHUB_RPS"
+          echo "== Tree sample =="
+          find data -maxdepth 3 -type d | sort | head -n 40
+          echo "== AAPL Finnhub sample files =="
+          ls -l data/AAPL/news/finnhub | head || true
+          echo "== AAPL yfinance sample files =="
+          ls -l data/AAPL/news/yfinance | head || true
+          echo "== AAPL sentiment sample files =="
+          ls -l data/AAPL/sentiment | head || true
 
-      - name: Inspect generated data (AAPL)
-        shell: python
-        run: |
-          import json, os
-          base="apps/web/public/data"
-          print("== List data dir ==")
-          for root, dirs, files in os.walk(base):
-              for f in sorted(files):
-                  print(os.path.join(root,f))
-
-          tfile=os.path.join(base,"ticker","AAPL.json")
-          if os.path.exists(tfile):
-              obj=json.load(open(tfile))
-              S = obj.get("S") or obj.get("sentiment") or []
-              nz=sum(1 for x in S if abs((x or 0))>1e-12)
-              print(f"\nAAPL sentiment: len= {len(S)}  non_zero= {nz}  first= {S[0] if S else None}  last= {S[-1] if S else None}")
-              news = obj.get("news") or []
-              print("AAPL news items saved (trimmed):", len(news))
-              days = len({ (n.get('ts') or '')[:10] for n in news if n.get('ts') })
-              print("AAPL news_day_count (unique days with news):", days)
-          else:
-              print("AAPL.json not found")
-
-          if os.path.exists("data/AAPL/news/finnhub"):
-              print("\nPersisted historical per-day Finnhub news exists under data/AAPL/news/finnhub/")
-          if os.path.exists("data/AAPL/sentiment"):
-              print("Persisted daily sentiment exists under data/AAPL/sentiment/")
-
-      # ---------- Node & web build ----------
+      # ---------- (Optional) build app JSON & web ----------
       - name: Setup Node.js (with npm cache)
         if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
         uses: actions/setup-node@v4
