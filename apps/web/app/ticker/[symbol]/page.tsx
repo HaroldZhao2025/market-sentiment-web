@@ -1,101 +1,92 @@
-"use client";
-import React from "react";
-import SentimentChart from "@/app/components/SentimentChart";
-import NewsList from "@/app/components/NewsList";
+// apps/web/app/ticker/[symbol]/page.tsx
+import fs from "node:fs/promises";
+import path from "node:path";
+import TickerClient from "./TickerClient";
 
-type Data = {
-  ticker: string;
-  dates: string[];
-  S: number[];
-  S_ma7?: number[];
-  sentiment?: number[]; // alias
-  news_count?: { finnhub: number; yfinance: number; total: number };
-  news: { ts: string; title: string; url: string; source?: string; provider?: string }[];
+type SeriesIn = {
+  date: string[];
+  price: number[];
+  sentiment: number[];
 };
 
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+type NewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  text?: string;
+};
 
-async function fetchData(symbol: string): Promise<Data | null> {
+export const dynamic = "error";
+export const dynamicParams = false;
+export const revalidate = false;
+
+const DATA_ROOT = path.join(process.cwd(), "public", "data");
+
+async function readJSON<T = any>(p: string): Promise<T | null> {
   try {
-    const url = `${BASE}/data/ticker/${symbol.toUpperCase()}.json?ts=${Date.now()}`;
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) return null;
-    return (await res.json()) as Data;
+    return JSON.parse(await fs.readFile(p, "utf8")) as T;
   } catch {
     return null;
   }
 }
+const numArr = (v: unknown): number[] => (Array.isArray(v) ? v.map((x) => Number(x) || 0) : []);
+const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
 
-export default function TickerPage({ params }: { params: { symbol: string } }) {
-  const symbol = params.symbol.toUpperCase();
-  const [data, setData] = React.useState<Data | null>(null);
-  const [lastRefreshed, setLastRefreshed] = React.useState<Date | null>(null);
+function buildSeries(obj: any): SeriesIn | null {
+  const date = strArr(obj?.date ?? obj?.dates);
+  const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
+  const sentiment = numArr(obj?.S ?? obj?.sentiment);
+  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);
+  if (!Number.isFinite(n) || n === 0) return null;
+  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
+}
 
-  const load = React.useCallback(async () => {
-    const d = await fetchData(symbol);
-    if (d) {
-      // guard against old builds that only had `sentiment`
-      if ((!d.S || d.S.length === 0) && d.sentiment && d.sentiment.length) {
-        d.S = d.sentiment;
-      }
-      setData(d);
-      setLastRefreshed(new Date());
-    }
-  }, [symbol]);
+function buildNews(obj: any): NewsItem[] {
+  const raw = Array.isArray(obj?.news) ? obj.news : [];
+  return raw
+    .map((r: any) => ({
+      ts: String(r?.ts ?? r?.date ?? ""),
+      title: String(r?.title ?? ""),
+      url: String(r?.url ?? ""),
+      text: r?.text ? String(r.text) : undefined,
+    }))
+    .filter((r: NewsItem) => r.ts && r.title);
+}
 
-  React.useEffect(() => {
-    load();
-    const id = setInterval(load, 60 * 60 * 1000); // refresh every hour
-    return () => clearInterval(id);
-  }, [load]);
+export async function generateStaticParams() {
+  const list = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
+  return list.map((symbol) => ({ symbol }));
+}
 
-  if (!data) {
+export default async function Page({ params }: { params: { symbol: string } }) {
+  const symbol = (params.symbol || "").toUpperCase();
+  const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
+  const obj = await readJSON<any>(f);
+
+  if (!obj) {
     return (
-      <div className="max-w-5xl mx-auto p-6">
-        <h1 className="text-xl font-semibold">Loading {symbol}…</h1>
+      <div className="min-h-screen p-6">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="text-2xl font-semibold mb-4">{symbol}</h1>
+          <div className="text-neutral-500">No data for {symbol}.</div>
+        </div>
       </div>
     );
   }
 
-  const sNow = data.S?.length ? data.S[data.S.length - 1] : 0;
-  const sNowText =
-    typeof sNow === "number" ? (sNow > 0 ? "Positive" : sNow < 0 ? "Negative" : "Neutral") : "Neutral";
+  const series = buildSeries(obj);
+  const news = buildNews(obj);
+  const newsTotal = Number(obj?.news_total ?? 0);
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-6">
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">{data.ticker}</h1>
-          <p className="text-sm text-gray-500">
-            Sentiment now: <span className="font-medium">{(sNow ?? 0).toFixed(4)}</span> ({sNowText})
-            {data.news_count ? (
-              <> · News (window): <span className="font-medium">{data.news_count.total}</span> </> ) : null}
-          </p>
-        </div>
-        <button
-          onClick={load}
-          className="px-3 py-1.5 text-sm rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 shadow"
-        >
-          Refresh now
-        </button>
-      </header>
-
-      <SentimentChart dates={data.dates || []} S={data.S || []} S_ma7={data.S_ma7 || data.sentiment || []} />
-
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="rounded-2xl shadow p-4 bg-white">
-          <h3 className="text-lg font-semibold mb-3">Summary</h3>
-          <ul className="text-sm text-gray-700 space-y-1">
-            <li>Days with sentiment: <b>{data.dates?.length || 0}</b></li>
-            <li>Finnhub items: <b>{data.news_count?.finnhub ?? 0}</b></li>
-            <li>Yahoo items: <b>{data.news_count?.yfinance ?? 0}</b></li>
-            <li>Total items (window): <b>{data.news_count?.total ?? 0}</b></li>
-            {lastRefreshed && (
-              <li>Last refreshed: <span className="text-gray-500">{lastRefreshed.toUTCString()}</span></li>
-            )}
-          </ul>
-        </div>
-        <NewsList items={data.news || []} />
+    <div className="min-h-screen p-6">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="sr-only">{symbol}</h1>
+        {series ? (
+          <TickerClient symbol={symbol} series={series} news={news} newsTotal={newsTotal} />
+        ) : (
+          <div className="text-neutral-500">No time series for {symbol}.</div>
+        )}
       </div>
     </div>
   );
