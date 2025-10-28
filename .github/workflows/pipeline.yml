@@ -30,10 +30,11 @@ on:
         type: choice
         options: ["120", "180", "240", "300", "365"]
   schedule:
-    - cron: "0 12 * * 1" # Mondays 12:00 UTC
+    - cron: "0 * * * *"   # refresh hourly
+    - cron: "0 12 * * 1"  # plus Mondays 12:00 UTC
 
 permissions:
-  contents: write     # must be write to push data/** back to repo
+  contents: write
   pages: write
   id-token: write
 
@@ -205,7 +206,6 @@ jobs:
           MAX_DAYS = int(os.environ.get("MAX_DAYS_PER_TICKER") or "365")
           TICKER_CSV = os.environ["TICKER_CSV"]
 
-          # tokens
           def build_tokens() -> list[str]:
               raw = os.environ.get("FINNHUB_TOKENS", "").strip()
               toks = [x.strip() for x in raw.split(",") if x.strip()] if raw else []
@@ -235,6 +235,7 @@ jobs:
           client = finnhub.Client(api_key=pool.current())
 
           def read_universe(csv_path: str) -> list[str]:
+              import pandas as pd
               df = pd.read_csv(csv_path)
               col = [c for c in df.columns if c.lower()=="ticker"]
               if not col: return []
@@ -250,7 +251,8 @@ jobs:
           last_call = 0.0
 
           def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True)
+              path.parent.mkdir(parents=True, exist_ok=True
+              )
               with path.open("w", encoding="utf-8") as f:
                   json.dump(obj, f, ensure_ascii=False, indent=2)
 
@@ -393,7 +395,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pandas.DataFrame(rows)
+              df = pd.DataFrame(rows)   # <- FIXED: use pd.DataFrame, not pandas.DataFrame
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
@@ -562,7 +564,7 @@ jobs:
                 "ticker": t,
                 "dates": [d for d,_ in rows],
                 "S": [round(float(v), 4) for _,v in rows],
-                "sentiment": [round(float(v), 4) for _,v in rows],  # alias for older clients
+                "sentiment": [round(float(v), 4) for _,v in rows],
                 "news_count": {"finnhub": int(nf), "yfinance": int(ny), "total": int(nf+ny)},
                 "news": news_trim
               }
