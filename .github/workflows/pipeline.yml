@@ -24,7 +24,7 @@ on:
         type: choice
         options: ["5", "8", "10", "15", "20", "30"]
       max_days_per_ticker:
-        description: "Historical backfill days per ticker (Finnhub-only backfill)"
+        description: "Historical backfill days per ticker (Finnhub backfill)"
         required: false
         default: "365"
         type: choice
@@ -141,7 +141,8 @@ jobs:
               tables = pd.read_html(r.text)
               df = next((t for t in tables if "Symbol" in t.columns), tables[0] if tables else None)
               if df is not None:
-                  candidates.append(df[( "Symbol" if "Symbol" in df.columns else df.columns[0])].astype(str))
+                  col = "Symbol" if "Symbol" in df.columns else df.columns[0]
+                  candidates.append(df[col].astype(str))
                   print(f"Slickcharts ok: {len(df)} rows")
           except Exception as e:
               print("Slickcharts failed:", e)
@@ -230,18 +231,16 @@ jobs:
                   if out.exists() and out.stat().st_size > 0:
                       continue
 
-                  # Rate-limit
                   now = time.time()
                   wait = max(0.0, (last_call + min_gap) - now)
                   if wait > 0: time.sleep(wait)
 
-                  # Call Finnhub (EXACT sample API)
                   try:
                       arr = client.company_news(t, _from=day, to=day) or []
                   except Exception as e:
                       msg = str(e)
                       if "429" in msg or "limit" in msg.lower():
-                          time.sleep(1.5)
+                          time.sleep(1.2)
                           try:
                               arr = client.company_news(t, _from=day, to=day) or []
                           except Exception as e2:
@@ -323,10 +322,10 @@ jobs:
                         or norm_ts(content.get("pubDate"))
                         or norm_ts(content.get("displayTime"))
                         or norm_ts(content.get("published")))
-                  if ts is None or pd.isna(ts) or ts < s or ts > e: 
+                  if ts is None or pd.isna(ts) or ts < s or ts > e:
                       continue
                   title = (content.get("title") or it.get("title") or "").strip()
-                  if not title: 
+                  if not title:
                       continue
                   url = ((content.get("canonicalUrl") or {}).get("url")
                          or (content.get("clickThroughUrl") or {}).get("url")
@@ -349,14 +348,12 @@ jobs:
               df = pd.DataFrame(rows)
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
-                  # merge if exists
                   merged = grp.to_dict(orient="records")
                   if out.exists() and out.stat().st_size>0:
                       try:
                           old = json.load(open(out, encoding="utf-8"))
                       except Exception:
                           old = []
-                      # de-dup by (headline,url)
                       seen = {(o.get("headline",""),o.get("url","")) for o in old}
                       for r in merged:
                           key=(r.get("headline",""),r.get("url",""))
@@ -366,7 +363,6 @@ jobs:
                   save_json(out, merged)
               print(f"[YF] {t}: saved recent news per-day under data/{t}/news/yfinance")
 
-      # ---------- DAILY SENTIMENT (4 decimals) ----------
       - name: Compute daily sentiment (Finnhub + yfinance) per day
         shell: python
         run: |
@@ -397,20 +393,19 @@ jobs:
               sent_dir.mkdir(parents=True, exist_ok=True)
 
               news_dirs = [base/"news"/"finnhub", base/"news"/"yfinance"]
-              # Map day -> list[texts] with provider counts
               day_texts = {}
 
               for nd in news_dirs:
-                  prov = nd.parts[-1] if nd.exists() else None
                   if not nd.exists(): 
                       continue
+                  prov = nd.parts[-1]
                   for p in sorted(glob.glob(str(nd/"*.json"))):
                       day = Path(p).stem
                       try:
                           ddate = pd.to_datetime(day, utc=True).date()
                       except Exception:
                           continue
-                      if ddate < s or ddate > e: 
+                      if ddate < s or ddate > e:
                           continue
                       try:
                           arr = json.load(open(p, encoding="utf-8")) or []
@@ -450,7 +445,6 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: daily sentiment saved under data/{t}/sentiment")
 
-      # ---------- Commit & push data directory ----------
       - name: Commit & push data directory (force-add ignored)
         if: always()
         shell: bash
@@ -472,21 +466,7 @@ jobs:
             git push || true
           fi
 
-      # ---------- Smoke inspect ----------
-      - name: Inspect saved historical artifacts (AAPL)
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "== Tree sample =="
-          find data -maxdepth 3 -type d | sort | head -n 40
-          echo "== AAPL Finnhub sample files =="
-          ls -l data/AAPL/news/finnhub | head || true
-          echo "== AAPL yfinance sample files =="
-          ls -l data/AAPL/news/yfinance | head || true
-          echo "== AAPL sentiment sample files =="
-          ls -l data/AAPL/sentiment | head || true
-
-      # ---------- (Optional) build app JSON & web ----------
+      # ---------- Node & web build ----------
       - name: Setup Node.js (with npm cache)
         if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
         uses: actions/setup-node@v4
@@ -506,6 +486,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Ensure a public folder exists even if the app doesn’t ship one
+          mkdir -p public/data
+          touch public/.keep
           if [ -f package-lock.json ]; then
             npm ci --no-audit --no-fund
           else
@@ -527,47 +510,49 @@ jobs:
           node -v
           npm -v
 
+          # Build (if your app needs data under public/, it already exists)
           npm run build
 
           echo "==== Prepare out/ ===="
-          if [ -d "out" ]; then
-            echo "Next produced out/ already. Using it."
-          else
-            echo "No out/ from Next; synthesizing from .next artifacts..."
-            rm -rf out
-            mkdir -p out
+          rm -rf out
+          mkdir -p out
 
-            # Copy static assets
-            if [ -d ".next/static" ]; then
-              mkdir -p out/_next
-              rsync -a .next/static out/_next/static
-            fi
+          # Copy Next static assets if present
+          if [ -d ".next/static" ]; then
+            mkdir -p out/_next
+            rsync -a .next/static/ out/_next/static/
+          fi
 
-            # Copy public assets (includes /data/**)
+          # Copy public assets IF the folder exists (guard to avoid rsync error)
+          if [ -d "public" ]; then
             rsync -a public/ out/
+          else
+            echo "public/ not found; creating an empty one and copying"
+            mkdir -p public
+            rsync -a public/ out/
+          fi
 
-            # Copy App Router HTML to route-style folders
-            if [ -d ".next/server/app" ]; then
-              find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-                rel="${f#.next/server/app}"
-                dir="${rel%/index.html}"
-                mkdir -p "out/${dir}"
-                cp "$f" "out/${dir}/index.html"
-              done
-              find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-                rel="${f#.next/server/app/}"
-                rel_noext="${rel%.html}"
-                mkdir -p "out/${rel_noext}"
-                cp "$f" "out/${rel_noext}/index.html"
-              done
-            fi
+          # App Router HTML synthesis if needed
+          if [ -d ".next/server/app" ]; then
+            find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+              rel="${f#.next/server/app}"
+              dir="${rel%/index.html}"
+              mkdir -p "out/${dir}"
+              cp "$f" "out/${dir}/index.html"
+            done
+            find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
+              rel="${f#.next/server/app/}"
+              rel_noext="${rel%.html}"
+              mkdir -p "out/${rel_noext}"
+              cp "$f" "out/${rel_noext}/index.html"
+            done
+          fi
 
-            # 404 fallback for GH Pages
-            if [ -f ".next/server/app/_not-found.html" ]; then
-              cp ".next/server/app/_not-found.html" "out/404.html" || true
-            elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
-              cp "out/index.html" "out/404.html" || true
-            fi
+          # 404 fallback
+          if [ -f ".next/server/app/_not-found.html" ]; then
+            cp ".next/server/app/_not-found.html" "out/404.html" || true
+          elif [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
+            cp "out/index.html" "out/404.html" || true
           fi
 
           touch out/.nojekyll
