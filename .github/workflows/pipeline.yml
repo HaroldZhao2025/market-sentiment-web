@@ -76,8 +76,9 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip wheel setuptools
+          pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
-          pip install --no-cache-dir finnhub-python yfinance transformers pandas requests
+          pip install --no-cache-dir finnhub-python yfinance transformers pandas requests lxml html5lib
 
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
@@ -205,6 +206,12 @@ jobs:
           MAX_DAYS = int(os.environ.get("MAX_DAYS_PER_TICKER") or "365")
           TICKER_CSV = os.environ["TICKER_CSV"]
 
+          def read_universe(csv_path: str) -> list[str]:
+              df = pd.read_csv(csv_path)
+              col = [c for c in df.columns if c.lower()=="ticker"]
+              if not col: return []
+              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+
           def build_tokens() -> list[str]:
               raw = os.environ.get("FINNHUB_TOKENS", "").strip()
               toks = [x.strip() for x in raw.split(",") if x.strip()] if raw else []
@@ -232,13 +239,6 @@ jobs:
 
           pool = TokenPool(TOKENS)
           client = finnhub.Client(api_key=pool.current())
-
-          def read_universe(csv_path: str) -> list[str]:
-              import pandas as pd
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
-              if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
           s_all = pd.Timestamp(START, tz="UTC").normalize()
           e_all = pd.Timestamp(END, tz="UTC").normalize()
@@ -272,7 +272,7 @@ jobs:
                     if wait > 0: time.sleep(wait)
 
                     tries, arr = 0, []
-                    while tries < 5:
+                    while tries < 6:
                         try:
                             arr = client.company_news(t, _from=day, to=day) or []
                             break
@@ -287,11 +287,10 @@ jobs:
                                     tries += 1
                                     continue
                                 else:
-                                    backoff = min(16.0, 2.0 ** tries)
+                                    backoff = min(32.0, 2.0 ** tries)
                                     time.sleep(backoff)
                                     tries += 1
-                                    if tries >= 5:
-                                        break
+                                    continue
                             else:
                                 logf.write(f"[FH] {t} {day} error: {msg}\n")
                                 break
@@ -354,10 +353,11 @@ jobs:
           e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
 
           for t in read_universe(TICKER_CSV):
+              items=[]
               try:
                   items = yf.Ticker(t).get_news(count=YF_COUNT, tab="all") or []
               except Exception:
-                  items = []
+                  pass
 
               rows=[]
               for it in items:
@@ -390,7 +390,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pd.DataFrame(rows)
+              df = pandas.DataFrame(rows) if 'pandas' in globals() else pd.DataFrame(rows)
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
@@ -485,11 +485,11 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: sentiment JSON written")
 
-      # ---------- Build site JSON (apps/web/public/data) ----------
+      # ---------- Assemble site JSON (apps/web/public/data) ----------
       - name: Assemble site JSON (apps/web/public/data)
         shell: python
         run: |
-          import os, json, glob, pandas as pd
+          import os, json, glob, pandas as pd, yfinance as yf
           from pathlib import Path
 
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
@@ -501,50 +501,46 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
+          s = pd.to_datetime(START)
+          e = pd.to_datetime(END) + pd.Timedelta(days=1)
+
           tickers = read_universe(TICKER_CSV)
           (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
 
           for t in tickers:
               base = Path(f"data/{t}")
+
+              # Prices (Adj Close preferred)
+              try:
+                  dfp = yf.download(t, start=START, end=END, progress=False, auto_adjust=True)
+              except Exception:
+                  dfp = pd.DataFrame()
+              dates = []
+              prices = []
+              if not dfp.empty:
+                  if "Adj Close" in dfp.columns:
+                      ser = dfp["Adj Close"]
+                  else:
+                      ser = dfp["Close"] if "Close" in dfp.columns else dfp.iloc[:,0]
+                  ser = ser.dropna()
+                  dates = [d.strftime("%Y-%m-%d") for d in ser.index.tz_localize(None)]
+                  prices = [float(x) for x in ser.values.tolist()]
+
+              # Sentiment series
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
-              rows=[]
+              s_map={}
               for sf in sfiles:
                   try:
                       o = json.load(open(sf, encoding="utf-8"))
-                      rows.append((o.get("date"), float(o.get("score_mean", 0.0))))
+                      if o.get("date"):
+                          s_map[o["date"]] = float(o.get("score_mean") or 0.0)
                   except Exception:
                       pass
-              rows = sorted([(d,s) for d,s in rows if d], key=lambda x:x[0])
+              S = [round(float(s_map.get(d, 0.0)), 4) for d in dates]
 
+              # News (trim for page) + counts
               news_items=[]
-              for prov in ("finnhub","yfinance"):
-                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
-                      try:
-                          arr = json.load(open(p, encoding="utf-8")) or []
-                          for it in arr:
-                              news_items.append({
-                                "ts": it.get("ts"),
-                                "title": it.get("headline") or "",
-                                "url": it.get("url") or "",
-                                "source": it.get("source") or prov,
-                                "provider": prov
-                              })
-                      except Exception:
-                          pass
-
-              s = pd.to_datetime(START, utc=True)
-              e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
-              def in_window(ts):
-                  try:
-                      tt = pd.to_datetime(ts, utc=True)
-                      return tt >= s and tt <= e
-                  except Exception:
-                      return False
-              news_items = [n for n in news_items if n.get("ts") and in_window(n.get("ts"))]
-              news_items.sort(key=lambda n: n["ts"], reverse=True)
-              news_trim = news_items[:20]
-
-              def count_provider(prov):
+              def total_provider(prov):
                   tot=0
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
@@ -552,26 +548,40 @@ jobs:
                       except Exception:
                           pass
                   return tot
-              nf = count_provider("finnhub")
-              ny = count_provider("yfinance")
+              nf = total_provider("finnhub")
+              ny = total_provider("yfinance")
+
+              for prov in ("finnhub","yfinance"):
+                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
+                      try:
+                          arr = json.load(open(p, encoding="utf-8")) or []
+                          for it in arr:
+                              if it.get("ts"):
+                                  news_items.append({
+                                      "ts": it.get("ts"),
+                                      "title": it.get("headline") or "",
+                                      "url": it.get("url") or "",
+                                      "source": it.get("source") or prov,
+                                      "provider": prov
+                                  })
+                      except Exception:
+                          pass
+              # only keep items within window
+              news_items = [n for n in news_items if n.get("ts") and (pd.to_datetime(n["ts"])>=s) and (pd.to_datetime(n["ts"])<e)]
+              news_items.sort(key=lambda n: n["ts"], reverse=True)
+              news_trim = news_items[:20]
 
               obj = {
                 "ticker": t,
-                "dates": [d for d,_ in rows],
-                "S": [round(float(v), 4) for _,v in rows],
-                "sentiment": [round(float(v), 4) for _,v in rows],
+                "date": dates,
+                "price": prices,
+                "S": S,
+                "sentiment": S,
                 "news_count": {"finnhub": int(nf), "yfinance": int(ny), "total": int(nf+ny)},
                 "news": news_trim
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)})")
-
-          # diagnostics for UI troubleshooting
-          diag = {
-            "generated_at_utc": pd.Timestamp.utcnow().isoformat(),
-            "tickers": tickers,
-          }
-          (pub/"diagnostics.json").write_text(json.dumps(diag, indent=2), encoding="utf-8")
+              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(dates)} news={len(news_trim)})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
@@ -593,7 +603,30 @@ jobs:
             git push || true
           fi
 
-      # ---------- Node & web build (Next export for GH Pages) ----------
+      # ---------- Ensure Next config (idempotent) ----------
+      - name: Ensure Next static export config
+        working-directory: apps/web
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f next.config.cjs ]; then
+            cat > next.config.cjs <<'JS'
+/** @type {import('next').NextConfig} */
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+module.exports = {
+  output: "export",
+  basePath: base,
+  assetPrefix: base ? `${base}/` : "",
+  trailingSlash: true,
+  images: { unoptimized: true },
+  reactStrictMode: true,
+};
+JS
+          fi
+          echo "==== next.config.cjs ===="
+          cat next.config.cjs
+
+      # ---------- Node & web build ----------
       - name: Setup Node.js (with npm cache)
         if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
         uses: actions/setup-node@v4
@@ -608,29 +641,36 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install web deps
+      - name: Install web deps (ensure public/data exists)
         working-directory: apps/web
+        shell: bash
         run: |
+          set -euo pipefail
           mkdir -p public/data public/data/ticker
           if [ -f package-lock.json ]; then
             npm ci --no-audit --no-fund
           else
-            npm install --no-audit --no-fund
+            npm install --no-audit --no-fund || true
           fi
+          npm i -D @types/react @types/node --no-audit --no-fund || true
 
-      - name: Build & export static site
+      - name: Build + export (requires output:"export" in next.config.cjs)
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
+        shell: bash
         run: |
-          # Build + export (requires next.config.cjs with output:'export')
+          set -euo pipefail
           npm run build
-          npx next export -o out
-          # 404 fallback for GH Pages
+          if [ ! -d "out" ]; then
+            echo "No out/ detected after build; running 'next export --outdir out' as fallback."
+            npx next export --outdir out
+          fi
           if [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
             cp out/index.html out/404.html
           fi
+          echo "==== Final out/ listing ===="
           find out -maxdepth 3 -type f | sort
 
       - name: Configure Pages
