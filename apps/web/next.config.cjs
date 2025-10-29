@@ -1,12 +1,25 @@
+// apps/web/next.config.mjs
 /** @type {import('next').NextConfig} */
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "/market-sentiment-web";
+const isProd = process.env.NODE_ENV === "production";
+const repo = "market-sentiment-web";
 
-module.exports = {
+const nextConfig = {
+  // Export for GitHub Pages
   output: "export",
-  basePath: BASE,
-  // DO NOT set assetPrefix; it breaks _next URLs on GitHub Pages
   trailingSlash: true,
+
+  // Make all URLs/assets work under /market-sentiment-web on Pages
+  basePath: isProd ? `/${repo}` : "",
+  assetPrefix: isProd ? `/${repo}/` : "",
+
+  // App Router + static export needs this so <Image> doesn’t try to optimize
   images: { unoptimized: true },
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+
+  // Helpful if you fetch local JSON during build
+  experimental: {
+    // Keep this off unless you know you want per-route server bundles
+    // staticGenerationSearchParams: true,
+  },
 };
+
+export default nextConfig;
