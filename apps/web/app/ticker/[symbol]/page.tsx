@@ -10,7 +10,21 @@ export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
 
-const DATA_ROOT = path.join(process.cwd(), "public", "data");
+// --- Robust data root resolution: works whether build runs at repo root or apps/web ---
+async function resolveDataRoot(): Promise<string> {
+  const candidates = [
+    path.join(process.cwd(), "public", "data"),            // when cwd = apps/web
+    path.join(process.cwd(), "apps", "web", "public", "data"), // when cwd = repo root
+  ];
+  for (const p of candidates) {
+    try {
+      const st = await fs.stat(p);
+      if (st.isDirectory()) return p;
+    } catch {}
+  }
+  // fallback to first; reads will just fail cleanly if not present
+  return candidates[0];
+}
 
 async function readJSON<T = any>(p: string): Promise<T | null> {
   try {
@@ -34,11 +48,11 @@ function buildSeries(obj: any): SeriesIn | null {
   return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
 }
 
-async function loadNewsJSON(symbol: string): Promise<NewsItem[]> {
+async function loadNewsJSON(dataRoot: string, symbol: string): Promise<NewsItem[]> {
   const candidates = [
-    path.join(DATA_ROOT, "news", `${symbol}.json`),
-    path.join(DATA_ROOT, "ticker", `${symbol}_news.json`),
-    path.join(DATA_ROOT, `${symbol}_news.json`),
+    path.join(dataRoot, "news", `${symbol}.json`),
+    path.join(dataRoot, "ticker", `${symbol}_news.json`),
+    path.join(dataRoot, `${symbol}_news.json`),
   ];
   for (const p of candidates) {
     const j = await readJSON<any>(p);
@@ -56,16 +70,16 @@ async function loadNewsJSON(symbol: string): Promise<NewsItem[]> {
 }
 
 /**
- * Critical for GitHub Pages static export: pre-generate /ticker/[symbol]/ for each JSON file.
- * Reads public/data/ticker/*.json and returns [{symbol}] so Next.js exports /ticker/SYMBOL/.
+ * Pre-generate /ticker/[symbol]/ for GitHub Pages static export.
+ * Looks under {dataRoot}/ticker/*.json and returns params {symbol}.
  */
 export async function generateStaticParams() {
-  const dir = path.join(DATA_ROOT, "ticker");
+  const dataRoot = await resolveDataRoot();
+  const dir = path.join(dataRoot, "ticker");
   let files: string[] = [];
   try {
     files = await fs.readdir(dir);
   } catch {
-    // no ticker directory = no pages
     return [];
   }
   return files
@@ -75,16 +89,19 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
+  const dataRoot = await resolveDataRoot();
 
-  const series = buildSeries(await readJSON<any>(path.join(DATA_ROOT, "ticker", `${symbol}.json`)));
-  const news = await loadNewsJSON(symbol);
+  const series = buildSeries(
+    await readJSON<any>(path.join(dataRoot, "ticker", `${symbol}.json`))
+  );
+  const news = await loadNewsJSON(dataRoot, symbol);
 
   if (!series) {
     return (
       <main style={{ maxWidth: 1200, margin: "40px auto", padding: "0 16px" }}>
         <h1>Market Sentiment for {symbol}</h1>
         <p style={{ color: "#6b7280" }}>
-          No data found for <code>public/data/ticker/{symbol}.json</code>.
+          No data found for <code>{path.join("public/data/ticker", `${symbol}.json`)}</code>.
         </p>
       </main>
     );
