@@ -1,15 +1,19 @@
+// apps/web/next.config.cjs
 /** @type {import('next').NextConfig} */
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/market-sentiment-web";
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 module.exports = {
-  // Required for GitHub Pages static hosting
+  // Static HTML export
   output: "export",
-  basePath,
-  assetPrefix: basePath,
+  // Required for GitHub Pages under a subpath
+  basePath: base,
+  assetPrefix: base ? `${base}/` : "",
+  // Ensure all routes end with / (helps GH Pages + static hosting)
   trailingSlash: true,
-  images: { unoptimized: true },
-
-  experimental: {
-    typedRoutes: false,
+  // Disable image optimizer for static export
+  images: {
+    unoptimized: true,
   },
+  // Optional: quieten build a bit
+  reactStrictMode: true,
 };
