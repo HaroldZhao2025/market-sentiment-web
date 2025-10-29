@@ -9,6 +9,13 @@ type SeriesIn = {
   sentiment: number[];
 };
 
+type NewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  text?: string;
+};
+
 export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
@@ -22,34 +29,26 @@ async function readJSON<T = any>(p: string): Promise<T | null> {
     return null;
   }
 }
-
 const numArr = (v: unknown): number[] =>
-  Array.isArray(v) ? v.map((x) => Number(x) || 0) : [];
-const strArr = (v: unknown): string[] =>
-  Array.isArray(v) ? v.map((x) => String(x ?? "")) : [];
+  Array.isArray(v) ? v.map((x) => (Number.isFinite(Number(x)) ? Number(x) : 0)) : [];
+const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
 
 function buildSeries(obj: any): SeriesIn | null {
   const date = strArr(obj?.date ?? obj?.dates);
   const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
   const sentiment = numArr(obj?.S ?? obj?.sentiment);
-  const n = Math.min(
-    date.length,
-    price.length || Infinity,
-    sentiment.length || Infinity
-  );
+  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);
   if (!Number.isFinite(n) || n === 0) return null;
-  return {
-    date: date.slice(0, n),
-    price: price.slice(0, n),
-    sentiment: sentiment.slice(0, n),
-  };
+  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
 }
 
+// NOTE: We intentionally do NOT build news here.
+// TickerClient requires `news` and `newsTotal` props, so we pass empty values.
+const EMPTY_NEWS: NewsItem[] = [];
+const EMPTY_NEWS_TOTAL = 0;
+
 export async function generateStaticParams() {
-  const list =
-    (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || [
-      "AAPL",
-    ];
+  const list = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
   return list.map((symbol) => ({ symbol }));
 }
 
@@ -67,7 +66,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
         </div>
       </div>
     );
-    }
+  }
 
   const series = buildSeries(obj);
 
@@ -76,7 +75,12 @@ export default async function Page({ params }: { params: { symbol: string } }) {
       <div className="max-w-6xl mx-auto">
         <h1 className="sr-only">{symbol}</h1>
         {series ? (
-          <TickerClient symbol={symbol} series={series} />
+          <TickerClient
+            symbol={symbol}
+            series={series}
+            news={EMPTY_NEWS}
+            newsTotal={EMPTY_NEWS_TOTAL}
+          />
         ) : (
           <div className="text-neutral-500">No time series for {symbol}.</div>
         )}
