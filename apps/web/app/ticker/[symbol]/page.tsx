@@ -3,19 +3,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import TickerClient from "./TickerClient";
 
-type SeriesIn = {
-  date: string[];
-  price: number[];
-  sentiment: number[];
-};
-
-type NewsItem = {
-  ts: string;
-  title: string;
-  url?: string;
-  source?: string;
-  score?: number;
-};
+type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
+type NewsItem = { ts: string; title: string; url?: string; source?: string; score?: number };
 
 export const dynamic = "error";
 export const dynamicParams = false;
@@ -33,8 +22,7 @@ async function readJSON<T = any>(p: string): Promise<T | null> {
 
 const numArr = (v: unknown): number[] =>
   Array.isArray(v) ? v.map((x) => (typeof x === "number" ? x : Number(x) || 0)) : [];
-const strArr = (v: unknown): string[] =>
-  Array.isArray(v) ? v.map((x) => String(x ?? "")) : [];
+const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
 
 function buildSeries(obj: any): SeriesIn | null {
   if (!obj) return null;
@@ -47,12 +35,12 @@ function buildSeries(obj: any): SeriesIn | null {
 }
 
 async function loadNewsJSON(symbol: string): Promise<NewsItem[]> {
-  const tryPaths = [
+  const candidates = [
     path.join(DATA_ROOT, "news", `${symbol}.json`),
     path.join(DATA_ROOT, "ticker", `${symbol}_news.json`),
     path.join(DATA_ROOT, `${symbol}_news.json`),
   ];
-  for (const p of tryPaths) {
+  for (const p of candidates) {
     const j = await readJSON<any>(p);
     if (j && Array.isArray(j)) {
       return j.map((x: any) => ({
@@ -67,13 +55,28 @@ async function loadNewsJSON(symbol: string): Promise<NewsItem[]> {
   return [];
 }
 
+/**
+ * Critical for GitHub Pages static export: pre-generate /ticker/[symbol]/ for each JSON file.
+ * Reads public/data/ticker/*.json and returns [{symbol}] so Next.js exports /ticker/SYMBOL/.
+ */
+export async function generateStaticParams() {
+  const dir = path.join(DATA_ROOT, "ticker");
+  let files: string[] = [];
+  try {
+    files = await fs.readdir(dir);
+  } catch {
+    // no ticker directory = no pages
+    return [];
+  }
+  return files
+    .filter((f) => f.toLowerCase().endsWith(".json"))
+    .map((f) => ({ symbol: f.replace(/\.json$/i, "").toUpperCase() }));
+}
+
 export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
 
-  // series
   const series = buildSeries(await readJSON<any>(path.join(DATA_ROOT, "ticker", `${symbol}.json`)));
-
-  // headlines (optional)
   const news = await loadNewsJSON(symbol);
 
   if (!series) {
