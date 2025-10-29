@@ -1,102 +1,93 @@
 // apps/web/app/ticker/[symbol]/page.tsx
-// Server component: declare routes and render a minimal shell.
-// All heavy data loading is done client-side from /data to work on GitHub Pages.
-
-import path from "node:path";
 import fs from "node:fs/promises";
+import path from "node:path";
 import TickerClient from "./TickerClient";
+
+type SeriesIn = {
+  date: string[];
+  price: number[];
+  sentiment: number[];
+};
+
+type NewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  text?: string;
+};
 
 export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
 
-// ---- helpers (server-only) ----
-async function fileExists(p: string) {
-  try {
-    await fs.stat(p);
-    return true;
-  } catch {
-    return false;
-  }
-}
+const DATA_ROOT = path.join(process.cwd(), "public", "data");
 
-async function readTextIf(p: string): Promise<string | null> {
+async function readJSON<T = any>(p: string): Promise<T | null> {
   try {
-    return await fs.readFile(p, "utf8");
+    return JSON.parse(await fs.readFile(p, "utf8")) as T;
   } catch {
     return null;
   }
 }
+const numArr = (v: unknown): number[] => (Array.isArray(v) ? v.map((x) => Number(x) || 0) : []);
+const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
 
-/**
- * We generate static params from either:
- * 1) built JSON directory (if present), or
- * 2) the committed universe CSV under /data/sp500.csv (repo root), which exists
- *    before the CI builds JSON. This avoids a race between JSON build and Next build.
- *
- * See README + workflow which build JSON into apps/web/public/data. :contentReference[oaicite:0]{index=0}
- */
-export async function generateStaticParams() {
-  const cwd = process.cwd();
-
-  // try #1: JSON directory after build_json step
-  const candJsonDirs = [
-    path.join(cwd, "apps", "web", "public", "data", "ticker"),
-    path.join(cwd, "public", "data", "ticker"),
-  ];
-  for (const d of candJsonDirs) {
-    if (await fileExists(d)) {
-      try {
-        const files = await fs.readdir(d);
-        const syms = files
-          .filter((n) => n.toLowerCase().endsWith(".json"))
-          .map((n) => n.replace(/\.json$/i, "").toUpperCase());
-        if (syms.length) return syms.map((symbol) => ({ symbol }));
-      } catch {
-        /* ignore and fall through */
-      }
-    }
-  }
-
-  // try #2: committed universe CSV in /data/sp500.csv (repo root)
-  const candCSVs = [
-    path.join(cwd, "data", "sp500.csv"),
-    path.join(cwd, "..", "data", "sp500.csv"),
-    path.join(cwd, "..", "..", "data", "sp500.csv"),
-  ];
-  for (const p of candCSVs) {
-    const txt = await readTextIf(p);
-    if (!txt) continue;
-    const lines = txt.split(/\r?\n/).filter(Boolean);
-    if (!lines.length) continue;
-    const header = lines[0].toLowerCase();
-    const idx =
-      header.split(",").findIndex((h) =>
-        ["symbol", "ticker"].includes(h.trim())
-      ) ?? -1;
-    if (idx < 0) continue;
-
-    const syms = lines.slice(1).map((ln) => {
-      const cols = ln.split(",");
-      return (cols[idx] || "").trim().toUpperCase();
-    });
-    const out = syms.filter(Boolean).slice(0, 600).map((symbol) => ({ symbol }));
-    if (out.length) return out;
-  }
-
-  // Worst case: fall back to a tiny set so export doesn't fail.
-  return [{ symbol: "AAPL" }, { symbol: "MSFT" }, { symbol: "NVDA" }];
+function buildSeries(obj: any): SeriesIn | null {
+  const date = strArr(obj?.date ?? obj?.dates);
+  const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
+  const sentiment = numArr(obj?.S ?? obj?.sentiment);
+  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);
+  if (!Number.isFinite(n) || n === 0) return null;
+  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
 }
 
-export default function Page({ params }: { params: { symbol: string } }) {
+function buildNews(obj: any): NewsItem[] {
+  const raw = Array.isArray(obj?.news) ? obj.news : [];
+  return raw
+    .map((r: any) => ({
+      ts: String(r?.ts ?? r?.date ?? ""),
+      title: String(r?.title ?? ""),
+      url: String(r?.url ?? ""),
+      text: r?.text ? String(r.text) : undefined,
+    }))
+    .filter((r: NewsItem) => r.ts && r.title);
+}
+
+export async function generateStaticParams() {
+  const list = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
+  return list.map((symbol) => ({ symbol }));
+}
+
+export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
+  const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
+  const obj = await readJSON<any>(f);
+
+  if (!obj) {
+    return (
+      <div className="min-h-screen p-6">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="text-2xl font-semibold mb-4">{symbol}</h1>
+          <div className="text-neutral-500">No data for {symbol}.</div>
+        </div>
+      </div>
+    );
+  }
+
+  const series = buildSeries(obj);
+  const news = buildNews(obj);
+  const newsTotal = Number(obj?.news_total ?? 0);
+
   return (
-    <main style={{ maxWidth: 1200, margin: "24px auto", padding: "0 16px" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 600, marginBottom: 8 }}>
-        Market Sentiment for {symbol}
-      </h1>
-      {/* Client component fetches from /data at runtime (works on GH Pages). */}
-      <TickerClient symbol={symbol} />
-    </main>
+    <div className="min-h-screen p-6">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="sr-only">{symbol}</h1>
+        {series ? (
+          <TickerClient symbol={symbol} series={series} news={news} newsTotal={newsTotal} />
+        ) : (
+          <div className="text-neutral-500">No time series for {symbol}.</div>
+        )}
+      </div>
+    </div>
   );
 }
