@@ -8,7 +8,7 @@ type NewsItem = { ts: string; title: string; url?: string; source?: string; scor
 type Props = { symbol: string; series: SeriesIn; news?: NewsItem[] };
 type ViewMode = "overlay" | "price" | "sentiment";
 
-// ---------- utils ----------
+// ---- utils ----
 const mean = (a: number[]) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0);
 const toPct = (x: number) => `${(x * 100).toFixed(2)}%`;
 function dateOnly(s: string): string {
@@ -19,7 +19,7 @@ function dateOnly(s: string): string {
   return (s.split(" ")[0] || s).replace(/T.*/, "");
 }
 
-// ---------- chart (pure SVG) ----------
+// ---- chart (pure SVG) ----
 function SentimentPriceChart({
   series,
   mode,
@@ -34,17 +34,18 @@ function SentimentPriceChart({
   const n = series.date.length;
   const xAt = (i: number) => pad.l + (i * (width - pad.l - pad.r)) / Math.max(1, n - 1);
 
-  // sentiment
+  // sentiment axis
   const sAbsMax = Math.max(1, ...series.sentiment.map((x) => Math.abs(x)));
   const sY = (v: number) => {
     const mid = pad.t + (height - pad.t - pad.b) / 2;
     return mid - (v / sAbsMax) * ((height - pad.t - pad.b) / 2);
   };
 
-  // price
+  // price axis
   const pMin = Math.min(...series.price);
   const pMax = Math.max(...series.price);
-  const pY = (v: number) => pad.t + ((pMax - v) * (height - pad.t - pad.b)) / Math.max(1e-6, pMax - pMin);
+  const pY = (v: number) =>
+    pad.t + ((pMax - v) * (height - pad.t - pad.b)) / Math.max(1e-6, pMax - pMin);
 
   const [hoverI, setHoverI] = React.useState<number | null>(null);
   const showSent = mode === "overlay" || mode === "sentiment";
@@ -60,18 +61,28 @@ function SentimentPriceChart({
         role="img"
         aria-label="Sentiment and price"
       >
-        {/* baseline for sentiment */}
-        {showSent && <line x1={pad.l} x2={width - pad.r} y1={sY(0)} y2={sY(0)} stroke="#e5e7eb" />}
+        {showSent && (
+          <line x1={pad.l} x2={width - pad.r} y1={sY(0)} y2={sY(0)} stroke="#e5e7eb" />
+        )}
 
-        {/* sentiment bars */}
         {showSent &&
           series.sentiment.map((v, i) => {
-            const x = xAt(i), y = Math.min(sY(0), sY(v));
+            const x = xAt(i);
+            const y = Math.min(sY(0), sY(v));
             const h = Math.abs(sY(v) - sY(0));
-            return <rect key={`s${i}`} x={x - 1} y={y} width={2} height={Math.max(1, h)} fill="#6b47dc" opacity={0.6} />;
+            return (
+              <rect
+                key={`s${i}`}
+                x={x - 1}
+                y={y}
+                width={2}
+                height={Math.max(1, h)}
+                fill="#6b47dc"
+                opacity={0.6}
+              />
+            );
           })}
 
-        {/* price line */}
         {showPrice &&
           series.price.map((v, i) => {
             if (i === 0) return null;
@@ -80,22 +91,34 @@ function SentimentPriceChart({
             return <line key={`p${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#10b981" strokeWidth={1.5} />;
           })}
 
-        {/* hover crosshair */}
         {hoverI != null && (
-          <line x1={xAt(hoverI)} x2={xAt(hoverI)} y1={pad.t} y2={height - pad.b} stroke="#9ca3af" strokeDasharray="4 4" />
+          <line
+            x1={xAt(hoverI)}
+            x2={xAt(hoverI)}
+            y1={pad.t}
+            y2={height - pad.b}
+            stroke="#9ca3af"
+            strokeDasharray="4 4"
+          />
         )}
 
-        {/* hover hitboxes */}
         {series.date.map((_, i) => {
-          const w = (width - pad.l - pad.r) / Math.max(1, n - 1), x = xAt(i);
+          const w = (width - pad.l - pad.r) / Math.max(1, n - 1);
+          const x = xAt(i);
           return (
-            <rect key={`h${i}`} x={x - w / 2} y={pad.t} width={w} height={height - pad.t - pad.b}
-                  fill="transparent" onMouseEnter={() => setHoverI(i)} />
+            <rect
+              key={`h${i}`}
+              x={x - w / 2}
+              y={pad.t}
+              width={w}
+              height={height - pad.t - pad.b}
+              fill="transparent"
+              onMouseEnter={() => setHoverI(i)}
+            />
           );
         })}
       </svg>
 
-      {/* hover details */}
       <div style={{ marginTop: 8, fontSize: 14, color: "#4b5563" }}>
         {hoverI != null ? (
           <>
@@ -105,7 +128,10 @@ function SentimentPriceChart({
               <>
                 <b>Price:</b> {series.price[hoverI].toFixed(2)} &nbsp; | &nbsp;
                 <b>Pred. return:</b>{" "}
-                {toPct(((series.price[hoverI + 1] ?? series.price[hoverI]) - series.price[hoverI]) / Math.max(1e-6, series.price[hoverI]))}
+                {toPct(
+                  ((series.price[hoverI + 1] ?? series.price[hoverI]) - series.price[hoverI]) /
+                    Math.max(1e-6, series.price[hoverI])
+                )}
               </>
             )}
           </>
@@ -117,23 +143,40 @@ function SentimentPriceChart({
   );
 }
 
-// ---------- small UI ----------
+// ---- small UI ----
 function Pill({ children, color = "#111827" }: { children: React.ReactNode; color?: string }) {
   return (
-    <span style={{
-      display: "inline-block", padding: "2px 8px", borderRadius: 999,
-      fontSize: 12, fontWeight: 600, color: "#fff", background: color, lineHeight: "18px"
-    }}>{children}</span>
+    <span
+      style={{
+        display: "inline-block",
+        padding: "2px 8px",
+        borderRadius: 999,
+        fontSize: 12,
+        fontWeight: 600,
+        color: "#fff",
+        background: color,
+        lineHeight: "18px",
+      }}
+    >
+      {children}
+    </span>
   );
 }
 
 function InsightCards({ series }: { series: SeriesIn }) {
   const last = series.price.length - 1;
-  const oneDayRet = last > 0 ? (series.price[last] - series.price[last - 1]) / Math.max(1e-6, series.price[last - 1]) : 0;
+  const oneDayRet =
+    last > 0
+      ? (series.price[last] - series.price[last - 1]) / Math.max(1e-6, series.price[last - 1])
+      : 0;
   const recent = series.sentiment.slice(Math.max(0, series.sentiment.length - 7));
   const sAvg = mean(recent);
   const sLabel = sAvg > 0.1 ? "Positive" : sAvg < -0.1 ? "Negative" : "Neutral";
-  const advisory = sAvg > 0.4 ? "Strong Buy" : sAvg > 0.1 ? "Buy" : sAvg < -0.4 ? "Strong Sell" : sAvg < -0.1 ? "Sell" : "Hold";
+  const advisory =
+    sAvg > 0.4 ? "Strong Buy" :
+    sAvg > 0.1 ? "Buy" :
+    sAvg < -0.4 ? "Strong Sell" :
+    sAvg < -0.1 ? "Sell" : "Hold";
   const ourRec = advisory.includes("Buy") ? "Buy" : advisory.includes("Sell") ? "Sell" : "Hold";
 
   const Card = ({ title, value, sub }: { title: string; value: string; sub?: string }) => (
@@ -201,7 +244,7 @@ function Headlines({ items }: { items: NewsItem[] }) {
   );
 }
 
-// ---------- main ----------
+// ---- main ----
 export default function TickerClient({ symbol, series, news = [] }: Props) {
   const [mode, setMode] = React.useState<ViewMode>("overlay");
 
@@ -232,16 +275,13 @@ export default function TickerClient({ symbol, series, news = [] }: Props) {
         </div>
       </div>
 
-      {/* chart */}
       <SentimentPriceChart series={series} mode={mode} />
 
-      {/* insights */}
       <div>
         <div style={{ fontWeight: 600, marginBottom: 8 }}>Live Market Insights</div>
         <InsightCards series={series} />
       </div>
 
-      {/* headlines */}
       <Headlines items={news} />
     </div>
   );
