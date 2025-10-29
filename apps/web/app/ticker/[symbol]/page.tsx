@@ -12,8 +12,9 @@ type SeriesIn = {
 type NewsItem = {
   ts: string;
   title: string;
-  url: string;
-  text?: string;
+  url?: string;
+  source?: string;
+  score?: number;
 };
 
 export const dynamic = "error";
@@ -29,65 +30,85 @@ async function readJSON<T = any>(p: string): Promise<T | null> {
     return null;
   }
 }
-const numArr = (v: unknown): number[] => (Array.isArray(v) ? v.map((x) => Number(x) || 0) : []);
-const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
+
+const numArr = (v: unknown): number[] =>
+  Array.isArray(v) ? v.map((x) => Number(x) || 0) : [];
+const strArr = (v: unknown): string[] =>
+  Array.isArray(v) ? v.map((x) => String(x ?? "")) : [];
 
 function buildSeries(obj: any): SeriesIn | null {
-  const date = strArr(obj?.date ?? obj?.dates);
-  const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
-  const sentiment = numArr(obj?.S ?? obj?.sentiment);
-  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);
-  if (!Number.isFinite(n) || n === 0) return null;
-  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
+  if (!obj) return null;
+  const date = strArr(obj.date ?? obj.dates ?? obj.time ?? []);
+  const price = numArr(obj.price ?? obj.prices ?? []);
+  const sentiment = numArr(obj.sentiment ?? obj.sentiments ?? []);
+  if (!date.length || !price.length || !sentiment.length) return null;
+  const n = Math.min(date.length, price.length, sentiment.length);
+  return {
+    date: date.slice(0, n),
+    price: price.slice(0, n),
+    sentiment: sentiment.slice(0, n),
+  };
 }
 
-function buildNews(obj: any): NewsItem[] {
-  const raw = Array.isArray(obj?.news) ? obj.news : [];
-  return raw
-    .map((r: any) => ({
-      ts: String(r?.ts ?? r?.date ?? ""),
-      title: String(r?.title ?? ""),
-      url: String(r?.url ?? ""),
-      text: r?.text ? String(r.text) : undefined,
-    }))
-    .filter((r: NewsItem) => r.ts && r.title);
+async function loadNewsJSON(symbol: string): Promise<NewsItem[]> {
+  const candidates = [
+    path.join(DATA_ROOT, "news", `${symbol}.json`),
+    path.join(DATA_ROOT, "ticker", `${symbol}_news.json`),
+    path.join(DATA_ROOT, `${symbol}_news.json`),
+  ];
+  for (const p of candidates) {
+    const j = await readJSON<any>(p);
+    if (j && Array.isArray(j)) {
+      return j.map((x: any) => ({
+        ts: String(x.ts ?? x.time ?? x.date ?? ""),
+        title: String(x.title ?? x.headline ?? ""),
+        url: x.url ?? x.link,
+        source: x.source ?? x.provider,
+        score: typeof x.score === "number" ? x.score : undefined,
+      }));
+    }
+  }
+  return [];
 }
 
+// Provide static params so `dynamic="error"` works for export
 export async function generateStaticParams() {
-  const list = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
-  return list.map((symbol) => ({ symbol }));
+  const dir = path.join(DATA_ROOT, "ticker");
+  try {
+    const files = await fs.readdir(dir);
+    return files
+      .filter((n) => n.toLowerCase().endsWith(".json"))
+      .map((n) => ({ symbol: n.replace(/\.json$/i, "").toUpperCase() }));
+  } catch {
+    return [];
+  }
 }
 
 export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
-  const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
-  const obj = await readJSON<any>(f);
+  const p1 = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
+  const obj = await readJSON<any>(p1);
+  const series = buildSeries(obj);
+  const news = await loadNewsJSON(symbol);
 
-  if (!obj) {
+  if (!series) {
     return (
-      <div className="min-h-screen p-6">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-2xl font-semibold mb-4">{symbol}</h1>
-          <div className="text-neutral-500">No data for {symbol}.</div>
-        </div>
-      </div>
+      <main style={{ maxWidth: 1200, margin: "40px auto", padding: "0 16px" }}>
+        <h1>Market Sentiment for {symbol}</h1>
+        <p style={{ color: "#6b7280" }}>
+          No data found for this symbol in{" "}
+          <code>public/data/ticker/{symbol}.json</code>.
+        </p>
+      </main>
     );
   }
 
-  const series = buildSeries(obj);
-  const news = buildNews(obj);
-  const newsTotal = Number(obj?.news_total ?? 0);
-
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="sr-only">{symbol}</h1>
-        {series ? (
-          <TickerClient symbol={symbol} series={series} news={news} newsTotal={newsTotal} />
-        ) : (
-          <div className="text-neutral-500">No time series for {symbol}.</div>
-        )}
-      </div>
-    </div>
+    <main style={{ maxWidth: 1200, margin: "24px auto", padding: "0 16px" }}>
+      <h1 style={{ fontSize: 28, fontWeight: 600, marginBottom: 8 }}>
+        Market Sentiment for {symbol}
+      </h1>
+      <TickerClient symbol={symbol} series={series} news={news} />
+    </main>
   );
 }
