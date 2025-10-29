@@ -30,10 +30,11 @@ on:
         type: choice
         options: ["120", "180", "240", "300", "365"]
   schedule:
-    - cron: "0 12 * * 1" # Mondays 12:00 UTC
+    - cron: "0 * * * *"   # refresh hourly
+    - cron: "0 12 * * 1"  # plus Mondays 12:00 UTC
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -54,6 +55,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
 
       # ---------- Python & deps ----------
       - name: Setup Python
@@ -79,6 +83,11 @@ jobs:
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
 
+      - name: Ensure base folders (avoid rsync/build errors)
+        run: |
+          mkdir -p data
+          mkdir -p apps/web/public/data/ticker
+
       - name: Set date range (last 365 days)
         shell: python
         run: |
@@ -94,7 +103,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p data
           MODE="${{ github.event.inputs.mode }}"
           if [ -z "${MODE:-}" ]; then MODE="sample"; fi
           if [ "$MODE" = "full" ]; then
@@ -198,7 +206,6 @@ jobs:
           MAX_DAYS = int(os.environ.get("MAX_DAYS_PER_TICKER") or "365")
           TICKER_CSV = os.environ["TICKER_CSV"]
 
-          # ----- token pool -----
           def build_tokens() -> list[str]:
               raw = os.environ.get("FINNHUB_TOKENS", "").strip()
               toks = [x.strip() for x in raw.split(",") if x.strip()] if raw else []
@@ -228,6 +235,7 @@ jobs:
           client = finnhub.Client(api_key=pool.current())
 
           def read_universe(csv_path: str) -> list[str]:
+              import pandas as pd
               df = pd.read_csv(csv_path)
               col = [c for c in df.columns if c.lower()=="ticker"]
               if not col: return []
@@ -237,13 +245,14 @@ jobs:
           e_all = pd.Timestamp(END, tz="UTC").normalize()
           days = list(pd.date_range(s_all, e_all, freq="D", tz="UTC"))
           if MAX_DAYS and len(days) > MAX_DAYS:
-              days = days[-MAX_DAYS:]  # cap backfill window
+              days = days[-MAX_DAYS:]
 
           min_gap = 1.0 / float(FINNHUB_RPS)
           last_call = 0.0
 
           def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True)
+              path.parent.mkdir(parents=True, exist_ok=True
+              )
               with path.open("w", encoding="utf-8") as f:
                   json.dump(obj, f, ensure_ascii=False, indent=2)
 
@@ -273,16 +282,14 @@ jobs:
                       except Exception as e:
                           msg = str(e)
                           if ("429" in msg) or ("API limit reached" in msg) or ("Remaining Limit: 0" in msg):
-                              # Rotate token if possible; else backoff then continue
                               logf.write(f"[FH] {t} {day} rate-limited: {msg}\n")
                               nxt = pool.rotate()
                               if nxt:
                                   client = finnhub.Client(api_key=nxt)
-                                  time.sleep(1.0)  # small pause after rotation
+                                  time.sleep(1.0)
                                   tries += 1
                                   continue
                               else:
-                                  # No tokens left; exponential backoff but still write empty file to mark attempt
                                   backoff = min(16.0, 2.0 ** tries)
                                   time.sleep(backoff)
                                   tries += 1
@@ -364,10 +371,10 @@ jobs:
                         or norm_ts(content.get("pubDate"))
                         or norm_ts(content.get("displayTime"))
                         or norm_ts(content.get("published")))
-                  if ts is None or pd.isna(ts) or ts < s or ts > e: 
+                  if ts is None or pd.isna(ts) or ts < s or ts > e:
                       continue
                   title = (content.get("title") or it.get("title") or "").strip()
-                  if not title: 
+                  if not title:
                       continue
                   url = ((content.get("canonicalUrl") or {}).get("url")
                          or (content.get("clickThroughUrl") or {}).get("url")
@@ -388,7 +395,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pd.DataFrame(rows)
+              df = pd.DataFrame(rows)   # <- FIXED: use pd.DataFrame, not pandas.DataFrame
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
@@ -437,7 +444,7 @@ jobs:
               day_texts = {}
               for prov in ("finnhub","yfinance"):
                   nd = base/"news"/prov
-                  if not nd.exists(): 
+                  if not nd.exists():
                       continue
                   for p in sorted(glob.glob(str(nd/"*.json"))):
                       day = Path(p).stem
@@ -445,7 +452,7 @@ jobs:
                           ddate = pd.to_datetime(day, utc=True).date()
                       except Exception:
                           continue
-                      if ddate < s or ddate > e: 
+                      if ddate < s or ddate > e:
                           continue
                       try:
                           arr = json.load(open(p, encoding="utf-8")) or []
@@ -460,7 +467,7 @@ jobs:
 
               for day, obj in day_texts.items():
                   out = base/"sentiment"/f"{day}.json"
-                  if out.exists() and out.stat().st_size>0: 
+                  if out.exists() and out.stat().st_size>0:
                       continue
                   texts = obj["texts"]
                   if not texts:
@@ -483,7 +490,7 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: sentiment JSON written")
 
-      # ---------- Build site JSON ----------
+      # ---------- Build site JSON (apps/web/public/data) ----------
       - name: Assemble site JSON (apps/web/public/data)
         shell: python
         run: |
@@ -524,7 +531,8 @@ jobs:
                                 "ts": it.get("ts"),
                                 "title": it.get("headline") or "",
                                 "url": it.get("url") or "",
-                                "source": it.get("source") or prov
+                                "source": it.get("source") or prov,
+                                "provider": prov
                               })
                       except Exception:
                           pass
@@ -533,19 +541,19 @@ jobs:
               e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
               def in_window(ts):
                   try:
-                      tt = pd.to_datetime(ts, utc=True); 
+                      tt = pd.to_datetime(ts, utc=True)
                       return tt >= s and tt <= e
                   except Exception:
                       return False
               news_items = [n for n in news_items if n.get("ts") and in_window(n.get("ts"))]
               news_items.sort(key=lambda n: n["ts"], reverse=True)
-              news_trim = news_items[:10]
+              news_trim = news_items[:20]
 
               def count_provider(prov):
                   tot=0
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
-                          tot += len(json.load(open(p)))
+                          tot += len(json.load(open(p, encoding="utf-8")))
                       except Exception:
                           pass
                   return tot
@@ -556,6 +564,7 @@ jobs:
                 "ticker": t,
                 "dates": [d for d,_ in rows],
                 "S": [round(float(v), 4) for _,v in rows],
+                "sentiment": [round(float(v), 4) for _,v in rows],
                 "news_count": {"finnhub": int(nf), "yfinance": int(ny), "total": int(nf+ny)},
                 "news": news_trim
               }
@@ -606,7 +615,7 @@ jobs:
           if [ -f package-lock.json ]; then
             npm ci --no-audit --no-fund
           else
-            npm install --no-audit --no-fund
+            npm install --no-audit --no-fund || true
           fi
           npm i -D @types/react @types/node --no-audit --no-fund || true
 
