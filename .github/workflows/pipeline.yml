@@ -593,7 +593,7 @@ jobs:
             git push || true
           fi
 
-      - name: Ensure Next static export config (write via Python to avoid YAML quoting)
+      - name: Ensure Next static export config (write via Python; avoids YAML quoting issues)
         working-directory: apps/web
         shell: python
         run: |
@@ -656,6 +656,7 @@ module.exports = {
           if [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
             cp out/index.html out/404.html
           fi
+          touch out/.nojekyll
           echo "==== Final out/ listing ===="
           find out -maxdepth 3 -type f | sort
 
