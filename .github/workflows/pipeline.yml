@@ -76,7 +76,6 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip wheel setuptools
-          pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
           pip install --no-cache-dir finnhub-python yfinance transformers pandas requests
 
@@ -251,8 +250,7 @@ jobs:
           last_call = 0.0
 
           def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True
-              )
+              path.parent.mkdir(parents=True, exist_ok=True)
               with path.open("w", encoding="utf-8") as f:
                   json.dump(obj, f, ensure_ascii=False, indent=2)
 
@@ -260,68 +258,66 @@ jobs:
               base = Path(f"data/{t}/news/finnhub")
               base.mkdir(parents=True, exist_ok=True)
               logp = Path(f"data/{t}/logs"); logp.mkdir(parents=True, exist_ok=True)
-              logf = (logp / "finnhub_fetch.log").open("a", encoding="utf-8")
+              with (logp / "finnhub_fetch.log").open("a", encoding="utf-8") as logf:
+                wrote = 0; skipped = 0
+                for dts in days:
+                    day = dts.date().isoformat()
+                    out = base / f"{day}.json"
+                    if out.exists() and out.stat().st_size > 0:
+                        skipped += 1
+                        continue
 
-              wrote = 0; skipped = 0
-              for dts in days:
-                  day = dts.date().isoformat()
-                  out = base / f"{day}.json"
-                  if out.exists() and out.stat().st_size > 0:
-                      skipped += 1
-                      continue
+                    now = time.time()
+                    wait = max(0.0, (last_call + min_gap) - now)
+                    if wait > 0: time.sleep(wait)
 
-                  now = time.time()
-                  wait = max(0.0, (last_call + min_gap) - now)
-                  if wait > 0: time.sleep(wait)
+                    tries, arr = 0, []
+                    while tries < 5:
+                        try:
+                            arr = client.company_news(t, _from=day, to=day) or []
+                            break
+                        except Exception as e:
+                            msg = str(e)
+                            if ("429" in msg) or ("API limit reached" in msg) or ("Remaining Limit: 0" in msg):
+                                logf.write(f"[FH] {t} {day} rate-limited: {msg}\n")
+                                nxt = pool.rotate()
+                                if nxt:
+                                    client = finnhub.Client(api_key=nxt)
+                                    time.sleep(1.0)
+                                    tries += 1
+                                    continue
+                                else:
+                                    backoff = min(16.0, 2.0 ** tries)
+                                    time.sleep(backoff)
+                                    tries += 1
+                                    if tries >= 5:
+                                        break
+                            else:
+                                logf.write(f"[FH] {t} {day} error: {msg}\n")
+                                break
 
-                  tries, arr = 0, []
-                  while tries < 5:
-                      try:
-                          arr = client.company_news(t, _from=day, to=day) or []
-                          break
-                      except Exception as e:
-                          msg = str(e)
-                          if ("429" in msg) or ("API limit reached" in msg) or ("Remaining Limit: 0" in msg):
-                              logf.write(f"[FH] {t} {day} rate-limited: {msg}\n")
-                              nxt = pool.rotate()
-                              if nxt:
-                                  client = finnhub.Client(api_key=nxt)
-                                  time.sleep(1.0)
-                                  tries += 1
-                                  continue
-                              else:
-                                  backoff = min(16.0, 2.0 ** tries)
-                                  time.sleep(backoff)
-                                  tries += 1
-                                  if tries >= 5:
-                                      break
-                          else:
-                              logf.write(f"[FH] {t} {day} error: {msg}\n")
-                              break
+                    last_call = time.time()
 
-                  last_call = time.time()
+                    cleaned = []
+                    for it in arr:
+                        try:
+                            ts = pd.Timestamp.utcfromtimestamp(int(it.get("datetime"))).tz_localize("UTC").isoformat()
+                        except Exception:
+                            ts = None
+                        cleaned.append({
+                          "ts": ts,
+                          "headline": (it.get("headline") or "").strip(),
+                          "summary": (it.get("summary") or it.get("headline") or "").strip(),
+                          "url": it.get("url") or "",
+                          "source": it.get("source") or "",
+                          "provider": "finnhub",
+                          "raw": it
+                        })
+                    save_json(out, cleaned)
+                    wrote += 1
 
-                  cleaned = []
-                  for it in arr:
-                      try:
-                          ts = pd.Timestamp.utcfromtimestamp(int(it.get("datetime"))).tz_localize("UTC").isoformat()
-                      except Exception:
-                          ts = None
-                      cleaned.append({
-                        "ts": ts,
-                        "headline": (it.get("headline") or "").strip(),
-                        "summary": (it.get("summary") or it.get("headline") or "").strip(),
-                        "url": it.get("url") or "",
-                        "source": it.get("source") or "",
-                        "provider": "finnhub",
-                        "raw": it
-                      })
-                  save_json(out, cleaned)
-                  wrote += 1
-
-              logf.write(f"[FH] {t}: wrote {wrote} files, skipped {skipped}\n")
-              logf.close()
-              print(f"[FH] {t}: wrote {wrote} files, skipped {skipped}")
+                logf.write(f"[FH] {t}: wrote {wrote} files, skipped {skipped}\n")
+                print(f"[FH] {t}: wrote {wrote} files, skipped {skipped}")
 
       # ---------- Yahoo Finance (~200 recent) per-day JSON ----------
       - name: Save Yahoo Finance per-day JSON (~200)
@@ -329,7 +325,7 @@ jobs:
           YF_COUNT: ${{ github.event.inputs.yfinance_count }}
         shell: python
         run: |
-          import os, json, pandas as pd, yfinance as yf
+          import os, json, pandas as pd, yfinance as yf, glob
           from pathlib import Path
 
           START=os.environ["START"]; END=os.environ["END"]
@@ -358,11 +354,10 @@ jobs:
           e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
 
           for t in read_universe(TICKER_CSV):
-              items=[]
               try:
                   items = yf.Ticker(t).get_news(count=YF_COUNT, tab="all") or []
               except Exception:
-                  pass
+                  items = []
 
               rows=[]
               for it in items:
@@ -395,7 +390,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pd.DataFrame(rows)   # <- FIXED: use pd.DataFrame, not pandas.DataFrame
+              df = pd.DataFrame(rows)
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
@@ -571,6 +566,13 @@ jobs:
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
               print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)})")
 
+          # diagnostics for UI troubleshooting
+          diag = {
+            "generated_at_utc": pd.Timestamp.utcnow().isoformat(),
+            "tickers": tickers,
+          }
+          (pub/"diagnostics.json").write_text(json.dumps(diag, indent=2), encoding="utf-8")
+
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
         if: always()
@@ -591,7 +593,7 @@ jobs:
             git push || true
           fi
 
-      # ---------- Node & web build ----------
+      # ---------- Node & web build (Next export for GH Pages) ----------
       - name: Setup Node.js (with npm cache)
         if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
         uses: actions/setup-node@v4
@@ -606,60 +608,29 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install web deps (ensure public/data exists)
+      - name: Install web deps
         working-directory: apps/web
-        shell: bash
         run: |
-          set -euo pipefail
           mkdir -p public/data public/data/ticker
           if [ -f package-lock.json ]; then
             npm ci --no-audit --no-fund
           else
-            npm install --no-audit --no-fund || true
+            npm install --no-audit --no-fund
           fi
-          npm i -D @types/react @types/node --no-audit --no-fund || true
 
-      - name: Build static site (synthesize out/ if needed)
+      - name: Build & export static site
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
           NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
-        shell: bash
         run: |
-          set -euo pipefail
-          npm run build || true
-
-          rm -rf out
-          mkdir -p out
-
-          if [ -d ".next/static" ]; then
-            mkdir -p out/_next
-            rsync -a .next/static/ out/_next/static/
+          # Build + export (requires next.config.cjs with output:'export')
+          npm run build
+          npx next export -o out
+          # 404 fallback for GH Pages
+          if [ ! -f "out/404.html" ] && [ -f "out/index.html" ]; then
+            cp out/index.html out/404.html
           fi
-
-          if [ -d "public" ]; then
-            rsync -a public/ out/
-          else
-            mkdir -p public
-            rsync -a public/ out/
-          fi
-
-          if [ -d ".next/server/app" ]; then
-            find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-              rel="${f#.next/server/app}"
-              dir="${rel%/index.html}"
-              mkdir -p "out/${dir}"
-              cp "$f" "out/${dir}/index.html"
-            done
-            find .next/server/app -type f -name '*.html' ! -name 'index.html' -print0 | while IFS= read -r -d '' f; do
-              rel="${f#.next/server/app/}"
-              rel_noext="${rel%.html}"
-              mkdir -p "out/${rel_noext}"
-              cp "$f" "out/${rel_noext}/index.html"
-            done
-          fi
-
-          touch out/.nojekyll
           find out -maxdepth 3 -type f | sort
 
       - name: Configure Pages
