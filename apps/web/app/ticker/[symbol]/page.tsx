@@ -3,17 +3,18 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import TickerClient from "./TickerClient";
 
-type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
-type NewsItem = { ts: string; title: string; url?: string; source?: string; score?: number };
-
+// App Router static export guarantees
 export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
 
-// --- Robust data root resolution: works whether build runs at repo root or apps/web ---
+type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
+type NewsItem = { ts: string; title: string; url?: string; source?: string; score?: number };
+
+// Robust path resolver (works from repo root or apps/web)
 async function resolveDataRoot(): Promise<string> {
   const candidates = [
-    path.join(process.cwd(), "public", "data"),            // when cwd = apps/web
+    path.join(process.cwd(), "public", "data"),                // when cwd = apps/web
     path.join(process.cwd(), "apps", "web", "public", "data"), // when cwd = repo root
   ];
   for (const p of candidates) {
@@ -22,42 +23,37 @@ async function resolveDataRoot(): Promise<string> {
       if (st.isDirectory()) return p;
     } catch {}
   }
-  // fallback to first; reads will just fail cleanly if not present
   return candidates[0];
 }
 
-async function readJSON<T = any>(p: string): Promise<T | null> {
-  try {
-    return JSON.parse(await fs.readFile(p, "utf8")) as T;
-  } catch {
-    return null;
-  }
+async function readJSON<T>(p: string): Promise<T | null> {
+  try { return JSON.parse(await fs.readFile(p, "utf8")) as T; }
+  catch { return null; }
 }
 
-const numArr = (v: unknown): number[] =>
-  Array.isArray(v) ? v.map((x) => (typeof x === "number" ? x : Number(x) || 0)) : [];
-const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
+const nArr = (x: unknown) => (Array.isArray(x) ? x.map((v) => Number(v) || 0) : []);
+const sArr = (x: unknown) => (Array.isArray(x) ? x.map((v) => String(v ?? "")) : []);
 
 function buildSeries(obj: any): SeriesIn | null {
   if (!obj) return null;
-  const date = strArr(obj.date ?? obj.dates ?? obj.time ?? []);
-  const price = numArr(obj.price ?? obj.prices ?? []);
-  const sentiment = numArr(obj.sentiment ?? obj.sentiments ?? []);
-  if (!date.length || !price.length || !sentiment.length) return null;
+  const date = sArr(obj.date ?? obj.dates ?? obj.time ?? []);
+  const price = nArr(obj.price ?? obj.prices ?? []);
+  const sentiment = nArr(obj.sentiment ?? obj.sentiments ?? []);
   const n = Math.min(date.length, price.length, sentiment.length);
+  if (!n) return null;
   return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
 }
 
-async function loadNewsJSON(dataRoot: string, symbol: string): Promise<NewsItem[]> {
+async function loadNews(dataRoot: string, symbol: string): Promise<NewsItem[]> {
   const candidates = [
     path.join(dataRoot, "news", `${symbol}.json`),
     path.join(dataRoot, "ticker", `${symbol}_news.json`),
     path.join(dataRoot, `${symbol}_news.json`),
   ];
   for (const p of candidates) {
-    const j = await readJSON<any>(p);
+    const j = await readJSON<any[]>(p);
     if (j && Array.isArray(j)) {
-      return j.map((x: any) => ({
+      return j.map((x) => ({
         ts: String(x.ts ?? x.time ?? x.date ?? ""),
         title: String(x.title ?? x.headline ?? ""),
         url: x.url ?? x.link,
@@ -69,22 +65,18 @@ async function loadNewsJSON(dataRoot: string, symbol: string): Promise<NewsItem[
   return [];
 }
 
-/**
- * Pre-generate /ticker/[symbol]/ for GitHub Pages static export.
- * Looks under {dataRoot}/ticker/*.json and returns params {symbol}.
- */
+// ------- Static prerender of /ticker/[symbol] from files your pipeline generates -------
 export async function generateStaticParams() {
   const dataRoot = await resolveDataRoot();
-  const dir = path.join(dataRoot, "ticker");
-  let files: string[] = [];
+  const tickDir = path.join(dataRoot, "ticker");
   try {
-    files = await fs.readdir(dir);
+    const files = await fs.readdir(tickDir);
+    return files
+      .filter((f) => f.toLowerCase().endsWith(".json"))
+      .map((f) => ({ symbol: f.replace(/\.json$/i, "").toUpperCase() }));
   } catch {
     return [];
   }
-  return files
-    .filter((f) => f.toLowerCase().endsWith(".json"))
-    .map((f) => ({ symbol: f.replace(/\.json$/i, "").toUpperCase() }));
 }
 
 export default async function Page({ params }: { params: { symbol: string } }) {
@@ -94,14 +86,14 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   const series = buildSeries(
     await readJSON<any>(path.join(dataRoot, "ticker", `${symbol}.json`))
   );
-  const news = await loadNewsJSON(dataRoot, symbol);
+  const news = await loadNews(dataRoot, symbol);
 
   if (!series) {
     return (
       <main style={{ maxWidth: 1200, margin: "40px auto", padding: "0 16px" }}>
         <h1>Market Sentiment for {symbol}</h1>
         <p style={{ color: "#6b7280" }}>
-          No data found for <code>{path.join("public/data/ticker", `${symbol}.json`)}</code>.
+          No data found for <code>{`public/data/ticker/${symbol}.json`}</code>.
         </p>
       </main>
     );
