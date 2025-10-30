@@ -7,6 +7,10 @@ type Series = { date: string[]; price: number[]; sentiment: number[] };
 type NewsItem = { ts: string; title: string; url?: string; source?: string; score?: number };
 type ViewMode = "overlay" | "price" | "sentiment";
 
+// ---------- helpers ----------
+const mean = (a: number[]) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0);
+const toPct = (x: number) => `${(x * 100).toFixed(2)}%`;
+
 function dateOnly(s: string): string {
   const m = s.match(/\d{4}-\d{2}-\d{2}/);
   if (m) return m[0];
@@ -14,11 +18,17 @@ function dateOnly(s: string): string {
   if (!Number.isNaN(d.getTime())) return d.toISOString().slice(0, 10);
   return (s.split(" ")[0] || s).replace(/T.*/, "");
 }
-const mean = (a: number[]) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0);
-const toPct = (x: number) => `${(x * 100).toFixed(2)}%`;
 
-// From /ticker/SYM/ the data lives at ../../data/...
-const relData = "../../data";
+/** Compute the GitHub Pages base path at runtime.
+ *  e.g. "/market-sentiment-web" when hosted as a project site; "" otherwise.
+ */
+function detectBasePath() {
+  if (typeof window === "undefined") return "";
+  const path = window.location.pathname;  // "/market-sentiment-web/ticker/AAPL/"
+  const first = path.indexOf("/", 1);     // position of 2nd slash
+  // If we are on "/repo/...", return "/repo"; if on "/", return ""
+  return first > 0 ? path.slice(0, first) : "";
+}
 
 async function fetchJSON<T>(url: string): Promise<T | null> {
   try {
@@ -39,6 +49,7 @@ function Pill({ children, color = "#111827" }: { children: React.ReactNode; colo
   );
 }
 
+// ---------- Chart (SVG) ----------
 function SentimentPriceChart({ series, mode, height = 320 }:{
   series: Series; mode: ViewMode; height?: number;
 }) {
@@ -112,8 +123,7 @@ function SentimentPriceChart({ series, mode, height = 320 }:{
 function InsightCards({ series }: { series: Series }) {
   const last = series.price.length - 1;
   const oneDayRet = last > 0 ? (series.price[last] - series.price[last - 1]) / Math.max(1e-6, series.price[last - 1]) : 0;
-  const recent = series.sentiment.slice(-7);
-  const sAvg = mean(recent);
+  const sAvg = mean(series.sentiment.slice(-7));
   const sLabel = sAvg > 0.1 ? "Positive" : sAvg < -0.1 ? "Negative" : "Neutral";
   const advisory = sAvg > 0.4 ? "Strong Buy" : sAvg > 0.1 ? "Buy" : sAvg < -0.4 ? "Strong Sell" : sAvg < -0.1 ? "Sell" : "Hold";
   const ourRec = advisory.includes("Buy") ? "Buy" : advisory.includes("Sell") ? "Sell" : "Hold";
@@ -181,6 +191,7 @@ function Headlines({ items }: { items: NewsItem[] }) {
   );
 }
 
+// ---------- Main ----------
 export default function TickerClient({ symbol }: { symbol: string }) {
   const [mode, setMode] = React.useState<ViewMode>("overlay");
   const [series, setSeries] = React.useState<Series | null>(null);
@@ -190,19 +201,25 @@ export default function TickerClient({ symbol }: { symbol: string }) {
   React.useEffect(() => {
     let alive = true;
     (async () => {
-      const s = await fetchJSON<any>(`${relData}/ticker/${symbol}.json`);
+      const base = detectBasePath(); // "" locally; "/market-sentiment-web" on GH Pages
+      // Primary fetch (absolute to project subpath)
+      let s = await fetchJSON<any>(`${base}/data/ticker/${symbol}.json`);
+      // Fallback: relative (covers odd previews or custom paths)
+      if (!s) s = await fetchJSON<any>(`../../data/ticker/${symbol}.json`);
       if (!alive) return;
+
       if (!s || !Array.isArray(s.date ?? s.dates ?? s.time)) {
-        setErr(`No data found for ${relData}/ticker/${symbol}.json`);
+        setErr(`No data found for ${base || "../../" }data/ticker/${symbol}.json`);
         return;
       }
-      const date = (s.date ?? s.dates ?? s.time).map((x: any) => String(x));
+      const dates = (s.date ?? s.dates ?? s.time).map((x: any) => String(x));
       const price = (s.price ?? s.prices ?? []).map((x: any) => Number(x) || 0);
       const sentiment = (s.sentiment ?? s.sentiments ?? []).map((x: any) => Number(x) || 0);
-      const n = Math.min(date.length, price.length, sentiment.length);
-      setSeries({ date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) });
+      const n = Math.min(dates.length, price.length, sentiment.length);
+      setSeries({ date: dates.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) });
 
-      const njs = await fetchJSON<any[]>(`${relData}/news/${symbol}.json`);
+      let njs = await fetchJSON<any[]>(`${base}/news/${symbol}.json`);
+      if (!njs) njs = await fetchJSON<any[]>(`../../news/${symbol}.json`);
       if (!alive) return;
       setNews(
         (njs || []).map((x: any) => ({
@@ -234,6 +251,7 @@ export default function TickerClient({ symbol }: { symbol: string }) {
   );
 
   if (err && !series) {
+    // Render the toggle and the error so the page never sits on a spinner forever
     return (
       <div>
         <div role="tablist" aria-label="View mode" style={{ border: "1px solid #e5e7eb", borderRadius: 999, overflow: "hidden", marginBottom: 12 }}>
@@ -246,9 +264,7 @@ export default function TickerClient({ symbol }: { symbol: string }) {
     );
   }
 
-  if (!series) {
-    return <div style={{ color: "#6b7280" }}>Loading…</div>;
-  }
+  if (!series) return <div style={{ color: "#6b7280" }}>Loading…</div>;
 
   return (
     <div style={{ display: "grid", gap: 16 }}>
@@ -260,17 +276,12 @@ export default function TickerClient({ symbol }: { symbol: string }) {
           <Button label="Sentiment Only" value="sentiment" />
         </div>
       </div>
-
       <SentimentPriceChart series={series} mode={mode} />
-
       <div>
         <div style={{ fontWeight: 600, marginBottom: 8 }}>Live Market Insights</div>
         <InsightCards series={series} />
       </div>
-
-      <div>
-        <Headlines items={news || []} />
-      </div>
+      <Headlines items={news || []} />
     </div>
   );
 }
