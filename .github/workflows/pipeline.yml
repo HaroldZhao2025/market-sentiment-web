@@ -591,6 +591,21 @@ jobs:
             git push || true
           fi
 
+      - name: Sanity check JSON (must exist before Next build)
+        run: |
+          ls -l apps/web/public/data/ticker | head
+          test -f apps/web/public/data/ticker/AAPL.json
+
+      - name: Build & export
+        working-directory: apps/web
+        run: |
+          npm ci
+          npm run build
+          npm run export
+          echo "Must include ticker AAPL page and data in out/:"
+          test -f out/ticker/AAPL/index.html
+          test -f out/data/ticker/AAPL.json
+
       # ---------- Node & web build ----------
       - name: Setup Node.js (with npm cache)
         if: ${{ hashFiles('apps/web/package-lock.json') != '' }}
