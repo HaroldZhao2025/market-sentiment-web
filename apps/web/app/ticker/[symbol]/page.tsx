@@ -1,95 +1,110 @@
+// apps/web/app/ticker/[symbol]/page.tsx
 import fs from "node:fs/promises";
 import path from "node:path";
 import TickerClient from "./TickerClient";
 
-type SeriesIn = {
-  date: string[];
-  price: number[];
-  sentiment: number[];
-};
-
-type NewsItem = {
-  ts: string;
-  title: string;
-  url: string;
-  text?: string;
-  source?: string;
-  provider?: string;
-};
-
+// App Router static export guarantees
 export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
 
-const DATA_ROOT = path.join(process.cwd(), "public", "data");
+type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
+type NewsItem = { ts: string; title: string; url?: string; source?: string; score?: number };
 
-async function readJSON<T = any>(p: string): Promise<T | null> {
-  try {
-    return JSON.parse(await fs.readFile(p, "utf8")) as T;
-  } catch {
-    return null;
+// Robust path resolver (works from repo root or apps/web)
+async function resolveDataRoot(): Promise<string> {
+  const candidates = [
+    path.join(process.cwd(), "public", "data"),                // when cwd = apps/web
+    path.join(process.cwd(), "apps", "web", "public", "data"), // when cwd = repo root
+  ];
+  for (const p of candidates) {
+    try {
+      const st = await fs.stat(p);
+      if (st.isDirectory()) return p;
+    } catch {}
   }
+  return candidates[0];
 }
-const numArr = (v: unknown): number[] => (Array.isArray(v) ? v.map((x) => Number(x) || 0) : []);
-const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
+
+async function readJSON<T>(p: string): Promise<T | null> {
+  try { return JSON.parse(await fs.readFile(p, "utf8")) as T; }
+  catch { return null; }
+}
+
+const nArr = (x: unknown) => (Array.isArray(x) ? x.map((v) => Number(v) || 0) : []);
+const sArr = (x: unknown) => (Array.isArray(x) ? x.map((v) => String(v ?? "")) : []);
 
 function buildSeries(obj: any): SeriesIn | null {
-  const date = strArr(obj?.date ?? obj?.dates);
-  const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
-  const sentiment = numArr(obj?.S ?? obj?.sentiment);
-  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);
-  if (!Number.isFinite(n) || n === 0) return null;
+  if (!obj) return null;
+  const date = sArr(obj.date ?? obj.dates ?? obj.time ?? []);
+  const price = nArr(obj.price ?? obj.prices ?? []);
+  const sentiment = nArr(obj.sentiment ?? obj.sentiments ?? []);
+  const n = Math.min(date.length, price.length, sentiment.length);
+  if (!n) return null;
   return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };
 }
 
-function buildNews(obj: any): NewsItem[] {
-  const raw = Array.isArray(obj?.news) ? obj.news : [];
-  return raw
-    .map((r: any) => ({
-      ts: String(r?.ts ?? r?.date ?? ""),
-      title: String(r?.title ?? ""),
-      url: String(r?.url ?? ""),
-      text: r?.text ? String(r.text) : undefined,
-      source: r?.source ? String(r.source) : undefined,
-      provider: r?.provider ? String(r.provider) : undefined,
-    }))
-    .filter((r: NewsItem) => r.ts && r.title);
+async function loadNews(dataRoot: string, symbol: string): Promise<NewsItem[]> {
+  const candidates = [
+    path.join(dataRoot, "news", `${symbol}.json`),
+    path.join(dataRoot, "ticker", `${symbol}_news.json`),
+    path.join(dataRoot, `${symbol}_news.json`),
+  ];
+  for (const p of candidates) {
+    const j = await readJSON<any[]>(p);
+    if (j && Array.isArray(j)) {
+      return j.map((x) => ({
+        ts: String(x.ts ?? x.time ?? x.date ?? ""),
+        title: String(x.title ?? x.headline ?? ""),
+        url: x.url ?? x.link,
+        source: x.source ?? x.provider,
+        score: typeof x.score === "number" ? x.score : undefined,
+      }));
+    }
+  }
+  return [];
 }
 
+// ------- Static prerender of /ticker/[symbol] from files your pipeline generates -------
 export async function generateStaticParams() {
-  const list = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
-  return list.map((symbol) => ({ symbol }));
+  const dataRoot = await resolveDataRoot();
+  const tickDir = path.join(dataRoot, "ticker");
+  try {
+    const files = await fs.readdir(tickDir);
+    return files
+      .filter((f) => f.toLowerCase().endsWith(".json"))
+      .map((f) => ({ symbol: f.replace(/\.json$/i, "").toUpperCase() }));
+  } catch {
+    return [];
+  }
 }
 
 export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
-  const f = path.join(DATA_ROOT, "ticker", `${symbol}.json`);
-  const obj = await readJSON<any>(f);
+  const dataRoot = await resolveDataRoot();
 
-  // If the JSON isn't available at build time, render a shell; the client will fetch it at runtime.
-  if (!obj) {
+  const series = buildSeries(
+    await readJSON<any>(path.join(dataRoot, "ticker", `${symbol}.json`))
+  );
+  const news = await loadNews(dataRoot, symbol);
+
+  if (!series) {
     return (
-      <div className="min-h-screen p-6">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-2xl font-semibold mb-4">{symbol}</h1>
-          <TickerClient symbol={symbol} />
-        </div>
-      </div>
+      <main style={{ maxWidth: 1200, margin: "40px auto", padding: "0 16px" }}>
+        <h1>Market Sentiment for {symbol}</h1>
+        <p style={{ color: "#6b7280" }}>
+          No data found for <code>{`public/data/ticker/${symbol}.json`}</code>.
+        </p>
+      </main>
     );
   }
 
-  const series = buildSeries(obj);
-  const news = buildNews(obj);
-  const newsTotal =
-    (obj?.news_count && Number(obj.news_count.total)) ||
-    (Array.isArray(news) ? news.length : 0);
-
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="sr-only">{symbol}</h1>
-        <TickerClient symbol={symbol} series={series ?? undefined} news={news} newsTotal={newsTotal} />
-      </div>
-    </div>
+    <main style={{ maxWidth: 1200, margin: "24px auto", padding: "0 16px" }}>
+      <h1 style={{ fontSize: 28, fontWeight: 600, marginBottom: 8 }}>
+        Market Sentiment for {symbol}
+      </h1>
+      <TickerClient symbol={symbol} series={series} news={news} />
+    </main>
   );
 }
