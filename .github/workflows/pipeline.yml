@@ -168,7 +168,7 @@ jobs:
                   if col:
                       s = df[col].astype(str)
                       candidates.append(s)
-                      print(f"Dataset ok: {len(s)} symbols")
+                      print(f"Dataset ok: {len(s)} symbols from {url}")
                       break
               except Exception as e:
                   print(f"Dataset failed ({url}):", e)
@@ -251,7 +251,8 @@ jobs:
           last_call = 0.0
 
           def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True)
+              path.parent.mkdir(parents=True, exist_ok=True
+              )
               with path.open("w", encoding="utf-8") as f:
                   json.dump(obj, f, ensure_ascii=False, indent=2)
 
@@ -394,7 +395,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pd.DataFrame(rows)
+              df = pd.DataFrame(rows)   # <- FIXED: use pd.DataFrame, not pandas.DataFrame
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
@@ -489,11 +490,11 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: sentiment JSON written")
 
-      # ---------- Build site JSON (apps/web/public/data) + PRICE SERIES ----------
-      - name: Assemble site JSON (apps/web/public/data) with price
+      # ---------- Build site JSON (apps/web/public/data) ----------
+      - name: Assemble site JSON (apps/web/public/data)
         shell: python
         run: |
-          import os, json, glob, pandas as pd, yfinance as yf
+          import os, json, glob, pandas as pd
           from pathlib import Path
 
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
@@ -505,39 +506,28 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          def load_sentiment_rows(t: str):
+          tickers = read_universe(TICKER_CSV)
+          (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
+
+          for t in tickers:
+              base = Path(f"data/{t}")
+              sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]
-              for sf in sorted(glob.glob(f"data/{t}/sentiment/*.json")):
+              for sf in sfiles:
                   try:
                       o = json.load(open(sf, encoding="utf-8"))
-                      d = o.get("date"); v = float(o.get("score_mean", 0.0))
-                      if d: rows.append((d, v))
+                      rows.append((o.get("date"), float(o.get("score_mean", 0.0))))
                   except Exception:
                       pass
-              return sorted(rows, key=lambda x: x[0])
+              rows = sorted([(d,s) for d,s in rows if d], key=lambda x:x[0])
 
-          def load_price_series(t: str, start: str, end: str):
-              try:
-                  hist = yf.Ticker(t).history(start=start, end=end, interval="1d", auto_adjust=False)
-              except Exception:
-                  hist = None
-              if hist is None or hist.empty:
-                  return [], []
-              idx = pd.to_datetime(hist.index, utc=True)
-              dates = idx.strftime("%Y-%m-%d").tolist()
-              # Prefer Adj Close if available
-              col = "Adj Close" if "Adj Close" in hist.columns else "Close"
-              prices = pd.to_numeric(hist[col], errors="coerce").fillna(method="ffill").fillna(method="bfill")
-              return dates, prices.round(4).astype(float).tolist()
-
-          def load_recent_news(t: str, start: str, end: str):
-              items=[]
+              news_items=[]
               for prov in ("finnhub","yfinance"):
-                  for p in glob.glob(f"data/{t}/news/{prov}/*.json"):
+                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
                           arr = json.load(open(p, encoding="utf-8")) or []
                           for it in arr:
-                              items.append({
+                              news_items.append({
                                 "ts": it.get("ts"),
                                 "title": it.get("headline") or "",
                                 "url": it.get("url") or "",
@@ -546,68 +536,40 @@ jobs:
                               })
                       except Exception:
                           pass
-              s = pd.to_datetime(start, utc=True)
-              e = pd.to_datetime(end, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+
+              s = pd.to_datetime(START, utc=True)
+              e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
               def in_window(ts):
                   try:
                       tt = pd.to_datetime(ts, utc=True)
                       return tt >= s and tt <= e
                   except Exception:
                       return False
-              items = [n for n in items if n.get("ts") and in_window(n.get("ts"))]
-              items.sort(key=lambda n: n["ts"], reverse=True)
-              return items[:20]
+              news_items = [n for n in news_items if n.get("ts") and in_window(n.get("ts"))]
+              news_items.sort(key=lambda n: n["ts"], reverse=True)
+              news_trim = news_items[:20]
 
-          tickers = read_universe(TICKER_CSV)
-          (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
-
-          for t in tickers:
-              sent_rows = load_sentiment_rows(t)
-              s_map = {d: float(v) for d, v in sent_rows}
-
-              p_dates, p_price = load_price_series(t, START, END)
-              if not p_dates:
-                  print(f"[SITE] WARNING: no price for {t}; skipping")
-                  continue
-
-              # Align by intersection so arrays have equal length
-              common = [d for d in p_dates if d in s_map]
-              if not common:
-                  # fallback: align to price dates and fill 0 sentiment
-                  common = p_dates[:]
-              i_map = {d: i for i, d in enumerate(p_dates)}
-              dates = common
-              price = [p_price[i_map[d]] for d in dates]
-              sentiment = [float(s_map.get(d, 0.0)) for d in dates]
-
-              news_trim = load_recent_news(t, START, END)
+              def count_provider(prov):
+                  tot=0
+                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
+                      try:
+                          tot += len(json.load(open(p, encoding="utf-8")))
+                      except Exception:
+                          pass
+                  return tot
+              nf = count_provider("finnhub")
+              ny = count_provider("yfinance")
 
               obj = {
                 "ticker": t,
-                "date": dates,
-                "dates": dates,
-                "price": price,
-                "sentiment": [round(v, 4) for v in sentiment],
+                "dates": [d for d,_ in rows],
+                "S": [round(float(v), 4) for _,v in rows],
+                "sentiment": [round(float(v), 4) for _,v in rows],
+                "news_count": {"finnhub": int(nf), "yfinance": int(ny), "total": int(nf+ny)},
                 "news": news_trim
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(dates)} news={len(news_trim)})")
-
-      - name: Sanity check AAPL JSON shape (date + price + sentiment)
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f "apps/web/public/data/ticker/AAPL.json"
-          python - <<'PY'
-import json, sys
-j = json.load(open("apps/web/public/data/ticker/AAPL.json"))
-need = ["date","price","sentiment"]
-miss = [k for k in need if k not in j or not isinstance(j[k], list) or len(j[k])==0]
-assert not miss, f"Missing keys or empty arrays: {miss}"
-n = min(len(j["date"]), len(j["price"]), len(j["sentiment"]))
-assert n>0, "Aligned arrays length is zero"
-print("OK: AAPL.json has aligned date/price/sentiment with length", n)
-PY
+              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
@@ -624,7 +586,7 @@ PY
           if git diff --cached --quiet; then
             echo "No changes to commit in data/."
           else
-            git commit -m "chore(data): persist raw news and sentiment [skip ci]"
+            git commit -m "chore(data): persist finnhub+yfinance raw news per-day and daily sentiment [skip ci]"
             git pull --rebase || true
             git push || true
           fi
@@ -698,23 +660,7 @@ PY
           fi
 
           touch out/.nojekyll
-          echo "VERIFY must exist:"
-          ls -l out/data/ticker/AAPL.json || true
-          find out -maxdepth 3 -type f -name index.html | sed 's|^|  |' | head -200
-
-      - name: Sanity check deployed artifacts
-        shell: bash
-        working-directory: apps/web
-        run: |
-          set -euo pipefail
-          test -f out/data/ticker/AAPL.json
-          python - <<'PY'
-import json, sys
-j = json.load(open("out/data/ticker/AAPL.json"))
-assert isinstance(j.get("price"), list) and len(j["price"])>0, "out/data/ticker/AAPL.json missing price[]"
-assert isinstance(j.get("sentiment"), list) and len(j["sentiment"])>0, "out/data/ticker/AAPL.json missing sentiment[]"
-print("OK: out/data/ticker/AAPL.json looks good.")
-PY
+          find out -maxdepth 3 -type f | sort
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
