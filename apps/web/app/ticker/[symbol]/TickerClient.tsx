@@ -1,18 +1,33 @@
+// apps/web/app/ticker/[symbol]/TickerClient.tsx
 "use client";
+
 import * as React from "react";
 
-type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
+type Series = { date: string[]; price: number[]; sentiment: number[] };
 type NewsItem = { ts: string; title: string; url?: string; source?: string; score?: number };
 type ViewMode = "overlay" | "price" | "sentiment";
 
-const mean = (a: number[]) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0);
-const toPct = (x: number) => `${(x * 100).toFixed(2)}%`;
 function dateOnly(s: string): string {
   const m = s.match(/\d{4}-\d{2}-\d{2}/);
   if (m) return m[0];
   const d = new Date(s);
   if (!Number.isNaN(d.getTime())) return d.toISOString().slice(0, 10);
   return (s.split(" ")[0] || s).replace(/T.*/, "");
+}
+const mean = (a: number[]) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0);
+const toPct = (x: number) => `${(x * 100).toFixed(2)}%`;
+
+// From /ticker/SYM/ the data lives at ../../data/...
+const relData = "../../data";
+
+async function fetchJSON<T>(url: string): Promise<T | null> {
+  try {
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) return null;
+    return (await r.json()) as T;
+  } catch {
+    return null;
+  }
 }
 
 function Pill({ children, color = "#111827" }: { children: React.ReactNode; color?: string }) {
@@ -24,87 +39,8 @@ function Pill({ children, color = "#111827" }: { children: React.ReactNode; colo
   );
 }
 
-function InsightCards({ series }: { series: SeriesIn }) {
-  const last = series.price.length - 1;
-  const oneDayRet =
-    last > 0 ? (series.price[last] - series.price[last - 1]) / Math.max(1e-6, series.price[last - 1]) : 0;
-  const recent = series.sentiment.slice(-7);
-  const sAvg = mean(recent);
-  const sLabel = sAvg > 0.1 ? "Positive" : sAvg < -0.1 ? "Negative" : "Neutral";
-  const advisory =
-    sAvg > 0.4 ? "Strong Buy" :
-    sAvg > 0.1 ? "Buy" :
-    sAvg < -0.4 ? "Strong Sell" :
-    sAvg < -0.1 ? "Sell" : "Hold";
-  const ourRec = advisory.includes("Buy") ? "Buy" : advisory.includes("Sell") ? "Sell" : "Hold";
-
-  const Card = ({ title, value, sub }: { title: string; value: string; sub?: string }) => (
-    <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, minWidth: 180 }}>
-      <div style={{ fontSize: 12, color: "#6b7280", marginBottom: 4 }}>{title}</div>
-      <div style={{ fontSize: 22, fontWeight: 700 }}>{value}</div>
-      {sub && <div style={{ fontSize: 12, color: "#6b7280", marginTop: 4 }}>{sub}</div>}
-    </div>
-  );
-
-  return (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-      <Card title="Live Market Sentiment" value={sLabel} sub="7-day average" />
-      <Card title="Predicted Return" value={toPct(oneDayRet)} />
-      <Card title="Advisory Opinion" value={advisory} />
-      <Card title="Our Recommendation" value={ourRec} />
-    </div>
-  );
-}
-
-function Headlines({ items }: { items: NewsItem[] }) {
-  return (
-    <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 12 }}>
-      <div style={{ fontWeight: 600, margin: "4px 8px 4px" }}>Recent Headlines</div>
-      <div style={{ fontSize: 13, color: "#6b7280", margin: "0 8px 12px" }}>
-        Latest headlines with aggregated sentiment (when available).
-      </div>
-      {items && items.length ? (
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ textAlign: "left", borderBottom: "1px solid #e5e7eb" }}>
-              <th style={{ padding: "8px" }}>Date</th>
-              <th style={{ padding: "8px" }}>Headline</th>
-              <th style={{ padding: "8px" }}>Source</th>
-              <th style={{ padding: "8px" }}>Sentiment</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((n, i) => (
-              <tr key={i} style={{ borderBottom: "1px solid #f3f4f6" }}>
-                <td style={{ padding: "8px", fontSize: 13, color: "#374151" }}>{dateOnly(n.ts)}</td>
-                <td style={{ padding: "8px" }}>
-                  {n.url ? (
-                    <a href={n.url} target="_blank" rel="noreferrer" style={{ color: "#1d4ed8", textDecoration: "none" }}>
-                      {n.title || "(no title)"}
-                    </a>
-                  ) : (n.title || "(no title)")}
-                </td>
-                <td style={{ padding: "8px", fontSize: 13, color: "#6b7280" }}>{n.source || ""}</td>
-                <td style={{ padding: "8px" }}>
-                  {typeof n.score === "number" ? (
-                    n.score > 0.1 ? <Pill color="#10b981">Positive</Pill>
-                    : n.score < -0.1 ? <Pill color="#ef4444">Negative</Pill>
-                    : <Pill color="#6b7280">Neutral</Pill>
-                  ) : <span style={{ color: "#6b7280", fontSize: 12 }}>—</span>}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <div style={{ padding: 12, color: "#6b7280", fontSize: 14 }}>No headlines available.</div>
-      )}
-    </div>
-  );
-}
-
 function SentimentPriceChart({ series, mode, height = 320 }:{
-  series: SeriesIn; mode: ViewMode; height?: number;
+  series: Series; mode: ViewMode; height?: number;
 }) {
   const width = 1000;
   const pad = { t: 12, r: 56, b: 28, l: 40 };
@@ -173,18 +109,146 @@ function SentimentPriceChart({ series, mode, height = 320 }:{
   );
 }
 
-export default function TickerClient({ symbol, series, news = [] }:{
-  symbol: string; series: SeriesIn; news?: NewsItem[];
-}) {
-  const [mode, setMode] = React.useState<ViewMode>("overlay");
-  const Button = ({ label, value }: { label: string; value: ViewMode }) => (
-    <button onClick={() => setMode(value)} aria-pressed={mode === value}
-      style={{
-        padding: "6px 12px", border: "none",
-        background: mode === value ? "#111827" : "white",
-        color: mode === value ? "white" : "#111827", cursor: "pointer",
-      }}>{label}</button>
+function InsightCards({ series }: { series: Series }) {
+  const last = series.price.length - 1;
+  const oneDayRet = last > 0 ? (series.price[last] - series.price[last - 1]) / Math.max(1e-6, series.price[last - 1]) : 0;
+  const recent = series.sentiment.slice(-7);
+  const sAvg = mean(recent);
+  const sLabel = sAvg > 0.1 ? "Positive" : sAvg < -0.1 ? "Negative" : "Neutral";
+  const advisory = sAvg > 0.4 ? "Strong Buy" : sAvg > 0.1 ? "Buy" : sAvg < -0.4 ? "Strong Sell" : sAvg < -0.1 ? "Sell" : "Hold";
+  const ourRec = advisory.includes("Buy") ? "Buy" : advisory.includes("Sell") ? "Sell" : "Hold";
+  const Card = ({ title, value, sub }: { title: string; value: string; sub?: string }) => (
+    <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, minWidth: 180 }}>
+      <div style={{ fontSize: 12, color: "#6b7280", marginBottom: 4 }}>{title}</div>
+      <div style={{ fontSize: 22, fontWeight: 700 }}>{value}</div>
+      {sub && <div style={{ fontSize: 12, color: "#6b7280", marginTop: 4 }}>{sub}</div>}
+    </div>
   );
+  return (
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+      <Card title="Live Market Sentiment" value={sLabel} sub="7-day average" />
+      <Card title="Predicted Return" value={toPct(oneDayRet)} />
+      <Card title="Advisory Opinion" value={advisory} />
+      <Card title="Our Recommendation" value={ourRec} />
+    </div>
+  );
+}
+
+function Headlines({ items }: { items: NewsItem[] }) {
+  return (
+    <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 12 }}>
+      <div style={{ fontWeight: 600, margin: "4px 8px 4px" }}>Recent Headlines</div>
+      <div style={{ fontSize: 13, color: "#6b7280", margin: "0 8px 12px" }}>
+        Latest headlines with aggregated sentiment (when available).
+      </div>
+      {items && items.length ? (
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ textAlign: "left", borderBottom: "1px solid #e5e7eb" }}>
+              <th style={{ padding: "8px" }}>Date</th>
+              <th style={{ padding: "8px" }}>Headline</th>
+              <th style={{ padding: "8px" }}>Source</th>
+              <th style={{ padding: "8px" }}>Sentiment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((n, i) => (
+              <tr key={i} style={{ borderBottom: "1px solid #f3f4f6" }}>
+                <td style={{ padding: "8px", fontSize: 13, color: "#374151" }}>{dateOnly(n.ts)}</td>
+                <td style={{ padding: "8px" }}>
+                  {n.url ? (
+                    <a href={n.url} target="_blank" rel="noreferrer" style={{ color: "#1d4ed8", textDecoration: "none" }}>
+                      {n.title || "(no title)"}
+                    </a>
+                  ) : (n.title || "(no title)")}
+                </td>
+                <td style={{ padding: "8px", fontSize: 13, color: "#6b7280" }}>{n.source || ""}</td>
+                <td style={{ padding: "8px" }}>
+                  {typeof n.score === "number" ? (
+                    n.score > 0.1 ? <Pill color="#10b981">Positive</Pill>
+                    : n.score < -0.1 ? <Pill color="#ef4444">Negative</Pill>
+                    : <Pill color="#6b7280">Neutral</Pill>
+                  ) : <span style={{ color: "#6b7280", fontSize: 12 }}>—</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div style={{ padding: 12, color: "#6b7280", fontSize: 14 }}>No headlines available.</div>
+      )}
+    </div>
+  );
+}
+
+export default function TickerClient({ symbol }: { symbol: string }) {
+  const [mode, setMode] = React.useState<ViewMode>("overlay");
+  const [series, setSeries] = React.useState<Series | null>(null);
+  const [news, setNews] = React.useState<NewsItem[] | null>(null);
+  const [err, setErr] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    let alive = true;
+    (async () => {
+      const s = await fetchJSON<any>(`${relData}/ticker/${symbol}.json`);
+      if (!alive) return;
+      if (!s || !Array.isArray(s.date ?? s.dates ?? s.time)) {
+        setErr(`No data found for ${relData}/ticker/${symbol}.json`);
+        return;
+      }
+      const date = (s.date ?? s.dates ?? s.time).map((x: any) => String(x));
+      const price = (s.price ?? s.prices ?? []).map((x: any) => Number(x) || 0);
+      const sentiment = (s.sentiment ?? s.sentiments ?? []).map((x: any) => Number(x) || 0);
+      const n = Math.min(date.length, price.length, sentiment.length);
+      setSeries({ date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) });
+
+      const njs = await fetchJSON<any[]>(`${relData}/news/${symbol}.json`);
+      if (!alive) return;
+      setNews(
+        (njs || []).map((x: any) => ({
+          ts: String(x.ts ?? x.time ?? x.date ?? ""),
+          title: String(x.title ?? x.headline ?? ""),
+          url: x.url ?? x.link,
+          source: x.source ?? x.provider,
+          score: typeof x.score === "number" ? x.score : undefined,
+        }))
+      );
+    })();
+    return () => { alive = false; };
+  }, [symbol]);
+
+  const Button = ({ label, value }: { label: string; value: ViewMode }) => (
+    <button
+      onClick={() => setMode(value)}
+      aria-pressed={mode === value}
+      style={{
+        padding: "6px 12px",
+        border: "none",
+        background: mode === value ? "#111827" : "white",
+        color: mode === value ? "white" : "#111827",
+        cursor: "pointer",
+      }}
+    >
+      {label}
+    </button>
+  );
+
+  if (err && !series) {
+    return (
+      <div>
+        <div role="tablist" aria-label="View mode" style={{ border: "1px solid #e5e7eb", borderRadius: 999, overflow: "hidden", marginBottom: 12 }}>
+          <Button label="Overlay" value="overlay" />
+          <Button label="Price Only" value="price" />
+          <Button label="Sentiment Only" value="sentiment" />
+        </div>
+        <p style={{ color: "#6b7280" }}>{err}</p>
+      </div>
+    );
+  }
+
+  if (!series) {
+    return <div style={{ color: "#6b7280" }}>Loading…</div>;
+  }
 
   return (
     <div style={{ display: "grid", gap: 16 }}>
@@ -196,12 +260,17 @@ export default function TickerClient({ symbol, series, news = [] }:{
           <Button label="Sentiment Only" value="sentiment" />
         </div>
       </div>
+
       <SentimentPriceChart series={series} mode={mode} />
+
       <div>
         <div style={{ fontWeight: 600, marginBottom: 8 }}>Live Market Insights</div>
         <InsightCards series={series} />
       </div>
-      <Headlines items={news} />
+
+      <div>
+        <Headlines items={news || []} />
+      </div>
     </div>
   );
 }
