@@ -1,67 +1,84 @@
-# build_news_counts.py
+# src/market_sentiment/build_news_counts.py
+# Aggregate news counts for each ticker over [START, END] (UTC) by summing
+
 from __future__ import annotations
-import json, os, glob, pathlib, collections
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-RAW_DIR = ROOT / "data"                     # where data/<TICKER>/sentiment/*.json live
-PUB_DIR = ROOT / "apps" / "web" / "public" / "data" / "ticker"
+import os
+import json
+import glob
+from pathlib import Path
+import pandas as pd
 
-def load_daily_sentiment(ticker: str):
-    """Return dict[date] = n_finnhub + n_yfinance from data/<TICKER>/sentiment/*.json."""
-    base = RAW_DIR / ticker / "sentiment"
-    out = {}
-    if not base.exists():
-        return out
-    for p in sorted(glob.glob(str(base / "*.json"))):
+
+def _read_universe(csv_path: str) -> list[str]:
+    df = pd.read_csv(csv_path)
+    col = [c for c in df.columns if c.lower() == "ticker"]
+    if not col:
+        return []
+    return (
+        df[col[0]]
+        .dropna()
+        .astype(str)
+        .str.upper()
+        .str.replace(".", "-", regex=False)
+        .str.strip()
+        .unique()
+        .tolist()
+    )
+
+
+def build_counts_for_ticker(ticker: str, start: str, end: str) -> dict:
+    base = Path(f"data/{ticker}")
+    counts = {"ticker": ticker, "start": start, "end": end,
+              "n_finnhub": 0, "n_yfinance": 0, "n_total": 0}
+
+    sdir = base / "sentiment"
+    if not sdir.exists():
+        return counts
+
+    s = pd.to_datetime(start, utc=True).date()
+    e = pd.to_datetime(end, utc=True).date()
+
+    for p in sorted(glob.glob(str(sdir / "*.json"))):
         try:
-            j = json.load(open(p, "r", encoding="utf-8"))
-            date = j.get("date")
-            nf = int(j.get("n_finnhub", 0) or 0)
-            ny = int(j.get("n_yfinance", 0) or 0)
-            if date:
-                out[date] = int(nf + ny)
+            obj = json.load(open(p, encoding="utf-8")) or {}
         except Exception:
-            # ignore broken files
+            obj = {}
+        day = obj.get("date")
+        if not day:
             continue
-    return out
-
-def inject_into_ticker_json(ticker: str, counts: dict[str, int]) -> bool:
-    """Add news_count_daily to apps/web/public/data/ticker/<TICKER>.json."""
-    tkr_path = PUB_DIR / f"{ticker}.json"
-    if not tkr_path.exists():
-        return False
-    try:
-        doc = json.load(open(tkr_path, "r", encoding="utf-8"))
-    except Exception:
-        return False
-
-    # serialize as sorted array of {date, count} pairs; stable for git diffs
-    items = [{"date": d, "count": counts[d]} for d in sorted(counts)]
-    doc["news_count_daily"] = items
-
-    tmp = tkr_path.with_suffix(".json.tmp")
-    with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(doc, f, ensure_ascii=False, separators=(",", ":"), indent=None)
-    os.replace(tmp, tkr_path)
-    return True
-
-def main():
-    if not PUB_DIR.exists():
-        print(f"[skip] {PUB_DIR} not found — build_json probably didn’t run yet.")
-        return
-    changed = 0
-    for p in sorted(glob.glob(str(PUB_DIR / "*.json"))):
-        ticker = pathlib.Path(p).stem.upper()
-        counts = load_daily_sentiment(ticker)
-        if not counts:
+        try:
+            dd = pd.to_datetime(day, utc=True).date()
+        except Exception:
             continue
-        if inject_into_ticker_json(ticker, counts):
-            changed += 1
-            print(f"[ok] injected news_count_daily into {ticker}.json  ({len(counts)} days)")
-    if changed == 0:
-        print("[info] no ticker JSONs updated")
-    else:
-        print(f"[done] updated {changed} ticker files")
+        if dd < s or dd > e:
+            continue
+
+        nf = int(obj.get("n_finnhub", 0) or 0)
+        ny = int(obj.get("n_yfinance", 0) or 0)
+        nt = int(obj.get("n_total", nf + ny) or (nf + ny))
+
+        counts["n_finnhub"] += nf
+        counts["n_yfinance"] += ny
+        counts["n_total"] += nt
+
+    # write
+    outp = base / "news" / "counts.json"
+    outp.parent.mkdir(parents=True, exist_ok=True)
+    json.dump(counts, open(outp, "w", encoding="utf-8"), indent=2)
+    return counts
+
+
+def main() -> None:
+    START = os.environ["START"]
+    END = os.environ["END"]
+    TICKER_CSV = os.environ["TICKER_CSV"]
+
+    for t in _read_universe(TICKER_CSV):
+        c = build_counts_for_ticker(t, START, END)
+        print(f"[NEWS-COUNTS] {t}: finnhub={c['n_finnhub']} "
+              f"yfinance={c['n_yfinance']} total={c['n_total']}")
+
 
 if __name__ == "__main__":
     main()
