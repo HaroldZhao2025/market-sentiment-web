@@ -251,8 +251,7 @@ jobs:
           last_call = 0.0
 
           def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True
-              )
+              path.parent.mkdir(parents=True, exist_ok=True)
               with path.open("w", encoding="utf-8") as f:
                   json.dump(obj, f, ensure_ascii=False, indent=2)
 
@@ -395,7 +394,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pd.DataFrame(rows)   # <-- FIXED: use pd.DataFrame
+              df = pd.DataFrame(rows)
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
@@ -490,15 +489,16 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: sentiment JSON written")
 
-
-      # ---------- Aggregate news counts from sentiment (writes data/{T}/news/counts.json) ----------
-      - name: Aggregate news counts (sentiment → counts.json)
-        shell: python
+      # ---------- NEW: Aggregate news counts using your repo script ----------
+      - name: Aggregate news counts (src/market_sentiment/build_news_counts.py)
+        shell: bash
         env:
-          PYTHONPATH: src
+          START: ${{ env.START }}
+          END: ${{ env.END }}
+          TICKER_CSV: ${{ env.TICKER_CSV }}
         run: |
-          from market_sentiment.build_news_counts import main
-          main()
+          set -euo pipefail
+          python -m market_sentiment.build_news_counts
 
       # ---------- NEW: Daily close prices (Yahoo) ----------
       - name: Fetch daily close prices (Yahoo)
@@ -518,7 +518,7 @@ jobs:
               try:
                   df = yf.download(t, start=START, end=END, interval="1d", progress=False, auto_adjust=False)
               except Exception as e:
-                  print(f"[PRICE] {t}: download failed:", e); df = None
+                  print(f("[PRICE] {t}: download failed:", e)); df = None
               if df is None or df.empty:
                   print(f"[PRICE] {t}: empty")
                   continue
@@ -552,10 +552,10 @@ jobs:
           tickers = read_universe(TICKER_CSV)
           (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
 
-          # lazy FinBERT loader (cache at module level)
+          # FinBERT loader (only for up to 20 trimmed headlines)
           _clf = None
           def get_clf():
-              global _clf   # <-- FIX: use global (not nonlocal)
+              global _clf
               if _clf is not None:
                   return _clf
               try:
@@ -565,33 +565,32 @@ jobs:
                   mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
                   _clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
               except Exception as e:
-                  print("[SITE] FinBERT load failed; headlines won't have per-item scores:", e)
+                  print("[SITE] FinBERT load failed; headlines fallback to day mean:", e)
                   _clf = None
               return _clf
 
-          def score_headlines(items):
-              """Attach per-headline probs + scalar s in-place. Safe no-op if model unavailable."""
+          def try_score_headlines(items):
+              """Attach per-headline probs + scalar s. If model unavailable, do nothing (fallback later)."""
               if not items:
-                  return
+                  return False
               clf = get_clf()
               if clf is None:
-                  return
+                  return False
               texts = [(it.get("title") or "").strip() for it in items]
               try:
                   preds = clf(texts, batch_size=16)
               except Exception as e:
-                  print("[SITE] FinBERT inference failed; skipping per-item scores:", e)
-                  return
+                  print("[SITE] FinBERT inference failed; using fallback:", e)
+                  return False
               for it, per in zip(items, preds):
                   try:
                       d = {x.get("label","").lower(): float(x.get("score", 0.0)) for x in per}
-                      pos = d.get("positive", 0.0)
-                      neu = d.get("neutral", 0.0)
-                      neg = d.get("negative", 0.0)
+                      pos = d.get("positive", 0.0); neu = d.get("neutral", 0.0); neg = d.get("negative", 0.0)
                       it["probs"] = {"pos": round(pos, 4), "neu": round(neu, 4), "neg": round(neg, 4)}
                       it["s"] = round(pos - neg, 4)
                   except Exception:
                       pass
+              return True
 
           for t in tickers:
               base = Path(f"data/{t}")
@@ -599,6 +598,7 @@ jobs:
               # --- sentiment rows + aggregate news counts from sentiment files
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_total=0; ny_total=0; nt_total=0
+              day_score = {}
               for sf in sfiles:
                   try:
                       o = json.load(open(sf, encoding="utf-8")) or {}
@@ -606,10 +606,13 @@ jobs:
                       o = {}
                   d = o.get("date")
                   if not d: continue
-                  rows.append((d, float(o.get("score_mean", 0.0))))
+                  score = float(o.get("score_mean", 0.0))
+                  rows.append((d, score))
+                  day_score[d] = score
                   nf_total += int(o.get("n_finnhub", 0))
                   ny_total += int(o.get("n_yfinance", 0))
-                  nt_total += int(o.get("n_total", 0))
+                  nt_total += int(o.get("n_total", nf_total + ny_total))
+
               rows = sorted(rows, key=lambda x:x[0])
               dates = [d for d,_ in rows]
               S = [round(float(v), 4) for _,v in rows]
@@ -630,7 +633,7 @@ jobs:
               else:
                   price = []
 
-              # --- recent headline items (window-filtered)
+              # --- recent headline items (filter to window), then score
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -647,20 +650,43 @@ jobs:
                       except Exception:
                           pass
 
-              s = pd.to_datetime(START, utc=True)
-              e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+              sdt = pd.to_datetime(START, utc=True)
+              edt = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
               def in_window(ts):
                   try:
                       tt = pd.to_datetime(ts, utc=True)
-                      return tt >= s and tt <= e
+                      return tt >= sdt and tt <= edt
                   except Exception:
                       return False
+
               news_items = [n for n in news_items if n.get("ts") and in_window(n.get("ts"))]
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:20]
 
-              # Attach per-headline scores (adds n['s'] and n['probs'])
-              score_headlines(news_trim)
+              # score with FinBERT if possible
+              scored = try_score_headlines(news_trim)
+
+              # fallback: if not scored, attach day's mean score to each headline
+              if not scored:
+                  for it in news_trim:
+                      day = str(it.get("ts",""))[:10]
+                      if day in day_score:
+                          it["s"] = round(float(day_score[day]), 4)
+
+              # --- use counts.json if present (preferred), else sums from sentiment
+              counts_path = base/"news"/"counts.json"
+              if counts_path.exists():
+                  try:
+                      c = json.load(open(counts_path, encoding="utf-8")) or {}
+                      news_count = {
+                        "finnhub": int(c.get("n_finnhub", 0)),
+                        "yfinance": int(c.get("n_yfinance", 0)),
+                        "total":   int(c.get("n_total", 0))
+                      }
+                  except Exception:
+                      news_count = {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nf_total+ny_total)}
+              else:
+                  news_count = {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nf_total+ny_total)}
 
               obj = {
                 "ticker": t,
@@ -668,11 +694,12 @@ jobs:
                 "price": [round(float(x), 4) for x in price] if price else [],
                 "S": S,
                 "sentiment": S,
-                "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
+                "news_count": news_count,
+                "news_total": int(news_count.get("total", 0)),   # <-- for TickerClient's newsTotal
                 "news": news_trim
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)} price={len(obj['price'])})")
+              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)} price={len(obj['price'])} total={obj['news_total']})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
@@ -689,7 +716,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit in data/."
           else
-            git commit -m "chore(data): persist news, daily sentiment, and prices [skip ci]"
+            git commit -m "chore(data): persist news, daily sentiment, prices, and counts [skip ci]"
             git pull --rebase || true
             git push || true
           fi
