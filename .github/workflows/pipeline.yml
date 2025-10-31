@@ -395,7 +395,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pandas.DataFrame(rows)
+              df = pd.DataFrame(rows)   # <-- FIXED: use pd.DataFrame
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
