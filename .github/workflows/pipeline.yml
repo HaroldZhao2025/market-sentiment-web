@@ -534,7 +534,6 @@ jobs:
               print(f"[PRICE] {t}: {len(df)} rows -> {out}")
 
       # ---------- Build site JSON (apps/web/public/data) ----------
-      # ---------- Build site JSON (apps/web/public/data) ----------
       - name: Assemble site JSON (apps/web/public/data)
         shell: python
         run: |
@@ -553,10 +552,10 @@ jobs:
           tickers = read_universe(TICKER_CSV)
           (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
 
-          # lazy FinBERT loader (only if we actually have headlines to score)
+          # lazy FinBERT loader (cache at module level)
           _clf = None
           def get_clf():
-              nonlocal _clf
+              global _clf   # <-- FIX: use global (not nonlocal)
               if _clf is not None:
                   return _clf
               try:
@@ -570,7 +569,7 @@ jobs:
                   _clf = None
               return _clf
 
-          def score_headlines(items: list[dict]) -> None:
+          def score_headlines(items):
               """Attach per-headline probs + scalar s in-place. Safe no-op if model unavailable."""
               if not items:
                   return
@@ -585,14 +584,13 @@ jobs:
                   return
               for it, per in zip(items, preds):
                   try:
-                      d = {x["label"].lower(): float(x.get("score", 0.0)) for x in per}
+                      d = {x.get("label","").lower(): float(x.get("score", 0.0)) for x in per}
                       pos = d.get("positive", 0.0)
                       neu = d.get("neutral", 0.0)
                       neg = d.get("negative", 0.0)
                       it["probs"] = {"pos": round(pos, 4), "neu": round(neu, 4), "neg": round(neg, 4)}
                       it["s"] = round(pos - neg, 4)
                   except Exception:
-                      # leave item as-is if anything goes wrong
                       pass
 
           for t in tickers:
@@ -632,7 +630,7 @@ jobs:
               else:
                   price = []
 
-              # --- recent headline items (window-filtered) + ATTACH PER-HEADLINE SCORES
+              # --- recent headline items (window-filtered)
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -661,7 +659,7 @@ jobs:
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:20]
 
-              # NEW: per-headline FinBERT scores (adds n['s'] and n['probs'])
+              # Attach per-headline scores (adds n['s'] and n['probs'])
               score_headlines(news_trim)
 
               obj = {
