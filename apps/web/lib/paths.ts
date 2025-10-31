@@ -1,12 +1,11 @@
 // apps/web/lib/paths.ts
 // Client-safe helpers for basePath-aware routes and data files.
-// Fixes double base-path by normalizing and de-duplicating the prefix.
+// Fix: avoid double base-path on <Link> by NOT prefixing internal routes here.
+// Next.js basePath (from next.config.cjs) already prefixes routes at render time.
 
 const RAW_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-// Normalize the configured base:
-// - strip all leading/trailing slashes
-// - if non-empty, add exactly one leading slash
+// Keep normalized BASE for static assets (public/data), not for routes.
 const BASE = (() => {
   const clean = RAW_BASE.replace(/^\/+|\/+$/g, "").trim();
   return clean ? `/${clean}` : "";
@@ -19,18 +18,13 @@ function ensureLeadingSlash(p: string) {
 }
 
 /**
- * Prefix an internal route with the GitHub Pages base path (if any),
- * while preventing double prefixing when the input is already base-prefixed.
+ * Internal routes for <Link> and in-app navigation.
+ * IMPORTANT: Do NOT add BASE here; Next.js basePath handles route prefixing.
+ * Returning clean absolute paths ("/...") prevents
+ * "/market-sentiment-web/market-sentiment-web/..." on GitHub Pages.
  */
 export function withBase(p: string) {
-  let route = ensureLeadingSlash(p || "/");
-
-  // If the route already begins with the normalized BASE, return as-is
-  // e.g. BASE="/market-sentiment-web", route="/market-sentiment-web/ticker/AAPL"
-  if (BASE && (route === BASE || route.startsWith(`${BASE}/`))) {
-    return route;
-  }
-  return `${BASE}${route}`;
+  return ensureLeadingSlash(p || "/");
 }
 
 /** Named link builders for consistency across the app */
@@ -41,7 +35,11 @@ export const hrefs = {
   earnings: (s: string) => withBase(`/earnings/${encodeURIComponent(s)}`),
 };
 
-/** Browser-safe URL to a data file under /public/data */
+/**
+ * Browser-safe URL to a data file under /public/data.
+ * For static assets we DO need the BASE, because browsers resolve "/data"
+ * to domain root; on GitHub Pages the site root is "/market-sentiment-web".
+ */
 export function dataUrl(rel: string): string {
   const clean = rel.replace(/^\/+/, "");
   const prefix = BASE ? `${BASE}/data` : `/data`;
