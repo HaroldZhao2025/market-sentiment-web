@@ -61,10 +61,8 @@ export default function TickerClient({
 
         {mode === "separate" ? (
           <div className="space-y-6">
-            {/* Sentiment bars around zero */}
             <SentimentBars dates={aligned.date} values={aligned.sentiment} height={300} />
-            {/* Price line with markers */}
-            <PriceLine dates={aligned.date} values={aligned.price} height={300} />
+            <PriceLine     dates={aligned.date} values={aligned.price}     height={300} />
           </div>
         ) : (
           <OverlayChart
@@ -157,15 +155,45 @@ function KpiCard({ title, value, sub, bigValue }:{
   );
 }
 
-/* ============ Charts ============ */
+/* ============ Shared axis helpers ============ */
+function parseISO(s: string): Date {
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) return d;
+  // try YYYY/MM/DD or similar
+  const parts = String(s).split(/[-/]/).map((x) => +x);
+  const dd = new Date(parts[0] || 1970, (parts[1] || 1) - 1, parts[2] || 1);
+  return isNaN(dd.getTime()) ? new Date() : dd;
+}
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-/** Overlay chart: purple bars (sentiment around zero) + green price line */
+/** Compute monthly tick indices + labels (keeps at most ~8 labels) */
+function monthTicks(dates: string[]) {
+  if (!dates.length) return [] as { i: number; label: string }[];
+  const marks: { i: number; label: string }[] = [];
+  let prevM = -1, prevY = -1;
+  for (let i = 0; i < dates.length; i++) {
+    const dt = parseISO(dates[i]), m = dt.getUTCMonth(), y = dt.getUTCFullYear();
+    if (m !== prevM || y !== prevY) {
+      marks.push({ i, label: `${MONTHS[m]}` });
+      prevM = m; prevY = y;
+    }
+  }
+  // downsample if too many
+  const maxLabels = 8;
+  if (marks.length > maxLabels) {
+    const stride = Math.ceil(marks.length / maxLabels);
+    return marks.filter((_, idx) => idx % stride === 0);
+  }
+  return marks;
+}
+
+/* ============ Overlay chart (with month ticks & y labels) ============ */
 function OverlayChart({
   dates, price, sentiment, height = 520, width = 980,
 }:{
   dates:string[]; price?:number[]; sentiment?:number[]; height?:number; width?:number;
 }) {
-  const pad = { t: 22, r: 64, b: 36, l: 44 };
+  const pad = { t: 28, r: 78, b: 44, l: 70 }; // more room for axis labels
   const W = width, H = height;
   const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
   const n = dates.length, step = n > 1 ? innerW / (n - 1) : innerW;
@@ -173,18 +201,72 @@ function OverlayChart({
   // Sentiment axis centered at 0
   const sMax = sentiment && sentiment.length ? Math.max(0.5, ...sentiment.map((x)=>Math.abs(x))) : 1;
   const sY   = (v:number) => pad.t + innerH/2 - (v / sMax) * (innerH/2);
+  const sTicks = [-sMax, -sMax/2, 0, sMax/2, sMax];
 
-  // Price axis on the right (min/max)
+  // Price axis on the right (min/mid/max)
   const pMin = price && price.length ? Math.min(...price) : 0;
   const pMax = price && price.length ? Math.max(...price) : 1;
   const pY   = (v:number) => pad.t + (1 - (v - pMin) / Math.max(1e-9, pMax - pMin)) * innerH;
+  const pTicks = price && price.length ? [pMin, (pMin+pMax)/2, pMax] : [];
 
   const baselineY = sY(0);
+  const monthMarks = monthTicks(dates);
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
       {/* frame */}
       <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
+
+      {/* left y-axis (sentiment) ticks + labels */}
+      {sTicks.map((v, i) => {
+        const y = sY(v);
+        return (
+          <g key={`s${i}`}>
+            <line x1={pad.l - 6} x2={pad.l} y1={y} y2={y} stroke="#e5e7eb" />
+            <text x={pad.l - 8} y={y + 3} fontSize="11" fill="#6b7280" textAnchor="end">
+              {v.toFixed(2)}
+            </text>
+            {/* grid lines except baseline (we’ll draw baseline separately) */}
+            {Math.abs(v) > 1e-10 && (
+              <line x1={pad.l} x2={pad.l + innerW} y1={y} y2={y} stroke="#f1f5f9" />
+            )}
+          </g>
+        );
+      })}
+      {/* left axis label */}
+      <text
+        x={16}
+        y={pad.t + innerH / 2}
+        fontSize="12"
+        fill="#374151"
+        transform={`rotate(-90, 16, ${pad.t + innerH / 2})`}
+        textAnchor="middle"
+      >
+        Sentiment Score
+      </text>
+
+      {/* right y-axis (price) ticks + labels */}
+      {pTicks.map((v, i) => {
+        const y = pY(v);
+        return (
+          <g key={`p${i}`}>
+            <line x1={pad.l+innerW} x2={pad.l+innerW+6} y1={y} y2={y} stroke="#e5e7eb" />
+            <text x={pad.l+innerW+8} y={y + 3} fontSize="11" fill="#6b7280">{v.toFixed(2)}</text>
+          </g>
+        );
+      })}
+      {/* right axis label */}
+      <text
+        x={W - 18}
+        y={pad.t + innerH / 2}
+        fontSize="12"
+        fill="#374151"
+        transform={`rotate(90, ${W - 18}, ${pad.t + innerH / 2})`}
+        textAnchor="middle"
+      >
+        Stock Price
+      </text>
+
       {/* sentiment baseline */}
       {sentiment && sentiment.length ? (
         <line x1={pad.l} x2={pad.l+innerW} y1={baselineY} y2={baselineY} stroke="#e5e7eb" />
@@ -198,47 +280,39 @@ function OverlayChart({
         return <rect key={i} x={x - 1} y={y} width={2} height={Math.max(1, h)} fill="#6b47dc" opacity={0.7} />;
       })}
 
-      {/* price line with markers */}
+      {/* price line (draw AFTER bars so it sits on top) */}
       {price && price.length > 1
         ? price.map((v, i) => {
             if (i === 0) return null;
             const x1 = pad.l + (i - 1) * step, y1 = pY(price[i - 1]);
             const x2 = pad.l + i * step,       y2 = pY(v);
-            return <line key={`l${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#10b981" strokeWidth={1.5} />;
+            return <line key={`l${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#10b981" strokeWidth={2.5} />;
           })
         : null}
       {price?.map((v, i) => {
         const cx = pad.l + i * step, cy = pY(v);
-        return <circle key={`c${i}`} cx={cx} cy={cy} r={1.8} fill="#10b981" />;
+        return <circle key={`c${i}`} cx={cx} cy={cy} r={2.2} fill="#10b981" />;
       })}
 
-      {/* simple labels: left = dates start/end; right = price ticks */}
-      <text x={pad.l} y={H - 10} fontSize="11" fill="#6b7280">{dates[0] || ""}</text>
-      <text x={pad.l + innerW - 54} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="start">{dates.at(-1) || ""}</text>
-
-      {/* right y-axis for price */}
-      {price && price.length ? (
-        <>
-          {[pMin, (pMin+pMax)/2, pMax].map((pv, i) => {
-            const y = pY(pv);
-            return (
-              <g key={i}>
-                <line x1={pad.l+innerW} x2={pad.l+innerW+6} y1={y} y2={y} stroke="#e5e7eb" />
-                <text x={pad.l+innerW+8} y={y+3} fontSize="11" fill="#6b7280">{pv.toFixed(3)}</text>
-              </g>
-            );
-          })}
-        </>
-      ) : null}
+      {/* month tick labels along x-axis */}
+      {monthMarks.map(({ i, label }, k) => {
+        const x = pad.l + i * step;
+        return (
+          <g key={`m${k}`}>
+            <line x1={x} x2={x} y1={pad.t + innerH} y2={pad.t + innerH + 5} stroke="#e5e7eb" />
+            <text x={x} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="middle">{label}</text>
+          </g>
+        );
+      })}
     </svg>
   );
 }
 
-/** Separate sentiment chart (bars around zero) */
+/* ============ Separate charts (with month ticks & y labels) ============ */
 function SentimentBars({ dates, values, height = 300, width = 980 }:{
   dates:string[]; values:number[]; height?:number; width?:number;
 }) {
-  const pad = { t: 22, r: 24, b: 36, l: 44 };
+  const pad = { t: 28, r: 24, b: 44, l: 70 };
   const W = width, H = height;
   const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
   const n = dates.length, step = n > 1 ? innerW / (n - 1) : innerW;
@@ -246,10 +320,34 @@ function SentimentBars({ dates, values, height = 300, width = 980 }:{
   const sMax = values.length ? Math.max(0.5, ...values.map((x)=>Math.abs(x))) : 1;
   const sY   = (v:number) => pad.t + innerH/2 - (v / sMax) * (innerH/2);
   const baselineY = sY(0);
+  const sTicks = [-sMax, -sMax/2, 0, sMax/2, sMax];
+  const monthMarks = monthTicks(dates);
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
       <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
+
+      {sTicks.map((v, i) => {
+        const y = sY(v);
+        return (
+          <g key={i}>
+            <line x1={pad.l - 6} x2={pad.l} y1={y} y2={y} stroke="#e5e7eb" />
+            <text x={pad.l - 8} y={y + 3} fontSize="11" fill="#6b7280" textAnchor="end">{v.toFixed(2)}</text>
+            {Math.abs(v) > 1e-10 && <line x1={pad.l} x2={pad.l + innerW} y1={y} y2={y} stroke="#f1f5f9" />}
+          </g>
+        );
+      })}
+      <text
+        x={16}
+        y={pad.t + innerH / 2}
+        fontSize="12"
+        fill="#374151"
+        transform={`rotate(-90, 16, ${pad.t + innerH / 2})`}
+        textAnchor="middle"
+      >
+        Sentiment Score
+      </text>
+
       <line x1={pad.l} x2={pad.l+innerW} y1={baselineY} y2={baselineY} stroke="#e5e7eb" />
       {values.map((v, i) => {
         const x = pad.l + i * step;
@@ -257,17 +355,24 @@ function SentimentBars({ dates, values, height = 300, width = 980 }:{
         const h = Math.abs(sY(v) - baselineY);
         return <rect key={i} x={x - 1} y={y} width={2} height={Math.max(1, h)} fill="#6b47dc" opacity={0.7} />;
       })}
-      <text x={pad.l} y={H - 10} fontSize="11" fill="#6b7280">{dates[0] || ""}</text>
-      <text x={pad.l + innerW - 54} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="start">{dates.at(-1) || ""}</text>
+
+      {monthMarks.map(({ i, label }, k) => {
+        const x = pad.l + i * step;
+        return (
+          <g key={k}>
+            <line x1={x} x2={x} y1={pad.t + innerH} y2={pad.t + innerH + 5} stroke="#e5e7eb" />
+            <text x={x} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="middle">{label}</text>
+          </g>
+        );
+      })}
     </svg>
   );
 }
 
-/** Separate price chart (line + markers) */
 function PriceLine({ dates, values, height = 300, width = 980 }:{
   dates:string[]; values:number[]; height?:number; width?:number;
 }) {
-  const pad = { t: 22, r: 64, b: 36, l: 44 };
+  const pad = { t: 28, r: 78, b: 44, l: 70 };
   const W = width, H = height;
   const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
   const n = dates.length, step = n > 1 ? innerW / (n - 1) : innerW;
@@ -275,32 +380,54 @@ function PriceLine({ dates, values, height = 300, width = 980 }:{
   const pMin = values.length ? Math.min(...values) : 0;
   const pMax = values.length ? Math.max(...values) : 1;
   const pY   = (v:number) => pad.t + (1 - (v - pMin) / Math.max(1e-9, pMax - pMin)) * innerH;
+  const pTicks = [pMin, (pMin+pMax)/2, pMax];
+  const monthMarks = monthTicks(dates);
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
       <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
+
+      {pTicks.map((v, i) => {
+        const y = pY(v);
+        return (
+          <g key={i}>
+            <line x1={pad.l+innerW} x2={pad.l+innerW+6} y1={y} y2={y} stroke="#e5e7eb" />
+            <text x={pad.l+innerW+8} y={y + 3} fontSize="11" fill="#6b7280">{v.toFixed(2)}</text>
+            {i !== 0 && i !== pTicks.length-1 && <line x1={pad.l} x2={pad.l + innerW} y1={y} y2={y} stroke="#f1f5f9" />}
+          </g>
+        );
+      })}
+      <text
+        x={W - 18}
+        y={pad.t + innerH / 2}
+        fontSize="12"
+        fill="#374151"
+        transform={`rotate(90, ${W - 18}, ${pad.t + innerH / 2})`}
+        textAnchor="middle"
+      >
+        Stock Price
+      </text>
+
       {values.map((v, i) => {
         if (i === 0) return null;
         const x1 = pad.l + (i-1) * step, y1 = pY(values[i-1]);
         const x2 = pad.l + i * step,     y2 = pY(v);
-        return <line key={`l${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#10b981" strokeWidth={1.5} />;
+        return <line key={`l${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#10b981" strokeWidth={2.5} />;
       })}
       {values.map((v, i) => {
         const cx = pad.l + i * step, cy = pY(v);
-        return <circle key={`c${i}`} cx={cx} cy={cy} r={1.8} fill="#10b981" />;
+        return <circle key={`c${i}`} cx={cx} cy={cy} r={2.2} fill="#10b981" />;
       })}
-      {/* right axis ticks */}
-      {[pMin, (pMin+pMax)/2, pMax].map((pv, i) => {
-        const y = pY(pv);
+
+      {monthMarks.map(({ i, label }, k) => {
+        const x = pad.l + i * step;
         return (
-          <g key={i}>
-            <line x1={pad.l+innerW} x2={pad.l+innerW+6} y1={y} y2={y} stroke="#e5e7eb" />
-            <text x={pad.l+innerW+8} y={y+3} fontSize="11" fill="#6b7280">{pv.toFixed(3)}</text>
+          <g key={k}>
+            <line x1={x} x2={x} y1={pad.t + innerH} y2={pad.t + innerH + 5} stroke="#e5e7eb" />
+            <text x={x} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="middle">{label}</text>
           </g>
         );
       })}
-      <text x={pad.l} y={H - 10} fontSize="11" fill="#6b7280">{dates[0] || ""}</text>
-      <text x={pad.l + innerW - 54} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="start">{dates.at(-1) || ""}</text>
     </svg>
   );
 }
