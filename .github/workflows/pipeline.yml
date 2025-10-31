@@ -490,6 +490,16 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: sentiment JSON written")
 
+
+      # ---------- Aggregate news counts from sentiment (writes data/{T}/news/counts.json) ----------
+      - name: Aggregate news counts (sentiment → counts.json)
+        shell: python
+        env:
+          PYTHONPATH: src
+        run: |
+          from market_sentiment.build_news_counts import main
+          main()
+
       # ---------- NEW: Daily close prices (Yahoo) ----------
       - name: Fetch daily close prices (Yahoo)
         shell: python
@@ -545,9 +555,9 @@ jobs:
           for t in tickers:
               base = Path(f"data/{t}")
 
-              # --- sentiment rows + aggregate news counts from sentiment files
+              # --- sentiment rows
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
-              rows=[]; nf_total=0; ny_total=0; nt_total=0
+              rows=[]; nf_sum=0; ny_sum=0; nt_sum=0
               for sf in sfiles:
                   try:
                       o = json.load(open(sf, encoding="utf-8")) or {}
@@ -556,20 +566,20 @@ jobs:
                   d = o.get("date")
                   if not d: continue
                   rows.append((d, float(o.get("score_mean", 0.0))))
-                  nf_total += int(o.get("n_finnhub", 0))
-                  ny_total += int(o.get("n_yfinance", 0))
-                  nt_total += int(o.get("n_total", 0))
-              rows = sorted(rows, key=lambda x:x[0])
+                  nf_sum += int(o.get("n_finnhub", 0))
+                  ny_sum += int(o.get("n_yfinance", 0))
+                  nt_sum += int(o.get("n_total", 0) or (int(o.get("n_finnhub",0))+int(o.get("n_yfinance",0))))
+              rows.sort(key=lambda x: x[0])
               dates = [d for d,_ in rows]
               S = [round(float(v), 4) for _,v in rows]
 
-              # --- prices aligned to sentiment dates (ffill + bfill)
+              # --- prices aligned to sentiment dates (ffill+bfill)
               price_json = base/"price"/"daily.json"
               pmap={}
               if price_json.exists():
                   try:
                       arr = json.load(open(price_json, encoding="utf-8")) or []
-                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") is not None and a.get("close") is not None}
+                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") and a.get("close") is not None}
                   except Exception:
                       pmap = {}
               if dates and pmap:
@@ -599,13 +609,28 @@ jobs:
               e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
               def in_window(ts):
                   try:
-                      tt = pd.to_datetime(ts, utc=True)
-                      return tt >= s and tt <= e
+                      tt = pd.to_datetime(ts, utc=True); return tt >= s and tt <= e
                   except Exception:
                       return False
               news_items = [n for n in news_items if n.get("ts") and in_window(n.get("ts"))]
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:20]
+
+              # --- totals: prefer counts.json (written by build_news_counts.py)
+              counts_file = base/"news"/"counts.json"
+              nf_total, ny_total, nt_total = nf_sum, ny_sum, nt_sum
+              if counts_file.exists():
+                  try:
+                      c = json.load(open(counts_file, encoding="utf-8")) or {}
+                      nf_total = int(c.get("n_finnhub", nf_sum))
+                      ny_total = int(c.get("n_yfinance", ny_sum))
+                      nt_total = int(c.get("n_total", nf_total + ny_total))
+                  except Exception:
+                      pass
+              else:
+                  # fallback if counts.json missing
+                  if nt_total == 0:
+                      nt_total = nf_total + ny_total
 
               obj = {
                 "ticker": t,
@@ -613,11 +638,12 @@ jobs:
                 "price": [round(float(x), 4) for x in price] if price else [],
                 "S": S,
                 "sentiment": S,
+                "news_total": int(nt_total),   # <— added so the UI can read obj.news_total
                 "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
                 "news": news_trim
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)} price={len(obj['price'])})")
+              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} price={len(obj['price'])} news_total={int(nt_total)} headlines={len(news_trim)})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
