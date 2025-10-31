@@ -540,6 +540,9 @@ jobs:
           import os, json, glob, pandas as pd
           from pathlib import Path
 
+          # NEW: import transformers for per-headline sentiment
+          from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
           pub = Path("apps/web/public/data"); (pub/"ticker").mkdir(parents=True, exist_ok=True)
 
@@ -552,10 +555,16 @@ jobs:
           tickers = read_universe(TICKER_CSV)
           (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
 
+          # NEW: build FinBERT pipeline once (used for headline-level scores)
+          model_name = "ProsusAI/finbert"
+          tok = AutoTokenizer.from_pretrained(model_name)
+          mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
+          clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
+
           for t in tickers:
               base = Path(f"data/{t}")
 
-              # --- sentiment rows
+              # --- sentiment rows + aggregate news counts
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_sum=0; ny_sum=0; nt_sum=0
               for sf in sfiles:
@@ -616,7 +625,23 @@ jobs:
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:20]
 
-              # --- totals: prefer counts.json (written by build_news_counts.py)
+              # === NEW: per-headline FinBERT score (positive - negative) ===
+              titles = [n["title"] for n in news_trim if (n.get("title") or "").strip()]
+              if titles:
+                  preds = clf(titles, batch_size=16)
+                  # preds is a list of list[{"label": "Positive/Negative/Neutral", "score": float}, ...]
+                  def score_from_out(one):
+                      d = {x["label"].lower(): float(x["score"]) for x in one}
+                      # Treat score as Positive - Negative in [-1,1], keep Neutral implicit
+                      return round(d.get("positive", 0.0) - d.get("negative", 0.0), 4)
+                  scores = [score_from_out(p) for p in preds]
+                  k = 0
+                  for i,n in enumerate(news_trim):
+                      if (n.get("title") or "").strip():
+                          n["s"] = float(scores[k])
+                          k += 1
+
+              # --- totals: prefer counts.json if present
               counts_file = base/"news"/"counts.json"
               nf_total, ny_total, nt_total = nf_sum, ny_sum, nt_sum
               if counts_file.exists():
@@ -628,7 +653,6 @@ jobs:
                   except Exception:
                       pass
               else:
-                  # fallback if counts.json missing
                   if nt_total == 0:
                       nt_total = nf_total + ny_total
 
@@ -638,12 +662,14 @@ jobs:
                 "price": [round(float(x), 4) for x in price] if price else [],
                 "S": S,
                 "sentiment": S,
-                "news_total": int(nt_total),   # <— added so the UI can read obj.news_total
+                "news_total": int(nt_total),
                 "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
+                # Each item may include 's' = per-headline sentiment (pos - neg)
                 "news": news_trim
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
               print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} price={len(obj['price'])} news_total={int(nt_total)} headlines={len(news_trim)})")
+
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
