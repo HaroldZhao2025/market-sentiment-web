@@ -550,58 +550,61 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          tickers = read_universe(TICKER_CSV)
-          (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
-
-          # Load FinBERT once for headline scoring
+          # Try to prepare FinBERT for headline scoring (used only for 10 most recent titles)
           clf = None
           try:
               from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
               tok  = AutoTokenizer.from_pretrained("ProsusAI/finbert")
               mdl  = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
               clf  = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
-              print("[SITE] FinBERT ready for headline scoring.")
+              print("[SITE] FinBERT loaded for per-headline scoring.")
           except Exception as e:
-              print("[SITE] FinBERT unavailable, headlines will have no per-item score:", e)
+              print("[SITE] FinBERT not available; headlines will have no 's' score.", e)
+
+          tickers = read_universe(TICKER_CSV)
+          (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
 
           for t in tickers:
               base = Path(f"data/{t}")
 
-              # --- sentiment series (dates + score_mean) and counts sums as fallback
-              sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
+              # --- sentiment time series + fallback counts sums
               rows=[]; nf_total=0; ny_total=0
-              for sf in sfiles:
+              for sf in sorted(glob.glob(str(base/"sentiment/*.json"))):
                   try:
                       o = json.load(open(sf, encoding="utf-8")) or {}
                   except Exception:
                       o = {}
-                  d = o.get("date")
-                  if not d: continue
+                  d = o.get("date"); 
+                  if not d: 
+                      continue
                   rows.append((d, float(o.get("score_mean", 0.0))))
                   nf_total += int(o.get("n_finnhub", 0) or 0)
                   ny_total += int(o.get("n_yfinance", 0) or 0)
-              rows = sorted(rows, key=lambda x:x[0])
+
+              rows.sort(key=lambda x: x[0])
               dates = [d for d,_ in rows]
               S = [round(float(v), 4) for _,v in rows]
 
-              # --- prices aligned to sentiment dates (ffill + bfill)
-              pmap={}
+              # --- price series aligned to sentiment dates (ffill/bfill)
+              price=[]
               pjson = base/"price"/"daily.json"
               if pjson.exists():
                   try:
                       arr = json.load(open(pjson, encoding="utf-8")) or []
-                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") is not None and a.get("close") is not None}
+                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") and a.get("close") is not None}
                   except Exception:
                       pmap = {}
-              if dates and pmap:
-                  idx = pd.Index(sorted(set(list(pmap.keys()) + dates)))
-                  s = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
-                  price = [float(s.get(d)) for d in dates]
-              else:
-                  price = []
+                  if dates and pmap:
+                      idx = pd.Index(sorted(set(list(pmap.keys()) + dates)))
+                      ser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
+                      price = [float(ser.get(d)) for d in dates]
 
-              # --- collect ALL raw headlines (no START/END filter), dedupe, sort DESC
-              news_items=[]
+              # --- collect ALL raw headlines, dedupe, sort DESC by timestamp
+              def _pt(x):
+                  try: return pd.to_datetime(x, utc=True, errors="coerce")
+                  except: return pd.NaT
+
+              raw=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
@@ -612,53 +615,53 @@ jobs:
                           ts = it.get("ts")
                           title = (it.get("headline") or "").strip()
                           url = it.get("url") or ""
-                          if not ts or not title: 
-                              continue
-                          news_items.append({
-                              "ts": ts,
-                              "title": title,
-                              "url": url,
-                              "source": it.get("source") or prov,
-                              "provider": prov
-                          })
+                          if ts and title:
+                              raw.append({
+                                "ts": ts,
+                                "title": title,
+                                "url": url,
+                                "source": it.get("source") or prov,
+                                "provider": prov,
+                                "_ts": _pt(ts),
+                              })
 
-              # parse + dedupe by (title,url)
-              def _pt(s):
-                  try: return pd.to_datetime(s, utc=True, errors="coerce")
-                  except: return pd.NaT
-              tmp = []
-              seen=set()
-              for n in news_items:
-                  ts = _pt(n.get("ts"))
-                  if pd.isna(ts): 
-                      continue
+              # Deduplicate by (title,url) and keep newest first
+              seen=set(); dedup=[]
+              for n in sorted([r for r in raw if pd.notna(r["_ts"])], key=lambda x: x["_ts"], reverse=True):
                   k=(n["title"], n["url"])
                   if k in seen: 
                       continue
-                  seen.add(k)
-                  m=n.copy(); m["_ts"]=ts
-                  tmp.append(m)
-              tmp.sort(key=lambda x: x["_ts"], reverse=True)
-              news_trim = tmp[:20]
+                  seen.add(k); dedup.append(n)
 
-              # --- "stupid" scoring: run FinBERT on these 20 titles now
+              # keep top-10
+              news_trim = dedup[:10]
+
+              # --- per-headline FinBERT scoring on these 10 titles
               if clf and news_trim:
                   texts = [n["title"] for n in news_trim]
                   try:
                       preds = clf(texts, batch_size=16)
                       for n, per in zip(news_trim, preds):
-                          d = {x.get("label","").lower(): float(x.get("score",0.0)) for x in per}
-                          pos = d.get("positive",0.0); neu = d.get("neutral",0.0); neg = d.get("negative",0.0)
-                          n["probs"] = {"pos": round(pos,4), "neu": round(neu,4), "neg": round(neg,4)}
-                          n["s"] = round(pos - neg, 4)
+                          # per looks like: [{"label":"Positive","score":0.7}, {"label":"Neutral","score":0.2},{"label":"Negative","score":0.1}]
+                          try:
+                              d = {x.get("label","").lower(): float(x.get("score",0.0)) for x in per}
+                              pos = d.get("positive",0.0); neu = d.get("neutral",0.0); neg = d.get("negative",0.0)
+                              n["probs"] = {"pos": round(pos,4), "neu": round(neu,4), "neg": round(neg,4)}
+                              n["s"] = round(pos - neg, 4)
+                          except Exception:
+                              n["probs"] = {"pos": 0.0, "neu": 0.0, "neg": 0.0}
+                              n["s"] = 0.0
                   except Exception as e:
                       print(f"[SITE] headline scoring failed for {t}:", e)
+                      for n in news_trim:
+                          n["probs"] = {"pos": 0.0, "neu": 0.0, "neg": 0.0}
+                          n["s"] = 0.0
 
-              # drop helper
+              # cleanup helper key
               for n in news_trim:
                   n.pop("_ts", None)
 
-              # --- prefer counts.json if exists
+              # --- prefer counts.json if available
               counts_path = base/"news"/"counts.json"
               if counts_path.exists():
                   try:
@@ -674,19 +677,19 @@ jobs:
                   news_count = {"finnhub": nf_total, "yfinance": ny_total, "total": nf_total+ny_total}
 
               obj = {
-                  "ticker": t,
-                  "dates": dates,
-                  "price": [round(float(x), 4) for x in price] if price else [],
-                  "S": S,
-                  "sentiment": S,
-                  "news_count": news_count,
-                  "news_total": int(news_count.get("total", 0)),
-                  "news": news_trim,
+                "ticker": t,
+                "dates": dates,
+                "price": [round(float(x), 4) for x in price] if price else [],
+                "S": S,
+                "sentiment": S,
+                "news_count": news_count,
+                "news_total": int(news_count.get("total", 0)),
+                "news": news_trim,  # each item now may include: "s" and "probs"
               }
 
               out = (pub/"ticker"/f"{t}.json")
               out.write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {out} (days={len(dates)} news={len(news_trim)} price={len(obj['price'])})")
+              print(f"[SITE] wrote {out} (pts={len(dates)} news={len(news_trim)} price={len(obj['price'])})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
