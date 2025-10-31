@@ -1,52 +1,47 @@
 // apps/web/lib/paths.ts
-// Client-safe helpers for basePath-aware routes and data files.
-// Fix: avoid double base-path on <Link> by NOT prefixing internal routes here.
-// Next.js basePath (from next.config.cjs) already prefixes routes at render time.
+// Client-safe helpers for routes and data file URLs.
+
+// NOTE:
+// - For internal app routes (used by <Link>, router.push, etc.), DO NOT prefix the base path here.
+//   Next.js already applies the configured basePath at runtime, so adding it again causes
+//   "/<base>/<base>/..." double-prefix issues on GitHub Pages.
+// - For public data files under /public/data (served at /<base>/data/*), we DO prefix with BASE.
 
 const RAW_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
-// Keep normalized BASE for static assets (public/data), not for routes.
-const BASE = (() => {
-  const clean = RAW_BASE.replace(/^\/+|\/+$/g, "").trim();
-  return clean ? `/${clean}` : "";
-})();
-
+const BASE = RAW_BASE.endsWith("/") ? RAW_BASE.slice(0, -1) : RAW_BASE;
 const isServer = typeof window === "undefined";
 
 function ensureLeadingSlash(p: string) {
   return p.startsWith("/") ? p : `/${p}`;
 }
 
-/**
- * Internal routes for <Link> and in-app navigation.
- * IMPORTANT: Do NOT add BASE here; Next.js basePath handles route prefixing.
- * Returning clean absolute paths ("/...") prevents
- * "/market-sentiment-web/market-sentiment-web/..." on GitHub Pages.
- */
-export function withBase(p: string) {
-  return ensureLeadingSlash(p || "/");
+/** Internal app routes handled by Next.js. Never add BASE here. */
+export function route(p: string) {
+  return ensureLeadingSlash(p);
 }
 
-/** Named link builders for consistency across the app */
+/** Back-compat alias kept for existing imports. Safe for routes now. */
+export function withBase(p: string) {
+  // Intentionally identical to route(): avoid double basePath on Links
+  return route(p);
+}
+
+/** Named link builders used across the app */
 export const hrefs = {
-  home: () => withBase("/"),
-  portfolio: () => withBase("/portfolio"),
-  ticker: (s: string) => withBase(`/ticker/${encodeURIComponent(s)}`),
-  earnings: (s: string) => withBase(`/earnings/${encodeURIComponent(s)}`),
+  home: () => route("/"),
+  portfolio: () => route("/portfolio"),
+  ticker: (s: string) => route(`/ticker/${encodeURIComponent(s)}`),
+  earnings: (s: string) => route(`/earnings/${encodeURIComponent(s)}`),
 };
 
-/**
- * Browser-safe URL to a data file under /public/data.
- * For static assets we DO need the BASE, because browsers resolve "/data"
- * to domain root; on GitHub Pages the site root is "/market-sentiment-web".
- */
+/** Browser-safe URL to a data file under /public/data (served at /<BASE>/data/...) */
 export function dataUrl(rel: string): string {
   const clean = rel.replace(/^\/+/, "");
   const prefix = BASE ? `${BASE}/data` : `/data`;
   return `${prefix}/${clean}`;
 }
 
-/** Filesystem path to a data file for server-only usage (lazy, no node: imports) */
+/** Filesystem path to a data file for server-only usage (no node: imports at top level) */
 export function dataFsPath(rel: string): string {
   const clean = rel.replace(/^\/+/, "");
   const cwd =
@@ -60,6 +55,7 @@ export function dataFsPath(rel: string): string {
 export async function loadJson<T = unknown>(rel: string): Promise<T> {
   const url = dataUrl(rel);
 
+  // Try HTTP first (works in both client and server)
   try {
     const res = await fetch(url, { cache: "no-cache" });
     if (res.ok) return (await res.json()) as T;
@@ -67,8 +63,10 @@ export async function loadJson<T = unknown>(rel: string): Promise<T> {
     /* fall through */
   }
 
+  // Server fallback: read from filesystem during build/SSR
   if (isServer) {
     try {
+      // Avoid bundling fs on the client
       // eslint-disable-next-line no-new-func
       const importFS = new Function("m", "return import(m)");
       const fs = (await importFS("fs/promises")) as typeof import("fs/promises");
