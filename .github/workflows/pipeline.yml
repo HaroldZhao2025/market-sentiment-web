@@ -534,14 +534,12 @@ jobs:
               print(f"[PRICE] {t}: {len(df)} rows -> {out}")
 
       # ---------- Build site JSON (apps/web/public/data) ----------
+      # ---------- Build site JSON (apps/web/public/data) ----------
       - name: Assemble site JSON (apps/web/public/data)
         shell: python
         run: |
           import os, json, glob, pandas as pd
           from pathlib import Path
-
-          # NEW: import transformers for per-headline sentiment
-          from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
           pub = Path("apps/web/public/data"); (pub/"ticker").mkdir(parents=True, exist_ok=True)
@@ -555,18 +553,54 @@ jobs:
           tickers = read_universe(TICKER_CSV)
           (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
 
-          # NEW: build FinBERT pipeline once (used for headline-level scores)
-          model_name = "ProsusAI/finbert"
-          tok = AutoTokenizer.from_pretrained(model_name)
-          mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
-          clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
+          # lazy FinBERT loader (only if we actually have headlines to score)
+          _clf = None
+          def get_clf():
+              nonlocal _clf
+              if _clf is not None:
+                  return _clf
+              try:
+                  from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+                  model_name = "ProsusAI/finbert"
+                  tok = AutoTokenizer.from_pretrained(model_name)
+                  mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
+                  _clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
+              except Exception as e:
+                  print("[SITE] FinBERT load failed; headlines won't have per-item scores:", e)
+                  _clf = None
+              return _clf
+
+          def score_headlines(items: list[dict]) -> None:
+              """Attach per-headline probs + scalar s in-place. Safe no-op if model unavailable."""
+              if not items:
+                  return
+              clf = get_clf()
+              if clf is None:
+                  return
+              texts = [(it.get("title") or "").strip() for it in items]
+              try:
+                  preds = clf(texts, batch_size=16)
+              except Exception as e:
+                  print("[SITE] FinBERT inference failed; skipping per-item scores:", e)
+                  return
+              for it, per in zip(items, preds):
+                  try:
+                      d = {x["label"].lower(): float(x.get("score", 0.0)) for x in per}
+                      pos = d.get("positive", 0.0)
+                      neu = d.get("neutral", 0.0)
+                      neg = d.get("negative", 0.0)
+                      it["probs"] = {"pos": round(pos, 4), "neu": round(neu, 4), "neg": round(neg, 4)}
+                      it["s"] = round(pos - neg, 4)
+                  except Exception:
+                      # leave item as-is if anything goes wrong
+                      pass
 
           for t in tickers:
               base = Path(f"data/{t}")
 
-              # --- sentiment rows + aggregate news counts
+              # --- sentiment rows + aggregate news counts from sentiment files
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
-              rows=[]; nf_sum=0; ny_sum=0; nt_sum=0
+              rows=[]; nf_total=0; ny_total=0; nt_total=0
               for sf in sfiles:
                   try:
                       o = json.load(open(sf, encoding="utf-8")) or {}
@@ -575,20 +609,20 @@ jobs:
                   d = o.get("date")
                   if not d: continue
                   rows.append((d, float(o.get("score_mean", 0.0))))
-                  nf_sum += int(o.get("n_finnhub", 0))
-                  ny_sum += int(o.get("n_yfinance", 0))
-                  nt_sum += int(o.get("n_total", 0) or (int(o.get("n_finnhub",0))+int(o.get("n_yfinance",0))))
-              rows.sort(key=lambda x: x[0])
+                  nf_total += int(o.get("n_finnhub", 0))
+                  ny_total += int(o.get("n_yfinance", 0))
+                  nt_total += int(o.get("n_total", 0))
+              rows = sorted(rows, key=lambda x:x[0])
               dates = [d for d,_ in rows]
               S = [round(float(v), 4) for _,v in rows]
 
-              # --- prices aligned to sentiment dates (ffill+bfill)
+              # --- prices aligned to sentiment dates (ffill + bfill)
               price_json = base/"price"/"daily.json"
               pmap={}
               if price_json.exists():
                   try:
                       arr = json.load(open(price_json, encoding="utf-8")) or []
-                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") and a.get("close") is not None}
+                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") is not None and a.get("close") is not None}
                   except Exception:
                       pmap = {}
               if dates and pmap:
@@ -598,7 +632,7 @@ jobs:
               else:
                   price = []
 
-              # --- recent headline items (best-effort)
+              # --- recent headline items (window-filtered) + ATTACH PER-HEADLINE SCORES
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -614,47 +648,21 @@ jobs:
                               })
                       except Exception:
                           pass
+
               s = pd.to_datetime(START, utc=True)
               e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
               def in_window(ts):
                   try:
-                      tt = pd.to_datetime(ts, utc=True); return tt >= s and tt <= e
+                      tt = pd.to_datetime(ts, utc=True)
+                      return tt >= s and tt <= e
                   except Exception:
                       return False
               news_items = [n for n in news_items if n.get("ts") and in_window(n.get("ts"))]
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:20]
 
-              # === NEW: per-headline FinBERT score (positive - negative) ===
-              titles = [n["title"] for n in news_trim if (n.get("title") or "").strip()]
-              if titles:
-                  preds = clf(titles, batch_size=16)
-                  # preds is a list of list[{"label": "Positive/Negative/Neutral", "score": float}, ...]
-                  def score_from_out(one):
-                      d = {x["label"].lower(): float(x["score"]) for x in one}
-                      # Treat score as Positive - Negative in [-1,1], keep Neutral implicit
-                      return round(d.get("positive", 0.0) - d.get("negative", 0.0), 4)
-                  scores = [score_from_out(p) for p in preds]
-                  k = 0
-                  for i,n in enumerate(news_trim):
-                      if (n.get("title") or "").strip():
-                          n["s"] = float(scores[k])
-                          k += 1
-
-              # --- totals: prefer counts.json if present
-              counts_file = base/"news"/"counts.json"
-              nf_total, ny_total, nt_total = nf_sum, ny_sum, nt_sum
-              if counts_file.exists():
-                  try:
-                      c = json.load(open(counts_file, encoding="utf-8")) or {}
-                      nf_total = int(c.get("n_finnhub", nf_sum))
-                      ny_total = int(c.get("n_yfinance", ny_sum))
-                      nt_total = int(c.get("n_total", nf_total + ny_total))
-                  except Exception:
-                      pass
-              else:
-                  if nt_total == 0:
-                      nt_total = nf_total + ny_total
+              # NEW: per-headline FinBERT scores (adds n['s'] and n['probs'])
+              score_headlines(news_trim)
 
               obj = {
                 "ticker": t,
@@ -662,14 +670,11 @@ jobs:
                 "price": [round(float(x), 4) for x in price] if price else [],
                 "S": S,
                 "sentiment": S,
-                "news_total": int(nt_total),
                 "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
-                # Each item may include 's' = per-headline sentiment (pos - neg)
                 "news": news_trim
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} price={len(obj['price'])} news_total={int(nt_total)} headlines={len(news_trim)})")
-
+              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)} price={len(obj['price'])})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
