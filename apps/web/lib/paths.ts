@@ -1,17 +1,36 @@
 // apps/web/lib/paths.ts
 // Client-safe helpers for basePath-aware routes and data files.
+// Fixes double base-path by normalizing and de-duplicating the prefix.
 
 const RAW_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
-const BASE = RAW_BASE.endsWith("/") ? RAW_BASE.slice(0, -1) : RAW_BASE;
+
+// Normalize the configured base:
+// - strip all leading/trailing slashes
+// - if non-empty, add exactly one leading slash
+const BASE = (() => {
+  const clean = RAW_BASE.replace(/^\/+|\/+$/g, "").trim();
+  return clean ? `/${clean}` : "";
+})();
+
 const isServer = typeof window === "undefined";
 
 function ensureLeadingSlash(p: string) {
   return p.startsWith("/") ? p : `/${p}`;
 }
 
-/** Prefix an internal route with the GitHub Pages base path */
+/**
+ * Prefix an internal route with the GitHub Pages base path (if any),
+ * while preventing double prefixing when the input is already base-prefixed.
+ */
 export function withBase(p: string) {
-  return `${BASE}${ensureLeadingSlash(p)}`;
+  let route = ensureLeadingSlash(p || "/");
+
+  // If the route already begins with the normalized BASE, return as-is
+  // e.g. BASE="/market-sentiment-web", route="/market-sentiment-web/ticker/AAPL"
+  if (BASE && (route === BASE || route.startsWith(`${BASE}/`))) {
+    return route;
+  }
+  return `${BASE}${route}`;
 }
 
 /** Named link builders for consistency across the app */
