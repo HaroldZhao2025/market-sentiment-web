@@ -1,67 +1,57 @@
 // apps/web/app/page.tsx
+import fs from "node:fs/promises";
+import path from "node:path";
 import Link from "next/link";
-import { loadTickers, loadPortfolio, loadTicker } from "../lib/data";
-import { hrefs } from "../lib/paths";
-import dynamic from "next/dynamic";
 
-const OverviewChart = dynamic(() => import("../components/OverviewChart"), { ssr: false });
+export const dynamic = "error";
+export const dynamicParams = false;
+export const revalidate = false;
+
+async function getTickers(): Promise<string[]> {
+  try {
+    const p = path.join(process.cwd(), "public", "data", "_tickers.json");
+    const raw = await fs.readFile(p, "utf8");
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr.map((x: any) => String(x).toUpperCase()) : ["AAPL"];
+  } catch {
+    return ["AAPL"];
+  }
+}
 
 export default async function Home() {
-  const [tickers, portfolio, spy, spx] = await Promise.all([
-    loadTickers(),
-    loadPortfolio(),
-    loadTicker("SPY"),
-    loadTicker("^GSPC"),
-  ]);
-
-  const priceSrc = spy?.price?.length ? spy : spx?.price?.length ? spx : null;
-  const price = priceSrc?.price ?? [];
-  const dates = portfolio?.dates ?? [];
-  const sentiment = portfolio?.S ?? portfolio?.sentiment ?? [];
+  const tickers = await getTickers();
 
   return (
-    <main className="max-w-6xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold">Market Sentiment — S&amp;P 500</h1>
+    <main className="min-h-screen p-6">
+      <div className="mx-auto max-w-6xl space-y-6">
+        <header className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold tracking-tight">Market Sentiment</h1>
+          {/* Route-only home link; Next will prepend basePath at build time */}
+          <Link
+            href="/"
+            className="rounded-xl border px-3 py-1.5 text-sm hover:bg-neutral-50"
+          >
+            Home
+          </Link>
+        </header>
 
-      {/* Overview */}
-      <section className="rounded-2xl p-4 shadow-sm border bg-white">
-        <h2 className="text-xl font-semibold mb-3">S&amp;P 500 Overview</h2>
-        {dates.length ? (
-          <OverviewChart dates={dates} sentiment={sentiment} price={price} />
-        ) : (
-          <p className="text-sm text-neutral-500">No portfolio data yet.</p>
-        )}
-      </section>
-
-      {/* Portfolio quick stats */}
-      <section className="rounded-2xl p-4 shadow-sm border bg-white">
-        <h2 className="text-xl font-semibold mb-2">Portfolio</h2>
-        {!portfolio ? (
-          <p className="text-sm text-neutral-500">No portfolio yet.</p>
-        ) : (
-          <p className="text-sm text-neutral-600">Points: {portfolio.dates?.length ?? 0}</p>
-        )}
-      </section>
-
-      {/* Tickers */}
-      <section>
-        <h2 className="text-xl font-semibold mb-3">Tickers</h2>
-        {tickers.length === 0 ? (
-          <p className="text-sm text-neutral-500">No data generated yet.</p>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+        <section>
+          <h2 className="sr-only">Tickers</h2>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {tickers.map((t) => (
-              <Link
-                key={t}
-                href={hrefs.ticker(t)}
-                className="px-3 py-2 rounded-lg bg-white hover:bg-neutral-100 border text-sm"
-              >
-                {t}
-              </Link>
+              <li key={t}>
+                {/* IMPORTANT: route-only href, no manual NEXT_PUBLIC_BASE_PATH */}
+                <Link
+                  href={`/ticker/${t}`}
+                  className="block rounded-xl border shadow-sm px-4 py-3 hover:shadow transition"
+                >
+                  {t}
+                </Link>
+              </li>
             ))}
-          </div>
-        )}
-      </section>
+          </ul>
+        </section>
+      </div>
     </main>
   );
 }
