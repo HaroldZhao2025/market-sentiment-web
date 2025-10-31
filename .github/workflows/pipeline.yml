@@ -395,7 +395,7 @@ jobs:
                   print(f"[YF] {t}: 0 items in window")
                   continue
 
-              df = pd.DataFrame(rows)   # <- FIXED: use pd.DataFrame, not pandas.DataFrame
+              df = pandas.DataFrame(rows)
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
                   out = Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
@@ -490,6 +490,39 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: sentiment JSON written")
 
+      # ---------- NEW: Daily close prices (Yahoo) ----------
+      - name: Fetch daily close prices (Yahoo)
+        shell: python
+        run: |
+          import os, json, pandas as pd, yfinance as yf
+          from pathlib import Path
+          START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
+
+          def read_universe(csv_path: str) -> list[str]:
+              df = pd.read_csv(csv_path)
+              col = [c for c in df.columns if c.lower()=="ticker"]
+              if not col: return []
+              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+
+          for t in read_universe(TICKER_CSV):
+              try:
+                  df = yf.download(t, start=START, end=END, interval="1d", progress=False, auto_adjust=False)
+              except Exception as e:
+                  print(f"[PRICE] {t}: download failed:", e); df = None
+              if df is None or df.empty:
+                  print(f"[PRICE] {t}: empty")
+                  continue
+              df = df.reset_index()
+              if "Date" in df.columns:
+                  df["date"] = pd.to_datetime(df["Date"], utc=True).dt.date.astype(str)
+              else:
+                  df["date"] = pd.to_datetime(df.index, utc=True).date.astype(str)
+              df["close"] = df["Close"].astype(float)
+              out = Path(f"data/{t}/price/daily.json")
+              out.parent.mkdir(parents=True, exist_ok=True)
+              json.dump([{"date": d, "close": float(c)} for d, c in zip(df["date"], df["close"])], open(out,"w"), indent=2)
+              print(f"[PRICE] {t}: {len(df)} rows -> {out}")
+
       # ---------- Build site JSON (apps/web/public/data) ----------
       - name: Assemble site JSON (apps/web/public/data)
         shell: python
@@ -511,16 +544,42 @@ jobs:
 
           for t in tickers:
               base = Path(f"data/{t}")
+
+              # --- sentiment rows + aggregate news counts from sentiment files
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
-              rows=[]
+              rows=[]; nf_total=0; ny_total=0; nt_total=0
               for sf in sfiles:
                   try:
-                      o = json.load(open(sf, encoding="utf-8"))
-                      rows.append((o.get("date"), float(o.get("score_mean", 0.0))))
+                      o = json.load(open(sf, encoding="utf-8")) or {}
                   except Exception:
-                      pass
-              rows = sorted([(d,s) for d,s in rows if d], key=lambda x:x[0])
+                      o = {}
+                  d = o.get("date")
+                  if not d: continue
+                  rows.append((d, float(o.get("score_mean", 0.0))))
+                  nf_total += int(o.get("n_finnhub", 0))
+                  ny_total += int(o.get("n_yfinance", 0))
+                  nt_total += int(o.get("n_total", 0))
+              rows = sorted(rows, key=lambda x:x[0])
+              dates = [d for d,_ in rows]
+              S = [round(float(v), 4) for _,v in rows]
 
+              # --- prices aligned to sentiment dates (ffill + bfill)
+              price_json = base/"price"/"daily.json"
+              pmap={}
+              if price_json.exists():
+                  try:
+                      arr = json.load(open(price_json, encoding="utf-8")) or []
+                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") is not None and a.get("close") is not None}
+                  except Exception:
+                      pmap = {}
+              if dates and pmap:
+                  idx = pd.Index(sorted(set(list(pmap.keys()) + dates)))
+                  s = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
+                  price = [float(s.get(d)) for d in dates]
+              else:
+                  price = []
+
+              # --- recent headline items (best-effort)
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -536,7 +595,6 @@ jobs:
                               })
                       except Exception:
                           pass
-
               s = pd.to_datetime(START, utc=True)
               e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
               def in_window(ts):
@@ -549,27 +607,17 @@ jobs:
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:20]
 
-              def count_provider(prov):
-                  tot=0
-                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
-                      try:
-                          tot += len(json.load(open(p, encoding="utf-8")))
-                      except Exception:
-                          pass
-                  return tot
-              nf = count_provider("finnhub")
-              ny = count_provider("yfinance")
-
               obj = {
                 "ticker": t,
-                "dates": [d for d,_ in rows],
-                "S": [round(float(v), 4) for _,v in rows],
-                "sentiment": [round(float(v), 4) for _,v in rows],
-                "news_count": {"finnhub": int(nf), "yfinance": int(ny), "total": int(nf+ny)},
+                "dates": dates,
+                "price": [round(float(x), 4) for x in price] if price else [],
+                "S": S,
+                "sentiment": S,
+                "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
                 "news": news_trim
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)})")
+              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(news_trim)} price={len(obj['price'])})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
@@ -586,7 +634,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit in data/."
           else
-            git commit -m "chore(data): persist finnhub+yfinance raw news per-day and daily sentiment [skip ci]"
+            git commit -m "chore(data): persist news, daily sentiment, and prices [skip ci]"
             git pull --rebase || true
             git push || true
           fi
