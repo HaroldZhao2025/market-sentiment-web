@@ -4,7 +4,17 @@ import { useMemo, useState } from "react";
 
 /* --------- Props (unchanged) --------- */
 export type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
-export type NewsItem = { ts: string; title: string; url: string; text?: string };
+export type NewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  text?: string;
+  // NEW (optional — safe if missing in JSON):
+  source?: string;
+  provider?: string;
+  s?: number; // headline-level score = Positive - Negative
+  probs?: { pos?: number; neu?: number; neg?: number }; // optional per-headline probs
+};
 
 type View = "overlay" | "price" | "sentiment" | "separate";
 
@@ -85,7 +95,7 @@ export default function TickerClient({
         </div>
       </section>
 
-      {/* Headlines with date-only */}
+      {/* Headlines with date-only + NEW sentiment column */}
       <section className="rounded-2xl p-6 shadow-sm border bg-white">
         <h3 className="font-semibold mb-2">Recent Headlines for {symbol}</h3>
         <p className="text-xs text-neutral-500 mb-3">
@@ -99,20 +109,42 @@ export default function TickerClient({
                   <th className="py-2 pr-3">Date</th>
                   <th className="py-2 pr-3">Headline</th>
                   <th className="py-2 pr-3">Source</th>
+                  {/* NEW */}
+                  <th className="py-2 pr-3">Sentiment</th>
                 </tr>
               </thead>
               <tbody>
-                {news.slice(0, 10).map((n, i) => (
-                  <tr key={i} className="border-b last:border-b-0">
-                    <td className="py-2 pr-3 text-neutral-600">{toDateOnly(n.ts)}</td>
-                    <td className="py-2 pr-3">
-                      <a className="underline decoration-dotted underline-offset-2" href={n.url} target="_blank" rel="noreferrer">
-                        {n.title}
-                      </a>
-                    </td>
-                    <td className="py-2 pr-3 text-neutral-500">{extractHost(n.url)}</td>
-                  </tr>
-                ))}
+                {news.slice(0, 10).map((n, i) => {
+                  const host = n.source || n.provider || extractHost(n.url);
+                  const S = fmtHeadlineSentiment(n);
+                  return (
+                    <tr key={i} className="border-b last:border-b-0">
+                      <td className="py-2 pr-3 text-neutral-600">{toDateOnly(n.ts)}</td>
+                      <td className="py-2 pr-3">
+                        <a className="underline decoration-dotted underline-offset-2" href={n.url} target="_blank" rel="noreferrer">
+                          {n.title}
+                        </a>
+                      </td>
+                      <td className="py-2 pr-3 text-neutral-500">{host}</td>
+                      {/* NEW cell */}
+                      <td className="py-2 pr-3">
+                        {S.s !== null ? (
+                          <>
+                            <span className="font-medium">{label(S.s)}</span>{" "}
+                            <span className="text-neutral-500">({S.s.toFixed(4)})</span>
+                            {S.hasProbs ? (
+                              <span className="ml-2 text-xs text-neutral-500">
+                                neg {S.neg!.toFixed(2)} / neu {S.neu!.toFixed(2)} / pos {S.pos!.toFixed(2)}
+                              </span>
+                            ) : null}
+                          </>
+                        ) : (
+                          <span className="text-neutral-400">–</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -466,4 +498,38 @@ function toDateOnly(x: string) {
 }
 function extractHost(u?: string) {
   try { return u ? new URL(u).host.replace(/^www\./,"") : ""; } catch { return ""; }
+}
+
+/* ===== NEW: headline sentiment pretty-printer (non-breaking) ===== */
+function fmtHeadlineSentiment(n: NewsItem): {
+  label: string;
+  s: number | null;
+  hasProbs: boolean;
+  pos?: number;
+  neu?: number;
+  neg?: number;
+} {
+  // Prefer explicit probs if present
+  const probs = (n as any)?.probs;
+  if (probs && typeof probs === "object") {
+    const pos = num(probs.pos ?? probs.positive ?? probs.Positive ?? probs.POS);
+    const neu = num(probs.neu ?? probs.neutral ?? probs.Neutral ?? probs.NEU);
+    const neg = num(probs.neg ?? probs.negative ?? probs.Negative ?? probs.NEG);
+    const s = clamp(pos - neg);
+    return { label: label(s), s, hasProbs: true, pos, neu, neg };
+  }
+  // Otherwise, use scalar s if available
+  const sv = (n as any)?.s;
+  if (typeof sv === "number" && isFinite(sv)) {
+    const s = clamp(sv);
+    return { label: label(s), s, hasProbs: false };
+  }
+  return { label: "", s: null, hasProbs: false };
+}
+function num(v: any): number {
+  const x = Number(v);
+  return Number.isFinite(x) ? x : 0;
+}
+function clamp(x: number, lo = -1, hi = 1): number {
+  return Math.max(lo, Math.min(hi, x));
 }
