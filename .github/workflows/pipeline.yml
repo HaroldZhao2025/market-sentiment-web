@@ -149,13 +149,15 @@ jobs:
       # ---------- Yahoo Finance per-day JSON ----------
       - name: Save Yahoo Finance per-day JSON
         shell: python
+        env:
+          YF_COUNT: ${{ env.YF_COUNT }}
         run: |
           import os, json, pandas as pd, yfinance as yf
           from pathlib import Path
 
           START=os.environ["START"]; END=os.environ["END"]
           TICKER_CSV=os.environ["TICKER_CSV"]
-          YF_COUNT = int(os.environ["YF_COUNT"])
+          YF_COUNT = int(os.environ.get("YF_COUNT") or "240")
 
           def read_universe(csv_path: str) -> list[str]:
               df = pd.read_csv(csv_path)
@@ -179,33 +181,50 @@ jobs:
           e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
 
           for t in read_universe(TICKER_CSV):
-              items=[]
+              items = []
               try:
                   items = yf.Ticker(t).get_news(count=YF_COUNT, tab="all") or []
               except Exception:
                   pass
 
-              rows=[]
+              rows = []
               for it in items:
-                  content = it.get("content", {})
+                  if not isinstance(it, dict):
+                      continue
+
+                  # ---- Robust content handling (fix) ----
+                  content = it.get("content") or {}
+                  if not isinstance(content, dict):
+                      content = {}
+
                   ts = (norm_ts(it.get("providerPublishTime"))
                         or norm_ts(content.get("pubDate"))
                         or norm_ts(content.get("displayTime"))
                         or norm_ts(content.get("published")))
                   if ts is None or pd.isna(ts) or ts < s or ts > e:
                       continue
+
                   title = (content.get("title") or it.get("title") or "").strip()
                   if not title:
                       continue
+
                   url = ((content.get("canonicalUrl") or {}).get("url")
                          or (content.get("clickThroughUrl") or {}).get("url")
                          or it.get("link") or it.get("url") or "")
-                  summary = (content.get("summary") or content.get("description") or it.get("summary") or title).strip()
-                  source = (content.get("provider") or {}).get("displayName") if isinstance(content.get("provider"), dict) else "Yahoo"
+
+                  # ---- Robust provider/source (also hardened) ----
+                  prov = content.get("provider")
+                  if isinstance(prov, dict):
+                      source = prov.get("displayName") or prov.get("name") or "Yahoo"
+                  elif isinstance(prov, str):
+                      source = prov
+                  else:
+                      source = "Yahoo"
+
                   rows.append({
                       "ts": ts.isoformat(),
                       "headline": title,
-                      "summary": summary,
+                      "summary": (content.get("summary") or content.get("description") or it.get("summary") or title).strip(),
                       "url": url,
                       "source": source,
                       "provider": "yfinance",
@@ -234,7 +253,7 @@ jobs:
                       new = old
                   json.dump(new, open(out,"w",encoding="utf-8"), ensure_ascii=False, indent=2)
               print(f"[YF] {t}: saved per-day JSON under data/{t}/news/yfinance")
-
+              
       # ---------- Finnhub backfill ----------
       - name: Backfill Finnhub per-day JSON (rotate tokens on 429, respect RPS)
         env:
