@@ -9,26 +9,12 @@ export type NewsItem = {
   title: string;
   url: string;
   text?: string;
-
-  // already present, keep:
   source?: string;
   provider?: string;
-
-  // headline-level scalar (any key name we might emit)
-  s?: number | string;
-  score?: number | string;
-  sent?: number | string;
-
-  // per-class probabilities as an object
-  probs?: { pos?: number | string; neu?: number | string; neg?: number | string } | null;
-
-  // sometimes stored as 'scores' (object OR array of {label, score})
-  scores?: any;
-
-  // sometimes stored as 'sentiment' (object with positive/neutral/negative)
-  sentiment?: any;
+  s?: number;                 // headline-level score = Positive - Negative
+  probs?: { pos?: number; neu?: number; neg?: number }; // optional per-headline probs
+  sentiment_label?: string;   // <--- NEW: use this if present
 };
-
 
 type View = "overlay" | "price" | "sentiment" | "separate";
 
@@ -109,7 +95,7 @@ export default function TickerClient({
         </div>
       </section>
 
-      {/* Headlines with date-only + Sentiment column */}
+      {/* Headlines with date-only + Sentiment label/score */}
       <section className="rounded-2xl p-6 shadow-sm border bg-white">
         <h3 className="font-semibold mb-2">Recent Headlines for {symbol}</h3>
         <p className="text-xs text-neutral-500 mb-3">
@@ -129,7 +115,9 @@ export default function TickerClient({
               <tbody>
                 {news.slice(0, 10).map((n, i) => {
                   const host = n.source || n.provider || extractHost(n.url);
-                  const S = fmtHeadlineSentiment(n);
+                  // *** Minimal, robust: use provided sentiment_label + s; fallback to computed label(s) if needed ***
+                  const haveS = typeof n.s === "number" && isFinite(n.s);
+                  const lab = n.sentiment_label || (haveS ? label(n.s as number) : "");
                   return (
                     <tr key={i} className="border-b last:border-b-0">
                       <td className="py-2 pr-3 text-neutral-600">{toDateOnly(n.ts)}</td>
@@ -140,17 +128,10 @@ export default function TickerClient({
                       </td>
                       <td className="py-2 pr-3 text-neutral-500">{host}</td>
                       <td className="py-2 pr-3">
-                        {S.s !== null ? (
+                        {lab ? (
                           <>
-                            <span className="font-medium">{S.label}</span>{" "}
-                            <span className="text-neutral-500">
-                              ({S.s.toFixed(4)})
-                            </span>
-                            {S.hasProbs ? (
-                              <span className="ml-2 text-xs text-neutral-500">
-                                neg {S.neg!.toFixed(2)} / neu {S.neu!.toFixed(2)} / pos {S.pos!.toFixed(2)}
-                              </span>
-                            ) : null}
+                            <span className="font-medium">{lab}</span>{" "}
+                            {haveS ? <span className="text-neutral-500">({(n.s as number).toFixed(4)})</span> : null}
                           </>
                         ) : (
                           <span className="text-neutral-400">–</span>
@@ -205,8 +186,9 @@ function KpiCard({ title, value, sub, bigValue }:{
 function parseISO(s: string): Date {
   const d = new Date(s);
   if (!isNaN(d.getTime())) return d;
+  // try YYYY/MM/DD or similar
   const parts = String(s).split(/[-/]/).map((x) => +x);
-  const dd = new Date(parts[0] || 1970, (parts[1] || 1) - 1, parts[2] || 1);
+  const dd = new Date(parts[0] || 1970, (parts[1] || 1) - 1, (parts[2] || 1));
   return isNaN(dd.getTime()) ? new Date() : dd;
 }
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -223,6 +205,7 @@ function monthTicks(dates: string[]) {
       prevM = m; prevY = y;
     }
   }
+  // downsample if too many
   const maxLabels = 8;
   if (marks.length > maxLabels) {
     const stride = Math.ceil(marks.length / maxLabels);
@@ -237,15 +220,17 @@ function OverlayChart({
 }:{
   dates:string[]; price?:number[]; sentiment?:number[]; height?:number; width?:number;
 }) {
-  const pad = { t: 28, r: 78, b: 44, l: 70 };
+  const pad = { t: 28, r: 78, b: 44, l: 70 }; // more room for axis labels
   const W = width, H = height;
   const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
   const n = dates.length, step = n > 1 ? innerW / (n - 1) : innerW;
 
+  // Sentiment axis centered at 0
   const sMax = sentiment && sentiment.length ? Math.max(0.5, ...sentiment.map((x)=>Math.abs(x))) : 1;
   const sY   = (v:number) => pad.t + innerH/2 - (v / sMax) * (innerH/2);
   const sTicks = [-sMax, -sMax/2, 0, sMax/2, sMax];
 
+  // Price axis on the right (min/mid/max)
   const pMin = price && price.length ? Math.min(...price) : 0;
   const pMax = price && price.length ? Math.max(...price) : 1;
   const pY   = (v:number) => pad.t + (1 - (v - pMin) / Math.max(1e-9, pMax - pMin)) * innerH;
@@ -256,7 +241,10 @@ function OverlayChart({
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
+      {/* frame */}
       <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
+
+      {/* left y-axis (sentiment) ticks + labels */}
       {sTicks.map((v, i) => {
         const y = sY(v);
         return (
@@ -265,12 +253,14 @@ function OverlayChart({
             <text x={pad.l - 8} y={y + 3} fontSize="11" fill="#6b7280" textAnchor="end">
               {v.toFixed(2)}
             </text>
+            {/* grid lines except baseline (we’ll draw baseline separately) */}
             {Math.abs(v) > 1e-10 && (
               <line x1={pad.l} x2={pad.l + innerW} y1={y} y2={y} stroke="#f1f5f9" />
             )}
           </g>
         );
       })}
+      {/* left axis label */}
       <text
         x={16}
         y={pad.t + innerH / 2}
@@ -282,6 +272,7 @@ function OverlayChart({
         Sentiment Score
       </text>
 
+      {/* right y-axis (price) ticks + labels */}
       {pTicks.map((v, i) => {
         const y = pY(v);
         return (
@@ -291,6 +282,7 @@ function OverlayChart({
           </g>
         );
       })}
+      {/* right axis label */}
       <text
         x={W - 18}
         y={pad.t + innerH / 2}
@@ -302,17 +294,20 @@ function OverlayChart({
         Stock Price
       </text>
 
+      {/* sentiment baseline */}
       {sentiment && sentiment.length ? (
-        <line x1={pad.l} x2={pad.l+innerW} y1={sY(0)} y2={sY(0)} stroke="#e5e7eb" />
+        <line x1={pad.l} x2={pad.l+innerW} y1={baselineY} y2={baselineY} stroke="#e5e7eb" />
       ) : null}
 
+      {/* sentiment bars */}
       {sentiment?.map((v, i) => {
         const x = pad.l + i * step;
-        const y = Math.min(sY(0), sY(v));
-        const h = Math.abs(sY(v) - sY(0));
+        const y = Math.min(baselineY, sY(v));
+        const h = Math.abs(sY(v) - baselineY);
         return <rect key={i} x={x - 1} y={y} width={2} height={Math.max(1, h)} fill="#6b47dc" opacity={0.7} />;
       })}
 
+      {/* price line (draw AFTER bars so it sits on top) */}
       {price && price.length > 1
         ? price.map((v, i) => {
             if (i === 0) return null;
@@ -326,6 +321,7 @@ function OverlayChart({
         return <circle key={`c${i}`} cx={cx} cy={cy} r={2.2} fill="#10b981" />;
       })}
 
+      {/* month tick labels along x-axis */}
       {monthMarks.map(({ i, label }, k) => {
         const x = pad.l + i * step;
         return (
@@ -339,7 +335,7 @@ function OverlayChart({
   );
 }
 
-/* ============ Separate charts ============ */
+/* ============ Separate charts (with month ticks & y labels) ============ */
 function SentimentBars({ dates, values, height = 300, width = 980 }:{
   dates:string[]; values:number[]; height?:number; width?:number;
 }) {
@@ -357,6 +353,7 @@ function SentimentBars({ dates, values, height = 300, width = 980 }:{
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
       <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
+
       {sTicks.map((v, i) => {
         const y = sY(v);
         return (
@@ -416,6 +413,7 @@ function PriceLine({ dates, values, height = 300, width = 980 }:{
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
       <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
+
       {pTicks.map((v, i) => {
         const y = pY(v);
         return (
@@ -495,81 +493,4 @@ function toDateOnly(x: string) {
 }
 function extractHost(u?: string) {
   try { return u ? new URL(u).host.replace(/^www\./,"") : ""; } catch { return ""; }
-}
-
-/* ===== NEW: headline sentiment pretty-printer (robust to many JSON shapes) ===== */
-function fmtHeadlineSentiment(n: NewsItem): {
-  label: string;
-  s: number | null;
-  hasProbs: boolean;
-  pos?: number;
-  neu?: number;
-  neg?: number;
-} {
-  // Helper: extract {pos, neu, neg} from an object with many possible key names
-  const asProbObj = (obj: any): { pos: number; neu: number; neg: number } | null => {
-    if (!obj || typeof obj !== "object") return null;
-
-    const get = (...keys: string[]) => {
-      for (const k of keys) {
-        const v = (obj as any)[k];
-        if (v !== undefined && v !== null && Number.isFinite(Number(v))) return Number(v);
-      }
-      return undefined;
-    };
-
-    const pos = get("pos", "positive", "POS", "Positive");
-    const neu = get("neu", "neutral", "NEU", "Neutral");
-    const neg = get("neg", "negative", "NEG", "Negative");
-
-    if ([pos, neu, neg].some((v) => v === undefined)) return null;
-    return { pos: num(pos), neu: num(neu), neg: num(neg) };
-  };
-
-  // Helper: extract {pos, neu, neg} from an array of {label, score}
-  const asProbArr = (arr: any): { pos: number; neu: number; neg: number } | null => {
-    if (!Array.isArray(arr)) return null;
-    let pos = 0, neu = 0, neg = 0;
-    for (const it of arr) {
-      if (!it) continue;
-      const lbl = String(it.label ?? it.Label ?? "").toLowerCase();
-      const sc  = Number(it.score ?? it.Score ?? NaN);
-      if (!Number.isFinite(sc)) continue;
-      if (lbl.includes("pos")) pos = sc;
-      else if (lbl.includes("neu")) neu = sc;
-      else if (lbl.includes("neg")) neg = sc;
-    }
-    const ok = [pos, neu, neg].some((v) => v > 0) || [pos, neu, neg].every((v) => v >= 0);
-    return ok ? { pos, neu, neg } : null;
-  };
-
-  // 1) Try a direct probs object
-  let probs =
-    asProbObj((n as any).probs) ||
-    asProbObj((n as any).scores) ||
-    asProbArr((n as any).scores) ||
-    asProbObj((n as any).sentiment);
-
-  if (probs) {
-    const s = clamp(num(probs.pos) - num(probs.neg));
-    return { label: label(s), s, hasProbs: true, pos: probs.pos, neu: probs.neu, neg: probs.neg };
-  }
-
-  // 2) Try scalar fields
-  const rawS = (n as any).s ?? (n as any).score ?? (n as any).sent;
-  if (rawS !== undefined && rawS !== null && Number.isFinite(Number(rawS))) {
-    const s = clamp(Number(rawS));
-    return { label: label(s), s, hasProbs: false };
-  }
-
-  // 3) No usable info
-  return { label: "", s: null, hasProbs: false };
-}
-
-function num(v: any): number {
-  const x = Number(v);
-  return Number.isFinite(x) ? x : 0;
-}
-function clamp(x: number, lo = -1, hi = 1): number {
-  return Math.max(lo, Math.min(hi, x));
 }
