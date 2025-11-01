@@ -4,9 +4,6 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch: {}
-  schedule:
-    - cron: "0 * * * *"   # refresh hourly (news only)
-    - cron: "0 12 * * 1"  # weekly Monday 12:00 UTC (also full via manual/push)
 
 permissions:
   contents: write
@@ -78,7 +75,7 @@ jobs:
               f.write(f"START={start}\nEND={end}\n")
           print("START", start, "END", end)
 
-      # Always ensure S&P500 universe exists (FULL is the only mode now)
+      # Always ensure S&P 500 universe exists (FULL is the only mode now)
       - name: Ensure S&P 500 CSV (multi-source, 403-safe)
         shell: python
         run: |
@@ -149,7 +146,7 @@ jobs:
       - name: Set universe path
         run: echo "TICKER_CSV=data/sp500.csv" >> "$GITHUB_ENV"
 
-      # ---------- Yahoo Finance per-day JSON (runs for ALL events) ----------
+      # ---------- Yahoo Finance per-day JSON ----------
       - name: Save Yahoo Finance per-day JSON
         shell: python
         run: |
@@ -238,9 +235,8 @@ jobs:
                   json.dump(new, open(out,"w",encoding="utf-8"), ensure_ascii=False, indent=2)
               print(f"[YF] {t}: saved per-day JSON under data/{t}/news/yfinance")
 
-      # ---------- Finnhub backfill (SKIPPED on schedule) ----------
+      # ---------- Finnhub backfill ----------
       - name: Backfill Finnhub per-day JSON (rotate tokens on 429, respect RPS)
-        if: ${{ github.event_name != 'schedule' }}
         env:
           FINNHUB_TOKENS: ${{ secrets.FINNHUB_TOKENS }}
           FINNHUB_TOKEN:  ${{ secrets.FINNHUB_TOKEN }}
@@ -378,9 +374,8 @@ jobs:
               logf.close()
               print(f"[FH] {t}: wrote {wrote} files, skipped {skipped}")
 
-      # ---------- Daily sentiment & prices & counts (SKIPPED on schedule) ----------
+      # ---------- Daily sentiment (FinBERT), counts, prices ----------
       - name: Compute daily sentiment from both sources
-        if: ${{ github.event_name != 'schedule' }}
         shell: python
         run: |
           import os, json, glob, pandas as pd
@@ -456,7 +451,6 @@ jobs:
               print(f"[SENT] {t}: sentiment JSON written")
 
       - name: Aggregate news counts (src/market_sentiment/build_news_counts.py)
-        if: ${{ github.event_name != 'schedule' }}
         shell: bash
         env:
           START: ${{ env.START }}
@@ -467,7 +461,6 @@ jobs:
           python -m market_sentiment.build_news_counts
 
       - name: Fetch daily close prices (Yahoo)
-        if: ${{ github.event_name != 'schedule' }}
         shell: python
         run: |
           import os, json, pandas as pd, yfinance as yf
@@ -546,7 +539,7 @@ jobs:
           for t in tickers:
               base = Path(f"data/{t}")
 
-              # --- sentiment rows from previously built daily sentiment JSONs (if present)
+              # sentiment rows from daily sentiment JSONs
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_total=0; ny_total=0; nt_total=0
               for sf in sfiles:
@@ -565,7 +558,7 @@ jobs:
               dates = [d for d,_ in rows]
               S = [round(float(v), 4) for _,v in rows]
 
-              # --- prices aligned to sentiment dates (if existing)
+              # prices aligned to sentiment dates
               price=[]
               price_json = base/"price"/"daily.json"
               if price_json.exists():
@@ -579,7 +572,7 @@ jobs:
                       sser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
                       price = [float(sser.get(d)) for d in dates]
 
-              # --- recent headline items (top 10)
+              # recent headline items (top 10)
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -607,7 +600,7 @@ jobs:
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:10]
 
-              # --- headline-level sentiment on the 10 shown items
+              # headline-level sentiment on the 10 shown items
               scored = []
               for item in news_trim:
                   s, lbl = score_one(item["title"]) if item.get("title") else (None, None)
