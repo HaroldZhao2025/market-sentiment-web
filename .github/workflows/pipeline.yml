@@ -3,35 +3,11 @@ name: Build Data & Deploy Site
 on:
   push:
     branches: ["main"]
-  workflow_dispatch:
-    inputs:
-      mode:
-        description: "Run mode: sample (AAPL) or full (S&P500)"
-        required: true
-        default: "sample"
-        type: choice
-        options: ["sample", "full"]
-      yfinance_count:
-        description: "Yahoo Finance items per ticker"
-        required: false
-        default: "240"
-        type: choice
-        options: ["120", "180", "200", "220", "240"]
-      finnhub_rps:
-        description: "Finnhub requests per second (≤30)"
-        required: false
-        default: "8"
-        type: choice
-        options: ["5", "8", "10", "15", "20", "30"]
-      max_days_per_ticker:
-        description: "Historical backfill days per ticker (Finnhub daily)"
-        required: false
-        default: "365"
-        type: choice
-        options: ["120", "180", "240", "300", "365"]
+  # One-click manual run; no inputs (always FULL)
+  workflow_dispatch: {}
+  # Hourly refresh (YFinance-only fetch; no Finnhub)
   schedule:
-    - cron: "0 * * * *"   # refresh hourly
-    - cron: "0 12 * * 1"  # plus Mondays 12:00 UTC
+    - cron: "0 * * * *"   # every hour UTC
 
 permissions:
   contents: write
@@ -43,6 +19,12 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  # ---- global knobs (fixed full) ----
+  MODE: full
+  YF_COUNT: "240"
+  FINNHUB_RPS: "8"
+  MAX_DAYS_PER_TICKER: "365"
+  # ---- build + site env ----
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
@@ -99,24 +81,23 @@ jobs:
               f.write(f"START={start}\nEND={end}\n")
           print("START", start, "END", end)
 
-      - name: Select mode and universe
+      - name: Select universe (FULL, fixed)
         shell: bash
         run: |
           set -euo pipefail
-          MODE="${{ github.event.inputs.mode }}"
-          if [ -z "${MODE:-}" ]; then MODE="sample"; fi
-          if [ "$MODE" = "full" ]; then
+          # Always FULL; choose data/sp500.csv if present, else create stub and fetch later (non-schedule only)
+          if [ -f "data/sp500.csv" ]; then
             TICKER_CSV="data/sp500.csv"
           else
-            TICKER_CSV="data/sample_one.csv"
-            printf "ticker\nAAPL\n" > "$TICKER_CSV"
+            TICKER_CSV="data/sp500.csv"
           fi
-          echo "MODE=$MODE" >> "$GITHUB_ENV"
+          echo "MODE=full"        >> "$GITHUB_ENV"
           echo "TICKER_CSV=$TICKER_CSV" >> "$GITHUB_ENV"
-          echo "Mode: $MODE | Universe: $TICKER_CSV"
+          echo "Mode: full | Universe: $TICKER_CSV"
 
-      - name: Generate S&P500 CSV if needed (MODE=full; multi-source, 403-safe)
-        if: env.MODE == 'full'
+      # Build S&P500 list (network) only when NOT on the hourly schedule
+      - name: Generate S&P500 CSV if needed (non-schedule only)
+        if: ${{ github.event_name != 'schedule' }}
         shell: python
         run: |
           import os, sys, pandas as pd, requests
@@ -174,7 +155,10 @@ jobs:
                   print(f"Dataset failed ({url}):", e)
 
           if not candidates:
-              raise RuntimeError("All S&P500 sources failed (403/parse). Commit data/sp500.csv to repo to bypass network.")
+              # As a fallback, keep a minimal stub so downstream steps don't crash.
+              outp.write_text("ticker\nAAPL\n", encoding="utf-8")
+              print("All sources failed; wrote stub sp500.csv with AAPL only.")
+              sys.exit(0)
 
           ser = pd.concat(candidates, ignore_index=True)
           ser = (ser.str.upper().str.replace(".", "-", regex=False).str.strip())
@@ -183,14 +167,15 @@ jobs:
           outp.write_text("ticker\n" + "\n".join(uniq) + "\n", encoding="utf-8")
           print(f"Wrote {len(uniq)} tickers to {outp}")
 
-      # ---------- Historical Finnhub (token rotation + rate-limit) ----------
-      - name: Backfill Finnhub per-day JSON (rotate tokens on 429, respect RPS)
+      # ---------- Finnhub daily (news-by-day) — skip on hourly schedule ----------
+      - name: Backfill Finnhub per-day JSON (rotate tokens on 429)
+        if: ${{ github.event_name != 'schedule' }}
         env:
           FINNHUB_TOKENS: ${{ secrets.FINNHUB_TOKENS }}
           FINNHUB_TOKEN:  ${{ secrets.FINNHUB_TOKEN }}
           FINNHUB_TOKEN_2: ${{ secrets.FINNHUB_TOKEN_2 }}
-          FINNHUB_RPS: ${{ github.event.inputs.finnhub_rps }}
-          MAX_DAYS_PER_TICKER: ${{ github.event.inputs.max_days_per_ticker }}
+          FINNHUB_RPS: ${{ env.FINNHUB_RPS }}
+          MAX_DAYS_PER_TICKER: ${{ env.MAX_DAYS_PER_TICKER }}
         continue-on-error: true
         shell: python
         run: |
@@ -206,106 +191,68 @@ jobs:
           MAX_DAYS = int(os.environ.get("MAX_DAYS_PER_TICKER") or "365")
           TICKER_CSV = os.environ["TICKER_CSV"]
 
-          def build_tokens() -> list[str]:
-              raw = os.environ.get("FINNHUB_TOKENS", "").strip()
-              toks = [x.strip() for x in raw.split(",") if x.strip()] if raw else []
-              if not toks:
-                  t1 = os.environ.get("FINNHUB_TOKEN", "").strip()
-                  t2 = os.environ.get("FINNHUB_TOKEN_2", "").strip()
-                  toks = [x for x in [t1, t2] if x]
-              return toks
+          def read_universe(csv_path: str) -> list[str]:
+              df = pd.read_csv(csv_path)
+              col = [c for c in df.columns if c.lower()=="ticker"]
+              if not col: return []
+              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          TOKENS = build_tokens()
+          TOKENS=[]
+          raw=os.environ.get("FINNHUB_TOKENS","").strip()
+          if raw:
+              TOKENS=[x.strip() for x in raw.split(",") if x.strip()]
+          for k in ("FINNHUB_TOKEN","FINNHUB_TOKEN_2"):
+              v=os.environ.get(k,"").strip()
+              if v: TOKENS.append(v)
           if finnhub is None or not TOKENS:
               print("Finnhub missing or no tokens; skipping.")
               raise SystemExit(0)
 
           class TokenPool:
               def __init__(self, tokens):
-                  self.tokens = tokens[:]
-                  self.idx = 0
-              def current(self):
-                  if self.idx >= len(self.tokens): return None
-                  return self.tokens[self.idx]
-              def rotate(self):
-                  self.idx += 1
-                  return self.current()
+                  self.tokens = tokens[:]; self.idx=0
+              def current(self): return self.tokens[self.idx] if self.idx < len(self.tokens) else None
+              def rotate(self): self.idx += 1; return self.current()
 
-          pool = TokenPool(TOKENS)
-          client = finnhub.Client(api_key=pool.current())
+          pool=TokenPool(TOKENS)
+          client=finnhub.Client(api_key=pool.current())
 
-          def read_universe(csv_path: str) -> list[str]:
-              import pandas as pd
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
-              if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+          s_all=pd.to_datetime(START, utc=True).normalize()
+          e_all=pd.to_datetime(END,   utc=True).normalize()
+          days=list(pd.date_range(s_all, e_all, freq="D", tz="UTC"))
+          if MAX_DAYS and len(days)>MAX_DAYS: days=days[-MAX_DAYS:]
 
-          s_all = pd.Timestamp(START, tz="UTC").normalize()
-          e_all = pd.Timestamp(END, tz="UTC").normalize()
-          days = list(pd.date_range(s_all, e_all, freq="D", tz="UTC"))
-          if MAX_DAYS and len(days) > MAX_DAYS:
-              days = days[-MAX_DAYS:]
-
-          min_gap = 1.0 / float(FINNHUB_RPS)
-          last_call = 0.0
-
-          def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True)
-              with path.open("w", encoding="utf-8") as f:
-                  json.dump(obj, f, ensure_ascii=False, indent=2)
+          min_gap=1.0/float(FINNHUB_RPS)
+          last_call=0.0
 
           for t in read_universe(TICKER_CSV):
-              base = Path(f"data/{t}/news/finnhub")
-              base.mkdir(parents=True, exist_ok=True)
-              logp = Path(f"data/{t}/logs"); logp.mkdir(parents=True, exist_ok=True)
-              logf = (logp / "finnhub_fetch.log").open("a", encoding="utf-8")
-
-              wrote = 0; skipped = 0
+              base=Path(f"data/{t}/news/finnhub"); base.mkdir(parents=True, exist_ok=True)
+              wrote=0; skipped=0
               for dts in days:
-                  day = dts.date().isoformat()
-                  out = base / f"{day}.json"
-                  if out.exists() and out.stat().st_size > 0:
-                      skipped += 1
-                      continue
-
-                  now = time.time()
-                  wait = max(0.0, (last_call + min_gap) - now)
-                  if wait > 0: time.sleep(wait)
-
-                  tries, arr = 0, []
-                  while tries < 5:
+                  day=dts.date().isoformat()
+                  out=base/f"{day}.json"
+                  if out.exists() and out.stat().st_size>0:
+                      skipped+=1; continue
+                  wait=max(0.0, (last_call+min_gap)-time.time())
+                  if wait>0: time.sleep(wait)
+                  tries=0; arr=[]
+                  while tries<5:
                       try:
-                          arr = client.company_news(t, _from=day, to=day) or []
+                          arr=client.company_news(t, _from=day, to=day) or []
                           break
                       except Exception as e:
-                          msg = str(e)
-                          if ("429" in msg) or ("API limit reached" in msg) or ("Remaining Limit: 0" in msg):
-                              logf.write(f"[FH] {t} {day} rate-limited: {msg}\n")
-                              nxt = pool.rotate()
-                              if nxt:
-                                  client = finnhub.Client(api_key=nxt)
-                                  time.sleep(1.0)
-                                  tries += 1
-                                  continue
-                              else:
-                                  backoff = min(16.0, 2.0 ** tries)
-                                  time.sleep(backoff)
-                                  tries += 1
-                                  if tries >= 5:
-                                      break
-                          else:
-                              logf.write(f"[FH] {t} {day} error: {msg}\n")
-                              break
-
-                  last_call = time.time()
-
-                  cleaned = []
+                          msg=str(e)
+                          if "429" in msg or "Remaining Limit: 0" in msg:
+                              if not pool.rotate(): time.sleep(min(16.0, 2.0**tries))
+                              tries+=1; continue
+                          break
+                  last_call=time.time()
+                  cleaned=[]
                   for it in arr:
                       try:
-                          ts = pd.Timestamp.utcfromtimestamp(int(it.get("datetime"))).tz_localize("UTC").isoformat()
+                          ts=pd.Timestamp.utcfromtimestamp(int(it.get("datetime"))).tz_localize("UTC").isoformat()
                       except Exception:
-                          ts = None
+                          ts=None
                       cleaned.append({
                         "ts": ts,
                         "headline": (it.get("headline") or "").strip(),
@@ -315,17 +262,12 @@ jobs:
                         "provider": "finnhub",
                         "raw": it
                       })
-                  save_json(out, cleaned)
-                  wrote += 1
-
-              logf.write(f"[FH] {t}: wrote {wrote} files, skipped {skipped}\n")
-              logf.close()
+                  out.write_text(json.dumps(cleaned, ensure_ascii=False, indent=2), encoding="utf-8")
+                  wrote+=1
               print(f"[FH] {t}: wrote {wrote} files, skipped {skipped}")
 
-      # ---------- Yahoo Finance (~200 recent) per-day JSON ----------
-      - name: Save Yahoo Finance per-day JSON (~200)
-        env:
-          YF_COUNT: ${{ github.event.inputs.yfinance_count }}
+      # ---------- Yahoo Finance (news, per-day JSON) — runs on ALL triggers ----------
+      - name: Save Yahoo Finance per-day JSON (~${{ env.YF_COUNT }})
         shell: python
         run: |
           import os, json, pandas as pd, yfinance as yf
@@ -413,8 +355,9 @@ jobs:
                   json.dump(new, open(out,"w",encoding="utf-8"), ensure_ascii=False, indent=2)
               print(f"[YF] {t}: saved per-day JSON under data/{t}/news/yfinance")
 
-      # ---------- Daily sentiment (FinBERT, 4 decimals) ----------
+      # ---------- Daily sentiment aggregation (FinBERT) — skip on hourly schedule ----------
       - name: Compute daily sentiment from both sources
+        if: ${{ github.event_name != 'schedule' }}
         shell: python
         run: |
           import os, json, glob, pandas as pd
@@ -489,8 +432,9 @@ jobs:
                   }, open(out,"w"), indent=2)
               print(f"[SENT] {t}: sentiment JSON written")
 
-      # ---------- NEW: Aggregate news counts using your repo script ----------
+      # ---------- Aggregate news counts — skip on hourly schedule ----------
       - name: Aggregate news counts (src/market_sentiment/build_news_counts.py)
+        if: ${{ github.event_name != 'schedule' }}
         shell: bash
         env:
           START: ${{ env.START }}
@@ -500,7 +444,7 @@ jobs:
           set -euo pipefail
           python -m market_sentiment.build_news_counts
 
-      # ---------- NEW: Daily close prices (Yahoo) ----------
+      # ---------- Daily close prices (Yahoo) ----------
       - name: Fetch daily close prices (Yahoo)
         shell: python
         run: |
@@ -518,7 +462,7 @@ jobs:
               try:
                   df = yf.download(t, start=START, end=END, interval="1d", progress=False, auto_adjust=False)
               except Exception as e:
-                  print(f("[PRICE] {t}: download failed:", e)); df = None
+                  print(f"[PRICE] {t}: download failed:", e); df = None
               if df is None or df.empty:
                   print(f"[PRICE] {t}: empty")
                   continue
@@ -533,8 +477,7 @@ jobs:
               json.dump([{"date": d, "close": float(c)} for d, c in zip(df["date"], df["close"])], open(out,"w"), indent=2)
               print(f"[PRICE] {t}: {len(df)} rows -> {out}")
 
-      # ---------- Build site JSON (apps/web/public/data) ----------
-      # ---------- Build site JSON (apps/web/public/data) ----------
+      # ---------- Assemble site JSON (scores 10 headlines/ticker with FinBERT) ----------
       - name: Assemble site JSON (apps/web/public/data)
         shell: python
         run: |
@@ -552,27 +495,24 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          # FinBERT once (no nonlocal)
           _tok = AutoTokenizer.from_pretrained("ProsusAI/finbert")
           _mdl = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
           _clf = pipeline("sentiment-analysis", model=_mdl, tokenizer=_tok, top_k=None, truncation=True)
 
           def score_one(title:str):
-              # returns (s, label, probs)
               try:
-                  raw = _clf(title)[0]  # list of dicts: [{'label':'positive','score':...}, ...]
+                  raw = _clf(title)[0]
                   m = {d["label"].lower(): float(d["score"]) for d in raw}
                   pos, neu, neg = m.get("positive",0.0), m.get("neutral",0.0), m.get("negative",0.0)
                   s = round(pos - neg, 4)
-                  # label by s
-                  if s >= 0.4:   label = "Strong Positive"
-                  elif s >= 0.1: label = "Positive"
+                  if   s >= 0.4:  label = "Strong Positive"
+                  elif s >= 0.1:  label = "Positive"
                   elif s <= -0.4: label = "Strong Negative"
                   elif s <= -0.1: label = "Negative"
-                  else: label = "Neutral"
-                  return s, label, {"pos": round(pos,4), "neu": round(neu,4), "neg": round(neg,4)}
+                  else:           label = "Neutral"
+                  return s, label
               except Exception:
-                  return None, None, None
+                  return None, None
 
           tickers = read_universe(TICKER_CSV)
           (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
@@ -583,7 +523,7 @@ jobs:
           for t in tickers:
               base = Path(f"data/{t}")
 
-              # --- sentiment rows + aggregate news counts from sentiment JSONs
+              # sentiment series
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_total=0; ny_total=0; nt_total=0
               for sf in sfiles:
@@ -592,8 +532,7 @@ jobs:
                   except Exception:
                       o = {}
                   day = o.get("date")
-                  if not day: 
-                      continue
+                  if not day: continue
                   rows.append((day, float(o.get("score_mean", 0.0))))
                   nf_total += int(o.get("n_finnhub", 0) or 0)
                   ny_total += int(o.get("n_yfinance", 0) or 0)
@@ -602,7 +541,7 @@ jobs:
               dates = [d for d,_ in rows]
               S = [round(float(v), 4) for _,v in rows]
 
-              # --- prices aligned to sentiment dates (ffill + bfill)
+              # price aligned to dates
               price_json = base/"price"/"daily.json"
               price=[]
               if price_json.exists():
@@ -616,44 +555,37 @@ jobs:
                       sser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
                       price = [float(sser.get(d)) for d in dates]
 
-              # --- recent headline items (top 10 within window)
+              # recent headlines (10)
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
                           arr = json.load(open(p, encoding="utf-8")) or []
-                          for it in arr:
-                              ts = it.get("ts")
-                              if not ts: 
-                                  continue
-                              try:
-                                  tt = pd.to_datetime(ts, utc=True)
-                                  if not (s_win <= tt <= e_win): 
-                                      continue
-                              except Exception:
-                                  continue
-                              news_items.append({
-                                "ts": ts,
-                                "title": it.get("headline") or it.get("title") or "",
-                                "url": it.get("url") or "",
-                                "source": it.get("source") or prov,
-                                "provider": prov
-                              })
                       except Exception:
-                          pass
+                          arr = []
+                      for it in arr:
+                          ts = it.get("ts")
+                          if not ts: continue
+                          try:
+                              tt = pd.to_datetime(ts, utc=True)
+                              if not (s_win <= tt <= e_win): continue
+                          except Exception:
+                              continue
+                          news_items.append({
+                            "ts": ts,
+                            "title": it.get("headline") or it.get("title") or "",
+                            "url": it.get("url") or "",
+                            "source": it.get("source") or prov,
+                            "provider": prov
+                          })
               news_items.sort(key=lambda n: n["ts"], reverse=True)
-              news_trim = news_items[:10]  # keep 10 latest
+              news_trim = news_items[:10]
 
-              # --- headline-level sentiment on the 10 shown items
-              scored = []
+              scored=[]
               for item in news_trim:
-                  s, label, probs = score_one(item["title"]) if item.get("title") else (None,None,None)
-                  if s is not None:
-                      item["s"] = s
-                  if label is not None:
-                      item["sentiment_label"] = label
-                  if probs is not None:
-                      item["probs"] = probs
+                  s, lab = score_one(item["title"]) if item.get("title") else (None,None)
+                  if s is not None: item["s"] = s
+                  if lab is not None: item["sentiment_label"] = lab
                   scored.append(item)
               if scored:
                   print(f"[SITE] {t}: scored {len(scored)}/{len(news_trim)} headlines with FinBERT")
@@ -665,7 +597,7 @@ jobs:
                 "S": S,
                 "sentiment": S,
                 "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
-                "news_total": int(nt_total),  # alias for older UI
+                "news_total": int(nt_total),
                 "news": scored
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
