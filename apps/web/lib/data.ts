@@ -12,21 +12,6 @@ function readJSON<T = any>(p: string): T | null {
   }
 }
 
-/* ---------- tiny helpers (local only) ---------- */
-function toNum(v: any): number | undefined {
-  const n = typeof v === "string" ? Number(v) : v;
-  return Number.isFinite(n) ? (n as number) : undefined;
-}
-function hostFromUrl(u?: string): string | undefined {
-  if (!u) return undefined;
-  try {
-    return new URL(u).host.replace(/^www\./, "");
-  } catch {
-    return undefined;
-  }
-}
-
-/* ---------- public loaders (unchanged signatures) ---------- */
 export async function loadTickers(): Promise<string[]> {
   const p = path.join(baseDir, "_tickers.json");
   return readJSON<string[]>(p) ?? [];
@@ -42,44 +27,106 @@ export async function loadTicker(symbol: string): Promise<any | null> {
   return readJSON<any>(p);
 }
 
-/**
- * Normalize per-headline sentiment so the client always gets:
- * { ts, title, url, source?, provider?, s?: number, probs?: {pos?, neu?, neg?} }
- */
+/* ----------------------- Helpers for news normalization ----------------------- */
+
+function hostFrom(u?: string): string {
+  try {
+    return u ? new URL(u).host.replace(/^www\./, "") : "";
+  } catch {
+    return "";
+  }
+}
+function num(v: any): number {
+  const x = Number(v);
+  return Number.isFinite(x) ? x : 0;
+}
+function clamp(x: number, lo = -1, hi = 1): number {
+  return Math.max(lo, Math.min(hi, x));
+}
+
+function normalizeNewsItem(n: any): any {
+  const out: any = { ...n };
+
+  // unify timestamp + source
+  out.ts = n.ts ?? n.time ?? n.published_at ?? n.date ?? n.pubDate ?? n.pub_time ?? "";
+  out.source = n.source ?? n.provider ?? (n.url ? hostFrom(n.url) : undefined);
+
+  // (1) probabilities-like objects under various keys
+  const probCandidates = [
+    n.probs,
+    n.prob,
+    n.p,
+    n.probabilities,
+    n.sentiment,
+    n.finbert,
+    n.headline_sentiment,
+  ];
+  for (const obj of probCandidates) {
+    if (obj && typeof obj === "object") {
+      const pos = num(obj.pos ?? obj.positive ?? obj.Positive ?? obj.POS);
+      const neu = num(obj.neu ?? obj.neutral ?? obj.Neutral ?? obj.NEU);
+      const neg = num(obj.neg ?? obj.negative ?? obj.Negative ?? obj.NEG);
+      if (pos || neu || neg) {
+        out.probs = { pos, neu, neg };
+        out.s = clamp(pos - neg);
+        return out;
+      }
+    }
+  }
+
+  // (2) FinBERT-style array: [{label, score}, ...]
+  if (Array.isArray(n.scores) && n.scores.length) {
+    let pos = 0, neg = 0, neu = 0;
+    for (const it of n.scores) {
+      const lab = String(it?.label ?? "").toLowerCase();
+      const sc = num(it?.score);
+      if (!Number.isFinite(sc)) continue;
+      if (lab.includes("pos")) pos = sc;
+      else if (lab.includes("neg")) neg = sc;
+      else if (lab.includes("neu")) neu = sc;
+    }
+    if (pos || neg || neu) {
+      out.probs = { pos, neu, neg };
+      out.s = clamp(pos - neg);
+      return out;
+    }
+  }
+
+  // (3) { sent: {label?, score} }
+  if (n.sent && typeof n.sent === "object") {
+    const sc = num(n.sent.score);
+    if (Number.isFinite(sc)) {
+      out.s = clamp(sc);
+      return out;
+    }
+  }
+
+  // (4) direct numeric score fields
+  const sc = n.s ?? n.sent_score ?? n.score;
+  if (typeof sc === "number" && Number.isFinite(sc)) {
+    out.s = clamp(sc);
+    return out;
+  }
+
+  // Nothing recognized; return as-is (TickerClient will show "–")
+  return out;
+}
+
+/* ----------------------- News loader (normalized) ----------------------- */
+
 export async function loadTickerNews(symbol: string): Promise<any[]> {
   const obj = await loadTicker(symbol);
-  const arr = Array.isArray(obj?.news) ? (obj!.news as any[]) : [];
+  const raw = Array.isArray(obj?.news)
+    ? obj!.news
+    : Array.isArray(obj?.headlines)
+    ? obj!.headlines
+    : [];
 
-  const out = arr.map((n) => {
-    const ts = String(n?.ts ?? n?.time ?? n?.date ?? "");
-    const title = String(n?.title ?? n?.headline ?? "");
-    const url = String(n?.url ?? "");
-    const provider = n?.provider;
-    const source = n?.source ?? provider ?? hostFromUrl(url);
-
-    // tolerate many shapes for probabilities
-    const p = n?.probs ?? n?.scores ?? n?.probabilities;
-    const pos = toNum(p?.pos ?? p?.positive ?? p?.Positive ?? p?.POS);
-    const neu = toNum(p?.neu ?? p?.neutral ?? p?.Neutral ?? p?.NEU);
-    const neg = toNum(p?.neg ?? p?.negative ?? p?.Negative ?? p?.NEG);
-
-    // scalar s may come as number or numeric string
-    let s = toNum(n?.s);
-    if (s === undefined && pos !== undefined && neg !== undefined) {
-      s = toNum((pos as number) - (neg as number));
-    }
-
-    const probs =
-      pos !== undefined || neu !== undefined || neg !== undefined
-        ? { pos, neu, neg }
-        : undefined;
-
-    return { ts, title, url, source, provider, s, probs };
-  });
-
-  // keep only minimally valid rows (title + url + ts)
-  return out.filter((x) => x.title && x.url && x.ts);
+  // Normalize and keep the first 10 as requested
+  return raw.slice(0, 10).map(normalizeNewsItem);
 }
+
+/* ----------------------- Series loader (unchanged) ----------------------- */
 
 export async function loadTickerSeries(symbol: string): Promise<{
   dates: string[];
