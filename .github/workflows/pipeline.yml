@@ -1,4 +1,4 @@
-name: Build Data & Deploy Site (Queued, 1 ticker/run)
+name: Build Data & Deploy Site (Queued, 1 ticker/run, skip A & AAPL)
 
 on:
   push:
@@ -21,7 +21,7 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  # Runtime knobs (full run settings)
+  # Full-run knobs
   YF_COUNT: "240"
   FINNHUB_RPS: "8"
   MAX_DAYS_PER_TICKER: "365"
@@ -109,19 +109,7 @@ jobs:
           except Exception as e:
               print("Slickcharts failed:", e)
 
-          for url in [
-              "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
-              "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv",
-          ]:
-              try:
-                  df=pd.read_csv(url)
-                  col="Symbol" if "Symbol" in df.columns else ("symbol" if "symbol" in df.columns else None)
-                  if col: cands.append(df[col].astype(str)); break
-              except Exception as e:
-                  print("Dataset failed:", e)
-
           if not cands:
-              # fallback minimal
               outp.write_text("ticker\nAAPL\n", encoding="utf-8")
               sys.exit(0)
 
@@ -131,62 +119,66 @@ jobs:
           outp.write_text("ticker\n"+"\n".join(uniq)+"\n", encoding="utf-8")
           print(f"Wrote {len(uniq)} tickers -> {outp}")
 
-      # ---- Pick ONE ticker for this run (skip completed) ----
-      - name: Pick next ticker (one per run)
+      # ---- Pick ONE ticker sequentially (skip A & AAPL), always overwrite ----
+      - name: Pick next ticker (sequential; skip A & AAPL)
         id: pick
         shell: python
         run: |
-          import os, json
           from pathlib import Path
+          SKIP = {"A", "AAPL"}  # skip set
 
           sp = Path("data/sp500.csv")
+          if not sp.exists():
+              Path("data/_one.csv").write_text("ticker\nAAPL\n", encoding="utf-8")
+              print("Universe missing; default to AAPL (will be skipped later if needed).")
+
           tickers = []
           if sp.exists():
               for line in sp.read_text(encoding="utf-8").splitlines()[1:]:
                   t=line.strip().upper().replace(".","-")
-                  if t: tickers.append(t)
-          else:
-              tickers=["AAPL"]
+                  if t and t not in SKIP:
+                      tickers.append(t)
 
-          # Helper: consider a ticker "complete" if site JSON exists and looks populated
-          def is_complete(t: str) -> bool:
-              p = Path(f"apps/web/public/data/ticker/{t}.json")
-              if not p.exists(): return False
-              try:
-                  obj = json.loads(p.read_text(encoding="utf-8"))
-              except Exception:
-                  return False
-              dates = obj.get("dates") or obj.get("date") or []
-              price = obj.get("price") or []
-              news  = obj.get("news") or []
-              if not isinstance(dates, list) or not dates: return False
-              if not isinstance(price, list) or len(price) != len(dates): return False
-              if not isinstance(news, list) or len(news) < 10: return False
-              return True
+          # progress pointer
+          ptr = Path("data/_last_ticker.txt")
+          last = ptr.read_text(encoding="utf-8").strip().upper() if ptr.exists() else ""
 
-          # Prefer to skip AAPL if already complete
           next_t = ""
-          for t in tickers:
-              if not is_complete(t):
-                  next_t = t
-                  break
+          if not tickers:
+              next_t = ""
+          else:
+              if last and last in tickers:
+                  idx = tickers.index(last) + 1
+              else:
+                  idx = 0
+              next_t = tickers[idx] if idx < len(tickers) else ""
 
-          # Fallback: if all complete, leave blank to stop queue
-          with open(os.environ["GITHUB_ENV"], "a") as f:
+          with open("/home/runner/work/_temp/next_env", "w") as f:
               f.write(f"NEXT_TICKER={next_t}\n")
-          print("NEXT_TICKER:", next_t or "(all done)")
+              if next_t:
+                  f.write("TICKER_CSV=data/_one.csv\n")
+          print("NEXT_TICKER:", next_t or "(none)")
 
-          # Write a one-ticker CSV if we have next
           if next_t:
               Path("data/_one.csv").write_text("ticker\n"+next_t+"\n", encoding="utf-8")
-              with open(os.environ["GITHUB_ENV"], "a") as f:
-                  f.write("TICKER_CSV=data/_one.csv\n")
+
+          # Export env
+          from shutil import move
+          move("/home/runner/work/_temp/next_env", "/home/runner/work/_temp/_github_env")
+          print("::add-mask::"+(next_t or ""))
+        shell: bash
+
+      - name: Load NEXT_TICKER env
+        run: |
+          if [ -f /home/runner/work/_temp/_github_env ]; then
+            cat /home/runner/work/_temp/_github_env >> "$GITHUB_ENV"
+          fi
 
       - name: Stop early if nothing to build
         if: env.NEXT_TICKER == ''
-        run: echo "All tickers complete. Nothing to do."
+        run: echo "All sequential tickers completed (skipping A & AAPL). Nothing to do."
 
-      # ---------- Finnhub (daily) for ONE ticker ----------
+      # ---------- Finnhub (daily) ----------
       - name: Backfill Finnhub per-day JSON (one ticker)
         if: env.NEXT_TICKER != ''
         env:
@@ -252,7 +244,6 @@ jobs:
               wrote=0; skipped=0
               for d in days:
                   day=d.date().isoformat(); out=base/f"{day}.json"
-                  if out.exists() and out.stat().st_size>0: skipped+=1; continue
                   now=time.time(); wait=max(0.0, (last+min_gap)-now); 
                   if wait>0: time.sleep(wait)
                   tries=0; arr=[]
@@ -433,7 +424,6 @@ jobs:
 
               for day, obj in day_texts.items():
                   out=base/"sentiment"/f"{day}.json"
-                  if out.exists() and out.stat().st_size>0: continue
                   texts=obj["texts"]
                   if not texts:
                       json.dump({"date":day,"ticker":t,"n_total":0,"n_finnhub":0,"n_yfinance":0,"score_mean":0.0}, open(out,"w"), indent=2)
@@ -519,12 +509,6 @@ jobs:
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
           pub=Path("apps/web/public/data"); (pub/"ticker").mkdir(parents=True, exist_ok=True)
 
-          def read_universe(csv_path: str) -> list[str]:
-              df=pd.read_csv(csv_path)
-              col=[c for c in df.columns if c.lower()=="ticker"]
-              if not col: return []
-              return [str(x).strip().upper().replace(".","-") for x in df[col[0]].dropna().unique().tolist()]
-
           _tok=AutoTokenizer.from_pretrained("ProsusAI/finbert")
           _mdl=AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
           _clf=pipeline("sentiment-analysis", model=_mdl, tokenizer=_tok, top_k=None, truncation=True)
@@ -547,12 +531,15 @@ jobs:
           s_win=pd.to_datetime(START, utc=True)
           e_win=pd.to_datetime(END, utc=True)+pd.Timedelta(days=1)-pd.Timedelta(seconds=1)
 
-          tickers=read_universe(TICKER_CSV)
-          (pub/"_tickers.json").write_text(json.dumps(sorted(set([*tickers, *([p.stem for p in (pub/'ticker').glob('*.json')])])), indent=2), encoding="utf-8")
+          # Universe here is just the one ticker in _one.csv
+          import pandas as pd
+          df=pd.read_csv(TICKER_CSV)
+          tickers=[str(x).strip().upper().replace(".","-") for x in df[df.columns[0]].tolist()[1:]]
 
           for t in tickers:
               base=Path(f"data/{t}")
 
+              # sentiment timeline
               sfiles=sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_total=0; ny_total=0; nt_total=0
               for sf in sfiles:
@@ -563,12 +550,13 @@ jobs:
                   rows.append((day, float(o.get("score_mean", 0.0))))
                   nf_total+=int(o.get("n_finnhub",0) or 0)
                   ny_total+=int(o.get("n_yfinance",0) or 0)
-                  nt_total+=int(o.get("n_total", nf_total+ny_total) or (0))
+                  nt_total+=int(o.get("n_total",0) or 0)
 
               rows=sorted(rows, key=lambda x:x[0])
               dates=[d for d,_ in rows]
               S=[round(float(v),4) for _,v in rows]
 
+              # price aligned
               price_json=base/"price"/"daily.json"; price=[]
               if price_json.exists():
                   try:
@@ -581,6 +569,7 @@ jobs:
                       sser=pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
                       price=[float(sser.get(d)) for d in dates]
 
+              # 10 recent headlines (window)
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -605,6 +594,7 @@ jobs:
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim=news_items[:10]
 
+              # per-headline score
               scored=[]
               for item in news_trim:
                   if not item.get("title"): scored.append(item); continue
@@ -628,6 +618,13 @@ jobs:
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
               print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(scored)} price={len(obj['price'])})")
 
+      # ---------- Update pointer to LAST processed ticker ----------
+      - name: Update last ticker pointer
+        if: env.NEXT_TICKER != ''
+        run: |
+          echo "${NEXT_TICKER}" > data/_last_ticker.txt
+          cat data/_last_ticker.txt
+
       # ---------- Commit & push data ----------
       - name: Commit & push data directory
         if: always()
@@ -644,7 +641,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore(data): update one-ticker batch [skip ci]"
+            git commit -m "chore(data): one-ticker batch (sequential, overwrite; skip A & AAPL) [skip ci]"
             git pull --rebase || true
             git push || true
           fi
@@ -740,22 +737,42 @@ jobs:
   # --------- Self-queue next run (only if more remain) ---------
   queue_next:
     needs: [build, deploy]
-    if: needs.build.outputs != '' || always()
     runs-on: ubuntu-latest
     steps:
-      - name: Detect remaining tickers
+      - name: Decide if more remain
         id: more
-        shell: bash
+        shell: python
         run: |
-          # if NEXT_TICKER was empty in build (all done), do nothing
-          echo "NEXT_TICKER=${NEXT_TICKER:-}" >> $GITHUB_OUTPUT
-          if [ -z "${NEXT_TICKER:-}" ]; then
-            echo "more=false" >> $GITHUB_OUTPUT
-          else
-            echo "more=true" >> $GITHUB_OUTPUT
-          fi
-      - name: Trigger next (workflow_dispatch)
-        if: steps.more.outputs.more == 'true'
+          from pathlib import Path
+          SKIP = {"A", "AAPL"}
+          sp = Path("data/sp500.csv")
+          tickers=[]
+          if sp.exists():
+              for line in sp.read_text(encoding="utf-8").splitlines()[1:]:
+                  t=line.strip().upper().replace(".","-")
+                  if t and t not in SKIP: tickers.append(t)
+
+          last = Path("data/_last_ticker.txt").read_text(encoding="utf-8").strip().upper() if Path("data/_last_ticker.txt").exists() else ""
+          has_more = False
+          if tickers:
+              try:
+                  idx = tickers.index(last) + 1 if last in tickers else 0
+                  has_more = idx < len(tickers)
+              except ValueError:
+                  has_more = True
+
+          print("HAS_MORE:", has_more)
+          with open("/home/runner/work/_temp/_out", "w") as f:
+              f.write(f"has_more={'true' if has_more else 'false'}\n")
+
+        # expose output
+      - name: Export output
+        id: export
+        run: |
+          cat /home/runner/work/_temp/_out >> "$GITHUB_OUTPUT"
+
+      - name: Trigger next workflow run
+        if: steps.export.outputs.has_more == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
