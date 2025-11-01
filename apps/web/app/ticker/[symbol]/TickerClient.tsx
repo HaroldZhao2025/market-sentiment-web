@@ -215,11 +215,14 @@ function monthTicks(dates: string[]) {
 }
 
 /* ============ Overlay chart (with month ticks & y labels) ============ */
+/* ============ Overlay chart (with month ticks & y labels) ============ */
 function OverlayChart({
   dates, price, sentiment, height = 520, width = 980,
 }:{
   dates:string[]; price?:number[]; sentiment?:number[]; height?:number; width?:number;
 }) {
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
+
   const pad = { t: 28, r: 78, b: 44, l: 70 }; // more room for axis labels
   const W = width, H = height;
   const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
@@ -238,6 +241,88 @@ function OverlayChart({
 
   const baselineY = sY(0);
   const monthMarks = monthTicks(dates);
+
+  // ---- Enable interactivity only when exactly one series is visible ----
+  const isPriceOnly = !!(price && price.length) && !(sentiment && sentiment.length);
+  const isSentOnly  = !!(sentiment && sentiment.length) && !(price && price.length);
+  const interactive = (isPriceOnly || isSentOnly) && n > 0 && innerW > 0;
+
+  // Mouse/touch -> index mapping
+  function idxFromX(px: number) {
+    const raw = Math.round((px - pad.l) / Math.max(1e-9, step));
+    return Math.max(0, Math.min(n - 1, raw));
+  }
+  function onMoveClientX(clientX: number, svgRect: DOMRect) {
+    const x = clientX - svgRect.left;
+    if (x < pad.l || x > pad.l + innerW) return;
+    setHoverIdx(idxFromX(x));
+  }
+  const onMouseMove: React.MouseEventHandler<SVGRectElement> = (e) => {
+    if (!interactive) return;
+    onMoveClientX(e.clientX, (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect());
+  };
+  const onTouchMove: React.TouchEventHandler<SVGRectElement> = (e) => {
+    if (!interactive) return;
+    const t = e.touches?.[0];
+    if (!t) return;
+    onMoveClientX(t.clientX, (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect());
+  };
+  const onLeave = () => setHoverIdx(null);
+
+  // Tooltip geometry helper
+  function renderTooltip(i: number) {
+    const x = pad.l + i * step;
+    const dateStr = toDateOnly(dates[i] ?? "");
+    let lines: string[] = [dateStr];
+
+    if (isPriceOnly && price) {
+      lines.push(`Price: ${Number(price[i] ?? 0).toFixed(2)}`);
+    } else if (isSentOnly && sentiment) {
+      const sVal = Number(sentiment[i] ?? 0);
+      lines.push(`Sentiment: ${label(sVal)} (${sVal.toFixed(4)})`);
+    } else {
+      return null; // no tooltip in overlayed modes
+    }
+
+    const padBox = 8;
+    const lineH = 16;
+    const textW = Math.max(...lines.map((s) => s.length)) * 7; // approx
+    const boxW = Math.min(Math.max(120, textW + padBox * 2), 280);
+    const boxH = lines.length * lineH + padBox * 2;
+
+    // place to left/right to avoid overflow
+    const toRight = x < W / 2;
+    const bx = toRight ? Math.min(x + 12, W - boxW - 6) : Math.max(6, x - boxW - 12);
+    const by = Math.max(pad.t + 6, Math.min(pad.t + innerH - boxH - 6, pad.t + 10));
+
+    return (
+      <g>
+        {/* vertical crosshair */}
+        <line x1={x} x2={x} y1={pad.t} y2={pad.t + innerH} stroke="#9ca3af" strokeDasharray="3,3" />
+        {/* marker on the series */}
+        {isPriceOnly && price ? (
+          <circle cx={x} cy={pY(price[i])} r={3.5} fill="#10b981" stroke="white" strokeWidth={1.2} />
+        ) : null}
+        {isSentOnly && sentiment ? (
+          <circle cx={x} cy={sY(sentiment[i])} r={3.5} fill="#6b47dc" stroke="white" strokeWidth={1.2} />
+        ) : null}
+
+        {/* tooltip box */}
+        <rect x={bx} y={by} rx={8} ry={8} width={boxW} height={boxH} fill="white" stroke="#e5e7eb" />
+        {lines.map((t, k) => (
+          <text
+            key={k}
+            x={bx + padBox}
+            y={by + padBox + 12 + k * lineH}
+            fontSize="12"
+            fill="#374151"
+          >
+            {t}
+          </text>
+        ))}
+      </g>
+    );
+  }
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
@@ -331,6 +416,24 @@ function OverlayChart({
           </g>
         );
       })}
+
+      {/* interactive hit-rect + tooltip (only in price-only / sentiment-only) */}
+      {interactive ? (
+        <g>
+          <rect
+            x={pad.l}
+            y={pad.t}
+            width={innerW}
+            height={innerH}
+            fill="transparent"
+            onMouseMove={onMouseMove}
+            onMouseLeave={onLeave}
+            onTouchStart={onTouchMove}
+            onTouchMove={onTouchMove}
+          />
+          {hoverIdx !== null ? renderTooltip(hoverIdx) : null}
+        </g>
+      ) : null}
     </svg>
   );
 }
