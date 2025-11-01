@@ -616,85 +616,33 @@ jobs:
                       sser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
                       price = [float(sser.get(d)) for d in dates]
 
-          # --- recent headline items (score with FinBERT; keep 10)
-          import urllib.parse
-          news_items=[]
-          for prov in ("finnhub","yfinance"):
-              for p in glob.glob(str(base/f"news/{prov}/*.json")):
-                  try:
-                      arr = json.load(open(p, encoding="utf-8")) or []
-                      for it in arr:
-                          news_items.append({
-                            "ts": it.get("ts"),
-                            "title": it.get("headline") or it.get("title") or "",
-                            "url": it.get("url") or "",
-                            "source": it.get("source") or it.get("provider") or prov,
-                            "provider": prov,
-                          })
-                  except Exception:
-                      pass
-
-          s_win = pd.to_datetime(START, utc=True)
-          e_win = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
-
-          def in_window(ts):
-              try:
-                  tt = pd.to_datetime(ts, utc=True)
-                  return (tt >= s_win) and (tt <= e_win)
-              except Exception:
-                  return False
-
-          # filter window + valid title
-          news_items = [n for n in news_items if n.get("ts") and in_window(n["ts"]) and n.get("title")]
-          news_items.sort(key=lambda n: n["ts"], reverse=True)
-          news_top = news_items[:10]  # keep 10 rows
-
-          # FinBERT scoring for the 10 titles
-          try:
-              from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
-              tok = AutoTokenizer.from_pretrained("ProsusAI/finbert")
-              mdl = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
-              clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, top_k=None, truncation=True)
-          except Exception as e:
-              clf = None
-              print("[SITE] WARNING: FinBERT unavailable for headline scoring:", e)
-
-          def pick(scores, label):
-              lab = label.lower()
-              for d in scores:
-                  if str(d.get("label","")).lower().startswith(lab):
+              # --- recent headline items (top 10 within window)
+              news_items=[]
+              for prov in ("finnhub","yfinance"):
+                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
-                          return float(d.get("score", 0.0))
+                          arr = json.load(open(p, encoding="utf-8")) or []
+                          for it in arr:
+                              ts = it.get("ts")
+                              if not ts: 
+                                  continue
+                              try:
+                                  tt = pd.to_datetime(ts, utc=True)
+                                  if not (s_win <= tt <= e_win): 
+                                      continue
+                              except Exception:
+                                  continue
+                              news_items.append({
+                                "ts": ts,
+                                "title": it.get("headline") or it.get("title") or "",
+                                "url": it.get("url") or "",
+                                "source": it.get("source") or prov,
+                                "provider": prov
+                              })
                       except Exception:
-                          return 0.0
-              return 0.0
-
-          news_scored=[]
-          if clf and news_top:
-              preds = clf([n["title"] for n in news_top], batch_size=16)
-              for n, scores in zip(news_top, preds):
-                  pos = pick(scores, "positive")
-                  neg = pick(scores, "negative")
-                  neu = pick(scores, "neutral")
-                  s_head = round(pos - neg, 4)
-                  src = n.get("source") or n.get("provider") or ""
-                  if not src and n.get("url"):
-                      try:
-                          src = urllib.parse.urlparse(n["url"]).netloc.replace("www.", "")
-                      except Exception:
-                          src = ""
-                  news_scored.append({
-                      "ts": n["ts"],
-                      "title": n["title"],
-                      "url": n["url"],
-                      "source": src,
-                      "provider": n.get("provider") or "",
-                      "s": s_head,
-                      "probs": {"pos": round(pos,4), "neu": round(neu,4), "neg": round(neg,4)},
-                  })
-              print(f"[SITE] {t}: scored {len(news_scored)}/{len(news_top)} headlines with FinBERT")
-          else:
-              news_scored = news_top  # graceful fallback without scores
+                          pass
+              news_items.sort(key=lambda n: n["ts"], reverse=True)
+              news_trim = news_items[:10]  # keep 10 latest
 
               # --- headline-level sentiment on the 10 shown items
               scored = []
@@ -718,7 +666,7 @@ jobs:
                 "sentiment": S,
                 "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
                 "news_total": int(nt_total),  # alias for older UI
-                "news": news_scored
+                "news": scored
               }
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
               print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(scored)} price={len(obj['price'])})")
