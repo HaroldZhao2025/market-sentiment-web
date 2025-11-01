@@ -4,7 +4,18 @@ import path from "node:path";
 import TickerClient from "./TickerClient";
 
 type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
-type NewsItem = { ts: string; title: string; url: string; text?: string };
+
+type NewsItem = {
+  ts: string;
+  title: string;
+  url: string;
+  text?: string;
+  source?: string;
+  provider?: string;
+  s?: number;
+  sentiment_label?: string;
+  probs?: { pos?: number; neu?: number; neg?: number };
+};
 
 export const dynamic = "error";
 export const dynamicParams = false;
@@ -31,6 +42,7 @@ function buildNews(obj: any): NewsItem[] {
   const raw = Array.isArray(obj?.news) ? obj.news : [];
   return raw
     .map((r: any) => ({
+      ...r,
       ts: String(r?.ts ?? r?.date ?? ""),
       title: String(r?.title ?? ""),
       url: String(r?.url ?? ""),
@@ -61,8 +73,10 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   }
 
   const series = buildSeries(obj);
-  const news = buildNews(obj);
-  const newsTotal = Number(obj?.news_total ?? obj?.newsTotal ?? 0);
+  const news = buildNews(obj).slice(0, 10); // keep top 10 as requested
+
+  const newsTotal =
+    Number(obj?.news_total ?? obj?.newsTotal ?? obj?.news_count?.total) || news.length;
 
   return (
     <div className="min-h-screen p-6">
