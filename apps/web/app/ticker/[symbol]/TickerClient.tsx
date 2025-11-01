@@ -493,7 +493,7 @@ function extractHost(u?: string) {
   try { return u ? new URL(u).host.replace(/^www\./,"") : ""; } catch { return ""; }
 }
 
-/* ===== Robust headline sentiment reader ===== */
+/* ===== NEW: headline sentiment pretty-printer (robust to many JSON shapes) ===== */
 function fmtHeadlineSentiment(n: NewsItem): {
   label: string;
   s: number | null;
@@ -502,78 +502,100 @@ function fmtHeadlineSentiment(n: NewsItem): {
   neu?: number;
   neg?: number;
 } {
-  // 1) Any of the "probability" objects
-  const probObj =
-    (n.probs && typeof n.probs === "object" && n.probs) ||
-    (n.prob  && typeof n.prob  === "object" && n.prob ) ||
-    (n.p     && typeof n.p     === "object" && n.p    ) ||
-    (n.probabilities && typeof n.probabilities === "object" && n.probabilities) ||
-    (n.sentiment && typeof n.sentiment === "object" && n.sentiment);
-
-  if (probObj) {
-    const pos = pick(probObj, ["pos","positive","Positive","POS"]);
-    const neu = pick(probObj, ["neu","neutral","Neutral","NEU"]);
-    const neg = pick(probObj, ["neg","negative","Negative","NEG"]);
-    const s = clamp(num(pos) - num(neg));
-    return { label: label(s), s, hasProbs: true, pos: num(pos), neu: num(neu), neg: num(neg) };
+  // 1) direct scalar
+  const sv = (n as any)?.s;
+  if (isFiniteNum(sv)) {
+    const s = clamp(Number(sv));
+    return { label: label(s), s, hasProbs: false };
   }
 
-  // 2) Direct scalar s / score variants
-  const candS = [n.s, n.sent_score, n.score];
-  for (const c of candS) {
-    if (typeof c === "number" && isFinite(c)) {
-      const s = clamp(c);
-      const lbl = typeof n.sent_label === "string" && n.sent_label.trim() ? n.sent_label.trim() : label(s);
-      return { label: lbl, s, hasProbs: false };
-    }
-  }
-
-  // 3) FinBERT-style array of scores [{label, score}, ...]
-  if (Array.isArray(n.scores) && n.scores.length) {
-    let pos = 0, neg = 0, neu = 0;
-    for (const it of n.scores) {
-      const lab = String(it?.label ?? "").toLowerCase();
-      const sc  = Number(it?.score ?? NaN);
-      if (!isFinite(sc)) continue;
-      if (lab.includes("pos")) pos = sc;
-      else if (lab.includes("neg")) neg = sc;
-      else if (lab.includes("neu")) neu = sc;
-    }
+  // 2) explicit probs object (pos/neu/neg OR positive/neutral/negative)
+  const probsObj = (n as any)?.probs;
+  const fromProbsObj = coerceProbs(probsObj);
+  if (fromProbsObj) {
+    const { pos, neu, neg } = fromProbsObj;
     const s = clamp(pos - neg);
     return { label: label(s), s, hasProbs: true, pos, neu, neg };
   }
 
-  // 4) { sent: {label, score} }
-  if (n.sent && (typeof n.sent === "object")) {
-    const sc = Number((n.sent as any).score ?? NaN);
-    if (isFinite(sc)) {
-      const s = clamp(sc);
-      const lbl = String((n.sent as any).label ?? "").trim() || label(s);
-      return { label: lbl, s, hasProbs: false };
-    }
+  // 3) scores array from HF pipeline (e.g., [{label:"positive", score:0.73}, ...])
+  const scoresArr = (n as any)?.scores;
+  const fromScoresArr = coerceProbs(scoresArr);
+  if (fromScoresArr) {
+    const { pos, neu, neg } = fromScoresArr;
+    const s = clamp(pos - neg);
+    return { label: label(s), s, hasProbs: true, pos, neu, neg };
   }
 
+  // 4) flat fields like score_pos / score_neu / score_neg
+  const flat = {
+    pos: (n as any)?.score_pos ?? (n as any)?.pos,
+    neu: (n as any)?.score_neu ?? (n as any)?.neu,
+    neg: (n as any)?.score_neg ?? (n as any)?.neg,
+  };
+  const fromFlat = coerceProbs(flat);
+  if (fromFlat) {
+    const { pos, neu, neg } = fromFlat;
+    const s = clamp(pos - neg);
+    return { label: label(s), s, hasProbs: true, pos, neu, neg };
+  }
+
+  // 5) last-resort: if "sentiment" is a string label, map it to a neutral-ish score
+  const sentLabel = String((n as any)?.sentiment || "").toLowerCase();
+  if (sentLabel === "positive") return { label: "Positive", s: 0.25, hasProbs: false };
+  if (sentLabel === "negative") return { label: "Negative", s: -0.25, hasProbs: false };
+  if (sentLabel === "neutral")  return { label: "Neutral",  s: 0.0,  hasProbs: false };
+
+  // No data
   return { label: "", s: null, hasProbs: false };
 }
 
-function pick(obj: Record<string, any>, keys: string[]) {
-  for (const k of keys) {
-    if (obj[k] != null) return obj[k];
-    // also tolerate nested like probs[k].score
-    if (obj[k] && typeof obj[k] === "object" && obj[k].score != null) return obj[k].score;
-  }
-  // tolerate uppercase versions of unknown shapes
-  for (const k of keys) {
-    const K = k.toUpperCase();
-    if (obj[K] != null) return obj[K];
-  }
-  return 0;
+function isFiniteNum(v: any): v is number {
+  return typeof v === "number" && Number.isFinite(v);
 }
 
-function num(v: any): number {
+/** Accepts an object with pos/neu/neg or an array of {label, score} and returns normalized probs in [0,1]. */
+function coerceProbs(maybe: any): { pos: number; neu: number; neg: number } | null {
+  if (!maybe) return null;
+
+  // Object form: { pos, neu, neg } or { positive, neutral, negative }
+  if (typeof maybe === "object" && !Array.isArray(maybe)) {
+    const pos = toNum(maybe.pos ?? maybe.positive ?? maybe.Positive ?? maybe.POS);
+    const neu = toNum(maybe.neu ?? maybe.neutral  ?? maybe.Neutral  ?? maybe.NEU);
+    const neg = toNum(maybe.neg ?? maybe.negative ?? maybe.Negative ?? maybe.NEG);
+    if (pos + neu + neg > 0) {
+      const s = pos + neu + neg;
+      return { pos: clamp01(pos / s), neu: clamp01(neu / s), neg: clamp01(neg / s) };
+    }
+  }
+
+  // Array form: [{label, score}, ...] (labels like "positive", "neutral", "negative")
+  if (Array.isArray(maybe)) {
+    let pos = 0, neu = 0, neg = 0;
+    for (const it of maybe) {
+      const lab = String(it?.label ?? "").toLowerCase();
+      const sc  = toNum(it?.score);
+      if (!Number.isFinite(sc)) continue;
+      if (lab.includes("pos")) pos = sc;
+      else if (lab.includes("neu")) neu = sc;
+      else if (lab.includes("neg")) neg = sc;
+    }
+    if (pos + neu + neg > 0) {
+      const s = pos + neu + neg;
+      return { pos: clamp01(pos / s), neu: clamp01(neu / s), neg: clamp01(neg / s) };
+    }
+  }
+
+  return null;
+}
+
+function toNum(v: any): number {
   const x = Number(v);
   return Number.isFinite(x) ? x : 0;
 }
 function clamp(x: number, lo = -1, hi = 1): number {
   return Math.max(lo, Math.min(hi, x));
+}
+function clamp01(x: number): number {
+  return Math.max(0, Math.min(1, x));
 }
