@@ -551,7 +551,7 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          # ---------- FinBERT loader (with graceful fallback) ----------
+          # ---- FinBERT loader with fallback (so we ALWAYS fill 's') ----
           clf = None
           def load_finbert():
               try:
@@ -560,18 +560,19 @@ jobs:
                   mdl = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
                   return pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
               except Exception as e:
-                  print("[SITE] FinBERT unavailable; using keyword fallback:", e)
+                  print("[SITE] FinBERT unavailable; keyword fallback:", e)
                   return None
           clf = load_finbert()
 
-          POS_WORDS = {"beat","beats","surge","record","upgrade","outperform","growth","strong","rise","rises","rally","gain","gains","optimism","bullish"}
-          NEG_WORDS = {"miss","misses","drop","drops","downgrade","lawsuit","probe","antitrust","weak","fall","falls","plunge","plunges","decline","bearish"}
+          POS = {"beat","beats","surge","record","upgrade","outperform","growth","strong","rise","rises","rally","gain","gains","optimism","bullish"}
+          NEG = {"miss","misses","drop","drops","downgrade","lawsuit","probe","antitrust","weak","fall","falls","plunge","plunges","decline","bearish"}
           def naive_score(title: str):
               t = title.lower()
-              pos = sum(w in t for w in POS_WORDS)
-              neg = sum(w in t for w in NEG_WORDS)
+              pos = sum(w in t for w in POS)
+              neg = sum(w in t for w in NEG)
               s = max(-1.0, min(1.0, (pos - neg) / 5.0))
-              return {'pos': max(0.0, s), 'neu': max(0.0, 1.0 - abs(s)), 'neg': max(0.0, -s)}, s
+              probs = {'pos': max(0.0, s), 'neu': max(0.0, 1.0-abs(s)), 'neg': max(0.0, -s)}
+              return {k: round(v,4) for k,v in probs.items()}, round(s,4)
 
           def label_from_score(s: float) -> str:
               if s >= 0.4: return "Strong Positive"
@@ -586,7 +587,7 @@ jobs:
           for t in tickers:
               base = Path(f"data/{t}")
 
-              # --- sentiment time series & fallback counts
+              # --- sentiment series + fallback counts if counts.json missing
               sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_total=0; ny_total=0
               for sf in sfiles:
@@ -599,11 +600,11 @@ jobs:
                   rows.append((d, float(o.get("score_mean", 0.0))))
                   nf_total += int(o.get("n_finnhub", 0) or 0)
                   ny_total += int(o.get("n_yfinance", 0) or 0)
-              rows = sorted(rows, key=lambda x:x[0])
+              rows.sort(key=lambda x:x[0])
               dates = [d for d,_ in rows]
-              S = [round(float(v), 4) for _,v in rows]
+              S = [round(float(v),4) for _,v in rows]
 
-              # --- prices aligned to sentiment dates (ffill + bfill)
+              # --- price aligned with dates
               price=[]
               pjson = base/"price"/"daily.json"
               if pjson.exists():
@@ -617,7 +618,7 @@ jobs:
                       ser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
                       price = [float(ser.get(d)) for d in dates]
 
-              # --- collect ALL headlines, de-dupe, sort DESC, keep 10
+              # --- collect, de-dupe, sort desc, keep 10
               raw=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -638,9 +639,11 @@ jobs:
                               "source": it.get("source") or prov,
                               "provider": prov
                           })
+
               def _pt(s):
                   try: return pd.to_datetime(s, utc=True, errors="coerce")
                   except: return pd.NaT
+
               tmp=[]; seen=set()
               for n in raw:
                   ts = _pt(n["ts"])
@@ -652,10 +655,11 @@ jobs:
                   seen.add(k)
                   m=n.copy(); m["_ts"]=ts
                   tmp.append(m)
+
               tmp.sort(key=lambda x: x["_ts"], reverse=True)
               news_trim = tmp[:HEADLINE_LIMIT]
 
-              # --- score the 10 headlines now
+              # --- score top 10 headlines
               if news_trim:
                   titles = [n["title"] for n in news_trim]
                   scored = False
@@ -670,19 +674,20 @@ jobs:
                               n["s"] = s
                               n["sentiment_label"] = label_from_score(s)
                           scored = True
+                          print(f"[SITE] {t}: scored {sum('s' in n for n in news_trim)}/{len(news_trim)} headlines with FinBERT")
                       except Exception as e:
-                          print(f"[SITE] FinBERT scoring failed for {t}:", e)
+                          print(f"[SITE] {t}: FinBERT failed ({e}); falling back")
                   if not scored:
                       for n in news_trim:
                           probs, s = naive_score(n["title"])
-                          n["probs"] = {k: round(v,4) for k,v in probs.items()}
-                          n["s"] = round(s,4)
+                          n["probs"] = probs
+                          n["s"] = s
                           n["sentiment_label"] = label_from_score(s)
 
               for n in news_trim:
                   n.pop("_ts", None)
 
-              # --- news counts: prefer counts.json written by build_news_counts.py
+              # --- counts: prefer data/<T>/news/counts.json
               counts_path = base/"news"/"counts.json"
               if counts_path.exists():
                   try:
@@ -697,7 +702,7 @@ jobs:
               else:
                   news_count = {"finnhub": nf_total, "yfinance": ny_total, "total": nf_total+ny_total}
 
-              obj = {
+              out_obj = {
                   "ticker": t,
                   "dates": dates,
                   "price": [round(float(x), 4) for x in price] if price else [],
@@ -709,8 +714,8 @@ jobs:
               }
 
               out = (pub/"ticker"/f"{t}.json")
-              out.write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {out} (days={len(dates)} news={len(news_trim)} price={len(obj['price'])})")
+              out.write_text(json.dumps(out_obj, ensure_ascii=False, indent=2), encoding="utf-8")
+              print(f"[SITE] wrote {out} (days={len(dates)} news={len(news_trim)} price={len(out_obj['price'])})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
