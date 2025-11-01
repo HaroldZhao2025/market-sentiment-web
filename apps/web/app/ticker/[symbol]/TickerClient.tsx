@@ -126,18 +126,13 @@ export default function TickerClient({
                         </a>
                       </td>
                       <td className="py-2 pr-3 text-neutral-500">{host}</td>
-                      {/* NEW cell */}
+                      {/* NEW cell — exact format Label(±0.1234) */}
                       <td className="py-2 pr-3">
                         {S.s !== null ? (
-                          <>
-                            <span className="font-medium">{label(S.s)}</span>{" "}
-                            <span className="text-neutral-500">({S.s.toFixed(4)})</span>
-                            {S.hasProbs ? (
-                              <span className="ml-2 text-xs text-neutral-500">
-                                neg {S.neg!.toFixed(2)} / neu {S.neu!.toFixed(2)} / pos {S.pos!.toFixed(2)}
-                              </span>
-                            ) : null}
-                          </>
+                          <span className="whitespace-nowrap">
+                            {S.label || label(S.s)}
+                            ({S.s >= 0 ? "+" : ""}{S.s.toFixed(4)})
+                          </span>
                         ) : (
                           <span className="text-neutral-400">–</span>
                         )}
