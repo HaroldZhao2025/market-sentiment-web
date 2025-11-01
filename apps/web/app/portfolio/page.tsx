@@ -1,29 +1,33 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import PortfolioClient from "./PortfolioClient";
+// apps/web/app/portfolio/page.tsx
+import SeriesClient, { SeriesIn } from "../components/SeriesClient";
+import { loadPortfolio, loadTicker } from "../../lib/data";
 
-const DATA_ROOT = path.join(process.cwd(), "public", "data");
+export const dynamic = "error";
+export const revalidate = false;
 
-async function readJSON<T>(p: string): Promise<T | null> {
-  try { return JSON.parse(await fs.readFile(p, "utf8")) as T; } catch { return null; }
-}
+export default async function PortfolioPage() {
+  // Average sentiment time series (already built by your pipeline)
+  const portfolio = await loadPortfolio(); // expects dates + S (or sentiment)
+  // Price: align with homepage logic (prefer SPY, else ^GSPC)
+  const spy = await loadTicker("SPY");
+  const spx = await loadTicker("^GSPC");
+  const priceSrc = spy?.price?.length ? spy : spx?.price?.length ? spx : null;
 
-export default async function Page() {
-  const pf = await readJSON<{ dates: string[]; S: number[]; price?: number[] }>(
-    path.join(DATA_ROOT, "portfolio.json")
-  );
+  const dates: string[] = portfolio?.dates ?? portfolio?.date ?? [];
+  const sentiment: number[] = portfolio?.S ?? portfolio?.sentiment ?? [];
+  const price: number[] = priceSrc?.price ?? [];
 
-  const dates = pf?.dates ?? [];
-  const sentiment = pf?.S ?? [];
-  const price = pf?.price ?? undefined;
-
-  if (!dates.length || !sentiment.length) {
-    return <div className="page"><h1 className="page-title">S&amp;P 500 Sentiment</h1><p className="muted">No portfolio data yet.</p></div>;
-  }
+  // Align lengths safely (SeriesClient will also slice, but we keep it neat here)
+  const n = Math.min(dates.length, price.length || Infinity, sentiment.length || Infinity);
+  const series: SeriesIn = {
+    date: dates.slice(0, n),
+    price: price.slice(0, n),
+    sentiment: sentiment.slice(0, n),
+  };
 
   return (
-    <div className="page">
-      <PortfolioClient dates={dates} sentiment={sentiment} price={price} />
+    <div className="min-h-screen p-6">
+      <SeriesClient title="S&P 500 Portfolio (Avg Sentiment)" series={series} />
     </div>
   );
 }
