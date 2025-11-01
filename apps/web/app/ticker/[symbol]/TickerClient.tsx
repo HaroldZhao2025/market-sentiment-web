@@ -495,7 +495,7 @@ function extractHost(u?: string) {
   try { return u ? new URL(u).host.replace(/^www\./,"") : ""; } catch { return ""; }
 }
 
-/* ===== NEW: headline sentiment pretty-printer (robust coercion) ===== */
+/* ===== NEW: headline sentiment pretty-printer (non-breaking) ===== */
 function fmtHeadlineSentiment(n: NewsItem): {
   label: string;
   s: number | null;
@@ -504,30 +504,27 @@ function fmtHeadlineSentiment(n: NewsItem): {
   neu?: number;
   neg?: number;
 } {
-  // helper
-  const toNum = (v: any): number | undefined => {
-    if (v === null || v === undefined) return undefined;
-    const x = typeof v === "string" ? Number(v) : v;
-    return Number.isFinite(x) ? (x as number) : undefined;
-  };
-
-  // accept many shapes for probabilities
-  const p = (n as any)?.probs ?? (n as any)?.scores ?? (n as any)?.probabilities;
-  const pos = toNum(p?.pos ?? p?.positive ?? p?.Positive ?? p?.POS);
-  const neu = toNum(p?.neu ?? p?.neutral  ?? p?.Neutral  ?? p?.NEU);
-  const neg = toNum(p?.neg ?? p?.negative ?? p?.Negative ?? p?.NEG);
-
-  // scalar s may be number or string; coerce
-  let s = toNum((n as any)?.s ?? (n as any)?.score ?? (n as any)?.sentiment ?? (n as any)?.sentiment_score);
-  if (s === undefined && pos !== undefined && neg !== undefined) {
-    s = pos - neg;
+  // Prefer explicit probs if present
+  const probs = (n as any)?.probs;
+  if (probs && typeof probs === "object") {
+    const pos = num(probs.pos ?? probs.positive ?? probs.Positive ?? probs.POS);
+    const neu = num(probs.neu ?? probs.neutral ?? probs.Neutral ?? probs.NEU);
+    const neg = num(probs.neg ?? probs.negative ?? probs.Negative ?? probs.NEG);
+    const s = clamp(pos - neg);
+    return { label: label(s), s, hasProbs: true, pos, neu, neg };
   }
-
-  if (s !== undefined) {
-    const sc = clamp(s);
-    return { label: label(sc), s: sc, hasProbs: pos !== undefined || neu !== undefined || neg !== undefined, pos, neu, neg };
+  // Otherwise, use scalar s if available
+  const sv = (n as any)?.s;
+  if (typeof sv === "number" && isFinite(sv)) {
+    const s = clamp(sv);
+    return { label: label(s), s, hasProbs: false };
   }
-
-  // no usable score
-  return { label: "", s: null, hasProbs: pos !== undefined || neu !== undefined || neg !== undefined, pos, neu, neg };
+  return { label: "", s: null, hasProbs: false };
+}
+function num(v: any): number {
+  const x = Number(v);
+  return Number.isFinite(x) ? x : 0;
+}
+function clamp(x: number, lo = -1, hi = 1): number {
+  return Math.max(lo, Math.min(hi, x));
 }
