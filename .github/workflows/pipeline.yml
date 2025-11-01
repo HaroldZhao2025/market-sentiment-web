@@ -21,7 +21,6 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  # Full-run knobs
   YF_COUNT: "240"
   FINNHUB_RPS: "8"
   MAX_DAYS_PER_TICKER: "365"
@@ -139,11 +138,9 @@ jobs:
                   if t and t not in SKIP:
                       tickers.append(t)
 
-          # progress pointer
           ptr = Path("data/_last_ticker.txt")
           last = ptr.read_text(encoding="utf-8").strip().upper() if ptr.exists() else ""
 
-          next_t = ""
           if not tickers:
               next_t = ""
           else:
@@ -153,25 +150,17 @@ jobs:
                   idx = 0
               next_t = tickers[idx] if idx < len(tickers) else ""
 
-          with open("/home/runner/work/_temp/next_env", "w") as f:
-              f.write(f"NEXT_TICKER={next_t}\n")
-              if next_t:
-                  f.write("TICKER_CSV=data/_one.csv\n")
-          print("NEXT_TICKER:", next_t or "(none)")
-
+          # write helper files for next steps
           if next_t:
               Path("data/_one.csv").write_text("ticker\n"+next_t+"\n", encoding="utf-8")
-
-          # Export env
-          from shutil import move
-          move("/home/runner/work/_temp/next_env", "/home/runner/work/_temp/_github_env")
-          print("::add-mask::"+(next_t or ""))
-        shell: bash
+              Path("data/_next_ticker.txt").write_text(next_t, encoding="utf-8")
+          print("NEXT_TICKER:", next_t or "(none)")
 
       - name: Load NEXT_TICKER env
         run: |
-          if [ -f /home/runner/work/_temp/_github_env ]; then
-            cat /home/runner/work/_temp/_github_env >> "$GITHUB_ENV"
+          if [ -f data/_next_ticker.txt ]; then
+            echo "NEXT_TICKER=$(cat data/_next_ticker.txt)" >> "$GITHUB_ENV"
+            echo "TICKER_CSV=data/_one.csv" >> "$GITHUB_ENV"
           fi
 
       - name: Stop early if nothing to build
@@ -531,15 +520,12 @@ jobs:
           s_win=pd.to_datetime(START, utc=True)
           e_win=pd.to_datetime(END, utc=True)+pd.Timedelta(days=1)-pd.Timedelta(seconds=1)
 
-          # Universe here is just the one ticker in _one.csv
-          import pandas as pd
           df=pd.read_csv(TICKER_CSV)
           tickers=[str(x).strip().upper().replace(".","-") for x in df[df.columns[0]].tolist()[1:]]
 
           for t in tickers:
               base=Path(f"data/{t}")
 
-              # sentiment timeline
               sfiles=sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_total=0; ny_total=0; nt_total=0
               for sf in sfiles:
@@ -556,7 +542,6 @@ jobs:
               dates=[d for d,_ in rows]
               S=[round(float(v),4) for _,v in rows]
 
-              # price aligned
               price_json=base/"price"/"daily.json"; price=[]
               if price_json.exists():
                   try:
@@ -569,7 +554,6 @@ jobs:
                       sser=pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
                       price=[float(sser.get(d)) for d in dates]
 
-              # 10 recent headlines (window)
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
@@ -594,7 +578,6 @@ jobs:
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim=news_items[:10]
 
-              # per-headline score
               scored=[]
               for item in news_trim:
                   if not item.get("title"): scored.append(item); continue
@@ -739,6 +722,9 @@ jobs:
     needs: [build, deploy]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Decide if more remain
         id: more
         shell: python
@@ -762,14 +748,12 @@ jobs:
                   has_more = True
 
           print("HAS_MORE:", has_more)
-          with open("/home/runner/work/_temp/_out", "w") as f:
-              f.write(f"has_more={'true' if has_more else 'false'}\n")
+          Path("_out.txt").write_text(f"has_more={'true' if has_more else 'false'}\n", encoding="utf-8")
 
-        # expose output
       - name: Export output
         id: export
         run: |
-          cat /home/runner/work/_temp/_out >> "$GITHUB_OUTPUT"
+          cat _out.txt >> "$GITHUB_OUTPUT"
 
       - name: Trigger next workflow run
         if: steps.export.outputs.has_more == 'true'
