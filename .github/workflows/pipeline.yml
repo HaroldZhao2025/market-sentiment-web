@@ -534,142 +534,162 @@ jobs:
               print(f"[PRICE] {t}: {len(df)} rows -> {out}")
 
       # ---------- Build site JSON (apps/web/public/data) ----------
-      # ---------- Build site JSON (apps/web/public/data) ----------
-      - name: Assemble site JSON (apps/web/public/data)
-        shell: python
-        run: |
-          import os, json, glob
-          from pathlib import Path
-          import pandas as pd
-          from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+- name: Assemble site JSON (apps/web/public/data)
+  shell: python
+  run: |
+    import os, json, glob
+    from pathlib import Path
+    import pandas as pd
 
-          START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
-          pub = Path("apps/web/public/data"); (pub/"ticker").mkdir(parents=True, exist_ok=True)
+    from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
-          def read_universe(csv_path: str) -> list[str]:
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
-              if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+    START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
+    pub = Path("apps/web/public/data"); (pub/"ticker").mkdir(parents=True, exist_ok=True)
 
-          # FinBERT once (no nonlocal)
-          _tok = AutoTokenizer.from_pretrained("ProsusAI/finbert")
-          _mdl = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
-          _clf = pipeline("sentiment-analysis", model=_mdl, tokenizer=_tok, top_k=None, truncation=True)
+    # ---------------- helpers ----------------
+    def read_universe(csv_path: str) -> list[str]:
+        df = pd.read_csv(csv_path)
+        col = [c for c in df.columns if c.lower()=="ticker"]
+        if not col: return []
+        return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          def score_one(title:str):
-              # returns (s, label, probs)
-              try:
-                  raw = _clf(title)[0]  # list of dicts: [{'label':'positive','score':...}, ...]
-                  m = {d["label"].lower(): float(d["score"]) for d in raw}
-                  pos, neu, neg = m.get("positive",0.0), m.get("neutral",0.0), m.get("negative",0.0)
-                  s = round(pos - neg, 4)
-                  # label by s
-                  if s >= 0.4:   label = "Strong Positive"
-                  elif s >= 0.1: label = "Positive"
-                  elif s <= -0.4: label = "Strong Negative"
-                  elif s <= -0.1: label = "Negative"
-                  else: label = "Neutral"
-                  return s, label, {"pos": round(pos,4), "neu": round(neu,4), "neg": round(neg,4)}
-              except Exception:
-                  return None, None, None
+    def in_window(ts):
+        try:
+            tt = pd.to_datetime(ts, utc=True)
+        except Exception:
+            return False
+        return (tt >= pd.to_datetime(START, utc=True)) and (tt <= pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1))
 
-          tickers = read_universe(TICKER_CSV)
-          (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
+    def ensure_host(u: str | None):
+        if not u: return None
+        try:
+            from urllib.parse import urlparse
+            h = urlparse(u).netloc
+            return h[4:] if h.startswith("www.") else h
+        except Exception:
+            return None
 
-          s_win = pd.to_datetime(START, utc=True)
-          e_win = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+    # ---------- FinBERT: build once ----------
+    model_name = "ProsusAI/finbert"
+    tok = AutoTokenizer.from_pretrained(model_name)
+    mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
+    clf = pipeline("text-classification", model=mdl, tokenizer=tok, top_k=None, truncation=True)
 
-          for t in tickers:
-              base = Path(f"data/{t}")
+    def probs_from_finbert_output(one: list[dict]) -> dict:
+        # one = [{'label':'positive','score':...}, {'label':'neutral',...}, {'label':'negative',...}]
+        m = {d["label"].lower(): float(d["score"]) for d in one}
+        return {"pos": m.get("positive", 0.0), "neu": m.get("neutral", 0.0), "neg": m.get("negative", 0.0)}
 
-              # --- sentiment rows + aggregate news counts from sentiment JSONs
-              sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
-              rows=[]; nf_total=0; ny_total=0; nt_total=0
-              for sf in sfiles:
-                  try:
-                      o = json.load(open(sf, encoding="utf-8")) or {}
-                  except Exception:
-                      o = {}
-                  day = o.get("date")
-                  if not day: 
-                      continue
-                  rows.append((day, float(o.get("score_mean", 0.0))))
-                  nf_total += int(o.get("n_finnhub", 0) or 0)
-                  ny_total += int(o.get("n_yfinance", 0) or 0)
-                  nt_total += int(o.get("n_total", 0) or (int(o.get("n_finnhub",0) or 0)+int(o.get("n_yfinance",0) or 0)))
-              rows = sorted(rows, key=lambda x:x[0])
-              dates = [d for d,_ in rows]
-              S = [round(float(v), 4) for _,v in rows]
+    # write the universe list so the UI can render the grid
+    tickers = read_universe(TICKER_CSV)
+    (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
 
-              # --- prices aligned to sentiment dates (ffill + bfill)
-              price_json = base/"price"/"daily.json"
-              price=[]
-              if price_json.exists():
-                  try:
-                      arr = json.load(open(price_json, encoding="utf-8")) or []
-                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") and a.get("close") is not None}
-                  except Exception:
-                      pmap = {}
-                  if dates and pmap:
-                      idx = pd.Index(sorted(set(list(pmap.keys()) + dates)))
-                      sser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
-                      price = [float(sser.get(d)) for d in dates]
+    for t in tickers:
+        base = Path(f"data/{t}")
 
-              # --- recent headline items (top 10 within window)
-              news_items=[]
-              for prov in ("finnhub","yfinance"):
-                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
-                      try:
-                          arr = json.load(open(p, encoding="utf-8")) or []
-                          for it in arr:
-                              ts = it.get("ts")
-                              if not ts: 
-                                  continue
-                              try:
-                                  tt = pd.to_datetime(ts, utc=True)
-                                  if not (s_win <= tt <= e_win): 
-                                      continue
-                              except Exception:
-                                  continue
-                              news_items.append({
-                                "ts": ts,
-                                "title": it.get("headline") or it.get("title") or "",
-                                "url": it.get("url") or "",
-                                "source": it.get("source") or prov,
-                                "provider": prov
-                              })
-                      except Exception:
-                          pass
-              news_items.sort(key=lambda n: n["ts"], reverse=True)
-              news_trim = news_items[:10]  # keep 10 latest
+        # --- sentiment rows + aggregate news counts (from daily sentiment files) ---
+        sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
+        rows=[]; nf_total=0; ny_total=0; nt_total=0
+        for sf in sfiles:
+            try:
+                o = json.load(open(sf, encoding="utf-8")) or {}
+            except Exception:
+                o = {}
+            d = o.get("date")
+            if not d: 
+                continue
+            rows.append((d, float(o.get("score_mean", 0.0))))
+            nf_total += int(o.get("n_finnhub", 0) or 0)
+            ny_total += int(o.get("n_yfinance", 0) or 0)
+            nt_total += int(o.get("n_total", 0) or 0)
 
-              # --- headline-level sentiment on the 10 shown items
-              scored = []
-              for item in news_trim:
-                  s, label, probs = score_one(item["title"]) if item.get("title") else (None,None,None)
-                  if s is not None:
-                      item["s"] = s
-                  if label is not None:
-                      item["sentiment_label"] = label
-                  if probs is not None:
-                      item["probs"] = probs
-                  scored.append(item)
-              if scored:
-                  print(f"[SITE] {t}: scored {len(scored)}/{len(news_trim)} headlines with FinBERT")
+        rows = sorted(rows, key=lambda x:x[0])
+        dates = [d for d,_ in rows]
+        S = [round(float(v), 4) for _,v in rows]
 
-              obj = {
-                "ticker": t,
-                "dates": dates,
-                "price": [round(float(x), 4) for x in price] if price else [],
-                "S": S,
-                "sentiment": S,
-                "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
-                "news_total": int(nt_total),  # alias for older UI
-                "news": scored
-              }
-              (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
-              print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(scored)} price={len(obj['price'])})")
+        # --- prices aligned to sentiment dates (ffill + bfill) ---
+        price_json = base/"price"/"daily.json"
+        pmap={}
+        if price_json.exists():
+            try:
+                arr = json.load(open(price_json, encoding="utf-8")) or []
+                pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") is not None and a.get("close") is not None}
+            except Exception:
+                pmap = {}
+        if dates and pmap:
+            idx = pd.Index(sorted(set(list(pmap.keys()) + dates)))
+            s = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
+            price = [float(s.get(d)) for d in dates]
+        else:
+            price = []
+
+        # --- gather recent headline items from raw providers ---
+        news_items=[]
+        for prov in ("finnhub","yfinance"):
+            for p in glob.glob(str(base/f"news/{prov}/*.json")):
+                try:
+                    arr = json.load(open(p, encoding="utf-8")) or []
+                except Exception:
+                    arr = []
+                for it in arr:
+                    ts = it.get("ts")
+                    if not ts or not in_window(ts):
+                        continue
+                    title = (it.get("headline") or it.get("title") or "").strip()
+                    if not title: 
+                        continue
+                    url = (it.get("url") or "").strip()
+                    news_items.append({
+                      "ts": ts,
+                      "title": title,
+                      "url": url,
+                      "source": (it.get("source") or ensure_host(url) or prov),
+                      "provider": it.get("provider") or prov,
+                    })
+
+        # sort desc by time, dedupe by (title,url), then keep TOP-10 only
+        news_items.sort(key=lambda n: n["ts"], reverse=True)
+        seen=set(); uniq=[]
+        for it in news_items:
+            key = (it["title"], it["url"])
+            if key in seen: 
+                continue
+            seen.add(key)
+            uniq.append(it)
+            if len(uniq) >= 10:
+                break
+
+        # --- score the 10 headlines with FinBERT and attach s/probs ---
+        titles = [u["title"] for u in uniq]
+        scored = clf(titles, batch_size=16) if titles else []
+        attached = 0
+        for i, u in enumerate(uniq):
+            try:
+                one = scored[i]
+                if isinstance(one, list) and one:
+                    pr = probs_from_finbert_output(one)
+                    s_val = round(float(pr["pos"] - pr["neg"]), 4)
+                    u["probs"] = pr          # {pos, neu, neg}
+                    u["s"] = s_val           # scalar
+                    attached += 1
+            except Exception:
+                # leave without sentiment if anything goes wrong
+                pass
+
+        print(f"[SITE] {t}: scored {attached}/{len(uniq)} headlines with FinBERT")
+
+        obj = {
+          "ticker": t,
+          "dates": dates,
+          "price": [round(float(x), 4) for x in price] if price else [],
+          "S": S,
+          "sentiment": S,
+          "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
+          "news": uniq,   # each item now may include {s, probs:{pos,neu,neg}}
+        }
+
+        (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(uniq)} price={len(obj['price'])})")
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
