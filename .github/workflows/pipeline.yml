@@ -1,14 +1,17 @@
-name: Build Data & Deploy Site
+name: Build Data & Deploy Site (Queued, 1 ticker/run)
 
 on:
   push:
     branches: ["main"]
   workflow_dispatch: {}
+  repository_dispatch:
+    types: [ticker-queue-next]
 
 permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
@@ -18,7 +21,7 @@ env:
   PYTHONPATH: src
   HF_HUB_DISABLE_TELEMETRY: "1"
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
-  # Fixed defaults for FULL pipeline
+  # Runtime knobs (full run settings)
   YF_COUNT: "240"
   FINNHUB_RPS: "8"
   MAX_DAYS_PER_TICKER: "365"
@@ -59,7 +62,7 @@ jobs:
       - name: Configure HF cache
         run: echo "HF_HOME=$RUNNER_TEMP/hf-home" >> "$GITHUB_ENV"
 
-      - name: Ensure base folders (avoid rsync/build errors)
+      - name: Ensure base folders
         run: |
           mkdir -p data
           mkdir -p apps/web/public/data/ticker
@@ -75,8 +78,8 @@ jobs:
               f.write(f"START={start}\nEND={end}\n")
           print("START", start, "END", end)
 
-      # Always ensure S&P 500 universe exists (FULL is the only mode now)
-      - name: Ensure S&P 500 CSV (multi-source, 403-safe)
+      # ---- Universe file (create if missing) ----
+      - name: Generate S&P500 CSV if needed
         shell: python
         run: |
           import os, sys, pandas as pd, requests
@@ -84,36 +87,25 @@ jobs:
 
           outp = Path("data/sp500.csv")
           if outp.exists() and outp.stat().st_size > 0:
-              print(f"{outp} already exists; skipping fetch.")
+              print(f"{outp} exists; skip.")
               sys.exit(0)
 
-          UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Safari/537.36"}
-          candidates = []
+          UA={"User-Agent":"Mozilla/5.0"}
+          cands=[]
 
           try:
-              print("Trying Wikipedia…")
-              r = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=30)
-              r.raise_for_status()
-              tables = pd.read_html(r.text)
-              df = next((t for t in tables if "Symbol" in t.columns), None)
-              if df is not None:
-                  s = df["Symbol"].astype(str)
-                  candidates.append(s)
-                  print(f"Wikipedia ok: {len(s)} symbols")
+              r=requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",headers=UA,timeout=30); r.raise_for_status()
+              tables=pd.read_html(r.text); df=next((t for t in tables if "Symbol" in t.columns), None)
+              if df is not None: cands.append(df["Symbol"].astype(str))
           except Exception as e:
               print("Wikipedia failed:", e)
 
           try:
-              print("Trying Slickcharts…")
-              r = requests.get("https://www.slickcharts.com/sp500", headers=UA, timeout=30)
-              r.raise_for_status()
-              tables = pd.read_html(r.text)
-              df = next((t for t in tables if "Symbol" in t.columns), tables[0] if tables else None)
+              r=requests.get("https://www.slickcharts.com/sp500",headers=UA,timeout=30); r.raise_for_status()
+              tables=pd.read_html(r.text); df=next((t for t in tables if "Symbol" in t.columns), tables[0] if tables else None)
               if df is not None:
-                  col = "Symbol" if "Symbol" in df.columns else df.columns[0]
-                  s = df[col].astype(str)
-                  candidates.append(s)
-                  print(f"Slickcharts ok: {len(s)} symbols")
+                  col="Symbol" if "Symbol" in df.columns else df.columns[0]
+                  cands.append(df[col].astype(str))
           except Exception as e:
               print("Slickcharts failed:", e)
 
@@ -122,34 +114,186 @@ jobs:
               "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/master/data/constituents.csv",
           ]:
               try:
-                  print(f"Trying dataset: {url}")
-                  df = pd.read_csv(url)
-                  col = "Symbol" if "Symbol" in df.columns else ("symbol" if "symbol" in df.columns else None)
-                  if col:
-                      s = df[col].astype(str)
-                      candidates.append(s)
-                      print(f"Dataset ok: {len(s)} symbols from {url}")
-                      break
+                  df=pd.read_csv(url)
+                  col="Symbol" if "Symbol" in df.columns else ("symbol" if "symbol" in df.columns else None)
+                  if col: cands.append(df[col].astype(str)); break
               except Exception as e:
-                  print(f"Dataset failed ({url}):", e)
+                  print("Dataset failed:", e)
 
-          if not candidates:
-              raise RuntimeError("All S&P500 sources failed (403/parse). Commit data/sp500.csv to repo to bypass network.")
+          if not cands:
+              # fallback minimal
+              outp.write_text("ticker\nAAPL\n", encoding="utf-8")
+              sys.exit(0)
 
-          ser = pd.concat(candidates, ignore_index=True)
-          ser = (ser.str.upper().str.replace(".", "-", regex=False).str.strip())
-          uniq = sorted(set(x for x in ser if x))
+          ser=pd.concat(cands, ignore_index=True).str.upper().str.replace(".","-",regex=False).str.strip()
+          uniq=sorted(set(x for x in ser if x))
           outp.parent.mkdir(parents=True, exist_ok=True)
-          outp.write_text("ticker\n" + "\n".join(uniq) + "\n", encoding="utf-8")
-          print(f"Wrote {len(uniq)} tickers to {outp}")
+          outp.write_text("ticker\n"+"\n".join(uniq)+"\n", encoding="utf-8")
+          print(f"Wrote {len(uniq)} tickers -> {outp}")
 
-      - name: Set universe path
-        run: echo "TICKER_CSV=data/sp500.csv" >> "$GITHUB_ENV"
+      # ---- Pick ONE ticker for this run (skip completed) ----
+      - name: Pick next ticker (one per run)
+        id: pick
+        shell: python
+        run: |
+          import os, json
+          from pathlib import Path
 
-      # ---------- Yahoo Finance per-day JSON ----------
-      - name: Save Yahoo Finance per-day JSON
+          sp = Path("data/sp500.csv")
+          tickers = []
+          if sp.exists():
+              for line in sp.read_text(encoding="utf-8").splitlines()[1:]:
+                  t=line.strip().upper().replace(".","-")
+                  if t: tickers.append(t)
+          else:
+              tickers=["AAPL"]
+
+          # Helper: consider a ticker "complete" if site JSON exists and looks populated
+          def is_complete(t: str) -> bool:
+              p = Path(f"apps/web/public/data/ticker/{t}.json")
+              if not p.exists(): return False
+              try:
+                  obj = json.loads(p.read_text(encoding="utf-8"))
+              except Exception:
+                  return False
+              dates = obj.get("dates") or obj.get("date") or []
+              price = obj.get("price") or []
+              news  = obj.get("news") or []
+              if not isinstance(dates, list) or not dates: return False
+              if not isinstance(price, list) or len(price) != len(dates): return False
+              if not isinstance(news, list) or len(news) < 10: return False
+              return True
+
+          # Prefer to skip AAPL if already complete
+          next_t = ""
+          for t in tickers:
+              if not is_complete(t):
+                  next_t = t
+                  break
+
+          # Fallback: if all complete, leave blank to stop queue
+          with open(os.environ["GITHUB_ENV"], "a") as f:
+              f.write(f"NEXT_TICKER={next_t}\n")
+          print("NEXT_TICKER:", next_t or "(all done)")
+
+          # Write a one-ticker CSV if we have next
+          if next_t:
+              Path("data/_one.csv").write_text("ticker\n"+next_t+"\n", encoding="utf-8")
+              with open(os.environ["GITHUB_ENV"], "a") as f:
+                  f.write("TICKER_CSV=data/_one.csv\n")
+
+      - name: Stop early if nothing to build
+        if: env.NEXT_TICKER == ''
+        run: echo "All tickers complete. Nothing to do."
+
+      # ---------- Finnhub (daily) for ONE ticker ----------
+      - name: Backfill Finnhub per-day JSON (one ticker)
+        if: env.NEXT_TICKER != ''
+        env:
+          FINNHUB_TOKENS: ${{ secrets.FINNHUB_TOKENS }}
+          FINNHUB_TOKEN:  ${{ secrets.FINNHUB_TOKEN }}
+          FINNHUB_TOKEN_2: ${{ secrets.FINNHUB_TOKEN_2 }}
+          FINNHUB_RPS: ${{ env.FINNHUB_RPS }}
+          MAX_DAYS_PER_TICKER: ${{ env.MAX_DAYS_PER_TICKER }}
+          START: ${{ env.START }}
+          END: ${{ env.END }}
+          TICKER_CSV: ${{ env.TICKER_CSV }}
+        shell: python
+        run: |
+          import os, time, json, pandas as pd
+          from pathlib import Path
+          try:
+              import finnhub
+          except Exception:
+              finnhub = None
+
+          START=os.environ["START"]; END=os.environ["END"]
+          FINNHUB_RPS=max(1, min(30, int(os.environ.get("FINNHUB_RPS") or "8")))
+          MAX_DAYS=int(os.environ.get("MAX_DAYS_PER_TICKER") or "365")
+          TICKER_CSV=os.environ["TICKER_CSV"]
+
+          def read_universe(csv_path: str) -> list[str]:
+              df=pd.read_csv(csv_path)
+              col=[c for c in df.columns if c.lower()=="ticker"]
+              if not col: return []
+              return [str(x).strip().upper().replace(".","-") for x in df[col[0]].dropna().unique().tolist()]
+
+          tokens=[]
+          raw=os.environ.get("FINNHUB_TOKENS","").strip()
+          if raw: tokens=[x.strip() for x in raw.split(",") if x.strip()]
+          if not tokens:
+              for k in ["FINNHUB_TOKEN","FINNHUB_TOKEN_2"]:
+                  v=os.environ.get(k,"").strip()
+                  if v: tokens.append(v)
+
+          if finnhub is None or not tokens:
+              print("Finnhub missing or no tokens; skipping."); raise SystemExit(0)
+
+          class Pool:
+              def __init__(self, toks): self.toks=toks; self.i=0
+              def cur(self): return self.toks[self.i] if self.i < len(self.toks) else None
+              def rot(self): self.i+=1; return self.cur()
+
+          pool=Pool(tokens)
+          client=finnhub.Client(api_key=pool.cur())
+
+          s_all=pd.Timestamp(START, tz="UTC").normalize()
+          e_all=pd.Timestamp(END, tz="UTC").normalize()
+          days=list(pd.date_range(s_all, e_all, freq="D", tz="UTC"))
+          if MAX_DAYS and len(days)>MAX_DAYS: days=days[-MAX_DAYS:]
+
+          min_gap=1.0/float(FINNHUB_RPS); last=0.0
+          def save_json(pth, obj):
+              pth.parent.mkdir(parents=True, exist_ok=True)
+              with pth.open("w", encoding="utf-8") as f: json.dump(obj, f, ensure_ascii=False, indent=2)
+
+          for t in read_universe(TICKER_CSV):
+              base=Path(f"data/{t}/news/finnhub"); base.mkdir(parents=True, exist_ok=True)
+              wrote=0; skipped=0
+              for d in days:
+                  day=d.date().isoformat(); out=base/f"{day}.json"
+                  if out.exists() and out.stat().st_size>0: skipped+=1; continue
+                  now=time.time(); wait=max(0.0, (last+min_gap)-now); 
+                  if wait>0: time.sleep(wait)
+                  tries=0; arr=[]
+                  while tries<5:
+                      try:
+                          arr=client.company_news(t, _from=day, to=day) or []; break
+                      except Exception as e:
+                          m=str(e)
+                          if "429" in m or "Remaining Limit: 0" in m or "API limit" in m:
+                              if not pool.rot(): time.sleep(min(16.0,2.0**tries))
+                              else: client=finnhub.Client(api_key=pool.cur()); time.sleep(1.0)
+                              tries+=1; continue
+                          else:
+                              print("Finnhub error:", m); break
+                  last=time.time()
+                  cleaned=[]
+                  for it in arr:
+                      try:
+                          ts=pd.Timestamp.utcfromtimestamp(int(it.get("datetime"))).tz_localize("UTC").isoformat()
+                      except Exception:
+                          ts=None
+                      cleaned.append({
+                        "ts": ts,
+                        "headline": (it.get("headline") or "").strip(),
+                        "summary": (it.get("summary") or it.get("headline") or "").strip(),
+                        "url": it.get("url") or "",
+                        "source": it.get("source") or "",
+                        "provider": "finnhub",
+                        "raw": it
+                      })
+                  save_json(out, cleaned); wrote+=1
+              print(f"[FH] {t}: wrote {wrote}, skipped {skipped}")
+
+      # ---------- Yahoo Finance (robust) ----------
+      - name: Save Yahoo Finance per-day JSON (one ticker)
+        if: env.NEXT_TICKER != ''
         shell: python
         env:
+          START: ${{ env.START }}
+          END: ${{ env.END }}
+          TICKER_CSV: ${{ env.TICKER_CSV }}
           YF_COUNT: ${{ env.YF_COUNT }}
         run: |
           import os, json, pandas as pd, yfinance as yf
@@ -157,69 +301,58 @@ jobs:
 
           START=os.environ["START"]; END=os.environ["END"]
           TICKER_CSV=os.environ["TICKER_CSV"]
-          YF_COUNT = int(os.environ.get("YF_COUNT") or "240")
+          YF_COUNT=int(os.environ.get("YF_COUNT") or "240")
 
           def read_universe(csv_path: str) -> list[str]:
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
+              df=pd.read_csv(csv_path)
+              col=[c for c in df.columns if c.lower()=="ticker"]
               if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+              return [str(x).strip().upper().replace(".","-") for x in df[col[0]].dropna().unique().tolist()]
 
           def norm_ts(v):
               if v is None: return None
               try:
-                  vi = int(v)
-                  if vi > 10_000_000_000: vi = vi/1000.0
+                  vi=int(v)
+                  if vi>10_000_000_000: vi=vi/1000.0
                   return pd.Timestamp.utcfromtimestamp(vi).tz_localize("UTC")
               except Exception:
-                  try:
-                      return pd.to_datetime(v, utc=True, errors="coerce")
-                  except Exception:
-                      return None
+                  try: return pd.to_datetime(v, utc=True, errors="coerce")
+                  except Exception: return None
 
-          s = pd.to_datetime(START, utc=True)
-          e = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+          s=pd.to_datetime(START, utc=True)
+          e=pd.to_datetime(END, utc=True)+pd.Timedelta(days=1)-pd.Timedelta(seconds=1)
 
           for t in read_universe(TICKER_CSV):
-              items = []
-              try:
-                  items = yf.Ticker(t).get_news(count=YF_COUNT, tab="all") or []
-              except Exception:
-                  pass
+              items=[]
+              try: items=yf.Ticker(t).get_news(count=YF_COUNT, tab="all") or []
+              except Exception: pass
 
-              rows = []
+              rows=[]
               for it in items:
-                  if not isinstance(it, dict):
-                      continue
-
-                  # ---- Robust content handling (fix) ----
+                  if not isinstance(it, dict): continue
                   content = it.get("content") or {}
-                  if not isinstance(content, dict):
-                      content = {}
+                  if not isinstance(content, dict): content = {}
 
                   ts = (norm_ts(it.get("providerPublishTime"))
                         or norm_ts(content.get("pubDate"))
                         or norm_ts(content.get("displayTime"))
                         or norm_ts(content.get("published")))
-                  if ts is None or pd.isna(ts) or ts < s or ts > e:
-                      continue
+                  if ts is None or pd.isna(ts) or ts < s or ts > e: continue
 
-                  title = (content.get("title") or it.get("title") or "").strip()
-                  if not title:
-                      continue
+                  title=(content.get("title") or it.get("title") or "").strip()
+                  if not title: continue
 
-                  url = ((content.get("canonicalUrl") or {}).get("url")
-                         or (content.get("clickThroughUrl") or {}).get("url")
-                         or it.get("link") or it.get("url") or "")
+                  url=((content.get("canonicalUrl") or {}).get("url")
+                       or (content.get("clickThroughUrl") or {}).get("url")
+                       or it.get("link") or it.get("url") or "")
 
-                  # ---- Robust provider/source (also hardened) ----
-                  prov = content.get("provider")
+                  prov=content.get("provider")
                   if isinstance(prov, dict):
-                      source = prov.get("displayName") or prov.get("name") or "Yahoo"
+                      source=prov.get("displayName") or prov.get("name") or "Yahoo"
                   elif isinstance(prov, str):
-                      source = prov
+                      source=prov
                   else:
-                      source = "Yahoo"
+                      source="Yahoo"
 
                   rows.append({
                       "ts": ts.isoformat(),
@@ -232,244 +365,97 @@ jobs:
                   })
 
               if not rows:
-                  print(f"[YF] {t}: 0 items in window")
-                  continue
+                  print(f"[YF] {t}: 0 items in window"); continue
 
-              df = pd.DataFrame(rows)
+              df=pd.DataFrame(rows)
               for day, grp in df.groupby(df["ts"].str.slice(0,10)):
-                  out = Path(f"data/{t}/news/yfinance/{day}.json")
+                  out=Path(f"data/{t}/news/yfinance/{day}.json")
                   out.parent.mkdir(parents=True, exist_ok=True)
-                  new = grp.to_dict(orient="records")
+                  new=grp.to_dict(orient="records")
                   if out.exists() and out.stat().st_size>0:
-                      try:
-                          old = json.load(open(out, encoding="utf-8"))
-                      except Exception:
-                          old = []
-                      seen = {(o.get("headline",""),o.get("url","")) for o in old}
+                      try: old=json.load(open(out, encoding="utf-8"))
+                      except Exception: old=[]
+                      seen={(o.get("headline",""),o.get("url","")) for o in old}
                       for r in new:
                           key=(r.get("headline",""),r.get("url",""))
                           if key not in seen:
                               old.append(r); seen.add(key)
-                      new = old
+                      new=old
                   json.dump(new, open(out,"w",encoding="utf-8"), ensure_ascii=False, indent=2)
               print(f"[YF] {t}: saved per-day JSON under data/{t}/news/yfinance")
-              
-      # ---------- Finnhub backfill ----------
-      - name: Backfill Finnhub per-day JSON (rotate tokens on 429, respect RPS)
+
+      # ---------- Daily sentiment (FinBERT) ----------
+      - name: Compute daily sentiment (one ticker)
+        if: env.NEXT_TICKER != ''
+        shell: python
         env:
-          FINNHUB_TOKENS: ${{ secrets.FINNHUB_TOKENS }}
-          FINNHUB_TOKEN:  ${{ secrets.FINNHUB_TOKEN }}
-          FINNHUB_TOKEN_2: ${{ secrets.FINNHUB_TOKEN_2 }}
-          FINNHUB_RPS: ${{ env.FINNHUB_RPS }}
-          MAX_DAYS_PER_TICKER: ${{ env.MAX_DAYS_PER_TICKER }}
-        continue-on-error: true
-        shell: python
-        run: |
-          import os, time, json, pandas as pd
-          from pathlib import Path
-          try:
-              import finnhub
-          except Exception:
-              finnhub = None
-
-          START = os.environ["START"]; END = os.environ["END"]
-          FINNHUB_RPS = max(1, min(30, int(os.environ.get("FINNHUB_RPS") or "8")))
-          MAX_DAYS = int(os.environ.get("MAX_DAYS_PER_TICKER") or "365")
-          TICKER_CSV = os.environ["TICKER_CSV"]
-
-          def build_tokens() -> list[str]:
-              raw = os.environ.get("FINNHUB_TOKENS", "").strip()
-              toks = [x.strip() for x in raw.split(",") if x.strip()] if raw else []
-              if not toks:
-                  t1 = os.environ.get("FINNHUB_TOKEN", "").strip()
-                  t2 = os.environ.get("FINNHUB_TOKEN_2", "").strip()
-                  toks = [x for x in [t1, t2] if x]
-              return toks
-
-          TOKENS = build_tokens()
-          if finnhub is None or not TOKENS:
-              print("Finnhub missing or no tokens; skipping.")
-              raise SystemExit(0)
-
-          class TokenPool:
-              def __init__(self, tokens):
-                  self.tokens = tokens[:]
-                  self.idx = 0
-              def current(self):
-                  if self.idx >= len(self.tokens): return None
-                  return self.tokens[self.idx]
-              def rotate(self):
-                  self.idx += 1
-                  return self.current()
-
-          pool = TokenPool(TOKENS)
-          client = finnhub.Client(api_key=pool.current())
-
-          def read_universe(csv_path: str) -> list[str]:
-              import pandas as pd
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
-              if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
-
-          s_all = pd.Timestamp(START, tz="UTC").normalize()
-          e_all = pd.Timestamp(END, tz="UTC").normalize()
-          days = list(pd.date_range(s_all, e_all, freq="D", tz="UTC"))
-          if MAX_DAYS and len(days) > MAX_DAYS:
-              days = days[-MAX_DAYS:]
-
-          min_gap = 1.0 / float(FINNHUB_RPS)
-          last_call = 0.0
-
-          def save_json(path: Path, obj):
-              path.parent.mkdir(parents=True, exist_ok=True)
-              with path.open("w", encoding="utf-8") as f:
-                  json.dump(obj, f, ensure_ascii=False, indent=2)
-
-          for t in read_universe(TICKER_CSV):
-              base = Path(f"data/{t}/news/finnhub")
-              base.mkdir(parents=True, exist_ok=True)
-              logp = Path(f"data/{t}/logs"); logp.mkdir(parents=True, exist_ok=True)
-              logf = (logp / "finnhub_fetch.log").open("a", encoding="utf-8")
-
-              wrote = 0; skipped = 0
-              for dts in days:
-                  day = dts.date().isoformat()
-                  out = base / f"{day}.json"
-                  if out.exists() and out.stat().st_size > 0:
-                      skipped += 1
-                      continue
-
-                  now = time.time()
-                  wait = max(0.0, (last_call + min_gap) - now)
-                  if wait > 0: time.sleep(wait)
-
-                  tries, arr = 0, []
-                  while tries < 5:
-                      try:
-                          arr = client.company_news(t, _from=day, to=day) or []
-                          break
-                      except Exception as e:
-                          msg = str(e)
-                          if ("429" in msg) or ("API limit reached" in msg) or ("Remaining Limit: 0" in msg):
-                              logf.write(f"[FH] {t} {day} rate-limited: {msg}\n")
-                              nxt = pool.rotate()
-                              if nxt:
-                                  client = finnhub.Client(api_key=nxt)
-                                  time.sleep(1.0)
-                                  tries += 1
-                                  continue
-                              else:
-                                  backoff = min(16.0, 2.0 ** tries)
-                                  time.sleep(backoff)
-                                  tries += 1
-                                  if tries >= 5:
-                                      break
-                          else:
-                              logf.write(f"[FH] {t} {day} error: {msg}\n")
-                              break
-
-                  last_call = time.time()
-
-                  cleaned = []
-                  for it in arr:
-                      try:
-                          ts = pd.Timestamp.utcfromtimestamp(int(it.get("datetime"))).tz_localize("UTC").isoformat()
-                      except Exception:
-                          ts = None
-                      cleaned.append({
-                        "ts": ts,
-                        "headline": (it.get("headline") or "").strip(),
-                        "summary": (it.get("summary") or it.get("headline") or "").strip(),
-                        "url": it.get("url") or "",
-                        "source": it.get("source") or "",
-                        "provider": "finnhub",
-                        "raw": it
-                      })
-                  save_json(out, cleaned)
-                  wrote += 1
-
-              logf.write(f"[FH] {t}: wrote {wrote} files, skipped {skipped}\n")
-              logf.close()
-              print(f"[FH] {t}: wrote {wrote} files, skipped {skipped}")
-
-      # ---------- Daily sentiment (FinBERT), counts, prices ----------
-      - name: Compute daily sentiment from both sources
-        shell: python
+          START: ${{ env.START }}
+          END: ${{ env.END }}
+          TICKER_CSV: ${{ env.TICKER_CSV }}
         run: |
           import os, json, glob, pandas as pd
           from pathlib import Path
           from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
-          model_name = "ProsusAI/finbert"
-          tok = AutoTokenizer.from_pretrained(model_name)
-          mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
-          clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
+          tok=AutoTokenizer.from_pretrained("ProsusAI/finbert")
+          mdl=AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
+          clf=pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
 
           def read_universe(csv_path: str) -> list[str]:
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
+              df=pd.read_csv(csv_path)
+              col=[c for c in df.columns if c.lower()=="ticker"]
               if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+              return [str(x).strip().upper().replace(".","-") for x in df[col[0]].dropna().unique().tolist()]
 
-          s = pd.to_datetime(START, utc=True).date()
-          e = pd.to_datetime(END, utc=True).date()
+          s=pd.to_datetime(START, utc=True).date()
+          e=pd.to_datetime(END, utc=True).date()
 
           for t in read_universe(TICKER_CSV):
-              base = Path(f"data/{t}")
-              (base/"sentiment").mkdir(parents=True, exist_ok=True)
-
-              day_texts = {}
+              base=Path(f"data/{t}"); (base/"sentiment").mkdir(parents=True, exist_ok=True)
+              day_texts={}
               for prov in ("finnhub","yfinance"):
-                  nd = base/"news"/prov
-                  if not nd.exists():
-                      continue
+                  nd=base/"news"/prov
+                  if not nd.exists(): continue
                   for p in sorted(glob.glob(str(nd/"*.json"))):
-                      day = Path(p).stem
-                      try:
-                          ddate = pd.to_datetime(day, utc=True).date()
-                      except Exception:
-                          continue
-                      if ddate < s or ddate > e:
-                          continue
-                      try:
-                          arr = json.load(open(p, encoding="utf-8")) or []
-                      except Exception:
-                          arr = []
-                      rec = day_texts.setdefault(day, {"texts": [], "counts": {"finnhub":0, "yfinance":0}})
+                      day=Path(p).stem
+                      try: ddate=pd.to_datetime(day, utc=True).date()
+                      except Exception: continue
+                      if ddate<s or ddate>e: continue
+                      try: arr=json.load(open(p, encoding="utf-8")) or []
+                      except Exception: arr=[]
+                      rec=day_texts.setdefault(day, {"texts": [], "counts": {"finnhub":0,"yfinance":0}})
                       for it in arr:
-                          title = (it.get("headline") or "").strip()
+                          title=(it.get("headline") or "").strip()
                           if title:
                               rec["texts"].append(title)
-                              rec["counts"][prov] += 1
+                              rec["counts"][prov]+=1
 
               for day, obj in day_texts.items():
-                  out = base/"sentiment"/f"{day}.json"
-                  if out.exists() and out.stat().st_size>0:
-                      continue
-                  texts = obj["texts"]
+                  out=base/"sentiment"/f"{day}.json"
+                  if out.exists() and out.stat().st_size>0: continue
+                  texts=obj["texts"]
                   if not texts:
-                      json.dump({"date": day, "ticker": t, "n_total": 0, "n_finnhub": 0, "n_yfinance": 0, "score_mean": 0.0}, open(out,"w"), indent=2)
+                      json.dump({"date":day,"ticker":t,"n_total":0,"n_finnhub":0,"n_yfinance":0,"score_mean":0.0}, open(out,"w"), indent=2)
                       continue
-                  preds = clf(texts, batch_size=16)
+                  preds=clf(texts, batch_size=16)
                   vals=[]
                   for per in preds:
-                      d = {x["label"].lower(): float(x["score"]) for x in per}
-                      s_val = d.get("positive",0.0) - d.get("negative",0.0)
-                      vals.append(s_val)
-                  mean = round(float(pd.Series(vals).mean()), 4)
+                      d={x["label"].lower(): float(x["score"]) for x in per}
+                      vals.append(d.get("positive",0.0)-d.get("negative",0.0))
+                  mean=round(float(pd.Series(vals).mean()),4)
                   json.dump({
-                    "date": day,
-                    "ticker": t,
+                    "date": day, "ticker": t,
                     "n_total": len(texts),
                     "n_finnhub": obj["counts"]["finnhub"],
                     "n_yfinance": obj["counts"]["yfinance"],
                     "score_mean": mean
                   }, open(out,"w"), indent=2)
-              print(f"[SENT] {t}: sentiment JSON written")
+              print(f"[SENT] {t}: daily sentiment written")
 
-      - name: Aggregate news counts (src/market_sentiment/build_news_counts.py)
+      # ---------- Aggregate news counts ----------
+      - name: Aggregate news counts
+        if: env.NEXT_TICKER != ''
         shell: bash
         env:
           START: ${{ env.START }}
@@ -479,41 +465,51 @@ jobs:
           set -euo pipefail
           python -m market_sentiment.build_news_counts
 
-      - name: Fetch daily close prices (Yahoo)
+      # ---------- Prices ----------
+      - name: Fetch daily close prices (one ticker)
+        if: env.NEXT_TICKER != ''
         shell: python
+        env:
+          START: ${{ env.START }}
+          END: ${{ env.END }}
+          TICKER_CSV: ${{ env.TICKER_CSV }}
         run: |
           import os, json, pandas as pd, yfinance as yf
           from pathlib import Path
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
 
           def read_universe(csv_path: str) -> list[str]:
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
+              df=pd.read_csv(csv_path)
+              col=[c for c in df.columns if c.lower()=="ticker"]
               if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+              return [str(x).strip().upper().replace(".","-") for x in df[col[0]].dropna().unique().tolist()]
 
           for t in read_universe(TICKER_CSV):
               try:
-                  df = yf.download(t, start=START, end=END, interval="1d", progress=False, auto_adjust=False)
+                  df=yf.download(t, start=START, end=END, interval="1d", progress=False, auto_adjust=False)
               except Exception as e:
-                  print(f("[PRICE] {t}: download failed:", e)); df = None
+                  print(f"[PRICE] {t}: download failed: {e}"); df=None
               if df is None or df.empty:
-                  print(f"[PRICE] {t}: empty")
-                  continue
-              df = df.reset_index()
+                  print(f"[PRICE] {t}: empty"); continue
+              df=df.reset_index()
               if "Date" in df.columns:
-                  df["date"] = pd.to_datetime(df["Date"], utc=True).dt.date.astype(str)
+                  df["date"]=pd.to_datetime(df["Date"], utc=True).dt.date.astype(str)
               else:
-                  df["date"] = pd.to_datetime(df.index, utc=True).date.astype(str)
-              df["close"] = df["Close"].astype(float)
-              out = Path(f"data/{t}/price/daily.json")
+                  df["date"]=pd.to_datetime(df.index, utc=True).date.astype(str)
+              df["close"]=df["Close"].astype(float)
+              out=Path(f"data/{t}/price/daily.json")
               out.parent.mkdir(parents=True, exist_ok=True)
-              json.dump([{"date": d, "close": float(c)} for d, c in zip(df["date"], df["close"])], open(out,"w"), indent=2)
+              json.dump([{"date":d,"close":float(c)} for d,c in zip(df["date"], df["close"])], open(out,"w"), indent=2)
               print(f"[PRICE] {t}: {len(df)} rows -> {out}")
 
-      # ---------- Build site JSON (apps/web/public/data) ----------
+      # ---------- Assemble site JSON ----------
       - name: Assemble site JSON (apps/web/public/data)
+        if: env.NEXT_TICKER != ''
         shell: python
+        env:
+          START: ${{ env.START }}
+          END: ${{ env.END }}
+          TICKER_CSV: ${{ env.TICKER_CSV }}
         run: |
           import os, json, glob
           from pathlib import Path
@@ -521,90 +517,81 @@ jobs:
           from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
           START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
-          pub = Path("apps/web/public/data"); (pub/"ticker").mkdir(parents=True, exist_ok=True)
+          pub=Path("apps/web/public/data"); (pub/"ticker").mkdir(parents=True, exist_ok=True)
 
           def read_universe(csv_path: str) -> list[str]:
-              df = pd.read_csv(csv_path)
-              col = [c for c in df.columns if c.lower()=="ticker"]
+              df=pd.read_csv(csv_path)
+              col=[c for c in df.columns if c.lower()=="ticker"]
               if not col: return []
-              return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
+              return [str(x).strip().upper().replace(".","-") for x in df[col[0]].dropna().unique().tolist()]
 
-          # FinBERT once
-          _tok = AutoTokenizer.from_pretrained("ProsusAI/finbert")
-          _mdl = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
-          _clf = pipeline("sentiment-analysis", model=_mdl, tokenizer=_tok, top_k=None, truncation=True)
+          _tok=AutoTokenizer.from_pretrained("ProsusAI/finbert")
+          _mdl=AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
+          _clf=pipeline("sentiment-analysis", model=_mdl, tokenizer=_tok, top_k=None, truncation=True)
 
           def score_one(title:str):
               try:
-                  raw = _clf(title)[0]
-                  m = {d["label"].lower(): float(d["score"]) for d in raw}
-                  pos, neu, neg = m.get("positive",0.0), m.get("neutral",0.0), m.get("negative",0.0)
-                  s = round(pos - neg, 4)
-                  if s >= 0.4:   label = "Strong Positive"
-                  elif s >= 0.1: label = "Positive"
-                  elif s <= -0.4: label = "Strong Negative"
-                  elif s <= -0.1: label = "Negative"
-                  else: label = "Neutral"
-                  return s, label
+                  raw=_clf(title)[0]
+                  m={d["label"].lower(): float(d["score"]) for d in raw}
+                  pos,neu,neg=m.get("positive",0.0), m.get("neutral",0.0), m.get("negative",0.0)
+                  s=round(pos-neg,4)
+                  if s>=0.4: lab="Strong Positive"
+                  elif s>=0.1: lab="Positive"
+                  elif s<=-0.4: lab="Strong Negative"
+                  elif s<=-0.1: lab="Negative"
+                  else: lab="Neutral"
+                  return s, lab
               except Exception:
                   return None, None
 
-          tickers = read_universe(TICKER_CSV)
-          (pub/"_tickers.json").write_text(json.dumps(tickers, indent=2), encoding="utf-8")
+          s_win=pd.to_datetime(START, utc=True)
+          e_win=pd.to_datetime(END, utc=True)+pd.Timedelta(days=1)-pd.Timedelta(seconds=1)
 
-          s_win = pd.to_datetime(START, utc=True)
-          e_win = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
+          tickers=read_universe(TICKER_CSV)
+          (pub/"_tickers.json").write_text(json.dumps(sorted(set([*tickers, *([p.stem for p in (pub/'ticker').glob('*.json')])])), indent=2), encoding="utf-8")
 
           for t in tickers:
-              base = Path(f"data/{t}")
+              base=Path(f"data/{t}")
 
-              # sentiment rows from daily sentiment JSONs
-              sfiles = sorted(glob.glob(str(base/"sentiment/*.json")))
+              sfiles=sorted(glob.glob(str(base/"sentiment/*.json")))
               rows=[]; nf_total=0; ny_total=0; nt_total=0
               for sf in sfiles:
-                  try:
-                      o = json.load(open(sf, encoding="utf-8")) or {}
-                  except Exception:
-                      o = {}
-                  day = o.get("date")
-                  if not day:
-                      continue
+                  try: o=json.load(open(sf, encoding="utf-8")) or {}
+                  except Exception: o={}
+                  day=o.get("date"); 
+                  if not day: continue
                   rows.append((day, float(o.get("score_mean", 0.0))))
-                  nf_total += int(o.get("n_finnhub", 0) or 0)
-                  ny_total += int(o.get("n_yfinance", 0) or 0)
-                  nt_total += int(o.get("n_total", 0) or (int(o.get("n_finnhub",0) or 0)+int(o.get("n_yfinance",0) or 0)))
-              rows = sorted(rows, key=lambda x:x[0])
-              dates = [d for d,_ in rows]
-              S = [round(float(v), 4) for _,v in rows]
+                  nf_total+=int(o.get("n_finnhub",0) or 0)
+                  ny_total+=int(o.get("n_yfinance",0) or 0)
+                  nt_total+=int(o.get("n_total", nf_total+ny_total) or (0))
 
-              # prices aligned to sentiment dates
-              price=[]
-              price_json = base/"price"/"daily.json"
+              rows=sorted(rows, key=lambda x:x[0])
+              dates=[d for d,_ in rows]
+              S=[round(float(v),4) for _,v in rows]
+
+              price_json=base/"price"/"daily.json"; price=[]
               if price_json.exists():
                   try:
-                      arr = json.load(open(price_json, encoding="utf-8")) or []
-                      pmap = {str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") and a.get("close") is not None}
+                      arr=json.load(open(price_json, encoding="utf-8")) or []
+                      pmap={str(a.get("date")): float(a.get("close")) for a in arr if a.get("date") and a.get("close") is not None}
                   except Exception:
-                      pmap = {}
+                      pmap={}
                   if dates and pmap:
-                      idx = pd.Index(sorted(set(list(pmap.keys()) + dates)))
-                      sser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
-                      price = [float(sser.get(d)) for d in dates]
+                      idx=pd.Index(sorted(set(list(pmap.keys())+dates)))
+                      sser=pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
+                      price=[float(sser.get(d)) for d in dates]
 
-              # recent headline items (top 10)
               news_items=[]
               for prov in ("finnhub","yfinance"):
                   for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
-                          arr = json.load(open(p, encoding="utf-8")) or []
+                          arr=json.load(open(p, encoding="utf-8")) or []
                           for it in arr:
-                              ts = it.get("ts")
-                              if not ts:
-                                  continue
+                              ts=it.get("ts")
+                              if not ts: continue
                               try:
-                                  tt = pd.to_datetime(ts, utc=True)
-                                  if not (s_win <= tt <= e_win):
-                                      continue
+                                  tt=pd.to_datetime(ts, utc=True)
+                                  if not (s_win<=tt<=e_win): continue
                               except Exception:
                                   continue
                               news_items.append({
@@ -614,25 +601,24 @@ jobs:
                                 "source": it.get("source") or prov,
                                 "provider": prov
                               })
-                      except Exception:
-                          pass
+                      except Exception: pass
               news_items.sort(key=lambda n: n["ts"], reverse=True)
-              news_trim = news_items[:10]
+              news_trim=news_items[:10]
 
-              # headline-level sentiment on the 10 shown items
-              scored = []
+              scored=[]
               for item in news_trim:
-                  s, lbl = score_one(item["title"]) if item.get("title") else (None, None)
-                  if s is not None:
-                      item["s"] = s
-                  if lbl is not None:
-                      item["sentiment_label"] = lbl
+                  if not item.get("title"): scored.append(item); continue
+                  s,lab=score_one(item["title"])
+                  if s is not None: item["s"]=s
+                  if lab is not None: item["sentiment_label"]=lab
                   scored.append(item)
+              if scored:
+                  print(f"[SITE] {t}: scored {len(scored)}/{len(news_trim)} headlines")
 
-              obj = {
+              obj={
                 "ticker": t,
                 "dates": dates,
-                "price": [round(float(x), 4) for x in price] if price else [],
+                "price": [round(float(x),4) for x in price] if price else [],
                 "S": S,
                 "sentiment": S,
                 "news_count": {"finnhub": int(nf_total), "yfinance": int(ny_total), "total": int(nt_total)},
@@ -642,7 +628,7 @@ jobs:
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
               print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(scored)} price={len(obj['price'])})")
 
-      # ---------- Commit & push raw data even if ignored ----------
+      # ---------- Commit & push data ----------
       - name: Commit & push data directory
         if: always()
         shell: bash
@@ -654,10 +640,11 @@ jobs:
           mkdir -p data || true
           git add -f data/** || true
           git add -f data/*  || true
+          git add -f apps/web/public/data/** || true
           if git diff --cached --quiet; then
-            echo "No changes to commit in data/."
+            echo "No changes to commit."
           else
-            git commit -m "chore(data): persist news, daily sentiment, prices, and counts [skip ci]"
+            git commit -m "chore(data): update one-ticker batch [skip ci]"
             git pull --rebase || true
             git push || true
           fi
@@ -677,7 +664,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install web deps (ensure public/data exists)
+      - name: Install web deps
         working-directory: apps/web
         shell: bash
         run: |
@@ -690,7 +677,7 @@ jobs:
           fi
           npm i -D @types/react @types/node --no-audit --no-fund || true
 
-      - name: Build static site (synthesize out/ if needed)
+      - name: Build static site and synthesize out/
         working-directory: apps/web
         env:
           NEXT_TELEMETRY_DISABLED: "1"
@@ -749,3 +736,34 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+
+  # --------- Self-queue next run (only if more remain) ---------
+  queue_next:
+    needs: [build, deploy]
+    if: needs.build.outputs != '' || always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Detect remaining tickers
+        id: more
+        shell: bash
+        run: |
+          # if NEXT_TICKER was empty in build (all done), do nothing
+          echo "NEXT_TICKER=${NEXT_TICKER:-}" >> $GITHUB_OUTPUT
+          if [ -z "${NEXT_TICKER:-}" ]; then
+            echo "more=false" >> $GITHUB_OUTPUT
+          else
+            echo "more=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Trigger next (workflow_dispatch)
+        if: steps.more.outputs.more == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          set -e
+          curl -s -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/pipeline.yml/dispatches \
+            -d '{"ref":"main"}'
