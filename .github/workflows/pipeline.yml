@@ -358,8 +358,9 @@ jobs:
                       skipped += 1
                       continue
 
+                  import time
                   now = time.time()
-                  wait = max(0.0, (last_call + min_gap) - now)
+                  wait = max(0.0, (last_call + (1.0/float(FINNHUB_RPS))) - now)
                   if wait > 0: time.sleep(wait)
 
                   tries, arr = 0, []
@@ -498,6 +499,7 @@ jobs:
           set -euo pipefail
           python -m market_sentiment.build_news_counts
 
+      # ---------- Fetch daily close prices (Yahoo) — MERGE, DON'T OVERWRITE ----------
       - name: Fetch daily close prices (Yahoo)
         shell: python
         env:
@@ -514,30 +516,81 @@ jobs:
               if not col: return []
               return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
 
-          # Narrow window for hourly to speed up
-          if RUN_KIND == "hourly":
-              start_date = (pd.to_datetime(END, utc=True) - pd.Timedelta(days=14)).date().isoformat()
-          else:
-              start_date = START
+          def all_news_days(ticker:str):
+              days=[]
+              for prov in ("finnhub","yfinance"):
+                  nd=Path(f"data/{ticker}/news/{prov}")
+                  if not nd.exists(): 
+                      continue
+                  for p in nd.glob("*.json"):
+                      day=p.stem
+                      try:
+                          pd.to_datetime(day, utc=True)
+                          days.append(day)
+                      except Exception:
+                          pass
+              return sorted(set(days))
 
           for t in read_universe(TICKER_CSV):
+              price_path = Path(f"data/{t}/price/daily.json")
+              price_path.parent.mkdir(parents=True, exist_ok=True)
+
+              # Load existing prices map
+              exist=[]
+              if price_path.exists() and price_path.stat().st_size>0:
+                  try:
+                      exist=json.load(open(price_path, encoding="utf-8")) or []
+                  except Exception:
+                      exist=[]
+              pmap={str(r.get("date")): float(r.get("close")) for r in exist if r.get("date") and r.get("close") is not None}
+
+              # Earliest news day across providers
+              news_days = all_news_days(t)
+              earliest_news = pd.to_datetime(news_days[0]).date().isoformat() if news_days else START
+
+              # Decide fetch start:
+              # - Hourly: if we already cover earliest_news (or earlier), fetch last 14d only; else backfill from earliest_news
+              # - Daily/manual: from min(START, earliest_news)
+              if RUN_KIND == "hourly":
+                  if pmap:
+                      have_earliest = min(pd.to_datetime(d).date() for d in pmap.keys())
+                      en = pd.to_datetime(earliest_news).date()
+                      if have_earliest <= en:
+                          fetch_start = (pd.to_datetime(END).date() - pd.Timedelta(days=14)).isoformat()
+                      else:
+                          fetch_start = earliest_news
+                  else:
+                      fetch_start = earliest_news
+              else:
+                  fetch_start = min(pd.to_datetime(START).date(), pd.to_datetime(earliest_news).date()).isoformat()
+
               try:
-                  df = yf.download(t, start=start_date, end=END, interval="1d", progress=False, auto_adjust=False)
+                  df = yf.download(t, start=fetch_start, end=END, interval="1d", progress=False, auto_adjust=False)
               except Exception as e:
                   print(f"[PRICE] {t}: download failed: {e}"); df = None
               if df is None or df.empty:
                   print(f"[PRICE] {t}: empty")
+                  # still write existing map if present
+                  if pmap and not price_path.exists():
+                      out_rows=[{"date": d, "close": float(c)} for d,c in sorted(pmap.items())]
+                      json.dump(out_rows, open(price_path,"w"), indent=2)
                   continue
+
               df = df.reset_index()
               if "Date" in df.columns:
                   df["date"] = pd.to_datetime(df["Date"], utc=True).dt.date.astype(str)
               else:
                   df["date"] = pd.to_datetime(df.index, utc=True).date.astype(str)
               df["close"] = df["Close"].astype(float)
-              out = Path(f"data/{t}/price/daily.json")
-              out.parent.mkdir(parents=True, exist_ok=True)
-              json.dump([{"date": d, "close": float(c)} for d, c in zip(df["date"], df["close"])], open(out,"w"), indent=2)
-              print(f"[PRICE] {t}: {len(df)} rows -> {out}")
+
+              # MERGE: update pmap with fetched rows (no overwrite of older unless same date)
+              for d, c in zip(df["date"], df["close"]):
+                  pmap[d] = float(c)
+
+              # Write merged, sorted
+              out_rows=[{"date": d, "close": float(c)} for d,c in sorted(pmap.items())]
+              json.dump(out_rows, open(price_path,"w"), indent=2)
+              print(f"[PRICE] {t}: coverage {out_rows[0]['date']} → {out_rows[-1]['date']} ({len(out_rows)} rows) -> {price_path}")
 
       # ---------- Build site JSON (apps/web/public/data) ----------
       - name: Assemble site JSON (apps/web/public/data)
@@ -611,7 +664,7 @@ jobs:
               dates = [d for d,_ in rows]
               S = [round(float(v), 4) for _,v in rows]
 
-              # prices aligned to sentiment dates
+              # prices aligned to sentiment dates (forward-fill only; no backfill)
               price=[]
               price_json = base/"price"/"daily.json"
               if price_json.exists():
@@ -622,7 +675,7 @@ jobs:
                       pmap = {}
                   if dates and pmap:
                       idx = pd.Index(sorted(set(list(pmap.keys()) + dates)))
-                      sser = pd.Series(pmap).reindex(idx).sort_index().ffill().bfill()
+                      sser = pd.Series(pmap).reindex(idx).sort_index().ffill()
                       price = [float(sser.get(d)) for d in dates]
 
               # recent headline items (top 10)
@@ -691,7 +744,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit in data/."
           else
-            git commit -m "chore(data): refresh news/sentiment/prices and assemble site JSON [skip ci]"
+            git commit -m "chore(data): refresh news/sentiment/prices (merge) and assemble site JSON [skip ci]"
             git pull --rebase || true
             git push || true
           fi
@@ -744,7 +797,7 @@ jobs:
 
           if [ -d "public" ]; then
             rsync -a public/ out/
-          else
+          else:
             mkdir -p public
             rsync -a public/ out/
           fi
