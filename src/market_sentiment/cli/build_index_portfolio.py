@@ -1,12 +1,13 @@
 # src/market_sentiment/cli/build_index_portfolio.py
 from __future__ import annotations
-
-import argparse
-import json
-import math
+import argparse, json, math, statistics, datetime as dt
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+import pandas as pd
+import yfinance as yf
+
+# ------------------------- JSON helpers -------------------------
 
 def _read_json(p: Path) -> Optional[Dict[str, Any]]:
     try:
@@ -15,263 +16,384 @@ def _read_json(p: Path) -> Optional[Dict[str, Any]]:
     except Exception:
         return None
 
-
-def _last_non_none(values: List[Any]) -> Optional[Any]:
-    for v in reversed(values):
-        if v is not None:
-            return v
-    return None
-
-
 def _safe_get(d: Dict[str, Any], *keys, default=None):
     cur = d
     try:
         for k in keys:
-            if cur is None:
-                return default
+            if cur is None: return default
             cur = cur.get(k)
         return default if cur is None else cur
     except Exception:
         return default
 
+# ------------------------- Per-ticker extractors -------------------------
 
-def _extract_meta(j: Dict[str, Any]) -> Tuple[str, str]:
-    """
-    Returns (name, sector) in a lenient way; falls back to empty strings.
-    Tries a few common locations.
-    """
+def _extract_meta(j: Dict[str, Any]) -> Tuple[str, str, Optional[float]]:
     name = (
-        _safe_get(j, "meta", "shortName")
-        or _safe_get(j, "meta", "longName")
+        _safe_get(j, "meta", "longName")
+        or _safe_get(j, "meta", "shortName")
+        or _safe_get(j, "info", "longName")
         or _safe_get(j, "profile", "shortName")
-        or _safe_get(j, "info", "shortName")
         or ""
     )
     sector = (
         _safe_get(j, "meta", "sector")
-        or _safe_get(j, "profile", "sector")
         or _safe_get(j, "info", "sector")
+        or _safe_get(j, "profile", "sector")
         or ""
     )
-    return str(name), str(sector)
-
+    mcap = _safe_get(j, "meta", "marketCap") or _safe_get(j, "info", "marketCap")
+    try:
+        mcap = float(mcap) if mcap is not None else None
+    except Exception:
+        mcap = None
+    return str(name), str(sector), mcap
 
 def _extract_daily_scores(j: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """
-    Normalize daily scoring time series into list of {date, score, pred_return?}
-    Tries several shapes:
-      - j["sentiment"]["daily"] = [{date, score, predicted_return?}, ...]
-      - j["daily"] with similar shape
-    """
-    cands = []
-    s1 = _safe_get(j, "sentiment", "daily")
-    if isinstance(s1, list):
-        cands = s1
-    elif isinstance(_safe_get(j, "daily"), list):
-        cands = _safe_get(j, "daily")
+    # Try common shapes: sentiment.daily OR daily
+    cand = _safe_get(j, "sentiment", "daily")
+    if not isinstance(cand, list):
+        cand = _safe_get(j, "daily")
     out = []
-    for row in cands or []:
-        # tolerate multiple possible keys
-        date = row.get("date") or row.get("d")
-        score = row.get("score") or row.get("s")
-        pr   = row.get("predicted_return") or row.get("pred") or row.get("r")
-        out.append({"date": date, "score": score, "pred": pr})
+    if isinstance(cand, list):
+        for row in cand:
+            if not isinstance(row, dict): continue
+            d = row.get("date") or row.get("d")
+            sc= row.get("score") or row.get("s")
+            pr= row.get("predicted_return") or row.get("pred") or row.get("r")
+            out.append({"date": d, "score": sc, "pred": pr})
     return out
-
 
 def _extract_prices(j: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """
-    Normalize OHLC or close series into list of {date, close}.
-    Tries a few common layouts seen in yfinance or custom exports.
-    """
-    # Try explicit "prices"
-    prices = _safe_get(j, "prices")
-    if isinstance(prices, list):
-        out = []
-        for p in prices:
-            date = p.get("date") or p.get("d")
-            close = p.get("adjClose") or p.get("close") or p.get("c")
-            if date is not None and close is not None:
-                out.append({"date": date, "close": float(close)})
-        return out
-
-    # Try "history" / "chart"
-    hist = _safe_get(j, "history") or _safe_get(j, "chart")
-    if isinstance(hist, list):
-        out = []
-        for p in hist:
-            date = p.get("date") or p.get("d")
-            close = p.get("adjClose") or p.get("close") or p.get("c")
-            if date is not None and close is not None:
-                out.append({"date": date, "close": float(close)})
-        return out
-
-    # Nothing found
+    for key in ("prices", "history", "chart"):
+        v = j.get(key)
+        if isinstance(v, list):
+            out=[]
+            for r in v:
+                if not isinstance(r, dict): continue
+                d = r.get("date") or r.get("d")
+                c = r.get("adjClose") or r.get("close") or r.get("c")
+                if d is None or c is None: continue
+                try:
+                    out.append({"date": str(d), "close": float(c)})
+                except Exception:
+                    pass
+            if out: return out
     return []
 
+def _pctchg(prices: List[Dict[str, Any]]) -> Dict[str, float]:
+    arr = sorted(prices, key=lambda r: r["date"])
+    out = {}
+    prev=None
+    for r in arr:
+        c = float(r["close"])
+        if prev is not None and c>0 and prev>0:
+            out[r["date"]] = (c/prev)-1.0
+        prev=c
+    return out
 
-def _index_from_tickers(ticker_dir: Path) -> List[Dict[str, Any]]:
-    rows: List[Dict[str, Any]] = []
-    for f in sorted(ticker_dir.glob("*.json")):
-        sym = f.stem.upper()
-        j = _read_json(f)
-        if not isinstance(j, dict):
-            continue
-        name, sector = _extract_meta(j)
-        daily = _extract_daily_scores(j)
-        last_score = _last_non_none([x.get("score") for x in daily if x.get("score") is not None])
-        last_pred  = _last_non_none([x.get("pred")  for x in daily if x.get("pred")  is not None])
-        last_date  = _last_non_none([x.get("date")  for x in daily if x.get("date")  is not None])
-        rows.append({
-            "symbol": sym,
-            "name": name,
-            "sector": sector,
-            "last_date": last_date,
-            "last_score": last_score,
-            "last_predicted_return": last_pred,
-        })
-    return rows
+# ------------------------- Index assembly -------------------------
 
+def _index_from_tickers(ticker_dir: Path, sp500_csv: Optional[Path]) -> Tuple[List[Dict[str, Any]], Dict[str, float]]:
+    """
+    Returns rows plus optional {symbol->market_cap} from file; if missing in file, we fetch selectively.
+    """
+    # optional CSV enrichment
+    name_map: Dict[str, str]   = {}
+    sect_map: Dict[str, str]   = {}
+    mcap_map: Dict[str, float] = {}
 
-def _merge_dates(series_list: List[List[Dict[str, Any]]]) -> List[str]:
-    s = set()
-    for series in series_list:
-        for row in series:
-            if row.get("date") is not None:
-                s.add(row["date"])
-    return sorted(s)
-
-
-def _to_map_by_date(series: List[Dict[str, Any]], key: str) -> Dict[str, float]:
-    out: Dict[str, float] = {}
-    for row in series:
-        d = row.get("date")
-        v = row.get(key)
-        if d is None or v is None:
-            continue
+    if sp500_csv and sp500_csv.exists():
         try:
-            out[str(d)] = float(v)
+            df = pd.read_csv(sp500_csv)
+            # Try common column names
+            symcol = next(c for c in df.columns if c.lower() in ("symbol","ticker"))
+            namecol= next((c for c in df.columns if c.lower() in ("security","name","company")), None)
+            sectcol= next((c for c in df.columns if "sector" in c.lower()), None)
+            mcapcol= next((c for c in df.columns if "mcap" in c.lower() or "marketcap" in c.lower()), None)
+            for _,r in df.iterrows():
+                s = str(r[symcol]).upper().replace(".", "-")
+                if namecol: name_map[s] = str(r[namecol])
+                if sectcol: sect_map[s] = str(r[sectcol])
+                if mcapcol:
+                    try: mcap_map[s] = float(r[mcapcol])
+                    except: pass
         except Exception:
             pass
-    return out
 
+    rows: List[Dict[str, Any]] = []
+    local_mcaps: Dict[str, float] = {}
 
-def _pctchg_from_prices(prices: List[Dict[str, Any]]) -> Dict[str, float]:
-    """Compute simple daily pct change by date."""
-    out: Dict[str, float] = {}
-    # sort by date as string (dates look like ISO yyyy-mm-dd in your site)
-    arr = sorted(prices, key=lambda r: str(r.get("date")))
-    prev = None
-    for r in arr:
-        d = str(r["date"])
-        c = float(r["close"])
-        if prev is not None and c > 0 and prev > 0:
-            out[d] = (c / prev) - 1.0
-        prev = c
-    return out
+    for f in sorted((ticker_dir).glob("*.json")):
+        sym = f.stem.upper()
+        j = _read_json(f)
+        if not isinstance(j, dict): continue
+        name, sector, mcap = _extract_meta(j)
+        if not name:   name   = name_map.get(sym, "")
+        if not sector: sector = sect_map.get(sym, "")
+        if not mcap:   mcap   = mcap_map.get(sym)
 
+        daily = _extract_daily_scores(j)
+        last_date = None
+        last_score= None
+        last_pred = None
+        for row in reversed([x for x in daily if isinstance(x, dict)]):
+            if row.get("score") is not None or row.get("pred") is not None:
+                last_date  = row.get("date")
+                last_score = row.get("score")
+                last_pred  = row.get("pred")
+                break
 
-def _portfolio_from_signals(ticker_dir: Path, long_n: int = 25, short_n: int = 25) -> Dict[str, Any]:
-    """
-    Build a naive daily long/short from cross-sectional predicted returns.
-    If we cannot compute returns (no prices), we still emit a tiny "valid" shape
-    so the UI never shows 'No portfolio data yet.'
-    """
-    per_ticker_daily_pred: Dict[str, Dict[str, float]] = {}
-    per_ticker_daily_ret:  Dict[str, Dict[str, float]] = {}
+        rows.append({
+            "symbol": sym, "name": name, "sector": sector,
+            "last_date": last_date, "last_score": last_score, "last_predicted_return": last_pred
+        })
+        if mcap: local_mcaps[sym] = float(mcap)
+
+    return rows, local_mcaps
+
+def _fetch_missing_mcaps(symbols: List[str], have: Dict[str, float]) -> Dict[str, float]:
+    missing = [s for s in symbols if s not in have]
+    if not missing: return have
+    for s in missing:
+        try:
+            info = yf.Ticker(s).fast_info  # faster than .info
+            mcap = getattr(info, "market_cap", None)
+            if mcap is None:
+                mcap = yf.Ticker(s).info.get("marketCap")
+            if mcap: have[s] = float(mcap)
+        except Exception:
+            pass
+    return have
+
+def _sp500_sentiment(rows: List[Dict[str, Any]], market_caps: Dict[str, float]) -> Tuple[str, Optional[float], Optional[float]]:
+    # latest common "last_date" across rows (fallback to max)
+    dates = [r["last_date"] for r in rows if r.get("last_date")]
+    date = max(dates) if dates else None
+
+    # prefer predicted_return, fallback to score
+    vals: Dict[str, float] = {}
+    for r in rows:
+        v = r.get("last_predicted_return")
+        if v is None:
+            v = r.get("last_score")
+        if v is not None:
+            vals[r["symbol"]] = float(v)
+
+    if not vals:
+        return date or "", None, None
+
+    # equal-weight
+    ew = sum(vals.values()) / len(vals)
+
+    # cap-weight (normalize mcaps over available vals)
+    weights = []
+    vlist   = []
+    total_mcap = sum(market_caps.get(s, 0.0) for s in vals.keys())
+    if total_mcap > 0:
+        for s,v in vals.items():
+            w = market_caps.get(s, 0.0) / total_mcap
+            weights.append(w); vlist.append(v)
+        cw = sum(w*v for w,v in zip(weights, vlist))
+    else:
+        cw = None
+
+    return date or "", ew, cw
+
+# ------------------------- Portfolio (long-only) -------------------------
+
+def _daily_signal_maps(ticker_dir: Path) -> Tuple[Dict[str, Dict[str, float]], Dict[str, Dict[str, float]]]:
+    preds: Dict[str, Dict[str, float]] = {}
+    scores: Dict[str, Dict[str, float]] = {}
     for f in sorted(ticker_dir.glob("*.json")):
         sym = f.stem.upper()
         j = _read_json(f)
-        if not isinstance(j, dict):
-            continue
+        if not isinstance(j, dict): continue
         daily = _extract_daily_scores(j)
-        prices = _extract_prices(j)
-        pred_map = _to_map_by_date(daily, "pred")
-        ret_map  = _pctchg_from_prices(prices)
-        if pred_map:
-            per_ticker_daily_pred[sym] = pred_map
-        if ret_map:
-            per_ticker_daily_ret[sym] = ret_map
+        pm: Dict[str,float] = {}
+        sm: Dict[str,float] = {}
+        for row in daily:
+            d=row.get("date")
+            if d is None: continue
+            if row.get("pred") is not None:
+                try: pm[str(d)] = float(row["pred"])
+                except: pass
+            if row.get("score") is not None:
+                try: sm[str(d)] = float(row["score"])
+                except: pass
+        if pm: preds[sym]=pm
+        if sm: scores[sym]=sm
+    return preds, scores
 
-    # collect all dates where we have any predictions
+def _daily_returns_map(ticker_dir: Path) -> Dict[str, Dict[str, float]]:
+    out: Dict[str, Dict[str, float]] = {}
+    for f in sorted(ticker_dir.glob("*.json")):
+        sym = f.stem.upper()
+        j = _read_json(f)
+        if not isinstance(j, dict): continue
+        ret = _pctchg(_extract_prices(j))
+        if ret: out[sym]=ret
+    return out
+
+def _align_dates(*series: List[str]) -> List[str]:
+    s=set()
+    for ser in series:
+        for d in ser: s.add(d)
+    return sorted(s)
+
+def _build_long_only(preds: Dict[str, Dict[str, float]], scores: Dict[str, Dict[str, float]], rets: Dict[str, Dict[str, float]], top_n: int=50) -> Tuple[List[Dict[str,Any]], List[Dict[str,Any]]]:
+    """
+    Rank daily by predicted return if available, else by score.
+    Long-only equal-weight top N; rebalance daily; same-day close->close return.
+    Returns equity_curve and daily list.
+    """
     all_dates = set()
-    for m in per_ticker_daily_pred.values():
+    for m in list(preds.values()) + list(scores.values()):
         all_dates.update(m.keys())
     dates = sorted(all_dates)
-
     equity = 1.0
-    curve: List[Dict[str, Any]] = []
-    daily_rets: List[Dict[str, Any]] = []
-
+    curve=[]; daily=[]
     for d in dates:
-        # build cross-section for date d
-        cross: List[Tuple[str, float]] = []
-        for sym, m in per_ticker_daily_pred.items():
-            v = m.get(d)
-            if v is not None and not math.isnan(v):
-                cross.append((sym, float(v)))
-        if len(cross) < 10:
-            # too sparse to form a long/short; skip
+        # Build cross-section
+        cross=[]
+        for sym in rets.keys():
+            v = preds.get(sym, {}).get(d)
+            if v is None: v = scores.get(sym, {}).get(d)
+            if v is not None and (d in rets.get(sym, {})):
+                try: cross.append((sym, float(v)))
+                except: pass
+        if len(cross) < max(10, top_n//2):  # not enough names
             continue
-        cross.sort(key=lambda x: x[1])
-        shorts = [s for s, _ in cross[:short_n]]
-        longs  = [s for s, _ in cross[-long_n:]]
-        # compute realized return using next-day (or same-day) pct changes if available
-        # Here we use same-day simple return from close series for simplicity.
-        long_ret = [per_ticker_daily_ret.get(s, {}).get(d) for s in longs]
-        short_ret= [per_ticker_daily_ret.get(s, {}).get(d) for s in shorts]
-        long_ret = [r for r in long_ret if r is not None]
-        short_ret= [r for r in short_ret if r is not None]
-        if not long_ret or not short_ret:
+        cross.sort(key=lambda x: x[1], reverse=True)  # top = biggest positive
+        longs=[s for s,_ in cross[:top_n]]
+        rlist=[rets[s][d] for s in longs if d in rets[s]]
+        if not rlist: 
             continue
-        # equal-weight long/short
-        r_long  = sum(long_ret)  / len(long_ret)
-        r_short = sum(short_ret) / len(short_ret)
-        r = 0.5 * r_long - 0.5 * r_short
+        r = sum(rlist)/len(rlist)
         equity *= (1.0 + r)
-        daily_rets.append({"date": d, "ret": r})
+        daily.append({"date": d, "ret": r})
         curve.append({"date": d, "equity": equity})
+    return curve, daily
 
-    # if we still have nothing, write a tiny valid file so UI doesn't show '0 points'
-    if not curve:
-        return {
-            "points": 1,
-            "equity_curve": [{"date": "1970-01-01", "equity": 1.0}],
-            "daily": [{"date": "1970-01-01", "ret": 0.0}],
-            "long_n": long_n,
-            "short_n": short_n,
-        }
+def _metrics(daily_rets: List[Dict[str,Any]]) -> Dict[str, float]:
+    if not daily_rets: 
+        return {"days":0,"cagr":0,"vol":0,"sharpe":0,"max_drawdown":0,"hit_ratio":0}
+    ser = [float(x["ret"]) for x in daily_rets]
+    n = len(ser)
+    mean = statistics.fmean(ser)
+    vol  = statistics.pstdev(ser) if n>1 else 0.0
+    ann_mean = mean * 252
+    ann_vol  = vol  * (252**0.5)
+    sharpe = (ann_mean/ann_vol) if ann_vol>0 else 0.0
+    # CAGR from equity
+    eq=1.0
+    peak=1.0
+    maxdd=0.0
+    for r in ser:
+        eq*=(1+r)
+        peak=max(peak,eq)
+        dd = (eq/peak)-1.0
+        maxdd=min(maxdd, dd)
+    years = n/252
+    cagr = (eq**(1/years)-1.0) if years>0 else 0.0
+    hits = sum(1 for r in ser if r>0)/n
+    return {"days":n, "cagr":cagr, "vol":ann_vol, "sharpe":sharpe, "max_drawdown":maxdd, "hit_ratio":hits}
 
-    return {
-        "points": len(curve),
-        "equity_curve": curve,
-        "daily": daily_rets,
-        "long_n": long_n,
-        "short_n": short_n,
-    }
+# ------------------------- Benchmark (^GSPC) -------------------------
 
+def _download_gspc(first_date: Optional[str], last_date: Optional[str]) -> List[Dict[str,Any]]:
+    # pad a bit
+    start = (pd.to_datetime(first_date) - pd.Timedelta(days=5)).date() if first_date else dt.date(2010,1,1)
+    end   = (pd.to_datetime(last_date)  + pd.Timedelta(days=5)).date() if last_date  else dt.date.today()
+    df = yf.download("^GSPC", start=start, end=end, auto_adjust=True, progress=False)
+    out=[]
+    if isinstance(df, pd.DataFrame) and not df.empty:
+        for d,c in df["Close"].items():
+            out.append({"date": str(d.date()), "close": float(c)})
+    return out
+
+def _equity_from_prices(prices: List[Dict[str,Any]]) -> Tuple[List[Dict[str,Any]], List[Dict[str,Any]]]:
+    # returns + equity
+    arr = sorted(prices, key=lambda r: r["date"])
+    daily=[]
+    eq=[]
+    prev=None; equity=1.0
+    for r in arr:
+        c=r["close"]
+        if prev is not None and c>0 and prev>0:
+            x=(c/prev)-1.0
+            daily.append({"date": r["date"], "ret": x})
+            equity *= (1+x)
+            eq.append({"date": r["date"], "equity": equity})
+        prev=c
+    return eq, daily
+
+# ------------------------- Main -------------------------
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data-dir", default="apps/web/public/data",
-                    help="Folder where /ticker/*.json live and where index/portfolio will be written.")
+    ap.add_argument("--data-dir", default="apps/web/public/data")
+    ap.add_argument("--sp500-csv", default="data/sp500.csv")
+    ap.add_argument("--top-n", type=int, default=50)
     args = ap.parse_args()
 
-    data_dir = Path(args.data_dir)
-    ticker_dir = data_dir / "ticker"
-    data_dir.mkdir(parents=True, exist_ok=True)
-    ticker_dir.mkdir(parents=True, exist_ok=True)
+    data_dir = Path(args.data_dir); data_dir.mkdir(parents=True, exist_ok=True)
+    ticker_dir = data_dir / "ticker"; ticker_dir.mkdir(parents=True, exist_ok=True)
+    sp500_csv  = Path(args.sp500_csv) if args.sp500_csv else None
 
-    # Build index.json
-    index_rows = _index_from_tickers(ticker_dir)
+    # ----- index rows -----
+    rows, mcaps = _index_from_tickers(ticker_dir, sp500_csv if sp500_csv and sp500_csv.exists() else None)
+    syms = [r["symbol"] for r in rows]
+    mcaps = _fetch_missing_mcaps(syms, mcaps)
+
+    # ----- index EW / Cap-weighted sentiment -----
+    last_date, ew, cw = _sp500_sentiment(rows, mcaps)
+
+    # ----- write index.json -----
     with (data_dir / "index.json").open("w", encoding="utf-8") as f:
-        json.dump({"count": len(index_rows), "tickers": index_rows}, f, ensure_ascii=False)
+        json.dump({
+            "count": len(rows),
+            "sp500": {"date": last_date, "sentiment_equal": ew, "sentiment_cap": cw},
+            "tickers": rows
+        }, f, ensure_ascii=False)
 
-    # Build portfolio.json
-    port = _portfolio_from_signals(ticker_dir)
+    # ----- portfolio (long-only) -----
+    preds, scores = _daily_signal_maps(ticker_dir)
+    rets = _daily_returns_map(ticker_dir)
+    curve, daily = _build_long_only(preds, scores, rets, top_n=args.top_n)
+    p_metrics = _metrics(daily)
+
+    # ----- benchmark (^GSPC) -----
+    first_date = curve[0]["date"] if curve else None
+    last_date  = curve[-1]["date"] if curve else None
+    gspc_prices = _download_gspc(first_date, last_date)
+    with (data_dir / "benchmark_gspc.json").open("w", encoding="utf-8") as f:
+        json.dump({"symbol":"^GSPC", "prices": gspc_prices}, f, ensure_ascii=False)
+
+    g_eq, g_daily = _equity_from_prices(gspc_prices)
+    g_metrics = _metrics(g_daily)
+
+    # ----- comparison -----
+    comp=[]
+    pm = {x["date"]: x["equity"] for x in curve}
+    gm = {x["date"]: x["equity"] for x in g_eq}
+    for d in sorted(set(pm.keys()) | set(gm.keys())):
+        if d in pm and d in gm:
+            comp.append({"date": d, "portfolio": pm[d], "sp500": gm[d]})
+
+    # ----- write portfolio.json -----
     with (data_dir / "portfolio.json").open("w", encoding="utf-8") as f:
-        json.dump(port, f, ensure_ascii=False)
-
+        json.dump({
+            "long_only": {"n": args.top_n, "rebalance": "daily",
+                          "metrics": p_metrics,
+                          "equity_curve": curve,
+                          "daily": daily},
+            "benchmark": {"symbol":"^GSPC",
+                          "metrics": g_metrics,
+                          "equity_curve": g_eq,
+                          "daily": g_daily},
+            "comparison": comp
+        }, f, ensure_ascii=False)
 
 if __name__ == "__main__":
     main()
