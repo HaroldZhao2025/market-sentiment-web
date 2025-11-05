@@ -409,83 +409,6 @@ jobs:
             logf.close()
             print(f"[FH] {t}: wrote {wrote} files, skipped {skipped}")
 
-      # ---------- Daily sentiment (FinBERT), counts (daily + manual only)
-      - name: Compute daily sentiment from both sources
-        if: ${{ env.RUN_KIND != 'hourly' }}
-        shell: python
-        run: |
-          import os, json, glob, pandas as pd
-          from pathlib import Path
-          from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
-
-          START=os.environ["START"]; END=os.environ["END"]; TICKER_CSV=os.environ["TICKER_CSV"]
-          model_name = "ProsusAI/finbert"
-          tok = AutoTokenizer.from_pretrained(model_name)
-          mdl = AutoModelForSequenceClassification.from_pretrained(model_name)
-          clf = pipeline("sentiment-analysis", model=mdl, tokenizer=tok, return_all_scores=True, truncation=True)
-
-          def read_universe(csv_path: str) -> list[str]:
-            df = pd.read_csv(csv_path)
-            col = [c for c in df.columns if c.lower()=="ticker"]
-            if not col: return []
-            return [str(x).strip().upper().replace(".", "-") for x in df[col[0]].dropna().unique().tolist()]
-
-          s = pd.to_datetime(START, utc=True).date()
-          e = pd.to_datetime(END, utc=True).date()
-
-          for t in read_universe(TICKER_CSV):
-            base = Path(f"data/{t}")
-            (base/"sentiment").mkdir(parents=True, exist_ok=True)
-
-            day_texts = {}
-            for prov in ("finnhub","yfinance"):
-              nd = base/"news"/prov
-              if not nd.exists():
-                continue
-              for p in sorted(glob.glob(str(nd/"*.json"))):
-                day = Path(p).stem
-                try:
-                  ddate = pd.to_datetime(day, utc=True).date()
-                except Exception:
-                  continue
-                if ddate < s or ddate > e:
-                  continue
-                try:
-                  arr = json.load(open(p, encoding="utf-8")) or []
-                except Exception:
-                  arr = []
-                rec = day_texts.setdefault(day, {"texts": [], "counts": {"finnhub":0, "yfinance":0}})
-                for it in arr:
-                  title = (it.get("headline") or "").strip()
-                  if title:
-                    rec["texts"].append(title)
-                    rec["counts"][prov] += 1
-
-            for day, obj in day_texts.items():
-              out = base/"sentiment"/f"{day}.json"
-              if out.exists() and out.stat().st_size>0:
-                continue
-              texts = obj["texts"]
-              if not texts:
-                json.dump({"date": day, "ticker": t, "n_total": 0, "n_finnhub": 0, "n_yfinance": 0, "score_mean": 0.0}, open(out,"w"), indent=2)
-                continue
-              preds = clf(texts, batch_size=16)
-              vals=[]
-              for per in preds:
-                d = {x["label"].lower(): float(x["score"]) for x in per}
-                s_val = d.get("positive",0.0) - d.get("negative",0.0)
-                vals.append(s_val)
-              mean = round(float(pd.Series(vals).mean()), 4)
-              json.dump({
-                "date": day,
-                "ticker": t,
-                "n_total": len(texts),
-                "n_finnhub": obj["counts"]["finnhub"],
-                "n_yfinance": obj["counts"]["yfinance"],
-                "score_mean": mean
-              }, open(out,"w"), indent=2)
-            print(f"[SENT] {t}: sentiment JSON written")
-
       - name: Aggregate news counts (src/market_sentiment/build_news_counts.py)
         shell: bash
         env:
@@ -716,14 +639,6 @@ jobs:
           rsync -a apps/web/public/data/ public/data/
           echo "Mirrored apps/web/public/data -> public/data"
 
-      # --- Sanity check BEFORE Next build (ensure data exists for SSG)
-      - name: Sanity check assembled site JSON
-        run: |
-          set -euo pipefail
-          test -s apps/web/public/data/_tickers.json
-          # Check a couple of known files exist
-          ls -l apps/web/public/data/ticker | head -n 5 || true
-
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
         if: always()
@@ -790,9 +705,12 @@ jobs:
             rsync -a .next/static/ out/_next/static/
           fi
 
-          # Always copy public to out (even if it's empty)
-          mkdir -p public
-          rsync -a public/ out/
+          if [ -d "public" ]; then
+            rsync -a public/ out/
+          else
+            mkdir -p public
+            rsync -a public/ out/
+          fi
 
           if [ -d ".next/server/app" ]; then
             find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
@@ -810,15 +728,10 @@ jobs:
           fi
 
           touch out/.nojekyll
+          find out -maxdepth 3 -type f | sort
 
-          # --- SAFE, CAPPED LISTING (avoid SIGPIPE under pipefail) ---
-          {
-            set +o pipefail
-            # show at most 200 files to avoid log truncation / broken pipe
-            find out -maxdepth 3 -type f -printf '%P\n' | sort | head -n 200
-            set -o pipefail
-          } || true
-          echo "Total files in out/: $(find out -type f | wc -l)"
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
