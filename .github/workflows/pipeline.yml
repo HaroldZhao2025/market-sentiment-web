@@ -708,13 +708,21 @@ jobs:
             (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
             print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(scored)} price={len(obj['price'])})")
 
-      # >>> NEW: Mirror data for SSG read (monorepo safety)
+      # >>> Mirror data for SSG read (monorepo safety)
       - name: Mirror data into repo-root public/ for SSG
         run: |
           set -euo pipefail
           mkdir -p public/data
           rsync -a apps/web/public/data/ public/data/
-          echo "Mirrored apps/web/public/data -> public/data (for process.cwd() variance)"
+          echo "Mirrored apps/web/public/data -> public/data"
+
+      # --- Sanity check BEFORE Next build (ensure data exists for SSG)
+      - name: Sanity check assembled site JSON
+        run: |
+          set -euo pipefail
+          test -s apps/web/public/data/_tickers.json
+          # Check a couple of known files exist
+          ls -l apps/web/public/data/ticker | head -n 5 || true
 
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
@@ -782,12 +790,9 @@ jobs:
             rsync -a .next/static/ out/_next/static/
           fi
 
-          if [ -d "public" ]; then
-            rsync -a public/ out/
-          else
-            mkdir -p public
-            rsync -a public/ out/
-          fi
+          # Always copy public to out (even if it's empty)
+          mkdir -p public
+          rsync -a public/ out/
 
           if [ -d ".next/server/app" ]; then
             find .next/server/app -type f -name 'index.html' -print0 | while IFS= read -r -d '' f; do
@@ -805,7 +810,15 @@ jobs:
           fi
 
           touch out/.nojekyll
-          find out -maxdepth 3 -type f | sort
+          find out -maxdepth 3 -type f | sort | head -n 50
+
+      # --- Sanity check AFTER Next build (artifact contains data)
+      - name: Sanity check out/ data
+        run: |
+          set -euo pipefail
+          test -s apps/web/out/data/_tickers.json
+          # Show a couple of ticker files (prove they’re in the artifact)
+          ls -l apps/web/out/data/ticker | head -n 5 || true
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
