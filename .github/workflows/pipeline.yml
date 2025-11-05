@@ -714,6 +714,24 @@ jobs:
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
               print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(scored)} price={len(obj['price'])})")
 
+      - name: Build S&P500 index + portfolio manifests (post-build)
+        shell: bash
+        run: |
+          python -m market_sentiment.cli.build_index_portfolio --data-dir apps/web/public/data
+          echo "Wrote:"
+          ls -lh apps/web/public/data/index.json || true
+          ls -lh apps/web/public/data/portfolio.json || true
+          
+      - name: Sanity-check data presence
+        shell: bash
+        run: |
+          echo "Ticker JSON files:"
+          ls apps/web/public/data/ticker | wc -l || true
+          echo "index.json, portfolio.json present?"
+          [ -s apps/web/public/data/index.json ] && echo "index.json OK" || echo "index.json MISSING"
+          [ -s apps/web/public/data/portfolio.json ] && echo "portfolio.json OK" || echo "portfolio.json MISSING"
+
+
       # ---------- Commit & push raw data even if ignored ----------
       - name: Commit & push data directory
         if: always()
