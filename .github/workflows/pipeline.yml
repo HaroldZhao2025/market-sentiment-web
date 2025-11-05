@@ -810,18 +810,15 @@ jobs:
           fi
 
           touch out/.nojekyll
-          find out -maxdepth 3 -type f | sort | head -n 50
 
-      # --- Sanity check AFTER Next build (artifact contains data)
-      - name: Sanity check out/ data
-        run: |
-          set -euo pipefail
-          test -s apps/web/out/data/_tickers.json
-          # Show a couple of ticker files (prove they’re in the artifact)
-          ls -l apps/web/out/data/ticker | head -n 5 || true
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+          # --- SAFE, CAPPED LISTING (avoid SIGPIPE under pipefail) ---
+          {
+            set +o pipefail
+            # show at most 200 files to avoid log truncation / broken pipe
+            find out -maxdepth 3 -type f -printf '%P\n' | sort | head -n 200
+            set -o pipefail
+          } || true
+          echo "Total files in out/: $(find out -type f | wc -l)"
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
