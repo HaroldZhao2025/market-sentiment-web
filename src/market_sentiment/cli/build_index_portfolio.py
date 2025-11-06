@@ -28,23 +28,22 @@ def _safe_get(d: Dict[str, Any], *keys, default=None):
 
 def _date_str(x) -> str:
     """
-    Normalize any date-like (pd.Timestamp / datetime / date / str) to 'YYYY-MM-DD'.
-    Never raises; best-effort.
+    Normalize any date-like to 'YYYY-MM-DD'.
     """
     try:
         ts = pd.to_datetime(x, errors="coerce")
         if isinstance(ts, pd.Timestamp):
-            # strip tz if present
-            return ts.tz_localize(None) if ts.tzinfo else ts
-        return ts
+            ts = ts.tz_localize(None) if ts.tzinfo else ts
+            return ts.date().isoformat()
+        if pd.isna(ts):
+            return str(x)[:10]
+        # Sometimes returns a date already
+        return str(getattr(ts, "date", lambda: ts)())
     except Exception:
-        ts = None
-    if ts is None:
         try:
             return str(x)[:10]
         except Exception:
             return "1970-01-01"
-    return str(getattr(ts, "date", lambda: ts)())
 
 # ------------------------- Per-ticker extractors -------------------------
 
@@ -70,6 +69,7 @@ def _extract_meta(j: Dict[str, Any]) -> Tuple[str, str, Optional[float]]:
     return str(name), str(sector), mcap
 
 def _extract_daily_scores(j: Dict[str, Any]) -> List[Dict[str, Any]]:
+    # Try common shapes: sentiment.daily OR daily
     cand = _safe_get(j, "sentiment", "daily")
     if not isinstance(cand, list):
         cand = _safe_get(j, "daily")
@@ -204,14 +204,9 @@ def _sp500_sentiment(rows: List[Dict[str, Any]], market_caps: Dict[str, float]) 
 
     ew = sum(vals.values()) / len(vals)
 
-    weights = []
-    vlist   = []
     total_mcap = sum(market_caps.get(s, 0.0) for s in vals.keys())
     if total_mcap > 0:
-        for s,v in vals.items():
-            w = market_caps.get(s, 0.0) / total_mcap
-            weights.append(w); vlist.append(v)
-        cw = sum(w*v for w,v in zip(weights, vlist))
+        cw = sum((market_caps.get(s, 0.0)/total_mcap) * v for s, v in vals.items())
     else:
         cw = None
 
@@ -303,23 +298,82 @@ def _metrics(daily_rets: List[Dict[str,Any]]) -> Dict[str, float]:
 
 # ------------------------- Benchmark (^GSPC) -------------------------
 
-def _download_gspc(first_date: Optional[str], last_date: Optional[str]) -> List[Dict[str,Any]]:
-    # pad a bit
-    start = (pd.to_datetime(first_date, errors="coerce") - pd.Timedelta(days=5)).date() if first_date else dt.date(2010,1,1)
-    end   = (pd.to_datetime(last_date,  errors="coerce") + pd.Timedelta(days=5)).date() if last_date  else dt.date.today()
+def _extract_close_series(df: pd.DataFrame) -> Optional[pd.Series]:
+    """
+    Handle all yfinance shapes:
+    - Single-level columns with 'Close' or 'Adj Close' (Series).
+    - MultiIndex columns like ('Close','^GSPC') -> slice to a Series.
+    - If 'Close' slice yields a DataFrame (multiple tickers), pick the first column.
+    Returns a pd.Series indexed by datetime-like.
+    """
+    if df is None or df.empty:
+        return None
+
+    # If MultiIndex columns
+    if isinstance(df.columns, pd.MultiIndex):
+        for label in ("Close", "Adj Close"):
+            if label in df.columns.get_level_values(0):
+                sub = df[label]
+                # sub can be Series (if single ticker) or DataFrame (multi)
+                if isinstance(sub, pd.Series):
+                    return sub
+                if isinstance(sub, pd.DataFrame) and not sub.empty:
+                    # Prefer ^GSPC column name if present; else first column
+                    for col in sub.columns:
+                        if str(col).upper() in ("^GSPC","GSPC","SPY"):
+                            return sub[col]
+                    return sub.iloc[:, 0]
+        # Fallback: first level 0
+        return df.xs(df.columns.levels[0][0], axis=1, level=0, drop_level=False).squeeze()
+
+    # Single-level columns
+    for col in ("Close", "Adj Close", "close", "adj close", "Adj_Close"):
+        if col in df.columns:
+            sub = df[col]
+            if isinstance(sub, pd.Series):
+                return sub
+            if isinstance(sub, pd.DataFrame) and not sub.empty:
+                return sub.iloc[:, 0]
+
+    # As a last resort, try the first numeric column
+    for col in df.columns:
+        try:
+            if pd.api.types.is_numeric_dtype(df[col]):
+                sub = df[col]
+                return sub if isinstance(sub, pd.Series) else sub.iloc[:, 0]
+        except Exception:
+            pass
+
+    return None
+
+def _download_prices_symbol(symbol: str, start: dt.date, end: dt.date) -> List[Dict[str, Any]]:
     try:
-        df = yf.download("^GSPC", start=start, end=end, auto_adjust=True, progress=False, interval="1d")
+        df = yf.download(symbol, start=start, end=end, auto_adjust=True, progress=False, interval="1d", group_by="column")
     except Exception:
         df = pd.DataFrame()
     out=[]
-    if isinstance(df, pd.DataFrame) and not df.empty and "Close" in df.columns:
-        idx = list(df.index)
-        closes = df["Close"].tolist()
-        for d, c in zip(idx, closes):
-            if pd.isna(c): 
-                continue
-            out.append({"date": _date_str(d), "close": float(c)})
+    if isinstance(df, pd.DataFrame) and not df.empty:
+        ser = _extract_close_series(df)
+        if isinstance(ser, pd.Series) and not ser.empty:
+            for d, c in ser.items():
+                if pd.isna(c): 
+                    continue
+                out.append({"date": _date_str(d), "close": float(c)})
     return out
+
+def _download_gspc(first_date: Optional[str], last_date: Optional[str]) -> Tuple[str, List[Dict[str,Any]]]:
+    # pad a bit
+    start = (pd.to_datetime(first_date, errors="coerce") - pd.Timedelta(days=5)).date() if first_date else dt.date(2010,1,1)
+    end   = (pd.to_datetime(last_date,  errors="coerce") + pd.Timedelta(days=5)).date() if last_date  else dt.date.today()
+
+    # Try ^GSPC first, then fallback to SPY if needed
+    data = _download_prices_symbol("^GSPC", start, end)
+    if data:
+        return "^GSPC", data
+    data = _download_prices_symbol("SPY", start, end)
+    if data:
+        return "SPY", data
+    return "SPX_proxy_EW", []  # signal to build proxy
 
 def _equity_from_prices(prices: List[Dict[str,Any]]) -> Tuple[List[Dict[str,Any]], List[Dict[str,Any]]]:
     arr = sorted(prices, key=lambda r: r["date"])
@@ -387,17 +441,14 @@ def main():
     curve, daily = _build_long_only(preds, scores, rets, top_n=args.top_n)
     p_metrics = _metrics(daily)
 
-    # ----- benchmark (^GSPC) with robust fallback -----
+    # ----- benchmark (^GSPC -> SPY -> EW proxy) -----
     first_date = curve[0]["date"] if curve else None
     last_date  = curve[-1]["date"] if curve else None
-    gspc_prices = _download_gspc(first_date, last_date)
-    if not gspc_prices:
-        # Fallback: SP500 equal-weight proxy from member returns
+    bench_symbol, gspc_prices = _download_gspc(first_date, last_date)
+    if bench_symbol == "SPX_proxy_EW" or not gspc_prices:
         g_eq, g_daily = _sp500_proxy_from_rets(rets)
-        bench_symbol = "SPX_proxy_EW"
     else:
         g_eq, g_daily = _equity_from_prices(gspc_prices)
-        bench_symbol = "^GSPC"
 
     with (data_dir / "benchmark_gspc.json").open("w", encoding="utf-8") as f:
         json.dump({"symbol": bench_symbol, "prices": gspc_prices}, f, ensure_ascii=False)
