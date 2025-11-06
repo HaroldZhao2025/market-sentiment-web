@@ -26,6 +26,26 @@ def _safe_get(d: Dict[str, Any], *keys, default=None):
     except Exception:
         return default
 
+def _date_str(x) -> str:
+    """
+    Normalize any date-like (pd.Timestamp / datetime / date / str) to 'YYYY-MM-DD'.
+    Never raises; best-effort.
+    """
+    try:
+        ts = pd.to_datetime(x, errors="coerce")
+        if isinstance(ts, pd.Timestamp):
+            # strip tz if present
+            return ts.tz_localize(None) if ts.tzinfo else ts
+        return ts
+    except Exception:
+        ts = None
+    if ts is None:
+        try:
+            return str(x)[:10]
+        except Exception:
+            return "1970-01-01"
+    return str(getattr(ts, "date", lambda: ts)())
+
 # ------------------------- Per-ticker extractors -------------------------
 
 def _extract_meta(j: Dict[str, Any]) -> Tuple[str, str, Optional[float]]:
@@ -50,7 +70,6 @@ def _extract_meta(j: Dict[str, Any]) -> Tuple[str, str, Optional[float]]:
     return str(name), str(sector), mcap
 
 def _extract_daily_scores(j: Dict[str, Any]) -> List[Dict[str, Any]]:
-    # Try common shapes: sentiment.daily OR daily
     cand = _safe_get(j, "sentiment", "daily")
     if not isinstance(cand, list):
         cand = _safe_get(j, "daily")
@@ -95,10 +114,6 @@ def _pctchg(prices: List[Dict[str, Any]]) -> Dict[str, float]:
 # ------------------------- Index assembly -------------------------
 
 def _index_from_tickers(ticker_dir: Path, sp500_csv: Optional[Path]) -> Tuple[List[Dict[str, Any]], Dict[str, float]]:
-    """
-    Returns rows plus optional {symbol->market_cap} from file; if missing in file, we fetch selectively.
-    """
-    # optional CSV enrichment
     name_map: Dict[str, str]   = {}
     sect_map: Dict[str, str]   = {}
     mcap_map: Dict[str, float] = {}
@@ -106,7 +121,6 @@ def _index_from_tickers(ticker_dir: Path, sp500_csv: Optional[Path]) -> Tuple[Li
     if sp500_csv and sp500_csv.exists():
         try:
             df = pd.read_csv(sp500_csv)
-            # Try common column names
             symcol = next(c for c in df.columns if c.lower() in ("symbol","ticker"))
             namecol= next((c for c in df.columns if c.lower() in ("security","name","company")), None)
             sectcol= next((c for c in df.columns if "sector" in c.lower()), None)
@@ -157,21 +171,26 @@ def _fetch_missing_mcaps(symbols: List[str], have: Dict[str, float]) -> Dict[str
     if not missing: return have
     for s in missing:
         try:
-            info = yf.Ticker(s).fast_info  # faster than .info
-            mcap = getattr(info, "market_cap", None)
+            tkr = yf.Ticker(s)
+            mcap = None
+            try:
+                fi = getattr(tkr, "fast_info", None)
+                mcap = getattr(fi, "market_cap", None) if fi is not None else None
+            except Exception:
+                mcap = None
             if mcap is None:
-                mcap = yf.Ticker(s).info.get("marketCap")
+                info = tkr.info or {}
+                mcap = info.get("marketCap")
             if mcap: have[s] = float(mcap)
         except Exception:
+            # tolerate 404s / delistings / bad symbols quietly
             pass
     return have
 
 def _sp500_sentiment(rows: List[Dict[str, Any]], market_caps: Dict[str, float]) -> Tuple[str, Optional[float], Optional[float]]:
-    # latest common "last_date" across rows (fallback to max)
     dates = [r["last_date"] for r in rows if r.get("last_date")]
     date = max(dates) if dates else None
 
-    # prefer predicted_return, fallback to score
     vals: Dict[str, float] = {}
     for r in rows:
         v = r.get("last_predicted_return")
@@ -183,10 +202,8 @@ def _sp500_sentiment(rows: List[Dict[str, Any]], market_caps: Dict[str, float]) 
     if not vals:
         return date or "", None, None
 
-    # equal-weight
     ew = sum(vals.values()) / len(vals)
 
-    # cap-weight (normalize mcaps over available vals)
     weights = []
     vlist   = []
     total_mcap = sum(market_caps.get(s, 0.0) for s in vals.keys())
@@ -235,18 +252,7 @@ def _daily_returns_map(ticker_dir: Path) -> Dict[str, Dict[str, float]]:
         if ret: out[sym]=ret
     return out
 
-def _align_dates(*series: List[str]) -> List[str]:
-    s=set()
-    for ser in series:
-        for d in ser: s.add(d)
-    return sorted(s)
-
 def _build_long_only(preds: Dict[str, Dict[str, float]], scores: Dict[str, Dict[str, float]], rets: Dict[str, Dict[str, float]], top_n: int=50) -> Tuple[List[Dict[str,Any]], List[Dict[str,Any]]]:
-    """
-    Rank daily by predicted return if available, else by score.
-    Long-only equal-weight top N; rebalance daily; same-day close->close return.
-    Returns equity_curve and daily list.
-    """
     all_dates = set()
     for m in list(preds.values()) + list(scores.values()):
         all_dates.update(m.keys())
@@ -254,7 +260,6 @@ def _build_long_only(preds: Dict[str, Dict[str, float]], scores: Dict[str, Dict[
     equity = 1.0
     curve=[]; daily=[]
     for d in dates:
-        # Build cross-section
         cross=[]
         for sym in rets.keys():
             v = preds.get(sym, {}).get(d)
@@ -262,9 +267,9 @@ def _build_long_only(preds: Dict[str, Dict[str, float]], scores: Dict[str, Dict[
             if v is not None and (d in rets.get(sym, {})):
                 try: cross.append((sym, float(v)))
                 except: pass
-        if len(cross) < max(10, top_n//2):  # not enough names
+        if len(cross) < max(10, top_n//2):
             continue
-        cross.sort(key=lambda x: x[1], reverse=True)  # top = biggest positive
+        cross.sort(key=lambda x: x[1], reverse=True)
         longs=[s for s,_ in cross[:top_n]]
         rlist=[rets[s][d] for s in longs if d in rets[s]]
         if not rlist: 
@@ -285,10 +290,7 @@ def _metrics(daily_rets: List[Dict[str,Any]]) -> Dict[str, float]:
     ann_mean = mean * 252
     ann_vol  = vol  * (252**0.5)
     sharpe = (ann_mean/ann_vol) if ann_vol>0 else 0.0
-    # CAGR from equity
-    eq=1.0
-    peak=1.0
-    maxdd=0.0
+    eq=1.0; peak=1.0; maxdd=0.0
     for r in ser:
         eq*=(1+r)
         peak=max(peak,eq)
@@ -303,17 +305,23 @@ def _metrics(daily_rets: List[Dict[str,Any]]) -> Dict[str, float]:
 
 def _download_gspc(first_date: Optional[str], last_date: Optional[str]) -> List[Dict[str,Any]]:
     # pad a bit
-    start = (pd.to_datetime(first_date) - pd.Timedelta(days=5)).date() if first_date else dt.date(2010,1,1)
-    end   = (pd.to_datetime(last_date)  + pd.Timedelta(days=5)).date() if last_date  else dt.date.today()
-    df = yf.download("^GSPC", start=start, end=end, auto_adjust=True, progress=False)
+    start = (pd.to_datetime(first_date, errors="coerce") - pd.Timedelta(days=5)).date() if first_date else dt.date(2010,1,1)
+    end   = (pd.to_datetime(last_date,  errors="coerce") + pd.Timedelta(days=5)).date() if last_date  else dt.date.today()
+    try:
+        df = yf.download("^GSPC", start=start, end=end, auto_adjust=True, progress=False, interval="1d")
+    except Exception:
+        df = pd.DataFrame()
     out=[]
-    if isinstance(df, pd.DataFrame) and not df.empty:
-        for d,c in df["Close"].items():
-            out.append({"date": str(d.date()), "close": float(c)})
+    if isinstance(df, pd.DataFrame) and not df.empty and "Close" in df.columns:
+        idx = list(df.index)
+        closes = df["Close"].tolist()
+        for d, c in zip(idx, closes):
+            if pd.isna(c): 
+                continue
+            out.append({"date": _date_str(d), "close": float(c)})
     return out
 
 def _equity_from_prices(prices: List[Dict[str,Any]]) -> Tuple[List[Dict[str,Any]], List[Dict[str,Any]]]:
-    # returns + equity
     arr = sorted(prices, key=lambda r: r["date"])
     daily=[]
     eq=[]
@@ -327,6 +335,22 @@ def _equity_from_prices(prices: List[Dict[str,Any]]) -> Tuple[List[Dict[str,Any]
             eq.append({"date": r["date"], "equity": equity})
         prev=c
     return eq, daily
+
+def _sp500_proxy_from_rets(rets: Dict[str, Dict[str, float]]) -> Tuple[List[Dict[str,Any]], List[Dict[str,Any]]]:
+    # Equal-weight proxy from member returns if Yahoo fails
+    dates=set()
+    for m in rets.values(): dates |= set(m.keys())
+    dates=sorted(dates)
+    equity=1.0
+    daily=[]; curve=[]
+    for d in dates:
+        xs=[m[d] for m in rets.values() if d in m]
+        if not xs: continue
+        r=sum(xs)/len(xs)
+        daily.append({"date": d, "ret": r})
+        equity*=(1+r)
+        curve.append({"date": d, "equity": equity})
+    return curve, daily
 
 # ------------------------- Main -------------------------
 
@@ -363,14 +387,21 @@ def main():
     curve, daily = _build_long_only(preds, scores, rets, top_n=args.top_n)
     p_metrics = _metrics(daily)
 
-    # ----- benchmark (^GSPC) -----
+    # ----- benchmark (^GSPC) with robust fallback -----
     first_date = curve[0]["date"] if curve else None
     last_date  = curve[-1]["date"] if curve else None
     gspc_prices = _download_gspc(first_date, last_date)
-    with (data_dir / "benchmark_gspc.json").open("w", encoding="utf-8") as f:
-        json.dump({"symbol":"^GSPC", "prices": gspc_prices}, f, ensure_ascii=False)
+    if not gspc_prices:
+        # Fallback: SP500 equal-weight proxy from member returns
+        g_eq, g_daily = _sp500_proxy_from_rets(rets)
+        bench_symbol = "SPX_proxy_EW"
+    else:
+        g_eq, g_daily = _equity_from_prices(gspc_prices)
+        bench_symbol = "^GSPC"
 
-    g_eq, g_daily = _equity_from_prices(gspc_prices)
+    with (data_dir / "benchmark_gspc.json").open("w", encoding="utf-8") as f:
+        json.dump({"symbol": bench_symbol, "prices": gspc_prices}, f, ensure_ascii=False)
+
     g_metrics = _metrics(g_daily)
 
     # ----- comparison -----
@@ -388,7 +419,7 @@ def main():
                           "metrics": p_metrics,
                           "equity_curve": curve,
                           "daily": daily},
-            "benchmark": {"symbol":"^GSPC",
+            "benchmark": {"symbol": bench_symbol,
                           "metrics": g_metrics,
                           "equity_curve": g_eq,
                           "daily": g_daily},
