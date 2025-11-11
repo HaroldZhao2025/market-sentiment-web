@@ -6,16 +6,50 @@ import TickerClient from "./TickerClient";
 type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
 
 type NewsItem = {
-  ts: string;
-  title: string;
-  url: string;
-  text?: string;
+  title?: string;
   source?: string;
-  provider?: string;
-  s?: number;
-  sentiment_label?: string;
-  probs?: { pos?: number; neu?: number; neg?: number };
+  url?: string;
+  date?: string;          // e.g., ISO string
+  publishedAt?: string;   // sometimes used instead of date
 };
+
+function pickRecentHeadlines(items: NewsItem[], max = 10): NewsItem[] {
+  const msDay = 24 * 60 * 60 * 1000;
+  const now = Date.now();
+
+  // Normalize + sort by time (desc)
+  const byTime = (items ?? [])
+    .filter(d => d && (d.date || d.publishedAt))
+    .map(d => ({ ...d, _t: Date.parse(d.publishedAt ?? d.date!) }))
+    .filter(d => Number.isFinite(d._t))
+    .sort((a, b) => b._t - a._t);
+
+  // Progressive windows: same-day → 3d → 7d → 14d → 30d
+  for (const days of [1, 3, 7, 14, 30]) {
+    const within = byTime.filter(d => now - d._t <= days * msDay);
+    // light de-dupe by normalized (source,title)
+    const seen = new Set<string>();
+    const dedupWithin = within.filter(d => {
+      const key = `${(d.source || "").toLowerCase()}::${(d.title || "").toLowerCase()}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    if (dedupWithin.length >= max) return dedupWithin.slice(0, max);
+  }
+
+const recent = pickRecentHeadlines(data?.news ?? [], 10);
+
+  // FINAL FALLBACK: just take latest 10 overall (deduped)
+  const seen2 = new Set<string>();
+  const dedupOverall = byTime.filter(d => {
+    const key = `${(d.source || "").toLowerCase()}::${(d.title || "").toLowerCase()}`;
+    if (seen2.has(key)) return false;
+    seen2.add(key);
+    return true;
+  });
+  return dedupOverall.slice(0, max);
+}
 
 export const dynamic = "error";
 export const dynamicParams = false;
