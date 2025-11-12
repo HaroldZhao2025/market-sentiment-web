@@ -5,6 +5,7 @@ import json
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Optional, Tuple
+from pathlib import Path
 
 import pandas as pd
 
@@ -18,6 +19,7 @@ from market_sentiment.finbert import FinBERT
 from market_sentiment.news import fetch_news
 from market_sentiment.prices import fetch_prices_yf
 from market_sentiment.writers import write_outputs
+from market_sentiment.news_enforcer import ensure_top_n_news_from_store
 
 
 # ---------------- FinBERT helpers ----------------
@@ -211,7 +213,62 @@ def main():
             panel[c] = 0.0
         panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
 
-    write_outputs(panel, news_rows, earn_rows, a.out)
+    def _df_rows_from_items(ticker: str, items: List[dict]) -> pd.DataFrame:
+        rows = []
+        for it in items:
+            ts = pd.to_datetime(
+                it.get("ts")
+                or (it.get("raw", {}) or {}).get("content", {}).get("displayTime")
+                or (it.get("raw", {}) or {}).get("pubDate"),
+                errors="coerce", utc=True
+            )
+            rows.append({
+                "ticker": ticker,
+                "ts": ts,
+                "title": it.get("headline") or it.get("title") or "",
+                "url": it.get("url") or "",
+                "text": it.get("summary") or it.get("text") or "",
+                "S": 0.0,
+            })
+        return pd.DataFrame(rows, columns=["ticker", "ts", "title", "url", "text", "S"])
+
+    if news_rows is not None and not news_rows.empty:
+        try:
+            s_map = news_rows.dropna(subset=["url"]).set_index("url")["S"].to_dict()
+        except Exception:
+            s_map = {}
+
+        out_parts: List[pd.DataFrame] = []
+        for t in tickers:
+            df_t = news_rows[news_rows["ticker"] == t].copy()
+            cur_items = [
+                {
+                    "ts": (r["ts"].isoformat() if pd.notnull(r["ts"]) else None),
+                    "headline": r.get("title", ""),
+                    "summary": r.get("text", ""),
+                    "url": r.get("url", "")
+                }
+                for _, r in df_t.iterrows()
+            ]
+            top10 = ensure_top_n_news_from_store(
+                symbol=t,
+                current_items=cur_items,
+                data_dir=Path("data"),
+                n=10,
+                providers=("yfinance", "finnhub", "newsapi"),
+                history_budget=200
+            )
+            df_top10 = _df_rows_from_items(t, top10)
+            if "url" in df_top10.columns and s_map:
+                df_top10["S"] = df_top10["url"].map(s_map).fillna(0.0)
+            out_parts.append(df_top10)
+
+        news_rows_for_write = pd.concat(out_parts, ignore_index=True)
+    else:
+        news_rows_for_write = news_rows
+
+    # 原先：write_outputs(panel, news_rows, earn_rows, a.out)
+    write_outputs(panel, news_rows_for_write, earn_rows, a.out)
 
     # Summary (from written files)
     tickers_list, have_files, with_news, with_nonzero_s = _summarize_from_files(a.out)
