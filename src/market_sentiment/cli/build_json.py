@@ -239,6 +239,11 @@ def main():
             s_map = {}
 
         out_parts: List[pd.DataFrame] = []
+        pages_base = os.environ.get(
+            "PAGES_BASE_URL",
+            "https://haroldzhao2025.github.io/market-sentiment-web",
+        )
+
         for t in tickers:
             df_t = news_rows[news_rows["ticker"] == t].copy()
             cur_items = [
@@ -250,15 +255,36 @@ def main():
                 }
                 for _, r in df_t.iterrows()
             ]
+
             top10 = ensure_top_n_news_from_store(
                 symbol=t,
                 current_items=cur_items,
                 data_dir=Path("data"),
                 n=10,
                 providers=("yfinance", "finnhub", "newsapi"),
-                history_budget=200
+                history_budget=200,
+                out_dir=Path(a.out),                 
+                pages_base_url=pages_base,           
             )
-            df_top10 = _df_rows_from_items(t, top10)
+
+            def _to_row(it: dict) -> dict:
+                ts = pd.to_datetime(
+                    it.get("ts")
+                    or (it.get("raw", {}) or {}).get("content", {}).get("displayTime")
+                    or (it.get("raw", {}) or {}).get("pubDate"),
+                    errors="coerce", utc=True
+                )
+                return {
+                    "ticker": t,
+                    "ts": ts,
+                    "title": it.get("headline") or it.get("title") or "",
+                    "url": it.get("url") or "",
+                    "text": it.get("summary") or it.get("text") or "",
+                    "S": 0.0,
+                }
+
+            df_top10 = pd.DataFrame([_to_row(it) for it in top10],
+                                    columns=["ticker","ts","title","url","text","S"])
             if "url" in df_top10.columns and s_map:
                 df_top10["S"] = df_top10["url"].map(s_map).fillna(0.0)
             out_parts.append(df_top10)
@@ -267,7 +293,6 @@ def main():
     else:
         news_rows_for_write = news_rows
 
-    # 原先：write_outputs(panel, news_rows, earn_rows, a.out)
     write_outputs(panel, news_rows_for_write, earn_rows, a.out)
 
     # Summary (from written files)
