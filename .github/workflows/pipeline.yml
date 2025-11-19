@@ -714,6 +714,13 @@ jobs:
               (pub/"ticker"/f"{t}.json").write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
               print(f"[SITE] wrote {pub/'ticker'/f'{t}.json'} (days={len(rows)} news={len(scored)} price={len(obj['price'])})")
 
+      - name: Build S&P 500 index data
+        run: |
+          python -m market_sentiment.cli.build_sp500_index \
+            --universe data/sp500.csv \
+            --data-root apps/web/public/data \
+            --out apps/web/public/data
+
       - name: Build S&P500 index + portfolio manifests (post-build)
         shell: bash
         run: |
