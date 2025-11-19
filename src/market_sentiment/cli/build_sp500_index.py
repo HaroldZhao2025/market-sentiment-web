@@ -13,8 +13,11 @@ import yfinance as yf
 # Constants
 # ----------------------------------------------------------------------
 
+# For prices we try these in order
 INDEX_PRICE_SYMBOL_CANDIDATES = ["^GSPC", "^SPX", "SPY"]
-INDEX_NEWS_SYMBOL_CANDIDATES = ["^GSPC", "^SPX", "SPY"]
+
+# For news we try ^SPX first (the way you do manually), then fallbacks
+INDEX_NEWS_SYMBOL_CANDIDATES = ["^SPX", "^GSPC", "SPY"]
 
 INDEX_SYMBOL = "SPX"        # name to expose on the site
 INDEX_NAME = "S&P 500 Index"
@@ -50,11 +53,14 @@ def _default_start_one_year(end_str: str) -> str:
 # ----------------------------------------------------------------------
 
 def _make_flat(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Make sure there is no MultiIndex on index or columns so that
+    merges are always safe.
+    """
     df = df.copy()
     if isinstance(df.index, pd.MultiIndex):
         df = df.reset_index()
     if isinstance(df.columns, pd.MultiIndex):
-        # join tuple column names with underscore
         df.columns = [
             "_".join(str(c) for c in col if c not in ("", None))
             for col in df.columns
@@ -100,7 +106,6 @@ def download_spx_prices(start: str, end: str) -> pd.DataFrame:
         elif "Adj Close" in df.columns:
             close_col = "Adj Close"
         else:
-            # This would be very weird, but just in case
             print(f"[SPX] {sym} missing Close/Adj Close, trying next candidate")
             continue
 
@@ -118,8 +123,11 @@ def download_spx_prices(start: str, end: str) -> pd.DataFrame:
 
 def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFrame:
     """
-    Try multiple yfinance symbols for S&P 500 news: ^GSPC, ^SPX, SPY.
-    Returns ['date', 'title', 'publisher', 'link'].
+    Try multiple yfinance symbols for S&P 500 news, using:
+        t.get_news(count=max_items, tab="all")
+    and falling back to t.news if get_news is unavailable.
+
+    Returns columns: ['date', 'title', 'publisher', 'link'].
     """
     start_dt = _parse_date(start)
     end_dt = _parse_date(end) + timedelta(days=1)
@@ -128,7 +136,12 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
         print(f"[SPX] Fetching news for {sym} ...")
         try:
             t = yf.Ticker(sym)
-            raw = t.news or []
+            # Preferred path: new yfinance API
+            try:
+                raw = t.get_news(count=max_items, tab="all") or []
+            except AttributeError:
+                # Fallback: older yfinance versions
+                raw = t.news or []
         except Exception as e:
             print(f"[SPX] Error fetching news for {sym}: {e!r}")
             raw = []
@@ -138,7 +151,7 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
             continue
 
         rows: List[Dict[str, Any]] = []
-        for item in raw[:max_items]:
+        for item in raw:
             ts = item.get("providerPublishTime")
             if ts is None:
                 continue
@@ -162,8 +175,11 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
         news_df = (
             pd.DataFrame(rows)
             .sort_values(["date", "publisher", "title"])
-            .reset_index(drop=True)
+            .reset_index(drop_by=True)  # type: ignore[arg-type]
         )
+        # In case of older pandas without drop_by, fallback:
+        # news_df = news_df.sort_values(["date", "publisher", "title"]).reset_index(drop=True)
+
         print(f"[SPX] Using {sym} for news, {len(news_df)} articles in range")
         return news_df
 
@@ -203,13 +219,14 @@ def fetch_market_caps_from_yf(symbols: List[str]) -> pd.DataFrame:
         try:
             t = multi.tickers.get(sym) or yf.Ticker(sym)
 
-            # fast_info first
+            # Try fast_info first
             fi = getattr(t, "fast_info", None)
             if isinstance(fi, dict):
                 mc = fi.get("market_cap")
             else:
                 mc = getattr(fi, "market_cap", None)
 
+            # Fallback: full info
             if mc is None:
                 info = getattr(t, "info", {}) or {}
                 if isinstance(info, dict):
@@ -228,9 +245,7 @@ def fetch_market_caps_from_yf(symbols: List[str]) -> pd.DataFrame:
     return caps
 
 
-def load_universe_with_weights(
-    universe_path: Path,
-) -> pd.DataFrame:
+def load_universe_with_weights(universe_path: Path) -> pd.DataFrame:
     """
     Load universe and ensure:
       - column 'symbol'
@@ -239,17 +254,17 @@ def load_universe_with_weights(
     """
     uni = pd.read_csv(universe_path)
 
+    # symbol column
     sym_col = _find_symbol_column(uni)
     uni = uni.rename(columns={sym_col: "symbol"})
 
+    # market cap column
     mktcap_col = _find_market_cap_column(uni)
     if mktcap_col is None:
-        # fetch from yfinance
         symbols = sorted(uni["symbol"].astype(str).unique().tolist())
         caps = fetch_market_caps_from_yf(symbols)
         if caps.empty:
             raise ValueError("[SPX] Could not fetch any market caps from yfinance")
-
         uni = uni.merge(caps, on="symbol", how="inner")
     else:
         uni = uni.rename(columns={mktcap_col: "market_cap"})
@@ -273,8 +288,8 @@ def load_universe_with_weights(
 def load_ticker_daily_sentiment_from_files(
     sentiment_root: Path,
     symbol: str,
-    start_date: datetime.date,
-    end_date: datetime.date,
+    start_date,
+    end_date,
 ) -> pd.DataFrame:
     """
     Read daily sentiment from:
@@ -290,7 +305,7 @@ def load_ticker_daily_sentiment_from_files(
       "score_mean": -0.0004
     }
 
-    We use 'score_mean' as the sentiment.
+    We use 'score_mean' as the sentiment (fallback to 'sentiment' if needed).
     """
     folder = sentiment_root / symbol / "sentiment"
     if not folder.exists():
@@ -309,13 +324,14 @@ def load_ticker_daily_sentiment_from_files(
         try:
             d = datetime.fromisoformat(date_str).date()
         except Exception:
-            # Skip if date malformed
             continue
 
         if d < start_date or d > end_date:
             continue
 
         sentiment = obj.get("score_mean")
+        if sentiment is None:
+            sentiment = obj.get("sentiment")
         rows.append({"date": d.isoformat(), "sentiment": sentiment})
 
     if not rows:
@@ -364,27 +380,36 @@ def compute_cap_weighted_sentiment(
         return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
 
     panel = pd.concat(frames, ignore_index=True)
+
+    # Ensure date is a date object
     panel["date"] = pd.to_datetime(panel["date"]).dt.date
 
-    def _agg_one_day(g: pd.DataFrame) -> float:
-        w = g["base_weight"].astype(float)
-        s = g["sentiment"].astype(float)
-        mask = s.notna()
-        w = w[mask]
-        s = s[mask]
-        if w.empty:
-            return float("nan")
-        # Renormalise among tickers that actually have sentiment that day
-        w = w / w.sum()
-        return float((w * s).sum())
+    # Restrict to [start, end] (defensive; loader already filters)
+    panel = panel[(panel["date"] >= start_date) & (panel["date"] <= end_date)]
 
+    if panel.empty:
+        print("[SPX] Panel empty after date filter")
+        return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
+
+    # Ensure sentiment is numeric
+    panel["sentiment"] = pd.to_numeric(panel["sentiment"], errors="coerce")
+    panel = panel.dropna(subset=["sentiment"])
+
+    if panel.empty:
+        print("[SPX] All sentiment values were NaN after conversion")
+        return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
+
+    # Weighted sum per day
+    tmp = panel.assign(weighted=panel["base_weight"] * panel["sentiment"])
     out = (
-        panel.groupby("date")
-        .apply(_agg_one_day)
-        .reset_index(name="sentiment_cap_weighted")
+        tmp.groupby("date", as_index=False)
+        .agg(total_weight=("base_weight", "sum"), weighted_sum=("weighted", "sum"))
     )
-    out["date"] = out["date"].dt.date.astype(str)
-    out = out.sort_values("date").reset_index(drop=True)
+    out["sentiment_cap_weighted"] = out["weighted_sum"] / out["total_weight"]
+    out = out[["date", "sentiment_cap_weighted"]]
+
+    # Convert date to string for JSON
+    out["date"] = out["date"].astype(str)
 
     print(f"[SPX] Built cap-weighted sentiment for {len(out)} days")
     return out
@@ -405,7 +430,6 @@ def build_sp500_index_payload(
     prices = _make_flat(prices)
     sentiment = _make_flat(sentiment)
 
-    # Ensure 'date' exists even if sentiment is empty
     if not sentiment.empty and "date" not in sentiment.columns:
         raise ValueError("[SPX] Sentiment DataFrame has no 'date' column")
 
@@ -415,7 +439,6 @@ def build_sp500_index_payload(
     payload: Dict[str, Any] = {
         "symbol": INDEX_SYMBOL,
         "name": INDEX_NAME,
-        # store which symbol we actually used for prices/news
         "price_symbol_candidates": INDEX_PRICE_SYMBOL_CANDIDATES,
         "news_symbol_candidates": INDEX_NEWS_SYMBOL_CANDIDATES,
         "daily": daily.to_dict(orient="records"),
