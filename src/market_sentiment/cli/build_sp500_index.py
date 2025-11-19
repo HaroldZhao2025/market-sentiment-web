@@ -9,15 +9,18 @@ from typing import Optional, Dict, Any, List
 import pandas as pd
 import yfinance as yf
 
+# ----------------------------------------------------------------------
+# Constants
+# ----------------------------------------------------------------------
 
-# -------------------- constants --------------------
-
-INDEX_YF_SYMBOL = "^GSPC"         # yfinance symbol
-INDEX_SYMBOL = "SPX"              # index symbol used on your site
+INDEX_YF_SYMBOL = "^GSPC"   # yfinance symbol for S&P 500 index
+INDEX_SYMBOL = "SPX"        # symbol name to expose on site
 INDEX_NAME = "S&P 500 Index"
 
 
-# -------------------- date helpers --------------------
+# ----------------------------------------------------------------------
+# Date helpers
+# ----------------------------------------------------------------------
 
 def _parse_date(s: str) -> datetime:
     dt = datetime.fromisoformat(s)
@@ -40,7 +43,9 @@ def _default_start_one_year(end_str: str) -> str:
     return start_dt.date().isoformat()
 
 
-# -------------------- SPX price & news --------------------
+# ----------------------------------------------------------------------
+# SPX price & news
+# ----------------------------------------------------------------------
 
 def download_spx_prices(start: str, end: str) -> pd.DataFrame:
     """
@@ -120,51 +125,112 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
     return news_df
 
 
-# -------------------- cap-weighted sentiment --------------------
+# ----------------------------------------------------------------------
+# Market cap handling
+# ----------------------------------------------------------------------
+
+def _find_symbol_column(uni: pd.DataFrame) -> str:
+    for cand in ["symbol", "ticker", "Symbol", "Ticker"]:
+        if cand in uni.columns:
+            return cand
+    raise KeyError(f"Could not find symbol/ticker column in universe: {uni.columns.tolist()}")
+
+
+def _find_market_cap_column(uni: pd.DataFrame) -> Optional[str]:
+    for cand in ["marketCap", "market_cap", "MarketCap", "marketcap"]:
+        if cand in uni.columns:
+            return cand
+    return None
+
+
+def fetch_market_caps_from_yf(symbols: List[str]) -> pd.DataFrame:
+    """
+    Fetch market caps for all symbols using yfinance.
+
+    We use yf.Tickers(...) and then, for each symbol, try:
+      - fast_info["market_cap"]
+      - info["marketCap"]
+    """
+    print(f"[SPX] Fetching market caps from yfinance for {len(symbols)} tickers ...")
+    # yfinance Tickers takes space-separated or comma-separated string
+    multi = yf.Tickers(" ".join(symbols))
+
+    records: List[Dict[str, Any]] = []
+
+    for sym in symbols:
+        mc = None
+        try:
+            t = multi.tickers.get(sym) or yf.Ticker(sym)
+
+            # Try fast_info first
+            fi = getattr(t, "fast_info", None)
+            if isinstance(fi, dict):
+                mc = fi.get("market_cap")
+            else:
+                # Some versions expose attributes instead of dict
+                mc = getattr(fi, "market_cap", None)
+
+            # Fallback: full info
+            if mc is None:
+                info = getattr(t, "info", {}) or {}
+                if isinstance(info, dict):
+                    mc = info.get("marketCap")
+
+        except Exception as e:
+            print(f"[SPX] Warning: failed to fetch market cap for {sym}: {e!r}")
+            mc = None
+
+        records.append({"symbol": sym, "market_cap": mc})
+
+    caps = pd.DataFrame(records)
+    caps = caps.dropna(subset=["market_cap"])
+    caps = caps[caps["market_cap"] > 0]
+    print(f"[SPX] Got positive market caps for {len(caps)} of {len(symbols)} tickers")
+    return caps
+
 
 def load_universe_with_weights(
     universe_path: Path,
-    symbol_col: str = "symbol",
-    mktcap_col: str = "marketCap",
 ) -> pd.DataFrame:
     """
-    Load S&P 500 universe and compute static cap weights.
-    Supports several fallback column names to match your CSV.
+    Load universe and ensure we have a 'symbol' column and a 'weight' column.
+
+    If no market cap column exists, we fetch market caps from yfinance.
     """
     uni = pd.read_csv(universe_path)
 
-    # symbol column
-    if symbol_col not in uni.columns:
-        for cand in ["Symbol", "ticker", "Ticker"]:
-            if cand in uni.columns:
-                symbol_col = cand
-                break
-        else:
-            raise KeyError(f"Could not find symbol column in universe: {uni.columns.tolist()}")
+    # --- symbol column ---
+    sym_col = _find_symbol_column(uni)
+    uni = uni.rename(columns={sym_col: "symbol"})
 
-    # market cap column
-    if mktcap_col not in uni.columns:
-        for cand in ["market_cap", "MarketCap", "marketcap"]:
-            if cand in uni.columns:
-                mktcap_col = cand
-                break
-        else:
-            raise KeyError(f"Could not find market cap column in universe: {uni.columns.tolist()}")
+    # --- market cap column ---
+    mktcap_col = _find_market_cap_column(uni)
+    if mktcap_col is None:
+        # No market cap in universe: fetch from yfinance
+        symbols = sorted(uni["symbol"].astype(str).unique().tolist())
+        caps = fetch_market_caps_from_yf(symbols)
+        if caps.empty:
+            raise ValueError("[SPX] Could not fetch any market caps from yfinance")
 
-    uni = uni[[symbol_col, mktcap_col]].rename(
-        columns={symbol_col: "symbol", mktcap_col: "market_cap"}
-    )
+        uni = uni.merge(caps, on="symbol", how="inner")
+    else:
+        uni = uni.rename(columns={mktcap_col: "market_cap"})
+
     uni = uni.dropna(subset=["market_cap"])
     uni = uni[uni["market_cap"] > 0]
 
     total_cap = float(uni["market_cap"].sum())
     if total_cap <= 0:
-        raise ValueError("Total market cap is non-positive")
+        raise ValueError("[SPX] Total market cap is non-positive")
 
     uni["weight"] = uni["market_cap"] / total_cap
-    print(f"[SPX] Loaded {len(uni)} tickers with positive market cap")
-    return uni
+    print(f"[SPX] Loaded {len(uni)} tickers with positive market cap for weighting")
+    return uni[["symbol", "market_cap", "weight"]]
 
+
+# ----------------------------------------------------------------------
+# Sentiment aggregation
+# ----------------------------------------------------------------------
 
 def load_ticker_daily_sentiment(
     data_root: Path,
@@ -175,12 +241,10 @@ def load_ticker_daily_sentiment(
     """
     Load per-ticker JSON and return ['date', 'sentiment'].
 
-    Assumptions (matches your existing build_json output):
+    Assumptions (adapt to your build_json output if needed):
       - File: {data_root}/ticker/{symbol}.json
-      - Has a top-level list under key `daily` (or `series` / `timeline` fallback)
-      - Inside each row: a date field and a sentiment field.
-
-    If structure differs, adjust `daily_key` / `sentiment_key` or the fallback logic.
+      - Has a list under key 'daily' (fallback to 'series' or 'timeline').
+      - Each row has date + sentiment fields.
     """
     path = data_root / "ticker" / f"{symbol}.json"
     if not path.exists():
@@ -189,7 +253,7 @@ def load_ticker_daily_sentiment(
     with path.open("r") as f:
         obj = json.load(f)
 
-    # find the time-series key
+    # Time-series key
     if daily_key not in obj:
         for cand in ["series", "timeline"]:
             if cand in obj:
@@ -204,7 +268,7 @@ def load_ticker_daily_sentiment(
 
     df = pd.DataFrame(rows)
 
-    # choose date column
+    # Date column
     date_col = None
     for cand in ["date", "Date", "day"]:
         if cand in df.columns:
@@ -227,52 +291,55 @@ def compute_cap_weighted_sentiment(
     end: str,
 ) -> pd.DataFrame:
     """
-    For each day, compute cap-weighted sentiment:
-      Sent_index_t = sum_i w_i,t * s_i,t
-    where w_i,t is the (re-normalised) market-cap weight among tickers
-    that actually have sentiment on day t.
+    For each date t, compute cap-weighted sentiment:
+
+        Sent_t = sum_i w_i * s_i,t  /  sum_i w_i (over tickers with sentiment on day t)
     """
-    start_dt = datetime.fromisoformat(start).date()
-    end_dt = datetime.fromisoformat(end).date()
+    start_date = datetime.fromisoformat(start).date()
+    end_date = datetime.fromisoformat(end).date()
 
     frames: List[pd.DataFrame] = []
 
     for _, row in universe.iterrows():
         symbol = row["symbol"]
-        weight = row["weight"]
+        base_weight = float(row["weight"])
+
         df = load_ticker_daily_sentiment(data_root, symbol)
         if df.empty:
             continue
+
         df["symbol"] = symbol
-        df["weight"] = weight
+        df["base_weight"] = base_weight
         frames.append(df)
 
     if not frames:
-        print("[SPX] No per-ticker sentiment found")
+        print("[SPX] No per-ticker sentiment found in data_root")
         return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
 
     panel = pd.concat(frames, ignore_index=True)
     panel["date"] = pd.to_datetime(panel["date"]).dt.date
-    panel = panel[(panel["date"] >= start_dt) & (panel["date"] <= end_dt)]
+    panel = panel[(panel["date"] >= start_date) & (panel["date"] <= end_date)]
 
     if panel.empty:
         print("[SPX] Panel empty after date filter")
         return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
 
-    def _agg(group: pd.DataFrame) -> float:
-        w = group["weight"].astype(float)
-        s = group["sentiment"].astype(float)
+    def _agg_one_day(g: pd.DataFrame) -> float:
+        w = g["base_weight"].astype(float)
+        s = g["sentiment"].astype(float)
         mask = s.notna()
         w = w[mask]
         s = s[mask]
         if w.empty:
             return float("nan")
-        w = w / w.sum()  # renormalise among tickers with sentiment that day
+        # Renormalise among tickers that actually have sentiment that day
+        w = w / w.sum()
         return float((w * s).sum())
 
     out = (
-        panel.groupby("date", as_index=False)
-        .apply(lambda g: pd.Series({"sentiment_cap_weighted": _agg(g)}))
+        panel.groupby("date")
+        .apply(_agg_one_day)
+        .reset_index(name="sentiment_cap_weighted")
     )
     out["date"] = out["date"].dt.date.astype(str)
     out = out.sort_values("date").reset_index(drop=True)
@@ -281,7 +348,9 @@ def compute_cap_weighted_sentiment(
     return out
 
 
-# -------------------- payload --------------------
+# ----------------------------------------------------------------------
+# Payload builder
+# ----------------------------------------------------------------------
 
 def build_sp500_index_payload(
     prices: pd.DataFrame,
@@ -289,7 +358,7 @@ def build_sp500_index_payload(
     news: pd.DataFrame,
 ) -> Dict[str, Any]:
     """
-    Merge price + sentiment + news into one JSON payload.
+    Merge price + sentiment + news into a single JSON payload.
     """
     daily = prices.merge(sentiment, on="date", how="left")
     daily = daily.sort_values("date").reset_index(drop=True)
@@ -304,7 +373,9 @@ def build_sp500_index_payload(
     return payload
 
 
-# -------------------- CLI --------------------
+# ----------------------------------------------------------------------
+# CLI
+# ----------------------------------------------------------------------
 
 def main(argv: Optional[list[str]] = None) -> None:
     parser = argparse.ArgumentParser(
@@ -314,7 +385,7 @@ def main(argv: Optional[list[str]] = None) -> None:
         "--universe",
         type=str,
         required=True,
-        help="Path to universe CSV (e.g. data/sp500.csv).",
+        help="Path to universe CSV (e.g. data/sp500.csv). Needs a ticker/symbol column.",
     )
     parser.add_argument(
         "--data-root",
@@ -326,7 +397,7 @@ def main(argv: Optional[list[str]] = None) -> None:
         "--out",
         type=str,
         required=True,
-        help="Output directory (usually the same as --data-root).",
+        help="Output directory (usually same as --data-root).",
     )
     parser.add_argument(
         "--start",
