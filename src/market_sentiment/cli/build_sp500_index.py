@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 
@@ -16,10 +16,10 @@ import yfinance as yf
 # For prices we try these in order
 INDEX_PRICE_SYMBOL_CANDIDATES = ["^GSPC", "^SPX", "SPY"]
 
-# For news we try ^SPX first (the way you do manually), then fallbacks
+# For news we try ^SPX first (your manual pattern), then fallbacks
 INDEX_NEWS_SYMBOL_CANDIDATES = ["^SPX", "^GSPC", "SPY"]
 
-INDEX_SYMBOL = "SPX"        # name to expose on the site
+INDEX_SYMBOL = "SPX"        # symbol exposed on the site
 INDEX_NAME = "S&P 500 Index"
 
 
@@ -54,17 +54,19 @@ def _default_start_one_year(end_str: str) -> str:
 
 def _make_flat(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Make sure there is no MultiIndex on index or columns so that
-    merges are always safe.
+    Ensure df has no MultiIndex in index or columns to make merges safe.
     """
     df = df.copy()
     if isinstance(df.index, pd.MultiIndex):
         df = df.reset_index()
     if isinstance(df.columns, pd.MultiIndex):
-        df.columns = [
-            "_".join(str(c) for c in col if c not in ("", None))
-            for col in df.columns
-        ]
+        new_cols = []
+        for col in df.columns:
+            if isinstance(col, tuple):
+                new_cols.append("_".join(str(c) for c in col if c not in ("", None)))
+            else:
+                new_cols.append(str(col))
+        df.columns = new_cols
     return df
 
 
@@ -125,7 +127,7 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
     """
     Try multiple yfinance symbols for S&P 500 news, using:
         t.get_news(count=max_items, tab="all")
-    and falling back to t.news if get_news is unavailable.
+    and falling back to other signatures or t.news if needed.
 
     Returns columns: ['date', 'title', 'publisher', 'link'].
     """
@@ -134,13 +136,17 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
 
     for sym in INDEX_NEWS_SYMBOL_CANDIDATES:
         print(f"[SPX] Fetching news for {sym} ...")
+        raw = []
         try:
             t = yf.Ticker(sym)
             # Preferred path: new yfinance API
             try:
                 raw = t.get_news(count=max_items, tab="all") or []
+            except TypeError:
+                # Some versions may not support tab=
+                raw = t.get_news(count=max_items) or []
             except AttributeError:
-                # Fallback: older yfinance versions
+                # Very old version: no get_news at all
                 raw = t.news or []
         except Exception as e:
             print(f"[SPX] Error fetching news for {sym}: {e!r}")
@@ -175,11 +181,8 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
         news_df = (
             pd.DataFrame(rows)
             .sort_values(["date", "publisher", "title"])
-            .reset_index(drop_by=True)  # type: ignore[arg-type]
+            .reset_index(drop=True)
         )
-        # In case of older pandas without drop_by, fallback:
-        # news_df = news_df.sort_values(["date", "publisher", "title"]).reset_index(drop=True)
-
         print(f"[SPX] Using {sym} for news, {len(news_df)} articles in range")
         return news_df
 
@@ -288,8 +291,8 @@ def load_universe_with_weights(universe_path: Path) -> pd.DataFrame:
 def load_ticker_daily_sentiment_from_files(
     sentiment_root: Path,
     symbol: str,
-    start_date,
-    end_date,
+    start_date: date,
+    end_date: date,
 ) -> pd.DataFrame:
     """
     Read daily sentiment from:
@@ -332,7 +335,7 @@ def load_ticker_daily_sentiment_from_files(
         sentiment = obj.get("score_mean")
         if sentiment is None:
             sentiment = obj.get("sentiment")
-        rows.append({"date": d.isoformat(), "sentiment": sentiment})
+        rows.append({"date": d, "sentiment": sentiment})
 
     if not rows:
         return pd.DataFrame(columns=["date", "sentiment"])
@@ -381,7 +384,7 @@ def compute_cap_weighted_sentiment(
 
     panel = pd.concat(frames, ignore_index=True)
 
-    # Ensure date is a date object
+    # Ensure date is datetime.date (already is in loader), but be safe:
     panel["date"] = pd.to_datetime(panel["date"]).dt.date
 
     # Restrict to [start, end] (defensive; loader already filters)
@@ -399,16 +402,16 @@ def compute_cap_weighted_sentiment(
         print("[SPX] All sentiment values were NaN after conversion")
         return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
 
-    # Weighted sum per day
+    # Weighted sum per day (no groupby.apply, no .dt on output)
     tmp = panel.assign(weighted=panel["base_weight"] * panel["sentiment"])
-    out = (
+    grouped = (
         tmp.groupby("date", as_index=False)
-        .agg(total_weight=("base_weight", "sum"), weighted_sum=("weighted", "sum"))
+        .agg(total_weight=("base_weight", "sum"),
+             weighted_sum=("weighted", "sum"))
     )
-    out["sentiment_cap_weighted"] = out["weighted_sum"] / out["total_weight"]
-    out = out[["date", "sentiment_cap_weighted"]]
+    grouped["sentiment_cap_weighted"] = grouped["weighted_sum"] / grouped["total_weight"]
 
-    # Convert date to string for JSON
+    out = grouped[["date", "sentiment_cap_weighted"]].copy()
     out["date"] = out["date"].astype(str)
 
     print(f"[SPX] Built cap-weighted sentiment for {len(out)} days")
