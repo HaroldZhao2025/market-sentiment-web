@@ -141,10 +141,10 @@ def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFram
             t = yf.Ticker(sym)
             # Preferred path: new yfinance API
             try:
-                raw = t.get_news(count=max_items, tab="all") or []
+                raw = t.get_news(count=500, tab="all") or []
             except TypeError:
                 # Some versions may not support tab=
-                raw = t.get_news(count=max_items) or []
+                raw = t.get_news(count=500) or []
             except AttributeError:
                 # Very old version: no get_news at all
                 raw = t.news or []
