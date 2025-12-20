@@ -1,4 +1,4 @@
-# Market Sentiment Web — S&P 500 (News + Earnings) • Website + Daily Pipeline
+# Market Sentiment Web — S&P 500 (News) • Website + Daily Pipeline
 
 ## Data (online)
 - Prices: `yfinance`
