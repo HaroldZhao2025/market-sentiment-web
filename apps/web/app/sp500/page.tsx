@@ -1,275 +1,249 @@
 // apps/web/app/sp500/page.tsx
-import fs from "node:fs/promises";
+import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
 
-export const metadata = {
-  title: "S&P 500 — Market Sentiment",
-  description: "S&P 500 index sentiment (cap-weighted) dashboard.",
-};
+export const dynamic = "force-static";
 
-type DailyRow = Record<string, any> & {
+type DailyRow = {
   date: string;
   sentiment_cap_weighted?: number;
+  [k: string]: unknown;
 };
 
-type SpxJson = {
+type Sp500IndexFile = {
   symbol: string;
-  name?: string;
+  name: string;
   price_symbol_candidates?: string[];
   news_symbol_candidates?: string[];
-  daily?: DailyRow[];
+  daily: DailyRow[];
 };
 
-function fmtNum(x: any, digits = 2) {
-  const n = Number(x);
-  if (!Number.isFinite(n)) return "—";
-  return n.toLocaleString(undefined, {
-    maximumFractionDigits: digits,
-    minimumFractionDigits: digits,
-  });
-}
-
-function fmtPct(x: any, digits = 2) {
-  const n = Number(x);
-  if (!Number.isFinite(n)) return "—";
-  return `${(n * 100).toFixed(digits)}%`;
-}
-
-function pickCloseKey(sample: DailyRow | undefined): string | null {
-  if (!sample) return null;
-  const keys = Object.keys(sample);
-  const k = keys.find((kk) => kk.startsWith("close_"));
-  return k ?? null;
-}
-
-function normalize(arr: number[]) {
-  const finite = arr.filter((x) => Number.isFinite(x));
-  if (finite.length === 0) return arr.map(() => NaN);
-  const mn = Math.min(...finite);
-  const mx = Math.max(...finite);
-  const den = mx - mn || 1;
-  return arr.map((x) => (Number.isFinite(x) ? (x - mn) / den : NaN));
-}
-
-function buildPolylinePoints(norm: number[], w: number, h: number, pad = 18) {
-  const usableW = w - pad * 2;
-  const usableH = h - pad * 2;
-  const n = norm.length;
-  if (n <= 1) return "";
-  const pts: string[] = [];
-  for (let i = 0; i < n; i++) {
-    const yv = norm[i];
-    if (!Number.isFinite(yv)) continue;
-    const x = pad + (usableW * i) / (n - 1);
-    const y = pad + usableH * (1 - yv);
-    pts.push(`${x.toFixed(2)},${y.toFixed(2)}`);
+function safeReadJson<T>(absPath: string): T | null {
+  try {
+    if (!fs.existsSync(absPath)) return null;
+    const raw = fs.readFileSync(absPath, "utf-8");
+    return JSON.parse(raw) as T;
+  } catch {
+    return null;
   }
-  return pts.join(" ");
 }
 
-async function loadSpxJson(): Promise<SpxJson | null> {
-  // apps/web 构建时 cwd 通常是 apps/web
+function readSp500Index(): { data: Sp500IndexFile | null; usedPath: string | null } {
+  // During GH Actions build, apps/web is the working dir (process.cwd()).
+  // Your file lives at repo root: data/SPX/sp500_index.json
   const candidates = [
-    // 1) 你现在说的主路径（repo root）
-    path.join(process.cwd(), "..", "..", "data", "SPX", "sp500_index.json"),
-    // 2) 兼容你未来如果把它拷到 public/data
-    path.join(process.cwd(), "public", "data", "SPX", "sp500_index.json"),
-    path.join(process.cwd(), "public", "data", "sp500_index.json"),
+    path.resolve(process.cwd(), "../../data/SPX/sp500_index.json"),
+    // Optional fallbacks (in case you later copy into web/public):
+    path.resolve(process.cwd(), "public/data/SPX/sp500_index.json"),
+    path.resolve(process.cwd(), "public/data/sp500_index.json"),
   ];
 
   for (const p of candidates) {
-    try {
-      const raw = await fs.readFile(p, "utf-8");
-      return JSON.parse(raw) as SpxJson;
-    } catch {
-      // try next
-    }
+    const parsed = safeReadJson<Sp500IndexFile>(p);
+    if (parsed && Array.isArray(parsed.daily)) return { data: parsed, usedPath: p };
   }
-  return null;
+  return { data: null, usedPath: null };
 }
 
-export default async function Sp500Page() {
-  const js = await loadSpxJson();
+function fmtNum(x: unknown, digits = 4): string {
+  const n = typeof x === "number" ? x : Number(x);
+  if (!Number.isFinite(n)) return "—";
+  return n.toFixed(digits);
+}
 
-  if (!js?.daily?.length) {
+function fmtMoney(x: unknown, digits = 2): string {
+  const n = typeof x === "number" ? x : Number(x);
+  if (!Number.isFinite(n)) return "—";
+  return n.toFixed(digits);
+}
+
+function avg(arr: number[]): number | null {
+  if (!arr.length) return null;
+  const s = arr.reduce((a, b) => a + b, 0);
+  return s / arr.length;
+}
+
+function Sparkline({
+  values,
+  width = 920,
+  height = 220,
+}: {
+  values: number[];
+  width?: number;
+  height?: number;
+}) {
+  if (values.length < 2) return null;
+
+  const padX = 10;
+  const padY = 14;
+
+  const minV = Math.min(...values);
+  const maxV = Math.max(...values);
+  const span = Math.max(1e-9, maxV - minV);
+
+  const innerW = width - 2 * padX;
+  const innerH = height - 2 * padY;
+
+  const pts = values.map((v, i) => {
+    const x = padX + (i / (values.length - 1)) * innerW;
+    const y = padY + (1 - (v - minV) / span) * innerH;
+    return [x, y] as const;
+  });
+
+  const d = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`).join(" ");
+
+  // A light baseline at 0 if it's within range
+  const hasZero = minV <= 0 && maxV >= 0;
+  const yZero = hasZero ? padY + (1 - (0 - minV) / span) * innerH : null;
+
+  return (
+    <div className="w-full overflow-x-auto border rounded-lg p-3">
+      <svg width={width} height={height} role="img" aria-label="SPX sentiment sparkline">
+        {hasZero && yZero !== null ? (
+          <line x1={padX} x2={width - padX} y1={yZero} y2={yZero} stroke="black" opacity={0.15} />
+        ) : null}
+        <path d={d} fill="none" stroke="black" strokeWidth={2} />
+      </svg>
+      <div className="text-xs text-gray-500 mt-2">
+        Range: {fmtNum(minV, 4)} to {fmtNum(maxV, 4)}
+      </div>
+    </div>
+  );
+}
+
+export default function Sp500Page() {
+  const { data, usedPath } = readSp500Index();
+
+  if (!data) {
     return (
       <div className="space-y-4">
         <h1 className="text-2xl font-semibold">S&amp;P 500 (SPX)</h1>
-        <p className="text-sm text-gray-600">
-          没有找到 SPX 数据文件，或 daily 为空。
+        <p className="text-gray-700">
+          Could not find <code>data/SPX/sp500_index.json</code> at build time.
         </p>
-        <div className="rounded-xl border p-4 text-sm text-gray-700 space-y-2">
-          <div>我会按以下路径尝试读取：</div>
-          <ul className="list-disc pl-5">
-            <li>data/SPX/sp500_index.json（repo 根目录）</li>
-            <li>apps/web/public/data/SPX/sp500_index.json</li>
-            <li>apps/web/public/data/sp500_index.json</li>
-          </ul>
-          <div className="pt-2">
-            你现在给的路径是：<code className="px-1 py-0.5 border rounded">data/SPX/sp500_index.json</code>
-          </div>
-        </div>
-        <Link className="underline text-sm" href="/">
-          ← Back to Home
-        </Link>
+        <p className="text-sm text-gray-500">
+          Tried reading from: <code>../../data/SPX/sp500_index.json</code> (relative to <code>apps/web</code>).
+        </p>
+        <p className="text-sm">
+          Go back <Link className="underline" href="/">Home</Link>.
+        </p>
       </div>
     );
   }
 
-  const daily = js.daily.slice().sort((a, b) => (a.date < b.date ? -1 : 1));
-  const closeKey = pickCloseKey(daily[0]);
+  const daily = [...data.daily].sort((a, b) => a.date.localeCompare(b.date));
   const latest = daily[daily.length - 1];
 
-  const closes = daily.map((r) => Number(closeKey ? r[closeKey] : NaN));
-  const sents = daily.map((r) => Number(r.sentiment_cap_weighted));
+  const latestSent = typeof latest?.sentiment_cap_weighted === "number" ? latest.sentiment_cap_weighted : null;
 
-  const closeNorm = normalize(closes);
-  const sentNorm = normalize(sents);
+  const last7 = daily
+    .slice(Math.max(0, daily.length - 7))
+    .map((r) => (typeof r.sentiment_cap_weighted === "number" ? r.sentiment_cap_weighted : null))
+    .filter((x): x is number => typeof x === "number");
 
-  const W = 980;
-  const H = 320;
-  const pricePts = buildPolylinePoints(closeNorm, W, H);
-  const sentPts = buildPolylinePoints(sentNorm, W, H);
+  const last30 = daily.slice(Math.max(0, daily.length - 30)).reverse();
 
-  const latestClose = closeKey ? latest[closeKey] : null;
-  const latestSent = latest.sentiment_cap_weighted;
+  // Close field (your JSON shows close_^GSPC; keep generic search)
+  const closeKey = Object.keys(latest || {}).find((k) => k.startsWith("close_"));
+  const latestClose = closeKey ? (latest as any)[closeKey] : null;
+
+  const sparkValues = daily
+    .map((r) => (typeof r.sentiment_cap_weighted === "number" ? r.sentiment_cap_weighted : null))
+    .filter((x): x is number => typeof x === "number");
 
   return (
     <div className="space-y-6">
-      <div className="flex items-end justify-between gap-4">
+      <div className="flex items-baseline justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-semibold">S&amp;P 500 (SPX)</h1>
+          <h1 className="text-2xl font-semibold">{data.name} ({data.symbol})</h1>
           <p className="text-sm text-gray-600">
-            Index-level sentiment (cap-weighted). No headlines on this page.
+            Built from <code>data/SPX/sp500_index.json</code>
+            {usedPath ? (
+              <>
+                {" "}(<span className="text-gray-500">read at build: </span>
+                <code className="text-gray-500">{usedPath}</code>)
+              </>
+            ) : null}
           </p>
         </div>
-        <Link className="text-sm underline" href="/">
-          Home
-        </Link>
-      </div>
-
-      {/* KPI cards */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl border p-4">
-          <div className="text-xs text-gray-500">Latest date</div>
-          <div className="text-lg font-semibold">{latest.date ?? "—"}</div>
-        </div>
-        <div className="rounded-xl border p-4">
-          <div className="text-xs text-gray-500">Close ({closeKey ?? "close"})</div>
-          <div className="text-lg font-semibold">{fmtNum(latestClose, 2)}</div>
-        </div>
-        <div className="rounded-xl border p-4">
-          <div className="text-xs text-gray-500">Cap-weighted sentiment</div>
-          <div className="text-lg font-semibold">{fmtPct(latestSent, 2)}</div>
+        <div className="text-sm">
+          <Link className="underline" href="/">← Back to Home</Link>
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="rounded-xl border p-4">
-        <div className="flex items-end justify-between gap-4 mb-3">
-          <div>
-            <div className="text-sm font-medium">Price vs. Sentiment</div>
-            <div className="text-xs text-gray-500">
-              Normalized overlay for visual comparison (not same units).
-            </div>
-          </div>
-          <div className="text-xs text-gray-500">
-            Source: {js.price_symbol_candidates?.join(", ") ?? "—"}
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="border rounded-lg p-4">
+          <div className="text-sm text-gray-500">Latest date</div>
+          <div className="text-lg font-medium">{latest?.date ?? "—"}</div>
+        </div>
+
+        <div className="border rounded-lg p-4">
+          <div className="text-sm text-gray-500">Latest close ({closeKey ?? "close"})</div>
+          <div className="text-lg font-medium">{fmtMoney(latestClose, 2)}</div>
+        </div>
+
+        <div className="border rounded-lg p-4">
+          <div className="text-sm text-gray-500">Cap-weighted sentiment</div>
+          <div className="text-lg font-medium">{latestSent === null ? "—" : fmtNum(latestSent, 4)}</div>
+          <div className="text-xs text-gray-500 mt-1">
+            7-day avg: {avg(last7) === null ? "—" : fmtNum(avg(last7)!, 4)}
           </div>
         </div>
-
-        <div className="w-full overflow-x-auto">
-          <svg
-            viewBox={`0 0 ${W} ${H}`}
-            className="w-[980px] max-w-full"
-            role="img"
-            aria-label="SPX price and sentiment chart"
-          >
-            {/* background */}
-            <rect x="0" y="0" width={W} height={H} fill="white" />
-
-            {/* grid lines */}
-            {Array.from({ length: 5 }).map((_, i) => {
-              const y = 18 + ((H - 36) * i) / 4;
-              return (
-                <line
-                  key={i}
-                  x1="18"
-                  x2={W - 18}
-                  y1={y}
-                  y2={y}
-                  stroke="#e5e7eb"
-                  strokeWidth="1"
-                />
-              );
-            })}
-
-            {/* price */}
-            {pricePts && (
-              <polyline
-                points={pricePts}
-                fill="none"
-                stroke="#111827"
-                strokeWidth="2"
-              />
-            )}
-
-            {/* sentiment */}
-            {sentPts && (
-              <polyline
-                points={sentPts}
-                fill="none"
-                stroke="#6b7280"
-                strokeWidth="2"
-                strokeDasharray="6 6"
-              />
-            )}
-          </svg>
-        </div>
-
-        <div className="mt-3 flex flex-wrap gap-3 text-sm">
-          <span className="inline-flex items-center gap-2">
-            <span className="inline-block h-0.5 w-6 bg-gray-900" />
-            Price
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <span className="inline-block h-0.5 w-6 bg-gray-500" style={{ borderTop: "2px dashed #6b7280" }} />
-            Sentiment (cap-weighted)
-          </span>
-        </div>
       </div>
 
-      {/* Expandable explainer */}
-      <details className="rounded-xl border p-4">
-        <summary className="cursor-pointer select-none font-medium">
-          ❓ how sp500 sentiment is calculated?
+      <details className="border rounded-lg p-4">
+        <summary className="cursor-pointer select-none text-sm font-medium">
+          ❓ How S&amp;P 500 sentiment is calculated?
         </summary>
-        <div className="mt-3 space-y-2 text-sm text-gray-700">
+        <div className="mt-3 text-sm text-gray-700 space-y-2">
           <p>
-            The index sentiment is computed as a <b>capital-weighted</b> aggregation
-            of constituent-level sentiment signals.
+            The index sentiment is a <b>market-cap-weighted</b> aggregation of constituent sentiment scores.
+            Intuitively, larger companies contribute more to the final index-level score.
           </p>
           <p>
-            Intuition: each constituent contributes a daily sentiment score; we
-            then take a weighted average using its market-cap weight, so larger
-            companies have proportionally larger influence on the index-level
-            sentiment.
-          </p>
-          <p className="text-gray-600">
-            This page intentionally omits news headlines to keep it stable and
-            lightweight. For news + sentiment at the company level, use the
-            per-ticker pages.
+            Concretely: for each day, we compute each constituent’s daily news sentiment score, then
+            aggregate across all constituents using their market-cap weights to produce a single
+            cap-weighted S&amp;P 500 sentiment number for that day.
           </p>
         </div>
       </details>
 
-      <div className="text-sm text-gray-600">
-        Want to see ticker-level news? Go to{" "}
-        <Link className="underline" href="/">
-          Home
-        </Link>{" "}
-        and click a ticker.
+      <div className="space-y-2">
+        <h2 className="text-lg font-semibold">Sentiment trend</h2>
+        <Sparkline values={sparkValues} />
+      </div>
+
+      <div className="space-y-2">
+        <h2 className="text-lg font-semibold">Recent daily values</h2>
+        <div className="overflow-x-auto border rounded-lg">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50 border-b">
+              <tr>
+                <th className="text-left p-3">Date</th>
+                <th className="text-right p-3">Close</th>
+                <th className="text-right p-3">Cap-weighted sentiment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {last30.map((r) => {
+                const ck = Object.keys(r).find((k) => k.startsWith("close_"));
+                const close = ck ? (r as any)[ck] : null;
+                return (
+                  <tr key={r.date} className="border-b last:border-b-0">
+                    <td className="p-3">{r.date}</td>
+                    <td className="p-3 text-right">{fmtMoney(close, 2)}</td>
+                    <td className="p-3 text-right">{fmtNum(r.sentiment_cap_weighted, 4)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-xs text-gray-500">
+          Showing the latest 30 rows from the SPX index file.
+        </p>
       </div>
     </div>
   );
