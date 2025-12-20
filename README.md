@@ -28,6 +28,6 @@ npm run build && npm run export
 ## Site
 - `/` — S&P 500 **overview** (search, sector filter, cards; top/bottom predicted return)
 - `/ticker/[symbol]` — per-ticker dashboard (overlay chart, insights, headlines)
-- `/earnings/[symbol]` — transcripts sentiment timeline
+- `sp500` - last 30 days S&P index and sentiment
 - `/portfolio` — daily long/short equity curve + holdings
 
