@@ -622,7 +622,7 @@ jobs:
 
           # Shorter news window for hourly assemble
           if RUN_KIND == "hourly":
-              s_win = pd.to_datetime(END, utc=True) - pd.Timedelta(days=3)
+              s_win = pd.to_datetime(END, utc=True) - pd.Timedelta(days=30)
           else:
               s_win = pd.to_datetime(START, utc=True)
           e_win = pd.to_datetime(END, utc=True) + pd.Timedelta(days=1) - pd.Timedelta(seconds=1)
@@ -664,65 +664,32 @@ jobs:
                       price = [float(sser.get(d)) for d in dates]
 
               # recent headline items (top 10)
-              news_items = []
-              seen = set()
-
-              def add_from_provider(prov: str, limit: int = 25):
-                  nd = base / "news" / prov
-                  if not nd.exists():
-                      return
-
-                  # files are YYYY-MM-DD.json → reverse sort == newest days first
-                  for p in sorted(nd.glob("*.json"), reverse=True):
+              news_items=[]
+              for prov in ("finnhub","yfinance"):
+                  for p in glob.glob(str(base/f"news/{prov}/*.json")):
                       try:
                           arr = json.load(open(p, encoding="utf-8")) or []
-                      except Exception:
-                          continue
-
-                      # make sure we iterate newest items first within the file too
-                      arr = sorted(arr, key=lambda x: x.get("ts", ""), reverse=True)
-
-                      for it in arr:
-                          ts = it.get("ts")
-                          if not ts:
-                              continue
-
-                          try:
-                              tt = pd.to_datetime(ts, utc=True)
-                              # only keep a sanity upper bound
-                              if not (tt <= e_win):
+                          for it in arr:
+                              ts = it.get("ts")
+                              if not ts:
                                   continue
-                          except Exception:
-                              continue
-
-                          title = (it.get("headline") or it.get("title") or "").strip()
-                          url = (it.get("url") or "").strip()
-                          if not title:
-                              continue
-
-                          key = (title, url)
-                          if key in seen:
-                              continue
-                          seen.add(key)
-
-                          news_items.append({
-                              "ts": ts,
-                              "title": title,
-                              "url": url,
-                              "source": it.get("source") or prov,
-                              "provider": prov
-                          })
-
-                          if len(news_items) >= limit:
-                              return
-
-              # pull a buffer from each provider, then sort & take top 10 overall
-              add_from_provider("finnhub", limit=25)
-              add_from_provider("yfinance", limit=25)
-
+                              try:
+                                  tt = pd.to_datetime(ts, utc=True)
+                                  if not (s_win <= tt <= e_win):
+                                      continue
+                              except Exception:
+                                  continue
+                              news_items.append({
+                                "ts": ts,
+                                "title": it.get("headline") or it.get("title") or "",
+                                "url": it.get("url") or "",
+                                "source": it.get("source") or prov,
+                                "provider": prov
+                              })
+                      except Exception:
+                          pass
               news_items.sort(key=lambda n: n["ts"], reverse=True)
               news_trim = news_items[:10]
-
 
               # headline-level sentiment on the 10 shown items
               scored = []
