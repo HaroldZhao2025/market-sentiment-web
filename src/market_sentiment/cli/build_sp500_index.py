@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
+import time
 from datetime import datetime, timedelta, timezone, date
 from pathlib import Path
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, Tuple
 
 import pandas as pd
 import yfinance as yf
@@ -123,71 +125,237 @@ def download_spx_prices(start: str, end: str) -> pd.DataFrame:
     )
 
 
-def download_spx_news(start: str, end: str, max_items: int = 500) -> pd.DataFrame:
+def _try_parse_datetime_str(s: str) -> Optional[datetime]:
     """
-    Try multiple yfinance symbols for S&P 500 news, using:
-        t.get_news(count=max_items, tab="all")
-    and falling back to other signatures or t.news if needed.
+    Best-effort parse for common timestamp strings. Keep it dependency-free (no dateutil).
+    """
+    if not s:
+        return None
 
-    Returns columns: ['date', 'title', 'publisher', 'link'].
+    s = s.strip()
+    # common RFC3339 "Z"
+    if s.endswith("Z"):
+        s = s[:-1] + "+00:00"
+
+    # try ISO first
+    try:
+        dt = datetime.fromisoformat(s)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        else:
+            dt = dt.astimezone(timezone.utc)
+        return dt
+    except Exception:
+        pass
+
+    # try a couple of common formats
+    fmts = [
+        "%Y-%m-%d %H:%M:%S%z",
+        "%Y-%m-%d %H:%M:%S",
+        "%a, %d %b %Y %H:%M:%S %z",
+    ]
+    for fmt in fmts:
+        try:
+            dt = datetime.strptime(s, fmt)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            else:
+                dt = dt.astimezone(timezone.utc)
+            return dt
+        except Exception:
+            continue
+    return None
+
+
+def _extract_publish_dt(item: Dict[str, Any]) -> Optional[datetime]:
+    """
+    yfinance news items are not perfectly stable across versions/endpoints.
+    We accept multiple keys and auto-handle seconds vs milliseconds.
+    """
+    # most common
+    ts = item.get("providerPublishTime")
+
+    # alternatives seen in the wild
+    if ts is None:
+        ts = item.get("providerPublishTimeMs")
+    if ts is None:
+        ts = item.get("published_at")
+    if ts is None:
+        ts = item.get("pubDate")
+    if ts is None:
+        content = item.get("content") if isinstance(item.get("content"), dict) else {}
+        ts = content.get("pubDate") or content.get("published_at") or content.get("publishedAt")
+
+    # numeric epoch
+    if isinstance(ts, (int, float)):
+        v = float(ts)
+        # if it's milliseconds, it's around 1e12-1e13; seconds is around 1e9
+        if v > 10_000_000_000:  # 1e10 threshold is safe for the 2001-2286 epoch range
+            v = v / 1000.0
+        try:
+            return datetime.fromtimestamp(v, tz=timezone.utc)
+        except Exception:
+            return None
+
+    # string epoch or ISO
+    if isinstance(ts, str):
+        # try int epoch first
+        try:
+            v = float(ts)
+            if v > 10_000_000_000:
+                v = v / 1000.0
+            return datetime.fromtimestamp(v, tz=timezone.utc)
+        except Exception:
+            return _try_parse_datetime_str(ts)
+
+    return None
+
+
+def _yf_get_news(t: yf.Ticker, count: int) -> Tuple[List[Dict[str, Any]], Optional[str]]:
+    """
+    Prefer tab="all". Fallback to other signatures / t.news.
+    """
+    # Prefer: tab="all" -> you already verified it works for ^SPX locally.
+    for tab in ("all", "news"):
+        try:
+            raw = t.get_news(count=count, tab=tab) or []
+            if raw:
+                return raw, tab
+        except TypeError:
+            # Some versions may not support tab=
+            try:
+                raw = t.get_news(count=count) or []
+                if raw:
+                    return raw, None
+            except Exception:
+                pass
+        except AttributeError:
+            # Very old version: no get_news at all
+            raw = getattr(t, "news", None) or []
+            if raw:
+                return raw, None
+        except Exception:
+            continue
+
+    # last resort
+    raw = getattr(t, "news", None) or []
+    return raw, None
+
+
+def download_spx_news(
+    start: str,
+    end: str,
+    max_items: int = 500,
+    retries: int = 3,
+) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+    """
+    Try multiple yfinance symbols for S&P 500 news.
+
+    Returns:
+      - news_df with columns ['date', 'title', 'publisher', 'link']
+      - meta: {'news_source_symbol', 'news_source_tab', 'news_raw_count', 'news_kept_count'}
     """
     start_dt = _parse_date(start)
+    # inclusive end date -> add 1 day (same as your original logic)
     end_dt = _parse_date(end) + timedelta(days=1)
+
+    last_err: Optional[Exception] = None
 
     for sym in INDEX_NEWS_SYMBOL_CANDIDATES:
         print(f"[SPX] Fetching news for {sym} ...")
-        raw = []
-        try:
-            t = yf.Ticker(sym)
-            # Preferred path: new yfinance API
+
+        raw: List[Dict[str, Any]] = []
+        used_tab: Optional[str] = None
+
+        # retries (CI is more likely to hit transient Yahoo issues)
+        for attempt in range(retries):
             try:
-                raw = t.get_news(count=500, tab="all") or []
-            except TypeError:
-                # Some versions may not support tab=
-                raw = t.get_news(count=500) or []
-            except AttributeError:
-                # Very old version: no get_news at all
-                raw = t.news or []
-        except Exception as e:
-            print(f"[SPX] Error fetching news for {sym}: {e!r}")
-            raw = []
+                t = yf.Ticker(sym)
+                raw, used_tab = _yf_get_news(t, count=max_items)
+                break
+            except Exception as e:
+                last_err = e
+                sleep_s = (2 ** attempt) + random.random()
+                print(f"[SPX] News fetch attempt {attempt+1}/{retries} failed for {sym}: {e!r}. sleep={sleep_s:.2f}s")
+                time.sleep(sleep_s)
 
         if not raw:
-            print(f"[SPX] No news for {sym}, trying next candidate")
+            print(f"[SPX] No news returned for {sym}, trying next candidate")
             continue
 
-        rows: List[Dict[str, Any]] = []
+        rows_in_range: List[Dict[str, Any]] = []
+        rows_any: List[Tuple[datetime, Dict[str, Any]]] = []
+
         for item in raw:
-            ts = item.get("providerPublishTime")
-            if ts is None:
-                continue
-            dt = datetime.fromtimestamp(ts, tz=timezone.utc)
-            if not (start_dt <= dt < end_dt):
+            dt = _extract_publish_dt(item)
+            if dt is None:
                 continue
 
-            rows.append(
-                {
-                    "date": dt.date().isoformat(),
-                    "title": item.get("title", ""),
-                    "publisher": item.get("publisher", ""),
-                    "link": item.get("link") or item.get("url") or "",
-                }
-            )
+            rec = {
+                "date": dt.date().isoformat(),
+                "title": item.get("title", "") or "",
+                "publisher": item.get("publisher", "") or "",
+                "link": item.get("link") or item.get("url") or "",
+            }
 
-        if not rows:
-            print(f"[SPX] No news in range for {sym}, trying next candidate")
+            # keep for fallback sorting
+            rows_any.append((dt, rec))
+
+            # in-range filter
+            if start_dt <= dt < end_dt:
+                rows_in_range.append(rec)
+
+        def _dedup_and_sort(rows: List[Dict[str, Any]]) -> pd.DataFrame:
+            if not rows:
+                return pd.DataFrame(columns=["date", "title", "publisher", "link"])
+            df = pd.DataFrame(rows)
+            # dedupe by link if possible, else by (publisher,title,date)
+            if "link" in df.columns:
+                df["link"] = df["link"].fillna("")
+                has_link = df["link"].str.len() > 0
+                df_link = df[has_link].drop_duplicates(subset=["link"], keep="first")
+                df_nolink = df[~has_link].drop_duplicates(subset=["date", "publisher", "title"], keep="first")
+                df = pd.concat([df_link, df_nolink], ignore_index=True)
+            else:
+                df = df.drop_duplicates(subset=["date", "publisher", "title"], keep="first")
+
+            df = df.sort_values(["date", "publisher", "title"]).reset_index(drop=True)
+            return df
+
+        # primary: only take in-range items
+        news_df = _dedup_and_sort(rows_in_range)
+
+        # fallback: if in-range becomes empty but raw was non-empty,
+        # keep most recent items (prevents CI/version timestamp quirks from wiping all news)
+        if news_df.empty and rows_any:
+            print(f"[SPX] Warning: {sym} returned news but none survived date-range filter. Falling back to most-recent items.")
+            rows_any.sort(key=lambda x: x[0], reverse=True)
+            fallback = [r for _, r in rows_any[: min(max_items, len(rows_any))]]
+            news_df = _dedup_and_sort(fallback)
+
+        if news_df.empty:
+            print(f"[SPX] No usable news rows for {sym} after parsing, trying next candidate")
             continue
 
-        news_df = (
-            pd.DataFrame(rows)
-            .sort_values(["date", "publisher", "title"])
-            .reset_index(drop=True)
-        )
-        print(f"[SPX] Using {sym} for news, {len(news_df)} articles in range")
-        return news_df
+        meta = {
+            "news_source_symbol": sym,
+            "news_source_tab": used_tab,
+            "news_raw_count": len(raw),
+            "news_kept_count": int(len(news_df)),
+        }
+        print(f"[SPX] Using {sym} for news (tab={used_tab}), kept {meta['news_kept_count']}/{meta['news_raw_count']}")
+        return news_df, meta
 
-    print("[SPX] No index news found for any symbol candidate")
-    return pd.DataFrame(columns=["date", "title", "publisher", "link"])
+    print(f"[SPX] No index news found for any symbol candidate. last_err={last_err!r}")
+    empty = pd.DataFrame(columns=["date", "title", "publisher", "link"])
+    meta = {
+        "news_source_symbol": None,
+        "news_source_tab": None,
+        "news_raw_count": 0,
+        "news_kept_count": 0,
+        "news_error": repr(last_err) if last_err else None,
+    }
+    return empty, meta
 
 
 # ----------------------------------------------------------------------
@@ -297,18 +465,6 @@ def load_ticker_daily_sentiment_from_files(
     """
     Read daily sentiment from:
         sentiment_root / symbol / "sentiment" / YYYY-MM-DD.json
-
-    Each JSON looks like:
-    {
-      "date": "2024-11-05",
-      "ticker": "AAPL",
-      "n_total": 51,
-      "n_finnhub": 51,
-      "n_yfinance": 0,
-      "score_mean": -0.0004
-    }
-
-    We use 'score_mean' as the sentiment (fallback to 'sentiment' if needed).
     """
     folder = sentiment_root / symbol / "sentiment"
     if not folder.exists():
@@ -353,7 +509,6 @@ def compute_cap_weighted_sentiment(
 ) -> pd.DataFrame:
     """
     For each date t, compute cap-weighted sentiment:
-
         Sent_t = sum_i w_i * s_i,t  /  sum_i w_i (over tickers with sentiment on day t)
     """
     start_date = datetime.fromisoformat(start).date()
@@ -384,17 +539,14 @@ def compute_cap_weighted_sentiment(
 
     panel = pd.concat(frames, ignore_index=True)
 
-    # Ensure date is datetime.date (already is in loader), but be safe:
     panel["date"] = pd.to_datetime(panel["date"]).dt.date
 
-    # Restrict to [start, end] (defensive; loader already filters)
     panel = panel[(panel["date"] >= start_date) & (panel["date"] <= end_date)]
 
     if panel.empty:
         print("[SPX] Panel empty after date filter")
         return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
 
-    # Ensure sentiment is numeric
     panel["sentiment"] = pd.to_numeric(panel["sentiment"], errors="coerce")
     panel = panel.dropna(subset=["sentiment"])
 
@@ -402,7 +554,6 @@ def compute_cap_weighted_sentiment(
         print("[SPX] All sentiment values were NaN after conversion")
         return pd.DataFrame(columns=["date", "sentiment_cap_weighted"])
 
-    # Weighted sum per day (no groupby.apply, no .dt on output)
     tmp = panel.assign(weighted=panel["base_weight"] * panel["sentiment"])
     grouped = (
         tmp.groupby("date", as_index=False)
@@ -426,6 +577,7 @@ def build_sp500_index_payload(
     prices: pd.DataFrame,
     sentiment: pd.DataFrame,
     news: pd.DataFrame,
+    news_meta: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
     Merge price + sentiment + news into a single JSON payload.
@@ -445,9 +597,9 @@ def build_sp500_index_payload(
         "price_symbol_candidates": INDEX_PRICE_SYMBOL_CANDIDATES,
         "news_symbol_candidates": INDEX_NEWS_SYMBOL_CANDIDATES,
         "daily": daily.to_dict(orient="records"),
-        "news": news.sort_values("date").to_dict(orient="records")
-        if not news.empty
-        else [],
+        "news": news.sort_values("date").to_dict(orient="records") if not news.empty else [],
+        # debug/meta (safe to keep; small)
+        **(news_meta or {}),
     }
     return payload
 
@@ -499,6 +651,12 @@ def main(argv: Optional[list[str]] = None) -> None:
         default=500,
         help="Max yfinance news items to pull for SPX.",
     )
+    parser.add_argument(
+        "--news-retries",
+        type=int,
+        default=3,
+        help="Retry count for yfinance news fetch (CI robustness).",
+    )
 
     args = parser.parse_args(argv)
 
@@ -512,9 +670,14 @@ def main(argv: Optional[list[str]] = None) -> None:
 
     prices = download_spx_prices(start_str, end_str)
     sentiment = compute_cap_weighted_sentiment(universe, sentiment_root, start_str, end_str)
-    news = download_spx_news(start_str, end_str, max_items=args.max_news)
+    news, news_meta = download_spx_news(
+        start_str,
+        end_str,
+        max_items=args.max_news,
+        retries=args.news_retries,
+    )
 
-    payload = build_sp500_index_payload(prices, sentiment, news)
+    payload = build_sp500_index_payload(prices, sentiment, news, news_meta)
 
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
