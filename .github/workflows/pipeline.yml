@@ -719,7 +719,7 @@ jobs:
           python -m market_sentiment.cli.build_sp500_index \
           --universe data/sp500.csv \
           --sentiment-root data \
-          --out apps/web/public/data
+          --out data/SPX
           
       - name: Sanity-check data presence
         shell: bash
