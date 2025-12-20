@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="mx-auto max-w-6xl flex items-center gap-6 p-4">
             {/* Next's <Link> automatically respects basePath */}
             <Link href="/">Home</Link>
-            <Link href="/portfolio">S&amp;P 500</Link>
+            <Link href="/sp500">S&amp;P 500</Link>
           </nav>
         </header>
         <main className="mx-auto max-w-6xl p-4">{children}</main>
