@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
+import Sp500Client from "./Sp500Client";
 
 export const dynamic = "force-static";
 
@@ -29,21 +30,18 @@ function safeReadJson<T>(absPath: string): T | null {
   }
 }
 
-function readSp500Index(): { data: Sp500IndexFile | null; usedPath: string | null } {
-  // During GH Actions build, apps/web is the working dir (process.cwd()).
-  // Your file lives at repo root: data/SPX/sp500_index.json
+function readSp500Index(): Sp500IndexFile | null {
   const candidates = [
     path.resolve(process.cwd(), "../../data/SPX/sp500_index.json"),
-    // Optional fallbacks (in case you later copy into web/public):
     path.resolve(process.cwd(), "public/data/SPX/sp500_index.json"),
     path.resolve(process.cwd(), "public/data/sp500_index.json"),
   ];
 
   for (const p of candidates) {
     const parsed = safeReadJson<Sp500IndexFile>(p);
-    if (parsed && Array.isArray(parsed.daily)) return { data: parsed, usedPath: p };
+    if (parsed && Array.isArray(parsed.daily)) return parsed;
   }
-  return { data: null, usedPath: null };
+  return null;
 }
 
 function fmtNum(x: unknown, digits = 4): string {
@@ -64,56 +62,8 @@ function avg(arr: number[]): number | null {
   return s / arr.length;
 }
 
-function Sparkline({
-  values,
-  width = 920,
-  height = 220,
-}: {
-  values: number[];
-  width?: number;
-  height?: number;
-}) {
-  if (values.length < 2) return null;
-
-  const padX = 10;
-  const padY = 14;
-
-  const minV = Math.min(...values);
-  const maxV = Math.max(...values);
-  const span = Math.max(1e-9, maxV - minV);
-
-  const innerW = width - 2 * padX;
-  const innerH = height - 2 * padY;
-
-  const pts = values.map((v, i) => {
-    const x = padX + (i / (values.length - 1)) * innerW;
-    const y = padY + (1 - (v - minV) / span) * innerH;
-    return [x, y] as const;
-  });
-
-  const d = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`).join(" ");
-
-  // A light baseline at 0 if it's within range
-  const hasZero = minV <= 0 && maxV >= 0;
-  const yZero = hasZero ? padY + (1 - (0 - minV) / span) * innerH : null;
-
-  return (
-    <div className="w-full overflow-x-auto border rounded-lg p-3">
-      <svg width={width} height={height} role="img" aria-label="SPX sentiment sparkline">
-        {hasZero && yZero !== null ? (
-          <line x1={padX} x2={width - padX} y1={yZero} y2={yZero} stroke="black" opacity={0.15} />
-        ) : null}
-        <path d={d} fill="none" stroke="black" strokeWidth={2} />
-      </svg>
-      <div className="text-xs text-gray-500 mt-2">
-        Range: {fmtNum(minV, 4)} to {fmtNum(maxV, 4)}
-      </div>
-    </div>
-  );
-}
-
 export default function Sp500Page() {
-  const { data, usedPath } = readSp500Index();
+  const data = readSp500Index();
 
   if (!data) {
     return (
@@ -121,9 +71,6 @@ export default function Sp500Page() {
         <h1 className="text-2xl font-semibold">S&amp;P 500 (SPX)</h1>
         <p className="text-gray-700">
           Could not find <code>data/SPX/sp500_index.json</code> at build time.
-        </p>
-        <p className="text-sm text-gray-500">
-          Tried reading from: <code>../../data/SPX/sp500_index.json</code> (relative to <code>apps/web</code>).
         </p>
         <p className="text-sm">
           Go back <Link className="underline" href="/">Home</Link>.
@@ -135,37 +82,34 @@ export default function Sp500Page() {
   const daily = [...data.daily].sort((a, b) => a.date.localeCompare(b.date));
   const latest = daily[daily.length - 1];
 
-  const latestSent = typeof latest?.sentiment_cap_weighted === "number" ? latest.sentiment_cap_weighted : null;
+  const closeKey = Object.keys(latest || {}).find((k) => k.startsWith("close_")) ?? null;
+  const latestClose = closeKey ? (latest as any)[closeKey] : null;
+
+  const latestSent =
+    typeof latest?.sentiment_cap_weighted === "number" ? latest.sentiment_cap_weighted : null;
 
   const last7 = daily
     .slice(Math.max(0, daily.length - 7))
     .map((r) => (typeof r.sentiment_cap_weighted === "number" ? r.sentiment_cap_weighted : null))
     .filter((x): x is number => typeof x === "number");
 
+  const series = {
+    date: daily.map((r) => r.date),
+    price: daily.map((r) => (closeKey ? Number((r as any)[closeKey]) : NaN)),
+    sentiment: daily.map((r) =>
+      typeof r.sentiment_cap_weighted === "number" ? r.sentiment_cap_weighted : NaN
+    ),
+  };
+
   const last30 = daily.slice(Math.max(0, daily.length - 30)).reverse();
-
-  // Close field (your JSON shows close_^GSPC; keep generic search)
-  const closeKey = Object.keys(latest || {}).find((k) => k.startsWith("close_"));
-  const latestClose = closeKey ? (latest as any)[closeKey] : null;
-
-  const sparkValues = daily
-    .map((r) => (typeof r.sentiment_cap_weighted === "number" ? r.sentiment_cap_weighted : null))
-    .filter((x): x is number => typeof x === "number");
 
   return (
     <div className="space-y-6">
       <div className="flex items-baseline justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-semibold">{data.name} ({data.symbol})</h1>
-          <p className="text-sm text-gray-600">
-            Built from <code>data/SPX/sp500_index.json</code>
-            {usedPath ? (
-              <>
-                {" "}(<span className="text-gray-500">read at build: </span>
-                <code className="text-gray-500">{usedPath}</code>)
-              </>
-            ) : null}
-          </p>
+          <h1 className="text-2xl font-semibold">
+            {data.name} ({data.symbol})
+          </h1>
         </div>
         <div className="text-sm">
           <Link className="underline" href="/">← Back to Home</Link>
@@ -199,19 +143,19 @@ export default function Sp500Page() {
         <div className="mt-3 text-sm text-gray-700 space-y-2">
           <p>
             The index sentiment is a <b>market-cap-weighted</b> aggregation of constituent sentiment scores.
-            Intuitively, larger companies contribute more to the final index-level score.
+            Larger companies contribute more to the final index-level score.
           </p>
           <p>
-            Concretely: for each day, we compute each constituent’s daily news sentiment score, then
-            aggregate across all constituents using their market-cap weights to produce a single
-            cap-weighted S&amp;P 500 sentiment number for that day.
+            For each day, we compute each constituent’s daily news sentiment score, then aggregate across all constituents
+            using their market-cap weights to produce a single cap-weighted S&amp;P 500 sentiment number.
           </p>
         </div>
       </details>
 
+      {/* Interactive charts + buttons */}
       <div className="space-y-2">
-        <h2 className="text-lg font-semibold">Sentiment trend</h2>
-        <Sparkline values={sparkValues} />
+        <h2 className="text-lg font-semibold">Price & Sentiment</h2>
+        <Sp500Client series={series} />
       </div>
 
       <div className="space-y-2">
@@ -227,8 +171,7 @@ export default function Sp500Page() {
             </thead>
             <tbody>
               {last30.map((r) => {
-                const ck = Object.keys(r).find((k) => k.startsWith("close_"));
-                const close = ck ? (r as any)[ck] : null;
+                const close = closeKey ? Number((r as any)[closeKey]) : NaN;
                 return (
                   <tr key={r.date} className="border-b last:border-b-0">
                     <td className="p-3">{r.date}</td>
@@ -241,9 +184,7 @@ export default function Sp500Page() {
           </table>
         </div>
 
-        <p className="text-xs text-gray-500">
-          Showing the latest 30 rows from the SPX index file.
-        </p>
+        <p className="text-xs text-gray-500">Showing the latest 30 rows from the SPX index file.</p>
       </div>
     </div>
   );
