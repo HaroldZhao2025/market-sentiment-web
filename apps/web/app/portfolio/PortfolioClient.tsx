@@ -37,12 +37,6 @@ type EquitySeries = {
   equity: number[];
 };
 
-type Sp500Index = {
-  dates: string[];
-  sentiment: number[];
-  sentiment_ma7: number[];
-};
-
 type Props = {
   meta?: Meta;
   metrics?: Metrics;
@@ -50,9 +44,8 @@ type Props = {
   equity: number[];
   portfolio_return: number[];
   holdings?: Holding[];
-  benchmark_series?: EquitySeries | null;     // typically SPY
-  sp500_price_series?: EquitySeries | null;   // typically ^GSPC
-  sp500_index?: Sp500Index | null;            // cap-weighted sentiment index
+  benchmark_series?: EquitySeries | null; // typically SPY
+  sp500_price_series?: EquitySeries | null; // SPX built from sp500_index.json + ^GSPC fill
 };
 
 function pct(x?: number) {
@@ -88,7 +81,6 @@ export default function PortfolioClient({
   holdings = [],
   benchmark_series,
   sp500_price_series,
-  sp500_index,
 }: Props) {
   const [showHoldings, setShowHoldings] = useState(true);
 
@@ -127,7 +119,7 @@ export default function PortfolioClient({
     }
     if (sp500_price_series?.equity?.length) {
       s.push({
-        label: sp500_price_series.ticker ?? "^GSPC",
+        label: sp500_price_series.ticker ?? "SPX",
         values: sp500_price_series.equity,
         strokeClassName: "stroke-fuchsia-600",
         dotClassName: "fill-fuchsia-600",
@@ -150,7 +142,7 @@ export default function PortfolioClient({
     }
     if (ddSpx.length) {
       s.push({
-        label: `${sp500_price_series?.ticker ?? "^GSPC"} DD`,
+        label: `${sp500_price_series?.ticker ?? "SPX"} DD`,
         values: ddSpx,
         strokeClassName: "stroke-violet-600",
         dotClassName: "fill-violet-600",
@@ -158,24 +150,6 @@ export default function PortfolioClient({
     }
     return s;
   }, [ddPort, ddSpy, ddSpx, benchmark_series, sp500_price_series]);
-
-  const sentimentSeries = useMemo(() => {
-    if (!sp500_index?.dates?.length) return [];
-    return [
-      {
-        label: "S&P 500 Sentiment",
-        values: sp500_index.sentiment,
-        strokeClassName: "stroke-amber-600",
-        dotClassName: "fill-amber-600",
-      },
-      {
-        label: "Sentiment MA(7)",
-        values: sp500_index.sentiment_ma7,
-        strokeClassName: "stroke-emerald-600",
-        dotClassName: "fill-emerald-600",
-      },
-    ];
-  }, [sp500_index]);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-indigo-50 via-white to-emerald-50">
@@ -227,22 +201,6 @@ export default function PortfolioClient({
           <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
             <details className="border rounded-2xl p-4 bg-white">
               <summary className="cursor-pointer select-none text-sm font-semibold">
-                ❓ How S&amp;P 500 sentiment is calculated?
-              </summary>
-              <div className="mt-3 text-sm text-neutral-700 space-y-2">
-                <p>
-                  The index sentiment is a <b>market-cap-weighted</b> aggregation of constituent sentiment scores.
-                  Larger companies contribute more to the final index-level score.
-                </p>
-                <p>
-                  For each day, we compute each constituent’s daily news sentiment score, then aggregate across all constituents
-                  using their market-cap weights to produce a single cap-weighted S&amp;P 500 sentiment number.
-                </p>
-              </div>
-            </details>
-
-            <details className="border rounded-2xl p-4 bg-white">
-              <summary className="cursor-pointer select-none text-sm font-semibold">
                 🧠 How this portfolio strategy works (weekly lagged sentiment ranking)
               </summary>
               <div className="mt-3 text-sm text-neutral-700 space-y-2">
@@ -255,6 +213,21 @@ export default function PortfolioClient({
                 </p>
                 <p className="text-neutral-600">
                   The lag + “apply weights from next trading day” rule is used to reduce look-ahead bias.
+                </p>
+              </div>
+            </details>
+
+            <details className="border rounded-2xl p-4 bg-white">
+              <summary className="cursor-pointer select-none text-sm font-semibold">
+                📌 What lines are shown on the charts?
+              </summary>
+              <div className="mt-3 text-sm text-neutral-700 space-y-2">
+                <p>
+                  The performance chart compares <b>Strategy Equity</b> to <b>SPY</b> (if available) and the <b>S&amp;P 500 index (SPX)</b>.
+                </p>
+                <p>
+                  SPX equity is constructed from <code>data/SPX/sp500_index.json</code> and filled using <code>^GSPC/^SPX</code> snapshots if needed,
+                  so all series share the same date axis.
                 </p>
               </div>
             </details>
@@ -301,13 +274,9 @@ export default function PortfolioClient({
           <div className="flex items-end justify-between gap-4">
             <div>
               <h3 className="font-semibold text-lg">Performance vs Benchmarks</h3>
-              <div className="text-sm text-neutral-600">
-                Portfolio (strategy) + {benchmark_series?.ticker ?? "SPY"} + {sp500_price_series?.ticker ?? "S&P 500"}
-              </div>
+              <div className="text-sm text-neutral-600">All lines are normalized to 1.00 at start.</div>
             </div>
-            <div className="text-xs text-neutral-500">
-              baseline: 1.0000
-            </div>
+            <div className="text-xs text-neutral-500">baseline: 1.00</div>
           </div>
 
           <PortfolioChart
@@ -315,6 +284,7 @@ export default function PortfolioClient({
             series={perfSeries}
             height={520}
             baselineValue={1}
+            yLabel="Equity (normalized)"
             valueFormat={(v) => v.toFixed(4)}
           />
         </section>
@@ -324,11 +294,9 @@ export default function PortfolioClient({
           <div className="flex items-end justify-between gap-4">
             <div>
               <h3 className="font-semibold text-lg">Drawdowns</h3>
-              <div className="text-sm text-neutral-600">Peak-to-trough performance comparison</div>
+              <div className="text-sm text-neutral-600">Peak-to-trough performance comparison.</div>
             </div>
-            <div className="text-xs text-neutral-500">
-              baseline: 0.00
-            </div>
+            <div className="text-xs text-neutral-500">baseline: 0.00</div>
           </div>
 
           <PortfolioChart
@@ -336,30 +304,10 @@ export default function PortfolioClient({
             series={ddSeries}
             height={360}
             baselineValue={0}
+            yLabel="Drawdown"
             valueFormat={(v) => `${(v * 100).toFixed(2)}%`}
           />
         </section>
-
-        {/* S&P 500 sentiment chart */}
-        {sp500_index?.dates?.length && sentimentSeries.length ? (
-          <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-5">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <h3 className="font-semibold text-lg">S&amp;P 500 Sentiment Index</h3>
-                <div className="text-sm text-neutral-600">Daily cap-weighted index sentiment + MA(7)</div>
-              </div>
-              <div className="text-xs text-neutral-500">baseline: 0.00</div>
-            </div>
-
-            <PortfolioChart
-              dates={sp500_index.dates}
-              series={sentimentSeries}
-              height={360}
-              baselineValue={0}
-              valueFormat={(v) => v.toFixed(3)}
-            />
-          </section>
-        ) : null}
 
         {/* Holdings */}
         {showHoldings ? (
