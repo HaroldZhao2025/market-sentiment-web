@@ -1,5 +1,9 @@
 # Market Sentiment Web — S&P 500 (News) • Website + Daily Pipeline
 
+## Author
+Portfolio by leolin0407-cmyk (leolin0407@gmail.com)
+Market Sentiment，Website Design, Repo Setting by HaroldZhao2025 (sz695@cornell.edu)
+
 ## Website:
 https://haroldzhao2025.github.io/market-sentiment-web/
 
