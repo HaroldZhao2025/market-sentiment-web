@@ -1,5 +1,12 @@
 # Market Sentiment Web — S&P 500 (News) • Website + Daily Pipeline
 
+## Website:
+https://haroldzhao2025.github.io/market-sentiment-web/
+
+### Current features:
+S&P500 individual stock sentiment analysis
+S&P500 market index and sentiment
+
 ## Data (online)
 - Prices: `yfinance`
 - News: `yfinance` news (default) OR `NewsAPI` when `NEWS_API_KEY` is provided
