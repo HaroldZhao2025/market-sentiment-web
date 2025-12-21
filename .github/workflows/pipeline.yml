@@ -720,6 +720,19 @@ jobs:
           --universe data/sp500.csv \
           --sentiment-root data \
           --out data/SPX
+
+      - name: Build portfolio strategy JSON
+        run: |
+          python -m market_sentiment.cli.build_portfolio \
+            --data-root apps/web/public/data \
+            --universe data/sp500.csv \
+            --out apps/web/public/data/portfolio_strategy.json \
+            --rebalance weekly \
+            --signal ma7 \
+            --lag-days 1 \
+            --k 5 \
+            --long-short
+
           
       - name: Sanity-check data presence
         shell: bash
