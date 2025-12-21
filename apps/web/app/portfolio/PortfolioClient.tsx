@@ -201,7 +201,7 @@ export default function PortfolioClient({
           <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
             <details className="border rounded-2xl p-4 bg-white">
               <summary className="cursor-pointer select-none text-sm font-semibold">
-                🧠 How this portfolio strategy works (weekly lagged sentiment ranking)
+               ❓ How this portfolio strategy works (weekly lagged sentiment ranking)
               </summary>
               <div className="mt-3 text-sm text-neutral-700 space-y-2">
                 <p>
