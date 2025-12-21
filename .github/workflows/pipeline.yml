@@ -721,14 +721,13 @@ jobs:
           --sentiment-root data \
           --out data/SPX
 
-      - name: Build S&P 500 heatmap data
+      - name: Build S&P 500 heatmap (Wikipedia sectors + market cap weights)
         run: |
           python -m market_sentiment.cli.build_sp500_heatmap \
-          --universe data/sp500.csv \
-          --data-root data \
-          --spx-index data/SPX/sp500_index.json \
-          --out data/SPX \
-          --also-out apps/web/public/data/SPX
+            --universe data/sp500.csv \
+            --data-root data \
+            --spx-index data/SPX/sp500_index.json \
+            --out data/SPX
 
       - name: Build portfolio strategy JSON
         run: |
@@ -742,7 +741,6 @@ jobs:
             --k 5 \
             --long-short
 
-          
       - name: Sanity-check data presence
         shell: bash
         run: |
