@@ -1,29 +1,66 @@
-// apps/web/pages/portfolio.tsx
-import Head from "next/head";
-import Link from "next/link";
+// apps/web/app/portfolio/page.tsx
+import path from "path";
+import { promises as fs } from "fs";
+import PortfolioClient from "./PortfolioClient";
 
-export default function PortfolioPage() {
-  return (
-    <>
-      <Head>
-        <title>Portfolio | Market Sentiment</title>
-      </Head>
+export const metadata = {
+  title: "Portfolio | Market Sentiment",
+};
 
-      <main style={{ maxWidth: 980, margin: "0 auto", padding: 16 }}>
-        <h1>Portfolio</h1>
-        <p style={{ opacity: 0.85 }}>
-          This page is reserved for future portfolio features (watchlists, custom baskets, etc.).
+export const dynamic = "force-static";
+
+type PortfolioStrategy = {
+  meta?: any;
+  metrics?: any;
+  dates: string[];
+  equity: number[];
+  portfolio_return: number[];
+  holdings?: any[];
+  benchmark_series?: { ticker: string; equity: number[] };
+};
+
+async function readStrategy(): Promise<PortfolioStrategy | null> {
+  const file = path.join(process.cwd(), "public", "data", "portfolio_strategy.json");
+  try {
+    const raw = await fs.readFile(file, "utf-8");
+    const parsed = JSON.parse(raw);
+    if (!parsed?.dates?.length || !parsed?.equity?.length) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+export default async function PortfolioPage() {
+  const data = await readStrategy();
+
+  if (!data) {
+    return (
+      <main className="mx-auto max-w-3xl px-4 py-10 space-y-3">
+        <h1 className="text-2xl font-bold">Portfolio</h1>
+        <p className="text-neutral-700">
+          Missing <code className="px-1 py-0.5 rounded bg-neutral-100">public/data/portfolio_strategy.json</code>.
         </p>
-
-        <p style={{ marginTop: 12 }}>
-          For the S&amp;P 500 index view, go to{" "}
-          <Link href="/sp500">/sp500</Link>.
+        <p className="text-neutral-700">
+          Run{" "}
+          <code className="px-1 py-0.5 rounded bg-neutral-100">
+            python -m market_sentiment.cli.build_portfolio ...
+          </code>{" "}
+          after <code className="px-1 py-0.5 rounded bg-neutral-100">build_json</code>.
         </p>
-
-        <div style={{ marginTop: 22, opacity: 0.8 }}>
-          <Link href="/">← Back to Home</Link>
-        </div>
       </main>
-    </>
+    );
+  }
+
+  return (
+    <PortfolioClient
+      meta={data.meta}
+      metrics={data.metrics}
+      dates={data.dates}
+      equity={data.equity}
+      portfolio_return={data.portfolio_return}
+      holdings={data.holdings ?? []}
+      benchmark_series={data.benchmark_series}
+    />
   );
 }
