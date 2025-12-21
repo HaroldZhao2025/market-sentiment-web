@@ -51,16 +51,16 @@ function ma7(arr: number[]) {
   return out;
 }
 
-function computeEquityFromPrice(price: number[]) {
+function computeEquityFromClose(close: number[]) {
   const eq: number[] = [];
   let cur = 1;
-  for (let i = 0; i < price.length; i++) {
+  for (let i = 0; i < close.length; i++) {
     if (i === 0) {
       eq.push(1);
       continue;
     }
-    const p0 = price[i - 1];
-    const p1 = price[i];
+    const p0 = close[i - 1];
+    const p1 = close[i];
     const r = p0 && Number.isFinite(p0) && Number.isFinite(p1) ? p1 / p0 - 1 : 0;
     cur = cur * (1 + (Number.isFinite(r) ? r : 0));
     eq.push(cur);
@@ -75,7 +75,6 @@ function alignByDate(targetDates: string[], sourceDates: string[], sourceValues:
     const v = sourceValues[i];
     if (d && Number.isFinite(v)) m.set(d, v);
   }
-  // If missing a day, keep it as NaN (chart will gap). You can also forward-fill if you want.
   return targetDates.map((d) => (m.has(d) ? (m.get(d) as number) : NaN));
 }
 
@@ -86,30 +85,96 @@ async function readStrategy(): Promise<PortfolioStrategy | null> {
   return parsed;
 }
 
-async function readSp500Index(): Promise<Sp500Index | null> {
-  // This is the same index series your homepage/sp500 page uses (cap-weighted sentiment).
-  const file = path.join(process.cwd(), "public", "data", "portfolio.json");
-  const parsed = await readJsonFile(file);
-  if (!parsed?.dates?.length) return null;
+/**
+ * Read SPX index bundle from repo file:
+ *   data/SPX/sp500_index.json
+ *
+ * Example shape:
+ * {
+ *   "symbol": "SPX",
+ *   "price_symbol_candidates": ["^GSPC","^SPX","SPY"],
+ *   "daily": [
+ *     { "date":"2024-12-23", "close_^GSPC": 5974.06, "sentiment_cap_weighted": 0.0624 },
+ *     ...
+ *   ]
+ * }
+ */
+async function readSpxIndexBundle(): Promise<{
+  symbol: string;
+  dates: string[];
+  close: number[];
+  sentiment: number[];
+} | null> {
+  // In a monorepo, process.cwd() during next build is typically apps/web
+  // so repo root is ../../
+  const candidates = [
+    path.join(process.cwd(), "data", "SPX", "sp500_index.json"),
+    path.join(process.cwd(), "..", "..", "data", "SPX", "sp500_index.json"),
+  ];
 
-  const dates: string[] = parsed.dates ?? [];
-  const sentiment: number[] = (parsed.S ?? parsed.sentiment ?? []).map((x: any) => Number(x));
+  let parsed: any | null = null;
+  for (const file of candidates) {
+    parsed = await readJsonFile(file);
+    if (parsed) break;
+  }
+  if (!parsed?.daily?.length) return null;
 
-  if (!dates.length || !sentiment.length) return null;
+  const symbol = String(parsed.symbol ?? "SPX");
+  const priceCandidates: string[] = Array.isArray(parsed.price_symbol_candidates)
+    ? parsed.price_symbol_candidates.map((x: any) => String(x))
+    : ["^GSPC", "^SPX", "SPY"];
 
-  const n = Math.min(dates.length, sentiment.length);
-  const s = sentiment.slice(0, n);
-  return {
-    dates: dates.slice(0, n),
-    sentiment: s,
-    sentiment_ma7: ma7(s),
-  };
+  const rows: any[] = parsed.daily;
+  const dates: string[] = [];
+  const close: number[] = [];
+  const sentiment: number[] = [];
+
+  for (const r of rows) {
+    const d = r?.date ? String(r.date) : "";
+    if (!d) continue;
+
+    // pick close field by candidate order: close_^GSPC, close_^SPX, close_SPY, ...
+    let px: number = NaN;
+    for (const c of priceCandidates) {
+      const key = `close_${c}`;
+      if (r[key] != null) {
+        const v = Number(r[key]);
+        if (Number.isFinite(v)) {
+          px = v;
+          break;
+        }
+      }
+    }
+    // fallback: any close_* field
+    if (!Number.isFinite(px)) {
+      for (const k of Object.keys(r)) {
+        if (!k.startsWith("close_")) continue;
+        const v = Number(r[k]);
+        if (Number.isFinite(v)) {
+          px = v;
+          break;
+        }
+      }
+    }
+
+    const s = Number(r?.sentiment_cap_weighted);
+
+    dates.push(d);
+    close.push(Number.isFinite(px) ? px : NaN);
+    sentiment.push(Number.isFinite(s) ? s : NaN);
+  }
+
+  // must have at least some close or sentiment
+  const hasAnyClose = close.some((x) => Number.isFinite(x));
+  const hasAnySent = sentiment.some((x) => Number.isFinite(x));
+  if (!hasAnyClose && !hasAnySent) return null;
+
+  return { symbol, dates, close, sentiment };
 }
 
-async function readTickerEquity(ticker: string, targetDates: string[]): Promise<EquitySeries | null> {
+async function readTickerEquityFromSnapshots(ticker: string, targetDates: string[]): Promise<EquitySeries | null> {
   const base = path.join(process.cwd(), "public", "data", "ticker");
 
-  // Try a few filename conventions (your repo uses BRK-B for BRK.B, and some environments store ^GSPC as %5EGSPC).
   const candidates = [
     `${ticker}.json`,
     `${ticker.replace(".", "-")}.json`,
@@ -127,7 +192,7 @@ async function readTickerEquity(ticker: string, targetDates: string[]): Promise<
 
   const srcDates: string[] = obj.dates;
   const price: number[] = obj.price.map((x: any) => Number(x));
-  const eq = computeEquityFromPrice(price);
+  const eq = computeEquityFromClose(price);
 
   const aligned = alignByDate(targetDates, srcDates, eq);
   return { ticker: obj.ticker ?? ticker, equity: aligned };
@@ -154,13 +219,31 @@ export default async function PortfolioPage() {
     );
   }
 
-  const sp500Index = await readSp500Index();
+  // 1) SPX bundle from data/SPX/sp500_index.json
+  const spxBundle = await readSpxIndexBundle();
 
-  // Pull both SPY and S&P 500 index if you have them available.
-  const [spySeries, spxSeries] = await Promise.all([
-    readTickerEquity("SPY", strategy.dates),
-    readTickerEquity("^GSPC", strategy.dates),
-  ]);
+  // Build sentiment index (for the sentiment chart)
+  const sp500_index: Sp500Index | null =
+    spxBundle?.dates?.length && spxBundle?.sentiment?.length
+      ? {
+          dates: spxBundle.dates,
+          sentiment: spxBundle.sentiment,
+          sentiment_ma7: ma7(spxBundle.sentiment),
+        }
+      : null;
+
+  // Build SPX equity curve (for the "all graphs" comparison chart)
+  const sp500_price_series: EquitySeries | null =
+    spxBundle?.dates?.length && spxBundle?.close?.length
+      ? (() => {
+          const eq = computeEquityFromClose(spxBundle.close);
+          const aligned = alignByDate(strategy.dates, spxBundle.dates, eq);
+          return { ticker: spxBundle.symbol ?? "SPX", equity: aligned };
+        })()
+      : null;
+
+  // 2) SPY benchmark from snapshots (optional fallback)
+  const spySeries = await readTickerEquityFromSnapshots("SPY", strategy.dates);
 
   return (
     <PortfolioClient
@@ -171,8 +254,8 @@ export default async function PortfolioPage() {
       portfolio_return={strategy.portfolio_return}
       holdings={strategy.holdings ?? []}
       benchmark_series={strategy.benchmark_series ?? spySeries ?? null}
-      sp500_price_series={spxSeries}
-      sp500_index={sp500Index}
+      sp500_price_series={sp500_price_series}
+      sp500_index={sp500_index}
     />
   );
 }
