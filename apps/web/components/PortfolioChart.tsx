@@ -6,15 +6,19 @@ type Series = {
   label: string;
   values: number[];
   strokeClassName: string; // e.g. "stroke-blue-600"
-  dotClassName?: string;   // e.g. "fill-blue-600"
+  dotClassName?: string; // e.g. "fill-blue-600"
 };
 
 type Props = {
   dates: string[];
   series: Series[];
   height?: number;
-  baselineValue?: number; // e.g. 1 for equity, 0 for drawdown/sentiment
+  baselineValue?: number; // e.g. 1 for equity, 0 for drawdown
   valueFormat?: (v: number) => string;
+
+  // NEW: labels
+  yLabel?: string;
+  showMinMaxLabels?: boolean;
 };
 
 function toPath(values: number[], w = 1000, h = 320, pad = 18, min = 0, max = 1) {
@@ -43,6 +47,8 @@ export default function PortfolioChart({
   height = 520,
   baselineValue,
   valueFormat,
+  yLabel,
+  showMinMaxLabels = true,
 }: Props) {
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
 
@@ -141,9 +147,16 @@ export default function PortfolioChart({
           {/* grid */}
           <line x1="0" y1={pad} x2={W} y2={pad} className="stroke-neutral-100" strokeWidth="1" />
           <line x1="0" y1={H - pad} x2={W} y2={H - pad} className="stroke-neutral-100" strokeWidth="1" />
-          <line x1="0" y1={(pad + (H - pad)) / 2} x2={W} y2={(pad + (H - pad)) / 2} className="stroke-neutral-100" strokeWidth="1" />
+          <line
+            x1="0"
+            y1={(pad + (H - pad)) / 2}
+            x2={W}
+            y2={(pad + (H - pad)) / 2}
+            className="stroke-neutral-100"
+            strokeWidth="1"
+          />
 
-          {/* baseline (e.g. equity=1, drawdown=0) */}
+          {/* baseline */}
           {baselineValue != null && Number.isFinite(baselineValue) ? (
             <line
               x1="0"
@@ -153,6 +166,36 @@ export default function PortfolioChart({
               className="stroke-neutral-200"
               strokeWidth="1.25"
             />
+          ) : null}
+
+          {/* axis labels */}
+          {yLabel ? (
+            <text x={14} y={18} className="fill-neutral-500" fontSize="12" fontFamily="ui-sans-serif, system-ui">
+              {yLabel}
+            </text>
+          ) : null}
+
+          {showMinMaxLabels ? (
+            <>
+              <text
+                x={14}
+                y={pad + 12}
+                className="fill-neutral-400"
+                fontSize="11"
+                fontFamily="ui-sans-serif, system-ui"
+              >
+                max: {fmt(combined.max)}
+              </text>
+              <text
+                x={14}
+                y={H - pad - 6}
+                className="fill-neutral-400"
+                fontSize="11"
+                fontFamily="ui-sans-serif, system-ui"
+              >
+                min: {fmt(combined.min)}
+              </text>
+            </>
           ) : null}
 
           {/* lines */}
