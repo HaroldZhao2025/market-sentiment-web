@@ -10,6 +10,7 @@ https://haroldzhao2025.github.io/market-sentiment-web/
 ### Current features:
 - S&P500 individual stock sentiment analysis
 - S&P500 market index and sentiment
+- Sentiment-based portfolio strategy
 
 ## Data (online)
 - Prices: `yfinance`
