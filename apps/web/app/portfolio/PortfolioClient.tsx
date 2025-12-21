@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import PortfolioChart from "../../components/PortfolioChart";
 
@@ -31,6 +32,17 @@ type Meta = {
   universe_size_used?: number;
 };
 
+type EquitySeries = {
+  ticker: string;
+  equity: number[];
+};
+
+type Sp500Index = {
+  dates: string[];
+  sentiment: number[];
+  sentiment_ma7: number[];
+};
+
 type Props = {
   meta?: Meta;
   metrics?: Metrics;
@@ -38,10 +50,9 @@ type Props = {
   equity: number[];
   portfolio_return: number[];
   holdings?: Holding[];
-  benchmark_series?: {
-    ticker: string;
-    equity: number[];
-  };
+  benchmark_series?: EquitySeries | null;     // typically SPY
+  sp500_price_series?: EquitySeries | null;   // typically ^GSPC
+  sp500_index?: Sp500Index | null;            // cap-weighted sentiment index
 };
 
 function pct(x?: number) {
@@ -54,6 +65,20 @@ function num(x?: number) {
   return x.toFixed(2);
 }
 
+function drawdown(eq: number[]) {
+  let peak = -Infinity;
+  return eq.map((v) => {
+    if (!Number.isFinite(v)) return NaN;
+    peak = Math.max(peak, v);
+    if (!Number.isFinite(peak) || peak === 0) return NaN;
+    return v / peak - 1;
+  });
+}
+
+function chipHref(t: string) {
+  return `/ticker/${encodeURIComponent(t)}`;
+}
+
 export default function PortfolioClient({
   meta,
   metrics,
@@ -62,6 +87,8 @@ export default function PortfolioClient({
   portfolio_return,
   holdings = [],
   benchmark_series,
+  sp500_price_series,
+  sp500_index,
 }: Props) {
   const [showHoldings, setShowHoldings] = useState(true);
 
@@ -76,111 +103,323 @@ export default function PortfolioClient({
 
   const latestHolding = holdings.at(-1);
 
+  const ddPort = useMemo(() => drawdown(equity), [equity]);
+  const ddSpy = useMemo(
+    () => (benchmark_series?.equity?.length ? drawdown(benchmark_series.equity) : []),
+    [benchmark_series]
+  );
+  const ddSpx = useMemo(
+    () => (sp500_price_series?.equity?.length ? drawdown(sp500_price_series.equity) : []),
+    [sp500_price_series]
+  );
+
+  const perfSeries = useMemo(() => {
+    const s = [
+      { label: "Strategy (L/S)", values: equity, strokeClassName: "stroke-neutral-900", dotClassName: "fill-neutral-900" },
+    ];
+    if (benchmark_series?.equity?.length) {
+      s.push({
+        label: benchmark_series.ticker ?? "SPY",
+        values: benchmark_series.equity,
+        strokeClassName: "stroke-blue-600",
+        dotClassName: "fill-blue-600",
+      });
+    }
+    if (sp500_price_series?.equity?.length) {
+      s.push({
+        label: sp500_price_series.ticker ?? "^GSPC",
+        values: sp500_price_series.equity,
+        strokeClassName: "stroke-fuchsia-600",
+        dotClassName: "fill-fuchsia-600",
+      });
+    }
+    return s;
+  }, [equity, benchmark_series, sp500_price_series]);
+
+  const ddSeries = useMemo(() => {
+    const s = [
+      { label: "Strategy DD", values: ddPort, strokeClassName: "stroke-rose-600", dotClassName: "fill-rose-600" },
+    ];
+    if (ddSpy.length) {
+      s.push({
+        label: `${benchmark_series?.ticker ?? "SPY"} DD`,
+        values: ddSpy,
+        strokeClassName: "stroke-sky-600",
+        dotClassName: "fill-sky-600",
+      });
+    }
+    if (ddSpx.length) {
+      s.push({
+        label: `${sp500_price_series?.ticker ?? "^GSPC"} DD`,
+        values: ddSpx,
+        strokeClassName: "stroke-violet-600",
+        dotClassName: "fill-violet-600",
+      });
+    }
+    return s;
+  }, [ddPort, ddSpy, ddSpx, benchmark_series, sp500_price_series]);
+
+  const sentimentSeries = useMemo(() => {
+    if (!sp500_index?.dates?.length) return [];
+    return [
+      {
+        label: "S&P 500 Sentiment",
+        values: sp500_index.sentiment,
+        strokeClassName: "stroke-amber-600",
+        dotClassName: "fill-amber-600",
+      },
+      {
+        label: "Sentiment MA(7)",
+        values: sp500_index.sentiment_ma7,
+        strokeClassName: "stroke-emerald-600",
+        dotClassName: "fill-emerald-600",
+      },
+    ];
+  }, [sp500_index]);
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 space-y-8">
-      <div className="flex items-start justify-between gap-6">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Portfolio</h1>
-          <div className="text-sm text-neutral-600 mt-1">
-            {meta?.rebalance ? (
-              <>
-                Rebalance: <span className="font-medium text-neutral-800">{meta.rebalance}</span> · Signal:{" "}
-                <span className="font-medium text-neutral-800">{meta.signal}</span> · K:{" "}
-                <span className="font-medium text-neutral-800">{meta.k}</span> · Long/Short:{" "}
-                <span className="font-medium text-neutral-800">{meta.long_short ? "Yes" : "No"}</span>
-              </>
+    <main className="min-h-screen bg-gradient-to-b from-indigo-50 via-white to-emerald-50">
+      <div className="mx-auto max-w-7xl px-4 py-10 space-y-10">
+        {/* Header */}
+        <div className="rounded-3xl border bg-white/80 backdrop-blur p-6 shadow-sm">
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">Portfolio Strategy</h1>
+              <div className="text-sm text-neutral-700 mt-2">
+                {meta?.rebalance ? (
+                  <div className="flex flex-wrap gap-x-2 gap-y-1">
+                    <span className="rounded-full bg-indigo-100 text-indigo-800 px-3 py-1 text-xs font-semibold">
+                      Rebalance: {meta.rebalance}
+                    </span>
+                    <span className="rounded-full bg-emerald-100 text-emerald-800 px-3 py-1 text-xs font-semibold">
+                      Signal: {meta.signal}
+                    </span>
+                    <span className="rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold">
+                      Lag: {meta.lag_days ?? 1}d
+                    </span>
+                    <span className="rounded-full bg-fuchsia-100 text-fuchsia-800 px-3 py-1 text-xs font-semibold">
+                      K: {meta.k}
+                    </span>
+                    <span className="rounded-full bg-sky-100 text-sky-800 px-3 py-1 text-xs font-semibold">
+                      Long/Short: {meta.long_short ? "Yes" : "No"}
+                    </span>
+                    {meta?.universe_size_used ? (
+                      <span className="rounded-full bg-neutral-100 text-neutral-800 px-3 py-1 text-xs font-semibold">
+                        Universe used: {meta.universe_size_used}
+                      </span>
+                    ) : null}
+                  </div>
+                ) : (
+                  "Daily long/short equity curve + holdings"
+                )}
+              </div>
+            </div>
+
+            <button
+              className="rounded-2xl border bg-white px-4 py-2 text-sm text-neutral-800 hover:bg-neutral-50 shadow-sm"
+              onClick={() => setShowHoldings((v) => !v)}
+            >
+              {showHoldings ? "Hide Holdings" : "Show Holdings"}
+            </button>
+          </div>
+
+          {/* explainers */}
+          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <details className="border rounded-2xl p-4 bg-white">
+              <summary className="cursor-pointer select-none text-sm font-semibold">
+                ❓ How S&amp;P 500 sentiment is calculated?
+              </summary>
+              <div className="mt-3 text-sm text-neutral-700 space-y-2">
+                <p>
+                  The index sentiment is a <b>market-cap-weighted</b> aggregation of constituent sentiment scores.
+                  Larger companies contribute more to the final index-level score.
+                </p>
+                <p>
+                  For each day, we compute each constituent’s daily news sentiment score, then aggregate across all constituents
+                  using their market-cap weights to produce a single cap-weighted S&amp;P 500 sentiment number.
+                </p>
+              </div>
+            </details>
+
+            <details className="border rounded-2xl p-4 bg-white">
+              <summary className="cursor-pointer select-none text-sm font-semibold">
+                🧠 How this portfolio strategy works (weekly lagged sentiment ranking)
+              </summary>
+              <div className="mt-3 text-sm text-neutral-700 space-y-2">
+                <p>
+                  We treat each stock’s news sentiment as a trading signal (either <b>daily</b> sentiment or its <b>7-day moving average</b>).
+                </p>
+                <p>
+                  On each rebalance date (typically <b>weekly</b>), we rank the universe by the signal observed with a <b>lag</b> (e.g., yesterday),
+                  then go <b>long</b> the top-K tickers and (optionally) <b>short</b> the bottom-K tickers with equal weights.
+                </p>
+                <p className="text-neutral-600">
+                  The lag + “apply weights from next trading day” rule is used to reduce look-ahead bias.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        {/* KPI cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="rounded-2xl p-5 shadow-sm border bg-white">
+            <div className="text-sm text-neutral-500 mb-1">Current Equity</div>
+            <div className="text-2xl font-semibold tabular-nums">{last.lastEq.toFixed(4)}</div>
+            <div className="text-sm text-neutral-600 mt-1">Latest daily: {pct(last.lastRet)}</div>
+          </div>
+
+          <div className="rounded-2xl p-5 shadow-sm border bg-white">
+            <div className="text-sm text-neutral-500 mb-1">Cumulative Return</div>
+            <div className="text-2xl font-semibold tabular-nums">{pct(metrics?.cumulative_return)}</div>
+            <div className="text-sm text-neutral-600 mt-1">Max DD: {pct(metrics?.max_drawdown)}</div>
+          </div>
+
+          <div className="rounded-2xl p-5 shadow-sm border bg-white">
+            <div className="text-sm text-neutral-500 mb-1">Annualized</div>
+            <div className="text-sm text-neutral-700 mt-1">
+              Return: <span className="font-semibold tabular-nums">{pct(metrics?.annualized_return)}</span>
+            </div>
+            <div className="text-sm text-neutral-700">
+              Vol: <span className="font-semibold tabular-nums">{pct(metrics?.annualized_vol)}</span>
+            </div>
+          </div>
+
+          <div className="rounded-2xl p-5 shadow-sm border bg-white">
+            <div className="text-sm text-neutral-500 mb-1">Sharpe & Hit Rate</div>
+            <div className="text-sm text-neutral-700 mt-1">
+              Sharpe: <span className="font-semibold tabular-nums">{num(metrics?.sharpe)}</span>
+            </div>
+            <div className="text-sm text-neutral-700">
+              Hit: <span className="font-semibold tabular-nums">{pct(metrics?.hit_rate)}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Performance chart */}
+        <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-5">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h3 className="font-semibold text-lg">Performance vs Benchmarks</h3>
+              <div className="text-sm text-neutral-600">
+                Portfolio (strategy) + {benchmark_series?.ticker ?? "SPY"} + {sp500_price_series?.ticker ?? "S&P 500"}
+              </div>
+            </div>
+            <div className="text-xs text-neutral-500">
+              baseline: 1.0000
+            </div>
+          </div>
+
+          <PortfolioChart
+            dates={dates}
+            series={perfSeries}
+            height={520}
+            baselineValue={1}
+            valueFormat={(v) => v.toFixed(4)}
+          />
+        </section>
+
+        {/* Drawdown chart */}
+        <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-5">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h3 className="font-semibold text-lg">Drawdowns</h3>
+              <div className="text-sm text-neutral-600">Peak-to-trough performance comparison</div>
+            </div>
+            <div className="text-xs text-neutral-500">
+              baseline: 0.00
+            </div>
+          </div>
+
+          <PortfolioChart
+            dates={dates}
+            series={ddSeries}
+            height={360}
+            baselineValue={0}
+            valueFormat={(v) => `${(v * 100).toFixed(2)}%`}
+          />
+        </section>
+
+        {/* S&P 500 sentiment chart */}
+        {sp500_index?.dates?.length && sentimentSeries.length ? (
+          <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-5">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <h3 className="font-semibold text-lg">S&amp;P 500 Sentiment Index</h3>
+                <div className="text-sm text-neutral-600">Daily cap-weighted index sentiment + MA(7)</div>
+              </div>
+              <div className="text-xs text-neutral-500">baseline: 0.00</div>
+            </div>
+
+            <PortfolioChart
+              dates={sp500_index.dates}
+              series={sentimentSeries}
+              height={360}
+              baselineValue={0}
+              valueFormat={(v) => v.toFixed(3)}
+            />
+          </section>
+        ) : null}
+
+        {/* Holdings */}
+        {showHoldings ? (
+          <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-lg">Latest Holdings</h3>
+              <div className="text-sm text-neutral-600">
+                {latestHolding?.date ? (
+                  <>
+                    As of <span className="font-medium text-neutral-900">{latestHolding.date}</span>
+                  </>
+                ) : (
+                  "—"
+                )}
+              </div>
+            </div>
+
+            {!latestHolding ? (
+              <div className="text-sm text-neutral-600">No holdings found in portfolio_strategy.json.</div>
             ) : (
-              "Daily long/short equity curve + holdings"
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="rounded-2xl border bg-emerald-50 p-4">
+                  <div className="text-sm font-semibold mb-2 text-emerald-900">Long</div>
+                  <div className="flex flex-wrap gap-2">
+                    {latestHolding.long.map((t) => (
+                      <Link
+                        key={t}
+                        href={chipHref(t)}
+                        className="rounded-full bg-white border px-3 py-1 text-sm hover:bg-emerald-100 transition"
+                        title={`Go to ${t}`}
+                      >
+                        {t}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border bg-rose-50 p-4">
+                  <div className="text-sm font-semibold mb-2 text-rose-900">Short</div>
+                  <div className="flex flex-wrap gap-2">
+                    {latestHolding.short.map((t) => (
+                      <Link
+                        key={t}
+                        href={chipHref(t)}
+                        className="rounded-full bg-white border px-3 py-1 text-sm hover:bg-rose-100 transition"
+                        title={`Go to ${t}`}
+                      >
+                        {t}
+                      </Link>
+                    ))}
+                    {!latestHolding.short.length ? (
+                      <span className="text-sm text-neutral-600">Short leg disabled.</span>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
             )}
-          </div>
-        </div>
-
-        <button
-          className="rounded-xl border bg-white px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50"
-          onClick={() => setShowHoldings((v) => !v)}
-        >
-          {showHoldings ? "Hide Holdings" : "Show Holdings"}
-        </button>
+          </section>
+        ) : null}
       </div>
-
-      <div className="rounded-2xl p-6 shadow-sm border bg-white space-y-5">
-        <h3 className="font-semibold">Equity Curve</h3>
-        <PortfolioChart
-          dates={dates}
-          portfolioEquity={equity}
-          benchmarkEquity={benchmark_series?.equity}
-          benchmarkLabel={benchmark_series?.ticker ?? "SPY"}
-          height={520}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 mb-1">Current Equity</div>
-          <div className="text-2xl font-semibold tabular-nums">{last.lastEq.toFixed(4)}</div>
-          <div className="text-sm text-neutral-600 mt-1">Latest daily: {pct(last.lastRet)}</div>
-        </div>
-
-        <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 mb-1">Cumulative Return</div>
-          <div className="text-2xl font-semibold tabular-nums">{pct(metrics?.cumulative_return)}</div>
-          <div className="text-sm text-neutral-600 mt-1">Max DD: {pct(metrics?.max_drawdown)}</div>
-        </div>
-
-        <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 mb-1">Annualized</div>
-          <div className="text-sm text-neutral-700 mt-1">Return: <span className="font-semibold tabular-nums">{pct(metrics?.annualized_return)}</span></div>
-          <div className="text-sm text-neutral-700">Vol: <span className="font-semibold tabular-nums">{pct(metrics?.annualized_vol)}</span></div>
-        </div>
-
-        <div className="rounded-2xl p-5 shadow-sm border bg-white">
-          <div className="text-sm text-neutral-500 mb-1">Sharpe & Hit Rate</div>
-          <div className="text-sm text-neutral-700 mt-1">Sharpe: <span className="font-semibold tabular-nums">{num(metrics?.sharpe)}</span></div>
-          <div className="text-sm text-neutral-700">Hit: <span className="font-semibold tabular-nums">{pct(metrics?.hit_rate)}</span></div>
-        </div>
-      </div>
-
-      {showHoldings ? (
-        <div className="rounded-2xl p-6 shadow-sm border bg-white space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold">Latest Holdings</h3>
-            <div className="text-sm text-neutral-600">
-              {latestHolding?.date ? <>As of <span className="font-medium text-neutral-800">{latestHolding.date}</span></> : "—"}
-            </div>
-          </div>
-
-          {!latestHolding ? (
-            <div className="text-sm text-neutral-600">No holdings found in portfolio_strategy.json.</div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-2xl border bg-neutral-50 p-4">
-                <div className="text-sm font-semibold mb-2">Long</div>
-                <div className="flex flex-wrap gap-2">
-                  {latestHolding.long.map((t) => (
-                    <span key={t} className="rounded-full bg-white border px-3 py-1 text-sm">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-2xl border bg-neutral-50 p-4">
-                <div className="text-sm font-semibold mb-2">Short</div>
-                <div className="flex flex-wrap gap-2">
-                  {latestHolding.short.map((t) => (
-                    <span key={t} className="rounded-full bg-white border px-3 py-1 text-sm">
-                      {t}
-                    </span>
-                  ))}
-                  {!latestHolding.short.length ? (
-                    <span className="text-sm text-neutral-600">Short leg disabled.</span>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      ) : null}
-    </div>
+    </main>
   );
 }
