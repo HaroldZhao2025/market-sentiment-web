@@ -2,13 +2,13 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import gzip
 import json
+import math
 import os
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -17,588 +17,369 @@ import pandas as pd
 # -----------------------------
 # IO helpers
 # -----------------------------
-
-def _safe_float(x) -> float:
-    try:
-        if x is None:
-            return float("nan")
-        return float(x)
-    except Exception:
-        return float("nan")
-
-
-def _open_maybe_gzip(path: str, mode: str = "rt", encoding: str = "utf-8"):
-    """
-    Open plain text or gzip-compressed files transparently.
-    mode: "rt" / "rb"
-    """
+def _read_json(path: str) -> Any:
     if path.endswith(".gz"):
-        return gzip.open(path, mode=mode, encoding=encoding if "t" in mode else None)
-    return open(path, mode=mode, encoding=encoding if "t" in mode else None)
-
-
-def _read_json_any(path: str):
-    with _open_maybe_gzip(path, "rt") as f:
+        with gzip.open(path, "rt", encoding="utf-8") as f:
+            return json.load(f)
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def _read_table_any(path: str) -> pd.DataFrame:
-    """
-    Read CSV/TSV (optionally gz) into a DataFrame (delimiter inferred).
-    """
-    with _open_maybe_gzip(path, "rt") as f:
-        sample = f.read(4096)
-        f.seek(0)
-        dialect = csv.Sniffer().sniff(sample, delimiters=",\t;")
-        return pd.read_csv(f, delimiter=dialect.delimiter)
+def _write_json(path: str, obj: Any) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False)
 
 
-def _first_existing(base: str, rel_candidates: Sequence[str]) -> Optional[str]:
-    for rel in rel_candidates:
-        p = os.path.join(base, rel)
+def _canonical_ticker_filename(t: str) -> str:
+    # GitHub-pages-friendly: BRK.B -> BRK-B, BF.B -> BF-B, etc.
+    # Keep caret etc as-is if you ever have those, but dot->dash is critical.
+    return t.replace(".", "-")
+
+
+def _load_universe_csv(path: str) -> List[str]:
+    df = pd.read_csv(path)
+    # try common column names; otherwise first col
+    for col in ["ticker", "Ticker", "symbol", "Symbol"]:
+        if col in df.columns:
+            s = df[col].astype(str)
+            return [x.strip() for x in s.tolist() if x and x.strip()]
+    s = df.iloc[:, 0].astype(str)
+    return [x.strip() for x in s.tolist() if x and x.strip()]
+
+
+def _find_ticker_snapshot(data_root: str, ticker: str) -> Optional[str]:
+    """
+    We expect: {data_root}/ticker/{TICKER}.json
+    Try both raw ticker and canonicalized filename.
+    """
+    t1 = ticker
+    t2 = _canonical_ticker_filename(ticker)
+
+    cand = [
+        os.path.join(data_root, "ticker", f"{t1}.json"),
+        os.path.join(data_root, "ticker", f"{t2}.json"),
+        os.path.join(data_root, "ticker", f"{t1}.json.gz"),
+        os.path.join(data_root, "ticker", f"{t2}.json.gz"),
+    ]
+    for p in cand:
         if os.path.exists(p):
             return p
     return None
 
 
-def _discover_tickers(data_root: str) -> List[str]:
+def _snapshot_to_df(obj: Dict[str, Any]) -> pd.DataFrame:
     """
-    Heuristic: ticker = any directory directly under data_root that is not hidden.
+    Expected keys (based on your repo export):
+      - dates: list[str]
+      - price: list[number]
+      - S or sentiment: list[number]
     """
-    if not os.path.isdir(data_root):
-        return []
-
-    out: List[str] = []
-    for name in sorted(os.listdir(data_root)):
-        if name.startswith("."):
-            continue
-        p = os.path.join(data_root, name)
-        if not os.path.isdir(p):
-            continue
-        if name.lower() in {"public", "apps", "src", "node_modules"}:
-            continue
-        out.append(name)
-    return out
-
-
-def _list_tickers_from_universe(universe_csv: str) -> List[str]:
-    df = pd.read_csv(universe_csv)
-    candidates = ["symbol", "Symbol", "ticker", "Ticker"]
-    col = next((c for c in candidates if c in df.columns), None)
-    if col is None:
-        col = df.columns[0]
-    tickers = df[col].astype(str).str.strip().replace({"": np.nan}).dropna().unique().tolist()
-    return [t for t in tickers if t.lower() not in {"nan", "none"}]
-
-
-# -----------------------------
-# Loaders: price / sentiment
-# -----------------------------
-
-_PRICE_PATH_CANDIDATES = [
-    os.path.join("price", "daily.json"),
-    os.path.join("price", "daily.json.gz"),
-    os.path.join("prices", "daily.json"),
-    os.path.join("prices", "daily.json.gz"),
-    os.path.join("price", "daily.csv"),
-    os.path.join("price", "daily.csv.gz"),
-    os.path.join("prices", "daily.csv"),
-    os.path.join("prices", "daily.csv.gz"),
-]
-
-_SENT_DIR_CANDIDATES = [
-    "sentiment",
-    "sentiments",
-    "news_sentiment",
-    "daily_sentiment",
-]
-
-
-def load_price_daily(data_root: str, ticker: str) -> pd.DataFrame:
-    """
-    Expected (preferred): {data_root}/{ticker}/price/daily.json
-      with records like [{"date":"YYYY-MM-DD","close":123.4}, ...]
-
-    Accepts common variants (csv, gz, alt column names).
-    Returns columns: date (Timestamp), close (float), ret (float).
-    """
-    tdir = os.path.join(data_root, ticker)
-    fpath = _first_existing(tdir, _PRICE_PATH_CANDIDATES)
-    if not fpath:
+    dates = obj.get("dates", [])
+    price = obj.get("price", [])
+    if not dates or not price:
         return pd.DataFrame()
 
-    if fpath.endswith((".csv", ".csv.gz", ".tsv", ".tsv.gz")):
-        rows = _read_table_any(fpath)
-    else:
-        data = _read_json_any(fpath)
-        if isinstance(data, dict):
-            if "data" in data and isinstance(data["data"], list):
-                data = data["data"]
-            elif "prices" in data and isinstance(data["prices"], list):
-                data = data["prices"]
-        if isinstance(data, list):
-            rows = pd.DataFrame(data)
-        elif isinstance(data, dict):
-            rows = pd.DataFrame(data)
-        else:
-            return pd.DataFrame()
+    # prefer S if present, else sentiment
+    sig = obj.get("S", obj.get("sentiment", obj.get("sentiment_score", [])))
 
-    if rows.empty:
+    n = min(len(dates), len(price), len(sig) if isinstance(sig, list) else len(dates))
+    if n <= 2:
         return pd.DataFrame()
 
-    date_col = next((c for c in ["date", "Date", "datetime", "timestamp", "time"] if c in rows.columns), None)
-    if date_col is None:
-        return pd.DataFrame()
-
-    close_col = next(
-        (c for c in ["adj_close", "adjClose", "Adj Close", "adjclose", "close", "Close", "price", "Price"] if c in rows.columns),
-        None,
+    df = pd.DataFrame(
+        {
+            "date": pd.to_datetime(pd.Series(dates[:n]), errors="coerce"),
+            "price": pd.to_numeric(pd.Series(price[:n]), errors="coerce"),
+            "signal_raw": pd.to_numeric(pd.Series(sig[:n]), errors="coerce"),
+        }
     )
-    if close_col is None:
-        return pd.DataFrame()
+    df = df.dropna(subset=["date", "price"]).sort_values("date")
+    if df.empty:
+        return df
 
-    out = rows[[date_col, close_col]].rename(columns={date_col: "date", close_col: "close"}).copy()
-    out["date"] = pd.to_datetime(out["date"], errors="coerce", utc=False)
-    out["close"] = pd.to_numeric(out["close"], errors="coerce")
-    out = out.dropna(subset=["date", "close"]).sort_values("date")
-    if out.empty:
-        return pd.DataFrame()
-
-    out["ret"] = out["close"].pct_change()
-    return out[["date", "close", "ret"]]
-
-
-def load_sentiment_daily(data_root: str, ticker: str) -> pd.DataFrame:
-    """
-    Accepts:
-      - {data_root}/{ticker}/sentiment/daily.json(.gz)  (list or dict)
-      - {data_root}/{ticker}/sentiment/*.json(.gz)      (one dict per file)
-      - daily.csv(.gz)
-
-    Returns columns: date (Timestamp), score_mean (float)
-    """
-    tdir = os.path.join(data_root, ticker)
-    sdir = None
-    for cand in _SENT_DIR_CANDIDATES:
-        p = os.path.join(tdir, cand)
-        if os.path.isdir(p):
-            sdir = p
-            break
-    if not sdir:
-        return pd.DataFrame()
-
-    score_keys = ["score_mean", "S", "sentiment", "score", "mean", "compound", "sentiment_mean", "avg_sentiment"]
-
-    def extract_score(d: dict) -> Optional[float]:
-        for k in score_keys:
-            if k in d and d[k] is not None:
-                v = d[k]
-                if isinstance(v, dict):
-                    for kk in ["score_mean", "mean", "compound", "score", "sentiment"]:
-                        if kk in v and v[kk] is not None:
-                            return _safe_float(v[kk])
-                else:
-                    return _safe_float(v)
-        return None
-
-    def extract_date(d: dict) -> Optional[str]:
-        for k in ["date", "Date", "datetime", "timestamp", "time"]:
-            if k in d and d[k]:
-                return str(d[k])
-        return None
-
-    rows: List[Dict[str, object]] = []
-
-    daily = _first_existing(sdir, ["daily.json", "daily.json.gz", "daily.csv", "daily.csv.gz"])
-
-    if daily and daily.endswith((".csv", ".csv.gz")):
-        df = _read_table_any(daily)
-        if df.empty:
-            return pd.DataFrame()
-
-        date_col = next((c for c in ["date", "Date", "datetime", "timestamp"] if c in df.columns), None)
-        score_col = next((c for c in score_keys if c in df.columns), None)
-        if date_col is None or score_col is None:
-            return pd.DataFrame()
-
-        out = df[[date_col, score_col]].rename(columns={date_col: "date", score_col: "score_mean"}).copy()
-        out["date"] = pd.to_datetime(out["date"], errors="coerce", utc=False)
-        out["score_mean"] = pd.to_numeric(out["score_mean"], errors="coerce")
-        out = out.dropna(subset=["date", "score_mean"]).sort_values("date")
-        return out[["date", "score_mean"]]
-
-    if daily and daily.endswith((".json", ".json.gz")):
-        try:
-            data = _read_json_any(daily)
-            if isinstance(data, dict):
-                if "data" in data and isinstance(data["data"], list):
-                    data = data["data"]
-                elif "rows" in data and isinstance(data["rows"], list):
-                    data = data["rows"]
-
-            if isinstance(data, list):
-                for d in data:
-                    if not isinstance(d, dict):
-                        continue
-                    ds = extract_date(d)
-                    sc = extract_score(d)
-                    if ds is None or sc is None or not np.isfinite(sc):
-                        continue
-                    rows.append({"date": ds, "score_mean": sc})
-        except Exception:
-            rows = []
-
-    if not rows:
-        # per-day files
-        for fname in sorted(os.listdir(sdir)):
-            if not (fname.endswith(".json") or fname.endswith(".json.gz")):
-                continue
-            if fname.startswith(".") or fname.startswith("daily."):
-                continue
-            fpath = os.path.join(sdir, fname)
-            try:
-                d = _read_json_any(fpath)
-                if not isinstance(d, dict):
-                    continue
-                ds = extract_date(d)
-                sc = extract_score(d)
-                if ds is None or sc is None or not np.isfinite(sc):
-                    continue
-                rows.append({"date": ds, "score_mean": sc})
-            except Exception:
-                continue
-
-    if not rows:
-        return pd.DataFrame()
-
-    out = pd.DataFrame(rows)
-    out["date"] = pd.to_datetime(out["date"], errors="coerce", utc=False)
-    out["score_mean"] = pd.to_numeric(out["score_mean"], errors="coerce")
-    out = out.dropna(subset=["date", "score_mean"]).sort_values("date")
-    out = out.groupby("date", as_index=False)["score_mean"].mean()
-    return out[["date", "score_mean"]]
+    df["ret"] = df["price"].pct_change()
+    df = df.set_index("date")
+    return df[["price", "ret", "signal_raw"]]
 
 
 # -----------------------------
-# Backtest utilities
+# Strategy / backtest helpers
 # -----------------------------
+def _rebalance_mask(dates: pd.DatetimeIndex, mode: str) -> np.ndarray:
+    if mode == "daily":
+        return np.ones(len(dates), dtype=bool)
 
-def compute_metrics(daily_ret: pd.Series, rf_annual: float = 0.0) -> Dict[str, float]:
-    r = daily_ret.dropna().astype(float)
-    if r.empty:
-        return {}
+    # weekly: first trading day of each calendar week (Period 'W')
+    week = dates.to_period("W")
+    first_pos = pd.Series(np.arange(len(dates)), index=dates).groupby(week).min().values
+    first_pos = set(int(x) for x in first_pos)
+    return np.array([i in first_pos for i in range(len(dates))], dtype=bool)
 
-    freq = 252.0
-    T = float(len(r))
 
-    cum_ret = float((1.0 + r).prod() - 1.0)
-    ann_ret = float((1.0 + cum_ret) ** (freq / T) - 1.0)
-    ann_vol = float(r.std(ddof=1) * np.sqrt(freq))
+def _compute_metrics(port_ret: pd.Series, equity: pd.Series) -> Dict[str, float]:
+    # Use 252 trading days annualization
+    r = port_ret.fillna(0.0).values
+    eq = equity.fillna(1.0).values
+    n = len(r)
+    n_days = max(1, n - 1)
 
-    rf_daily = (1.0 + rf_annual) ** (1.0 / freq) - 1.0
-    ex = r - rf_daily
-    sharpe = float((ex.mean() / ex.std(ddof=1)) * np.sqrt(freq)) if ex.std(ddof=1) > 0 else float("nan")
+    cumulative_return = float(eq[-1] - 1.0)
 
-    wealth = (1.0 + r).cumprod()
-    peak = wealth.cummax()
-    dd = wealth / peak - 1.0
-    max_dd = float(dd.min())
+    # annualized return via CAGR on equity curve
+    annualized_return = float(eq[-1] ** (252.0 / n_days) - 1.0) if eq[-1] > 0 else float("nan")
 
-    hit_rate = float((r > 0).mean())
+    # annualized vol (exclude first day, which is usually 0/NaN)
+    if n > 2:
+        daily_std = float(np.std(r[1:], ddof=1))
+    else:
+        daily_std = float("nan")
+    annualized_vol = float(daily_std * math.sqrt(252.0)) if np.isfinite(daily_std) else float("nan")
+
+    sharpe = float(annualized_return / annualized_vol) if annualized_vol and annualized_vol > 0 else float("nan")
+
+    # max drawdown
+    peak = np.maximum.accumulate(eq)
+    dd = eq / np.where(peak == 0, np.nan, peak) - 1.0
+    max_drawdown = float(np.nanmin(dd)) if np.isfinite(dd).any() else float("nan")
+
+    hit_rate = float(np.mean(r[1:] > 0)) if n > 2 else float("nan")
 
     return {
-        "cumulative_return": cum_ret,
-        "annualized_return": ann_ret,
-        "annualized_vol": ann_vol,
+        "cumulative_return": cumulative_return,
+        "annualized_return": annualized_return,
+        "annualized_vol": annualized_vol,
         "sharpe": sharpe,
-        "max_drawdown": max_dd,
+        "max_drawdown": max_drawdown,
         "hit_rate": hit_rate,
-        "num_days": float(len(r)),
+        "num_days": float(n_days),
     }
-
-
-def _rebalance_starts(dates: pd.DatetimeIndex, mode: str) -> List[pd.Timestamp]:
-    if len(dates) == 0:
-        return []
-    if mode == "daily":
-        return list(pd.to_datetime(dates))
-
-    tmp = pd.DataFrame({"date": pd.to_datetime(dates)})
-    tmp["week"] = tmp["date"].dt.to_period("W")
-    first_dates = tmp.groupby("week")["date"].min().sort_values()
-    return [pd.Timestamp(x) for x in first_dates.values]
-
-
-def _compute_weekly_sentiment(df_long: pd.DataFrame, trading_dates: pd.DatetimeIndex) -> pd.DataFrame:
-    """
-    Recency-weighted weekly sentiment (matches your notebook idea):
-    - Within each calendar week, later trading days have higher weights (1..m).
-    - Weekly(ticker, week) = weighted avg of score_mean on days it exists.
-    """
-    if df_long.empty:
-        return pd.DataFrame()
-
-    cal = pd.DataFrame({"date": pd.to_datetime(trading_dates)})
-    cal["week"] = cal["date"].dt.to_period("W")
-    cal["pos"] = cal.groupby("week").cumcount() + 1
-    cal["m"] = cal.groupby("week")["pos"].transform("max")
-    cal["day_weight"] = cal["pos"] / (cal["m"] * (cal["m"] + 1) / 2.0)
-    cal = cal[["date", "week", "day_weight"]]
-
-    sent = df_long[["ticker", "date", "score_mean"]].copy()
-    sent = sent.dropna(subset=["date", "score_mean"])
-    sent["date"] = pd.to_datetime(sent["date"])
-    sent = sent.merge(cal, on="date", how="left").dropna(subset=["day_weight"])
-
-    if sent.empty:
-        return pd.DataFrame()
-
-    def _wavg(g: pd.DataFrame) -> float:
-        return float(np.average(g["score_mean"].astype(float), weights=g["day_weight"].astype(float)))
-
-    weekly = (
-        sent.groupby(["week", "ticker"])
-        .apply(_wavg)
-        .rename("weekly_sent")
-        .reset_index()
-        .pivot(index="week", columns="ticker", values="weekly_sent")
-        .sort_index()
-    )
-    return weekly
 
 
 @dataclass
-class Holding:
-    date: str
-    long: List[str]
-    short: List[str]
+class BacktestConfig:
+    rebalance: str
+    signal: str
+    lag_days: int
+    k: int
+    long_short: bool
+    gross_per_side: float
 
 
-def build_portfolio(
-    data_root: str,
-    tickers: List[str],
-    k: int = 5,
-    long_short: bool = True,
-    gross_per_side: float = 1.0,
-    rebalance: str = "weekly",
-    signal: str = "weekavg",  # day | ma7 | weekavg
-    lag_days: int = 1,
-    benchmark_ticker: str = "SPY",
-    exclude_benchmark_from_universe: bool = True,
-    verbose: bool = False,
-) -> Dict:
-    frames: List[pd.DataFrame] = []
-    loaded = 0
+def _build_portfolio_from_panel(
+    ret_wide: pd.DataFrame,
+    sig_wide: pd.DataFrame,
+    dates: pd.DatetimeIndex,
+    cfg: BacktestConfig,
+) -> Tuple[pd.Series, pd.Series, List[Dict[str, Any]]]:
+    reb_mask = _rebalance_mask(dates, cfg.rebalance)
 
-    for t in tickers:
-        if exclude_benchmark_from_universe and t == benchmark_ticker:
-            continue
+    # weights at rebalance dates (will ffill and shift(1) later)
+    weights_reb = pd.DataFrame(0.0, index=dates, columns=ret_wide.columns)
+    holdings: List[Dict[str, Any]] = []
 
-        px = load_price_daily(data_root, t)
-        if px.empty:
-            if verbose:
-                print(f"[skip] {t}: missing price")
-            continue
-
-        s = load_sentiment_daily(data_root, t)
-        if s.empty:
-            if verbose:
-                print(f"[skip] {t}: missing sentiment")
-            continue
-
-        # IMPORTANT: keep all price dates
-        merged = px.merge(s, on="date", how="left")
-        merged["ticker"] = t
-        frames.append(merged[["ticker", "date", "ret", "score_mean"]])
-        loaded += 1
-
-    if verbose:
-        print(f"Loaded tickers with price+sentiment: {loaded} / {len(tickers)}")
-
-    if not frames:
-        # If you still see {} after this, it means data_root/path assumptions still don't match.
-        return {}
-
-    df = pd.concat(frames, ignore_index=True).sort_values(["ticker", "date"])
-    df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    df = df.dropna(subset=["date"])
-    df["ret"] = pd.to_numeric(df["ret"], errors="coerce")
-
-    ret_wide = df.pivot(index="date", columns="ticker", values="ret").sort_index()
-    if ret_wide.empty:
-        return {}
-
-    # Benchmark (try load separately if not in universe)
-    bench_ret = None
-    if benchmark_ticker:
-        bpx = load_price_daily(data_root, benchmark_ticker)
-        if not bpx.empty:
-            b = bpx.set_index("date")["ret"].sort_index()
-            bench_ret = b.reindex(ret_wide.index).fillna(0.0)
-
-    port_ret = pd.Series(index=ret_wide.index, data=0.0, dtype=float)
-    holdings: List[Holding] = []
-
-    if signal in {"day", "ma7"}:
-        df["S_day"] = pd.to_numeric(df["score_mean"], errors="coerce")
-        if signal == "ma7":
-            df["S_sig"] = df.groupby("ticker")["S_day"].transform(lambda s: s.rolling(7, min_periods=7).mean())
-        else:
-            df["S_sig"] = df["S_day"]
-        df["S_lag"] = df.groupby("ticker")["S_sig"].shift(lag_days)
-
-        sig_wide = df.pivot(index="date", columns="ticker", values="S_lag").reindex(ret_wide.index)
-        starts = _rebalance_starts(ret_wide.index, rebalance)
-
-        for i, start in enumerate(starts):
-            end = starts[i + 1] if i + 1 < len(starts) else (ret_wide.index.max() + pd.Timedelta(days=1))
-            if start not in sig_wide.index:
-                continue
-
-            sig = sig_wide.loc[start].dropna()
-            if exclude_benchmark_from_universe:
-                sig = sig.drop(index=benchmark_ticker, errors="ignore")
-            if sig.empty:
-                continue
-
-            sig_sorted = sig.sort_values(ascending=False)
-            k_eff = max(1, min(k, len(sig_sorted)))
-
-            long_names = sig_sorted.head(k_eff).index.tolist()
-            short_names = sig_sorted.tail(k_eff).index.tolist() if long_short else []
-
-            w = pd.Series(0.0, index=ret_wide.columns, dtype=float)
-            w[long_names] = gross_per_side / float(len(long_names))
-            if long_short and short_names:
-                w[short_names] = -gross_per_side / float(len(short_names))
-
-            mask = (ret_wide.index >= start) & (ret_wide.index < end)
-            slice_ret = ret_wide.loc[mask, w.index].fillna(0.0)
-            port_ret.loc[mask] = (slice_ret * w.values).sum(axis=1).values
-            holdings.append(Holding(date=pd.Timestamp(start).date().isoformat(), long=long_names, short=short_names))
-
-    elif signal == "weekavg":
-        # Always weekly in this mode
-        weekly_sent = _compute_weekly_sentiment(df, trading_dates=ret_wide.index)
-
-        cal = pd.DataFrame({"date": pd.to_datetime(ret_wide.index)})
-        cal["week"] = cal["date"].dt.to_period("W")
-        first_dates = cal.groupby("week")["date"].min().sort_values()
-        weeks = list(first_dates.index)
-
-        for k_idx, w_cur in enumerate(weeks):
-            if k_idx == 0:
-                continue
-            w_prev = weeks[k_idx - 1]
-
-            start = pd.Timestamp(first_dates.loc[w_cur])
-            end = pd.Timestamp(first_dates.loc[weeks[k_idx + 1]]) if k_idx + 1 < len(weeks) else (ret_wide.index.max() + pd.Timedelta(days=1))
-
-            if w_prev not in weekly_sent.index:
-                continue
-
-            sig = weekly_sent.loc[w_prev].dropna()
-            if exclude_benchmark_from_universe:
-                sig = sig.drop(index=benchmark_ticker, errors="ignore")
-            if sig.empty:
-                continue
-
-            sig_sorted = sig.sort_values(ascending=False)
-            k_eff = max(1, min(k, len(sig_sorted)))
-
-            long_names = sig_sorted.head(k_eff).index.tolist()
-            short_names = sig_sorted.tail(k_eff).index.tolist() if long_short else []
-
-            w = pd.Series(0.0, index=ret_wide.columns, dtype=float)
-            w[long_names] = gross_per_side / float(len(long_names))
-            if long_short and short_names:
-                w[short_names] = -gross_per_side / float(len(short_names))
-
-            mask = (ret_wide.index >= start) & (ret_wide.index < end)
-            slice_ret = ret_wide.loc[mask, w.index].fillna(0.0)
-            port_ret.loc[mask] = (slice_ret * w.values).sum(axis=1).values
-            holdings.append(Holding(date=start.date().isoformat(), long=long_names, short=short_names))
-
+    # compute actual signal series
+    if cfg.signal == "day":
+        sig_used = sig_wide.copy()
+    elif cfg.signal == "ma7":
+        sig_used = sig_wide.rolling(window=7, min_periods=7).mean()
     else:
-        raise ValueError(f"Unknown signal='{signal}'. Use day|ma7|weekavg.")
+        raise ValueError(f"Unsupported signal: {cfg.signal}")
 
-    port_ret = port_ret.replace([np.inf, -np.inf], np.nan).fillna(0.0)
-    equity = (1.0 + port_ret).cumprod()
+    for i, d in enumerate(dates):
+        if not reb_mask[i]:
+            continue
 
-    out: Dict[str, object] = {
+        j = i - int(cfg.lag_days)
+        if j < 0:
+            continue
+
+        s = sig_used.iloc[j].dropna()
+        if s.empty:
+            continue
+
+        s_sorted = s.sort_values(ascending=False)
+
+        longs = list(s_sorted.head(cfg.k).index)
+        shorts: List[str] = []
+        if cfg.long_short:
+            shorts = list(s_sorted.tail(cfg.k).index)
+
+        w = pd.Series(0.0, index=weights_reb.columns, dtype=float)
+
+        if longs:
+            w.loc[longs] = float(cfg.gross_per_side) / float(len(longs))
+        if cfg.long_short and shorts:
+            w.loc[shorts] = -float(cfg.gross_per_side) / float(len(shorts))
+
+        weights_reb.loc[d] = w.values
+
+        holdings.append(
+            {
+                "date": d.strftime("%Y-%m-%d"),
+                "long": [str(x) for x in longs],
+                "short": [str(x) for x in shorts],
+            }
+        )
+
+    # hold weights until next rebalance, and apply starting *next day* to avoid look-ahead
+    weights = (
+        weights_reb.replace(0.0, np.nan)
+        .ffill()
+        .fillna(0.0)
+        .shift(1)
+        .fillna(0.0)
+    )
+
+    port_ret = (weights * ret_wide.fillna(0.0)).sum(axis=1)
+    equity = (1.0 + port_ret.fillna(0.0)).cumprod()
+
+    return port_ret, equity, holdings
+
+
+def build_portfolio_strategy(
+    data_root: str,
+    universe_csv: Optional[str],
+    benchmark: Optional[str],
+    out_path: str,
+    cfg: BacktestConfig,
+) -> Dict[str, Any]:
+    ticker_dir = os.path.join(data_root, "ticker")
+    if not os.path.isdir(ticker_dir):
+        raise FileNotFoundError(
+            f"Expected ticker snapshots at: {ticker_dir}\n"
+            f"(i.e., {data_root}/ticker/<TICKER>.json)."
+        )
+
+    if universe_csv:
+        universe = _load_universe_csv(universe_csv)
+    else:
+        universe = [os.path.splitext(x)[0] for x in os.listdir(ticker_dir) if x.endswith(".json")]
+
+    loaded: List[str] = []
+    dfs: Dict[str, pd.DataFrame] = {}
+    missing: List[str] = []
+
+    for t in universe:
+        p = _find_ticker_snapshot(data_root, t)
+        if not p:
+            missing.append(t)
+            continue
+
+        obj = _read_json(p)
+        df = _snapshot_to_df(obj)
+        if df.empty:
+            missing.append(t)
+            continue
+
+        # Use the ticker string stored in file if present, otherwise universe ticker
+        file_ticker = obj.get("ticker") or _canonical_ticker_filename(t)
+        dfs[file_ticker] = df
+        loaded.append(file_ticker)
+
+    if not loaded:
+        # IMPORTANT: fail loudly instead of silently writing {}
+        raise RuntimeError(
+            "No tickers loaded for portfolio backtest.\n"
+            f"data_root={data_root}\n"
+            f"universe_csv={universe_csv}\n"
+            "This almost always means your build_portfolio loader does not match the repo data format."
+        )
+
+    # Build union date index; drop dates where all returns are NaN
+    all_dates = sorted(set().union(*[set(df.index) for df in dfs.values()]))
+    dates = pd.DatetimeIndex(all_dates)
+    if len(dates) < 5:
+        raise RuntimeError("Too few dates after loading snapshots; cannot backtest.")
+
+    ret_wide = pd.DataFrame(index=dates)
+    sig_wide = pd.DataFrame(index=dates)
+    for t, df in dfs.items():
+        ret_wide[t] = df["ret"]
+        sig_wide[t] = df["signal_raw"]
+
+    # drop dates where there are no returns at all
+    keep = ret_wide.notna().sum(axis=1) > 0
+    ret_wide = ret_wide.loc[keep]
+    sig_wide = sig_wide.loc[keep]
+    dates = ret_wide.index
+
+    port_ret, equity, holdings = _build_portfolio_from_panel(ret_wide, sig_wide, dates, cfg)
+    metrics = _compute_metrics(port_ret, equity)
+
+    benchmark_series = None
+    if benchmark:
+        p_b = _find_ticker_snapshot(data_root, benchmark)
+        if p_b:
+            obj_b = _read_json(p_b)
+            df_b = _snapshot_to_df(obj_b)
+            if not df_b.empty:
+                b_ret = df_b["ret"].reindex(dates).fillna(0.0)
+                b_eq = (1.0 + b_ret).cumprod()
+                benchmark_series = {
+                    "ticker": obj_b.get("ticker") or benchmark,
+                    "equity": [float(x) for x in b_eq.values],
+                }
+
+    out = {
         "meta": {
             "generated_at": datetime.now(timezone.utc).isoformat(),
-            "rebalance": rebalance if signal != "weekavg" else "weekly",
-            "signal": signal,
-            "lag_days": int(lag_days),
-            "k": int(k),
-            "long_short": bool(long_short),
-            "gross_per_side": float(gross_per_side),
-            "benchmark": benchmark_ticker if bench_ret is not None else None,
-            "universe_size_used": int(ret_wide.shape[1]),
+            "rebalance": cfg.rebalance,
+            "signal": cfg.signal,
+            "lag_days": int(cfg.lag_days),
+            "k": int(cfg.k),
+            "long_short": bool(cfg.long_short),
+            "gross_per_side": float(cfg.gross_per_side),
+            "benchmark": benchmark,
+            "universe_size_used": int(len(loaded)),
         },
-        "dates": [pd.Timestamp(d).date().isoformat() for d in port_ret.index],
-        "portfolio_return": [float(np.round(x, 8)) for x in port_ret.values],
-        "equity": [float(np.round(x, 8)) for x in equity.values],
-        "holdings": [asdict(h) for h in holdings],
-        "metrics": compute_metrics(port_ret, rf_annual=0.0),
+        "metrics": metrics,
+        "dates": [d.strftime("%Y-%m-%d") for d in dates],
+        "equity": [float(x) for x in equity.values],
+        "portfolio_return": [float(x) for x in port_ret.fillna(0.0).values],
+        "holdings": holdings,
+        "benchmark_series": benchmark_series,
     }
 
-    if bench_ret is not None:
-        bench_ret = pd.to_numeric(bench_ret, errors="coerce").replace([np.inf, -np.inf], np.nan).fillna(0.0)
-        bench_equity = (1.0 + bench_ret).cumprod()
-        out["benchmark_series"] = {
-            "ticker": benchmark_ticker,
-            "equity": [float(np.round(x, 8)) for x in bench_equity.values],
-        }
-
+    _write_json(out_path, out)
     return out
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data-root", required=True, help="Path to repo data folder (e.g. data)")
-    ap.add_argument("--universe", default="", help="Optional CSV with tickers (Symbol/symbol/ticker column).")
-    ap.add_argument("--out", required=True, help="Output JSON path (e.g. apps/web/public/data/portfolio_strategy.json)")
-    ap.add_argument("--k", type=int, default=5)
+    ap.add_argument("--data-root", default="apps/web/public/data", help="Root that contains ticker/<TICKER>.json")
+    ap.add_argument("--universe", default=None, help="CSV with tickers (e.g. data/sp500.csv). If omitted, use all in data-root/ticker/")
+    ap.add_argument("--out", default="apps/web/public/data/portfolio_strategy.json")
     ap.add_argument("--rebalance", choices=["daily", "weekly"], default="weekly")
-    ap.add_argument("--signal", choices=["day", "ma7", "weekavg"], default="weekavg")
+    ap.add_argument("--signal", choices=["day", "ma7"], default="ma7")
     ap.add_argument("--lag-days", type=int, default=1)
+    ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--long-short", action="store_true")
     ap.add_argument("--gross-per-side", type=float, default=1.0)
-    ap.add_argument("--benchmark", default="SPY")
-    ap.add_argument("--include-benchmark-in-universe", action="store_true")
-    ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--benchmark", default="SPY", help="Ticker for benchmark equity curve; set to empty to disable")
+
     args = ap.parse_args()
 
-    if args.universe:
-        tickers = _list_tickers_from_universe(args.universe)
-    else:
-        tickers = _discover_tickers(args.data_root)
+    benchmark = args.benchmark.strip() if isinstance(args.benchmark, str) else None
+    if benchmark == "":
+        benchmark = None
 
-    if args.verbose:
-        print(f"data_root={args.data_root}")
-        print(f"tickers discovered={len(tickers)} (first 10: {tickers[:10]})")
-
-    data = build_portfolio(
-        data_root=args.data_root,
-        tickers=tickers,
-        k=args.k,
-        long_short=args.long_short,
-        gross_per_side=args.gross_per_side,
+    cfg = BacktestConfig(
         rebalance=args.rebalance,
         signal=args.signal,
-        lag_days=args.lag_days,
-        benchmark_ticker=args.benchmark,
-        exclude_benchmark_from_universe=not args.include_benchmark_in_universe,
-        verbose=args.verbose,
+        lag_days=max(0, int(args.lag_days)),
+        k=max(1, int(args.k)),
+        long_short=bool(args.long_short),
+        gross_per_side=float(args.gross_per_side),
     )
 
-    os.makedirs(os.path.dirname(args.out), exist_ok=True)
-    with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False)
-
-    print(f"Wrote {args.out} (dates={len(data.get('dates', []))}, holdings={len(data.get('holdings', []))})")
+    build_portfolio_strategy(
+        data_root=args.data_root,
+        universe_csv=args.universe,
+        benchmark=benchmark,
+        out_path=args.out,
+        cfg=cfg,
+    )
 
 
 if __name__ == "__main__":
