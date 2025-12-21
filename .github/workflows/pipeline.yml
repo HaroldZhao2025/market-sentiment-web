@@ -721,6 +721,15 @@ jobs:
           --sentiment-root data \
           --out data/SPX
 
+      - name: Build S&P 500 heatmap data
+        run: |
+          python -m market_sentiment.cli.build_sp500_heatmap \
+          --universe data/sp500.csv \
+          --data-root data \
+          --spx-index data/SPX/sp500_index.json \
+          --out data/SPX \
+          --also-out apps/web/public/data/SPX
+
       - name: Build portfolio strategy JSON
         run: |
           python -m market_sentiment.cli.build_portfolio \
