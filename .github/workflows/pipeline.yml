@@ -728,6 +728,11 @@ jobs:
             --data-root data \
             --spx-index data/SPX/sp500_index.json \
             --out data/SPX
+            
+      - name: Sync SPX heatmap into apps/web/public
+        run: |
+          mkdir -p apps/web/public/data/SPX
+          cp -f data/SPX/sp500_heatmap.json apps/web/public/data/SPX/sp500_heatmap.json
 
       - name: Build portfolio strategy JSON
         run: |
