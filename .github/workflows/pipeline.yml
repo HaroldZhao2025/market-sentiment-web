@@ -746,6 +746,10 @@ jobs:
             --k 5 \
             --long-short
 
+      - name: Build research artifacts
+        run: |
+          python src/market_sentiment/cli/build_research.py --data-root data --out-dir apps/web/public/research
+
       - name: Sanity-check data presence
         shell: bash
         run: |
