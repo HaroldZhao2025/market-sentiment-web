@@ -1,417 +1,325 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 
-type HeatmapRow = {
+type HeatmapTile = {
   symbol: string;
-  name: string;
-  sector: string;
-  industry: string;
-  market_cap: number;
-  weight: number;
-  sentiment: number | null;
-  close: number | null;
-  prev_close: number | null;
-  return_1d: number | null;
-};
-
-type HeatmapSnapshot = {
-  date: string;
-  rows: HeatmapRow[];
-  sector_stats: Array<{
-    sector: string;
-    weight_sum: number;
-    market_cap_sum: number;
-    sentiment_wavg: number | null;
-    return_wavg: number | null;
-    contribution_sum: number;
-    n: number;
-  }>;
+  name?: string;
+  sector?: string;
+  industry?: string;
+  market_cap?: number;
+  weight?: number;
+  date?: string;
+  price?: number | null;
+  return_1d?: number | null;
+  sentiment?: number | null;
+  n_total?: number | null;
 };
 
 type Sp500HeatmapFile = {
   symbol: string;
   name: string;
-  asof: { latest_trading_day: string; current: string };
-  snapshots: {
-    latest_trading_day: HeatmapSnapshot;
-    current: HeatmapSnapshot;
-  };
+  asof: string;
+  updated_at_utc?: string;
+  stats?: Record<string, unknown>;
+  tiles: HeatmapTile[];
 };
 
-type Props = { file: Sp500HeatmapFile };
-type Metric = "sentiment" | "return_1d";
+type Props = { data: Sp500HeatmapFile };
 
-function clamp(x: number, lo: number, hi: number) {
-  return Math.max(lo, Math.min(hi, x));
+type Rect = HeatmapTile & { x: number; y: number; w: number; h: number; key: string };
+
+function clamp(x: number, a: number, b: number) {
+  return Math.max(a, Math.min(b, x));
 }
 
-function fmtPct(x: number | null | undefined, digits = 2) {
-  if (typeof x !== "number" || !Number.isFinite(x)) return "—";
-  return `${(x * 100).toFixed(digits)}%`;
+function mix(a: number, b: number, t: number) {
+  return Math.round(a + (b - a) * t);
 }
 
-function fmtNum(x: number | null | undefined, digits = 4) {
-  if (typeof x !== "number" || !Number.isFinite(x)) return "—";
-  return x.toFixed(digits);
-}
+function bgForMetric(v: number | null | undefined, mode: "sentiment" | "return"): string {
+  if (v == null || !Number.isFinite(v)) return "rgb(235,235,235)";
 
-function fmtMoney(x: number | null | undefined, digits = 2) {
-  if (typeof x !== "number" || !Number.isFinite(x)) return "—";
-  return x.toFixed(digits);
-}
-
-function colorFor(v: number | null, domain: [number, number]) {
-  if (v === null || !Number.isFinite(v)) return "hsl(0, 0%, 92%)";
-  const [lo, hi] = domain;
-  const x = clamp(v, lo, hi);
-  const t = (x - lo) / (hi - lo + 1e-12); // 0..1
-  const centered = t * 2 - 1; // -1..1
-
-  const mag = Math.abs(centered);
-  const light = 82 - 42 * mag;
-  const sat = 45 + 40 * mag;
-  const hue = centered >= 0 ? 120 : 0; // green / red
-  return `hsl(${hue}, ${sat}%, ${light}%)`;
-}
-
-function textColorForHsl(bg: string) {
-  const m = bg.match(/hsl\(\s*\d+\s*,\s*\d+%\s*,\s*(\d+)%\s*\)/);
-  if (!m) return "black";
-  const l = Number(m[1]);
-  return l < 60 ? "white" : "black";
-}
-
-type Item = {
-  key: string;
-  label: string;
-  value: number;
-  metric: number | null;
-  kind: "group" | "leaf";
-  rows: HeatmapRow[];
-};
-
-type Rect = { x: number; y: number; w: number; h: number; item: Item };
-
-function layoutBinaryTreemap(items: Item[], x: number, y: number, w: number, h: number): Rect[] {
-  const out: Rect[] = [];
-  const safe = items.filter((it) => Number.isFinite(it.value) && it.value > 0);
-  if (!safe.length) return out;
-
-  const sorted = [...safe].sort((a, b) => b.value - a.value);
-
-  const rec = (arr: Item[], rx: number, ry: number, rw: number, rh: number) => {
-    if (arr.length === 1) {
-      out.push({ x: rx, y: ry, w: rw, h: rh, item: arr[0] });
-      return;
+  if (mode === "sentiment") {
+    // sentiment typically small; scale to look finviz-like
+    const s = clamp(v, -0.6, 0.6) / 0.6; // [-1,1]
+    if (s >= 0) {
+      const t = clamp(s, 0, 1);
+      // white -> green
+      const r = mix(245, 0, t);
+      const g = mix(245, 170, t);
+      const b = mix(245, 0, t);
+      return `rgb(${r},${g},${b})`;
+    } else {
+      const t = clamp(-s, 0, 1);
+      // white -> red
+      const r = mix(245, 200, t);
+      const g = mix(245, 0, t);
+      const b = mix(245, 0, t);
+      return `rgb(${r},${g},${b})`;
     }
-    const total = arr.reduce((s, it) => s + it.value, 0);
-    if (total <= 0) return;
+  }
 
+  // return mode: map ±5% roughly
+  const s = clamp(v, -0.05, 0.05) / 0.05;
+  if (s >= 0) {
+    const t = clamp(s, 0, 1);
+    const r = mix(245, 0, t);
+    const g = mix(245, 170, t);
+    const b = mix(245, 0, t);
+    return `rgb(${r},${g},${b})`;
+  } else {
+    const t = clamp(-s, 0, 1);
+    const r = mix(245, 200, t);
+    const g = mix(245, 0, t);
+    const b = mix(245, 0, t);
+    return `rgb(${r},${g},${b})`;
+  }
+}
+
+function textColor(bgRgb: string) {
+  // crude luminance check
+  const m = bgRgb.match(/rgb\((\d+),(\d+),(\d+)\)/);
+  if (!m) return "text-black";
+  const r = Number(m[1]), g = Number(m[2]), b = Number(m[3]);
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return lum < 120 ? "text-white" : "text-black";
+}
+
+function fmtMoney(x: number | null | undefined) {
+  if (x == null || !Number.isFinite(x)) return "—";
+  return x.toFixed(1);
+}
+function fmtNum(x: number | null | undefined, d = 2) {
+  if (x == null || !Number.isFinite(x)) return "—";
+  return x.toFixed(d);
+}
+function fmtPct(x: number | null | undefined) {
+  if (x == null || !Number.isFinite(x)) return "—";
+  return `${(x * 100).toFixed(2)}%`;
+}
+
+// Simple binary treemap (stable, no extra deps)
+function layoutBinary(items: HeatmapTile[], x: number, y: number, w: number, h: number): Rect[] {
+  const arr = items
+    .filter((t) => Number.isFinite(Number(t.market_cap)) && Number(t.market_cap) > 0)
+    .slice()
+    .sort((a, b) => Number(b.market_cap || 0) - Number(a.market_cap || 0));
+
+  const total = arr.reduce((s, t) => s + Number(t.market_cap || 0), 0);
+  if (!arr.length || total <= 0) return [];
+
+  function rec(list: HeatmapTile[], x0: number, y0: number, w0: number, h0: number): Rect[] {
+    if (list.length === 1) {
+      const t = list[0];
+      return [{ ...t, x: x0, y: y0, w: w0, h: h0, key: t.symbol }];
+    }
+    const sum = list.reduce((s, t) => s + Number(t.market_cap || 0), 0);
+    if (sum <= 0) return [];
+
+    const horizontal = w0 < h0; // if tall, split horizontally; else vertically
     let acc = 0;
     let k = 0;
-    while (k < arr.length && acc + arr[k].value < total / 2) {
-      acc += arr[k].value;
-      k++;
+    for (; k < list.length; k++) {
+      acc += Number(list[k].market_cap || 0);
+      if (acc >= sum / 2) break;
     }
-    if (k <= 0) k = 1;
-    if (k >= arr.length) k = arr.length - 1;
+    const left = list.slice(0, Math.max(1, k + 1));
+    const right = list.slice(Math.max(1, k + 1));
 
-    const left = arr.slice(0, k);
-    const right = arr.slice(k);
+    const sumL = left.reduce((s, t) => s + Number(t.market_cap || 0), 0);
 
-    const sumL = left.reduce((s, it) => s + it.value, 0);
-
-    if (rw >= rh) {
-      const wL = rw * (sumL / total);
-      rec(left, rx, ry, wL, rh);
-      rec(right, rx + wL, ry, rw - wL, rh);
-    } else {
-      const hT = rh * (sumL / total);
-      rec(left, rx, ry, rw, hT);
-      rec(right, rx, ry + hT, rw, rh - hT);
+    if (!right.length) {
+      // fallback
+      return left.map((t) => ({ ...t, x: x0, y: y0, w: w0, h: h0, key: t.symbol }));
     }
-  };
 
-  rec(sorted, x, y, w, h);
-  return out;
-}
-
-function wavg(rows: HeatmapRow[], metric: Metric) {
-  let num = 0;
-  let den = 0;
-  for (const r of rows) {
-    const v = r[metric];
-    if (typeof v !== "number" || !Number.isFinite(v)) continue;
-    const w = typeof r.weight === "number" && Number.isFinite(r.weight) ? r.weight : 0;
-    if (w <= 0) continue;
-    num += w * v;
-    den += w;
-  }
-  return den > 0 ? num / den : null;
-}
-
-function groupItems(rows: HeatmapRow[], level: 0 | 1 | 2, sectorPick?: string, industryPick?: string): Item[] {
-  const filtered = rows.filter((r) => {
-    if (sectorPick && r.sector !== sectorPick) return false;
-    if (industryPick && r.industry !== industryPick) return false;
-    return true;
-  });
-
-  if (level === 2) {
-    return filtered.map((r) => ({
-      key: r.symbol,
-      label: r.symbol,
-      value: Number.isFinite(r.market_cap) ? r.market_cap : r.weight ?? 0,
-      metric: r.sentiment,
-      kind: "leaf",
-      rows: [r],
-    }));
-  }
-
-  const by = new Map<string, HeatmapRow[]>();
-  for (const r of filtered) {
-    const k = level === 0 ? (r.sector || "Unknown") : (r.industry || "Unknown");
-    const arr = by.get(k) ?? [];
-    arr.push(r);
-    by.set(k, arr);
-  }
-
-  const out: Item[] = [];
-  for (const [k, rs] of by.entries()) {
-    out.push({
-      key: k,
-      label: k,
-      value: rs.reduce((s, r) => s + (Number.isFinite(r.market_cap) ? r.market_cap : 0), 0),
-      metric: null,
-      kind: "group",
-      rows: rs,
-    });
-  }
-  return out;
-}
-
-export default function Sp500HeatmapClient({ file }: Props) {
-  const router = useRouter();
-
-  const [which, setWhich] = useState<"latest_trading_day" | "current">("latest_trading_day");
-  const [metric, setMetric] = useState<Metric>("sentiment");
-  const [sectorPick, setSectorPick] = useState<string | null>(null);
-  const [industryPick, setIndustryPick] = useState<string | null>(null);
-
-  const snap = file.snapshots[which];
-  const domain: [number, number] = metric === "sentiment" ? [-0.5, 0.5] : [-0.03, 0.03];
-
-  const level: 0 | 1 | 2 = industryPick ? 2 : sectorPick ? 1 : 0;
-
-  const items = useMemo(() => {
-    const raw = groupItems(snap.rows, level, sectorPick ?? undefined, industryPick ?? undefined);
-    return raw
-      .map((it) => ({
-        ...it,
-        metric: it.kind === "leaf" ? it.rows[0][metric] : wavg(it.rows, metric),
-      }))
-      .filter((it) => Number.isFinite(it.value) && it.value > 0)
-      .sort((a, b) => b.value - a.value);
-  }, [snap.rows, level, sectorPick, industryPick, metric]);
-
-  const boxRef = useRef<HTMLDivElement | null>(null);
-  const [box, setBox] = useState<{ w: number; h: number }>({ w: 900, h: 520 });
-
-  useEffect(() => {
-    if (!boxRef.current) return;
-    const el = boxRef.current;
-    const ro = new ResizeObserver(() => {
-      const r = el.getBoundingClientRect();
-      setBox({ w: Math.max(320, Math.floor(r.width)), h: Math.max(360, Math.floor(r.height)) });
-    });
-    ro.observe(el);
-    const r = el.getBoundingClientRect();
-    setBox({ w: Math.max(320, Math.floor(r.width)), h: Math.max(360, Math.floor(r.height)) });
-    return () => ro.disconnect();
-  }, []);
-
-  const rects = useMemo(() => layoutBinaryTreemap(items, 0, 0, box.w, box.h), [items, box.w, box.h]);
-
-  const breadcrumb = useMemo(() => {
-    if (!sectorPick) return [{ label: "All sectors", disabled: true, onClick: () => {} }];
-    if (!industryPick) {
+    if (horizontal) {
+      const hL = h0 * (sumL / sum);
       return [
-        { label: "All sectors", disabled: false, onClick: () => setSectorPick(null) },
-        { label: sectorPick, disabled: true, onClick: () => {} },
+        ...rec(left, x0, y0, w0, hL),
+        ...rec(right, x0, y0 + hL, w0, h0 - hL),
+      ];
+    } else {
+      const wL = w0 * (sumL / sum);
+      return [
+        ...rec(left, x0, y0, wL, h0),
+        ...rec(right, x0 + wL, y0, w0 - wL, h0),
       ];
     }
-    return [
-      { label: "All sectors", disabled: false, onClick: () => { setSectorPick(null); setIndustryPick(null); } },
-      { label: sectorPick, disabled: false, onClick: () => setIndustryPick(null) },
-      { label: industryPick, disabled: true, onClick: () => {} },
-    ];
-  }, [sectorPick, industryPick]);
+  }
 
-  const topSectors = useMemo(() => [...snap.sector_stats].slice(0, 12), [snap.sector_stats]);
+  return rec(arr, x, y, w, h);
+}
+
+export default function Sp500HeatmapClient({ data }: Props) {
+  const [sector, setSector] = useState<string>("All sectors");
+  const [industry, setIndustry] = useState<string>("All industries");
+  const [mode, setMode] = useState<"sentiment" | "return">("sentiment");
+
+  const tiles = data.tiles || [];
+
+  const sectors = useMemo(() => {
+    const s = new Set<string>();
+    for (const t of tiles) s.add(t.sector || "Unknown");
+    return ["All sectors", ...Array.from(s).sort((a, b) => a.localeCompare(b))];
+  }, [tiles]);
+
+  const industries = useMemo(() => {
+    const s = new Set<string>();
+    for (const t of tiles) {
+      const sec = t.sector || "Unknown";
+      if (sector !== "All sectors" && sec !== sector) continue;
+      s.add(t.industry || "Unknown");
+    }
+    return ["All industries", ...Array.from(s).sort((a, b) => a.localeCompare(b))];
+  }, [tiles, sector]);
+
+  const filtered = useMemo(() => {
+    return tiles.filter((t) => {
+      const sec = t.sector || "Unknown";
+      const ind = t.industry || "Unknown";
+      if (sector !== "All sectors" && sec !== sector) return false;
+      if (industry !== "All industries" && ind !== industry) return false;
+      return true;
+    });
+  }, [tiles, sector, industry]);
+
+  const rects = useMemo(() => layoutBinary(filtered, 0, 0, 1000, 560), [filtered]);
 
   return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-2 flex-wrap">
-          <div className="inline-flex rounded-lg border overflow-hidden text-sm">
-            <button
-              className={`px-3 py-1.5 ${which === "latest_trading_day" ? "bg-gray-900 text-white" : "bg-white"}`}
-              onClick={() => setWhich("latest_trading_day")}
-            >
-              Latest trading day
-            </button>
-            <button
-              className={`px-3 py-1.5 ${which === "current" ? "bg-gray-900 text-white" : "bg-white"}`}
-              onClick={() => setWhich("current")}
-            >
-              Current
-            </button>
-          </div>
-
-          <div className="inline-flex rounded-lg border overflow-hidden text-sm">
-            <button
-              className={`px-3 py-1.5 ${metric === "sentiment" ? "bg-gray-900 text-white" : "bg-white"}`}
-              onClick={() => setMetric("sentiment")}
-            >
-              Color: Sentiment
-            </button>
-            <button
-              className={`px-3 py-1.5 ${metric === "return_1d" ? "bg-gray-900 text-white" : "bg-white"}`}
-              onClick={() => setMetric("return_1d")}
-            >
-              Color: Return (1D)
-            </button>
-          </div>
-
-          <div className="text-xs text-gray-500">
-            Showing: <span className="font-medium">{snap.date}</span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 text-xs text-gray-600">
-          <span>Neg</span>
-          <div
-            className="h-2 w-28 rounded"
-            style={{ background: "linear-gradient(90deg, hsl(0, 85%, 45%), hsl(0, 0%, 92%), hsl(120, 85%, 45%))" }}
-          />
-          <span>Pos</span>
-          <span className="ml-2 text-gray-400">({metric === "sentiment" ? "≈ [-0.5, 0.5]" : "≈ [-3%, 3%]"})</span>
-        </div>
-      </div>
-
-      <div className="border rounded-lg p-3">
-        <div className="text-sm font-medium mb-2">Sector contribution (cap-weighted)</div>
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {topSectors.map((s) => {
-            const v = metric === "sentiment" ? s.sentiment_wavg : s.return_wavg;
-            const bg = colorFor(v, domain);
-            const tc = textColorForHsl(bg);
-            return (
-              <div key={s.sector} className="flex items-center justify-between gap-2">
-                <div className="truncate text-sm">{s.sector}</div>
-                <div className="flex items-center gap-2">
-                  <div className="text-xs text-gray-500 w-16 text-right">{fmtPct(s.weight_sum, 1)}</div>
-                  <div className="px-2 py-1 rounded text-xs" style={{ background: bg, color: tc, minWidth: 84, textAlign: "right" }}>
-                    {metric === "sentiment" ? fmtNum(s.sentiment_wavg, 3) : fmtPct(s.return_wavg, 2)}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2 text-sm">
-        {breadcrumb.map((b, i) => (
-          <div key={i} className="flex items-center gap-2">
-            {i > 0 ? <span className="text-gray-400">/</span> : null}
-            <button
-              className={`underline-offset-2 ${b.disabled ? "text-gray-800 font-medium" : "text-gray-600 hover:underline"}`}
-              onClick={() => !b.disabled && b.onClick()}
-              disabled={b.disabled}
-            >
-              {b.label}
-            </button>
-          </div>
-        ))}
-      </div>
-
-      <div className="border rounded-lg overflow-hidden">
-        <div ref={boxRef} className="relative w-full" style={{ height: 520 }}>
-          {rects.map((r) => {
-            const bg = colorFor(r.item.metric, domain);
-            const tc = textColorForHsl(bg);
-            const area = r.w * r.h;
-            const small = area < 1400;
-            const verySmall = area < 800;
-
-            return (
-              <button
-                key={r.item.key}
-                className="absolute border border-white/60 text-left p-2 focus:outline-none"
-                style={{
-                  left: r.x,
-                  top: r.y,
-                  width: r.w,
-                  height: r.h,
-                  background: bg,
-                  color: tc,
-                }}
-                title={
-                  r.item.kind === "leaf"
-                    ? `${r.item.rows[0].symbol} ${r.item.rows[0].name}\n${r.item.rows[0].sector} / ${r.item.rows[0].industry}\nSent: ${fmtNum(
-                        r.item.rows[0].sentiment,
-                        4
-                      )}\nClose: ${fmtMoney(r.item.rows[0].close, 2)}  1D: ${fmtPct(r.item.rows[0].return_1d, 2)}`
-                    : `${r.item.label}\n# constituents: ${r.item.rows.length}\nAvg: ${
-                        metric === "sentiment" ? fmtNum(r.item.metric, 4) : fmtPct(r.item.metric, 2)
-                      }`
-                }
-                onClick={() => {
-                  if (r.item.kind === "leaf") {
-                    router.push(`/ticker/${r.item.rows[0].symbol}`);
-                    return;
-                  }
-                  if (!sectorPick) {
-                    setSectorPick(r.item.label);
-                    setIndustryPick(null);
-                    return;
-                  }
-                  if (sectorPick && !industryPick) {
-                    setIndustryPick(r.item.label);
-                    return;
-                  }
-                }}
-              >
-                {!verySmall ? (
-                  <div className="leading-tight">
-                    <div className={`font-semibold ${small ? "text-xs" : "text-sm"}`}>
-                      {r.item.kind === "leaf" ? r.item.rows[0].symbol : r.item.label}
-                    </div>
-                    {!small ? (
-                      <div className="text-xs opacity-90 mt-1">
-                        {r.item.kind === "leaf" ? (
-                          <>
-                            ({fmtMoney(r.item.rows[0].close, 1)}, {fmtNum(r.item.rows[0].sentiment, 2)})
-                          </>
-                        ) : (
-                          <>
-                            {r.item.rows.length} names · {metric === "sentiment" ? fmtNum(r.item.metric, 3) : fmtPct(r.item.metric, 2)}
-                          </>
-                        )}
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
+    <div className="border rounded-xl bg-white overflow-hidden">
+      {/* Header / Controls (finviz-like) */}
+      <div className="px-4 py-3 border-b bg-gray-50 flex flex-wrap items-center justify-between gap-3">
+        <div className="text-sm">
+          <span className="text-gray-500">All sectors</span>
+          {sector !== "All sectors" && (
+            <>
+              <span className="text-gray-400"> / </span>
+              <button className="underline" onClick={() => { setIndustry("All industries"); }}>
+                {sector}
               </button>
+            </>
+          )}
+          {industry !== "All industries" && (
+            <>
+              <span className="text-gray-400"> / </span>
+              <span className="font-semibold">{industry}</span>
+            </>
+          )}
+          <span className="ml-3 text-gray-500">•</span>
+          <span className="ml-3 text-gray-600">
+            Latest trading day: <span className="font-medium">{data.asof}</span>
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 text-sm">
+          <select
+            className="border rounded-md px-2 py-1 bg-white"
+            value={sector}
+            onChange={(e) => {
+              setSector(e.target.value);
+              setIndustry("All industries");
+            }}
+          >
+            {sectors.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+
+          <select
+            className="border rounded-md px-2 py-1 bg-white"
+            value={industry}
+            onChange={(e) => setIndustry(e.target.value)}
+          >
+            {industries.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+
+          <div className="border rounded-md overflow-hidden flex">
+            <button
+              className={`px-3 py-1 ${mode === "sentiment" ? "bg-black text-white" : "bg-white"}`}
+              onClick={() => setMode("sentiment")}
+              title="Color by sentiment"
+            >
+              Sentiment
+            </button>
+            <button
+              className={`px-3 py-1 ${mode === "return" ? "bg-black text-white" : "bg-white"}`}
+              onClick={() => setMode("return")}
+              title="Color by 1D return"
+            >
+              Return
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Map */}
+      <div className="p-3 bg-white">
+        <div className="relative w-full" style={{ height: "70vh", minHeight: 420 }}>
+          {rects.map((r) => {
+            const pad = 1.5; // finviz-like white gutters
+            const left = (r.x / 1000) * 100;
+            const top = (r.y / 560) * 100;
+            const width = (r.w / 1000) * 100;
+            const height = (r.h / 560) * 100;
+
+            const metricValue = mode === "sentiment" ? (r.sentiment ?? null) : (r.return_1d ?? null);
+            const bg = bgForMetric(metricValue as any, mode);
+            const tc = textColor(bg);
+
+            const showDetail = width > 6 && height > 6;
+
+            return (
+              <Link
+                key={r.key}
+                href={`/ticker/${r.symbol}`}
+                className={`absolute rounded-sm border border-white/80 ${tc} hover:brightness-95`}
+                style={{
+                  left: `calc(${left}% + ${pad}px)`,
+                  top: `calc(${top}% + ${pad}px)`,
+                  width: `calc(${width}% - ${pad * 2}px)`,
+                  height: `calc(${height}% - ${pad * 2}px)`,
+                  background: bg,
+                  textDecoration: "none",
+                }}
+                title={[
+                  r.symbol,
+                  r.name ? `Name: ${r.name}` : null,
+                  `Sector: ${r.sector || "Unknown"}`,
+                  `Industry: ${r.industry || "Unknown"}`,
+                  `Price: ${fmtMoney(r.price ?? null)}`,
+                  `Return(1D): ${fmtPct(r.return_1d ?? null)}`,
+                  `Sentiment: ${fmtNum(r.sentiment ?? null, 4)}`,
+                  r.n_total != null ? `Articles: ${r.n_total}` : null,
+                ]
+                  .filter(Boolean)
+                  .join("\n")}
+              >
+                <div className="w-full h-full p-2 flex flex-col justify-center items-center text-center">
+                  <div className="font-semibold leading-none" style={{ fontSize: showDetail ? 14 : 11 }}>
+                    {r.symbol}
+                  </div>
+                  {showDetail && (
+                    <div className="mt-1 text-[12px] opacity-90">
+                      ({fmtMoney(r.price ?? null)}, {fmtNum(r.sentiment ?? null, 2)})
+                    </div>
+                  )}
+                </div>
+              </Link>
             );
           })}
         </div>
 
-        <div className="px-3 py-2 text-xs text-gray-500 border-t bg-gray-50">
-          Tip: click tiles to drill down. Click a ticker tile to open its page.
+        <div className="mt-2 text-xs text-gray-500">
+          Tip: click tiles to drill into a ticker page. Use filters to focus by sector/industry.
         </div>
       </div>
     </div>
