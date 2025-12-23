@@ -40,18 +40,6 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
         </section>
       ) : null}
 
-      {/* 🔹 NEW: conclusions */}
-      {study.conclusions?.length ? (
-        <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
-          <h2 className="text-lg font-semibold">Conclusions</h2>
-          <ul className="list-disc pl-5 text-sm text-zinc-700 space-y-1">
-            {study.conclusions.map((c, i) => (
-              <li key={i}>{c}</li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
       {/* charts */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
