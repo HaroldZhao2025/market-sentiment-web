@@ -20,47 +20,73 @@ export default async function ResearchPage() {
             Small empirical studies built on the same dataset powering Sentiment Live.
           </p>
         </div>
+
+        <Link href="/" className="text-sm underline text-zinc-700 hover:text-zinc-900">
+          Home →
+        </Link>
       </div>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {items.map((it) => (
-          <Link
-            key={it.slug}
-            href={`/research/${it.slug}`}
-            className="rounded-2xl border border-zinc-200 bg-white p-5 hover:shadow-sm transition"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="space-y-1">
-                <div className="text-lg font-semibold leading-snug">{it.title}</div>
-                <div className="text-sm text-zinc-600">{it.summary}</div>
-              </div>
-              <div className="text-right space-y-2 shrink-0">
-                <Badge>{(it.status ?? "draft").toUpperCase()}</Badge>
-                <div className="text-xs text-zinc-500">{it.updated_at}</div>
-              </div>
-            </div>
+      {items.length === 0 ? (
+        <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
+          <div className="text-lg font-semibold">No research artifacts yet</div>
+          <p className="text-sm text-zinc-600">
+            This usually means the research builder hasn’t generated{" "}
+            <code className="px-1 py-0.5 rounded bg-zinc-100">apps/web/public/research/index.json</code>{" "}
+            for this deployment.
+          </p>
+          <p className="text-sm text-zinc-600">
+            Make sure your workflow runs the research build step <b>before</b> Next.js build/export:
+          </p>
+          <pre className="text-xs overflow-auto rounded-xl bg-zinc-50 border border-zinc-100 p-4">
+python src/market_sentiment/cli/build_research.py --data-root data --out-dir apps/web/public/research
+          </pre>
+        </section>
+      ) : (
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {items.map((it) => (
+            <Link
+              key={it.slug}
+              href={`/research/${it.slug}`}
+              className="rounded-2xl border border-zinc-200 bg-white p-5 hover:shadow-sm transition"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="text-lg font-semibold leading-snug">{it.title}</div>
+                  <div className="text-sm text-zinc-600">{it.summary}</div>
 
-            <div className="mt-3 flex flex-wrap gap-2">
-              {(it.tags ?? []).slice(0, 6).map((t) => (
-                <span key={t} className="text-xs text-zinc-600 px-2 py-1 rounded-full bg-zinc-100">
-                  {t}
-                </span>
-              ))}
-            </div>
+                  {it.highlight ? (
+                    <div className="text-xs text-zinc-500 mt-2 line-clamp-2">{it.highlight}</div>
+                  ) : null}
+                </div>
 
-            {it.key_stats?.length ? (
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                {it.key_stats.slice(0, 4).map((s) => (
-                  <div key={s.label} className="rounded-xl bg-zinc-50 p-3 border border-zinc-100">
-                    <div className="text-xs text-zinc-500">{s.label}</div>
-                    <div className="text-sm font-semibold">{s.value}</div>
-                  </div>
+                <div className="text-right space-y-2 shrink-0">
+                  <Badge>{(it.status ?? "draft").toUpperCase()}</Badge>
+                  <div className="text-xs text-zinc-500">{it.updated_at}</div>
+                </div>
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {(it.tags ?? []).slice(0, 6).map((t) => (
+                  <span key={t} className="text-xs text-zinc-600 px-2 py-1 rounded-full bg-zinc-100">
+                    {t}
+                  </span>
                 ))}
               </div>
-            ) : null}
-          </Link>
-        ))}
-      </section>
+
+              {it.key_stats?.length ? (
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  {it.key_stats.slice(0, 4).map((s) => (
+                    <div key={s.label} className="rounded-xl bg-zinc-50 p-3 border border-zinc-100">
+                      <div className="text-xs text-zinc-500">{s.label}</div>
+                      <div className="text-sm font-semibold">{s.value}</div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </Link>
+          ))}
+        </section>
+      )}
     </main>
   );
 }
