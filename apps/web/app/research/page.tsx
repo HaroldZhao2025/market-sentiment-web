@@ -1,6 +1,10 @@
 // apps/web/app/research/page.tsx
 import Link from "next/link";
-import { loadResearchIndex, loadResearchOverviewFull } from "../../lib/research";
+import {
+  loadResearchIndex,
+  loadResearchOverview,
+  loadResearchOverviewFull,
+} from "../../lib/research";
 
 type IndexItem = {
   slug: string;
@@ -29,13 +33,15 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
 );
 
 export default async function ResearchPage() {
-  const [itemsRaw, sectionsRaw] = await Promise.all([
+  const [itemsRaw, overview, sectionsRaw] = await Promise.all([
     loadResearchIndex(),
+    loadResearchOverview(),
     loadResearchOverviewFull(),
   ]);
 
   const items = (itemsRaw ?? []) as IndexItem[];
   const sections = (sectionsRaw ?? []) as Section[];
+  const meta = overview?.meta ?? {};
 
   const bySlug = new Map(items.map((x) => [x.slug, x]));
   const hasSections = sections.length > 0;
@@ -53,19 +59,53 @@ export default async function ResearchPage() {
           </div>
         </div>
 
-        <Link href="/" className="text-sm underline text-zinc-700 hover:text-zinc-900">
-          Home →
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/" className="text-sm underline text-zinc-700 hover:text-zinc-900">
+            Home →
+          </Link>
+        </div>
       </div>
+
+      {/* meta */}
+      {meta && (meta.n_studies || meta.date_range) ? (
+        <section className="rounded-2xl border border-zinc-200 bg-white p-5">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="space-y-1">
+              <div className="text-sm font-semibold text-zinc-800">Dataset snapshot</div>
+              <div className="text-xs text-zinc-600">
+                Updated: <span className="font-medium">{meta.updated_at ?? "—"}</span>
+              </div>
+              <div className="text-xs text-zinc-600">
+                Date range:{" "}
+                <span className="font-medium">
+                  {Array.isArray(meta.date_range) ? `${meta.date_range[0]} .. ${meta.date_range[1]}` : "—"}
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {[
+                { label: "Studies", value: meta.n_studies?.toString?.() ?? "—" },
+                { label: "Tickers", value: meta.n_tickers?.toString?.() ?? "—" },
+                { label: "Obs (panel)", value: meta.n_obs_panel?.toString?.() ?? "—" },
+                { label: "Coverage", value: Array.isArray(meta.date_range) ? "daily" : "—" },
+              ].map((s) => (
+                <div key={s.label} className="rounded-xl bg-zinc-50 p-3 border border-zinc-100">
+                  <div className="text-xs text-zinc-500">{s.label}</div>
+                  <div className="text-sm font-semibold">{s.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {items.length === 0 ? (
         <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
           <div className="text-lg font-semibold">No research artifacts yet</div>
           <p className="text-sm text-zinc-600">
             The research builder has not generated{" "}
-            <code className="px-1 py-0.5 rounded bg-zinc-100">
-              apps/web/public/research/index.json
-            </code>{" "}
+            <code className="px-1 py-0.5 rounded bg-zinc-100">apps/web/public/research/index.json</code>{" "}
             for this deployment.
           </p>
           <pre className="text-xs overflow-auto rounded-xl bg-zinc-50 border border-zinc-100 p-4">
@@ -82,9 +122,7 @@ python src/market_sentiment/cli/build_research.py --data-root data --out-dir app
               <section key={sec.id} className="space-y-4">
                 <div className="space-y-2">
                   <h2 className="text-xl font-semibold">{sec.title}</h2>
-                  {sec.description ? (
-                    <div className="text-sm text-zinc-600">{sec.description}</div>
-                  ) : null}
+                  {sec.description ? <div className="text-sm text-zinc-600">{sec.description}</div> : null}
                   {sec.conclusions?.length ? (
                     <ul className="list-disc pl-5 text-sm text-zinc-700 space-y-1">
                       {sec.conclusions.slice(0, 3).map((c, i) => (
@@ -107,8 +145,7 @@ python src/market_sentiment/cli/build_research.py --data-root data --out-dir app
                           <div className="text-sm text-zinc-600">{it.summary}</div>
                           {it.highlight ? (
                             <div className="text-xs text-zinc-500 mt-2 line-clamp-2">
-                              <span className="font-semibold text-zinc-600">Key finding:</span>{" "}
-                              {it.highlight}
+                              <span className="font-semibold text-zinc-600">Key finding:</span> {it.highlight}
                             </div>
                           ) : null}
                         </div>
@@ -119,19 +156,17 @@ python src/market_sentiment/cli/build_research.py --data-root data --out-dir app
                       </div>
 
                       <div className="mt-3 flex flex-wrap gap-2">
-                        {(it.tags ?? []).slice(0, 6).map((t) => (
-                          <span
-                            key={t}
-                            className="text-xs text-zinc-600 px-2 py-1 rounded-full bg-zinc-100"
-                          >
+                        {(it.tags ?? []).slice(0, 8).map((t) => (
+                          <span key={t} className="text-xs text-zinc-600 px-2 py-1 rounded-full bg-zinc-100">
                             {t}
                           </span>
                         ))}
                       </div>
 
+                      {/* show up to 6 so R² appears */}
                       {it.key_stats?.length ? (
-                        <div className="mt-4 grid grid-cols-2 gap-2">
-                          {it.key_stats.slice(0, 4).map((s) => (
+                        <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-2">
+                          {it.key_stats.slice(0, 6).map((s) => (
                             <div key={s.label} className="rounded-xl bg-zinc-50 p-3 border border-zinc-100">
                               <div className="text-xs text-zinc-500">{s.label}</div>
                               <div className="text-sm font-semibold">{s.value}</div>
