@@ -65,6 +65,15 @@ def stars(p: Optional[float]) -> str:
     return ""
 
 
+def fmt_g(x: Optional[float], nd: int = 4) -> str:
+    if x is None:
+        return "—"
+    try:
+        return f"{float(x):.{nd}g}"
+    except Exception:
+        return "—"
+
+
 # -----------------------------
 # Locate ticker json directory
 # -----------------------------
@@ -170,7 +179,7 @@ def build_panel(repo_root: Path, data_root: Path, min_obs: int) -> pd.DataFrame:
 
 
 # -----------------------------
-# Export series for UI (fixes your missing score_mean chart)
+# Export series for UI
 # -----------------------------
 
 def export_series(df: pd.DataFrame) -> Dict[str, Any]:
@@ -191,7 +200,7 @@ def export_series(df: pd.DataFrame) -> Dict[str, Any]:
     add("y_ret")
     add("y_ret_fwd1")
     add("abs_ret")
-    add("score_mean")   # ✅ always export for sparkline
+    add("score_mean")
     add("n_total")
 
     return out
@@ -269,7 +278,7 @@ def quantile_reg(df: pd.DataFrame, y: str, x_cols: List[str], qs: Tuple[float, .
 
 
 # -----------------------------
-# Serious academic add-ons
+# “Paper-grade” add-ons
 # -----------------------------
 
 def fama_macbeth(panel: pd.DataFrame, y: str, x_cols: List[str], min_xs: int, nw_lags: int) -> Dict[str, Any]:
@@ -291,7 +300,6 @@ def fama_macbeth(panel: pd.DataFrame, y: str, x_cols: List[str], min_xs: int, nw
             continue
         X = np.column_stack([np.ones(len(g))] + [g[c].astype(float).values for c in x_cols])
         yv = g[y].astype(float).values
-        # OLS
         b, *_ = np.linalg.lstsq(X, yv, rcond=None)
         yhat = X @ b
         sse = float(np.sum((yv - yhat) ** 2))
@@ -308,7 +316,6 @@ def fama_macbeth(panel: pd.DataFrame, y: str, x_cols: List[str], min_xs: int, nw
     coef_df = pd.DataFrame(betas, columns=["const"] + x_cols)
     coef_df["date"] = dates
 
-    # NW t for mean slope using OLS on constant with HAC
     table_rows = []
     for c in x_cols:
         res = sm.OLS(coef_df[c].values, np.ones((len(coef_df), 1))).fit(
@@ -345,12 +352,19 @@ def add_lags(panel: pd.DataFrame, col: str, max_lag: int) -> pd.DataFrame:
     return out
 
 
-def distributed_lag_models(panel: pd.DataFrame, df_sample: pd.DataFrame, y: str, base_col: str, max_lag: int, controls: List[str], nw_lags: int) -> Dict[str, Any]:
+def distributed_lag_models(
+    panel: pd.DataFrame,
+    df_sample: pd.DataFrame,
+    y: str,
+    base_col: str,
+    max_lag: int,
+    controls: List[str],
+    nw_lags: int,
+) -> Dict[str, Any]:
     """
     y ~ sum_{L=0..K} beta_L * base_col_lagL + controls
-    Returns TS (sample ticker) HAC and Panel FE results + a clean table.
+    Returns TS HAC and Panel FE results + a clean table.
     """
-    # sample ticker
     s = df_sample.copy()
     for L in range(max_lag + 1):
         s[f"{base_col}_lag{L}"] = s[base_col].shift(L)
@@ -359,12 +373,10 @@ def distributed_lag_models(panel: pd.DataFrame, df_sample: pd.DataFrame, y: str,
     x_ts = x_lags + controls
     ts = time_series_ols_hac(s, y, x_ts, maxlags=nw_lags)
 
-    # panel
     p = add_lags(panel, base_col, max_lag)
     x_fe = x_lags + controls
     fe = panel_within_fe_cluster(p, y, x_fe)
 
-    # build a compact table: lag coefs + t + p (panel FE)
     rows = []
     for L in range(max_lag + 1):
         v = f"{base_col}_lag{L}"
@@ -373,7 +385,6 @@ def distributed_lag_models(panel: pd.DataFrame, df_sample: pd.DataFrame, y: str,
         pval = safe_num((fe.get("pvalues") or {}).get(v))
         rows.append([v, b, t, pval, stars(pval)])
 
-    # cumulative effect (sum of betas)
     sum_beta = None
     if isinstance(fe.get("params"), dict):
         sb = 0.0
@@ -420,8 +431,126 @@ def placebo_shuffle(panel: pd.DataFrame, y: str, x: str, controls: List[str], se
     return fe
 
 
+def asymmetry_models(
+    panel: pd.DataFrame,
+    df_sample: pd.DataFrame,
+    y: str,
+    s_col: str,
+    controls: List[str],
+    nw_lags: int,
+) -> Dict[str, Any]:
+    """
+    Asymmetry: split sentiment into positive and negative components:
+      s_pos = max(s, 0), s_neg = min(s, 0)
+    """
+    s = df_sample.copy()
+    s["s_pos"] = np.maximum(s[s_col].astype(float), 0.0)
+    s["s_neg"] = np.minimum(s[s_col].astype(float), 0.0)
+    ts = time_series_ols_hac(s, y, ["s_pos", "s_neg"] + controls, maxlags=nw_lags)
+
+    p = panel.copy()
+    p["s_pos"] = np.maximum(p[s_col].astype(float), 0.0)
+    p["s_neg"] = np.minimum(p[s_col].astype(float), 0.0)
+    fe = panel_within_fe_cluster(p, y, ["s_pos", "s_neg"] + controls)
+
+    rows = []
+    for v in ["s_pos", "s_neg"] + controls:
+        b = safe_num((fe.get("params") or {}).get(v))
+        t = safe_num((fe.get("tvalues") or {}).get(v))
+        pv = safe_num((fe.get("pvalues") or {}).get(v))
+        rows.append([v, b, t, pv, stars(pv)])
+
+    return {
+        "time_series": ts,
+        "panel_fe": fe,
+        "table": {
+            "title": f"Asymmetry (panel FE): {y} on s_pos and s_neg (+ controls)",
+            "columns": ["Variable", "Coef", "t", "p", "Sig"],
+            "rows": rows,
+        },
+    }
+
+
+def interaction_models(
+    panel: pd.DataFrame,
+    df_sample: pd.DataFrame,
+    y: str,
+    s_col: str,
+    n_col: str,
+    nw_lags: int,
+) -> Dict[str, Any]:
+    """
+    Interaction: y ~ s + log(1+n) + s*log(1+n)
+    """
+    s = df_sample.copy()
+    s["log_n"] = np.log1p(pd.to_numeric(s[n_col], errors="coerce")).replace([np.inf, -np.inf], np.nan)
+    s["s_x_log_n"] = s[s_col].astype(float) * s["log_n"].astype(float)
+    ts = time_series_ols_hac(s, y, [s_col, "log_n", "s_x_log_n"], maxlags=nw_lags)
+
+    p = panel.copy()
+    p["log_n"] = np.log1p(pd.to_numeric(p[n_col], errors="coerce")).replace([np.inf, -np.inf], np.nan)
+    p["s_x_log_n"] = p[s_col].astype(float) * p["log_n"].astype(float)
+    fe = panel_within_fe_cluster(p, y, [s_col, "log_n", "s_x_log_n"])
+
+    rows = []
+    for v in [s_col, "log_n", "s_x_log_n"]:
+        b = safe_num((fe.get("params") or {}).get(v))
+        t = safe_num((fe.get("tvalues") or {}).get(v))
+        pv = safe_num((fe.get("pvalues") or {}).get(v))
+        rows.append([v, b, t, pv, stars(pv)])
+
+    return {
+        "time_series": ts,
+        "panel_fe": fe,
+        "table": {
+            "title": f"Interaction (panel FE): {y} on sentiment × log(1+news)",
+            "columns": ["Variable", "Coef", "t", "p", "Sig"],
+            "rows": rows,
+        },
+    }
+
+
+def subsample_stability(
+    panel: pd.DataFrame,
+    y: str,
+    x_cols: List[str],
+) -> Dict[str, Any]:
+    """
+    Split by median date; compare FE coefficients.
+    """
+    use = panel.dropna(subset=["date", "ticker", y] + x_cols).copy()
+    if use.empty:
+        return {"error": "no_data"}
+
+    med = pd.to_datetime(use["date"]).sort_values().iloc[len(use) // 2]
+    left = use.loc[pd.to_datetime(use["date"]) <= med].copy()
+    right = use.loc[pd.to_datetime(use["date"]) > med].copy()
+
+    fe_l = panel_within_fe_cluster(left, y, x_cols)
+    fe_r = panel_within_fe_cluster(right, y, x_cols)
+
+    rows = []
+    for v in x_cols:
+        bL = safe_num((fe_l.get("params") or {}).get(v))
+        pL = safe_num((fe_l.get("pvalues") or {}).get(v))
+        bR = safe_num((fe_r.get("params") or {}).get(v))
+        pR = safe_num((fe_r.get("pvalues") or {}).get(v))
+        rows.append([v, bL, pL, stars(pL), bR, pR, stars(pR)])
+
+    return {
+        "stats": {"median_date": pd.to_datetime(med).strftime("%Y-%m-%d")},
+        "panel_fe_left": fe_l,
+        "panel_fe_right": fe_r,
+        "table": {
+            "title": "Subsample stability: panel FE coefficients (pre/post median date)",
+            "columns": ["Variable", "Beta (pre)", "p (pre)", "Sig", "Beta (post)", "p (post)", "Sig"],
+            "rows": rows,
+        },
+    }
+
+
 # -----------------------------
-# Packaging: key stats / sections / conclusions
+# Packaging
 # -----------------------------
 
 def key_stats_from(ts: Dict[str, Any], fe: Dict[str, Any], var: str) -> List[Dict[str, str]]:
@@ -433,14 +562,11 @@ def key_stats_from(ts: Dict[str, Any], fe: Dict[str, Any], var: str) -> List[Dic
     t_fe = safe_num((fe.get("tvalues") or {}).get(var))
     p_fe = safe_num((fe.get("pvalues") or {}).get(var))
 
-    def f(x: Optional[float], nd=4) -> str:
-        return "—" if x is None else f"{x:.{nd}g}"
-
     return [
-        {"label": f"β({var}) TS", "value": f"{f(b_ts)}{stars(p_ts)}"},
-        {"label": "t-stat TS", "value": f(t_ts, 3)},
-        {"label": f"β({var}) FE", "value": f"{f(b_fe)}{stars(p_fe)}"},
-        {"label": "t-stat FE", "value": f(t_fe, 3)},
+        {"label": f"β({var}) TS", "value": f"{fmt_g(b_ts)}{stars(p_ts)}"},
+        {"label": "t-stat TS", "value": fmt_g(t_ts, 3)},
+        {"label": f"β({var}) FE", "value": f"{fmt_g(b_fe)}{stars(p_fe)}"},
+        {"label": "t-stat FE", "value": fmt_g(t_fe, 3)},
     ]
 
 
@@ -461,23 +587,27 @@ def build_sections_common(universe: str, freq: str, y_def: str, s_def: str, cave
 
 def conclusion_from_models(study_title: str, ts: Dict[str, Any], fe: Dict[str, Any], var: str, y_label: str) -> List[str]:
     def get(m: Dict[str, Any], field: str) -> Optional[float]:
-        return safe_num(((m.get(field) or {}) if isinstance(m.get(field), dict) else {}).get(var))
+        base = m.get(field)
+        if not isinstance(base, dict):
+            return None
+        return safe_num(base.get(var))
 
     b_ts = get(ts, "params")
     t_ts = get(ts, "tvalues")
     p_ts = get(ts, "pvalues")
-    r2 = safe_num(ts.get("rsquared"))
+    r2_ts = safe_num(ts.get("rsquared"))
 
     b_fe = get(fe, "params")
     t_fe = get(fe, "tvalues")
     p_fe = get(fe, "pvalues")
+    r2_fe = safe_num(fe.get("rsquared"))
 
     out: List[str] = []
 
     if b_ts is not None:
         direction = "positive" if b_ts > 0 else "negative" if b_ts < 0 else "flat"
         out.append(
-            f"{study_title}: {var} is {direction} in TS (β={b_ts:.6g}{stars(p_ts)}, t={t_ts if t_ts is not None else '—'}, R²={r2 if r2 is not None else '—'})."
+            f"{study_title}: {var} is {direction} in TS (β={b_ts:.6g}{stars(p_ts)}, t={t_ts if t_ts is not None else '—'}, R²={r2_ts if r2_ts is not None else '—'})."
         )
     else:
         out.append(f"{study_title}: TS estimate for {var} not available.")
@@ -485,13 +615,13 @@ def conclusion_from_models(study_title: str, ts: Dict[str, Any], fe: Dict[str, A
     if b_fe is not None:
         direction = "positive" if b_fe > 0 else "negative" if b_fe < 0 else "flat"
         out.append(
-            f"Panel FE: {var} is {direction} after removing ticker FE (β={b_fe:.6g}{stars(p_fe)}, t={t_fe if t_fe is not None else '—'})."
+            f"Panel FE: {var} is {direction} after removing ticker FE (β={b_fe:.6g}{stars(p_fe)}, t={t_fe if t_fe is not None else '—'}, R²={r2_fe if r2_fe is not None else '—'})."
         )
     else:
         out.append("Panel FE output not available (insufficient data or model error).")
 
     if b_ts is not None:
-        out.append(f"Scale: +1.0 in {var} ≈ {(b_ts*10000):.2f} bps change in {y_label} (log-return units).")
+        out.append(f"Scale: +1.0 in {var} ≈ {(b_ts * 10000):.2f} bps change in {y_label} (log-return units).")
 
     return out
 
@@ -527,6 +657,48 @@ def build_study_payload(
         "results": results,
         "notes": notes,
     }
+
+
+def safe_write_study(out_dir: Path, study: Dict[str, Any]) -> None:
+    write_json(out_dir / f"{study['slug']}.json", study)
+
+
+def make_error_study(slug: str, title: str, category: str, summary: str, updated_at: str, tags: List[str], err: str) -> Dict[str, Any]:
+    return build_study_payload(
+        slug=slug,
+        title=title,
+        category=category,
+        summary=summary,
+        updated_at=updated_at,
+        status="error",
+        tags=tags,
+        key_stats=[{"label": "Status", "value": "ERROR"}],
+        methodology=["This study failed during build. The site remains deployable (no Pages 404)."],
+        sections=[{"title": "Error", "bullets": [err]}],
+        conclusions=[f"Build error: {err}"],
+        results={"error": err},
+        notes=[],
+    )
+
+
+def index_key_stats_with_r2(study: Dict[str, Any]) -> List[Dict[str, str]]:
+    """
+    For /research cards: include R² TS/FE if available, without changing the study JSON.
+    """
+    base = list((study.get("key_stats") or [])[:2])  # keep first two (usually β + t)
+    res = (study.get("results") or {})
+    ts = res.get("time_series") or {}
+    fe = res.get("panel_fe") or {}
+
+    r2_ts = safe_num(ts.get("rsquared"))
+    r2_fe = safe_num(fe.get("rsquared"))
+
+    if r2_ts is not None:
+        base.append({"label": "R² TS", "value": fmt_g(r2_ts, 4)})
+    if r2_fe is not None:
+        base.append({"label": "R² FE", "value": fmt_g(r2_fe, 4)})
+
+    return base
 
 
 # -----------------------------
@@ -587,296 +759,582 @@ def main() -> None:
     studies: List[Dict[str, Any]] = []
 
     # -------------------- Study 1: same-day returns --------------------
-    ts1 = time_series_ols_hac(df_sample, "y_ret", x_cols, maxlags=int(args.maxlags))
-    fe1 = panel_within_fe_cluster(panel, "y_ret", x_cols)
-    q1 = {} if args.no_quantiles else quantile_reg(df_sample, "y_ret", ["score_mean"])
+    try:
+        ts1 = time_series_ols_hac(df_sample, "y_ret", x_cols, maxlags=int(args.maxlags))
+        fe1 = panel_within_fe_cluster(panel, "y_ret", x_cols)
+        q1 = {} if args.no_quantiles else quantile_reg(df_sample, "y_ret", ["score_mean"])
 
-    s1 = build_study_payload(
-        slug="same-day-sentiment-vs-returns",
-        title="Same-day sentiment vs same-day returns",
-        category="Contemporaneous relationships",
-        summary="TS (HAC) + ticker fixed-effects panel: y_ret(t) ~ score_mean(t) (+ n_total(t)).",
-        updated_at=args.updated_at,
-        status="live",
-        tags=["time-series", "panel", "HAC", "fixed effects", "returns", "sentiment"],
-        key_stats=key_stats_from(ts1, fe1, "score_mean"),
-        methodology=[
-            "Dependent variable: y_ret(t).",
-            "Regressors: score_mean(t) and optional n_total(t).",
-            f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
-            "Panel: within estimator removing ticker FE; SE clustered by ticker.",
-        ],
-        sections=[
-            {"title": "Specification", "bullets": ["y_ret(t) ~ score_mean(t) + n_total(t) (optional)."]},
-            *build_sections_common(universe, freq, y_def, s_def, caveats),
-        ],
-        conclusions=conclusion_from_models("Same-day sentiment vs same-day returns", ts1, fe1, "score_mean", "daily return")
-        + ["Interpretation: strong same-day effects often reflect contemporaneous reaction rather than forecastability."],
-        results={
-            "sample_ticker": sample_ticker,
-            "n_tickers": n_tickers,
-            "n_obs_panel": n_obs_panel,
-            "series": export_series(df_sample),  # ✅ includes score_mean
-            "time_series": ts1,
-            "panel_fe": fe1,
-            "quantiles": q1,
-        },
-        notes=[],
-    )
-    write_json(out_dir / f"{s1['slug']}.json", s1)
-    studies.append(s1)
+        s1 = build_study_payload(
+            slug="same-day-sentiment-vs-returns",
+            title="Same-day sentiment vs same-day returns",
+            category="Contemporaneous relationships",
+            summary="TS (HAC) + ticker fixed-effects panel: y_ret(t) ~ score_mean(t) (+ n_total(t)).",
+            updated_at=args.updated_at,
+            status="live",
+            tags=["time-series", "panel", "HAC", "fixed effects", "returns", "sentiment"],
+            key_stats=key_stats_from(ts1, fe1, "score_mean"),
+            methodology=[
+                "Dependent variable: y_ret(t).",
+                "Regressors: score_mean(t) and optional n_total(t).",
+                f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
+                "Panel: within estimator removing ticker FE; SE clustered by ticker.",
+            ],
+            sections=[
+                {"title": "Specification", "bullets": ["y_ret(t) ~ score_mean(t) + n_total(t) (optional)."]},
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=conclusion_from_models(
+                "Same-day sentiment vs same-day returns", ts1, fe1, "score_mean", "daily return"
+            )
+            + ["Interpretation: strong same-day effects often reflect contemporaneous reaction rather than forecastability."],
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "series": export_series(df_sample),
+                "time_series": ts1,
+                "panel_fe": fe1,
+                "quantiles": q1,
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s1)
+        studies.append(s1)
+    except Exception as e:
+        s1 = make_error_study(
+            "same-day-sentiment-vs-returns",
+            "Same-day sentiment vs same-day returns",
+            "Contemporaneous relationships",
+            "TS (HAC) + ticker fixed-effects panel: y_ret(t) ~ score_mean(t) (+ n_total(t)).",
+            args.updated_at,
+            ["time-series", "panel"],
+            str(e),
+        )
+        safe_write_study(out_dir, s1)
+        studies.append(s1)
 
     # -------------------- Study 2: next-day returns --------------------
-    ts2 = time_series_ols_hac(df_sample, "y_ret_fwd1", x_cols, maxlags=int(args.maxlags))
-    fe2 = panel_within_fe_cluster(panel, "y_ret_fwd1", x_cols)
+    try:
+        ts2 = time_series_ols_hac(df_sample, "y_ret_fwd1", x_cols, maxlags=int(args.maxlags))
+        fe2 = panel_within_fe_cluster(panel, "y_ret_fwd1", x_cols)
 
-    s2 = build_study_payload(
-        slug="sentiment-vs-next-day-returns",
-        title="Sentiment vs next-day returns",
-        category="Predictability",
-        summary="Predictive check: y_ret(t+1) ~ score_mean(t) (+ n_total(t)) in TS + panel FE.",
-        updated_at=args.updated_at,
-        status="live",
-        tags=["predictive", "panel", "HAC", "fixed effects", "returns", "sentiment"],
-        key_stats=key_stats_from(ts2, fe2, "score_mean"),
-        methodology=[
-            "Dependent variable: y_ret(t+1).",
-            "Regressors: score_mean(t) and optional n_total(t).",
-            f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
-            "Panel: within estimator removing ticker FE; SE clustered by ticker.",
-        ],
-        sections=[
-            {"title": "Specification", "bullets": ["y_ret(t+1) ~ score_mean(t) + n_total(t) (optional)."]},
-            *build_sections_common(universe, freq, y_def, s_def, caveats),
-        ],
-        conclusions=conclusion_from_models("Sentiment vs next-day returns", ts2, fe2, "score_mean", "next-day return")
-        + ["If predictive effects are weak while same-day is strong, the sentiment metric likely captures reaction rather than alpha."],
-        results={
-            "sample_ticker": sample_ticker,
-            "n_tickers": n_tickers,
-            "n_obs_panel": n_obs_panel,
-            "series": export_series(df_sample),
-            "time_series": ts2,
-            "panel_fe": fe2,
-        },
-        notes=[],
-    )
-    write_json(out_dir / f"{s2['slug']}.json", s2)
-    studies.append(s2)
+        s2 = build_study_payload(
+            slug="sentiment-vs-next-day-returns",
+            title="Sentiment vs next-day returns",
+            category="Predictability",
+            summary="Predictive check: y_ret(t+1) ~ score_mean(t) (+ n_total(t)) in TS + panel FE.",
+            updated_at=args.updated_at,
+            status="live",
+            tags=["predictive", "panel", "HAC", "fixed effects", "returns", "sentiment"],
+            key_stats=key_stats_from(ts2, fe2, "score_mean"),
+            methodology=[
+                "Dependent variable: y_ret(t+1).",
+                "Regressors: score_mean(t) and optional n_total(t).",
+                f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
+                "Panel: within estimator removing ticker FE; SE clustered by ticker.",
+            ],
+            sections=[
+                {"title": "Specification", "bullets": ["y_ret(t+1) ~ score_mean(t) + n_total(t) (optional)."]},
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=conclusion_from_models(
+                "Sentiment vs next-day returns", ts2, fe2, "score_mean", "next-day return"
+            )
+            + ["If predictive effects are weak while same-day is strong, the sentiment metric likely captures reaction rather than alpha."],
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "series": export_series(df_sample),
+                "time_series": ts2,
+                "panel_fe": fe2,
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s2)
+        studies.append(s2)
+    except Exception as e:
+        s2 = make_error_study(
+            "sentiment-vs-next-day-returns",
+            "Sentiment vs next-day returns",
+            "Predictability",
+            "Predictive check: y_ret(t+1) ~ score_mean(t) (+ n_total(t)) in TS + panel FE.",
+            args.updated_at,
+            ["predictive", "panel"],
+            str(e),
+        )
+        safe_write_study(out_dir, s2)
+        studies.append(s2)
 
     # -------------------- Study 3: volatility & attention --------------------
-    if has_news:
-        x3 = ["n_total", "score_mean"]
-        main3 = "n_total"
-        slug3 = "news-volume-vs-volatility"
-        title3 = "News volume vs volatility (abs returns)"
-        summary3 = "abs_ret(t) ~ n_total(t) + score_mean(t)."
-        tags3 = ["volatility", "news volume", "panel", "fixed effects"]
-    else:
-        x3 = ["score_mean"]
-        main3 = "score_mean"
-        slug3 = "sentiment-vs-volatility"
-        title3 = "Sentiment vs volatility proxy (abs returns)"
-        summary3 = "abs_ret(t) ~ score_mean(t)."
-        tags3 = ["volatility", "panel", "fixed effects"]
+    try:
+        if has_news:
+            x3 = ["n_total", "score_mean"]
+            main3 = "n_total"
+            slug3 = "news-volume-vs-volatility"
+            title3 = "News volume vs volatility (abs returns)"
+            summary3 = "abs_ret(t) ~ n_total(t) + score_mean(t)."
+            tags3 = ["volatility", "news volume", "panel", "fixed effects"]
+        else:
+            x3 = ["score_mean"]
+            main3 = "score_mean"
+            slug3 = "sentiment-vs-volatility"
+            title3 = "Sentiment vs volatility proxy (abs returns)"
+            summary3 = "abs_ret(t) ~ score_mean(t)."
+            tags3 = ["volatility", "panel", "fixed effects"]
 
-    ts3 = time_series_ols_hac(df_sample, "abs_ret", x3, maxlags=int(args.maxlags))
-    fe3 = panel_within_fe_cluster(panel, "abs_ret", x3)
+        ts3 = time_series_ols_hac(df_sample, "abs_ret", x3, maxlags=int(args.maxlags))
+        fe3 = panel_within_fe_cluster(panel, "abs_ret", x3)
 
-    s3 = build_study_payload(
-        slug=slug3,
-        title=title3,
-        category="Volatility & attention",
-        summary=summary3,
-        updated_at=args.updated_at,
-        status="live",
-        tags=tags3,
-        key_stats=key_stats_from(ts3, fe3, main3),
-        methodology=[
-            "Dependent variable: abs_ret(t) = |y_ret(t)|.",
-            "Regressors: n_total(t) (if available) and score_mean(t).",
-            f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
-            "Panel: within estimator removing ticker FE; SE clustered by ticker.",
-        ],
-        sections=[
-            {"title": "Specification", "bullets": ["|y_ret(t)| ~ n_total(t) + score_mean(t)."]},
-            *build_sections_common(universe, freq, y_def, s_def, caveats),
-        ],
-        conclusions=conclusion_from_models(title3, ts3, fe3, main3, "abs return (vol proxy)")
-        + ["Interpretation: attention proxies (news volume) often correlate with volatility regardless of direction."],
-        results={
-            "sample_ticker": sample_ticker,
-            "n_tickers": n_tickers,
-            "n_obs_panel": n_obs_panel,
-            "series": export_series(df_sample),  # ✅ includes score_mean, so sentiment chart renders
-            "time_series": ts3,
-            "panel_fe": fe3,
-        },
-        notes=[],
-    )
-    write_json(out_dir / f"{s3['slug']}.json", s3)
-    studies.append(s3)
+        s3 = build_study_payload(
+            slug=slug3,
+            title=title3,
+            category="Volatility & attention",
+            summary=summary3,
+            updated_at=args.updated_at,
+            status="live",
+            tags=tags3,
+            key_stats=key_stats_from(ts3, fe3, main3),
+            methodology=[
+                "Dependent variable: abs_ret(t) = |y_ret(t)|.",
+                "Regressors: n_total(t) (if available) and score_mean(t).",
+                f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
+                "Panel: within estimator removing ticker FE; SE clustered by ticker.",
+            ],
+            sections=[
+                {"title": "Specification", "bullets": ["|y_ret(t)| ~ n_total(t) + score_mean(t)."]},
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=conclusion_from_models(title3, ts3, fe3, main3, "abs return (vol proxy)")
+            + ["Interpretation: attention proxies (news volume) often correlate with volatility regardless of direction."],
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "series": export_series(df_sample),
+                "time_series": ts3,
+                "panel_fe": fe3,
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s3)
+        studies.append(s3)
+    except Exception as e:
+        s3 = make_error_study(
+            "news-volume-vs-volatility" if has_news else "sentiment-vs-volatility",
+            "News volume vs volatility (abs returns)" if has_news else "Sentiment vs volatility proxy (abs returns)",
+            "Volatility & attention",
+            "abs_ret(t) ~ n_total(t) + score_mean(t)." if has_news else "abs_ret(t) ~ score_mean(t).",
+            args.updated_at,
+            ["volatility", "panel"],
+            str(e),
+        )
+        safe_write_study(out_dir, s3)
+        studies.append(s3)
 
-    # -------------------- Study 4: Fama–MacBeth (serious academic) --------------------
-    fm_x = ["score_mean"] + (["n_total"] if has_news else [])
-    fm = fama_macbeth(panel, y="y_ret_fwd1", x_cols=fm_x, min_xs=int(args.fm_min_xs), nw_lags=int(args.maxlags))
+    # -------------------- Study 4: Fama–MacBeth --------------------
+    try:
+        fm_x = ["score_mean"] + (["n_total"] if has_news else [])
+        fm = fama_macbeth(panel, y="y_ret_fwd1", x_cols=fm_x, min_xs=int(args.fm_min_xs), nw_lags=int(args.maxlags))
 
-    concl4 = []
-    if "error" in fm:
-        concl4 = [f"Fama–MacBeth could not be computed: {fm.get('error')}."]
-    else:
-        concl4 = [
-            "Fama–MacBeth estimates average cross-sectional pricing of sentiment signals using daily cross-sectional regressions.",
-            f"Average cross-sectional R² ≈ {fm['stats'].get('avg_cs_r2'):.4g} (dates={fm['stats'].get('n_dates')}).",
-            "Interpretation: significant mean slopes suggest a systematic cross-sectional relationship rather than a single-ticker artifact.",
+        if "error" in fm:
+            concl4 = [f"Fama–MacBeth could not be computed: {fm.get('error')}."]
+        else:
+            avg_r2 = safe_num((fm.get("stats") or {}).get("avg_cs_r2"))
+            concl4 = [
+                "Fama–MacBeth estimates average cross-sectional pricing using daily cross-sectional regressions.",
+                f"Average cross-sectional R² ≈ {fmt_g(avg_r2, 4)} (dates={(fm.get('stats') or {}).get('n_dates')}).",
+                "Significant mean slopes suggest a systematic cross-sectional relationship rather than a single-ticker artifact.",
+            ]
+
+        avg_r2 = safe_num((fm.get("stats") or {}).get("avg_cs_r2"))
+        s4 = build_study_payload(
+            slug="fama-macbeth-next-day",
+            title="Fama–MacBeth: next-day returns on sentiment (cross-sectional)",
+            category="Cross-sectional pricing",
+            summary="Per-day cross-sectional OLS y_ret(t+1) on score_mean(t) (+ n_total). Report mean slopes and NW t-stats.",
+            updated_at=args.updated_at,
+            status="live",
+            tags=["Fama-MacBeth", "cross-sectional", "Newey-West", "predictive"],
+            key_stats=[
+                {"label": "Dates", "value": str((fm.get("stats") or {}).get("n_dates", "—"))},
+                {"label": "Avg CS R²", "value": fmt_g(avg_r2, 4)},
+                {"label": "Min XS N", "value": str((fm.get("stats") or {}).get("min_xs", "—"))},
+                {"label": "NW lags", "value": str((fm.get("stats") or {}).get("nw_lags", "—"))},
+            ],
+            methodology=[
+                "Each date t: cross-sectional OLS over tickers: y_ret(t+1) ~ score_mean(t) (+ n_total(t)).",
+                "Collect daily slope estimates; test mean slope using Newey–West standard errors.",
+            ],
+            sections=[
+                {
+                    "title": "Specification",
+                    "bullets": [
+                        "For each day t: r_{i,t+1} = a_t + b_t * score_{i,t} + c_t * n_total_{i,t} + ε_{i,t}.",
+                        "Then test E[b_t] using NW SE.",
+                    ],
+                },
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=concl4,
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "famamacbeth": fm,
+                "tables": [fm.get("table")] if isinstance(fm.get("table"), dict) else [],
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s4)
+        studies.append(s4)
+    except Exception as e:
+        s4 = make_error_study(
+            "fama-macbeth-next-day",
+            "Fama–MacBeth: next-day returns on sentiment (cross-sectional)",
+            "Cross-sectional pricing",
+            "Per-day cross-sectional OLS y_ret(t+1) on score_mean(t) (+ n_total).",
+            args.updated_at,
+            ["Fama-MacBeth", "cross-sectional"],
+            str(e),
+        )
+        safe_write_study(out_dir, s4)
+        studies.append(s4)
+
+    # -------------------- Study 5: distributed lags --------------------
+    try:
+        controls5 = ["n_total"] if has_news else []
+        dl = distributed_lag_models(
+            panel, df_sample, y="y_ret_fwd1", base_col="score_mean",
+            max_lag=int(args.dl_max_lag), controls=controls5, nw_lags=int(args.maxlags)
+        )
+
+        sum_beta = safe_num((dl.get("stats") or {}).get("sum_beta"))
+        concl5 = [
+            f"Distributed lag model estimates how sentiment impacts returns over multiple days (lags 0..{args.dl_max_lag}).",
+            f"Panel FE cumulative beta (sum of lag coefficients) ≈ {fmt_g(sum_beta, 4)}.",
+            "Front-loaded vs delayed coefficients help distinguish immediate reaction from slow diffusion.",
         ]
 
-    s4 = build_study_payload(
-        slug="fama-macbeth-next-day",
-        title="Fama–MacBeth: next-day returns on sentiment (cross-sectional)",
-        category="Cross-sectional pricing",
-        summary="Per-day cross-sectional OLS y_ret(t+1) on score_mean(t) (+ n_total). Report mean slopes and NW t-stats.",
-        updated_at=args.updated_at,
-        status="live",
-        tags=["Fama-MacBeth", "cross-sectional", "Newey-West", "predictive"],
-        key_stats=[
-            {"label": "Dates", "value": str((fm.get("stats") or {}).get("n_dates", "—"))},
-            {"label": "Avg CS R²", "value": f"{(fm.get('stats') or {}).get('avg_cs_r2', float('nan')):.3g}" if isinstance((fm.get("stats") or {}).get("avg_cs_r2"), (int, float)) else "—"},
-            {"label": "Min XS N", "value": str((fm.get("stats") or {}).get("min_xs", "—"))},
-            {"label": "NW lags", "value": str((fm.get("stats") or {}).get("nw_lags", "—"))},
-        ],
-        methodology=[
-            "Each date t: cross-sectional OLS over tickers: y_ret(t+1) ~ score_mean(t) (+ n_total(t)).",
-            "Collect daily slope estimates; test mean slope using Newey–West standard errors.",
-        ],
-        sections=[
-            {"title": "Specification", "bullets": ["For each day t: r_{i,t+1} = a_t + b_t * score_{i,t} + c_t * n_total_{i,t} + ε_{i,t}.", "Then test E[b_t] using NW SE."]},
-            *build_sections_common(universe, freq, y_def, s_def, caveats),
-        ],
-        conclusions=concl4,
-        results={
-            "sample_ticker": sample_ticker,
-            "n_tickers": n_tickers,
-            "n_obs_panel": n_obs_panel,
-            "famamacbeth": fm,
-            "tables": [fm.get("table")] if isinstance(fm.get("table"), dict) else [],
-        },
-        notes=[],
-    )
-    write_json(out_dir / f"{s4['slug']}.json", s4)
-    studies.append(s4)
+        s5 = build_study_payload(
+            slug="distributed-lags-next-day",
+            title="Distributed lags: next-day returns on lagged sentiment",
+            category="Predictability",
+            summary=f"Panel FE + TS HAC: y_ret(t+1) on score_mean lags 0..{args.dl_max_lag} (+ n_total).",
+            updated_at=args.updated_at,
+            status="live",
+            tags=["distributed lags", "panel", "fixed effects", "Newey-West"],
+            key_stats=[
+                {"label": "Max lag", "value": str(args.dl_max_lag)},
+                {"label": "Sum beta (FE)", "value": fmt_g(sum_beta, 4)},
+                {"label": "Tickers", "value": str(n_tickers)},
+                {"label": "Obs", "value": str(n_obs_panel)},
+            ],
+            methodology=[
+                f"Construct lagged sentiment variables score_mean_lag0..score_mean_lag{args.dl_max_lag}.",
+                "Estimate y_ret(t+1) on lags with panel FE; SE clustered by ticker. Also fit TS HAC on sample ticker.",
+            ],
+            sections=[
+                {"title": "Specification", "bullets": [f"y_ret(t+1) ~ Σ_{{L=0..{args.dl_max_lag}}} β_L score_mean(t-L) + controls."]},
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=concl5,
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "series": export_series(df_sample),
+                "time_series": dl.get("time_series"),
+                "panel_fe": dl.get("panel_fe"),
+                "tables": [dl.get("table")] if isinstance(dl.get("table"), dict) else [],
+                "dl_stats": dl.get("stats"),
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s5)
+        studies.append(s5)
+    except Exception as e:
+        s5 = make_error_study(
+            "distributed-lags-next-day",
+            "Distributed lags: next-day returns on lagged sentiment",
+            "Predictability",
+            "Panel FE + TS HAC: y_ret(t+1) on score_mean lags (+ controls).",
+            args.updated_at,
+            ["distributed lags", "panel"],
+            str(e),
+        )
+        safe_write_study(out_dir, s5)
+        studies.append(s5)
 
-    # -------------------- Study 5: distributed lags (serious academic) --------------------
-    controls5 = ["n_total"] if has_news else []
-    dl = distributed_lag_models(panel, df_sample, y="y_ret_fwd1", base_col="score_mean", max_lag=int(args.dl_max_lag), controls=controls5, nw_lags=int(args.maxlags))
+    # -------------------- Study 6: placebo shuffle --------------------
+    try:
+        controls6 = ["n_total"] if has_news else []
+        # reuse fe2 baseline if it exists; otherwise recompute quickly
+        fe_real = None
+        for st in studies:
+            if st.get("slug") == "sentiment-vs-next-day-returns":
+                fe_real = (st.get("results") or {}).get("panel_fe")
+                break
+        if not isinstance(fe_real, dict):
+            fe_real = panel_within_fe_cluster(panel, "y_ret_fwd1", ["score_mean"] + controls6)
 
-    sum_beta = safe_num((dl.get("stats") or {}).get("sum_beta"))
-    concl5 = [
-        f"Distributed lag model estimates how sentiment impacts returns over multiple days (lags 0..{args.dl_max_lag}).",
-        f"Panel FE cumulative beta (sum of lag coefficients) ≈ {sum_beta if sum_beta is not None else '—'}.",
-        "Interpretation: front-loaded vs delayed coefficients distinguish immediate reaction from slow diffusion.",
-    ]
+        fe_pl = placebo_shuffle(panel, y="y_ret_fwd1", x="score_mean", controls=controls6, seed=int(args.placebo_seed))
 
-    s5 = build_study_payload(
-        slug="distributed-lags-next-day",
-        title="Distributed lags: next-day returns on lagged sentiment",
-        category="Predictability",
-        summary=f"Panel FE + TS HAC: y_ret(t+1) on score_mean lags 0..{args.dl_max_lag} (+ n_total).",
-        updated_at=args.updated_at,
-        status="live",
-        tags=["distributed lags", "panel", "fixed effects", "Newey-West"],
-        key_stats=[
-            {"label": "Max lag", "value": str(args.dl_max_lag)},
-            {"label": "Sum beta (FE)", "value": f"{sum_beta:.3g}" if sum_beta is not None else "—"},
-            {"label": "Tickers", "value": str(n_tickers)},
-            {"label": "Obs", "value": str(n_obs_panel)},
-        ],
-        methodology=[
-            f"Construct lagged sentiment variables score_mean_lag0..score_mean_lag{args.dl_max_lag}.",
-            "Estimate y_ret(t+1) on lags with panel FE; SE clustered by ticker. Also fit TS HAC on sample ticker.",
-        ],
-        sections=[
-            {"title": "Specification", "bullets": [f"y_ret(t+1) ~ Σ_{{L=0..{args.dl_max_lag}}} β_L score_mean(t-L) + controls."]},
-            *build_sections_common(universe, freq, y_def, s_def, caveats),
-        ],
-        conclusions=concl5,
-        results={
-            "sample_ticker": sample_ticker,
-            "n_tickers": n_tickers,
-            "n_obs_panel": n_obs_panel,
-            "series": export_series(df_sample),
-            "time_series": dl.get("time_series"),
-            "panel_fe": dl.get("panel_fe"),
-            "tables": [dl.get("table")] if isinstance(dl.get("table"), dict) else [],
-            "dl_stats": dl.get("stats"),
-        },
-        notes=[],
-    )
-    write_json(out_dir / f"{s5['slug']}.json", s5)
-    studies.append(s5)
+        b_real = safe_num((fe_real.get("params") or {}).get("score_mean"))
+        p_real = safe_num((fe_real.get("pvalues") or {}).get("score_mean"))
+        b_pl = safe_num((fe_pl.get("params") or {}).get("score_mean"))
+        p_pl = safe_num((fe_pl.get("pvalues") or {}).get("score_mean"))
 
-    # -------------------- Study 6: placebo / shuffle test (serious academic) --------------------
-    controls6 = ["n_total"] if has_news else []
-    fe_real = fe2  # from Study 2 baseline
-    fe_pl = placebo_shuffle(panel, y="y_ret_fwd1", x="score_mean", controls=controls6, seed=int(args.placebo_seed))
+        concl6 = [
+            "Placebo test: shuffle sentiment within ticker to break time structure; predictive coefficient should collapse toward zero.",
+            f"Baseline (panel FE) β={fmt_g(b_real, 6)}{stars(p_real)} vs placebo β={fmt_g(b_pl, 6)}{stars(p_pl)}.",
+            "If placebo is near zero while baseline is not, the signal is less likely to be an artifact of fixed cross-sectional differences.",
+        ]
 
-    b_real = safe_num((fe_real.get("params") or {}).get("score_mean"))
-    p_real = safe_num((fe_real.get("pvalues") or {}).get("score_mean"))
-    b_pl = safe_num((fe_pl.get("params") or {}).get("score_mean"))
-    p_pl = safe_num((fe_pl.get("pvalues") or {}).get("score_mean"))
+        placebo_table = {
+            "title": "Placebo (shuffle within ticker): panel FE comparison",
+            "columns": ["Spec", "β(score_mean)", "p", "Sig"],
+            "rows": [
+                ["Baseline", b_real, p_real, stars(p_real)],
+                [f"Placebo (seed={args.placebo_seed})", b_pl, p_pl, stars(p_pl)],
+            ],
+        }
 
-    concl6 = [
-        "Placebo test: shuffle sentiment within ticker to break time structure; predictive coefficient should collapse toward zero.",
-        f"Baseline (panel FE) β={b_real if b_real is not None else '—'}{stars(p_real)} vs placebo β={b_pl if b_pl is not None else '—'}{stars(p_pl)}.",
-        "Interpretation: if placebo is near zero while baseline is not, the signal is less likely to be an artifact of fixed cross-sectional differences.",
-    ]
+        s6 = build_study_payload(
+            slug="placebo-shuffle-test",
+            title="Placebo test: shuffle sentiment within ticker",
+            category="Robustness",
+            summary="Shuffle score_mean within ticker (destroys time ordering) and re-run predictive panel FE.",
+            updated_at=args.updated_at,
+            status="live",
+            tags=["placebo", "robustness", "panel", "fixed effects"],
+            key_stats=[
+                {"label": "β real", "value": f"{fmt_g(b_real, 4)}{stars(p_real)}"},
+                {"label": "β placebo", "value": f"{fmt_g(b_pl, 4)}{stars(p_pl)}"},
+                {"label": "Seed", "value": str(args.placebo_seed)},
+                {"label": "Tickers", "value": str(n_tickers)},
+            ],
+            methodology=[
+                "Within each ticker, randomly permute the sentiment time series (deterministic seed).",
+                "Re-estimate y_ret(t+1) ~ score_mean(t) (+ controls) with panel FE and ticker-clustered SE.",
+            ],
+            sections=[
+                {"title": "Specification", "bullets": ["Compare baseline panel FE vs placebo with permuted score_mean."]},
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=concl6,
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "panel_fe_baseline": fe_real,
+                "panel_fe_placebo": fe_pl,
+                "tables": [placebo_table],
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s6)
+        studies.append(s6)
+    except Exception as e:
+        s6 = make_error_study(
+            "placebo-shuffle-test",
+            "Placebo test: shuffle sentiment within ticker",
+            "Robustness",
+            "Shuffle score_mean within ticker and re-run predictive panel FE.",
+            args.updated_at,
+            ["placebo", "robustness"],
+            str(e),
+        )
+        safe_write_study(out_dir, s6)
+        studies.append(s6)
 
-    placebo_table = {
-        "title": "Placebo (shuffle within ticker): panel FE comparison",
-        "columns": ["Spec", "β(score_mean)", "p", "Sig"],
-        "rows": [
-            ["Baseline", b_real, p_real, stars(p_real)],
-            [f"Placebo (seed={args.placebo_seed})", b_pl, p_pl, stars(p_pl)],
-        ],
-    }
+    # -------------------- Study 7: asymmetry --------------------
+    try:
+        controls7 = ["n_total"] if has_news else []
+        am = asymmetry_models(panel, df_sample, y="y_ret_fwd1", s_col="score_mean", controls=controls7, nw_lags=int(args.maxlags))
 
-    s6 = build_study_payload(
-        slug="placebo-shuffle-test",
-        title="Placebo test: shuffle sentiment within ticker",
-        category="Robustness",
-        summary="Shuffle score_mean within ticker (destroys time ordering) and re-run predictive panel FE.",
-        updated_at=args.updated_at,
-        status="live",
-        tags=["placebo", "robustness", "panel", "fixed effects"],
-        key_stats=[
-            {"label": "β real", "value": f"{b_real:.3g}{stars(p_real)}" if b_real is not None else "—"},
-            {"label": "β placebo", "value": f"{b_pl:.3g}{stars(p_pl)}" if b_pl is not None else "—"},
-            {"label": "Seed", "value": str(args.placebo_seed)},
-            {"label": "Tickers", "value": str(n_tickers)},
-        ],
-        methodology=[
-            "Within each ticker, randomly permute the sentiment time series (deterministic seed).",
-            "Re-estimate y_ret(t+1) ~ score_mean(t) (+ controls) with panel FE and ticker-clustered SE.",
-        ],
-        sections=[
-            {"title": "Specification", "bullets": ["Compare baseline panel FE vs placebo with permuted score_mean."]},
-            *build_sections_common(universe, freq, y_def, s_def, caveats),
-        ],
-        conclusions=concl6,
-        results={
-            "sample_ticker": sample_ticker,
-            "n_tickers": n_tickers,
-            "n_obs_panel": n_obs_panel,
-            "panel_fe_baseline": fe_real,
-            "panel_fe_placebo": fe_pl,
-            "tables": [placebo_table],
-        },
-        notes=[],
-    )
-    write_json(out_dir / f"{s6['slug']}.json", s6)
-    studies.append(s6)
+        b_pos = safe_num((am.get("panel_fe") or {}).get("params", {}).get("s_pos")) if isinstance(am.get("panel_fe"), dict) else None
+        p_pos = safe_num((am.get("panel_fe") or {}).get("pvalues", {}).get("s_pos")) if isinstance(am.get("panel_fe"), dict) else None
+        b_neg = safe_num((am.get("panel_fe") or {}).get("params", {}).get("s_neg")) if isinstance(am.get("panel_fe"), dict) else None
+        p_neg = safe_num((am.get("panel_fe") or {}).get("pvalues", {}).get("s_neg")) if isinstance(am.get("panel_fe"), dict) else None
 
-    # -------------------- index + overview (sectioned, academic) --------------------
+        concl7 = [
+            "Asymmetry test decomposes sentiment into positive and negative components (s_pos, s_neg).",
+            f"Panel FE: β(s_pos)={fmt_g(b_pos, 6)}{stars(p_pos)}, β(s_neg)={fmt_g(b_neg, 6)}{stars(p_neg)}.",
+            "Interpretation: different magnitudes/significance imply asymmetric reaction (bad news vs good news).",
+        ]
+
+        s7 = build_study_payload(
+            slug="asymmetry-next-day",
+            title="Asymmetry: positive vs negative sentiment (next-day returns)",
+            category="Predictability",
+            summary="Panel FE + TS HAC: y_ret(t+1) on s_pos and s_neg (+ controls).",
+            updated_at=args.updated_at,
+            status="live",
+            tags=["asymmetry", "panel", "fixed effects", "Newey-West"],
+            key_stats=[
+                {"label": "β s_pos (FE)", "value": f"{fmt_g(b_pos, 4)}{stars(p_pos)}"},
+                {"label": "β s_neg (FE)", "value": f"{fmt_g(b_neg, 4)}{stars(p_neg)}"},
+                {"label": "Tickers", "value": str(n_tickers)},
+                {"label": "Obs", "value": str(n_obs_panel)},
+            ],
+            methodology=[
+                "Define s_pos=max(score_mean,0), s_neg=min(score_mean,0).",
+                "Estimate predictive regression with panel FE (cluster ticker) and TS HAC (sample ticker).",
+            ],
+            sections=[
+                {"title": "Specification", "bullets": ["y_ret(t+1) ~ s_pos(t) + s_neg(t) + controls."]},
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=concl7,
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "series": export_series(df_sample),
+                "time_series": am.get("time_series"),
+                "panel_fe": am.get("panel_fe"),
+                "tables": [am.get("table")] if isinstance(am.get("table"), dict) else [],
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s7)
+        studies.append(s7)
+    except Exception as e:
+        s7 = make_error_study(
+            "asymmetry-next-day",
+            "Asymmetry: positive vs negative sentiment (next-day returns)",
+            "Predictability",
+            "Panel FE + TS HAC: y_ret(t+1) on s_pos and s_neg (+ controls).",
+            args.updated_at,
+            ["asymmetry", "panel"],
+            str(e),
+        )
+        safe_write_study(out_dir, s7)
+        studies.append(s7)
+
+    # -------------------- Study 8: interaction with news volume --------------------
+    if has_news:
+        try:
+            im = interaction_models(panel, df_sample, y="y_ret_fwd1", s_col="score_mean", n_col="n_total", nw_lags=int(args.maxlags))
+            b_int = safe_num((im.get("panel_fe") or {}).get("params", {}).get("s_x_log_n")) if isinstance(im.get("panel_fe"), dict) else None
+            p_int = safe_num((im.get("panel_fe") or {}).get("pvalues", {}).get("s_x_log_n")) if isinstance(im.get("panel_fe"), dict) else None
+
+            concl8 = [
+                "Interaction tests whether sentiment matters more on high-attention (high news volume) days.",
+                f"Panel FE interaction β(score_mean×log(1+n_total))={fmt_g(b_int, 6)}{stars(p_int)}.",
+                "Interpretation: significant interaction implies state-dependence with attention/coverage.",
+            ]
+
+            s8 = build_study_payload(
+                slug="interaction-attention-next-day",
+                title="Interaction: sentiment × attention (news volume) and next-day returns",
+                category="Predictability",
+                summary="Panel FE + TS HAC: y_ret(t+1) ~ score_mean + log(1+n_total) + score_mean×log(1+n_total).",
+                updated_at=args.updated_at,
+                status="live",
+                tags=["interaction", "attention", "panel", "fixed effects"],
+                key_stats=[
+                    {"label": "β interaction (FE)", "value": f"{fmt_g(b_int, 4)}{stars(p_int)}"},
+                    {"label": "Tickers", "value": str(n_tickers)},
+                    {"label": "Obs", "value": str(n_obs_panel)},
+                    {"label": "Controls", "value": "log(1+n_total)"},
+                ],
+                methodology=[
+                    "Construct log_n=log(1+n_total) and interaction score_mean×log_n.",
+                    "Estimate predictive regression with panel FE (cluster ticker) and TS HAC (sample ticker).",
+                ],
+                sections=[
+                    {"title": "Specification", "bullets": ["y_ret(t+1) ~ score_mean(t) + log(1+n_total(t)) + score_mean(t)×log(1+n_total(t))."]},
+                    *build_sections_common(universe, freq, y_def, s_def, caveats),
+                ],
+                conclusions=concl8,
+                results={
+                    "sample_ticker": sample_ticker,
+                    "n_tickers": n_tickers,
+                    "n_obs_panel": n_obs_panel,
+                    "series": export_series(df_sample),
+                    "time_series": im.get("time_series"),
+                    "panel_fe": im.get("panel_fe"),
+                    "tables": [im.get("table")] if isinstance(im.get("table"), dict) else [],
+                },
+                notes=[],
+            )
+            safe_write_study(out_dir, s8)
+            studies.append(s8)
+        except Exception as e:
+            s8 = make_error_study(
+                "interaction-attention-next-day",
+                "Interaction: sentiment × attention (news volume) and next-day returns",
+                "Predictability",
+                "Panel FE + TS HAC: interaction model with log(1+n_total).",
+                args.updated_at,
+                ["interaction", "attention"],
+                str(e),
+            )
+            safe_write_study(out_dir, s8)
+            studies.append(s8)
+
+    # -------------------- Study 9: subsample stability --------------------
+    try:
+        x9 = ["score_mean"] + (["n_total"] if has_news else [])
+        stab = subsample_stability(panel, y="y_ret_fwd1", x_cols=x9)
+
+        med = (stab.get("stats") or {}).get("median_date", "—")
+        concl9 = [
+            "Stability test compares fixed-effects estimates before vs after the median date.",
+            f"Median split date: {med}.",
+            "Large differences may indicate regime dependence or evolving data coverage.",
+        ]
+
+        s9 = build_study_payload(
+            slug="subsample-stability-next-day",
+            title="Stability: subsample (pre/post median date) fixed-effects estimates",
+            category="Robustness",
+            summary="Panel FE coefficient stability test: estimate on pre and post subsamples split by median date.",
+            updated_at=args.updated_at,
+            status="live",
+            tags=["stability", "robustness", "panel", "fixed effects"],
+            key_stats=[
+                {"label": "Split", "value": str(med)},
+                {"label": "Tickers", "value": str(n_tickers)},
+                {"label": "Obs", "value": str(n_obs_panel)},
+                {"label": "Outcome", "value": "y_ret(t+1)"},
+            ],
+            methodology=[
+                "Split the panel into pre and post subsamples by median date.",
+                "Re-estimate within-ticker FE regression separately and compare coefficients.",
+            ],
+            sections=[
+                {"title": "Specification", "bullets": ["Estimate FE model separately on pre and post subsamples; compare β."]},
+                *build_sections_common(universe, freq, y_def, s_def, caveats),
+            ],
+            conclusions=concl9,
+            results={
+                "sample_ticker": sample_ticker,
+                "n_tickers": n_tickers,
+                "n_obs_panel": n_obs_panel,
+                "tables": [stab.get("table")] if isinstance(stab.get("table"), dict) else [],
+                "stability": stab,
+            },
+            notes=[],
+        )
+        safe_write_study(out_dir, s9)
+        studies.append(s9)
+    except Exception as e:
+        s9 = make_error_study(
+            "subsample-stability-next-day",
+            "Stability: subsample (pre/post median date) fixed-effects estimates",
+            "Robustness",
+            "Panel FE stability test split by median date.",
+            args.updated_at,
+            ["stability", "robustness"],
+            str(e),
+        )
+        safe_write_study(out_dir, s9)
+        studies.append(s9)
+
+    # -------------------- index + overview --------------------
     index = []
     for s in studies:
         index.append(
@@ -887,14 +1345,14 @@ def main() -> None:
                 "updated_at": s["updated_at"],
                 "status": s.get("status", "draft"),
                 "tags": s.get("tags", []),
-                "key_stats": s.get("key_stats", []),
+                # ✅ index cards get R² TS/FE
+                "key_stats": index_key_stats_with_r2(s),
                 "highlight": (s.get("conclusions") or [""])[0],
                 "category": s.get("category", "Other"),
             }
         )
     write_json(out_dir / "index.json", index)
 
-    # overview: meta + section-level conclusions
     by_cat: Dict[str, List[Dict[str, Any]]] = {}
     for s in studies:
         by_cat.setdefault(s.get("category", "Other"), []).append(s)
