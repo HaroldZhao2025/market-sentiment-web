@@ -4,7 +4,7 @@ A lightweight pipeline + static website for tracking **news-based sentiment** ac
 
 ## Author
 - Portfolio Strategy by **leolin0407-cmyk** (leolin0407@gmail.com)
-- Market Sentiment, Website Design, Repo Setting, Research by **HaroldZhao2025** (sz695@cornell.edu)
+- Market Sentiment, Website Design, Repo Setting by **HaroldZhao2025** (sz695@cornell.edu)
 
 ## Website
 https://haroldzhao2025.github.io/market-sentiment-web/
@@ -57,4 +57,4 @@ npm run build && npm run export
 * `/ticker/<symbol>` — per-ticker dashboard (overlay chart, insights, headlines)
 * `/sp500` — last 30 days S&P index price + cap-weighted sentiment
 * `/portfolio` — daily long/short equity curve + latest holdings
-
+* `/research` — live empirical notes / descriptive analytics (NOT investment advice; results may change as data updates)
