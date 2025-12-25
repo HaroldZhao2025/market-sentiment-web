@@ -7,18 +7,26 @@ export type ResearchIndexItem = {
   slug: string;
   title: string;
   summary: string;
-  updated_at: string; // ISO date (YYYY-MM-DD)
+  updated_at: string;
   status?: "live" | "draft";
   tags?: string[];
   key_stats?: { label: string; value: string }[];
-
-  // optional: builder may include this (safe to ignore if absent)
   highlight?: string;
+  category?: string;
+};
+
+export type ResearchOverviewSection = {
+  id: string;
+  title: string;
+  description?: string;
+  conclusions?: string[];
+  slugs: string[];
 };
 
 export type ResearchStudy = ResearchIndexItem & {
   methodology?: string[];
-  conclusions?: string[]; // ✅ NEW (your ResearchStudyClient uses this)
+  sections?: { title: string; bullets?: string[]; text?: string }[];
+  conclusions?: string[];
 
   results?: {
     sample_ticker?: string;
@@ -37,6 +45,8 @@ export type ResearchStudy = ResearchIndexItem & {
     time_series?: Record<string, unknown>;
     panel_fe?: Record<string, unknown>;
     quantiles?: Record<string, unknown>;
+
+    portfolios?: Record<string, unknown>;
   };
 
   notes?: string[];
@@ -51,11 +61,7 @@ function exists(p: string) {
 }
 
 function findResearchDir(): string | null {
-  // Try to handle both cases:
-  // - build runs inside apps/web (cwd=apps/web) -> public/research is correct
-  // - build runs at repo root (cwd=root) -> apps/web/public/research is correct
   const c = process.cwd();
-
   const candidates = [
     path.resolve(c, "public", "research"),
     path.resolve(c, "apps", "web", "public", "research"),
@@ -64,15 +70,11 @@ function findResearchDir(): string | null {
   ];
 
   for (const d of candidates) {
-    const idx = path.join(d, "index.json");
-    if (exists(idx)) return d;
+    if (exists(path.join(d, "index.json"))) return d;
   }
-
-  // even if index.json doesn't exist yet, still return a directory if it exists
   for (const d of candidates) {
     if (exists(d)) return d;
   }
-
   return null;
 }
 
@@ -88,12 +90,16 @@ async function safeReadJson<T>(absPath: string): Promise<T | null> {
 export async function loadResearchIndex(): Promise<ResearchIndexItem[]> {
   const dir = findResearchDir();
   if (!dir) return [];
-
-  const file = path.join(dir, "index.json");
-  const data = await safeReadJson<ResearchIndexItem[]>(file);
-
-  // export-safe: never throw
+  const data = await safeReadJson<ResearchIndexItem[]>(path.join(dir, "index.json"));
   return Array.isArray(data) ? data : [];
+}
+
+export async function loadResearchOverview(): Promise<ResearchOverviewSection[]> {
+  const dir = findResearchDir();
+  if (!dir) return [];
+  const data = await safeReadJson<{ sections?: ResearchOverviewSection[] }>(path.join(dir, "overview.json"));
+  const sections = data?.sections;
+  return Array.isArray(sections) ? sections : [];
 }
 
 export async function loadResearchStudy(slug: string): Promise<ResearchStudy> {
@@ -111,10 +117,8 @@ export async function loadResearchStudy(slug: string): Promise<ResearchStudy> {
 
   const file = path.join(dir, `${slug}.json`);
   const data = await safeReadJson<ResearchStudy>(file);
-
   if (data && typeof data === "object") return data;
 
-  // export-safe fallback
   return {
     slug,
     title: slug,
