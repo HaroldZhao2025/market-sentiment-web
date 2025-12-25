@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -20,15 +19,6 @@ from statsmodels.regression.quantile_regression import QuantReg
 # IO helpers
 # -----------------------------
 
-def read_json(p: Path) -> Any:
-    return json.loads(p.read_text(encoding="utf-8"))
-
-
-def write_json(p: Path, obj: Any) -> None:
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(obj, indent=2, default=_json_safe), encoding="utf-8")
-
-
 def _json_safe(x: Any) -> Any:
     if isinstance(x, (np.integer, np.floating)):
         return x.item()
@@ -39,18 +29,47 @@ def _json_safe(x: Any) -> Any:
     return x
 
 
+def read_json(p: Path) -> Any:
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def write_json(p: Path, obj: Any) -> None:
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(obj, indent=2, default=_json_safe), encoding="utf-8")
+
+
+def safe_num(x: Any) -> Optional[float]:
+    try:
+        v = float(x)
+        return v if np.isfinite(v) else None
+    except Exception:
+        return None
+
+
+def pick_first_key(d: Dict[str, Any], keys: List[str]) -> Optional[str]:
+    for k in keys:
+        if k in d:
+            return k
+    return None
+
+
+def stars(p: Optional[float]) -> str:
+    if p is None or not np.isfinite(p):
+        return ""
+    if p < 0.01:
+        return "***"
+    if p < 0.05:
+        return "**"
+    if p < 0.1:
+        return "*"
+    return ""
+
+
 # -----------------------------
 # Discovery: find ticker json dir
 # -----------------------------
 
 def find_ticker_dir(repo_root: Path, data_root: Path) -> Optional[Path]:
-    """
-    Try to locate per-ticker JSON time series.
-    Most common patterns:
-      data/ticker/*.json
-      public/data/ticker/*.json
-      apps/web/public/data/ticker/*.json
-    """
     candidates = [
         data_root / "ticker",
         data_root / "data" / "ticker",
@@ -66,24 +85,11 @@ def find_ticker_dir(repo_root: Path, data_root: Path) -> Optional[Path]:
     return None
 
 
-def pick_first_key(d: Dict[str, Any], keys: List[str]) -> Optional[str]:
-    for k in keys:
-        if k in d:
-            return k
-    return None
-
-
 # -----------------------------
 # Load a ticker JSON into df
 # -----------------------------
 
 def load_one_ticker_series(fp: Path) -> Optional[pd.DataFrame]:
-    """
-    Expects a json like:
-      { dates: [...], price: [...], S or sentiment or score_mean: [...], optional n_total: [...] }
-    Returns DataFrame indexed by date with:
-      y_ret, abs_ret, score_mean, optional n_total
-    """
     try:
         obj = read_json(fp)
     except Exception:
@@ -110,11 +116,9 @@ def load_one_ticker_series(fp: Path) -> Optional[pd.DataFrame]:
         {
             "date": pd.to_datetime(pd.Series(dates), errors="coerce"),
             "price": pd.to_numeric(pd.Series(prices), errors="coerce"),
-            # normalize sentiment to score_mean (what your UI expects)
             "score_mean": pd.to_numeric(pd.Series(s_arr), errors="coerce"),
         }
     )
-
     if n_key and isinstance(n_arr, list) and len(n_arr) == len(dates):
         df["n_total"] = pd.to_numeric(pd.Series(n_arr), errors="coerce")
 
@@ -125,14 +129,11 @@ def load_one_ticker_series(fp: Path) -> Optional[pd.DataFrame]:
     df = df.set_index("date")
     df["y_ret"] = np.log(df["price"]).diff()
     df["abs_ret"] = df["y_ret"].abs()
-
-    df = df.replace([np.inf, -np.inf], np.nan)
-    df = df.dropna(subset=["y_ret", "score_mean"])
+    df = df.replace([np.inf, -np.inf], np.nan).dropna(subset=["y_ret", "score_mean"])
 
     cols = ["y_ret", "abs_ret", "score_mean"]
     if "n_total" in df.columns:
         cols.append("n_total")
-
     return df[cols]
 
 
@@ -155,26 +156,17 @@ def build_panel(repo_root: Path, data_root: Path, min_obs: int) -> pd.DataFrame:
     if not frames:
         raise RuntimeError(f"No usable tickers found under {ticker_dir} with min_obs={min_obs}.")
 
-    panel = pd.concat(frames, ignore_index=True)
-    panel = panel.sort_values(["ticker", "date"]).reset_index(drop=True)
-
-    # forward return
+    panel = pd.concat(frames, ignore_index=True).sort_values(["ticker", "date"]).reset_index(drop=True)
     panel["y_ret_fwd1"] = panel.groupby("ticker")["y_ret"].shift(-1)
-
     return panel
 
 
 # -----------------------------
-# Export series for UI (CRITICAL FIX)
+# Export series for UI (CRITICAL)
 # -----------------------------
 
 def export_series(df: pd.DataFrame) -> Dict[str, Any]:
-    """
-    Always export everything the UI might plot.
-    This fixes your 'Sentiment (sample) ... No series available' issue by ensuring score_mean exists.
-    """
     out: Dict[str, Any] = {}
-
     if "date" in df.columns:
         out["dates"] = pd.to_datetime(df["date"], errors="coerce").dt.strftime("%Y-%m-%d").fillna("").tolist()
 
@@ -191,23 +183,14 @@ def export_series(df: pd.DataFrame) -> Dict[str, Any]:
     add("y_ret")
     add("y_ret_fwd1")
     add("abs_ret")
-    add("score_mean")  # ✅ MUST HAVE for your UI
+    add("score_mean")  # ✅ always
     add("n_total")
-
     return out
 
 
 # -----------------------------
 # Regression helpers
 # -----------------------------
-
-def safe_num(x: Any) -> Optional[float]:
-    try:
-        v = float(x)
-        return v if np.isfinite(v) else None
-    except Exception:
-        return None
-
 
 def _ols_summary(res: sm.regression.linear_model.RegressionResultsWrapper) -> Dict[str, Any]:
     keys = list(res.params.index)
@@ -226,7 +209,6 @@ def time_series_ols_hac(df: pd.DataFrame, y: str, x_cols: List[str], maxlags: in
     use = df.dropna(subset=[y] + x_cols).copy()
     if len(use) < 30:
         return {"error": "too_few_obs"}
-
     X = sm.add_constant(use[x_cols].astype(float), has_constant="add")
     yv = use[y].astype(float)
     res = sm.OLS(yv, X).fit(cov_type="HAC", cov_kwds={"maxlags": int(maxlags)})
@@ -278,58 +260,8 @@ def quantile_reg(df: pd.DataFrame, y: str, x_cols: List[str], qs: Tuple[float, .
 
 
 # -----------------------------
-# Conclusions generation (simple but useful)
+# Academic packaging helpers
 # -----------------------------
-
-def stars(p: Optional[float]) -> str:
-    if p is None or not np.isfinite(p):
-        return ""
-    if p < 0.01:
-        return "***"
-    if p < 0.05:
-        return "**"
-    if p < 0.1:
-        return "*"
-    return ""
-
-
-def conclusion_from_models(study_title: str, ts: Dict[str, Any], fe: Dict[str, Any], var: str, y_label: str) -> List[str]:
-    def get(m: Dict[str, Any], field: str) -> Optional[float]:
-        return safe_num(((m.get(field) or {}) if isinstance(m.get(field), dict) else {}).get(var))
-
-    b_ts = get(ts, "params")
-    t_ts = get(ts, "tvalues")
-    p_ts = get(ts, "pvalues")
-    r2 = safe_num(ts.get("rsquared"))
-
-    b_fe = get(fe, "params")
-    t_fe = get(fe, "tvalues")
-    p_fe = get(fe, "pvalues")
-
-    lines: List[str] = []
-
-    if b_ts is not None:
-        direction = "positive" if b_ts > 0 else "negative" if b_ts < 0 else "flat"
-        bps = b_ts * 10000.0
-        lines.append(
-            f"{study_title}: {var} is {direction} in the time-series spec "
-            f"(β={b_ts:.6g}{stars(p_ts)}, t={t_ts if t_ts is not None else '—'}, R²={r2 if r2 is not None else '—'})."
-        )
-        lines.append(f"Approx magnitude: +1.0 in {var} ↦ {bps:.2f} bps change in {y_label} (log-return units).")
-    else:
-        lines.append(f"{study_title}: time-series estimate for {var} not available.")
-
-    if b_fe is not None:
-        direction = "positive" if b_fe > 0 else "negative" if b_fe < 0 else "flat"
-        lines.append(
-            f"Panel FE check: {var} is {direction} after removing ticker fixed effects "
-            f"(β={b_fe:.6g}{stars(p_fe)}, t={t_fe if t_fe is not None else '—'})."
-        )
-    else:
-        lines.append("Panel FE output not available (insufficient data or model error).")
-
-    return lines
-
 
 def key_stats_from(ts: Dict[str, Any], fe: Dict[str, Any], var: str) -> List[Dict[str, str]]:
     b_ts = safe_num((ts.get("params") or {}).get(var))
@@ -351,20 +283,146 @@ def key_stats_from(ts: Dict[str, Any], fe: Dict[str, Any], var: str) -> List[Dic
     ]
 
 
+def build_sections_common(universe: str, freq: str, y_def: str, s_def: str, caveats: List[str]) -> List[Dict[str, Any]]:
+    return [
+        {
+            "title": "Data",
+            "bullets": [
+                f"Universe: {universe}.",
+                f"Frequency: {freq}.",
+                f"Returns definition: {y_def}.",
+                f"Sentiment definition: {s_def}.",
+            ],
+        },
+        {
+            "title": "Limitations",
+            "bullets": caveats,
+        },
+    ]
+
+
+def conclusion_from_models(study_title: str, ts: Dict[str, Any], fe: Dict[str, Any], var: str, y_label: str) -> List[str]:
+    def get(m: Dict[str, Any], field: str) -> Optional[float]:
+        return safe_num(((m.get(field) or {}) if isinstance(m.get(field), dict) else {}).get(var))
+
+    b_ts = get(ts, "params")
+    t_ts = get(ts, "tvalues")
+    p_ts = get(ts, "pvalues")
+    r2 = safe_num(ts.get("rsquared"))
+
+    b_fe = get(fe, "params")
+    t_fe = get(fe, "tvalues")
+    p_fe = get(fe, "pvalues")
+
+    out: List[str] = []
+
+    if b_ts is not None:
+        direction = "positive" if b_ts > 0 else "negative" if b_ts < 0 else "flat"
+        out.append(
+            f"{study_title}: {var} is {direction} in TS (β={b_ts:.6g}{stars(p_ts)}, t={t_ts if t_ts is not None else '—'}, R²={r2 if r2 is not None else '—'})."
+        )
+    else:
+        out.append(f"{study_title}: TS estimate for {var} not available.")
+
+    if b_fe is not None:
+        direction = "positive" if b_fe > 0 else "negative" if b_fe < 0 else "flat"
+        out.append(
+            f"Panel FE check: {var} is {direction} after removing ticker FE (β={b_fe:.6g}{stars(p_fe)}, t={t_fe if t_fe is not None else '—'})."
+        )
+    else:
+        out.append("Panel FE output not available (insufficient data or model error).")
+
+    if b_ts is not None:
+        out.append(f"Scale: +1.0 in {var} ≈ {(b_ts*10000):.2f} bps change in {y_label} (log-return units).")
+
+    return out
+
+
 # -----------------------------
-# Build studies
+# New study: sentiment-sort long-short
+# -----------------------------
+
+def build_sentiment_sort(panel: pd.DataFrame, n_bins: int = 5, min_xs: int = 120) -> Dict[str, Any]:
+    """
+    Each date t:
+      - sort tickers by score_mean(t) into n_bins
+      - compute next-day returns y_ret_fwd1(t) by bin
+      - long-short = top - bottom
+    """
+    use = panel.dropna(subset=["date", "ticker", "score_mean", "y_ret_fwd1"]).copy()
+    use = use.sort_values(["date", "ticker"])
+
+    out_rows = []
+    for dt, g in use.groupby("date", sort=True):
+        if len(g) < min_xs:
+            continue
+        # robust binning: use ranks to avoid qcut duplicate edges
+        r = g["score_mean"].rank(method="first")
+        q = pd.qcut(r, q=n_bins, labels=False, duplicates="drop")
+        if q.nunique() < 2:
+            continue
+        g = g.assign(bin=q.values)
+
+        by = g.groupby("bin")["y_ret_fwd1"].mean()
+        lo = by.min()
+        hi = by.max()
+        ls = hi - lo
+        out_rows.append((dt, float(lo), float(hi), float(ls)))
+
+    if not out_rows:
+        return {"error": "no_dates_after_filter"}
+
+    df = pd.DataFrame(out_rows, columns=["date", "bottom", "top", "long_short"]).sort_values("date")
+    df["cum_long_short"] = np.exp(df["long_short"].cumsum()) - 1.0
+    df["cum_top"] = np.exp(df["top"].cumsum()) - 1.0
+    df["cum_bottom"] = np.exp(df["bottom"].cumsum()) - 1.0
+
+    # summary stats
+    mu = df["long_short"].mean()
+    sd = df["long_short"].std(ddof=1)
+    sharpe = (mu / sd) * np.sqrt(252) if sd > 0 else np.nan
+
+    # HAC t-stat for mean via regression on constant
+    X = np.ones((len(df), 1))
+    res = sm.OLS(df["long_short"].values, X).fit(cov_type="HAC", cov_kwds={"maxlags": 5})
+    t = float(res.tvalues[0]) if len(res.tvalues) else np.nan
+    p = float(res.pvalues[0]) if len(res.pvalues) else np.nan
+
+    return {
+        "series": {
+            "dates": df["date"].dt.strftime("%Y-%m-%d").tolist(),
+            "bottom": df["bottom"].astype(float).tolist(),
+            "top": df["top"].astype(float).tolist(),
+            "long_short": df["long_short"].astype(float).tolist(),
+            "cum_long_short": df["cum_long_short"].astype(float).tolist(),
+        },
+        "stats": {
+            "n_days": int(len(df)),
+            "mean_daily": safe_num(mu),
+            "std_daily": safe_num(sd),
+            "sharpe_ann": safe_num(sharpe),
+            "t_hac": safe_num(t),
+            "p_hac": safe_num(p),
+        },
+    }
+
+
+# -----------------------------
+# Build payload
 # -----------------------------
 
 def build_study_payload(
     *,
     slug: str,
     title: str,
+    category: str,
     summary: str,
     updated_at: str,
     status: str,
     tags: List[str],
     key_stats: List[Dict[str, str]],
     methodology: List[str],
+    sections: List[Dict[str, Any]],
     conclusions: List[str],
     results: Dict[str, Any],
     notes: List[str],
@@ -372,12 +430,14 @@ def build_study_payload(
     return {
         "slug": slug,
         "title": title,
+        "category": category,
         "summary": summary,
         "updated_at": updated_at,
         "status": status,
         "tags": tags,
         "key_stats": key_stats,
         "methodology": methodology,
+        "sections": sections,
         "conclusions": conclusions,
         "results": results,
         "notes": notes,
@@ -392,110 +452,112 @@ def main() -> None:
     ap.add_argument("--updated-at", type=str, default=pd.Timestamp.today().strftime("%Y-%m-%d"))
     ap.add_argument("--maxlags", type=int, default=5)
     ap.add_argument("--no-quantiles", action="store_true")
-    ap.add_argument("--allow-empty", action="store_true", help="Do not fail build if no data found")
     args = ap.parse_args()
 
     repo_root = Path.cwd()
     data_root = (repo_root / args.data_root).resolve()
     out_dir = (repo_root / args.out_dir).resolve()
 
+    # Export-safe behavior: if panel cannot be built, write empty index/overview so site won't 404
     try:
         panel = build_panel(repo_root, data_root, min_obs=int(args.min_obs))
     except Exception as e:
-        # Export-safe: don't kill your whole Pages build
-        if args.allow_empty or True:
-            write_json(out_dir / "index.json", [])
-            print(f"[WARN] build_research: {e}")
-            print(f"[WARN] wrote empty index.json to {out_dir}")
-            return
-        raise
+        write_json(out_dir / "index.json", [])
+        write_json(out_dir / "overview.json", {"sections": []})
+        print(f"[WARN] build_research failed: {e}")
+        print(f"[WARN] wrote empty research artifacts to: {out_dir}")
+        return
 
     n_tickers = int(panel["ticker"].nunique())
     n_obs_panel = int(len(panel))
 
-    # sample ticker with most observations
     sample_ticker = panel["ticker"].value_counts().index[0]
     df_sample = panel.loc[panel["ticker"] == sample_ticker].sort_values("date").copy()
 
-    # regressors
     x_cols = ["score_mean"] + (["n_total"] if "n_total" in panel.columns else [])
+
+    universe = "S&P 500 constituents (as in your snapshot pipeline)"
+    freq = "Daily"
+    y_def = "log(P_t) - log(P_{t-1}) using the price series in ticker JSON"
+    s_def = "score_mean in ticker JSON (normalized sentiment metric in your pipeline)"
+    caveats = [
+        "Timing: if news arrives after close, same-day sentiment may not be tradable without shifting.",
+        "Survivorship: depends on how the S&P 500 universe is snapshotted in your repo.",
+        "Causality: regressions are descriptive; omitted variables may remain.",
+    ]
 
     studies: List[Dict[str, Any]] = []
 
-    # ---- Study 1: Same-day returns ----
+    # -------------------- Study 1 --------------------
     ts1 = time_series_ols_hac(df_sample, "y_ret", x_cols, maxlags=int(args.maxlags))
     fe1 = panel_within_fe_cluster(panel, "y_ret", x_cols)
     q1 = {} if args.no_quantiles else quantile_reg(df_sample, "y_ret", ["score_mean"])
 
-    conclusions_1 = conclusion_from_models(
-        "Same-day sentiment vs same-day returns", ts1, fe1, "score_mean", "daily return"
-    )
-
     study1 = build_study_payload(
         slug="same-day-sentiment-vs-returns",
         title="Same-day sentiment vs same-day returns",
+        category="Contemporaneous relationships",
         summary="TS (HAC) + ticker fixed-effects panel: y_ret(t) ~ score_mean(t) (+ news count if available).",
         updated_at=args.updated_at,
         status="live",
-        tags=["time-series", "panel", "fixed effects", "HAC", "returns", "sentiment"],
+        tags=["time-series", "panel", "HAC", "fixed effects", "returns", "sentiment"],
         key_stats=key_stats_from(ts1, fe1, "score_mean"),
         methodology=[
-            "Dependent variable: daily log return y_ret(t).",
-            "Main regressor: same-day sentiment score_mean(t).",
-            "Optional control: same-day news count n_total(t) if present.",
+            "Dependent variable: y_ret(t).",
+            "Regressors: score_mean(t) and optional n_total(t).",
             f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
-            "Panel: within estimator removing ticker fixed effects; SE clustered by ticker.",
-            "Quantiles: (optional) quantile regression on the sample ticker.",
+            "Panel: within estimator removing ticker FE; SE clustered by ticker.",
         ],
-        conclusions=conclusions_1 + [
-            "Interpretation note: same-day results can reflect contemporaneous information flow rather than predictability.",
+        sections=[
+            {"title": "Specification", "bullets": ["y_ret(t) ~ score_mean(t) + controls."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
         ],
+        conclusions=conclusion_from_models("Same-day sentiment vs same-day returns", ts1, fe1, "score_mean", "daily return")
+        + ["Interpretation: same-day results are likely contemporaneous reaction rather than predictability."],
         results={
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "series": export_series(df_sample),  # ✅ always includes score_mean
+            "series": export_series(df_sample),
             "time_series": ts1,
             "panel_fe": fe1,
             "quantiles": q1,
         },
-        notes=[
-            "If your sentiment is based on articles after the close, consider shifting sentiment by +1 day for cleaner predictive interpretation.",
-        ],
+        notes=[],
     )
     write_json(out_dir / f"{study1['slug']}.json", study1)
     studies.append(study1)
 
-    # ---- Study 2: Next-day returns ----
+    # -------------------- Study 2 --------------------
     ts2 = time_series_ols_hac(df_sample, "y_ret_fwd1", x_cols, maxlags=int(args.maxlags))
     fe2 = panel_within_fe_cluster(panel, "y_ret_fwd1", x_cols)
-
-    conclusions_2 = conclusion_from_models(
-        "Sentiment vs next-day returns", ts2, fe2, "score_mean", "next-day return"
-    )
 
     study2 = build_study_payload(
         slug="sentiment-vs-next-day-returns",
         title="Sentiment vs next-day returns",
+        category="Predictability",
         summary="Predictability check: y_ret(t+1) ~ score_mean(t) (+ news count if available).",
         updated_at=args.updated_at,
         status="live",
-        tags=["predictive", "panel", "fixed effects", "returns", "sentiment"],
+        tags=["predictive", "panel", "HAC", "fixed effects", "returns", "sentiment"],
         key_stats=key_stats_from(ts2, fe2, "score_mean"),
         methodology=[
-            "Dependent variable: next-day log return y_ret(t+1).",
+            "Dependent variable: y_ret(t+1).",
             "Regressors: score_mean(t) and optional n_total(t).",
             f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
-            "Panel: within estimator removing ticker fixed effects; SE clustered by ticker.",
+            "Panel: within estimator removing ticker FE; SE clustered by ticker.",
         ],
-        conclusions=conclusions_2 + [
-            "If next-day effects are weak but same-day is strong, the sentiment metric may be capturing contemporaneous reaction rather than forecasting.",
+        sections=[
+            {"title": "Specification", "bullets": ["y_ret(t+1) ~ score_mean(t) + controls."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
         ],
+        conclusions=conclusion_from_models("Sentiment vs next-day returns", ts2, fe2, "score_mean", "next-day return")
+        + ["If this is weak while same-day is strong, the metric is likely contemporaneous rather than forecasting."],
         results={
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "series": export_series(df_sample),  # ✅ includes y_ret_fwd1 + score_mean
+            "series": export_series(df_sample),
             "time_series": ts2,
             "panel_fe": fe2,
         },
@@ -504,63 +566,175 @@ def main() -> None:
     write_json(out_dir / f"{study2['slug']}.json", study2)
     studies.append(study2)
 
-    # ---- Study 3: News volume vs volatility proxy (abs returns) ----
+    # -------------------- Study 3 --------------------
     if "n_total" in panel.columns:
-        x_cols3 = ["n_total", "score_mean"]
-        main_var = "n_total"
-        title3 = "News volume vs volatility (abs returns)"
+        x3 = ["n_total", "score_mean"]
+        main3 = "n_total"
         slug3 = "news-volume-vs-volatility"
-        summary3 = "Does more news coincide with larger moves? abs_ret(t) ~ n_total(t) + score_mean(t)."
+        title3 = "News volume vs volatility (abs returns)"
+        summary3 = "abs_ret(t) ~ n_total(t) + score_mean(t)."
         tags3 = ["volatility", "news volume", "panel", "fixed effects"]
     else:
-        x_cols3 = ["score_mean"]
-        main_var = "score_mean"
-        title3 = "Sentiment vs volatility proxy (abs returns)"
+        x3 = ["score_mean"]
+        main3 = "score_mean"
         slug3 = "sentiment-vs-volatility"
-        summary3 = "abs_ret(t) ~ score_mean(t). (news volume not available in ticker JSON)"
-        tags3 = ["volatility", "sentiment", "panel", "fixed effects"]
+        title3 = "Sentiment vs volatility proxy (abs returns)"
+        summary3 = "abs_ret(t) ~ score_mean(t)."
+        tags3 = ["volatility", "panel", "fixed effects"]
 
-    ts3 = time_series_ols_hac(df_sample, "abs_ret", x_cols3, maxlags=int(args.maxlags))
-    fe3 = panel_within_fe_cluster(panel, "abs_ret", x_cols3)
-
-    conclusions_3 = conclusion_from_models(title3, ts3, fe3, main_var, "abs return (vol proxy)")
+    ts3 = time_series_ols_hac(df_sample, "abs_ret", x3, maxlags=int(args.maxlags))
+    fe3 = panel_within_fe_cluster(panel, "abs_ret", x3)
 
     study3 = build_study_payload(
         slug=slug3,
         title=title3,
+        category="Volatility & attention",
         summary=summary3,
         updated_at=args.updated_at,
         status="live",
         tags=tags3,
-        key_stats=key_stats_from(ts3, fe3, main_var),
+        key_stats=key_stats_from(ts3, fe3, main3),
         methodology=[
-            "Volatility proxy: absolute daily log return |y_ret(t)|.",
+            "Dependent variable: abs_ret(t) = |y_ret(t)|.",
             "Regressors: n_total(t) (if available) and score_mean(t).",
             f"Time-series: OLS with Newey–West HAC SE (maxlags={int(args.maxlags)}).",
-            "Panel: within estimator removing ticker fixed effects; SE clustered by ticker.",
+            "Panel: within estimator removing ticker FE; SE clustered by ticker.",
         ],
-        conclusions=conclusions_3 + [
-            "This is a simple volatility proxy; you can later replace it with squared returns or realized volatility measures.",
+        sections=[
+            {"title": "Specification", "bullets": ["|y_ret(t)| ~ n_total(t) + score_mean(t)."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
         ],
+        conclusions=conclusion_from_models(title3, ts3, fe3, main3, "abs return (vol proxy)")
+        + ["Interpretation: news volume often correlates with larger moves regardless of direction."],
         results={
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "series": export_series(df_sample),  # ✅ includes abs_ret + score_mean (+ n_total)
+            "series": export_series(df_sample),  # includes abs_ret, n_total, score_mean
             "time_series": ts3,
             "panel_fe": fe3,
         },
-        notes=[
-            "A positive n_total coefficient is common: more news tends to coincide with larger moves (regardless of direction).",
-        ],
+        notes=[],
     )
     write_json(out_dir / f"{study3['slug']}.json", study3)
     studies.append(study3)
 
-    # ---- index.json ----
+    # -------------------- Study 4 (NEW): sentiment-sort portfolio --------------------
+    sort_out = build_sentiment_sort(panel, n_bins=5, min_xs=120)
+    stats = sort_out.get("stats") or {}
+    t_hac = safe_num(stats.get("t_hac"))
+    p_hac = safe_num(stats.get("p_hac"))
+    sharpe = safe_num(stats.get("sharpe_ann"))
+
+    concl4 = [
+        f"Sentiment-sorted long-short (top-minus-bottom) shows mean={safe_num(stats.get('mean_daily'))} per day, "
+        f"t(HAC)={t_hac if t_hac is not None else '—'}{stars(p_hac)}, Sharpe(ann)={sharpe if sharpe is not None else '—'}.",
+        "Interpretation: if statistically significant, this suggests delayed reaction / cross-sectional predictability (subject to trading frictions).",
+        "This is equal-weighted and uses next-day returns; add transaction costs and turnover next for realism.",
+    ]
+
+    study4 = build_study_payload(
+        slug="sentiment-sorted-long-short",
+        title="Sentiment-sorted portfolios (next-day, long-short)",
+        category="Predictability",
+        summary="Each day: sort tickers by score_mean(t) into quintiles; evaluate next-day returns and top-minus-bottom spread.",
+        updated_at=args.updated_at,
+        status="live",
+        tags=["cross-sectional", "portfolios", "predictive", "HAC"],
+        key_stats=[
+            {"label": "t(HAC) mean LS", "value": f"{t_hac:.3g}{stars(p_hac)}" if t_hac is not None else "—"},
+            {"label": "Sharpe (ann)", "value": f"{sharpe:.3g}" if sharpe is not None else "—"},
+            {"label": "Days", "value": str(stats.get("n_days", "—"))},
+            {"label": "Bins", "value": "5"},
+        ],
+        methodology=[
+            "Cross-sectional sort: rank tickers by score_mean(t) each date.",
+            "Compute equal-weighted next-day returns by bin; long-short = top - bottom.",
+            "Test mean long-short return using OLS on constant with HAC SE.",
+        ],
+        sections=[
+            {"title": "Specification", "bullets": ["LS(t+1) = E[r_{top}(t+1)] - E[r_{bottom}(t+1)] based on score_mean(t) sorting."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
+        ],
+        conclusions=concl4,
+        results={
+            "sample_ticker": sample_ticker,
+            "n_tickers": n_tickers,
+            "n_obs_panel": n_obs_panel,
+            "portfolios": sort_out,  # contains series + stats
+        },
+        notes=[],
+    )
+    write_json(out_dir / f"{study4['slug']}.json", study4)
+    studies.append(study4)
+
+    # -------------------- Study 5 (NEW): asymmetry (pos vs neg sentiment) --------------------
+    panel2 = panel.copy()
+    panel2["score_pos"] = panel2["score_mean"].clip(lower=0.0)
+    panel2["score_neg"] = panel2["score_mean"].clip(upper=0.0)
+
+    df_sample2 = df_sample.copy()
+    df_sample2["score_pos"] = df_sample2["score_mean"].clip(lower=0.0)
+    df_sample2["score_neg"] = df_sample2["score_mean"].clip(upper=0.0)
+
+    x5 = ["score_pos", "score_neg"] + (["n_total"] if "n_total" in panel2.columns else [])
+    ts5 = time_series_ols_hac(df_sample2, "y_ret_fwd1", x5, maxlags=int(args.maxlags))
+    fe5 = panel_within_fe_cluster(panel2, "y_ret_fwd1", x5)
+
+    # section conclusions (explicit)
+    bpos = safe_num((fe5.get("params") or {}).get("score_pos"))
+    ppos = safe_num((fe5.get("pvalues") or {}).get("score_pos"))
+    bneg = safe_num((fe5.get("params") or {}).get("score_neg"))
+    pneg = safe_num((fe5.get("pvalues") or {}).get("score_neg"))
+
+    concl5 = [
+        f"Asymmetry test (panel FE): score_pos β={bpos if bpos is not None else '—'}{stars(ppos)}; "
+        f"score_neg β={bneg if bneg is not None else '—'}{stars(pneg)}.",
+        "Interpretation: different coefficients suggest sentiment impacts differ between positive vs negative tone.",
+        "Use this to motivate non-linear models (splines / regime splits) later.",
+    ]
+
+    study5 = build_study_payload(
+        slug="sentiment-asymmetry-next-day",
+        title="Sentiment asymmetry (positive vs negative, next-day)",
+        category="Predictability",
+        summary="Nonlinearity check: split sentiment into positive and negative components; regress next-day returns on both.",
+        updated_at=args.updated_at,
+        status="live",
+        tags=["predictive", "nonlinear", "panel", "fixed effects", "HAC"],
+        key_stats=[
+            {"label": "β(pos) FE", "value": f"{bpos:.3g}{stars(ppos)}" if bpos is not None else "—"},
+            {"label": "β(neg) FE", "value": f"{bneg:.3g}{stars(pneg)}" if bneg is not None else "—"},
+            {"label": "Tickers", "value": str(n_tickers)},
+            {"label": "Obs", "value": str(n_obs_panel)},
+        ],
+        methodology=[
+            "Construct score_pos = max(score_mean, 0) and score_neg = min(score_mean, 0).",
+            "Estimate y_ret(t+1) ~ score_pos(t) + score_neg(t) (+ n_total).",
+            "Panel FE removes time-invariant ticker differences; SE clustered by ticker.",
+        ],
+        sections=[
+            {"title": "Specification", "bullets": ["y_ret(t+1) ~ score_pos(t) + score_neg(t) + controls."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
+        ],
+        conclusions=concl5,
+        results={
+            "sample_ticker": sample_ticker,
+            "n_tickers": n_tickers,
+            "n_obs_panel": n_obs_panel,
+            "series": export_series(df_sample2),  # still includes score_mean
+            "time_series": ts5,
+            "panel_fe": fe5,
+        },
+        notes=[],
+    )
+    write_json(out_dir / f"{study5['slug']}.json", study5)
+    studies.append(study5)
+
+    # -------------------- index.json + overview.json (SECTION CONCLUSIONS) --------------------
+
     index = []
     for s in studies:
-        highlight = (s.get("conclusions") or [""])[0]
         index.append(
             {
                 "slug": s["slug"],
@@ -570,16 +744,44 @@ def main() -> None:
                 "status": s.get("status", "draft"),
                 "tags": s.get("tags", []),
                 "key_stats": s.get("key_stats", []),
-                "highlight": highlight,
+                "highlight": (s.get("conclusions") or [""])[0],
+                "category": s.get("category", "Other"),
+            }
+        )
+    write_json(out_dir / "index.json", index)
+
+    # Create section-level conclusions (1–3 bullets each)
+    by_cat: Dict[str, List[Dict[str, Any]]] = {}
+    for s in studies:
+        by_cat.setdefault(s.get("category", "Other"), []).append(s)
+
+    sections = []
+    for cat, ss in by_cat.items():
+        ss_sorted = sorted(ss, key=lambda x: x.get("slug", ""))
+        # take first conclusion line from up to 2 studies as the section "conclusion bullets"
+        concls = []
+        for st in ss_sorted[:2]:
+            c0 = (st.get("conclusions") or [""])[0]
+            if c0:
+                concls.append(c0)
+        if not concls:
+            concls = ["No conclusions available yet (research build missing or too few observations)."]
+
+        sections.append(
+            {
+                "id": cat.lower().replace(" ", "-").replace("&", "and"),
+                "title": cat,
+                "description": "Empirical snapshots updated with the same pipeline powering the site.",
+                "conclusions": concls,
+                "slugs": [st["slug"] for st in ss_sorted],
             }
         )
 
-    write_json(out_dir / "index.json", index)
+    sections = sorted(sections, key=lambda x: x["title"])
+    write_json(out_dir / "overview.json", {"sections": sections})
 
     print(f"[OK] wrote {len(studies)} studies to {out_dir}")
     print(f"[OK] tickers={n_tickers}, panel_obs={n_obs_panel}, sample_ticker={sample_ticker}")
-    # helpful for debugging in Actions
-    print(f"[INFO] out files: {', '.join([s['slug'] + '.json' for s in studies] + ['index.json'])}")
 
 
 if __name__ == "__main__":
