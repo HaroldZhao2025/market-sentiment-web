@@ -31,7 +31,7 @@ const Badge = ({ children }: { children: React.ReactNode }) => (
 export default async function ResearchPage() {
   const [itemsRaw, sectionsRaw] = await Promise.all([
     loadResearchIndex(),
-    loadResearchOverviewFull(), // ✅ correct export name
+    loadResearchOverviewFull(),
   ]);
 
   const items = (itemsRaw ?? []) as IndexItem[];
@@ -147,7 +147,6 @@ python src/market_sentiment/cli/build_research.py --data-root data --out-dir app
           })}
         </div>
       ) : (
-        // fallback if overview isn't present
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {items.map((it) => (
             <Link
