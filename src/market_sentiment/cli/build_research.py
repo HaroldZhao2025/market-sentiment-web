@@ -598,129 +598,224 @@ def oos_predictability(df: pd.DataFrame, y: str, x_cols: List[str], min_train: i
     }
 
 
-def event_study(panel: pd.DataFrame, signal_col: str, ret_col: str, z_thr: float, window: int, min_events: int) -> Dict[str, Any]:
+def event_study(
+    panel: pd.DataFrame,
+    signal_col: str,
+    ret_col: str,
+    z_thr: float,
+    window: int,
+    min_events: int,
+    *,
+    dedup_overlapping: bool = True,
+) -> Dict[str, Any]:
     """
-    Panel event study:
-      - compute within-ticker z-score of signal_col
-      - positive events: z >= z_thr; negative: z <= -z_thr
-      - compute average cumulative return path around event (tau=-W..+W)
-    Returns:
-      tau: [-W..W], car_pos, car_neg
+    Panel event study (daily):
+      1) within-ticker z-score of signal_col
+      2) events: z >= z_thr (pos), z <= -z_thr (neg)
+      3) construct event-time paths for tau in [-W..W]:
+         - AAR(tau): average return at relative day tau
+         - CAR(tau): cumulative return relative to event, anchored at CAR(0)=0
+            * tau>0: sum of returns from +1..tau
+            * tau<0: - sum of returns from tau..-1  (so CAR approaches 0 at tau=0)
+         Note: CAR intentionally excludes event-day return (tau=0) to keep pre/post continuous.
+    Exports mean paths and standard errors across events.
     """
+
     use = panel.dropna(subset=["ticker", "date", signal_col, ret_col]).copy()
     if use.empty:
         return {"error": "no_data"}
 
     use = use.sort_values(["ticker", "date"]).reset_index(drop=True)
 
-    # within ticker zscore
+    # within ticker z-score
     g = use.groupby("ticker", sort=False)
     mu = g[signal_col].transform("mean")
     sd = g[signal_col].transform("std").replace(0.0, np.nan)
     use["_z"] = (use[signal_col] - mu) / sd
 
-    pos_idx = use.index[use["_z"] >= float(z_thr)].to_numpy()
-    neg_idx = use.index[use["_z"] <= -float(z_thr)].to_numpy()
+    tau = np.arange(-int(window), int(window) + 1, dtype=int)
+    W = int(window)
 
-    def _collect(indices: np.ndarray) -> Optional[np.ndarray]:
-        if len(indices) == 0:
-            return None
+    def _thin_events(idx: np.ndarray, z: np.ndarray, n: int) -> np.ndarray:
+        """
+        Pick non-overlapping events within a ticker:
+        greedy by |z| (strongest first), then block [i-W..i+W].
+        """
+        if len(idx) == 0:
+            return idx
 
-        out = []
-        # We'll work per ticker positions to ensure contiguous index isn't mixing tickers
-        # Create per-ticker arrays of returns
-        by_ticker = {}
-        for tkr, gg in use.groupby("ticker", sort=False):
-            by_ticker[tkr] = gg.reset_index(drop=True)
+        order = idx[np.argsort(np.abs(z[idx]))[::-1]]
+        blocked = np.zeros(n, dtype=bool)
+        chosen: List[int] = []
 
-        # Map global row -> (ticker, local_idx)
-        # (cheap method: iterate through ticker groups and build dict of original index -> local)
-        idx_map = {}
-        for tkr, gg in use.groupby("ticker", sort=False):
-            loc = gg.reset_index(drop=True)
-            for j, orig_i in enumerate(gg.index.values.tolist()):
-                idx_map[int(orig_i)] = (tkr, j)
-
-        for orig_i in indices:
-            if int(orig_i) not in idx_map:
+        for i in order:
+            i = int(i)
+            if i - W < 0 or i + W >= n:
                 continue
-            tkr, j = idx_map[int(orig_i)]
-            gg = by_ticker[tkr]
-            if j - window < 0 or j + window >= len(gg):
+            if blocked[i]:
                 continue
-            r = gg[ret_col].astype(float).values
+            chosen.append(i)
+            lo = max(0, i - W)
+            hi = min(n, i + W + 1)
+            blocked[lo:hi] = True
 
-            # CAR path relative to event: tau=0 -> 0
-            car = np.zeros(2 * window + 1, dtype=float)
-            # tau > 0: sum r_{t+1..t+tau}
-            for k in range(1, window + 1):
-                car[window + k] = float(np.sum(r[(j + 1):(j + k + 1)]))
-            # tau < 0: -sum r_{t+tau+1..t}
-            for k in range(1, window + 1):
-                car[window - k] = float(-np.sum(r[(j - k + 1):(j + 1)]))
-            out.append(car)
+        return np.array(sorted(chosen), dtype=int)
 
-        if len(out) == 0:
-            return None
-        return np.vstack(out)
+    def _collect_for_group(df: pd.DataFrame, mask: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Return (aar_mat, car_mat) each of shape (n_events, 2W+1).
+        """
+        n = len(df)
+        if n < 2 * W + 1:
+            return np.zeros((0, 2 * W + 1)), np.zeros((0, 2 * W + 1))
 
-    pos_mat = _collect(pos_idx)
-    neg_mat = _collect(neg_idx)
+        r = df[ret_col].astype(float).values
+        z = df["_z"].astype(float).values
 
-    if (pos_mat is None or len(pos_mat) == 0) and (neg_mat is None or len(neg_mat) == 0):
+        idx = np.where(mask)[0].astype(int)
+
+        # filter edges first
+        idx = idx[(idx - W >= 0) & (idx + W < n)]
+        if dedup_overlapping:
+            idx = _thin_events(idx, z, n)
+
+        if len(idx) == 0:
+            return np.zeros((0, 2 * W + 1)), np.zeros((0, 2 * W + 1))
+
+        aar_list: List[np.ndarray] = []
+        car_list: List[np.ndarray] = []
+
+        for j in idx:
+            # event window returns (includes tau=0 return)
+            aar = r[j - W : j + W + 1].astype(float)
+
+            # CAR anchored at 0, excludes tau=0 return in cumulation by construction
+            car = np.zeros(2 * W + 1, dtype=float)
+
+            # post-event: sum returns at +1..+k
+            for k in range(1, W + 1):
+                car[W + k] = float(np.sum(aar[W + 1 : W + k + 1]))
+
+            # pre-event: negative sum returns at tau=-k..-1 (EXCLUDES event day)
+            for k in range(1, W + 1):
+                car[W - k] = float(-np.sum(aar[W - k : W]))
+
+            aar_list.append(aar)
+            car_list.append(car)
+
+        return np.vstack(aar_list), np.vstack(car_list)
+
+    # collect across tickers
+    aar_pos_all: List[np.ndarray] = []
+    car_pos_all: List[np.ndarray] = []
+    aar_neg_all: List[np.ndarray] = []
+    car_neg_all: List[np.ndarray] = []
+
+    for _, df in use.groupby("ticker", sort=False):
+        df = df.reset_index(drop=True)
+        z = df["_z"].values
+
+        aar_pos, car_pos = _collect_for_group(df, z >= float(z_thr))
+        aar_neg, car_neg = _collect_for_group(df, z <= -float(z_thr))
+
+        if aar_pos.shape[0]:
+            aar_pos_all.append(aar_pos)
+            car_pos_all.append(car_pos)
+        if aar_neg.shape[0]:
+            aar_neg_all.append(aar_neg)
+            car_neg_all.append(car_neg)
+
+    def _stack(mats: List[np.ndarray]) -> np.ndarray:
+        if not mats:
+            return np.zeros((0, 2 * W + 1))
+        return np.vstack(mats)
+
+    AAR_pos = _stack(aar_pos_all)
+    CAR_pos = _stack(car_pos_all)
+    AAR_neg = _stack(aar_neg_all)
+    CAR_neg = _stack(car_neg_all)
+
+    n_pos = int(AAR_pos.shape[0])
+    n_neg = int(AAR_neg.shape[0])
+
+    if (n_pos + n_neg) == 0:
         return {"error": "too_few_events"}
 
-    tau = list(range(-window, window + 1))
+    def _mean_se(mat: np.ndarray) -> Tuple[List[float], List[float]]:
+        if mat.shape[0] == 0:
+            return [], []
+        m = np.nanmean(mat, axis=0)
+        if mat.shape[0] == 1:
+            se = np.full_like(m, np.nan, dtype=float)
+        else:
+            se = np.nanstd(mat, axis=0, ddof=1) / np.sqrt(mat.shape[0])
+        return [float(x) for x in m.tolist()], [float(x) for x in se.tolist()]
 
-    def _avg(mat: Optional[np.ndarray]) -> List[float]:
-        if mat is None:
-            return []
-        return [float(v) for v in np.nanmean(mat, axis=0).tolist()]
+    aar_pos_mean, aar_pos_se = _mean_se(AAR_pos)
+    car_pos_mean, car_pos_se = _mean_se(CAR_pos)
+    aar_neg_mean, aar_neg_se = _mean_se(AAR_neg)
+    car_neg_mean, car_neg_se = _mean_se(CAR_neg)
 
-    out = {
+    # pre-trend diagnostic: mean AAR over tau in [-W..-1]
+    def _pre_mean(mat: np.ndarray) -> Optional[float]:
+        if mat.shape[0] == 0:
+            return None
+        pre = mat[:, :W]  # tau=-W..-1
+        return float(np.nanmean(pre))
+
+    pre_pos = _pre_mean(AAR_pos)
+    pre_neg = _pre_mean(AAR_neg)
+
+    out: Dict[str, Any] = {
         "stats": {
             "z_thr": float(z_thr),
             "window": int(window),
-            "n_pos": int(0 if pos_mat is None else pos_mat.shape[0]),
-            "n_neg": int(0 if neg_mat is None else neg_mat.shape[0]),
+            "n_pos": n_pos,
+            "n_neg": n_neg,
+            "dedup_overlapping": bool(dedup_overlapping),
         },
         "series": {
-            "tau": tau,
-            "car_pos": _avg(pos_mat),
-            "car_neg": _avg(neg_mat),
+            "tau": [int(x) for x in tau.tolist()],
+            # means
+            "aar_pos": aar_pos_mean,
+            "aar_neg": aar_neg_mean,
+            "car_pos": car_pos_mean,
+            "car_neg": car_neg_mean,
+            # standard errors (for academic CI bands later)
+            "aar_pos_se": aar_pos_se,
+            "aar_neg_se": aar_neg_se,
+            "car_pos_se": car_pos_se,
+            "car_neg_se": car_neg_se,
         },
     }
 
-    # add quick table: CAR(+1,+5)
-    def _pick(series: List[float], w: int, k: int) -> Optional[float]:
-        # tau=k is at index w+k
-        idx = w + k
+    # compact table (academic-facing)
+    def _at(series: List[float], t: int) -> Optional[float]:
+        if not series:
+            return None
+        idx = W + int(t)
         if idx < 0 or idx >= len(series):
             return None
         return float(series[idx])
 
-    car_pos = out["series"].get("car_pos", [])
-    car_neg = out["series"].get("car_neg", [])
-    w = int(window)
-
     rows = []
-    for lab, s in [("Positive", car_pos), ("Negative", car_neg)]:
-        if not s:
-            continue
-        rows.append([lab, _pick(s, w, 1), _pick(s, w, 5)])
+    if car_pos_mean:
+        rows.append(["Positive", _at(aar_pos_mean, 0), _at(car_pos_mean, 1), _at(car_pos_mean, 5), pre_pos])
+    if car_neg_mean:
+        rows.append(["Negative", _at(aar_neg_mean, 0), _at(car_neg_mean, 1), _at(car_neg_mean, 5), pre_neg])
+
     out["table"] = {
-        "title": f"Event study CAR (z≥{z_thr} / z≤−{z_thr}): cumulative log return",
-        "columns": ["Event type", "CAR(+1)", "CAR(+5)"],
+        "title": f"Event study (z≥{z_thr} / z≤−{z_thr}): AAR(0) and CAR(+k)",
+        "columns": ["Event type", "AAR(0)", "CAR(+1)", "CAR(+5)", "Mean pre AAR(τ<0)"],
         "rows": rows,
     }
 
     # guard: min_events threshold (soft)
-    n_events = out["stats"]["n_pos"] + out["stats"]["n_neg"]
+    n_events = n_pos + n_neg
     if n_events < int(min_events):
         out["stats"]["warning"] = f"few_events({n_events}<{min_events})"
 
     return out
-
 
 def try_load_market_series(repo_root: Path, data_root: Path, symbol: str = "SPY") -> Optional[pd.DataFrame]:
     ticker_dir = find_ticker_dir(repo_root, data_root)
