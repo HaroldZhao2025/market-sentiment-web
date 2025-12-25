@@ -23,6 +23,19 @@ export type ResearchOverviewSection = {
   slugs: string[];
 };
 
+export type ResearchOverviewMeta = {
+  updated_at?: string;
+  n_studies?: number;
+  n_tickers?: number;
+  n_obs_panel?: number;
+  date_range?: [string, string];
+};
+
+export type ResearchOverview = {
+  meta?: ResearchOverviewMeta;
+  sections: ResearchOverviewSection[];
+};
+
 export type ResearchStudy = ResearchIndexItem & {
   methodology?: string[];
   sections?: { title: string; bullets?: string[]; text?: string }[];
@@ -33,20 +46,20 @@ export type ResearchStudy = ResearchIndexItem & {
     n_tickers?: number;
     n_obs_panel?: number;
 
-    series?: {
-      dates?: string[];
-      y_ret?: number[];
-      y_ret_fwd1?: number[];
-      abs_ret?: number[];
-      score_mean?: number[];
-      n_total?: number[];
-    };
+    series?: Record<string, any>;
 
     time_series?: Record<string, unknown>;
     panel_fe?: Record<string, unknown>;
     quantiles?: Record<string, unknown>;
 
-    portfolios?: Record<string, unknown>;
+    famamacbeth?: Record<string, unknown>;
+    tables?: Array<{
+      title: string;
+      columns: string[];
+      rows: any[][];
+    }>;
+
+    [k: string]: unknown;
   };
 
   notes?: string[];
@@ -94,12 +107,15 @@ export async function loadResearchIndex(): Promise<ResearchIndexItem[]> {
   return Array.isArray(data) ? data : [];
 }
 
-export async function loadResearchOverview(): Promise<ResearchOverviewSection[]> {
+export async function loadResearchOverviewFull(): Promise<ResearchOverview> {
   const dir = findResearchDir();
-  if (!dir) return [];
-  const data = await safeReadJson<{ sections?: ResearchOverviewSection[] }>(path.join(dir, "overview.json"));
-  const sections = data?.sections;
-  return Array.isArray(sections) ? sections : [];
+  if (!dir) return { sections: [] };
+
+  const data = await safeReadJson<ResearchOverview>(path.join(dir, "overview.json"));
+  const sections = Array.isArray(data?.sections) ? data!.sections : [];
+  const meta = data?.meta ?? undefined;
+
+  return { meta, sections };
 }
 
 export async function loadResearchStudy(slug: string): Promise<ResearchStudy> {
@@ -117,6 +133,7 @@ export async function loadResearchStudy(slug: string): Promise<ResearchStudy> {
 
   const file = path.join(dir, `${slug}.json`);
   const data = await safeReadJson<ResearchStudy>(file);
+
   if (data && typeof data === "object") return data;
 
   return {
