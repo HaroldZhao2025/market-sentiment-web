@@ -1,6 +1,5 @@
 // apps/web/lib/research.ts
 import fs from "node:fs/promises";
-import fssync from "node:fs";
 import path from "node:path";
 
 export type ResearchIndexItem = {
@@ -8,14 +7,19 @@ export type ResearchIndexItem = {
   title: string;
   summary: string;
   updated_at: string;
-  status?: "live" | "draft";
+  status?: string;
   tags?: string[];
   key_stats?: { label: string; value: string }[];
   highlight?: string;
   category?: string;
 };
 
-export type ResearchOverviewSection = {
+export type ResearchOverview = {
+  meta?: Record<string, any>;
+  sections: ResearchSection[];
+};
+
+export type ResearchSection = {
   id: string;
   title: string;
   description?: string;
@@ -23,125 +27,90 @@ export type ResearchOverviewSection = {
   slugs: string[];
 };
 
-export type ResearchOverviewMeta = {
-  updated_at?: string;
-  n_studies?: number;
-  n_tickers?: number;
-  n_obs_panel?: number;
-  date_range?: [string, string];
+export type ResearchTable = {
+  title: string;
+  columns: string[];
+  rows: any[][];
 };
 
-export type ResearchOverview = {
-  meta?: ResearchOverviewMeta;
-  sections: ResearchOverviewSection[];
-};
-
-export type ResearchStudy = ResearchIndexItem & {
+export type ResearchStudy = {
+  slug: string;
+  title: string;
+  category?: string;
+  summary: string;
+  updated_at: string;
+  status?: string;
+  tags?: string[];
+  key_stats?: { label: string; value: string }[];
+  highlight?: string;
   methodology?: string[];
-  sections?: { title: string; bullets?: string[]; text?: string }[];
+  sections?: { title: string; bullets?: string[] }[];
   conclusions?: string[];
-
-  results?: {
-    sample_ticker?: string;
-    n_tickers?: number;
-    n_obs_panel?: number;
-
-    series?: Record<string, any>;
-
-    time_series?: Record<string, unknown>;
-    panel_fe?: Record<string, unknown>;
-    quantiles?: Record<string, unknown>;
-
-    famamacbeth?: Record<string, unknown>;
-    tables?: Array<{
-      title: string;
-      columns: string[];
-      rows: any[][];
-    }>;
-
-    [k: string]: unknown;
-  };
-
+  results?: any;
   notes?: string[];
 };
 
-function exists(p: string) {
+async function exists(p: string) {
   try {
-    return fssync.existsSync(p);
+    await fs.access(p);
+    return true;
   } catch {
     return false;
   }
 }
 
-function findResearchDir(): string | null {
-  const c = process.cwd();
-  const candidates = [
-    path.resolve(c, "public", "research"),
-    path.resolve(c, "apps", "web", "public", "research"),
-    path.resolve(c, "..", "public", "research"),
-    path.resolve(c, "..", "..", "apps", "web", "public", "research"),
+async function resolveResearchDir(): Promise<string> {
+  // robust for monorepo vs apps/web cwd
+  const cands = [
+    path.join(process.cwd(), "apps", "web", "public", "research"),
+    path.join(process.cwd(), "public", "research"),
   ];
-
-  for (const d of candidates) {
-    if (exists(path.join(d, "index.json"))) return d;
+  for (const p of cands) {
+    if (await exists(p)) return p;
   }
-  for (const d of candidates) {
-    if (exists(d)) return d;
-  }
-  return null;
+  // default to first (will throw later on read)
+  return cands[0];
 }
 
-async function safeReadJson<T>(absPath: string): Promise<T | null> {
+async function readJsonFile<T>(absPath: string, fallback: T): Promise<T> {
   try {
     const raw = await fs.readFile(absPath, "utf-8");
     return JSON.parse(raw) as T;
   } catch {
-    return null;
+    return fallback;
   }
 }
 
 export async function loadResearchIndex(): Promise<ResearchIndexItem[]> {
-  const dir = findResearchDir();
-  if (!dir) return [];
-  const data = await safeReadJson<ResearchIndexItem[]>(path.join(dir, "index.json"));
-  return Array.isArray(data) ? data : [];
+  const dir = await resolveResearchDir();
+  const p = path.join(dir, "index.json");
+  return readJsonFile<ResearchIndexItem[]>(p, []);
 }
 
-export async function loadResearchOverviewFull(): Promise<ResearchOverview> {
-  const dir = findResearchDir();
-  if (!dir) return { sections: [] };
+export async function loadResearchOverview(): Promise<ResearchOverview> {
+  const dir = await resolveResearchDir();
+  const p = path.join(dir, "overview.json");
+  return readJsonFile<ResearchOverview>(p, { sections: [] });
+}
 
-  const data = await safeReadJson<ResearchOverview>(path.join(dir, "overview.json"));
-  const sections = Array.isArray(data?.sections) ? data!.sections : [];
-  const meta = data?.meta ?? undefined;
-
-  return { meta, sections };
+/**
+ * Backward-compatible helper: returns only sections array (your page currently expects this).
+ */
+export async function loadResearchOverviewFull(): Promise<ResearchSection[]> {
+  const ov = await loadResearchOverview();
+  return (ov?.sections ?? []) as ResearchSection[];
 }
 
 export async function loadResearchStudy(slug: string): Promise<ResearchStudy> {
-  const dir = findResearchDir();
-  if (!dir) {
-    return {
-      slug,
-      title: slug,
-      summary: "Research artifacts not found (research build may not have run yet).",
-      updated_at: "",
-      status: "draft",
-      conclusions: ["Research JSON not available yet. Please run the research build step."],
-    };
-  }
-
-  const file = path.join(dir, `${slug}.json`);
-  const data = await safeReadJson<ResearchStudy>(file);
-
-  if (data && typeof data === "object") return data;
-
-  return {
+  const dir = await resolveResearchDir();
+  const p = path.join(dir, `${slug}.json`);
+  const fallback: ResearchStudy = {
     slug,
     title: slug,
-    summary: "Study JSON not found.",
+    summary: "Missing research artifact. The builder may not have generated this study for the deployment.",
     updated_at: "",
     status: "draft",
-    conclusions: [`Missing file: ${path.basename(file)}.`],
+    results: {},
   };
+  return readJsonFile<ResearchStudy>(p, fallback);
 }
