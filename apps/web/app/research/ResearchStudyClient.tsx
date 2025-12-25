@@ -73,12 +73,15 @@ function buildSeriesOptions(series: any) {
   );
   add("y_ret", "Returns (sample)", "log return", pickSeriesArray(series, ["y_ret"]));
   add("abs_ret", "Volatility proxy (sample)", "|log return|", pickSeriesArray(series, ["abs_ret"]));
+
+  // IMPORTANT: robust sentiment fallbacks (fixes “No series available” when your builder uses different key)
   add(
     "score_mean",
     "Sentiment (sample)",
     "score_mean",
     pickSeriesArray(series, ["score_mean", "S", "sentiment", "sent"])
   );
+
   add("n_total", "News volume (sample)", "n_total", pickSeriesArray(series, ["n_total", "news_count", "n_news"]));
 
   return out;
@@ -155,7 +158,6 @@ function RegressionTable({ title, model }: { title: string; model?: ModelOut | n
 function GenericTableCard({ table }: { table: GenericTable }) {
   const cols = table.columns ?? [];
   const rows = table.rows ?? [];
-
   if (!cols.length || !rows.length) return null;
 
   return (
@@ -167,10 +169,7 @@ function GenericTableCard({ table }: { table: GenericTable }) {
           <thead className="text-xs text-zinc-500">
             <tr className="border-b border-zinc-200">
               {cols.map((c, i) => (
-                <th
-                  key={i}
-                  className={`font-medium p-3 ${i === 0 ? "text-left" : "text-right"}`}
-                >
+                <th key={i} className={`font-medium p-3 ${i === 0 ? "text-left" : "text-right"}`}>
                   {c}
                 </th>
               ))}
@@ -182,11 +181,7 @@ function GenericTableCard({ table }: { table: GenericTable }) {
                 {r.map((cell: any, ci: number) => {
                   const n = num(cell);
                   const content =
-                    typeof cell === "string"
-                      ? cell
-                      : n != null
-                      ? fmt(n, 6)
-                      : safeStr(cell);
+                    typeof cell === "string" ? cell : n != null ? fmt(n, 6) : safeStr(cell);
                   return (
                     <td
                       key={ci}
@@ -203,7 +198,7 @@ function GenericTableCard({ table }: { table: GenericTable }) {
       </div>
 
       <div className="text-xs text-zinc-500">
-        Note: table contents are exported by the Python builder; formatting is intentionally compact.
+        Note: exported by the Python builder; formatting is intentionally compact.
       </div>
     </div>
   );
@@ -243,45 +238,28 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
         if (x && typeof x === "object" && Array.isArray(x.columns) && Array.isArray(x.rows)) t.push(x);
       }
     }
-    // also accept nested famamacbeth.table if your builder stores it there
     const fm = (study.results as any)?.famamacbeth?.table;
     if (fm && Array.isArray(fm.columns) && Array.isArray(fm.rows)) t.push(fm);
-
     return t;
   }, [study.results]);
 
-  const hasSections = Array.isArray((study as any).sections) && (study as any).sections.length > 0;
+  const ts = study.results?.time_series as any as ModelOut | undefined;
+  const fe = study.results?.panel_fe as any as ModelOut | undefined;
 
-  const jsonHref = useMemo(() => {
-    const slug = (study as any)?.slug;
-    return slug ? `/research/${slug}.json` : null;
-  }, [study]);
+  const r2ts = ts?.rsquared;
+  const r2fe = fe?.rsquared;
+
+  const hasSections = Array.isArray((study as any).sections) && (study as any).sections.length > 0;
 
   return (
     <div className="space-y-6">
       {/* “paper header” panel */}
       <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-4">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-          <div className="space-y-1">
-            <div className="text-xs text-zinc-500">Study</div>
-            <div className="text-lg font-semibold text-zinc-900">{study.title}</div>
-            <div className="text-sm text-zinc-600">{study.summary}</div>
-            <div className="text-xs text-zinc-500">Updated: {study.updated_at ?? "—"}</div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {jsonHref ? (
-              <a href={jsonHref} className="text-sm underline text-zinc-700 hover:text-zinc-900">
-                Download JSON
-              </a>
-            ) : null}
-            <a
-              href="/research/index.json"
-              className="text-sm underline text-zinc-700 hover:text-zinc-900"
-            >
-              index.json
-            </a>
-          </div>
+        <div className="space-y-1">
+          <div className="text-xs text-zinc-500">Study</div>
+          <div className="text-lg font-semibold text-zinc-900">{study.title}</div>
+          <div className="text-sm text-zinc-600">{study.summary}</div>
+          <div className="text-xs text-zinc-500">Updated: {study.updated_at ?? "—"}</div>
         </div>
 
         {/* quick stats */}
@@ -292,13 +270,15 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
           <Stat label="Sample ticker" value={study.results?.sample_ticker} />
           <Stat label="Tickers (panel)" value={study.results?.n_tickers?.toString()} />
           <Stat label="Obs (panel)" value={study.results?.n_obs_panel?.toString()} />
+          <Stat label="R² (TS)" value={r2ts != null ? fmt(r2ts, 4) : "—"} />
+          <Stat label="R² (FE)" value={r2fe != null ? fmt(r2fe, 4) : "—"} />
         </div>
       </section>
 
       {/* methodology + conclusions */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {study.methodology?.length ? (
-          <div id="methodology" className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
             <h2 className="text-lg font-semibold">Methodology</h2>
             <ul className="list-disc pl-5 text-sm text-zinc-700 space-y-1">
               {study.methodology.map((m, i) => (
@@ -308,13 +288,12 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
           </div>
         ) : (
           <MiniCallout title="Methodology">
-            No methodology text exported yet. Consider adding a structured “Data / Specification / Inference / Caveats”
-            block in the builder output.
+            No methodology text exported yet. Consider exporting “Data / Specification / Inference / Caveats”.
           </MiniCallout>
         )}
 
         {study.conclusions?.length ? (
-          <div id="conclusions" className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
             <h2 className="text-lg font-semibold">Key findings</h2>
             <ul className="list-disc pl-5 text-sm text-zinc-700 space-y-1">
               {study.conclusions.map((c, i) => (
@@ -334,7 +313,7 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
 
       {/* study sections (Data / Specification / Limitations), if exported */}
       {hasSections ? (
-        <section id="sections" className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-4">
+        <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-4">
           <h2 className="text-lg font-semibold">Study sections</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {(study as any).sections.map((sec: any, i: number) => (
@@ -357,12 +336,12 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
       ) : null}
 
       {/* series viewer (tabbed) */}
-      <section id="series" className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-4">
+      <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-4">
         <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-3">
           <div className="space-y-1">
             <h2 className="text-lg font-semibold">Sample time-series</h2>
             <div className="text-xs text-zinc-500">
-              These charts are from the sample ticker exported in the JSON (not the full panel).
+              Charts are from the sample ticker (not the full panel).
             </div>
           </div>
 
@@ -396,17 +375,18 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
             </div>
           ) : (
             <div className="text-sm text-zinc-500">
-              No series available. (If this is sentiment, ensure the builder exports <code className="px-1 py-0.5 rounded bg-zinc-100">results.series.score_mean</code>.)
+              No series available. If this is sentiment, export{" "}
+              <code className="px-1 py-0.5 rounded bg-zinc-100">results.series.score_mean</code>.
             </div>
           )}
         </div>
       </section>
 
       {/* regression tables */}
-      <section id="regressions" className="space-y-4">
+      <section className="space-y-4">
         <div className="flex items-baseline justify-between">
           <h2 className="text-lg font-semibold">Regression outputs</h2>
-          <div className="text-xs text-zinc-500">Compact tables; see Appendix for raw JSON</div>
+          <div className="text-xs text-zinc-500">Compact tables; coefficients include stars</div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -415,9 +395,9 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
         </div>
       </section>
 
-      {/* exported tables (Fama–MacBeth / DL / Placebo / etc.) */}
+      {/* exported tables */}
       {tables.length ? (
-        <section id="tables" className="space-y-4">
+        <section className="space-y-4">
           <div className="flex items-baseline justify-between">
             <h2 className="text-lg font-semibold">Tables</h2>
             <div className="text-xs text-zinc-500">Exported by the Python builder</div>
@@ -430,23 +410,10 @@ export default function ResearchStudyClient({ study }: { study: ResearchStudy })
         </section>
       ) : null}
 
-      {/* reproducibility + appendix */}
-      <section id="appendix" className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-3">
+      {/* appendix: raw JSON (kept; you can remove if you want) */}
+      <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-3">
         <h2 className="text-lg font-semibold">Appendix</h2>
-
-        <details className="rounded-xl bg-zinc-50 border border-zinc-100 p-4">
-          <summary className="cursor-pointer text-sm font-semibold text-zinc-800">Reproducibility</summary>
-          <div className="text-sm text-zinc-700 mt-2">
-            Studies are generated by a CLI and exported as static JSON under{" "}
-            <code className="px-1 py-0.5 rounded bg-zinc-100">apps/web/public/research</code>.
-          </div>
-          <pre className="text-xs overflow-auto mt-3 rounded-xl bg-white border border-zinc-200 p-3">
-python src/market_sentiment/cli/build_research.py --data-root data --out-dir apps/web/public/research
-          </pre>
-          <div className="text-xs text-zinc-500 mt-2">
-            Make sure the builder runs <span className="font-semibold">before</span> Next.js export in GitHub Actions.
-          </div>
-        </details>
+        <div className="text-xs text-zinc-500">Raw exported objects (reproducibility / debugging).</div>
 
         <details className="rounded-xl bg-zinc-50 border border-zinc-100 p-4">
           <summary className="cursor-pointer text-sm font-semibold text-zinc-800">Raw exported JSON</summary>
@@ -456,7 +423,6 @@ python src/market_sentiment/cli/build_research.py --data-root data --out-dir app
     series: study.results?.series ?? null,
     time_series: study.results?.time_series ?? null,
     panel_fe: study.results?.panel_fe ?? null,
-    quantiles: (study.results as any)?.quantiles ?? null,
     tables: (study.results as any)?.tables ?? null,
     famamacbeth: (study.results as any)?.famamacbeth ?? null,
   },
