@@ -14,6 +14,7 @@ https://haroldzhao2025.github.io/market-sentiment-web/
 - S&P 500 **index price + cap-weighted sentiment**
 - S&P 500 **interactive map / heatmap**
 - Sentiment-based **portfolio strategy** (weekly rebalance, lagged ranking, long/short)
+- **Research**: Live **empirical notes** built on the same dataset powering Sentiment Live.
 
 > Note: We **do not** have earnings / transcript analysis shown on the website yet.
 
