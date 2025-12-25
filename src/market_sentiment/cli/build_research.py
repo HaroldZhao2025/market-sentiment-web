@@ -796,7 +796,7 @@ def main() -> None:
             "Estimate y_ret(t+1) on lags with panel FE; SE clustered by ticker. Also fit TS HAC on sample ticker.",
         ],
         sections=[
-            {"title": "Specification", "bullets": [f"y_ret(t+1) ~ Σ_{L=0..{args.dl_max_lag}} β_L score_mean(t−L) + controls."]},
+            {"title": "Specification", "bullets": [f"y_ret(t+1) ~ Σ_{{L=0..{args.dl_max_lag}}} β_L score_mean(t-L) + controls."]},
             *build_sections_common(universe, freq, y_def, s_def, caveats),
         ],
         conclusions=concl5,
