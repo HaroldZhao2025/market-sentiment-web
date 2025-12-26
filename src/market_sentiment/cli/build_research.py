@@ -22,9 +22,9 @@ from statsmodels.regression.quantile_regression import QuantReg
 def _json_safe(x: Any) -> Any:
     if isinstance(x, (np.integer, np.floating)):
         return x.item()
-    if isinstance(x, (np.ndarray,)):
+    if isinstance(x, np.ndarray):
         return [_json_safe(v) for v in x.tolist()]
-    if isinstance(x, (pd.Timestamp,)):
+    if isinstance(x, pd.Timestamp):
         return x.strftime("%Y-%m-%d")
     return x
 
@@ -85,18 +85,47 @@ def find_ticker_dir(repo_root: Path, data_root: Path) -> Optional[Path]:
     return None
 
 
-def find_sp500_index_path(repo_root: Path) -> Optional[Path]:
+def maybe_load_sp500_index(repo_root: Path, data_root: Path) -> Dict[str, Dict[str, str]]:
+    """
+    Best-effort loader for a universe mapping file (symbol -> sector / industry / subindustry).
+    Returns: dict[ticker] -> attrs
+    """
     candidates = [
+        data_root / "sp500_index.json",
+        repo_root / "data" / "sp500_index.json",
         repo_root / "apps" / "web" / "public" / "sp500_index.json",
         repo_root / "apps" / "web" / "public" / "data" / "sp500_index.json",
-        repo_root / "public" / "sp500_index.json",
-        repo_root / "public" / "data" / "sp500_index.json",
-        repo_root / "data" / "sp500_index.json",
     ]
     for p in candidates:
-        if p.exists() and p.is_file():
-            return p
-    return None
+        if not p.exists():
+            continue
+        try:
+            arr = read_json(p)
+            if isinstance(arr, dict) and "constituents" in arr:
+                arr = arr["constituents"]
+            if not isinstance(arr, list):
+                continue
+            out: Dict[str, Dict[str, str]] = {}
+            for row in arr:
+                if not isinstance(row, dict):
+                    continue
+                sym = (row.get("symbol") or row.get("ticker") or "").strip()
+                if not sym:
+                    continue
+                out[sym] = {
+                    "sector": str(row.get("sector") or row.get("gics_sector") or ""),
+                    "industry": str(row.get("industry") or row.get("gics_industry") or ""),
+                    "sub_industry": str(
+                        row.get("subIndustry")
+                        or row.get("sub_industry")
+                        or row.get("gics_sub_industry")
+                        or ""
+                    ),
+                }
+            return out
+        except Exception:
+            pass
+    return {}
 
 
 # -----------------------------
@@ -161,6 +190,8 @@ def build_panel(repo_root: Path, data_root: Path, min_obs: int) -> pd.DataFrame:
     if ticker_dir is None:
         raise RuntimeError("Could not find ticker json directory (e.g., data/ticker/*.json).")
 
+    meta_map = maybe_load_sp500_index(repo_root, data_root)
+
     frames: List[pd.DataFrame] = []
     for fp in sorted(ticker_dir.glob("*.json")):
         t = fp.stem
@@ -170,14 +201,25 @@ def build_panel(repo_root: Path, data_root: Path, min_obs: int) -> pd.DataFrame:
         tmp = df.copy()
         tmp["ticker"] = t
         tmp = tmp.reset_index(names="date")
+
+        m = meta_map.get(t, {})
+        if m:
+            tmp["sector"] = m.get("sector") or None
+            tmp["industry"] = m.get("industry") or None
+            tmp["sub_industry"] = m.get("sub_industry") or None
+
         frames.append(tmp)
 
     if not frames:
         raise RuntimeError(f"No usable tickers found under {ticker_dir} with min_obs={min_obs}.")
 
-    panel = pd.concat(frames, ignore_index=True).sort_values(["ticker", "date"]).reset_index(drop=True)
+    panel = (
+        pd.concat(frames, ignore_index=True)
+        .sort_values(["ticker", "date"])
+        .reset_index(drop=True)
+    )
 
-    # forward return for predictability tests
+    # forward 1-day return
     panel["y_ret_fwd1"] = panel.groupby("ticker")["y_ret"].shift(-1)
 
     return panel
@@ -190,7 +232,12 @@ def build_panel(repo_root: Path, data_root: Path, min_obs: int) -> pd.DataFrame:
 def export_series(df: pd.DataFrame) -> Dict[str, Any]:
     out: Dict[str, Any] = {}
     if "date" in df.columns:
-        out["dates"] = pd.to_datetime(df["date"], errors="coerce").dt.strftime("%Y-%m-%d").fillna("").tolist()
+        out["dates"] = (
+            pd.to_datetime(df["date"], errors="coerce")
+            .dt.strftime("%Y-%m-%d")
+            .fillna("")
+            .tolist()
+        )
 
     def add(col: str):
         if col in df.columns:
@@ -202,17 +249,14 @@ def export_series(df: pd.DataFrame) -> Dict[str, Any]:
                 .tolist()
             )
 
-    add("y_ret")
-    add("y_ret_fwd1")
-    add("abs_ret")
-    add("score_mean")   # always export
-    add("n_total")
+    for c in ["price", "y_ret", "y_ret_fwd1", "abs_ret", "score_mean", "n_total"]:
+        add(c)
 
     return out
 
 
 # -----------------------------
-# Regressions
+# Regression utilities
 # -----------------------------
 
 def _ols_summary(res: sm.regression.linear_model.RegressionResultsWrapper) -> Dict[str, Any]:
@@ -283,7 +327,7 @@ def quantile_reg(df: pd.DataFrame, y: str, x_cols: List[str], qs: Tuple[float, .
 
 
 # -----------------------------
-# "Serious academic" add-ons
+# Academic models
 # -----------------------------
 
 def fama_macbeth(panel: pd.DataFrame, y: str, x_cols: List[str], min_xs: int, nw_lags: int) -> Dict[str, Any]:
@@ -296,9 +340,9 @@ def fama_macbeth(panel: pd.DataFrame, y: str, x_cols: List[str], min_xs: int, nw
     if use.empty:
         return {"error": "no_data"}
 
-    dates = []
-    betas = []
-    r2s = []
+    dates: List[pd.Timestamp] = []
+    betas: List[np.ndarray] = []
+    r2s: List[float] = []
 
     for dt, g in use.groupby("date", sort=True):
         if len(g) < min_xs:
@@ -306,6 +350,7 @@ def fama_macbeth(panel: pd.DataFrame, y: str, x_cols: List[str], min_xs: int, nw
         X = np.column_stack([np.ones(len(g))] + [g[c].astype(float).values for c in x_cols])
         yv = g[y].astype(float).values
         b, *_ = np.linalg.lstsq(X, yv, rcond=None)
+
         yhat = X @ b
         sse = float(np.sum((yv - yhat) ** 2))
         sst = float(np.sum((yv - float(np.mean(yv))) ** 2))
@@ -357,7 +402,15 @@ def add_lags(panel: pd.DataFrame, col: str, max_lag: int) -> pd.DataFrame:
     return out
 
 
-def distributed_lag_models(panel: pd.DataFrame, df_sample: pd.DataFrame, y: str, base_col: str, max_lag: int, controls: List[str], nw_lags: int) -> Dict[str, Any]:
+def distributed_lag_models(
+    panel: pd.DataFrame,
+    df_sample: pd.DataFrame,
+    y: str,
+    base_col: str,
+    max_lag: int,
+    controls: List[str],
+    nw_lags: int,
+) -> Dict[str, Any]:
     """
     y ~ sum_{L=0..K} beta_L * base_col_lagL + controls
     Returns TS (sample ticker) HAC and Panel FE results + a clean table.
@@ -403,10 +456,7 @@ def distributed_lag_models(panel: pd.DataFrame, df_sample: pd.DataFrame, y: str,
             "columns": ["Variable", "Coef", "t", "p", "Sig"],
             "rows": rows,
         },
-        "stats": {
-            "max_lag": int(max_lag),
-            "sum_beta": sum_beta,
-        },
+        "stats": {"max_lag": int(max_lag), "sum_beta": sum_beta},
     }
 
 
@@ -428,175 +478,99 @@ def placebo_shuffle(panel: pd.DataFrame, y: str, x: str, controls: List[str], se
     return fe
 
 
-def _nw_mean_t(x: np.ndarray, maxlags: int) -> Tuple[float, float, float]:
+# -----------------------------
+# New studies: asymmetry & horizon sweep
+# -----------------------------
+
+def add_forward_returns(panel: pd.DataFrame, base_ret: str, horizons: List[int]) -> pd.DataFrame:
     """
-    mean, t, p from OLS on constant with HAC (NW).
+    Add cumulative forward returns:
+      y_ret_fwdh(t) = sum_{j=1..h} y_ret(t+j)
+    Efficient implementation via shift + rolling + shift.
     """
-    x = np.asarray(x, dtype=float)
-    x = x[np.isfinite(x)]
-    if len(x) < 40:
-        return (np.nan, np.nan, np.nan)
-    res = sm.OLS(x, np.ones((len(x), 1))).fit(cov_type="HAC", cov_kwds={"maxlags": int(maxlags)})
-    return (float(res.params[0]), float(res.tvalues[0]), float(res.pvalues[0]))
+    out = panel.copy()
+    g = out.groupby("ticker", sort=False)[base_ret]
+    for h in horizons:
+        out[f"{base_ret}_fwd{h}"] = g.transform(
+            lambda s: s.shift(-1).rolling(int(h)).sum().shift(-(int(h) - 1))
+        )
+    return out
 
 
-def portfolio_sorts(panel: pd.DataFrame, sort_col: str, ret_col: str, n_bins: int, min_n: int, nw_lags: int) -> Dict[str, Any]:
+def piecewise_sentiment(panel: pd.DataFrame, col: str) -> pd.DataFrame:
+    out = panel.copy()
+    s = out[col].astype(float)
+    out[f"{col}_pos"] = np.maximum(s, 0.0)
+    out[f"{col}_neg"] = np.minimum(s, 0.0)
+    return out
+
+
+def horizon_sweep(panel: pd.DataFrame, y_base: str, x_cols: List[str], horizons: List[int]) -> Dict[str, Any]:
     """
-    Classic asset pricing portfolio sorts:
-      each date: sort tickers into n_bins by sort_col, compute mean ret_col for each bin.
-      long-short = top - bottom. Report NW t-stats of portfolio means and long-short.
+    For each horizon h, regress cumulative forward return on x_cols using panel FE.
+    Reports coefficient on the *first* signal in x_cols.
     """
-    use = panel.dropna(subset=["date", "ticker", sort_col, ret_col]).copy()
+    p = add_forward_returns(panel, y_base, horizons=horizons)
+    signal = x_cols[0]
+
+    rows = []
+    for h in horizons:
+        y = f"{y_base}_fwd{h}"
+        fe = panel_within_fe_cluster(p, y, x_cols)
+        b = safe_num((fe.get("params") or {}).get(signal))
+        t = safe_num((fe.get("tvalues") or {}).get(signal))
+        pval = safe_num((fe.get("pvalues") or {}).get(signal))
+        r2 = safe_num(fe.get("rsquared"))
+        rows.append([h, b, t, pval, stars(pval), r2])
+
+    return {
+        "table": {
+            "title": "Horizon sweep (panel FE): cumulative forward returns vs signal",
+            "columns": ["Horizon (days)", f"β({signal})", "t", "p", "Sig", "R²"],
+            "rows": rows,
+        },
+        "stats": {"horizons": horizons, "signal": signal},
+    }
+
+
+def sector_heterogeneity(panel: pd.DataFrame, y: str, x_cols: List[str], min_obs: int = 4000) -> Dict[str, Any]:
+    """
+    Run the same panel FE regression inside each sector, if sector exists.
+    """
+    if "sector" not in panel.columns:
+        return {"error": "no_sector"}
+
+    use = panel.dropna(subset=["sector", "ticker", y] + x_cols).copy()
     if use.empty:
         return {"error": "no_data"}
 
-    # per-date bins
+    signal = x_cols[0]
     rows = []
-    dates = []
-    ports = {f"q{i}": [] for i in range(1, n_bins + 1)}
-    ls = []
-
-    for dt, g in use.groupby("date", sort=True):
-        if len(g) < max(min_n, n_bins * 10):
+    for sec, g in use.groupby("sector", sort=True):
+        if len(g) < min_obs:
             continue
-        try:
-            # qcut can fail if too many ties; add rank fallback
-            x = g[sort_col].astype(float)
-            if x.nunique() < n_bins:
-                rk = x.rank(method="average")
-                bins = pd.qcut(rk, q=n_bins, labels=False, duplicates="drop")
-            else:
-                bins = pd.qcut(x, q=n_bins, labels=False, duplicates="drop")
-        except Exception:
-            continue
+        fe = panel_within_fe_cluster(g, y, x_cols)
+        b = safe_num((fe.get("params") or {}).get(signal))
+        t = safe_num((fe.get("tvalues") or {}).get(signal))
+        p = safe_num((fe.get("pvalues") or {}).get(signal))
+        r2 = safe_num(fe.get("rsquared"))
+        rows.append([sec, len(g), b, t, p, stars(p), r2])
 
-        g2 = g.copy()
-        g2["_bin"] = bins
-        if g2["_bin"].isna().all():
-            continue
-
-        # ensure bins 0..n_bins-1 present (some may be missing due to duplicates)
-        port_means = []
-        for b in range(n_bins):
-            gb = g2[g2["_bin"] == b]
-            if len(gb) == 0:
-                port_means.append(np.nan)
-            else:
-                port_means.append(float(np.nanmean(gb[ret_col].astype(float).values)))
-
-        if not np.isfinite(port_means[0]) or not np.isfinite(port_means[-1]):
-            continue
-
-        dates.append(pd.to_datetime(dt))
-        for i in range(n_bins):
-            ports[f"q{i+1}"].append(port_means[i])
-        ls.append(port_means[-1] - port_means[0])
-
-    if len(ls) < 80:
-        return {"error": "too_few_days", "n_days": int(len(ls))}
-
-    # NW stats for each portfolio + long-short
-    table_rows = []
-    for i in range(n_bins):
-        arr = np.array(ports[f"q{i+1}"], dtype=float)
-        m, t, p = _nw_mean_t(arr, maxlags=nw_lags)
-        table_rows.append([f"Q{i+1}", m, t, p, stars(p), m * 10000, (m / (np.nanstd(arr) + 1e-12)) * np.sqrt(252)])
-
-    arr_ls = np.array(ls, dtype=float)
-    m_ls, t_ls, p_ls = _nw_mean_t(arr_ls, maxlags=nw_lags)
-    table_rows.append(["Long−Short (Q{hi}−Q{lo})".format(hi=n_bins, lo=1), m_ls, t_ls, p_ls, stars(p_ls), m_ls * 10000, (m_ls / (np.nanstd(arr_ls) + 1e-12)) * np.sqrt(252)])
-
-    # cumulative log return of LS (for a plot)
-    cum_ls = np.cumsum(arr_ls).tolist()
+    if not rows:
+        return {"error": "too_few_by_sector"}
 
     return {
-        "series": {
-            "dates": [d.strftime("%Y-%m-%d") for d in dates],
-            **{k: [float(v) if np.isfinite(v) else 0.0 for v in vs] for k, vs in ports.items()},
-            "ls": [float(v) for v in arr_ls.tolist()],
-            "cum_ls": [float(v) for v in cum_ls],
-        },
-        "stats": {
-            "n_days": int(len(arr_ls)),
-            "n_bins": int(n_bins),
-            "nw_lags": int(nw_lags),
-            "ls_mean": float(m_ls),
-            "ls_t": float(t_ls),
-            "ls_p": float(p_ls),
-            "ls_sharpe": float((m_ls / (np.nanstd(arr_ls) + 1e-12)) * np.sqrt(252)),
-        },
         "table": {
-            "title": f"Portfolio sorts on {sort_col}: mean({ret_col}) by quantile (NW t)",
-            "columns": ["Portfolio", "Mean", "t (NW)", "p", "Sig", "Mean (bps/day)", "Ann. Sharpe"],
-            "rows": table_rows,
-        },
+            "title": "Sector heterogeneity (panel FE): next-day returns on sentiment",
+            "columns": ["Sector", "Obs", f"β({signal})", "t", "p", "Sig", "R²"],
+            "rows": rows,
+        }
     }
 
 
-def oos_predictability(df: pd.DataFrame, y: str, x_cols: List[str], min_train: int, nw_lags: int) -> Dict[str, Any]:
-    """
-    Expanding-window OOS forecast:
-      at each t, fit OLS on past data and predict y_t.
-      benchmark: historical mean of y.
-    Report OOS R^2 = 1 - SSE_model / SSE_bench.
-    """
-    use = df.dropna(subset=[y] + x_cols).copy()
-    if len(use) < (min_train + 50):
-        return {"error": "too_few_obs"}
-
-    use = use.reset_index(drop=True)
-    yv = use[y].astype(float).values
-    X = use[x_cols].astype(float).values
-
-    preds = np.full_like(yv, np.nan, dtype=float)
-    bench = np.full_like(yv, np.nan, dtype=float)
-
-    for t in range(min_train, len(use)):
-        y_train = yv[:t]
-        X_train = X[:t, :]
-        X_train2 = np.column_stack([np.ones(t), X_train])
-        b, *_ = np.linalg.lstsq(X_train2, y_train, rcond=None)
-
-        x_t = np.concatenate([[1.0], X[t, :]])
-        preds[t] = float(x_t @ b)
-        bench[t] = float(np.mean(y_train))
-
-    mask = np.isfinite(preds) & np.isfinite(bench) & np.isfinite(yv)
-    if mask.sum() < 40:
-        return {"error": "too_few_test_points"}
-
-    sse_m = float(np.sum((yv[mask] - preds[mask]) ** 2))
-    sse_b = float(np.sum((yv[mask] - bench[mask]) ** 2))
-    oos_r2 = 1.0 - (sse_m / sse_b) if sse_b > 0 else np.nan
-
-    # NW t-stat for mean forecast error improvement of squared errors (optional, simple)
-    d = (yv[mask] - bench[mask]) ** 2 - (yv[mask] - preds[mask]) ** 2
-    m_d, t_d, p_d = _nw_mean_t(d, maxlags=nw_lags)
-
-    # cumulative realized vs predicted (log units)
-    real = yv[mask]
-    pred = preds[mask]
-    cum_real = np.cumsum(real).tolist()
-    cum_pred = np.cumsum(pred).tolist()
-
-    return {
-        "stats": {
-            "oos_r2": float(oos_r2),
-            "n_test": int(mask.sum()),
-            "min_train": int(min_train),
-            "nw_lags": int(nw_lags),
-            "dm_like_mean": float(m_d),
-            "dm_like_t": float(t_d),
-            "dm_like_p": float(p_d),
-        },
-        "series": {
-            "real": [float(v) for v in real.tolist()],
-            "pred": [float(v) for v in pred.tolist()],
-            "cum_real": [float(v) for v in cum_real],
-            "cum_pred": [float(v) for v in cum_pred],
-        },
-    }
-
+# -----------------------------
+# Event study
+# -----------------------------
 
 def event_study(
     panel: pd.DataFrame,
@@ -605,260 +579,160 @@ def event_study(
     z_thr: float,
     window: int,
     min_events: int,
-    *,
-    dedup_overlapping: bool = True,
+    dedup_gap: int = 0,
 ) -> Dict[str, Any]:
     """
-    Panel event study (daily):
-      1) within-ticker z-score of signal_col
-      2) events: z >= z_thr (pos), z <= -z_thr (neg)
-      3) construct event-time paths for tau in [-W..W]:
-         - AAR(tau): average return at relative day tau
-         - CAR(tau): cumulative return relative to event, anchored at CAR(0)=0
-            * tau>0: sum of returns from +1..tau
-            * tau<0: - sum of returns from tau..-1  (so CAR approaches 0 at tau=0)
-         Note: CAR intentionally excludes event-day return (tau=0) to keep pre/post continuous.
-    Exports mean paths and standard errors across events.
+    Panel event study:
+      - within-ticker z-score of signal
+      - events: z >= z_thr (pos), z <= -z_thr (neg)
+      - mean AAR(τ) and CAR(τ) for τ ∈ [-W..W]
+      - SE across events at each τ (simple across-event SE)
+    dedup_gap: if >0, keep only the first event within a "gap" for each ticker/sign.
     """
-
     use = panel.dropna(subset=["ticker", "date", signal_col, ret_col]).copy()
     if use.empty:
         return {"error": "no_data"}
 
     use = use.sort_values(["ticker", "date"]).reset_index(drop=True)
 
-    # within ticker z-score
     g = use.groupby("ticker", sort=False)
     mu = g[signal_col].transform("mean")
     sd = g[signal_col].transform("std").replace(0.0, np.nan)
     use["_z"] = (use[signal_col] - mu) / sd
 
-    tau = np.arange(-int(window), int(window) + 1, dtype=int)
-    W = int(window)
+    by: Dict[str, Tuple[np.ndarray, np.ndarray]] = {}
+    for tkr, gg in use.groupby("ticker", sort=False):
+        gg = gg.reset_index(drop=True)
+        z = gg["_z"].astype(float).values
+        r = gg[ret_col].astype(float).values
+        by[tkr] = (z, r)
 
-    def _thin_events(idx: np.ndarray, z: np.ndarray, n: int) -> np.ndarray:
-        """
-        Pick non-overlapping events within a ticker:
-        greedy by |z| (strongest first), then block [i-W..i+W].
-        """
-        if len(idx) == 0:
-            return idx
+    def _dedup(pos: np.ndarray, gap: int) -> np.ndarray:
+        if gap <= 0 or len(pos) <= 1:
+            return pos
+        keep = [pos[0]]
+        last = pos[0]
+        for x in pos[1:]:
+            if x - last > gap:
+                keep.append(x)
+                last = x
+        return np.asarray(keep, dtype=int)
 
-        order = idx[np.argsort(np.abs(z[idx]))[::-1]]
-        blocked = np.zeros(n, dtype=bool)
-        chosen: List[int] = []
+    def _collect(sign: int) -> Tuple[Optional[np.ndarray], Optional[np.ndarray], int]:
+        aar_list = []
+        car_list = []
+        n_total = 0
 
-        for i in order:
-            i = int(i)
-            if i - W < 0 or i + W >= n:
+        for _, (z, r) in by.items():
+            if sign > 0:
+                pos = np.where(z >= float(z_thr))[0]
+            else:
+                pos = np.where(z <= -float(z_thr))[0]
+            pos = np.asarray(pos, dtype=int)
+            if pos.size == 0:
                 continue
-            if blocked[i]:
-                continue
-            chosen.append(i)
-            lo = max(0, i - W)
-            hi = min(n, i + W + 1)
-            blocked[lo:hi] = True
 
-        return np.array(sorted(chosen), dtype=int)
+            pos.sort()
+            pos = _dedup(pos, dedup_gap)
 
-    def _collect_for_group(df: pd.DataFrame, mask: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Return (aar_mat, car_mat) each of shape (n_events, 2W+1).
-        """
-        n = len(df)
-        if n < 2 * W + 1:
-            return np.zeros((0, 2 * W + 1)), np.zeros((0, 2 * W + 1))
+            for j in pos:
+                if j - window < 0 or j + window >= len(r):
+                    continue
 
-        r = df[ret_col].astype(float).values
-        z = df["_z"].astype(float).values
+                win_r = r[(j - window):(j + window + 1)].astype(float)
+                aar = win_r.copy()
 
-        idx = np.where(mask)[0].astype(int)
+                car = np.zeros(2 * window + 1, dtype=float)
+                fwd_cum = np.cumsum(win_r[window + 1:])
+                car[window + 1:] = fwd_cum
+                bwd = np.cumsum(win_r[:window][::-1])
+                car[:window] = -bwd[::-1]
 
-        # filter edges first
-        idx = idx[(idx - W >= 0) & (idx + W < n)]
-        if dedup_overlapping:
-            idx = _thin_events(idx, z, n)
+                aar_list.append(aar)
+                car_list.append(car)
+                n_total += 1
 
-        if len(idx) == 0:
-            return np.zeros((0, 2 * W + 1)), np.zeros((0, 2 * W + 1))
+        if n_total == 0:
+            return None, None, 0
+        return np.vstack(aar_list), np.vstack(car_list), n_total
 
-        aar_list: List[np.ndarray] = []
-        car_list: List[np.ndarray] = []
+    aar_pos, car_pos, n_pos = _collect(+1)
+    aar_neg, car_neg, n_neg = _collect(-1)
 
-        for j in idx:
-            # event window returns (includes tau=0 return)
-            aar = r[j - W : j + W + 1].astype(float)
+    warn = "—"
+    if (n_pos + n_neg) < int(min_events):
+        warn = f"few_events({n_pos+n_neg}<{min_events})"
 
-            # CAR anchored at 0, excludes tau=0 return in cumulation by construction
-            car = np.zeros(2 * W + 1, dtype=float)
+    tau = list(range(-window, window + 1))
 
-            # post-event: sum returns at +1..+k
-            for k in range(1, W + 1):
-                car[W + k] = float(np.sum(aar[W + 1 : W + k + 1]))
-
-            # pre-event: negative sum returns at tau=-k..-1 (EXCLUDES event day)
-            for k in range(1, W + 1):
-                car[W - k] = float(-np.sum(aar[W - k : W]))
-
-            aar_list.append(aar)
-            car_list.append(car)
-
-        return np.vstack(aar_list), np.vstack(car_list)
-
-    # collect across tickers
-    aar_pos_all: List[np.ndarray] = []
-    car_pos_all: List[np.ndarray] = []
-    aar_neg_all: List[np.ndarray] = []
-    car_neg_all: List[np.ndarray] = []
-
-    for _, df in use.groupby("ticker", sort=False):
-        df = df.reset_index(drop=True)
-        z = df["_z"].values
-
-        aar_pos, car_pos = _collect_for_group(df, z >= float(z_thr))
-        aar_neg, car_neg = _collect_for_group(df, z <= -float(z_thr))
-
-        if aar_pos.shape[0]:
-            aar_pos_all.append(aar_pos)
-            car_pos_all.append(car_pos)
-        if aar_neg.shape[0]:
-            aar_neg_all.append(aar_neg)
-            car_neg_all.append(car_neg)
-
-    def _stack(mats: List[np.ndarray]) -> np.ndarray:
-        if not mats:
-            return np.zeros((0, 2 * W + 1))
-        return np.vstack(mats)
-
-    AAR_pos = _stack(aar_pos_all)
-    CAR_pos = _stack(car_pos_all)
-    AAR_neg = _stack(aar_neg_all)
-    CAR_neg = _stack(car_neg_all)
-
-    n_pos = int(AAR_pos.shape[0])
-    n_neg = int(AAR_neg.shape[0])
-
-    if (n_pos + n_neg) == 0:
-        return {"error": "too_few_events"}
-
-    def _mean_se(mat: np.ndarray) -> Tuple[List[float], List[float]]:
-        if mat.shape[0] == 0:
+    def _mean_se(mat: Optional[np.ndarray]) -> Tuple[List[float], List[float]]:
+        if mat is None:
             return [], []
         m = np.nanmean(mat, axis=0)
-        if mat.shape[0] == 1:
-            se = np.full_like(m, np.nan, dtype=float)
-        else:
-            se = np.nanstd(mat, axis=0, ddof=1) / np.sqrt(mat.shape[0])
-        return [float(x) for x in m.tolist()], [float(x) for x in se.tolist()]
+        sd_ = np.nanstd(mat, axis=0, ddof=1)
+        se = sd_ / np.sqrt(max(1, mat.shape[0]))
+        return [float(v) for v in m.tolist()], [float(v) for v in se.tolist()]
 
-    aar_pos_mean, aar_pos_se = _mean_se(AAR_pos)
-    car_pos_mean, car_pos_se = _mean_se(CAR_pos)
-    aar_neg_mean, aar_neg_se = _mean_se(AAR_neg)
-    car_neg_mean, car_neg_se = _mean_se(CAR_neg)
+    aar_pos_m, aar_pos_se = _mean_se(aar_pos)
+    aar_neg_m, aar_neg_se = _mean_se(aar_neg)
+    car_pos_m, car_pos_se = _mean_se(car_pos)
+    car_neg_m, car_neg_se = _mean_se(car_neg)
 
-    # pre-trend diagnostic: mean AAR over tau in [-W..-1]
-    def _pre_mean(mat: np.ndarray) -> Optional[float]:
-        if mat.shape[0] == 0:
-            return None
-        pre = mat[:, :W]  # tau=-W..-1
-        return float(np.nanmean(pre))
-
-    pre_pos = _pre_mean(AAR_pos)
-    pre_neg = _pre_mean(AAR_neg)
-
-    out: Dict[str, Any] = {
-        "stats": {
-            "z_thr": float(z_thr),
-            "window": int(window),
-            "n_pos": n_pos,
-            "n_neg": n_neg,
-            "dedup_overlapping": bool(dedup_overlapping),
-        },
-        "series": {
-            "tau": [int(x) for x in tau.tolist()],
-            # means
-            "aar_pos": aar_pos_mean,
-            "aar_neg": aar_neg_mean,
-            "car_pos": car_pos_mean,
-            "car_neg": car_neg_mean,
-            # standard errors (for academic CI bands later)
-            "aar_pos_se": aar_pos_se,
-            "aar_neg_se": aar_neg_se,
-            "car_pos_se": car_pos_se,
-            "car_neg_se": car_neg_se,
-        },
-    }
-
-    # compact table (academic-facing)
-    def _at(series: List[float], t: int) -> Optional[float]:
-        if not series:
-            return None
-        idx = W + int(t)
+    def _pick(series: List[float], w: int, k: int) -> Optional[float]:
+        idx = w + k
         if idx < 0 or idx >= len(series):
             return None
         return float(series[idx])
 
     rows = []
-    if car_pos_mean:
-        rows.append(["Positive", _at(aar_pos_mean, 0), _at(car_pos_mean, 1), _at(car_pos_mean, 5), pre_pos])
-    if car_neg_mean:
-        rows.append(["Negative", _at(aar_neg_mean, 0), _at(car_neg_mean, 1), _at(car_neg_mean, 5), pre_neg])
+    w = int(window)
+    if car_pos_m:
+        rows.append(["Positive", _pick(car_pos_m, w, 1), _pick(car_pos_m, w, 5)])
+    if car_neg_m:
+        rows.append(["Negative", _pick(car_neg_m, w, 1), _pick(car_neg_m, w, 5)])
 
-    out["table"] = {
-        "title": f"Event study (z≥{z_thr} / z≤−{z_thr}): AAR(0) and CAR(+k)",
-        "columns": ["Event type", "AAR(0)", "CAR(+1)", "CAR(+5)", "Mean pre AAR(τ<0)"],
-        "rows": rows,
+    return {
+        "stats": {
+            "z_thr": float(z_thr),
+            "window": int(window),
+            "n_pos": int(n_pos),
+            "n_neg": int(n_neg),
+            "dedup_gap": int(dedup_gap),
+            "warning": warn,
+        },
+        "series": {
+            "tau": tau,
+            "aar_pos": aar_pos_m,
+            "aar_neg": aar_neg_m,
+            "car_pos": car_pos_m,
+            "car_neg": car_neg_m,
+            # preferred key names (used by the new UI)
+            "aar_pos_se": aar_pos_se,
+            "aar_neg_se": aar_neg_se,
+            "car_pos_se": car_pos_se,
+            "car_neg_se": car_neg_se,
+            # backward-compat aliases (in case older UI expects these)
+            "se_aar_pos": aar_pos_se,
+            "se_aar_neg": aar_neg_se,
+            "se_car_pos": car_pos_se,
+            "se_car_neg": car_neg_se,
+        },
+        "table": {
+            "title": f"Event study CAR (z≥{z_thr} / z≤−{z_thr}): cumulative log return",
+            "columns": ["Event type", "CAR(+1)", "CAR(+5)"],
+            "rows": rows,
+        },
     }
-
-    # guard: min_events threshold (soft)
-    n_events = n_pos + n_neg
-    if n_events < int(min_events):
-        out["stats"]["warning"] = f"few_events({n_events}<{min_events})"
-
-    return out
-
-def try_load_market_series(repo_root: Path, data_root: Path, symbol: str = "SPY") -> Optional[pd.DataFrame]:
-    ticker_dir = find_ticker_dir(repo_root, data_root)
-    if ticker_dir is None:
-        return None
-    fp = ticker_dir / f"{symbol}.json"
-    if not fp.exists():
-        return None
-    df = load_one_ticker_series(fp)
-    if df is None or df.empty:
-        return None
-    out = df.reset_index(names="date").sort_values("date").copy()
-    out["mkt_ret"] = out["y_ret"].astype(float)
-    out["mkt_ret_fwd1"] = out["mkt_ret"].shift(-1)
-    return out[["date", "mkt_ret", "mkt_ret_fwd1"]]
-
-
-def sector_map_from_sp500(repo_root: Path) -> Optional[Dict[str, str]]:
-    p = find_sp500_index_path(repo_root)
-    if p is None:
-        return None
-    try:
-        arr = read_json(p)
-        if not isinstance(arr, list):
-            return None
-        out = {}
-        for it in arr:
-            if not isinstance(it, dict):
-                continue
-            sym = it.get("symbol") or it.get("ticker")
-            sec = it.get("sector") or it.get("gics_sector") or it.get("Sector")
-            if isinstance(sym, str) and isinstance(sec, str) and sym and sec:
-                out[sym.upper()] = sec
-        return out if out else None
-    except Exception:
-        return None
 
 
 # -----------------------------
-# Packaging: key stats / sections / conclusions
+# Packaging helpers
 # -----------------------------
 
 def key_stats_from(ts: Dict[str, Any], fe: Dict[str, Any], var: str) -> List[Dict[str, str]]:
+    def fmt(x: Optional[float], nd=4) -> str:
+        return "—" if x is None else f"{x:.{nd}g}"
+
     b_ts = safe_num((ts.get("params") or {}).get(var))
     t_ts = safe_num((ts.get("tvalues") or {}).get(var))
     p_ts = safe_num((ts.get("pvalues") or {}).get(var))
@@ -869,16 +743,13 @@ def key_stats_from(ts: Dict[str, Any], fe: Dict[str, Any], var: str) -> List[Dic
     p_fe = safe_num((fe.get("pvalues") or {}).get(var))
     r2_fe = safe_num(fe.get("rsquared"))
 
-    def f(x: Optional[float], nd=4) -> str:
-        return "—" if x is None else f"{x:.{nd}g}"
-
     return [
-        {"label": f"β({var}) TS", "value": f"{f(b_ts)}{stars(p_ts)}"},
-        {"label": "t-stat TS", "value": f(t_ts, 3)},
-        {"label": "R² TS", "value": f(r2_ts, 3)},
-        {"label": f"β({var}) FE", "value": f"{f(b_fe)}{stars(p_fe)}"},
-        {"label": "t-stat FE", "value": f(t_fe, 3)},
-        {"label": "R² FE", "value": f(r2_fe, 3)},
+        {"label": f"β({var}) TS", "value": f"{fmt(b_ts)}{stars(p_ts)}"},
+        {"label": "t-stat TS", "value": fmt(t_ts, 3)},
+        {"label": "R² (TS)", "value": fmt(r2_ts, 3)},
+        {"label": f"β({var}) FE", "value": f"{fmt(b_fe)}{stars(p_fe)}"},
+        {"label": "t-stat FE", "value": fmt(t_fe, 3)},
+        {"label": "R² (FE)", "value": fmt(r2_fe, 3)},
     ]
 
 
@@ -894,25 +765,30 @@ def build_sections_common(universe: str, freq: str, y_def: str, s_def: str, cave
             ],
         },
         {"title": "Limitations", "bullets": caveats},
-        {
-            "title": "References (minimal)",
-            "bullets": [
-                "Fama, E. F., & MacBeth, J. D. (1973). Risk, return, and equilibrium: Empirical tests.",
-                "Newey, W. K., & West, K. D. (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix.",
-                "Petersen, M. A. (2009). Estimating standard errors in finance panel data sets.",
-            ],
-        },
     ]
+
+
+def refs_minimal(extra: Optional[List[str]] = None) -> List[str]:
+    base = [
+        "Newey, W. K., & West, K. D. (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix.",
+        "Petersen, M. A. (2009). Estimating standard errors in finance panel data sets.",
+    ]
+    if extra:
+        base.extend(extra)
+    return base
 
 
 def conclusion_from_models(study_title: str, ts: Dict[str, Any], fe: Dict[str, Any], var: str, y_label: str) -> List[str]:
     def get(m: Dict[str, Any], field: str) -> Optional[float]:
-        return safe_num(((m.get(field) or {}) if isinstance(m.get(field), dict) else {}).get(var))
+        d = m.get(field)
+        if not isinstance(d, dict):
+            return None
+        return safe_num(d.get(var))
 
     b_ts = get(ts, "params")
     t_ts = get(ts, "tvalues")
     p_ts = get(ts, "pvalues")
-    r2 = safe_num(ts.get("rsquared"))
+    r2_ts = safe_num(ts.get("rsquared"))
 
     b_fe = get(fe, "params")
     t_fe = get(fe, "tvalues")
@@ -924,7 +800,7 @@ def conclusion_from_models(study_title: str, ts: Dict[str, Any], fe: Dict[str, A
     if b_ts is not None:
         direction = "positive" if b_ts > 0 else "negative" if b_ts < 0 else "flat"
         out.append(
-            f"{study_title}: {var} is {direction} in TS (β={b_ts:.6g}{stars(p_ts)}, t={t_ts if t_ts is not None else '—'}, R²={r2 if r2 is not None else '—'})."
+            f"{study_title}: {var} is {direction} in TS (β={b_ts:.6g}{stars(p_ts)}, t={t_ts if t_ts is not None else '—'}, R²={r2_ts if r2_ts is not None else '—'})."
         )
     else:
         out.append(f"{study_title}: TS estimate for {var} not available.")
@@ -938,7 +814,7 @@ def conclusion_from_models(study_title: str, ts: Dict[str, Any], fe: Dict[str, A
         out.append("Panel FE output not available (insufficient data or model error).")
 
     if b_ts is not None:
-        out.append(f"Scale: +1.0 in {var} ≈ {(b_ts*10000):.2f} bps change in {y_label} (log-return units).")
+        out.append(f"Scale: +1.0 in {var} ≈ {(b_ts * 10000):.2f} bps change in {y_label} (log-return units).")
 
     return out
 
@@ -987,21 +863,17 @@ def main() -> None:
     ap.add_argument("--min-obs", type=int, default=80)
     ap.add_argument("--updated-at", type=str, default=pd.Timestamp.today().strftime("%Y-%m-%d"))
     ap.add_argument("--maxlags", type=int, default=5)
-    ap.add_argument("--no-quantiles", action="store_true")
 
     # academic add-on params
     ap.add_argument("--fm-min-xs", type=int, default=120)
     ap.add_argument("--dl-max-lag", type=int, default=5)
     ap.add_argument("--placebo-seed", type=int, default=7)
 
-    # “paper-like” extras
-    ap.add_argument("--sort-bins", type=int, default=5)
-    ap.add_argument("--sort-min-n", type=int, default=120)
-    ap.add_argument("--oos-min-train", type=int, default=252)
+    # event study
     ap.add_argument("--event-z", type=float, default=2.0)
     ap.add_argument("--event-window", type=int, default=5)
-    ap.add_argument("--event-min-events", type=int, default=300)
-    ap.add_argument("--sector-min-tickers", type=int, default=20)
+    ap.add_argument("--event-min-events", type=int, default=2000)
+    ap.add_argument("--event-dedup-gap", type=int, default=0)
 
     args = ap.parse_args()
 
@@ -1009,7 +881,7 @@ def main() -> None:
     data_root = (repo_root / args.data_root).resolve()
     out_dir = (repo_root / args.out_dir).resolve()
 
-    # export-safe: never kill pages build
+    # Fail-safe: never kill Pages deploy; always emit JSON
     try:
         panel = build_panel(repo_root, data_root, min_obs=int(args.min_obs))
     except Exception as e:
@@ -1045,7 +917,7 @@ def main() -> None:
     # -------------------- Study 1: same-day returns --------------------
     ts1 = time_series_ols_hac(df_sample, "y_ret", x_cols, maxlags=int(args.maxlags))
     fe1 = panel_within_fe_cluster(panel, "y_ret", x_cols)
-    q1 = {} if args.no_quantiles else quantile_reg(df_sample, "y_ret", ["score_mean"])
+    q1 = quantile_reg(df_sample, "y_ret", ["score_mean"])
 
     s1 = build_study_payload(
         slug="same-day-sentiment-vs-returns",
@@ -1065,14 +937,15 @@ def main() -> None:
         sections=[
             {"title": "Specification", "bullets": ["y_ret(t) ~ score_mean(t) + n_total(t) (optional)."]},
             *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal()},
         ],
-        conclusions=conclusion_from_models("Same-day sentiment vs same-day returns", ts1, fe1, "score_mean", "daily return")
-        + ["Interpretation: strong same-day effects often reflect contemporaneous reaction rather than forecastability."],
+        conclusions=conclusion_from_models(
+            "Same-day sentiment vs same-day returns", ts1, fe1, "score_mean", "daily return"
+        ) + ["Interpretation: same-day effects can reflect contemporaneous price reaction rather than forecastability."],
         results={
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "date_range": [start_date, end_date],
             "series": export_series(df_sample),
             "time_series": ts1,
             "panel_fe": fe1,
@@ -1105,14 +978,15 @@ def main() -> None:
         sections=[
             {"title": "Specification", "bullets": ["y_ret(t+1) ~ score_mean(t) + n_total(t) (optional)."]},
             *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal()},
         ],
-        conclusions=conclusion_from_models("Sentiment vs next-day returns", ts2, fe2, "score_mean", "next-day return")
-        + ["If predictive effects are weak while same-day is strong, the sentiment metric likely captures reaction rather than alpha."],
+        conclusions=conclusion_from_models(
+            "Sentiment vs next-day returns", ts2, fe2, "score_mean", "next-day return"
+        ) + ["If predictive effects are weak while same-day is strong, the sentiment metric likely captures reaction rather than alpha."],
         results={
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "date_range": [start_date, end_date],
             "series": export_series(df_sample),
             "time_series": ts2,
             "panel_fe": fe2,
@@ -1159,6 +1033,7 @@ def main() -> None:
         sections=[
             {"title": "Specification", "bullets": ["|y_ret(t)| ~ n_total(t) + score_mean(t)."]},
             *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal()},
         ],
         conclusions=conclusion_from_models(title3, ts3, fe3, main3, "abs return (vol proxy)")
         + ["Interpretation: attention proxies (news volume) often correlate with volatility regardless of direction."],
@@ -1166,7 +1041,6 @@ def main() -> None:
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "date_range": [start_date, end_date],
             "series": export_series(df_sample),
             "time_series": ts3,
             "panel_fe": fe3,
@@ -1180,13 +1054,13 @@ def main() -> None:
     fm_x = ["score_mean"] + (["n_total"] if has_news else [])
     fm = fama_macbeth(panel, y="y_ret_fwd1", x_cols=fm_x, min_xs=int(args.fm_min_xs), nw_lags=int(args.maxlags))
 
-    concl4 = []
     if "error" in fm:
         concl4 = [f"Fama–MacBeth could not be computed: {fm.get('error')}."]
     else:
+        avg_r2 = safe_num((fm.get("stats") or {}).get("avg_cs_r2"))
         concl4 = [
             "Fama–MacBeth estimates average cross-sectional pricing of sentiment signals using daily cross-sectional regressions.",
-            f"Average cross-sectional R² ≈ {fm['stats'].get('avg_cs_r2'):.4g} (dates={fm['stats'].get('n_dates')}).",
+            f"Average cross-sectional R² ≈ {avg_r2:.4g} (dates={fm['stats'].get('n_dates')})." if avg_r2 is not None else f"Dates={fm['stats'].get('n_dates')}.",
             "Interpretation: significant mean slopes suggest a systematic cross-sectional relationship rather than a single-ticker artifact.",
         ]
 
@@ -1200,29 +1074,33 @@ def main() -> None:
         tags=["Fama-MacBeth", "cross-sectional", "Newey-West", "predictive"],
         key_stats=[
             {"label": "Dates", "value": str((fm.get("stats") or {}).get("n_dates", "—"))},
-            {"label": "Avg CS R²", "value": f"{(fm.get('stats') or {}).get('avg_cs_r2', float('nan')):.3g}" if isinstance((fm.get("stats") or {}).get("avg_cs_r2"), (int, float)) else "—"},
+            {"label": "Avg CS R²", "value": f"{safe_num((fm.get('stats') or {}).get('avg_cs_r2')):.3g}" if safe_num((fm.get("stats") or {}).get("avg_cs_r2")) is not None else "—"},
             {"label": "Min XS N", "value": str((fm.get("stats") or {}).get("min_xs", "—"))},
             {"label": "NW lags", "value": str((fm.get("stats") or {}).get("nw_lags", "—"))},
-            {"label": "Tickers", "value": str(n_tickers)},
-            {"label": "Obs", "value": str(n_obs_panel)},
         ],
         methodology=[
             "Each date t: cross-sectional OLS over tickers: y_ret(t+1) ~ score_mean(t) (+ n_total(t)).",
             "Collect daily slope estimates; test mean slope using Newey–West standard errors.",
         ],
         sections=[
-            {"title": "Specification", "bullets": [
-                "For each day t: r_{i,t+1} = a_t + b_t * score_{i,t} + c_t * n_total_{i,t} + ε_{i,t}.",
-                "Then test E[b_t] using Newey–West SE."
-            ]},
+            {
+                "title": "Specification",
+                "bullets": [
+                    "For each day t: r_{i,t+1} = a_t + b_t * score_{i,t} + c_t * n_total_{i,t} + ε_{i,t}.",
+                    "Then test E[b_t] using NW SE across t.",
+                ],
+            },
             *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {
+                "title": "References (minimal)",
+                "bullets": refs_minimal(extra=["Fama, E. F., & MacBeth, J. D. (1973). Risk, return, and equilibrium: Empirical tests."]),
+            },
         ],
         conclusions=concl4,
         results={
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "date_range": [start_date, end_date],
             "famamacbeth": fm,
             "tables": [fm.get("table")] if isinstance(fm.get("table"), dict) else [],
         },
@@ -1242,13 +1120,7 @@ def main() -> None:
         controls=controls5,
         nw_lags=int(args.maxlags),
     )
-
     sum_beta = safe_num((dl.get("stats") or {}).get("sum_beta"))
-    concl5 = [
-        f"Distributed lag model estimates how sentiment impacts returns over multiple days (lags 0..{args.dl_max_lag}).",
-        f"Panel FE cumulative beta (sum of lag coefficients) ≈ {sum_beta if sum_beta is not None else '—'}.",
-        "Interpretation: front-loaded vs delayed coefficients distinguish immediate reaction from slow diffusion.",
-    ]
 
     s5 = build_study_payload(
         slug="distributed-lags-next-day",
@@ -1261,8 +1133,6 @@ def main() -> None:
         key_stats=[
             {"label": "Max lag", "value": str(args.dl_max_lag)},
             {"label": "Sum beta (FE)", "value": f"{sum_beta:.3g}" if sum_beta is not None else "—"},
-            {"label": "R² TS", "value": f"{safe_num((dl.get('time_series') or {}).get('rsquared')):.3g}" if safe_num((dl.get('time_series') or {}).get("rsquared")) is not None else "—"},
-            {"label": "R² FE", "value": f"{safe_num((dl.get('panel_fe') or {}).get('rsquared')):.3g}" if safe_num((dl.get('panel_fe') or {}).get("rsquared")) is not None else "—"},
             {"label": "Tickers", "value": str(n_tickers)},
             {"label": "Obs", "value": str(n_obs_panel)},
         ],
@@ -1271,17 +1141,19 @@ def main() -> None:
             "Estimate y_ret(t+1) on lags with panel FE; SE clustered by ticker. Also fit TS HAC on sample ticker.",
         ],
         sections=[
-            {"title": "Specification", "bullets": [
-                f"y_ret(t+1) ~ Σ_{{L=0..{args.dl_max_lag}}} β_L score_mean(t−L) + controls."
-            ]},
+            {"title": "Specification", "bullets": [f"y_ret(t+1) ~ Σ_{{L=0..{args.dl_max_lag}}} β_L score_mean(t-L) + controls."]},
             *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal()},
         ],
-        conclusions=concl5,
+        conclusions=[
+            f"Distributed lag model estimates how sentiment impacts returns over multiple days (lags 0..{args.dl_max_lag}).",
+            f"Panel FE cumulative beta (sum of lag coefficients) ≈ {sum_beta if sum_beta is not None else '—'}.",
+            "Interpretation: front-loaded vs delayed coefficients distinguish immediate reaction from slow diffusion.",
+        ],
         results={
             "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "date_range": [start_date, end_date],
             "series": export_series(df_sample),
             "time_series": dl.get("time_series"),
             "panel_fe": dl.get("panel_fe"),
@@ -1293,21 +1165,14 @@ def main() -> None:
     write_json(out_dir / f"{s5['slug']}.json", s5)
     studies.append(s5)
 
-    # -------------------- Study 6: placebo / shuffle test --------------------
+    # -------------------- Study 6: placebo shuffle --------------------
     controls6 = ["n_total"] if has_news else []
-    fe_real = fe2  # from Study 2 baseline
     fe_pl = placebo_shuffle(panel, y="y_ret_fwd1", x="score_mean", controls=controls6, seed=int(args.placebo_seed))
 
-    b_real = safe_num((fe_real.get("params") or {}).get("score_mean"))
-    p_real = safe_num((fe_real.get("pvalues") or {}).get("score_mean"))
+    b_real = safe_num((fe2.get("params") or {}).get("score_mean"))
+    p_real = safe_num((fe2.get("pvalues") or {}).get("score_mean"))
     b_pl = safe_num((fe_pl.get("params") or {}).get("score_mean"))
     p_pl = safe_num((fe_pl.get("pvalues") or {}).get("score_mean"))
-
-    concl6 = [
-        "Placebo test: shuffle sentiment within ticker to break time structure; predictive coefficient should collapse toward zero.",
-        f"Baseline (panel FE) β={b_real if b_real is not None else '—'}{stars(p_real)} vs placebo β={b_pl if b_pl is not None else '—'}{stars(p_pl)}.",
-        "Interpretation: if placebo is near zero while baseline is not, the signal is less likely to be an artifact of fixed cross-sectional differences.",
-    ]
 
     placebo_table = {
         "title": "Placebo (shuffle within ticker): panel FE comparison",
@@ -1330,9 +1195,7 @@ def main() -> None:
             {"label": "β real", "value": f"{b_real:.3g}{stars(p_real)}" if b_real is not None else "—"},
             {"label": "β placebo", "value": f"{b_pl:.3g}{stars(p_pl)}" if b_pl is not None else "—"},
             {"label": "Seed", "value": str(args.placebo_seed)},
-            {"label": "R² FE (real)", "value": f"{safe_num(fe_real.get('rsquared')):.3g}" if safe_num(fe_real.get("rsquared")) is not None else "—"},
             {"label": "Tickers", "value": str(n_tickers)},
-            {"label": "Obs", "value": str(n_obs_panel)},
         ],
         methodology=[
             "Within each ticker, randomly permute the sentiment time series (deterministic seed).",
@@ -1341,14 +1204,17 @@ def main() -> None:
         sections=[
             {"title": "Specification", "bullets": ["Compare baseline panel FE vs placebo with permuted score_mean."]},
             *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal()},
         ],
-        conclusions=concl6,
+        conclusions=[
+            "Placebo test: shuffling sentiment should remove any true predictive relationship.",
+            f"Baseline β={b_real if b_real is not None else '—'}{stars(p_real)} vs placebo β={b_pl if b_pl is not None else '—'}{stars(p_pl)}.",
+            "Interpretation: if placebo collapses toward zero while baseline does not, the signal is less likely to be driven only by fixed cross-sectional differences.",
+        ],
         results={
-            "sample_ticker": sample_ticker,
             "n_tickers": n_tickers,
             "n_obs_panel": n_obs_panel,
-            "date_range": [start_date, end_date],
-            "panel_fe_baseline": fe_real,
+            "panel_fe_baseline": fe2,
             "panel_fe_placebo": fe_pl,
             "tables": [placebo_table],
         },
@@ -1357,266 +1223,224 @@ def main() -> None:
     write_json(out_dir / f"{s6['slug']}.json", s6)
     studies.append(s6)
 
-    # -------------------- Study 7: portfolio sorts (academic staple) --------------------
-    ps = portfolio_sorts(
-        panel,
-        sort_col="score_mean",
-        ret_col="y_ret_fwd1",
-        n_bins=int(args.sort_bins),
-        min_n=int(args.sort_min_n),
-        nw_lags=int(args.maxlags),
+    # -------------------- Study 7: asymmetry (piecewise) --------------------
+    p7 = piecewise_sentiment(panel, "score_mean")
+    df7 = piecewise_sentiment(df_sample, "score_mean")
+    x7 = ["score_mean_pos", "score_mean_neg"] + (["n_total"] if has_news else [])
+
+    ts7 = time_series_ols_hac(df7, "y_ret_fwd1", x7, maxlags=int(args.maxlags))
+    fe7 = panel_within_fe_cluster(p7, "y_ret_fwd1", x7)
+
+    ks7: List[Dict[str, str]] = []
+    for v in ["score_mean_pos", "score_mean_neg"]:
+        b = safe_num((fe7.get("params") or {}).get(v))
+        p = safe_num((fe7.get("pvalues") or {}).get(v))
+        ks7.append({"label": f"β({v}) FE", "value": "—" if b is None else f"{b:.3g}{stars(p)}"})
+
+    s7 = build_study_payload(
+        slug="asymmetry-piecewise-sentiment",
+        title="Asymmetry: piecewise sentiment effects on next-day returns",
+        category="Predictability",
+        summary="Allow different slopes for positive vs negative sentiment: r(t+1) ~ score_pos(t) + score_neg(t) (+ controls).",
+        updated_at=args.updated_at,
+        status="live",
+        tags=["asymmetry", "nonlinear", "panel", "fixed effects"],
+        key_stats=ks7 + [
+            {"label": "R² (TS)", "value": f"{safe_num(ts7.get('rsquared')):.3g}" if safe_num(ts7.get("rsquared")) is not None else "—"},
+            {"label": "R² (FE)", "value": f"{safe_num(fe7.get('rsquared')):.3g}" if safe_num(fe7.get("rsquared")) is not None else "—"},
+        ],
+        methodology=[
+            "Construct piecewise regressors: score_pos=max(score_mean,0), score_neg=min(score_mean,0).",
+            "Estimate predictive regression with TS HAC and panel FE.",
+        ],
+        sections=[
+            {"title": "Specification", "bullets": ["y_ret(t+1) ~ β+ * score_pos(t) + β− * score_neg(t) + controls."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal()},
+        ],
+        conclusions=[
+            "Piecewise specification tests whether sentiment effects differ between positive and negative territory.",
+            "Interpretation: a stronger negative slope can be consistent with asymmetric attention to bad news; the reverse suggests optimism/news propagation asymmetry.",
+        ],
+        results={
+            "sample_ticker": sample_ticker,
+            "n_tickers": n_tickers,
+            "n_obs_panel": n_obs_panel,
+            "series": export_series(df_sample),
+            "time_series": ts7,
+            "panel_fe": fe7,
+        },
+        notes=[],
     )
-    if "error" not in ps:
-        st = ps["stats"]
-        s7 = build_study_payload(
-            slug="portfolio-sorts-sentiment",
-            title="Portfolio sorts: next-day returns by sentiment quantile",
-            category="Portfolio sorts",
-            summary="Each day, sort tickers into quantiles by score_mean(t); compute mean r(t+1) and long–short spread with NW t-stats.",
+    write_json(out_dir / f"{s7['slug']}.json", s7)
+    studies.append(s7)
+
+    # -------------------- Study 8: horizon sweep --------------------
+    hs = horizon_sweep(panel, y_base="y_ret", x_cols=["score_mean"] + (["n_total"] if has_news else []), horizons=[1, 2, 5, 10])
+
+    s8 = build_study_payload(
+        slug="horizon-sweep-predictability",
+        title="Horizon sweep: predictability across 1–10 day horizons",
+        category="Predictability",
+        summary="Panel FE regressions of cumulative forward returns on score_mean across multiple horizons.",
+        updated_at=args.updated_at,
+        status="live",
+        tags=["horizon", "panel", "fixed effects", "cumulative returns"],
+        key_stats=[
+            {"label": "Horizons", "value": "1,2,5,10"},
+            {"label": "Signal", "value": "score_mean"},
+            {"label": "Tickers", "value": str(n_tickers)},
+            {"label": "Obs", "value": str(n_obs_panel)},
+        ],
+        methodology=[
+            "For each horizon h: compute cumulative forward return r_{t+1..t+h}.",
+            "Run panel FE regression on score_mean(t) (+ controls), cluster SE by ticker.",
+        ],
+        sections=[
+            {"title": "Specification", "bullets": ["For each horizon h: r_{t+1..t+h} ~ score_mean(t) (+ controls), within-ticker FE."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal()},
+        ],
+        conclusions=[
+            "Horizon profiles show whether any predictability is short-lived or persists over longer windows.",
+            "Interpretation: if coefficients decay quickly with horizon, sentiment behaves like a short-term reaction; persistent coefficients are more consistent with slow diffusion.",
+        ],
+        results={
+            "tables": [hs.get("table")] if isinstance(hs.get("table"), dict) else [],
+            "horizon_sweep": hs,
+            "n_tickers": n_tickers,
+            "n_obs_panel": n_obs_panel,
+        },
+        notes=[],
+    )
+    write_json(out_dir / f"{s8['slug']}.json", s8)
+    studies.append(s8)
+
+    # -------------------- Study 9: event study extremes --------------------
+    ev = event_study(
+        panel,
+        signal_col="score_mean",
+        ret_col="y_ret",
+        z_thr=float(args.event_z),
+        window=int(args.event_window),
+        min_events=int(args.event_min_events),
+        dedup_gap=int(args.event_dedup_gap),
+    )
+
+    s9 = build_study_payload(
+        slug="event-study-extreme-sentiment",
+        title="Event study: return dynamics around extreme sentiment",
+        category="Event study",
+        summary="Panel event study using within-ticker z-score of sentiment. Compare average CAR/AAR paths for extreme positive vs negative sentiment days.",
+        updated_at=args.updated_at,
+        status="live",
+        tags=["event study", "extremes", "CAR", "AAR", "panel"],
+        key_stats=[
+            {"label": "z threshold", "value": str(args.event_z)},
+            {"label": "window", "value": str(args.event_window)},
+            {"label": "N pos", "value": str((ev.get("stats") or {}).get("n_pos", "—"))},
+            {"label": "N neg", "value": str((ev.get("stats") or {}).get("n_neg", "—"))},
+            {"label": "warning", "value": str((ev.get("stats") or {}).get("warning", "—"))},
+            {"label": "date range", "value": f"{start_date}..{end_date}"},
+        ],
+        methodology=[
+            "Compute within-ticker z-score of score_mean.",
+            "Define events: z≥threshold (positive) and z≤−threshold (negative).",
+            "Compute average abnormal return (AAR) and cumulative abnormal return (CAR) paths around events: tau ∈ [−W..W].",
+        ],
+        sections=[
+            {"title": "Specification", "bullets": ["AAR(τ) = mean return at event-time τ across events.", "CAR(τ) computed relative to event date using log returns."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
+            {"title": "References (minimal)", "bullets": refs_minimal(extra=["MacKinlay, A. C. (1997). Event studies in economics and finance. Journal of Economic Literature."])},
+        ],
+        conclusions=[
+            "Event-study profiles help distinguish immediate reaction vs post-event drift.",
+            "Asymmetries between positive and negative events can suggest non-linear responses to sentiment extremes.",
+        ],
+        results={
+            "n_tickers": n_tickers,
+            "n_obs_panel": n_obs_panel,
+            "event_study": ev,
+            "tables": [ev.get("table")] if isinstance(ev.get("table"), dict) else [],
+        },
+        notes=[],
+    )
+    write_json(out_dir / f"{s9['slug']}.json", s9)
+    studies.append(s9)
+
+    # -------------------- Study 10: quantile predictive (sample ticker) --------------------
+    q10 = quantile_reg(df_sample, "y_ret_fwd1", ["score_mean"])
+    s10 = build_study_payload(
+        slug="quantile-predictability-sample-ticker",
+        title="Quantile regression (sample ticker): sentiment vs next-day returns",
+        category="Robustness",
+        summary="Quantile regression on the sample ticker to see whether sentiment loads differently in tails vs median.",
+        updated_at=args.updated_at,
+        status="live",
+        tags=["quantile regression", "tails", "robustness"],
+        key_stats=[
+            {"label": "Sample ticker", "value": sample_ticker},
+            {"label": "Quantiles", "value": "0.1, 0.5, 0.9"},
+            {"label": "Horizon", "value": "t+1"},
+        ],
+        methodology=[
+            "Run QuantReg on the sample ticker: y_ret(t+1) ~ score_mean(t).",
+            "This is descriptive (single-ticker) but useful to diagnose tail behavior.",
+        ],
+        sections=[
+            {"title": "Specification", "bullets": ["QuantReg_q: y_ret(t+1) ~ score_mean(t), q ∈ {0.1, 0.5, 0.9}."]},
+            *build_sections_common(universe, freq, y_def, s_def, caveats),
+        ],
+        conclusions=[
+            "Quantile slopes can reveal whether the signal is stronger in downside tails or upside tails.",
+            "If tail-loadings differ, linear mean regressions can hide economically relevant asymmetries.",
+        ],
+        results={
+            "sample_ticker": sample_ticker,
+            "series": export_series(df_sample),
+            "quantiles_next_day": q10,
+        },
+        notes=[],
+    )
+    write_json(out_dir / f"{s10['slug']}.json", s10)
+    studies.append(s10)
+
+    # -------------------- Study 11: sector heterogeneity (if available) --------------------
+    het = sector_heterogeneity(panel, y="y_ret_fwd1", x_cols=["score_mean"] + (["n_total"] if has_news else []))
+    if "error" not in het:
+        s11 = build_study_payload(
+            slug="sector-heterogeneity-next-day",
+            title="Sector heterogeneity: sentiment vs next-day returns",
+            category="Cross-sectional pricing",
+            summary="Run the same predictive panel FE inside each sector (if sector metadata exists).",
             updated_at=args.updated_at,
             status="live",
-            tags=["portfolio sorts", "long-short", "Newey-West", "cross-sectional"],
+            tags=["sector", "heterogeneity", "panel", "fixed effects"],
             key_stats=[
-                {"label": "LS mean (bps/day)", "value": f"{st.get('ls_mean', float('nan'))*10000:.2f}" if np.isfinite(st.get("ls_mean", np.nan)) else "—"},
-                {"label": "LS t (NW)", "value": f"{st.get('ls_t', float('nan')):.3g}" if np.isfinite(st.get("ls_t", np.nan)) else "—"},
-                {"label": "LS Sharpe (ann.)", "value": f"{st.get('ls_sharpe', float('nan')):.3g}" if np.isfinite(st.get("ls_sharpe", np.nan)) else "—"},
-                {"label": "Days", "value": str(st.get("n_days", "—"))},
-                {"label": "Bins", "value": str(st.get("n_bins", "—"))},
-                {"label": "NW lags", "value": str(st.get("nw_lags", "—"))},
+                {"label": "Signal", "value": "score_mean"},
+                {"label": "Horizon", "value": "t+1"},
+                {"label": "Sectors", "value": str(len((het.get("table") or {}).get("rows", [])))},
             ],
             methodology=[
-                f"Per day: form {args.sort_bins}-quantile portfolios by score_mean(t).",
-                "Compute average y_ret(t+1) within each portfolio and long–short (top minus bottom).",
-                f"Test mean returns using Newey–West HAC SE (lags={args.maxlags}).",
+                "Split panel by sector and run within-ticker FE regression in each sector.",
+                "SE clustered by ticker; report β, t, p, R² by sector.",
             ],
             sections=[
-                {"title": "Specification", "bullets": ["Q-sort on score_mean(t); report E[r(t+1)|Q] and LS = Q_high − Q_low."]},
+                {"title": "Specification", "bullets": ["Within each sector: y_ret(t+1) ~ score_mean(t) (+ controls), within-ticker FE."]},
                 *build_sections_common(universe, freq, y_def, s_def, caveats),
+                {"title": "References (minimal)", "bullets": refs_minimal()},
             ],
             conclusions=[
-                "Portfolio sorts provide an economically interpretable view of predictability (if any) beyond regression coefficients.",
-                "A significant long–short mean with robust NW t-stat is consistent with cross-sectional pricing of the signal.",
+                "Heterogeneity across sectors helps distinguish a market-wide attention story from sector-specific mechanisms.",
+                "If coefficients cluster in a few sectors, cross-sectional aggregation can be misleading.",
             ],
-            results={
-                "n_tickers": n_tickers,
-                "n_obs_panel": n_obs_panel,
-                "date_range": [start_date, end_date],
-                "tables": [ps.get("table")],
-                "series": ps.get("series"),
-                "portfolio_sorts": ps,
-            },
+            results={"tables": [het.get("table")]},
             notes=[],
         )
-        write_json(out_dir / f"{s7['slug']}.json", s7)
-        studies.append(s7)
+        write_json(out_dir / f"{s11['slug']}.json", s11)
+        studies.append(s11)
 
-    # -------------------- Study 8: out-of-sample predictability (OOS R^2) --------------------
-    # Use sample ticker as a conservative OOS demo (keeps runtime light and easy to interpret).
-    oos = oos_predictability(df_sample, y="y_ret_fwd1", x_cols=x_cols, min_train=int(args.oos_min_train), nw_lags=int(args.maxlags))
-    if "error" not in oos:
-        st = oos["stats"]
-        s8 = build_study_payload(
-            slug="oos-predictability-sample",
-            title="Out-of-sample predictability (sample ticker): OOS R²",
-            category="Predictability",
-            summary="Expanding-window OOS forecast for y_ret(t+1) using score_mean(t) (+ n_total). Report OOS R² vs historical mean benchmark.",
-            updated_at=args.updated_at,
-            status="live",
-            tags=["out-of-sample", "forecasting", "OOS R2", "predictability"],
-            key_stats=[
-                {"label": "OOS R²", "value": f"{st.get('oos_r2', float('nan')):.4g}" if np.isfinite(st.get("oos_r2", np.nan)) else "—"},
-                {"label": "Test N", "value": str(st.get("n_test", "—"))},
-                {"label": "Train min", "value": str(st.get("min_train", "—"))},
-                {"label": "NW lags", "value": str(st.get("nw_lags", "—"))},
-                {"label": "DM-like t", "value": f"{st.get('dm_like_t', float('nan')):.3g}" if np.isfinite(st.get("dm_like_t", np.nan)) else "—"},
-                {"label": "DM-like p", "value": f"{st.get('dm_like_p', float('nan')):.3g}" if np.isfinite(st.get("dm_like_p", np.nan)) else "—"},
-            ],
-            methodology=[
-                f"At each t, fit OLS on data up to t−1; predict y_ret(t+1).",
-                "Benchmark forecast: historical mean return up to t−1.",
-                "OOS R² computed from relative MSE vs benchmark.",
-            ],
-            sections=[
-                {"title": "Specification", "bullets": ["Forecast: y_ret(t+1) = a + b*score_mean(t) + c*n_total(t) + ε."]},
-                *build_sections_common(universe, freq, y_def, s_def, caveats),
-            ],
-            conclusions=[
-                "OOS R² is a stricter criterion than in-sample fit: it penalizes unstable relationships.",
-                "If OOS R² is near zero while same-day effects are strong, the metric is likely descriptive (reaction) rather than predictive (alpha).",
-            ],
-            results={
-                "sample_ticker": sample_ticker,
-                "date_range": [start_date, end_date],
-                "oos": oos,
-                "series": {
-                    # no dates here (we don't carry them) but sparklines work without x-axis
-                    "real": oos["series"]["real"],
-                    "pred": oos["series"]["pred"],
-                    "cum_real": oos["series"]["cum_real"],
-                    "cum_pred": oos["series"]["cum_pred"],
-                },
-            },
-            notes=[],
-        )
-        write_json(out_dir / f"{s8['slug']}.json", s8)
-        studies.append(s8)
-
-    # -------------------- Study 9: event study (extreme sentiment) --------------------
-    ev = event_study(panel, signal_col="score_mean", ret_col="y_ret", z_thr=float(args.event_z), window=int(args.event_window), min_events=int(args.event_min_events))
-    if "error" not in ev:
-        st = ev["stats"]
-        s9 = build_study_payload(
-            slug="event-study-extreme-sentiment",
-            title="Event study: return dynamics around extreme sentiment",
-            category="Event studies",
-            summary="Panel event study using within-ticker z-score of sentiment. Compare average CAR paths for extreme positive vs negative sentiment days.",
-            updated_at=args.updated_at,
-            status="live",
-            tags=["event study", "CAR", "extremes", "mechanism"],
-            key_stats=[
-                {"label": "z threshold", "value": str(st.get("z_thr", "—"))},
-                {"label": "window", "value": str(st.get("window", "—"))},
-                {"label": "N pos", "value": str(st.get("n_pos", "—"))},
-                {"label": "N neg", "value": str(st.get("n_neg", "—"))},
-                {"label": "warning", "value": str(st.get("warning", "—")) if "warning" in st else "—"},
-                {"label": "date range", "value": f"{start_date}..{end_date}"},
-            ],
-            methodology=[
-                "Compute within-ticker z-score of score_mean.",
-                "Define events: z≥threshold (positive) and z≤−threshold (negative).",
-                "Compute average cumulative log-return paths (CAR) around events: tau ∈ [−W..W].",
-            ],
-            sections=[
-                {"title": "Specification", "bullets": ["CAR(τ) computed relative to event date, using log returns."]},
-                *build_sections_common(universe, freq, y_def, s_def, caveats),
-            ],
-            conclusions=[
-                "Event-study profiles help distinguish immediate reaction vs post-event drift.",
-                "Asymmetries between positive and negative events can suggest non-linear responses to sentiment extremes.",
-            ],
-            results={
-                "n_tickers": n_tickers,
-                "n_obs_panel": n_obs_panel,
-                "date_range": [start_date, end_date],
-                "tables": [ev.get("table")] if isinstance(ev.get("table"), dict) else [],
-                "series": ev.get("series"),
-                "event_study": ev,
-            },
-            notes=[],
-        )
-        write_json(out_dir / f"{s9['slug']}.json", s9)
-        studies.append(s9)
-
-    # -------------------- Study 10: market-adjusted predictability (if SPY available) --------------------
-    mkt = try_load_market_series(repo_root, data_root, symbol="SPY")
-    if mkt is not None and not mkt.empty:
-        p2 = panel.merge(mkt, on="date", how="left")
-        p2["excess_fwd1"] = p2["y_ret_fwd1"] - p2["mkt_ret_fwd1"]
-        x10 = x_cols
-        fe10 = panel_within_fe_cluster(p2, "excess_fwd1", x10)
-        ts10 = time_series_ols_hac(df_sample.merge(mkt, on="date", how="left"), "y_ret_fwd1", x10, maxlags=int(args.maxlags))
-
-        s10 = build_study_payload(
-            slug="market-adjusted-predictability",
-            title="Market-adjusted predictability: excess next-day returns",
-            category="Predictability",
-            summary="Predictive regression on excess returns: (r_i(t+1) − r_mkt(t+1)) ~ score_mean(t) (+ n_total). Market proxy: SPY if present in ticker JSON.",
-            updated_at=args.updated_at,
-            status="live",
-            tags=["market-adjusted", "excess return", "panel", "robustness"],
-            key_stats=key_stats_from(ts10, fe10, "score_mean"),
-            methodology=[
-                "Construct market next-day return using SPY (if present).",
-                "Define excess_fwd1 = y_ret_fwd1 − mkt_ret_fwd1.",
-                "Estimate TS HAC and panel FE predictability on excess_fwd1.",
-            ],
-            sections=[
-                {"title": "Specification", "bullets": ["excess_fwd1(t) ~ score_mean(t) + n_total(t) (optional)."]},
-                *build_sections_common(universe, freq, y_def, s_def, caveats),
-            ],
-            conclusions=conclusion_from_models("Market-adjusted predictability", ts10, fe10, "score_mean", "excess next-day return")
-            + ["Market-adjustment reduces the chance results are driven by broad market moves."],
-            results={
-                "sample_ticker": sample_ticker,
-                "n_tickers": n_tickers,
-                "n_obs_panel": n_obs_panel,
-                "date_range": [start_date, end_date],
-                "time_series": ts10,
-                "panel_fe": fe10,
-            },
-            notes=["This study appears only if SPY.json exists in the same ticker JSON directory."],
-        )
-        write_json(out_dir / f"{s10['slug']}.json", s10)
-        studies.append(s10)
-
-    # -------------------- Study 11: sector heterogeneity (if mapping available) --------------------
-    sec_map = sector_map_from_sp500(repo_root)
-    if sec_map is not None:
-        psec = panel.copy()
-        psec["sector"] = psec["ticker"].astype(str).str.upper().map(sec_map)
-        psec = psec.dropna(subset=["sector"]).copy()
-
-        rows = []
-        for sec, g in psec.groupby("sector", sort=True):
-            tickers_sec = g["ticker"].nunique()
-            if tickers_sec < int(args.sector_min_tickers):
-                continue
-            fe_sec = panel_within_fe_cluster(g, "y_ret_fwd1", x_cols)
-            b = safe_num((fe_sec.get("params") or {}).get("score_mean"))
-            t = safe_num((fe_sec.get("tvalues") or {}).get("score_mean"))
-            pval = safe_num((fe_sec.get("pvalues") or {}).get("score_mean"))
-            r2 = safe_num(fe_sec.get("rsquared"))
-            rows.append([sec, int(tickers_sec), int(len(g)), b, t, pval, stars(pval), r2])
-
-        if rows:
-            table = {
-                "title": "Sector heterogeneity: panel FE slope on score_mean (predicting r(t+1))",
-                "columns": ["Sector", "Tickers", "Obs", "β", "t", "p", "Sig", "R²"],
-                "rows": rows,
-            }
-
-            # key stat: share significant at 10%
-            sig10 = sum(1 for r in rows if isinstance(r[5], (int, float)) and np.isfinite(r[5]) and r[5] < 0.1)
-            s11 = build_study_payload(
-                slug="sector-heterogeneity",
-                title="Heterogeneity: predictive slope by sector (panel FE)",
-                category="Heterogeneity",
-                summary="Run predictive panel FE y_ret(t+1) ~ score_mean(t) (+ n_total) within each sector. Report β and clustered t-stats.",
-                updated_at=args.updated_at,
-                status="live",
-                tags=["heterogeneity", "sector", "panel", "fixed effects"],
-                key_stats=[
-                    {"label": "Sectors", "value": str(len(rows))},
-                    {"label": "Sig @10%", "value": str(sig10)},
-                    {"label": "Min tickers", "value": str(args.sector_min_tickers)},
-                    {"label": "Tickers", "value": str(n_tickers)},
-                    {"label": "Obs", "value": str(n_obs_panel)},
-                    {"label": "date range", "value": f"{start_date}..{end_date}"},
-                ],
-                methodology=[
-                    "Map tickers to sector using sp500_index.json (if present).",
-                    "Within each sector: panel FE with ticker-clustered SE.",
-                ],
-                sections=[
-                    {"title": "Specification", "bullets": ["Within sector s: y_ret(t+1) ~ score_mean(t) + controls, with ticker FE."]},
-                    *build_sections_common(universe, freq, y_def, s_def, caveats),
-                ],
-                conclusions=[
-                    "Heterogeneity tables help diagnose whether the signal is concentrated in a subset of industries.",
-                    "Sector-level instability is common in sentiment proxies; strong broad-based results are harder to obtain.",
-                ],
-                results={
-                    "n_tickers": n_tickers,
-                    "n_obs_panel": n_obs_panel,
-                    "date_range": [start_date, end_date],
-                    "tables": [table],
-                },
-                notes=["This study appears only if sp500_index.json exists and contains a sector field."],
-            )
-            write_json(out_dir / f"{s11['slug']}.json", s11)
-            studies.append(s11)
-
-    # -------------------- index + overview (sectioned) --------------------
+    # -------------------- index + overview --------------------
     index = []
     for s in studies:
         index.append(
