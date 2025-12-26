@@ -1,7 +1,7 @@
 // apps/web/app/research/page.tsx
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { loadResearchIndex, loadResearchOverview } from "../../lib/research";
+import { loadResearchIndex } from "../../lib/research";
 
 type IndexItem = {
   slug: string;
@@ -70,18 +70,54 @@ function deriveSections(items: IndexItem[]) {
     }));
 }
 
+async function loadOverviewSafe(): Promise<Overview | null> {
+  // Avoid compile-time failure when the helper gets renamed (e.g. Overview vs OverviewFull).
+  try {
+    const mod: any = await import("../../lib/research");
+    const fn =
+      mod.loadResearchOverview ??
+      mod.loadResearchOverviewFull ??
+      mod.loadResearchOverviewFullSafe; // optional future-proof
+    if (typeof fn === "function") {
+      const out = await fn();
+      return (out ?? null) as Overview | null;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function fmtNum(x: any) {
+  const n = typeof x === "number" ? x : Number(x);
+  return Number.isFinite(n) ? String(n) : "—";
+}
+
 export default async function ResearchPage() {
-  const [itemsRaw, overviewRaw] = await Promise.all([loadResearchIndex(), loadResearchOverview()]);
+  const [itemsRaw, overviewRaw] = await Promise.all([loadResearchIndex(), loadOverviewSafe()]);
   const items = (itemsRaw ?? []) as IndexItem[];
   const overview = (overviewRaw ?? { sections: [] }) as Overview;
 
   const sections =
-    overview.sections && overview.sections.length
-      ? overview.sections
-      : deriveSections(items);
+    overview.sections && overview.sections.length ? overview.sections : deriveSections(items);
 
   const meta = overview.meta ?? {};
   const bySlug = new Map(items.map((x) => [x.slug, x]));
+
+  // “Latest updates” (academic/professional polish)
+  const latest = items
+    .slice()
+    .sort((a, b) => (b.updated_at || "").localeCompare(a.updated_at || ""))
+    .slice(0, 4);
+
+  // Coverage summary
+  const categories = Array.from(
+    items.reduce((m, it) => {
+      const c = it.category?.trim() || "Other";
+      m.set(c, (m.get(c) ?? 0) + 1);
+      return m;
+    }, new Map<string, number>())
+  ).sort((a, b) => a[0].localeCompare(b[0]));
 
   return (
     <main className="max-w-6xl mx-auto p-6 space-y-8">
@@ -109,7 +145,7 @@ export default async function ResearchPage() {
             <div className="space-y-1">
               <div className="text-lg font-semibold">Dataset snapshot</div>
               <div className="text-sm text-zinc-600">
-                Current research artifacts are generated from your latest scheduled pipeline output.
+                Research artifacts are generated from your latest scheduled pipeline output.
               </div>
             </div>
             <Badge>LIVE</Badge>
@@ -125,12 +161,76 @@ export default async function ResearchPage() {
                   : "—"
               }
             />
-            <StatPill label="Studies" value={meta.n_studies?.toString?.() ?? "—"} />
-            <StatPill label="Tickers" value={meta.n_tickers?.toString?.() ?? "—"} />
-            <StatPill label="Obs (panel)" value={meta.n_obs_panel?.toString?.() ?? "—"} />
+            <StatPill label="Studies" value={fmtNum(meta.n_studies)} />
+            <StatPill label="Tickers" value={fmtNum(meta.n_tickers)} />
+            <StatPill label="Obs (panel)" value={fmtNum(meta.n_obs_panel)} />
             <StatPill label="Frequency" value={Array.isArray(meta.date_range) ? "Daily" : "—"} />
             <StatPill label="Scope" value="S&P 500 snapshot" />
-            <StatPill label="Style" value="Reproducible JSON" />
+            <StatPill label="Artifacts" value="Reproducible JSON" />
+          </div>
+
+          {/* Methods (academic “tone”) */}
+          <div className="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+            <div className="text-sm font-semibold text-zinc-900">Methods covered</div>
+            <div className="mt-2 text-sm text-zinc-700">
+              Time-series OLS with HAC (Newey–West), panel fixed effects with clustered SE, distributed
+              lags, placebo/permutation checks, cross-sectional pricing (Fama–MacBeth), and event-study
+              CAR/AAR profiles (when applicable).
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* Coverage + Latest */}
+      {items.length ? (
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5">
+            <div className="text-lg font-semibold">Coverage</div>
+            <div className="text-sm text-zinc-600 mt-1">
+              Study count by research theme/category.
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {categories.map(([c, n]) => (
+                <span
+                  key={c}
+                  className="text-[11px] px-2 py-1 rounded-full bg-zinc-100 text-zinc-700"
+                >
+                  {c}: {n}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-lg font-semibold">Latest updates</div>
+                <div className="text-sm text-zinc-600 mt-1">Most recently updated studies.</div>
+              </div>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              {latest.map((it) => (
+                <Link
+                  key={it.slug}
+                  href={`/research/${it.slug}`}
+                  className="block rounded-xl border border-zinc-200 bg-white p-3 hover:shadow-sm transition"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-zinc-900 truncate">{it.title}</div>
+                      <div className="text-xs text-zinc-600 line-clamp-2 mt-1">{it.summary}</div>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <div className="text-[11px] text-zinc-500">{it.updated_at}</div>
+                      <div className="mt-1">
+                        <Badge>{(it.status ?? "draft").toUpperCase()}</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       ) : null}
@@ -153,10 +253,7 @@ python src/market_sentiment/cli/build_research.py --data-root data --out-dir app
       ) : (
         <div className="space-y-10">
           {sections.map((sec) => {
-            const secItems = sec.slugs
-              .map((s) => bySlug.get(s))
-              .filter(Boolean) as IndexItem[];
-
+            const secItems = sec.slugs.map((s) => bySlug.get(s)).filter(Boolean) as IndexItem[];
             if (!secItems.length) return null;
 
             return (
@@ -191,7 +288,7 @@ python src/market_sentiment/cli/build_research.py --data-root data --out-dir app
                       className="group rounded-2xl border border-zinc-200 bg-white p-5 hover:shadow-sm transition"
                     >
                       <div className="flex items-start justify-between gap-3">
-                        <div className="space-y-1">
+                        <div className="space-y-1 min-w-0">
                           <div className="text-lg font-semibold leading-snug group-hover:underline">
                             {it.title}
                           </div>
