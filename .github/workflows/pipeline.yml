@@ -72,7 +72,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip wheel setuptools
-          pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
+          pip install --no-cache-dir "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir -r requirements.txt
           pip install --no-cache-dir finnhub-python yfinance transformers pandas requests
 
