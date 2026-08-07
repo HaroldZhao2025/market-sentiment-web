@@ -17,7 +17,7 @@ import yfinance as yf
 # ----------------------------------------------------------------------
 
 # For prices we try these in order.
-INDEX_PRICE_SYMBOL_CANDIDATES = ["^GSPC", "^SPX", "SPY"]
+INDEX_PRICE_SYMBOL_CANDIDATES = ["^GSPC", "^SPX"]
 
 # For news we try ^SPX first, then fallbacks.
 INDEX_NEWS_SYMBOL_CANDIDATES = ["^SPX", "^GSPC", "SPY"]
@@ -169,17 +169,21 @@ def _normalise_symbol_for_yfinance(symbol: str) -> str:
 
 def download_spx_prices(start: str, end: str) -> pd.DataFrame:
     """
-    Try a few symbols for S&P 500 price: ^GSPC, ^SPX, SPY.
+    Download the true S&P 500 index level from Yahoo Finance.
 
-    Returns columns: ['date', 'close'].
+    The CLI treats ``end`` as inclusive, while yfinance treats ``end`` as
+    exclusive, so one calendar day is added to the download boundary.
+    SPY is intentionally not an index-level fallback.
+
+    Returns columns: ['date', 'close', 'price_source'].
     """
     last_err: Optional[Exception] = None
+    download_end = (datetime.fromisoformat(end).date() + timedelta(days=1)).isoformat()
 
     for sym in INDEX_PRICE_SYMBOL_CANDIDATES:
-        print(f"[SPX] Downloading prices for {sym} {start} → {end} ...")
-
+        print(f"[SPX] Downloading prices for {sym} {start} → {end} (yf end={download_end}) ...")
         try:
-            df = _download_yf_daily_single_symbol(sym, start, end)
+            df = _download_yf_daily_single_symbol(sym, start, download_end)
         except Exception as e:
             print(f"[SPX] Error downloading prices for {sym}: {e!r}")
             last_err = e
@@ -190,8 +194,6 @@ def download_spx_prices(start: str, end: str) -> pd.DataFrame:
             continue
 
         df = _collapse_yf_price_columns(df, sym)
-
-        # yfinance usually returns Date in the index. Make reset_index robust.
         if df.index.name is None:
             df.index.name = "Date"
         df = df.reset_index()
@@ -207,12 +209,7 @@ def download_spx_prices(start: str, end: str) -> pd.DataFrame:
             )
             continue
 
-        date_col = None
-        for cand in ("Date", "Datetime", "index"):
-            if cand in df.columns:
-                date_col = cand
-                break
-
+        date_col = next((c for c in ("Date", "Datetime", "index") if c in df.columns), None)
         if date_col is None:
             print(
                 f"[SPX] {sym} missing date column after reset_index. "
@@ -220,26 +217,36 @@ def download_spx_prices(start: str, end: str) -> pd.DataFrame:
             )
             continue
 
-        out = df[[date_col, close_col]].rename(
-            columns={date_col: "date", close_col: "close"}
-        )
-        out["date"] = pd.to_datetime(out["date"]).dt.date.astype(str)
+        out = df[[date_col, close_col]].rename(columns={date_col: "date", close_col: "close"})
+        out["date"] = pd.to_datetime(out["date"], errors="coerce").dt.date.astype(str)
         out["close"] = pd.to_numeric(out["close"], errors="coerce")
         out = out.dropna(subset=["close"])
+        out = out[out["close"] > 0]
 
         if out.empty:
             print(f"[SPX] {sym} close series is empty after cleaning, trying next candidate")
             continue
 
-        out = out.sort_values("date").reset_index(drop=True)
+        out = out.sort_values("date").drop_duplicates("date", keep="last").reset_index(drop=True)
+
+        # Guard against accidentally publishing an ETF-scaled series as SPX.
+        recent = out["close"].tail(min(20, len(out)))
+        recent_median = float(recent.median()) if len(recent) else float("nan")
+        if not pd.notna(recent_median) or recent_median < 1000:
+            print(
+                f"[SPX] Rejecting {sym}: recent median level {recent_median!r} "
+                "does not look like an S&P 500 index level"
+            )
+            continue
+
+        out["price_source"] = sym
         print(f"[SPX] Using {sym} for index prices, {len(out)} rows")
         return out
 
     raise RuntimeError(
-        f"[SPX] Could not download index prices for any of {INDEX_PRICE_SYMBOL_CANDIDATES}. "
-        f"Last error: {last_err!r}"
+        f"[SPX] Could not download a valid S&P 500 index series from "
+        f"{INDEX_PRICE_SYMBOL_CANDIDATES}. Last error: {last_err!r}"
     )
-
 
 def _try_parse_datetime_str(s: str) -> Optional[datetime]:
     """
@@ -810,6 +817,11 @@ def build_sp500_index_payload(
         "symbol": INDEX_SYMBOL,
         "name": INDEX_NAME,
         "price_symbol_candidates": INDEX_PRICE_SYMBOL_CANDIDATES,
+        "price_symbol": (
+            str(prices["price_source"].dropna().iloc[-1])
+            if "price_source" in prices.columns and prices["price_source"].notna().any()
+            else None
+        ),
         "news_symbol_candidates": INDEX_NEWS_SYMBOL_CANDIDATES,
         "daily": daily.to_dict(orient="records"),
         "news": news.sort_values("date").to_dict(orient="records") if not news.empty else [],
@@ -899,8 +911,28 @@ def main(argv: Optional[List[str]] = None) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     out_path = out_dir / "sp500_index.json"
-    with out_path.open("w") as f:
-        json.dump(payload, f, indent=2)
+    def _json_safe(value: Any) -> Any:
+        if isinstance(value, dict):
+            return {str(k): _json_safe(v) for k, v in value.items()}
+        if isinstance(value, list):
+            return [_json_safe(v) for v in value]
+        try:
+            if pd.isna(value):
+                return None
+        except (TypeError, ValueError):
+            pass
+        if hasattr(value, "item"):
+            try:
+                return value.item()
+            except (TypeError, ValueError):
+                pass
+        return value
+
+    tmp_path = out_path.with_suffix(".json.tmp")
+    with tmp_path.open("w", encoding="utf-8") as f:
+        json.dump(_json_safe(payload), f, indent=2, allow_nan=False)
+        f.flush()
+    tmp_path.replace(out_path)
 
     print(f"[SPX] Wrote {out_path}")
 

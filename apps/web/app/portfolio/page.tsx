@@ -70,7 +70,12 @@ function recomputeMetricsFromSeries(eq: number[], rets: number[]) {
   // annualization on trading days
   const annRet = Number.isFinite(lastEq) && n > 1 ? Math.pow(lastEq, 252 / n) - 1 : NaN;
   const annVol = cleanR.length ? std(cleanR) * Math.sqrt(252) : NaN;
-  const sharpe = Number.isFinite(annRet) && Number.isFinite(annVol) && annVol !== 0 ? annRet / annVol : NaN;
+  const dailyMean = cleanR.length ? mean(cleanR) : NaN;
+  const dailyStd = cleanR.length > 1 ? std(cleanR) : NaN;
+  const sharpe =
+    Number.isFinite(dailyMean) && Number.isFinite(dailyStd) && dailyStd !== 0
+      ? (dailyMean / dailyStd) * Math.sqrt(252)
+      : NaN;
 
   const hit =
     cleanR.length > 0 ? cleanR.filter((x) => x > 0).length / cleanR.length : NaN;
@@ -203,7 +208,7 @@ async function readSpxIndexBundle(): Promise<{
     : [];
 
   // include the extra candidates you requested as fallback
-  const fallbackCandidates = ["^GSPC", "^SPX", "^GSPX", "SPY"];
+  const fallbackCandidates = ["^GSPC", "^SPX", "^GSPX"];
   const candidatesMerged = Array.from(new Set([...priceCandidates, ...fallbackCandidates]));
 
   const rows: any[] = parsed.daily;
@@ -213,8 +218,9 @@ async function readSpxIndexBundle(): Promise<{
     const d = r?.date ? String(r.date) : "";
     if (!d) continue;
 
-    let px: number = NaN;
+    let px: number = Number(r?.close);
     for (const c of candidatesMerged) {
+      if (Number.isFinite(px)) break;
       const key = `close_${c}`;
       if (r[key] != null) {
         const v = Number(r[key]);
@@ -394,7 +400,6 @@ export default async function PortfolioPage() {
         gspc ? { dates: gspc.dates, close: gspc.close } : null,
         spxSnap ? { dates: spxSnap.dates, close: spxSnap.close } : null,
         gspx ? { dates: gspx.dates, close: gspx.close } : null,
-        spy ? { dates: spy.dates, close: spy.close } : null,
       ].filter(Boolean) as Array<{ dates: string[]; close: number[] }>
     );
   }

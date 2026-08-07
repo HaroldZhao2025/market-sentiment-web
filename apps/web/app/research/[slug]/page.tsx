@@ -3,9 +3,17 @@ import Link from "next/link";
 import { loadResearchIndex, loadResearchStudy } from "../../../lib/research";
 import ResearchStudyClient from "../ResearchStudyClient";
 
+// Static export must have at least one concrete parameter even when the
+// research data pipeline has not run yet (for example in a clean CI checkout).
+// Production builds still use every real slug emitted by build_research.py.
 export async function generateStaticParams() {
   const idx = await loadResearchIndex();
-  return idx.map((x) => ({ slug: x.slug }));
+  const slugs = idx
+    .map((x) => String(x?.slug ?? "").trim())
+    .filter((slug) => slug.length > 0);
+  return slugs.length > 0
+    ? slugs.map((slug) => ({ slug }))
+    : [{ slug: "__build_check__" }];
 }
 
 export default async function ResearchStudyPage({
@@ -15,7 +23,6 @@ export default async function ResearchStudyPage({
 }) {
   const { slug } = await params;
   const study = await loadResearchStudy(slug);
-
   return (
     <main className="max-w-6xl mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between gap-4">
@@ -28,7 +35,6 @@ export default async function ResearchStudyPage({
           <div className="text-xs text-zinc-500">Updated: {study.updated_at}</div>
         </div>
       </div>
-
       <ResearchStudyClient study={study} />
 
       {study.notes?.length ? (

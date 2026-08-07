@@ -23,7 +23,7 @@ type Metrics = {
 type Meta = {
   generated_at?: string;
   rebalance?: "daily" | "weekly";
-  signal?: "day" | "ma7";
+  signal?: "day" | "ma7" | "blend";
   lag_days?: number;
   k?: number;
   long_short?: boolean;
@@ -205,11 +205,11 @@ export default function PortfolioClient({
               </summary>
               <div className="mt-3 text-sm text-neutral-700 space-y-2">
                 <p>
-                  We treat each stock’s news sentiment as a trading signal (either <b>daily</b> sentiment or its <b>7-day moving average</b>).
+                  We combine news sentiment level/change with price momentum, then scale positions using recent volatility. Daily and 7-day sentiment modes remain available.
                 </p>
                 <p>
                   On each rebalance date (typically <b>weekly</b>), we rank the universe by the signal observed with a <b>lag</b> (e.g., yesterday),
-                  then go <b>long</b> the top-K tickers and (optionally) <b>short</b> the bottom-K tickers with equal weights.
+                  then go <b>long</b> the strongest names and (optionally) <b>short</b> the weakest names with diversified risk-aware weights.
                 </p>
                 <p className="text-neutral-600">
                   The lag + “apply weights from next trading day” rule is used to reduce look-ahead bias.

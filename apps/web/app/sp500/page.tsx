@@ -138,7 +138,10 @@ export default function Sp500Page() {
   const daily = [...data.daily].sort((a, b) => a.date.localeCompare(b.date));
   const latest = daily[daily.length - 1];
 
-  const closeKey = Object.keys(latest || {}).find((k) => k.startsWith("close_")) ?? null;
+  const closeKey =
+    latest && Number.isFinite(Number((latest as any).close))
+      ? "close"
+      : Object.keys(latest || {}).find((k) => k.startsWith("close_")) ?? null;
   const latestClose = closeKey ? (latest as any)[closeKey] : null;
 
   const latestSent =
