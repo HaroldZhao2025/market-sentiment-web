@@ -1,0 +1,933 @@
+name: Repair Market Data & Deploy
+
+on:
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["Build Data & Deploy Site"]
+    types: [completed]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  PYTHONPATH: src
+  NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+  HF_HUB_DISABLE_TELEMETRY: "1"
+
+jobs:
+  repair-build:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install lightweight Python dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir "pandas>=2.1" "numpy>=1.26" "statsmodels>=0.14"
+
+      - name: Install repair scripts and frontend fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p scripts
+
+          cat > scripts/repair_recent_sentiment.py <<'PY'
+          from __future__ import annotations
+
+          import argparse
+          import glob
+          import json
+          import math
+          import os
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+          from typing import Any
+
+          def load_json(path: Path, default: Any) -> Any:
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+
+          def write_json(path: Path, obj: Any) -> None:
+              path.parent.mkdir(parents=True, exist_ok=True)
+              tmp = path.with_suffix(path.suffix + ".tmp")
+              tmp.write_text(
+                  json.dumps(obj, ensure_ascii=False, indent=2, allow_nan=False),
+                  encoding="utf-8",
+              )
+              os.replace(tmp, path)
+
+          def finite_number(value: Any) -> bool:
+              try:
+                  return math.isfinite(float(value))
+              except (TypeError, ValueError):
+                  return False
+
+          def read_universe(path: Path) -> list[str]:
+              import csv
+              with path.open(newline="", encoding="utf-8") as f:
+                  rows = list(csv.DictReader(f))
+              if not rows:
+                  return []
+              keys = rows[0].keys()
+              col = next((k for k in keys if k.lower() in {"ticker", "symbol"}), None)
+              if not col:
+                  return []
+              out = []
+              seen = set()
+              for row in rows:
+                  t = str(row.get(col) or "").strip().upper().replace(".", "-")
+                  if t and t not in seen:
+                      out.append(t)
+                      seen.add(t)
+              return out
+
+          def collect_titles(base: Path, day: str) -> tuple[list[str], dict[str, int]]:
+              texts: list[str] = []
+              counts = {"finnhub": 0, "yfinance": 0}
+              for provider in ("finnhub", "yfinance"):
+                  p = base / "news" / provider / f"{day}.json"
+                  arr = load_json(p, [])
+                  if not isinstance(arr, list):
+                      continue
+                  for item in arr:
+                      if not isinstance(item, dict):
+                          continue
+                      title = str(item.get("headline") or item.get("title") or "").strip()
+                      if title:
+                          texts.append(title)
+                          counts[provider] += 1
+              return texts, counts
+
+          def scan(universe: list[str], data_root: Path, days_back: int) -> list[dict[str, Any]]:
+              today = datetime.now(timezone.utc).date()
+              earliest = today - timedelta(days=max(1, days_back) - 1)
+              candidates: list[dict[str, Any]] = []
+              normalized_empty = 0
+
+              for ticker in universe:
+                  base = data_root / ticker
+                  sent_dir = base / "sentiment"
+                  sent_dir.mkdir(parents=True, exist_ok=True)
+
+                  for offset in range((today - earliest).days + 1):
+                      day = (earliest + timedelta(days=offset)).isoformat()
+                      texts, counts = collect_titles(base, day)
+                      out = sent_dir / f"{day}.json"
+                      old = load_json(out, {}) if out.exists() else {}
+                      old_n = int(old.get("n_total", 0) or 0) if isinstance(old, dict) else 0
+                      old_nf = int(old.get("n_finnhub", 0) or 0) if isinstance(old, dict) else 0
+                      old_ny = int(old.get("n_yfinance", 0) or 0) if isinstance(old, dict) else 0
+                      old_score = old.get("score_mean") if isinstance(old, dict) else None
+
+                      if not texts:
+                          if out.exists() and (
+                              old_n == 0
+                              and (old_score == 0 or old_score == 0.0 or old_score is None)
+                          ):
+                              clean = {
+                                  "date": day,
+                                  "ticker": ticker,
+                                  "n_total": 0,
+                                  "n_finnhub": 0,
+                                  "n_yfinance": 0,
+                                  "score_mean": None,
+                              }
+                              if old != clean:
+                                  write_json(out, clean)
+                                  normalized_empty += 1
+                          continue
+
+                      current_n = len(texts)
+                      needs_repair = (
+                          not out.exists()
+                          or old_n != current_n
+                          or old_nf != counts["finnhub"]
+                          or old_ny != counts["yfinance"]
+                          or not finite_number(old_score)
+                          or old_n == 0
+                      )
+                      if needs_repair:
+                          candidates.append(
+                              {
+                                  "ticker": ticker,
+                                  "day": day,
+                                  "texts": texts,
+                                  "counts": counts,
+                                  "out": str(out),
+                              }
+                          )
+
+              print(f"Normalized no-news rows to null: {normalized_empty}")
+              print(f"Sentiment day/ticker records needing FinBERT recompute: {len(candidates)}")
+              return candidates
+
+          def repair(candidates: list[dict[str, Any]]) -> None:
+              if not candidates:
+                  print("No FinBERT recompute needed.")
+                  return
+
+              from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
+
+              model_name = "ProsusAI/finbert"
+              tokenizer = AutoTokenizer.from_pretrained(model_name)
+              model = AutoModelForSequenceClassification.from_pretrained(model_name)
+              clf = pipeline(
+                  "sentiment-analysis",
+                  model=model,
+                  tokenizer=tokenizer,
+                  return_all_scores=True,
+                  truncation=True,
+              )
+
+              # Flatten once so inference is efficiently batched across all stale records.
+              all_texts: list[str] = []
+              spans: list[tuple[int, int]] = []
+              for rec in candidates:
+                  start = len(all_texts)
+                  all_texts.extend(rec["texts"])
+                  spans.append((start, len(all_texts)))
+
+              predictions = clf(all_texts, batch_size=32)
+              if len(predictions) != len(all_texts):
+                  raise RuntimeError(
+                      f"FinBERT output length mismatch: {len(predictions)} != {len(all_texts)}"
+                  )
+
+              for rec, (start, end) in zip(candidates, spans):
+                  vals: list[float] = []
+                  for per in predictions[start:end]:
+                      scores = {str(x["label"]).lower(): float(x["score"]) for x in per}
+                      vals.append(scores.get("positive", 0.0) - scores.get("negative", 0.0))
+                  mean = round(sum(vals) / len(vals), 4)
+                  obj = {
+                      "date": rec["day"],
+                      "ticker": rec["ticker"],
+                      "n_total": len(rec["texts"]),
+                      "n_finnhub": int(rec["counts"]["finnhub"]),
+                      "n_yfinance": int(rec["counts"]["yfinance"]),
+                      "score_mean": mean,
+                  }
+                  write_json(Path(rec["out"]), obj)
+
+              print(f"Recomputed {len(candidates)} stale daily sentiment records.")
+
+          def main() -> None:
+              ap = argparse.ArgumentParser()
+              ap.add_argument("--universe", default="data/sp500.csv")
+              ap.add_argument("--data-root", default="data")
+              ap.add_argument("--days-back", type=int, default=7)
+              ap.add_argument("--manifest", default="/tmp/sentiment-repair-manifest.json")
+              ap.add_argument("--scan-only", action="store_true")
+              args = ap.parse_args()
+
+              universe = read_universe(Path(args.universe))
+              if not universe:
+                  raise SystemExit("No universe tickers found")
+              candidates = scan(universe, Path(args.data_root), args.days_back)
+              Path(args.manifest).write_text(
+                  json.dumps(candidates, ensure_ascii=False),
+                  encoding="utf-8",
+              )
+              if not args.scan_only:
+                  repair(candidates)
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+          cat > scripts/rebuild_site_data.py <<'PY'
+          from __future__ import annotations
+
+          import argparse
+          import csv
+          import json
+          import math
+          import os
+          from collections import defaultdict
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+          from typing import Any
+
+          def load_json(path: Path, default: Any) -> Any:
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+
+          def write_json(path: Path, obj: Any) -> None:
+              path.parent.mkdir(parents=True, exist_ok=True)
+              tmp = path.with_suffix(path.suffix + ".tmp")
+              tmp.write_text(
+                  json.dumps(obj, ensure_ascii=False, indent=2, allow_nan=False),
+                  encoding="utf-8",
+              )
+              os.replace(tmp, path)
+
+          def finite(value: Any) -> float | None:
+              if value is None or isinstance(value, bool):
+                  return None
+              try:
+                  x = float(value)
+              except (TypeError, ValueError):
+                  return None
+              return x if math.isfinite(x) else None
+
+          def valid_date(value: Any) -> str | None:
+              s = str(value or "")[:10]
+              try:
+                  return datetime.fromisoformat(s).date().isoformat()
+              except Exception:
+                  return None
+
+          def read_universe(path: Path) -> list[str]:
+              with path.open(newline="", encoding="utf-8") as f:
+                  rows = list(csv.DictReader(f))
+              if not rows:
+                  return []
+              col = next((k for k in rows[0].keys() if k.lower() in {"ticker", "symbol"}), None)
+              if not col:
+                  return []
+              out, seen = [], set()
+              for row in rows:
+                  t = str(row.get(col) or "").strip().upper().replace(".", "-")
+                  if t and t not in seen:
+                      seen.add(t)
+                      out.append(t)
+              return out
+
+          def clean_prices(
+              path: Path,
+              cutoff: str,
+              end: str,
+              latest_override: tuple[str, float] | None = None,
+          ) -> list[dict[str, Any]]:
+              arr = load_json(path, [])
+              if not isinstance(arr, list):
+                  arr = []
+              pmap: dict[str, float] = {}
+              for row in arr:
+                  if not isinstance(row, dict):
+                      continue
+                  d = valid_date(row.get("date"))
+                  c = finite(row.get("close"))
+                  if d is None or c is None or c <= 0 or d < cutoff or d > end:
+                      continue
+                  pmap[d] = c
+
+              # The heatmap is generated from fresh market quotes and is a reliable
+              # same-day fallback when the old per-ticker yfinance step misses today
+              # because its `end` boundary is exclusive.
+              if latest_override is not None:
+                  d, c = latest_override
+                  if cutoff <= d <= end and math.isfinite(c) and c > 0:
+                      pmap[d] = c
+
+              rows = [{"date": d, "close": pmap[d]} for d in sorted(pmap)]
+              if rows != arr:
+                  write_json(path, rows)
+              return rows
+
+          def sentiment_map(base: Path, cutoff: str, end: str) -> tuple[dict[str, float | None], dict[str, int], dict[str, dict[str, int]]]:
+              smap: dict[str, float | None] = {}
+              totals = {"finnhub": 0, "yfinance": 0, "total": 0}
+              counts_by_day: dict[str, dict[str, int]] = {}
+              sent_dir = base / "sentiment"
+              if not sent_dir.exists():
+                  return smap, totals, counts_by_day
+
+              for path in sent_dir.glob("*.json"):
+                  obj = load_json(path, {})
+                  if not isinstance(obj, dict):
+                      continue
+                  d = valid_date(obj.get("date") or path.stem)
+                  if d is None or d < cutoff or d > end:
+                      continue
+                  nf = int(obj.get("n_finnhub", 0) or 0)
+                  ny = int(obj.get("n_yfinance", 0) or 0)
+                  nt = int(obj.get("n_total", 0) or (nf + ny))
+                  score = finite(obj.get("score_mean"))
+                  # Critical rule: no-news is missing, not neutral.
+                  smap[d] = score if nt > 0 and score is not None else None
+                  counts_by_day[d] = {"finnhub": nf, "yfinance": ny, "total": nt}
+                  totals["finnhub"] += nf
+                  totals["yfinance"] += ny
+                  totals["total"] += nt
+              return smap, totals, counts_by_day
+
+          def recent_news(base: Path, cutoff_dt: datetime, end_dt: datetime) -> list[dict[str, Any]]:
+              out: list[dict[str, Any]] = []
+              seen: set[tuple[str, str]] = set()
+              for provider in ("finnhub", "yfinance"):
+                  nd = base / "news" / provider
+                  if not nd.exists():
+                      continue
+                  for path in nd.glob("*.json"):
+                      arr = load_json(path, [])
+                      if not isinstance(arr, list):
+                          continue
+                      for item in arr:
+                          if not isinstance(item, dict):
+                              continue
+                          ts = str(item.get("ts") or "")
+                          title = str(item.get("headline") or item.get("title") or "").strip()
+                          url = str(item.get("url") or "")
+                          if not ts or not title:
+                              continue
+                          try:
+                              dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+                              if dt.tzinfo is None:
+                                  dt = dt.replace(tzinfo=timezone.utc)
+                              dt = dt.astimezone(timezone.utc)
+                          except Exception:
+                              continue
+                          if dt < cutoff_dt or dt > end_dt:
+                              continue
+                          key = (title, url)
+                          if key in seen:
+                              continue
+                          seen.add(key)
+                          out.append(
+                              {
+                                  "ts": dt.isoformat(),
+                                  "title": title,
+                                  "url": url,
+                                  "source": str(item.get("source") or provider),
+                                  "provider": provider,
+                              }
+                          )
+              out.sort(key=lambda x: x["ts"], reverse=True)
+              return out[:10]
+
+          def rebuild_spx_sentiment(
+              data_root: Path,
+              sentiment_by_day: dict[str, dict[str, float]],
+              counts_by_ticker_day: dict[str, dict[str, dict[str, int]]],
+          ) -> None:
+              spx_path = data_root / "SPX" / "sp500_index.json"
+              heat_path = data_root / "SPX" / "sp500_heatmap.json"
+              spx = load_json(spx_path, {})
+              heat = load_json(heat_path, {})
+              if not isinstance(spx, dict) or not isinstance(spx.get("daily"), list):
+                  raise RuntimeError(f"Missing valid {spx_path}")
+              if not isinstance(heat, dict) or not isinstance(heat.get("tiles"), list):
+                  raise RuntimeError(f"Missing valid {heat_path}")
+
+              weights: dict[str, float] = {}
+              for tile in heat["tiles"]:
+                  if not isinstance(tile, dict):
+                      continue
+                  sym = str(tile.get("symbol") or "").upper().replace(".", "-")
+                  w = finite(tile.get("weight"))
+                  if sym and w is not None and w > 0:
+                      weights[sym] = w
+
+              changed_days = 0
+              for row in spx["daily"]:
+                  if not isinstance(row, dict):
+                      continue
+                  d = valid_date(row.get("date"))
+                  if not d:
+                      continue
+                  available = sentiment_by_day.get(d, {})
+                  num = 0.0
+                  den = 0.0
+                  for sym, score in available.items():
+                      w = weights.get(sym)
+                      if w is None:
+                          continue
+                      num += w * score
+                      den += w
+                  if den > 0:
+                      row["sentiment_cap_weighted"] = num / den
+                      changed_days += 1
+
+              latest_day = max((valid_date(r.get("date")) for r in spx["daily"] if isinstance(r, dict)), default=None)
+              if latest_day:
+                  latest_scores = sentiment_by_day.get(latest_day, {})
+                  for tile in heat["tiles"]:
+                      if not isinstance(tile, dict):
+                          continue
+                      sym = str(tile.get("symbol") or "").upper().replace(".", "-")
+                      score = latest_scores.get(sym)
+                      tile["sentiment"] = score
+                      cnt = counts_by_ticker_day.get(sym, {}).get(latest_day, {}).get("total", 0)
+                      tile["n_total"] = int(cnt)
+                  stats = heat.get("stats")
+                  if isinstance(stats, dict):
+                      stats["missing_sentiment"] = sum(
+                          1 for tile in heat["tiles"]
+                          if isinstance(tile, dict) and tile.get("sentiment") is None
+                      )
+                  heat["updated_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+              write_json(spx_path, spx)
+              write_json(heat_path, heat)
+              print(f"Recomputed SPX cap-weighted sentiment on {changed_days} price dates.")
+
+          def main() -> None:
+              ap = argparse.ArgumentParser()
+              ap.add_argument("--universe", default="data/sp500.csv")
+              ap.add_argument("--data-root", default="data")
+              ap.add_argument("--public-root", default="apps/web/public/data")
+              ap.add_argument("--days", type=int, default=365)
+              args = ap.parse_args()
+
+              data_root = Path(args.data_root)
+              pub = Path(args.public_root)
+              ticker_pub = pub / "ticker"
+              ticker_pub.mkdir(parents=True, exist_ok=True)
+
+              today = datetime.now(timezone.utc).date()
+              cutoff = (today - timedelta(days=max(30, args.days))).isoformat()
+              end = today.isoformat()
+              news_cutoff = datetime.now(timezone.utc) - timedelta(days=30)
+              news_end = datetime.now(timezone.utc) + timedelta(hours=1)
+
+              universe = read_universe(Path(args.universe))
+              written: list[str] = []
+              sentiment_by_day: dict[str, dict[str, float]] = defaultdict(dict)
+              counts_by_ticker_day: dict[str, dict[str, dict[str, int]]] = {}
+
+              # Reuse the freshly-built heatmap quote as a same-day price overlay.
+              # This also avoids making hundreds of extra Yahoo requests in the repair pass.
+              heat = load_json(data_root / "SPX" / "sp500_heatmap.json", {})
+              latest_market: dict[str, tuple[str, float]] = {}
+              if isinstance(heat, dict) and isinstance(heat.get("tiles"), list):
+                  for tile in heat["tiles"]:
+                      if not isinstance(tile, dict):
+                          continue
+                      sym = str(tile.get("symbol") or "").upper().replace(".", "-")
+                      d = valid_date(tile.get("date"))
+                      px = finite(tile.get("price"))
+                      if sym and d and px is not None and px > 0:
+                          latest_market[sym] = (d, px)
+
+              for ticker in universe:
+                  base = data_root / ticker
+                  prices = clean_prices(
+                      base / "price" / "daily.json",
+                      cutoff,
+                      end,
+                      latest_market.get(ticker),
+                  )
+                  if not prices:
+                      continue
+                  smap, totals, day_counts = sentiment_map(base, cutoff, end)
+                  counts_by_ticker_day[ticker] = day_counts
+                  for d, score in smap.items():
+                      if score is not None:
+                          sentiment_by_day[d][ticker] = score
+
+                  dates = [r["date"] for r in prices]
+                  price = [round(float(r["close"]), 4) for r in prices]
+                  signal = [smap.get(d) for d in dates]
+                  latest_sentiment_date = next(
+                      (d for d, s in reversed(list(zip(dates, signal))) if s is not None),
+                      None,
+                  )
+
+                  obj = {
+                      "schema_version": 3,
+                      "ticker": ticker,
+                      "dates": dates,
+                      "price": price,
+                      "S": signal,
+                      "sentiment": signal,
+                      "latest_sentiment_date": latest_sentiment_date,
+                      "sentiment_observation_count": sum(s is not None for s in signal),
+                      "news_count": totals,
+                      "news_total": int(totals["total"]),
+                      "news": recent_news(base, news_cutoff, news_end),
+                  }
+                  write_json(ticker_pub / f"{ticker}.json", obj)
+                  written.append(ticker)
+
+              if len(written) < 25:
+                  raise RuntimeError(f"Too few ticker snapshots written: {len(written)}")
+
+              write_json(pub / "_tickers.json", written)
+              rebuild_spx_sentiment(data_root, sentiment_by_day, counts_by_ticker_day)
+
+              spx_src = data_root / "SPX" / "sp500_index.json"
+              heat_src = data_root / "SPX" / "sp500_heatmap.json"
+              spx_dst = pub / "SPX" / "sp500_index.json"
+              heat_dst = pub / "SPX" / "sp500_heatmap.json"
+              spx_dst.parent.mkdir(parents=True, exist_ok=True)
+              spx_dst.write_bytes(spx_src.read_bytes())
+              heat_dst.write_bytes(heat_src.read_bytes())
+
+              print(f"Wrote {len(written)} ticker snapshots.")
+              print(f"Copied {spx_src} -> {spx_dst}")
+              print(f"Copied {heat_src} -> {heat_dst}")
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once_or_already(text: str, old: str, new: str, marker: str, label: str) -> str:
+              if marker in text:
+                  print(f"{label}: already patched")
+                  return text
+              count = text.count(old)
+              if count != 1:
+                  raise RuntimeError(f"{label}: expected exactly one source block, found {count}")
+              print(f"{label}: patched")
+              return text.replace(old, new, 1)
+
+          # ---- Home page: nullable sentiment + canonical SPX "close".
+          p = Path("apps/web/app/page.tsx")
+          s = p.read_text(encoding="utf-8")
+
+          s = replace_once_or_already(
+              s,
+              "  S?: number[];\n  sentiment?: number[];",
+              "  S?: (number | null)[];\n  sentiment?: (number | null)[];",
+              "S?: (number | null)[];",
+              "Home ticker JSON types",
+          )
+
+          old_home_ticker = (
+              "  const price = obj?.price?.length ? Number(obj.price[obj.price.length - 1]) : null;\n"
+              "\n"
+              "  // prefer S (your strategy uses S a lot), else sentiment\n"
+              "  const sArr = (obj?.S?.length ? obj.S : obj?.sentiment) ?? [];\n"
+              "  const sentiment = sArr.length ? Number(sArr[sArr.length - 1]) : null;"
+          )
+          new_home_ticker = (
+              "  const lastFinite = (arr: unknown[]): number | null => {\n"
+              "    for (let i = arr.length - 1; i >= 0; i--) {\n"
+              "      const raw = arr[i];\n"
+              "      if (raw === null || raw === undefined || raw === \"\") continue;\n"
+              "      const n = Number(raw);\n"
+              "      if (Number.isFinite(n)) return n;\n"
+              "    }\n"
+              "    return null;\n"
+              "  };\n"
+              "\n"
+              "  const price = lastFinite(obj?.price ?? []);\n"
+              "\n"
+              "  // Missing/no-news sentiment is null, not a genuine neutral zero.\n"
+              "  // Show the latest actually observed sentiment score.\n"
+              "  const sArr = (obj?.S?.length ? obj.S : obj?.sentiment) ?? [];\n"
+              "  const sentiment = lastFinite(sArr as unknown[]);"
+          )
+          s = replace_once_or_already(
+              s,
+              old_home_ticker,
+              new_home_ticker,
+              "const sentiment = lastFinite(sArr as unknown[]);",
+              "Home latest price/sentiment reader",
+          )
+
+          old_spx = (
+              '  const closeKey = latest ? Object.keys(latest).find((k) => k.startsWith("close_")) ?? null : null;\n'
+              '  const latestClose = latest && closeKey ? (latest as any)[closeKey] : null;'
+          )
+          new_spx = (
+              "  const closeKey =\n"
+              "    latest && Number.isFinite(Number((latest as any).close))\n"
+              '      ? "close"\n'
+              "      : latest\n"
+              '      ? Object.keys(latest).find((k) => k.startsWith("close_")) ?? null\n'
+              "      : null;\n"
+              "  const latestClose = latest && closeKey ? (latest as any)[closeKey] : null;"
+          )
+          s = replace_once_or_already(
+              s,
+              old_spx,
+              new_spx,
+              '      ? "close"',
+              "Home S&P 500 close reader",
+          )
+          p.write_text(s, encoding="utf-8")
+
+          # ---- Ticker route: never coerce null/missing sentiment into zero.
+          p = Path("apps/web/app/ticker/[symbol]/page.tsx")
+          s = p.read_text(encoding="utf-8")
+
+          old_series = (
+              "const numArr = (v: unknown): number[] => (Array.isArray(v) ? v.map((x) => Number(x) || 0) : []);\n"
+              "const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? \"\")) : []);\n"
+              "function buildSeries(obj: any): SeriesIn | null {\n"
+              "  const date = strArr(obj?.date ?? obj?.dates);\n"
+              "  const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);\n"
+              "  const sentiment = numArr(obj?.S ?? obj?.sentiment);\n"
+              "  const n = Math.min(date.length, price.length || Infinity, sentiment.length || Infinity);\n"
+              "  if (!Number.isFinite(n) || n === 0) return null;\n"
+              "  return { date: date.slice(0, n), price: price.slice(0, n), sentiment: sentiment.slice(0, n) };\n"
+              "}"
+          )
+          new_series = (
+              "const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? \"\")) : []);\n"
+              "const rawArr = (v: unknown): unknown[] => (Array.isArray(v) ? v : []);\n"
+              "function buildSeries(obj: any): SeriesIn | null {\n"
+              "  const dates = strArr(obj?.date ?? obj?.dates);\n"
+              "  const prices = rawArr(obj?.price ?? obj?.close ?? obj?.Close);\n"
+              "  const sentiments = rawArr(obj?.S ?? obj?.sentiment);\n"
+              "  const n = Math.min(dates.length, prices.length, sentiments.length);\n"
+              "  const date: string[] = [];\n"
+              "  const price: number[] = [];\n"
+              "  const sentiment: number[] = [];\n"
+              "\n"
+              "  for (let i = 0; i < n; i++) {\n"
+              "    const sRaw = sentiments[i];\n"
+              '    if (sRaw === null || sRaw === undefined || sRaw === "") continue;\n'
+              "    const p = Number(prices[i]);\n"
+              "    const s = Number(sRaw);\n"
+              "    if (!dates[i] || !Number.isFinite(p) || p <= 0 || !Number.isFinite(s)) continue;\n"
+              "    date.push(dates[i]);\n"
+              "    price.push(p);\n"
+              "    sentiment.push(s);\n"
+              "  }\n"
+              "  return date.length ? { date, price, sentiment } : null;\n"
+              "}"
+          )
+          s = replace_once_or_already(
+              s,
+              old_series,
+              new_series,
+              "const rawArr = (v: unknown): unknown[]",
+              "Ticker detail series reader",
+          )
+          p.write_text(s, encoding="utf-8")
+
+          print("Frontend readers patched successfully.")
+          PY
+
+          python -m py_compile scripts/repair_recent_sentiment.py scripts/rebuild_site_data.py
+
+      - name: Scan recent sentiment for stale zero files
+        id: sentiment_scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/repair_recent_sentiment.py \
+            --universe data/sp500.csv \
+            --data-root data \
+            --days-back 7 \
+            --manifest /tmp/sentiment-repair-manifest.json \
+            --scan-only
+
+          COUNT="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("/tmp/sentiment-repair-manifest.json")
+          arr=json.loads(p.read_text()) if p.exists() else []
+          print(len(arr))
+          PY
+          )"
+          echo "candidate_count=$COUNT" >> "$GITHUB_OUTPUT"
+          if [ "$COUNT" -gt 0 ]; then
+            echo "need_model=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "need_model=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Recent sentiment records requiring recompute: $COUNT"
+
+      - name: Cache Hugging Face model
+        if: steps.sentiment_scan.outputs.need_model == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: finbert-${{ runner.os }}-py311-v1
+
+      - name: Install FinBERT dependencies only when needed
+        if: steps.sentiment_scan.outputs.need_model == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          pip install --no-cache-dir "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
+          pip install --no-cache-dir "transformers==4.45.2" "tokenizers==0.20.3"
+
+      - name: Recompute stale recent sentiment
+        if: steps.sentiment_scan.outputs.need_model == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from scripts.repair_recent_sentiment import repair
+          p=Path("/tmp/sentiment-repair-manifest.json")
+          candidates=json.loads(p.read_text()) if p.exists() else []
+          repair(candidates)
+          PY
+
+      - name: Rebuild ticker, SPX and portfolio data correctly
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf apps/web/public/data/ticker
+          mkdir -p apps/web/public/data/ticker apps/web/public/data/SPX
+
+          python scripts/rebuild_site_data.py \
+            --universe data/sp500.csv \
+            --data-root data \
+            --public-root apps/web/public/data \
+            --days 365
+
+          python -m market_sentiment.cli.build_portfolio \
+            --data-root apps/web/public/data \
+            --universe data/sp500.csv \
+            --out apps/web/public/data/portfolio_strategy.json \
+            --rebalance weekly \
+            --signal blend \
+            --lag-days 1 \
+            --k 10 \
+            --long-short \
+            --gross-per-side 0.5 \
+            --transaction-cost-bps 10 \
+            --risk-lookback 20 \
+            --min-coverage 0.80 \
+            --max-weight 0.10 \
+            --selection-buffer 1.50
+
+          python src/market_sentiment/cli/build_research.py \
+            --data-root apps/web/public/data \
+            --out-dir apps/web/public/research
+
+          python scripts/validate_artifacts.py \
+            --sp500 apps/web/public/data/SPX/sp500_index.json \
+            --portfolio apps/web/public/data/portfolio_strategy.json \
+            --ticker-dir apps/web/public/data/ticker \
+            --minimum-tickers 25 \
+            --max-stale-days 10
+
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+
+          ticker_dir=Path("apps/web/public/data/ticker")
+          files=list(ticker_dir.glob("*.json"))
+          if not files:
+              raise SystemExit("No ticker files")
+
+          nonzero_latest=0
+          observed_latest=0
+          prices=0
+          for p in files:
+              o=json.loads(p.read_text())
+              pr=o.get("price") or []
+              if pr and math.isfinite(float(pr[-1])) and float(pr[-1]) > 0:
+                  prices += 1
+              s=o.get("S") or []
+              latest=next((x for x in reversed(s) if x is not None), None)
+              if latest is not None:
+                  observed_latest += 1
+                  if abs(float(latest)) > 1e-12:
+                      nonzero_latest += 1
+
+          spx=json.loads(Path("apps/web/public/data/SPX/sp500_index.json").read_text())
+          latest=spx["daily"][-1]
+          close=float(latest["close"])
+          if close < 1000:
+              raise SystemExit(f"SPX price scale invalid: {close}")
+          if prices < 25:
+              raise SystemExit(f"Too few tickers with prices: {prices}")
+          if observed_latest < 25:
+              raise SystemExit(f"Too few tickers with observed sentiment: {observed_latest}")
+          if nonzero_latest < 10:
+              raise SystemExit(
+                  f"Sentiment sanity check failed: only {nonzero_latest} latest observed scores are nonzero"
+              )
+          print(
+              f"DATA SANITY OK: ticker_prices={prices}, "
+              f"latest_observed_sentiment={observed_latest}, "
+              f"nonzero_latest_sentiment={nonzero_latest}, "
+              f"SPX_close={close:.2f}"
+          )
+          PY
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Strict Next.js production build
+        working-directory: apps/web
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci --no-audit --no-fund
+          rm -rf out .next
+          npm run build
+          test -s out/index.html
+          test -s out/sp500/index.html
+          touch out/.nojekyll
+          echo "Strict static export passed."
+
+      - name: Commit repaired source/raw data
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Never stage this workflow or any other .github/workflows file.
+          git add \
+            apps/web/app/page.tsx \
+            'apps/web/app/ticker/[symbol]/page.tsx' \
+            scripts/repair_recent_sentiment.py \
+            scripts/rebuild_site_data.py \
+            data
+
+          if git diff --cached --name-only | grep -q '^\.github/workflows/'; then
+            echo "ERROR: workflow file accidentally staged."
+            exit 1
+          fi
+
+          if git diff --cached --quiet; then
+            echo "No source/raw-data repair changes to commit."
+          else
+            git commit -m "fix: repair market prices and live sentiment [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload repaired site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/out
+
+  deploy:
+    needs: repair-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - name: Deploy repaired site to GitHub Pages
+        uses: actions/deploy-pages@v4
