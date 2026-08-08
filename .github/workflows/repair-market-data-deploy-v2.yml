@@ -1,0 +1,854 @@
+name: Repair Market Data & Deploy V2
+
+on:
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["Build Data & Deploy Site"]
+    types: [completed]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
+
+jobs:
+  repair-build:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deterministic data dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir "numpy>=1.26,<3" "pandas>=2.1,<3"
+
+      - name: Install self-contained runtime data repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/market-repair
+          cat > /tmp/market-repair/rebuild_runtime_site.py <<'PY'
+          #!/usr/bin/env python3
+          from __future__ import annotations
+
+          import argparse
+          import bisect
+          import csv
+          import json
+          import math
+          import os
+          import tempfile
+          from collections import defaultdict
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from typing import Any
+
+          import numpy as np
+          import pandas as pd
+
+
+          def load_json(path: Path, default: Any) -> Any:
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+
+
+          def safe_float(value: Any) -> float | None:
+              if value is None or isinstance(value, bool):
+                  return None
+              try:
+                  x = float(value)
+              except (TypeError, ValueError):
+                  return None
+              return x if math.isfinite(x) else None
+
+
+          def valid_day(value: Any) -> str | None:
+              s = str(value or "")[:10]
+              try:
+                  return datetime.strptime(s, "%Y-%m-%d").date().isoformat()
+              except Exception:
+                  return None
+
+
+          def atomic_json(path: Path, obj: Any) -> None:
+              path.parent.mkdir(parents=True, exist_ok=True)
+              fd, tmp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
+              try:
+                  with os.fdopen(fd, "w", encoding="utf-8") as f:
+                      json.dump(obj, f, ensure_ascii=False, indent=2, allow_nan=False)
+                      f.flush()
+                      os.fsync(f.fileno())
+                  os.replace(tmp_name, path)
+              except Exception:
+                  try:
+                      os.unlink(tmp_name)
+                  except FileNotFoundError:
+                      pass
+                  raise
+
+
+          def read_universe(path: Path) -> list[str]:
+              with path.open(newline="", encoding="utf-8") as f:
+                  rows = list(csv.DictReader(f))
+              if not rows:
+                  return []
+              col = next((c for c in rows[0].keys() if c.lower() in {"ticker", "symbol"}), None)
+              if col is None:
+                  return []
+              out: list[str] = []
+              seen: set[str] = set()
+              for row in rows:
+                  t = str(row.get(col) or "").strip().upper().replace(".", "-")
+                  if t and t not in seen:
+                      seen.add(t)
+                      out.append(t)
+              return out
+
+
+          def read_prices(base: Path) -> list[tuple[str, float]]:
+              arr = load_json(base / "price" / "daily.json", [])
+              if not isinstance(arr, list):
+                  return []
+              pmap: dict[str, float] = {}
+              for row in arr:
+                  if not isinstance(row, dict):
+                      continue
+                  d = valid_day(row.get("date"))
+                  c = safe_float(row.get("close"))
+                  if d and c is not None and c > 0:
+                      pmap[d] = c
+              return sorted(pmap.items())
+
+
+          def read_sentiment(base: Path) -> list[tuple[str, float, int]]:
+              sent_dir = base / "sentiment"
+              if not sent_dir.exists():
+                  return []
+              smap: dict[str, tuple[float, int]] = {}
+              for p in sent_dir.glob("*.json"):
+                  obj = load_json(p, {})
+                  if not isinstance(obj, dict):
+                      continue
+                  d = valid_day(obj.get("date") or p.stem)
+                  score = safe_float(obj.get("score_mean"))
+                  try:
+                      n_total = int(obj.get("n_total", 0) or 0)
+                  except Exception:
+                      n_total = 0
+                  # Critical: n_total == 0 means "no sentiment observation", not neutral sentiment.
+                  if d and score is not None and n_total > 0:
+                      smap[d] = (score, n_total)
+              return [(d, sc, n) for d, (sc, n) in sorted(smap.items())]
+
+
+          def prior_price(prices: list[tuple[str, float]], day: str) -> tuple[str, float] | None:
+              if not prices:
+                  return None
+              dates = [d for d, _ in prices]
+              i = bisect.bisect_right(dates, day) - 1
+              if i < 0:
+                  return None
+              return prices[i]
+
+
+          def map_sentiment_to_trading_days(
+              prices: list[tuple[str, float]], observations: list[tuple[str, float, int]]
+          ) -> dict[str, float]:
+              """Map calendar-day news sentiment to the same or next trading day, weighted by article count."""
+              if not prices or not observations:
+                  return {}
+              trading_days = [d for d, _ in prices]
+              bucket_num: dict[str, float] = defaultdict(float)
+              bucket_den: dict[str, float] = defaultdict(float)
+              for day, score, n in observations:
+                  i = bisect.bisect_left(trading_days, day)
+                  if i >= len(trading_days):
+                      continue
+                  td = trading_days[i]
+                  weight = max(1, int(n))
+                  bucket_num[td] += score * weight
+                  bucket_den[td] += weight
+              return {d: bucket_num[d] / bucket_den[d] for d in bucket_num if bucket_den[d] > 0}
+
+
+          def recent_news(base: Path, limit: int = 10) -> list[dict[str, Any]]:
+              rows: list[dict[str, Any]] = []
+              seen: set[tuple[str, str]] = set()
+              for provider in ("finnhub", "yfinance"):
+                  nd = base / "news" / provider
+                  if not nd.exists():
+                      continue
+                  for p in nd.glob("*.json"):
+                      arr = load_json(p, [])
+                      if not isinstance(arr, list):
+                          continue
+                      for item in arr:
+                          if not isinstance(item, dict):
+                              continue
+                          title = str(item.get("headline") or item.get("title") or "").strip()
+                          if not title:
+                              continue
+                          url = str(item.get("url") or item.get("link") or "").strip()
+                          ts = str(item.get("ts") or item.get("datetime") or item.get("published") or "")
+                          key = (title, url)
+                          if key in seen:
+                              continue
+                          seen.add(key)
+                          rows.append(
+                              {
+                                  "ts": ts,
+                                  "title": title,
+                                  "url": url,
+                                  "source": str(item.get("source") or provider),
+                                  "provider": provider,
+                              }
+                          )
+              rows.sort(key=lambda x: x.get("ts") or "", reverse=True)
+              return rows[:limit]
+
+
+          def rank_centered(s: pd.Series) -> pd.Series:
+              clean = pd.to_numeric(s, errors="coerce").replace([np.inf, -np.inf], np.nan)
+              return clean.rank(method="average", pct=True) - 0.5
+
+
+          def weighted_cross_section(parts: list[tuple[pd.Series, float]]) -> pd.Series:
+              names = sorted(set().union(*(set(s.index) for s, _ in parts)))
+              score = pd.Series(0.0, index=names, dtype=float)
+              denom = pd.Series(0.0, index=names, dtype=float)
+              for values, weight in parts:
+                  ranked = rank_centered(values).reindex(names)
+                  ok = ranked.notna()
+                  score.loc[ok] += ranked.loc[ok] * float(weight)
+                  denom.loc[ok] += abs(float(weight))
+              return score / denom.replace(0.0, np.nan)
+
+
+          def capped_inverse_vol(names: list[str], vol: pd.Series, gross: float = 0.5, cap: float = 0.10) -> pd.Series:
+              if not names:
+                  return pd.Series(dtype=float)
+              v = pd.to_numeric(vol.reindex(names), errors="coerce").replace([np.inf, -np.inf], np.nan)
+              fallback = float(v.dropna().median()) if v.notna().any() else 0.02
+              if not math.isfinite(fallback) or fallback <= 1e-8:
+                  fallback = 0.02
+              v = v.fillna(fallback).clip(lower=max(1e-4, fallback * 0.1))
+              raw = 1.0 / v
+              w = raw / raw.sum() * gross
+              cap = max(cap, gross / len(names))
+              fixed = pd.Series(False, index=w.index)
+              for _ in range(len(names) + 1):
+                  over = (~fixed) & (w > cap + 1e-12)
+                  if not over.any():
+                      break
+                  w.loc[over] = cap
+                  fixed.loc[over] = True
+                  remaining = gross - float(w.loc[fixed].sum())
+                  free = ~fixed
+                  if remaining <= 1e-12 or not free.any():
+                      break
+                  basis = raw.loc[free]
+                  w.loc[free] = basis / basis.sum() * remaining
+              if w.sum() > 0:
+                  w *= gross / float(w.sum())
+              return w
+
+
+          def metrics(rets: pd.Series, equity: pd.Series, turnover: pd.Series, cost: pd.Series) -> dict[str, float | None]:
+              r = pd.to_numeric(rets, errors="coerce").fillna(0.0)
+              eq = pd.to_numeric(equity, errors="coerce").ffill().fillna(1.0)
+              sample = r.iloc[1:] if len(r) > 1 else r
+              n = max(1, len(sample))
+              last = float(eq.iloc[-1]) if len(eq) else 1.0
+              ann_ret = last ** (252 / n) - 1 if last > 0 else np.nan
+              std = float(sample.std(ddof=1)) if len(sample) > 1 else np.nan
+              ann_vol = std * math.sqrt(252) if math.isfinite(std) else np.nan
+              mean = float(sample.mean()) if len(sample) else np.nan
+              sharpe = mean / std * math.sqrt(252) if math.isfinite(std) and std > 0 else np.nan
+              peak = eq.cummax().replace(0.0, np.nan)
+              dd = eq / peak - 1
+              mdd = float(dd.min()) if dd.notna().any() else np.nan
+              def js(x: float) -> float | None:
+                  return float(x) if math.isfinite(float(x)) else None
+              return {
+                  "cumulative_return": js(last - 1),
+                  "annualized_return": js(ann_ret),
+                  "annualized_vol": js(ann_vol),
+                  "sharpe": js(sharpe),
+                  "max_drawdown": js(mdd),
+                  "hit_rate": js(float((sample > 0).mean()) if len(sample) else np.nan),
+                  "num_days": int(len(sample)),
+                  "average_daily_turnover": js(float(turnover.mean()) if len(turnover) else 0.0),
+                  "total_trading_cost": js(float(cost.sum()) if len(cost) else 0.0),
+              }
+
+
+          def build_portfolio(
+              prices_by_ticker: dict[str, list[tuple[str, float]]],
+              sentiment_by_ticker: dict[str, list[tuple[str, float, int]]],
+              out: Path,
+          ) -> dict[str, Any]:
+              price_series: dict[str, pd.Series] = {}
+              signal_series: dict[str, pd.Series] = {}
+              for t, prices in prices_by_ticker.items():
+                  if len(prices) < 30:
+                      continue
+                  idx = pd.to_datetime([d for d, _ in prices])
+                  price_series[t] = pd.Series([p for _, p in prices], index=idx, dtype=float)
+                  mapped = map_sentiment_to_trading_days(prices, sentiment_by_ticker.get(t, []))
+                  signal_series[t] = pd.Series(mapped, dtype=float)
+                  signal_series[t].index = pd.to_datetime(signal_series[t].index)
+
+              if len(price_series) < 20:
+                  raise RuntimeError(f"Too few price series for portfolio: {len(price_series)}")
+
+              prices = pd.DataFrame(price_series).sort_index()
+              # Use only dates with broad market coverage, preventing sparse union tails.
+              min_names = max(20, int(len(price_series) * 0.50))
+              dates = prices.index[prices.notna().sum(axis=1) >= min_names]
+              prices = prices.reindex(dates)
+              rets = prices.pct_change(fill_method=None)
+              rets[(rets <= -0.95) | (rets >= 2.0)] = np.nan
+
+              signal = pd.DataFrame(index=dates, columns=prices.columns, dtype=float)
+              for t, s in signal_series.items():
+                  if t in signal.columns and not s.empty:
+                      common = s.index.intersection(signal.index)
+                      signal.loc[common, t] = s.loc[common]
+              # Last observed news signal is usable briefly, but never indefinitely.
+              signal = signal.ffill(limit=5)
+
+              sentiment_ma7 = signal.rolling(7, min_periods=3).mean()
+              sentiment_delta5 = sentiment_ma7 - sentiment_ma7.shift(5)
+              momentum20 = (1.0 + rets).rolling(20, min_periods=10).apply(np.prod, raw=True) - 1.0
+              volatility20 = rets.rolling(20, min_periods=10).std(ddof=1)
+              coverage20 = rets.rolling(20, min_periods=1).count() / 20.0
+
+              periods = dates.to_period("W-FRI")
+              rebalance_positions = set(pd.Series(range(len(dates)), index=dates).groupby(periods).max().astype(int).tolist())
+
+              targets: list[pd.Series] = []
+              target_dates: list[pd.Timestamp] = []
+              holdings: list[dict[str, Any]] = []
+              prev_longs: list[str] = []
+              prev_shorts: list[str] = []
+              k = 10
+              buffer_k = 15
+
+              for i, day in enumerate(dates):
+                  if i not in rebalance_positions:
+                      continue
+                  j = i - 1
+                  if j < 20 or i + 1 >= len(dates):
+                      continue
+                  score = weighted_cross_section(
+                      [
+                          (sentiment_ma7.iloc[j], 0.55),
+                          (sentiment_delta5.iloc[j], 0.15),
+                          (momentum20.iloc[j], 0.30),
+                          (volatility20.iloc[j], -0.10),
+                      ]
+                  )
+                  eligible = coverage20.iloc[j].ge(0.80)
+                  eligible &= rets.iloc[max(0, j - 1): j + 1].notna().any(axis=0)
+                  score = score[eligible.reindex(score.index).fillna(False)].dropna()
+                  if len(score) < 20:
+                      continue
+                  ordered = score.sort_values(ascending=False)
+                  long_candidates = [str(x) for x in ordered.head(buffer_k).index]
+                  longs = [x for x in prev_longs if x in long_candidates][:k]
+                  longs.extend(x for x in long_candidates if x not in longs)
+                  longs = longs[:k]
+
+                  short_pool = ordered.drop(index=longs, errors="ignore")
+                  short_candidates = [str(x) for x in short_pool.tail(buffer_k).index]
+                  shorts = [x for x in prev_shorts if x in short_candidates and x not in longs][:k]
+                  shorts.extend(x for x in reversed(short_candidates) if x not in shorts and x not in longs)
+                  shorts = shorts[:k]
+
+                  prev_longs, prev_shorts = list(longs), list(shorts)
+                  w = pd.Series(0.0, index=prices.columns, dtype=float)
+                  lw = capped_inverse_vol(longs, volatility20.iloc[j], gross=0.5, cap=0.10)
+                  sw = capped_inverse_vol(shorts, volatility20.iloc[j], gross=0.5, cap=0.10)
+                  w.loc[lw.index] = lw.values
+                  w.loc[sw.index] = -sw.values
+
+                  target_dates.append(day)
+                  targets.append(w)
+                  holdings.append(
+                      {
+                          "date": day.strftime("%Y-%m-%d"),
+                          "signal_date": dates[j].strftime("%Y-%m-%d"),
+                          "effective_date": dates[i + 1].strftime("%Y-%m-%d"),
+                          "long": longs,
+                          "short": shorts,
+                          "long_weights": {str(x): float(lw.loc[x]) for x in lw.index},
+                          "short_weights": {str(x): float(-sw.loc[x]) for x in sw.index},
+                      }
+                  )
+
+              if not targets:
+                  raise RuntimeError("No valid portfolio rebalance could be formed")
+
+              target_df = pd.DataFrame(targets, index=pd.DatetimeIndex(target_dates), columns=prices.columns)
+              # Full rebalance rows contain explicit zeros. FFill therefore preserves exits correctly.
+              weights = target_df.reindex(dates).ffill().fillna(0.0).shift(1).fillna(0.0)
+              tradable = weights.where(rets.notna(), 0.0)
+              gross_ret = (tradable * rets.fillna(0.0)).sum(axis=1)
+              turnover = weights.diff().abs().sum(axis=1)
+              if len(turnover):
+                  turnover.iloc[0] = weights.iloc[0].abs().sum()
+              cost = turnover * 0.001  # 10 bps
+              port_ret = gross_ret - cost
+              equity = (1.0 + port_ret).cumprod()
+
+              gross = weights.abs().sum(axis=1)
+              if float(gross.max()) > 1.000001:
+                  raise RuntimeError(f"Gross exposure exceeded 1.0: {float(gross.max())}")
+              if not np.isfinite(equity.to_numpy()).all() or (equity <= 0).any():
+                  raise RuntimeError("Portfolio equity contains invalid values")
+
+              payload = {
+                  "schema_version": 3,
+                  "meta": {
+                      "generated_at": datetime.now(timezone.utc).isoformat(),
+                      "rebalance": "weekly",
+                      "signal": "blend",
+                      "lag_days": 1,
+                      "k": 10,
+                      "long_short": True,
+                      "gross_per_side": 0.5,
+                      "transaction_cost_bps": 10.0,
+                      "risk_lookback": 20,
+                      "min_coverage": 0.80,
+                      "max_weight": 0.10,
+                      "selection_buffer": 1.50,
+                      "benchmark": None,
+                      "universe_size_used": int(len(price_series)),
+                      "methodology": "lagged sentiment+momentum blend, inverse-volatility sizing, next-trading-day execution, explicit exits, 10 bps costs",
+                  },
+                  "metrics": metrics(port_ret, equity, turnover, cost),
+                  "dates": [d.strftime("%Y-%m-%d") for d in dates],
+                  "equity": [float(x) for x in equity],
+                  "portfolio_return": [float(x) for x in port_ret.fillna(0.0)],
+                  "turnover": [float(x) for x in turnover.fillna(0.0)],
+                  "gross_exposure": [float(x) for x in gross],
+                  "net_exposure": [float(x) for x in weights.sum(axis=1)],
+                  "holdings": holdings,
+                  "benchmark_series": None,
+              }
+              atomic_json(out, payload)
+              return payload
+
+
+          def rebuild_spx(
+              data_root: Path,
+              public_root: Path,
+              sentiment_by_ticker: dict[str, list[tuple[str, float, int]]],
+          ) -> dict[str, Any]:
+              spx_path = data_root / "SPX" / "sp500_index.json"
+              heat_path = data_root / "SPX" / "sp500_heatmap.json"
+              spx = load_json(spx_path, {})
+              heat = load_json(heat_path, {})
+              if not isinstance(spx, dict) or not isinstance(spx.get("daily"), list) or not spx["daily"]:
+                  raise RuntimeError(f"Invalid or missing {spx_path}")
+              if not isinstance(heat, dict) or not isinstance(heat.get("tiles"), list) or not heat["tiles"]:
+                  raise RuntimeError(f"Invalid or missing {heat_path}")
+
+              weights: dict[str, float] = {}
+              for tile in heat["tiles"]:
+                  if not isinstance(tile, dict):
+                      continue
+                  t = str(tile.get("symbol") or "").strip().upper().replace(".", "-")
+                  w = safe_float(tile.get("weight"))
+                  if t and w is not None and w > 0:
+                      weights[t] = w
+
+              by_day: dict[str, dict[str, tuple[float, int]]] = defaultdict(dict)
+              latest_by_ticker: dict[str, tuple[str, float, int]] = {}
+              for t, obs in sentiment_by_ticker.items():
+                  for d, score, n in obs:
+                      by_day[d][t] = (score, n)
+                      if t not in latest_by_ticker or d > latest_by_ticker[t][0]:
+                          latest_by_ticker[t] = (d, score, n)
+
+              fixed_rows = 0
+              sentiment_days = 0
+              for row in spx["daily"]:
+                  if not isinstance(row, dict):
+                      continue
+                  d = valid_day(row.get("date"))
+                  close = safe_float(row.get("close"))
+                  if not d or close is None or close <= 1000:
+                      raise RuntimeError(f"Invalid SPX row: {row}")
+                  row["close_^GSPC"] = close
+                  fixed_rows += 1
+
+                  num = 0.0
+                  den = 0.0
+                  n_articles = 0
+                  for t, (score, n) in by_day.get(d, {}).items():
+                      w = weights.get(t)
+                      if w is None or w <= 0:
+                          continue
+                      num += w * score
+                      den += w
+                      n_articles += int(n)
+                  if den > 0:
+                      row["sentiment_cap_weighted"] = num / den
+                      row["sentiment_coverage_weight"] = den
+                      row["sentiment_articles"] = n_articles
+                      sentiment_days += 1
+                  else:
+                      row.pop("sentiment_cap_weighted", None)
+                      row.pop("sentiment_coverage_weight", None)
+                      row.pop("sentiment_articles", None)
+
+              spx["price_symbol"] = "^GSPC"
+              cands = [str(x) for x in spx.get("price_symbol_candidates", []) if str(x) != "SPY"]
+              spx["price_symbol_candidates"] = list(dict.fromkeys(["^GSPC", "^SPX", *cands]))
+              spx["sentiment_missing_means"] = "no qualifying news sentiment observation; never encoded as neutral zero"
+
+              asof = str(heat.get("asof") or spx["daily"][-1].get("date") or "")
+              valid_tile_sent = 0
+              nonzero_tile_sent = 0
+              for tile in heat["tiles"]:
+                  if not isinstance(tile, dict):
+                      continue
+                  t = str(tile.get("symbol") or "").strip().upper().replace(".", "-")
+                  same_day = by_day.get(asof, {}).get(t)
+                  if same_day is None:
+                      tile["sentiment"] = None
+                      tile["n_total"] = 0
+                      tile["sentiment_date"] = None
+                  else:
+                      score, n = same_day
+                      tile["sentiment"] = score
+                      tile["n_total"] = int(n)
+                      tile["sentiment_date"] = asof
+                      valid_tile_sent += 1
+                      if abs(score) > 1e-12:
+                          nonzero_tile_sent += 1
+              heat.setdefault("stats", {})
+              if isinstance(heat["stats"], dict):
+                  heat["stats"]["missing_sentiment"] = int(len(heat["tiles"]) - valid_tile_sent)
+                  heat["stats"]["observed_sentiment"] = int(valid_tile_sent)
+                  heat["stats"]["nonzero_observed_sentiment"] = int(nonzero_tile_sent)
+              heat["updated_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+              heat["sentiment_missing_means"] = "no same-day qualifying news sentiment; shown as gray, not 0"
+
+              atomic_json(spx_path, spx)
+              atomic_json(heat_path, heat)
+              atomic_json(public_root / "SPX" / "sp500_index.json", spx)
+              atomic_json(public_root / "SPX" / "sp500_heatmap.json", heat)
+
+              latest = spx["daily"][-1]
+              latest_close = float(latest["close"])
+              latest_sent = safe_float(latest.get("sentiment_cap_weighted"))
+              return {
+                  "spx_rows": fixed_rows,
+                  "spx_sentiment_days": sentiment_days,
+                  "spx_latest_date": latest["date"],
+                  "spx_latest_close": latest_close,
+                  "spx_latest_sentiment": latest_sent,
+                  "heatmap_observed": valid_tile_sent,
+                  "heatmap_nonzero": nonzero_tile_sent,
+              }
+
+
+          def build_public_tickers(
+              universe: list[str],
+              data_root: Path,
+              public_root: Path,
+          ) -> tuple[dict[str, list[tuple[str, float]]], dict[str, list[tuple[str, float, int]]], dict[str, Any]]:
+              ticker_dir = public_root / "ticker"
+              if ticker_dir.exists():
+                  for p in ticker_dir.glob("*.json"):
+                      p.unlink()
+              ticker_dir.mkdir(parents=True, exist_ok=True)
+
+              prices_by_ticker: dict[str, list[tuple[str, float]]] = {}
+              sentiment_by_ticker: dict[str, list[tuple[str, float, int]]] = {}
+              written: list[str] = []
+              latest_nonzero = 0
+              total_observed_rows = 0
+
+              for t in universe:
+                  base = data_root / t
+                  prices = read_prices(base)
+                  obs = read_sentiment(base)
+                  prices_by_ticker[t] = prices
+                  sentiment_by_ticker[t] = obs
+                  if not prices or not obs:
+                      continue
+
+                  dates: list[str] = []
+                  price: list[float] = []
+                  S: list[float] = []
+                  n_total: list[int] = []
+                  for d, score, n in obs:
+                      pp = prior_price(prices, d)
+                      if pp is None:
+                          continue
+                      _, px = pp
+                      dates.append(d)
+                      price.append(round(float(px), 4))
+                      S.append(round(float(score), 4))
+                      n_total.append(int(n))
+
+                  if len(dates) < 3:
+                      continue
+
+                  latest_market_date, latest_market_price = prices[-1]
+                  payload = {
+                      "schema_version": 4,
+                      "ticker": t,
+                      "dates": dates,
+                      "price": price,
+                      "S": S,
+                      "sentiment": S,
+                      "n_total": n_total,
+                      "latest_market_date": latest_market_date,
+                      "latest_market_price": round(float(latest_market_price), 4),
+                      "latest_sentiment_date": dates[-1],
+                      "news_total": int(sum(n_total)),
+                      "news_count": {"total": int(sum(n_total))},
+                      "news": recent_news(base, 10),
+                      "sentiment_semantics": "Only real FinBERT observations with n_total>0 are included; missing/no-news days are omitted, never converted to 0.",
+                  }
+                  atomic_json(ticker_dir / f"{t}.json", payload)
+                  written.append(t)
+                  total_observed_rows += len(S)
+                  if abs(S[-1]) > 1e-12:
+                      latest_nonzero += 1
+
+              atomic_json(public_root / "_tickers.json", written)
+              return prices_by_ticker, sentiment_by_ticker, {
+                  "ticker_files": len(written),
+                  "latest_nonzero": latest_nonzero,
+                  "observed_rows": total_observed_rows,
+              }
+
+
+          def validate(
+              public_root: Path,
+              ui_stats: dict[str, Any],
+              spx_stats: dict[str, Any],
+              portfolio: dict[str, Any],
+          ) -> None:
+              if ui_stats["ticker_files"] < 100:
+                  raise RuntimeError(f"Too few ticker snapshots: {ui_stats['ticker_files']}")
+              if ui_stats["latest_nonzero"] < 20:
+                  raise RuntimeError(f"Too few tickers with non-zero latest real sentiment: {ui_stats['latest_nonzero']}")
+              if spx_stats["spx_latest_close"] <= 1000:
+                  raise RuntimeError(f"SPX close scale invalid: {spx_stats['spx_latest_close']}")
+              if spx_stats["heatmap_observed"] < 10 or spx_stats["heatmap_nonzero"] < 5:
+                  raise RuntimeError(
+                      f"Too little same-day heatmap sentiment: observed={spx_stats['heatmap_observed']} "
+                      f"nonzero={spx_stats['heatmap_nonzero']}"
+                  )
+              if spx_stats["spx_latest_sentiment"] is None:
+                  raise RuntimeError("Latest SPX trading day has no valid cap-weighted sentiment")
+              if abs(float(spx_stats["spx_latest_sentiment"])) <= 1e-12:
+                  raise RuntimeError("Latest SPX sentiment is exactly zero; refusing suspicious deployment")
+              dates = portfolio.get("dates") or []
+              gross = portfolio.get("gross_exposure") or []
+              equity = portfolio.get("equity") or []
+              if len(dates) < 40 or len(dates) != len(equity):
+                  raise RuntimeError("Portfolio output is incomplete")
+              if gross and max(float(x) for x in gross) > 1.000001:
+                  raise RuntimeError("Portfolio gross exposure exceeds 1.0")
+
+              # Re-read SPX public compatibility field exactly as the current frontend expects it.
+              spx = load_json(public_root / "SPX" / "sp500_index.json", {})
+              latest = spx["daily"][-1]
+              if safe_float(latest.get("close_^GSPC")) != safe_float(latest.get("close")):
+                  raise RuntimeError("SPX compatibility key close_^GSPC is missing or inconsistent")
+
+              print(
+                  "DATA SANITY OK | "
+                  f"ticker_files={ui_stats['ticker_files']} "
+                  f"latest_nonzero_real_sentiment={ui_stats['latest_nonzero']} "
+                  f"heatmap_observed={spx_stats['heatmap_observed']} "
+                  f"heatmap_nonzero={spx_stats['heatmap_nonzero']} "
+                  f"SPX={spx_stats['spx_latest_close']:.2f} "
+                  f"SPX_sentiment={spx_stats['spx_latest_sentiment']:.4f} "
+                  f"portfolio_days={len(dates)} "
+                  f"portfolio_max_gross={max(gross) if gross else 0:.4f}"
+              )
+
+
+          def main() -> None:
+              ap = argparse.ArgumentParser()
+              ap.add_argument("--universe", default="data/sp500.csv")
+              ap.add_argument("--data-root", default="data")
+              ap.add_argument("--public-root", default="apps/web/public/data")
+              args = ap.parse_args()
+
+              universe = read_universe(Path(args.universe))
+              if len(universe) < 100:
+                  raise RuntimeError(f"Universe unexpectedly small: {len(universe)}")
+
+              data_root = Path(args.data_root)
+              public_root = Path(args.public_root)
+              public_root.mkdir(parents=True, exist_ok=True)
+
+              prices, sentiments, ui_stats = build_public_tickers(universe, data_root, public_root)
+              spx_stats = rebuild_spx(data_root, public_root, sentiments)
+              portfolio = build_portfolio(prices, sentiments, public_root / "portfolio_strategy.json")
+              validate(public_root, ui_stats, spx_stats, portfolio)
+
+
+          if __name__ == "__main__":
+              main()
+
+          PY
+          python -m py_compile /tmp/market-repair/rebuild_runtime_site.py
+
+      - name: Rebuild truthful market, sentiment and portfolio data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python /tmp/market-repair/rebuild_runtime_site.py             --universe data/sp500.csv             --data-root data             --public-root apps/web/public/data             | tee /tmp/market-repair/data-sanity.log
+
+          echo "### Market data repair" >> "$GITHUB_STEP_SUMMARY"
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/market-repair/data-sanity.log >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify generated JSON contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import math
+          from pathlib import Path
+
+          pub = Path("apps/web/public/data")
+
+          spx = json.loads((pub / "SPX" / "sp500_index.json").read_text())
+          latest = spx["daily"][-1]
+          close = float(latest["close"])
+          compat = float(latest["close_^GSPC"])
+          if close <= 1000 or abs(close - compat) > 1e-9:
+              raise SystemExit(f"SPX contract invalid: close={close}, close_^GSPC={compat}")
+
+          heat = json.loads((pub / "SPX" / "sp500_heatmap.json").read_text())
+          observed = [
+              t for t in heat.get("tiles", [])
+              if int(t.get("n_total", 0) or 0) > 0 and t.get("sentiment") is not None
+          ]
+          fake_zero = [
+              t for t in heat.get("tiles", [])
+              if int(t.get("n_total", 0) or 0) == 0 and t.get("sentiment") == 0
+          ]
+          if fake_zero:
+              raise SystemExit(f"Found {len(fake_zero)} no-news heatmap tiles incorrectly encoded as zero")
+          if len(observed) < 10:
+              raise SystemExit(f"Too few same-day observed heatmap sentiments: {len(observed)}")
+
+          tickers = json.loads((pub / "_tickers.json").read_text())
+          if len(tickers) < 100:
+              raise SystemExit(f"Too few ticker pages: {len(tickers)}")
+
+          checked = 0
+          for t in tickers:
+              obj = json.loads((pub / "ticker" / f"{t}.json").read_text())
+              dates = obj.get("dates") or []
+              price = obj.get("price") or []
+              sent = obj.get("S") or []
+              counts = obj.get("n_total") or []
+              if not (len(dates) == len(price) == len(sent) == len(counts)):
+                  raise SystemExit(f"Array contract mismatch in {t}")
+              if any(int(n) <= 0 for n in counts):
+                  raise SystemExit(f"No-news row leaked into public sentiment for {t}")
+              if any(not math.isfinite(float(x)) for x in sent):
+                  raise SystemExit(f"Non-finite sentiment in {t}")
+              checked += 1
+
+          port = json.loads((pub / "portfolio_strategy.json").read_text())
+          gross = [float(x) for x in port.get("gross_exposure", [])]
+          if not gross or max(gross) > 1.000001:
+              raise SystemExit(f"Portfolio gross exposure invalid: {max(gross) if gross else None}")
+          if len(port.get("dates", [])) != len(port.get("equity", [])):
+              raise SystemExit("Portfolio dates/equity length mismatch")
+
+          print(
+              f"JSON CONTRACTS OK | tickers={checked} "
+              f"same_day_sentiment_tiles={len(observed)} "
+              f"SPX={close:.2f} max_gross={max(gross):.4f}"
+          )
+          PY
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Strict Next.js production build
+        working-directory: apps/web
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_PUBLIC_BASE_PATH: ${{ env.NEXT_PUBLIC_BASE_PATH }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
+
+          rm -rf .next out
+          npm run build
+
+          test -s out/index.html
+          test -s out/sp500/index.html
+          test -s out/portfolio/index.html
+          touch out/.nojekyll
+
+          echo "STRICT STATIC BUILD OK"
+          find out -maxdepth 2 -type f -name 'index.html' | head -20
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload repaired site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/out
+
+  deploy:
+    needs: repair-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy repaired site to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
