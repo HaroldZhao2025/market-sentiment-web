@@ -1654,64 +1654,31 @@ jobs:
           PY
           cat > /tmp/market-final/upgrade_source.py <<'PY'
           #!/usr/bin/env python3
+          # Intentionally does NOT modify React/TypeScript source at runtime.
+          # The production pipeline fixes the homepage data contract instead.
           from __future__ import annotations
-          import json, re
+          import json
           from pathlib import Path
 
-
-          def patch_homepage() -> bool:
-              p=Path('apps/web/app/page.tsx')
-              if not p.exists():
-                  print('[SOURCE] homepage missing; skipping optional source hardening')
-                  return False
-              s=p.read_text(encoding='utf-8'); orig=s
-
-              # Null must never coerce to JavaScript zero in formatters.
-              for fn in ('fmtNum','fmtMoney','fmtPct'):
-                  pat=rf'(function {fn}\(x: unknown[^\n]*\): string \{{\n)(\s*)(const n = typeof x === "number" \? x : Number\(x\);)'
-                  repl=rf'\1\2if (x === null || x === undefined || x === "") return "—";\n\2\3'
-                  s,n=re.subn(pat,repl,s,count=1)
-                  if n: print(f'[SOURCE] hardened {fn} null handling')
-
-              # Make ticker sentiment arrays explicitly nullable if current source still says number[].
-              s=s.replace('  S?: number[];\n  sentiment?: number[];', '  S?: (number | null)[];\n  sentiment?: (number | null)[];')
-
-              # Read latest finite ticker sentiment rather than Number(null) => 0.
-              old='''  // prefer S (your strategy uses S a lot), else sentiment\n  const sArr = (obj?.S?.length ? obj.S : obj?.sentiment) ?? [];\n  const sentiment = sArr.length ? Number(sArr[sArr.length - 1]) : null;'''
-              new='''  // Prefer the latest real sentiment observation. Missing/null is not neutral zero.\n  const sArr = (obj?.S?.length ? obj.S : obj?.sentiment) ?? [];\n  let sentiment: number | null = null;\n  for (let i = sArr.length - 1; i >= 0; i--) {\n    const raw = sArr[i];\n    if (raw === null || raw === undefined || raw === "") continue;\n    const n = Number(raw);\n    if (Number.isFinite(n)) { sentiment = n; break; }\n  }'''
-              if old in s:
-                  s=s.replace(old,new,1); print('[SOURCE] hardened ticker latest sentiment reader')
-
-              # Prefer canonical close, but stay backward-compatible with close_* aliases.
-              old='''  const closeKey = latest ? Object.keys(latest).find((k) => k.startsWith("close_")) ?? null : null;\n  const latestClose = latest && closeKey ? (latest as any)[closeKey] : null;'''
-              new='''  const closeKey =\n    latest && Number.isFinite(Number((latest as any).close))\n      ? "close"\n      : latest\n        ? Object.keys(latest).find((k) => k.startsWith("close_")) ?? null\n        : null;\n  const latestClose = latest && closeKey ? (latest as any)[closeKey] : null;'''
-              if old in s:
-                  s=s.replace(old,new,1); print('[SOURCE] homepage now prefers canonical SPX close')
-
-              if s!=orig:
-                  p.write_text(s,encoding='utf-8'); return True
-              print('[SOURCE] homepage already hardened or layout changed; data compatibility still guarantees SPX display')
-              return False
-
-
           def upgrade_package() -> bool:
-              p=Path('apps/web/package.json')
-              obj=json.loads(p.read_text(encoding='utf-8'))
-              deps=obj.setdefault('dependencies',{})
-              changed=False
-              if deps.get('next')!='14.2.35':
+              p = Path("apps/web/package.json")
+              obj = json.loads(p.read_text(encoding="utf-8"))
+              deps = obj.setdefault("dependencies", {})
+              changed = False
+              if deps.get("next") != "14.2.35":
                   print(f"[SOURCE] Next.js {deps.get('next')} -> 14.2.35")
-                  deps['next']='14.2.35'; changed=True
+                  deps["next"] = "14.2.35"
+                  changed = True
               if changed:
-                  p.write_text(json.dumps(obj,indent=2)+"\n",encoding='utf-8')
+                  p.write_text(json.dumps(obj, indent=2) + "\n", encoding="utf-8")
               return changed
 
+          def main() -> None:
+              changed = upgrade_package()
+              print(f"[SOURCE] dependency_changed={changed}; homepage source left untouched")
 
-          def main():
-              a=patch_homepage(); b=upgrade_package()
-              print(f'[SOURCE] changed={a or b}')
-
-          if __name__=='__main__': main()
+          if __name__ == "__main__":
+              main()
           PY
           cat > /tmp/market-final/validate_final_data.py <<'PY'
           #!/usr/bin/env python3
@@ -1724,6 +1691,9 @@ jobs:
           def main():
               pub=Path('apps/web/public/data')
               spx=load(pub/'SPX'/'sp500_index.json'); daily=spx.get('daily') or []
+              root_spx=load(Path('data/SPX/sp500_index.json'))
+              if root_spx != spx:
+                  raise RuntimeError('Homepage/root SPX file differs from validated public SPX file')
               if not daily: raise RuntimeError('SPX daily empty')
               latest=daily[-1]
               close=float(latest.get('close'))
@@ -1885,6 +1855,43 @@ jobs:
           rm -rf apps/web/public/data/ticker apps/web/public/data/SPX /tmp/portfolio-input
           mkdir -p apps/web/public/data
           python /tmp/market-final/build_complete_site.py             --universe data/sp500.csv --data-root data             --public-root apps/web/public/data             --cache data/derived/sentiment_v2.json.gz             --portfolio-input /tmp/portfolio-input --days 365             | tee /tmp/market-final/site-data.log
+          # Homepage compatibility:
+          # apps/web/app/page.tsx currently checks ../../data/SPX/sp500_index.json first.
+          # Make that first-choice file the FINAL aggregate, not the earlier price-only file.
+          cp -f apps/web/public/data/SPX/sp500_index.json data/SPX/sp500_index.json
+          cp -f apps/web/public/data/SPX/sp500_heatmap.json data/SPX/sp500_heatmap.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          public_path = Path("apps/web/public/data/SPX/sp500_index.json")
+          root_path = Path("data/SPX/sp500_index.json")
+          public = json.loads(public_path.read_text(encoding="utf-8"))
+          root = json.loads(root_path.read_text(encoding="utf-8"))
+
+          if public != root:
+              raise SystemExit("SPX synchronization failed: root data/SPX differs from public/data/SPX")
+
+          daily = root.get("daily") or []
+          if not daily:
+              raise SystemExit("Homepage SPX contract invalid: no daily rows")
+          latest = daily[-1]
+          close = latest.get("close_^GSPC")
+          sentiment = latest.get("sentiment_cap_weighted")
+
+          if close is None or float(close) <= 1000:
+              raise SystemExit(f"Homepage SPX close invalid: {latest}")
+          if sentiment is None:
+              raise SystemExit(f"Homepage cap-weighted sentiment missing: {latest}")
+
+          print(
+              "HOMEPAGE SPX CONTRACT OK | "
+              f"date={latest.get('date')} "
+              f"close={float(close):.2f} "
+              f"cap_weighted={float(sentiment):.6f}"
+          )
+          PY
 
       - name: Build upgraded portfolio strategy
         shell: bash
@@ -1901,7 +1908,7 @@ jobs:
           mkdir -p apps/web/public/research
           python src/market_sentiment/cli/build_research.py             --data-root /tmp/research-input --out-dir apps/web/public/research --min-obs 80             | tee /tmp/market-final/research-build.log
 
-      - name: Apply safe source and dependency upgrades
+      - name: Apply dependency upgrade and run regression tests
         shell: bash
         run: |
           set -euo pipefail
@@ -1960,7 +1967,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f data
-          git add apps/web/app/page.tsx apps/web/package.json apps/web/package-lock.json || true
+          git add apps/web/package.json apps/web/package-lock.json || true
           if git diff --cached --name-only | grep -q '^\.github/workflows/'; then
             echo "ERROR: workflow file accidentally staged"; exit 1
           fi
@@ -1983,6 +1990,8 @@ jobs:
             echo "## Stable market pipeline"
             echo
             echo "- S&P price source: ^GSPC; public JSON includes canonical close and close_^GSPC compatibility alias."
+            echo "- Homepage SPX: final public aggregate is synchronized to data/SPX before build, matching the homepage first-read path."
+            echo "- React/TypeScript runtime rewriting: disabled."
             echo "- Sentiment: Finnhub + Yahoo cross-provider dedup; FinBERT P(positive)-P(negative); no-news is missing, not neutral zero."
             echo "- S&P aggregate: current market-cap weights renormalized only across tickers with real sentiment observations."
             echo "- Diagnostics: market-cap coverage, observed tickers, ticker coverage, unique-news count."
