@@ -371,7 +371,7 @@ jobs:
           from typing import Any
           from urllib.parse import urlsplit
 
-          ALGORITHM_VERSION = "dedup-finbert-v2"
+          ALGORITHM_VERSION = "dedup-finbert-v3-article-sentiment"
           SCHEMA_VERSION = 2
 
 
@@ -646,6 +646,7 @@ jobs:
                               "n_duplicates": int(sum(raw_counts.values())),
                               "n_finnhub_raw": int(raw_counts["finnhub"]),
                               "n_yfinance_raw": int(raw_counts["yfinance"]),
+                              "articles": [],
                           }
                           empty += 1
                           touched += 1
@@ -718,12 +719,32 @@ jobs:
               if len(predictions) != len(texts):
                   raise RuntimeError(f"FinBERT output length mismatch: {len(predictions)} != {len(texts)}")
 
-              score_by_key: dict[str, float] = {}
+              score_by_key: dict[str, dict[str, Any]] = {}
+
+              def sentiment_label(v: float) -> str:
+                  if v >= 0.4:
+                      return "Strong Positive"
+                  if v >= 0.1:
+                      return "Positive"
+                  if v <= -0.4:
+                      return "Strong Negative"
+                  if v <= -0.1:
+                      return "Negative"
+                  return "Neutral"
+
               for key, per in zip(keys, predictions):
                   if isinstance(per, dict):
                       per = [per]
                   labels = {str(x.get("label") or "").lower(): float(x.get("score") or 0.0) for x in per}
-                  score_by_key[key] = labels.get("positive", 0.0) - labels.get("negative", 0.0)
+                  pos = float(labels.get("positive", 0.0))
+                  neu = float(labels.get("neutral", 0.0))
+                  neg = float(labels.get("negative", 0.0))
+                  s_val = pos - neg
+                  score_by_key[key] = {
+                      "s": s_val,
+                      "sentiment_label": sentiment_label(s_val),
+                      "probs": {"pos": pos, "neu": neu, "neg": neg},
+                  }
 
               cache_path = Path(args.cache)
               cache = load_cache(cache_path)
@@ -731,11 +752,32 @@ jobs:
               for rec in manifest:
                   ticker = str(rec["ticker"])
                   day = str(rec["day"])
-                  scores = []
+                  scores: list[float] = []
+                  scored_articles: list[dict[str, Any]] = []
                   for article in rec.get("articles", []):
                       key = str(article.get("title_key") or "")
-                      if key in score_by_key:
-                          scores.append(float(score_by_key[key]))
+                      pred = score_by_key.get(key)
+                      if pred is None:
+                          continue
+                      s_val = float(pred["s"])
+                      scores.append(s_val)
+                      scored_articles.append(
+                          {
+                              "title_key": key,
+                              "title": str(article.get("title") or ""),
+                              "url": str(article.get("url") or ""),
+                              "providers": article.get("providers") or [],
+                              "sources": article.get("sources") or [],
+                              "raw_duplicates": int(article.get("raw_duplicates", 1) or 1),
+                              "s": round(s_val, 6),
+                              "sentiment_label": str(pred["sentiment_label"]),
+                              "probs": {
+                                  "pos": round(float(pred["probs"]["pos"]), 6),
+                                  "neu": round(float(pred["probs"]["neu"]), 6),
+                                  "neg": round(float(pred["probs"]["neg"]), 6),
+                              },
+                          }
+                      )
                   if not scores:
                       score_mean = None
                       score_std = None
@@ -763,6 +805,7 @@ jobs:
                       "n_duplicates": max(0, n_raw - int(n_total)),
                       "n_finnhub_raw": int(raw_counts.get("finnhub", 0) or 0),
                       "n_yfinance_raw": int(raw_counts.get("yfinance", 0) or 0),
+                      "articles": scored_articles,
                   }
 
               save_cache(cache_path, cache)
@@ -1004,8 +1047,31 @@ jobs:
                   return ""
 
 
-          def recent_news(data_root: Path, ticker: str, limit: int = 10) -> list[dict[str, Any]]:
-              rows = []
+          def recent_news(
+              data_root: Path,
+              ticker: str,
+              cache_records: dict[str, Any],
+              limit: int = 10,
+          ) -> list[dict[str, Any]]:
+              """Return only recent deduplicated headlines with article-level FinBERT scores."""
+              lookup: dict[str, dict[str, Any]] = {}
+              ticker_days = cache_records.get(ticker)
+              if isinstance(ticker_days, dict):
+                  for rec in ticker_days.values():
+                      if not isinstance(rec, dict):
+                          continue
+                      articles = rec.get("articles")
+                      if not isinstance(articles, list):
+                          continue
+                      for article in articles:
+                          if not isinstance(article, dict):
+                              continue
+                          key = str(article.get("title_key") or "")
+                          score = safe_float(article.get("s"))
+                          if key and score is not None:
+                              lookup[key] = article
+
+              rows: list[dict[str, Any]] = []
               seen_titles: set[str] = set()
               seen_urls: set[str] = set()
               for provider in ("finnhub", "yfinance"):
@@ -1020,26 +1086,40 @@ jobs:
                           if not isinstance(item, dict):
                               continue
                           title = str(item.get("headline") or item.get("title") or "").strip()
-                          tk = normalize_title(title)
-                          if not tk:
+                          title_key = normalize_title(title)
+                          if not title_key:
                               continue
+                          scored = lookup.get(title_key)
+                          if scored is None:
+                              continue
+
                           url = str(item.get("url") or item.get("link") or "").strip()
-                          uk = canonical_url(url)
-                          if tk in seen_titles or (uk and uk in seen_urls):
+                          url_key = canonical_url(url)
+                          if title_key in seen_titles or (url_key and url_key in seen_urls):
                               continue
-                          seen_titles.add(tk)
-                          if uk:
-                              seen_urls.add(uk)
-                          ts = str(item.get("ts") or "")
-                          rows.append(
-                              {
-                                  "ts": ts,
-                                  "title": title,
-                                  "url": url,
-                                  "source": str(item.get("source") or provider),
-                                  "provider": provider,
+                          seen_titles.add(title_key)
+                          if url_key:
+                              seen_urls.add(url_key)
+
+                          score = float(scored["s"])
+                          row: dict[str, Any] = {
+                              "ts": str(item.get("ts") or ""),
+                              "title": title,
+                              "url": url,
+                              "source": str(item.get("source") or provider),
+                              "provider": provider,
+                              "s": round(score, 6),
+                              "sentiment_label": str(scored.get("sentiment_label") or ""),
+                          }
+                          probs = scored.get("probs")
+                          if isinstance(probs, dict):
+                              row["probs"] = {
+                                  "pos": round(float(probs.get("pos", 0.0)), 6),
+                                  "neu": round(float(probs.get("neu", 0.0)), 6),
+                                  "neg": round(float(probs.get("neg", 0.0)), 6),
                               }
-                          )
+                          rows.append(row)
+
               rows.sort(key=lambda r: (r.get("ts") or "", r.get("title") or ""), reverse=True)
               return rows[:limit]
 
@@ -1135,7 +1215,7 @@ jobs:
                           "S is the last observed real FinBERT ticker sentiment carried forward for display only; "
                           "sentiment_observed and n_total identify dates with new unique-news observations."
                       ),
-                      "news": recent_news(data_root, ticker, limit=10),
+                      "news": recent_news(data_root, ticker, cache_records, limit=10),
                   }
                   atomic_json(ticker_pub / f"{ticker}.json", obj)
 
@@ -1725,6 +1805,31 @@ jobs:
               if price_ok<100 or real<100 or nonzero<20:
                   raise RuntimeError(f'Suspicious ticker data: price_ok={price_ok}, real={real}, nonzero={nonzero}')
 
+              displayed_news = 0
+              for t in tickers:
+                  p=pub/'ticker'/f'{t}.json'
+                  if not p.exists():
+                      continue
+                  obj=load(p)
+                  for item in (obj.get('news') or []):
+                      displayed_news += 1
+                      if not isinstance(item,dict):
+                          raise RuntimeError(f'Invalid displayed news item: {t}')
+                      score=item.get('s')
+                      label=str(item.get('sentiment_label') or '').strip()
+                      if score is None or not math.isfinite(float(score)) or not label:
+                          raise RuntimeError(f'Displayed news missing article sentiment: {t} {item}')
+                      probs=item.get('probs')
+                      if isinstance(probs,dict):
+                          vals=[float(probs.get(k,0.0)) for k in ('pos','neu','neg')]
+                          if any(not math.isfinite(v) for v in vals):
+                              raise RuntimeError(f'Invalid article sentiment probabilities: {t}')
+                          if abs(sum(vals)-1.0)>0.02:
+                              raise RuntimeError(f'Article probabilities do not sum to one: {t} {vals}')
+              if displayed_news < 50:
+                  raise RuntimeError(f'Too few article-scored displayed news items: {displayed_news}')
+              print(f'ARTICLE SENTIMENT OK | displayed_scored_news={displayed_news}')
+
               port=load(pub/'portfolio_strategy.json')
               dates=port.get('dates') or []; eq=port.get('equity') or []; gross=[float(x) for x in (port.get('gross_exposure') or [])]
               if not dates or len(dates)!=len(eq): raise RuntimeError('Portfolio dates/equity invalid')
@@ -1824,7 +1929,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/hf-home
-          key: finbert-prosus-dedup-v2-${{ runner.os }}-py311
+          key: finbert-prosus-dedup-v3-article-${{ runner.os }}-py311
 
       - name: Install FinBERT only when needed
         if: steps.sentiment_scan.outputs.need_model == 'true'
@@ -1993,6 +2098,7 @@ jobs:
             echo "- Homepage SPX: final public aggregate is synchronized to data/SPX before build, matching the homepage first-read path."
             echo "- React/TypeScript runtime rewriting: disabled."
             echo "- Sentiment: Finnhub + Yahoo cross-provider dedup; FinBERT P(positive)-P(negative); no-news is missing, not neutral zero."
+            echo "- News table: every displayed headline carries article-level FinBERT score, label, and pos/neutral/neg probabilities."
             echo "- S&P aggregate: current market-cap weights renormalized only across tickers with real sentiment observations."
             echo "- Diagnostics: market-cap coverage, observed tickers, ticker coverage, unique-news count."
             echo "- Portfolio: weekly, next-day execution, blend signal, inverse-volatility sizing, 10 bp cost, 10% position cap, gross <= 1.0."
