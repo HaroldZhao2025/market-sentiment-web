@@ -2,28 +2,29 @@
 
 > **Read this file before making any change to this repository.**
 >
-> This is the persistent handoff / memory for ChatGPT, Codex, Claude, future contributors, and the project owner. It records product intent, architecture, data semantics, authorship, completed phases, known failure modes, UI rules, and the current next tasks.
+> This is the persistent handoff for ChatGPT, Codex, Claude, future contributors, and the project owner. Current `main` is always the source of truth when this file conflicts with older conversation history.
 
 **Repository:** `HaroldZhao2025/market-sentiment-web`  
 **Live site:** `https://haroldzhao2025.github.io/market-sentiment-web/`  
-**Last updated:** 2026-08-12
+**Last updated:** 2026-08-12  
+**Current product phase:** Phase 3 Intelligence Engine completed; next product work begins from Phase 4 / targeted engineering hardening.
 
 ---
 
 ## 1. Product identity
 
-The project is evolving from a simple **Market Sentiment Website** into **Sentiment Intelligence**: a transparent, auditable market-intelligence and empirical-research platform built around S&P 500 news sentiment, price reactions, portfolio signals, and research artifacts.
+The product is **Sentiment Intelligence**: a transparent, auditable market-intelligence and empirical-research platform built around S&P 500 news sentiment, price reactions, constituent attribution, event intelligence, signal screening, portfolio research, and empirical studies.
 
-The long-run product principle is:
+Long-run principle:
 
-> Do not compete with LLMs by generating generic financial prose. Build proprietary, auditable, queryable market intelligence that LLMs and agents can consume.
+> Do not compete with LLMs by generating generic financial prose. Build proprietary, deterministic, auditable market data, event intelligence, screens, research, and backtests that LLMs and agents can consume.
 
-The site should answer increasingly valuable questions:
+The product should answer:
 
 1. What is the current market sentiment?
 2. What changed?
 3. Why did it change?
-4. Which stocks or sectors drove the move?
+4. Which stocks, industries, and sectors drove the move?
 5. Where is sentiment diverging from price?
 6. Has this type of event happened before?
 7. Does the signal predict anything historically?
@@ -33,31 +34,37 @@ The site should answer increasingly valuable questions:
 
 ## 2. Authorship
 
-Read authorship from the repository README; do not guess or overwrite it.
+Read authorship from `README.md`; do not guess or overwrite it.
 
-Current README attribution:
+Current attribution:
 
 - **Portfolio Strategy:** `leolin0407-cmyk` — `leolin0407@gmail.com`
 - **Market Sentiment, Website Design, Repo Setting:** `HaroldZhao2025` — `stevenfinch2022@outlook.com`
 
-The Portfolio webpage should visibly credit **leolin0407-cmyk** as the Portfolio Strategy author.
+The Portfolio page visibly credits:
+
+**Portfolio Strategy by leolin0407-cmyk**
 
 ---
 
-## 3. Main product surfaces
+## 3. Current product surfaces
 
-Current main routes:
+Main routes on current `main`:
 
 - `/` — market overview / market state
-- `/ticker/<symbol>` — ticker intelligence
-- `/sp500` — S&P 500 sentiment, index state, constituent intelligence
-- `/portfolio` — sentiment-driven portfolio strategy and benchmarks
-- `/research` — empirical research index
+- `/ticker/<symbol>` — ticker intelligence, article evidence, event drivers
+- `/screener` — cross-sectional Market Screener / Signal Explorer
+- `/sp500` — S&P 500 index state and clustered constituent bubble map
+- `/attribution` — company → industry → sector → index attribution
+- `/events` — Historical Event Memory / deterministic event intelligence
+- `/lab` — Interactive Research Lab
+- `/portfolio` — portfolio strategy and benchmark research
+- `/research` — empirical research library
 - `/research/<slug>` — individual empirical studies
 - `/data` — machine-readable data contracts
-- `/methodology` — methodology and caveats
+- `/methodology` — methodology, definitions, caveats
 
-The product name shown in the global shell is **Sentiment Intelligence**.
+Global product name: **Sentiment Intelligence**.
 
 ---
 
@@ -67,31 +74,23 @@ The product name shown in the global shell is **Sentiment Intelligence**.
 
 News comes primarily from Finnhub and Yahoo/yfinance sources in the current production pipeline.
 
-Cross-provider duplicate headlines are deduplicated before sentiment aggregation.
+Cross-provider duplicate headlines are deduplicated before aggregation.
 
-FinBERT article score is:
+FinBERT article score:
 
 `article_sentiment = P(positive) - P(negative)`
 
-Article-level records should preserve at least:
+Article-level records should preserve title, URL, source/provider, timestamp, article score `s`, sentiment label, and probability outputs when available.
 
-- title
-- URL
-- source/provider
-- timestamp
-- `s` article sentiment
-- `sentiment_label`
-- positive / neutral / negative probabilities when available
-
-Displayed ticker headlines should not silently show `-` because an article score was discarded upstream. If a displayed headline is intended to show sentiment, the data contract must contain a real article-level score.
+If ticker UI displays headline sentiment, the underlying article-level score must exist; do not silently discard it upstream.
 
 ### 4.2 No-news semantics
 
 **No news is missing, not neutral zero.**
 
-Do not convert a missing sentiment observation into `0.0` merely to simplify frontend code or index aggregation.
+A true neutral score near zero and an unobserved ticker/day are different states.
 
-A true neutral score near zero and an unobserved day are conceptually different.
+Do not coerce null/missing sentiment to `0.0` for convenience.
 
 ### 4.3 Ticker daily sentiment
 
@@ -99,301 +98,281 @@ Ticker-day sentiment is the equal-weight mean of unique scored article sentiment
 
 ### 4.4 S&P cap-weighted sentiment
 
-Only tickers with actual observed sentiment belong in the cap-weighted denominator:
+Only constituents with actual observed sentiment belong in the denominator:
 
 `S_t = sum(w_i * s_i for observed i) / sum(w_i for observed i)`
 
-Do not include fake zeros for no-news tickers.
-
-Important diagnostics should remain visible or available:
-
-- `sentiment_cap_weighted`
-- `sentiment_equal_weighted`
-- market-cap coverage
-- observed ticker count
-- ticker coverage
-- unique news count
+Diagnostics should preserve market-cap coverage, observed ticker count, ticker coverage, and unique-news count.
 
 ### 4.5 Contribution
 
-Ticker contribution to index sentiment is deterministic:
+Constituent contribution is deterministic and additive:
 
 `contribution_i = constituent_weight_i * observed_sentiment_i`
 
-Missing sentiment is not contribution zero in the conceptual model; it is missing evidence.
+Industry and sector contributions are sums of constituent contribution. Group sentiment is a separate renormalized statistic over observed weight within the group.
 
 ### 4.6 Price data
 
-S&P 500 index level should use `^GSPC` or equivalent true index source. Do not use SPY as a fallback for the index level because its scale is different.
+S&P 500 index level uses `^GSPC` or equivalent true index source. **Do not use SPY as an S&P index-level price substitute.**
 
-`yfinance` end dates are exclusive.
-
-`yfinance` may return MultiIndex columns; builders must normalize them robustly.
+`yfinance` end dates are exclusive and MultiIndex columns must be normalized robustly.
 
 ---
 
-## 5. Portfolio strategy — important implementation notes
+## 5. Portfolio strategy safeguards
 
-The portfolio implementation was upgraded from the earlier fragile version.
-
-Key rules currently intended:
+Portfolio rules currently intended include:
 
 - weekly rebalance on the last trading day
 - signal observed with lag
-- execute on the next trading day to reduce look-ahead bias
-- blend sentiment level/change with momentum and volatility where configured
+- execute on the next trading day
+- sentiment level/change blended with momentum/volatility where configured
 - inverse-volatility / risk-aware sizing
 - max individual weight constraints
 - selection buffer to reduce turnover
 - transaction costs
-- gross exposure bounded
-- correct exits (do not resurrect sold positions by converting zero weights to NaN before forward fill)
-- safer handling of missing/corrupt prices
-- metrics include Sharpe, Sortino/Calmar where available, drawdown, turnover, etc.
+- bounded gross exposure
+- correct exits; do not resurrect sold positions through zero→NaN forward-fill bugs
+- robust handling of missing/corrupt prices
+- risk/performance metrics such as Sharpe, drawdown, turnover and related diagnostics
 
-Do not reintroduce the old “ghost holdings” bug.
+Do not silently change portfolio calculations during UI work.
 
-Do not present a simple sentiment moving average as a literal **Predicted Return / Buy / Sell** forecast unless there is a real predictive model supporting that claim.
-
-The Portfolio page should explicitly credit:
-
-**Portfolio Strategy by leolin0407-cmyk**
+Do not relabel a simple sentiment moving average as a literal predicted return / Buy / Sell forecast.
 
 ---
 
-## 6. Completed product phases
+## 6. Completed phases
 
-### Phase 1 — merged into `main`
+### Phase 1 — completed
 
-Phase 1 repositioned the project as a market-intelligence product.
+Added the Sentiment Intelligence product shell, market-state homepage, ticker signal explorer, Data/Methodology pages, and frontend PR CI foundation.
 
-Completed work included:
+### Phase 2 — completed via PR #2
 
-- global dark product shell under **Sentiment Intelligence**
-- homepage organized around Market State / What Changed / Attention / Explore
-- robust frontend missing-value semantics
-- ticker search and signal explorer
-- positive / negative / divergence screening
-- sentiment-change sorting
-- Data page documenting public JSON contracts
-- Methodology page
-- lightweight frontend PR CI using TypeScript typecheck
+Added:
 
-### Phase 2 — merged into `main` via PR #2
-
-PR #2 title: **Phase 2: event intelligence and constituent attribution**
-
-Completed work included:
-
-- removed the unwanted “Agent-ready direction” marketing block
-- ticker **Why sentiment changed** section
-- deterministic event-theme grouping over scored headlines
-- positive and negative headline drivers
+- removal of unwanted generic marketing blocks
+- ticker **Why sentiment changed**
+- deterministic event-theme grouping
+- positive/negative headline drivers
 - removal of misleading Predicted Return / Buy / Sell presentation
-- S&P constituent contribution attribution
+- S&P contribution attribution
 - Contribution / Sentiment / 1D Return modes
-- S&P coverage, observed ticker count, unique-news evidence
-- Portfolio / Research visual alignment toward the dark product shell
-- dark compatibility layer for legacy components
+- coverage / observed ticker / unique-news evidence
+- dark product styling improvements
 
-Current deterministic ticker theme groups include concepts such as:
+### Phase 3 — Intelligence Engine — completed via PR #3 + validation/completion PR #4
 
-- Earnings & guidance
+Phase 3 added the following product and methodology upgrades.
+
+#### 6.3.1 Market Screener
+
+Route: `/screener`
+
+Implemented deterministic cross-sectional screening across:
+
+- ticker / company
+- sector / industry
+- constituent weight
+- price and 1D return
+- observed sentiment
+- sentiment change
+- sentiment-price divergence
+- dominant deterministic event theme
+- event novelty
+- source breadth
+- sentiment disagreement
+- unique-news evidence
+
+Missing sentiment remains missing and can be filtered explicitly.
+
+#### 6.3.2 Interactive Research Lab
+
+Route: `/lab`
+
+Signals:
+
+- sentiment level
+- sentiment change
+- sentiment-price divergence
+
+Forward horizons:
+
+- 1D
+- 3D
+- 5D
+- 20D
+
+Universes:
+
+- All
+- sector-specific subsets
+
+Quantile choices:
+
+- top/bottom 20%
+- top/bottom 25%
+- top/bottom 33%
+
+**Important corrected methodology:**
+
+The Lab does **not** pool all stock-dates into one quantile sort. For each trading date it:
+
+1. selects the available observed cross-section,
+2. ranks stocks by the chosen signal,
+3. forms equal-weight high- and low-signal groups,
+4. computes each group's forward return,
+5. computes that date's high-minus-low spread,
+6. summarizes the resulting daily spread series.
+
+Diagnostic outputs include:
+
+- mean high-signal return
+- mean low-signal return
+- mean long-short spread
+- simple t-stat across daily spreads
+- hit rate
+- horizon-adjusted diagnostic Sharpe
+- stock-day observation count
+- valid cross-sectional date count
+- sample range
+
+Overlapping forward horizons can create serial dependence. The displayed t-stat and Sharpe are diagnostics, **not publication-grade causal inference**. Formal research should add robust/clustered inference, transaction costs where relevant, and out-of-sample validation.
+
+Current divergence diagnostic:
+
+`observed sentiment - clip(1D return / 0.05, -1, 1)`
+
+#### 6.3.3 Historical Event Memory
+
+Route: `/events`
+
+Uses retained scored article history to classify deterministic event themes and attach observed price reactions.
+
+Current richer theme family includes concepts such as:
+
+- Earnings beat / miss
+- Guidance & outlook
 - Product & AI
-- Regulation & legal
-- Deals & capital
+- M&A & strategic deals
+- Capital return & financing
+- Regulation & antitrust
+- Legal & litigation
+- Management change
 - Operations & demand
-- Analyst & market
+- Analyst action
 
-These are deterministic keyword-group explanations, not LLM-generated narratives.
+Diagnostics include:
+
+- event count
+- ticker count
+- source count
+- average article sentiment
+- average 1D / 5D price reaction
+- positive 1D reaction rate
+- headline novelty
+- sentiment disagreement
+- recent retained examples
+
+Event Memory is bounded by retained ticker JSON article history; it is not a complete historical news database.
+
+#### 6.3.4 S&P Attribution V2
+
+Route: `/attribution`
+
+Implemented company → industry → sector → index contribution decomposition.
+
+Group contribution sums constituent `weight × observed sentiment`. Group sentiment renormalizes over observed weight inside the group.
+
+#### 6.3.5 S&P clustered bubble map
+
+`apps/web/app/sp500/Sp500HeatmapClient.tsx` no longer uses the rectangular binary treemap.
+
+Current visualization:
+
+- packed/clustered stock circles
+- bubble area approximately reflects constituent weight
+- sector attraction creates organic clusters
+- modes: Contribution / Sentiment / 1D Return
+- major-bubble labels
+- hover tooltip with ticker, company, sector, industry, weight, price, 1D return, sentiment, contribution, unique-news count
+- click bubble → ticker page
+- dependency-light deterministic layout; no D3 dependency added
+
+#### 6.3.6 UI completion
+
+Completed outstanding UI work:
+
+- ticker latest price uses green/red semantic color according to latest return
+- Screener price uses the same semantic direction color
+- Portfolio chart is natively dark; explicit white panel/light SVG background removed
+- Portfolio Strategy author credit is visible
+- Research shell/studies use stronger hierarchy and dedicated dark academic typography
+- README now identifies the product as Sentiment Intelligence and documents Phase 3
+
+#### 6.3.7 Intelligence code organization
+
+New Phase 3 deterministic application logic lives in normal source code:
+
+`apps/web/lib/intelligence.ts`
+
+It contains shared event taxonomy, screener metrics, Research Lab calculations, Event Memory calculations, and attribution logic. Ticker/heatmap file reads are cached during static generation to avoid thousands of repeated reads.
+
+**Legacy production-pipeline note:** `.github/workflows/pipeline.yml` still contains substantial older embedded Python heredoc logic. Do not add new Phase 3 business logic there. A broader extraction of legacy production scripts into normal Python modules should be handled as a dedicated infrastructure refactor with production-data regression validation rather than mixed casually into a UI/product PR.
 
 ---
 
-## 7. Current UI / design rules
+## 7. Frontend validation contract
 
-The visual direction is a dark, clean **market intelligence terminal**, not a light student-dashboard aesthetic.
+PR #4 corrected the frontend CI gate.
 
-Preferred design characteristics:
+`.github/workflows/frontend-ci.yml` now:
+
+1. sparse-checks out only `apps/web` to avoid downloading the entire ~large data repository for a frontend PR,
+2. runs `npm ci --no-audit --no-fund`,
+3. runs `npx tsc --noEmit`,
+4. runs strict `npm run build`.
+
+Do not restore `npm run build || true`.
+
+Latest Phase 3 completion PR validation passed both TypeScript and Next.js production build before merge.
+
+---
+
+## 8. Current UI / design rules
+
+Visual direction: dark, clean **market-intelligence terminal**, not a light student-dashboard aesthetic.
+
+Preferred:
 
 - dark neutral surfaces
 - subtle borders
 - low-noise hierarchy
-- readable metrics
+- readable metrics and research tables
 - restrained green/red semantic color
-- minimal decorative marketing blocks
-- charts should visually belong to the page rather than appear as white embedded images
+- charts visually integrated with the page
+- deterministic explanations rather than generic finance prose
 
-### Semantic colors
-
-For market values:
+Semantic market colors:
 
 - positive / rising price: green
 - negative / falling price: red
-- missing / neutral: neutral gray
+- flat / missing: neutral gray
 
-Price itself should visually reflect the latest price move where appropriate, not always remain white.
+Avoid:
 
-### Avoid
-
-- white chart background panels inside dark pages
-- large generic marketing statements that do not help analysis
-- excessive gradients or glows
-- tiny / weak research typography
-- visual components that look pasted in from an older design system
-
----
-
-## 8. Current next tasks — highest priority
-
-These requests are explicitly outstanding as of 2026-08-12 and should be handled next.
-
-### 8.1 Stock price coloring
-
-On ticker pages and any relevant market summaries:
-
-- if latest price return > 0: price should be green
-- if latest price return < 0: price should be red
-- if exactly zero or unavailable: neutral
-
-This applies both to the return and, where visually appropriate, the latest price number itself.
-
-### 8.2 Portfolio white chart background
-
-The outer Portfolio page was darkened, but `apps/web/components/PortfolioChart.tsx` still explicitly renders:
-
-- `bg-white`
-- a white / light SVG gradient background
-- light grid lines
-- legacy dark text classes
-
-Fix the chart component itself rather than relying only on a wrapper compatibility layer.
-
-The chart should have a transparent/dark surface and visually integrate with the Portfolio page.
-
-### 8.3 Research typography and dark styling
-
-Research index and research study internals still contain many legacy `zinc-*`, `bg-white`, and small-font styles.
-
-Important files:
-
-- `apps/web/app/research/ResearchIndexClient.tsx`
-- `apps/web/app/research/ResearchStudyClient.tsx`
-- `apps/web/app/research/[slug]/page.tsx`
-
-Upgrade typography and hierarchy:
-
-- clearer title scale
-- better body readability
-- less tiny gray text
-- dark cards/tables
-- consistent font weight and spacing
-- retain rigorous academic / empirical feel
-
-Do not change the empirical results just to redesign the page.
-
-### 8.4 S&P constituent visualization — replace rectangular treemap
-
-The current `Sp500HeatmapClient.tsx` still uses a rectangular binary treemap.
-
-The owner wants a **clustered bubble / packed-circle visualization**, not rectangles.
-
-Desired behavior:
-
-- each stock is a circle / bubble
-- bubble area approximately reflects market cap or constituent weight
-- bubbles appear as organic clusters / packed groups rather than a grid
-- ideally cluster by sector while preserving an understandable overall map
-- color modes remain:
-  - Contribution
-  - Sentiment
-  - 1D Return
-- hover should show a rich tooltip with:
-  - ticker
-  - company name
-  - sector / industry
-  - weight
-  - price
-  - 1D return
-  - sentiment
-  - contribution
-  - unique news count
-- clicking a bubble should navigate to the ticker page
-- interaction should feel smooth and premium
-- do not hide essential data behind hover only; labels for major bubbles are useful
-
-Prefer a dependency-light implementation. If adding D3 hierarchy / pack materially improves robustness, evaluate bundle / static export impact first.
-
-### 8.5 Portfolio author credit
-
-Add visible authorship to the Portfolio page using the repository README as the source of truth:
-
-**Portfolio Strategy by leolin0407-cmyk**
-
-Optionally show the email if appropriate, but the author name is required.
+- white chart panels inside dark pages
+- giant generic marketing blocks
+- excessive gradients/glows
+- tiny weak research typography
+- rectangular S&P treemap layouts
+- hiding all important information behind hover
 
 ---
 
-## 9. Future roadmap after current UI fixes
-
-### Phase 3 — Intelligence Engine
-
-Recommended high-value next phase:
-
-1. **Market Screener / Signal Explorer**
-   - combine sector, market cap, sentiment, sentiment change, price return, news evidence, divergence
-   - deterministic filters and sorting
-
-2. **Interactive Research Lab**
-   - selectable signal
-   - horizon (1D / 3D / 5D / 20D)
-   - universe / sector
-   - long-short quantiles
-   - controls
-   - sample period
-   - output coefficient/spread, t-stat, Sharpe, hit rate, drawdown, N
-
-3. **Historical Event Memory**
-   - map current event themes to historical comparable events
-   - report historical price reactions / distributions
-
-4. **Event Intelligence V2**
-   - richer taxonomy: earnings beat/miss/guidance, product launch/delay, regulation, M&A, management, legal, analyst actions
-   - novelty
-   - source/provider consensus
-   - disagreement
-   - price reaction
-
-5. **S&P Attribution V2**
-   - Company → Industry → Sector → Index decomposition
-
-6. **Pipeline modularization**
-   - move business logic out of giant embedded GitHub Actions Python blocks into real Python modules
-   - workflow should orchestrate, not contain the application
-
-### Phase 4 — LLM / agent layer
-
-Only after the deterministic engine is strong:
-
-- Ask the Market
-- natural-language screener
-- structured query conversion
-- API endpoints
-- agent/MCP interfaces
-
-LLM should parse/explain; deterministic code should compute facts and backtests.
-
-### Phase 5 — personalization
-
-- watchlists
-- saved screens
-- saved strategies
-- alerts
-- “since your last visit” intelligence
-- portfolio monitoring
-
----
-
-## 10. Public / generated data contracts
+## 9. Current generated/public data family
 
 Important generated artifacts include variants of:
 
@@ -405,87 +384,104 @@ Important generated artifacts include variants of:
 - `apps/web/public/research/index.json`
 - research overview / study JSON artifacts
 
-The website should consume stable contracts rather than repeatedly patching React code to accommodate inconsistent JSON.
+Stable data contracts are preferred to runtime React source patching.
 
 ---
 
-## 11. Pipeline history and known failure modes
+## 10. Known historical failure modes — never reintroduce
 
-This project experienced repeated failures because too much business logic was embedded directly inside `.github/workflows/pipeline.yml`.
+### Build suppression
 
-Important historical bugs / lessons:
-
-### Do not suppress builds
-
-Never restore:
+Never use:
 
 `npm run build || true`
 
-Build failures must fail the workflow.
+### Runtime frontend rewriting
 
-### Static Research routes
+Do not dynamically rewrite React/TypeScript source during the production workflow.
 
-Next static export needs valid `generateStaticParams()` for `/research/[slug]`.
+### Sentiment version mismatch
 
-Research artifacts must exist before the Next build when production slugs are expected.
+Do not duplicate incompatible algorithm-version constants across independent scripts. Current production env uses the shared `SENTIMENT_ALGORITHM_VERSION` contract.
 
-### Sentiment cache version mismatch
+### Missing → zero
 
-A previous failure occurred because the sentiment generator wrote V3 while a downstream site builder still hard-coded V2.
+Never convert absent news/sentiment into neutral zero simply for aggregation or display convenience.
 
-Preferred rule:
+### Article sentiment dropped
 
-- one shared algorithm-version source / environment contract
-- do not duplicate version strings across embedded scripts
+If the UI displays headline sentiment, article-level inference must remain available in the generated data/cache.
 
-### Missing Python imports
+### SPX source inconsistency
 
-A previous research builder used `os.environ` but forgot `import os`.
+Do not let stale root/public S&P files conflict, and never substitute SPY scale for the S&P index level.
 
-Static compile alone is not always enough; execute critical builders against synthetic fixtures when modifying them.
+### Portfolio ghost holdings
 
-### Frontend TypeScript runtime patching
+Do not convert explicit zero portfolio weights to NaN before forward fill; that can resurrect sold positions.
 
-A previous pipeline dynamically rewrote `page.tsx` and produced a type error comparing `number` to `""`.
+### Research static routes
 
-Do not mutate core React/TypeScript source at production runtime.
+Static export requires valid `generateStaticParams()` behavior even in clean frontend CI where production research artifacts may be absent.
 
-Frontend source changes belong in the repository and should pass PR CI.
+---
 
-### S&P root/public precedence
+## 11. Recommended next phase — Phase 4
 
-Historically the homepage could read a root `data/SPX/sp500_index.json` before the final public aggregate, causing price/sentiment inconsistencies.
+Phase 4 should add an LLM/agent interface **on top of**, not instead of, the deterministic engine.
 
-Data contracts should now be explicit and consistent. Avoid dual inconsistent copies.
+High-value directions:
 
-### Article sentiment dropped from cache
+1. **Ask the Market**
+   - natural-language question → structured deterministic query
+   - answer should cite the underlying ticker/event/screen/research evidence
 
-An earlier V2 aggregation retained only ticker-day means and discarded article-level sentiment. Ticker headline sentiment therefore displayed `-`.
+2. **Natural-language Screener**
+   - parse user constraints into the existing deterministic Screener fields
 
-Do not discard article-level inference if the UI needs article evidence.
+3. **API / agent interface**
+   - structured endpoints for market state, screener results, event memory, attribution, and research-lab specifications
+   - suitable for agent/MCP consumption
+
+4. **Historical Event Memory V2**
+   - persist a deeper historical event store instead of relying only on the latest retained ticker snapshot
+   - richer event-instance IDs and provider consensus
+
+5. **Research Lab V2**
+   - Newey-West / clustered inference where appropriate
+   - transaction-cost controls
+   - point-in-time universe/weights where available
+   - out-of-sample windows
+   - downloadable specification/results
+
+6. **Watchlists / alerts / personalization** after the deterministic API layer is stable.
+
+Engineering hardening can proceed in parallel, especially a dedicated migration of legacy embedded Python from `pipeline.yml` into tested `src/market_sentiment` modules.
 
 ---
 
 ## 12. Development workflow
 
-Preferred workflow for UI/product upgrades:
+For UI/product work:
 
-1. read `PROJECT_MEMORY.md`
-2. inspect the actual current `main` files
-3. create a clean branch from latest `main`
-4. make real file-level changes
-5. avoid runtime source patching in pipeline YAML
-6. open a focused PR
-7. let Frontend CI run TypeScript checks
-8. inspect CI result before claiming success
-9. merge only after review / validation
+1. read this file
+2. read current `README.md`
+3. inspect actual latest `main`
+4. create a clean branch from latest `main`
+5. make real file-level changes
+6. keep business logic in normal source files
+7. open a focused PR
+8. require Frontend CI typecheck + Next build success
+9. merge only after validation
 
 For production pipeline changes:
 
 - keep changes narrow
-- validate shell and Python syntax
-- execute important scripts with representative/synthetic data if possible
 - preserve strict build/deploy gates
+- validate shell and Python syntax
+- execute critical builders against representative/synthetic fixtures when possible
+- compare generated data contracts before/after
+- do not combine a giant pipeline migration with unrelated UI work
 
 ---
 
@@ -493,13 +489,13 @@ For production pipeline changes:
 
 The owner prefers:
 
-- direct implementation rather than long speculative upgrade checklists
-- fewer manual upload / retry loops
+- discussion mainly in Chinese
+- code and code comments in English
+- direct implementation instead of long speculative checklists
 - GitHub-connected changes when possible
-- clear explanations of real root causes
-- no claims of “100% guaranteed” without evidence
-- Chinese is generally preferred for discussion
-- code and code comments should remain in English
+- fewer manual upload/retry loops
+- clear root-cause explanations
+- no claims of success before CI/build/data validation
 
 If the owner says “直接改”, make the changes rather than returning only a proposal.
 
@@ -510,9 +506,9 @@ If the owner says “直接改”, make the changes rather than returning only a
 Before acting:
 
 1. Read this entire file.
-2. Read the current `README.md`.
-3. Inspect current `main`, because this memory may lag new commits.
-4. Treat `main` and current generated data contracts as the source of truth when they conflict with older conversation history.
-5. Preserve the core semantics: no-news ≠ zero; contribution is auditable; article evidence remains traceable; portfolio calculations should not be silently changed during UI work.
-
-Then continue from **Current Next Tasks** unless the owner gives a newer instruction.
+2. Read current `README.md`.
+3. Inspect current `main` and relevant generated data contracts.
+4. Treat `main` as source of truth over old conversation history.
+5. Preserve no-news ≠ zero, article evidence, deterministic contribution, true SPX pricing, and portfolio safeguards.
+6. Treat Phase 1, Phase 2, and Phase 3 as already completed unless current `main` proves otherwise.
+7. Continue from Phase 4 or from a newer instruction given by the owner.
