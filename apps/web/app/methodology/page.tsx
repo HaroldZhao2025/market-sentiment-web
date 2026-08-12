@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Methodology",
-  description: "How Sentiment Intelligence deduplicates news, scores FinBERT sentiment, aggregates the S&P 500, and evaluates portfolio signals.",
+  description: "How Sentiment Intelligence deduplicates news, scores FinBERT sentiment, aggregates the S&P 500, classifies events, and evaluates signals.",
 };
 
 const steps = [
@@ -29,13 +29,23 @@ const steps = [
   },
   {
     number: "05",
-    title: "Aggregate the index",
-    body: "Cap-weighted S&P sentiment renormalizes constituent market-cap weights only across tickers with an observed sentiment value that day. Coverage metrics accompany the aggregate.",
+    title: "Aggregate and attribute the index",
+    body: "Cap-weighted S&P sentiment renormalizes constituent weights only across observed tickers. Raw contribution remains constituent weight × observed sentiment and can be aggregated company → industry → sector → index.",
   },
   {
     number: "06",
-    title: "Evaluate, do not narrate",
-    body: "The portfolio and research layers use deterministic calculations with explicit execution lag, trading costs, exposure limits, and generated empirical artifacts.",
+    title: "Build deterministic event intelligence",
+    body: "Retained scored headlines are assigned to explicit keyword taxonomies such as earnings, guidance, product/AI, M&A, regulation, legal, management, operations, and analyst actions. Novelty and disagreement are diagnostics computed from retained evidence, not generated prose.",
+  },
+  {
+    number: "07",
+    title: "Evaluate signals cross-sectionally",
+    body: "The Research Lab ranks the available ticker cross-section separately on each trading date, forms equal-weight high- and low-signal groups, computes forward-return spreads, and summarizes the resulting daily spread series.",
+  },
+  {
+    number: "08",
+    title: "Treat backtests as research",
+    body: "Portfolio and research outputs use deterministic calculations with explicit execution lag, trading costs, exposure limits, and generated empirical artifacts. Diagnostic statistics are not causal claims or performance promises.",
   },
 ];
 
@@ -43,9 +53,12 @@ const definitions = [
   ["Article sentiment", "s = P(positive) − P(negative) from FinBERT."],
   ["Ticker-day sentiment", "Equal-weight mean of deduplicated, scored headlines for one company on one day."],
   ["Cap-weighted sentiment", "Weighted mean across observed constituents, with weights renormalized inside the observed set."],
+  ["Raw contribution", "Constituent index weight × observed ticker sentiment. It is additive across company, industry, and sector groupings."],
   ["Coverage", "How much of the constituent universe / market-cap weight has an observed signal on a given date."],
-  ["Divergence", "A diagnostic where news sentiment and contemporaneous price return have opposite signs."],
-  ["Research panel", "A reproducible daily panel derived from the same generated data family used by the website."],
+  ["Sentiment-price divergence", "Observed sentiment minus a clipped 1D price-return signal, where the return is scaled by 5% before clipping to [−1, 1]."],
+  ["Event novelty", "One minus the highest Jaccard token similarity between a retained headline and other retained headlines for the ticker snapshot."],
+  ["Sentiment disagreement", "Cross-headline standard deviation of article-level sentiment scores within the retained evidence set."],
+  ["Research Lab spread", "For each date: mean forward return of the high-signal cross-sectional quantile minus the low-signal quantile; summary statistics are then computed across dates."],
 ];
 
 export default function MethodologyPage() {
@@ -55,18 +68,20 @@ export default function MethodologyPage() {
         <div className="eyebrow">Trust layer</div>
         <h1 className="page-title mt-3">Every number should have a reason.</h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-neutral-400">
-          Sentiment is useful only when the observation, aggregation, and missing-data rules are explicit. This page documents the production logic at a product level so that a market score can be interpreted rather than merely consumed.
+          Sentiment is useful only when the observation, aggregation, event-classification, and missing-data rules are explicit. The intelligence engine is deterministic by design so market scores, screens, event diagnostics, and research results can be audited back to retained evidence.
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
           <Link href="/data" className="pill">Inspect data endpoints →</Link>
-          <Link href="/research" className="pill">Inspect empirical research →</Link>
+          <Link href="/screener" className="pill">Open Screener →</Link>
+          <Link href="/lab" className="pill">Open Research Lab →</Link>
+          <Link href="/research" className="pill">Empirical research →</Link>
         </div>
       </section>
 
       <section className="space-y-4">
         <div>
-          <h2 className="section-title">Signal pipeline</h2>
-          <p className="section-copy">The live website, index aggregate, ticker pages, portfolio, and research all originate from this evidence chain.</p>
+          <h2 className="section-title">Signal and intelligence pipeline</h2>
+          <p className="section-copy">The live website, index aggregate, ticker pages, event memory, screener, portfolio, and research all originate from this evidence chain.</p>
         </div>
         <div className="grid gap-3 lg:grid-cols-2">
           {steps.map((step) => (
@@ -86,51 +101,36 @@ export default function MethodologyPage() {
       <section className="space-y-4">
         <div>
           <h2 className="section-title">Core definitions</h2>
-          <p className="section-copy">These definitions are the intended semantic contract. A future model or agent should not reinterpret missing values or exposure rules.</p>
+          <p className="section-copy">These definitions are the semantic contract. A future model or agent should not reinterpret missing values, contribution, or the research sorting rules.</p>
         </div>
         <div className="table-shell overflow-x-auto">
           <table className="w-full min-w-[680px] text-left text-sm">
             <thead className="border-b border-white/10 bg-white/[0.025] text-[11px] uppercase tracking-[0.12em] text-neutral-500">
-              <tr>
-                <th className="px-5 py-3 font-medium">Concept</th>
-                <th className="px-5 py-3 font-medium">Definition</th>
-              </tr>
+              <tr><th className="px-5 py-3 font-medium">Concept</th><th className="px-5 py-3 font-medium">Definition</th></tr>
             </thead>
             <tbody className="divide-y divide-white/5">
               {definitions.map(([name, definition]) => (
-                <tr key={name}>
-                  <td className="px-5 py-4 font-medium text-neutral-200">{name}</td>
-                  <td className="px-5 py-4 leading-6 text-neutral-500">{definition}</td>
-                </tr>
+                <tr key={name}><td className="px-5 py-4 font-medium text-neutral-200">{name}</td><td className="px-5 py-4 leading-6 text-neutral-500">{definition}</td></tr>
               ))}
             </tbody>
           </table>
         </div>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-3">
-        <MethodCard
-          eyebrow="Missing data"
-          title="No news is not neutral news."
-          copy="A missing observation should remain visibly missing in the live signal layer. This prevents low-news days from mechanically pulling aggregate sentiment toward zero."
-        />
-        <MethodCard
-          eyebrow="Index weights"
-          title="Coverage is part of the estimate."
-          copy="An index score based on a small observed subset should not look as authoritative as a broad-coverage score. Market-cap coverage and observed ticker counts belong beside the estimate."
-        />
-        <MethodCard
-          eyebrow="Backtests"
-          title="Execution assumptions matter."
-          copy="Portfolio results should include signal lag, rebalance timing, exposure constraints, turnover, and transaction costs. Backtests are research outputs, not performance promises."
-        />
+      <section className="grid gap-4 lg:grid-cols-4">
+        <MethodCard eyebrow="Missing data" title="No news is not neutral news." copy="A missing observation remains missing. This prevents low-news tickers and days from mechanically pulling live aggregate sentiment toward zero." />
+        <MethodCard eyebrow="Attribution" title="Contribution is additive." copy="Company contribution is weight × observed sentiment. Sector and industry contributions sum those company-level terms; group sentiment is separately renormalized over observed group weight." />
+        <MethodCard eyebrow="Research Lab" title="Rank within each date." copy="Signal quantiles are formed independently for each trading date before forward returns are averaged. Different calendar dates are never pooled into one cross-sectional ranking." />
+        <MethodCard eyebrow="Backtests" title="Execution assumptions matter." copy="Portfolio results should include signal lag, rebalance timing, exposure constraints, turnover, and transaction costs. Backtests are research outputs, not performance promises." />
       </section>
 
       <section className="card border-amber-400/10 bg-amber-400/[0.035] p-6">
         <div className="text-sm font-semibold text-amber-200">Important limitations</div>
         <div className="mt-3 grid gap-3 text-sm leading-6 text-neutral-400 md:grid-cols-2">
           <p>Current-cap weighting is not a historical point-in-time constituent-weight dataset. Historical index analysis should not be interpreted as a fully reconstructed historical S&P 500 membership series.</p>
-          <p>Headline sentiment is a model-derived feature, not a causal interpretation of news. Source selection, headline wording, duplicate detection, and model calibration can all affect the signal.</p>
+          <p>Headline sentiment and event classes are model- and rule-derived features, not causal interpretations of news. Source selection, retained article history, duplicate detection, wording, and calibration can affect the signal.</p>
+          <p>Event Memory is bounded by the article history retained in current ticker artifacts. It is not a complete historical news archive, and event-reaction averages may contain overlapping or correlated observations.</p>
+          <p>Research Lab t-statistics and Sharpe ratios are diagnostics. Overlapping forward horizons can create serial dependence; publication-grade inference should use appropriate robust or clustered standard errors and out-of-sample validation.</p>
         </div>
       </section>
     </main>
