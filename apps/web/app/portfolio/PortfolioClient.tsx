@@ -74,12 +74,8 @@ export default function PortfolioClient({
     const rows = [
       { label: "Strategy", values: equity, strokeClassName: "stroke-emerald-400", dotClassName: "fill-emerald-400" },
     ];
-    if (benchmark_series?.equity?.length) {
-      rows.push({ label: benchmark_series.ticker || "SPY", values: benchmark_series.equity, strokeClassName: "stroke-sky-400", dotClassName: "fill-sky-400" });
-    }
-    if (sp500_price_series?.equity?.length) {
-      rows.push({ label: sp500_price_series.ticker || "SPX", values: sp500_price_series.equity, strokeClassName: "stroke-fuchsia-400", dotClassName: "fill-fuchsia-400" });
-    }
+    if (benchmark_series?.equity?.length) rows.push({ label: benchmark_series.ticker || "SPY", values: benchmark_series.equity, strokeClassName: "stroke-sky-400", dotClassName: "fill-sky-400" });
+    if (sp500_price_series?.equity?.length) rows.push({ label: sp500_price_series.ticker || "SPX", values: sp500_price_series.equity, strokeClassName: "stroke-fuchsia-400", dotClassName: "fill-fuchsia-400" });
     return rows;
   }, [equity, benchmark_series, sp500_price_series]);
 
@@ -87,12 +83,8 @@ export default function PortfolioClient({
     const rows = [
       { label: "Strategy DD", values: drawdown(equity), strokeClassName: "stroke-rose-400", dotClassName: "fill-rose-400" },
     ];
-    if (benchmark_series?.equity?.length) {
-      rows.push({ label: `${benchmark_series.ticker || "SPY"} DD`, values: drawdown(benchmark_series.equity), strokeClassName: "stroke-sky-400", dotClassName: "fill-sky-400" });
-    }
-    if (sp500_price_series?.equity?.length) {
-      rows.push({ label: `${sp500_price_series.ticker || "SPX"} DD`, values: drawdown(sp500_price_series.equity), strokeClassName: "stroke-fuchsia-400", dotClassName: "fill-fuchsia-400" });
-    }
+    if (benchmark_series?.equity?.length) rows.push({ label: `${benchmark_series.ticker || "SPY"} DD`, values: drawdown(benchmark_series.equity), strokeClassName: "stroke-sky-400", dotClassName: "fill-sky-400" });
+    if (sp500_price_series?.equity?.length) rows.push({ label: `${sp500_price_series.ticker || "SPX"} DD`, values: drawdown(sp500_price_series.equity), strokeClassName: "stroke-fuchsia-400", dotClassName: "fill-fuchsia-400" });
     return rows;
   }, [equity, benchmark_series, sp500_price_series]);
 
@@ -105,6 +97,9 @@ export default function PortfolioClient({
           <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
             Lagged sentiment and price signals translated into a reproducible long/short backtest with explicit benchmark comparison.
           </p>
+          <div className="mt-3 text-xs text-neutral-500">
+            Portfolio Strategy by <span className="font-semibold text-neutral-300">leolin0407-cmyk</span>
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
           {meta?.rebalance ? <span className="pill">Rebalance · {meta.rebalance}</span> : null}
@@ -116,109 +111,40 @@ export default function PortfolioClient({
       </section>
 
       <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-        <div className="kpi">
-          <div className="kpi-label">Current equity</div>
-          <div className="kpi-value">{lastEq.toFixed(4)}</div>
-          <div className="kpi-sub">Latest daily return · {pct(lastRet)}</div>
-        </div>
-        <div className="kpi">
-          <div className="kpi-label">Cumulative return</div>
-          <div className="kpi-value">{pct(metrics?.cumulative_return)}</div>
-          <div className="kpi-sub">Max drawdown · {pct(metrics?.max_drawdown)}</div>
-        </div>
-        <div className="kpi">
-          <div className="kpi-label">Annualized return</div>
-          <div className="kpi-value">{pct(metrics?.annualized_return)}</div>
-          <div className="kpi-sub">Volatility · {pct(metrics?.annualized_vol)}</div>
-        </div>
-        <div className="kpi">
-          <div className="kpi-label">Sharpe</div>
-          <div className="kpi-value">{num(metrics?.sharpe)}</div>
-          <div className="kpi-sub">Hit rate · {pct(metrics?.hit_rate)}</div>
-        </div>
-        <div className="kpi">
-          <div className="kpi-label">Universe used</div>
-          <div className="kpi-value">{meta?.universe_size_used?.toLocaleString() ?? "—"}</div>
-          <div className="kpi-sub">Long/short · {meta?.long_short ? "enabled" : "disabled"}</div>
-        </div>
+        <div className="kpi"><div className="kpi-label">Current equity</div><div className="kpi-value">{lastEq.toFixed(4)}</div><div className="kpi-sub">Latest daily return · {pct(lastRet)}</div></div>
+        <div className="kpi"><div className="kpi-label">Cumulative return</div><div className="kpi-value">{pct(metrics?.cumulative_return)}</div><div className="kpi-sub">Max drawdown · {pct(metrics?.max_drawdown)}</div></div>
+        <div className="kpi"><div className="kpi-label">Annualized return</div><div className="kpi-value">{pct(metrics?.annualized_return)}</div><div className="kpi-sub">Volatility · {pct(metrics?.annualized_vol)}</div></div>
+        <div className="kpi"><div className="kpi-label">Sharpe</div><div className="kpi-value">{num(metrics?.sharpe)}</div><div className="kpi-sub">Hit rate · {pct(metrics?.hit_rate)}</div></div>
+        <div className="kpi"><div className="kpi-label">Universe used</div><div className="kpi-value">{meta?.universe_size_used?.toLocaleString() ?? "—"}</div><div className="kpi-sub">Long/short · {meta?.long_short ? "enabled" : "disabled"}</div></div>
       </section>
 
       <section className="space-y-3">
-        <div>
-          <div className="eyebrow">Performance</div>
-          <h2 className="section-title mt-1">Strategy vs benchmarks</h2>
-          <p className="section-copy">All equity lines are normalized to 1.00 at the comparison start.</p>
-        </div>
-        <div className="legacy-dark ambient-panel p-4 md:p-6">
-          <PortfolioChart
-            dates={dates}
-            series={perfSeries}
-            height={520}
-            baselineValue={1}
-            yLabel="Equity (normalized)"
-            valueFormat={(v) => v.toFixed(4)}
-          />
-        </div>
+        <div><div className="eyebrow">Performance</div><h2 className="section-title mt-1">Strategy vs benchmarks</h2><p className="section-copy">All equity lines are normalized to 1.00 at the comparison start.</p></div>
+        <div className="ambient-panel p-4 md:p-6"><PortfolioChart dates={dates} series={perfSeries} height={520} baselineValue={1} yLabel="Equity (normalized)" valueFormat={(v) => v.toFixed(4)} /></div>
       </section>
 
       <section className="space-y-3">
-        <div>
-          <div className="eyebrow">Risk</div>
-          <h2 className="section-title mt-1">Drawdowns</h2>
-          <p className="section-copy">Peak-to-trough losses reveal how the strategy behaves when the signal is wrong or market regimes change.</p>
-        </div>
-        <div className="legacy-dark ambient-panel p-4 md:p-6">
-          <PortfolioChart
-            dates={dates}
-            series={ddSeries}
-            height={360}
-            baselineValue={0}
-            yLabel="Drawdown"
-            valueFormat={(v) => `${(v * 100).toFixed(2)}%`}
-          />
-        </div>
+        <div><div className="eyebrow">Risk</div><h2 className="section-title mt-1">Drawdowns</h2><p className="section-copy">Peak-to-trough losses reveal how the strategy behaves when the signal is wrong or market regimes change.</p></div>
+        <div className="ambient-panel p-4 md:p-6"><PortfolioChart dates={dates} series={ddSeries} height={360} baselineValue={0} yLabel="Drawdown" valueFormat={(v) => `${(v * 100).toFixed(2)}%`} /></div>
       </section>
 
       <section className="space-y-3">
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <div className="eyebrow">Current positioning</div>
-            <h2 className="section-title mt-1">Latest holdings</h2>
-          </div>
-          <button type="button" className="pill" onClick={() => setShowHoldings((v) => !v)}>
-            {showHoldings ? "Hide holdings" : "Show holdings"}
-          </button>
+          <div><div className="eyebrow">Current positioning</div><h2 className="section-title mt-1">Latest holdings</h2></div>
+          <button type="button" className="pill" onClick={() => setShowHoldings((v) => !v)}>{showHoldings ? "Hide holdings" : "Show holdings"}</button>
         </div>
-
-        {showHoldings ? (
-          latestHolding ? (
-            <div className="grid gap-3 lg:grid-cols-2">
-              <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.045] p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300">Long book</div>
-                  <div className="text-xs text-neutral-600">{latestHolding.date}</div>
-                </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {latestHolding.long.map((t) => (
-                    <Link key={t} href={chipHref(t)} className="rounded-full border border-emerald-400/15 bg-black/20 px-3 py-1.5 text-sm text-emerald-100 transition hover:bg-emerald-400/10">{t}</Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-rose-400/15 bg-rose-400/[0.045] p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-rose-300">Short book</div>
-                  <div className="text-xs text-neutral-600">{latestHolding.date}</div>
-                </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {latestHolding.short.length ? latestHolding.short.map((t) => (
-                    <Link key={t} href={chipHref(t)} className="rounded-full border border-rose-400/15 bg-black/20 px-3 py-1.5 text-sm text-rose-100 transition hover:bg-rose-400/10">{t}</Link>
-                  )) : <span className="text-sm text-neutral-600">Short leg disabled.</span>}
-                </div>
-              </div>
+        {showHoldings ? latestHolding ? (
+          <div className="grid gap-3 lg:grid-cols-2">
+            <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.045] p-5">
+              <div className="flex items-center justify-between gap-3"><div className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300">Long book</div><div className="text-xs text-neutral-600">{latestHolding.date}</div></div>
+              <div className="mt-4 flex flex-wrap gap-2">{latestHolding.long.map((t) => <Link key={t} href={chipHref(t)} className="rounded-full border border-emerald-400/15 bg-black/20 px-3 py-1.5 text-sm text-emerald-100 transition hover:bg-emerald-400/10">{t}</Link>)}</div>
             </div>
-          ) : <div className="card p-5 text-sm text-neutral-500">No holdings found in the generated strategy artifact.</div>
-        ) : null}
+            <div className="rounded-2xl border border-rose-400/15 bg-rose-400/[0.045] p-5">
+              <div className="flex items-center justify-between gap-3"><div className="text-xs font-semibold uppercase tracking-[0.14em] text-rose-300">Short book</div><div className="text-xs text-neutral-600">{latestHolding.date}</div></div>
+              <div className="mt-4 flex flex-wrap gap-2">{latestHolding.short.length ? latestHolding.short.map((t) => <Link key={t} href={chipHref(t)} className="rounded-full border border-rose-400/15 bg-black/20 px-3 py-1.5 text-sm text-rose-100 transition hover:bg-rose-400/10">{t}</Link>) : <span className="text-sm text-neutral-600">Short leg disabled.</span>}</div>
+            </div>
+          </div>
+        ) : <div className="card p-5 text-sm text-neutral-500">No holdings found in the generated strategy artifact.</div> : null}
       </section>
 
       <section className="card p-5 text-xs leading-6 text-neutral-500">

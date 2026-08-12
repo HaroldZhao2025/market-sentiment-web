@@ -13,7 +13,11 @@ export const metadata: Metadata = {
 
 const navItems = [
   { href: "/", label: "Market" },
+  { href: "/screener", label: "Screener" },
   { href: "/sp500", label: "S&P 500" },
+  { href: "/attribution", label: "Attribution" },
+  { href: "/events", label: "Events" },
+  { href: "/lab", label: "Lab" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/research", label: "Research" },
   { href: "/data", label: "Data" },
@@ -26,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
         <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/90 backdrop-blur-xl">
           <nav className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 md:px-6">
-            <Link href="/" className="group flex items-center gap-3">
+            <Link href="/" className="group flex shrink-0 items-center gap-3">
               <span className="grid h-9 w-9 place-items-center rounded-xl border border-emerald-400/30 bg-emerald-400/10 text-sm font-black text-emerald-300">
                 SI
               </span>
@@ -40,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </span>
             </Link>
 
-            <div className="flex max-w-[70vw] items-center gap-1 overflow-x-auto rounded-xl border border-white/10 bg-white/[0.03] p-1 text-sm">
+            <div className="flex max-w-[72vw] items-center gap-1 overflow-x-auto rounded-xl border border-white/10 bg-white/[0.03] p-1 text-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {navItems.map((item) => (
                 <Link
                   key={item.href}

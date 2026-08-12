@@ -29,48 +29,30 @@ body {
   .page-title { @apply text-3xl font-semibold tracking-tight text-white md:text-4xl; }
   .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-400; }
   .muted { @apply text-sm text-neutral-400; }
-
-  .card {
-    @apply rounded-2xl border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/10;
-  }
-  .card-hover {
-    @apply transition duration-200 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.055];
-  }
+  .card { @apply rounded-2xl border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/10; }
+  .card-hover { @apply transition duration-200 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.055]; }
   .kpi { @apply card p-5; }
   .kpi-label { @apply mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-neutral-500; }
   .kpi-value { @apply text-2xl font-semibold tabular-nums text-white md:text-3xl; }
   .kpi-sub { @apply mt-1 text-xs text-neutral-500; }
-
   .pill { @apply rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-neutral-300 transition; }
   .pill:hover { @apply border-white/20 bg-white/[0.07] text-white; }
   .pill-active { @apply border-emerald-400/30 bg-emerald-400/10 text-emerald-300; }
-
   .section-title { @apply text-lg font-semibold tracking-tight text-white md:text-xl; }
   .section-copy { @apply mt-1 max-w-3xl text-sm leading-6 text-neutral-400; }
-
   .table-shell { @apply overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025]; }
   .divider { @apply border-white/10; }
-
   .signal-positive { @apply text-emerald-400; }
   .signal-negative { @apply text-rose-400; }
   .signal-neutral { @apply text-neutral-400; }
-
-  .ambient-panel {
-    @apply rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.055] via-white/[0.025] to-transparent shadow-2xl shadow-black/20;
-  }
+  .ambient-panel { @apply rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.055] via-white/[0.025] to-transparent shadow-2xl shadow-black/20; }
 }
 
-/*
- * Compatibility layer for older chart/table components.  This lets the
- * legacy visualization code live inside the new dark product shell without
- * rewriting every SVG primitive in one release.
- */
 .legacy-dark .bg-white,
 .legacy-dark .bg-gray-50,
 .legacy-dark .bg-neutral-50 {
   background-color: rgba(255, 255, 255, 0.035) !important;
 }
-
 .legacy-dark .border,
 .legacy-dark .border-b,
 .legacy-dark .border-t,
@@ -79,7 +61,6 @@ body {
 .legacy-dark .border-gray-100 {
   border-color: rgba(255, 255, 255, 0.10) !important;
 }
-
 .legacy-dark .text-black,
 .legacy-dark .text-gray-900,
 .legacy-dark .text-neutral-900,
@@ -89,41 +70,85 @@ body {
 .legacy-dark .text-neutral-700 {
   color: #f5f5f5 !important;
 }
-
 .legacy-dark .text-gray-600,
 .legacy-dark .text-neutral-600,
 .legacy-dark .text-gray-500,
 .legacy-dark .text-neutral-500 {
   color: #a3a3a3 !important;
 }
-
 .legacy-dark button,
-.legacy-dark select {
-  color-scheme: dark;
-}
-
+.legacy-dark select { color-scheme: dark; }
 .legacy-dark select,
 .legacy-dark input {
   background: #171717 !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: #f5f5f5 !important;
 }
-
 .legacy-dark svg {
   background: rgba(255, 255, 255, 0.018) !important;
   border-color: rgba(255, 255, 255, 0.08) !important;
 }
-
-.legacy-dark svg text {
-  fill: #a3a3a3 !important;
-}
-
-.legacy-dark svg rect[fill="white"] {
-  fill: #171717 !important;
-  stroke: #404040 !important;
-}
-
+.legacy-dark svg text { fill: #a3a3a3 !important; }
+.legacy-dark svg rect[fill="white"] { fill: #171717 !important; stroke: #404040 !important; }
 .legacy-dark svg line[stroke="#e5e7eb"],
-.legacy-dark svg line[stroke="#f1f5f9"] {
-  stroke: #303036 !important;
+.legacy-dark svg line[stroke="#f1f5f9"] { stroke: #303036 !important; }
+
+/* Research has its own denser academic reading system. */
+.research-dark .bg-white,
+.research-dark .bg-zinc-50,
+.research-dark .bg-zinc-100 {
+  background-color: rgba(255, 255, 255, 0.035) !important;
+}
+.research-dark .border-zinc-100,
+.research-dark .border-zinc-200,
+.research-dark .border-zinc-300,
+.research-dark .border {
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+.research-dark .text-zinc-900,
+.research-dark .text-zinc-800,
+.research-dark .text-zinc-700 {
+  color: #f4f4f5 !important;
+}
+.research-dark .text-zinc-600 {
+  color: #b4b4bb !important;
+}
+.research-dark .text-zinc-500,
+.research-dark .text-zinc-400 {
+  color: #85858f !important;
+}
+.research-dark input,
+.research-dark select,
+.research-dark button {
+  color-scheme: dark;
+}
+.research-dark input,
+.research-dark select {
+  background: rgba(0, 0, 0, 0.28) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f4f4f5 !important;
+}
+.research-dark h2,
+.research-dark h3 {
+  letter-spacing: -0.018em;
+}
+.research-dark p,
+.research-dark li,
+.research-dark td {
+  line-height: 1.65;
+}
+.research-dark table {
+  font-variant-numeric: tabular-nums;
+}
+.research-dark thead {
+  background: rgba(255, 255, 255, 0.025) !important;
+}
+.research-dark tbody tr:hover {
+  background: rgba(255, 255, 255, 0.022);
+}
+.research-dark svg {
+  background: rgba(0, 0, 0, 0.16) !important;
+}
+.research-dark svg text {
+  fill: #a1a1aa !important;
 }
