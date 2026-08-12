@@ -22,6 +22,7 @@ env:
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
   HF_HUB_DISABLE_TELEMETRY: "1"
   TOKENIZERS_PARALLELISM: "false"
+  SENTIMENT_ALGORITHM_VERSION: "dedup-finbert-v3-article-sentiment"
 
 jobs:
   build:
@@ -371,7 +372,7 @@ jobs:
           from typing import Any
           from urllib.parse import urlsplit
 
-          ALGORITHM_VERSION = "dedup-finbert-v3-article-sentiment"
+          ALGORITHM_VERSION = os.environ.get("SENTIMENT_ALGORITHM_VERSION", "dedup-finbert-v3-article-sentiment")
           SCHEMA_VERSION = 2
 
 
@@ -843,7 +844,7 @@ jobs:
               if bad_no_news:
                   raise RuntimeError(f"{bad_no_news} no-news records incorrectly contain a numeric score")
               if observed < 100:
-                  raise RuntimeError(f"Too few observed sentiment records in v2 cache: {observed}")
+                  raise RuntimeError(f"Too few observed sentiment records in sentiment cache: {observed}")
               if nonzero < max(20, int(observed * 0.05)):
                   raise RuntimeError(f"Suspicious sentiment cache: only {nonzero}/{observed} observed records are nonzero")
               print(
@@ -1497,8 +1498,16 @@ jobs:
               if len(universe) < 100:
                   raise RuntimeError(f"Universe unexpectedly small: {len(universe)}")
               cache = load_cache(Path(args.cache))
-              if cache.get("algorithm_version") != "dedup-finbert-v2":
-                  raise RuntimeError(f"Unexpected sentiment cache version: {cache.get('algorithm_version')}")
+              expected_algorithm = os.environ.get(
+                  "SENTIMENT_ALGORITHM_VERSION",
+                  "dedup-finbert-v3-article-sentiment",
+              )
+              actual_algorithm = str(cache.get("algorithm_version") or "")
+              if actual_algorithm != expected_algorithm:
+                  raise RuntimeError(
+                      f"Unexpected sentiment cache version: {actual_algorithm!r}; "
+                      f"expected {expected_algorithm!r}"
+                  )
               cache_records = cache.get("records")
               if not isinstance(cache_records, dict):
                   raise RuntimeError("Sentiment v2 cache has no records")
@@ -1653,9 +1662,19 @@ jobs:
               args = ap.parse_args()
 
               cache = load_cache(Path(args.cache))
+              expected_algorithm = os.environ.get(
+                  "SENTIMENT_ALGORITHM_VERSION",
+                  "dedup-finbert-v3-article-sentiment",
+              )
+              actual_algorithm = str(cache.get("algorithm_version") or "")
+              if actual_algorithm != expected_algorithm:
+                  raise RuntimeError(
+                      f"Research sentiment cache version mismatch: {actual_algorithm!r}; "
+                      f"expected {expected_algorithm!r}"
+                  )
               records = cache.get("records")
               if not isinstance(records, dict):
-                  raise RuntimeError("No sentiment_v2 records available for research")
+                  raise RuntimeError("No sentiment cache records available for research")
               universe = read_universe(Path(args.universe))
               cutoff = (datetime.now(timezone.utc).date() - timedelta(days=max(180, int(args.days)))).isoformat()
 
@@ -1953,6 +1972,53 @@ jobs:
           set -euo pipefail
           python /tmp/market-final/build_sentiment_v2.py validate             --cache data/derived/sentiment_v2.json.gz | tee /tmp/market-final/sentiment-validate.log
 
+          python - <<'PY'
+          import gzip
+          import json
+          import os
+          from pathlib import Path
+
+          cache_path = Path("data/derived/sentiment_v2.json.gz")
+          expected = os.environ["SENTIMENT_ALGORITHM_VERSION"]
+          with gzip.open(cache_path, "rt", encoding="utf-8") as f:
+              cache = json.load(f)
+          actual = str(cache.get("algorithm_version") or "")
+          if actual != expected:
+              raise SystemExit(
+                  f"SENTIMENT CONTRACT FAIL | cache={actual!r} expected={expected!r}"
+              )
+          records = cache.get("records")
+          if not isinstance(records, dict) or not records:
+              raise SystemExit("SENTIMENT CONTRACT FAIL | cache records missing")
+          article_rows = 0
+          scored_article_rows = 0
+          for days in records.values():
+              if not isinstance(days, dict):
+                  continue
+              for rec in days.values():
+                  if not isinstance(rec, dict):
+                      continue
+                  articles = rec.get("articles")
+                  if not isinstance(articles, list):
+                      continue
+                  article_rows += len(articles)
+                  scored_article_rows += sum(
+                      1 for a in articles
+                      if isinstance(a, dict)
+                      and a.get("s") is not None
+                      and str(a.get("sentiment_label") or "").strip()
+                  )
+          if scored_article_rows < 50:
+              raise SystemExit(
+                  f"SENTIMENT CONTRACT FAIL | only {scored_article_rows} scored article rows"
+              )
+          print(
+              "SENTIMENT CONTRACT OK | "
+              f"version={actual} records_tickers={len(records)} "
+              f"article_rows={article_rows} scored_article_rows={scored_article_rows}"
+          )
+          PY
+
       - name: Build corrected ticker and S&P site data
         shell: bash
         run: |
@@ -2098,6 +2164,7 @@ jobs:
             echo "- Homepage SPX: final public aggregate is synchronized to data/SPX before build, matching the homepage first-read path."
             echo "- React/TypeScript runtime rewriting: disabled."
             echo "- Sentiment: Finnhub + Yahoo cross-provider dedup; FinBERT P(positive)-P(negative); no-news is missing, not neutral zero."
+            echo "- Sentiment cache contract: $SENTIMENT_ALGORITHM_VERSION (single shared version for generator, site, and research)."
             echo "- News table: every displayed headline carries article-level FinBERT score, label, and pos/neutral/neg probabilities."
             echo "- S&P aggregate: current market-cap weights renormalized only across tickers with real sentiment observations."
             echo "- Diagnostics: market-cap coverage, observed tickers, ticker coverage, unique-news count."
