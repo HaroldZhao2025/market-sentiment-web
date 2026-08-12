@@ -4,7 +4,7 @@ A lightweight pipeline + static website for tracking **news-based sentiment** ac
 
 ## Author
 - Portfolio Strategy by **leolin0407-cmyk** (leolin0407@gmail.com)
-- Market Sentiment, Website Design, Repo Setting by **HaroldZhao2025** (sz695@cornell.edu)
+- Market Sentiment, Website Design, Repo Setting by **HaroldZhao2025** (stevenfinch2022@outlook.com)
 
 ## Website
 https://haroldzhao2025.github.io/market-sentiment-web/
