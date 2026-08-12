@@ -12,9 +12,11 @@ html {
 
 body {
   background:
-    radial-gradient(circle at 15% -10%, rgba(16, 185, 129, 0.10), transparent 28rem),
-    radial-gradient(circle at 88% 4%, rgba(59, 130, 246, 0.08), transparent 30rem),
-    #0a0a0a;
+    radial-gradient(circle at 12% -8%, rgba(16, 185, 129, 0.14), transparent 32rem),
+    radial-gradient(circle at 88% 2%, rgba(59, 130, 246, 0.10), transparent 34rem),
+    radial-gradient(circle at 50% 115%, rgba(139, 92, 246, 0.08), transparent 38rem),
+    linear-gradient(180deg, #090909 0%, #0b0b0d 52%, #08090a 100%);
+  background-attachment: fixed;
 }
 
 ::selection {
@@ -52,4 +54,76 @@ body {
   .signal-positive { @apply text-emerald-400; }
   .signal-negative { @apply text-rose-400; }
   .signal-neutral { @apply text-neutral-400; }
+
+  .ambient-panel {
+    @apply rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.055] via-white/[0.025] to-transparent shadow-2xl shadow-black/20;
+  }
+}
+
+/*
+ * Compatibility layer for older chart/table components.  This lets the
+ * legacy visualization code live inside the new dark product shell without
+ * rewriting every SVG primitive in one release.
+ */
+.legacy-dark .bg-white,
+.legacy-dark .bg-gray-50,
+.legacy-dark .bg-neutral-50 {
+  background-color: rgba(255, 255, 255, 0.035) !important;
+}
+
+.legacy-dark .border,
+.legacy-dark .border-b,
+.legacy-dark .border-t,
+.legacy-dark .border-neutral-200,
+.legacy-dark .border-gray-200,
+.legacy-dark .border-gray-100 {
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.legacy-dark .text-black,
+.legacy-dark .text-gray-900,
+.legacy-dark .text-neutral-900,
+.legacy-dark .text-gray-800,
+.legacy-dark .text-neutral-800,
+.legacy-dark .text-gray-700,
+.legacy-dark .text-neutral-700 {
+  color: #f5f5f5 !important;
+}
+
+.legacy-dark .text-gray-600,
+.legacy-dark .text-neutral-600,
+.legacy-dark .text-gray-500,
+.legacy-dark .text-neutral-500 {
+  color: #a3a3a3 !important;
+}
+
+.legacy-dark button,
+.legacy-dark select {
+  color-scheme: dark;
+}
+
+.legacy-dark select,
+.legacy-dark input {
+  background: #171717 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f5f5f5 !important;
+}
+
+.legacy-dark svg {
+  background: rgba(255, 255, 255, 0.018) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.legacy-dark svg text {
+  fill: #a3a3a3 !important;
+}
+
+.legacy-dark svg rect[fill="white"] {
+  fill: #171717 !important;
+  stroke: #404040 !important;
+}
+
+.legacy-dark svg line[stroke="#e5e7eb"],
+.legacy-dark svg line[stroke="#f1f5f9"] {
+  stroke: #303036 !important;
 }

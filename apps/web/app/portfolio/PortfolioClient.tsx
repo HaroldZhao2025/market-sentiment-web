@@ -4,12 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import PortfolioChart from "../../components/PortfolioChart";
 
-type Holding = {
-  date: string;
-  long: string[];
-  short: string[];
-};
-
+type Holding = { date: string; long: string[]; short: string[] };
 type Metrics = {
   cumulative_return?: number;
   annualized_return?: number;
@@ -19,7 +14,6 @@ type Metrics = {
   hit_rate?: number;
   num_days?: number;
 };
-
 type Meta = {
   generated_at?: string;
   rebalance?: "daily" | "weekly";
@@ -31,12 +25,7 @@ type Meta = {
   benchmark?: string | null;
   universe_size_used?: number;
 };
-
-type EquitySeries = {
-  ticker: string;
-  equity: number[];
-};
-
+type EquitySeries = { ticker: string; equity: number[] };
 type Props = {
   meta?: Meta;
   metrics?: Metrics;
@@ -44,30 +33,24 @@ type Props = {
   equity: number[];
   portfolio_return: number[];
   holdings?: Holding[];
-  benchmark_series?: EquitySeries | null; // typically SPY
-  sp500_price_series?: EquitySeries | null; // SPX built from sp500_index.json + ^GSPC fill
+  benchmark_series?: EquitySeries | null;
+  sp500_price_series?: EquitySeries | null;
 };
 
 function pct(x?: number) {
-  if (x == null || !Number.isFinite(x)) return "—";
-  return `${(x * 100).toFixed(2)}%`;
+  return x == null || !Number.isFinite(x) ? "—" : `${(x * 100).toFixed(2)}%`;
 }
-
 function num(x?: number) {
-  if (x == null || !Number.isFinite(x)) return "—";
-  return x.toFixed(2);
+  return x == null || !Number.isFinite(x) ? "—" : x.toFixed(2);
 }
-
 function drawdown(eq: number[]) {
   let peak = -Infinity;
   return eq.map((v) => {
-    if (!Number.isFinite(v)) return NaN;
+    if (!Number.isFinite(v)) return Number.NaN;
     peak = Math.max(peak, v);
-    if (!Number.isFinite(peak) || peak === 0) return NaN;
-    return v / peak - 1;
+    return peak > 0 ? v / peak - 1 : Number.NaN;
   });
 }
-
 function chipHref(t: string) {
   return `/ticker/${encodeURIComponent(t)}`;
 }
@@ -83,202 +66,90 @@ export default function PortfolioClient({
   sp500_price_series,
 }: Props) {
   const [showHoldings, setShowHoldings] = useState(true);
-
-  const last = useMemo(() => {
-    const lastEq = equity.at(-1);
-    const lastRet = portfolio_return.at(-1);
-    return {
-      lastEq: lastEq ?? 1,
-      lastRet: lastRet ?? 0,
-    };
-  }, [equity, portfolio_return]);
-
   const latestHolding = holdings.at(-1);
-
-  const ddPort = useMemo(() => drawdown(equity), [equity]);
-  const ddSpy = useMemo(
-    () => (benchmark_series?.equity?.length ? drawdown(benchmark_series.equity) : []),
-    [benchmark_series]
-  );
-  const ddSpx = useMemo(
-    () => (sp500_price_series?.equity?.length ? drawdown(sp500_price_series.equity) : []),
-    [sp500_price_series]
-  );
+  const lastEq = equity.at(-1) ?? 1;
+  const lastRet = portfolio_return.at(-1) ?? 0;
 
   const perfSeries = useMemo(() => {
-    const s = [
-      { label: "Strategy (L/S)", values: equity, strokeClassName: "stroke-neutral-900", dotClassName: "fill-neutral-900" },
+    const rows = [
+      { label: "Strategy", values: equity, strokeClassName: "stroke-emerald-400", dotClassName: "fill-emerald-400" },
     ];
     if (benchmark_series?.equity?.length) {
-      s.push({
-        label: benchmark_series.ticker ?? "SPY",
-        values: benchmark_series.equity,
-        strokeClassName: "stroke-blue-600",
-        dotClassName: "fill-blue-600",
-      });
+      rows.push({ label: benchmark_series.ticker || "SPY", values: benchmark_series.equity, strokeClassName: "stroke-sky-400", dotClassName: "fill-sky-400" });
     }
     if (sp500_price_series?.equity?.length) {
-      s.push({
-        label: sp500_price_series.ticker ?? "SPX",
-        values: sp500_price_series.equity,
-        strokeClassName: "stroke-fuchsia-600",
-        dotClassName: "fill-fuchsia-600",
-      });
+      rows.push({ label: sp500_price_series.ticker || "SPX", values: sp500_price_series.equity, strokeClassName: "stroke-fuchsia-400", dotClassName: "fill-fuchsia-400" });
     }
-    return s;
+    return rows;
   }, [equity, benchmark_series, sp500_price_series]);
 
   const ddSeries = useMemo(() => {
-    const s = [
-      { label: "Strategy DD", values: ddPort, strokeClassName: "stroke-rose-600", dotClassName: "fill-rose-600" },
+    const rows = [
+      { label: "Strategy DD", values: drawdown(equity), strokeClassName: "stroke-rose-400", dotClassName: "fill-rose-400" },
     ];
-    if (ddSpy.length) {
-      s.push({
-        label: `${benchmark_series?.ticker ?? "SPY"} DD`,
-        values: ddSpy,
-        strokeClassName: "stroke-sky-600",
-        dotClassName: "fill-sky-600",
-      });
+    if (benchmark_series?.equity?.length) {
+      rows.push({ label: `${benchmark_series.ticker || "SPY"} DD`, values: drawdown(benchmark_series.equity), strokeClassName: "stroke-sky-400", dotClassName: "fill-sky-400" });
     }
-    if (ddSpx.length) {
-      s.push({
-        label: `${sp500_price_series?.ticker ?? "SPX"} DD`,
-        values: ddSpx,
-        strokeClassName: "stroke-violet-600",
-        dotClassName: "fill-violet-600",
-      });
+    if (sp500_price_series?.equity?.length) {
+      rows.push({ label: `${sp500_price_series.ticker || "SPX"} DD`, values: drawdown(sp500_price_series.equity), strokeClassName: "stroke-fuchsia-400", dotClassName: "fill-fuchsia-400" });
     }
-    return s;
-  }, [ddPort, ddSpy, ddSpx, benchmark_series, sp500_price_series]);
+    return rows;
+  }, [equity, benchmark_series, sp500_price_series]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-indigo-50 via-white to-emerald-50">
-      <div className="mx-auto max-w-7xl px-4 py-10 space-y-10">
-        {/* Header */}
-        <div className="rounded-3xl border bg-white/80 backdrop-blur p-6 shadow-sm">
-          <div className="flex items-start justify-between gap-6">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">Portfolio Strategy</h1>
-              <div className="text-sm text-neutral-700 mt-2">
-                {meta?.rebalance ? (
-                  <div className="flex flex-wrap gap-x-2 gap-y-1">
-                    <span className="rounded-full bg-indigo-100 text-indigo-800 px-3 py-1 text-xs font-semibold">
-                      Rebalance: {meta.rebalance}
-                    </span>
-                    <span className="rounded-full bg-emerald-100 text-emerald-800 px-3 py-1 text-xs font-semibold">
-                      Signal: {meta.signal}
-                    </span>
-                    <span className="rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold">
-                      Lag: {meta.lag_days ?? 1}d
-                    </span>
-                    <span className="rounded-full bg-fuchsia-100 text-fuchsia-800 px-3 py-1 text-xs font-semibold">
-                      K: {meta.k}
-                    </span>
-                    <span className="rounded-full bg-sky-100 text-sky-800 px-3 py-1 text-xs font-semibold">
-                      Long/Short: {meta.long_short ? "Yes" : "No"}
-                    </span>
-                    {meta?.universe_size_used ? (
-                      <span className="rounded-full bg-neutral-100 text-neutral-800 px-3 py-1 text-xs font-semibold">
-                        Universe used: {meta.universe_size_used}
-                      </span>
-                    ) : null}
-                  </div>
-                ) : (
-                  "Daily long/short equity curve + holdings"
-                )}
-              </div>
-            </div>
-
-            <button
-              className="rounded-2xl border bg-white px-4 py-2 text-sm text-neutral-800 hover:bg-neutral-50 shadow-sm"
-              onClick={() => setShowHoldings((v) => !v)}
-            >
-              {showHoldings ? "Hide Holdings" : "Show Holdings"}
-            </button>
-          </div>
-
-          {/* explainers */}
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <details className="border rounded-2xl p-4 bg-white">
-              <summary className="cursor-pointer select-none text-sm font-semibold">
-               ❓ How this portfolio strategy works (weekly lagged sentiment ranking)
-              </summary>
-              <div className="mt-3 text-sm text-neutral-700 space-y-2">
-                <p>
-                  We combine news sentiment level/change with price momentum, then scale positions using recent volatility. Daily and 7-day sentiment modes remain available.
-                </p>
-                <p>
-                  On each rebalance date (typically <b>weekly</b>), we rank the universe by the signal observed with a <b>lag</b> (e.g., yesterday),
-                  then go <b>long</b> the strongest names and (optionally) <b>short</b> the weakest names with diversified risk-aware weights.
-                </p>
-                <p className="text-neutral-600">
-                  The lag + “apply weights from next trading day” rule is used to reduce look-ahead bias.
-                </p>
-              </div>
-            </details>
-
-            <details className="border rounded-2xl p-4 bg-white">
-              <summary className="cursor-pointer select-none text-sm font-semibold">
-                📌 What lines are shown on the charts?
-              </summary>
-              <div className="mt-3 text-sm text-neutral-700 space-y-2">
-                <p>
-                  The performance chart compares <b>Strategy Equity</b> to <b>SPY</b> (if available) and the <b>S&amp;P 500 index (SPX)</b>.
-                </p>
-                <p>
-                  SPX equity is constructed from <code>data/SPX/sp500_index.json</code> and filled using <code>^GSPC/^SPX</code> snapshots if needed,
-                  so all series share the same date axis.
-                </p>
-              </div>
-            </details>
-          </div>
+    <main className="space-y-8">
+      <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <div className="eyebrow">Strategy lab</div>
+          <h1 className="page-title mt-2">Portfolio strategy</h1>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
+            Lagged sentiment and price signals translated into a reproducible long/short backtest with explicit benchmark comparison.
+          </p>
         </div>
-
-        {/* KPI cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="rounded-2xl p-5 shadow-sm border bg-white">
-            <div className="text-sm text-neutral-500 mb-1">Current Equity</div>
-            <div className="text-2xl font-semibold tabular-nums">{last.lastEq.toFixed(4)}</div>
-            <div className="text-sm text-neutral-600 mt-1">Latest daily: {pct(last.lastRet)}</div>
-          </div>
-
-          <div className="rounded-2xl p-5 shadow-sm border bg-white">
-            <div className="text-sm text-neutral-500 mb-1">Cumulative Return</div>
-            <div className="text-2xl font-semibold tabular-nums">{pct(metrics?.cumulative_return)}</div>
-            <div className="text-sm text-neutral-600 mt-1">Max DD: {pct(metrics?.max_drawdown)}</div>
-          </div>
-
-          <div className="rounded-2xl p-5 shadow-sm border bg-white">
-            <div className="text-sm text-neutral-500 mb-1">Annualized</div>
-            <div className="text-sm text-neutral-700 mt-1">
-              Return: <span className="font-semibold tabular-nums">{pct(metrics?.annualized_return)}</span>
-            </div>
-            <div className="text-sm text-neutral-700">
-              Vol: <span className="font-semibold tabular-nums">{pct(metrics?.annualized_vol)}</span>
-            </div>
-          </div>
-
-          <div className="rounded-2xl p-5 shadow-sm border bg-white">
-            <div className="text-sm text-neutral-500 mb-1">Sharpe & Hit Rate</div>
-            <div className="text-sm text-neutral-700 mt-1">
-              Sharpe: <span className="font-semibold tabular-nums">{num(metrics?.sharpe)}</span>
-            </div>
-            <div className="text-sm text-neutral-700">
-              Hit: <span className="font-semibold tabular-nums">{pct(metrics?.hit_rate)}</span>
-            </div>
-          </div>
+        <div className="flex flex-wrap gap-2">
+          {meta?.rebalance ? <span className="pill">Rebalance · {meta.rebalance}</span> : null}
+          {meta?.signal ? <span className="pill">Signal · {meta.signal}</span> : null}
+          {typeof meta?.lag_days === "number" ? <span className="pill">Lag · {meta.lag_days}d</span> : null}
+          {typeof meta?.k === "number" ? <span className="pill">K · {meta.k}</span> : null}
+          <Link href="/methodology" className="pill">Methodology →</Link>
         </div>
+      </section>
 
-        {/* Performance chart */}
-        <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-5">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h3 className="font-semibold text-lg">Performance vs Benchmarks</h3>
-              <div className="text-sm text-neutral-600">All lines are normalized to 1.00 at start.</div>
-            </div>
-            <div className="text-xs text-neutral-500">baseline: 1.00</div>
-          </div>
+      <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+        <div className="kpi">
+          <div className="kpi-label">Current equity</div>
+          <div className="kpi-value">{lastEq.toFixed(4)}</div>
+          <div className="kpi-sub">Latest daily return · {pct(lastRet)}</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Cumulative return</div>
+          <div className="kpi-value">{pct(metrics?.cumulative_return)}</div>
+          <div className="kpi-sub">Max drawdown · {pct(metrics?.max_drawdown)}</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Annualized return</div>
+          <div className="kpi-value">{pct(metrics?.annualized_return)}</div>
+          <div className="kpi-sub">Volatility · {pct(metrics?.annualized_vol)}</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Sharpe</div>
+          <div className="kpi-value">{num(metrics?.sharpe)}</div>
+          <div className="kpi-sub">Hit rate · {pct(metrics?.hit_rate)}</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Universe used</div>
+          <div className="kpi-value">{meta?.universe_size_used?.toLocaleString() ?? "—"}</div>
+          <div className="kpi-sub">Long/short · {meta?.long_short ? "enabled" : "disabled"}</div>
+        </div>
+      </section>
 
+      <section className="space-y-3">
+        <div>
+          <div className="eyebrow">Performance</div>
+          <h2 className="section-title mt-1">Strategy vs benchmarks</h2>
+          <p className="section-copy">All equity lines are normalized to 1.00 at the comparison start.</p>
+        </div>
+        <div className="legacy-dark ambient-panel p-4 md:p-6">
           <PortfolioChart
             dates={dates}
             series={perfSeries}
@@ -287,18 +158,16 @@ export default function PortfolioClient({
             yLabel="Equity (normalized)"
             valueFormat={(v) => v.toFixed(4)}
           />
-        </section>
+        </div>
+      </section>
 
-        {/* Drawdown chart */}
-        <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-5">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h3 className="font-semibold text-lg">Drawdowns</h3>
-              <div className="text-sm text-neutral-600">Peak-to-trough performance comparison.</div>
-            </div>
-            <div className="text-xs text-neutral-500">baseline: 0.00</div>
-          </div>
-
+      <section className="space-y-3">
+        <div>
+          <div className="eyebrow">Risk</div>
+          <h2 className="section-title mt-1">Drawdowns</h2>
+          <p className="section-copy">Peak-to-trough losses reveal how the strategy behaves when the signal is wrong or market regimes change.</p>
+        </div>
+        <div className="legacy-dark ambient-panel p-4 md:p-6">
           <PortfolioChart
             dates={dates}
             series={ddSeries}
@@ -307,67 +176,54 @@ export default function PortfolioClient({
             yLabel="Drawdown"
             valueFormat={(v) => `${(v * 100).toFixed(2)}%`}
           />
-        </section>
+        </div>
+      </section>
 
-        {/* Holdings */}
+      <section className="space-y-3">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <div className="eyebrow">Current positioning</div>
+            <h2 className="section-title mt-1">Latest holdings</h2>
+          </div>
+          <button type="button" className="pill" onClick={() => setShowHoldings((v) => !v)}>
+            {showHoldings ? "Hide holdings" : "Show holdings"}
+          </button>
+        </div>
+
         {showHoldings ? (
-          <section className="rounded-3xl p-6 shadow-sm border bg-white space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-lg">Latest Holdings</h3>
-              <div className="text-sm text-neutral-600">
-                {latestHolding?.date ? (
-                  <>
-                    As of <span className="font-medium text-neutral-900">{latestHolding.date}</span>
-                  </>
-                ) : (
-                  "—"
-                )}
+          latestHolding ? (
+            <div className="grid gap-3 lg:grid-cols-2">
+              <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.045] p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300">Long book</div>
+                  <div className="text-xs text-neutral-600">{latestHolding.date}</div>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {latestHolding.long.map((t) => (
+                    <Link key={t} href={chipHref(t)} className="rounded-full border border-emerald-400/15 bg-black/20 px-3 py-1.5 text-sm text-emerald-100 transition hover:bg-emerald-400/10">{t}</Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-rose-400/15 bg-rose-400/[0.045] p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-rose-300">Short book</div>
+                  <div className="text-xs text-neutral-600">{latestHolding.date}</div>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {latestHolding.short.length ? latestHolding.short.map((t) => (
+                    <Link key={t} href={chipHref(t)} className="rounded-full border border-rose-400/15 bg-black/20 px-3 py-1.5 text-sm text-rose-100 transition hover:bg-rose-400/10">{t}</Link>
+                  )) : <span className="text-sm text-neutral-600">Short leg disabled.</span>}
+                </div>
               </div>
             </div>
-
-            {!latestHolding ? (
-              <div className="text-sm text-neutral-600">No holdings found in portfolio_strategy.json.</div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="rounded-2xl border bg-emerald-50 p-4">
-                  <div className="text-sm font-semibold mb-2 text-emerald-900">Long</div>
-                  <div className="flex flex-wrap gap-2">
-                    {latestHolding.long.map((t) => (
-                      <Link
-                        key={t}
-                        href={chipHref(t)}
-                        className="rounded-full bg-white border px-3 py-1 text-sm hover:bg-emerald-100 transition"
-                        title={`Go to ${t}`}
-                      >
-                        {t}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border bg-rose-50 p-4">
-                  <div className="text-sm font-semibold mb-2 text-rose-900">Short</div>
-                  <div className="flex flex-wrap gap-2">
-                    {latestHolding.short.map((t) => (
-                      <Link
-                        key={t}
-                        href={chipHref(t)}
-                        className="rounded-full bg-white border px-3 py-1 text-sm hover:bg-rose-100 transition"
-                        title={`Go to ${t}`}
-                      >
-                        {t}
-                      </Link>
-                    ))}
-                    {!latestHolding.short.length ? (
-                      <span className="text-sm text-neutral-600">Short leg disabled.</span>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-            )}
-          </section>
+          ) : <div className="card p-5 text-sm text-neutral-500">No holdings found in the generated strategy artifact.</div>
         ) : null}
-      </div>
+      </section>
+
+      <section className="card p-5 text-xs leading-6 text-neutral-500">
+        The portfolio is a research backtest, not an investment recommendation. Signal construction, lag, transaction costs, and weighting assumptions are documented on the Methodology page.
+      </section>
     </main>
   );
 }

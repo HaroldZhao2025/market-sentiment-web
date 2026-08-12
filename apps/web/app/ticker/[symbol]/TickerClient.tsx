@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import LineChart, { ChartLegend } from "../../../components/LineChart";
 
-/* --------- Props (unchanged) --------- */
 export type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
 export type NewsItem = {
   ts: string;
@@ -11,12 +11,136 @@ export type NewsItem = {
   text?: string;
   source?: string;
   provider?: string;
-  s?: number;                 // headline-level score = Positive - Negative
-  probs?: { pos?: number; neu?: number; neg?: number }; // optional per-headline probs
-  sentiment_label?: string;   // <--- NEW: use this if present
+  s?: number;
+  probs?: { pos?: number; neu?: number; neg?: number };
+  sentiment_label?: string;
 };
 
-type View = "overlay" | "price" | "sentiment" | "separate";
+type View = "overlay" | "separate";
+
+type ThemeSummary = {
+  name: string;
+  count: number;
+  score: number;
+  headlines: NewsItem[];
+};
+
+const THEME_RULES: { name: string; terms: string[] }[] = [
+  { name: "Earnings & guidance", terms: ["earnings", "revenue", "profit", "eps", "guidance", "quarter", "margin", "forecast"] },
+  { name: "Product & AI", terms: ["ai", "artificial intelligence", "product", "launch", "iphone", "chip", "model", "cloud", "software"] },
+  { name: "Regulation & legal", terms: ["regulator", "antitrust", "lawsuit", "court", "legal", "tariff", "ban", "probe", "investigation"] },
+  { name: "Deals & capital", terms: ["acquisition", "merger", "deal", "buyback", "dividend", "stake", "financing", "investment"] },
+  { name: "Operations & demand", terms: ["demand", "supply", "shipment", "production", "sales", "orders", "factory", "inventory"] },
+  { name: "Analyst & market", terms: ["analyst", "rating", "target", "upgrade", "downgrade", "market", "valuation", "outlook"] },
+];
+
+function finite(x: unknown): number | null {
+  if (x === null || x === undefined || x === "") return null;
+  const n = Number(x);
+  return Number.isFinite(n) ? n : null;
+}
+
+function ma7(arr: number[]) {
+  const out: number[] = [];
+  let run = 0;
+  for (let i = 0; i < arr.length; i++) {
+    run += arr[i];
+    if (i >= 7) run -= arr[i - 7];
+    out.push(i >= 6 ? run / 7 : Number.NaN);
+  }
+  return out;
+}
+
+function label(v: number | null) {
+  if (v == null) return "No observation";
+  if (v >= 0.4) return "Strong Positive";
+  if (v >= 0.1) return "Positive";
+  if (v <= -0.4) return "Strong Negative";
+  if (v <= -0.1) return "Negative";
+  return "Neutral";
+}
+
+function signalClass(v: number | null) {
+  if (v == null) return "text-neutral-400";
+  if (v > 0) return "text-emerald-300";
+  if (v < 0) return "text-rose-300";
+  return "text-neutral-300";
+}
+
+function fmtSigned(v: number | null, digits = 4) {
+  if (v == null) return "—";
+  return `${v > 0 ? "+" : ""}${v.toFixed(digits)}`;
+}
+
+function fmtPct(v: number | null, digits = 2) {
+  if (v == null) return "—";
+  return `${v > 0 ? "+" : ""}${(v * 100).toFixed(digits)}%`;
+}
+
+function classifyTheme(item: NewsItem) {
+  const text = `${item.title || ""} ${item.text || ""}`.toLowerCase();
+  for (const rule of THEME_RULES) {
+    if (rule.terms.some((term) => text.includes(term))) return rule.name;
+  }
+  return "Other company news";
+}
+
+function summarizeThemes(news: NewsItem[]): ThemeSummary[] {
+  const map = new Map<string, { scores: number[]; headlines: NewsItem[] }>();
+  news.forEach((item) => {
+    const score = finite(item.s);
+    if (score == null) return;
+    const theme = classifyTheme(item);
+    const current = map.get(theme) ?? { scores: [], headlines: [] };
+    current.scores.push(score);
+    current.headlines.push(item);
+    map.set(theme, current);
+  });
+
+  return Array.from(map.entries())
+    .map(([name, value]) => ({
+      name,
+      count: value.scores.length,
+      score: value.scores.reduce((a, b) => a + b, 0) / value.scores.length,
+      headlines: value.headlines,
+    }))
+    .sort((a, b) => Math.abs(b.score) * Math.sqrt(b.count) - Math.abs(a.score) * Math.sqrt(a.count));
+}
+
+function sourceOf(item: NewsItem) {
+  if (item.source) return item.source;
+  if (item.provider) return item.provider;
+  try { return new URL(item.url).host.replace(/^www\./, ""); } catch { return ""; }
+}
+
+function dateOnly(value: string) {
+  const d = new Date(value);
+  if (!Number.isNaN(d.getTime())) return d.toISOString().slice(0, 10);
+  return String(value).slice(0, 10);
+}
+
+function DriverCard({ item, positive }: { item: NewsItem; positive: boolean }) {
+  const score = finite(item.s);
+  return (
+    <a
+      href={item.url}
+      target="_blank"
+      rel="noreferrer"
+      className="card card-hover block p-4"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <span className={`rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-wider ${
+          positive ? "bg-emerald-400/10 text-emerald-300" : "bg-rose-400/10 text-rose-300"
+        }`}>
+          {positive ? "Positive driver" : "Negative driver"}
+        </span>
+        <span className={`font-mono text-xs ${signalClass(score)}`}>{fmtSigned(score, 3)}</span>
+      </div>
+      <div className="mt-3 text-sm font-medium leading-6 text-neutral-200">{item.title}</div>
+      <div className="mt-2 text-[11px] text-neutral-600">{sourceOf(item)} · {dateOnly(item.ts)}</div>
+    </a>
+  );
+}
 
 export default function TickerClient({
   symbol,
@@ -31,111 +155,201 @@ export default function TickerClient({
 }) {
   const [mode, setMode] = useState<View>("overlay");
 
-  /* ---------- Align series safely ---------- */
   const aligned = useMemo(() => {
-    const n = Math.min(
-      series.date?.length ?? 0,
-      series.price?.length || Infinity,
-      series.sentiment?.length || Infinity
-    );
-    const date = (series.date || []).slice(0, n);
-    const price = (series.price || []).slice(0, n);
-    const sentiment = (series.sentiment || []).slice(0, n);
-    return { date, price, sentiment, n };
+    const n = Math.min(series.date.length, series.price.length, series.sentiment.length);
+    return {
+      date: series.date.slice(0, n),
+      price: series.price.slice(0, n),
+      sentiment: series.sentiment.slice(0, n),
+    };
   }, [series]);
 
-  const hasPrice = aligned.price.length > 0 && aligned.price.length === aligned.date.length;
-  const hasSent  = aligned.sentiment.length > 0 && aligned.sentiment.length === aligned.date.length;
+  const sentimentMA7 = useMemo(() => ma7(aligned.sentiment), [aligned.sentiment]);
+  const latestSent = finite(aligned.sentiment.at(-1));
+  const priorSent = finite(aligned.sentiment.at(-2));
+  const sentimentChange = latestSent != null && priorSent != null ? latestSent - priorSent : null;
+  const latestMA7 = finite(sentimentMA7.at(-1));
+  const latestPrice = finite(aligned.price.at(-1));
+  const priorPrice = finite(aligned.price.at(-2));
+  const priceReturn = latestPrice != null && priorPrice != null && priorPrice !== 0 ? latestPrice / priorPrice - 1 : null;
 
-  /* ---------- KPIs ---------- */
-  const sMA7 = useMemo(() => ma7(aligned.sentiment), [aligned.sentiment]);
-  const lastS  = aligned.n ? Number(aligned.sentiment.at(-1) ?? 0) : 0;
-  const lastMA = aligned.n ? Number(sMA7.at(-1) ?? 0) : 0;
+  const scoredNews = useMemo(() => news.filter((item) => finite(item.s) != null), [news]);
+  const recentNewsMean = scoredNews.length
+    ? scoredNews.reduce((sum, item) => sum + (finite(item.s) ?? 0), 0) / scoredNews.length
+    : null;
+  const themes = useMemo(() => summarizeThemes(scoredNews), [scoredNews]);
+  const dominantTheme = themes[0] ?? null;
+  const positiveDrivers = useMemo(
+    () => scoredNews.slice().sort((a, b) => (finite(b.s) ?? -Infinity) - (finite(a.s) ?? -Infinity)).filter((x) => (finite(x.s) ?? 0) > 0).slice(0, 3),
+    [scoredNews]
+  );
+  const negativeDrivers = useMemo(
+    () => scoredNews.slice().sort((a, b) => (finite(a.s) ?? Infinity) - (finite(b.s) ?? Infinity)).filter((x) => (finite(x.s) ?? 0) < 0).slice(0, 3),
+    [scoredNews]
+  );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 space-y-8">
-      {/* Header + View selector */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl font-bold tracking-tight">Market Sentiment for {symbol}</h1>
-        <div className="inline-flex items-center rounded-xl border bg-white p-1" role="tablist" aria-label="Chart view">
-          <SegButton active={mode === "separate"} onClick={() => setMode("separate")}  label="Separate View" />
-          <SegButton active={mode === "overlay"}  onClick={() => setMode("overlay")}   label="Overlayed View" />
-          {hasPrice && <SegButton active={mode === "price"} onClick={() => setMode("price")} label="Price Only" />}
-          {hasSent  && <SegButton active={mode === "sentiment"} onClick={() => setMode("sentiment")} label="Sentiment Only" />}
+    <div className="space-y-8">
+      <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <div className="eyebrow">Ticker intelligence</div>
+          <h1 className="page-title mt-2">{symbol}</h1>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
+            Price reaction, observed news sentiment, article-level evidence, and deterministic event themes.
+          </p>
         </div>
-      </div>
-
-      {/* Chart card(s) */}
-      <div className="rounded-2xl p-6 shadow-sm border bg-white space-y-6">
-        <h3 className="font-semibold">Sentiment and Price Analysis</h3>
-
-        {mode === "separate" ? (
-          <div className="space-y-6">
-            <SentimentBars dates={aligned.date} values={aligned.sentiment} height={300} />
-            <PriceLine     dates={aligned.date} values={aligned.price}     height={300} />
-          </div>
-        ) : (
-          <OverlayChart
-            dates={aligned.date}
-            price={mode !== "sentiment" && hasPrice ? aligned.price : undefined}
-            sentiment={mode !== "price"     && hasSent  ? aligned.sentiment : undefined}
-            height={520}
-          />
-        )}
-      </div>
-
-      {/* Live Market Insights */}
-      <section className="rounded-2xl p-6 shadow-sm border bg-white space-y-4">
-        <h3 className="font-semibold">Live Market Insights</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <KpiCard title="Live Market Sentiment" value={label(lastS)} sub="(Latest daily score)" bigValue={lastS.toFixed(4)} />
-          <KpiCard title="Predicted Return" value={`${(lastMA * 100).toFixed(2)}%`} sub="7-day sentiment average" />
-          <KpiCard title="Advisory Opinion" value={recommendation(lastMA)} sub="Derived from sentiment trend" />
-          <KpiCard title="News Items (period)" value={newsTotal.toLocaleString()} />
+        <div className="flex rounded-xl border border-white/10 bg-black/30 p-1">
+          <button type="button" onClick={() => setMode("overlay")} className={`rounded-lg px-3 py-2 text-xs ${mode === "overlay" ? "bg-white/10 text-white" : "text-neutral-500"}`}>Overlay</button>
+          <button type="button" onClick={() => setMode("separate")} className={`rounded-lg px-3 py-2 text-xs ${mode === "separate" ? "bg-white/10 text-white" : "text-neutral-500"}`}>Separate</button>
         </div>
       </section>
 
-      {/* Headlines with date-only + Sentiment label/score */}
-      <section className="rounded-2xl p-6 shadow-sm border bg-white">
-        <h3 className="font-semibold mb-2">Recent Headlines for {symbol}</h3>
-        <p className="text-xs text-neutral-500 mb-3">
-          The table below gives each of the most recent headlines of the stock and the negative, neutral, positive aggregated sentiment score.
-        </p>
-        {news?.length ? (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="text-left text-neutral-600 border-b">
+      <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="kpi">
+          <div className="kpi-label">Latest sentiment</div>
+          <div className={`kpi-value ${signalClass(latestSent)}`}>{label(latestSent)}</div>
+          <div className="kpi-sub font-mono">{fmtSigned(latestSent, 4)}</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Sentiment change</div>
+          <div className={`kpi-value ${signalClass(sentimentChange)}`}>{fmtSigned(sentimentChange, 4)}</div>
+          <div className="kpi-sub">Latest observation vs previous observation</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">7D sentiment average</div>
+          <div className={`kpi-value ${signalClass(latestMA7)}`}>{fmtSigned(latestMA7, 4)}</div>
+          <div className="kpi-sub">Smoothed signal, not a return forecast</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">1D price return</div>
+          <div className={`kpi-value ${signalClass(priceReturn)}`}>{fmtPct(priceReturn)}</div>
+          <div className="kpi-sub">Latest close: {latestPrice == null ? "—" : latestPrice.toFixed(2)}</div>
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <div className="eyebrow">Why sentiment changed</div>
+          <h2 className="section-title mt-1">Evidence behind the current signal</h2>
+          <p className="section-copy">Article scores are grouped with deterministic keyword rules. This is an auditable explanation layer, not an LLM-generated narrative.</p>
+        </div>
+
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <div className="card p-5">
+            <div className="kpi-label">Recent article mean</div>
+            <div className={`text-2xl font-semibold ${signalClass(recentNewsMean)}`}>{fmtSigned(recentNewsMean, 4)}</div>
+            <div className="mt-1 text-xs text-neutral-600">{scoredNews.length} scored headlines displayed</div>
+          </div>
+          <div className="card p-5">
+            <div className="kpi-label">Dominant event theme</div>
+            <div className="text-lg font-semibold text-white">{dominantTheme?.name ?? "No scored theme"}</div>
+            <div className={`mt-1 font-mono text-xs ${signalClass(dominantTheme?.score ?? null)}`}>{dominantTheme ? `${dominantTheme.count} headlines · ${fmtSigned(dominantTheme.score, 3)}` : "—"}</div>
+          </div>
+          <div className="card p-5">
+            <div className="kpi-label">Positive evidence</div>
+            <div className="text-2xl font-semibold text-emerald-300">{positiveDrivers.length}</div>
+            <div className="mt-1 text-xs text-neutral-600">Strongest recent positive drivers shown below</div>
+          </div>
+          <div className="card p-5">
+            <div className="kpi-label">News evidence</div>
+            <div className="text-2xl font-semibold text-white">{newsTotal.toLocaleString()}</div>
+            <div className="mt-1 text-xs text-neutral-600">Period total · {scoredNews.length} recent rows scored</div>
+          </div>
+        </div>
+
+        {themes.length ? (
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {themes.slice(0, 6).map((theme) => {
+              const width = Math.min(100, Math.max(4, Math.abs(theme.score) * 100));
+              return (
+                <div key={theme.name} className="card p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-sm font-semibold text-neutral-200">{theme.name}</div>
+                      <div className="mt-1 text-[11px] text-neutral-600">{theme.count} scored headline{theme.count === 1 ? "" : "s"}</div>
+                    </div>
+                    <div className={`font-mono text-xs ${signalClass(theme.score)}`}>{fmtSigned(theme.score, 3)}</div>
+                  </div>
+                  <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+                    <div
+                      className={`h-full rounded-full ${theme.score >= 0 ? "bg-emerald-400" : "bg-rose-400"}`}
+                      style={{ width: `${width}%` }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
+
+        {(positiveDrivers.length || negativeDrivers.length) ? (
+          <div className="grid gap-3 lg:grid-cols-2">
+            <div className="space-y-3">
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald-400">Positive drivers</div>
+              {positiveDrivers.map((item, i) => <DriverCard key={`${item.url}-${i}`} item={item} positive />)}
+            </div>
+            <div className="space-y-3">
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-rose-400">Negative drivers</div>
+              {negativeDrivers.map((item, i) => <DriverCard key={`${item.url}-${i}`} item={item} positive={false} />)}
+            </div>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="space-y-3">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <div className="eyebrow">Signal history</div>
+            <h2 className="section-title mt-1">Price and sentiment</h2>
+          </div>
+          <ChartLegend />
+        </div>
+        <div className="legacy-dark ambient-panel p-3 md:p-5">
+          <LineChart
+            mode={mode}
+            dates={aligned.date}
+            price={aligned.price}
+            sentiment={aligned.sentiment}
+            sentimentMA7={sentimentMA7}
+            height={540}
+          />
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <div>
+          <div className="eyebrow">Article evidence</div>
+          <h2 className="section-title mt-1">Recent scored headlines</h2>
+          <p className="section-copy">Each score is the article-level FinBERT probability difference P(positive) − P(negative).</p>
+        </div>
+
+        {news.length ? (
+          <div className="table-shell overflow-x-auto">
+            <table className="w-full min-w-[760px] text-sm">
+              <thead className="border-b border-white/10 bg-white/[0.025] text-left text-[11px] uppercase tracking-[0.12em] text-neutral-600">
                 <tr>
-                  <th className="py-2 pr-3">Date</th>
-                  <th className="py-2 pr-3">Headline</th>
-                  <th className="py-2 pr-3">Source</th>
-                  <th className="py-2 pr-3">Sentiment</th>
+                  <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3">Headline</th>
+                  <th className="px-4 py-3">Theme</th>
+                  <th className="px-4 py-3">Source</th>
+                  <th className="px-4 py-3 text-right">Sentiment</th>
                 </tr>
               </thead>
               <tbody>
-                {news.slice(0, 10).map((n, i) => {
-                  const host = n.source || n.provider || extractHost(n.url);
-                  // *** Minimal, robust: use provided sentiment_label + s; fallback to computed label(s) if needed ***
-                  const haveS = typeof n.s === "number" && isFinite(n.s);
-                  const lab = n.sentiment_label || (haveS ? label(n.s as number) : "");
+                {news.slice(0, 10).map((item, i) => {
+                  const score = finite(item.s);
                   return (
-                    <tr key={i} className="border-b last:border-b-0">
-                      <td className="py-2 pr-3 text-neutral-600">{toDateOnly(n.ts)}</td>
-                      <td className="py-2 pr-3">
-                        <a className="underline decoration-dotted underline-offset-2" href={n.url} target="_blank" rel="noreferrer">
-                          {n.title}
+                    <tr key={`${item.url}-${i}`} className="border-b border-white/[0.06] last:border-0 hover:bg-white/[0.025]">
+                      <td className="whitespace-nowrap px-4 py-3 font-mono text-xs text-neutral-600">{dateOnly(item.ts)}</td>
+                      <td className="max-w-xl px-4 py-3">
+                        <a href={item.url} target="_blank" rel="noreferrer" className="font-medium leading-6 text-neutral-200 hover:text-white hover:underline">
+                          {item.title}
                         </a>
                       </td>
-                      <td className="py-2 pr-3 text-neutral-500">{host}</td>
-                      <td className="py-2 pr-3">
-                        {lab ? (
-                          <>
-                            <span className="font-medium">{lab}</span>{" "}
-                            {haveS ? <span className="text-neutral-500">({(n.s as number).toFixed(4)})</span> : null}
-                          </>
-                        ) : (
-                          <span className="text-neutral-400">–</span>
-                        )}
+                      <td className="px-4 py-3 text-xs text-neutral-500">{classifyTheme(item)}</td>
+                      <td className="px-4 py-3 text-xs text-neutral-500">{sourceOf(item)}</td>
+                      <td className={`whitespace-nowrap px-4 py-3 text-right font-mono text-xs ${signalClass(score)}`}>
+                        {item.sentiment_label || label(score)} · {fmtSigned(score, 4)}
                       </td>
                     </tr>
                   );
@@ -144,456 +358,9 @@ export default function TickerClient({
             </table>
           </div>
         ) : (
-          <div className="text-neutral-500">No recent headlines found.</div>
+          <div className="card p-5 text-sm text-neutral-500">No recent scored headlines are available.</div>
         )}
       </section>
     </div>
   );
-}
-
-/* ============ UI atoms ============ */
-function SegButton({ active, onClick, label }:{ active:boolean; onClick:()=>void; label:string }) {
-  return (
-    <button
-      role="tab"
-      aria-selected={active}
-      className={[
-        "px-3 py-1.5 text-sm rounded-lg transition",
-        active ? "bg-black text-white shadow-sm" : "text-neutral-700 hover:bg-neutral-50",
-      ].join(" ")}
-      onClick={onClick}
-    >
-      {label}
-    </button>
-  );
-}
-
-function KpiCard({ title, value, sub, bigValue }:{
-  title:string; value:string; sub?:string; bigValue?:string;
-}) {
-  return (
-    <div className="rounded-2xl p-5 shadow-sm border bg-white">
-      <div className="text-sm text-neutral-500 mb-1">{title}</div>
-      <div className="text-2xl md:text-3xl font-semibold">
-        {value} {bigValue ? <span className="text-neutral-500 text-lg">({bigValue})</span> : null}
-      </div>
-      {sub ? <div className="text-xs text-neutral-500 mt-1">{sub}</div> : null}
-    </div>
-  );
-}
-
-/* ============ Shared axis helpers ============ */
-function parseISO(s: string): Date {
-  const d = new Date(s);
-  if (!isNaN(d.getTime())) return d;
-  // try YYYY/MM/DD or similar
-  const parts = String(s).split(/[-/]/).map((x) => +x);
-  const dd = new Date(parts[0] || 1970, (parts[1] || 1) - 1, (parts[2] || 1));
-  return isNaN(dd.getTime()) ? new Date() : dd;
-}
-const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-/** Compute monthly tick indices + labels (keeps at most ~8 labels) */
-function monthTicks(dates: string[]) {
-  if (!dates.length) return [] as { i: number; label: string }[];
-  const marks: { i: number; label: string }[] = [];
-  let prevM = -1, prevY = -1;
-  for (let i = 0; i < dates.length; i++) {
-    const dt = parseISO(dates[i]), m = dt.getUTCMonth(), y = dt.getUTCFullYear();
-    if (m !== prevM || y !== prevY) {
-      marks.push({ i, label: `${MONTHS[m]}` });
-      prevM = m; prevY = y;
-    }
-  }
-  // downsample if too many
-  const maxLabels = 8;
-  if (marks.length > maxLabels) {
-    const stride = Math.ceil(marks.length / maxLabels);
-    return marks.filter((_, idx) => idx % stride === 0);
-  }
-  return marks;
-}
-
-/* ============ Overlay chart (with month ticks & y labels) ============ */
-/* ============ Overlay chart (with month ticks & y labels) ============ */
-function OverlayChart({
-  dates, price, sentiment, height = 520, width = 980,
-}:{
-  dates:string[]; price?:number[]; sentiment?:number[]; height?:number; width?:number;
-}) {
-  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
-
-  const pad = { t: 28, r: 78, b: 44, l: 70 }; // more room for axis labels
-  const W = width, H = height;
-  const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
-  const n = dates.length, step = n > 1 ? innerW / (n - 1) : innerW;
-
-  // Sentiment axis centered at 0
-  const sMax = sentiment && sentiment.length ? Math.max(0.5, ...sentiment.map((x)=>Math.abs(x))) : 1;
-  const sY   = (v:number) => pad.t + innerH/2 - (v / sMax) * (innerH/2);
-  const sTicks = [-sMax, -sMax/2, 0, sMax/2, sMax];
-
-  // Price axis on the right (min/mid/max)
-  const pMin = price && price.length ? Math.min(...price) : 0;
-  const pMax = price && price.length ? Math.max(...price) : 1;
-  const pY   = (v:number) => pad.t + (1 - (v - pMin) / Math.max(1e-9, pMax - pMin)) * innerH;
-  const pTicks = price && price.length ? [pMin, (pMin+pMax)/2, pMax] : [];
-
-  const baselineY = sY(0);
-  const monthMarks = monthTicks(dates);
-
-  // ---- Enable interactivity only when exactly one series is visible ----
-  const isPriceOnly = !!(price && price.length) && !(sentiment && sentiment.length);
-  const isSentOnly  = !!(sentiment && sentiment.length) && !(price && price.length);
-  const interactive = (isPriceOnly || isSentOnly) && n > 0 && innerW > 0;
-
-  // Mouse/touch -> index mapping
-  function idxFromX(px: number) {
-    const raw = Math.round((px - pad.l) / Math.max(1e-9, step));
-    return Math.max(0, Math.min(n - 1, raw));
-  }
-  function onMoveClientX(clientX: number, svgRect: DOMRect) {
-    const x = clientX - svgRect.left;
-    if (x < pad.l || x > pad.l + innerW) return;
-    setHoverIdx(idxFromX(x));
-  }
-  const onMouseMove: React.MouseEventHandler<SVGRectElement> = (e) => {
-    if (!interactive) return;
-    onMoveClientX(e.clientX, (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect());
-  };
-  const onTouchMove: React.TouchEventHandler<SVGRectElement> = (e) => {
-    if (!interactive) return;
-    const t = e.touches?.[0];
-    if (!t) return;
-    onMoveClientX(t.clientX, (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect());
-  };
-  const onLeave = () => setHoverIdx(null);
-
-  // Tooltip geometry helper
-  function renderTooltip(i: number) {
-    const x = pad.l + i * step;
-    const dateStr = toDateOnly(dates[i] ?? "");
-    let lines: string[] = [dateStr];
-
-    if (isPriceOnly && price) {
-      lines.push(`Price: ${Number(price[i] ?? 0).toFixed(2)}`);
-    } else if (isSentOnly && sentiment) {
-      const sVal = Number(sentiment[i] ?? 0);
-      lines.push(`Sentiment: ${label(sVal)} (${sVal.toFixed(4)})`);
-    } else {
-      return null; // no tooltip in overlayed modes
-    }
-
-    const padBox = 8;
-    const lineH = 16;
-    const textW = Math.max(...lines.map((s) => s.length)) * 7; // approx
-    const boxW = Math.min(Math.max(120, textW + padBox * 2), 280);
-    const boxH = lines.length * lineH + padBox * 2;
-
-    // place to left/right to avoid overflow
-    const toRight = x < W / 2;
-    const bx = toRight ? Math.min(x + 12, W - boxW - 6) : Math.max(6, x - boxW - 12);
-    const by = Math.max(pad.t + 6, Math.min(pad.t + innerH - boxH - 6, pad.t + 10));
-
-    return (
-      <g>
-        {/* vertical crosshair */}
-        <line x1={x} x2={x} y1={pad.t} y2={pad.t + innerH} stroke="#9ca3af" strokeDasharray="3,3" />
-        {/* marker on the series */}
-        {isPriceOnly && price ? (
-          <circle cx={x} cy={pY(price[i])} r={3.5} fill="#10b981" stroke="white" strokeWidth={1.2} />
-        ) : null}
-        {isSentOnly && sentiment ? (
-          <circle cx={x} cy={sY(sentiment[i])} r={3.5} fill="#6b47dc" stroke="white" strokeWidth={1.2} />
-        ) : null}
-
-        {/* tooltip box */}
-        <rect x={bx} y={by} rx={8} ry={8} width={boxW} height={boxH} fill="white" stroke="#e5e7eb" />
-        {lines.map((t, k) => (
-          <text
-            key={k}
-            x={bx + padBox}
-            y={by + padBox + 12 + k * lineH}
-            fontSize="12"
-            fill="#374151"
-          >
-            {t}
-          </text>
-        ))}
-      </g>
-    );
-  }
-
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
-      {/* frame */}
-      <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
-
-      {/* left y-axis (sentiment) ticks + labels */}
-      {sTicks.map((v, i) => {
-        const y = sY(v);
-        return (
-          <g key={`s${i}`}>
-            <line x1={pad.l - 6} x2={pad.l} y1={y} y2={y} stroke="#e5e7eb" />
-            <text x={pad.l - 8} y={y + 3} fontSize="11" fill="#6b7280" textAnchor="end">
-              {v.toFixed(2)}
-            </text>
-            {/* grid lines except baseline (we’ll draw baseline separately) */}
-            {Math.abs(v) > 1e-10 && (
-              <line x1={pad.l} x2={pad.l + innerW} y1={y} y2={y} stroke="#f1f5f9" />
-            )}
-          </g>
-        );
-      })}
-      {/* left axis label */}
-      <text
-        x={16}
-        y={pad.t + innerH / 2}
-        fontSize="12"
-        fill="#374151"
-        transform={`rotate(-90, 16, ${pad.t + innerH / 2})`}
-        textAnchor="middle"
-      >
-        Sentiment Score
-      </text>
-
-      {/* right y-axis (price) ticks + labels */}
-      {pTicks.map((v, i) => {
-        const y = pY(v);
-        return (
-          <g key={`p${i}`}>
-            <line x1={pad.l+innerW} x2={pad.l+innerW+6} y1={y} y2={y} stroke="#e5e7eb" />
-            <text x={pad.l+innerW+8} y={y + 3} fontSize="11" fill="#6b7280">{v.toFixed(2)}</text>
-          </g>
-        );
-      })}
-      {/* right axis label */}
-      <text
-        x={W - 18}
-        y={pad.t + innerH / 2}
-        fontSize="12"
-        fill="#374151"
-        transform={`rotate(90, ${W - 18}, ${pad.t + innerH / 2})`}
-        textAnchor="middle"
-      >
-        Stock Price
-      </text>
-
-      {/* sentiment baseline */}
-      {sentiment && sentiment.length ? (
-        <line x1={pad.l} x2={pad.l+innerW} y1={baselineY} y2={baselineY} stroke="#e5e7eb" />
-      ) : null}
-
-      {/* sentiment bars */}
-      {sentiment?.map((v, i) => {
-        const x = pad.l + i * step;
-        const y = Math.min(baselineY, sY(v));
-        const h = Math.abs(sY(v) - baselineY);
-        return <rect key={i} x={x - 1} y={y} width={2} height={Math.max(1, h)} fill="#6b47dc" opacity={0.7} />;
-      })}
-
-      {/* price line (draw AFTER bars so it sits on top) */}
-      {price && price.length > 1
-        ? price.map((v, i) => {
-            if (i === 0) return null;
-            const x1 = pad.l + (i - 1) * step, y1 = pY(price[i - 1]);
-            const x2 = pad.l + i * step,       y2 = pY(v);
-            return <line key={`l${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#10b981" strokeWidth={2.5} />;
-          })
-        : null}
-      {price?.map((v, i) => {
-        const cx = pad.l + i * step, cy = pY(v);
-        return <circle key={`c${i}`} cx={cx} cy={cy} r={2.2} fill="#10b981" />;
-      })}
-
-      {/* month tick labels along x-axis */}
-      {monthMarks.map(({ i, label }, k) => {
-        const x = pad.l + i * step;
-        return (
-          <g key={`m${k}`}>
-            <line x1={x} x2={x} y1={pad.t + innerH} y2={pad.t + innerH + 5} stroke="#e5e7eb" />
-            <text x={x} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="middle">{label}</text>
-          </g>
-        );
-      })}
-
-      {/* interactive hit-rect + tooltip (only in price-only / sentiment-only) */}
-      {interactive ? (
-        <g>
-          <rect
-            x={pad.l}
-            y={pad.t}
-            width={innerW}
-            height={innerH}
-            fill="transparent"
-            onMouseMove={onMouseMove}
-            onMouseLeave={onLeave}
-            onTouchStart={onTouchMove}
-            onTouchMove={onTouchMove}
-          />
-          {hoverIdx !== null ? renderTooltip(hoverIdx) : null}
-        </g>
-      ) : null}
-    </svg>
-  );
-}
-
-/* ============ Separate charts (with month ticks & y labels) ============ */
-function SentimentBars({ dates, values, height = 300, width = 980 }:{
-  dates:string[]; values:number[]; height?:number; width?:number;
-}) {
-  const pad = { t: 28, r: 24, b: 44, l: 70 };
-  const W = width, H = height;
-  const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
-  const n = dates.length, step = n > 1 ? innerW / (n - 1) : innerW;
-
-  const sMax = values.length ? Math.max(0.5, ...values.map((x)=>Math.abs(x))) : 1;
-  const sY   = (v:number) => pad.t + innerH/2 - (v / sMax) * (innerH/2);
-  const baselineY = sY(0);
-  const sTicks = [-sMax, -sMax/2, 0, sMax/2, sMax];
-  const monthMarks = monthTicks(dates);
-
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
-      <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
-
-      {sTicks.map((v, i) => {
-        const y = sY(v);
-        return (
-          <g key={i}>
-            <line x1={pad.l - 6} x2={pad.l} y1={y} y2={y} stroke="#e5e7eb" />
-            <text x={pad.l - 8} y={y + 3} fontSize="11" fill="#6b7280" textAnchor="end">{v.toFixed(2)}</text>
-            {Math.abs(v) > 1e-10 && <line x1={pad.l} x2={pad.l + innerW} y1={y} y2={y} stroke="#f1f5f9" />}
-          </g>
-        );
-      })}
-      <text
-        x={16}
-        y={pad.t + innerH / 2}
-        fontSize="12"
-        fill="#374151"
-        transform={`rotate(-90, 16, ${pad.t + innerH / 2})`}
-        textAnchor="middle"
-      >
-        Sentiment Score
-      </text>
-
-      <line x1={pad.l} x2={pad.l+innerW} y1={baselineY} y2={baselineY} stroke="#e5e7eb" />
-      {values.map((v, i) => {
-        const x = pad.l + i * step;
-        const y = Math.min(baselineY, sY(v));
-        const h = Math.abs(sY(v) - baselineY);
-        return <rect key={i} x={x - 1} y={y} width={2} height={Math.max(1, h)} fill="#6b47dc" opacity={0.7} />;
-      })}
-
-      {monthMarks.map(({ i, label }, k) => {
-        const x = pad.l + i * step;
-        return (
-          <g key={k}>
-            <line x1={x} x2={x} y1={pad.t + innerH} y2={pad.t + innerH + 5} stroke="#e5e7eb" />
-            <text x={x} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="middle">{label}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-function PriceLine({ dates, values, height = 300, width = 980 }:{
-  dates:string[]; values:number[]; height?:number; width?:number;
-}) {
-  const pad = { t: 28, r: 78, b: 44, l: 70 };
-  const W = width, H = height;
-  const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
-  const n = dates.length, step = n > 1 ? innerW / (n - 1) : innerW;
-
-  const pMin = values.length ? Math.min(...values) : 0;
-  const pMax = values.length ? Math.max(...values) : 1;
-  const pY   = (v:number) => pad.t + (1 - (v - pMin) / Math.max(1e-9, pMax - pMin)) * innerH;
-  const pTicks = [pMin, (pMin+pMax)/2, pMax];
-  const monthMarks = monthTicks(dates);
-
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border bg-white">
-      <rect x={pad.l} y={pad.t} width={innerW} height={innerH} fill="none" stroke="#e5e7eb" />
-
-      {pTicks.map((v, i) => {
-        const y = pY(v);
-        return (
-          <g key={i}>
-            <line x1={pad.l+innerW} x2={pad.l+innerW+6} y1={y} y2={y} stroke="#e5e7eb" />
-            <text x={pad.l+innerW+8} y={y + 3} fontSize="11" fill="#6b7280">{v.toFixed(2)}</text>
-            {i !== 0 && i !== pTicks.length-1 && <line x1={pad.l} x2={pad.l + innerW} y1={y} y2={y} stroke="#f1f5f9" />}
-          </g>
-        );
-      })}
-      <text
-        x={W - 18}
-        y={pad.t + innerH / 2}
-        fontSize="12"
-        fill="#374151"
-        transform={`rotate(90, ${W - 18}, ${pad.t + innerH / 2})`}
-        textAnchor="middle"
-      >
-        Stock Price
-      </text>
-
-      {values.map((v, i) => {
-        if (i === 0) return null;
-        const x1 = pad.l + (i-1) * step, y1 = pY(values[i-1]);
-        const x2 = pad.l + i * step,     y2 = pY(v);
-        return <line key={`l${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#10b981" strokeWidth={2.5} />;
-      })}
-      {values.map((v, i) => {
-        const cx = pad.l + i * step, cy = pY(v);
-        return <circle key={`c${i}`} cx={cx} cy={cy} r={2.2} fill="#10b981" />;
-      })}
-
-      {monthMarks.map(({ i, label }, k) => {
-        const x = pad.l + i * step;
-        return (
-          <g key={k}>
-            <line x1={x} x2={x} y1={pad.t + innerH} y2={pad.t + innerH + 5} stroke="#e5e7eb" />
-            <text x={x} y={H - 10} fontSize="11" fill="#6b7280" textAnchor="middle">{label}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-/* ============ Utilities ============ */
-function ma7(arr: number[]) {
-  const out: number[] = [];
-  let run = 0;
-  for (let i = 0; i < arr.length; i++) {
-    const v = Number(arr[i] || 0);
-    run += v;
-    if (i >= 7) run -= Number(arr[i - 7] || 0);
-    out.push(i >= 6 ? run / 7 : NaN);
-  }
-  return out;
-}
-function label(v: number) {
-  if (v >= 0.4) return "Strong Positive";
-  if (v >= 0.1) return "Positive";
-  if (v <= -0.4) return "Strong Negative";
-  if (v <= -0.1) return "Negative";
-  return "Neutral";
-}
-function recommendation(v: number) {
-  if (v >= 0.4) return "Strong Buy";
-  if (v >= 0.1) return "Buy";
-  if (v <= -0.4) return "Strong Sell";
-  if (v <= -0.1) return "Sell";
-  return "Hold";
-}
-function toDateOnly(x: string) {
-  const d = new Date(x);
-  if (!isNaN(d.getTime())) return d.toISOString().slice(0, 10);
-  const m = String(x).match(/\d{4}-\d{2}-\d{2}/);
-  return m ? m[0] : String(x).slice(0, 10);
-}
-function extractHost(u?: string) {
-  try { return u ? new URL(u).host.replace(/^www\./,"") : ""; } catch { return ""; }
 }
