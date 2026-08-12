@@ -15,9 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  typecheck:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     defaults:
       run:
         working-directory: apps/web
@@ -37,3 +37,6 @@ jobs:
 
       - name: TypeScript typecheck
         run: npx tsc --noEmit
+
+      - name: Next.js production build
+        run: npm run build
