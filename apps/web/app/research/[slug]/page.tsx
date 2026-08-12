@@ -1,49 +1,39 @@
-// apps/web/app/research/[slug]/page.tsx
 import Link from "next/link";
 import { loadResearchIndex, loadResearchStudy } from "../../../lib/research";
 import ResearchStudyClient from "../ResearchStudyClient";
 
-// Static export must have at least one concrete parameter even when the
-// research data pipeline has not run yet (for example in a clean CI checkout).
-// Production builds still use every real slug emitted by build_research.py.
 export async function generateStaticParams() {
   const idx = await loadResearchIndex();
-  const slugs = idx
-    .map((x) => String(x?.slug ?? "").trim())
-    .filter((slug) => slug.length > 0);
-  return slugs.length > 0
-    ? slugs.map((slug) => ({ slug }))
-    : [{ slug: "__build_check__" }];
+  const slugs = idx.map((x) => String(x?.slug ?? "").trim()).filter((slug) => slug.length > 0);
+  return slugs.length > 0 ? slugs.map((slug) => ({ slug })) : [{ slug: "__build_check__" }];
 }
 
-export default async function ResearchStudyPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ResearchStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const study = await loadResearchStudy(slug);
   return (
-    <main className="max-w-6xl mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between gap-4">
-        <div className="space-y-1">
-          <Link href="/research" className="text-sm text-zinc-600 hover:underline">
-            ← Back to Research
-          </Link>
-          <h1 className="text-3xl font-bold">{study.title}</h1>
-          <p className="text-zinc-600">{study.summary}</p>
-          <div className="text-xs text-zinc-500">Updated: {study.updated_at}</div>
+    <main className="research-dark mx-auto max-w-6xl space-y-8 py-2">
+      <header className="border-b border-white/10 pb-7">
+        <Link href="/research" className="text-xs font-medium uppercase tracking-[0.12em] text-neutral-500 transition hover:text-emerald-300">← Research library</Link>
+        <div className="mt-5 max-w-4xl">
+          <div className="eyebrow">Empirical study</div>
+          <h1 className="mt-2 text-3xl font-semibold leading-tight tracking-[-0.03em] text-white md:text-5xl">{study.title}</h1>
+          <p className="mt-4 max-w-3xl text-[15px] leading-7 text-neutral-400">{study.summary}</p>
+          <div className="mt-4 flex flex-wrap gap-2 text-xs text-neutral-600">
+            {study.category ? <span className="pill">{study.category}</span> : null}
+            {study.status ? <span className="pill">{String(study.status).toUpperCase()}</span> : null}
+            <span className="pill">Updated · {study.updated_at}</span>
+          </div>
         </div>
-      </div>
+      </header>
+
       <ResearchStudyClient study={study} />
 
       {study.notes?.length ? (
-        <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
-          <h2 className="text-lg font-semibold">Notes</h2>
-          <ul className="list-disc pl-5 text-sm text-zinc-700 space-y-1">
-            {study.notes.map((n, i) => (
-              <li key={i}>{n}</li>
-            ))}
+        <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+          <h2 className="text-xl font-semibold tracking-tight text-white">Notes</h2>
+          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-neutral-400">
+            {study.notes.map((n, i) => <li key={i}>{n}</li>)}
           </ul>
         </section>
       ) : null}
