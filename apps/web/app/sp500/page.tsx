@@ -1,4 +1,3 @@
-// apps/web/app/sp500/page.tsx
 import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
@@ -9,7 +8,13 @@ export const dynamic = "force-static";
 
 type DailyRow = {
   date: string;
+  close?: number;
   sentiment_cap_weighted?: number;
+  sentiment_equal_weighted?: number;
+  sentiment_coverage_market_cap?: number;
+  sentiment_coverage_tickers?: number;
+  sentiment_observed_tickers?: number;
+  sentiment_unique_news_count?: number;
   [k: string]: unknown;
 };
 
@@ -47,74 +52,81 @@ type Sp500HeatmapFile = {
 function safeReadJson<T>(absPath: string): T | null {
   try {
     if (!fs.existsSync(absPath)) return null;
-    const raw = fs.readFileSync(absPath, "utf-8");
-    return JSON.parse(raw) as T;
+    return JSON.parse(fs.readFileSync(absPath, "utf-8")) as T;
   } catch {
     return null;
   }
 }
 
 function readSp500Index(): Sp500IndexFile | null {
-  // We support both:
-  // - running with cwd=repo root
-  // - running with cwd=apps/web
   const candidates = [
-    // repo root
-    path.resolve(process.cwd(), "data/SPX/sp500_index.json"),
-    path.resolve(process.cwd(), "apps/web/public/data/SPX/sp500_index.json"),
-
-    // apps/web cwd
-    path.resolve(process.cwd(), "../../data/SPX/sp500_index.json"),
     path.resolve(process.cwd(), "public/data/SPX/sp500_index.json"),
-
-    // legacy fallback
+    path.resolve(process.cwd(), "apps/web/public/data/SPX/sp500_index.json"),
+    path.resolve(process.cwd(), "../../apps/web/public/data/SPX/sp500_index.json"),
+    path.resolve(process.cwd(), "../../data/SPX/sp500_index.json"),
+    path.resolve(process.cwd(), "data/SPX/sp500_index.json"),
     path.resolve(process.cwd(), "public/data/sp500_index.json"),
   ];
-
   for (const p of candidates) {
     const parsed = safeReadJson<Sp500IndexFile>(p);
-    if (parsed && Array.isArray(parsed.daily)) return parsed;
+    if (parsed?.daily && Array.isArray(parsed.daily)) return parsed;
   }
   return null;
 }
 
 function readSp500Heatmap(): Sp500HeatmapFile | null {
   const candidates = [
-    // repo root
-    path.resolve(process.cwd(), "data/SPX/sp500_heatmap.json"),
-    path.resolve(process.cwd(), "apps/web/public/data/SPX/sp500_heatmap.json"),
-
-    // apps/web cwd
-    path.resolve(process.cwd(), "../../data/SPX/sp500_heatmap.json"),
     path.resolve(process.cwd(), "public/data/SPX/sp500_heatmap.json"),
-
-    // legacy fallback
-    path.resolve(process.cwd(), "public/data/sp500_heatmap.json"),
+    path.resolve(process.cwd(), "apps/web/public/data/SPX/sp500_heatmap.json"),
+    path.resolve(process.cwd(), "../../apps/web/public/data/SPX/sp500_heatmap.json"),
+    path.resolve(process.cwd(), "../../data/SPX/sp500_heatmap.json"),
+    path.resolve(process.cwd(), "data/SPX/sp500_heatmap.json"),
   ];
-
   for (const p of candidates) {
     const parsed = safeReadJson<Sp500HeatmapFile>(p);
-    if (parsed && Array.isArray(parsed.tiles)) return parsed;
+    if (parsed?.tiles && Array.isArray(parsed.tiles)) return parsed;
   }
   return null;
 }
 
-function fmtNum(x: unknown, digits = 4): string {
-  const n = typeof x === "number" ? x : Number(x);
-  if (!Number.isFinite(n)) return "—";
-  return n.toFixed(digits);
+function finite(x: unknown): number | null {
+  if (x === null || x === undefined || x === "") return null;
+  const n = Number(x);
+  return Number.isFinite(n) ? n : null;
 }
 
-function fmtMoney(x: unknown, digits = 2): string {
-  const n = typeof x === "number" ? x : Number(x);
-  if (!Number.isFinite(n)) return "—";
-  return n.toFixed(digits);
+function closeOf(row: DailyRow | null | undefined): number | null {
+  if (!row) return null;
+  const canonical = finite(row.close);
+  if (canonical != null) return canonical;
+  const key = Object.keys(row).find((k) => k.startsWith("close_"));
+  return key ? finite(row[key]) : null;
 }
 
-function avg(arr: number[]): number | null {
-  if (!arr.length) return null;
-  const s = arr.reduce((a, b) => a + b, 0);
-  return s / arr.length;
+function fmtNum(x: unknown, digits = 4) {
+  const n = finite(x);
+  return n == null ? "—" : n.toFixed(digits);
+}
+
+function fmtMoney(x: unknown, digits = 2) {
+  const n = finite(x);
+  return n == null ? "—" : n.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+
+function fmtPct(x: unknown, digits = 1) {
+  const n = finite(x);
+  return n == null ? "—" : `${(n * 100).toFixed(digits)}%`;
+}
+
+function signClass(x: number | null) {
+  if (x == null) return "text-neutral-300";
+  if (x > 0) return "text-emerald-300";
+  if (x < 0) return "text-rose-300";
+  return "text-neutral-300";
+}
+
+function avg(xs: number[]) {
+  return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
 }
 
 export default function Sp500Page() {
@@ -123,156 +135,141 @@ export default function Sp500Page() {
 
   if (!data) {
     return (
-      <div className="space-y-4">
-        <h1 className="text-2xl font-semibold">S&amp;P 500 (SPX)</h1>
-        <p className="text-gray-700">
-          Could not find <code>sp500_index.json</code> at build time.
-        </p>
-        <p className="text-sm">
-          Go back <Link className="underline" href="/">Home</Link>.
-        </p>
-      </div>
+      <main className="space-y-4">
+        <div className="eyebrow">S&P 500 intelligence</div>
+        <h1 className="page-title">Index data unavailable</h1>
+        <p className="text-sm text-neutral-500">The generated SPX index artifact was not available at build time.</p>
+      </main>
     );
   }
 
   const daily = [...data.daily].sort((a, b) => a.date.localeCompare(b.date));
-  const latest = daily[daily.length - 1];
-
-  const closeKey =
-    latest && Number.isFinite(Number((latest as any).close))
-      ? "close"
-      : Object.keys(latest || {}).find((k) => k.startsWith("close_")) ?? null;
-  const latestClose = closeKey ? (latest as any)[closeKey] : null;
-
-  const latestSent =
-    typeof latest?.sentiment_cap_weighted === "number" ? latest.sentiment_cap_weighted : null;
-
-  const last7 = daily
-    .slice(Math.max(0, daily.length - 7))
-    .map((r) => (typeof r.sentiment_cap_weighted === "number" ? r.sentiment_cap_weighted : null))
-    .filter((x): x is number => typeof x === "number");
+  const latest = daily.at(-1) ?? null;
+  const prior = daily.at(-2) ?? null;
+  const latestClose = closeOf(latest);
+  const priorClose = closeOf(prior);
+  const priceChange = latestClose != null && priorClose != null && priorClose !== 0 ? latestClose / priorClose - 1 : null;
+  const latestSent = finite(latest?.sentiment_cap_weighted);
+  const priorSent = finite(prior?.sentiment_cap_weighted);
+  const sentChange = latestSent != null && priorSent != null ? latestSent - priorSent : null;
+  const last7 = daily.slice(-7).map((r) => finite(r.sentiment_cap_weighted)).filter((x): x is number => x != null);
+  const last7Avg = avg(last7);
 
   const series = {
     date: daily.map((r) => r.date),
-    price: daily.map((r) => (closeKey ? Number((r as any)[closeKey]) : NaN)),
-    sentiment: daily.map((r) =>
-      typeof r.sentiment_cap_weighted === "number" ? r.sentiment_cap_weighted : NaN
-    ),
+    price: daily.map((r) => closeOf(r) ?? Number.NaN),
+    sentiment: daily.map((r) => finite(r.sentiment_cap_weighted) ?? Number.NaN),
   };
 
-  const last30 = daily.slice(Math.max(0, daily.length - 30)).reverse();
-
-  const heatmapAsOf = heatmap?.asof ?? latest?.date ?? "—";
+  const observedTiles = (heatmap?.tiles ?? []).filter((t) => finite(t.sentiment) != null);
+  const observedWeight = observedTiles.reduce((s, t) => s + Math.max(0, finite(t.weight) ?? 0), 0);
+  const uniqueArticles = latest?.sentiment_unique_news_count ?? observedTiles.reduce((s, t) => s + Math.max(0, finite(t.n_total) ?? 0), 0);
+  const coverage = finite(latest?.sentiment_coverage_market_cap) ?? (observedWeight > 0 ? observedWeight : null);
+  const observedTickers = finite(latest?.sentiment_observed_tickers) ?? observedTiles.length;
+  const totalTiles = heatmap?.tiles?.length ?? 0;
+  const last30 = daily.slice(-30).reverse();
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-baseline justify-between gap-4 flex-wrap">
+    <main className="space-y-8">
+      <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">
-            {data.name} ({data.symbol})
-          </h1>
-          <div className="text-sm text-gray-500 mt-1">
-            Current view: <span className="font-medium">{heatmapAsOf}</span> (latest trading day)
-          </div>
-        </div>
-        <div className="text-sm">
-          <Link className="underline" href="/">← Back to Home</Link>
-        </div>
-      </div>
-
-      <div className="grid gap-3 sm:grid-cols-3">
-        <div className="border rounded-lg p-4">
-          <div className="text-sm text-gray-500">Latest date</div>
-          <div className="text-lg font-medium">{latest?.date ?? "—"}</div>
-        </div>
-
-        <div className="border rounded-lg p-4">
-          <div className="text-sm text-gray-500">Latest close ({closeKey ?? "close"})</div>
-          <div className="text-lg font-medium">{fmtMoney(latestClose, 2)}</div>
-        </div>
-
-        <div className="border rounded-lg p-4">
-          <div className="text-sm text-gray-500">Cap-weighted sentiment</div>
-          <div className="text-lg font-medium">{latestSent === null ? "—" : fmtNum(latestSent, 4)}</div>
-          <div className="text-xs text-gray-500 mt-1">
-            7-day avg: {avg(last7) === null ? "—" : fmtNum(avg(last7)!, 4)}
-          </div>
-        </div>
-      </div>
-
-      <details className="border rounded-lg p-4">
-        <summary className="cursor-pointer select-none text-sm font-medium">
-          ❓ How S&amp;P 500 sentiment is calculated?
-        </summary>
-        <div className="mt-3 text-sm text-gray-700 space-y-2">
-          <p>
-            The index sentiment is a <b>market-cap-weighted</b> aggregation of constituent sentiment scores.
-            Larger companies contribute more to the final index-level score.
-          </p>
-          <p>
-            For each day, we compute each constituent’s daily news sentiment score, then aggregate across all constituents
-            using their market-cap weights to produce a single cap-weighted S&amp;P 500 sentiment number.
+          <div className="eyebrow">Index intelligence</div>
+          <h1 className="page-title mt-2">{data.name}</h1>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
+            Price, observed news sentiment, coverage, and constituent attribution in one view. Missing sentiment is excluded rather than treated as neutral.
           </p>
         </div>
-      </details>
-
-      {/* Interactive charts */}
-      <div className="space-y-2">
-        <h2 className="text-lg font-semibold">Price & Sentiment</h2>
-        <Sp500Client series={series} />
-      </div>
-
-      {/* Heatmap */}
-      <div className="space-y-2">
-        <div className="flex items-end justify-between gap-3 flex-wrap">
-          <h2 className="text-lg font-semibold">Market Heatmap</h2>
-          <div className="text-xs text-gray-500">
-            Source: Wikipedia (GICS sector/industry) + yfinance (market cap)
-          </div>
+        <div className="flex flex-wrap gap-2">
+          <span className="pill">Latest trading day · {latest?.date ?? "—"}</span>
+          <Link href="/methodology" className="pill">Methodology →</Link>
         </div>
+      </section>
 
+      <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+        <div className="kpi">
+          <div className="kpi-label">S&P 500 close</div>
+          <div className="kpi-value">{fmtMoney(latestClose)}</div>
+          <div className={`kpi-sub ${signClass(priceChange)}`}>{priceChange == null ? "1D change unavailable" : `${priceChange >= 0 ? "+" : ""}${fmtPct(priceChange, 2)} 1D`}</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Cap-weighted sentiment</div>
+          <div className={`kpi-value ${signClass(latestSent)}`}>{fmtNum(latestSent, 4)}</div>
+          <div className={`kpi-sub ${signClass(sentChange)}`}>{sentChange == null ? "Change unavailable" : `${sentChange >= 0 ? "+" : ""}${sentChange.toFixed(4)} vs prior obs`}</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">7D sentiment average</div>
+          <div className={`kpi-value ${signClass(last7Avg)}`}>{fmtNum(last7Avg, 4)}</div>
+          <div className="kpi-sub">Observed daily index signal</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Market-cap coverage</div>
+          <div className="kpi-value">{fmtPct(coverage, 1)}</div>
+          <div className="kpi-sub">{Math.round(observedTickers)} / {totalTiles || "—"} constituents observed</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Unique news evidence</div>
+          <div className="kpi-value">{Number(uniqueArticles || 0).toLocaleString()}</div>
+          <div className="kpi-sub">Articles behind latest observed signal</div>
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <div>
+          <div className="eyebrow">Market structure</div>
+          <h2 className="section-title mt-1">Who is driving the index signal?</h2>
+          <p className="section-copy">Switch between contribution, raw sentiment, and one-day price return. Contribution combines constituent weight with observed sentiment.</p>
+        </div>
         {heatmap ? (
           <Sp500HeatmapClient data={heatmap} />
         ) : (
-          <div className="border rounded-lg p-4 text-sm text-gray-700">
-            <div className="font-medium">Heatmap is unavailable because sp500_heatmap.json was not found at build time.</div>
-            <div className="mt-2 text-xs text-gray-600">
-              Fix: generate <code>data/SPX/sp500_heatmap.json</code> and copy to{" "}
-              <code>apps/web/public/data/SPX/sp500_heatmap.json</code> in your workflow <b>before</b> Next build/export.
-            </div>
-          </div>
+          <div className="card p-5 text-sm text-neutral-500">Constituent map artifact is unavailable.</div>
         )}
-      </div>
+      </section>
 
-      {/* Recent daily values */}
-      <div className="space-y-2">
-        <h2 className="text-lg font-semibold">Recent daily values</h2>
-        <div className="overflow-x-auto border rounded-lg">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b">
+      <section className="space-y-3">
+        <div>
+          <div className="eyebrow">Time series</div>
+          <h2 className="section-title mt-1">Price and sentiment through time</h2>
+        </div>
+        <div className="legacy-dark">
+          <Sp500Client series={series} />
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <div className="eyebrow">Audit trail</div>
+            <h2 className="section-title mt-1">Recent index observations</h2>
+          </div>
+          <span className="text-xs text-neutral-600">Latest 30 rows</span>
+        </div>
+        <div className="table-shell overflow-x-auto">
+          <table className="w-full min-w-[640px] text-sm">
+            <thead className="border-b border-white/10 bg-white/[0.025] text-left text-[11px] uppercase tracking-[0.12em] text-neutral-600">
               <tr>
-                <th className="text-left p-3">Date</th>
-                <th className="text-right p-3">Close</th>
-                <th className="text-right p-3">Cap-weighted sentiment</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3 text-right">Close</th>
+                <th className="px-4 py-3 text-right">Cap weighted</th>
+                <th className="px-4 py-3 text-right">Coverage</th>
               </tr>
             </thead>
             <tbody>
               {last30.map((r) => {
-                const close = closeKey ? Number((r as any)[closeKey]) : NaN;
+                const s = finite(r.sentiment_cap_weighted);
                 return (
-                  <tr key={r.date} className="border-b last:border-b-0">
-                    <td className="p-3">{r.date}</td>
-                    <td className="p-3 text-right">{fmtMoney(close, 2)}</td>
-                    <td className="p-3 text-right">{fmtNum(r.sentiment_cap_weighted, 4)}</td>
+                  <tr key={r.date} className="border-b border-white/[0.06] last:border-0 hover:bg-white/[0.025]">
+                    <td className="px-4 py-3 font-mono text-xs text-neutral-400">{r.date}</td>
+                    <td className="px-4 py-3 text-right font-mono text-neutral-300">{fmtMoney(closeOf(r))}</td>
+                    <td className={`px-4 py-3 text-right font-mono ${signClass(s)}`}>{fmtNum(s, 4)}</td>
+                    <td className="px-4 py-3 text-right font-mono text-neutral-500">{fmtPct(r.sentiment_coverage_market_cap, 1)}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-
-        <p className="text-xs text-gray-500">Showing the latest 30 rows from the SPX index file.</p>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

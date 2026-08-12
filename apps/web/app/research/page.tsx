@@ -1,4 +1,3 @@
-// apps/web/app/research/page.tsx
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { loadResearchIndex, loadResearchOverview } from "../../lib/research";
@@ -34,15 +33,15 @@ type Overview = {
 };
 
 const Badge = ({ children }: { children: ReactNode }) => (
-  <span className="text-[11px] px-2 py-1 rounded-full border border-zinc-200 bg-white">
+  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-300">
     {children}
   </span>
 );
 
 const StatPill = ({ label, value }: { label: string; value: string }) => (
-  <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
-    <div className="text-[11px] text-zinc-500">{label}</div>
-    <div className="text-sm font-semibold text-zinc-900">{value}</div>
+  <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
+    <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-600">{label}</div>
+    <div className="mt-1 text-sm font-semibold text-neutral-200">{value}</div>
   </div>
 );
 
@@ -59,11 +58,8 @@ function deriveSections(items: IndexItem[]) {
     .map(([cat, arr]) => ({
       id: cat.toLowerCase().replace(/\s+/g, "-"),
       title: cat,
-      description: "Empirical notes generated from the live Sentiment Live snapshot.",
-      conclusions: arr
-        .map((x) => x.highlight)
-        .filter(Boolean)
-        .slice(0, 3) as string[],
+      description: "Empirical results generated from the current market-intelligence dataset.",
+      conclusions: arr.map((x) => x.highlight).filter(Boolean).slice(0, 3) as string[],
       slugs: arr
         .slice()
         .sort((a, b) => (b.updated_at || "").localeCompare(a.updated_at || ""))
@@ -75,81 +71,58 @@ export default async function ResearchPage() {
   const [itemsRaw, overviewRaw] = await Promise.all([loadResearchIndex(), loadResearchOverview()]);
   const items = (itemsRaw ?? []) as IndexItem[];
   const overview = (overviewRaw ?? { sections: [] }) as Overview;
-
-  const sections =
-    overview.sections && overview.sections.length ? overview.sections : deriveSections(items);
-
+  const sections = overview.sections?.length ? overview.sections : deriveSections(items);
   const meta = overview.meta ?? {};
 
   return (
-    <main className="max-w-6xl mx-auto p-6 space-y-8">
-      {/* Header */}
-      <div className="flex items-end justify-between gap-4">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold">Research</h1>
-          <p className="text-zinc-600">
-            Live empirical notes built on the same dataset powering Sentiment Live.
+    <main className="space-y-8">
+      <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <div className="eyebrow">Research lab</div>
+          <h1 className="page-title mt-2">Empirical evidence behind the signals.</h1>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
+            Reproducible studies built from the same generated artifacts that power the market, ticker, and portfolio views.
           </p>
-          <p className="text-xs text-zinc-500">
-            Descriptive analytics only — not investment advice. Results may change as data updates.
-          </p>
+          <p className="mt-2 text-xs text-neutral-600">Descriptive research only — not investment advice.</p>
         </div>
+        <div className="flex gap-2">
+          <Link href="/methodology" className="pill">Methodology →</Link>
+          <Link href="/data" className="pill">Data contracts →</Link>
+        </div>
+      </section>
 
-        <Link href="/" className="text-sm underline text-zinc-700 hover:text-zinc-900">
-          Home →
-        </Link>
-      </div>
-
-      {/* Dataset snapshot */}
       {(meta.n_studies || meta.date_range || meta.n_tickers || meta.n_obs_panel) ? (
-        <section className="rounded-2xl border border-zinc-200 bg-white p-5">
+        <section className="ambient-panel p-5 md:p-6">
           <div className="flex items-start justify-between gap-4">
-            <div className="space-y-1">
-              <div className="text-lg font-semibold">Dataset snapshot</div>
-              <div className="text-sm text-zinc-600">
-                Research artifacts are generated from your latest scheduled pipeline output.
-              </div>
+            <div>
+              <div className="text-lg font-semibold text-white">Dataset snapshot</div>
+              <div className="mt-1 text-sm text-neutral-500">Latest generated research universe and panel coverage.</div>
             </div>
-            <Badge>LIVE</Badge>
+            <Badge>Live artifacts</Badge>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
             <StatPill label="Updated" value={meta.updated_at ?? "—"} />
-            <StatPill
-              label="Date range"
-              value={
-                Array.isArray(meta.date_range)
-                  ? `${meta.date_range[0]} .. ${meta.date_range[1]}`
-                  : "—"
-              }
-            />
+            <StatPill label="Date range" value={Array.isArray(meta.date_range) ? `${meta.date_range[0]} → ${meta.date_range[1]}` : "—"} />
             <StatPill label="Studies" value={meta.n_studies?.toString?.() ?? "—"} />
             <StatPill label="Tickers" value={meta.n_tickers?.toString?.() ?? "—"} />
-            <StatPill label="Obs (panel)" value={meta.n_obs_panel?.toString?.() ?? "—"} />
+            <StatPill label="Panel observations" value={meta.n_obs_panel?.toLocaleString?.() ?? "—"} />
             <StatPill label="Frequency" value={Array.isArray(meta.date_range) ? "Daily" : "—"} />
             <StatPill label="Scope" value="S&P 500 snapshot" />
-            <StatPill label="Outputs" value="Reproducible JSON" />
+            <StatPill label="Output" value="Reproducible JSON" />
           </div>
         </section>
       ) : null}
 
-      {/* Empty state */}
       {items.length === 0 ? (
-        <section className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-2">
-          <div className="text-lg font-semibold">No research artifacts yet</div>
-          <p className="text-sm text-zinc-600">
-            The research builder has not generated{" "}
-            <code className="px-1 py-0.5 rounded bg-zinc-100">
-              apps/web/public/research/index.json
-            </code>{" "}
-            for this deployment.
-          </p>
-          <pre className="text-xs overflow-auto rounded-xl bg-zinc-50 border border-zinc-100 p-4">
-python src/market_sentiment/cli/build_research.py --data-root data --out-dir apps/web/public/research
-          </pre>
+        <section className="card p-6">
+          <div className="text-lg font-semibold text-white">No research artifacts yet</div>
+          <p className="mt-2 text-sm text-neutral-500">Research outputs were not generated for this deployment.</p>
         </section>
       ) : (
-        <ResearchIndexClient items={items} sections={sections as any} />
+        <div className="legacy-dark">
+          <ResearchIndexClient items={items} sections={sections as any} />
+        </div>
       )}
     </main>
   );

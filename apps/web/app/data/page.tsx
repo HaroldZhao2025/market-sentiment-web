@@ -28,7 +28,7 @@ const endpoints = [
     description: "Index close, cap-weighted sentiment, equal-weighted sentiment, coverage, and news-observation diagnostics.",
   },
   {
-    name: "S&P 500 heatmap",
+    name: "S&P 500 constituent map",
     path: "/data/SPX/sp500_heatmap.json",
     shape: "HeatmapSnapshot",
     description: "Constituent classifications, weights, price returns, and latest observed sentiment where available.",
@@ -97,10 +97,10 @@ export default function DataPage() {
         </div>
       </section>
 
-      <section className="space-y-4">
+      <section className="space-y-4 pb-4">
         <div>
           <h2 className="section-title">Contract principles</h2>
-          <p className="section-copy">The goal is to make model outputs interpretable enough to reuse in research, screens, and future agent tools.</p>
+          <p className="section-copy">The goal is to make model outputs interpretable enough to reuse in research, screens, and deterministic tools.</p>
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           {principles.map(([title, copy]) => (
@@ -110,14 +110,6 @@ export default function DataPage() {
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="card p-6">
-        <div className="eyebrow">Agent-ready direction</div>
-        <h2 className="mt-2 text-xl font-semibold text-white">The next interface will be queryable, not just browsable.</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
-          Phase 1 exposes the canonical artifacts. The next step is a deterministic screening and backtest interface that an LLM can translate natural-language questions into, while the actual filtering and calculations remain reproducible code.
-        </p>
       </section>
     </main>
   );

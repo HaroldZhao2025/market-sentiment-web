@@ -27,88 +27,85 @@ type Sp500HeatmapFile = {
 };
 
 type Props = { data: Sp500HeatmapFile };
-
+type Mode = "contribution" | "sentiment" | "return";
 type Rect = HeatmapTile & { x: number; y: number; w: number; h: number; key: string };
 
 function clamp(x: number, a: number, b: number) {
   return Math.max(a, Math.min(b, x));
 }
 
-function mix(a: number, b: number, t: number) {
-  return Math.round(a + (b - a) * t);
+function finite(x: unknown): number | null {
+  const n = Number(x);
+  return Number.isFinite(n) ? n : null;
 }
 
-function bgForMetric(v: number | null | undefined, mode: "sentiment" | "return"): string {
-  if (v == null || !Number.isFinite(v)) return "rgb(235,235,235)";
-
-  if (mode === "sentiment") {
-    // sentiment typically small; scale to look finviz-like
-    const s = clamp(v, -0.6, 0.6) / 0.6; // [-1,1]
-    if (s >= 0) {
-      const t = clamp(s, 0, 1);
-      // white -> green
-      const r = mix(245, 0, t);
-      const g = mix(245, 170, t);
-      const b = mix(245, 0, t);
-      return `rgb(${r},${g},${b})`;
-    } else {
-      const t = clamp(-s, 0, 1);
-      // white -> red
-      const r = mix(245, 200, t);
-      const g = mix(245, 0, t);
-      const b = mix(245, 0, t);
-      return `rgb(${r},${g},${b})`;
-    }
-  }
-
-  // return mode: map ±5% roughly
-  const s = clamp(v, -0.05, 0.05) / 0.05;
-  if (s >= 0) {
-    const t = clamp(s, 0, 1);
-    const r = mix(245, 0, t);
-    const g = mix(245, 170, t);
-    const b = mix(245, 0, t);
-    return `rgb(${r},${g},${b})`;
-  } else {
-    const t = clamp(-s, 0, 1);
-    const r = mix(245, 200, t);
-    const g = mix(245, 0, t);
-    const b = mix(245, 0, t);
-    return `rgb(${r},${g},${b})`;
-  }
+function contribution(tile: HeatmapTile): number | null {
+  const w = finite(tile.weight);
+  const s = finite(tile.sentiment);
+  if (w == null || s == null) return null;
+  return w * s;
 }
 
-function textColor(bgRgb: string) {
-  // crude luminance check
-  const m = bgRgb.match(/rgb\((\d+),(\d+),(\d+)\)/);
-  if (!m) return "text-black";
-  const r = Number(m[1]), g = Number(m[2]), b = Number(m[3]);
-  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return lum < 120 ? "text-white" : "text-black";
+function metricValue(tile: HeatmapTile, mode: Mode): number | null {
+  if (mode === "sentiment") return finite(tile.sentiment);
+  if (mode === "return") return finite(tile.return_1d);
+  return contribution(tile);
+}
+
+function metricLabel(mode: Mode) {
+  if (mode === "sentiment") return "Sentiment";
+  if (mode === "return") return "1D return";
+  return "Index contribution";
+}
+
+function scaleFor(mode: Mode) {
+  if (mode === "sentiment") return 0.45;
+  if (mode === "return") return 0.04;
+  return 0.008;
+}
+
+function bgForMetric(v: number | null, mode: Mode): string {
+  if (v == null) return "linear-gradient(145deg, #1b1b20, #141417)";
+  const t = clamp(Math.abs(v) / scaleFor(mode), 0, 1);
+  if (v >= 0) {
+    const alpha = 0.13 + t * 0.67;
+    return `linear-gradient(145deg, rgba(16,185,129,${alpha}), rgba(5,46,40,${0.55 + t * 0.25}))`;
+  }
+  const alpha = 0.13 + t * 0.67;
+  return `linear-gradient(145deg, rgba(244,63,94,${alpha}), rgba(76,5,25,${0.55 + t * 0.25}))`;
 }
 
 function fmtMoney(x: number | null | undefined) {
   if (x == null || !Number.isFinite(x)) return "—";
-  return x.toFixed(1);
+  return x.toFixed(2);
 }
-function fmtNum(x: number | null | undefined, d = 2) {
+
+function fmtNum(x: number | null | undefined, d = 3) {
   if (x == null || !Number.isFinite(x)) return "—";
   return x.toFixed(d);
 }
-function fmtPct(x: number | null | undefined) {
+
+function fmtPct(x: number | null | undefined, d = 2) {
   if (x == null || !Number.isFinite(x)) return "—";
-  return `${(x * 100).toFixed(2)}%`;
+  return `${(x * 100).toFixed(d)}%`;
 }
 
-// Simple binary treemap (stable, no extra deps)
+function metricDisplay(tile: HeatmapTile, mode: Mode) {
+  const v = metricValue(tile, mode);
+  if (v == null) return "—";
+  if (mode === "return") return fmtPct(v, 2);
+  if (mode === "contribution") return `${v >= 0 ? "+" : ""}${(v * 10000).toFixed(2)} bps`;
+  return `${v >= 0 ? "+" : ""}${v.toFixed(3)}`;
+}
+
+// Dependency-free, stable binary treemap. Area remains proportional to market cap.
 function layoutBinary(items: HeatmapTile[], x: number, y: number, w: number, h: number): Rect[] {
   const arr = items
     .filter((t) => Number.isFinite(Number(t.market_cap)) && Number(t.market_cap) > 0)
     .slice()
     .sort((a, b) => Number(b.market_cap || 0) - Number(a.market_cap || 0));
 
-  const total = arr.reduce((s, t) => s + Number(t.market_cap || 0), 0);
-  if (!arr.length || total <= 0) return [];
+  if (!arr.length) return [];
 
   function rec(list: HeatmapTile[], x0: number, y0: number, w0: number, h0: number): Rect[] {
     if (list.length === 1) {
@@ -118,208 +115,211 @@ function layoutBinary(items: HeatmapTile[], x: number, y: number, w: number, h: 
     const sum = list.reduce((s, t) => s + Number(t.market_cap || 0), 0);
     if (sum <= 0) return [];
 
-    const horizontal = w0 < h0; // if tall, split horizontally; else vertically
     let acc = 0;
-    let k = 0;
-    for (; k < list.length; k++) {
-      acc += Number(list[k].market_cap || 0);
+    let split = 0;
+    for (; split < list.length; split++) {
+      acc += Number(list[split].market_cap || 0);
       if (acc >= sum / 2) break;
     }
-    const left = list.slice(0, Math.max(1, k + 1));
-    const right = list.slice(Math.max(1, k + 1));
+    const left = list.slice(0, Math.max(1, split + 1));
+    const right = list.slice(Math.max(1, split + 1));
+    if (!right.length) return rec(left, x0, y0, w0, h0);
 
-    const sumL = left.reduce((s, t) => s + Number(t.market_cap || 0), 0);
-
-    if (!right.length) {
-      // fallback
-      return left.map((t) => ({ ...t, x: x0, y: y0, w: w0, h: h0, key: t.symbol }));
-    }
-
-    if (horizontal) {
-      const hL = h0 * (sumL / sum);
+    const leftWeight = left.reduce((s, t) => s + Number(t.market_cap || 0), 0) / sum;
+    if (w0 >= h0) {
+      const wLeft = w0 * leftWeight;
       return [
-        ...rec(left, x0, y0, w0, hL),
-        ...rec(right, x0, y0 + hL, w0, h0 - hL),
-      ];
-    } else {
-      const wL = w0 * (sumL / sum);
-      return [
-        ...rec(left, x0, y0, wL, h0),
-        ...rec(right, x0 + wL, y0, w0 - wL, h0),
+        ...rec(left, x0, y0, wLeft, h0),
+        ...rec(right, x0 + wLeft, y0, w0 - wLeft, h0),
       ];
     }
+    const hLeft = h0 * leftWeight;
+    return [
+      ...rec(left, x0, y0, w0, hLeft),
+      ...rec(right, x0, y0 + hLeft, w0, h0 - hLeft),
+    ];
   }
 
   return rec(arr, x, y, w, h);
 }
 
-export default function Sp500HeatmapClient({ data }: Props) {
-  const [sector, setSector] = useState<string>("All sectors");
-  const [industry, setIndustry] = useState<string>("All industries");
-  const [mode, setMode] = useState<"sentiment" | "return">("sentiment");
+function RankList({
+  title,
+  rows,
+  positive,
+}: {
+  title: string;
+  rows: HeatmapTile[];
+  positive: boolean;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-4">
+      <div className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500">{title}</div>
+      <div className="space-y-2">
+        {rows.length ? rows.map((tile) => {
+          const c = contribution(tile) ?? 0;
+          return (
+            <Link
+              key={tile.symbol}
+              href={`/ticker/${tile.symbol}`}
+              className="flex items-center justify-between gap-3 rounded-xl px-2 py-2 transition hover:bg-white/[0.05]"
+            >
+              <div className="min-w-0">
+                <div className="font-semibold text-white">{tile.symbol}</div>
+                <div className="truncate text-[11px] text-neutral-600">{tile.sector || "Unknown sector"}</div>
+              </div>
+              <div className={`text-right font-mono text-xs ${positive ? "text-emerald-300" : "text-rose-300"}`}>
+                {c >= 0 ? "+" : ""}{(c * 10000).toFixed(2)} bps
+              </div>
+            </Link>
+          );
+        }) : <div className="text-xs text-neutral-600">No observed contributors.</div>}
+      </div>
+    </div>
+  );
+}
 
+export default function Sp500HeatmapClient({ data }: Props) {
+  const [sector, setSector] = useState("All sectors");
+  const [mode, setMode] = useState<Mode>("contribution");
   const tiles = data.tiles || [];
 
   const sectors = useMemo(() => {
-    const s = new Set<string>();
-    for (const t of tiles) s.add(t.sector || "Unknown");
-    return ["All sectors", ...Array.from(s).sort((a, b) => a.localeCompare(b))];
+    const set = new Set<string>();
+    tiles.forEach((t) => set.add(t.sector || "Unknown"));
+    return ["All sectors", ...Array.from(set).sort()];
   }, [tiles]);
 
-  const industries = useMemo(() => {
-    const s = new Set<string>();
-    for (const t of tiles) {
-      const sec = t.sector || "Unknown";
-      if (sector !== "All sectors" && sec !== sector) continue;
-      s.add(t.industry || "Unknown");
-    }
-    return ["All industries", ...Array.from(s).sort((a, b) => a.localeCompare(b))];
-  }, [tiles, sector]);
+  const filtered = useMemo(
+    () => tiles.filter((t) => sector === "All sectors" || (t.sector || "Unknown") === sector),
+    [tiles, sector]
+  );
 
-  const filtered = useMemo(() => {
-    return tiles.filter((t) => {
-      const sec = t.sector || "Unknown";
-      const ind = t.industry || "Unknown";
-      if (sector !== "All sectors" && sec !== sector) return false;
-      if (industry !== "All industries" && ind !== industry) return false;
-      return true;
-    });
-  }, [tiles, sector, industry]);
+  const rects = useMemo(() => layoutBinary(filtered, 0, 0, 1200, 650), [filtered]);
 
-  const rects = useMemo(() => layoutBinary(filtered, 0, 0, 1000, 560), [filtered]);
+  const observed = useMemo(
+    () => filtered.filter((t) => finite(t.sentiment) != null),
+    [filtered]
+  );
+
+  const positive = useMemo(
+    () => observed.slice().sort((a, b) => (contribution(b) ?? -Infinity) - (contribution(a) ?? -Infinity)).filter((t) => (contribution(t) ?? 0) > 0).slice(0, 6),
+    [observed]
+  );
+  const negative = useMemo(
+    () => observed.slice().sort((a, b) => (contribution(a) ?? Infinity) - (contribution(b) ?? Infinity)).filter((t) => (contribution(t) ?? 0) < 0).slice(0, 6),
+    [observed]
+  );
+
+  const observedWeight = observed.reduce((s, t) => s + Math.max(0, finite(t.weight) ?? 0), 0);
 
   return (
-    <div className="border rounded-xl bg-white overflow-hidden">
-      {/* Header / Controls (finviz-like) */}
-      <div className="px-4 py-3 border-b bg-gray-50 flex flex-wrap items-center justify-between gap-3">
-        <div className="text-sm">
-          <span className="text-gray-500">All sectors</span>
-          {sector !== "All sectors" && (
-            <>
-              <span className="text-gray-400"> / </span>
-              <button className="underline" onClick={() => { setIndustry("All industries"); }}>
-                {sector}
-              </button>
-            </>
-          )}
-          {industry !== "All industries" && (
-            <>
-              <span className="text-gray-400"> / </span>
-              <span className="font-semibold">{industry}</span>
-            </>
-          )}
-          <span className="ml-3 text-gray-500">•</span>
-          <span className="ml-3 text-gray-600">
-            Latest trading day: <span className="font-medium">{data.asof}</span>
-          </span>
-        </div>
+    <div className="space-y-4">
+      <div className="ambient-panel overflow-hidden">
+        <div className="flex flex-col gap-4 border-b border-white/10 px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <div className="eyebrow">Constituent intelligence</div>
+            <div className="mt-1 flex flex-wrap items-baseline gap-3">
+              <h3 className="text-lg font-semibold text-white">S&P 500 constituent map</h3>
+              <span className="text-xs text-neutral-600">As of {data.asof}</span>
+            </div>
+            <p className="mt-1 text-xs text-neutral-500">
+              Area reflects market cap. Color reflects {metricLabel(mode).toLowerCase()}.
+            </p>
+          </div>
 
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          <select
-            className="border rounded-md px-2 py-1 bg-white"
-            value={sector}
-            onChange={(e) => {
-              setSector(e.target.value);
-              setIndustry("All industries");
-            }}
-          >
-            {sectors.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-
-          <select
-            className="border rounded-md px-2 py-1 bg-white"
-            value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
-          >
-            {industries.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-
-          <div className="border rounded-md overflow-hidden flex">
-            <button
-              className={`px-3 py-1 ${mode === "sentiment" ? "bg-black text-white" : "bg-white"}`}
-              onClick={() => setMode("sentiment")}
-              title="Color by sentiment"
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              className="rounded-xl border border-white/10 bg-neutral-900 px-3 py-2 text-xs text-neutral-300 outline-none"
+              value={sector}
+              onChange={(e) => setSector(e.target.value)}
             >
-              Sentiment
-            </button>
-            <button
-              className={`px-3 py-1 ${mode === "return" ? "bg-black text-white" : "bg-white"}`}
-              onClick={() => setMode("return")}
-              title="Color by 1D return"
-            >
-              Return
-            </button>
+              {sectors.map((s) => <option key={s} value={s}>{s}</option>)}
+            </select>
+            <div className="flex rounded-xl border border-white/10 bg-black/30 p-1">
+              {(["contribution", "sentiment", "return"] as Mode[]).map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => setMode(m)}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
+                    mode === m ? "bg-white/10 text-white" : "text-neutral-500 hover:text-neutral-300"
+                  }`}
+                >
+                  {m === "contribution" ? "Contribution" : m === "sentiment" ? "Sentiment" : "1D Return"}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Map */}
-      <div className="p-3 bg-white">
-        <div className="relative w-full" style={{ height: "70vh", minHeight: 420 }}>
-          {rects.map((r) => {
-            const pad = 1.5; // finviz-like white gutters
-            const left = (r.x / 1000) * 100;
-            const top = (r.y / 560) * 100;
-            const width = (r.w / 1000) * 100;
-            const height = (r.h / 560) * 100;
+        <div className="grid gap-0 xl:grid-cols-[minmax(0,1fr)_260px]">
+          <div className="p-3 md:p-4">
+            <div className="relative min-h-[470px] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/30" style={{ height: "68vh", maxHeight: 720 }}>
+              {rects.map((r) => {
+                const gap = 2;
+                const left = (r.x / 1200) * 100;
+                const top = (r.y / 650) * 100;
+                const width = (r.w / 1200) * 100;
+                const height = (r.h / 650) * 100;
+                const value = metricValue(r, mode);
+                const showMetric = width > 5 && height > 6;
+                const showName = width > 10 && height > 12;
 
-            const metricValue = mode === "sentiment" ? (r.sentiment ?? null) : (r.return_1d ?? null);
-            const bg = bgForMetric(metricValue as any, mode);
-            const tc = textColor(bg);
-
-            const showDetail = width > 6 && height > 6;
-
-            return (
-              <Link
-                key={r.key}
-                href={`/ticker/${r.symbol}`}
-                className={`absolute rounded-sm border border-white/80 ${tc} hover:brightness-95`}
-                style={{
-                  left: `calc(${left}% + ${pad}px)`,
-                  top: `calc(${top}% + ${pad}px)`,
-                  width: `calc(${width}% - ${pad * 2}px)`,
-                  height: `calc(${height}% - ${pad * 2}px)`,
-                  background: bg,
-                  textDecoration: "none",
-                }}
-                title={[
-                  r.symbol,
-                  r.name ? `Name: ${r.name}` : null,
-                  `Sector: ${r.sector || "Unknown"}`,
-                  `Industry: ${r.industry || "Unknown"}`,
-                  `Price: ${fmtMoney(r.price ?? null)}`,
-                  `Return(1D): ${fmtPct(r.return_1d ?? null)}`,
-                  `Sentiment: ${fmtNum(r.sentiment ?? null, 4)}`,
-                  r.n_total != null ? `Articles: ${r.n_total}` : null,
-                ]
-                  .filter(Boolean)
-                  .join("\n")}
-              >
-                <div className="w-full h-full p-2 flex flex-col justify-center items-center text-center">
-                  <div className="font-semibold leading-none" style={{ fontSize: showDetail ? 14 : 11 }}>
-                    {r.symbol}
-                  </div>
-                  {showDetail && (
-                    <div className="mt-1 text-[12px] opacity-90">
-                      ({fmtMoney(r.price ?? null)}, {fmtNum(r.sentiment ?? null, 2)})
+                return (
+                  <Link
+                    key={r.key}
+                    href={`/ticker/${r.symbol}`}
+                    className="group absolute overflow-hidden rounded-lg border border-white/[0.07] shadow-inner shadow-white/[0.03] transition duration-200 hover:z-20 hover:scale-[1.012] hover:border-white/30 hover:brightness-110"
+                    style={{
+                      left: `calc(${left}% + ${gap}px)`,
+                      top: `calc(${top}% + ${gap}px)`,
+                      width: `calc(${width}% - ${gap * 2}px)`,
+                      height: `calc(${height}% - ${gap * 2}px)`,
+                      background: bgForMetric(value, mode),
+                    }}
+                    title={[
+                      `${r.symbol} — ${r.name || ""}`,
+                      r.sector || "Unknown sector",
+                      `Weight: ${fmtPct(r.weight, 2)}`,
+                      `Price: ${fmtMoney(r.price)}`,
+                      `1D return: ${fmtPct(r.return_1d)}`,
+                      `Sentiment: ${fmtNum(r.sentiment, 4)}`,
+                      `Contribution: ${contribution(r) == null ? "—" : `${((contribution(r) || 0) * 10000).toFixed(2)} bps`}`,
+                      r.n_total != null ? `Unique articles: ${r.n_total}` : null,
+                    ].filter(Boolean).join("\n")}
+                  >
+                    <div className="flex h-full flex-col justify-between p-2.5">
+                      <div>
+                        <div className="font-semibold leading-none text-white drop-shadow-sm" style={{ fontSize: showName ? 14 : 11 }}>
+                          {r.symbol}
+                        </div>
+                        {showName ? <div className="mt-1 truncate text-[10px] text-white/60">{r.name}</div> : null}
+                      </div>
+                      {showMetric ? (
+                        <div className="font-mono text-[10px] font-semibold text-white/85 md:text-[11px]">
+                          {metricDisplay(r, mode)}
+                        </div>
+                      ) : null}
                     </div>
-                  )}
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                  </Link>
+                );
+              })}
+            </div>
 
-        <div className="mt-2 text-xs text-gray-500">
-          Tip: click tiles to drill into a ticker page. Use filters to focus by sector/industry.
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-[11px] text-neutral-600">
+              <span>{filtered.length} constituents shown · {observed.length} with observed sentiment</span>
+              <span>Observed market-cap coverage: {fmtPct(observedWeight, 1)}</span>
+            </div>
+          </div>
+
+          <aside className="space-y-3 border-t border-white/10 p-3 xl:border-l xl:border-t-0 xl:p-4">
+            <RankList title="Top positive contributors" rows={positive} positive />
+            <RankList title="Top negative contributors" rows={negative} positive={false} />
+            <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-[11px] leading-5 text-neutral-600">
+              <span className="text-neutral-400">Contribution</span> = constituent weight × observed sentiment. Missing sentiment is not treated as zero.
+            </div>
+          </aside>
         </div>
       </div>
     </div>
