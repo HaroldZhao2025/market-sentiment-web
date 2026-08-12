@@ -37,6 +37,7 @@ export type LabSummary = {
   hit_rate: number | null;
   sharpe: number | null;
   n: number;
+  n_dates: number;
   start: string | null;
   end: string | null;
 };
@@ -94,7 +95,17 @@ type PanelObs = {
   fwd: number;
 };
 
+type DailySpread = {
+  date: string;
+  top: number;
+  bottom: number;
+  spread: number;
+  observations: number;
+};
+
 const DATA_ROOT = path.join(process.cwd(), "public", "data");
+const tickerCache = new Map<string, TickerObject | null>();
+let heatmapCache: HeatmapTile[] | null = null;
 
 const EVENT_RULES: Array<{ theme: string; terms: string[] }> = [
   { theme: "Earnings beat / miss", terms: ["earnings", "eps", "revenue", "profit", "quarter", "beat", "miss"] },
@@ -134,19 +145,27 @@ function datesOf(obj: TickerObject): string[] {
 }
 
 export function readHeatmapTiles(): HeatmapTile[] {
+  if (heatmapCache) return heatmapCache;
   const candidates = [
     path.join(DATA_ROOT, "SPX", "sp500_heatmap.json"),
     path.resolve(process.cwd(), "apps/web/public/data/SPX/sp500_heatmap.json"),
   ];
   for (const file of candidates) {
     const parsed = readJson<{ tiles?: HeatmapTile[] }>(file);
-    if (Array.isArray(parsed?.tiles)) return parsed!.tiles;
+    if (Array.isArray(parsed?.tiles)) {
+      heatmapCache = parsed!.tiles;
+      return heatmapCache;
+    }
   }
-  return [];
+  heatmapCache = [];
+  return heatmapCache;
 }
 
 function tickerObject(symbol: string): TickerObject | null {
-  return readJson<TickerObject>(path.join(DATA_ROOT, "ticker", `${symbol}.json`));
+  if (tickerCache.has(symbol)) return tickerCache.get(symbol) ?? null;
+  const obj = readJson<TickerObject>(path.join(DATA_ROOT, "ticker", `${symbol}.json`));
+  tickerCache.set(symbol, obj);
+  return obj;
 }
 
 function sourceOf(item: any): string {
@@ -306,23 +325,57 @@ function buildPanel(signalName: LabSummary["signal"], horizon: LabSummary["horiz
   return out;
 }
 
-function quantileSummary(obs: PanelObs[], q: LabSummary["quantile"]): Omit<LabSummary, "signal" | "horizon" | "sector" | "quantile"> {
-  if (obs.length < 12) {
-    return { top_mean: null, bottom_mean: null, spread: null, t_stat: null, hit_rate: null, sharpe: null, n: obs.length, start: null, end: null };
+function dailyCrossSectionSpreads(obs: PanelObs[], q: LabSummary["quantile"]): DailySpread[] {
+  const byDate = new Map<string, PanelObs[]>();
+  obs.forEach((row) => byDate.set(row.date, [...(byDate.get(row.date) ?? []), row]));
+
+  const out: DailySpread[] = [];
+  Array.from(byDate.entries()).sort((a, b) => a[0].localeCompare(b[0])).forEach(([date, rows]) => {
+    if (rows.length < 6) return;
+    const sorted = rows.slice().sort((a, b) => a.signal - b.signal);
+    const k = Math.max(1, Math.floor(sorted.length * q));
+    if (k * 2 > sorted.length) return;
+    const bottom = mean(sorted.slice(0, k).map((x) => x.fwd));
+    const top = mean(sorted.slice(-k).map((x) => x.fwd));
+    if (top == null || bottom == null) return;
+    out.push({ date, top, bottom, spread: top - bottom, observations: rows.length });
+  });
+  return out;
+}
+
+function quantileSummary(
+  obs: PanelObs[],
+  q: LabSummary["quantile"],
+  horizon: LabSummary["horizon"]
+): Omit<LabSummary, "signal" | "horizon" | "sector" | "quantile"> {
+  const daily = dailyCrossSectionSpreads(obs, q);
+  if (daily.length < 3) {
+    const ds = obs.map((x) => x.date).sort();
+    return {
+      top_mean: null,
+      bottom_mean: null,
+      spread: null,
+      t_stat: null,
+      hit_rate: null,
+      sharpe: null,
+      n: obs.length,
+      n_dates: daily.length,
+      start: ds[0] ?? null,
+      end: ds.at(-1) ?? null,
+    };
   }
-  const sorted = obs.slice().sort((a, b) => a.signal - b.signal);
-  const k = Math.max(1, Math.floor(sorted.length * q));
-  const bottom = sorted.slice(0, k).map((x) => x.fwd);
-  const top = sorted.slice(-k).map((x) => x.fwd);
-  const topMean = mean(top);
-  const bottomMean = mean(bottom);
-  const spreads = top.slice(0, Math.min(top.length, bottom.length)).map((x, i) => x - bottom[i]);
-  const spread = topMean != null && bottomMean != null ? topMean - bottomMean : null;
+
+  const topMean = mean(daily.map((x) => x.top));
+  const bottomMean = mean(daily.map((x) => x.bottom));
+  const spreads = daily.map((x) => x.spread);
+  const spread = mean(spreads);
   const sd = std(spreads);
   const tStat = spread != null && sd != null && sd > 0 ? spread / (sd / Math.sqrt(spreads.length)) : null;
   const hit = spreads.length ? spreads.filter((x) => x > 0).length / spreads.length : null;
-  const sharpe = spread != null && sd != null && sd > 0 ? (spread / sd) * Math.sqrt(252 / 5) : null;
-  const ds = obs.map((x) => x.date).sort();
+  const periodsPerYear = 252 / horizon;
+  const sharpe = spread != null && sd != null && sd > 0 ? (spread / sd) * Math.sqrt(periodsPerYear) : null;
+  const ds = daily.map((x) => x.date).sort();
+
   return {
     top_mean: topMean,
     bottom_mean: bottomMean,
@@ -331,6 +384,7 @@ function quantileSummary(obs: PanelObs[], q: LabSummary["quantile"]): Omit<LabSu
     hit_rate: hit,
     sharpe,
     n: obs.length,
+    n_dates: daily.length,
     start: ds[0] ?? null,
     end: ds.at(-1) ?? null,
   };
@@ -342,13 +396,17 @@ export function buildLabSummaries(): LabSummary[] {
   const quantiles: LabSummary["quantile"][] = [0.2, 0.25, 0.33];
   const sectors = ["All", ...Array.from(new Set(readHeatmapTiles().map((t) => t.sector || "Unknown"))).sort()];
   const out: LabSummary[] = [];
+  const panelCache = new Map<string, PanelObs[]>();
+
   for (const signal of signals) {
     for (const horizon of horizons) {
-      const panel = buildPanel(signal, horizon);
+      const cacheKey = `${signal}:${horizon}`;
+      const panel = panelCache.get(cacheKey) ?? buildPanel(signal, horizon);
+      panelCache.set(cacheKey, panel);
       for (const sector of sectors) {
         const scoped = sector === "All" ? panel : panel.filter((x) => x.sector === sector);
         for (const quantile of quantiles) {
-          out.push({ signal, horizon, sector, quantile, ...quantileSummary(scoped, quantile) });
+          out.push({ signal, horizon, sector, quantile, ...quantileSummary(scoped, quantile, horizon) });
         }
       }
     }
