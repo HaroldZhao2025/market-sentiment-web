@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import GlobalNav from "../components/GlobalNav";
+import GlobalNavV2 from "../components/GlobalNavV2";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
-        <GlobalNav />
+        <GlobalNavV2 />
 
         <div className="mx-auto min-h-[calc(100vh-144px)] max-w-7xl px-4 py-6 md:px-6 md:py-8">{children}</div>
 

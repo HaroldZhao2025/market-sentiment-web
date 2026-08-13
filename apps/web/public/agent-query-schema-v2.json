@@ -1,0 +1,29 @@
+{
+  "schema_version": 2,
+  "id": "sentiment-intelligence-query-v2",
+  "description": "Deterministic query contract for company, news, earnings, event, and research evidence.",
+  "request": {
+    "universe": ["sp500", "extended"],
+    "symbols": "string[] optional",
+    "sector": "string optional",
+    "event_theme": "string optional",
+    "sentiment": ["positive", "negative", "any"],
+    "price_reaction": ["up", "down", "any"],
+    "minimum_news": "integer >= 0",
+    "sort": ["sentiment", "sentiment_change", "return_1d", "divergence", "contribution", "news", "novelty", "disagreement"],
+    "limit": "integer 1..100"
+  },
+  "result": {
+    "query_id": "stable hash of normalized request",
+    "generated_at_utc": "ISO-8601",
+    "data_asof": "ISO date or timestamp",
+    "rows": "deterministic evidence rows",
+    "sources": "public artifact paths used to produce the result",
+    "semantics": {
+      "article_sentiment": "P(positive) - P(negative)",
+      "no_news": "missing, never neutral zero",
+      "sp500_scope": "SPX weighting and contribution use S&P 500 core only",
+      "extended_scope": "extended universe is company intelligence and does not alter SPX weighting"
+    }
+  }
+}
