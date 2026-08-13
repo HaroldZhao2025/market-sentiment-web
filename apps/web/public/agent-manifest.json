@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "product": "Sentiment Intelligence",
+  "interface_type": "static-machine-readable-contract",
+  "base_path": "/market-sentiment-web",
+  "principles": {
+    "article_sentiment": "P(positive) - P(negative)",
+    "no_news": "missing, not neutral zero",
+    "sp500_sentiment": "renormalized cap-weighted mean across observed constituents only",
+    "contribution": "constituent_weight * observed_sentiment",
+    "sp500_price": "true index source such as ^GSPC, never SPY as index-level substitute"
+  },
+  "resources": [
+    {
+      "id": "sp500_index",
+      "path": "/data/SPX/sp500_index.json",
+      "description": "S&P 500 daily close, observed aggregate sentiment, coverage and evidence diagnostics",
+      "format": "json"
+    },
+    {
+      "id": "sp500_constituents",
+      "path": "/data/SPX/sp500_heatmap.json",
+      "description": "Latest constituent metadata, market-cap weight, price, 1D return, observed sentiment and unique-news count",
+      "format": "json"
+    },
+    {
+      "id": "ticker_list",
+      "path": "/data/_tickers.json",
+      "description": "Ticker symbols with generated public snapshots",
+      "format": "json"
+    },
+    {
+      "id": "ticker_snapshot",
+      "path_template": "/data/ticker/{SYMBOL}.json",
+      "description": "Ticker price/sentiment series plus retained article-level scored evidence",
+      "format": "json",
+      "missing_semantics": "Use sentiment_observed / n_total when present. Carried-forward display S is not a new sentiment observation."
+    },
+    {
+      "id": "portfolio_strategy",
+      "path": "/data/portfolio_strategy.json",
+      "description": "Generated portfolio backtest artifact; presentation layers must not silently alter strategy logic",
+      "format": "json"
+    },
+    {
+      "id": "research_index",
+      "path": "/research/index.json",
+      "description": "Generated empirical research library index when available",
+      "format": "json"
+    }
+  ],
+  "query_fields": {
+    "symbol": "string",
+    "name": "string",
+    "sector": "string",
+    "industry": "string",
+    "weight": "number|null",
+    "price": "number|null",
+    "return_1d": "number|null",
+    "sentiment": "number|null",
+    "sentiment_change": "derived number|null",
+    "divergence": "derived number|null",
+    "event_theme": "derived string|null",
+    "novelty": "derived number|null",
+    "disagreement": "derived number|null",
+    "n_total": "number|null"
+  },
+  "natural_language_interface": {
+    "route": "/ask",
+    "behavior": "Natural language is deterministically mapped to explicit filters and rankings. It does not replace underlying calculations with generated prose."
+  },
+  "research_lab": {
+    "route": "/lab",
+    "version": 2,
+    "signals": ["sentiment", "sentiment_change", "divergence"],
+    "horizons_trading_days": [1, 3, 5, 20],
+    "quantiles": [0.2, 0.25, 0.33],
+    "inference": "Newey-West/Bartlett HAC for mean daily high-minus-low spread; lag = horizon - 1",
+    "validation": "chronological 70/30 in-sample/out-of-sample split",
+    "download": "Selected specification and result can be exported as JSON from the Lab UI"
+  }
+}
