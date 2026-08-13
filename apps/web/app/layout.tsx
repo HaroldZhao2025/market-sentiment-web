@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 
 const navItems = [
   { href: "/", label: "Market" },
+  { href: "/ask", label: "Ask" },
   { href: "/screener", label: "Screener" },
   { href: "/sp500", label: "S&P 500" },
   { href: "/attribution", label: "Attribution" },
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-neutral-500 md:flex-row md:items-center md:justify-between md:px-6">
             <div>Sentiment Intelligence · S&P 500 market-intelligence research project</div>
             <div className="flex flex-wrap gap-4">
+              <Link href="/ask" className="hover:text-neutral-300">Ask the Market</Link>
               <Link href="/methodology" className="hover:text-neutral-300">Methodology</Link>
               <Link href="/data" className="hover:text-neutral-300">Machine-readable data</Link>
               <span>Not investment advice</span>
