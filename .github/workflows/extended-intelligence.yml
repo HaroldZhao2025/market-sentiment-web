@@ -47,7 +47,7 @@ jobs:
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
         run: |
           set -euo pipefail
-          python -m market_sentiment.cli.build_v6_market --public-root apps/web/public --state-root data/v5 --news-refresh-limit 60 --news-days 45 --news-max-items 60 --earnings-limit 3 --earnings-quarters 4 --score-news
+          python -m market_sentiment.cli.build_v6_market_safe --public-root apps/web/public --state-root data/v5 --news-refresh-limit 60 --news-days 45 --news-max-items 60 --earnings-limit 3 --earnings-quarters 4 --score-news
       - name: Validate and persist
         run: |
           set -euo pipefail
