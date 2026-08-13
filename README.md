@@ -1,8 +1,6 @@
 # Sentiment Intelligence — S&P 500 Market Evidence & Research
 
-**Sentiment Intelligence** is an auditable market-intelligence and empirical-research platform built around S&P 500 news sentiment, price reactions, constituent attribution, deterministic event intelligence, signal screening, natural-language querying, and reproducible backtests.
-
-The product principle is simple:
+**Sentiment Intelligence** is an auditable market-intelligence and empirical-research platform built around S&P 500 news sentiment, price reactions, constituent attribution, deterministic event intelligence, signal screening, natural-language querying, machine-readable agent contracts, and reproducible research.
 
 > Do not compete with LLMs by generating generic financial prose. Build proprietary, deterministic, auditable market data and research that humans, LLMs, and agents can consume.
 
@@ -18,17 +16,19 @@ The product principle is simple:
 ## Current product surfaces
 
 - `/` — market state, attention, and signal discovery
-- `/ask` — Ask the Market: natural-language questions translated into explicit deterministic filters and rankings
+- `/ask` — **Ask the Market**: natural-language questions translated into explicit deterministic filters and rankings
 - `/ticker/<symbol>` — ticker price/sentiment history, scored headline evidence, and deterministic event drivers
 - `/screener` — cross-sectional Market Screener / Signal Explorer
-- `/sp500` — true S&P 500 index price, observed sentiment, coverage, and user-selectable **Treemap / Bubbles** constituent views
+- `/sp500` — true S&P 500 index price, observed sentiment, coverage, and user-selectable **Treemap / Bubbles** views
 - `/attribution` — company → industry → sector → index sentiment-contribution decomposition
-- `/events` — Historical Event Memory with event taxonomy, novelty, source breadth, disagreement, and observed price reactions
-- `/lab` — Interactive Research Lab for daily cross-sectional signal sorts and forward-return diagnostics
+- `/events` — Historical Event Memory with taxonomy, novelty, source breadth, disagreement, and observed price reactions
+- `/lab` — **Research Lab V2** with observed-only cross-sectional sorts, HAC inference, OOS checks, turnover and cost sensitivity
+- `/agent` — machine-interface documentation for external agents and research workflows
 - `/portfolio` — lagged sentiment-driven portfolio research and benchmark comparison
 - `/research` — generated empirical research library
 - `/data` — machine-readable data contracts
 - `/methodology` — methodology, definitions, and limitations
+- `/agent-manifest.json` — static discovery/semantics contract for agents
 
 ## Core methodology contracts
 
@@ -42,19 +42,15 @@ The product principle is simple:
 - S&P index price uses a true index source such as `^GSPC`; SPY is not used as an index-level price substitute.
 - Portfolio calculations should not be silently changed by presentation/UI work.
 
-## Phase 3 — Intelligence Engine
+## Phase 4 — completed
 
-Phase 3 added deterministic intelligence products on top of the evidence layer: Market Screener, Interactive Research Lab, Historical Event Memory, richer deterministic event diagnostics, S&P Attribution V2, and the dark market-intelligence product shell.
+Phase 4 turns the Intelligence Engine into a queryable research platform:
 
-## Phase 4 — Query Layer
-
-Phase 4 has started with three upgrades:
-
-1. **Ask the Market** — natural language is parsed into an explicit query plan over the existing Screener fields. The UI shows both the interpretation and the underlying rows; it does not invent generic finance prose.
-2. **Dual S&P visualization** — the constituent map now defaults to a classic rectangular treemap while retaining clustered bubbles as an alternative. Both views support Contribution / Sentiment / 1D Return, sector filtering, rich hover evidence, and ticker navigation.
-3. **Constituent metadata hardening** — S&P company metadata uses a seven-day Wikipedia cache TTL and yfinance `longName` / `shortName` fallback. The builder fails if company-name coverage drops below 98% rather than silently publishing large numbers of blank names.
-
-The next Phase 4 expansion should build structured agent/API access, Event Memory V2, and Research Lab V2 on top of the same deterministic engine.
+1. **Ask the Market** — natural language maps to an explicit query plan over deterministic Screener fields; the UI shows the interpretation and underlying rows.
+2. **Dual S&P visualization** — classic Treemap is the default, with clustered Bubbles available as an alternative. Both support Contribution / Sentiment / 1D Return, sector filtering, rich hover evidence, and ticker navigation.
+3. **Constituent metadata hardening** — seven-day Wikipedia metadata TTL, yfinance `longName` / `shortName` fallback, ticker-variant handling, and a 98% company-name coverage gate.
+4. **Research Lab V2** — uses only `sentiment_observed=true` dates, prior observed sentiment for changes, daily cross-sectional sorts, Newey-West/Bartlett HAC inference, chronological 70/30 validation, turnover diagnostics, transaction-cost sensitivity, and downloadable JSON specifications/results.
+5. **Agent interface** — `/agent` plus `/agent-manifest.json` provide stable static machine-readable contracts appropriate for GitHub Pages rather than pretending the site has an always-on dynamic API server.
 
 ## Data sources
 
@@ -62,30 +58,24 @@ The next Phase 4 expansion should build structured agent/API access, Event Memor
 - Constituent metadata: Wikipedia S&P 500 constituents table with yfinance metadata fallback
 - News: Finnhub and Yahoo/yfinance sources in the current production pipeline
 - Sentiment: ProsusAI/FinBERT
-- Earnings/transcript-related pipeline components exist, but transcript analysis is not yet a production website surface.
 
 ## Run locally
 
 ```bash
-# Python
 pip install -r requirements.txt
-
-# Frontend
 cd apps/web
 npm ci
 npx tsc --noEmit
 npm run build
 ```
 
-Generated data artifacts are expected under `apps/web/public/data` and `apps/web/public/research` for full production/static-export behavior.
-
 ## CI / GitHub Pages
 
 - Production data/site deployment runs through `.github/workflows/pipeline.yml`.
-- Frontend PR CI is strict: TypeScript typecheck and Next.js production build must succeed; build failures are not suppressed.
-- Python source changes now receive compile validation plus deterministic S&P metadata-helper tests.
-- Optional production secrets include provider/API credentials used by the data pipeline.
+- Frontend PR CI strictly runs TypeScript typecheck and Next.js production build.
+- Python source changes receive compile validation plus deterministic S&P metadata-helper tests.
+- Build failures are not suppressed.
 
-## Important research caveats
+## Research caveats
 
-The Research Lab and Event Memory are descriptive research tools, not causal estimators or investment recommendations. Overlapping forward-return horizons can induce serial dependence; publication-grade inference should add appropriate robust/clustered standard errors, transaction costs where relevant, and out-of-sample validation.
+Research Lab V2 and Event Memory are descriptive research tools, not causal estimators or investment recommendations. HAC inference addresses overlapping-return serial dependence only at the displayed diagnostic level; publication-grade work should still consider richer clustering, transaction-cost assumptions, multiple-testing concerns, point-in-time universe construction, and genuinely held-out validation.
