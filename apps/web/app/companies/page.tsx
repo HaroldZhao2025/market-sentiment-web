@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import CompaniesClient, { type CompanyRow } from "./CompaniesClient";
+import CompanyMetrics from "./CompanyMetrics";
 
 export const dynamic = "force-static";
 export const metadata = { title: "Companies" };
@@ -25,21 +26,26 @@ export default function CompaniesPage() {
 
   return (
     <main className="space-y-7">
-      <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <div className="eyebrow">Phase 5 market expansion</div>
-          <h1 className="page-title mt-2">Companies</h1>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
-            Extended U.S. company intelligence beyond the S&amp;P 500. The broader universe is physically separated from SPX weights, attribution, and portfolio calculations.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <span className="pill">{rows.length || "—"} extended companies</span>
-          <span className="pill">{sp500 || "—"} S&amp;P 500</span>
-          <span className="pill">{midcap || "—"} MidCap 400</span>
-        </div>
+      <section>
+        <div className="eyebrow">Company intelligence</div>
+        <h1 className="page-title mt-2">Companies</h1>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
+          Extended U.S. company intelligence beyond the S&amp;P 500. The broader universe remains physically separated from SPX weights, attribution, and portfolio calculations.
+        </p>
       </section>
-      {rows.length ? <CompaniesClient rows={rows} generatedAt={data.generated_at_utc ?? null} /> : <div className="card p-5 text-sm leading-6 text-neutral-500">The V5 extended-universe artifact has not been generated in this clean build yet. This route is intentionally build-safe; the core S&amp;P 500 surfaces remain unaffected.</div>}
+
+      <CompanyMetrics total={rows.length} sp500={sp500} midcap={midcap} />
+
+      {rows.length ? (
+        <CompaniesClient rows={rows} generatedAt={data.generated_at_utc ?? null} />
+      ) : (
+        <section className="rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-7">
+          <div className="text-sm font-semibold text-neutral-200">Extended market data is waiting for its first Phase 6 refresh.</div>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-500">
+            This route remains build-safe. S&amp;P 500 market, attribution, portfolio, and research surfaces continue to use their validated core artifacts while the broader company universe is generated independently.
+          </p>
+        </section>
+      )}
     </main>
   );
 }
