@@ -15,6 +15,9 @@ const resources = [
   ["Research index", "/research/index.json", "Generated empirical-study registry when available."],
 ];
 
+const BASE = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
+const publicHref = (path: string) => `${BASE}${path.startsWith("/") ? path : `/${path}`}`;
+
 export default function AgentPage() {
   return (
     <main className="space-y-8">
@@ -25,7 +28,7 @@ export default function AgentPage() {
           Sentiment Intelligence exposes deterministic facts as static JSON contracts that can be consumed by external LLMs, agents, notebooks, and research pipelines without requiring them to scrape presentation text or reinterpret missing values.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <a href="/agent-manifest.json" className="pill">Open agent manifest →</a>
+          <a href={publicHref("/agent-manifest.json")} className="pill">Open agent manifest →</a>
           <Link href="/ask" className="pill">Ask the Market →</Link>
           <Link href="/data" className="pill">Data contracts →</Link>
         </div>
@@ -42,7 +45,7 @@ export default function AgentPage() {
         <div className="table-shell overflow-x-auto">
           <table className="w-full min-w-[760px] text-sm">
             <thead className="border-b border-white/10 bg-white/[0.025] text-left text-[11px] uppercase tracking-[0.1em] text-neutral-600"><tr><th className="px-4 py-3">Resource</th><th className="px-4 py-3">Path</th><th className="px-4 py-3">Purpose</th></tr></thead>
-            <tbody>{resources.map(([name, href, description]) => <tr key={name} className="border-b border-white/[0.06] last:border-0"><td className="px-4 py-3 font-medium text-neutral-200">{name}</td><td className="px-4 py-3"><a href={href} className="font-mono text-xs text-emerald-300 hover:underline">{href}</a></td><td className="px-4 py-3 text-sm leading-6 text-neutral-500">{description}</td></tr>)}</tbody>
+            <tbody>{resources.map(([name, href, description]) => <tr key={name} className="border-b border-white/[0.06] last:border-0"><td className="px-4 py-3 font-medium text-neutral-200">{name}</td><td className="px-4 py-3"><a href={publicHref(href)} className="font-mono text-xs text-emerald-300 hover:underline">{href}</a></td><td className="px-4 py-3 text-sm leading-6 text-neutral-500">{description}</td></tr>)}</tbody>
           </table>
         </div>
       </section>
