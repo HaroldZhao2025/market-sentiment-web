@@ -1,542 +1,376 @@
-# src/market_sentiment/cli/build_sp500_heatmap.py
 from __future__ import annotations
 
 import argparse
 import csv
 import json
+import math
 import re
 import sys
 from dataclasses import dataclass
-from datetime import datetime, date
+from datetime import date, datetime, timedelta, timezone
 from html import unescape
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.request import Request, urlopen
 
 import yfinance as yf
 
-
 WIKI_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+CACHE_TTL_DAYS = 7
 
 
-def read_json(p: Path) -> Any:
-    with p.open("r", encoding="utf-8") as f:
+def read_json(path: Path) -> Any:
+    with path.open("r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def write_json(p: Path, obj: Any) -> None:
-    p.parent.mkdir(parents=True, exist_ok=True)
-    with p.open("w", encoding="utf-8") as f:
-        json.dump(obj, f, indent=2)
+def write_json(path: Path, obj: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(obj, indent=2, ensure_ascii=False), encoding="utf-8")
+    tmp.replace(path)
 
 
-def parse_iso_date(s: str) -> date:
-    return datetime.fromisoformat(s).date()
+def parse_iso_date(value: str) -> date:
+    return datetime.fromisoformat(value).date()
 
 
-def yfinance_symbol(sym: str) -> str:
-    # BRK.B -> BRK-B for yfinance
-    return sym.replace(".", "-")
+def normalize_ticker(value: str) -> str:
+    return re.sub(r"\s+", "", (value or "").strip().upper())
 
 
-def normalize_ticker(s: str) -> str:
-    s = (s or "").strip().upper()
-    # remove weird whitespace
-    s = re.sub(r"\s+", "", s)
-    return s
+def yfinance_symbol(symbol: str) -> str:
+    return normalize_ticker(symbol).replace(".", "-")
 
 
-def ticker_variants(sym: str) -> List[str]:
-    sym = normalize_ticker(sym)
-    if not sym:
-        return []
-    out = {sym}
-    out.add(sym.replace(".", "-"))
-    out.add(sym.replace("-", "."))
-    return list(out)
+def ticker_variants(symbol: str) -> List[str]:
+    symbol = normalize_ticker(symbol)
+    return list({symbol, symbol.replace(".", "-"), symbol.replace("-", ".")}) if symbol else []
 
 
-def read_tickers_csv(universe_csv: Path) -> List[str]:
-    """
-    data/sp500.csv has only tickers (per your description).
-    This reads first column, skips header if present.
-    """
-    tickers: List[str] = []
-    with universe_csv.open("r", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        for i, row in enumerate(reader):
-            if not row:
-                continue
-            v = normalize_ticker(row[0])
-            if not v:
-                continue
-            # skip header-like first row
-            if i == 0 and v in {"TICKER", "SYMBOL"}:
-                continue
-            tickers.append(v)
-    # unique, preserve order
+def read_tickers_csv(path: Path) -> List[str]:
+    with path.open("r", encoding="utf-8", newline="") as f:
+        rows = list(csv.reader(f))
+    out: List[str] = []
     seen = set()
-    out = []
-    for t in tickers:
-        if t not in seen:
-            out.append(t)
-            seen.add(t)
+    for i, row in enumerate(rows):
+        if not row:
+            continue
+        value = normalize_ticker(row[0])
+        if i == 0 and value in {"TICKER", "SYMBOL"}:
+            continue
+        if value and value not in seen:
+            seen.add(value)
+            out.append(value)
     return out
 
 
-def latest_trading_day_from_spx_index(spx_index_path: Path) -> str:
-    obj = read_json(spx_index_path)
+def latest_trading_day_from_spx_index(path: Path) -> str:
+    obj = read_json(path)
     daily = obj.get("daily") or []
     if not isinstance(daily, list) or not daily:
-        raise ValueError(f"{spx_index_path} has no daily rows")
-    daily_sorted = sorted(daily, key=lambda r: str(r.get("date", "")))
-    d = daily_sorted[-1].get("date")
-    if not d:
+        raise ValueError(f"{path} has no daily rows")
+    row = max(daily, key=lambda r: str(r.get("date") or ""))
+    if not row.get("date"):
         raise ValueError("Latest SPX row missing date")
-    return str(d)
+    return str(row["date"])
 
 
 def fetch_url(url: str, user_agent: str) -> str:
-    req = Request(
-        url,
-        headers={
-            "User-Agent": user_agent,
-            "Accept": "text/html,application/xhtml+xml",
-        },
-    )
+    req = Request(url, headers={"User-Agent": user_agent, "Accept": "text/html,application/xhtml+xml"})
     with urlopen(req, timeout=30) as resp:
-        raw = resp.read()
-    return raw.decode("utf-8", errors="replace")
-
-
-def extract_constituents_table_html(page_html: str) -> str:
-    """
-    Try to extract the constituents table from Wikipedia page HTML.
-
-    Wikipedia currently has a table with id="constituents". We target it first.
-    Fallback: any table containing 'GICS Sector' and 'GICS Sub-Industry'.
-    """
-    # Prefer id="constituents"
-    m = re.search(r'(<table[^>]*id="constituents"[^>]*>.*?</table>)', page_html, flags=re.S | re.I)
-    if m:
-        return m.group(1)
-
-    # Fallback: find a table that contains both headers
-    tables = re.findall(r"(<table[^>]*>.*?</table>)", page_html, flags=re.S | re.I)
-    for t in tables:
-        if "GICS Sector" in t and "GICS Sub-Industry" in t and "Symbol" in t:
-            return t
-
-    raise RuntimeError("Could not locate constituents table in Wikipedia HTML")
+        return resp.read().decode("utf-8", errors="replace")
 
 
 def strip_tags(html: str) -> str:
-    # remove scripts/styles
     html = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", html, flags=re.S | re.I)
-    # remove tags
-    text = re.sub(r"<[^>]+>", "", html)
-    text = unescape(text)
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
+    return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", "", html))).strip()
 
 
-def parse_html_table(table_html: str) -> List[List[str]]:
-    """
-    Minimal HTML table parser (no external deps).
-    Returns rows of cell texts.
-    """
-    rows_html = re.findall(r"<tr[^>]*>(.*?)</tr>", table_html, flags=re.S | re.I)
+def parse_constituent_rows(html: str) -> List[List[str]]:
+    match = re.search(r'(<table[^>]*id="constituents"[^>]*>.*?</table>)', html, flags=re.S | re.I)
+    tables = [match.group(1)] if match else re.findall(r"(<table[^>]*>.*?</table>)", html, flags=re.S | re.I)
+    table = next((t for t in tables if "GICS Sector" in t and "Symbol" in t), None)
+    if not table:
+        raise RuntimeError("Could not locate S&P 500 constituents table")
     rows: List[List[str]] = []
-    for rh in rows_html:
-        cells = re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", rh, flags=re.S | re.I)
-        if not cells:
-            continue
-        rows.append([strip_tags(c) for c in cells])
+    for raw_row in re.findall(r"<tr[^>]*>(.*?)</tr>", table, flags=re.S | re.I):
+        cells = re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", raw_row, flags=re.S | re.I)
+        if cells:
+            rows.append([strip_tags(cell) for cell in cells])
     return rows
 
 
 @dataclass
-class WikiMeta:
+class Meta:
     name: str
     sector: str
     industry: str
+    source: str
 
 
-def build_wikipedia_map(
-    cache_path: Path,
-    user_agent: str,
-    refresh: bool,
-) -> Dict[str, WikiMeta]:
-    """
-    Returns mapping for ticker variants -> WikiMeta.
-    Cache is written to cache_path.
-    """
-    if cache_path.exists() and not refresh:
-        try:
-            cached = read_json(cache_path)
-            if isinstance(cached, dict) and "rows" in cached:
-                return rows_to_wiki_map(cached["rows"])
-        except Exception:
-            pass
-
-    html = fetch_url(WIKI_URL, user_agent=user_agent)
-    table_html = extract_constituents_table_html(html)
-    rows = parse_html_table(table_html)
-
-    # write raw cache (rows) so we can parse later even if Wikipedia changes slightly
-    write_json(
-        cache_path,
-        {
-            "source": WIKI_URL,
-            "fetched_at_utc": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
-            "rows": rows,
-        },
-    )
-
-    return rows_to_wiki_map(rows)
-
-
-def rows_to_wiki_map(rows: List[List[str]]) -> Dict[str, WikiMeta]:
-    """
-    Convert table rows -> mapping.
-    Expected headers include: Symbol, Security, GICS Sector, GICS Sub-Industry
-    """
+def rows_to_meta_map(rows: List[List[str]]) -> Dict[str, Meta]:
     if not rows:
-        raise RuntimeError("Wikipedia table rows empty")
+        return {}
+    header = [c.strip().lower() for c in rows[0]]
 
-    header = [c.strip() for c in rows[0]]
-    header_l = [h.lower() for h in header]
-
-    def find_col(names: List[str]) -> int:
-        for nm in names:
-            if nm.lower() in header_l:
-                return header_l.index(nm.lower())
+    def col(*names: str) -> int:
+        for name in names:
+            if name.lower() in header:
+                return header.index(name.lower())
         return -1
 
-    i_symbol = find_col(["Symbol"])
-    i_name = find_col(["Security", "Company", "Name"])
-    i_sector = find_col(["GICS Sector", "Sector"])
-    i_ind = find_col(["GICS Sub-Industry", "GICS Sub-Industry ", "Sub-Industry", "Industry"])
+    i_symbol = col("Symbol")
+    i_name = col("Security", "Company", "Name")
+    i_sector = col("GICS Sector", "Sector")
+    i_industry = col("GICS Sub-Industry", "Sub-Industry", "Industry")
+    if min(i_symbol, i_sector, i_industry) < 0:
+        raise RuntimeError(f"Wikipedia constituent header changed: {rows[0]}")
 
-    if i_symbol < 0 or i_sector < 0 or i_ind < 0:
-        raise RuntimeError(f"Could not find needed columns in Wikipedia header: {header}")
-
-    out: Dict[str, WikiMeta] = {}
-
-    for r in rows[1:]:
-        if len(r) <= max(i_symbol, i_sector, i_ind):
+    out: Dict[str, Meta] = {}
+    for row in rows[1:]:
+        if len(row) <= max(i_symbol, i_sector, i_industry):
             continue
-
-        sym_raw = r[i_symbol]
-        sym = normalize_ticker(sym_raw)
-        if not sym:
+        symbol = re.sub(r"[^A-Z0-9.\-]", "", normalize_ticker(row[i_symbol]))
+        if not symbol:
             continue
-
-        # Some Wikipedia symbols can have notes; keep only ticker-ish chars
-        sym = re.sub(r"[^A-Z0-9.\-]", "", sym)
-        if not sym:
-            continue
-
-        name = r[i_name].strip() if (i_name >= 0 and i_name < len(r)) else ""
-        sector = r[i_sector].strip()
-        industry = r[i_ind].strip()
-
-        meta = WikiMeta(name=name, sector=sector or "Unknown", industry=industry or "Unknown")
-        for v in ticker_variants(sym):
-            out[v] = meta
-
+        meta = Meta(
+            name=(row[i_name].strip() if i_name >= 0 and i_name < len(row) else ""),
+            sector=row[i_sector].strip() or "Unknown",
+            industry=row[i_industry].strip() or "Unknown",
+            source="wikipedia",
+        )
+        for variant in ticker_variants(symbol):
+            out[variant] = meta
     return out
+
+
+def cache_is_fresh(obj: Any, ttl_days: int) -> bool:
+    if not isinstance(obj, dict):
+        return False
+    raw = obj.get("fetched_at_utc")
+    if not raw:
+        return False
+    try:
+        stamp = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+        if stamp.tzinfo is None:
+            stamp = stamp.replace(tzinfo=timezone.utc)
+        return datetime.now(timezone.utc) - stamp <= timedelta(days=ttl_days)
+    except Exception:
+        return False
+
+
+def load_metadata(cache_path: Path, user_agent: str, refresh: bool, ttl_days: int) -> Dict[str, Meta]:
+    cached: Any = None
+    if cache_path.exists():
+        try:
+            cached = read_json(cache_path)
+        except Exception:
+            cached = None
+
+    if cached and not refresh and cache_is_fresh(cached, ttl_days):
+        return rows_to_meta_map(cached.get("rows") or [])
+
+    try:
+        rows = parse_constituent_rows(fetch_url(WIKI_URL, user_agent))
+        write_json(cache_path, {
+            "source": WIKI_URL,
+            "fetched_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "rows": rows,
+        })
+        return rows_to_meta_map(rows)
+    except Exception as exc:
+        if cached:
+            print(f"[heatmap] WARNING: metadata refresh failed; using stale cache: {exc}", file=sys.stderr)
+            return rows_to_meta_map(cached.get("rows") or [])
+        raise
 
 
 def read_price_daily(data_root: Path, ticker: str) -> List[Dict[str, Any]]:
-    p = data_root / ticker / "price" / "daily.json"
-    if not p.exists():
-        return []
+    path = data_root / ticker / "price" / "daily.json"
     try:
-        arr = read_json(p)
-        if isinstance(arr, list):
-            return arr
+        obj = read_json(path)
+        return obj if isinstance(obj, list) else []
     except Exception:
         return []
-    return []
 
 
-def find_close_for_date(price_rows: List[Dict[str, Any]], target: str) -> Tuple[Optional[float], Optional[str]]:
-    """
-    If target date not found, use latest date < target.
-    Returns (close, used_date)
-    """
-    if not price_rows:
-        return None, None
-
+def find_close_for_date(rows: List[Dict[str, Any]], target: str) -> Tuple[Optional[float], Optional[str]]:
     parsed: List[Tuple[date, float]] = []
-    for r in price_rows:
-        d = r.get("date")
-        c = r.get("close")
-        if not d:
-            continue
+    for row in rows:
         try:
-            dd = parse_iso_date(str(d))
-            cc = float(c)
+            parsed.append((parse_iso_date(str(row.get("date"))), float(row.get("close"))))
         except Exception:
             continue
-        parsed.append((dd, cc))
-
     if not parsed:
         return None, None
-
     parsed.sort(key=lambda x: x[0])
     t = parse_iso_date(target)
-
-    # exact
-    for dd, cc in parsed:
-        if dd == t:
-            return cc, dd.isoformat()
-
-    before = [(dd, cc) for dd, cc in parsed if dd < t]
-    if before:
-        dd, cc = before[-1]
-        return cc, dd.isoformat()
-
-    # otherwise earliest after
-    dd, cc = parsed[0]
-    return cc, dd.isoformat()
+    eligible = [(d, c) for d, c in parsed if d <= t]
+    d, c = eligible[-1] if eligible else parsed[0]
+    return c, d.isoformat()
 
 
-def prev_close(price_rows: List[Dict[str, Any]], used_date: str) -> Optional[float]:
-    if not price_rows or not used_date:
-        return None
-
+def prev_close(rows: List[Dict[str, Any]], used_date: str) -> Optional[float]:
+    target = parse_iso_date(used_date)
     parsed: List[Tuple[date, float]] = []
-    for r in price_rows:
-        d = r.get("date")
-        c = r.get("close")
-        if not d:
-            continue
+    for row in rows:
         try:
-            dd = parse_iso_date(str(d))
-            cc = float(c)
+            parsed.append((parse_iso_date(str(row.get("date"))), float(row.get("close"))))
         except Exception:
             continue
-        parsed.append((dd, cc))
-
-    if not parsed:
-        return None
-    parsed.sort(key=lambda x: x[0])
-
-    u = parse_iso_date(used_date)
-    before = [(dd, cc) for dd, cc in parsed if dd < u]
-    if not before:
-        return None
-    return before[-1][1]
+    before = sorted((d, c) for d, c in parsed if d < target)
+    return before[-1][1] if before else None
 
 
 def read_sentiment(data_root: Path, ticker: str, asof: str) -> Tuple[Optional[float], Optional[int]]:
-    p = data_root / ticker / "sentiment" / f"{asof}.json"
-    if not p.exists():
-        return None, None
+    path = data_root / ticker / "sentiment" / f"{asof}.json"
     try:
-        obj = read_json(p)
+        obj = read_json(path)
     except Exception:
         return None, None
-
-    s = obj.get("score_mean")
-    if s is None:
-        s = obj.get("sentiment")
-
-    n_total = obj.get("n_total")
+    raw = obj.get("score_mean", obj.get("sentiment"))
     try:
-        sval = float(s) if s is not None else None
+        score = float(raw) if raw is not None and math.isfinite(float(raw)) else None
     except Exception:
-        sval = None
-
+        score = None
     try:
-        nval = int(n_total) if n_total is not None else None
+        count = int(obj.get("n_total")) if obj.get("n_total") is not None else None
     except Exception:
-        nval = None
+        count = None
+    return score, count
 
-    return sval, nval
 
-
-def fetch_market_caps(tickers: List[str]) -> Dict[str, float]:
-    """
-    Robust market cap fetch via yfinance in batches.
-    Returns {original_ticker: market_cap}.
-    """
-    out: Dict[str, float] = {}
-    if not tickers:
-        return out
-
-    # batch for fewer requests
+def fetch_market_metadata(tickers: List[str], wiki_map: Dict[str, Meta]) -> Tuple[Dict[str, float], Dict[str, Meta]]:
+    caps: Dict[str, float] = {}
+    meta: Dict[str, Meta] = {}
     batch_size = 50
-    for i in range(0, len(tickers), batch_size):
-        chunk = tickers[i : i + batch_size]
-        yf_syms = [yfinance_symbol(t) for t in chunk]
-        multi = yf.Tickers(" ".join(yf_syms))
-
-        for orig, ys in zip(chunk, yf_syms):
-            mc = None
+    for start in range(0, len(tickers), batch_size):
+        chunk = tickers[start:start + batch_size]
+        yf_symbols = [yfinance_symbol(t) for t in chunk]
+        multi = yf.Tickers(" ".join(yf_symbols))
+        for original, yf_symbol in zip(chunk, yf_symbols):
+            wiki = next((wiki_map.get(v) for v in ticker_variants(original) if wiki_map.get(v)), None)
+            info: Dict[str, Any] = {}
+            market_cap = None
             try:
-                t = multi.tickers.get(ys) or yf.Ticker(ys)
-                fi = getattr(t, "fast_info", None)
-
-                # fast_info sometimes dict-like
-                if isinstance(fi, dict):
-                    mc = fi.get("market_cap")
-                else:
-                    mc = getattr(fi, "market_cap", None)
-
-                if mc is None:
-                    info = getattr(t, "info", {}) or {}
-                    if isinstance(info, dict):
-                        mc = info.get("marketCap")
+                ticker = multi.tickers.get(yf_symbol) or yf.Ticker(yf_symbol)
+                fast = getattr(ticker, "fast_info", None)
+                market_cap = fast.get("market_cap") if isinstance(fast, dict) else getattr(fast, "market_cap", None)
+                needs_info = market_cap is None or wiki is None or not wiki.name
+                if needs_info:
+                    raw = getattr(ticker, "info", {}) or {}
+                    info = raw if isinstance(raw, dict) else {}
+                    market_cap = market_cap or info.get("marketCap")
             except Exception:
-                mc = None
+                pass
 
-            if mc is not None:
-                try:
-                    mc_f = float(mc)
-                    if mc_f > 0:
-                        out[orig] = mc_f
-                except Exception:
-                    pass
+            try:
+                value = float(market_cap)
+                if value > 0 and math.isfinite(value):
+                    caps[original] = value
+            except Exception:
+                pass
 
-    return out
+            name = (wiki.name if wiki else "") or str(info.get("longName") or info.get("shortName") or "").strip()
+            sector = (wiki.sector if wiki else "") or str(info.get("sector") or "Unknown").strip() or "Unknown"
+            industry = (wiki.industry if wiki else "") or str(info.get("industry") or "Unknown").strip() or "Unknown"
+            meta[original] = Meta(name=name, sector=sector, industry=industry, source="wikipedia" if wiki and wiki.name else "yfinance")
+    return caps, meta
 
 
 def main(argv: Optional[List[str]] = None) -> None:
-    ap = argparse.ArgumentParser(
-        description="Build SP500 heatmap JSON using Wikipedia for sector/industry, yfinance for market cap."
-    )
-    ap.add_argument("--universe", required=True, help="Universe CSV with only tickers, e.g. data/sp500.csv")
-    ap.add_argument("--data-root", required=True, help="Root dir of per-ticker folders, e.g. data")
-    ap.add_argument("--spx-index", required=True, help="Path to data/SPX/sp500_index.json (latest trading day)")
-    ap.add_argument("--out", required=True, help="Output dir, e.g. data/SPX")
-    ap.add_argument("--asof", default=None, help="YYYY-MM-DD. If omitted uses latest day in spx-index.")
-    ap.add_argument("--wiki-cache", default=None, help="Cache file path for wikipedia rows (default: <out>/sp500_wikipedia_cache.json)")
-    ap.add_argument("--refresh-wiki", action="store_true", help="Force refresh wikipedia cache")
-    ap.add_argument(
-        "--user-agent",
-        default="market-sentiment-web/1.0 (contact: github-actions)",
-        help="User-Agent for Wikipedia request",
-    )
-    args = ap.parse_args(argv)
+    parser = argparse.ArgumentParser(description="Build S&P 500 constituent heatmap data with refreshed company metadata.")
+    parser.add_argument("--universe", required=True)
+    parser.add_argument("--data-root", required=True)
+    parser.add_argument("--spx-index", required=True)
+    parser.add_argument("--out", required=True)
+    parser.add_argument("--asof", default=None)
+    parser.add_argument("--wiki-cache", default=None)
+    parser.add_argument("--refresh-wiki", action="store_true")
+    parser.add_argument("--metadata-ttl-days", type=int, default=CACHE_TTL_DAYS)
+    parser.add_argument("--user-agent", default="market-sentiment-web/2.0 (contact: github-actions)")
+    args = parser.parse_args(argv)
 
-    universe_path = Path(args.universe)
+    universe = read_tickers_csv(Path(args.universe))
+    if not universe:
+        raise RuntimeError("S&P universe is empty")
     data_root = Path(args.data_root)
-    spx_index_path = Path(args.spx_index)
     out_dir = Path(args.out)
-    wiki_cache = Path(args.wiki_cache) if args.wiki_cache else (out_dir / "sp500_wikipedia_cache.json")
+    asof = args.asof or latest_trading_day_from_spx_index(Path(args.spx_index))
+    cache = Path(args.wiki_cache) if args.wiki_cache else out_dir / "sp500_wikipedia_cache.json"
 
-    tickers = read_tickers_csv(universe_path)
-    if not tickers:
-        raise RuntimeError(f"No tickers found in {universe_path}")
-
-    asof = args.asof or latest_trading_day_from_spx_index(spx_index_path)
-    print(f"[heatmap] asof={asof} (tickers={len(tickers)})")
-
-    wiki_map = build_wikipedia_map(
-        cache_path=wiki_cache,
-        user_agent=args.user_agent,
-        refresh=args.refresh_wiki,
-    )
-    print(f"[heatmap] wikipedia map size={len(wiki_map)}")
-
-    mcap_map = fetch_market_caps(tickers)
-    if not mcap_map:
-        raise RuntimeError("Could not fetch any market caps from yfinance")
-    print(f"[heatmap] market caps fetched={len(mcap_map)}")
-
-    # compute weights on tickers that have market cap
-    total_mcap = sum(mcap_map.values())
-    if total_mcap <= 0:
-        raise RuntimeError("Total market cap <= 0")
+    wiki_map = load_metadata(cache, args.user_agent, args.refresh_wiki, max(1, args.metadata_ttl_days))
+    caps, metadata = fetch_market_metadata(universe, wiki_map)
+    if not caps:
+        raise RuntimeError("Could not fetch any market caps")
+    total_cap = sum(caps.values())
 
     tiles: List[Dict[str, Any]] = []
-    missing_class = 0
-    missing_price = 0
-    missing_sent = 0
-
-    for tkr in tickers:
-        mc = mcap_map.get(tkr)
-        if mc is None or mc <= 0:
+    missing_name = missing_classification = missing_price = missing_sentiment = 0
+    yfinance_name_fallbacks = 0
+    for ticker in universe:
+        cap = caps.get(ticker)
+        if cap is None or cap <= 0:
             continue
+        meta = metadata.get(ticker) or Meta("", "Unknown", "Unknown", "missing")
+        if not meta.name:
+            missing_name += 1
+        if meta.source == "yfinance" and meta.name:
+            yfinance_name_fallbacks += 1
+        if meta.sector == "Unknown" or meta.industry == "Unknown":
+            missing_classification += 1
 
-        meta = None
-        for v in ticker_variants(tkr):
-            meta = wiki_map.get(v)
-            if meta is not None:
-                break
-
-        if meta is None:
-            missing_class += 1
-            name = ""
-            sector = "Unknown"
-            industry = "Unknown"
-        else:
-            name = meta.name
-            sector = meta.sector or "Unknown"
-            industry = meta.industry or "Unknown"
-
-        price_rows = read_price_daily(data_root, tkr)
-        close_today, used_date = find_close_for_date(price_rows, asof)
-        if close_today is None:
+        prices = read_price_daily(data_root, ticker)
+        close, used_date = find_close_for_date(prices, asof)
+        if close is None:
             missing_price += 1
+        previous = prev_close(prices, used_date) if used_date else None
+        return_1d = close / previous - 1 if close is not None and previous not in (None, 0) else None
+        sentiment, n_total = read_sentiment(data_root, ticker, asof)
+        if sentiment is None:
+            missing_sentiment += 1
 
-        ret_1d = None
-        if close_today is not None and used_date:
-            pc = prev_close(price_rows, used_date)
-            if pc is not None and pc != 0:
-                ret_1d = (close_today / pc) - 1.0
+        tiles.append({
+            "symbol": ticker,
+            "name": meta.name or ticker,
+            "sector": meta.sector,
+            "industry": meta.industry,
+            "metadata_source": meta.source,
+            "market_cap": cap,
+            "weight": cap / total_cap,
+            "date": used_date or asof,
+            "price": close,
+            "return_1d": return_1d,
+            "sentiment": sentiment,
+            "n_total": n_total,
+        })
 
-        sent, n_total = read_sentiment(data_root, tkr, asof)
-        if sent is None:
-            missing_sent += 1
-
-        tiles.append(
-            {
-                "symbol": tkr,
-                "name": name,
-                "sector": sector,
-                "industry": industry,  # GICS Sub-Industry
-                "market_cap": mc,
-                "weight": mc / total_mcap,
-                "date": used_date or asof,
-                "price": close_today,
-                "return_1d": ret_1d,
-                "sentiment": sent,
-                "n_total": n_total,
-            }
-        )
-
-    tiles.sort(key=lambda x: float(x.get("market_cap") or 0.0), reverse=True)
-
+    tiles.sort(key=lambda row: float(row.get("market_cap") or 0), reverse=True)
     payload = {
         "symbol": "SPX",
         "name": "S&P 500 Index",
         "asof": asof,
-        "updated_at_utc": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "updated_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "stats": {
-            "n_universe": len(tickers),
+            "n_universe": len(universe),
             "n_tiles": len(tiles),
-            "missing_classification": missing_class,
+            "missing_name": missing_name,
+            "missing_classification": missing_classification,
             "missing_price": missing_price,
-            "missing_sentiment": missing_sent,
+            "missing_sentiment": missing_sentiment,
+            "yfinance_name_fallbacks": yfinance_name_fallbacks,
+            "metadata_cache_ttl_days": max(1, args.metadata_ttl_days),
         },
         "tiles": tiles,
     }
+    write_json(out_dir / "sp500_heatmap.json", payload)
+    print(f"[heatmap] wrote {len(tiles)} tiles asof={asof} missing_name={missing_name} fallback_names={yfinance_name_fallbacks}")
 
-    out_path = out_dir / "sp500_heatmap.json"
-    write_json(out_path, payload)
-    print(f"[heatmap] wrote {out_path}")
-
-    # if classification missing is large, fail loudly (this prevents “NVDA/MSFT in Unknown”)
-    miss_rate = missing_class / max(1, len(tiles))
-    if miss_rate > 0.10:
-        print(
-            f"[heatmap] WARNING: high missing classification rate: {missing_class}/{len(tiles)} (~{miss_rate:.1%}).",
-            file=sys.stderr,
-        )
+    if missing_name / max(1, len(tiles)) > 0.02:
+        raise RuntimeError(f"Company-name coverage too low: missing {missing_name}/{len(tiles)}")
+    if missing_classification / max(1, len(tiles)) > 0.10:
+        print(f"[heatmap] WARNING: missing classification {missing_classification}/{len(tiles)}", file=sys.stderr)
 
 
 if __name__ == "__main__":
