@@ -1,0 +1,58 @@
+name: Python Source CI
+
+on:
+  pull_request:
+    paths:
+      - "src/market_sentiment/**"
+      - ".github/workflows/python-source-ci.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            src/market_sentiment
+          sparse-checkout-cone-mode: false
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install lightweight runtime dependency
+        run: pip install --disable-pip-version-check --no-cache-dir yfinance
+
+      - name: Compile market sentiment source
+        run: python -m compileall -q src/market_sentiment
+
+      - name: Validate S&P metadata helpers
+        env:
+          PYTHONPATH: src
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timezone
+          from market_sentiment.cli.build_sp500_heatmap import cache_is_fresh, rows_to_meta_map
+
+          rows = [
+              ["Symbol", "Security", "GICS Sector", "GICS Sub-Industry"],
+              ["AAPL", "Apple Inc.", "Information Technology", "Technology Hardware"],
+              ["BRK.B", "Berkshire Hathaway", "Financials", "Multi-Sector Holdings"],
+          ]
+          meta = rows_to_meta_map(rows)
+          assert meta["AAPL"].name == "Apple Inc."
+          assert meta["BRK-B"].name == "Berkshire Hathaway"
+          assert meta["BRK.B"].sector == "Financials"
+
+          current = {"fetched_at_utc": datetime.now(timezone.utc).isoformat()}
+          assert cache_is_fresh(current, 7)
+          print("S&P metadata helper validation OK")
+          PY
