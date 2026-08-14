@@ -1,0 +1,201 @@
+{
+  "schema_version": 2,
+  "symbol": "AAL",
+  "earnings_history": [
+    {
+      "date": "2026-10-22T08:00:00-04:00",
+      "eps_estimate": -0.22,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-23T07:00:00-04:00",
+      "eps_estimate": 0.05,
+      "reported_eps": 0.15,
+      "surprise_pct": 227.58
+    },
+    {
+      "date": "2026-04-23T07:00:00-04:00",
+      "eps_estimate": -0.46,
+      "reported_eps": -0.4,
+      "surprise_pct": 13.04
+    },
+    {
+      "date": "2026-01-27T07:00:00-05:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.16,
+      "surprise_pct": -54.58
+    },
+    {
+      "date": "2025-10-23T07:00:00-04:00",
+      "eps_estimate": -0.28,
+      "reported_eps": -0.17,
+      "surprise_pct": 38.21
+    },
+    {
+      "date": "2025-07-24T07:00:00-04:00",
+      "eps_estimate": 0.77,
+      "reported_eps": 0.95,
+      "surprise_pct": 22.7
+    },
+    {
+      "date": "2025-04-24T07:00:00-04:00",
+      "eps_estimate": -0.67,
+      "reported_eps": -0.59,
+      "surprise_pct": 12.12
+    },
+    {
+      "date": "2025-01-23T07:00:00-05:00",
+      "eps_estimate": 0.66,
+      "reported_eps": 0.86,
+      "surprise_pct": 30.1
+    },
+    {
+      "date": "2024-10-24T07:00:00-04:00",
+      "eps_estimate": 0.17,
+      "reported_eps": 0.3,
+      "surprise_pct": 80.77
+    },
+    {
+      "date": "2024-07-25T07:00:00-04:00",
+      "eps_estimate": 1.05,
+      "reported_eps": 1.09,
+      "surprise_pct": 3.99
+    },
+    {
+      "date": "2024-04-25T07:00:00-04:00",
+      "eps_estimate": -0.29,
+      "reported_eps": -0.34,
+      "surprise_pct": -16.81
+    },
+    {
+      "date": "2024-01-25T07:00:00-05:00",
+      "eps_estimate": 0.08,
+      "reported_eps": 0.29,
+      "surprise_pct": 265.56
+    },
+    {
+      "date": "2023-10-19T07:00:00-04:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.38,
+      "surprise_pct": 50.51
+    },
+    {
+      "date": "2023-07-20T07:00:00-04:00",
+      "eps_estimate": 1.59,
+      "reported_eps": 1.92,
+      "surprise_pct": 20.43
+    },
+    {
+      "date": "2023-04-27T07:00:00-04:00",
+      "eps_estimate": 0.03,
+      "reported_eps": 0.05,
+      "surprise_pct": 80.7
+    },
+    {
+      "date": "2023-01-26T07:00:00-05:00",
+      "eps_estimate": 1.08,
+      "reported_eps": 1.17,
+      "surprise_pct": 8.62
+    },
+    {
+      "date": "2022-10-20T07:00:00-04:00",
+      "eps_estimate": 0.56,
+      "reported_eps": 0.69,
+      "surprise_pct": 22.49
+    },
+    {
+      "date": "2022-07-21T07:00:00-04:00",
+      "eps_estimate": 0.74,
+      "reported_eps": 0.76,
+      "surprise_pct": 2.36
+    },
+    {
+      "date": "2022-04-21T07:00:00-04:00",
+      "eps_estimate": -2.41,
+      "reported_eps": -2.32,
+      "surprise_pct": 3.52
+    },
+    {
+      "date": "2022-01-20T07:00:00-05:00",
+      "eps_estimate": -1.48,
+      "reported_eps": -1.42,
+      "surprise_pct": 3.99
+    },
+    {
+      "date": "2021-10-21T07:00:00-04:00",
+      "eps_estimate": -1.03,
+      "reported_eps": -0.95,
+      "surprise_pct": 7.76
+    },
+    {
+      "date": "2021-07-22T07:00:00-04:00",
+      "eps_estimate": -1.73,
+      "reported_eps": -1.69,
+      "surprise_pct": 2.29
+    },
+    {
+      "date": "2021-04-22T07:00:00-04:00",
+      "eps_estimate": -4.33,
+      "reported_eps": -4.32,
+      "surprise_pct": 0.27
+    },
+    {
+      "date": "2021-01-28T07:00:00-05:00",
+      "eps_estimate": -4.12,
+      "reported_eps": -3.86,
+      "surprise_pct": 6.34
+    },
+    {
+      "date": "2020-10-22T07:00:00-04:00",
+      "eps_estimate": -5.75,
+      "reported_eps": -5.54,
+      "surprise_pct": 3.73
+    }
+  ],
+  "calls": [],
+  "methodology": {
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
+    "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
+    "topics": "deterministic keyword families",
+    "transcript_provider": "Not configured"
+  },
+  "call_links": [
+    {
+      "title": "5 Must-Read Analyst Questions From American Airlines’s Q2 Earnings Call",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/5-must-read-analyst-questions-203702349.html",
+      "ts": "2026-07-30T20:37:02+00:00",
+      "source": "StockStory",
+      "provider": "yfinance"
+    },
+    {
+      "title": "American Airlines Q2 Earnings Call Focuses on Revenue Strategy",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/american-airlines-q2-earnings-call-130100409.html",
+      "ts": "2026-07-24T13:01:00+00:00",
+      "source": "Zacks",
+      "provider": "yfinance"
+    },
+    {
+      "title": "American Airlines Group Inc. Q2 2026 Earnings Call Summary",
+      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-american-airlines-group-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
+      "ts": "2026-07-24T12:30:00+00:00",
+      "source": "Moby",
+      "provider": "yfinance"
+    },
+    {
+      "title": "American Airlines Group Inc (AAL) Q2 2026 Earnings Call Highlights: Record Revenue Growth Amid ...",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/american-airlines-group-inc-aal-210241680.html",
+      "ts": "2026-07-23T21:02:41+00:00",
+      "source": "GuruFocus.com",
+      "provider": "yfinance"
+    },
+    {
+      "title": "American Airlines Group Q2 Earnings Call Highlights",
+      "url": "https://www.marketbeat.com/instant-alerts/american-airlines-group-q2-earnings-call-highlights-2026-07-23/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "ts": "2026-07-23T14:06:56+00:00",
+      "source": "MarketBeat",
+      "provider": "yfinance"
+    }
+  ],
+  "filing_fallback": []
+}

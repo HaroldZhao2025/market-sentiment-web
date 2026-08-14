@@ -1,0 +1,173 @@
+{
+  "schema_version": 2,
+  "symbol": "ACA",
+  "earnings_history": [
+    {
+      "date": "2026-10-29T16:00:00-04:00",
+      "eps_estimate": 1.57,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-05T16:00:00-04:00",
+      "eps_estimate": 1.18,
+      "reported_eps": 1.13,
+      "surprise_pct": -4.52
+    },
+    {
+      "date": "2026-04-30T16:00:00-04:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.81,
+      "surprise_pct": 131.96
+    },
+    {
+      "date": "2026-02-26T16:00:00-05:00",
+      "eps_estimate": 0.92,
+      "reported_eps": 1.15,
+      "surprise_pct": 25.48
+    },
+    {
+      "date": "2025-10-30T17:00:00-04:00",
+      "eps_estimate": 1.35,
+      "reported_eps": 1.56,
+      "surprise_pct": 15.53
+    },
+    {
+      "date": "2025-08-07T16:00:00-04:00",
+      "eps_estimate": 1.05,
+      "reported_eps": 1.27,
+      "surprise_pct": 21.47
+    },
+    {
+      "date": "2025-05-06T16:00:00-04:00",
+      "eps_estimate": 0.18,
+      "reported_eps": 0.49,
+      "surprise_pct": 165.83
+    },
+    {
+      "date": "2025-02-27T16:00:00-05:00",
+      "eps_estimate": 0.76,
+      "reported_eps": 0.46,
+      "surprise_pct": -39.73
+    },
+    {
+      "date": "2024-10-30T16:00:00-04:00",
+      "eps_estimate": 0.85,
+      "reported_eps": 0.91,
+      "surprise_pct": 7.31
+    },
+    {
+      "date": "2024-08-01T16:00:00-04:00",
+      "eps_estimate": 0.83,
+      "reported_eps": 0.91,
+      "surprise_pct": 9.38
+    },
+    {
+      "date": "2024-05-02T16:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.73,
+      "surprise_pct": 39.85
+    },
+    {
+      "date": "2024-02-22T16:00:00-05:00",
+      "eps_estimate": 0.49,
+      "reported_eps": 0.68,
+      "surprise_pct": 39.92
+    },
+    {
+      "date": "2023-11-01T16:00:00-04:00",
+      "eps_estimate": 0.68,
+      "reported_eps": 0.73,
+      "surprise_pct": 6.73
+    },
+    {
+      "date": "2023-08-03T16:00:00-04:00",
+      "eps_estimate": 0.59,
+      "reported_eps": 0.76,
+      "surprise_pct": 29.69
+    },
+    {
+      "date": "2023-04-27T16:00:00-04:00",
+      "eps_estimate": 0.54,
+      "reported_eps": 1.06,
+      "surprise_pct": 95.57
+    },
+    {
+      "date": "2023-02-23T16:00:00-05:00",
+      "eps_estimate": 0.21,
+      "reported_eps": 0.24,
+      "surprise_pct": 17.07
+    },
+    {
+      "date": "2022-11-02T16:00:00-04:00",
+      "eps_estimate": 0.63,
+      "reported_eps": 0.7,
+      "surprise_pct": 11.46
+    },
+    {
+      "date": "2022-08-03T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.83,
+      "surprise_pct": 80.43
+    },
+    {
+      "date": "2022-04-28T16:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.42,
+      "surprise_pct": 94.71
+    },
+    {
+      "date": "2022-02-23T16:00:00-05:00",
+      "eps_estimate": 0.21,
+      "reported_eps": 0.4,
+      "surprise_pct": 86.66
+    },
+    {
+      "date": "2021-11-03T16:00:00-04:00",
+      "eps_estimate": 0.5,
+      "reported_eps": 0.57,
+      "surprise_pct": 14.33
+    },
+    {
+      "date": "2021-08-04T16:00:00-04:00",
+      "eps_estimate": 0.57,
+      "reported_eps": 0.6,
+      "surprise_pct": 4.8
+    },
+    {
+      "date": "2021-04-29T16:00:00-04:00",
+      "eps_estimate": 0.21,
+      "reported_eps": 0.35,
+      "surprise_pct": 66.67
+    },
+    {
+      "date": "2021-02-24T16:00:00-05:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.33,
+      "surprise_pct": -20.48
+    },
+    {
+      "date": "2020-10-28T16:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.68,
+      "surprise_pct": 4.62
+    }
+  ],
+  "calls": [],
+  "methodology": {
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
+    "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
+    "topics": "deterministic keyword families",
+    "transcript_provider": "Not configured"
+  },
+  "call_links": [
+    {
+      "title": "CRH Q2 Earnings Call Highlights",
+      "url": "https://www.marketbeat.com/instant-alerts/crh-q2-earnings-call-highlights-2026-07-31/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "ts": "2026-07-31T05:03:49+00:00",
+      "source": "MarketBeat",
+      "provider": "yfinance"
+    }
+  ],
+  "filing_fallback": []
+}

@@ -1,0 +1,165 @@
+{
+  "schema_version": 2,
+  "symbol": "ABM",
+  "earnings_history": [
+    {
+      "date": "2026-09-03T08:00:00-04:00",
+      "eps_estimate": 1.01,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-06-05T06:00:00-04:00",
+      "eps_estimate": 0.88,
+      "reported_eps": 0.9,
+      "surprise_pct": 2.35
+    },
+    {
+      "date": "2026-03-10T06:00:00-04:00",
+      "eps_estimate": 0.87,
+      "reported_eps": 0.83,
+      "surprise_pct": -4.83
+    },
+    {
+      "date": "2025-12-17T06:00:00-05:00",
+      "eps_estimate": 1.09,
+      "reported_eps": 0.88,
+      "surprise_pct": -18.96
+    },
+    {
+      "date": "2025-09-05T06:00:00-04:00",
+      "eps_estimate": 0.95,
+      "reported_eps": 0.82,
+      "surprise_pct": -13.55
+    },
+    {
+      "date": "2025-06-06T06:00:00-04:00",
+      "eps_estimate": 0.86,
+      "reported_eps": 0.86,
+      "surprise_pct": -0.04
+    },
+    {
+      "date": "2025-03-12T06:00:00-04:00",
+      "eps_estimate": 0.78,
+      "reported_eps": 0.87,
+      "surprise_pct": 11.37
+    },
+    {
+      "date": "2024-12-18T06:00:00-05:00",
+      "eps_estimate": 0.87,
+      "reported_eps": 0.9,
+      "surprise_pct": 3.27
+    },
+    {
+      "date": "2024-09-06T07:00:00-04:00",
+      "eps_estimate": 0.85,
+      "reported_eps": 0.94,
+      "surprise_pct": 10.75
+    },
+    {
+      "date": "2024-06-06T06:00:00-04:00",
+      "eps_estimate": 0.79,
+      "reported_eps": 0.87,
+      "surprise_pct": 9.81
+    },
+    {
+      "date": "2024-03-07T06:00:00-05:00",
+      "eps_estimate": 0.71,
+      "reported_eps": 0.86,
+      "surprise_pct": 20.4
+    },
+    {
+      "date": "2023-12-13T07:00:00-05:00",
+      "eps_estimate": 0.92,
+      "reported_eps": 1.01,
+      "surprise_pct": 9.38
+    },
+    {
+      "date": "2023-09-07T06:00:00-04:00",
+      "eps_estimate": 0.89,
+      "reported_eps": 0.79,
+      "surprise_pct": -10.79
+    },
+    {
+      "date": "2023-06-06T06:00:00-04:00",
+      "eps_estimate": 0.86,
+      "reported_eps": 0.9,
+      "surprise_pct": 4.51
+    },
+    {
+      "date": "2023-03-08T07:00:00-05:00",
+      "eps_estimate": 0.77,
+      "reported_eps": 0.79,
+      "surprise_pct": 3.17
+    },
+    {
+      "date": "2022-12-13T16:00:00-05:00",
+      "eps_estimate": 0.88,
+      "reported_eps": 0.89,
+      "surprise_pct": 0.81
+    },
+    {
+      "date": "2022-09-09T06:00:00-04:00",
+      "eps_estimate": 0.9,
+      "reported_eps": 0.94,
+      "surprise_pct": 3.91
+    },
+    {
+      "date": "2022-06-08T16:00:00-04:00",
+      "eps_estimate": 0.84,
+      "reported_eps": 0.89,
+      "surprise_pct": 5.53
+    },
+    {
+      "date": "2022-03-08T16:00:00-05:00",
+      "eps_estimate": 0.78,
+      "reported_eps": 0.94,
+      "surprise_pct": 21.03
+    },
+    {
+      "date": "2021-12-15T07:00:00-05:00",
+      "eps_estimate": 0.81,
+      "reported_eps": 0.85,
+      "surprise_pct": 5.46
+    },
+    {
+      "date": "2021-09-08T16:00:00-04:00",
+      "eps_estimate": 0.81,
+      "reported_eps": 0.9,
+      "surprise_pct": 10.88
+    },
+    {
+      "date": "2021-06-08T16:00:00-04:00",
+      "eps_estimate": 0.71,
+      "reported_eps": 0.82,
+      "surprise_pct": 14.95
+    },
+    {
+      "date": "2021-03-09T16:00:00-05:00",
+      "eps_estimate": 0.59,
+      "reported_eps": 1.01,
+      "surprise_pct": 70.23
+    },
+    {
+      "date": "2020-12-16T16:00:00-05:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 0.69,
+      "surprise_pct": -1.9
+    },
+    {
+      "date": "2020-09-08T16:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.75,
+      "surprise_pct": 79.28
+    }
+  ],
+  "calls": [],
+  "methodology": {
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
+    "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
+    "topics": "deterministic keyword families",
+    "transcript_provider": "Not configured"
+  },
+  "call_links": [],
+  "filing_fallback": []
+}
