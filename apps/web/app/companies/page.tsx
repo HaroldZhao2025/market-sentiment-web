@@ -1,12 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
-import CompaniesClient, { type CompanyRow } from "./CompaniesClient";
+import CompaniesClientV2, { type CompanyRowV2 } from "./CompaniesClientV2";
 import CompanyMetrics from "./CompanyMetrics";
 
 export const dynamic = "force-static";
 export const metadata = { title: "Companies" };
 
-type UniverseFile = { generated_at_utc?: string; companies?: CompanyRow[] };
+type UniverseFile = { generated_at_utc?: string; companies?: CompanyRowV2[] };
 
 function loadUniverse(): UniverseFile {
   try {
@@ -23,27 +23,26 @@ export default function CompaniesPage() {
   const rows = Array.isArray(data.companies) ? data.companies : [];
   const sp500 = rows.filter((row) => row.universe === "S&P 500").length;
   const midcap = rows.filter((row) => row.universe === "S&P MidCap 400").length;
+  const smallcap = rows.filter((row) => row.universe === "S&P SmallCap 600").length;
 
   return (
     <main className="space-y-7">
       <section>
-        <div className="eyebrow">Company intelligence</div>
+        <div className="eyebrow">U.S. company universe</div>
         <h1 className="page-title mt-2">Companies</h1>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
-          Extended U.S. company intelligence beyond the S&amp;P 500. The broader universe remains physically separated from SPX weights, attribution, and portfolio calculations.
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">
+          Search large, mid and small-cap names in one market view. S&amp;P 500 index calculations remain separate.
         </p>
       </section>
 
-      <CompanyMetrics total={rows.length} sp500={sp500} midcap={midcap} />
+      <CompanyMetrics total={rows.length} sp500={sp500} midcap={midcap} smallcap={smallcap} />
 
       {rows.length ? (
-        <CompaniesClient rows={rows} generatedAt={data.generated_at_utc ?? null} />
+        <CompaniesClientV2 rows={rows} generatedAt={data.generated_at_utc ?? null} />
       ) : (
-        <section className="rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-7">
-          <div className="text-sm font-semibold text-neutral-200">Extended market data is waiting for its first Phase 6 refresh.</div>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-500">
-            This route remains build-safe. S&amp;P 500 market, attribution, portfolio, and research surfaces continue to use their validated core artifacts while the broader company universe is generated independently.
-          </p>
+        <section className="rounded-2xl border border-white/10 bg-white/[0.025] p-6">
+          <div className="text-sm font-semibold text-neutral-200">Company data is refreshing.</div>
+          <p className="mt-2 text-sm text-neutral-500">The core S&amp;P 500 pages remain available while the broader universe is rebuilt.</p>
         </section>
       )}
     </main>
