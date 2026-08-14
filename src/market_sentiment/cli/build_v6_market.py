@@ -32,6 +32,61 @@ def rotation_subset(companies: list[dict[str, Any]], limit: int, salt: int = 0) 
     return ordered[:limit]
 
 
+def priority_subset(
+    companies: list[dict[str, Any]],
+    limit: int,
+    artifact_dir: Path,
+    list_field: str,
+    salt: int = 0,
+) -> list[dict[str, Any]]:
+    """Prioritize companies with no usable artifact before normal rotation."""
+    if limit <= 0:
+        return []
+    missing: list[dict[str, Any]] = []
+    covered: list[dict[str, Any]] = []
+    for company in companies:
+        ticker = str(company.get("ticker") or "")
+        payload = load_json(artifact_dir / f"{ticker}.json", {})
+        rows = object_rows(payload.get(list_field) if isinstance(payload, dict) else None)
+        if rows:
+            covered.append(company)
+        else:
+            missing.append(company)
+    if limit >= len(companies):
+        return missing + covered
+    rotated = rotation_subset(covered, len(covered), salt=salt)
+    return (missing + rotated)[:limit]
+
+
+def earnings_call_links(news: list[dict[str, Any]], limit: int = 6) -> list[dict[str, Any]]:
+    links: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in news:
+        title = str(row.get("title") or row.get("headline") or "").strip()
+        url = str(row.get("url") or "").strip()
+        lower = title.lower()
+        is_call = (
+            "earnings call" in lower
+            or "conference call" in lower
+            or ("transcript" in lower and any(token in lower for token in (" q1 ", " q2 ", " q3 ", " q4 ", "earnings")))
+        )
+        if not title or not url or not is_call or url in seen:
+            continue
+        seen.add(url)
+        links.append(
+            {
+                "title": title,
+                "url": url,
+                "ts": str(row.get("ts") or row.get("date") or ""),
+                "source": str(row.get("source") or row.get("provider") or "Transcript source"),
+                "provider": str(row.get("provider") or ""),
+            }
+        )
+        if len(links) >= limit:
+            break
+    return links
+
+
 def market_snapshots(tickers: list[str]) -> dict[str, dict[str, float | None]]:
     out: dict[str, dict[str, float | None]] = {}
     for start in range(0, len(tickers), 100):
@@ -68,10 +123,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Refresh extended U.S. company intelligence artifacts.")
     parser.add_argument("--public-root", default="apps/web/public")
     parser.add_argument("--state-root", default="data/v5")
-    parser.add_argument("--news-refresh-limit", type=int, default=80)
+    parser.add_argument("--news-refresh-limit", type=int, default=200)
     parser.add_argument("--news-days", type=int, default=45)
-    parser.add_argument("--news-max-items", type=int, default=60)
-    parser.add_argument("--earnings-limit", type=int, default=5)
+    parser.add_argument("--news-max-items", type=int, default=40)
+    parser.add_argument("--earnings-limit", type=int, default=25)
     parser.add_argument("--earnings-quarters", type=int, default=4)
     parser.add_argument("--score-news", action="store_true")
     parser.add_argument("--universe-only", action="store_true")
@@ -80,7 +135,10 @@ def main() -> None:
     public_root = Path(args.public_root)
     state_root = Path(args.state_root)
     v5_public = public_root / "data" / "v5"
-    v5_public.mkdir(parents=True, exist_ok=True)
+    news_dir = v5_public / "news"
+    earnings_dir = v5_public / "earnings"
+    news_dir.mkdir(parents=True, exist_ok=True)
+    earnings_dir.mkdir(parents=True, exist_ok=True)
     state_root.mkdir(parents=True, exist_ok=True)
 
     companies = build_extended_universe()
@@ -102,9 +160,17 @@ def main() -> None:
         if company["sentiment"] is None:
             company["sentiment"] = prior.get("sentiment")
         company["news_count"] = prior.get("news_count")
-        company["earnings_available"] = (v5_public / "earnings" / f"{ticker}.json").exists()
+        company["earnings_available"] = (earnings_dir / f"{ticker}.json").exists()
 
-    refresh_companies: list[dict[str, Any]] = [] if args.universe_only else rotation_subset(companies, args.news_refresh_limit)
+    existing_news_files = len(list(news_dir.glob("*.json")))
+    bootstrap_news = existing_news_files < int(len(companies) * 0.90)
+    effective_news_limit = max(args.news_refresh_limit, 200) if bootstrap_news else args.news_refresh_limit
+    refresh_companies: list[dict[str, Any]] = (
+        []
+        if args.universe_only
+        else priority_subset(companies, effective_news_limit, news_dir, "articles", salt=31)
+    )
+
     finnhub_token = os.environ.get("FINNHUB_TOKEN", "").strip()
     scorer = ReusableNewsScorer(state_root / "headline_scores.json.gz", batch_size=32) if args.score_news else None
     new_events: list[dict[str, Any]] = []
@@ -115,7 +181,7 @@ def main() -> None:
         if scorer is not None and news:
             news = scorer.score(news)
         elif news:
-            old = load_json(v5_public / "news" / f"{ticker}.json", {})
+            old = load_json(news_dir / f"{ticker}.json", {})
             old_articles = object_rows(old.get("articles") if isinstance(old, dict) else None)
             old_scores = {str(row.get("title_key")): row.get("s") for row in old_articles if row.get("title_key")}
             for row in news:
@@ -123,42 +189,90 @@ def main() -> None:
                     row["s"] = old_scores[row["title_key"]]
 
         scores = [value for value in (finite(row.get("s")) for row in news) if value is not None]
-        atomic_json(v5_public / "news" / f"{ticker}.json", {
-            "schema_version": 3,
-            "symbol": ticker,
-            "updated_at_utc": datetime.now(timezone.utc).isoformat(),
-            "article_count": len(news),
-            "scored_article_count": len(scores),
-            "sentiment_mean": sum(scores) / len(scores) if scores else None,
-            "articles": news,
-        })
+        atomic_json(
+            news_dir / f"{ticker}.json",
+            {
+                "schema_version": 3,
+                "symbol": ticker,
+                "updated_at_utc": datetime.now(timezone.utc).isoformat(),
+                "article_count": len(news),
+                "scored_article_count": len(scores),
+                "sentiment_mean": sum(scores) / len(scores) if scores else None,
+                "articles": news,
+            },
+        )
         company["news_count"] = len(news)
         if scores:
             company["sentiment"] = sum(scores) / len(scores)
         new_events.extend(article_events(company, news))
+
+        call_links = earnings_call_links(news)
+        if call_links:
+            existing_earnings = load_json(earnings_dir / f"{ticker}.json", {})
+            if not isinstance(existing_earnings, dict):
+                existing_earnings = {}
+            existing_earnings.setdefault("schema_version", 3)
+            existing_earnings["symbol"] = ticker
+            existing_earnings.setdefault("earnings_history", [])
+            existing_earnings.setdefault("calls", [])
+            existing_earnings.setdefault("filing_fallback", [])
+            existing_earnings["call_links"] = call_links
+            atomic_json(earnings_dir / f"{ticker}.json", existing_earnings)
+            company["earnings_available"] = True
+
         if index % 20 == 0:
             print(f"[NEWS] refreshed {index}/{len(refresh_companies)}")
 
-    # Earnings rotates across the entire Composite 1500 coverage, not just large caps.
-    earnings_targets = [] if args.universe_only else rotation_subset(companies, args.earnings_limit, salt=97)
     earnings_key = os.environ.get("ALPHAVANTAGE_API_KEY", "").strip()
+    effective_earnings_limit = max(args.earnings_limit, 25)
+    earnings_targets = (
+        []
+        if args.universe_only
+        else priority_subset(companies, effective_earnings_limit, earnings_dir, "earnings_history", salt=97)
+    )
     company_by_ticker = {str(company["ticker"]): company for company in companies}
 
     for company in earnings_targets:
         ticker = str(company["ticker"])
-        if earnings_key:
-            artifact = build_earnings_intelligence(ticker, earnings_key, quarters=max(1, args.earnings_quarters))
-        else:
-            artifact = {
-                "schema_version": 2,
-                "symbol": ticker,
-                "earnings_history": [],
-                "calls": [],
-                "methodology": {"transcript_status": "Transcript provider not configured; SEC filing fallback only"},
-            }
+        artifact = build_earnings_intelligence(ticker, earnings_key, quarters=max(1, args.earnings_quarters))
+        news_payload = load_json(news_dir / f"{ticker}.json", {})
+        news_rows = object_rows(news_payload.get("articles") if isinstance(news_payload, dict) else None)
+        artifact["call_links"] = earnings_call_links(news_rows)
         artifact["filing_fallback"] = build_sec_fallback(ticker)
-        atomic_json(v5_public / "earnings" / f"{ticker}.json", artifact)
-        company_by_ticker[ticker]["earnings_available"] = bool(artifact.get("calls") or artifact.get("filing_fallback") or artifact.get("earnings_history"))
+        artifact.setdefault("methodology", {})
+        artifact["methodology"]["transcript_provider"] = (
+            "Alpha Vantage EARNINGS_CALL_TRANSCRIPT" if earnings_key else "Not configured"
+        )
+        atomic_json(earnings_dir / f"{ticker}.json", artifact)
+        company_by_ticker[ticker]["earnings_available"] = bool(
+            artifact.get("calls")
+            or artifact.get("call_links")
+            or artifact.get("filing_fallback")
+            or artifact.get("earnings_history")
+        )
+
+    # Backfill transcript-link evidence from every retained news artifact at negligible cost.
+    call_link_companies = 0
+    for company in companies:
+        ticker = str(company["ticker"])
+        news_payload = load_json(news_dir / f"{ticker}.json", {})
+        news_rows = object_rows(news_payload.get("articles") if isinstance(news_payload, dict) else None)
+        links = earnings_call_links(news_rows)
+        if not links:
+            continue
+        call_link_companies += 1
+        earnings_path = earnings_dir / f"{ticker}.json"
+        artifact = load_json(earnings_path, {})
+        if not isinstance(artifact, dict):
+            artifact = {}
+        artifact.setdefault("schema_version", 3)
+        artifact["symbol"] = ticker
+        artifact.setdefault("earnings_history", [])
+        artifact.setdefault("calls", [])
+        artifact.setdefault("filing_fallback", [])
+        artifact["call_links"] = links
+        atomic_json(earnings_path, artifact)
+        company_by_ticker[ticker]["earnings_available"] = True
 
     existing_events = load_json(state_root / "events.json", load_json(v5_public / "events.json", {}))
     article_store = merge_event_store(existing_events if isinstance(existing_events, dict) else {}, new_events)
@@ -167,25 +281,43 @@ def main() -> None:
     atomic_json(v5_public / "events.json", article_store)
     atomic_json(v5_public / "event_instances.json", event_store_v3)
 
+    structured_call_companies = 0
+    earnings_artifact_count = 0
+    for path in earnings_dir.glob("*.json"):
+        artifact = load_json(path, {})
+        if not isinstance(artifact, dict):
+            continue
+        earnings_artifact_count += 1
+        if object_rows(artifact.get("calls")):
+            structured_call_companies += 1
+
+    news_artifact_count = len(list(news_dir.glob("*.json")))
     payload = {
-        "schema_version": 3,
+        "schema_version": 4,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "core_universe": "S&P 500 only for SPX weighting and attribution",
         "extended_universe": "S&P Composite 1500 coverage: S&P 500 + MidCap 400 + SmallCap 600, deduplicated",
         "company_count": len(companies),
         "news_refreshed_this_run": len(refresh_companies),
+        "news_artifact_count": news_artifact_count,
         "earnings_refreshed_this_run": len(earnings_targets),
+        "earnings_artifact_count": earnings_artifact_count,
+        "earnings_call_link_companies": call_link_companies,
+        "structured_call_companies": structured_call_companies,
+        "transcript_provider_configured": bool(earnings_key),
         "companies": companies,
     }
     atomic_json(v5_public / "universe.json", payload)
     atomic_json(state_root / "universe.json", payload)
 
-    article_events = object_rows(article_store.get("events") if isinstance(article_store, dict) else None)
-    event_instances = object_rows(event_store_v3.get("event_instances") if isinstance(event_store_v3, dict) else None)
+    article_event_rows = object_rows(article_store.get("events") if isinstance(article_store, dict) else None)
+    event_instance_rows = object_rows(event_store_v3.get("event_instances") if isinstance(event_store_v3, dict) else None)
     print(
-        f"EXTENDED REFRESH OK | companies={len(companies)} news={len(refresh_companies)} "
-        f"earnings={len(earnings_targets)} article_events={len(article_events)} "
-        f"event_instances={len(event_instances)}"
+        f"EXTENDED REFRESH OK | companies={len(companies)} news_refreshed={len(refresh_companies)} "
+        f"news_artifacts={news_artifact_count} earnings_refreshed={len(earnings_targets)} "
+        f"earnings_artifacts={earnings_artifact_count} call_links={call_link_companies} "
+        f"structured_calls={structured_call_companies} transcript_provider={bool(earnings_key)} "
+        f"article_events={len(article_event_rows)} event_instances={len(event_instance_rows)}"
     )
 
 

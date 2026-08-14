@@ -47,7 +47,15 @@ jobs:
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
         run: |
           set -euo pipefail
-          python -m market_sentiment.cli.build_v6_market_safe --public-root apps/web/public --state-root data/v5 --news-refresh-limit 80 --news-days 45 --news-max-items 60 --earnings-limit 5 --earnings-quarters 4 --score-news
+          python -m market_sentiment.cli.build_v6_market_safe \
+            --public-root apps/web/public \
+            --state-root data/v5 \
+            --news-refresh-limit 200 \
+            --news-days 45 \
+            --news-max-items 40 \
+            --earnings-limit 25 \
+            --earnings-quarters 4 \
+            --score-news
       - name: Validate and persist
         run: |
           set -euo pipefail
@@ -61,20 +69,31 @@ jobs:
           sp500 = sum(1 for row in rows if row.get("universe") == "S&P 500")
           midcap = sum(1 for row in rows if row.get("universe") == "S&P MidCap 400")
           smallcap = sum(1 for row in rows if row.get("universe") == "S&P SmallCap 600")
+          news_files = list((root / "news").glob("*.json"))
+          earnings_files = list((root / "earnings").glob("*.json"))
+          call_links = int(universe.get("earnings_call_link_companies") or 0)
+          structured_calls = int(universe.get("structured_call_companies") or 0)
+          provider = bool(universe.get("transcript_provider_configured"))
 
           if len(rows) < 1300:
               raise SystemExit(f"Composite universe too small: {len(rows)}")
           if sp500 < 450 or midcap < 300 or smallcap < 450:
               raise SystemExit(f"Universe composition invalid: sp500={sp500} midcap={midcap} smallcap={smallcap}")
-          if not list((root / "news").glob("*.json")):
-              raise SystemExit("No news artifacts")
+          if len(news_files) < 100:
+              raise SystemExit(f"News coverage unexpectedly low: {len(news_files)} artifacts")
+          if not earnings_files:
+              raise SystemExit("No earnings artifacts")
           if not (root / "event_instances.json").is_file():
               raise SystemExit("No event instances")
 
           print(
-              f"EXTENDED DATA OK | companies={len(rows)} sp500={sp500} "
-              f"midcap={midcap} smallcap={smallcap}"
+              f"EXTENDED DATA OK | companies={len(rows)} sp500={sp500} midcap={midcap} smallcap={smallcap} "
+              f"news_artifacts={len(news_files)} earnings_artifacts={len(earnings_files)} "
+              f"call_link_companies={call_links} structured_call_companies={structured_calls} "
+              f"transcript_provider_configured={provider}"
           )
+          if not provider:
+              print("WARNING: ALPHAVANTAGE_API_KEY is not configured; structured transcript analysis cannot be generated. Transcript-link evidence and filing/results coverage remain enabled.")
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
