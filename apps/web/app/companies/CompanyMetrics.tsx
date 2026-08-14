@@ -1,12 +1,13 @@
-export default function CompanyMetrics({ total, sp500, midcap }: { total: number; sp500: number; midcap: number }) {
+export default function CompanyMetrics({ total, sp500, midcap, smallcap }: { total: number; sp500: number; midcap: number; smallcap: number }) {
   const ready = total > 0;
   const cards = [
-    { label: "Extended universe", value: ready ? total.toLocaleString() : "Pending", note: "S&P 500 + S&P MidCap 400, deduplicated" },
-    { label: "S&P 500 core", value: ready ? sp500.toLocaleString() : "Pending", note: "Only this core enters SPX weighting and attribution" },
-    { label: "MidCap extension", value: ready ? midcap.toLocaleString() : "Pending", note: "Additional company intelligence coverage" },
+    { label: "Composite coverage", value: ready ? total.toLocaleString() : "Pending", note: "Large, mid and small-cap companies" },
+    { label: "S&P 500", value: ready ? sp500.toLocaleString() : "Pending", note: "Core index universe" },
+    { label: "MidCap 400", value: ready ? midcap.toLocaleString() : "Pending", note: "Mid-cap extension" },
+    { label: "SmallCap 600", value: ready ? smallcap.toLocaleString() : "Pending", note: "New Phase 7 coverage" },
   ];
   return (
-    <section className="grid gap-3 md:grid-cols-3">
+    <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {cards.map((card) => (
         <div key={card.label} className="rounded-2xl border border-white/10 bg-white/[0.025] p-4 md:p-5">
           <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-600">{card.label}</div>

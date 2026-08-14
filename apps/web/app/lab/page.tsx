@@ -12,10 +12,10 @@ export default function ResearchLabPage() {
   return (
     <main className="space-y-7">
       <section>
-        <div className="eyebrow">Interactive research · V3</div>
+        <div className="eyebrow">Research · V3</div>
         <h1 className="page-title mt-2">Research Lab</h1>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
-          Test observed sentiment signals with balanced diagnostics, Newey-West inference, chronological out-of-sample checks, turnover and cost sensitivity, plus reproducible specification IDs.
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">
+          Compare signals, horizons, samples and trading-cost assumptions with reproducible specification IDs.
         </p>
       </section>
       <ResearchLabClientV3 rows={rows} />
