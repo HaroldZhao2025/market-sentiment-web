@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import os
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -17,6 +16,12 @@ from market_sentiment.v5_news import collect_company_news
 from market_sentiment.v5_universe import build_extended_universe
 from market_sentiment.v6_events import build_event_store_v3
 from market_sentiment.v6_news import ReusableNewsScorer
+
+
+def object_rows(value: object) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    return [row for row in value if isinstance(row, dict)]
 
 
 def rotation_subset(companies: list[dict[str, Any]], limit: int, salt: int = 0) -> list[dict[str, Any]]:
@@ -60,13 +65,13 @@ def core_sentiment(public_root: Path, ticker: str) -> float | None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Refresh Phase 6 extended company intelligence artifacts.")
+    parser = argparse.ArgumentParser(description="Refresh extended U.S. company intelligence artifacts.")
     parser.add_argument("--public-root", default="apps/web/public")
     parser.add_argument("--state-root", default="data/v5")
-    parser.add_argument("--news-refresh-limit", type=int, default=60)
+    parser.add_argument("--news-refresh-limit", type=int, default=80)
     parser.add_argument("--news-days", type=int, default=45)
     parser.add_argument("--news-max-items", type=int, default=60)
-    parser.add_argument("--earnings-limit", type=int, default=8)
+    parser.add_argument("--earnings-limit", type=int, default=5)
     parser.add_argument("--earnings-quarters", type=int, default=4)
     parser.add_argument("--score-news", action="store_true")
     parser.add_argument("--universe-only", action="store_true")
@@ -79,12 +84,12 @@ def main() -> None:
     state_root.mkdir(parents=True, exist_ok=True)
 
     companies = build_extended_universe()
-    if len(companies) < 700:
-        raise RuntimeError(f"Extended universe unexpectedly small: {len(companies)}")
+    if len(companies) < 1300:
+        raise RuntimeError(f"Composite universe unexpectedly small: {len(companies)}")
 
     previous_payload = load_json(v5_public / "universe.json", {})
-    previous_rows = previous_payload.get("companies") if isinstance(previous_payload, dict) else []
-    previous = {str(row.get("ticker")): row for row in previous_rows if isinstance(row, dict) and row.get("ticker")}
+    previous_rows = object_rows(previous_payload.get("companies") if isinstance(previous_payload, dict) else None)
+    previous = {str(row.get("ticker")): row for row in previous_rows if row.get("ticker")}
 
     snapshots = market_snapshots([str(company["ticker"]) for company in companies])
     for company in companies:
@@ -111,14 +116,15 @@ def main() -> None:
             news = scorer.score(news)
         elif news:
             old = load_json(v5_public / "news" / f"{ticker}.json", {})
-            old_scores = {str(row.get("title_key")): row.get("s") for row in old.get("articles", []) if isinstance(row, dict)} if isinstance(old, dict) else {}
+            old_articles = object_rows(old.get("articles") if isinstance(old, dict) else None)
+            old_scores = {str(row.get("title_key")): row.get("s") for row in old_articles if row.get("title_key")}
             for row in news:
                 if row.get("title_key") in old_scores:
                     row["s"] = old_scores[row["title_key"]]
 
         scores = [value for value in (finite(row.get("s")) for row in news) if value is not None]
         atomic_json(v5_public / "news" / f"{ticker}.json", {
-            "schema_version": 2,
+            "schema_version": 3,
             "symbol": ticker,
             "updated_at_utc": datetime.now(timezone.utc).isoformat(),
             "article_count": len(news),
@@ -131,10 +137,10 @@ def main() -> None:
             company["sentiment"] = sum(scores) / len(scores)
         new_events.extend(article_events(company, news))
         if index % 20 == 0:
-            print(f"[V6 NEWS] refreshed {index}/{len(refresh_companies)}")
+            print(f"[NEWS] refreshed {index}/{len(refresh_companies)}")
 
-    sp500_companies = [company for company in companies if company.get("universe") == "S&P 500"]
-    earnings_targets = [] if args.universe_only else rotation_subset(sp500_companies, args.earnings_limit, salt=97)
+    # Earnings rotates across the entire Composite 1500 coverage, not just large caps.
+    earnings_targets = [] if args.universe_only else rotation_subset(companies, args.earnings_limit, salt=97)
     earnings_key = os.environ.get("ALPHAVANTAGE_API_KEY", "").strip()
     company_by_ticker = {str(company["ticker"]): company for company in companies}
 
@@ -148,7 +154,7 @@ def main() -> None:
                 "symbol": ticker,
                 "earnings_history": [],
                 "calls": [],
-                "methodology": {"transcript_status": "No transcript API key configured; SEC filing fallback only"},
+                "methodology": {"transcript_status": "Transcript provider not configured; SEC filing fallback only"},
             }
         artifact["filing_fallback"] = build_sec_fallback(ticker)
         atomic_json(v5_public / "earnings" / f"{ticker}.json", artifact)
@@ -162,10 +168,10 @@ def main() -> None:
     atomic_json(v5_public / "event_instances.json", event_store_v3)
 
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "core_universe": "S&P 500 remains the only universe used for SPX index weighting and attribution",
-        "extended_universe": "S&P 500 plus S&P MidCap 400, deduplicated",
+        "core_universe": "S&P 500 only for SPX weighting and attribution",
+        "extended_universe": "S&P Composite 1500 coverage: S&P 500 + MidCap 400 + SmallCap 600, deduplicated",
         "company_count": len(companies),
         "news_refreshed_this_run": len(refresh_companies),
         "earnings_refreshed_this_run": len(earnings_targets),
@@ -174,10 +180,12 @@ def main() -> None:
     atomic_json(v5_public / "universe.json", payload)
     atomic_json(state_root / "universe.json", payload)
 
+    article_events = object_rows(article_store.get("events") if isinstance(article_store, dict) else None)
+    event_instances = object_rows(event_store_v3.get("event_instances") if isinstance(event_store_v3, dict) else None)
     print(
-        f"V6 REFRESH OK | companies={len(companies)} news={len(refresh_companies)} "
-        f"earnings={len(earnings_targets)} article_events={len(article_store.get('events', []))} "
-        f"event_instances={len(event_store_v3.get('event_instances', []))}"
+        f"EXTENDED REFRESH OK | companies={len(companies)} news={len(refresh_companies)} "
+        f"earnings={len(earnings_targets)} article_events={len(article_events)} "
+        f"event_instances={len(event_instances)}"
     )
 
 
