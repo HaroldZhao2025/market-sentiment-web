@@ -1,26 +1,30 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
+import CompanyVisual from "../../../components/CompanyVisual";
 import EarningsIntelligenceClient, { type EarningsArtifact } from "./EarningsIntelligenceClient";
 
 export const dynamic = "error";
 export const dynamicParams = false;
 export const revalidate = false;
 
+type CompanyMeta = { ticker?: string; name?: string; sector?: string; industry?: string; universe?: string };
+
 async function readJson<T = any>(filePath: string): Promise<T | null> {
-  try {
-    return JSON.parse(await fs.readFile(filePath, "utf8")) as T;
-  } catch {
-    return null;
-  }
+  try { return JSON.parse(await fs.readFile(filePath, "utf8")) as T; } catch { return null; }
+}
+
+async function loadCompanies(): Promise<CompanyMeta[]> {
+  const publicData = path.join(process.cwd(), "public", "data");
+  const v5 = await readJson<{ companies?: CompanyMeta[] }>(path.join(publicData, "v5", "universe.json"));
+  return Array.isArray(v5?.companies) ? v5.companies : [];
 }
 
 async function loadSymbols(): Promise<string[]> {
   const publicData = path.join(process.cwd(), "public", "data");
   const core = await readJson<string[]>(path.join(publicData, "_tickers.json"));
-  const v5 = await readJson<{ companies?: Array<{ ticker?: string }> }>(path.join(publicData, "v5", "universe.json"));
   const symbols = new Set<string>(Array.isArray(core) ? core : ["A"]);
-  for (const company of v5?.companies ?? []) {
+  for (const company of await loadCompanies()) {
     const ticker = String(company?.ticker || "").trim().toUpperCase();
     if (ticker) symbols.add(ticker);
   }
@@ -38,11 +42,11 @@ function legacyToV5(symbol: string, raw: any): EarningsArtifact {
       ts: String(doc?.ts ?? ""),
       title: String(doc?.title ?? ""),
       url: String(doc?.url ?? ""),
-      source: String(doc?.source ?? "Legacy earnings evidence"),
+      source: String(doc?.source ?? "Legacy earnings source"),
       document_type: "legacy",
       S: typeof doc?.S === "number" ? doc.S : undefined,
     })),
-    methodology: { compatibility: "Legacy earnings artifact mapped into the V5 filing fallback surface." },
+    methodology: { compatibility: "Legacy artifact mapped into the current filing view." },
   };
 }
 
@@ -62,28 +66,31 @@ export async function generateStaticParams() {
 
 export default async function EarningsPage({ params }: { params: { symbol: string } }) {
   const symbol = String(params.symbol || "").toUpperCase();
-  const data = await loadEarnings(symbol);
+  const [data, companies] = await Promise.all([loadEarnings(symbol), loadCompanies()]);
+  const company = companies.find((row) => String(row.ticker || "").toUpperCase() === symbol);
   const callCount = Array.isArray(data.calls) ? data.calls.length : 0;
   const filingCount = Array.isArray(data.filing_fallback) ? data.filing_fallback.length : 0;
   const historyCount = Array.isArray(data.earnings_history) ? data.earnings_history.length : 0;
 
   return (
     <main className="space-y-7">
-      <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <div className="eyebrow">Phase 5 · earnings intelligence</div>
-          <h1 className="page-title mt-2">{symbol} Earnings Intelligence</h1>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
-            Earnings surprise, call tone, prepared-versus-Q&amp;A shift, deterministic topic diagnostics, transcript evidence, and regulatory filing fallback.
-          </p>
+      <section className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex items-center gap-4">
+          <CompanyVisual ticker={symbol} name={company?.name} sector={company?.sector} size="lg" />
+          <div>
+            <div className="eyebrow">Earnings</div>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-white">{company?.name || symbol}</h1>
+            <div className="mt-1 flex flex-wrap gap-x-3 text-xs text-neutral-500"><span className="font-mono text-neutral-300">{symbol}</span>{company?.sector ? <span>{company.sector}</span> : null}</div>
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          <span className="pill">{callCount} structured call{callCount === 1 ? "" : "s"}</span>
-          <span className="pill">{historyCount} earnings observations</span>
-          <span className="pill">{filingCount} filing fallback{filingCount === 1 ? "" : "s"}</span>
-          <Link href={`/ticker/${symbol}`} className="pill">← Ticker</Link>
+          <span className="pill">{callCount} call{callCount === 1 ? "" : "s"}</span>
+          <span className="pill">{historyCount} results</span>
+          <span className="pill">{filingCount} filings</span>
+          <Link href={`/ticker/${symbol}`} className="pill">← Company</Link>
         </div>
       </section>
+      <p className="max-w-3xl text-sm leading-6 text-neutral-500">Surprises, management tone, Q&amp;A shifts, topics and source filings in one view.</p>
       <EarningsIntelligenceClient symbol={symbol} data={data} />
     </main>
   );
