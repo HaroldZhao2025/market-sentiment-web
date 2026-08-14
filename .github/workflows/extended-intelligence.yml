@@ -20,7 +20,7 @@ env:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/hf-home
-          key: phase6-finbert-${{ runner.os }}-py311
+          key: phase7-finbert-${{ runner.os }}-py311
       - name: Install dependencies
         run: |
           set -euo pipefail
@@ -47,22 +47,34 @@ jobs:
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
         run: |
           set -euo pipefail
-          python -m market_sentiment.cli.build_v6_market_safe --public-root apps/web/public --state-root data/v5 --news-refresh-limit 60 --news-days 45 --news-max-items 60 --earnings-limit 3 --earnings-quarters 4 --score-news
+          python -m market_sentiment.cli.build_v6_market_safe --public-root apps/web/public --state-root data/v5 --news-refresh-limit 80 --news-days 45 --news-max-items 60 --earnings-limit 5 --earnings-quarters 4 --score-news
       - name: Validate and persist
         run: |
           set -euo pipefail
           python - <<'PY'
           import json
           from pathlib import Path
-          root=Path("apps/web/public/data/v5")
-          universe=json.loads((root/"universe.json").read_text())
-          rows=universe.get("companies") or []
-          sp500=sum(1 for r in rows if r.get("universe")=="S&P 500")
-          midcap=sum(1 for r in rows if r.get("universe")=="S&P MidCap 400")
-          if len(rows)<700 or sp500<450 or midcap<300: raise SystemExit(f"bad universe {len(rows)} {sp500} {midcap}")
-          if not list((root/"news").glob("*.json")): raise SystemExit("no news artifacts")
-          if not (root/"event_instances.json").is_file(): raise SystemExit("no event instances")
-          print(f"EXTENDED DATA OK | companies={len(rows)} sp500={sp500} midcap={midcap}")
+
+          root = Path("apps/web/public/data/v5")
+          universe = json.loads((root / "universe.json").read_text())
+          rows = universe.get("companies") or []
+          sp500 = sum(1 for row in rows if row.get("universe") == "S&P 500")
+          midcap = sum(1 for row in rows if row.get("universe") == "S&P MidCap 400")
+          smallcap = sum(1 for row in rows if row.get("universe") == "S&P SmallCap 600")
+
+          if len(rows) < 1300:
+              raise SystemExit(f"Composite universe too small: {len(rows)}")
+          if sp500 < 450 or midcap < 300 or smallcap < 450:
+              raise SystemExit(f"Universe composition invalid: sp500={sp500} midcap={midcap} smallcap={smallcap}")
+          if not list((root / "news").glob("*.json")):
+              raise SystemExit("No news artifacts")
+          if not (root / "event_instances.json").is_file():
+              raise SystemExit("No event instances")
+
+          print(
+              f"EXTENDED DATA OK | companies={len(rows)} sp500={sp500} "
+              f"midcap={midcap} smallcap={smallcap}"
+          )
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
