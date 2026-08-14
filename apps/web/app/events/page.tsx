@@ -1,103 +1,86 @@
+import fs from "node:fs";
+import path from "node:path";
 import Link from "next/link";
-import { buildEventMemory, finite } from "../../lib/intelligence";
+import CompanyVisual from "../../components/CompanyVisual";
+import { buildEventMemory } from "../../lib/intelligence";
 
 export const dynamic = "force-static";
+export const metadata = { title: "Events" };
 
-export const metadata = {
-  title: "Event Memory",
+type EventArticle = { date?: string; title?: string; url?: string; source?: string; sentiment?: number | null };
+type EventInstance = {
+  event_instance_id?: string;
+  symbol?: string;
+  name?: string;
+  sector?: string;
+  theme?: string;
+  start_date?: string;
+  end_date?: string;
+  article_count?: number;
+  source_count?: number;
+  sentiment_mean?: number | null;
+  sentiment_disagreement?: number | null;
+  articles?: EventArticle[];
 };
 
-function tone(v: number | null) {
-  if (v == null) return "text-neutral-500";
-  if (v > 0) return "text-emerald-300";
-  if (v < 0) return "text-rose-300";
-  return "text-neutral-300";
+function loadPersistentEvents(): EventInstance[] {
+  try {
+    const file = path.join(process.cwd(), "public", "data", "v5", "event_instances.json");
+    const parsed = JSON.parse(fs.readFileSync(file, "utf8"));
+    return Array.isArray(parsed?.event_instances) ? parsed.event_instances : [];
+  } catch {
+    return [];
+  }
 }
 
-function pct(v: number | null, d = 2) {
-  return v == null ? "—" : `${v > 0 ? "+" : ""}${(v * 100).toFixed(d)}%`;
+function tone(value: number | null | undefined) {
+  if (value == null) return "text-neutral-500";
+  return value > 0 ? "text-emerald-300" : value < 0 ? "text-rose-300" : "text-neutral-300";
 }
 
 export default function EventsPage() {
-  const themes = buildEventMemory();
-  const total = themes.reduce((s, x) => s + x.count, 0);
+  const instances = loadPersistentEvents();
+  const fallback = buildEventMemory();
+  const recent = instances.slice(0, 120);
+  const companies = new Set(recent.map((item) => item.symbol).filter(Boolean)).size;
+  const themes = new Set(recent.map((item) => item.theme).filter(Boolean)).size;
 
   return (
     <main className="space-y-8">
       <section>
-        <div className="eyebrow">Historical event memory</div>
-        <h1 className="page-title mt-2">Event Intelligence</h1>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-400">
-          A deterministic memory layer over the article history retained in current ticker artifacts. Events are classified by rules and linked to observed price reactions; no generative narrative is used.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <span className="pill">{total.toLocaleString()} retained article events</span>
-          <span className="pill">{themes.length} event themes</span>
-          <span className="pill">Novelty + source disagreement</span>
-        </div>
+        <div className="eyebrow">Company events</div>
+        <h1 className="page-title mt-2">Event Stream</h1>
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">Related headlines are grouped into company-level event instances so one story does not look like ten separate events.</p>
+        <div className="mt-4 flex flex-wrap gap-2"><span className="pill">{instances.length.toLocaleString()} stored events</span><span className="pill">{companies} companies in view</span><span className="pill">{themes} themes</span></div>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-2">
-        {themes.map((theme) => (
-          <article key={theme.theme} className="ambient-panel p-5">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="eyebrow">{theme.count} events · {theme.ticker_count} tickers</div>
-                <h2 className="mt-2 text-xl font-semibold text-white">{theme.theme}</h2>
-              </div>
-              <div className={`font-mono text-sm ${tone(theme.avg_sentiment)}`}>{theme.avg_sentiment == null ? "—" : `${theme.avg_sentiment > 0 ? "+" : ""}${theme.avg_sentiment.toFixed(3)}`}</div>
-            </div>
-
-            <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
-              <div className="rounded-xl border border-white/[0.07] bg-black/20 p-3">
-                <div className="text-[10px] uppercase tracking-wider text-neutral-600">Avg 1D reaction</div>
-                <div className={`mt-1 font-mono text-sm ${tone(theme.avg_return_1d)}`}>{pct(theme.avg_return_1d)}</div>
-              </div>
-              <div className="rounded-xl border border-white/[0.07] bg-black/20 p-3">
-                <div className="text-[10px] uppercase tracking-wider text-neutral-600">Avg 5D reaction</div>
-                <div className={`mt-1 font-mono text-sm ${tone(theme.avg_return_5d)}`}>{pct(theme.avg_return_5d)}</div>
-              </div>
-              <div className="rounded-xl border border-white/[0.07] bg-black/20 p-3">
-                <div className="text-[10px] uppercase tracking-wider text-neutral-600">Positive 1D</div>
-                <div className="mt-1 font-mono text-sm text-neutral-300">{theme.positive_1d_rate == null ? "—" : `${(theme.positive_1d_rate * 100).toFixed(1)}%`}</div>
-              </div>
-              <div className="rounded-xl border border-white/[0.07] bg-black/20 p-3">
-                <div className="text-[10px] uppercase tracking-wider text-neutral-600">Novelty</div>
-                <div className="mt-1 font-mono text-sm text-neutral-300">{theme.avg_novelty == null ? "—" : theme.avg_novelty.toFixed(2)}</div>
-              </div>
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-3 text-[11px] text-neutral-600">
-              <span>{theme.source_count} distinct sources</span>
-              <span>Sentiment disagreement: {finite(theme.disagreement)?.toFixed(3) ?? "—"}</span>
-            </div>
-
-            {theme.recent_examples.length ? (
-              <div className="mt-5 space-y-2 border-t border-white/[0.07] pt-4">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-neutral-600">Recent retained examples</div>
-                {theme.recent_examples.slice(0, 3).map((item, i) => (
-                  <div key={`${item.symbol}-${item.date}-${i}`} className="rounded-xl bg-white/[0.025] p-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <Link href={`/ticker/${item.symbol}`} className="text-xs font-semibold text-white hover:text-emerald-300">{item.symbol}</Link>
-                      <div className="font-mono text-[10px] text-neutral-600">{item.date}</div>
+      {recent.length ? (
+        <section className="grid gap-3 lg:grid-cols-2">
+          {recent.map((event, index) => {
+            const symbol = String(event.symbol || "");
+            const latestArticle = Array.isArray(event.articles) ? event.articles[0] : undefined;
+            return (
+              <article key={event.event_instance_id || `${symbol}-${event.start_date}-${index}`} className="rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+                <div className="flex gap-4">
+                  <CompanyVisual ticker={symbol || "CO"} name={event.name} sector={event.sector} size="md" />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <div><div className="eyebrow">{event.theme || "Company news"}</div><h2 className="mt-1 text-lg font-semibold text-white">{event.name || symbol}</h2><div className="mt-1 text-xs text-neutral-600">{symbol} · {event.start_date || "—"}{event.end_date && event.end_date !== event.start_date ? ` → ${event.end_date}` : ""}</div></div>
+                      <div className={`font-mono text-sm ${tone(event.sentiment_mean)}`}>{event.sentiment_mean == null ? "—" : `${event.sentiment_mean > 0 ? "+" : ""}${event.sentiment_mean.toFixed(3)}`}</div>
                     </div>
-                    <div className="mt-1 text-xs leading-5 text-neutral-300">{item.title}</div>
-                    <div className="mt-2 flex flex-wrap gap-3 text-[10px] text-neutral-600">
-                      <span>{item.source || "Unknown source"}</span>
-                      <span className={tone(item.sentiment)}>S {item.sentiment == null ? "—" : item.sentiment.toFixed(3)}</span>
-                      <span className={tone(item.return_1d)}>1D {pct(item.return_1d)}</span>
-                    </div>
+                    {latestArticle?.title ? <div className="mt-3 text-sm leading-6 text-neutral-300">{latestArticle.url ? <a href={latestArticle.url} target="_blank" rel="noreferrer" className="hover:underline">{latestArticle.title}</a> : latestArticle.title}</div> : null}
+                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-neutral-600"><span>{event.article_count ?? 0} article{event.article_count === 1 ? "" : "s"}</span><span>{event.source_count ?? 0} source{event.source_count === 1 ? "" : "s"}</span><span>Disagreement {event.sentiment_disagreement == null ? "—" : event.sentiment_disagreement.toFixed(3)}</span>{symbol ? <Link href={`/ticker/${symbol}`} className="text-emerald-300 hover:underline">Company →</Link> : null}</div>
                   </div>
-                ))}
-              </div>
-            ) : null}
-          </article>
-        ))}
-      </section>
-
-      <section className="card p-5 text-sm leading-6 text-neutral-500">
-        Event Memory is bounded by the article history retained in generated ticker JSON. It should not be interpreted as a complete historical news database. Price reactions use the first available trading observation on or after the article date.
-      </section>
+                </div>
+              </article>
+            );
+          })}
+        </section>
+      ) : (
+        <section className="grid gap-4 lg:grid-cols-2">
+          {fallback.map((theme) => <div key={theme.theme} className="card p-5"><div className="eyebrow">{theme.count} retained articles</div><h2 className="mt-2 text-lg font-semibold text-white">{theme.theme}</h2><div className="mt-3 text-sm text-neutral-500">Persistent event data is refreshing; this summary uses the current ticker history.</div></div>)}
+        </section>
+      )}
     </main>
   );
 }
