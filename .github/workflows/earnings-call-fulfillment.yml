@@ -87,7 +87,7 @@ jobs:
       - name: Fulfill free public earnings calls
         run: |
           set -euo pipefail
-          python -m market_sentiment.cli.fulfill_earnings_calls \
+          python -m market_sentiment.cli.fulfill_earnings_calls_fast \
             --public-root apps/web/public \
             --batch-index "${{ steps.batch.outputs.index }}" \
             --batch-size "${{ steps.batch.outputs.size }}" \
