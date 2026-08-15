@@ -1,0 +1,71 @@
+{
+  "schema_version": 6,
+  "symbol": "IESC",
+  "earnings_history": [
+    {
+      "date": "2026-11-20T07:00:00-05:00",
+      "eps_estimate": 5.61,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-31T07:00:00-04:00",
+      "eps_estimate": 4.83,
+      "reported_eps": 7.57,
+      "surprise_pct": 56.73
+    },
+    {
+      "date": "2026-05-01T07:00:00-04:00",
+      "eps_estimate": 3.95,
+      "reported_eps": 5.44,
+      "surprise_pct": 37.72
+    },
+    {
+      "date": "2026-01-30T07:00:00-05:00",
+      "eps_estimate": 3.94,
+      "reported_eps": 4.51,
+      "surprise_pct": 14.47
+    },
+    {
+      "date": "2025-11-21T07:00:00-05:00",
+      "eps_estimate": 3.11,
+      "reported_eps": 4.99,
+      "surprise_pct": 60.45
+    },
+    {
+      "date": "2025-08-01T07:00:00-04:00",
+      "eps_estimate": 3.55,
+      "reported_eps": 3.81,
+      "surprise_pct": 7.32
+    },
+    {
+      "date": "2011-08-15T06:00:00-04:00",
+      "eps_estimate": -0.37,
+      "reported_eps": -0.06,
+      "surprise_pct": 83.61
+    },
+    {
+      "date": "2011-05-16T06:00:00-04:00",
+      "eps_estimate": -0.53,
+      "reported_eps": -0.64,
+      "surprise_pct": -21.21
+    },
+    {
+      "date": "2011-02-09T17:00:00-05:00",
+      "eps_estimate": -0.68,
+      "reported_eps": -0.48,
+      "surprise_pct": 29.41
+    }
+  ],
+  "calls": [],
+  "call_links": [],
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "free_public_only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+  },
+  "updated_at_utc": "2026-08-15T03:45:43.720969+00:00"
+}

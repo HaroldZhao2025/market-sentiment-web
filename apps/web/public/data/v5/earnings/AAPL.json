@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 6,
   "symbol": "AAPL",
   "earnings_history": [
     {
@@ -24,7 +24,7 @@
       "date": "2026-01-29T16:00:00-05:00",
       "eps_estimate": 2.67,
       "reported_eps": 2.84,
-      "surprise_pct": 6.25
+      "surprise_pct": 6.34
     },
     {
       "date": "2025-10-30T16:00:00-04:00",
@@ -36,7 +36,7 @@
       "date": "2025-07-31T16:00:00-04:00",
       "eps_estimate": 1.43,
       "reported_eps": 1.57,
-      "surprise_pct": 9.48
+      "surprise_pct": 10.12
     },
     {
       "date": "2025-05-01T16:00:00-04:00",
@@ -46,9 +46,9 @@
     },
     {
       "date": "2025-01-30T16:00:00-05:00",
-      "eps_estimate": 2.35,
+      "eps_estimate": 2.34,
       "reported_eps": 2.4,
-      "surprise_pct": 2.26
+      "surprise_pct": 2.52
     },
     {
       "date": "2024-10-31T16:00:00-04:00",
@@ -64,21 +64,21 @@
     },
     {
       "date": "2024-05-02T16:00:00-04:00",
-      "eps_estimate": 1.51,
+      "eps_estimate": 1.5,
       "reported_eps": 1.53,
-      "surprise_pct": 1.46
+      "surprise_pct": 2.05
     },
     {
       "date": "2024-02-01T16:00:00-05:00",
-      "eps_estimate": 2.1,
+      "eps_estimate": 2.11,
       "reported_eps": 2.18,
-      "surprise_pct": 3.66
+      "surprise_pct": 3.55
     },
     {
       "date": "2023-11-02T16:00:00-04:00",
       "eps_estimate": 1.39,
       "reported_eps": 1.46,
-      "surprise_pct": 4.82
+      "surprise_pct": 4.93
     },
     {
       "date": "2023-08-03T16:00:00-04:00",
@@ -90,7 +90,7 @@
       "date": "2023-05-04T16:00:00-04:00",
       "eps_estimate": 1.43,
       "reported_eps": 1.52,
-      "surprise_pct": 6.28
+      "surprise_pct": 6.37
     },
     {
       "date": "2023-02-02T16:00:00-05:00",
@@ -132,7 +132,7 @@
       "date": "2021-07-27T16:00:00-04:00",
       "eps_estimate": 1.01,
       "reported_eps": 1.3,
-      "surprise_pct": 28.18
+      "surprise_pct": 28.56
     },
     {
       "date": "2021-04-28T16:00:00-04:00",
@@ -150,24 +150,515 @@
       "date": "2020-10-29T16:00:00-04:00",
       "eps_estimate": 0.7,
       "reported_eps": 0.73,
-      "surprise_pct": 4.48
+      "surprise_pct": 4.5
     }
   ],
-  "calls": [],
-  "methodology": {
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
-    "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
-    "topics": "deterministic keyword families",
-    "transcript_provider": "Not configured"
-  },
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Six Colors",
+      "source_url": "https://sixcolors.com/post/2026/07/one-last-time-this-is-tim-transcript-of-apples-q3-2026-financial-call/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 35,
+        "scored_turn_count": 35,
+        "overall_sentiment": 0.464089,
+        "prepared_sentiment": 0.464089,
+        "qa_sentiment": null,
+        "qa_tone_shift": null,
+        "uncertainty_turn_rate": 0.085714,
+        "forward_looking_turn_rate": 0.314286,
+        "topics": [
+          {
+            "topic": "Macro & FX",
+            "mentions": 11,
+            "sentiment": 0.598373
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": 0.372245
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": 0.630915
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 10,
+            "sentiment": 0.596882
+          },
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": 0.222985
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.697102
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Amit Daryanani, Evercore",
+          "section": "prepared",
+          "sentiment": 0.720409,
+          "word_count": 100,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Kevan Parekh",
+          "section": "prepared",
+          "sentiment": 0.482917,
+          "word_count": 171,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.100229,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Amit Daryanani, Evercore",
+          "section": "prepared",
+          "sentiment": 0.433208,
+          "word_count": 121,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": -0.096582,
+          "word_count": 254,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Michael Ng, Goldman Sachs",
+          "section": "prepared",
+          "sentiment": 0.77484,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": -0.257716,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Kevan Parekh",
+          "section": "prepared",
+          "sentiment": 0.88381,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Michael Ng, Goldman Sachs",
+          "section": "prepared",
+          "sentiment": 0.766498,
+          "word_count": 78,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.481607,
+          "word_count": 196,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Ben Reitzes, Melius Research",
+          "section": "prepared",
+          "sentiment": 0.487838,
+          "word_count": 164,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.51483,
+          "word_count": 177,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 12,
+          "speaker": "Kevan Parekh",
+          "section": "prepared",
+          "sentiment": 0.83225,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Ben Reitzes, Melius Research",
+          "section": "prepared",
+          "sentiment": 4.1e-05,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": -0.73298,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Eric Woodring, Morgan Stanley",
+          "section": "prepared",
+          "sentiment": 0.836424,
+          "word_count": 123,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.828328,
+          "word_count": 118,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Eric Woodring, Morgan Stanley",
+          "section": "prepared",
+          "sentiment": 0.743298,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Kevan Parekh",
+          "section": "prepared",
+          "sentiment": 0.159879,
+          "word_count": 514,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Aaron Rakers, Wells Fargo",
+          "section": "prepared",
+          "sentiment": 0.799932,
+          "word_count": 78,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.352774,
+          "word_count": 111,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Aaron Rakers, Wells Fargo",
+          "section": "prepared",
+          "sentiment": 0.533679,
+          "word_count": 59,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.4575,
+          "word_count": 77,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Wamsi Mohan, Bank of America",
+          "section": "prepared",
+          "sentiment": -0.094293,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.444583,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Wamsi Mohan, Bank of America",
+          "section": "prepared",
+          "sentiment": 0.828177,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.790608,
+          "word_count": 129,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Wamsi Mohan, Bank of America",
+          "section": "prepared",
+          "sentiment": 0.585403,
+          "word_count": 81,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "John Ternus",
+          "section": "prepared",
+          "sentiment": 0.557947,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Samik Chatterjee, J.P. Morgan",
+          "section": "prepared",
+          "sentiment": 0.729015,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.622175,
+          "word_count": 177,
+          "topic_hits": [
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Samik Chatterjee, J.P. Morgan",
+          "section": "prepared",
+          "sentiment": 0.771924,
+          "word_count": 85,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Kevan Parekh",
+          "section": "prepared",
+          "sentiment": 0.697207,
+          "word_count": 251,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Samik Chatterjee, J.P. Morgan",
+          "section": "prepared",
+          "sentiment": -0.601402,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Tim Cook",
+          "section": "prepared",
+          "sentiment": 0.808758,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4144,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
-      "title": "Tim Cook Warned of a \"100-Year Flood\" in Memory Chip Pricing on His Last Earnings Call. Should Apple Investors Be Worried About Margins?",
-      "url": "https://www.fool.com/investing/2026/08/13/tim-cook-warned-of-a-100-year-flood-in-memory-chip/",
-      "ts": "2026-08-13T04:20:00+00:00",
+      "title": "Apple (AAPL) Q2 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/04/30/apple-aapl-q2-2026-earnings-call-transcript/",
       "source": "Motley Fool",
-      "provider": "yfinance"
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "Transcript of Apple's Q3 2026 financial call",
+      "url": "https://sixcolors.com/post/2026/07/one-last-time-this-is-tim-transcript-of-apples-q3-2026-financial-call/",
+      "source": "Six Colors",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
-  "filing_fallback": []
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "free_public_only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+  },
+  "updated_at_utc": "2026-08-15T03:44:33.006862+00:00"
 }
