@@ -23,7 +23,7 @@ permissions:
 
 concurrency:
   group: earnings-call-fulfillment
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   PYTHONPATH: src
@@ -40,6 +40,10 @@ jobs:
           ref: main
           fetch-depth: 1
           persist-credentials: true
+          sparse-checkout: |
+            src/market_sentiment
+            apps/web/public/data/v5
+          sparse-checkout-cone-mode: false
 
       - uses: actions/setup-python@v5
         with:
