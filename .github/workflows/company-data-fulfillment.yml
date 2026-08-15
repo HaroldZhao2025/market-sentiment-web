@@ -79,7 +79,7 @@ jobs:
       - name: Fulfill company news and history
         run: |
           set -euo pipefail
-          python -m market_sentiment.cli.fulfill_company_data \
+          python -m market_sentiment.cli.fulfill_company_data_priority \
             --public-root apps/web/public \
             --batch-size "${{ steps.batch.outputs.size }}" \
             --news-days 365 \
