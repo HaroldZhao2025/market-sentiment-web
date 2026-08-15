@@ -16,14 +16,14 @@ on:
         required: false
         default: "100"
   schedule:
-    - cron: "20 * * * *"
+    - cron: "5,25,45 * * * *"
 
 permissions:
   contents: write
 
 concurrency:
   group: earnings-call-fulfillment
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   PYTHONPATH: src
@@ -78,7 +78,7 @@ jobs:
               index = int(os.getenv("INPUT_BATCH_INDEX") or 0)
               size = int(os.getenv("INPUT_BATCH_SIZE") or 100)
           else:
-              index = (now.timetuple().tm_yday - 1) * 24 + now.hour
+              index = (now.timetuple().tm_yday - 1) * 72 + now.hour * 3 + (0 if now.minute < 20 else 1 if now.minute < 40 else 2)
               size = 100
           print(f"index={index}")
           print(f"size={size}")
@@ -87,13 +87,13 @@ jobs:
       - name: Fulfill free public earnings calls
         run: |
           set -euo pipefail
-          python -m market_sentiment.cli.fulfill_earnings_calls_fast \
+          python -m market_sentiment.cli.fulfill_earnings_calls_tiered \
             --public-root apps/web/public \
             --batch-index "${{ steps.batch.outputs.index }}" \
             --batch-size "${{ steps.batch.outputs.size }}" \
             --priority-symbols "AAPL,MSFT,NVDA,AMZN,GOOGL,META,TSLA" \
             --sec-days 550 \
-            --retry-cooldown-hours 24
+            --retry-cooldown-hours 1
 
       - name: Validate fulfillment policy
         run: |
@@ -109,6 +109,9 @@ jobs:
               raise SystemExit("Fulfillment source policy is not free_public_only")
           if int(coverage.get("company_count") or 0) < 1300:
               raise SystemExit("Earnings coverage universe is unexpectedly small")
+          progress = coverage.get("search_progress") or {}
+          if int(progress.get("tier1_attempted") or 0) <= 0:
+              raise SystemExit("Tier-1 search progress was not persisted")
           aapl_path = root / "earnings" / "AAPL.json"
           if not aapl_path.exists():
               raise SystemExit("AAPL earnings artifact missing")
@@ -126,7 +129,8 @@ jobs:
           print(
               f"FULFILLMENT DATA OK | sweep_results={len(status.get('results') or [])} "
               f"market_complete={coverage.get('complete_company_count')}/{coverage.get('company_count')} "
-              f"coverage={float(coverage.get('complete_coverage_rate') or 0):.1%}"
+              f"coverage={float(coverage.get('complete_coverage_rate') or 0):.1%} "
+              f"tier1={progress.get('tier1_attempted', 0)} tier2={progress.get('tier2_attempted', 0)} tier3={progress.get('tier3_attempted', 0)}"
           )
           PY
 
@@ -141,7 +145,7 @@ jobs:
             apps/web/public/data/v5/earnings_fulfillment_attempts.json \
             apps/web/public/data/v5/earnings_coverage.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore: sweep free earnings calls ${{ steps.batch.outputs.index }} [skip ci]"
+            git commit -m "chore: tiered free earnings sweep ${{ steps.batch.outputs.index }} [skip ci]"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
