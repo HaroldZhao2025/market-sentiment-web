@@ -2,14 +2,11 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Protocol
 from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
-
-from .finbert import FinBERT
-from .v5_earnings import FORWARD_TERMS, TOPICS, UNCERTAINTY_TERMS, summarize_transcript
 
 UA = "market-sentiment-web/1.0 (+https://github.com/HaroldZhao2025/market-sentiment-web)"
 ROLE_TERMS = (
@@ -24,6 +21,21 @@ QA_START_TERMS = (
     "the first question comes", "our first question is", "first question is from",
     "begin the q&a", "begin the question-and-answer", "open the call to questions",
 )
+TOPICS: dict[str, tuple[str, ...]] = {
+    "Guidance": ("guidance", "outlook", "forecast", "expect", "next quarter", "full year"),
+    "Demand": ("demand", "orders", "bookings", "pipeline", "customer", "volume"),
+    "Margins & costs": ("margin", "cost", "expense", "pricing", "productivity", "inflation"),
+    "AI & technology": ("artificial intelligence", " ai ", "model", "cloud", "compute", "software", "chip"),
+    "Capital allocation": ("buyback", "repurchase", "dividend", "capex", "debt", "cash flow"),
+    "Macro & FX": ("macro", "economy", "consumer", "foreign exchange", "fx", "interest rate"),
+    "Regulation & legal": ("regulation", "regulatory", "antitrust", "legal", "litigation", "tariff"),
+}
+UNCERTAINTY_TERMS = ("uncertain", "uncertainty", "volatile", "challenging", "risk", "headwind", "visibility", "cautious", "pressure")
+FORWARD_TERMS = ("expect", "forecast", "outlook", "guidance", "anticipate", "next quarter", "full year", "going forward", "we believe")
+
+
+class SentimentScorer(Protocol):
+    def score(self, texts: list[str], batch_size: int = 16) -> list[float]: ...
 
 
 @dataclass(frozen=True)
@@ -171,7 +183,6 @@ def _stockanalysis_turns(soup: BeautifulSoup) -> list[dict[str, Any]]:
     if "Summary" in lines[:8]:
         pos = lines.index("Summary")
         lines = lines[pos + 1 :]
-    # Skip the one-line summary until the first identifiable speaker.
     first = 0
     for i, text in enumerate(lines):
         if text == "Operator" or (_looks_like_name(text) and i + 1 < len(lines) and _looks_like_role(lines[i + 1])):
@@ -277,12 +288,51 @@ def extract_broad_transcript(candidate: BroadCandidate) -> dict[str, Any] | None
     return {"candidate": candidate, "turns": turns, "word_count": word_count}
 
 
+def _mean(values: list[float]) -> float | None:
+    return sum(values) / len(values) if values else None
+
+
+def _term_rate(texts: list[str], terms: tuple[str, ...]) -> float | None:
+    if not texts:
+        return None
+    hits = sum(any(term in f" {text.lower()} " for term in terms) for text in texts)
+    return hits / len(texts)
+
+
+def _summarize_transcript(turns: list[dict[str, Any]]) -> dict[str, Any]:
+    scored = [turn for turn in turns if isinstance(turn.get("sentiment"), (int, float))]
+    all_scores = [float(turn["sentiment"]) for turn in scored]
+    prepared_scores = [float(turn["sentiment"]) for turn in scored if turn.get("section") == "prepared"]
+    qa_scores = [float(turn["sentiment"]) for turn in scored if turn.get("section") == "qa"]
+    prepared = _mean(prepared_scores)
+    qa = _mean(qa_scores)
+    topic_rows: list[dict[str, Any]] = []
+    for topic, terms in TOPICS.items():
+        matching = [turn for turn in scored if any(term in f" {str(turn.get('text') or '').lower()} " for term in terms)]
+        if matching:
+            values = [float(turn["sentiment"]) for turn in matching]
+            topic_rows.append({"topic": topic, "mentions": len(matching), "sentiment": round(float(_mean(values) or 0.0), 6)})
+    topic_rows.sort(key=lambda row: (-int(row["mentions"]), -abs(float(row["sentiment"]))))
+    texts = [str(turn.get("text") or "") for turn in scored]
+    return {
+        "turn_count": len(turns),
+        "scored_turn_count": len(scored),
+        "overall_sentiment": round(float(_mean(all_scores)), 6) if all_scores else None,
+        "prepared_sentiment": round(float(prepared), 6) if prepared is not None else None,
+        "qa_sentiment": round(float(qa), 6) if qa is not None else None,
+        "qa_tone_shift": round(float(qa - prepared), 6) if qa is not None and prepared is not None else None,
+        "uncertainty_turn_rate": round(float(_term_rate(texts, UNCERTAINTY_TERMS)), 6) if texts else None,
+        "forward_looking_turn_rate": round(float(_term_rate(texts, FORWARD_TERMS)), 6) if texts else None,
+        "topics": topic_rows[:8],
+    }
+
+
 def _term_hits(text: str, terms: tuple[str, ...]) -> int:
     lower = f" {text.lower()} "
     return sum(1 for term in terms if term in lower)
 
 
-def score_broad_transcript(parsed: dict[str, Any], model: FinBERT) -> dict[str, Any]:
+def score_broad_transcript(parsed: dict[str, Any], model: SentimentScorer) -> dict[str, Any]:
     raw_turns = [row for row in parsed.get("turns") or [] if isinstance(row, dict) and str(row.get("text") or "").strip()]
     if not raw_turns:
         return {}
@@ -314,7 +364,7 @@ def score_broad_transcript(parsed: dict[str, Any], model: FinBERT) -> dict[str, 
             "uncertainty_hits": _term_hits(text, UNCERTAINTY_TERMS),
             "forward_looking_hits": _term_hits(text, FORWARD_TERMS),
         })
-    summary = summarize_transcript(internal)
+    summary = _summarize_transcript(internal)
     candidate: BroadCandidate = parsed["candidate"]
     return {
         "quarter": None,
@@ -334,7 +384,7 @@ def complete_call(call: dict[str, Any]) -> bool:
     return all(summary.get(key) is not None for key in ("overall_sentiment", "prepared_sentiment", "qa_sentiment", "qa_tone_shift"))
 
 
-def fulfill_broad_transcript(symbol: str, model: FinBERT) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def fulfill_broad_transcript(symbol: str, model: SentimentScorer) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     candidates = discover_broad_candidates(symbol)
     evidence = [{"title": c.title, "url": c.url, "source": c.source, "ts": c.published} for c in candidates]
     fallback: list[dict[str, Any]] = []
