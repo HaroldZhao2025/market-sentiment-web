@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 8,
   "symbol": "ACN",
   "earnings_history": [
     {
@@ -158,7 +158,9 @@
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
     "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
     "topics": "deterministic keyword families",
-    "transcript_provider": "Not configured"
+    "transcript_provider": "Not configured",
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
   },
   "call_links": [
     {
@@ -195,7 +197,32 @@
       "ts": "2026-07-28T12:30:00+00:00",
       "source": "Moby",
       "provider": "yfinance"
+    },
+    {
+      "title": "ACN Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/acn/transcripts/609341-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-06-18T00:00:00+00:00"
+    },
+    {
+      "title": "ACN Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/acn/transcripts/532769-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-19T00:00:00+00:00"
+    },
+    {
+      "title": "ACN Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/acn/transcripts/390130-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-12-18T00:00:00+00:00"
+    },
+    {
+      "title": "ACN Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-6-19-accenture-plc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-06-19T00:00:00+00:00"
     }
   ],
-  "filing_fallback": []
+  "filing_fallback": [],
+  "updated_at_utc": "2026-08-15T14:03:56.543269+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 8,
   "symbol": "ACLS",
   "earnings_history": [
     {
@@ -153,12 +153,760 @@
       "surprise_pct": 27.15
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-6-axcelis-technologies-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 54,
+        "scored_turn_count": 54,
+        "overall_sentiment": 0.193037,
+        "prepared_sentiment": -0.370399,
+        "qa_sentiment": 0.474755,
+        "qa_tone_shift": 0.845154,
+        "uncertainty_turn_rate": 0.018519,
+        "forward_looking_turn_rate": 0.425926,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 24,
+            "sentiment": -0.212464
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 21,
+            "sentiment": -0.129068
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.115231
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": 0.44076
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.00129
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.902258
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.043797
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.890586,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.919736,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.904594,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.930412,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.832123,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.916738,
+          "word_count": 127,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.892707,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.899355,
+          "word_count": 135,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.266233,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.910156,
+          "word_count": 66,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.917639,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.902258,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 12,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.384934,
+          "word_count": 84,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.907882,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.043797,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 15,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.008608,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 16,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.930984,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.27413,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91737,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.652704,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.662559,
+          "word_count": 121,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.414888,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.58153,
+          "word_count": 111,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.180626,
+          "word_count": 111,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.036693,
+          "word_count": 49,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.550851,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914185,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Needham & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.678639,
+          "word_count": 118,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.408086,
+          "word_count": 132,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.807922,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.701108,
+          "word_count": 138,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.288738,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Analyst at Needham & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.657361,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.821155,
+          "word_count": 76,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909107,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.869382,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.71077,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.778848,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914391,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Analyst at Bank of America Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.451415,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.538272,
+          "word_count": 117,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Analyst at Bank of America Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.464305,
+          "word_count": 61,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.797681,
+          "word_count": 120,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "President and CEO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.060435,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.411392,
+          "word_count": 68,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Analyst at Bank of America Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.051515,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917253,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.479147,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.279319,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.704567,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.654266,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914442,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "SVP and Interim CFO at Axcelis Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.808736,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890127,
+          "word_count": 854,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        }
+      ],
+      "transcript_word_count": 5540,
+      "transcript_text_redistributed": false
+    }
+  ],
   "methodology": {
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
     "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
     "topics": "deterministic keyword families",
-    "transcript_provider": "Not configured"
+    "transcript_provider": "Not configured",
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
   },
   "call_links": [
     {
@@ -195,7 +943,32 @@
       "ts": "2026-07-22T12:00:00+00:00",
       "source": "PR Newswire",
       "provider": "yfinance"
+    },
+    {
+      "title": "ACLS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/acls/transcripts/662782-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "ACLS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/acls/transcripts/558692-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "ACLS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/acls/transcripts/397258-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-17T00:00:00+00:00"
+    },
+    {
+      "title": "ACLS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-axcelis-technologies-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
-  "filing_fallback": []
+  "filing_fallback": [],
+  "updated_at_utc": "2026-08-15T14:03:13.361582+00:00"
 }

@@ -1,257 +1,1020 @@
 {
-  "schema_version": 2,
-  "generated_at_utc": "2026-08-15T13:16:11.411031+00:00",
-  "batch_index": 37,
-  "batch_size": 25,
+  "schema_version": 4,
+  "generated_at_utc": "2026-08-15T14:21:22.611980+00:00",
+  "batch_index": 5437,
+  "batch_size": 100,
   "source_policy": "free_public_only",
+  "search_order": [
+    "Stock Analysis / Quartr",
+    "MarketBeat",
+    "Yahoo/Motley Fool public",
+    "SEC EDGAR"
+  ],
   "results": [
     {
       "symbol": "MSFT",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
       "sec_evidence": 0,
-      "latest_source": ""
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
     },
     {
       "symbol": "NVDA",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
       "sec_evidence": 0,
-      "latest_source": ""
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
     },
     {
       "symbol": "AMZN",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 1,
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 5,
+      "broad_candidates": 4,
       "sec_evidence": 0,
-      "latest_source": ""
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
     },
     {
       "symbol": "GOOGL",
       "structured_calls": 0,
       "complete_calls": 0,
-      "call_links": 0,
+      "call_links": 3,
+      "broad_candidates": 3,
       "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
       "latest_source": ""
     },
     {
       "symbol": "META",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
       "sec_evidence": 0,
-      "latest_source": ""
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
     },
     {
       "symbol": "TSLA",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NEO",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NEOG",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NEU",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NFG",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NFLX",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NGVT",
-      "structured_calls": 1,
-      "complete_calls": 0,
-      "call_links": 1,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NHC",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NHI",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NI",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NIC",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NJR",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NKE",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NLY",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NMIH",
-      "structured_calls": 1,
-      "complete_calls": 0,
-      "call_links": 1,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NNN",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NOC",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NOG",
       "structured_calls": 1,
       "complete_calls": 1,
-      "call_links": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
       "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "A",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AA",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AAL",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AAMI",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AAON",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AAP",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AAT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ABBV",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ABCB",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 6,
+      "broad_candidates": 3,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ABG",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ABM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ABNB",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 5,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ABR",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ABT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 5,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACA",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 4,
+      "broad_candidates": 3,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ACAD",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACGL",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACHC",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACI",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACIW",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACLS",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ACMR",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 10,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search",
       "latest_source": "Motley Fool"
     },
     {
-      "symbol": "NOV",
+      "symbol": "ACN",
       "structured_calls": 0,
       "complete_calls": 0,
-      "call_links": 0,
+      "call_links": 9,
+      "broad_candidates": 4,
       "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
       "latest_source": ""
     },
     {
-      "symbol": "NOVT",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NOW",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NPK",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NPO",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NRG",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NSC",
-      "structured_calls": 0,
-      "complete_calls": 0,
-      "call_links": 0,
-      "sec_evidence": 0,
-      "latest_source": ""
-    },
-    {
-      "symbol": "NSIT",
+      "symbol": "ACT",
       "structured_calls": 1,
       "complete_calls": 1,
-      "call_links": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
       "sec_evidence": 0,
-      "latest_source": "Motley Fool"
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADAM",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 5,
+      "broad_candidates": 3,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ADBE",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 5,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ADC",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADEA",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADI",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 4,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ADIG",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 2,
+      "broad_candidates": 1,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ADM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADMA",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ADNT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADP",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADSK",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 5,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ADUS",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AEE",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AEIS",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AEO",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AEP",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AES",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 3,
+      "broad_candidates": 3,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AESI",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AFG",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 10,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AFL",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AGCO",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AGNT",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AGO",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AGX",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 4,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AGYS",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AHCO",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 10,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AHR",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AIG",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AIN",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 10,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AIR",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AIT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AIZ",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AJG",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AKAM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AKR",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 5,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALB",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALG",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALGM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALGN",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALGT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALHC",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALK",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ALKS",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALL",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALLE",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALLY",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALRM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALSN",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "ALV",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMAT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMCR",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMD",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AME",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 10,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMG",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 6,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AMGN",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 10,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMH",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMKR",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMN",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMP",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMPH",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMR",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMRX",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMSF",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "AMT",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 7,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AMTM",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
+    },
+    {
+      "symbol": "AN",
+      "structured_calls": 0,
+      "complete_calls": 0,
+      "call_links": 9,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad+public-search+sec",
+      "latest_source": ""
+    },
+    {
+      "symbol": "ANDE",
+      "structured_calls": 1,
+      "complete_calls": 1,
+      "call_links": 8,
+      "broad_candidates": 4,
+      "sec_evidence": 0,
+      "search_path": "broad",
+      "latest_source": "MarketBeat"
     }
-  ]
+  ],
+  "coverage": {
+    "company_count": 1506,
+    "complete_company_count": 92,
+    "complete_coverage_rate": 0.061089
+  }
 }

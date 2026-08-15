@@ -1,8 +1,1024 @@
 {
-  "schema_version": 3,
+  "schema_version": 8,
   "symbol": "AMH",
   "earnings_history": [],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-american-homes-4-rent-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 76,
+        "scored_turn_count": 76,
+        "overall_sentiment": 0.187382,
+        "prepared_sentiment": -0.270886,
+        "qa_sentiment": 0.281945,
+        "qa_tone_shift": 0.552831,
+        "uncertainty_turn_rate": 0.065789,
+        "forward_looking_turn_rate": 0.407895,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 29,
+            "sentiment": -0.157084
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 15,
+            "sentiment": -0.304255
+          },
+          {
+            "topic": "Demand",
+            "mentions": 15,
+            "sentiment": -0.086063
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 8,
+            "sentiment": 0.20674
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.258269
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.6254
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.830375
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909503,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "VP of Investor Relations at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.817109,
+          "word_count": 125,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "VP of Investor Relations at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.930304,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.21345,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.899382,
+          "word_count": 127,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.898061,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.920714,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.652867,
+          "word_count": 108,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.70818,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.83098,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.320888,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.902179,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.258635,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917934,
+          "word_count": 137,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Analyst at BMO Capital Markets",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.699204,
+          "word_count": 72,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.828388,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.710736,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912413,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Analyst at Wells Fargo",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.026333,
+          "word_count": 85,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.663012,
+          "word_count": 137,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.23741,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917067,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at Citi",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.846873,
+          "word_count": 110,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.499051,
+          "word_count": 135,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.551134,
+          "word_count": 113,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.921605,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Analyst at Mizuho Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.6698,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.545406,
+          "word_count": 134,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.08096,
+          "word_count": 146,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.028325,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912882,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Evercore ISI",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.708459,
+          "word_count": 69,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.148509,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912435,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Analyst at Bank of America",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.762617,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.474692,
+          "word_count": 141,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.087592,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 37,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.444228,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.599346,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914723,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Analyst at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.795169,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.496968,
+          "word_count": 114,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.745997,
+          "word_count": 110,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911623,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Analyst at Green Street Advisors",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.048856,
+          "word_count": 59,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 45,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.717032,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.483619,
+          "word_count": 124,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.261537,
+          "word_count": 24,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917061,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Analyst at Zelman & Associates",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.551584,
+          "word_count": 122,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.137683,
+          "word_count": 136,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.772009,
+          "word_count": 77,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918322,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.751579,
+          "word_count": 55,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.626489,
+          "word_count": 115,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.830375,
+          "word_count": 80,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91351,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Analyst at RBC Capital Markets",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.031289,
+          "word_count": 98,
+          "topic_hits": [
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.759382,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 59,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.866976,
+          "word_count": 42,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911487,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.732951,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 62,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.767555,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "CFO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.853622,
+          "word_count": 105,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 64,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.580198,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "COO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.023152,
+          "word_count": 73,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.921582,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Analyst at KBW",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.429207,
+          "word_count": 47,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.29929,
+          "word_count": 119,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.39958,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.919769,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Analyst at Zelman & Associates",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.109493,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.715921,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 73,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913386,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "CEO at AMH",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.570789,
+          "word_count": 23,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 75,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.821593,
+          "word_count": 1049,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        }
+      ],
+      "transcript_word_count": 7757,
+      "transcript_text_redistributed": false
+    }
+  ],
   "filing_fallback": [],
   "call_links": [
     {
@@ -39,6 +1055,35 @@
       "ts": "2026-07-10T20:15:00+00:00",
       "source": "PR Newswire",
       "provider": "yfinance"
+    },
+    {
+      "title": "AMH Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/amh/transcripts/662474-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-31T00:00:00+00:00"
+    },
+    {
+      "title": "AMH Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/amh/transcripts/562188-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "AMH Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/amh/transcripts/394277-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-20T00:00:00+00:00"
+    },
+    {
+      "title": "AMH Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-american-homes-4-rent-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
-  ]
+  ],
+  "methodology": {
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
+  },
+  "updated_at_utc": "2026-08-15T14:18:35.059011+00:00"
 }

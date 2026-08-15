@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 8,
   "symbol": "ABNB",
   "earnings_history": [
     {
@@ -152,7 +152,9 @@
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
     "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
     "topics": "deterministic keyword families",
-    "transcript_provider": "Not configured"
+    "transcript_provider": "Not configured",
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
   },
   "call_links": [
     {
@@ -161,7 +163,32 @@
       "ts": "2026-08-14T00:30:56+00:00",
       "source": "Motley Fool",
       "provider": "yfinance"
+    },
+    {
+      "title": "ABNB Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/abnb/transcripts/662687-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "ABNB Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/abnb/transcripts/556160-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "ABNB Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/abnb/transcripts/396495-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "ABNB Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-airbnb-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
-  "filing_fallback": []
+  "filing_fallback": [],
+  "updated_at_utc": "2026-08-15T14:00:48.938731+00:00"
 }

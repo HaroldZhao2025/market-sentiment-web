@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 8,
   "symbol": "A",
   "earnings_history": [
     {
@@ -153,13 +153,1435 @@
       "surprise_pct": 16.91
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-27T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-5-27-agilent-technologies-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 104,
+        "scored_turn_count": 104,
+        "overall_sentiment": 0.02583,
+        "prepared_sentiment": -0.419351,
+        "qa_sentiment": 0.242061,
+        "qa_tone_shift": 0.661412,
+        "uncertainty_turn_rate": 0.163462,
+        "forward_looking_turn_rate": 0.384615,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 37,
+            "sentiment": -0.190405
+          },
+          {
+            "topic": "Demand",
+            "mentions": 35,
+            "sentiment": -0.325457
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 25,
+            "sentiment": -0.272717
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 10,
+            "sentiment": 0.060811
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 8,
+            "sentiment": -0.448827
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 7,
+            "sentiment": -0.481441
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.797176
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906939,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "VP of Investor Relations at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.904254,
+          "word_count": 145,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "VP of Investor Relations at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.904898,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.93594,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.409149,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.853921,
+          "word_count": 138,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.89959,
+          "word_count": 149,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.820797,
+          "word_count": 150,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.915885,
+          "word_count": 131,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.562141,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.716787,
+          "word_count": 136,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.702931,
+          "word_count": 135,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.869508,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.909686,
+          "word_count": 142,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.872794,
+          "word_count": 144,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.765244,
+          "word_count": 144,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.891361,
+          "word_count": 144,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.822938,
+          "word_count": 133,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.883796,
+          "word_count": 144,
+          "topic_hits": [
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.093316,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.675989,
+          "word_count": 106,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 21,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.90434,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 22,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.917592,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.921138,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.737959,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 25,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.449298,
+          "word_count": 127,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 26,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.891121,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.847465,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 28,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.039516,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 29,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.072996,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906706,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.883838,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 32,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.601665,
+          "word_count": 44,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "VP of Investor Relations at Agilent Technologies",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.886036,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911328,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Senior Managing Director at Evercore",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.612809,
+          "word_count": 107,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.765816,
+          "word_count": 140,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.134565,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.904304,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Senior Managing Director at Evercore",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.185418,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.531136,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.029184,
+          "word_count": 153,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906139,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Patrick Donnelly",
+          "role": "Managing Director and Senior Equity Research Analyst at Citi",
+          "section": "qa",
+          "sentiment": 0.722453,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.685789,
+          "word_count": 99,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Simon May",
+          "role": "President of the Life Sciences and Diagnostics Markets Group at Agilent Technologies",
+          "section": "qa",
+          "sentiment": -0.841708,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Simon May",
+          "role": "President of the Life Sciences and Diagnostics Markets Group at Agilent Technologies",
+          "section": "qa",
+          "sentiment": 0.637892,
+          "word_count": 37,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Patrick Donnelly",
+          "role": "Managing Director and Senior Equity Research Analyst at Citi",
+          "section": "qa",
+          "sentiment": 0.699219,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.450042,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.601182,
+          "word_count": 103,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905838,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Tycho Peterson",
+          "role": "Managing Director and Senior Equity Research Analyst at Jefferies",
+          "section": "qa",
+          "sentiment": 0.777008,
+          "word_count": 87,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.45597,
+          "word_count": 135,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.778245,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Tycho Peterson",
+          "role": "Managing Director and Senior Equity Research Analyst at Jefferies",
+          "section": "qa",
+          "sentiment": 0.804513,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.095668,
+          "word_count": 101,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Tycho Peterson",
+          "role": "Managing Director and Senior Equity Research Analyst at Jefferies",
+          "section": "qa",
+          "sentiment": 0.778812,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898223,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Puneet Souda",
+          "role": "Senior Managing Director and Senior Research Analyst at Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.068671,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.658411,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 60,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.901518,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 61,
+          "speaker": "Puneet Souda",
+          "role": "Senior Managing Director and Senior Research Analyst at Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.517072,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.227039,
+          "word_count": 134,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.311322,
+          "word_count": 129,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.899721,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 65,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899293,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Dan Brennan",
+          "role": "Managing Director and Senior Equity Research Analyst at TD Cowen",
+          "section": "qa",
+          "sentiment": 0.764485,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.121809,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 68,
+          "speaker": "Simon May",
+          "role": "President of the Life Sciences and Diagnostics Markets Group at Agilent Technologies",
+          "section": "qa",
+          "sentiment": -0.807307,
+          "word_count": 142,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Simon May",
+          "role": "President of the Life Sciences and Diagnostics Markets Group at Agilent Technologies",
+          "section": "qa",
+          "sentiment": 0.01431,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Dan Brennan",
+          "role": "Managing Director and Senior Equity Research Analyst at TD Cowen",
+          "section": "qa",
+          "sentiment": 0.833786,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.007097,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 72,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.73333,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 73,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.750067,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.301176,
+          "word_count": 54,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.869107,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Michael Ryskin",
+          "role": "Managing Director and Senior Equity Research Analyst at Bank of America",
+          "section": "qa",
+          "sentiment": 0.247437,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.124409,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 78,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.651091,
+          "word_count": 120,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 79,
+          "speaker": "Michael Ryskin",
+          "role": "Managing Director and Senior Equity Research Analyst at Bank of America",
+          "section": "qa",
+          "sentiment": 0.718825,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.062242,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 81,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901308,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 82,
+          "speaker": "Dan Leonard",
+          "role": "Managing Director and Senior Equity Research Analyst at RBC",
+          "section": "qa",
+          "sentiment": 0.728925,
+          "word_count": 70,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 83,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.781711,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 84,
+          "speaker": "Mike Zhang",
+          "role": "President of the Applied Markets Group at Agilent Technologies",
+          "section": "qa",
+          "sentiment": -0.214652,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 85,
+          "speaker": "Mike Zhang",
+          "role": "President of the Applied Markets Group at Agilent Technologies",
+          "section": "qa",
+          "sentiment": -0.423682,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 86,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882311,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 87,
+          "speaker": "Director of Healthcare Equity Research at Barclays",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.586015,
+          "word_count": 100,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 88,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.76386,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 89,
+          "speaker": "CFO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.571243,
+          "word_count": 82,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 90,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91051,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 91,
+          "speaker": "Analyst at Baird",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.846924,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 92,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.063213,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 93,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.848431,
+          "word_count": 75,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 94,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910526,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 95,
+          "speaker": "VP of Equity Research at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.804346,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 96,
+          "speaker": "VP of Equity Research at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.869682,
+          "word_count": 98,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 97,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.741322,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 98,
+          "speaker": "Mike Zhang",
+          "role": "President of the Applied Markets Group at Agilent Technologies",
+          "section": "qa",
+          "sentiment": -0.83597,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 99,
+          "speaker": "CEO at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.664645,
+          "word_count": 86,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 100,
+          "speaker": "VP of Equity Research at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.467564,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 101,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918179,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 102,
+          "speaker": "VP of Investor Relations at Agilent Technologies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.133902,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 103,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.21248,
+          "word_count": 1012,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 10619,
+      "transcript_text_redistributed": false
+    }
+  ],
   "methodology": {
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
     "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
     "topics": "deterministic keyword families",
-    "transcript_provider": "Not configured"
+    "transcript_provider": "Not configured",
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
   },
-  "call_links": [],
-  "filing_fallback": []
+  "call_links": [
+    {
+      "title": "A Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/a/transcripts/568912-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-27T00:00:00+00:00"
+    },
+    {
+      "title": "A Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/a/transcripts/422732-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "A Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/a/transcripts/379474-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-11-24T00:00:00+00:00"
+    },
+    {
+      "title": "A Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-5-27-agilent-technologies-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-05-27T00:00:00+00:00"
+    }
+  ],
+  "filing_fallback": [],
+  "updated_at_utc": "2026-08-15T13:57:37.285628+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 8,
   "symbol": "ABCB",
   "earnings_history": [
     {
@@ -158,7 +158,9 @@
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
     "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
     "topics": "deterministic keyword families",
-    "transcript_provider": "Not configured"
+    "transcript_provider": "Not configured",
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
   },
   "call_links": [
     {
@@ -181,7 +183,26 @@
       "ts": "2026-07-24T12:30:00+00:00",
       "source": "Moby",
       "provider": "yfinance"
+    },
+    {
+      "title": "ABCB Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/abcb/transcripts/654392-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-24T00:00:00+00:00"
+    },
+    {
+      "title": "ABCB Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/abcb/transcripts/549250-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-24T00:00:00+00:00"
+    },
+    {
+      "title": "ABCB Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/abcb/transcripts/393550-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-30T00:00:00+00:00"
     }
   ],
-  "filing_fallback": []
+  "filing_fallback": [],
+  "updated_at_utc": "2026-08-15T13:59:54.237741+00:00"
 }

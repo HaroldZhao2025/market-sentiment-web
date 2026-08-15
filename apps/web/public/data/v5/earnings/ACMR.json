@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 8,
   "symbol": "ACMR",
   "earnings_history": [
     {
@@ -153,12 +153,716 @@
       "surprise_pct": 24.14
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-14T13:14:21+00:00",
+      "source": "Motley Fool",
+      "source_url": "https://finance.yahoo.com/m/dd8c275b-6df3-3f4c-bbe1-d77e06401981/acm-research-%28acmr%29-q2-2026.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 58,
+        "scored_turn_count": 58,
+        "overall_sentiment": 0.475051,
+        "prepared_sentiment": 0.216921,
+        "qa_sentiment": 0.494171,
+        "qa_tone_shift": 0.27725,
+        "uncertainty_turn_rate": 0.051724,
+        "forward_looking_turn_rate": 0.172414,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 20,
+            "sentiment": 0.281686
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": 0.187245
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.30603
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 6,
+            "sentiment": -0.055404
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.036922
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "section": "prepared",
+          "sentiment": 0.901193,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Steven C. Pelayo",
+          "section": "prepared",
+          "sentiment": 0.919927,
+          "word_count": 288,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "David Wang",
+          "section": "prepared",
+          "sentiment": -0.891815,
+          "word_count": 1850,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 3,
+          "speaker": "Mark McKechnie",
+          "section": "prepared",
+          "sentiment": -0.061621,
+          "word_count": 575,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.882217,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Sujeeva De Silva",
+          "section": "qa",
+          "sentiment": 0.491236,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.390635,
+          "word_count": 126,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Sujeeva De Silva",
+          "section": "qa",
+          "sentiment": 0.763825,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": -0.14084,
+          "word_count": 144,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Sujeeva De Silva",
+          "section": "qa",
+          "sentiment": 0.503924,
+          "word_count": 80,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": -0.131424,
+          "word_count": 296,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Sujeeva De Silva",
+          "section": "qa",
+          "sentiment": -0.817715,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.912205,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Yu Shi",
+          "section": "qa",
+          "sentiment": 0.682161,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": -0.41395,
+          "word_count": 177,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "Yu Shi",
+          "section": "qa",
+          "sentiment": 0.422789,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 16,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": 0.504112,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.907683,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": -0.199797,
+          "word_count": 52,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.425006,
+          "word_count": 131,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.817964,
+          "word_count": 70,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": 0.832321,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.866823,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.776711,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": 0.874938,
+          "word_count": 35,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.848609,
+          "word_count": 343,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.561128,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": -0.065984,
+          "word_count": 133,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.627857,
+          "word_count": 63,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.389351,
+          "word_count": 107,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.908312,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Unknown Analyst",
+          "section": "qa",
+          "sentiment": 0.84611,
+          "word_count": 57,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.614959,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.408605,
+          "word_count": 116,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": -0.856205,
+          "word_count": 59,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": -0.233439,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Unknown Analyst",
+          "section": "qa",
+          "sentiment": 0.888709,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.888473,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.860579,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.795748,
+          "word_count": 44,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.489312,
+          "word_count": 119,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": 0.671794,
+          "word_count": 71,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": -0.430058,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.773943,
+          "word_count": 45,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.548132,
+          "word_count": 84,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.419056,
+          "word_count": 38,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.760484,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Jimmy Huang",
+          "section": "qa",
+          "sentiment": 0.893011,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": 0.665652,
+          "word_count": 68,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.868481,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Unknown Analyst",
+          "section": "qa",
+          "sentiment": 0.579319,
+          "word_count": 31,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": 0.380455,
+          "word_count": 57,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "David Wang",
+          "section": "qa",
+          "sentiment": 0.497653,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Unknown Analyst",
+          "section": "qa",
+          "sentiment": 0.761932,
+          "word_count": 45,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Mark McKechnie",
+          "section": "qa",
+          "sentiment": -0.589544,
+          "word_count": 93,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.890188,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Steven C. Pelayo",
+          "section": "qa",
+          "sentiment": 0.923458,
+          "word_count": 118,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.748347,
+          "word_count": 188,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6773,
+      "transcript_text_redistributed": false
+    }
+  ],
   "methodology": {
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
     "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
     "topics": "deterministic keyword families",
-    "transcript_provider": "Not configured"
+    "transcript_provider": "Not configured",
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
   },
   "call_links": [
     {
@@ -195,7 +899,38 @@
       "ts": "2026-08-07T14:04:28+00:00",
       "source": "MarketBeat",
       "provider": "yfinance"
+    },
+    {
+      "title": "ACMR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/acmr/transcripts/662101-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-07T00:00:00+00:00"
+    },
+    {
+      "title": "ACMR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/acmr/transcripts/571607-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "ACMR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/acmr/transcripts/400230-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "ACMR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-7-acm-research-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-07T00:00:00+00:00"
+    },
+    {
+      "title": "ACM Research (ACMR) Q2 2026 Earnings Call Transcript",
+      "url": "https://finance.yahoo.com/m/dd8c275b-6df3-3f4c-bbe1-d77e06401981/acm-research-%28acmr%29-q2-2026.html",
+      "source": "Motley Fool",
+      "ts": "2026-08-14T13:14:21+00:00"
     }
   ],
-  "filing_fallback": []
+  "filing_fallback": [],
+  "updated_at_utc": "2026-08-15T14:03:52.506832+00:00"
 }
