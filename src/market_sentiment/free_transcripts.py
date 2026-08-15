@@ -19,6 +19,12 @@ ALLOWED_PUBLIC_HOSTS = ("fool.com", "finance.yahoo.com", "sixcolors.com")
 VERIFIED_PUBLIC_TRANSCRIPTS: dict[str, tuple[tuple[str, str, str, str], ...]] = {
     "AAPL": (
         (
+            "https://finance.yahoo.com/markets/stocks/articles/apple-aapl-q2-2026-earnings-225423168.html",
+            "Apple AAPL Q2 2026 Earnings Call Transcript",
+            "Yahoo Finance / Motley Fool Transcribing",
+            "2026-04-30T00:00:00+00:00",
+        ),
+        (
             "https://www.fool.com/earnings/call-transcripts/2026/04/30/apple-aapl-q2-2026-earnings-call-transcript/",
             "Apple (AAPL) Q2 2026 Earnings Call Transcript",
             "Motley Fool",
@@ -221,6 +227,25 @@ def _speaker_from_block(block: str) -> tuple[str, str] | None:
     return speaker, text
 
 
+def _starts_qa(block: str, speaker: str = "", text: str = "") -> bool:
+    haystack = f" {block.lower()} {speaker.lower()} {text.lower()} "
+    explicit = (
+        " questions & answers ",
+        " question-and-answer ",
+        " questions and answers ",
+        " we will now open the call for questions ",
+        " we'll now open the call for questions ",
+        " take questions ",
+        " first question ",
+        " our first question ",
+    )
+    if any(marker in haystack for marker in explicit):
+        return True
+    if speaker.lower() == "operator" and "question" in text.lower():
+        return True
+    return False
+
+
 def extract_public_transcript(candidate: TranscriptCandidate) -> dict[str, Any] | None:
     if not _allowed(candidate.url):
         return None
@@ -246,20 +271,21 @@ def extract_public_transcript(candidate: TranscriptCandidate) -> dict[str, Any] 
         pending_text = []
 
     for block in blocks:
-        lower = f" {block.lower()} "
-        if " questions & answers " in lower or " question-and-answer " in lower or lower.strip() in {"q&a", "questions and answers"}:
+        if _starts_qa(block):
             flush()
             qa_started = True
-            continue
         parsed = _speaker_from_block(block)
         if parsed:
             speaker, text = parsed
             flush()
-            if speaker.lower() == "operator" and "question" in text.lower():
+            if _starts_qa(block, speaker, text):
                 qa_started = True
             pending_speaker = speaker
             pending_text = [text]
         elif pending_speaker and len(block.split()) >= 4:
+            if _starts_qa(block):
+                flush()
+                qa_started = True
             pending_text.append(block)
     flush()
     if len(turns) < 4:
@@ -296,22 +322,28 @@ def score_public_transcript(parsed: dict[str, Any], model: FinBERT | None = None
     return {"quarter": None, "date": candidate.published or None, "source": candidate.source, "source_url": candidate.url, "source_type": "free_public_transcript", "summary": summary, "turns": safe_turns, "transcript_word_count": int(parsed.get("word_count") or 0), "transcript_text_redistributed": False}
 
 
+def _complete_call(call: dict[str, Any]) -> bool:
+    summary = call.get("summary") if isinstance(call.get("summary"), dict) else {}
+    return all(summary.get(key) is not None for key in ("overall_sentiment", "prepared_sentiment", "qa_sentiment", "qa_tone_shift"))
+
+
 def fulfill_public_transcript(symbol: str, company_name: str = "", news_rows: list[dict[str, Any]] | None = None, model: FinBERT | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     candidates = discover_transcripts(symbol, company_name, news_rows or [])
-    calls: list[dict[str, Any]] = []
     evidence: list[dict[str, Any]] = []
+    fallback_calls: list[dict[str, Any]] = []
     seen_sources: set[str] = set()
     for candidate in candidates:
         evidence.append({"title": candidate.title, "url": candidate.url, "source": candidate.source, "ts": candidate.published})
         if candidate.url in seen_sources:
             continue
+        seen_sources.add(candidate.url)
         parsed = extract_public_transcript(candidate)
         if parsed is None:
             continue
         call = score_public_transcript(parsed, model=model)
         if not call:
             continue
-        seen_sources.add(candidate.url)
-        calls.append(call)
-        break
-    return calls, evidence[:12]
+        if _complete_call(call):
+            return [call], evidence[:12]
+        fallback_calls.append(call)
+    return fallback_calls[:1], evidence[:12]
