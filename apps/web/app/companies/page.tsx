@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 export const metadata = { title: "Companies" };
 
 type UniverseFile = { generated_at_utc?: string; companies?: CompanyRowV2[] };
-type CoverageRow = {
+type EarningsCoverageRow = {
   ticker?: string;
   status?: "complete" | "partial" | "link_only" | "no_structured_call";
   complete_calls?: number;
@@ -15,11 +15,20 @@ type CoverageRow = {
   call_links?: number;
   source?: string;
 };
-type CoverageFile = {
+type EarningsCoverageFile = {
   generated_at_utc?: string;
   complete_company_count?: number;
   complete_coverage_rate?: number;
-  companies?: CoverageRow[];
+  companies?: EarningsCoverageRow[];
+};
+type CompanyDataCoverageFile = {
+  generated_at_utc?: string;
+  company_count?: number;
+  news_ready_count?: number;
+  history_ready_count?: number;
+  attempted_count?: number;
+  news_coverage_rate?: number;
+  history_coverage_rate?: number;
 };
 
 function readJson<T>(relativePath: string): T | null {
@@ -36,17 +45,27 @@ function loadUniverse(): UniverseFile {
   return parsed && typeof parsed === "object" ? parsed : {};
 }
 
-function loadCoverage(): CoverageFile {
-  const parsed = readJson<CoverageFile>("earnings_coverage.json");
+function loadEarningsCoverage(): EarningsCoverageFile {
+  const parsed = readJson<EarningsCoverageFile>("earnings_coverage.json");
   return parsed && typeof parsed === "object" ? parsed : {};
+}
+
+function loadCompanyDataCoverage(): CompanyDataCoverageFile {
+  const parsed = readJson<CompanyDataCoverageFile>("company_data_coverage.json");
+  return parsed && typeof parsed === "object" ? parsed : {};
+}
+
+function pct(value: number | undefined) {
+  return Number.isFinite(value) ? `${((value as number) * 100).toFixed(1)}%` : "—";
 }
 
 export default function CompaniesPage() {
   const data = loadUniverse();
-  const coverage = loadCoverage();
+  const earningsCoverage = loadEarningsCoverage();
+  const companyCoverage = loadCompanyDataCoverage();
   const baseRows = Array.isArray(data.companies) ? data.companies : [];
   const coverageMap = new Map(
-    (Array.isArray(coverage.companies) ? coverage.companies : [])
+    (Array.isArray(earningsCoverage.companies) ? earningsCoverage.companies : [])
       .filter((row) => row?.ticker)
       .map((row) => [String(row.ticker).toUpperCase(), row] as const),
   );
@@ -67,6 +86,9 @@ export default function CompaniesPage() {
   const smallcap = rows.filter((row) => row.universe === "S&P SmallCap 600").length;
   const completeCalls = rows.filter((row) => row.call_status === "complete").length;
   const callCoverage = rows.length ? completeCalls / rows.length : 0;
+  const newsReady = Number(companyCoverage.news_ready_count || 0);
+  const historyReady = Number(companyCoverage.history_ready_count || 0);
+  const attempted = Number(companyCoverage.attempted_count || 0);
 
   return (
     <main className="space-y-7">
@@ -74,7 +96,7 @@ export default function CompaniesPage() {
         <div className="eyebrow">U.S. company universe</div>
         <h1 className="page-title mt-2">Companies</h1>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">
-          Search large, mid and small-cap names in one market view. S&amp;P 500 index calculations remain separate.
+          Search large, mid and small-cap names with company news, price history and earnings-call availability. S&amp;P 500 index calculations remain separate.
         </p>
       </section>
 
@@ -82,22 +104,16 @@ export default function CompaniesPage() {
 
       {rows.length ? (
         <>
-          <section className="grid gap-3 md:grid-cols-2">
-            <div className="kpi">
-              <div className="kpi-label">Complete earnings calls</div>
-              <div className="kpi-value text-white">{completeCalls.toLocaleString()}</div>
-              <div className="kpi-sub">Structured call analytics available</div>
-            </div>
-            <div className="kpi">
-              <div className="kpi-label">Call coverage</div>
-              <div className="kpi-value text-emerald-300">{(callCoverage * 100).toFixed(1)}%</div>
-              <div className="kpi-sub">Of the current company universe</div>
-            </div>
+          <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="kpi"><div className="kpi-label">News ready</div><div className="kpi-value text-white">{newsReady.toLocaleString()}</div><div className="kpi-sub">{pct(companyCoverage.news_coverage_rate)} of companies</div></div>
+            <div className="kpi"><div className="kpi-label">Price history ready</div><div className="kpi-value text-white">{historyReady.toLocaleString()}</div><div className="kpi-sub">{pct(companyCoverage.history_coverage_rate)} of companies</div></div>
+            <div className="kpi"><div className="kpi-label">Structured calls</div><div className="kpi-value text-white">{completeCalls.toLocaleString()}</div><div className="kpi-sub">{(callCoverage * 100).toFixed(1)}% complete-call coverage</div></div>
+            <div className="kpi"><div className="kpi-label">Company data searched</div><div className="kpi-value text-emerald-300">{attempted.toLocaleString()}</div><div className="kpi-sub">{rows.length ? `${Math.min(100, (attempted / rows.length) * 100).toFixed(1)}% attempted` : "—"}</div></div>
           </section>
           <CompaniesClientV2
             rows={rows}
             generatedAt={data.generated_at_utc ?? null}
-            coverageGeneratedAt={coverage.generated_at_utc ?? null}
+            coverageGeneratedAt={earningsCoverage.generated_at_utc ?? companyCoverage.generated_at_utc ?? null}
           />
         </>
       ) : (
