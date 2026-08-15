@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "symbol": "LGIH",
   "earnings_history": [
     {
@@ -153,15 +153,666 @@
       "surprise_pct": 13.64
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-04T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-4-lgi-homes-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 46,
+        "scored_turn_count": 46,
+        "overall_sentiment": 0.174236,
+        "prepared_sentiment": -0.148394,
+        "qa_sentiment": 0.363364,
+        "qa_tone_shift": 0.511758,
+        "uncertainty_turn_rate": 0.195652,
+        "forward_looking_turn_rate": 0.369565,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 15,
+            "sentiment": -0.016689
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": -0.227206
+          },
+          {
+            "topic": "Demand",
+            "mentions": 13,
+            "sentiment": 0.005829
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.885269
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.299847
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.901388,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Josh Fattor",
+          "role": "EVP of Finance and Capital Markets at LGI Homes",
+          "section": "prepared",
+          "sentiment": 0.875902,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Josh Fattor",
+          "role": "EVP of Finance and Capital Markets at LGI Homes",
+          "section": "prepared",
+          "sentiment": 0.907107,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.923375,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.891103,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.517785,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.820487,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.774635,
+          "word_count": 138,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": 0.0191,
+          "word_count": 133,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "CFO and Treasurer at LGI Homes",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.224979,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "CFO and Treasurer at LGI Homes",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.741484,
+          "word_count": 130,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "CFO and Treasurer at LGI Homes",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.021379,
+          "word_count": 144,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "CFO and Treasurer at LGI Homes",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.925286,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "CFO and Treasurer at LGI Homes",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.827951,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Josh Fattor",
+          "role": "EVP of Finance and Capital Markets at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.299847,
+          "word_count": 143,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.889347,
+          "word_count": 137,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "prepared",
+          "sentiment": -0.875004,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": -0.913724,
+          "word_count": 112,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917041,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.165958,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 20,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": -0.097235,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": -0.369639,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.691661,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": 0.556735,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.63574,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": 0.695607,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.921132,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Texas Capital Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.757707,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Analyst at Texas Capital Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.880473,
+          "word_count": 55,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": 0.23748,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": 0.885577,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Texas Capital Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.058773,
+          "word_count": 41,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": -0.140573,
+          "word_count": 45,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Analyst at Texas Capital Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.757168,
+          "word_count": 47,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "CFO and Treasurer at LGI Homes",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885917,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909251,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Analyst at Citizens Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.558284,
+          "word_count": 76,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": 0.755364,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at Citizens Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.664316,
+          "word_count": 86,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": 0.765229,
+          "word_count": 117,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": -0.556111,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Analyst at Citizens Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.862239,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": 0.784457,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891092,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Eric Lipar",
+          "role": "CEO and Chairman of the Board at LGI Homes",
+          "section": "qa",
+          "sentiment": -0.720738,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885269,
+          "word_count": 914,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 4726,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "LGIH Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/lgih/transcripts/656233-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "LGIH Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/lgih/transcripts/558604-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "LGIH Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/lgih/transcripts/394281-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-17T00:00:00+00:00"
+    },
+    {
+      "title": "LGIH Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-lgi-homes-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-04T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
     "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
-  "updated_at_utc": "2026-08-15T07:57:53.773910+00:00"
+  "updated_at_utc": "2026-08-15T17:13:27.028135+00:00"
 }

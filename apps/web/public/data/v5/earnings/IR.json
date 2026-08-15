@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "symbol": "IR",
   "earnings_history": [
     {
@@ -153,15 +153,1447 @@
       "surprise_pct": 31.14
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-ingersoll-rand-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 110,
+        "scored_turn_count": 110,
+        "overall_sentiment": 0.330832,
+        "prepared_sentiment": -0.406433,
+        "qa_sentiment": 0.515148,
+        "qa_tone_shift": 0.921581,
+        "uncertainty_turn_rate": 0.054545,
+        "forward_looking_turn_rate": 0.245455,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 26,
+            "sentiment": -0.134688
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 25,
+            "sentiment": -0.046033
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 24,
+            "sentiment": 0.04518
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": -0.663773
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.869038
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.804543
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.799234
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.916077,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Director of Investor Relations at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.907367,
+          "word_count": 149,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Director of Investor Relations at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.915614,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.878638,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.904342,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.058549,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.885732,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.634112,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.612053,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.002764,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.930041,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.902757,
+          "word_count": 106,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.026226,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.290747,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.827733,
+          "word_count": 123,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.846759,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.903176,
+          "word_count": 129,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.413496,
+          "word_count": 119,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.799234,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 19,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.804543,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 20,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.891408,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.655297,
+          "word_count": 86,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907743,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Analyst at Baird",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.441584,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Analyst at Baird",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.694688,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.626361,
+          "word_count": 140,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.210178,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.598462,
+          "word_count": 66,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Analyst at Baird",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.672217,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.496963,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Analyst at Baird",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.551933,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898865,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Analyst at Vertical Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.684773,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Analyst at Vertical Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.831282,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.395188,
+          "word_count": 130,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Analyst at Vertical Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.43874,
+          "word_count": 49,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.669002,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 37,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.834814,
+          "word_count": 16,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at Vertical Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.834763,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901855,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.649039,
+          "word_count": 109,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88837,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.793515,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.654067,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.360864,
+          "word_count": 73,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.564612,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897605,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Analyst at Melius Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.377529,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.2997,
+          "word_count": 130,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.858752,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902318,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Analyst at Stifel",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.782891,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.727292,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Analyst at Stifel",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.853506,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.526099,
+          "word_count": 89,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Analyst at Stifel",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.817685,
+          "word_count": 99,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.812901,
+          "word_count": 139,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.03144,
+          "word_count": 81,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Analyst at Stifel",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.770648,
+          "word_count": 12,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872295,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Analyst at Stifel",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.801808,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89832,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Analyst at Citigroup",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.782891,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Analyst at Citigroup",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.472321,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.851618,
+          "word_count": 70,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.249413,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Analyst at Citigroup",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.613948,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.369387,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Analyst at Citigroup",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.596105,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894974,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.605262,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.578472,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 72,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.071612,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 73,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.345754,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 74,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.800022,
+          "word_count": 67,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.505146,
+          "word_count": 78,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.690099,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905828,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "Analyst at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.753919,
+          "word_count": 108,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.455504,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 80,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.76621,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 81,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.8552,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 82,
+          "speaker": "Analyst at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.377078,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 83,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.462335,
+          "word_count": 137,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 84,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882165,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 85,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.771351,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 86,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.850773,
+          "word_count": 115,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 87,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.573013,
+          "word_count": 132,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 88,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.516443,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 89,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.75392,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 90,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.866699,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 91,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.662076,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 92,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89996,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 93,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.573785,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 94,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.768918,
+          "word_count": 54,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 95,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.413933,
+          "word_count": 127,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 96,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.694707,
+          "word_count": 39,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 97,
+          "speaker": "CFO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.83227,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 98,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.729571,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 99,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907723,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 100,
+          "speaker": "Analyst at BNP Paribas",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.726019,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 101,
+          "speaker": "Analyst at BNP Paribas",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.847731,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 102,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.832721,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 103,
+          "speaker": "Analyst at BNP Paribas",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.859611,
+          "word_count": 109,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 104,
+          "speaker": "Analyst at BNP Paribas",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.806617,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 105,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.707508,
+          "word_count": 147,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 106,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.011742,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 107,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909661,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 108,
+          "speaker": "Chairman and CEO at Ingersoll Rand",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.686301,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 109,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878465,
+          "word_count": 961,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 8842,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "IR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ir/transcripts/656824-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-31T00:00:00+00:00"
+    },
+    {
+      "title": "IR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ir/transcripts/556729-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "IR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ir/transcripts/397660-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-13T00:00:00+00:00"
+    },
+    {
+      "title": "IR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-ingersoll-rand-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
     "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
-  "updated_at_utc": "2026-08-15T04:08:32.691004+00:00"
+  "updated_at_utc": "2026-08-15T17:02:13.800062+00:00"
 }

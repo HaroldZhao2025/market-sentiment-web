@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "symbol": "JBLU",
   "earnings_history": [
     {
@@ -153,15 +153,1419 @@
       "surprise_pct": 10.21
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-28T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-28-jetblue-airways-co-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 104,
+        "scored_turn_count": 104,
+        "overall_sentiment": 0.162865,
+        "prepared_sentiment": -0.603062,
+        "qa_sentiment": 0.418174,
+        "qa_tone_shift": 1.021236,
+        "uncertainty_turn_rate": 0.086538,
+        "forward_looking_turn_rate": 0.307692,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 37,
+            "sentiment": -0.083118
+          },
+          {
+            "topic": "Demand",
+            "mentions": 29,
+            "sentiment": -0.355615
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 27,
+            "sentiment": -0.25181
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 10,
+            "sentiment": -0.242714
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 9,
+            "sentiment": -0.069907
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.436344
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.878665,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Director of Investor Relations at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.907877,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Director of Investor Relations at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.922738,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.816094,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.893778,
+          "word_count": 140,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.920811,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.928892,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 7,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.938134,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.899649,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.736305,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.934071,
+          "word_count": 131,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.916236,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.869857,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.829294,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.653033,
+          "word_count": 142,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.894743,
+          "word_count": 113,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 16,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.414567,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 17,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.005452,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.814031,
+          "word_count": 110,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.933256,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.928622,
+          "word_count": 124,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 21,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.690922,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 22,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.89062,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 23,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.8106,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 24,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.927192,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.74273,
+          "word_count": 97,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907265,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.815099,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.133384,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.370116,
+          "word_count": 107,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.760607,
+          "word_count": 92,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.880229,
+          "word_count": 76,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Analyst at Deutsche Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.257498,
+          "word_count": 87,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.6107,
+          "word_count": 85,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907563,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Analyst at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.79481,
+          "word_count": 109,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.481553,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.729619,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.707518,
+          "word_count": 103,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.320816,
+          "word_count": 130,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.732039,
+          "word_count": 94,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.773107,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902358,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Analyst at Citigroup",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.797872,
+          "word_count": 112,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.482031,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.533394,
+          "word_count": 104,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Analyst at Citigroup",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.725618,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.019975,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.464524,
+          "word_count": 138,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902942,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at Barclays",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.799174,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.035068,
+          "word_count": 151,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.70065,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.545793,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Analyst at Barclays",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.242088,
+          "word_count": 43,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.522989,
+          "word_count": 63,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908504,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Analyst at Evercore",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.859864,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.788041,
+          "word_count": 118,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Analyst at Evercore",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.746928,
+          "word_count": 78,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.633815,
+          "word_count": 151,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.702558,
+          "word_count": 94,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90344,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.836736,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.685625,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.488396,
+          "word_count": 146,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.823315,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "CEO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.729986,
+          "word_count": 92,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 68,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.793626,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.47664,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904854,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.600442,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 72,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.176682,
+          "word_count": 137,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 73,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.69038,
+          "word_count": 92,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.849833,
+          "word_count": 111,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913126,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Analyst at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.75942,
+          "word_count": 81,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.825361,
+          "word_count": 127,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.046768,
+          "word_count": 134,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902052,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "Analyst at TD Cowen",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.819449,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 81,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.82073,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 82,
+          "speaker": "Analyst at TD Cowen",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.300339,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 83,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.740745,
+          "word_count": 148,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 84,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.443498,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 85,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.922637,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 86,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913702,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 87,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.57101,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 88,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.458866,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 89,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.554476,
+          "word_count": 110,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 90,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.404227,
+          "word_count": 69,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 91,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870898,
+          "word_count": 41,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 92,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.746255,
+          "word_count": 51,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 93,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.812245,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 94,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909248,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 95,
+          "speaker": "Analyst at Bank of America",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.777523,
+          "word_count": 83,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 96,
+          "speaker": "CFO at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.792722,
+          "word_count": 86,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 97,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914377,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 98,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.674645,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 99,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.339407,
+          "word_count": 146,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 100,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.796102,
+          "word_count": 37,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 101,
+          "speaker": "President at JetBlue Airways",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.583072,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 102,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.487447,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 103,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.501015,
+          "word_count": 976,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        }
+      ],
+      "transcript_word_count": 10407,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "JBLU Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/jblu/transcripts/656107-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "JBLU Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/jblu/transcripts/547070-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "JBLU Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/jblu/transcripts/403547-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-27T00:00:00+00:00"
+    },
+    {
+      "title": "JBLU Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-jetblue-airways-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
     "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
-  "updated_at_utc": "2026-08-15T05:57:38.390019+00:00"
+  "updated_at_utc": "2026-08-15T17:04:03.961050+00:00"
 }
