@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import math
+import os
+import time
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
@@ -14,7 +16,7 @@ import yfinance as yf
 from bs4 import BeautifulSoup
 
 from market_sentiment.cli.build_v5_market import atomic_json, close_series, finite, load_json
-from market_sentiment.v5_news import PUBLIC_UA, canonical_url, collect_company_news, deduplicate_news, normalize_title
+from market_sentiment.v5_news import PUBLIC_UA, collect_company_news, deduplicate_news
 from market_sentiment.v6_news import ReusableNewsScorer
 
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
@@ -75,12 +77,94 @@ def google_news_window(ticker: str, company_name: str, start: pd.Timestamp, end:
     return out
 
 
+def _finnhub_tokens() -> list[str]:
+    raw = os.environ.get("FINNHUB_TOKENS", "").strip()
+    tokens = [token.strip() for token in raw.split(",") if token.strip()]
+    for name in ("FINNHUB_TOKEN", "FINNHUB_TOKEN_2"):
+        value = os.environ.get(name, "").strip()
+        if value and value not in tokens:
+            tokens.append(value)
+    return tokens
+
+
+def collect_finnhub_history(companies: list[dict[str, Any]], days: int) -> dict[str, list[dict[str, Any]]]:
+    """Backfill company news over a long date range when Finnhub credentials are configured."""
+    tokens = _finnhub_tokens()
+    if not tokens:
+        print("[FINNHUB HISTORY] no token configured; continuing with public discovery sources", flush=True)
+        return {}
+    try:
+        import finnhub
+    except Exception:
+        print("[FINNHUB HISTORY] finnhub-python unavailable; continuing without Finnhub", flush=True)
+        return {}
+
+    end = datetime.now(timezone.utc).date()
+    start = end - timedelta(days=max(1, days))
+    clients = [finnhub.Client(api_key=token) for token in tokens]
+    out: dict[str, list[dict[str, Any]]] = {}
+    saved = 0
+    request_delay = max(0.2, 1.05 / max(1, len(tokens)))
+
+    for index, company in enumerate(companies, 1):
+        symbol = str(company.get("ticker") or "").upper()
+        if not symbol:
+            continue
+        items: list[dict[str, Any]] = []
+        for attempt in range(max(3, len(clients) * 2)):
+            client = clients[(index + attempt - 1) % len(clients)]
+            try:
+                raw_items = client.company_news(symbol, _from=start.isoformat(), to=end.isoformat()) or []
+                for item in raw_items:
+                    if not isinstance(item, dict):
+                        continue
+                    try:
+                        published = pd.Timestamp.fromtimestamp(int(item.get("datetime")), tz="UTC")
+                    except Exception:
+                        continue
+                    title = str(item.get("headline") or "").strip()
+                    if not title:
+                        continue
+                    items.append(
+                        {
+                            "ts": published.isoformat(),
+                            "title": title,
+                            "summary": str(item.get("summary") or title).strip(),
+                            "url": str(item.get("url") or ""),
+                            "source": str(item.get("source") or "Finnhub"),
+                            "provider": "finnhub",
+                        }
+                    )
+                break
+            except Exception as exc:
+                message = str(exc).lower()
+                if "429" in message or "limit" in message:
+                    time.sleep(max(1.0, request_delay * 2))
+                    continue
+                if attempt == 0:
+                    time.sleep(0.5)
+                else:
+                    break
+        if items:
+            clean = deduplicate_news(items)
+            out[symbol] = clean
+            saved += len(clean)
+        time.sleep(request_delay)
+        if index % 50 == 0:
+            print(f"[FINNHUB HISTORY] processed {index}/{len(companies)} retained={saved}", flush=True)
+
+    print(f"[FINNHUB HISTORY] retained_items={saved} range={start.isoformat()}..{end.isoformat()}", flush=True)
+    return out
+
+
 def collect_historical_news(ticker: str, company_name: str, days: int, max_items: int) -> list[dict[str, Any]]:
     now = pd.Timestamp.now(tz="UTC")
     items = collect_company_news(ticker, days=min(days, 180), max_items=max_items, company_name=company_name)
-    # Search older windows explicitly so new companies receive history immediately instead of waiting for future refreshes.
+    # Search explicit windows so older public results are not crowded out by the newest headlines.
     if days > 120:
-        edges = [0, 120, 240, min(days, 365)]
+        edges = list(range(0, min(days, 730) + 1, 120))
+        if not edges or edges[-1] != min(days, 730):
+            edges.append(min(days, 730))
         for left, right in zip(edges[:-1], edges[1:]):
             if right <= left:
                 continue
@@ -189,7 +273,7 @@ def history_payload(symbol: str, dates: list[str], prices: list[float | None], n
         "source_policy": "free_public_only",
         "updated_at_utc": datetime.now(timezone.utc).isoformat(),
         "price_source": "Yahoo Finance public market data via yfinance",
-        "sentiment_source": "Scored retained free-public news; missing days remain missing",
+        "sentiment_source": "Scored retained free-public news including Finnhub when configured; missing days remain missing",
         "date": dates,
         "price": prices,
         "sentiment": sentiment,
@@ -242,8 +326,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--public-root", default="apps/web/public")
     parser.add_argument("--batch-size", type=int, default=120)
-    parser.add_argument("--news-days", type=int, default=365)
-    parser.add_argument("--news-max-items", type=int, default=120)
+    parser.add_argument("--news-days", type=int, default=730)
+    parser.add_argument("--news-max-items", type=int, default=240)
     parser.add_argument("--history-period", default="2y")
     parser.add_argument("--workers", type=int, default=12)
     parser.add_argument("--score-cache", default="data/v5/headline_scores.json.gz")
@@ -274,6 +358,7 @@ def main() -> None:
 
     symbols = [str(row.get("ticker") or "").upper() for row in targets]
     prices = download_price_history(symbols, period=args.history_period)
+    finnhub_items = collect_finnhub_history(targets, args.news_days)
 
     fetched: dict[str, list[dict[str, Any]]] = {}
     with ThreadPoolExecutor(max_workers=max(1, min(args.workers, 24))) as pool:
@@ -291,9 +376,10 @@ def main() -> None:
             company = futures[future]
             symbol = str(company.get("ticker") or "").upper()
             try:
-                fetched[symbol] = future.result()
+                public_items = future.result()
             except Exception:
-                fetched[symbol] = []
+                public_items = []
+            fetched[symbol] = deduplicate_news([*public_items, *finnhub_items.get(symbol, [])])[: max(1, args.news_max_items)]
 
     scorer = ReusableNewsScorer(Path(args.score_cache), batch_size=48)
     now = datetime.now(timezone.utc)
