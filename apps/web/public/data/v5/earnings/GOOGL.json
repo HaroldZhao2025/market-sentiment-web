@@ -153,7 +153,123 @@
       "surprise_pct": 46.24
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-15T14:29:46+00:00",
+      "source": "Motley Fool",
+      "source_url": "https://finance.yahoo.com/m/b1f24429-09a2-307e-9eed-4d61092dbc7b/cmct-%28cmct%29-q2-2026-earnings.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 6,
+        "scored_turn_count": 6,
+        "overall_sentiment": 0.182544,
+        "prepared_sentiment": 0.078282,
+        "qa_sentiment": 0.703856,
+        "qa_tone_shift": 0.625574,
+        "uncertainty_turn_rate": 0.166667,
+        "forward_looking_turn_rate": 0.5,
+        "topics": [
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.470921
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.474342
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.235464
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 1,
+            "sentiment": 0.901741
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "section": "prepared",
+          "sentiment": 0.902432,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Stephen Altebrando",
+          "section": "prepared",
+          "sentiment": 0.901741,
+          "word_count": 205,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "David Thompson",
+          "section": "prepared",
+          "sentiment": -0.941836,
+          "word_count": 499,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Stephen Altebrando",
+          "section": "prepared",
+          "sentiment": -0.464081,
+          "word_count": 628,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Brandon Hill",
+          "section": "prepared",
+          "sentiment": -0.006847,
+          "word_count": 673,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.703856,
+          "word_count": 212,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 2260,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "GOOGL Earnings Call: Q2 2026",
@@ -172,6 +288,12 @@
       "url": "https://stockanalysis.com/stocks/googl/transcripts/396697-q4-2025/",
       "source": "Stock Analysis / Quartr",
       "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "CMCT (CMCT) Q2 2026 Earnings Call Transcript",
+      "url": "https://finance.yahoo.com/m/b1f24429-09a2-307e-9eed-4d61092dbc7b/cmct-%28cmct%29-q2-2026-earnings.html",
+      "source": "Motley Fool",
+      "ts": "2026-08-15T14:29:46+00:00"
     }
   ],
   "filing_fallback": [],
@@ -180,7 +302,8 @@
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
   },
-  "updated_at_utc": "2026-08-15T13:56:34.360039+00:00"
+  "updated_at_utc": "2026-08-15T15:11:46.526221+00:00"
 }
