@@ -1,37 +1,37 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-15T14:21:22.600866+00:00",
+  "generated_at_utc": "2026-08-15T14:43:09.521165+00:00",
   "source_policy": "free_public_only",
   "company_count": 1506,
-  "complete_company_count": 92,
-  "complete_coverage_rate": 0.061089,
+  "complete_company_count": 156,
+  "complete_coverage_rate": 0.103586,
   "totals": {
-    "complete": 92,
+    "complete": 156,
     "partial": 7,
-    "link_only": 176,
-    "no_structured_call": 1231
+    "link_only": 127,
+    "no_structured_call": 1216
   },
   "by_universe": {
     "S&P 500": {
       "total": 503,
-      "complete": 29,
+      "complete": 44,
       "partial": 0,
-      "link_only": 76,
-      "no_structured_call": 398
+      "link_only": 66,
+      "no_structured_call": 393
     },
     "S&P MidCap 400": {
       "total": 400,
-      "complete": 16,
+      "complete": 35,
       "partial": 2,
-      "link_only": 55,
-      "no_structured_call": 327
+      "link_only": 42,
+      "no_structured_call": 321
     },
     "S&P SmallCap 600": {
       "total": 603,
-      "complete": 47,
+      "complete": 77,
       "partial": 5,
-      "link_only": 45,
-      "no_structured_call": 506
+      "link_only": 19,
+      "no_structured_call": 502
     }
   },
   "companies": [
@@ -901,69 +901,87 @@
     },
     {
       "ticker": "ANET",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ANF",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ANIP",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "AON",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "AORT",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "AOS",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 5,
+      "call_links": 9,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "AOSL",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "APA",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "APAM",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 5,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "APD",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
@@ -972,74 +990,56 @@
       "source": ""
     },
     {
-      "ticker": "APAM",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 1,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "APD",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 2,
-      "filings": 0,
-      "source": ""
-    },
-    {
       "ticker": "APG",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 2,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 6,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "APH",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 4,
+      "call_links": 8,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "APLE",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "APO",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 1,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 5,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "APOG",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "APP",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 2,
+      "call_links": 6,
       "filings": 0,
       "source": ""
     },
@@ -1048,7 +1048,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 7,
       "filings": 0,
       "source": ""
     },
@@ -1057,196 +1057,196 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 4,
+      "call_links": 8,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "AR",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ARCB",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ARE",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 1,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "ARES",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "ARLO",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "ARMK",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "AROC",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
       "call_links": 5,
       "filings": 0,
       "source": ""
     },
     {
-      "ticker": "ARR",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "ticker": "ARES",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "ARLO",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "ARMK",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "AROC",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "ARR",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
+      "filings": 0,
+      "source": "MarketBeat"
     },
     {
       "ticker": "ARW",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ARWR",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 2,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "ASB",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "ASH",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "ASO",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "ASTE",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
       "call_links": 6,
       "filings": 0,
       "source": ""
     },
     {
-      "ticker": "ASTH",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
+      "ticker": "ASB",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "ASH",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "ASO",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
       "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "ASTE",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "ASTH",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
+      "filings": 0,
+      "source": "MarketBeat"
     },
     {
       "ticker": "ATEN",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ATI",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ATMU",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ATO",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "ATR",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "AUB",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 2,
+      "call_links": 6,
       "filings": 0,
       "source": ""
     },
@@ -1255,16 +1255,16 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 6,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "AVAV",
-      "status": "no_structured_call",
+      "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 0,
+      "call_links": 4,
       "filings": 0,
       "source": ""
     },
@@ -1273,16 +1273,16 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 1,
+      "call_links": 4,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "AVGO",
-      "status": "no_structured_call",
+      "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 0,
+      "call_links": 4,
       "filings": 0,
       "source": ""
     },
@@ -1291,12 +1291,57 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 7,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "AVT",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "AVTR",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "AVY",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "AWI",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "AWK",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "AWR",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
@@ -1305,65 +1350,20 @@
       "source": ""
     },
     {
-      "ticker": "AVTR",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "AVY",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "AWI",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "AWK",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "AWR",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 2,
-      "filings": 0,
-      "source": ""
-    },
-    {
       "ticker": "AX",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "AXON",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 5,
+      "call_links": 9,
       "filings": 0,
       "source": ""
     },
@@ -1372,7 +1372,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 2,
+      "call_links": 6,
       "filings": 0,
       "source": ""
     },
@@ -1381,88 +1381,88 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 4,
+      "call_links": 8,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "AYI",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "AZO",
-      "status": "no_structured_call",
+      "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 0,
+      "call_links": 4,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "AZTA",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "AZZ",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BA",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BAC",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BAH",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 4,
+      "call_links": 8,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BALL",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BANC",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 6,
       "filings": 0,
       "source": ""
     },
@@ -1477,19 +1477,19 @@
     },
     {
       "ticker": "BANR",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BAX",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 7,
       "filings": 0,
       "source": ""
     },
@@ -1498,90 +1498,90 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 6,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BBWI",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BBY",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BC",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BCC",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BCO",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 6,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BCPC",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BDC",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 2,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 6,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BDX",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 7,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BEN",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 3,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 7,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BF-B",
@@ -1594,21 +1594,21 @@
     },
     {
       "ticker": "BFAM",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BFH",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BFS",
@@ -1621,109 +1621,109 @@
     },
     {
       "ticker": "BG",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BGC",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BHE",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BHF",
-      "status": "no_structured_call",
+      "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 0,
+      "call_links": 3,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BIIB",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BILL",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BIO",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BJ",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 1,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 5,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BJRI",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 5,
+      "call_links": 9,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BKE",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 4,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BKH",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 6,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BKNG",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 7,
       "filings": 0,
       "source": ""
     },
@@ -1732,7 +1732,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 6,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -1741,12 +1741,21 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 3,
+      "call_links": 7,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BL",
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 10,
+      "filings": 0,
+      "source": "MarketBeat"
+    },
+    {
+      "ticker": "BLDR",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
@@ -1755,20 +1764,11 @@
       "source": ""
     },
     {
-      "ticker": "BLDR",
+      "ticker": "BLFS",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 2,
-      "filings": 0,
-      "source": ""
-    },
-    {
-      "ticker": "BLFS",
-      "status": "no_structured_call",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "call_links": 3,
       "filings": 0,
       "source": ""
     },
@@ -1777,27 +1777,27 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 2,
+      "call_links": 6,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BLKB",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 8,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BMI",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 5,
+      "status": "complete",
+      "complete_calls": 1,
+      "structured_calls": 1,
+      "call_links": 9,
       "filings": 0,
-      "source": ""
+      "source": "MarketBeat"
     },
     {
       "ticker": "BMRN",
@@ -13589,5 +13589,10 @@
       "filings": 0,
       "source": ""
     }
-  ]
+  ],
+  "search_progress": {
+    "tier1_attempted": 200,
+    "tier2_attempted": 0,
+    "tier3_attempted": 0
+  }
 }
