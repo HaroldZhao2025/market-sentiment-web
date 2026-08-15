@@ -1,0 +1,119 @@
+name: Fulfill Earnings Call History
+
+on:
+  push:
+    paths:
+      - ".github/workflows/earnings-call-history.yml"
+      - ".github/earnings-history-trigger"
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: "Companies per history batch"
+        required: false
+        default: "40"
+      desired_calls:
+        description: "Target complete calls per company"
+        required: false
+        default: "4"
+  schedule:
+    - cron: "12 */4 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: earnings-call-history
+  cancel-in-progress: false
+
+env:
+  PYTHONPATH: src
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  TOKENIZERS_PARALLELISM: "false"
+
+jobs:
+  fulfill-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: true
+          sparse-checkout: |
+            src/market_sentiment
+            apps/web/public/data/v5
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/hf-home
+          key: earnings-history-finbert-${{ runner.os }}-py311
+
+      - name: Install free-source transcript dependencies
+        run: |
+          set -euo pipefail
+          echo "HF_HOME=${RUNNER_TEMP}/hf-home" >> "$GITHUB_ENV"
+          pip install --disable-pip-version-check --no-cache-dir \
+            "numpy>=1.26,<3" "pandas>=2.1,<3" "requests>=2.31" "beautifulsoup4>=4.12" "lxml>=5.2"
+          pip install --disable-pip-version-check --no-cache-dir "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
+          pip install --disable-pip-version-check --no-cache-dir "transformers==4.45.2" "tokenizers==0.20.3"
+
+      - name: Fulfill multi-quarter free-public calls
+        env:
+          INPUT_BATCH_SIZE: ${{ github.event.inputs.batch_size }}
+          INPUT_DESIRED_CALLS: ${{ github.event.inputs.desired_calls }}
+        run: |
+          set -euo pipefail
+          python -m market_sentiment.cli.fulfill_earnings_history \
+            --public-root apps/web/public \
+            --batch-size "${INPUT_BATCH_SIZE:-40}" \
+            --desired-calls "${INPUT_DESIRED_CALLS:-4}" \
+            --cooldown-hours 72 \
+            --priority-symbols "AAPL,MSFT,NVDA,AMZN,GOOGL,META,TSLA"
+
+      - name: Validate free-public history artifacts
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("apps/web/public/data/v5")
+          coverage = json.loads((root / "earnings_coverage.json").read_text())
+          if coverage.get("source_policy") != "free_public_only":
+              raise SystemExit("Earnings history source policy changed")
+          if int(coverage.get("company_count") or 0) < 1300:
+              raise SystemExit("Unexpected company universe size")
+          for path in (root / "earnings").glob("*.json"):
+              payload = json.loads(path.read_text())
+              for call in payload.get("calls") or []:
+                  for turn in call.get("turns") or []:
+                      if turn.get("text"):
+                          raise SystemExit(f"Transcript body text leaked into {path.name}")
+          history = coverage.get("history") or {}
+          print(
+              "EARNINGS HISTORY DATA OK | "
+              f"two_plus={history.get('companies_with_2_plus_calls', 0)} "
+              f"target={history.get('companies_with_desired_history', 0)}"
+          )
+          PY
+
+      - name: Persist earnings history artifacts
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f \
+            apps/web/public/data/v5/earnings \
+            apps/web/public/data/v5/earnings_coverage.json \
+            apps/web/public/data/v5/earnings_history_attempts.json \
+            apps/web/public/data/v5/earnings_history_fulfillment_status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: fulfill earnings call history [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
