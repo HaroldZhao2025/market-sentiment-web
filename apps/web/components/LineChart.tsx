@@ -46,15 +46,26 @@ function finite(value: unknown): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
+function rollingMean7(values: Array<number | null>): Array<number | null> {
+  return values.map((_, index) => {
+    if (index < 6) return null;
+    const window = values.slice(index - 6, index + 1);
+    if (window.some((value) => value == null)) return null;
+    return window.reduce((sum, value) => sum + (value as number), 0) / 7;
+  });
+}
+
 function buildRows(dates: string[], price?: number[], sentiment?: number[], ma?: number[]): Row[] {
+  const sentimentValues = dates.map((_, index) => finite(sentiment?.[index]));
+  const derivedMA = rollingMean7(sentimentValues);
   return dates.map((d, i) => {
     const parsed = Date.parse(`${d}T00:00:00Z`);
     return {
       d,
       t: Number.isFinite(parsed) ? parsed : i,
       p: finite(price?.[i]),
-      s: finite(sentiment?.[i]),
-      m: finite(ma?.[i]),
+      s: sentimentValues[i],
+      m: finite(ma?.[i]) ?? derivedMA[i],
     };
   }).filter((row) => row.d);
 }
