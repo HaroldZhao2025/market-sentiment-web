@@ -87,7 +87,7 @@ jobs:
       - name: Fulfill free public earnings calls
         run: |
           set -euo pipefail
-          python -m market_sentiment.cli.fulfill_earnings_calls_tiered \
+          python -m market_sentiment.cli.fulfill_earnings_calls_tiered_parallel \
             --public-root apps/web/public \
             --batch-index "${{ steps.batch.outputs.index }}" \
             --batch-size "${{ steps.batch.outputs.size }}" \
@@ -101,7 +101,6 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-
           root = Path("apps/web/public/data/v5")
           status = json.loads((root / "earnings_fulfillment_status.json").read_text())
           coverage = json.loads((root / "earnings_coverage.json").read_text())
@@ -112,10 +111,7 @@ jobs:
           progress = coverage.get("search_progress") or {}
           if int(progress.get("tier1_attempted") or 0) <= 0:
               raise SystemExit("Tier-1 search progress was not persisted")
-          aapl_path = root / "earnings" / "AAPL.json"
-          if not aapl_path.exists():
-              raise SystemExit("AAPL earnings artifact missing")
-          aapl = json.loads(aapl_path.read_text())
+          aapl = json.loads((root / "earnings" / "AAPL.json").read_text())
           complete = []
           for call in aapl.get("calls") or []:
               summary = call.get("summary") or {}
@@ -126,12 +122,7 @@ jobs:
                       raise SystemExit("Transcript text must not be redistributed in public artifacts")
           if not complete:
               raise SystemExit("AAPL complete structured-call gate failed")
-          print(
-              f"FULFILLMENT DATA OK | sweep_results={len(status.get('results') or [])} "
-              f"market_complete={coverage.get('complete_company_count')}/{coverage.get('company_count')} "
-              f"coverage={float(coverage.get('complete_coverage_rate') or 0):.1%} "
-              f"tier1={progress.get('tier1_attempted', 0)} tier2={progress.get('tier2_attempted', 0)} tier3={progress.get('tier3_attempted', 0)}"
-          )
+          print(f"FULFILLMENT DATA OK | market_complete={coverage.get('complete_company_count')}/{coverage.get('company_count')} tier1={progress.get('tier1_attempted', 0)} tier2={progress.get('tier2_attempted', 0)} tier3={progress.get('tier3_attempted', 0)}")
           PY
 
       - name: Persist fulfillment artifacts
@@ -139,11 +130,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f \
-            apps/web/public/data/v5/earnings \
-            apps/web/public/data/v5/earnings_fulfillment_status.json \
-            apps/web/public/data/v5/earnings_fulfillment_attempts.json \
-            apps/web/public/data/v5/earnings_coverage.json
+          git add -f apps/web/public/data/v5/earnings apps/web/public/data/v5/earnings_fulfillment_status.json apps/web/public/data/v5/earnings_fulfillment_attempts.json apps/web/public/data/v5/earnings_coverage.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: tiered free earnings sweep ${{ steps.batch.outputs.index }} [skip ci]"
             git pull --rebase origin main
