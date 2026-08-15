@@ -39,65 +39,33 @@ type TickerObject = {
   sentiment_observed?: unknown[];
 };
 
-type PanelObs = {
-  symbol: string;
-  sector: string;
-  date: string;
-  signal: number;
-  fwd: number;
-};
-
-type DailySpread = {
-  date: string;
-  top: number;
-  bottom: number;
-  spread: number;
-  topSymbols: string[];
-  bottomSymbols: string[];
-  observations: number;
-};
+type PanelObs = { symbol: string; sector: string; date: string; signal: number; fwd: number };
+type DailySpread = { date: string; top: number; bottom: number; spread: number; topSymbols: string[]; bottomSymbols: string[]; observations: number };
 
 const DATA_ROOT = path.join(process.cwd(), "public", "data");
 const tickerCache = new Map<string, TickerObject | null>();
 
 function readJson<T>(file: string): T | null {
-  try {
-    return JSON.parse(fs.readFileSync(file, "utf8")) as T;
-  } catch {
-    return null;
-  }
+  try { return JSON.parse(fs.readFileSync(file, "utf8")) as T; } catch { return null; }
 }
-
 function tickerObject(symbol: string): TickerObject | null {
   if (tickerCache.has(symbol)) return tickerCache.get(symbol) ?? null;
   const obj = readJson<TickerObject>(path.join(DATA_ROOT, "ticker", `${symbol}.json`));
   tickerCache.set(symbol, obj);
   return obj;
 }
-
-function strArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.map((x) => String(x ?? "")) : [];
-}
-
-function numArray(value: unknown): Array<number | null> {
-  return Array.isArray(value) ? value.map(finite) : [];
-}
-
+function strArray(value: unknown): string[] { return Array.isArray(value) ? value.map((x) => String(x ?? "")) : []; }
+function numArray(value: unknown): Array<number | null> { return Array.isArray(value) ? value.map(finite) : []; }
 function boolArray(value: unknown, length: number): boolean[] {
   if (!Array.isArray(value)) return Array.from({ length }, () => true);
   return value.map((x) => x === true || x === 1 || x === "1" || x === "true");
 }
-
-function mean(xs: number[]): number | null {
-  return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
-}
-
+function mean(xs: number[]): number | null { return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null; }
 function sampleStd(xs: number[]): number | null {
   if (xs.length < 2) return null;
   const m = mean(xs)!;
   return Math.sqrt(xs.reduce((sum, x) => sum + (x - m) ** 2, 0) / (xs.length - 1));
 }
-
 function forwardReturn(prices: Array<number | null>, i: number, horizon: number): number | null {
   const p0 = prices[i];
   const p1 = prices[i + horizon];
@@ -107,7 +75,6 @@ function forwardReturn(prices: Array<number | null>, i: number, horizon: number)
 function buildPanel(signal: LabV2Signal, horizon: LabV2Horizon): PanelObs[] {
   const sectorByTicker = new Map(readHeatmapTiles().map((t) => [t.symbol, t.sector || "Unknown"]));
   const out: PanelObs[] = [];
-
   for (const [symbol, sector] of sectorByTicker.entries()) {
     const obj = tickerObject(symbol);
     if (!obj) continue;
@@ -116,12 +83,11 @@ function buildPanel(signal: LabV2Signal, horizon: LabV2Horizon): PanelObs[] {
     const sentiments = numArray(obj.S ?? obj.sentiment);
     const n = Math.min(dates.length, prices.length, sentiments.length);
     const observed = boolArray(obj.sentiment_observed, n);
-    let previousObserved: number | null = null;
+    let previousObserved: number | null = observed[0] && sentiments[0] != null ? sentiments[0] : null;
 
     for (let i = 1; i + horizon < n; i += 1) {
       const current = sentiments[i];
       if (!observed[i] || current == null) continue;
-
       let signalValue: number | null = null;
       if (signal === "sentiment") signalValue = current;
       if (signal === "sentiment_change") signalValue = previousObserved == null ? null : current - previousObserved;
@@ -131,11 +97,8 @@ function buildPanel(signal: LabV2Signal, horizon: LabV2Horizon): PanelObs[] {
         const r1 = p0 != null && p1 != null && p0 !== 0 ? p1 / p0 - 1 : null;
         signalValue = r1 == null ? null : current - Math.max(-1, Math.min(1, r1 / 0.05));
       }
-
       const fwd = forwardReturn(prices, i, horizon);
-      if (signalValue != null && fwd != null && dates[i]) {
-        out.push({ symbol, sector, date: dates[i], signal: signalValue, fwd });
-      }
+      if (signalValue != null && fwd != null && dates[i]) out.push({ symbol, sector, date: dates[i], signal: signalValue, fwd });
       previousObserved = current;
     }
   }
@@ -145,7 +108,6 @@ function buildPanel(signal: LabV2Signal, horizon: LabV2Horizon): PanelObs[] {
 function dailySpreads(obs: PanelObs[], quantile: LabV2Quantile): DailySpread[] {
   const byDate = new Map<string, PanelObs[]>();
   for (const row of obs) byDate.set(row.date, [...(byDate.get(row.date) ?? []), row]);
-
   const out: DailySpread[] = [];
   for (const [date, rows] of Array.from(byDate.entries()).sort((a, b) => a[0].localeCompare(b[0]))) {
     if (rows.length < 6) continue;
@@ -157,15 +119,7 @@ function dailySpreads(obs: PanelObs[], quantile: LabV2Quantile): DailySpread[] {
     const bottom = mean(lowRows.map((x) => x.fwd));
     const top = mean(highRows.map((x) => x.fwd));
     if (top == null || bottom == null) continue;
-    out.push({
-      date,
-      top,
-      bottom,
-      spread: top - bottom,
-      topSymbols: highRows.map((x) => x.symbol),
-      bottomSymbols: lowRows.map((x) => x.symbol),
-      observations: rows.length,
-    });
+    out.push({ date, top, bottom, spread: top - bottom, topSymbols: highRows.map((x) => x.symbol), bottomSymbols: lowRows.map((x) => x.symbol), observations: rows.length });
   }
   return out;
 }
@@ -181,16 +135,12 @@ function sideTurnover(previous: string[], current: string[]): number {
   }
   return absoluteChange / 2;
 }
-
 function averageTurnover(rows: DailySpread[]): number | null {
   if (rows.length < 2) return null;
   const values: number[] = [];
-  for (let i = 1; i < rows.length; i += 1) {
-    values.push(sideTurnover(rows[i - 1].topSymbols, rows[i].topSymbols) + sideTurnover(rows[i - 1].bottomSymbols, rows[i].bottomSymbols));
-  }
+  for (let i = 1; i < rows.length; i += 1) values.push(sideTurnover(rows[i - 1].topSymbols, rows[i].topSymbols) + sideTurnover(rows[i - 1].bottomSymbols, rows[i].bottomSymbols));
   return mean(values);
 }
-
 function neweyWestMeanSe(values: number[], lag: number): number | null {
   const n = values.length;
   if (n < 3) return null;
@@ -207,22 +157,13 @@ function neweyWestMeanSe(values: number[], lag: number): number | null {
   }
   return longRunVariance > 0 ? Math.sqrt(longRunVariance / n) : null;
 }
-
 function selectSample(rows: DailySpread[], sample: LabV2Sample): DailySpread[] {
   if (sample === "all" || rows.length < 4) return rows;
   const split = Math.max(1, Math.min(rows.length - 1, Math.floor(rows.length * 0.7)));
   return sample === "in_sample" ? rows.slice(0, split) : rows.slice(split);
 }
 
-function summarize(
-  panel: PanelObs[],
-  dailyAll: DailySpread[],
-  signal: LabV2Signal,
-  horizon: LabV2Horizon,
-  sector: string,
-  quantile: LabV2Quantile,
-  sample: LabV2Sample,
-): LabV2Summary {
+function summarize(panel: PanelObs[], dailyAll: DailySpread[], signal: LabV2Signal, horizon: LabV2Horizon, sector: string, quantile: LabV2Quantile, sample: LabV2Sample): LabV2Summary {
   const daily = selectSample(dailyAll, sample);
   const allowedDates = new Set(daily.map((x) => x.date));
   const scopedPanel = panel.filter((x) => allowedDates.has(x.date));
@@ -236,13 +177,8 @@ function summarize(
   const periodsPerYear = 252 / horizon;
   const sharpe = spread != null && sd != null && sd > 0 ? (spread / sd) * Math.sqrt(periodsPerYear) : null;
   const dates = daily.map((x) => x.date);
-
   return {
-    signal,
-    horizon,
-    sector,
-    quantile,
-    sample,
+    signal, horizon, sector, quantile, sample,
     top_mean: mean(daily.map((x) => x.top)),
     bottom_mean: mean(daily.map((x) => x.bottom)),
     spread,
@@ -267,7 +203,6 @@ export function buildLabV2Summaries(): LabV2Summary[] {
   const samples: LabV2Sample[] = ["all", "in_sample", "out_of_sample"];
   const sectors = ["All", ...Array.from(new Set(readHeatmapTiles().map((t) => t.sector || "Unknown"))).sort()];
   const output: LabV2Summary[] = [];
-
   for (const signal of signals) {
     for (const horizon of horizons) {
       const fullPanel = buildPanel(signal, horizon);
