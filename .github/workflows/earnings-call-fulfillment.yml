@@ -12,7 +12,7 @@ on:
         required: false
         default: "25"
   schedule:
-    - cron: "35 3,9,15,21 * * *"
+    - cron: "45 * * * *"
 
 permissions:
   contents: write
@@ -70,8 +70,7 @@ jobs:
               size = int(os.getenv("INPUT_BATCH_SIZE") or 25)
           else:
               now = datetime.datetime.now(datetime.timezone.utc)
-              slot = {3: 0, 9: 1, 15: 2, 21: 3}.get(now.hour, 0)
-              index = ((now.timetuple().tm_yday - 1) * 4 + slot) % 60
+              index = ((now.timetuple().tm_yday - 1) * 24 + now.hour) % 60
               size = 25
           print(f"index={index}")
           print(f"size={size}")
@@ -118,7 +117,7 @@ jobs:
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "4189828+github-actions[bot]@users.noreply.github.com"
           git add -f apps/web/public/data/v5/earnings apps/web/public/data/v5/earnings_fulfillment_status.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: fulfill free earnings calls batch ${{ steps.batch.outputs.index }} [skip ci]"
