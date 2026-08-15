@@ -11,219 +11,191 @@ type Props = {
   height?: number;
 };
 
+type Row = { d: string; t: number; p: number | null; s: number | null; m: number | null };
 type Pt = { x: number; y: number };
+
+type PanelKind = "overlay" | "price" | "sentiment";
 
 export function ChartLegend() {
   return (
-    <div className="flex flex-wrap items-center gap-4 text-sm">
-      <div className="flex items-center gap-2">
-        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#6B5BFF" }} />
-        <span className="text-neutral-700">Sentiment</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#10B981" }} />
-        <span className="text-neutral-700">Sentiment (MA7)</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#0EA5E9" }} />
-        <span className="text-neutral-700">Price</span>
-      </div>
+    <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-400">
+      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-violet-400" />Sentiment</div>
+      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-emerald-400" />Sentiment MA7</div>
+      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-sky-400" />Price</div>
     </div>
   );
 }
 
 function useMeasure() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [w, setW] = useState(960);
+  const [width, setWidth] = useState(960);
   useEffect(() => {
     if (!ref.current) return;
-    const ro = new ResizeObserver((entries) => {
-      for (const e of entries) {
-        if (e.contentRect?.width) setW(Math.max(640, Math.floor(e.contentRect.width)));
-      }
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry?.contentRect.width) setWidth(Math.max(320, Math.floor(entry.contentRect.width)));
     });
-    ro.observe(ref.current);
-    return () => ro.disconnect();
+    observer.observe(ref.current);
+    return () => observer.disconnect();
   }, []);
-  return { ref, width: w };
+  return { ref, width };
 }
 
-function monthTickLabel(d: string) {
-  try {
-    const dt = new Date(d + "T00:00:00Z");
-    return dt.toLocaleDateString(undefined, { month: "short" });
-  } catch {
-    return d.slice(5, 7);
-  }
+function finite(value: unknown): number | null {
+  if (value === null || value === undefined || value === "") return null;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
 }
 
-function buildRows(dates: string[], price?: number[], s?: number[], m?: number[]) {
-  const n = Math.max(dates.length, price?.length ?? 0, s?.length ?? 0, m?.length ?? 0);
-  return Array.from({ length: n }, (_, i) => ({
-    d: dates[i] ?? "",
-    p: Number.isFinite(Number(price?.[i])) ? Number(price?.[i]) : null,
-    s: Number.isFinite(Number(s?.[i])) ? Number(s?.[i]) : null,
-    m: Number.isFinite(Number(m?.[i])) ? Number(m?.[i]) : null,
-  }));
+function buildRows(dates: string[], price?: number[], sentiment?: number[], ma?: number[]): Row[] {
+  return dates.map((d, i) => {
+    const parsed = Date.parse(`${d}T00:00:00Z`);
+    return {
+      d,
+      t: Number.isFinite(parsed) ? parsed : i,
+      p: finite(price?.[i]),
+      s: finite(sentiment?.[i]),
+      m: finite(ma?.[i]),
+    };
+  }).filter((row) => row.d);
 }
 
 function scaleLinear(domain: [number, number], range: [number, number]) {
   const [d0, d1] = domain;
   const [r0, r1] = range;
   const span = d1 - d0 || 1;
-  const m = (r1 - r0) / span;
-  const fn = (v: number) => r0 + (v - d0) * m;
-  (fn as any).invert = (r: number) => d0 + (r - r0) / m;
+  const slope = (r1 - r0) / span;
+  const fn = (v: number) => r0 + (v - d0) * slope;
+  (fn as any).invert = (r: number) => d0 + (r - r0) / slope;
   return fn as ((v: number) => number) & { invert: (r: number) => number };
 }
 
-function pointsToPolyline(pts: Pt[]) {
-  return pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+function extent(values: Array<number | null>, fallback: [number, number], padding = 0.06): [number, number] {
+  const valid = values.filter((v): v is number => v != null && Number.isFinite(v));
+  if (!valid.length) return fallback;
+  const min = Math.min(...valid);
+  const max = Math.max(...valid);
+  const pad = (max - min) * padding || Math.max(Math.abs(max) * padding, 1);
+  return [min - pad, max + pad];
 }
 
-function ChartSVG({
-  width,
-  height,
-  rows,
-  separate = false,
-}: {
-  width: number;
-  height: number;
-  rows: { d: string; p: number | null; s: number | null; m: number | null }[];
-  separate?: boolean;
-}) {
-  const pad = { t: 20, r: 72, b: 36, l: 56 };
-  const w = Math.max(640, width);
-  const h = Math.max(280, height);
-  const W = Math.max(1, w - pad.l - pad.r);
-  const H = Math.max(1, h - pad.t - pad.b);
+function niceNumber(value: number) {
+  const abs = Math.abs(value);
+  if (abs >= 1000) return value.toLocaleString(undefined, { maximumFractionDigits: 0 });
+  if (abs >= 100) return value.toFixed(0);
+  if (abs >= 10) return value.toFixed(1);
+  return value.toFixed(2);
+}
 
-  const N = rows.length || 1;
-  const x = scaleLinear([0, Math.max(0, N - 1)], [0, W]);
+function formatDate(value: string, includeYear = false) {
+  const dt = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(dt.getTime())) return value;
+  return dt.toLocaleDateString(undefined, includeYear ? { month: "short", year: "2-digit" } : { month: "short" });
+}
 
-  // L: Sentiment [-1, 1] / R: Price autoscale
-  const yL = scaleLinear([1, -1], [0, H]);
-  const pVals = rows.map((r) => r.p).filter((v): v is number => Number.isFinite(v));
-  const pMin = pVals.length ? Math.min(...pVals) : 0;
-  const pMax = pVals.length ? Math.max(...pVals) : 1;
-  const padP = (pMax - pMin) * 0.06 || 1;
-  const yR = scaleLinear([pMin - padP, pMax + padP], [H, 0]);
+function chooseTickIndices(rows: Row[], maxTicks: number) {
+  if (!rows.length) return [];
+  const count = Math.min(maxTicks, rows.length);
+  if (count <= 1) return [0];
+  const indices = Array.from({ length: count }, (_, i) => Math.round((i * (rows.length - 1)) / (count - 1)));
+  return Array.from(new Set(indices));
+}
 
-  const sPts: Pt[] = [];
-  const mPts: Pt[] = [];
-  const pPts: Pt[] = [];
-  rows.forEach((r, i) => {
-    const xi = x(i);
-    if (Number.isFinite(r.s as number)) sPts.push({ x: xi, y: yL(r.s as number) });
-    if (Number.isFinite(r.m as number)) mPts.push({ x: xi, y: yL(r.m as number) });
-    if (Number.isFinite(r.p as number)) pPts.push({ x: xi, y: yR(r.p as number) });
-  });
+function points(rows: Row[], x: (v: number) => number, y: (v: number) => number, key: "p" | "s" | "m") {
+  return rows.filter((row) => row[key] != null).map((row) => ({ x: x(row.t), y: y(row[key] as number) }));
+}
 
-  const yTicksL = [-1, -0.5, 0, 0.5, 1];
-  const yTicksR = 5;
-  const monthEvery = Math.max(1, Math.floor(N / 8));
+function polyline(pts: Pt[]) {
+  return pts.map((pt) => `${pt.x.toFixed(1)},${pt.y.toFixed(1)}`).join(" ");
+}
 
-  const [hoverX, setHoverX] = useState<number | null>(null);
+function ChartPanel({ width, height, rows, kind }: { width: number; height: number; rows: Row[]; kind: PanelKind }) {
+  const pad = { t: 22, r: kind === "overlay" ? 70 : 26, b: 48, l: 58 };
+  const w = Math.max(320, width);
+  const h = Math.max(220, height);
+  const plotW = Math.max(1, w - pad.l - pad.r);
+  const plotH = Math.max(1, h - pad.t - pad.b);
+  const minT = rows[0]?.t ?? 0;
+  const maxT = rows.at(-1)?.t ?? minT + 1;
+  const x = scaleLinear([minT, maxT === minT ? minT + 1 : maxT], [0, plotW]);
+  const priceDomain = extent(rows.map((row) => row.p), [0, 1], 0.05);
+  const sentimentDomain: [number, number] = [-1, 1];
+  const yPrice = scaleLinear(priceDomain, [plotH, 0]);
+  const ySentiment = scaleLinear(sentimentDomain, [plotH, 0]);
+  const xTicks = chooseTickIndices(rows, w < 640 ? 4 : 7);
+  const priceTicks = Array.from({ length: 5 }, (_, i) => priceDomain[0] + ((priceDomain[1] - priceDomain[0]) * i) / 4);
+  const sentimentTicks = [-1, -0.5, 0, 0.5, 1];
+  const pricePts = points(rows, x, yPrice, "p");
+  const sentPts = points(rows, x, ySentiment, "s");
+  const maPts = points(rows, x, ySentiment, "m");
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
-  const onMove = (ev: React.MouseEvent<SVGRectElement>) => {
-    const rect = (ev.target as SVGRectElement).getBoundingClientRect();
-    const rx = ev.clientX - rect.left;
-    const clamped = Math.max(0, Math.min(W, rx));
-    setHoverX(clamped);
-    const idx = Math.round(x.invert(clamped));
-    setHoverIdx(Math.max(0, Math.min(N - 1, idx)));
-  };
-  const onLeave = () => {
-    setHoverX(null);
-    setHoverIdx(null);
+
+  const onMove = (event: React.MouseEvent<SVGRectElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const px = Math.max(0, Math.min(plotW, event.clientX - rect.left));
+    const targetTime = x.invert(px);
+    let best = 0;
+    let bestDistance = Infinity;
+    rows.forEach((row, index) => {
+      const distance = Math.abs(row.t - targetTime);
+      if (distance < bestDistance) {
+        best = index;
+        bestDistance = distance;
+      }
+    });
+    setHoverIdx(best);
   };
 
-  const hover = hoverIdx != null ? rows[hoverIdx] : null;
+  const hover = hoverIdx == null ? null : rows[hoverIdx];
+  const hoverX = hover ? x(hover.t) : null;
 
   return (
-    <svg width={w} height={h} className="select-none">
+    <svg width={w} height={h} className="block select-none overflow-visible">
       <g transform={`translate(${pad.l},${pad.t})`}>
-        {/* grid */}
-        {yTicksL.map((t, i) => (
-          <line key={`gy-${i}`} x1={0} y1={yL(t)} x2={W} y2={yL(t)} stroke="#000" strokeOpacity={0.08} />
+        {(kind === "price" ? priceTicks : sentimentTicks).map((tick, index) => {
+          const yy = kind === "price" ? yPrice(tick) : ySentiment(tick);
+          return <line key={`grid-${index}`} x1={0} y1={yy} x2={plotW} y2={yy} stroke="currentColor" className="text-white" strokeOpacity={0.07} />;
+        })}
+
+        {kind !== "price" ? sentimentTicks.map((tick) => (
+          <text key={`sl-${tick}`} x={-12} y={ySentiment(tick)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{tick.toFixed(1)}</text>
+        )) : priceTicks.map((tick) => (
+          <text key={`pl-${tick}`} x={-12} y={yPrice(tick)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{niceNumber(tick)}</text>
         ))}
-        {rows.map((_, i) =>
-          i % monthEvery === 0 ? (
-            <line key={`gx-${i}`} x1={x(i)} y1={0} x2={x(i)} y2={H} stroke="#000" strokeOpacity={0.05} />
-          ) : null
-        )}
 
-        {/* axes labels */}
-        {yTicksL.map((t, i) => (
-          <text key={`yl-${i}`} x={-10} y={yL(t)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={12}>
-            {t.toFixed(1)}
-          </text>
-        ))}
-        {pVals.length
-          ? [...Array(yTicksR)].map((_, i) => {
-              const v = pMin - padP + ((pMax + padP - (pMin - padP)) * i) / (yTicksR - 1);
-              return (
-                <text key={`yr-${i}`} x={W + 8} y={yR(v)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={12}>
-                  {Math.round(v)}
-                </text>
-              );
-            })
-          : null}
-        {rows.map((r, i) =>
-          i % monthEvery === 0 ? (
-            <text key={`xl-${i}`} x={x(i)} y={H + 20} textAnchor="middle" className="fill-neutral-500" fontSize={12}>
-              {monthTickLabel(r.d)}
-            </text>
-          ) : null
-        )}
+        {kind === "overlay" ? priceTicks.map((tick) => (
+          <text key={`pr-${tick}`} x={plotW + 10} y={yPrice(tick)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{niceNumber(tick)}</text>
+        )) : null}
 
-        {/* zero line */}
-        <line x1={0} y1={yL(0)} x2={W} y2={yL(0)} stroke="#000" strokeOpacity={0.12} />
+        {xTicks.map((index, pos) => {
+          const row = rows[index];
+          const includeYear = pos === 0 || pos === xTicks.length - 1 || new Date(`${row.d}T00:00:00Z`).getUTCMonth() === 0;
+          return (
+            <g key={`xt-${index}`}>
+              <line x1={x(row.t)} y1={0} x2={x(row.t)} y2={plotH} stroke="currentColor" className="text-white" strokeOpacity={0.035} />
+              <text x={x(row.t)} y={plotH + 24} textAnchor="middle" className="fill-neutral-500" fontSize={11}>{formatDate(row.d, includeYear)}</text>
+            </g>
+          );
+        })}
 
-        {/* series */}
-        {!separate && sPts.length ? (
-          <polyline points={pointsToPolyline(sPts)} fill="none" stroke="#6B5BFF" strokeOpacity={0.35} strokeWidth={1.5} />
+        {kind === "overlay" || kind === "sentiment" ? (
+          <>
+            {sentPts.length ? <polyline points={polyline(sentPts)} fill="none" stroke="#a78bfa" strokeOpacity={0.32} strokeWidth={1.2} /> : null}
+            {maPts.length ? <polyline points={polyline(maPts)} fill="none" stroke="#34d399" strokeWidth={2.2} /> : null}
+          </>
         ) : null}
-        {mPts.length ? <polyline points={pointsToPolyline(mPts)} fill="none" stroke="#10B981" strokeWidth={2} /> : null}
-        {pPts.length ? <polyline points={pointsToPolyline(pPts)} fill="none" stroke="#0EA5E9" strokeWidth={2} /> : null}
+        {kind === "overlay" || kind === "price" ? (pricePts.length ? <polyline points={polyline(pricePts)} fill="none" stroke="#38bdf8" strokeWidth={2.2} /> : null) : null}
 
-        {/* hover layer */}
-        <rect x={0} y={0} width={W} height={H} fill="transparent" onMouseMove={onMove} onMouseLeave={onLeave} style={{ cursor: "crosshair" }} />
+        <rect x={0} y={0} width={plotW} height={plotH} fill="transparent" onMouseMove={onMove} onMouseLeave={() => setHoverIdx(null)} style={{ cursor: "crosshair" }} />
+
         {hover && hoverX != null ? (
           <>
-            <line x1={hoverX} y1={0} x2={hoverX} y2={H} stroke="#000" strokeOpacity={0.15} />
-            {Number.isFinite(hover.m as number) ? <circle cx={hoverX} cy={yL(hover.m as number)} r={3} fill="#10B981" /> : null}
-            {Number.isFinite(hover.p as number) ? <circle cx={hoverX} cy={yR(hover.p as number)} r={3} fill="#0EA5E9" /> : null}
-            <foreignObject x={Math.min(Math.max(hoverX + 10, 0), Math.max(0, W - 240))} y={10} width={240} height={110}>
-              <div className="rounded-lg border bg-white/95 shadow p-2 text-xs leading-5">
-                <div className="font-semibold mb-1">
-                  {(() => {
-                    try {
-                      const d = new Date(rows[hoverIdx!].d + "T00:00:00Z");
-                      return d.toLocaleDateString(undefined, { month: "short", day: "2-digit", year: "numeric" });
-                    } catch {
-                      return rows[hoverIdx!].d;
-                    }
-                  })()}
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-neutral-600">Sentiment</span>
-                  <span className="font-medium" style={{ color: "#6B5BFF" }}>
-                    {Number.isFinite(hover.s as number) ? (hover.s as number).toFixed(4) : "—"}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-neutral-600">Sentiment (MA7)</span>
-                  <span className="font-medium" style={{ color: "#10B981" }}>
-                    {Number.isFinite(hover.m as number) ? (hover.m as number).toFixed(4) : "—"}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-neutral-600">Price</span>
-                  <span className="font-medium" style={{ color: "#0EA5E9" }}>
-                    {Number.isFinite(hover.p as number) ? (hover.p as number).toFixed(2) : "—"}
-                  </span>
-                </div>
+            <line x1={hoverX} y1={0} x2={hoverX} y2={plotH} stroke="currentColor" className="text-white" strokeOpacity={0.18} />
+            <foreignObject x={Math.min(Math.max(hoverX + 12, 0), Math.max(0, plotW - 220))} y={8} width={220} height={108}>
+              <div className="rounded-lg border border-white/10 bg-neutral-950/95 p-2.5 text-xs shadow-2xl">
+                <div className="mb-1.5 font-medium text-neutral-200">{new Date(`${hover.d}T00:00:00Z`).toLocaleDateString()}</div>
+                {kind !== "price" ? <div className="flex justify-between gap-3 text-neutral-400"><span>Sentiment</span><span className="font-mono text-violet-300">{hover.s == null ? "—" : hover.s.toFixed(4)}</span></div> : null}
+                {kind !== "price" ? <div className="flex justify-between gap-3 text-neutral-400"><span>MA7</span><span className="font-mono text-emerald-300">{hover.m == null ? "—" : hover.m.toFixed(4)}</span></div> : null}
+                {kind !== "sentiment" ? <div className="flex justify-between gap-3 text-neutral-400"><span>Price</span><span className="font-mono text-sky-300">{hover.p == null ? "—" : hover.p.toFixed(2)}</span></div> : null}
               </div>
             </foreignObject>
           </>
@@ -233,39 +205,27 @@ function ChartSVG({
   );
 }
 
-export default function LineChart({
-  mode,
-  dates,
-  price,
-  sentiment,
-  sentimentMA7,
-  height = 520,
-}: Props) {
+export default function LineChart({ mode, dates, price, sentiment, sentimentMA7, height = 520 }: Props) {
   const rows = useMemo(() => buildRows(dates, price, sentiment, sentimentMA7), [dates, price, sentiment, sentimentMA7]);
   const { ref, width } = useMeasure();
 
-  if (!rows.length) {
-    return (
-      <div className="w-full grid place-items-center text-neutral-400 text-sm" style={{ height }}>
-        No chart data.
-      </div>
-    );
-  }
+  if (!rows.length) return <div className="grid w-full place-items-center text-sm text-neutral-500" style={{ height }}>No chart data.</div>;
 
   if (mode === "overlay") {
-    return (
-      <div ref={ref} className="w-full">
-        <ChartSVG width={width} height={height} rows={rows} />
-      </div>
-    );
+    return <div ref={ref} className="w-full overflow-hidden"><ChartPanel width={width} height={height} rows={rows} kind="overlay" /></div>;
   }
 
-  const h1 = Math.max(260, Math.floor(height * 0.58));
-  const h2 = Math.max(220, Math.floor(height * 0.42));
+  const panelHeight = Math.max(250, Math.floor((height - 28) / 2));
   return (
-    <div ref={ref} className="w-full space-y-6">
-      <ChartSVG width={width} height={h1} rows={rows} separate />
-      <ChartSVG width={width} height={h2} rows={rows} />
+    <div ref={ref} className="w-full space-y-7 overflow-hidden">
+      <div>
+        <div className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-neutral-500">Price</div>
+        <ChartPanel width={width} height={panelHeight} rows={rows} kind="price" />
+      </div>
+      <div>
+        <div className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-neutral-500">Sentiment</div>
+        <ChartPanel width={width} height={panelHeight} rows={rows} kind="sentiment" />
+      </div>
     </div>
   );
 }

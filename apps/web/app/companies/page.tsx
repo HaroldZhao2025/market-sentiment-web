@@ -82,7 +82,7 @@ export default function CompaniesPage() {
 
       {rows.length ? (
         <>
-          <section className="grid gap-3 md:grid-cols-3">
+          <section className="grid gap-3 md:grid-cols-2">
             <div className="kpi">
               <div className="kpi-label">Complete earnings calls</div>
               <div className="kpi-value text-white">{completeCalls.toLocaleString()}</div>
@@ -92,11 +92,6 @@ export default function CompaniesPage() {
               <div className="kpi-label">Call coverage</div>
               <div className="kpi-value text-emerald-300">{(callCoverage * 100).toFixed(1)}%</div>
               <div className="kpi-sub">Of the current company universe</div>
-            </div>
-            <div className="kpi">
-              <div className="kpi-label">Coverage sweep</div>
-              <div className="kpi-value text-neutral-200">100 / hour</div>
-              <div className="kpi-sub">Free-public transcript search batches</div>
             </div>
           </section>
           <CompaniesClientV2
