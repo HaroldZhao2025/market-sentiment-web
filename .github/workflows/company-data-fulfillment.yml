@@ -83,7 +83,7 @@ jobs:
             --public-root apps/web/public \
             --batch-size "${{ steps.batch.outputs.size }}" \
             --news-days 365 \
-            --news-max-items 120 \
+            --news-max-items 160 \
             --history-period 2y \
             --workers 16 \
             --score-cache "${RUNNER_TEMP}/company-data-cache/headline_scores.json.gz"
