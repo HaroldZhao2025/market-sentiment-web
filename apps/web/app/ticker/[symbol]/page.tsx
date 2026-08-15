@@ -36,18 +36,17 @@ function buildSeries(obj: any): SeriesIn | null {
   const n = Math.min(date.length, price.length);
   const rawSentiment = sentimentArr(obj?.S ?? obj?.sentiment).slice(0, n);
   const firstObserved = rawSentiment.findIndex((value) => Number.isFinite(value));
-  if (firstObserved < 0) {
-    return { date: date.slice(0, n), price: price.slice(0, n), sentiment: Array(n).fill(Number.NaN) };
-  }
-  let last = Number.NaN;
-  const displaySentiment = rawSentiment.slice(firstObserved).map((value) => {
-    if (Number.isFinite(value)) last = value;
-    return last;
-  });
+  const sentiment = firstObserved < 0 ? Array(n).fill(Number.NaN) : (() => {
+    let last = Number.NaN;
+    return rawSentiment.map((value) => {
+      if (Number.isFinite(value)) last = value;
+      return last;
+    });
+  })();
   return {
-    date: date.slice(firstObserved, n),
-    price: price.slice(firstObserved, n),
-    sentiment: displaySentiment,
+    date: date.slice(0, n),
+    price: price.slice(0, n),
+    sentiment,
   };
 }
 
@@ -108,7 +107,9 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   const compact = buildNews(obj);
   const news = (richNews.length ? richNews : compact).slice(0, 120);
   const newsTotal = Number(rich?.article_count ?? obj?.news_total ?? obj?.newsTotal ?? obj?.news_count?.total) || news.length;
-  const series = obj ? buildSeries(obj) : buildSeries(extendedHistory);
+  const extendedSeries = extendedHistory ? buildSeries(extendedHistory) : null;
+  const legacySeries = obj ? buildSeries(obj) : null;
+  const series = extendedSeries && extendedSeries.date.length >= 30 ? extendedSeries : legacySeries;
   const historyDays = series?.date.length ?? 0;
   const callCount = Array.isArray(earnings.calls) ? earnings.calls.length : 0;
   const callLinks = Array.isArray((earnings as EarningsArtifact & { call_links?: unknown[] }).call_links)
