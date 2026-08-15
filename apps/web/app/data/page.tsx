@@ -9,23 +9,26 @@ export const metadata: Metadata = {
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const endpoints = [
-  { name: "Composite company universe", path: "/data/v5/universe.json", shape: "ExtendedUniverse", description: "Large, mid and small-cap company metadata, price, return and coverage fields." },
-  { name: "Company news", path: "/data/v5/news/AAPL.json", shape: "CompanyNews", description: "Up to 60 deduplicated recent articles with article sentiment where scored." },
-  { name: "Company earnings", path: "/data/v5/earnings/AAPL.json", shape: "EarningsArtifact", description: "Earnings history, call analysis when available, and filing fallback." },
-  { name: "Event instances", path: "/data/v5/event_instances.json", shape: "EventStoreV3", description: "Article events clustered into company/theme event instances." },
-  { name: "Core ticker list", path: "/data/_tickers.json", shape: "string[]", description: "Symbols with full historical ticker snapshots." },
-  { name: "Ticker snapshot", path: "/data/ticker/AAPL.json", shape: "TickerSnapshot", description: "Price, sentiment observations and recent scored headlines." },
-  { name: "S&P 500 index", path: "/data/SPX/sp500_index.json", shape: "Sp500Index", description: "True-index close, aggregate sentiment and coverage." },
-  { name: "S&P 500 constituents", path: "/data/SPX/sp500_heatmap.json", shape: "HeatmapSnapshot", description: "Weights, classifications, returns and latest constituent sentiment." },
-  { name: "Portfolio strategy", path: "/data/portfolio_strategy.json", shape: "PortfolioBacktest", description: "Equity curve, holdings, exposure, turnover, costs and metrics." },
+  { name: "Composite company universe", path: "/data/v5/universe.json", shape: "ExtendedUniverse", description: "S&P 500, MidCap 400 and SmallCap 600 company metadata plus latest company fields." },
+  { name: "Company news archive", path: "/data/v5/news/AAPL.json", shape: "CompanyNews", description: "Up to 120 deduplicated free-public headlines with article sentiment where scored." },
+  { name: "Company price & sentiment history", path: "/data/v5/history/AAPL.json", shape: "CompanyHistory", description: "Extended-company daily price history and observed-only daily news sentiment. Missing-news days remain missing." },
+  { name: "Company earnings", path: "/data/v5/earnings/AAPL.json", shape: "EarningsArtifact", description: "EPS history, derived call diagnostics when a free public transcript is found, source links and SEC/IR material." },
+  { name: "Earnings-call coverage", path: "/data/v5/earnings_coverage.json", shape: "EarningsCoverage", description: "Composite-universe structured-call, link-only and missing coverage by company." },
+  { name: "Company-data coverage", path: "/data/v5/company_data_coverage.json", shape: "CompanyDataCoverage", description: "News, history and fulfillment coverage for every company in the Composite 1500 layer." },
+  { name: "Event instances", path: "/data/v5/event_instances.json", shape: "EventStoreV3", description: "Retained article events clustered into company/theme event instances." },
+  { name: "Core ticker list", path: "/data/_tickers.json", shape: "string[]", description: "Core S&P symbols with legacy full ticker snapshots." },
+  { name: "Core ticker snapshot", path: "/data/ticker/AAPL.json", shape: "TickerSnapshot", description: "Core price, sentiment observations and scored headline evidence." },
+  { name: "S&P 500 index", path: "/data/SPX/sp500_index.json", shape: "Sp500Index", description: "True-index close, observed-only aggregate sentiment and coverage." },
+  { name: "S&P 500 constituents", path: "/data/SPX/sp500_heatmap.json", shape: "HeatmapSnapshot", description: "Constituent weights, classifications, returns and latest sentiment." },
+  { name: "Portfolio strategy", path: "/data/portfolio_strategy.json", shape: "PortfolioBacktest", description: "S&P-based strategy equity curve, holdings, exposure, turnover, costs and metrics." },
   { name: "Research index", path: "/research/index.json", shape: "ResearchIndexItem[]", description: "Generated empirical-study catalog." },
 ];
 
 const principles = [
-  ["Missing stays missing", "No-news observations are not converted to zero."],
-  ["Aggregation is explicit", "Article → ticker-day → observed-only index aggregation."],
-  ["Coverage travels with signal", "Index sentiment is paired with ticker and market-cap coverage."],
-  ["One published layer", "The site, research tools and agents read the same artifact family."],
+  ["Free public sources", "Extended news and earnings fulfillment do not depend on paid or Premium APIs."],
+  ["Missing stays missing", "No-news observations are not converted to neutral zero in stored research data."],
+  ["Scope stays explicit", "Composite-company artifacts are separate from S&P 500 index weighting, attribution and portfolio calculations."],
+  ["Coverage is published", "News, history and earnings-call gaps are exposed in dedicated machine-readable coverage files."],
 ];
 
 export default function DataPage() {
@@ -34,7 +37,7 @@ export default function DataPage() {
       <section className="max-w-4xl">
         <div className="eyebrow">Public JSON</div>
         <h1 className="page-title mt-3">Data contracts</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">Inspect or reuse the market and company artifacts behind the site.</p>
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">Inspect the same market, company and research files used by the site.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Link href="/methodology" className="pill">Methodology →</Link><Link href="/agent" className="pill">Agent interface →</Link></div>
       </section>
 
