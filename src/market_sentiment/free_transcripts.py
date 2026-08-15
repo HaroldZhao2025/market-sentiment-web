@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import html
 import re
-import time
 from dataclasses import dataclass
 from typing import Any
 from urllib.parse import quote_plus, urlparse
@@ -14,16 +13,8 @@ from .finbert import FinBERT
 from .v5_earnings import FORWARD_TERMS, TOPICS, UNCERTAINTY_TERMS, summarize_transcript
 
 UA = "market-sentiment-web/1.0 (+https://github.com/HaroldZhao2025/market-sentiment-web)"
-TRANSCRIPT_MARKERS = (
-    "earnings call transcript",
-    "conference call transcript",
-    "financial call transcript",
-)
-ALLOWED_PUBLIC_HOSTS = (
-    "fool.com",
-    "finance.yahoo.com",
-    "sixcolors.com",
-)
+TRANSCRIPT_MARKERS = ("earnings call transcript", "conference call transcript", "financial call transcript")
+ALLOWED_PUBLIC_HOSTS = ("fool.com", "finance.yahoo.com", "sixcolors.com")
 
 
 @dataclass(frozen=True)
@@ -34,9 +25,9 @@ class TranscriptCandidate:
     published: str = ""
 
 
-def _get(url: str, timeout: int = 30) -> requests.Response | None:
+def _get(url: str, timeout: int = 30, params: dict[str, Any] | None = None) -> requests.Response | None:
     try:
-        response = requests.get(url, headers={"User-Agent": UA}, timeout=timeout, allow_redirects=True)
+        response = requests.get(url, params=params, headers={"User-Agent": UA}, timeout=timeout, allow_redirects=True)
         response.raise_for_status()
         return response
     except Exception:
@@ -50,9 +41,7 @@ def _allowed(url: str) -> bool:
 
 def _looks_like_transcript(title: str) -> bool:
     lower = f" {title.lower()} "
-    return any(marker in lower for marker in TRANSCRIPT_MARKERS) or (
-        " transcript " in lower and (" earnings " in lower or " financial call " in lower)
-    )
+    return any(marker in lower for marker in TRANSCRIPT_MARKERS) or (" transcript " in lower and (" earnings " in lower or " financial call " in lower))
 
 
 def _resolve_google_news_url(url: str) -> str:
@@ -60,6 +49,36 @@ def _resolve_google_news_url(url: str) -> str:
         return url
     response = _get(url, timeout=20)
     return response.url if response is not None else url
+
+
+def yahoo_search_transcript_candidates(symbol: str, company_name: str = "", limit: int = 12) -> list[TranscriptCandidate]:
+    query = f"{symbol} earnings call transcript"
+    if company_name:
+        query = f"{company_name} {symbol} earnings call transcript"
+    response = _get(
+        "https://query1.finance.yahoo.com/v1/finance/search",
+        params={"q": query, "quotesCount": 0, "newsCount": max(20, limit * 2), "enableFuzzyQuery": "false"},
+    )
+    if response is None:
+        return []
+    try:
+        payload = response.json()
+    except Exception:
+        return []
+    out: list[TranscriptCandidate] = []
+    seen: set[str] = set()
+    for row in payload.get("news") or []:
+        if not isinstance(row, dict):
+            continue
+        title = str(row.get("title") or "").strip()
+        url = str(row.get("link") or row.get("url") or "").strip()
+        if not _looks_like_transcript(title) or not url or not _allowed(url) or url in seen:
+            continue
+        seen.add(url)
+        out.append(TranscriptCandidate(url=url, title=title, source=str(row.get("publisher") or urlparse(url).hostname or "Yahoo public search"), published=str(row.get("providerPublishTime") or "")))
+        if len(out) >= limit:
+            break
+    return out
 
 
 def google_transcript_candidates(symbol: str, company_name: str = "", limit: int = 12) -> list[TranscriptCandidate]:
@@ -103,26 +122,15 @@ def news_transcript_candidates(news_rows: list[dict[str, Any]], limit: int = 12)
         if not _allowed(resolved) or resolved in seen:
             continue
         seen.add(resolved)
-        out.append(
-            TranscriptCandidate(
-                resolved,
-                title,
-                str(row.get("source") or row.get("provider") or urlparse(resolved).hostname or "Public transcript"),
-                str(row.get("ts") or row.get("date") or ""),
-            )
-        )
+        out.append(TranscriptCandidate(resolved, title, str(row.get("source") or row.get("provider") or urlparse(resolved).hostname or "Public transcript"), str(row.get("ts") or row.get("date") or "")))
         if len(out) >= limit:
             break
     return out
 
 
-def discover_transcripts(
-    symbol: str,
-    company_name: str = "",
-    news_rows: list[dict[str, Any]] | None = None,
-    limit: int = 12,
-) -> list[TranscriptCandidate]:
+def discover_transcripts(symbol: str, company_name: str = "", news_rows: list[dict[str, Any]] | None = None, limit: int = 12) -> list[TranscriptCandidate]:
     candidates = news_transcript_candidates(news_rows or [], limit=limit)
+    candidates.extend(yahoo_search_transcript_candidates(symbol, company_name, limit=limit))
     candidates.extend(google_transcript_candidates(symbol, company_name, limit=limit))
     out: list[TranscriptCandidate] = []
     seen: set[str] = set()
@@ -139,11 +147,9 @@ def discover_transcripts(
 def _article_blocks(soup: BeautifulSoup) -> list[str]:
     root = soup.find("article") or soup.find("main") or soup.body or soup
     blocks: list[str] = []
-    for node in root.find_all(["h1", "h2", "h3", "h4", "p", "div", "li"]):
+    for node in root.find_all(["h1", "h2", "h3", "h4", "p", "li"]):
         text = " ".join(node.get_text(" ", strip=True).split())
         if not text or len(text) < 3:
-            continue
-        if node.name == "div" and len(text) > 1200:
             continue
         if blocks and text == blocks[-1]:
             continue
@@ -162,14 +168,7 @@ def _trim_to_transcript(blocks: list[str]) -> list[str]:
             start = i + 1
             break
     selected = blocks[start:]
-    stop_markers = (
-        "this article is a transcript",
-        "stocks mentioned",
-        "the motley fool has positions",
-        "disclosure policy",
-        "related articles",
-        "subscribe to",
-    )
+    stop_markers = ("this article is a transcript", "stocks mentioned", "the motley fool has positions", "disclosure policy", "related articles", "subscribe to")
     trimmed: list[str] = []
     for block in selected:
         lower = block.lower()
@@ -200,7 +199,6 @@ def extract_public_transcript(candidate: TranscriptCandidate) -> dict[str, Any] 
     blocks = _trim_to_transcript(_article_blocks(soup))
     if not blocks:
         return None
-
     qa_started = False
     turns: list[dict[str, Any]] = []
     pending_speaker: str | None = None
@@ -232,17 +230,12 @@ def extract_public_transcript(candidate: TranscriptCandidate) -> dict[str, Any] 
         elif pending_speaker and len(block.split()) >= 4:
             pending_text.append(block)
     flush()
-
     if len(turns) < 4:
         return None
     word_count = sum(len(str(turn.get("text") or "").split()) for turn in turns)
     if word_count < 500:
         return None
-    return {
-        "candidate": candidate,
-        "turns": turns,
-        "word_count": word_count,
-    }
+    return {"candidate": candidate, "turns": turns, "word_count": word_count}
 
 
 def _term_hits(text: str, terms: tuple[str, ...]) -> int:
@@ -261,49 +254,17 @@ def score_public_transcript(parsed: dict[str, Any], model: FinBERT | None = None
     safe_turns: list[dict[str, Any]] = []
     for index, (row, score) in enumerate(zip(raw_turns, scores)):
         text = str(row["text"])
-        topic_hits = [topic for topic, terms in TOPICS.items() if any(term in f" {text.lower()} " for term in terms)]
-        internal = {
-            "turn": index,
-            "speaker": str(row.get("speaker") or "Unknown speaker"),
-            "role": "",
-            "section": str(row.get("section") or "prepared"),
-            "text": text,
-            "sentiment": round(float(score), 6),
-        }
+        lower = f" {text.lower()} "
+        topic_hits = [topic for topic, terms in TOPICS.items() if any(term in lower for term in terms)]
+        internal = {"turn": index, "speaker": str(row.get("speaker") or "Unknown speaker"), "role": "", "section": str(row.get("section") or "prepared"), "text": text, "sentiment": round(float(score), 6)}
         scored_internal.append(internal)
-        safe_turns.append(
-            {
-                "turn": index,
-                "speaker": internal["speaker"],
-                "section": internal["section"],
-                "sentiment": internal["sentiment"],
-                "word_count": len(text.split()),
-                "topic_hits": topic_hits,
-                "uncertainty_hits": _term_hits(text, UNCERTAINTY_TERMS),
-                "forward_looking_hits": _term_hits(text, FORWARD_TERMS),
-            }
-        )
+        safe_turns.append({"turn": index, "speaker": internal["speaker"], "section": internal["section"], "sentiment": internal["sentiment"], "word_count": len(text.split()), "topic_hits": topic_hits, "uncertainty_hits": _term_hits(text, UNCERTAINTY_TERMS), "forward_looking_hits": _term_hits(text, FORWARD_TERMS)})
     summary = summarize_transcript(scored_internal)
     candidate: TranscriptCandidate = parsed["candidate"]
-    return {
-        "quarter": None,
-        "date": candidate.published or None,
-        "source": candidate.source,
-        "source_url": candidate.url,
-        "source_type": "free_public_transcript",
-        "summary": summary,
-        "turns": safe_turns,
-        "transcript_word_count": int(parsed.get("word_count") or 0),
-        "transcript_text_redistributed": False,
-    }
+    return {"quarter": None, "date": candidate.published or None, "source": candidate.source, "source_url": candidate.url, "source_type": "free_public_transcript", "summary": summary, "turns": safe_turns, "transcript_word_count": int(parsed.get("word_count") or 0), "transcript_text_redistributed": False}
 
 
-def fulfill_public_transcript(
-    symbol: str,
-    company_name: str = "",
-    news_rows: list[dict[str, Any]] | None = None,
-    model: FinBERT | None = None,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def fulfill_public_transcript(symbol: str, company_name: str = "", news_rows: list[dict[str, Any]] | None = None, model: FinBERT | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     candidates = discover_transcripts(symbol, company_name, news_rows or [])
     calls: list[dict[str, Any]] = []
     evidence: list[dict[str, Any]] = []
@@ -320,6 +281,5 @@ def fulfill_public_transcript(
             continue
         seen_sources.add(candidate.url)
         calls.append(call)
-        # One usable recent transcript is sufficient for the current fulfillment pass.
         break
     return calls, evidence[:12]
