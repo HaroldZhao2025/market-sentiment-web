@@ -1,15 +1,18 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "product": "Sentiment Intelligence",
   "interface_type": "static-machine-readable-contract",
   "base_path": "/market-sentiment-web",
   "principles": {
+    "source_policy": "free_public_only for extended company news and earnings fulfillment",
     "article_sentiment": "P(positive) - P(negative)",
     "no_news": "missing, not neutral zero",
+    "display_carry_forward": "allowed only after the first observed sentiment and is not a new observation",
     "sp500_sentiment": "renormalized cap-weighted mean across observed constituents only",
     "contribution": "constituent_weight * observed_sentiment",
     "sp500_price": "true index source such as ^GSPC, never SPY as index-level substitute",
-    "universe_boundary": "Composite 1500 company coverage is separate from S&P 500 index weighting, attribution and portfolio contracts"
+    "universe_boundary": "Composite 1500 company coverage is separate from S&P 500 index weighting, attribution, portfolio and research contracts",
+    "transcript_policy": "structured call analytics require actual free-public transcript text; transcript body text is not redistributed"
   },
   "resources": [
     {
@@ -21,50 +24,69 @@
     {
       "id": "company_news",
       "path_template": "/data/v5/news/{SYMBOL}.json",
-      "description": "Deduplicated recent company articles with article sentiment where scored",
+      "description": "Retained deduplicated free-public company news with article sentiment where scored",
       "format": "json"
+    },
+    {
+      "id": "company_history",
+      "path_template": "/data/v5/history/{SYMBOL}.json",
+      "description": "Extended-company daily price history plus observed-only daily sentiment and observation flags",
+      "format": "json",
+      "missing_semantics": "A false sentiment_observed flag means there was no scored sentiment observation on that date."
     },
     {
       "id": "company_earnings",
       "path_template": "/data/v5/earnings/{SYMBOL}.json",
-      "description": "Earnings history, call intelligence when available, and regulatory filing fallback",
+      "description": "EPS history, derived structured-call diagnostics when available, call source links and supporting SEC/IR material",
+      "format": "json"
+    },
+    {
+      "id": "company_data_coverage",
+      "path": "/data/v5/company_data_coverage.json",
+      "description": "News, price-history and fulfillment coverage across the Composite company universe",
+      "format": "json"
+    },
+    {
+      "id": "earnings_call_coverage",
+      "path": "/data/v5/earnings_coverage.json",
+      "description": "Complete, partial, link-only and missing free-public structured-call status by company",
       "format": "json"
     },
     {
       "id": "event_instances",
       "path": "/data/v5/event_instances.json",
-      "description": "Deterministically clustered company/theme event instances",
+      "description": "Clustered company/theme event instances derived from retained article evidence",
       "format": "json"
     },
     {
       "id": "sp500_index",
       "path": "/data/SPX/sp500_index.json",
-      "description": "S&P 500 daily close, aggregate sentiment and coverage",
+      "description": "S&P 500 true-index daily close, observed-only aggregate sentiment and coverage",
       "format": "json"
     },
     {
       "id": "sp500_constituents",
       "path": "/data/SPX/sp500_heatmap.json",
-      "description": "Constituent metadata, weight, price reaction and latest observed sentiment",
+      "description": "Core constituent metadata, index weight, price reaction and latest observed sentiment",
       "format": "json"
     },
     {
       "id": "ticker_list",
       "path": "/data/_tickers.json",
-      "description": "Symbols with full generated ticker snapshots",
+      "description": "Core symbols with legacy full ticker snapshots",
       "format": "json"
     },
     {
       "id": "ticker_snapshot",
       "path_template": "/data/ticker/{SYMBOL}.json",
-      "description": "Price/sentiment history plus scored recent articles",
+      "description": "Core price/sentiment history plus scored article evidence",
       "format": "json",
       "missing_semantics": "Use sentiment_observed / n_total when present. Carried-forward display S is not a new observation."
     },
     {
       "id": "portfolio_strategy",
       "path": "/data/portfolio_strategy.json",
-      "description": "Generated portfolio backtest artifact",
+      "description": "Generated S&P-based portfolio backtest artifact",
       "format": "json"
     },
     {
@@ -84,20 +106,24 @@
     "price": "number|null",
     "return_1d": "number|null",
     "sentiment": "number|null",
+    "sentiment_observed": "boolean where available",
     "sentiment_change": "derived number|null",
     "divergence": "derived number|null",
     "event_theme": "derived string|null",
     "novelty": "derived number|null",
     "disagreement": "derived number|null",
-    "n_total": "number|null"
+    "n_total": "number|null",
+    "call_status": "complete|partial|link_only|no_structured_call"
   },
   "natural_language_interface": {
     "route": "/ask",
+    "default_scope": "S&P 500 screener fields",
     "behavior": "Natural language maps to explicit filters and rankings over published fields."
   },
   "research_lab": {
     "route": "/lab",
     "version": 3,
+    "scope": "S&P 500 research panel",
     "signals": ["sentiment", "sentiment_change", "divergence"],
     "horizons_trading_days": [1, 3, 5, 20],
     "quantiles": [0.2, 0.25, 0.33],
