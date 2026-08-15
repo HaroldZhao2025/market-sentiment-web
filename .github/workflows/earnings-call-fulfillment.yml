@@ -23,7 +23,7 @@ permissions:
 
 concurrency:
   group: earnings-call-fulfillment
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   PYTHONPATH: src
