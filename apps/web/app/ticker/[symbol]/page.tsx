@@ -34,7 +34,8 @@ function buildSeries(obj: any): SeriesIn | null {
   const price = priceArr(obj?.price ?? obj?.close ?? obj?.Close);
   if (!date.length || !price.length) return null;
   const n = Math.min(date.length, price.length);
-  const rawSentiment = sentimentArr(obj?.S ?? obj?.sentiment).slice(0, n);
+  const sourceSentiment = sentimentArr(obj?.S ?? obj?.sentiment);
+  const rawSentiment = Array.from({ length: n }, (_, index) => sourceSentiment[index] ?? Number.NaN);
   const firstObserved = rawSentiment.findIndex((value) => Number.isFinite(value));
   const sentiment = firstObserved < 0 ? Array(n).fill(Number.NaN) : (() => {
     let last = Number.NaN;
@@ -105,7 +106,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   ]);
   const richNews = buildNews(rich);
   const compact = buildNews(obj);
-  const news = (richNews.length ? richNews : compact).slice(0, 120);
+  const news = (richNews.length ? richNews : compact).slice(0, 160);
   const newsTotal = Number(rich?.article_count ?? obj?.news_total ?? obj?.newsTotal ?? obj?.news_count?.total) || news.length;
   const extendedSeries = extendedHistory ? buildSeries(extendedHistory) : null;
   const legacySeries = obj ? buildSeries(obj) : null;
