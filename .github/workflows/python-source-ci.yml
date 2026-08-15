@@ -5,6 +5,7 @@ on:
     paths:
       - "src/market_sentiment/**"
       - ".github/workflows/python-source-ci.yml"
+      - ".github/workflows/extended-intelligence.yml"
   workflow_dispatch: {}
 
 permissions:
@@ -20,6 +21,7 @@ jobs:
         with:
           sparse-checkout: |
             src/market_sentiment
+            .github/workflows/extended-intelligence.yml
           sparse-checkout-cone-mode: false
           fetch-depth: 1
 
@@ -29,7 +31,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install lightweight runtime dependency
-        run: pip install --disable-pip-version-check --no-cache-dir yfinance
+        run: pip install --disable-pip-version-check --no-cache-dir yfinance beautifulsoup4 lxml
 
       - name: Compile market sentiment source
         run: python -m compileall -q src/market_sentiment
@@ -58,10 +60,13 @@ jobs:
           PY
 
       - name: Validate extended-refresh regression guards
+        env:
+          PYTHONPATH: src
         run: |
           python - <<'PY'
           import ast
           from pathlib import Path
+          from market_sentiment.edgar import _classify_document
 
           path = Path("src/market_sentiment/cli/build_v6_market.py")
           source = path.read_text(encoding="utf-8")
@@ -78,7 +83,28 @@ jobs:
                       if isinstance(target, ast.Name) and target.id == "article_events":
                           shadowed.append(node.lineno)
           assert not shadowed, f"article_events import is shadowed at lines {shadowed}"
-          assert "news_artifact_count" in source
-          assert "structured_call_companies" in source
+
+          assert _classify_document("Earnings Call Transcript", "EX-99.2") == "transcript"
+          assert _classify_document("Quarterly Financial Results", "EX-99.1") == "earnings_release"
+          assert _classify_document("Investor Presentation", "EX-99.2") == "presentation"
           print("Extended refresh regression guards OK")
+          PY
+
+      - name: Enforce free public production sources
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          files = [
+              Path("src/market_sentiment/cli/build_v6_market.py"),
+              Path("src/market_sentiment/v5_news.py"),
+              Path("src/market_sentiment/v5_earnings.py"),
+              Path(".github/workflows/extended-intelligence.yml"),
+          ]
+          forbidden = ["FINNHUB_TOKEN", "ALPHAVANTAGE_API_KEY", "finnhub-python", "EARNINGS_CALL_TRANSCRIPT"]
+          for path in files:
+              text = path.read_text(encoding="utf-8")
+              hits = [token for token in forbidden if token in text]
+              assert not hits, f"Paid/Premium source dependency in {path}: {hits}"
+          print("Free public source policy OK")
           PY

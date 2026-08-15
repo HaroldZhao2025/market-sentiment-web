@@ -1,16 +1,13 @@
 from __future__ import annotations
 
 import math
-from datetime import date
+import re
 from typing import Any
 
 import pandas as pd
-import requests
 import yfinance as yf
 
 from .finbert import FinBERT
-
-ALPHA_VANTAGE_ENDPOINT = "https://www.alphavantage.co/query"
 
 TOPICS: dict[str, tuple[str, ...]] = {
     "Guidance": ("guidance", "outlook", "forecast", "expect", "next quarter", "full year"),
@@ -24,6 +21,7 @@ TOPICS: dict[str, tuple[str, ...]] = {
 
 UNCERTAINTY_TERMS = ("uncertain", "uncertainty", "volatile", "challenging", "risk", "headwind", "visibility", "cautious", "pressure")
 FORWARD_TERMS = ("expect", "forecast", "outlook", "guidance", "anticipate", "next quarter", "full year", "going forward", "we believe")
+QA_MARKERS = ("question-and-answer", "question and answer", "questions and answers", "q&a", "operator instructions")
 
 
 def finite(value: object) -> float | None:
@@ -34,76 +32,9 @@ def finite(value: object) -> float | None:
     return number if math.isfinite(number) else None
 
 
-def fiscal_quarters(count: int = 8, today: date | None = None) -> list[str]:
-    current = today or date.today()
-    quarter = (current.month - 1) // 3 + 1
-    year = current.year
-    out: list[str] = []
-    for _ in range(max(1, count)):
-        out.append(f"{year}Q{quarter}")
-        quarter -= 1
-        if quarter == 0:
-            quarter = 4
-            year -= 1
-    return out
-
-
-def fetch_transcript(symbol: str, quarter: str, api_key: str) -> dict[str, Any] | None:
-    if not api_key:
-        return None
-    try:
-        response = requests.get(
-            ALPHA_VANTAGE_ENDPOINT,
-            params={"function": "EARNINGS_CALL_TRANSCRIPT", "symbol": symbol, "quarter": quarter, "apikey": api_key},
-            timeout=30,
-        )
-        response.raise_for_status()
-        payload = response.json()
-    except Exception:
-        return None
-    if not isinstance(payload, dict) or payload.get("Information") or payload.get("Note") or payload.get("Error Message"):
-        return None
-    return payload if isinstance(payload.get("transcript"), list) and payload.get("transcript") else None
-
-
-def normalize_turns(payload: dict[str, Any]) -> list[dict[str, Any]]:
-    raw = payload.get("transcript")
-    if not isinstance(raw, list):
-        return []
-    turns: list[dict[str, Any]] = []
-    qa_started = False
-    for index, item in enumerate(raw):
-        if not isinstance(item, dict):
-            continue
-        speaker = str(item.get("speaker") or item.get("name") or "").strip()
-        role = str(item.get("title") or item.get("role") or "").strip()
-        text = str(item.get("content") or item.get("text") or "").strip()
-        if not text:
-            continue
-        marker = f" {speaker} {role} {text[:140]} ".lower()
-        if "analyst" in marker or "question-and-answer" in marker or "question and answer" in marker or " q&a " in marker:
-            qa_started = True
-        turns.append({"turn": index, "speaker": speaker, "role": role, "section": "qa" if qa_started else "prepared", "text": text, "provider_sentiment": finite(item.get("sentiment"))})
-    return turns
-
-
 def _chunks(text: str, words: int = 160) -> list[str]:
     tokens = text.split()
-    return [" ".join(tokens[i : i + words]) for i in range(0, len(tokens), words)] or [""]
-
-
-def score_turns(turns: list[dict[str, Any]], model: FinBERT | None = None) -> list[dict[str, Any]]:
-    if not turns:
-        return []
-    fb = model or FinBERT()
-    out: list[dict[str, Any]] = []
-    for turn in turns:
-        chunks = _chunks(str(turn.get("text") or ""))
-        scores = fb.score(chunks, batch_size=12)
-        row = dict(turn)
-        row["sentiment"] = round(sum(scores) / len(scores), 6) if scores else None
-        out.append(row)
-    return out
+    return [" ".join(tokens[i : i + words]) for i in range(0, len(tokens), words)] or []
 
 
 def _mean(values: list[float]) -> float | None:
@@ -154,23 +85,118 @@ def earnings_history(symbol: str, limit: int = 8) -> list[dict[str, Any]]:
         return []
     rows: list[dict[str, Any]] = []
     for idx, row in frame.sort_index(ascending=False).iterrows():
-        rows.append({"date": pd.Timestamp(idx).isoformat(), "eps_estimate": finite(row.get("EPS Estimate")), "reported_eps": finite(row.get("Reported EPS")), "surprise_pct": finite(row.get("Surprise(%)"))})
+        rows.append(
+            {
+                "date": pd.Timestamp(idx).isoformat(),
+                "eps_estimate": finite(row.get("EPS Estimate")),
+                "reported_eps": finite(row.get("Reported EPS")),
+                "surprise_pct": finite(row.get("Surprise(%)")),
+            }
+        )
     return rows
 
 
-def build_earnings_intelligence(symbol: str, api_key: str, quarters: int = 4) -> dict[str, Any]:
+def _sec_transcript_turns(text: str, model: FinBERT) -> list[dict[str, Any]]:
+    """Create conservative transcript segments from a free SEC transcript exhibit."""
+    if not text.strip():
+        return []
+    # Prefer visible paragraph/newline structure when available; otherwise use bounded word chunks.
+    parts = [" ".join(part.split()) for part in re.split(r"\n{1,}|(?<=\.)\s{2,}", text) if len(part.split()) >= 12]
+    if len(parts) < 3:
+        parts = _chunks(text, words=140)
+    qa_started = False
+    rows: list[dict[str, Any]] = []
+    texts: list[str] = []
+    sections: list[str] = []
+    for part in parts[:200]:
+        lower = part.lower()
+        if any(marker in lower for marker in QA_MARKERS):
+            qa_started = True
+        texts.append(part)
+        sections.append("qa" if qa_started else "prepared")
+    if not texts:
+        return []
+    scores = model.score(texts, batch_size=12)
+    for index, (part, section, score) in enumerate(zip(texts, sections, scores)):
+        rows.append(
+            {
+                "turn": index,
+                "speaker": "SEC transcript segment",
+                "role": "unparsed",
+                "section": section,
+                "text": part,
+                "sentiment": round(float(score), 6),
+            }
+        )
+    return rows
+
+
+def build_free_earnings_intelligence(symbol: str, sec_evidence: list[dict[str, Any]]) -> dict[str, Any]:
+    """Build earnings intelligence only from free public sources."""
+    transcripts = [row for row in sec_evidence if row.get("document_type") == "transcript" and str(row.get("text") or "").strip()]
     calls: list[dict[str, Any]] = []
     model: FinBERT | None = None
-    for quarter in fiscal_quarters(max(quarters + 2, 6)):
-        if len(calls) >= quarters:
-            break
-        payload = fetch_transcript(symbol, quarter, api_key)
-        if not payload:
-            continue
-        turns = normalize_turns(payload)
+    for row in transcripts[:4]:
+        model = model or FinBERT()
+        turns = _sec_transcript_turns(str(row.get("text") or ""), model)
         if not turns:
             continue
-        model = model or FinBERT()
-        scored = score_turns(turns, model=model)
-        calls.append({"quarter": str(payload.get("quarter") or quarter), "date": str(payload.get("date") or payload.get("fiscalDateEnding") or "") or None, "source": "earnings call transcript", "summary": summarize_transcript(scored), "turns": scored})
-    return {"schema_version": 2, "symbol": symbol, "earnings_history": earnings_history(symbol), "calls": calls, "methodology": {"turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns", "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment", "topics": "deterministic keyword families"}}
+        calls.append(
+            {
+                "quarter": None,
+                "date": str(row.get("ts") or "") or None,
+                "source": "SEC EDGAR transcript exhibit",
+                "source_url": str(row.get("url") or ""),
+                "summary": summarize_transcript(turns),
+                "turns": turns,
+            }
+        )
+
+    filing_fallback = []
+    public_links: list[dict[str, Any]] = []
+    seen_links: set[str] = set()
+    for row in sec_evidence:
+        item = {
+            "ts": str(row.get("ts") or ""),
+            "title": str(row.get("title") or ""),
+            "url": str(row.get("url") or ""),
+            "source": "SEC EDGAR",
+            "document_type": str(row.get("document_type") or "filing"),
+            "sec_form_type": str(row.get("sec_form_type") or ""),
+        }
+        if item["document_type"] != "transcript":
+            filing_fallback.append(item)
+        for url in row.get("public_links") or []:
+            value = str(url or "").strip()
+            if value and value not in seen_links:
+                seen_links.add(value)
+                public_links.append({"title": "Public webcast / investor-relations link", "url": value, "source": "SEC filing link", "ts": item["ts"]})
+
+    return {
+        "schema_version": 5,
+        "symbol": symbol,
+        "earnings_history": earnings_history(symbol),
+        "calls": calls,
+        "call_links": public_links[:10],
+        "filing_fallback": filing_fallback[:30],
+        "methodology": {
+            "source_policy": "Free public sources only",
+            "structured_transcript_source": "SEC EDGAR transcript exhibits when voluntarily filed",
+            "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+            "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on bounded transcript segments",
+        },
+    }
+
+
+# Compatibility entry point. Paid transcript APIs are intentionally not used in production.
+def build_earnings_intelligence(symbol: str, api_key: str = "", quarters: int = 4) -> dict[str, Any]:
+    del api_key, quarters
+    return {
+        "schema_version": 5,
+        "symbol": symbol,
+        "earnings_history": earnings_history(symbol),
+        "calls": [],
+        "call_links": [],
+        "filing_fallback": [],
+        "methodology": {"source_policy": "Free public sources only"},
+    }

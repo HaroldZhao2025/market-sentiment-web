@@ -6,13 +6,18 @@ import json
 import math
 import re
 import unicodedata
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlsplit
+from urllib.parse import quote_plus, urlsplit
 
 import pandas as pd
+import requests
 import yfinance as yf
+from bs4 import BeautifulSoup
+
+GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
+PUBLIC_UA = "market-sentiment-web/0.1 (+https://github.com/HaroldZhao2025/market-sentiment-web)"
 
 
 def normalize_title(value: object) -> str:
@@ -49,6 +54,7 @@ def _timestamp(value: object) -> pd.Timestamp | None:
 
 
 def yahoo_news(ticker: str, days: int = 30, count: int = 250) -> list[dict[str, Any]]:
+    """Free public Yahoo Finance news surfaced through yfinance."""
     now = pd.Timestamp.now(tz="UTC")
     cutoff = now - pd.Timedelta(days=max(1, days))
     try:
@@ -86,44 +92,49 @@ def yahoo_news(ticker: str, days: int = 30, count: int = 250) -> list[dict[str, 
                 "summary": str(content.get("summary") or content.get("description") or item.get("summary") or "").strip(),
                 "url": str(canonical.get("url") or click.get("url") or item.get("link") or item.get("url") or ""),
                 "source": source,
-                "provider": "yfinance",
+                "provider": "yahoo_public",
             }
         )
     return rows
 
 
-def finnhub_news(ticker: str, token: str, days: int = 30) -> list[dict[str, Any]]:
-    if not token:
-        return []
+def google_news_rss(ticker: str, company_name: str = "", days: int = 30, count: int = 100) -> list[dict[str, Any]]:
+    """Free public Google News RSS search, used as a second discovery source."""
+    now = pd.Timestamp.now(tz="UTC")
+    cutoff = now - pd.Timedelta(days=max(1, days))
+    query = f'("{company_name}" OR {ticker}) when:{max(1, days)}d' if company_name else f'{ticker} stock when:{max(1, days)}d'
     try:
-        import finnhub
+        response = requests.get(
+            GOOGLE_NEWS_RSS,
+            params={"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"},
+            headers={"User-Agent": PUBLIC_UA},
+            timeout=20,
+        )
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, "xml")
     except Exception:
         return []
-    end = datetime.now(timezone.utc).date()
-    start = end - timedelta(days=max(1, days))
-    try:
-        items = finnhub.Client(api_key=token).company_news(ticker, _from=start.isoformat(), to=end.isoformat()) or []
-    except Exception:
-        return []
+
     rows: list[dict[str, Any]] = []
-    for item in items:
-        if not isinstance(item, dict):
+    for item in soup.find_all("item")[: max(1, count)]:
+        title = " ".join((item.title.get_text(" ", strip=True) if item.title else "").split())
+        link = str(item.link.get_text(strip=True) if item.link else "").strip()
+        source_tag = item.find("source")
+        source = " ".join(source_tag.get_text(" ", strip=True).split()) if source_tag else "Google News"
+        pub_date = item.pubDate.get_text(strip=True) if item.pubDate else ""
+        ts = pd.to_datetime(pub_date, utc=True, errors="coerce")
+        if not title or pd.isna(ts) or ts < cutoff or ts > now + pd.Timedelta(hours=2):
             continue
-        title = str(item.get("headline") or "").strip()
-        if not title:
-            continue
-        try:
-            ts = pd.Timestamp.fromtimestamp(int(item.get("datetime")), tz="UTC").isoformat()
-        except Exception:
-            ts = ""
+        description = item.description.get_text(" ", strip=True) if item.description else ""
+        summary = " ".join(BeautifulSoup(description, "lxml").get_text(" ", strip=True).split())
         rows.append(
             {
-                "ts": ts,
+                "ts": ts.isoformat(),
                 "title": title,
-                "summary": str(item.get("summary") or "").strip(),
-                "url": str(item.get("url") or ""),
-                "source": str(item.get("source") or "Finnhub"),
-                "provider": "finnhub",
+                "summary": summary,
+                "url": link,
+                "source": source or "Google News",
+                "provider": "google_news_rss",
             }
         )
     return rows
@@ -197,11 +208,13 @@ def score_news(items: list[dict[str, Any]], cache_path: Path, batch_size: int = 
 
 def collect_company_news(
     ticker: str,
-    finnhub_token: str = "",
+    finnhub_token: str = "",  # compatibility only; intentionally ignored
     days: int = 30,
     max_items: int = 60,
+    company_name: str = "",
 ) -> list[dict[str, Any]]:
+    """Collect only free public news. Paid/Premium APIs are intentionally excluded."""
+    del finnhub_token
     items = yahoo_news(ticker, days=days, count=max(250, max_items * 3))
-    if finnhub_token:
-        items.extend(finnhub_news(ticker, finnhub_token, days=days))
+    items.extend(google_news_rss(ticker, company_name=company_name, days=days, count=max(100, max_items * 2)))
     return deduplicate_news(items)[:max_items]
