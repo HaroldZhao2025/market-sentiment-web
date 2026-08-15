@@ -1,63 +1,96 @@
-# Sentiment Intelligence — S&P 500 Market Evidence & Research
+# Sentiment Intelligence — U.S. Company Evidence & S&P 500 Research
 
-**Sentiment Intelligence** is an auditable market-intelligence and empirical-research platform built around S&P 500 news sentiment, price reactions, constituent attribution, deterministic event intelligence, signal screening, natural-language querying, machine-readable agent contracts, and reproducible research.
+**Sentiment Intelligence** is an auditable market-intelligence and empirical-research platform combining a broad U.S. company evidence layer with a strictly separated S&P 500 index/research core.
 
-> Do not compete with LLMs by generating generic financial prose. Build proprietary, deterministic, auditable market data and research that humans, LLMs, and agents can consume.
+## Authors
 
-## Author
+- Portfolio Strategy by **leolin0407-cmyk** — leolin0407@gmail.com
+- Market Sentiment, Website Design, Repo Setting by **HaroldZhao2025** — stevenfinch2022@outlook.com
 
-- Portfolio Strategy by **leolin0407-cmyk** (leolin0407@gmail.com)
-- Market Sentiment, Website Design, Repo Setting by **HaroldZhao2025** (stevenfinch2022@outlook.com)
-
-## Website
-
-`https://haroldzhao2025.github.io/market-sentiment-web/`
+Live site: `https://haroldzhao2025.github.io/market-sentiment-web/`
 
 ## Current product surfaces
 
-- `/` — market state, attention, and signal discovery
-- `/ask` — **Ask the Market**: natural-language questions translated into explicit deterministic filters and rankings
-- `/ticker/<symbol>` — ticker price/sentiment history, scored headline evidence, and deterministic event drivers
-- `/screener` — cross-sectional Market Screener / Signal Explorer
-- `/sp500` — true S&P 500 index price, observed sentiment, coverage, and user-selectable **Treemap / Bubbles** views
-- `/attribution` — company → industry → sector → index sentiment-contribution decomposition
-- `/events` — Historical Event Memory with taxonomy, novelty, source breadth, disagreement, and observed price reactions
-- `/lab` — **Research Lab V2** with observed-only cross-sectional sorts, HAC inference, OOS checks, turnover and cost sensitivity
-- `/agent` — machine-interface documentation for external agents and research workflows
-- `/portfolio` — lagged sentiment-driven portfolio research and benchmark comparison
+- `/` — S&P 500 market state and signal discovery
+- `/companies` — Composite 1500 company explorer with company visuals and coverage status
+- `/ticker/<symbol>` — unified company workspace with **Daily News / Earnings Call** tabs
+- `/earnings/<symbol>` — backward-compatible standalone earnings route
+- `/ask` — deterministic natural-language query layer over S&P 500 screener fields
+- `/screener` — S&P 500 cross-sectional signal explorer
+- `/sp500` — true S&P 500 price, observed sentiment, coverage, Treemap and Bubbles
+- `/attribution` — company → industry → sector → index contribution
+- `/events` — persistent company event stream
+- `/lab` — Research Lab V3 with observed-only signal construction and reproducible specification IDs
+- `/portfolio` — sentiment strategy research; Portfolio Strategy by leolin0407-cmyk
 - `/research` — generated empirical research library
-- `/data` — machine-readable data contracts
-- `/methodology` — methodology, definitions, and limitations
-- `/agent-manifest.json` — static discovery/semantics contract for agents
+- `/agent` — machine-interface documentation
+- `/data` — public JSON contracts
+- `/methodology` — definitions, source policy and limitations
+- `/agent-manifest.json` — static discovery/semantics contract
 
-## Core methodology contracts
+## Universe architecture
 
-- Cross-provider duplicate headlines are deduplicated before aggregation.
+The broad company layer is the **S&P Composite 1500** coverage target:
+
+- S&P 500
+- S&P MidCap 400
+- S&P SmallCap 600
+
+This layer supplies company metadata, retained news, extended daily history, earnings evidence and event instances.
+
+The **S&P 500 core remains separate** for index weighting, constituent contribution, portfolio research, Screener/Ask, and Research Lab. Extended companies are never silently injected into those calculations.
+
+## Data semantics
+
+- Cross-source duplicate headlines are removed before aggregation.
 - FinBERT article sentiment is `P(positive) - P(negative)`.
 - **No news is missing, not neutral zero.**
-- Ticker-day sentiment is the equal-weight mean of unique scored articles for that ticker/day.
+- Ticker-day sentiment is the equal-weight mean of unique scored headlines for that company/day.
 - S&P cap-weighted sentiment renormalizes only across constituents with observed sentiment.
-- Constituent contribution is `constituent weight × observed sentiment`.
-- Article-level sentiment remains available for headline evidence.
-- S&P index price uses a true index source such as `^GSPC`; SPY is not used as an index-level price substitute.
-- Portfolio calculations should not be silently changed by presentation/UI work.
+- Constituent contribution is `weight × observed sentiment` and is additive.
+- The S&P index price uses a true index source such as `^GSPC`; SPY is not an index-level substitute.
+- `sentiment_observed` distinguishes fresh observations from any display carry-forward value.
+- Portfolio calculations must not be silently changed by UI work.
 
-## Phase 4 — completed
+## Free-public source policy
 
-Phase 4 turns the Intelligence Engine into a queryable research platform:
+Production company intelligence uses **free, publicly accessible sources only**.
 
-1. **Ask the Market** — natural language maps to an explicit query plan over deterministic Screener fields; the UI shows the interpretation and underlying rows.
-2. **Dual S&P visualization** — classic Treemap is the default, with clustered Bubbles available as an alternative. Both support Contribution / Sentiment / 1D Return, sector filtering, rich hover evidence, and ticker navigation.
-3. **Constituent metadata hardening** — seven-day Wikipedia metadata TTL, yfinance `longName` / `shortName` fallback, ticker-variant handling, and a 98% company-name coverage gate.
-4. **Research Lab V2** — uses only `sentiment_observed=true` dates, prior observed sentiment for changes, daily cross-sectional sorts, Newey-West/Bartlett HAC inference, chronological 70/30 validation, turnover diagnostics, transaction-cost sensitivity, and downloadable JSON specifications/results.
-5. **Agent interface** — `/agent` plus `/agent-manifest.json` provide stable static machine-readable contracts appropriate for GitHub Pages rather than pretending the site has an always-on dynamic API server.
+- Market/price history: Yahoo Finance public market data via yfinance
+- Company news discovery: Yahoo public finance surfaces + Google News RSS
+- Sentiment model: ProsusAI/FinBERT
+- Earnings/call discovery: free public transcript pages, public Yahoo/Motley Fool discovery, company/public links and SEC EDGAR evidence
+- Constituent metadata: public S&P constituent tables/Wikipedia with yfinance metadata fallback
 
-## Data sources
+Paid/Premium news or transcript feeds are not production dependencies.
 
-- Prices: `yfinance`
-- Constituent metadata: Wikipedia S&P 500 constituents table with yfinance metadata fallback
-- News: Finnhub and Yahoo/yfinance sources in the current production pipeline
-- Sentiment: ProsusAI/FinBERT
+Third-party transcript body text may be processed transiently to derive speaker/section sentiment, uncertainty, forward-looking language and topics. Public artifacts retain **derived diagnostics and source URLs, not the transcript body text**.
+
+## Company fulfillment artifacts
+
+Key public resources under `apps/web/public/data/v5/`:
+
+- `universe.json` — Composite 1500 company layer
+- `news/{SYMBOL}.json` — retained free-public news
+- `history/{SYMBOL}.json` — extended daily price + observed sentiment history
+- `company_data_coverage.json` — news/history readiness across the universe
+- `earnings/{SYMBOL}.json` — EPS history, structured call diagnostics where available, source links, filings
+- `earnings_coverage.json` — structured-call coverage audit
+- `event_instances.json` — persistent clustered event instances
+
+Dedicated fulfillment workflows progressively fill missing news/history and earnings-call coverage rather than representing unavailable evidence as zero.
+
+## Research Lab V3
+
+Research Lab remains on the S&P 500 core and uses fresh observed sentiment only.
+
+- Signals: sentiment level, observed sentiment change, sentiment/price divergence
+- Horizons: 1D / 3D / 5D / 20D
+- Quantiles: 20% / 25% / 33%
+- Samples: full / first 70% / last 30%
+- Newey-West/Bartlett HAC inference with lag `horizon - 1`
+- Turnover and transaction-cost sensitivity
+- Reproducible specification IDs and downloadable results
 
 ## Run locally
 
@@ -69,13 +102,13 @@ npx tsc --noEmit
 npm run build
 ```
 
-## CI / GitHub Pages
+## CI and deployment
 
-- Production data/site deployment runs through `.github/workflows/pipeline.yml`.
-- Frontend PR CI strictly runs TypeScript typecheck and Next.js production build.
-- Python source changes receive compile validation plus deterministic S&P metadata-helper tests.
-- Build failures are not suppressed.
+- Frontend PR CI: `npm ci` → `npx tsc --noEmit` → `npm run build`
+- Python source CI: compile + deterministic regression/source-policy guards
+- Main production site/data deployment: `.github/workflows/pipeline.yml`
+- Extended company refresh, earnings fulfillment and company-data fulfillment run separately so they do not alter S&P core semantics.
 
 ## Research caveats
 
-Research Lab V2 and Event Memory are descriptive research tools, not causal estimators or investment recommendations. HAC inference addresses overlapping-return serial dependence only at the displayed diagnostic level; publication-grade work should still consider richer clustering, transaction-cost assumptions, multiple-testing concerns, point-in-time universe construction, and genuinely held-out validation.
+The current company layer is a broad current-universe evidence product, not a fully reconstructed historical point-in-time membership dataset. Free-public news/transcript availability varies by company and date. Event history is bounded by collected evidence. Research statistics and backtests are diagnostics rather than causal estimates or investment recommendations.
