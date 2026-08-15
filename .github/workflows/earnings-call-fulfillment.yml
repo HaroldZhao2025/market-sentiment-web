@@ -1,0 +1,127 @@
+name: Fulfill Earnings Calls
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_index:
+        description: "Zero-based fulfillment batch index"
+        required: false
+        default: "0"
+      batch_size:
+        description: "Companies per batch"
+        required: false
+        default: "25"
+  schedule:
+    - cron: "35 3,9,15,21 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: earnings-call-fulfillment
+  cancel-in-progress: false
+
+env:
+  PYTHONPATH: src
+  HF_HUB_DISABLE_TELEMETRY: "1"
+  TOKENIZERS_PARALLELISM: "false"
+
+jobs:
+  fulfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/hf-home
+          key: phase8-finbert-${{ runner.os }}-py311
+
+      - name: Install free-source fulfillment dependencies
+        run: |
+          set -euo pipefail
+          echo "HF_HOME=${RUNNER_TEMP}/hf-home" >> "$GITHUB_ENV"
+          pip install --disable-pip-version-check --no-cache-dir \
+            "numpy>=1.26,<3" "pandas>=2.1,<3" "requests>=2.31" "yfinance>=0.2.50" \
+            "beautifulsoup4>=4.12" "lxml>=5.2"
+          pip install --disable-pip-version-check --no-cache-dir "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
+          pip install --disable-pip-version-check --no-cache-dir "transformers==4.45.2" "tokenizers==0.20.3"
+
+      - name: Resolve batch
+        id: batch
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_BATCH_INDEX: ${{ github.event.inputs.batch_index }}
+          INPUT_BATCH_SIZE: ${{ github.event.inputs.batch_size }}
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import datetime, os
+          if os.getenv("EVENT_NAME") == "workflow_dispatch":
+              index = int(os.getenv("INPUT_BATCH_INDEX") or 0)
+              size = int(os.getenv("INPUT_BATCH_SIZE") or 25)
+          else:
+              now = datetime.datetime.now(datetime.timezone.utc)
+              slot = {3: 0, 9: 1, 15: 2, 21: 3}.get(now.hour, 0)
+              index = ((now.timetuple().tm_yday - 1) * 4 + slot) % 60
+              size = 25
+          print(f"index={index}")
+          print(f"size={size}")
+          PY
+
+      - name: Fulfill free public earnings calls
+        run: |
+          set -euo pipefail
+          python -m market_sentiment.cli.fulfill_earnings_calls \
+            --public-root apps/web/public \
+            --batch-index "${{ steps.batch.outputs.index }}" \
+            --batch-size "${{ steps.batch.outputs.size }}" \
+            --priority-symbols "AAPL,MSFT,NVDA,AMZN,GOOGL,META,TSLA" \
+            --sec-days 550
+
+      - name: Validate fulfillment policy
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("apps/web/public/data/v5")
+          status = json.loads((root / "earnings_fulfillment_status.json").read_text())
+          if status.get("source_policy") != "free_public_only":
+              raise SystemExit("Fulfillment source policy is not free_public_only")
+          results = status.get("results") or []
+          if not results:
+              raise SystemExit("Fulfillment produced no batch results")
+          aapl_path = root / "earnings" / "AAPL.json"
+          if not aapl_path.exists():
+              raise SystemExit("AAPL earnings artifact missing")
+          aapl = json.loads(aapl_path.read_text())
+          if not (aapl.get("calls") or []):
+              raise SystemExit("AAPL structured-call fulfillment gate failed")
+          for call in aapl.get("calls") or []:
+              for turn in call.get("turns") or []:
+                  if turn.get("text"):
+                      raise SystemExit("Transcript text must not be redistributed in public artifacts")
+          print(f"FULFILLMENT DATA OK | batch_results={len(results)} aapl_calls={len(aapl.get('calls') or [])}")
+          PY
+
+      - name: Persist fulfillment artifacts
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f apps/web/public/data/v5/earnings apps/web/public/data/v5/earnings_fulfillment_status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: fulfill free earnings calls batch ${{ steps.batch.outputs.index }} [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

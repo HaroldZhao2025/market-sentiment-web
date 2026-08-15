@@ -6,6 +6,7 @@ on:
       - "src/market_sentiment/**"
       - ".github/workflows/python-source-ci.yml"
       - ".github/workflows/extended-intelligence.yml"
+      - ".github/workflows/earnings-call-fulfillment.yml"
   workflow_dispatch: {}
 
 permissions:
@@ -22,6 +23,7 @@ jobs:
           sparse-checkout: |
             src/market_sentiment
             .github/workflows/extended-intelligence.yml
+            .github/workflows/earnings-call-fulfillment.yml
           sparse-checkout-cone-mode: false
           fetch-depth: 1
 
@@ -53,7 +55,6 @@ jobs:
           assert meta["AAPL"].name == "Apple Inc."
           assert meta["BRK-B"].name == "Berkshire Hathaway"
           assert meta["BRK.B"].sector == "Financials"
-
           current = {"fetched_at_utc": datetime.now(timezone.utc).isoformat()}
           assert cache_is_fresh(current, 7)
           print("S&P metadata helper validation OK")
@@ -83,11 +84,45 @@ jobs:
                       if isinstance(target, ast.Name) and target.id == "article_events":
                           shadowed.append(node.lineno)
           assert not shadowed, f"article_events import is shadowed at lines {shadowed}"
-
           assert _classify_document("Earnings Call Transcript", "EX-99.2") == "transcript"
           assert _classify_document("Quarterly Financial Results", "EX-99.1") == "earnings_release"
           assert _classify_document("Investor Presentation", "EX-99.2") == "presentation"
           print("Extended refresh regression guards OK")
+          PY
+
+      - name: Validate Phase 8 fulfillment contract
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          resolver = Path("src/market_sentiment/free_transcripts.py").read_text(encoding="utf-8")
+          fulfill = Path("src/market_sentiment/cli/fulfill_earnings_calls.py").read_text(encoding="utf-8")
+          workflow = Path(".github/workflows/earnings-call-fulfillment.yml").read_text(encoding="utf-8")
+          tree = ast.parse(resolver)
+          functions = {node.name for node in tree.body if isinstance(node, ast.FunctionDef)}
+          required = {"discover_transcripts", "extract_public_transcript", "score_public_transcript", "fulfill_public_transcript"}
+          assert required.issubset(functions), required - functions
+          assert "transcript_text_redistributed" in resolver
+          assert '"AAPL,MSFT,NVDA,AMZN,GOOGL,META,TSLA"' in workflow
+          assert "AAPL fulfillment gate failed" in fulfill
+          assert "batch_index" in fulfill and "batch_size" in fulfill
+
+          # Only inspect dictionaries appended to safe_turns. Internal FinBERT
+          # working rows may contain transcript text, but persisted safe turns may not.
+          safe_append_dicts = []
+          for node in ast.walk(tree):
+              if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+                  continue
+              if node.func.attr != "append" or not isinstance(node.func.value, ast.Name) or node.func.value.id != "safe_turns":
+                  continue
+              if node.args and isinstance(node.args[0], ast.Dict):
+                  safe_append_dicts.append(node.args[0])
+          assert safe_append_dicts, "No safe_turns artifact dictionaries found"
+          for item in safe_append_dicts:
+              keys = {key.value for key in item.keys if isinstance(key, ast.Constant) and isinstance(key.value, str)}
+              assert "text" not in keys, f"Public transcript artifact includes raw text: {keys}"
+          print("Phase 8 fulfillment contract OK")
           PY
 
       - name: Enforce free public production sources
@@ -97,9 +132,12 @@ jobs:
 
           files = [
               Path("src/market_sentiment/cli/build_v6_market.py"),
+              Path("src/market_sentiment/cli/fulfill_earnings_calls.py"),
               Path("src/market_sentiment/v5_news.py"),
               Path("src/market_sentiment/v5_earnings.py"),
+              Path("src/market_sentiment/free_transcripts.py"),
               Path(".github/workflows/extended-intelligence.yml"),
+              Path(".github/workflows/earnings-call-fulfillment.yml"),
           ]
           forbidden = ["FINNHUB_TOKEN", "ALPHAVANTAGE_API_KEY", "finnhub-python", "EARNINGS_CALL_TRANSCRIPT"]
           for path in files:

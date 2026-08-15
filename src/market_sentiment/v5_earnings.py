@@ -97,15 +97,12 @@ def earnings_history(symbol: str, limit: int = 8) -> list[dict[str, Any]]:
 
 
 def _sec_transcript_turns(text: str, model: FinBERT) -> list[dict[str, Any]]:
-    """Create conservative transcript segments from a free SEC transcript exhibit."""
     if not text.strip():
         return []
-    # Prefer visible paragraph/newline structure when available; otherwise use bounded word chunks.
     parts = [" ".join(part.split()) for part in re.split(r"\n{1,}|(?<=\.)\s{2,}", text) if len(part.split()) >= 12]
     if len(parts) < 3:
         parts = _chunks(text, words=140)
     qa_started = False
-    rows: list[dict[str, Any]] = []
     texts: list[str] = []
     sections: list[str] = []
     for part in parts[:200]:
@@ -117,22 +114,41 @@ def _sec_transcript_turns(text: str, model: FinBERT) -> list[dict[str, Any]]:
     if not texts:
         return []
     scores = model.score(texts, batch_size=12)
-    for index, (part, section, score) in enumerate(zip(texts, sections, scores)):
-        rows.append(
+    return [
+        {
+            "turn": index,
+            "speaker": "SEC transcript segment",
+            "role": "unparsed",
+            "section": section,
+            "text": part,
+            "sentiment": round(float(score), 6),
+        }
+        for index, (part, section, score) in enumerate(zip(texts, sections, scores))
+    ]
+
+
+def _safe_turns(turns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    safe: list[dict[str, Any]] = []
+    for turn in turns:
+        text = str(turn.get("text") or "")
+        lower = f" {text.lower()} "
+        safe.append(
             {
-                "turn": index,
-                "speaker": "SEC transcript segment",
-                "role": "unparsed",
-                "section": section,
-                "text": part,
-                "sentiment": round(float(score), 6),
+                "turn": turn.get("turn"),
+                "speaker": str(turn.get("speaker") or "Unknown speaker"),
+                "role": str(turn.get("role") or ""),
+                "section": str(turn.get("section") or "prepared"),
+                "sentiment": finite(turn.get("sentiment")),
+                "word_count": len(text.split()),
+                "topic_hits": [topic for topic, terms in TOPICS.items() if any(term in lower for term in terms)],
+                "uncertainty_hits": sum(1 for term in UNCERTAINTY_TERMS if term in lower),
+                "forward_looking_hits": sum(1 for term in FORWARD_TERMS if term in lower),
             }
         )
-    return rows
+    return safe
 
 
 def build_free_earnings_intelligence(symbol: str, sec_evidence: list[dict[str, Any]]) -> dict[str, Any]:
-    """Build earnings intelligence only from free public sources."""
     transcripts = [row for row in sec_evidence if row.get("document_type") == "transcript" and str(row.get("text") or "").strip()]
     calls: list[dict[str, Any]] = []
     model: FinBERT | None = None
@@ -147,8 +163,11 @@ def build_free_earnings_intelligence(symbol: str, sec_evidence: list[dict[str, A
                 "date": str(row.get("ts") or "") or None,
                 "source": "SEC EDGAR transcript exhibit",
                 "source_url": str(row.get("url") or ""),
+                "source_type": "sec_transcript_exhibit",
                 "summary": summarize_transcript(turns),
-                "turns": turns,
+                "turns": _safe_turns(turns),
+                "transcript_word_count": sum(len(str(turn.get("text") or "").split()) for turn in turns),
+                "transcript_text_redistributed": False,
             }
         )
 
@@ -173,7 +192,7 @@ def build_free_earnings_intelligence(symbol: str, sec_evidence: list[dict[str, A
                 public_links.append({"title": "Public webcast / investor-relations link", "url": value, "source": "SEC filing link", "ts": item["ts"]})
 
     return {
-        "schema_version": 5,
+        "schema_version": 6,
         "symbol": symbol,
         "earnings_history": earnings_history(symbol),
         "calls": calls,
@@ -181,18 +200,17 @@ def build_free_earnings_intelligence(symbol: str, sec_evidence: list[dict[str, A
         "filing_fallback": filing_fallback[:30],
         "methodology": {
             "source_policy": "Free public sources only",
-            "structured_transcript_source": "SEC EDGAR transcript exhibits when voluntarily filed",
+            "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
             "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-            "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on bounded transcript segments",
+            "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
         },
     }
 
 
-# Compatibility entry point. Paid transcript APIs are intentionally not used in production.
 def build_earnings_intelligence(symbol: str, api_key: str = "", quarters: int = 4) -> dict[str, Any]:
     del api_key, quarters
     return {
-        "schema_version": 5,
+        "schema_version": 6,
         "symbol": symbol,
         "earnings_history": earnings_history(symbol),
         "calls": [],
