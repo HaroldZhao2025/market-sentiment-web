@@ -12,7 +12,7 @@ on:
         required: false
         default: "25"
   schedule:
-    - cron: "45 * * * *"
+    - cron: "40 * * * *"
 
 permissions:
   contents: write
@@ -117,7 +117,7 @@ jobs:
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
-          git config user.email "4189828+github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f apps/web/public/data/v5/earnings apps/web/public/data/v5/earnings_fulfillment_status.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: fulfill free earnings calls batch ${{ steps.batch.outputs.index }} [skip ci]"
