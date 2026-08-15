@@ -10,7 +10,7 @@ on:
       batch_size:
         description: "Companies per fulfillment batch"
         required: false
-        default: "120"
+        default: "250"
   schedule:
     - cron: "7,22,37,52 * * * *"
 
@@ -70,9 +70,9 @@ jobs:
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import os
           if os.getenv("EVENT_NAME") == "workflow_dispatch":
-              size = int(os.getenv("INPUT_BATCH_SIZE") or 120)
+              size = int(os.getenv("INPUT_BATCH_SIZE") or 250)
           else:
-              size = 120
+              size = 250
           print(f"size={size}")
           PY
 
@@ -85,7 +85,7 @@ jobs:
             --news-days 365 \
             --news-max-items 120 \
             --history-period 2y \
-            --workers 12 \
+            --workers 16 \
             --score-cache "${RUNNER_TEMP}/company-data-cache/headline_scores.json.gz"
 
       - name: Validate company data coverage artifact
