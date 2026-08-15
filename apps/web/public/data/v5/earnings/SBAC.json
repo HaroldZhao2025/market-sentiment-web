@@ -1,10 +1,40 @@
 {
-  "schema_version": 2,
+  "schema_version": 8,
   "symbol": "SBAC",
   "earnings_history": [],
   "calls": [],
   "methodology": {
-    "transcript_status": "No transcript API key configured; SEC filing fallback only"
+    "transcript_status": "No transcript API key configured; SEC filing fallback only",
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
-  "filing_fallback": []
+  "filing_fallback": [],
+  "call_links": [
+    {
+      "title": "SBAC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/sbac/transcripts/657376-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-03T00:00:00+00:00"
+    },
+    {
+      "title": "SBAC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/sbac/transcripts/572351-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "SBAC Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/sbac/transcripts/397138-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "SBAC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-sba-communications-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
+    }
+  ],
+  "updated_at_utc": "2026-08-15T19:46:45.404962+00:00"
 }
