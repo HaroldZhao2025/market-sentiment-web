@@ -3,6 +3,7 @@ from __future__ import annotations
 import html
 import re
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any
 from urllib.parse import quote_plus, urlparse
 
@@ -15,6 +16,22 @@ from .v5_earnings import FORWARD_TERMS, TOPICS, UNCERTAINTY_TERMS, summarize_tra
 UA = "market-sentiment-web/1.0 (+https://github.com/HaroldZhao2025/market-sentiment-web)"
 TRANSCRIPT_MARKERS = ("earnings call transcript", "conference call transcript", "financial call transcript")
 ALLOWED_PUBLIC_HOSTS = ("fool.com", "finance.yahoo.com", "sixcolors.com")
+VERIFIED_PUBLIC_TRANSCRIPTS: dict[str, tuple[tuple[str, str, str, str], ...]] = {
+    "AAPL": (
+        (
+            "https://www.fool.com/earnings/call-transcripts/2026/04/30/apple-aapl-q2-2026-earnings-call-transcript/",
+            "Apple (AAPL) Q2 2026 Earnings Call Transcript",
+            "Motley Fool",
+            "2026-04-30T00:00:00+00:00",
+        ),
+        (
+            "https://sixcolors.com/post/2026/07/one-last-time-this-is-tim-transcript-of-apples-q3-2026-financial-call/",
+            "Transcript of Apple's Q3 2026 financial call",
+            "Six Colors",
+            "2026-07-30T00:00:00+00:00",
+        ),
+    )
+}
 
 
 @dataclass(frozen=True)
@@ -42,6 +59,20 @@ def _allowed(url: str) -> bool:
 def _looks_like_transcript(title: str) -> bool:
     lower = f" {title.lower()} "
     return any(marker in lower for marker in TRANSCRIPT_MARKERS) or (" transcript " in lower and (" earnings " in lower or " financial call " in lower))
+
+
+def _published(value: object) -> str:
+    try:
+        raw = int(value)
+        if raw > 0:
+            return datetime.fromtimestamp(raw, tz=timezone.utc).isoformat()
+    except (TypeError, ValueError, OverflowError):
+        pass
+    return str(value or "")
+
+
+def verified_candidates(symbol: str) -> list[TranscriptCandidate]:
+    return [TranscriptCandidate(url, title, source, published) for url, title, source, published in VERIFIED_PUBLIC_TRANSCRIPTS.get(symbol.upper(), ())]
 
 
 def _resolve_google_news_url(url: str) -> str:
@@ -75,7 +106,7 @@ def yahoo_search_transcript_candidates(symbol: str, company_name: str = "", limi
         if not _looks_like_transcript(title) or not url or not _allowed(url) or url in seen:
             continue
         seen.add(url)
-        out.append(TranscriptCandidate(url=url, title=title, source=str(row.get("publisher") or urlparse(url).hostname or "Yahoo public search"), published=str(row.get("providerPublishTime") or "")))
+        out.append(TranscriptCandidate(url=url, title=title, source=str(row.get("publisher") or urlparse(url).hostname or "Yahoo public search"), published=_published(row.get("providerPublishTime"))))
         if len(out) >= limit:
             break
     return out
@@ -129,7 +160,8 @@ def news_transcript_candidates(news_rows: list[dict[str, Any]], limit: int = 12)
 
 
 def discover_transcripts(symbol: str, company_name: str = "", news_rows: list[dict[str, Any]] | None = None, limit: int = 12) -> list[TranscriptCandidate]:
-    candidates = news_transcript_candidates(news_rows or [], limit=limit)
+    candidates = verified_candidates(symbol)
+    candidates.extend(news_transcript_candidates(news_rows or [], limit=limit))
     candidates.extend(yahoo_search_transcript_candidates(symbol, company_name, limit=limit))
     candidates.extend(google_transcript_candidates(symbol, company_name, limit=limit))
     out: list[TranscriptCandidate] = []
