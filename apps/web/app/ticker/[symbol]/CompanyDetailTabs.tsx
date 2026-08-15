@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import EarningsIntelligenceClient, { type EarningsArtifact } from "../../earnings/[symbol]/EarningsIntelligenceClient";
+import CompanyNewsArchive from "./CompanyNewsArchive";
 import TickerClient, { type NewsItem, type SeriesIn } from "./TickerClient";
 
 type Props = {
@@ -40,13 +41,18 @@ export default function CompanyDetailTabs({ symbol, series, news, newsTotal, ear
             {(calls > 0 || links > 0) ? <span className="ml-2 rounded-full bg-emerald-400/10 px-2 py-0.5 text-[10px] text-emerald-300">{calls || links}</span> : null}
           </button>
         </div>
-        <div className="text-xs text-neutral-600">One company workspace · switch without leaving the page</div>
+        <div className="text-xs text-neutral-600">News, history and calls in one company workspace</div>
       </div>
 
       {tab === "news" ? (
-        series ? <TickerClient symbol={symbol} series={series} news={news} newsTotal={newsTotal} /> : (
-          <div className="card p-5 text-sm text-neutral-500">Price history is still building. Recent company news remains available from the Companies surface.</div>
-        )
+        <div className="space-y-8">
+          {series ? (
+            <TickerClient symbol={symbol} series={series} news={news} newsTotal={newsTotal} />
+          ) : (
+            <div className="card p-5 text-sm text-neutral-500">Price history is still being fulfilled for this company.</div>
+          )}
+          <CompanyNewsArchive news={news} />
+        </div>
       ) : (
         <EarningsIntelligenceClient symbol={symbol} data={earnings} />
       )}
