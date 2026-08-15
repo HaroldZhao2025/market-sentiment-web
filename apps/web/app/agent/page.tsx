@@ -11,11 +11,14 @@ const resources = [
   ["Agent manifest", "/agent-manifest.json", "Discovery, semantics and resource paths."],
   ["Query schema", "/agent-query-schema-v2.json", "Versioned query/result specification."],
   ["Composite company universe", "/data/v5/universe.json", "S&P 500, MidCap 400 and SmallCap 600 company layer."],
-  ["Company news", "/data/v5/news/AAPL.json", "Deduplicated recent company articles and scores."],
-  ["Company earnings", "/data/v5/earnings/AAPL.json", "Results, calls when available, and filing fallback."],
+  ["Company news archive", "/data/v5/news/AAPL.json", "Retained deduplicated free-public company headlines and article scores."],
+  ["Company history", "/data/v5/history/AAPL.json", "Daily extended-company price history and observed-only sentiment history."],
+  ["Company earnings", "/data/v5/earnings/AAPL.json", "EPS history, derived call diagnostics, source links and supporting material."],
+  ["Company-data coverage", "/data/v5/company_data_coverage.json", "News/history availability and fulfillment status across the Composite universe."],
+  ["Earnings-call coverage", "/data/v5/earnings_coverage.json", "Structured-call, link-only and missing status by company."],
   ["Event instances", "/data/v5/event_instances.json", "Clustered company event history."],
-  ["S&P index", "/data/SPX/sp500_index.json", "Index close, sentiment and coverage."],
-  ["S&P constituents", "/data/SPX/sp500_heatmap.json", "Weights, returns and constituent sentiment."],
+  ["S&P index", "/data/SPX/sp500_index.json", "True-index close, observed sentiment and coverage."],
+  ["S&P constituents", "/data/SPX/sp500_heatmap.json", "Core constituent weights, returns and sentiment."],
   ["Research index", "/research/index.json", "Generated empirical-study registry."],
 ];
 
@@ -28,14 +31,14 @@ export default function AgentPage() {
       <section className="max-w-4xl">
         <div className="eyebrow">Machine interface</div>
         <h1 className="page-title mt-2">Agent Interface</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">Static JSON contracts for market, company, event and research workflows.</p>
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">Static contracts for company, S&P 500, event and research workflows.</p>
         <div className="mt-5 flex flex-wrap gap-2"><a href={publicHref("/agent-manifest.json")} className="pill">Manifest →</a><Link href="/ask" className="pill">Ask →</Link><Link href="/data" className="pill">Data →</Link></div>
       </section>
 
       <section className="grid gap-3 md:grid-cols-3">
-        <div className="card p-5"><div className="eyebrow">Inputs</div><h2 className="mt-2 text-lg font-semibold text-white">Structured first</h2><p className="mt-2 text-sm leading-6 text-neutral-500">Read published market state and article scores before generating an explanation.</p></div>
-        <div className="card p-5"><div className="eyebrow">Nulls</div><h2 className="mt-2 text-lg font-semibold text-white">Missing stays missing</h2><p className="mt-2 text-sm leading-6 text-neutral-500">Use observation flags where available; do not convert absent news sentiment to zero.</p></div>
-        <div className="card p-5"><div className="eyebrow">Hosting</div><h2 className="mt-2 text-lg font-semibold text-white">Static by design</h2><p className="mt-2 text-sm leading-6 text-neutral-500">GitHub Pages serves versioned files rather than an always-on API.</p></div>
+        <div className="card p-5"><div className="eyebrow">Universe</div><h2 className="mt-2 text-lg font-semibold text-white">Choose scope explicitly</h2><p className="mt-2 text-sm leading-6 text-neutral-500">Composite-company files and S&amp;P index/research files serve different purposes and should not be mixed silently.</p></div>
+        <div className="card p-5"><div className="eyebrow">Nulls</div><h2 className="mt-2 text-lg font-semibold text-white">Missing stays missing</h2><p className="mt-2 text-sm leading-6 text-neutral-500">Use observation and coverage fields; absent news sentiment is not zero.</p></div>
+        <div className="card p-5"><div className="eyebrow">Sources</div><h2 className="mt-2 text-lg font-semibold text-white">Free-public company layer</h2><p className="mt-2 text-sm leading-6 text-neutral-500">Company news and earnings fulfillment are published with explicit coverage status rather than invented values.</p></div>
       </section>
 
       <section className="space-y-3">
@@ -48,7 +51,7 @@ export default function AgentPage() {
         </div>
       </section>
 
-      <section className="card p-5 text-sm leading-6 text-neutral-500"><span className="font-semibold text-neutral-300">Contract:</span> preserve article scores, null semantics, true S&amp;P index pricing, additive contribution and portfolio boundaries.</section>
+      <section className="card p-5 text-sm leading-6 text-neutral-500"><span className="font-semibold text-neutral-300">Contract:</span> preserve source policy, article scores, null semantics, universe boundaries, true S&amp;P index pricing and additive contribution.</section>
     </main>
   );
 }
