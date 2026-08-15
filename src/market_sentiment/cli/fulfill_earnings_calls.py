@@ -57,7 +57,6 @@ def batch_targets(
     if start >= len(ordered):
         start = 0
     batch = ordered[start : start + size]
-    # Priority symbols should be tested in every batch until fulfilled.
     priority_rows = [row for row in ordered if str(row.get("ticker") or "").upper() in {s.upper() for s in priority_symbols}]
     merged: list[dict[str, Any]] = []
     merged_seen: set[str] = set()
@@ -125,7 +124,7 @@ def main() -> None:
     for index, company in enumerate(targets, 1):
         symbol = str(company.get("ticker") or "").upper()
         name = str(company.get("name") or symbol)
-        print(f"[CALL {index}/{len(targets)}] {symbol} {name}")
+        print(f"[CALL {index}/{len(targets)}] {symbol} {name}", flush=True)
 
         news_payload = load_json(news_dir / f"{symbol}.json", {})
         news_rows = rows(news_payload.get("articles") if isinstance(news_payload, dict) else None)
@@ -147,18 +146,32 @@ def main() -> None:
         atomic_json(earnings_dir / f"{symbol}.json", artifact)
 
         calls = rows(artifact.get("calls"))
-        results.append(
-            {
-                "symbol": symbol,
-                "structured_calls": len(calls),
-                "call_links": len(rows(artifact.get("call_links"))),
-                "sec_evidence": len(sec_evidence),
-                "latest_source": str(calls[0].get("source") or "") if calls else "",
-            }
-        )
+        result = {
+            "symbol": symbol,
+            "structured_calls": len(calls),
+            "call_links": len(rows(artifact.get("call_links"))),
+            "sec_evidence": len(sec_evidence),
+            "latest_source": str(calls[0].get("source") or "") if calls else "",
+        }
+        results.append(result)
         print(
-            f"[CALL RESULT] {symbol} structured={len(calls)} links={len(rows(artifact.get('call_links')))} sec={len(sec_evidence)}"
+            f"[CALL RESULT] {symbol} structured={len(calls)} links={len(rows(artifact.get('call_links')))} sec={len(sec_evidence)}",
+            flush=True,
         )
+
+        if symbol == "AAPL" and "AAPL" in priority_symbols and not calls:
+            atomic_json(
+                v5 / "earnings_fulfillment_status.json",
+                {
+                    "schema_version": 1,
+                    "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "batch_index": args.batch_index,
+                    "batch_size": args.batch_size,
+                    "source_policy": "free_public_only",
+                    "results": results,
+                },
+            )
+            raise RuntimeError("AAPL fulfillment gate failed: no structured free public earnings-call transcript was produced")
 
     report = {
         "schema_version": 1,
@@ -170,9 +183,6 @@ def main() -> None:
     }
     atomic_json(v5 / "earnings_fulfillment_status.json", report)
 
-    aapl = next((row for row in results if row["symbol"] == "AAPL"), None)
-    if "AAPL" in priority_symbols and aapl is not None and int(aapl["structured_calls"]) < 1:
-        raise RuntimeError("AAPL fulfillment gate failed: no structured free public earnings-call transcript was produced")
     successful = sum(1 for row in results if int(row["structured_calls"]) > 0)
     print(f"EARNINGS FULFILLMENT OK | targets={len(results)} structured={successful} source_policy=free_public_only")
 
