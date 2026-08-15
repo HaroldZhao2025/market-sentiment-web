@@ -1,10 +1,12 @@
 {
-  "schema_version": 2,
+  "schema_version": 6,
   "symbol": "HAL",
-  "updated_at_utc": "2026-08-14T20:23:34.282629+00:00",
-  "article_count": 60,
-  "scored_article_count": 60,
-  "sentiment_mean": -0.2908546166666666,
+  "source_policy": "free_public_only",
+  "updated_at_utc": "2026-08-15T20:10:23.687853+00:00",
+  "history_days_requested": 365,
+  "article_count": 120,
+  "scored_article_count": 120,
+  "sentiment_mean": 0.026703533333333338,
   "articles": [
     {
       "ts": "2026-08-14T19:05:01+00:00",
@@ -14,7 +16,7 @@
       "source": "ChartMill",
       "provider": "finnhub",
       "title_key": "top s p500 movers in friday s session",
-      "s": 0.359211
+      "s": 0.35921
     },
     {
       "ts": "2026-08-14T14:34:00+00:00",
@@ -22,9 +24,39 @@
       "summary": "CRC's revenues surge 50.4% as Berry synergies, drilling gains and midstream expansion support growth despite weaker differentials.",
       "url": "https://finance.yahoo.com/energy/articles/crc-q2-earnings-miss-takeaway-143400058.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "crc q2 earnings miss on takeaway constraints revenues beat",
       "s": -0.024146
+    },
+    {
+      "ts": "2026-08-14T11:14:01+00:00",
+      "title": "Halliburton (HAL) Stock Forecast & Analyst Ratings - moomoo.com",
+      "summary": "Halliburton (HAL) Stock Forecast & Analyst Ratings moomoo.com",
+      "url": "https://news.google.com/rss/articles/CBMisgJBVV95cUxQQTRwUFZXdDAwZXE0aXJiY1NJOV9HdDJKV3dNUnZxVjhjYjZsMjBfbUF1WVJfQklmVHF5SnlKUS1haUhoR25ta3RDYnpER2FPUUJCRHZQR1V0TGNuOHZpXzdWYldzRWs1X3ZsR1EwUU9zMGlUQWJXeFNUUUoxNFdReVpha2JWLUFtRG5lVW5VUE85RXJRdmpJUU9VaGRjd3RiSTI0akZyWmgzMXZXeW1RN182LXFLN3hqY0pjV0kxUXFab0tMUzRYVzFNWms4VG9YSEZFVWxaSHpsMWFoNGI2WnE2b212SjJlRzZ3ZG5pNGRid3lpNkNSbzdjVlEzeDlZRTBGN1ZnM19vRWMtaWE2OTR6d3FBQy1LMjRwZ3U4NDd6WkdiMC1yZG1VWERWcEpUVWc?oc=5",
+      "source": "moomoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal stock forecast analyst ratings moomoo com",
+      "s": 0.913465
+    },
+    {
+      "ts": "2026-08-13T20:42:43+00:00",
+      "title": "ABN AMRO gains momentum in Germany following the integration of Hauck Aufhäuser Lampe (HAL) - ABN AMRO",
+      "summary": "ABN AMRO gains momentum in Germany following the integration of Hauck Aufhäuser Lampe (HAL) ABN AMRO",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOOVozQlZQaUZPVWxqd2VGamxweGRkTk5fUWItREhCeEw0aXJCWExFb2UzVzROejNoUTRTbWZJY2ZEdUIwQnB1dlhQZXUzOWVRZFhhTGtjWHY5LUZOTmgwcTFvMnpiSFBaRHJod2dEZjlad0FTYkZLUkdBejNsRHBIVDJ2YWsxaHEwWVZMMEJKS0NEV210X1ctZHNaMlJKTWl4bGdyWFJ0UEd0SUxYcHN2Q1JtTk1pR3lFZlhlYkNROA?oc=5",
+      "source": "ABN AMRO",
+      "provider": "google_news_rss",
+      "title_key": "abn amro gains momentum in germany following the integration of hauck aufh user lampe hal abn amro",
+      "s": -0.919195
+    },
+    {
+      "ts": "2026-08-13T19:44:26+00:00",
+      "title": "Centuri hires Halliburton alum for CFO - CFO Dive",
+      "summary": "Centuri hires Halliburton alum for CFO CFO Dive",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPazhtZzZNX3VQVm9EQktkTFNVQzNRTUU3cEhiUDdQM3R3d1EyWUxQRjdRcV96dFdfSm5YcjRRR2lza3VWanVELUdCOThsVnotT1VGR0dzTzN2bDBVb1FKTUk4YTJ4SDZpOWJYcURpZUtJemROdnhOYllDenJGeTBLU1dWOUkyWF9M?oc=5",
+      "source": "CFO Dive",
+      "provider": "google_news_rss",
+      "title_key": "centuri hires halliburton alum for cfo cfo dive",
+      "s": 0.91498
     },
     {
       "ts": "2026-08-13T14:40:00+00:00",
@@ -32,7 +64,7 @@
       "summary": "Cheniere Energy lifts 2026 EBITDA and production guidance as higher LNG volumes, margins and project progress boost results.",
       "url": "https://finance.yahoo.com/energy/articles/lng-q2-earnings-beat-estimates-144000186.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "lng q2 earnings beat estimates on higher volumes and margins",
       "s": -0.927968
     },
@@ -42,9 +74,29 @@
       "summary": "The energy firm named a new CFO and new legal leader as it continues to face economic headwinds including high fuel prices.",
       "url": "https://www.cfodive.com/news/centuri-taps-new-cfo-amid-leadership-changes/827833/",
       "source": "CFO Dive",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "centuri hires halliburton alum for cfo",
       "s": 0.915213
+    },
+    {
+      "ts": "2026-08-13T11:24:32+00:00",
+      "title": "Halliburton (HAL) Stock May Stay Cheap Despite Nuclear Waste Push - simplywall.st",
+      "summary": "Halliburton (HAL) Stock May Stay Cheap Despite Nuclear Waste Push simplywall.st",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNUEZOOVBlTF9lczFTRDhwWUpnX3NKUkJvcTNpdmZVX0EtQ1JiQmp6NUhlckVVai1UbXV6eDMyTTJnUFlRYXNtWDM3aVZXN3kzd243V3g2cUtRcF9wM1JDUWt3dlpCLWFPa0NQMkRGN280ZTZmN1pWYy1qY0FoOUFSdjJRQi01LTFjbXFaU3lqYTdUdldXS3FNUmpXU1ZvbFFLU0xKcUlITUl3N002UzlYOFNCN2Nub0M5a08xYllzMk5HcEnSAcgBQVVfeXFMT2lGd2RjaVFBZFMzUjUzcW5UODdxQktpaTkyR18teG40SklFLTlNbTR2OElLTlJmckZUS0FSanFzMW8zNjBMOUtFNkNYM1V2SlEyMjlqMHlJOEVmci1lQ2pMRVNseERWOEhfR0NMSzFYLVdNWWpkbGs2STFza2VpemdKTV92R0lfWVZ0UGNhR29LbURfWms0N2V3YVljR05sUUtTU25iYmRaVDBRNDRVSWdBSUt3MG9PRTFLbGROLUowUFF1UDJ0ZnI?oc=5",
+      "source": "simplywall.st",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal stock may stay cheap despite nuclear waste push simplywall st",
+      "s": 0.326529
+    },
+    {
+      "ts": "2026-08-13T09:41:53+00:00",
+      "title": "Wedge Capital Management L L P NC Lowers Stock Holdings in Halliburton Company $HAL - MarketBeat",
+      "summary": "Wedge Capital Management L L P NC Lowers Stock Holdings in Halliburton Company $HAL MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxObWw4M0dEdkhhSVc3cFNMU3BveEE4eUk0N0c1NDFOYlZCOEtKOENFVEJ3T2J1U3VDQnBMclRJdXNFb0dCQmZWcFEtTFl1NVdULVQwa2hzSEhXaWxoZ0NrSnlyYUh1ZUdjN3c5RUU5ajI3UVBSUDQ1cTZaVFBYdWRSMVFVc2hsVnFKY0pCcEU4UmlfNVdQTVBmcm9lalZhUTdTM0tYN2hrRWFEYzRndHBsTi0tOFhJbG1lNUU2c3YwUkZOUXBUOHhkWjMxMlFTY3Jkcmx1b0oxTjFhS0E?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "wedge capital management l l p nc lowers stock holdings in halliburton company hal marketbeat",
+      "s": 0.013679
     },
     {
       "ts": "2026-08-13T08:09:23+00:00",
@@ -52,9 +104,49 @@
       "summary": "Halliburton stock has almost doubled investors' money over the past five years, yet the current valuation checks still point to the shares looking inexpensive on several fronts. With the market already rewarding the company, the key issue for investors is whether that pricing still lines up with the fundamentals. Halliburton has delivered a 93.7% return over the past five years, which puts recent gains firmly on the radar for anyone assessing what is already priced in. Halliburton's market...",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-hal-stock-may-undervalued-080923368.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton hal stock may be undervalued even after a 94 run",
       "s": -0.902079
+    },
+    {
+      "ts": "2026-08-13T08:09:23+00:00",
+      "title": "Halliburton (HAL) Stock May Be Undervalued Even After A 94% Run - finance.yahoo.com",
+      "summary": "Halliburton (HAL) Stock May Be Undervalued Even After A 94% Run finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPS2FBMGxJRXJSbEViVUlzbVc3U2ZFVmI3aHVsUk1GU3BSY1AtRVAyYUIyTnpxMFBmdEdpSnpEbTBmWGhiWER3eTk4cC1rUTdTRXAwNG9vck5Qd2hjZjVLQWlxMlhKaWdpU1EwcnVYRmpYa000XzVsc2VmUHVQVlhqdWZfYTg5VEVKNlM5Y2FEV3R2aDkzU1NNUlJDamJqa3p6X0htWA?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal stock may be undervalued even after a 94 run finance yahoo com",
+      "s": 0.53516
+    },
+    {
+      "ts": "2026-08-13T07:00:00+00:00",
+      "title": "Hal Peterson Obituary Aug 13, 2026 - eastgatefuneral.com",
+      "summary": "Hal Peterson Obituary Aug 13, 2026 eastgatefuneral.com",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE13ZTk1dnZNemdDdTJLQ1RGTjhZSC1Xd285N05XcVVSdlB1V2NGZGJyTGRGUUxkUlpoMXRHSExBSjJ1LVB4YnpvU19ydk52WWVIMGJUYXJKUHkxUWZGb2RfZ0p5QTIwZw?oc=5",
+      "source": "eastgatefuneral.com",
+      "provider": "google_news_rss",
+      "title_key": "hal peterson obituary aug 13 2026 eastgatefuneral com",
+      "s": 0.916426
+    },
+    {
+      "ts": "2026-08-13T07:00:00+00:00",
+      "title": "Halliburton (HAL) Stock May Stay Cheap Despite Nuclear Waste Push - Sahm",
+      "summary": "Halliburton (HAL) Stock May Stay Cheap Despite Nuclear Waste Push Sahm",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNVndKcXM3ZnJ0US0xRk5UbVl3bE1mYWxwSDBGMG0tS0IyeV9EVDBsZDEyOXZMWE44Yk5YWHNRQTAxc0s4bExQc0tBWENKcWRQMWNtZWg0VFVsdkdiOTJERTR5TndqNnFIc1JLRWxkREphcU1ZVjQ2cDdncDFWYnhmcGVDdWlLVUxuZlZieDVGVFV6bmlpUmo1WTJ4MGIyb0tUcWlpRGU4VXg1dkxSOF9WU3BTVzRIQQ?oc=5",
+      "source": "Sahm",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal stock may stay cheap despite nuclear waste push sahm",
+      "s": -0.380809
+    },
+    {
+      "ts": "2026-08-13T05:40:57+00:00",
+      "title": "Halliburton Co. (HAL) News, Articles, Events & Latest Updates - Stocktwits",
+      "summary": "Halliburton Co. (HAL) News, Articles, Events & Latest Updates Stocktwits",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5jazJGNjRHeXBSTHFCQnpEd2hBb2FNOXB2NDlRb1k3cVJmaElJeXVBTzdRZnZSYU1vQkJqZFZwT2ZIeEJLeVlzaVFaN2J1blk?oc=5",
+      "source": "Stocktwits",
+      "provider": "google_news_rss",
+      "title_key": "halliburton co hal news articles events latest updates stocktwits",
+      "s": 0.912519
     },
     {
       "ts": "2026-08-12T16:53:22+00:00",
@@ -62,7 +154,7 @@
       "summary": "A number of stocks jumped in the morning session after Brent crude failed to break below $80 and rebounded to the mid-$80s, as traders kept a geopolitical risk premium priced into oil despite ongoing Strait of Hormuz negotiations. Over the previous 24 hours, the UAE-vessel incident reversed the earlier price drop that had assumed a path to de-escalation. At the same time, Kpler data from the previous two days showed shipping traffic through the Strait of Hormuz plummeted about 33%, with only a h",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-technipfmc-antero-resources-apa-165322090.html",
       "source": "StockStory",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton technipfmc antero resources apa corporation and transocean stocks trade up what you need to know",
       "s": 0.85535
     },
@@ -72,7 +164,7 @@
       "summary": "MUSA's Q2 earnings surge 53.1% as stronger fuel economics, higher volumes and merchandise gains boost results and raise 2026 earnings power.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/murphy-usa-q2-earnings-beat-134300469.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "murphy usa q2 earnings beat estimates on strong fuel contribution",
       "s": -0.922534
     },
@@ -82,9 +174,19 @@
       "summary": "DK posts a major Q2 earnings gain as stronger refining margins and record logistics results drive EBITDA higher.",
       "url": "https://finance.yahoo.com/energy/articles/delek-us-q2-earnings-beat-141000713.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "delek us q2 earnings beat estimates on strong refining margins",
       "s": -0.923241
+    },
+    {
+      "ts": "2026-08-10T17:18:07+00:00",
+      "title": "Halliburton, TechnipFMC, Antero Resources, APA Corporation, and Transocean Stocks Trade Up, What You Need To Know - StockStory",
+      "summary": "Halliburton, TechnipFMC, Antero Resources, APA Corporation, and Transocean Stocks Trade Up, What You Need To Know StockStory",
+      "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxNcVlFYXFsSDdxMWZTR2YzRWVjTWREY1ZjX1UzZkZRR1h2a0FxcEdwdFlxajdDTW50N1JMLXdkeFlJMHNuQTJSc296c2lpSEtxY2w4WG9fM0J0aUlhVGdYeldHYmdHQ21QRWVKME9wS3MzdWxUSEt6bjJHS0NvdmxrRml4Z21kdnREcXNVZ1YycVE0U1R5bjlQR3UxcUdubnBZTXowbzZ1NlFEakVNZnVhc29DLU81WEFVTFluamJGZVN6d0N5RTBhd1p2a05JM201MUE5ZjFPbXdXdFhUZDk4ZEtIUjV5VndWdDMwS2k5UEJXTkhhQjZjZGZIOA?oc=5",
+      "source": "StockStory",
+      "provider": "google_news_rss",
+      "title_key": "halliburton technipfmc antero resources apa corporation and transocean stocks trade up what you need to know stockstory",
+      "s": 0.788587
     },
     {
       "ts": "2026-08-10T14:29:00+00:00",
@@ -92,7 +194,7 @@
       "summary": "CRGY expects total production guidance of 327-335 MBoe/d, up from 320-335 MBoe/d, and adjusted operating expense guidance of $11-$12 per Boe, down from $11.50-$12.50.",
       "url": "https://finance.yahoo.com/energy/articles/crescent-q2-earnings-revenues-beat-142900887.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "crescent q2 earnings and revenues beat estimates rise y y",
       "s": -0.904616
     },
@@ -102,7 +204,7 @@
       "summary": "MPC expects crude oil throughput of 2,820 thousand barrels per day (mbpd) and total refinery throughput of 3,005 mbpd in the third quarter of 2026",
       "url": "https://finance.yahoo.com/energy/articles/marathon-petroleum-q2-earnings-beat-142400351.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "marathon petroleum q2 earnings beat on strong refining margins",
       "s": -0.926918
     },
@@ -112,9 +214,29 @@
       "summary": "Deep Isolation is betting on drilling wells to bury nuclear waste if federal regulations evolve.",
       "url": "https://finance.yahoo.com/energy/articles/nuclear-startup-halliburton-repurposed-oil-070900904.html",
       "source": "Fortune",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "this nuclear startup and halliburton repurposed oil drilling tech in a bid to solve america s radioactive waste problem",
       "s": 0.286154
+    },
+    {
+      "ts": "2026-08-09T07:09:00+00:00",
+      "title": "This nuclear startup and Halliburton repurposed oil-drilling tech in a bid to solve America's radioactive waste problem - Fortune",
+      "summary": "This nuclear startup and Halliburton repurposed oil-drilling tech in a bid to solve America's radioactive waste problem Fortune",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQZzBmR1NFMlRhdU1XUk40TXlwRnBqTWRHcVVTT0ZRRFQzd2lPLXlBc21Xa2xYUVAzdmZjd3I2cXNVcTQyNHlEQWM3ZDFscktqSW44MXpVc2QzNVNYclVSUDM5b3lGNTAzN1hkR2ZLS2pjWHVaTm0yengtRFNRVlI2X2dId2dIaVNlT2taM0VlZk1NR3JybGw5N3Z1aw?oc=5",
+      "source": "Fortune",
+      "provider": "google_news_rss",
+      "title_key": "this nuclear startup and halliburton repurposed oil drilling tech in a bid to solve america s radioactive waste problem fortune",
+      "s": 0.382085
+    },
+    {
+      "ts": "2026-08-08T09:17:51+00:00",
+      "title": "Halliburton Company $HAL Shares Bought by Janus Henderson Group PLC - MarketBeat",
+      "summary": "Halliburton Company $HAL Shares Bought by Janus Henderson Group PLC MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQRXAyQ3VxSnJCZU9XTEdUaHYyeTNfMnpZVGN1YTlVZ1VLV2JQX3IzZ3RjRThtREFpUU9DUWR5TDJGU3VRV3ZGd1dnX25HSkhQVENyUDdGOGRWUlhUS25QYXh4MXkwUEhpeV9RbU9aaE8zeEhpd1ZwTWFxc2VtNUFUM0hYOEFyeHQ0UWlhQ0R6RXpQTWtJNDRRV1dDbEZ5cFg2MDAwczJVMnJZQWlVaFVLNDNfYzI3WkRUUUVHT0pHMWxEbm5BcEE?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "halliburton company hal shares bought by janus henderson group plc marketbeat",
+      "s": 0.883586
     },
     {
       "ts": "2026-08-06T14:58:00+00:00",
@@ -122,7 +244,7 @@
       "summary": "TRP expects comparable EBITDA at the upper end of its C$11.6-C$11.8 billion guidance and net capital expenditures of C$5.5-C$6 billion.",
       "url": "https://finance.yahoo.com/energy/articles/tc-energy-q2-earnings-revenues-145800813.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "tc energy q2 earnings and revenues beat estimates rise y y",
       "s": -0.911261
     },
@@ -132,7 +254,7 @@
       "summary": "Halliburton has rallied better than the broader market over the past year, and analysts are fairly bullish about its future growth projections.",
       "url": "https://www.barchart.com/story/news/3686529/what-are-wall-street-analysts-target-price-for-halliburton-stock",
       "source": "Barchart",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "what are wall street analysts target price for halliburton stock",
       "s": 0.899143
     },
@@ -142,9 +264,19 @@
       "summary": "PBA misses Q2 EPS estimates, but revenues rise 20% year over year as higher volumes and operational strength lift results across its business segments.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/pembina-pipeline-q2-earnings-miss-171000023.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "pembina pipeline q2 earnings miss estimates revenues increase y y",
       "s": -0.912132
+    },
+    {
+      "ts": "2026-08-05T07:00:00+00:00",
+      "title": "Bank of America Corp DE Sells 3,839,227 Shares of Halliburton Company $HAL - MarketBeat",
+      "summary": "Bank of America Corp DE Sells 3,839,227 Shares of Halliburton Company $HAL MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQbkdVRTFqdkpJMW4xTDF5NGVaSkNXNDEtbGI3N1l2U3RpRUxpVHJORjZTdVJNeFNtX3l0LUJCOFhBa0FNSTQtR0puZTlaYUV6QTJQYVN5WmpTazhlejRHeWhuQXNPV2JQeGZtc2N1eC1Ib2tYMTFoWUpNUnBrY0J2MnVlSTlvQW5LZXBoNHZXUXhtX2RuYnVxU0s5TnVNdWtfdUJKVTV3cWgxZWFzN19rN29XNF9OMEtfeC1EQ1UzMm41bXNNNlJiMjBDczM?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "bank of america corp de sells 3 839 227 shares of halliburton company hal marketbeat",
+      "s": 0.911929
     },
     {
       "ts": "2026-08-04T17:02:00+00:00",
@@ -152,7 +284,7 @@
       "summary": "FTI tops Q2 earnings and revenue estimates as Subsea strength lifts margins and sales, while reaffirming full-year 2026 guidance and shareholder returns.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/technipfmc-q2-earnings-revenues-beat-170200874.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "technipfmc q2 earnings revenues beat estimates rise y y",
       "s": -0.908046
     },
@@ -162,7 +294,7 @@
       "summary": "PUMP expects 2026 capital expenditures of $525-$595 million, with Completions spending projected at $125-$145 million and PROPWR spending expected to be $400-$450 million.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/propetro-q2-loss-wider-expected-133100629.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "propetro q2 loss wider than expected revenues beat estimates",
       "s": -0.785881
     },
@@ -172,7 +304,7 @@
       "summary": "PUMP pairs strong cash flow from Permian completions with PROPWR growth, but rich valuation, higher spending and execution demands raise the bar for future gains.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/pump-stock-worth-buying-now-132900009.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "is pump stock worth buying now as propwr growth tests its valuation",
       "s": 0.707442
     },
@@ -182,7 +314,7 @@
       "summary": "PTEN expects about 100 average U.S. rigs in Drilling Services during the third quarter, with adjusted gross profit projected at around $145 million.",
       "url": "https://finance.yahoo.com/energy/articles/patterson-uti-energy-q2-earnings-143200679.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "patterson uti energy q2 earnings revenues beat estimates",
       "s": -0.559414
     },
@@ -192,7 +324,7 @@
       "summary": "Halliburton earnings and buyback catch investor eye Halliburton (HAL) recently reported its second quarter 2026 results, with sales, revenue, net income and earnings per share all higher than the same period last year, alongside continued progress on a long running share repurchase program. See our latest analysis for Halliburton. Halliburton’s recent earnings beat and continued buybacks came against a mixed share price backdrop, with the stock at US$32.25 and a 90 day share price return that...",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-hal-undervalued-q2-2026-020615169.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "is halliburton hal undervalued after its q2 2026 earnings beat and buybacks",
       "s": 0.008913
     },
@@ -202,7 +334,7 @@
       "summary": "Core Laboratories stock looks cheaper after a 47.1% six-month selloff, but falling earnings and geopolitical pressure keep the near-term case cautious.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/clb-stock-attractive-sharp-selloff-162200812.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "is clb stock attractive after its sharp selloff and mixed q2 results",
       "s": -0.699006
     },
@@ -212,9 +344,59 @@
       "summary": "Chevron posts a strong Q2 as upstream output climbs, downstream margins improve and free cash flow jumps year over year.",
       "url": "https://finance.yahoo.com/energy/articles/cvx-q2-earnings-beat-higher-154600388.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "cvx q2 earnings beat on higher output strong refining margins",
       "s": -0.929329
+    },
+    {
+      "ts": "2026-07-31T07:00:00+00:00",
+      "title": "Is Halliburton (HAL) Undervalued After Its Q2 2026 Earnings Beat And Buybacks? - finance.yahoo.com",
+      "summary": "Is Halliburton (HAL) Undervalued After Its Q2 2026 Earnings Beat And Buybacks? finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNVmlrcUdKdEx5ODlmU1Exak9tdG9UTUJhemZReThEU0o2dWxtRnMwUmZ1cDFQakhHbnl5Rno5dEFiQ1NVTWR5UEM2QlNRcHhHT053WkFzM2N2M21ETG9lLXA5eVppODVKY1dtUDhsR1gxaldPNmo5anFDd0RJTWY2eHZWNGViaXdmQ25teVlLMDU3YnJGOFBIOEZjSUY0VDdHdmc?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "is halliburton hal undervalued after its q2 2026 earnings beat and buybacks finance yahoo com",
+      "s": 0.198352
+    },
+    {
+      "ts": "2026-07-31T07:00:00+00:00",
+      "title": "Is Halliburton (HAL) Undervalued On Earnings, Buybacks, And Its Australian AI Data Center MOU? - simplywall.st",
+      "summary": "Is Halliburton (HAL) Undervalued On Earnings, Buybacks, And Its Australian AI Data Center MOU? simplywall.st",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOcHFUQXBmS2h0VDdCREwzWHBfR3pCUFdiemlXZ2lhSXBKdUdTYklWOU5ZTHcyM1BCOWdwNlV5RGVYSXdWVVBJS1JsR2RiTEdSbUo1bVRvQkZEeU11ZHpzeEJOTEszMV9tdzEwcElJdWJ1RmtRdnlJXzlHTjJNeGxmZFpkYnpqMHVuZDBFaVlJLW5sTTJqU0JTMTFoa1cxbjl3dU1KRHV2OWJXdk9hSS1LQW9WMDFUT0Y4LXRPTnFNYVhVUdIBxwFBVV95cUxQdF9SUTI1MkQtMm1oT0lzT29wRk0ySlQ1XzVVQWpqaVBKd0dzdFptTnp4bDlsd213VmZJV0lNUHpudDJDZmZXZEZxZkx5cElnWHdOWUpUS0NUZHhBUGE0bUtmVGVNdDkxNHkwVlNweGlXOTdLNlVxUU9VSnV4RmxTbTFFZkNqWm1MbGxpcURfVW1jc2RaWE5FY3l4cHp3bTZrUHVJaHFXMU53cng1NG0wMENhXzJzX3N6bHMxMGZzSHh2bjVtOTNj?oc=5",
+      "source": "simplywall.st",
+      "provider": "google_news_rss",
+      "title_key": "is halliburton hal undervalued on earnings buybacks and its australian ai data center mou simplywall st",
+      "s": -0.009065
+    },
+    {
+      "ts": "2026-07-31T07:00:00+00:00",
+      "title": "Halliburton Company $HAL Shares Acquired by Quantinno Capital Management LP - MarketBeat",
+      "summary": "Halliburton Company $HAL Shares Acquired by Quantinno Capital Management LP MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQeVg3MzNRVzhRZG1ONzhzb0dWcDZvTm9zRWZKcThsYnlwaHVaX2FCOS1xNUpTSVNJNVVrUGlIeUM1Z2JGWktCc3ZacFJnejI5a3h4VE1PSU5WLWVYWlNNamd2dTNsNGxOcW5VWlFteEd2M3FOLTcxbS1pUEwzX25sTVFibGRGQThLbEs1MkdIZXJiMVdzUEt6UHJyQjY4Z1NsZkFNNTQzMUNYZk5hdmxwQTJnaVRnLVBWM3h2LVNiVkdabEVDdGlFMDlZOWxwSUVY?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "halliburton company hal shares acquired by quantinno capital management lp marketbeat",
+      "s": 0.877284
+    },
+    {
+      "ts": "2026-07-31T07:00:00+00:00",
+      "title": "Amundi Has $258.63 Million Holdings in Halliburton Company $HAL - MarketBeat",
+      "summary": "Amundi Has $258.63 Million Holdings in Halliburton Company $HAL MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOOWdkbmZsbHVxZjBNbl9IQS1sVzdoWVBuSkJwa3hBeDhsS1FkNXlEcVY1T29hTFd0QklhbDg2bXExOXVodDJ0aHNRZVNhalk0Zm1oWThPendOX1YtN2RmUVlIbm1ZdndveUY3VkJIZzdUbmpOMlgxeDJpeDY0d1RVVXlWd3ktM0QyejRsa0tGLVFnY3RnSHd0cFYwakZvcG5yWmhIRzdsaGVjTkd3Wm1FM19DN2VjQzlZZ3BYSmxn?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "amundi has 258 63 million holdings in halliburton company hal marketbeat",
+      "s": 0.901832
+    },
+    {
+      "ts": "2026-07-31T07:00:00+00:00",
+      "title": "Halliburton Company (NYSE:HAL) Given Average Recommendation of \"Moderate Buy\" by Brokerages - MarketBeat",
+      "summary": "Halliburton Company (NYSE:HAL) Given Average Recommendation of \"Moderate Buy\" by Brokerages MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQUmtKdVVQMDFIV19Vb1hlSnduV1V6SU41REdZTkQ2aGNUWU5UbnRKbzZlNDlLQXc1REtVZDN4ald6TjlPWWdIdnlWV3F2UzY5SHlOYUZpVVRGTk1wRktzSWFzOHJfY0lqNXRnNFFNUmhfeG5QSndEYjNSeWRqOVRhYVotTUFVLXMwTWZvUFZ6Zi1VLUxkb1RqZ0IyWnBYTHdFNjlfVzZUbmpkTm52N0dqOUxpZE1EazFXaXA1LWVUMHg4MWRQMjVlMTVMTVJoNGZaRVE4QmUxcw?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "halliburton company nyse hal given average recommendation of moderate buy by brokerages marketbeat",
+      "s": -0.783829
     },
     {
       "ts": "2026-07-31T05:03:48+00:00",
@@ -222,7 +404,7 @@
       "summary": "Core Laboratories (NYSE:CLB) reported second-quarter 2026 revenue of $124.6 million, up more than 2% from the prior quarter but down 4% from a year earlier, as stronger completion-product sales partly offset disruptions to its service business from conflicts in the Middle East and Russia-Ukraine. C",
       "url": "https://www.marketbeat.com/instant-alerts/core-laboratories-q2-earnings-call-highlights-2026-07-31/?utm_source=yahoofinance&utm_medium=yahoofinance",
       "source": "MarketBeat",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "core laboratories q2 earnings call highlights",
       "s": 0.761535
     },
@@ -232,7 +414,7 @@
       "summary": "NOV beats Q2 earnings and revenue estimates despite lower sales, as Energy Equipment strength, shareholder returns and upbeat Q3 guidance support momentum.",
       "url": "https://finance.yahoo.com/energy/articles/nov-q2-earnings-surpass-estimates-163400580.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "nov q2 earnings surpass estimates revenues decrease y y",
       "s": -0.007653
     },
@@ -242,7 +424,7 @@
       "summary": "EXE beats Q2 earnings estimates as higher production and reduced operating costs offset weaker revenues and lower natural gas prices.",
       "url": "https://finance.yahoo.com/energy/articles/expand-energy-q2-earnings-beat-163000503.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "expand energy q2 earnings beat estimates on strong production",
       "s": -0.90678
     },
@@ -252,9 +434,19 @@
       "summary": "Shares of capital market company MSCI and credit rating agency Equifax both posted double-digit declines in response to lackluster earnings.",
       "url": "https://www.fool.com/investing/2026/07/30/capital-market-earnings-crash-out/",
       "source": "Motley Fool",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "capital market earnings crash out",
       "s": 0.031604
+    },
+    {
+      "ts": "2026-07-30T07:00:00+00:00",
+      "title": "South Dakota Investment Council Sells 138,068 Shares of Halliburton Company $HAL - MarketBeat",
+      "summary": "South Dakota Investment Council Sells 138,068 Shares of Halliburton Company $HAL MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOSm1UUjNpWGY2elZXVGhIa21ZSTZkYVQxcktrbUN0bXpjQVFoTEUxQ0lSUXkyc3A0MUNpSTJ3cVQ1U29YeFhIMkhWZ2RtYV9XeUdqVEMxZUF4d3Q4N1pKQUVTNi1nVGxRM3hVZ2c4LVpOdGxjRFcwYTh0SUZvaHo0bk5nd05sVE1ld2xBSUd6R3pzV29SQkpEZjg5eEN4ZzEwZFQ5TGExRy1CWFFtMzNVVGlDeHBVWERVOEo0VWtQMWV3NWpwT3MzWXdkbGhpbDJqbUFLUXlB?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "south dakota investment council sells 138 068 shares of halliburton company hal marketbeat",
+      "s": 0.903926
     },
     {
       "ts": "2026-07-30T02:10:00+00:00",
@@ -262,9 +454,19 @@
       "summary": "Beetaloo Energy has signed a memorandum of understanding with Halliburton to support a proposed gas-powered AI data center development in Australia's Northern Territory.",
       "url": "https://finance.yahoo.com/energy/articles/beetaloo-energy-signs-halliburton-mou-021000581.html",
       "source": "Oilprice.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "beetaloo energy signs halliburton mou for gas powered data center development",
       "s": -0.02152
+    },
+    {
+      "ts": "2026-07-29T07:00:00+00:00",
+      "title": "Australia's Beetaloo Energy partners with Halliburton for AI data centre-linked gas project - Reuters",
+      "summary": "Australia's Beetaloo Energy partners with Halliburton for AI data centre-linked gas project Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQZUtDTkM5QURhM1VtaEtpQlpmN2pGM0tFSFN0dnFEVF9iVFl6T3YyYm5nSWRWSDZqb1h4RmhaZUJ2eEl1SHRWXzhZSTFodHpyNUZmeUNvRkZXVFg3M0JnOE40TmFYelFWYTByVXd0TEgxRVktUXVfVXB4YVpCTXJhUm1EajM1OGVVYkExLWRRcWloWHk3R19ETXBpQkd1c2dwb3FlSTN6UHRGRG1ZM1BxaEF2RW45Z3pydlo1T1V6ZzRLWTZLdnJ1Wld3?oc=5",
+      "source": "Reuters",
+      "provider": "google_news_rss",
+      "title_key": "australia s beetaloo energy partners with halliburton for ai data centre linked gas project reuters",
+      "s": -0.167989
     },
     {
       "ts": "2026-07-28T14:33:00+00:00",
@@ -272,9 +474,29 @@
       "summary": "SLB's offshore scale, digital growth and ChampionX production strengthen its long-term growth outlook for 2027, but Middle East risks and net debt cloud the near term.",
       "url": "https://finance.yahoo.com/energy/articles/slb-growth-outlook-hinges-offshore-143300717.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "slb growth outlook hinges on offshore digital and production gains",
       "s": 0.582263
+    },
+    {
+      "ts": "2026-07-28T13:54:27+00:00",
+      "title": "Halliburton Number of Employees 2026 | Employee Count & Headcount Data - Revelio Labs",
+      "summary": "Halliburton Number of Employees 2026 | Employee Count & Headcount Data Revelio Labs",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE04dWx0SDNEVm1qbzk5S2xySnFZQy0wUzlFa012eVBUNmREamVObGZMRW9NSzMtbkRCV3I4LXFONFZ0bDBpUlNBTWtaLUxxRk1Ba0FWWWlHX1Y4VFh2bGFDOXFuXzdBU0dXQkdZ?oc=5",
+      "source": "Revelio Labs",
+      "provider": "google_news_rss",
+      "title_key": "halliburton number of employees 2026 employee count headcount data revelio labs",
+      "s": 0.784284
+    },
+    {
+      "ts": "2026-07-28T07:00:00+00:00",
+      "title": "The outrages mount | Hal Bidlack - Colorado Politics",
+      "summary": "The outrages mount | Hal Bidlack Colorado Politics",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPUnZJa3BrY0FCU2pYZGJLMWNoN1JzQnVYZU4wYkU5blhqcEFsWE05cFpFZC1sOXpzMzl2TFdXWlNad0drTG5YY1JYSldyb0ZnbHRVVTlhMmNreUxIYm5TM0RyYkJYWGZCdFV3ZkFqRDZReVVmS1lnVlJTWEt3M2ZwbQ?oc=5",
+      "source": "Colorado Politics",
+      "provider": "google_news_rss",
+      "title_key": "the outrages mount hal bidlack colorado politics",
+      "s": 0.497818
     },
     {
       "ts": "2026-07-27T18:05:21+00:00",
@@ -282,7 +504,7 @@
       "summary": "Halliburton announced a spate of contract awards in the Middle East this month.",
       "url": "https://finance.yahoo.com/energy/articles/halliburton-bags-spate-middle-east-180521620.html",
       "source": "Rigzone.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton bags spate of middle east contracts in july",
       "s": -0.703864
     },
@@ -292,7 +514,7 @@
       "summary": "Liberty Energy beats Q2 estimates and trades below its subindustry on forward sales, but margin pressure and heavy growth spending keep the outlook mixed.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/lbrt-stock-attractive-sharp-pullback-164700677.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "is lbrt stock attractive after its sharp pullback and earnings beat",
       "s": -0.728751
     },
@@ -302,7 +524,7 @@
       "summary": "Baker Hughes stock is one of the top-performing stocks in the S&P 500 on Monday as second-quarter earnings show the oilfield services company is successfully navigating the situation in the Middle East.",
       "url": "https://www.barrons.com/articles/baker-hughes-earnings-stock-price-f345cd91?siteid=yhoof2&yptr=yahoo",
       "source": "Barrons.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "baker hughes rises as energy infrastructure demand outweighs middle east disruptions",
       "s": -0.892559
     },
@@ -312,7 +534,7 @@
       "summary": "OVV's Q2 earnings miss estimates despite a 30% revenue jump, as lower gas prices and higher costs offset stronger oil pricing and cash flow.",
       "url": "https://finance.yahoo.com/energy/articles/ovintiv-q2-earnings-miss-estimates-134800890.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "ovintiv q2 earnings miss estimates revenues increase y y",
       "s": -0.909612
     },
@@ -322,7 +544,7 @@
       "summary": "(Bloomberg) -- US companies that are integrating artificial intelligence capabilities are well positioned this earnings season as they’re poised for stronger profit margins, according to Morgan Stanley strategists.Most Read from BloombergDeepSeek Suspends Fundraising After Viral US-China PostsUS, Iran Extend Pause in Strikes as Oman Holds Hormuz TalksSpaceX at $100 Would Imply Zero AI Value, Morgan Stanley SaysChina Chipmaker CXMT Jumps 466% in Debut After Blockbuster IPOStocks, Bonds Rise in Re",
       "url": "https://finance.yahoo.com/technology/ai/articles/morgan-stanley-wilson-says-ai-092445879.html",
       "source": "Bloomberg",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "morgan stanley s wilson says ai adoption key to profit outlook",
       "s": -0.772237
     },
@@ -332,9 +554,29 @@
       "summary": "Investing.com -- Shares in oil and gas producers across the U.S. and Europe fell sharply after the U.S. military halted two weeks of strikes on Iran, with Tehran signaling it would suspend its own attacks as long as the pause holds, easing fears of a broader Middle East escalation and dragging crude prices lower.",
       "url": "https://finance.yahoo.com/energy/articles/global-oil-stocks-tumble-crude-091028096.html",
       "source": "Investing.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "global oil stocks tumble as crude prices retreat after u s halts iran strikes",
       "s": 0.025997
+    },
+    {
+      "ts": "2026-07-27T07:00:00+00:00",
+      "title": "UBS cuts Halliburton stock price target on margin pressure - Investing.com",
+      "summary": "UBS cuts Halliburton stock price target on margin pressure Investing.com",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNQ0ZHTkowaE05RVJJZEpSYmdVVHdMWXNURVRUa1RBeElWakZqVTZzSzFHQWRJZXBON3pNQVJNZ1ZUU2VNbTFMWVE3cmZNNUY0LW5XeG02S0t1cnFEbC1HTHpkM3gxdC1vT0M4S3NNczkyRXFFbUpCcExfSDBKSXVUOGNadW5jSGY2czg4bGl1d3lycUtGb21qQjZZOHJCMXJmOXkyQy1DNTdCVDIxOUJRNXZzbHd4bXJnUmc?oc=5",
+      "source": "Investing.com",
+      "provider": "google_news_rss",
+      "title_key": "ubs cuts halliburton stock price target on margin pressure investing com",
+      "s": 0.668796
+    },
+    {
+      "ts": "2026-07-25T07:00:00+00:00",
+      "title": "Two killed in two separate crashes on Hal Rogers Parkway - WKYT",
+      "summary": "Two killed in two separate crashes on Hal Rogers Parkway WKYT",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxONmJhc05qQU9sRXNFX1ZzQ2hwelVnd2lMLXFPdU02VkxjNEZHbzZaUnpMTlNObk01V2o1ZFNsTXFzR1RtOGxvTndTV1h3d1ROZGVtaEVCd1BEbjZxNHhmdFQ3ZHZvODRfQXU5ZlNlNGpBYTNVTnViR1JpcTdYRzhLd3lvZmduT05ZM05aZUQwdHpxMlpn0gGoAUFVX3lxTE9veC1YYWN2RlhGVlh6ZVVEd3dGRXZQc1NlaDBIUkw0b1BvcFZQbXMxTHNOMzVzNW1EVDY4Ykg3ZkNmOTZOS2F3YUZaOUh2ZE1ZUUYwNWxjQzgwaEluYXl1bEw1eXJvZVV1VUZwTy1abVZtU0hwSWFrNENWZFA5Y1VOSmhDZUZtZ1FMOTc1OWZzMFA4YnE4Z2dER1ZJT2RJRUhTWThHNjg1cw?oc=5",
+      "source": "WKYT",
+      "provider": "google_news_rss",
+      "title_key": "two killed in two separate crashes on hal rogers parkway wkyt",
+      "s": 0.110289
     },
     {
       "ts": "2026-07-24T17:30:01+00:00",
@@ -342,7 +584,7 @@
       "summary": "Although the revenue and EPS for Halliburton (HAL) give a sense of how its business performed in the quarter ended June 2026, it might be worth considering how some key metrics compare with Wall Street estimates and the year-ago numbers.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-hal-q2-earnings-taking-173001096.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton hal q2 earnings taking a look at key metrics versus estimates",
       "s": 0.815596
     },
@@ -352,7 +594,7 @@
       "summary": "LBRT tops Q2 earnings and revenue estimates as record utilization, pricing gains and AI-focused initiatives fuel growth despite higher costs.",
       "url": "https://finance.yahoo.com/energy/articles/liberty-energy-q2-earnings-surpass-152000496.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "liberty energy q2 earnings surpass estimates revenues increase y y",
       "s": -0.928427
     },
@@ -362,9 +604,29 @@
       "summary": "OII expects consolidated revenues to increase in the third quarter of 2026, with EBITDA projected in the range of $115 million to $125 million.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/oceaneering-q2-earnings-revenues-rise-140400916.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "oceaneering q2 earnings revenues rise y y adjusted ebitda up",
       "s": -0.91781
+    },
+    {
+      "ts": "2026-07-24T07:00:00+00:00",
+      "title": "Halliburton (HAL) Q2 Earnings: Taking a Look at Key Metrics Versus Estimates - finance.yahoo.com",
+      "summary": "Halliburton (HAL) Q2 Earnings: Taking a Look at Key Metrics Versus Estimates finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNSDZWMVFwYUhvaFpidWQ4TkNrSDQyNzdfRTVhU2piQnYtaTJQZmRwekdvS1RNOEEtVThUWC16MXZ2d0ZwNUxYYUJLcm1mbTIydWUyT1R1Z3RmRjdmRTdCeDZiRVAyLXNaaEk0U2pvWnM3Zjgwd2lJRFBQMURsQ1RZZWwyQW8zX0pucW9YbDNRQVYwNEpCb2J4STZJQU4wSGFQ?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal q2 earnings taking a look at key metrics versus estimates finance yahoo com",
+      "s": 0.887893
+    },
+    {
+      "ts": "2026-07-24T07:00:00+00:00",
+      "title": "'Lanterns' trailer: Hal Jordan and John Stewart team up for a Manhunter murder mystery - Mashable",
+      "summary": "'Lanterns' trailer: Hal Jordan and John Stewart team up for a Manhunter murder mystery Mashable",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5XZmt5aTZETmhlYjNDWlJqYm14VFQwcE0zdlBMQ1dXME43T2tlSklSYWVYSVVmZnNDb1VLRzJoYnM5ZmhoMEM0Sk5aekpJV3dEcXl5Rk53SGRNdzQzUHNQaUpOY0ZBWVFlZDlpdg?oc=5",
+      "source": "Mashable",
+      "provider": "google_news_rss",
+      "title_key": "lanterns trailer hal jordan and john stewart team up for a manhunter murder mystery mashable",
+      "s": 0.848953
     },
     {
       "ts": "2026-07-23T18:11:55+00:00",
@@ -372,7 +634,7 @@
       "summary": "Halliburton (NYSE:HAL) has secured a contract with Basra Oil Company to provide integrated field management, digital solutions, and EPCM services in southern Iraq. The agreement covers major oil and gas field development, including planning and advanced digital capabilities. This contract expands Halliburton's presence in Iraq and adds a new large scale project to its international portfolio. For investors tracking Halliburton, the new Basra Oil Company contract adds fresh context to a...",
       "url": "https://finance.yahoo.com/energy/articles/halliburton-hal-lands-iraq-field-181155847.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton hal lands iraq field development contract with basra oil company",
       "s": -0.281549
     },
@@ -382,7 +644,7 @@
       "summary": "HAL's global contract wins and technology edge strengthen growth prospects, but geopolitical risks and uneven execution temper the near-term outlook.",
       "url": "https://finance.yahoo.com/energy/articles/halliburtons-outlook-improves-contract-wins-163600737.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton s outlook improves as contract wins fuel global growth ahead",
       "s": -0.930194
     },
@@ -392,9 +654,59 @@
       "summary": "In the second quarter of 2026, Halliburton Company reported year-on-year revenue growth to US$5.71 billion and net income of US$534 million, alongside continued share repurchases and a series of new multi-year contracts with Saudi Aramco, TotalEnergies, and other international customers. These wins in Saudi Arabia, Suriname, Indonesia, and Kuwait highlight Halliburton’s push into higher-tech, integrated services and automation, potentially reinforcing its earlier focus on international...",
       "url": "https://finance.yahoo.com/energy/articles/halliburton-hal-aramco-deals-quietly-151455511.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "are halliburton s hal new aramco deals quietly redefining its long term business mix",
       "s": 0.699486
+    },
+    {
+      "ts": "2026-07-23T07:00:00+00:00",
+      "title": "Are Halliburton’s (HAL) New Aramco Deals Quietly Redefining Its Long-Term Business Mix? - finance.yahoo.com",
+      "summary": "Are Halliburton’s (HAL) New Aramco Deals Quietly Redefining Its Long-Term Business Mix? finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNNnpwOW1rUlRDQUpwdGJSRFlFTXA4R29xVmdTSWdzQTlLNWpuckZQVFNkNnVxR3gwZWZuSWtNbGlIdEIyMWlMT05ZdGdhZDdfczlDcEM3VFdnWEJoVlE3LXNqbVVLRTFiNG40dkg5c1JwZXN0bXlhNGx3MldORDZnQmdqaHJKWHJSX2pzQm52WDcxQkRhWlBVeA?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "are halliburton s hal new aramco deals quietly redefining its long term business mix finance yahoo com",
+      "s": 0.78162
+    },
+    {
+      "ts": "2026-07-23T07:00:00+00:00",
+      "title": "Halliburton (HAL) Lands Iraq Field Development Contract With Basra Oil Company - finance.yahoo.com",
+      "summary": "Halliburton (HAL) Lands Iraq Field Development Contract With Basra Oil Company finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQckZOWEJPeWVqbVEtUUJGXzVRUWdoNXIzMU5jOFM2NEtFNVR4NHZhek80X2dSYmE4b29jN2tWaDBubWZCSVpvOEs2cVJPTVY2N29MWHczZ1hMd3lqanR6bkVqWk9zeFFoS2xhX1BzaG1sRWZ3bEtiZVlZaTBrTFZGZFpEczZTRE4wajMwb3BBQVI1RjA?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal lands iraq field development contract with basra oil company finance yahoo com",
+      "s": 0.752407
+    },
+    {
+      "ts": "2026-07-23T07:00:00+00:00",
+      "title": "Watch CNBC's full interview with Tractor Supply CEO Hal Lawton - CNBC",
+      "summary": "Watch CNBC's full interview with Tractor Supply CEO Hal Lawton CNBC",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQNGZwWHJ4SjJVS0k0dkd6c0JSVHhMWU9BQk1paTlKc002aDdmUDBZT0p6YnVrQ0FudURsdkhfWmhZTTNsSzNiVC1kMEdBbHhJUzE5ejZmMkoxaVR1T0d2QUItT0k1aWl0c0M4RXBYSnpVMkpHdDFGS1E0dzNQUWNiMTBkcjV0ckFSUkVVNWR5TGQzWVB2TzFrcUZsWHRhbTFzZ1pNcnA3Zw?oc=5",
+      "source": "CNBC",
+      "provider": "google_news_rss",
+      "title_key": "watch cnbc s full interview with tractor supply ceo hal lawton cnbc",
+      "s": 0.902341
+    },
+    {
+      "ts": "2026-07-23T07:00:00+00:00",
+      "title": "Halliburton's Outlook Improves as Contract Wins Fuel Global Growth Ahead - finance.yahoo.com",
+      "summary": "Halliburton's Outlook Improves as Contract Wins Fuel Global Growth Ahead finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNSnpJeXRtNmw4VHVZOHhjSkhxTXc4RFN6Q0NvaHlmd0JRd3JXZWIyRkE4Zzk1SUFsMDNBZnAyNWR3Z2pFQ3djbHY4MHF6eXprcEZrcWhMeUFla0lmbFppekRFSWlDdm9xeW9CYlBJTXJYUlJnZ3F4VXkzLUhZdUZDSWJya0ZVRGFsMWJkM3Mzc2daajZZVTdjX2w3dnVXSjNfaHc?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton s outlook improves as contract wins fuel global growth ahead finance yahoo com",
+      "s": -0.873535
+    },
+    {
+      "ts": "2026-07-23T07:00:00+00:00",
+      "title": "Halliburton Stock: Big Red Has A Fire Sale (NYSE:HAL) - Seeking Alpha",
+      "summary": "Halliburton Stock: Big Red Has A Fire Sale (NYSE:HAL) Seeking Alpha",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNa3pIVjlack0zMV9VejZBaTlxc2RaWExtTlIxaG9mSk51TWlJR2ljUFdxc2xFRm9BbEdIU2NmWGdnbTNtbFhpNWZDZmJBWnBjMkw4TXBsY3pPeXVwbkw4elkwRHRuaFNJcnoxejIxWUhZSlJLQ1hBSUhSNy15ek9HNElJTDRBTzZYdkpNRnJGbmZPZw?oc=5",
+      "source": "Seeking Alpha",
+      "provider": "google_news_rss",
+      "title_key": "halliburton stock big red has a fire sale nyse hal seeking alpha",
+      "s": 0.832525
     },
     {
       "ts": "2026-07-22T15:52:12+00:00",
@@ -402,7 +714,7 @@
       "summary": "Halliburton's (HAL) outlook for the rest of the year is improving as international projects ramp up",
       "url": "https://finance.yahoo.com/energy/articles/halliburton-apos-outlook-improves-awards-155212446.html",
       "source": "MT Newswires",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton s outlook improves as new awards build momentum after flat q2 rbc says",
       "s": -0.927849
     },
@@ -412,7 +724,7 @@
       "summary": "Value stocks typically trade at discounts to the broader market, offering patient investors the opportunity to buy businesses when they’re out of favor. The key risk, however, is that these stocks are usually cheap for a reason — five cents for a piece of fruit may seem like a great deal until you find out it’s rotten.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/3-value-stocks-warning-signs-135027480.html",
       "source": "StockStory",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "3 value stocks with warning signs",
       "s": 0.754204
     },
@@ -422,7 +734,7 @@
       "summary": "Moby summary of Halliburton Company's Q2 2026 earnings call",
       "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-halliburton-company-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
       "source": "Moby",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton company q2 2026 earnings call summary",
       "s": 0.787423
     },
@@ -432,9 +744,19 @@
       "summary": "HOUSTON, July 22, 2026--Kuwait Oil Company (KOC) awarded Halliburton (NYSE: HAL) a multi-year agreement to support the development of the Ahmadi Innovation Valley (AIV), a flagship initiative that advances Kuwait’s energy sector transformation.",
       "url": "https://finance.yahoo.com/energy/articles/kuwait-oil-company-awards-long-120000208.html",
       "source": "Business Wire",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "kuwait oil company awards long term agreement to advance technology development ahmadi innovation valley",
       "s": -0.859481
+    },
+    {
+      "ts": "2026-07-22T07:00:00+00:00",
+      "title": "Hal Scott Regional Preserve conducts 680-acre prescribed burn Wednesday - WFTV",
+      "summary": "Hal Scott Regional Preserve conducts 680-acre prescribed burn Wednesday WFTV",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQV1ZJc3JYaDZNMW9KT1hFaGd0UEo3dEFJY2RxdnBWMVFyN09EbWVZcURPQzU0V2hYZTJ1Z0kyRjdidFpwb2NfU3VJT0VJcTZDb3BOdXYtOUlFX2U2VGZWQm1VbGRUV3dvbGdNWldOaGt5VXdrenk2Q1ZUeHN6VkZVUjdiMl9FN0hPcGxlejZVQy1hR3JidkhOdUJSMkMtcjFuUFl2cHhmbnFRTHprQ0czNHk3SjlSNzczanM2RUdlRU9NOE1BeXBCekxBWdIB3wFBVV95cUxOY09EZThXeDMtY3N5aVd4S1VpbHBXbHhCeVdnVGtrLTh1d2pwRnV4VXBsdFRITFB4ejVsbGRnV29LVDhpV1pQX0xxOFJaRzRrOVdQOTNzb2x2dkFmVlFaV3lqY0xpRW5adW9YcFliSUM1ckFKWnBWQ0d4bG5FX2E1Y2xIVnVWdWlOMy0yaTRQQ2k0ZVNENHhjTklvZTNIVnJoNkJ2aFhnMnZ6SFNEeWtSNWg3ajZXVFpfN0ZzaGd1akRvN2R0aTQ0YXQ4WENPa2c2d2kzc2owcEtDZ2hSRllv?oc=5",
+      "source": "WFTV",
+      "provider": "google_news_rss",
+      "title_key": "hal scott regional preserve conducts 680 acre prescribed burn wednesday wftv",
+      "s": 0.918234
     },
     {
       "ts": "2026-07-22T02:05:47+00:00",
@@ -442,7 +764,7 @@
       "summary": "Halliburton reported stronger second-quarter 2026 earnings and revenue, driven by improving North American activity and resilient international demand, while signaling confidence in continued growth.",
       "url": "https://finance.yahoo.com/energy/articles/halliburton-tops-estimates-international-demand-020547328.html",
       "source": "Oilprice.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton tops estimates as international demand strengthens",
       "s": -0.912942
     },
@@ -452,7 +774,7 @@
       "summary": "International revenue hit a 10-year high as margins expanded.",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/07/21/halliburton-hal-q2-2026-earnings-call-transcript/",
       "source": "Motley Fool",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton hal q2 2026 earnings call transcript",
       "s": 0.858443
     },
@@ -462,7 +784,7 @@
       "summary": "Halliburton Co (HAL) reports a 6% revenue increase to $5.7 billion, driven by international gains despite North American stagnation and Middle East disruptions.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-co-hal-q2-2026-210121277.html",
       "source": "GuruFocus.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton co hal q2 2026 earnings call highlights strong international growth amidst",
       "s": -0.911035
     },
@@ -472,7 +794,7 @@
       "summary": "Halliburton stock declines after the oilfield services company posts slightly better-than-expected earnings but sees the war in the Middle East take its toll on business.",
       "url": "https://www.barrons.com/articles/halliburton-earnings-stock-price-991b78ce?siteid=yhoof2&yptr=yahoo",
       "source": "Barrons.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton earnings beat estimates why the stock is falling",
       "s": 0.161696
     },
@@ -482,7 +804,7 @@
       "summary": "HAL tops Q2 estimates as revenues rise across both business segments, while management highlights contract wins and expects further growth.",
       "url": "https://finance.yahoo.com/energy/articles/halliburton-q2-earnings-revenues-beat-153300863.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton q2 earnings revenues beat estimates sales up y y",
       "s": -0.927391
     },
@@ -492,7 +814,7 @@
       "summary": "Halliburton (NYSE:HAL) reported sequential revenue growth in the second quarter of 2026, with management pointing to strength in international markets, a recovering North America business and a growing pipeline of technology-driven contract awards. Chairman, President and CEO Jeff Miller said Halli",
       "url": "https://www.marketbeat.com/instant-alerts/halliburton-q2-earnings-call-highlights-2026-07-21/?utm_source=yahoofinance&utm_medium=yahoofinance",
       "source": "MarketBeat",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton q2 earnings call highlights",
       "s": 0.779423
     },
@@ -502,7 +824,7 @@
       "summary": "Halliburton Company (NYSE:HAL, XETRA:HAL) reported second quarter results that exceeded Wall Street expectations, but shares fell more than 6% after management warned that the oilfield services market is weakening more than previously anticipated in the short to medium term. The oilfield...",
       "url": "https://www.proactiveinvestors.com/companies/news/1095786/halliburton-tops-q2-earnings-estimates-as-ceo-warns-of-softer-oilfield-services-market-1095786.html",
       "source": "Proactive",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton tops q2 earnings estimates as ceo warns of softer oilfield services market",
       "s": -0.214402
     },
@@ -512,7 +834,7 @@
       "summary": "Earnings beat fails to lift the stockHalliburton Company (NYSE:HAL) reported second-quarter results ahead of market expectations on Tuesday, delivering better-than-forecast earnings and revenue despite a negative share price reaction in pre-market trading. Adjusted earnings came in at $0.",
       "url": "https://investorshub.advfn.com/market-news/article/32304/halliburton-tops-second-quarter-forecasts-but-shares-fall-after-results-hal",
       "source": "InvestorsHub",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton tops second quarter forecasts but shares fall after results hal",
       "s": 0.011963
     },
@@ -522,7 +844,7 @@
       "summary": "The oilfield services company posted net income of $472 million in the second quarter, up from $204 million in the prior quarter",
       "url": "https://qz.com/halliburton-q2-2025-earnings-oilfield-services-market-072126",
       "source": "Quartz",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton q2 2025 earnings ceo warns of softer oilfield market",
       "s": -0.051136
     },
@@ -532,7 +854,7 @@
       "summary": "Energy stocks were edging higher premarket Tuesday, with the State Street Energy Select Sector SPDR",
       "url": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-edge-higher-132317646.html",
       "source": "MT Newswires",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "sector update energy stocks edge higher premarket tuesday",
       "s": -0.846682
     },
@@ -542,9 +864,9 @@
       "summary": "Futures rose early Tuesday as Sandisk, Micron and AMD lead an AI rebound. GM and 3M are earnings movers.",
       "url": "https://www.investors.com/market-trend/stock-market-today/stock-market-today-dow-jones-nasdaq-sandisk-micron-amd-jump-ai-rebounds-gm-3m-lead-earnings-movers/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "stock market today sandisk micron amd jump as ai rebounds gm 3m lead earnings movers",
-      "s": -0.633171
+      "s": -0.63317
     },
     {
       "ts": "2026-07-21T11:55:01+00:00",
@@ -552,7 +874,7 @@
       "summary": "Halliburton (HAL) delivered earnings and revenue surprises of +1.85% and +4.19%, respectively, for the quarter ended June 2026. Do the numbers hold clues to what lies ahead for the stock?",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-hal-surpasses-q2-earnings-115501745.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton hal surpasses q2 earnings and revenue estimates",
       "s": -0.925957
     },
@@ -562,7 +884,7 @@
       "summary": "Investing.com -- Halliburton Company (NYSE:HAL) reported second-quarter earnings before the open on Tuesday, with its shares declining premarket despite the company topping consensus expectations.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-stock-slides-despite-earnings-113108083.html",
       "source": "Investing.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton stock slides despite earnings and revenue beating expectations",
       "s": 0.003722
     },
@@ -572,7 +894,7 @@
       "summary": "Oilfield services company Halliburton (NYSE:HAL) reported revenue ahead of Wall Street’s expectations in Q2 CY2026, with sales up 3.7% year on year to $5.71 billion. Its non-GAAP profit of $0.55 per share was 2.3% above analysts’ consensus estimates.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-nyse-hal-beats-expectations-112154293.html",
       "source": "StockStory",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton nyse hal beats expectations in strong q2 cy2026",
       "s": -0.905534
     },
@@ -582,9 +904,139 @@
       "summary": "The contract includes field development planning, production optimisation, digital solutions and EPCM services for the two fields.",
       "url": "https://www.offshore-technology.com/news/halliburton-basra-oil-contract-southern-iraq/",
       "source": "Offshore Technology",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "halliburton wins basra oil contract for southern iraq field services",
       "s": -0.381206
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton Profit Climbs on Higher Revenue - WSJ",
+      "summary": "Halliburton Profit Climbs on Higher Revenue WSJ",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNMllCaFJyOENVMHZlVF9xV1dSdHMxNXNCcDhVc29oWmNYcTN4VG84c2Z4clVhYWk4bmdmSlE4MWpzMjlWN1piTXFOOGRjSnpFZlZteUM3SWl0d3JHaGVEelZEX0MyekNFVkR3SHBzMlZjX0oyMUdTS18zeGFwWEMzRGhlM0hRejlJTGhURXl4M3dFQ0kt?oc=5",
+      "source": "WSJ",
+      "provider": "google_news_rss",
+      "title_key": "halliburton profit climbs on higher revenue wsj",
+      "s": -0.907491
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton tumbles on tepid revenue forecast, Middle East recovery warning - Reuters",
+      "summary": "Halliburton tumbles on tepid revenue forecast, Middle East recovery warning Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQMkw5dDliVldRU28tWFNhSXB5eXdaeHc3cHdOM2dNOV9vUmItbGl1YkZBdTdsV0RTMDhPcHE2dnJzZUJEdGtYRkhNazBYYmtkbFhtUFJRZnkyYkZ2c25tLVRNNDVWekp2UkdrczlRNEtvODBkQjVSbHYtb3FmQUtWU0ZKeXJ3aEtlSFRLQXdHVHRSZGgtcFRVQkpCVUpZTmZ3WV9HTHcxV0h4Vm9iQmc0MS1SaUx4b296Q1Jn?oc=5",
+      "source": "Reuters",
+      "provider": "google_news_rss",
+      "title_key": "halliburton tumbles on tepid revenue forecast middle east recovery warning reuters",
+      "s": 0.013637
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton (HAL) Surpasses Q2 Earnings and Revenue Estimates - finance.yahoo.com",
+      "summary": "Halliburton (HAL) Surpasses Q2 Earnings and Revenue Estimates finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNM2QzUFZ4RlRCVXhyM2V1NGhaZlZGalZYVWExUHd4OF9QSEV3dDN3UWJOanRySkkxeVhNTnZpUHY4a3Zudi1kdEMxMU1USHN4VnFEX3VfUkJWODZiem5VMkEzakIwZGROYWVPM3A3UDdOTFZHdFNCeDhVNTI3SHc5XzQ3S1RZNElobWk0Z1NNVWE5U25OdU5zZFNCY05mVGpaUGdvbw?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal surpasses q2 earnings and revenue estimates finance yahoo com",
+      "s": -0.312802
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton tops second-quarter forecasts but shares fall after results (HAL) - finance.yahoo.com",
+      "summary": "Halliburton tops second-quarter forecasts but shares fall after results (HAL) finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPczR1TVlhTUFLa0JaYkQwa2Y0TUZUTXFtclNaM2o5bTFkWFdQdTFpTzNuLVV0aVBleExQbS1iaHliYnJMb19fYTkxY00zVHF1b19Qa3BfeHM2R2hsS1JmMnpqX2tTeWdTTnFKS3Q0RmREQmFtcU9YZHQwMlZlbGh5eEVyYlQ3VlpmNjkzQVhKNncxY3V0TnczemsxYmZkWHJKVUZzU0hmZHpXZw?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton tops second quarter forecasts but shares fall after results hal finance yahoo com",
+      "s": 0.03784
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton Q2 Earnings Call Highlights - finance.yahoo.com",
+      "summary": "Halliburton Q2 Earnings Call Highlights finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQODdLbWR0bUl2MzFkdVBUbDRzUlJQN3VncUc2SW1uQlpMNGJuNlZ3M3FaRTJjV2VQVldFOEwySy1fcVplcHBlMXd6UjR3bUF3ZVNrbkQ1UHA3YTBLbXJQdzRWcC12LVp6UUl3Tm5WNW9scDJHQW5EWGVCYlZKRm1rcktUelU3Vmx6amMtUEtyMkNUQzhEUVNBcVd1R20?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton q2 earnings call highlights finance yahoo com",
+      "s": 0.902086
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton Tops Estimates as International Demand Strengthens - finance.yahoo.com",
+      "summary": "Halliburton Tops Estimates as International Demand Strengthens finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQWHlJUHdwb3Z1VmI2T0REX0ZaTHpIVWFQcnNmTkhvNHNDSEhsVFV3aXRCcklqQ2ZzOVhlUjJVNUhrZ3ZIVkY5QTFqUDZQZFQ4UHhlLWVNbl9ZVWNrWFRKRU1UQjRkWlF1eHJhdXQzRjhRV2dDUUhnZkJPVWdpNm9xTTQ4SGEwT1BzY1BJcmVmd3F6RjczZVZqVGcyVEw5Y095bHF3aTVWbw?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton tops estimates as international demand strengthens finance yahoo com",
+      "s": -0.223283
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton Q2 Earnings & Revenues Beat Estimates, Sales Up Y/Y - finance.yahoo.com",
+      "summary": "Halliburton Q2 Earnings & Revenues Beat Estimates, Sales Up Y/Y finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOaUpwMTRVMU5UbnBYOFQyYXVnQmMwSG9vNXhHUGVHcElVUEktSDk0VG82dzEydFBFRmRINTVqaUpaVndfWjF3eXU1enFaTW5VMlNVT19ESW9WNldVdl9lNS1NRm5rVGxhalhEZWFxVU9mcmhxckFhaWRyeG1tUzVlY0dDd1BwUkhfU0dpOVFOVGR1RVhOOUhSamVn?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton q2 earnings revenues beat estimates sales up y y finance yahoo com",
+      "s": -0.82263
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton Sees Improvement in North American Activity in 2026 - Bloomberg.com",
+      "summary": "Halliburton Sees Improvement in North American Activity in 2026 Bloomberg.com",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNMVdsN0xteG5mZkhxUDdUT2NnRi1WTzVMX2FiQ2JOdWY2RzJIN3hpOWZ5ck5YM3FyU0J5YWZRUDVVM0NzNXk1YWdJSnVJRExlcU5IZDU4ZjhDZHBtMUc2SlVMa3BJQmpwSnJRdC1BbUJjWEhhRVlyZlVQQ0NRMGVMMHBOZU1MVEw0N0dTVHRjTGxnYXRYamc1azEwQkhiaWxWbldTRXlibkdWbWNkd21jeUVtN2Y?oc=5",
+      "source": "Bloomberg.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton sees improvement in north american activity in 2026 bloomberg com",
+      "s": -0.800788
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton wins Basra Oil contract for southern Iraq field services - finance.yahoo.com",
+      "summary": "Halliburton wins Basra Oil contract for southern Iraq field services finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPNGJ5Z3NEYi1JR3hxVk5EdzFKUUdoRXJsYXdGTmlheGtiV3hHVzgzeFpjMmhSS0dLbXhaSUZCNjNqTmtfbFZJZlB3WV9uM3RLT0c1YjdJenhDRHZ4ZktFSl8yZWpJd1JHbFZYYlJZeXN2eks0dGtKZG9QeTY3LTJTU0lxTGIxRzFwR0tUNXEydUtsSTEtUU9J?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton wins basra oil contract for southern iraq field services finance yahoo com",
+      "s": 0.702223
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton Q2 2025 earnings: CEO warns of softer oilfield market - qz.com",
+      "summary": "Halliburton Q2 2025 earnings: CEO warns of softer oilfield market qz.com",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQRFhFU2Z6QXR6SHJySGZqY3Z0ZHJ2TWJzTGdBMEVMVTJreUtwUnZRYU1pdUk5Z2VGNFpnNVc5di04WDlPN3NPVzdyWWF0N3hpVEpTangyOWNTTUU2RldwSkU4czRydkk5Z1FXaEh2eUNwdW5wY0ZibFB1c1dlbGN5dA?oc=5",
+      "source": "qz.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton q2 2025 earnings ceo warns of softer oilfield market qz com",
+      "s": 0.440598
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton sinks despite Q2 earnings beat as sales slide in Middle East, flat in North America - Seeking Alpha",
+      "summary": "Halliburton sinks despite Q2 earnings beat as sales slide in Middle East, flat in North America Seeking Alpha",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOcDM0VGxBTWZNQ1FWNFdDcGhFMGp5c2UyUFBYaWEwWm04dmtJeWpqQjNENWI5ZzZBdFhmLUpmVzBuTlhRMWVQcnJtLUMxRkJmS2RGM3ZXYXZSMV9Sck1WSm5JdzRubG9WWkh6a0ctMEJyLU11Rl9RMHJQLUdELVJTRmd0dWwySTczQXlPdWVzRDZfQ2R3Vlc5UDF5aHJqekl3elVqcmYtSDJFalhQVGZ3N05qTVQ1RDNqaE4tZTVVRFRxUWc0ZTY5ejRFd3k?oc=5",
+      "source": "Seeking Alpha",
+      "provider": "google_news_rss",
+      "title_key": "halliburton sinks despite q2 earnings beat as sales slide in middle east flat in north america seeking alpha",
+      "s": -0.002444
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "Halliburton (NYSE:HAL) Beats Expectations in Strong Q2 CY2026 - finance.yahoo.com",
+      "summary": "Halliburton (NYSE:HAL) Beats Expectations in Strong Q2 CY2026 finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOYVFrV2tGWjQ3Rkt2TC1vRGFkZEJCOXI0SUJPT0JSV0QyN2RnV3U0WlZGeDdQUVJZa05kNW1MOVNtd05jOHNMcy1xSFRQaUhfaDNYbHZGX095OV9Bc1FlSXZESEFtSmg2ZE5qOUJmOWxVOGZ6VEN6OEFmRmxqdk4xSk8wQnBtSkI1aTRkTHU0OGZfM2ctTjVRUWgxSnRpcFRrbGkxRWxUSQ?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton nyse hal beats expectations in strong q2 cy2026 finance yahoo com",
+      "s": -0.563717
+    },
+    {
+      "ts": "2026-07-21T07:00:00+00:00",
+      "title": "A Look at Halliburton Co (HAL) After 5.5% Decline -- GF Value $3 - GuruFocus",
+      "summary": "A Look at Halliburton Co (HAL) After 5.5% Decline -- GF Value $3 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQcm02d0JLa2xBeXZOVEk3ZVY2V0RNMFVkRmxTWHBwQW9fQ0F4U1lkNjQ0cE9jV0d6UVloNGtxSjVqRkQ1NjBVNXU2anlmQjVNcnIyb1Y0VFRJcGNzREg1QWJRUzVBRXNYNVdMWU42aVllbWRvVWhkV3dtaVpkcW9DU0NXY0k2NF93ZzNhWGh6Umd6R1c2ZEhoUnozRzJOUVdPWkhFRm5zZnZCMHBVY3VCTTlR?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "a look at halliburton co hal after 5 5 decline gf value 3 gurufocus",
+      "s": 0.677956
     },
     {
       "ts": "2026-07-20T20:57:23+00:00",
@@ -592,7 +1044,7 @@
       "summary": "Halliburton, SLB and Baker Hughes earnings could reveal the full second-quarter impact of Middle East disruptions.",
       "url": "https://finance.yahoo.com/energy/articles/slb-eyes-31-profit-drop-205723854.html",
       "source": "GuruFocus.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "slb eyes 31 profit drop as iran conflict tests oilfield services",
       "s": 0.005391
     },
@@ -602,9 +1054,159 @@
       "summary": "Energy stocks were leaning lower premarket Monday, with the State Street Energy Select Sector SPDR E",
       "url": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-lean-lower-132417393.html",
       "source": "MT Newswires",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "sector update energy stocks lean lower premarket monday",
       "s": -0.027136
+    },
+    {
+      "ts": "2026-07-20T12:00:00+00:00",
+      "title": "Basra Oil Company Awards Halliburton Contract to Advance Oil and Gas Development in Southern Iraq",
+      "summary": "HOUSTON, July 20, 2026--Halliburton (NYSE: HAL) has been awarded a contract by Basra Oil Company (BOC) to provide Integrated Field Management Services (IFMS) and Engineering, Procurement, and Construction Management (EPCM) for the development of the Bin Umar and Sindbad oil and gas fields in southern Iraq.",
+      "url": "https://finance.yahoo.com/energy/articles/basra-oil-company-awards-halliburton-120000690.html",
+      "source": "Business Wire",
+      "provider": "yahoo_public",
+      "title_key": "basra oil company awards halliburton contract to advance oil and gas development in southern iraq",
+      "s": -0.866625
+    },
+    {
+      "ts": "2026-07-20T11:00:00+00:00",
+      "title": "Oil-Service Companies Set to Reveal War’s Impact on Earnings",
+      "summary": "(Bloomberg) -- This week will offer the clearest picture yet of the Iran war’s impact on the world’s biggest oil field service providers, with the likes of SLB Ltd., Baker Hughes Co. and Halliburton Co. all expected to take hits to their bottom line.Most Read from BloombergUS Strikes Iran in Escalating Campaign After Troops KilledThousands of Trucks Haul Iraq’s Oil Through Syria in Sign of Hormuz LegacyUS Strikes Iran to ‘Punish’ It for Attack That Killed 2 TroopsTrump Silent So Far on Iran Plan",
+      "url": "https://finance.yahoo.com/energy/articles/oil-companies-set-reveal-war-110000157.html",
+      "source": "Bloomberg",
+      "provider": "yahoo_public",
+      "title_key": "oil service companies set to reveal war s impact on earnings",
+      "s": 0.793484
+    },
+    {
+      "ts": "2026-07-20T10:23:33+00:00",
+      "title": "Halliburton (HAL) Reports Q2: Everything You Need To Know Ahead Of Earnings",
+      "summary": "Oilfield services company Halliburton (NYSE:HAL) will be announcing earnings results tomorrow before the bell. Here’s what to expect.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/halliburton-hal-reports-q2-everything-102333126.html",
+      "source": "StockStory",
+      "provider": "yahoo_public",
+      "title_key": "halliburton hal reports q2 everything you need to know ahead of earnings",
+      "s": 0.899686
+    },
+    {
+      "ts": "2026-07-20T07:00:00+00:00",
+      "title": "Halliburton (HAL) Reports Q2: Everything You Need To Know Ahead Of Earnings - finance.yahoo.com",
+      "summary": "Halliburton (HAL) Reports Q2: Everything You Need To Know Ahead Of Earnings finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNQmM0R0huM0JqSHRCUUlXSVJRSUlod2VDcHlOT0RmNUpmOUtDaTNJSzZvQnlPY04zVXhrdXZ2RXFxQVVERTZIMGYwZU9hTmFWTzF4TEVjZnk4V1NadlZDeHhOcXNPV1JCbzNDRXo4b05nQ1B3cGVDQ2N2Y1pQeElpS2dkd1gyM1QzYU96cDZLZU5oMkRXbjdqY1QzX2VwVjd1LV9INQ?oc=5",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss",
+      "title_key": "halliburton hal reports q2 everything you need to know ahead of earnings finance yahoo com",
+      "s": 0.919024
+    },
+    {
+      "ts": "2026-07-19T18:00:00+00:00",
+      "title": "Jobs, GM, Tesla, Alphabet, Intel, Verizon, and More to Watch This Week",
+      "summary": "It’s a heavy earnings week, with results also coming in from Halliburton, 3M, AT&T, Blackstone, and more. On the economic front, we’ll see data on jobs, new-home sales, and industry purchasing activity.",
+      "url": "https://www.barrons.com/articles/jobs-gm-tesla-alphabet-intel-verizon-and-more-to-watch-this-week-3dd9de07?siteid=yhoof2&yptr=yahoo",
+      "source": "Barrons.com",
+      "provider": "yahoo_public",
+      "title_key": "jobs gm tesla alphabet intel verizon and more to watch this week",
+      "s": 0.909278
+    },
+    {
+      "ts": "2026-07-19T07:00:00+00:00",
+      "title": "Hal Williams, Actor in First Wave of Black Sitcoms, Dies at 91 - The New York Times",
+      "summary": "Hal Williams, Actor in First Wave of Black Sitcoms, Dies at 91 The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBtOEV2eVpMb2p5VTlEVGZHQ3VCQjRMWjBxdlJWN25OQU8yOEtuTUNqRnVraDFvV3B0VTBlX1JlcTJBUDJPc3luVEJJWHFjMjQ1a3IxR2ItZURCQ0kyclRsU1YwWWtEd0s1R0pNYjhQUHFfTWVNUVNn?oc=5",
+      "source": "The New York Times",
+      "provider": "google_news_rss",
+      "title_key": "hal williams actor in first wave of black sitcoms dies at 91 the new york times",
+      "s": 0.841055
+    },
+    {
+      "ts": "2026-07-18T07:00:00+00:00",
+      "title": "Obituary for Harold \"Hal\" McGowan - Karvonen Funeral & Cremation Service",
+      "summary": "Obituary for Harold \"Hal\" McGowan Karvonen Funeral & Cremation Service",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE52MUJoTHBUMWluNEdqdEJ6XzNLdlZ1UzMyek1OVG9WaVBQTmJqUDBtTzM0V0dBb3YtMndmWHpRUUZFVGJRWUdPXzFPSzdWSzlxR1JlY2hoaUhfMmJFOHkyLUtnYlNvcFk4b09qYXI1dw?oc=5",
+      "source": "Karvonen Funeral & Cremation Service",
+      "provider": "google_news_rss",
+      "title_key": "obituary for harold hal mcgowan karvonen funeral cremation service",
+      "s": 0.888473
+    },
+    {
+      "ts": "2026-07-17T23:08:16+00:00",
+      "title": "Halliburton (HAL) Lands Saudi Aramco Contracts For Unconventional Gas And Oil Re Entry",
+      "summary": "Halliburton secured multiple multi year contracts with Saudi Aramco to support unconventional gas development and onshore oil re entry work in Saudi Arabia. The agreements include the deployment of advanced intelligent automation and fracturing technologies and meaningfully expand Halliburton’s operational footprint in the country. These long duration contracts add to Halliburton’s international business exposure and deepen its role in Aramco’s upstream development plans. Halliburton,...",
+      "url": "https://finance.yahoo.com/energy/articles/halliburton-hal-lands-saudi-aramco-230816587.html",
+      "source": "Simply Wall St.",
+      "provider": "yahoo_public",
+      "title_key": "halliburton hal lands saudi aramco contracts for unconventional gas and oil re entry",
+      "s": -0.127733
+    },
+    {
+      "ts": "2026-07-17T18:52:15+00:00",
+      "title": "ConocoPhillips Joins US Firms Vowing $60 Billion for Iraqi Deals",
+      "summary": "(Bloomberg) -- ConocoPhillips joined dozens of US firms from the energy, healthcare, finance and tech sectors in signing some $60 billion in deals to lift the Iraqi economy.Most Read from BloombergFCC Near Rulings Against Disney Over ‘The View,’ TV LicensesChip Stocks Poised for Bear Market in AI Unwind: Markets WrapGoogle Gemini Launch Delayed as Tech Falls Short of Internal GoalsChina’s Moonshot Unveils AI Model, Fueling Tech RoutThailand Scraps Plan to End Visa-Free Entry for Indian TouristsT",
+      "url": "https://finance.yahoo.com/energy/articles/conocophillips-joins-us-firms-vowing-185215847.html",
+      "source": "Bloomberg",
+      "provider": "yahoo_public",
+      "title_key": "conocophillips joins us firms vowing 60 billion for iraqi deals",
+      "s": -0.208999
+    },
+    {
+      "ts": "2026-07-17T13:29:46+00:00",
+      "title": "3 Stocks Under $50 with Open Questions",
+      "summary": "The $10-50 price range often includes mid-sized businesses with proven track records and plenty of growth runway ahead. They also usually carry less risk than penny stocks, though they’re not immune to volatility as many lack the scale advantages of their larger peers.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/3-stocks-under-50-open-132946215.html",
+      "source": "StockStory",
+      "provider": "yahoo_public",
+      "title_key": "3 stocks under 50 with open questions",
+      "s": 0.433782
+    },
+    {
+      "ts": "2026-07-17T10:37:50+00:00",
+      "title": "Halliburton wins multi-year LSTK onshore contracts from Aramco",
+      "summary": "Halliburton will deliver an integrated well model covering drilling, completions, workovers and oil re-entry operations.",
+      "url": "https://www.offshore-technology.com/news/halliburton-lstk-onshore-contracts-aramco/",
+      "source": "Offshore Technology",
+      "provider": "yahoo_public",
+      "title_key": "halliburton wins multi year lstk onshore contracts from aramco",
+      "s": -0.884003
+    },
+    {
+      "ts": "2026-07-17T07:00:00+00:00",
+      "title": "Actor Hal Williams, star of sitcom ‘227’ and ‘Private Benjamin’ has died - Orange County Register",
+      "summary": "Actor Hal Williams, star of sitcom ‘227’ and ‘Private Benjamin’ has died Orange County Register",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNamJpS25POW1IN1pQQk1WTGN3TDRiNzFublV2OFJPc2JsS1A5dFZjNlFDNFFmNkMwVVNaQkhyTHpFTUQxcWtVbmo0R0Njcms0U2tVOEN4aEVNcWMzMlVRNXFtQlQzX3hHTzYzaXFSdVdvdTVxX1oyS18zOVd2cHdleUVROTBOR0pWSVFnR3BYdFc1TFd1azVDclpCcGRKMDVHYnFHU0VuMGtjUQ?oc=5",
+      "source": "Orange County Register",
+      "provider": "google_news_rss",
+      "title_key": "actor hal williams star of sitcom 227 and private benjamin has died orange county register",
+      "s": 0.729345
+    },
+    {
+      "ts": "2026-07-17T07:00:00+00:00",
+      "title": "Annual Hal Wing Honoring Heroes Ride set for Saturday to benefit foundation - ABC4 Utah",
+      "summary": "Annual Hal Wing Honoring Heroes Ride set for Saturday to benefit foundation ABC4 Utah",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQX2JRSXoyaEVqZ214Q0dtX0VIcWdZVnpaUEMwemtQdWFUNW1UamtHcU9BTHNfSHhmYmVNbURPV282bFR2Q2ZOdVpLOHdTMmplWlVjMmg0WUVSeFJ5ZnN6bzl1QmdzQkpQOVRIZGJ6dlUzeVljTkFvUzBSZ2RFYWlNSdIBhgFBVV95cUxQV2dpTnBNYXFIZTJLQ01JN3VFRDVVRGhOenRYTjZsTWkyUmlsZlBXeVdoNFo2ZjZLc0U4bW9IUlN3SkU5SUo0eVpxMG9hVG0xS1dOdlBzbzVPbFRCSktQbXVqZzFZZ2c4dGdETFlWenNKMzcxOGhNMVl0blo1ZkVvc2d2d25xUQ?oc=5",
+      "source": "ABC4 Utah",
+      "provider": "google_news_rss",
+      "title_key": "annual hal wing honoring heroes ride set for saturday to benefit foundation abc4 utah",
+      "s": 0.746319
+    },
+    {
+      "ts": "2026-07-17T07:00:00+00:00",
+      "title": "Hal Williams Reflected on the Legacy of Sanford and Son in Interview Days Before His Death at 91 - People.com",
+      "summary": "Hal Williams Reflected on the Legacy of Sanford and Son in Interview Days Before His Death at 91 People.com",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNemc0S2hndGhWUU9sbWhaWjJtVjFfUThVaGduTGpraDV2eVVsLXpUVzI2VzNrSWdrOUg4S2hVQV9xcTkyS3pTTXF2SlZTUHh3RDZFVDVTQ1J6TE5KX0FrYnltdHQ3cDNZZkdwRnhVTjlIbEhBUFFnR2gtd2VLTklneHZwTEdyM3JHdV92b1g0Y3Z4ZURYYURHcmRBYjA?oc=5",
+      "source": "People.com",
+      "provider": "google_news_rss",
+      "title_key": "hal williams reflected on the legacy of sanford and son in interview days before his death at 91 people com",
+      "s": 0.91294
+    },
+    {
+      "ts": "2026-07-16T15:52:00+00:00",
+      "title": "Halliburton Lands Aramco Deal for Saudi Arabia's Jafurah Gas Project",
+      "summary": "HAL secures a long-term Aramco contract for the Jafurah gas project, expanding its Saudi footprint with advanced fracturing technologies.",
+      "url": "https://finance.yahoo.com/energy/articles/halliburton-lands-aramco-deal-saudi-155200775.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "halliburton lands aramco deal for saudi arabia s jafurah gas project",
+      "s": 0.297413
     }
   ]
 }
