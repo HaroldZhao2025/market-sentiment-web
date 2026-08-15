@@ -99,15 +99,29 @@ jobs:
           resolver = Path("src/market_sentiment/free_transcripts.py").read_text(encoding="utf-8")
           fulfill = Path("src/market_sentiment/cli/fulfill_earnings_calls.py").read_text(encoding="utf-8")
           workflow = Path(".github/workflows/earnings-call-fulfillment.yml").read_text(encoding="utf-8")
-          resolver_tree = ast.parse(resolver)
-          resolver_functions = {node.name for node in resolver_tree.body if isinstance(node, ast.FunctionDef)}
+          tree = ast.parse(resolver)
+          functions = {node.name for node in tree.body if isinstance(node, ast.FunctionDef)}
           required = {"discover_transcripts", "extract_public_transcript", "score_public_transcript", "fulfill_public_transcript"}
-          assert required.issubset(resolver_functions), required - resolver_functions
+          assert required.issubset(functions), required - functions
           assert "transcript_text_redistributed" in resolver
           assert '"AAPL,MSFT,NVDA,AMZN,GOOGL,META,TSLA"' in workflow
           assert "AAPL fulfillment gate failed" in fulfill
           assert "batch_index" in fulfill and "batch_size" in fulfill
-          assert "text\": text" not in resolver.split("safe_turns", 1)[-1], "Public artifact path must not redistribute transcript text"
+
+          # Only inspect dictionaries appended to safe_turns. Internal FinBERT
+          # working rows may contain transcript text, but persisted safe turns may not.
+          safe_append_dicts = []
+          for node in ast.walk(tree):
+              if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+                  continue
+              if node.func.attr != "append" or not isinstance(node.func.value, ast.Name) or node.func.value.id != "safe_turns":
+                  continue
+              if node.args and isinstance(node.args[0], ast.Dict):
+                  safe_append_dicts.append(node.args[0])
+          assert safe_append_dicts, "No safe_turns artifact dictionaries found"
+          for item in safe_append_dicts:
+              keys = {key.value for key in item.keys if isinstance(key, ast.Constant) and isinstance(key.value, str)}
+              assert "text" not in keys, f"Public transcript artifact includes raw text: {keys}"
           print("Phase 8 fulfillment contract OK")
           PY
 
