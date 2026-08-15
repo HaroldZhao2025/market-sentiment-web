@@ -1,6 +1,9 @@
 name: Fulfill Earnings Calls
 
 on:
+  push:
+    paths:
+      - ".github/workflows/earnings-call-fulfillment.yml"
   workflow_dispatch:
     inputs:
       batch_index:
