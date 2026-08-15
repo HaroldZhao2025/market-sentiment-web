@@ -34,9 +34,21 @@ function buildSeries(obj: any): SeriesIn | null {
   const price = priceArr(obj?.price ?? obj?.close ?? obj?.Close);
   if (!date.length || !price.length) return null;
   const n = Math.min(date.length, price.length);
-  const rawSentiment = sentimentArr(obj?.S ?? obj?.sentiment);
-  const sentiment = Array.from({ length: n }, (_, i) => rawSentiment[i] ?? Number.NaN);
-  return { date: date.slice(0, n), price: price.slice(0, n), sentiment };
+  const rawSentiment = sentimentArr(obj?.S ?? obj?.sentiment).slice(0, n);
+  const firstObserved = rawSentiment.findIndex((value) => Number.isFinite(value));
+  if (firstObserved < 0) {
+    return { date: date.slice(0, n), price: price.slice(0, n), sentiment: Array(n).fill(Number.NaN) };
+  }
+  let last = Number.NaN;
+  const displaySentiment = rawSentiment.slice(firstObserved).map((value) => {
+    if (Number.isFinite(value)) last = value;
+    return last;
+  });
+  return {
+    date: date.slice(firstObserved, n),
+    price: price.slice(firstObserved, n),
+    sentiment: displaySentiment,
+  };
 }
 
 function buildNews(obj: any): NewsItem[] {
