@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import CompanyVisual from "../../../components/CompanyVisual";
-import TickerClient from "./TickerClient";
+import type { EarningsArtifact } from "../../earnings/[symbol]/EarningsIntelligenceClient";
+import CompanyDetailTabs from "./CompanyDetailTabs";
 
 type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
 type NewsItem = { ts: string; title: string; url: string; text?: string; summary?: string; source?: string; provider?: string; s?: number | null; sentiment_label?: string; probs?: { pos?: number; neu?: number; neg?: number } };
@@ -37,6 +38,30 @@ async function loadUniverse() {
   return (await readJSON<{ companies?: CompanyMeta[] }>(path.join(DATA_ROOT, "v5", "universe.json")))?.companies ?? [];
 }
 
+function legacyEarnings(symbol: string, raw: any): EarningsArtifact {
+  const docs = Array.isArray(raw) ? raw : Array.isArray(raw?.docs) ? raw.docs : [];
+  return {
+    schema_version: 1,
+    symbol,
+    earnings_history: [],
+    calls: [],
+    filing_fallback: docs.map((doc: any) => ({
+      ts: String(doc?.ts ?? ""),
+      title: String(doc?.title ?? ""),
+      url: String(doc?.url ?? ""),
+      source: String(doc?.source ?? "Legacy earnings source"),
+      document_type: "legacy",
+    })),
+  };
+}
+
+async function loadEarnings(symbol: string): Promise<EarningsArtifact> {
+  const current = await readJSON<EarningsArtifact>(path.join(DATA_ROOT, "v5", "earnings", `${symbol}.json`));
+  if (current && typeof current === "object") return current;
+  const legacy = await readJSON<any>(path.join(DATA_ROOT, "earnings", `${symbol}.json`));
+  return legacy ? legacyEarnings(symbol, legacy) : { schema_version: 6, symbol, earnings_history: [], calls: [], filing_fallback: [] };
+}
+
 export async function generateStaticParams() {
   const core = (await readJSON<string[]>(path.join(DATA_ROOT, "_tickers.json"))) || ["AAPL"];
   const symbols = new Set(core);
@@ -51,40 +76,44 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
   const companies = await loadUniverse();
   const company = companies.find((row) => String(row.ticker || "").toUpperCase() === symbol);
-  const obj = await readJSON<any>(path.join(DATA_ROOT, "ticker", `${symbol}.json`));
-  const rich = await readJSON<any>(path.join(DATA_ROOT, "v5", "news", `${symbol}.json`));
+  const [obj, rich, earnings] = await Promise.all([
+    readJSON<any>(path.join(DATA_ROOT, "ticker", `${symbol}.json`)),
+    readJSON<any>(path.join(DATA_ROOT, "v5", "news", `${symbol}.json`)),
+    loadEarnings(symbol),
+  ]);
   const richNews = buildNews(rich);
-
-  const header = (
-    <section className="flex items-center gap-4">
-      <CompanyVisual ticker={symbol} name={company?.name} sector={company?.sector} size="lg" />
-      <div className="min-w-0">
-        <div className="eyebrow">{company?.universe || "U.S. company"}</div>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-white">{company?.name || symbol}</h1>
-        <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-neutral-500"><span className="font-mono text-neutral-300">{symbol}</span>{company?.sector ? <span>{company.sector}</span> : null}{company?.industry && company.industry !== "Unknown" ? <span>{company.industry}</span> : null}</div>
-      </div>
-    </section>
-  );
-
-  if (!obj) {
-    return (
-      <main className="space-y-6">
-        {header}
-        <p className="max-w-2xl text-sm text-neutral-500">Price history is still building. Recent company news is available below.</p>
-        {richNews.length ? <div className="table-shell overflow-x-auto"><table className="w-full min-w-[820px] text-sm"><thead className="border-b border-white/10 bg-white/[0.025] text-left text-[11px] uppercase tracking-[0.1em] text-neutral-600"><tr><th className="px-4 py-3">Date</th><th className="px-4 py-3">Headline</th><th className="px-4 py-3">Source</th><th className="px-4 py-3 text-right">Sentiment</th></tr></thead><tbody>{richNews.slice(0, 60).map((item, index) => <tr key={`${item.url}-${index}`} className="border-b border-white/[0.06] last:border-0"><td className="px-4 py-3 font-mono text-xs text-neutral-600">{item.ts.slice(0, 10)}</td><td className="px-4 py-3"><a href={item.url} target="_blank" rel="noreferrer" className="font-medium text-neutral-200 hover:underline">{item.title}</a></td><td className="px-4 py-3 text-xs text-neutral-500">{item.source || item.provider || "—"}</td><td className="px-4 py-3 text-right font-mono text-xs text-neutral-400">{typeof item.s === "number" ? `${item.s > 0 ? "+" : ""}${item.s.toFixed(3)}` : "—"}</td></tr>)}</tbody></table></div> : <div className="card p-5 text-sm text-neutral-500">Recent news has not been collected for this company yet.</div>}
-      </main>
-    );
-  }
-
-  const series = buildSeries(obj);
   const compact = buildNews(obj);
   const news = (richNews.length ? richNews : compact).slice(0, 60);
   const newsTotal = Number(rich?.article_count ?? obj?.news_total ?? obj?.newsTotal ?? obj?.news_count?.total) || news.length;
+  const series = obj ? buildSeries(obj) : null;
+  const callCount = Array.isArray(earnings.calls) ? earnings.calls.length : 0;
+  const callLinks = Array.isArray((earnings as EarningsArtifact & { call_links?: unknown[] }).call_links)
+    ? ((earnings as EarningsArtifact & { call_links?: unknown[] }).call_links?.length ?? 0)
+    : 0;
 
   return (
-    <main className="space-y-5">
-      {header}
-      {series ? <TickerClient symbol={symbol} series={series} news={news as any} newsTotal={newsTotal} /> : <div className="text-neutral-500">No time series for {symbol}.</div>}
+    <main className="space-y-6">
+      <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex items-center gap-4">
+          <CompanyVisual ticker={symbol} name={company?.name} sector={company?.sector} size="lg" />
+          <div className="min-w-0">
+            <div className="eyebrow">{company?.universe || "U.S. company"}</div>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-white">{company?.name || symbol}</h1>
+            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-neutral-500">
+              <span className="font-mono text-neutral-300">{symbol}</span>
+              {company?.sector ? <span>{company.sector}</span> : null}
+              {company?.industry && company.industry !== "Unknown" ? <span>{company.industry}</span> : null}
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2 text-xs">
+          <span className="pill">{newsTotal} news</span>
+          <span className={`pill ${callCount > 0 ? "text-emerald-300" : ""}`}>{callCount} structured call{callCount === 1 ? "" : "s"}</span>
+          {callLinks > 0 ? <span className="pill">{callLinks} public call source{callLinks === 1 ? "" : "s"}</span> : null}
+        </div>
+      </section>
+
+      <CompanyDetailTabs symbol={symbol} series={series} news={news as any} newsTotal={newsTotal} earnings={earnings} />
     </main>
   );
 }
