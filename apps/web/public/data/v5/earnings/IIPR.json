@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "symbol": "IIPR",
   "earnings_history": [
     {
@@ -153,15 +153,769 @@
       "surprise_pct": 6.44
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-03T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-3-innovative-industrial-properties-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 56,
+        "scored_turn_count": 56,
+        "overall_sentiment": 0.124216,
+        "prepared_sentiment": -0.20731,
+        "qa_sentiment": 0.411539,
+        "qa_tone_shift": 0.618849,
+        "uncertainty_turn_rate": 0.089286,
+        "forward_looking_turn_rate": 0.196429,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": -0.565752
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 6,
+            "sentiment": -0.358126
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 6,
+            "sentiment": 0.352879
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": 0.502608
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.119199
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.851378
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.089704
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.894563,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Eli Kanter",
+          "role": "Director of Finance at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": 0.839914,
+          "word_count": 87,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Eli Kanter",
+          "role": "Director of Finance at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": 0.903093,
+          "word_count": 128,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.906869,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.844635,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.771155,
+          "word_count": 77,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.879434,
+          "word_count": 69,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.671606,
+          "word_count": 78,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Paul Smithers",
+          "role": "President and CEO at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": 0.567902,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Paul Smithers",
+          "role": "President and CEO at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.823718,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Paul Smithers",
+          "role": "President and CEO at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.143967,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Paul Smithers",
+          "role": "President and CEO at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.09131,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": 0.784135,
+          "word_count": 80,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.691723,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.216808,
+          "word_count": 75,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": 0.871131,
+          "word_count": 94,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.812484,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": 0.472724,
+          "word_count": 84,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.870043,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": -0.929338,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "prepared",
+          "sentiment": 0.115148,
+          "word_count": 84,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "CFO at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.006541,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "CFO at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.595907,
+          "word_count": 74,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "CFO at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.787704,
+          "word_count": 106,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "CFO at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.743866,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "CFO at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.064656,
+          "word_count": 67,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911727,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Alliance Global Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.746094,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.632242,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.485432,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Analyst at Alliance Global Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.433802,
+          "word_count": 131,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.537019,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.361318,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Analyst at Alliance Global Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.877309,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905599,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Analyst at Roth Capital Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.811826,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "qa",
+          "sentiment": 0.686868,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Analyst at Roth Capital Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.860291,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at Roth Capital Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.730166,
+          "word_count": 49,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Paul Smithers",
+          "role": "President and CEO at Innovative Industrial Properties Inc",
+          "section": "qa",
+          "sentiment": 0.649587,
+          "word_count": 83,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Paul Smithers",
+          "role": "President and CEO at Innovative Industrial Properties Inc",
+          "section": "qa",
+          "sentiment": -0.887109,
+          "word_count": 97,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Analyst at Roth Capital Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.604981,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905517,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.682885,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "qa",
+          "sentiment": 0.852208,
+          "word_count": 93,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.727241,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "CFO at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.867667,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "CFO at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.827378,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.789073,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "qa",
+          "sentiment": 0.235447,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894149,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Ben Regin",
+          "role": "Chief Investment Officer at Innovative Industrial Properties Inc",
+          "section": "qa",
+          "sentiment": -0.728587,
+          "word_count": 121,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.820376,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917145,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Executive Chairman at Innovative Industrial Properties Inc",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.742407,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.850548,
+          "word_count": 926,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 4964,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "IIPR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/iipr/transcripts/660789-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "IIPR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/iipr/transcripts/566590-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "IIPR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/iipr/transcripts/401660-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-24T00:00:00+00:00"
+    },
+    {
+      "title": "IIPR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-innovative-industrial-properties-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
     "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
-  "updated_at_utc": "2026-08-15T03:55:19.980032+00:00"
+  "updated_at_utc": "2026-08-15T16:58:58.966458+00:00"
 }

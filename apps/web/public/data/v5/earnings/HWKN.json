@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "symbol": "HWKN",
   "earnings_history": [
     {
@@ -161,7 +161,8 @@
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
-  "updated_at_utc": "2026-08-15T03:54:31.867104+00:00"
+  "updated_at_utc": "2026-08-15T16:54:58.095606+00:00"
 }
