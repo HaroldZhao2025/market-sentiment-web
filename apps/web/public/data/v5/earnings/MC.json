@@ -1,5 +1,5 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "symbol": "MC",
   "earnings_history": [
     {
@@ -153,15 +153,976 @@
       "surprise_pct": 1996.27
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-29-moelis-company-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 70,
+        "scored_turn_count": 70,
+        "overall_sentiment": 0.333668,
+        "prepared_sentiment": -0.177602,
+        "qa_sentiment": 0.49766,
+        "qa_tone_shift": 0.675261,
+        "uncertainty_turn_rate": 0.085714,
+        "forward_looking_turn_rate": 0.242857,
+        "topics": [
+          {
+            "topic": "AI & technology",
+            "mentions": 16,
+            "sentiment": 0.425665
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 15,
+            "sentiment": 0.208181
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 15,
+            "sentiment": 0.021359
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": -0.313374
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 6,
+            "sentiment": 0.069344
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": 0.419509
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.805835
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.896351,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Investor Relations at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.849114,
+          "word_count": 142,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Investor Relations at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.917731,
+          "word_count": 44,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.920151,
+          "word_count": 122,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.862295,
+          "word_count": 160,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.927228,
+          "word_count": 118,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.781838,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.857674,
+          "word_count": 121,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.791877,
+          "word_count": 128,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.167817,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.817567,
+          "word_count": 117,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.34566,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "CFO at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.935081,
+          "word_count": 132,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "CFO at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.166309,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "CFO at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.164497,
+          "word_count": 140,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "CFO at Moelis & Company",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.459199,
+          "word_count": 25,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905053,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900829,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Analyst at Citizens Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.421297,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.289049,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.538468,
+          "word_count": 132,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Analyst at Citizens Bank",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894554,
+          "word_count": 50,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.627864,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.437307,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908391,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.708234,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.212248,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.750593,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.874772,
+          "word_count": 111,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Analyst at UBS",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.764452,
+          "word_count": 69,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.753028,
+          "word_count": 145,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.777619,
+          "word_count": 144,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.798759,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901462,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88593,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.853761,
+          "word_count": 132,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.810368,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Analyst at Goldman Sachs",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.675087,
+          "word_count": 49,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.292426,
+          "word_count": 130,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.35493,
+          "word_count": 39,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "CFO at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.927191,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908344,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Analyst at BMO",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.784295,
+          "word_count": 108,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.805835,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.465234,
+          "word_count": 127,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.332647,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Analyst at BMO",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.481984,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.415717,
+          "word_count": 125,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.106745,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903317,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at KBW",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.676858,
+          "word_count": 60,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.709296,
+          "word_count": 81,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.692559,
+          "word_count": 88,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Analyst at KBW",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.728971,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "CFO at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.327689,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 55,
+          "speaker": "CFO at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.515707,
+          "word_count": 56,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.791967,
+          "word_count": 107,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.242521,
+          "word_count": 134,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903156,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Analyst at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.774404,
+          "word_count": 69,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 60,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.833773,
+          "word_count": 133,
+          "topic_hits": [
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.13871,
+          "word_count": 140,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Analyst at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.84108,
+          "word_count": 53,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.771414,
+          "word_count": 124,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.689003,
+          "word_count": 143,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "CEO and Co-Founder at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.592064,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915733,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Investor Relations at Moelis & Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.675435,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.767694,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.827533,
+          "word_count": 717,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 6951,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "MC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/mc/transcripts/657342-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "MC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/mc/transcripts/552046-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "MC Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/mc/transcripts/396568-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "MC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-moelis-company-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
     "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
-  "updated_at_utc": "2026-08-15T09:56:42.404991+00:00"
+  "updated_at_utc": "2026-08-15T18:06:20.367039+00:00"
 }
