@@ -2,7 +2,997 @@
   "schema_version": 8,
   "symbol": "BANC",
   "earnings_history": [],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-08T01:48:01+00:00",
+      "source": "Motley Fool",
+      "source_url": "https://finance.yahoo.com/m/25f4b59a-a79e-3680-94e0-4881620aed4d/banc-of-california-%28banc%29-q2.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 83,
+        "scored_turn_count": 83,
+        "overall_sentiment": 0.574778,
+        "prepared_sentiment": 0.044741,
+        "qa_sentiment": 0.608755,
+        "qa_tone_shift": 0.564013,
+        "uncertainty_turn_rate": 0.060241,
+        "forward_looking_turn_rate": 0.337349,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 24,
+            "sentiment": 0.430456
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 18,
+            "sentiment": 0.301607
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 6,
+            "sentiment": 0.113646
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": 0.422906
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.182306
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": -0.07087
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.381248
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "section": "prepared",
+          "sentiment": 0.910494,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Ann DeVries",
+          "section": "prepared",
+          "sentiment": 0.906773,
+          "word_count": 203,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Jared Wolff",
+          "section": "prepared",
+          "sentiment": -0.852704,
+          "word_count": 962,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Joseph Kauder",
+          "section": "prepared",
+          "sentiment": 0.090207,
+          "word_count": 1066,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Jared Wolff",
+          "section": "prepared",
+          "sentiment": -0.831063,
+          "word_count": 200,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.901264,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Benjamin Gerlinger",
+          "section": "qa",
+          "sentiment": 0.83309,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.049134,
+          "word_count": 300,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Benjamin Gerlinger",
+          "section": "qa",
+          "sentiment": 0.875657,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.84792,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.883495,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Benjamin Gerlinger",
+          "section": "qa",
+          "sentiment": 0.877226,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.85734,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": 0.230144,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.902598,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Gary Tenner",
+          "section": "qa",
+          "sentiment": 0.854101,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.055263,
+          "word_count": 556,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Gary Tenner",
+          "section": "qa",
+          "sentiment": 0.571341,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.816027,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Gary Tenner",
+          "section": "qa",
+          "sentiment": 0.887179,
+          "word_count": 33,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.843067,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": 0.015688,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.895881,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "David Chiaverini",
+          "section": "qa",
+          "sentiment": 0.840256,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.777423,
+          "word_count": 45,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": 0.751709,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "David Chiaverini",
+          "section": "qa",
+          "sentiment": 0.823174,
+          "word_count": 61,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.620956,
+          "word_count": 100,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": -0.045145,
+          "word_count": 73,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.892972,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Adam Kroll",
+          "section": "qa",
+          "sentiment": 0.69149,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.429882,
+          "word_count": 268,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Adam Kroll",
+          "section": "qa",
+          "sentiment": 0.715234,
+          "word_count": 50,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.873984,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": -0.036436,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.888079,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "David Feaster",
+          "section": "qa",
+          "sentiment": 0.637075,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.288195,
+          "word_count": 313,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "David Feaster",
+          "section": "qa",
+          "sentiment": 0.328103,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.5986,
+          "word_count": 112,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "David Feaster",
+          "section": "qa",
+          "sentiment": -0.271967,
+          "word_count": 98,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.278179,
+          "word_count": 431,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": 0.379412,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.886833,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Jonathan Rau",
+          "section": "qa",
+          "sentiment": 0.894258,
+          "word_count": 45,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.782223,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Jonathan Rau",
+          "section": "qa",
+          "sentiment": 0.868487,
+          "word_count": 30,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.873984,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": -0.335174,
+          "word_count": 141,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.88321,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.861779,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Christopher McGratty",
+          "section": "qa",
+          "sentiment": 0.733791,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.709496,
+          "word_count": 193,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 53,
+          "speaker": "Joseph Kauder",
+          "section": "qa",
+          "sentiment": 0.148617,
+          "word_count": 197,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.177528,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 55,
+          "speaker": "Christopher McGratty",
+          "section": "qa",
+          "sentiment": 0.893968,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.895618,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Christopher McGratty",
+          "section": "qa",
+          "sentiment": 0.865833,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.745846,
+          "word_count": 118,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.897119,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Anthony Elian",
+          "section": "qa",
+          "sentiment": 0.679938,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 61,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.881325,
+          "word_count": 10,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 62,
+          "speaker": "Anthony Elian",
+          "section": "qa",
+          "sentiment": 0.725612,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.426332,
+          "word_count": 229,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 64,
+          "speaker": "Anthony Elian",
+          "section": "qa",
+          "sentiment": 0.799353,
+          "word_count": 44,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.834417,
+          "word_count": 235,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.892061,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Timothy Coffey",
+          "section": "qa",
+          "sentiment": 0.766503,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.426782,
+          "word_count": 140,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Timothy Coffey",
+          "section": "qa",
+          "sentiment": 0.831929,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.836704,
+          "word_count": 101,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 71,
+          "speaker": "Timothy Coffey",
+          "section": "qa",
+          "sentiment": 0.876599,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": -0.184863,
+          "word_count": 85,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 73,
+          "speaker": "Timothy Coffey",
+          "section": "qa",
+          "sentiment": 0.749057,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 74,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.780534,
+          "word_count": 194,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 75,
+          "speaker": "Timothy Coffey",
+          "section": "qa",
+          "sentiment": -0.654149,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.43786,
+          "word_count": 13,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 77,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.873801,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "Benjamin Gerlinger",
+          "section": "qa",
+          "sentiment": 0.519521,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": 0.721016,
+          "word_count": 154,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "Benjamin Gerlinger",
+          "section": "qa",
+          "sentiment": 0.690407,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 81,
+          "speaker": "Jared Wolff",
+          "section": "qa",
+          "sentiment": -0.553931,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 82,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.685045,
+          "word_count": 192,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8701,
+      "transcript_text_redistributed": false
+    }
+  ],
   "filing_fallback": [],
   "call_links": [
     {
@@ -43,12 +1033,18 @@
       "url": "https://stockanalysis.com/stocks/banc/transcripts/402368-q4-2025/",
       "source": "Stock Analysis / Quartr",
       "ts": "2026-01-22T00:00:00+00:00"
+    },
+    {
+      "title": "Banc of California (BANC) Q2 2026 Earnings Call Transcript",
+      "url": "https://finance.yahoo.com/m/25f4b59a-a79e-3680-94e0-4881620aed4d/banc-of-california-%28banc%29-q2.html",
+      "source": "Motley Fool",
+      "ts": "2026-08-08T01:48:01+00:00"
     }
   ],
   "methodology": {
     "source_policy": "free_public_only",
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
+    "fulfillment_stage": 2
   },
-  "updated_at_utc": "2026-08-15T14:36:21.608769+00:00"
+  "updated_at_utc": "2026-08-15T21:31:38.813545+00:00"
 }
