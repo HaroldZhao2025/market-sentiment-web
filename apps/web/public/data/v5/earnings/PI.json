@@ -2,7 +2,493 @@
   "schema_version": 8,
   "symbol": "PI",
   "earnings_history": [],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-07T23:58:47+00:00",
+      "source": "Motley Fool",
+      "source_url": "https://finance.yahoo.com/m/e3fc8779-6140-3ee4-add6-097acab49060/impinj-%28pi%29-q2-2026-earnings.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 36,
+        "scored_turn_count": 36,
+        "overall_sentiment": 0.502406,
+        "prepared_sentiment": -0.009257,
+        "qa_sentiment": 0.566364,
+        "qa_tone_shift": 0.575622,
+        "uncertainty_turn_rate": 0.138889,
+        "forward_looking_turn_rate": 0.388889,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 15,
+            "sentiment": 0.305022
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": 0.100278
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": 0.018515
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.297103
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": -0.205738
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 3,
+            "sentiment": -0.118602
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.007819
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "section": "prepared",
+          "sentiment": 0.912047,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Andy Cobb",
+          "section": "prepared",
+          "sentiment": 0.915529,
+          "word_count": 296,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Chris Diorio",
+          "section": "prepared",
+          "sentiment": -0.933439,
+          "word_count": 873,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Cary Baker",
+          "section": "prepared",
+          "sentiment": -0.931167,
+          "word_count": 433,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.593622,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.114388,
+          "word_count": 571,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.911689,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Christopher Rolland",
+          "section": "qa",
+          "sentiment": 0.548555,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.73851,
+          "word_count": 330,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Christopher Rolland",
+          "section": "qa",
+          "sentiment": 0.647723,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.535115,
+          "word_count": 290,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.903466,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "James Ricchiuti",
+          "section": "qa",
+          "sentiment": 0.816315,
+          "word_count": 81,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.811077,
+          "word_count": 242,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "James Ricchiuti",
+          "section": "qa",
+          "sentiment": 0.74751,
+          "word_count": 119,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.859587,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Cary Baker",
+          "section": "qa",
+          "sentiment": -0.17215,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": -0.510892,
+          "word_count": 197,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.914658,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Scott Searle",
+          "section": "qa",
+          "sentiment": 0.696665,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": -0.306101,
+          "word_count": 438,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 21,
+          "speaker": "Scott Searle",
+          "section": "qa",
+          "sentiment": 0.613656,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.446731,
+          "word_count": 181,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.9023,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Troy Jensen",
+          "section": "qa",
+          "sentiment": 0.653169,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.848227,
+          "word_count": 288,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Troy Jensen",
+          "section": "qa",
+          "sentiment": 0.809744,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Cary Baker",
+          "section": "qa",
+          "sentiment": 0.761677,
+          "word_count": 303,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.905506,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Nicholas Igneri",
+          "section": "qa",
+          "sentiment": 0.783426,
+          "word_count": 43,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Cary Baker",
+          "section": "qa",
+          "sentiment": -0.539016,
+          "word_count": 226,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Nicholas Igneri",
+          "section": "qa",
+          "sentiment": 0.704619,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Cary Baker",
+          "section": "qa",
+          "sentiment": 0.286564,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.905046,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Chris Diorio",
+          "section": "qa",
+          "sentiment": 0.490233,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.702041,
+          "word_count": 187,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6073,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "PI Earnings Call: Q2 2026",
@@ -27,13 +513,25 @@
       "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-impinj-inc-stock/#transcript",
       "source": "MarketBeat",
       "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "Impinj (PI) Q2 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/impinj-pi-q2-2026-earnings-call-transcript/",
+      "source": "Motley Fool",
+      "ts": "2026-08-07T23:58:47+00:00"
+    },
+    {
+      "title": "Impinj (PI) Q2 2026 Earnings Call Transcript",
+      "url": "https://finance.yahoo.com/m/e3fc8779-6140-3ee4-add6-097acab49060/impinj-%28pi%29-q2-2026-earnings.html",
+      "source": "Motley Fool",
+      "ts": "2026-08-07T23:58:47+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
     "source_policy": "free_public_only",
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
+    "fulfillment_stage": 2
   },
-  "updated_at_utc": "2026-08-15T19:12:18.672804+00:00"
+  "updated_at_utc": "2026-08-15T22:34:18.627740+00:00"
 }
