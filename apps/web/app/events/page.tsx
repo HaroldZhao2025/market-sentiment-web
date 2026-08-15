@@ -39,7 +39,7 @@ function tone(value: number | null | undefined) {
 }
 
 export default function EventsPage() {
-  const instances = loadPersistentEvents();
+  const instances = loadPersistentEvents().slice().sort((a, b) => String(b.end_date || b.start_date || "").localeCompare(String(a.end_date || a.start_date || "")));
   const fallback = buildEventMemory();
   const recent = instances.slice(0, 120);
   const companies = new Set(recent.map((item) => item.symbol).filter(Boolean)).size;
@@ -50,7 +50,7 @@ export default function EventsPage() {
       <section>
         <div className="eyebrow">Company events</div>
         <h1 className="page-title mt-2">Event Stream</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">Related headlines are grouped into company-level event instances so one story does not look like ten separate events.</p>
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-400">Related headlines are grouped into company-level event instances, newest first.</p>
         <div className="mt-4 flex flex-wrap gap-2"><span className="pill">{instances.length.toLocaleString()} stored events</span><span className="pill">{companies} companies in view</span><span className="pill">{themes} themes</span></div>
       </section>
 
@@ -58,7 +58,8 @@ export default function EventsPage() {
         <section className="grid gap-3 lg:grid-cols-2">
           {recent.map((event, index) => {
             const symbol = String(event.symbol || "");
-            const latestArticle = Array.isArray(event.articles) ? event.articles[0] : undefined;
+            const articles = Array.isArray(event.articles) ? event.articles.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || ""))) : [];
+            const latestArticle = articles[0];
             return (
               <article key={event.event_instance_id || `${symbol}-${event.start_date}-${index}`} className="rounded-2xl border border-white/10 bg-white/[0.025] p-5">
                 <div className="flex gap-4">
@@ -77,9 +78,7 @@ export default function EventsPage() {
           })}
         </section>
       ) : (
-        <section className="grid gap-4 lg:grid-cols-2">
-          {fallback.map((theme) => <div key={theme.theme} className="card p-5"><div className="eyebrow">{theme.count} retained articles</div><h2 className="mt-2 text-lg font-semibold text-white">{theme.theme}</h2><div className="mt-3 text-sm text-neutral-500">Persistent event data is refreshing; this summary uses the current ticker history.</div></div>)}
-        </section>
+        <section className="grid gap-4 lg:grid-cols-2">{fallback.map((theme) => <div key={theme.theme} className="card p-5"><div className="eyebrow">{theme.count} retained articles</div><h2 className="mt-2 text-lg font-semibold text-white">{theme.theme}</h2><div className="mt-3 text-sm text-neutral-500">Persistent event data is refreshing; this summary uses the current core ticker history.</div></div>)}</section>
       )}
     </main>
   );
