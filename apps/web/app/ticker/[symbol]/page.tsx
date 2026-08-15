@@ -110,7 +110,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   const newsTotal = Number(rich?.article_count ?? obj?.news_total ?? obj?.newsTotal ?? obj?.news_count?.total) || news.length;
   const extendedSeries = extendedHistory ? buildSeries(extendedHistory) : null;
   const legacySeries = obj ? buildSeries(obj) : null;
-  const series = extendedSeries && extendedSeries.date.length >= 30 ? extendedSeries : legacySeries;
+  const series = extendedSeries && extendedSeries.date.length > 0 ? extendedSeries : legacySeries;
   const historyDays = series?.date.length ?? 0;
   const callCount = Array.isArray(earnings.calls) ? earnings.calls.length : 0;
   const callLinks = Array.isArray((earnings as EarningsArtifact & { call_links?: unknown[] }).call_links)
