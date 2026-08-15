@@ -1,10 +1,12 @@
 {
-  "schema_version": 2,
+  "schema_version": 6,
   "symbol": "FTNT",
-  "updated_at_utc": "2026-08-14T20:22:51.221574+00:00",
-  "article_count": 60,
-  "scored_article_count": 60,
-  "sentiment_mean": 0.19426741666666666,
+  "source_policy": "free_public_only",
+  "updated_at_utc": "2026-08-15T19:52:33.972198+00:00",
+  "history_days_requested": 365,
+  "article_count": 120,
+  "scored_article_count": 120,
+  "sentiment_mean": 0.21552546666666658,
   "articles": [
     {
       "ts": "2026-08-14T18:27:26+00:00",
@@ -12,7 +14,7 @@
       "summary": "Record revenue, a guide above Wall Street, and a stock down anyway, because the growth now arrives as hardware and the mix shift is what compresses the margin.",
       "url": "https://www.trefis.com/articles/611552/cisco-beat-on-every-line-then-fell-on-what-ai-costs-to-ship/2026-08-14",
       "source": "Trefis",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "cisco beat on every line then fell on what ai costs to ship",
       "s": 0.077771
     },
@@ -32,9 +34,9 @@
       "summary": "Shares of Fortinet, Inc. (FTNT) gain 7,982% since institutions first bought big in 2010.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/ai-sales-push-fortinet-shares-122355330.html",
       "source": "FX Empire",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "ai sales push fortinet shares to new heights",
-      "s": -0.891624
+      "s": -0.891623
     },
     {
       "ts": "2026-08-13T23:29:12+00:00",
@@ -42,7 +44,7 @@
       "summary": "The recurring-revenue share management once put front and center has slipped while hyperscaler orders became the story.",
       "url": "https://www.trefis.com/articles/611356/the-number-cisco-stopped-leading-with-explains-what-you-now-own/2026-08-13",
       "source": "Trefis",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "the number cisco stopped leading with explains what you now own",
       "s": 0.859453
     },
@@ -52,9 +54,29 @@
       "summary": "The AI boom often centers on productivity – doing more and doing it faster. But AI also allows for automated attacks at record speeds.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/two-ai-security-winners-own-202732394.html",
       "source": "FX Empire",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "two ai security winners to own now",
       "s": 0.518673
+    },
+    {
+      "ts": "2026-08-13T10:40:57+00:00",
+      "title": "Fortinet Patches Authentication Flaws in FortiWeb and FortiManager - SecurityWeek",
+      "summary": "Fortinet Patches Authentication Flaws in FortiWeb and FortiManager SecurityWeek",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOX0d2azNqbTg1LXloTmRRUUM1Q0ZYaHNvUU9hU2FoWWxtWDdHaGtRVHEzc1djZWNra3VXVG44Mjl4aFRpU1Nub19abldYcXZYZXJRRUozS3E4ZGx5SGFWUHVhTE42WEhWQklsS1JCYzduSUFLak12S1JoTWl1YU16MDBSNFg1MnUzX1VDZlczQnBMa1lLWERPOGJjR3HSAaIBQVVfeXFMTzNBcF9OMHRCR1NiMVZlaWdrUWVpdFF0VHdkenh0N0pMN3pWZVpXOWdpVHh4TEJGNHlkWEVSSndHVUx3WDZMZjhCVjB4OHh4NU1TSHY4UGZ6V3dSWGZyUFZpWXR6Q1JabnJVMVpYT2ZjVE1rWHBGYWdHdndXQ1EtTzRRenFVZWRDUW5OT3pLcUNDdDBmMEhrZ3F0aGxza0ZEOWx3?oc=5",
+      "source": "SecurityWeek",
+      "provider": "google_news_rss",
+      "title_key": "fortinet patches authentication flaws in fortiweb and fortimanager securityweek",
+      "s": 0.239406
+    },
+    {
+      "ts": "2026-08-13T02:28:57+00:00",
+      "title": "Fortinet Products Multiple Vulnerabilities - Hong Kong Computer Emergency Response Team Coordination Centre",
+      "summary": "Fortinet Products Multiple Vulnerabilities Hong Kong Computer Emergency Response Team Coordination Centre",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQcl9mVzZmTXZ4Yk94elQ5dGZYbHBPaEhmMXRIN2Z2R2hxLXViVW1zWGdSaXB2TnNEWTY4NVg5TnFVNzhwZGluUkVjeEs2V1g1ZUp6Qnp5YS1PVHJnSEN0ZHFvUnRVcEpfcEQyXzhLS1poYkgxSVJEUW1MX0dyN2ZfelNNazQ3ZVpOUnZGVmRKR1lYNEpnTnkw?oc=5",
+      "source": "Hong Kong Computer Emergency Response Team Coordination Centre",
+      "provider": "google_news_rss",
+      "title_key": "fortinet products multiple vulnerabilities hong kong computer emergency response team coordination centre",
+      "s": 0.884343
     },
     {
       "ts": "2026-08-12T14:58:00+00:00",
@@ -62,9 +84,29 @@
       "summary": "FTNT raises 2026 guidance as firewall refreshes and SASE adoption accelerate, and AI and silicon advances strengthen its growth outlook.",
       "url": "https://finance.yahoo.com/technology/articles/fortinet-lifts-2026-guidance-firewall-145800016.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet lifts 2026 guidance on firewall sase demand buy the stock",
       "s": 0.87089
+    },
+    {
+      "ts": "2026-08-12T14:58:00+00:00",
+      "title": "Fortinet Lifts 2026 Guidance on Firewall, SASE Demand: Buy the Stock? - Yahoo Finance",
+      "summary": "Fortinet Lifts 2026 Guidance on Firewall, SASE Demand: Buy the Stock? Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQS3ZHY0lqMl9EMUdyMkpoeERlZ3ZrZ0lCc2NfODR3S3pETk53eHZMR21LcnNlY3Y0NDNZRkwtOUpSOVdtVWRBT3pUZDIwbnd4Um1PYTFRR25abFZGTzRLb3ozeUNoS3RTWXpudk1ZNXBHamtpSW9rWlVhTkMyV0RfcXROWlExYVBseFRabkxIRndLb3lVV0R0cnlEOFdNbkk?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet lifts 2026 guidance on firewall sase demand buy the stock yahoo finance",
+      "s": 0.873513
+    },
+    {
+      "ts": "2026-08-11T21:37:52+00:00",
+      "title": "Gunra Ransomware Gang Exploits Fortinet Flaws, Bypasses MFA - Dark Reading",
+      "summary": "Gunra Ransomware Gang Exploits Fortinet Flaws, Bypasses MFA Dark Reading",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNVm5qb05yLVduWHl0TFVLNVNPWkZwdlRNMTdHSlhlY3dXd0c5M09VYm9uTjFaTGVYbEg1ZnoxeTZHM3RsOTRSM3pyTE9vMGc0UElUdElhWWNpbmIxcW9CWTZHNXQzZmx0MmQ5SzZuaXE2RHlsYjV3dTVVMXBYOTdIN1JPLVFDY1M0X1Y4c256ME90a2hueF94MWJ6bDc2VTJQdTlsS2xSQQ?oc=5",
+      "source": "Dark Reading",
+      "provider": "google_news_rss",
+      "title_key": "gunra ransomware gang exploits fortinet flaws bypasses mfa dark reading",
+      "s": 0.705024
     },
     {
       "ts": "2026-08-11T17:53:26+00:00",
@@ -72,7 +114,7 @@
       "summary": "The demand behind the run was already in its subscription commitments two reports before the price moved.",
       "url": "https://www.trefis.com/articles/611018/crowdstrike-stocks-surge-showed-up-in-its-bookings-two-reports-early/2026-08-11",
       "source": "Trefis",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "crowdstrike stock s surge showed up in its bookings two reports early",
       "s": -0.862299
     },
@@ -82,7 +124,7 @@
       "summary": "Palo Alto Networks had described the AI attack problem, raised its long-term target and bought an observability platform before the stock repriced.",
       "url": "https://www.trefis.com/articles/611014/palo-alto-networks-stock-ran-on-a-threat-that-management-had-already-named/2026-08-11",
       "source": "Trefis",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "palo alto networks stock ran on a threat that management had already named",
       "s": 0.037004
     },
@@ -92,9 +134,19 @@
       "summary": "Cybersecurity faces a new era as hackers automate attacks. The troubling trend brings serious implications for AI stocks.",
       "url": "https://www.investors.com/news/technology/ai-stocks-cybersecurity-artificial-intelligence-battlefield/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "how cybersecurity has become critical tech battlefield",
       "s": 0.845081
+    },
+    {
+      "ts": "2026-08-11T09:16:00+00:00",
+      "title": "Gunra Ransomware Exploits Fortinet FortiOS, FortiProxy Flaws to Breach Networks - The Hacker News",
+      "summary": "Gunra Ransomware Exploits Fortinet FortiOS, FortiProxy Flaws to Breach Networks The Hacker News",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPM0RGcjBMRUp1RHhCNG5NQUtmeGNzdWtxa2I1Q2JadnFYNDUtajJkYzl0SU1YeEZfYmlNSkhWcVlJajdId21RaWp5TFFpa0o2WWZrTjdhREJJV0pTMV8wbEc0NkJPNmd0Q2hKRWRtYTdVRGRKV1ZBSUJvM25FMWVqWDQtOA?oc=5",
+      "source": "The Hacker News",
+      "provider": "google_news_rss",
+      "title_key": "gunra ransomware exploits fortinet fortios fortiproxy flaws to breach networks the hacker news",
+      "s": 0.577935
     },
     {
       "ts": "2026-08-11T05:25:00+00:00",
@@ -102,7 +154,7 @@
       "summary": "Twelve Nasdaq 100 stocks have doubled in 2026, and not a single the Magnificent Seven is among them. Here is why.",
       "url": "https://beincrypto.com/nasdaq-100-stocks-doubled-2026/",
       "source": "BeInCrypto",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "12 nasdaq stocks doubled in 2026 but none are magnificent seven",
       "s": -0.654975
     },
@@ -112,9 +164,9 @@
       "summary": "Cybersecurity stocks were a bright spot in Monday’s trading at a time when broader markets declined.",
       "url": "https://www.investopedia.com/market-update-cybersecurity-stocks-surge-with-crowdstrike-and-palo-alto-networks-leading-the-charge-12042728",
       "source": "Investopedia",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "cybersecurity stocks surge with palo alto networks and crowdstrike leading the charge",
-      "s": -0.319321
+      "s": -0.319323
     },
     {
       "ts": "2026-08-10T13:16:00+00:00",
@@ -122,7 +174,7 @@
       "summary": "ZS' discounted valuation may look tempting, but slowing growth, higher spending and execution risks raise concerns for investors.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/zscalers-discounted-valuation-buying-opportunity-131600441.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "is zscaler s discounted valuation a buying opportunity or a value trap",
       "s": 0.698644
     },
@@ -132,7 +184,7 @@
       "summary": "Landing a cybersecurity giant bodes well for Intel's security chip business.",
       "url": "https://www.fool.com/investing/2026/08/09/intel-foundry-lands-a-major-new-client-worth-watch/",
       "source": "Motley Fool",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "intel foundry lands a major new client worth watching",
       "s": -0.626535
     },
@@ -142,9 +194,19 @@
       "summary": "Fortinet (FTNT) drew fresh investor attention after reporting second quarter 2026 results and issuing new guidance, including a full year 2026 revenue outlook of US$8.02b to US$8.18b with 19% year over year growth. See our latest analysis for Fortinet. Fortinet’s share price has climbed strongly over the year, with a 90 day share price return of 39.95% and a year to date share price return of 104.98%. The 1 year total shareholder return of 114.60% points to powerful longer term momentum...",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-lifted-2026-guidance-201009350.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet ftnt lifted 2026 guidance is the stock now too expensive",
       "s": 0.542441
+    },
+    {
+      "ts": "2026-08-08T20:10:09+00:00",
+      "title": "Fortinet (FTNT) Lifted 2026 Guidance, Is The Stock Now Too Expensive? - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Lifted 2026 Guidance, Is The Stock Now Too Expensive? Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNLVdKVVpzaTN5d0trb3VrMHI5SWVJX2lHWTlzdi00SjhwZm9vT19nZ2RzNHFFZk0xYzNvLTlqeXhLUXFGcktsMzJDRy1Vc2stU2dybHZsa09YNXRMQnp1c0gzdFpYR3RlaUN6UjdUWURUQzJuUTBNeWNvazdXQk1lZEppQmlsekpwbUVqRUE5UFR5SlVpTWxhbWhNZ0pIcjVz?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt lifted 2026 guidance is the stock now too expensive yahoo finance",
+      "s": 0.842539
     },
     {
       "ts": "2026-08-08T13:50:21+00:00",
@@ -152,9 +214,29 @@
       "summary": "During the lightning round on the August 5 episode of CNBC’s Mad Money, a caller asked a question regarding Fortinet, Inc. (NASDAQ:FTNT). and Cramer responded: Okay, we just had a little kind of a discussion. Fortinet’s good, by the way. We had a little discussion about PaloAlto and about CrowdStrike. There’s room for many, and […]",
       "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-favors-fortinet-ftnt-135021351.html",
       "source": "Insider Monkey",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "jim cramer favors fortinet ftnt alongside crowdstrike crwd and palo alto panw",
-      "s": 0.792082
+      "s": 0.792081
+    },
+    {
+      "ts": "2026-08-08T13:50:21+00:00",
+      "title": "Jim Cramer Favors Fortinet (FTNT) Alongside CrowdStrike (CRWD) and Palo Alto (PANW) - Yahoo Finance",
+      "summary": "Jim Cramer Favors Fortinet (FTNT) Alongside CrowdStrike (CRWD) and Palo Alto (PANW) Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOSElpOVVocWZCQWJTNzhFdlFFUC1QNzhlMTRNR2dLeTVZVmE5T096dm9SRFQ4MXBfSkVMSTJvUE9XcEFhUzRfWkVyQkF6a3BDX0VzUG1IYnZUN05VRFU4bmRqWE15MmlfY3JtQURoV2xTUzZmQm5ZYUdKNWJRSmRkY0pRZmZSb1BZNUd0OVdZc0EzTkhfSmprRV9Ca2g?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "jim cramer favors fortinet ftnt alongside crowdstrike crwd and palo alto panw yahoo finance",
+      "s": 0.819919
+    },
+    {
+      "ts": "2026-08-08T05:45:45+00:00",
+      "title": "Fortinet (FTNT) Stock Could Be 12% Overvalued On Raised 2026 Outlook - simplywall.st",
+      "summary": "Fortinet (FTNT) Stock Could Be 12% Overvalued On Raised 2026 Outlook simplywall.st",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQMU1YS1hCVEgyYW5Jc3QwcU1TdlZYeXhLVnpGR1RPNzFRYzQ1ZDZtTzQwc0dBZkpqbl9IaFNnQjkxaHViQWpGOWpPSW9ObW1yb0UwV0lONFBCcmZ3R0NtdDloRTd4MS1vWUc2bTV1Ul9qNURBaHBBalV4X1BuX0FLQXlua0J5ZkFNQkJaVFE2VEJ3NzNtbVJLb1RMVWtEcnhhUnJJQVZsVXQ0eHYydDRndEY2a0E2Y29Nck1iSnduSm12Z25WQVHSAcsBQVVfeXFMTlZLdTdfYlkweGhBVE1UekhMOXB1QjJnNzFXcmRfVkdzUk40UGtSeC0za0xUZG1TNVg4cjZhVC11ai1PZS04aUNFRjNqNDFWeUxUZENGMlFzUlZYaWVUOTdfVnA5aDNtbS15TTA3bVlYRXBFTllFVmp0cXVDbTRZdUg2NURKRHZYN2J6RVlUalFOZzZ1c0RyS3lGN0dYRHZ6MmNnN1VFakVsSVRnOVlUQTRpUVktUVdtVUFjQ1Y5UEgzWld5UE5qRGFzRWc?oc=5",
+      "source": "simplywall.st",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt stock could be 12 overvalued on raised 2026 outlook simplywall st",
+      "s": 0.699527
     },
     {
       "ts": "2026-08-07T23:58:48+00:00",
@@ -162,7 +244,7 @@
       "summary": "Revenue hit $2.05 billion with 26% growth as AI security demand surges.",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/fortinet-ftnt-q2-2026-earnings-call-transcript/",
       "source": "Motley Fool",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet ftnt q2 2026 earnings call transcript",
       "s": 0.874209
     },
@@ -172,7 +254,7 @@
       "summary": "Management put a much higher number on its future, and the stock has been on a tear ever since. But is this a fleeting AI boom or a fundamental rewiring of the business.",
       "url": "https://www.trefis.com/articles/610572/cisco-stock-is-finally-pricing-in-a-new-growth-story/2026-08-07",
       "source": "Trefis",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "cisco stock is finally pricing in a new growth story",
       "s": -0.774156
     },
@@ -182,9 +264,9 @@
       "summary": "CrowdStrike shares have soared 106.4% in six months as Falcon Flex adoption surges, but premium valuation and slowing sales growth warrant caution.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/crwd-stock-rises-106-6-143900933.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "crwd stock rises 106 in 6 months time to hold or book profits",
-      "s": 0.00155
+      "s": 0.001549
     },
     {
       "ts": "2026-08-07T10:14:00+00:00",
@@ -192,7 +274,7 @@
       "summary": "Palo Alto Networks, Fortinet, and Okta have been highlighted in this Industry Outlook article.",
       "url": "https://finance.yahoo.com/technology/articles/zacks-industry-outlook-palo-alto-101400098.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "zacks industry outlook palo alto networks fortinet and okta",
       "s": 0.783066
     },
@@ -202,9 +284,9 @@
       "summary": "The Zacks Security industry participants, PANW, FTNT and OKTA, gain from surging demand for cybersecurity solutions amid accelerating digital transformation and cloud migration strategies.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/3-security-stocks-bet-now-152100103.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "3 security stocks to bet on now as industry trends show promise",
-      "s": 0.617421
+      "s": 0.61742
     },
     {
       "ts": "2026-08-06T12:58:00+00:00",
@@ -212,7 +294,7 @@
       "summary": "Fortinet and Ecopetrol have been highlighted as Zacks Bull and Bear of the Day",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ecopetrol-highlighted-zacks-bull-125800620.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet and ecopetrol have been highlighted as zacks bull and bear of the day",
       "s": -0.174423
     },
@@ -222,7 +304,7 @@
       "summary": "If you thought cybersecurity was important before, just wait until you see the havoc AI is causing on it.",
       "url": "https://finance.yahoo.com/technology/articles/bull-day-fortinet-ftnt-110000264.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "bull of the day fortinet ftnt",
       "s": 0.812098
     },
@@ -232,9 +314,29 @@
       "summary": "Lam, The Cheesecake, Vertiv and Fortinet have been highlighted in this Screen of The Week article.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-com-featured-highlights-lam-102100498.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "zacks com featured highlights lam the cheesecake vertiv and fortinet",
       "s": 0.910362
+    },
+    {
+      "ts": "2026-08-06T07:00:00+00:00",
+      "title": "Bull of the Day: Fortinet (FTNT) - Yahoo Finance",
+      "summary": "Bull of the Day: Fortinet (FTNT) Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNMmF4ajg2aDUxckxxUnlWVVVsX1U4a1NudE5Xei02bzhWcWFGRXlDZ1dZc282RU80X19IbTBHVnYxREtkNVVUT0xoSW9La1BsTnJkckF6SHpMUThXZ3JEVVpIdFN5eU5ReUJUVUxoZ0QzNUJXb2ZHUVVGYk1lRnptMXRqQnJBX0pFb000?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "bull of the day fortinet ftnt yahoo finance",
+      "s": 0.756159
+    },
+    {
+      "ts": "2026-08-06T07:00:00+00:00",
+      "title": "Fortinet, Inc. $FTNT Stock Holdings Lessened by CX Institutional - MarketBeat",
+      "summary": "Fortinet, Inc. $FTNT Stock Holdings Lessened by CX Institutional MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPTnNiMTVNeURwcktGQ0VxTVRCSVh5MVFuNDVMaHN3cG1teU43OVl1Ykw0czhySGhIbFZwUUptUi1xakJPRTJpM3VnSURlLVJoRUJKR2RrWTBHZVRfT1FhWXJPM2ZpS2ZaU2hBU1hENGJtaTJZbmVubkJCUXlaWTBWRldFODJhOEs3Q2FhNHFMX1lYVTRibXFXN0FRdUxJUG9nYjVpUXlCMlRmdlFSV08ta1l3d2ZJNTNvUWZ2M1FScw?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "fortinet inc ftnt stock holdings lessened by cx institutional marketbeat",
+      "s": -0.744313
     },
     {
       "ts": "2026-08-06T03:00:00+00:00",
@@ -242,7 +344,7 @@
       "summary": "Forrester (Nasdaq: FORR) today announced that Fortinet is the Asia Pacific winner of its B2B Marketing AI Impact Award, given to organizations that apply AI successfully to improve marketing performance and deliver measurable business results. Fortinet will be recognized at Forrester's AI Forum Singapore during the marketing leaders track session, \"Hello, GTM Singularity.\"",
       "url": "https://finance.yahoo.com/technology/ai/articles/forrester-recognizes-fortinet-apac-winner-030000103.html",
       "source": "PR Newswire",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "forrester recognizes fortinet as apac winner of its inaugural b2b marketing ai impact award",
       "s": -0.791091
     },
@@ -252,7 +354,7 @@
       "summary": "A wave of sophisticated cyberattacks has targeted several of Wall Street’s most prominent money managers in recent days, highlighting the growing threat posed by artificial intelligence-enabled fraud, Bloomberg reported. The hackers attempted to breach information systems at major hedge funds—including Two Sigma Investments, Citadel, and Point72 Asset Management—as well as several private equity firms, according to people familiar with the matter who spoke to Bloomberg on the condition of anonym",
       "url": "https://finance.yahoo.com/technology/ai/articles/wall-street-hit-wave-ai-161703213.html",
       "source": "Investing.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "wall street hit by wave of ai powered vishing cyberattacks bloomberg",
       "s": 0.112565
     },
@@ -262,7 +364,7 @@
       "summary": "Does Fortinet (FTNT) have what it takes to be a top stock pick for momentum investors? Let's find out.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/makes-fortinet-ftnt-strong-momentum-160003097.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "what makes fortinet ftnt a strong momentum stock buy now",
       "s": 0.825039
     },
@@ -272,7 +374,7 @@
       "summary": "The GARP strategy helps investors gain exposure to stocks that have solid prospects and are trading at a discount. LRCX, CAKE, VRT& FTNT are some such stocks.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/4-garp-stocks-investors-scoop-143800306.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "4 garp stocks that investors can scoop up for maximum returns",
       "s": 0.769155
     },
@@ -282,7 +384,7 @@
       "summary": "AMCX, FTNT and AMZN made it to the Zacks Rank #1 (Strong Buy) momentum stocks list on August 5th, 2026.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/best-momentum-stocks-buy-august-140000696.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "best momentum stocks to buy for august 5th",
       "s": 0.844898
     },
@@ -292,9 +394,39 @@
       "summary": "FTNT, AMP, AMZN, VLO and APEMY have been added to the Zacks Rank #1 (Strong Buy) List on August 5th, 2026.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/strong-buy-stocks-august-5th-094500213.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "new strong buy stocks for august 5th",
       "s": 0.790894
+    },
+    {
+      "ts": "2026-08-05T07:00:00+00:00",
+      "title": "Cramer's lightning round: 'Fortinet is good' - CNBC",
+      "summary": "Cramer's lightning round: 'Fortinet is good' CNBC",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQV0hQOUJFNTFGOXMxdEE1UmxYU09KTkpybHhqMlJzYVp5Nnpkdmx6YWtvZDZrbEF5UGtobUlPbURiTjZYOVIyOVNZcXZzYXRyY2VmdjhlNFlYLWdKdG1FNjkxb2pLcWdrNzlwVHNCYVFoZmtsenF0bE0wRGdVX0dPd1o1a9IBiAFBVV95cUxNbko4RG1aTjA3ZFRRb3RUOTVyMVUzSDNPVGN2QlJpVkJ6aHJqamxSeDgyQy1KaGVmQTdENVZ5SFNLSUZpRGlSRVpLNGhhT3hWUTlSY29hYy1GZ3hyY01udERVeW1XUW83aVhCQjMyYy00WlI1d3hKbVlfTWk1XzB3NktPRUFoRlJG?oc=5",
+      "source": "CNBC",
+      "provider": "google_news_rss",
+      "title_key": "cramer s lightning round fortinet is good cnbc",
+      "s": 0.457018
+    },
+    {
+      "ts": "2026-08-05T07:00:00+00:00",
+      "title": "What Makes Fortinet (FTNT) a Strong Momentum Stock: Buy Now? - Yahoo Finance",
+      "summary": "What Makes Fortinet (FTNT) a Strong Momentum Stock: Buy Now? Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOc3c5Y2FsZzQ1dGZ1cnFRVi1Hem1EUjdXUVpkQ3R3d255VWlDTWNzeTFVMnZ1Mno4dHdmSGU1elpJT1NrazBjV1VUOWlBUWZ0cDNhQzBwbWdMYkZRc2plWVhJa0ZDQjBkNDlUY09LM2E2RGRBUHhLaTZiVUhua1UxYjFJdmhuT2ZMV3Rmc2VQa0dseExOMzZLWms4bkZzNnNLLVE?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "what makes fortinet ftnt a strong momentum stock buy now yahoo finance",
+      "s": 0.784481
+    },
+    {
+      "ts": "2026-08-05T07:00:00+00:00",
+      "title": "Fortinet Stock Rides A 5-Day Winning Streak To A 12% Gain - Trefis",
+      "summary": "Fortinet Stock Rides A 5-Day Winning Streak To A 12% Gain Trefis",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNUUdiOWh2N05VTVRpVlFoVFBtaEN3aERvckNfaV9HTE1XNzdSTE1BNjR1RTcyYXRmRFc5U2R2OUNidE9STl8tVDgzNFdhQ2pUTVBncXl3bDhJc2dnaHRXRjhXYU8wWFJOQkMwVnliV0wtQk1pRFFCelEzWnVHVHE3TVA1cjl2NXVNaS1FN0Z6eXp6NWRCYmRES3ZoQXEzU3J4U2FHU3dxR0xUU0VOU0YtdDVrbDVTUkJr?oc=5",
+      "source": "Trefis",
+      "provider": "google_news_rss",
+      "title_key": "fortinet stock rides a 5 day winning streak to a 12 gain trefis",
+      "s": -0.840441
     },
     {
       "ts": "2026-08-04T16:45:02+00:00",
@@ -302,7 +434,7 @@
       "summary": "Fortinet (FTNT) is well positioned to outperform the market, as it exhibits above-average growth in financials.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/why-growth-investors-buy-fortinet-164502867.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "here is why growth investors should buy fortinet ftnt now",
       "s": 0.84451
     },
@@ -312,7 +444,7 @@
       "summary": "Here is how Allegro MicroSystems, Inc. (ALGM) and Fortinet (FTNT) have performed compared to their sector so far this year.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/allegro-microsystems-algm-outperforming-other-134003952.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "is allegro microsystems algm outperforming other computer and technology stocks this year",
       "s": 0.001503
     },
@@ -322,9 +454,29 @@
       "summary": "In late July 2026, Fortinet reported second-quarter revenue of US$2,047.9 million and net income of US$606.3 million, raised full-year 2026 revenue guidance to a range of US$8.02 billion to US$8.18 billion, and issued third-quarter revenue guidance of US$2,010 million to US$2,100 million. The company also introduced the FortiGate 1200G series with FortiSASE Outpost, aimed at high-performance, AI-focused and sovereignty-sensitive security needs across hybrid environments. Next, we will...",
       "url": "https://finance.yahoo.com/technology/ai/articles/fortinet-ftnt-8-8-raising-091220169.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet ftnt is up 8 8 after raising 2026 revenue guidance and launching new ai focused firewall has the bull case changed",
-      "s": -0.905596
+      "s": -0.905595
+    },
+    {
+      "ts": "2026-08-04T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Is Up 8.8% After Raising 2026 Revenue Guidance And Launching New AI-Focused Firewall - Has The Bull Case Changed? - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Is Up 8.8% After Raising 2026 Revenue Guidance And Launching New AI-Focused Firewall - Has The Bull Case Changed? Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPTmRGT3pRZnlyQTRFNmVOR3dYeGR4OUZxdUx1RFl6dDNuZC1fZkVMa0NTcEp0UUNRdTZXSVMxVGpKMllQaTZUeXZNTDFjX193WWs5RTRha1dKdmRHVTNNYnN1VGYtZmFNQlhOMlU3RDdqME15YzB6WmFBZDVlS0VmcWh6MXFEWG5NdExFUjNCcjl2YjQ?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt is up 8 8 after raising 2026 revenue guidance and launching new ai focused firewall has the bull case changed yahoo finance",
+      "s": -0.920019
+    },
+    {
+      "ts": "2026-08-04T07:00:00+00:00",
+      "title": "Here is Why Growth Investors Should Buy Fortinet (FTNT) Now - Yahoo Finance",
+      "summary": "Here is Why Growth Investors Should Buy Fortinet (FTNT) Now Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQR1UtYTZ2TXNSMDVNM2dzVkJVcU1waUM5Y2FqQzBDRVlNd2RaVkduZVNQMDNZYm4wLVRqQmxDaHhQMm9faTRqXzVVR0ZDZklRNFRZeEYyVlFqeEdWa2pIWFJsUk01WndKMEZNRWFHajJxdm5kRW1pekU1UGUxME8wSm1KUWk1VkZNeUxtT3BlTkZFYmRqWTRIeUlBTDIxZGc?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "here is why growth investors should buy fortinet ftnt now yahoo finance",
+      "s": 0.853985
     },
     {
       "ts": "2026-08-03T17:40:50+00:00",
@@ -332,9 +484,9 @@
       "summary": "Cybersecurity stocks have shrugged off AI fears. The Amplify Cybersecurity ETF is a diversified way to play the sector.",
       "url": "https://www.investors.com/research/ibd-stock-of-the-day/cybersecurity-stocks-ai-competition-fears-hack-etf/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "this etf the ibd stock of the day breaks out as cybersecurity stocks rebound",
-      "s": 0.864372
+      "s": 0.864373
     },
     {
       "ts": "2026-08-03T13:15:06+00:00",
@@ -342,9 +494,19 @@
       "summary": "Explore how Fortinet's (FTNT) revenue from international markets is changing and the resulting impact on Wall Street's predictions and the stock's prospects.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/unlocking-fortinet-ftnt-international-revenues-131506923.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "unlocking fortinet ftnt international revenues trends surprises and prospects",
       "s": 0.765462
+    },
+    {
+      "ts": "2026-08-03T07:00:00+00:00",
+      "title": "Unlocking Fortinet (FTNT) International Revenues: Trends, Surprises, and Prospects - Yahoo Finance",
+      "summary": "Unlocking Fortinet (FTNT) International Revenues: Trends, Surprises, and Prospects Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNQlZTTHJmRHVGaTRVMUFNMFRIWG1KNEk1WFhUUXZXZXYxeVZLQWVKbnFickV3enozVktLM3BwUEx4bUNiTDB4TlVhdFRWNnNWb250eDJoSkJYM1Y5ejdBZ0ZPQTk1bng0RExRaFBRYWtpeDVYWHNVOWRfcnZyY2h0T0lzQzdjam40R3RydDJ5ODVndlk0QkVla0FWS2hHSUZ6dFZtdGxtakU1UGRULTN2Ug?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "unlocking fortinet ftnt international revenues trends surprises and prospects yahoo finance",
+      "s": 0.773491
     },
     {
       "ts": "2026-07-31T18:17:00+00:00",
@@ -352,7 +514,7 @@
       "summary": "As the age of artificial intelligence takes the world by storm, Fortinet's cybersecurity solutions are in high demand.",
       "url": "https://finance.yahoo.com/technology/ai/articles/fortinet-securing-ai-revolution-181700463.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet securing the ai revolution",
       "s": 0.602265
     },
@@ -362,9 +524,29 @@
       "summary": "If you hold Synopsys shares, the market is pricing a potential fifty percent swing over the next year, a two-sided risk you carry whether or not you ever touch an option.",
       "url": "https://www.trefis.com/articles/609641/the-quiet-surface-of-synopsys-stock-hides-a-turbulent-forecast/2026-07-31",
       "source": "Trefis",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "the quiet surface of synopsys stock hides a turbulent forecast",
-      "s": 0.687106
+      "s": 0.687107
+    },
+    {
+      "ts": "2026-07-31T07:00:00+00:00",
+      "title": "Fortinet: Securing the AI Revolution - Yahoo Finance",
+      "summary": "Fortinet: Securing the AI Revolution Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNaXdYOU81S3BFa05Sa1BKdHEwU1RfMkxmdjZMdHdsc3dINS0tQzJ0ekM5M1gwMHNYUmE1dGU1OHlfY0M1ZG0xb3daWUpPc0pnaFVPZmd2bzl1bzNaQUJTTERqRXVOdUpha2JYY2FRUnJ2amRNcExXeEpqNF9CVURpYkE0TmRucVV0YXo3WXdkRkZLMnd1dlRLV2ZENA?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet securing the ai revolution yahoo finance",
+      "s": 0.796433
+    },
+    {
+      "ts": "2026-07-31T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Stock Faces Premium P E Scrutiny After Record Margins - simplywall.st",
+      "summary": "Fortinet (FTNT) Stock Faces Premium P E Scrutiny After Record Margins simplywall.st",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPWGxsMHFaa29DZGZYSEFQSXJySzdDR3MtRmJ4UVVtU25nSklfc0taS2luZFVZaGxBNUFBMlowOGp2YUYwTDNidVlHWVB2aHp1ZTc0WEdFQllGUHpwZk9VejJUOU1wUTdRWUQ3TUY2eWtaUHdjTXg3d3VIYURSbHd4RTJqRXBtR1hWZEtWbDVscjhldzdZZlJvYmVjS2Nua3hXUUFNUTVpdmxFVGJNTFJmalFYYktLcXpqVWoyMERGREdibFhw0gHKAUFVX3lxTFBsMHZrMFV0V2hqRTFZM1QzVUZNazNlWVhocUFFVFYxWkswcjNfMTJ1Q2ZwUE9HM0VjRDF2YjhUd2JGSFNGRnNvREd1b0s0RXBMY2R2TUoxSEs4dzhUY05iNXZlaHBDdzd1VWNEa2p1YzZpbVYtUENtMkRsSnFSTi1YSm01d3RnSS1vb096TEZ4YXJhWFROdmEzN0VLTlFsel9qOG9YYmdDVjhCZHNkdmVNeWFIY0ZOUzRHb1lWaWVPcGZKWFNwemZ3UEE?oc=5",
+      "source": "simplywall.st",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt stock faces premium p e scrutiny after record margins simplywall st",
+      "s": -0.012236
     },
     {
       "ts": "2026-07-30T20:46:55+00:00",
@@ -372,7 +554,7 @@
       "summary": "Stock Market Today: The Dow Jones index rallies with the Nasdaq composite following a Fed Day tumble. Meta stock plunges on earnings.",
       "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-inflation-data-meta-stock-meta-q2-earnings/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "stock market today chips lead nasdaq s fierce rebound but meta bashed",
       "s": -0.279185
     },
@@ -382,9 +564,9 @@
       "summary": "Climb Global Solutions (NASDAQ:CLMB) reported second-quarter results marked by higher gross billings, sales and gross profit, while net income and adjusted EBITDA declined as the company absorbed acquisition-related costs and increased investments in technology infrastructure. For the quarter ended",
       "url": "https://www.marketbeat.com/instant-alerts/climb-global-solutions-q2-earnings-call-highlights-2026-07-30/?utm_source=yahoofinance&utm_medium=yahoofinance",
       "source": "MarketBeat",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "climb global solutions q2 earnings call highlights",
-      "s": -0.359154
+      "s": -0.359152
     },
     {
       "ts": "2026-07-30T14:00:00+00:00",
@@ -392,9 +574,9 @@
       "summary": "Fortinet expands SASE Firewall and AI security momentum as revenues, margins and 2026 outlook rise after a strong second quarter, driven by platform growth.",
       "url": "https://finance.yahoo.com/technology/articles/ftnt-q2-earnings-call-highlights-140000937.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "ftnt q2 earnings call highlights sase firewall growth",
-      "s": 0.455483
+      "s": 0.455481
     },
     {
       "ts": "2026-07-30T13:38:00+00:00",
@@ -402,7 +584,7 @@
       "summary": "FTNT tops Q2 earnings and revenue estimates as strong AI infrastructure, SASE and OT security demand lift results and prompt higher 2026 guidance.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-q2-earnings-revenues-beat-133800402.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet q2 earnings revenues beat estimates increase y y",
       "s": -0.91787
     },
@@ -412,7 +594,7 @@
       "summary": "Moby summary of Climb Global Solutions, Inc.'s Q2 2026 earnings call",
       "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-climb-global-solutions-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
       "source": "Moby",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "climb global solutions inc q2 2026 earnings call summary",
       "s": 0.858572
     },
@@ -422,7 +604,7 @@
       "summary": "Revenue of $2.05 billion and EPS of $0.90 both beat consensus",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-stock-jumps-10-product-122644365.html",
       "source": "GuruFocus.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet stock jumps 10 as product revenue grows 52",
       "s": -0.910675
     },
@@ -432,9 +614,9 @@
       "summary": "The cybersecurity company's earnings were so good the stock is set to join the exclusive club of S&P 500 names to double in 2026.",
       "url": "https://www.barrons.com/articles/fortinet-stock-price-earnings-cybersecurity-ai-5cde2767?siteid=yhoof2&yptr=yahoo",
       "source": "Barrons.com",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "move over memory fortinet earnings show cybersecurity stocks are red hot ai plays",
-      "s": 0.077649
+      "s": 0.07765
     },
     {
       "ts": "2026-07-30T12:15:49+00:00",
@@ -442,9 +624,59 @@
       "summary": "Dow Jones futures rose early Thursday, along with S&P 500 futures and especially Nasdaq futures. Microsoft, Meta Platforms, Starbucks and Fortinet headlined another big night of earnings. Amazon and Apple will report after the close.",
       "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-oil-prices-trump-iran-threats-microsoft-meta-fortinet-earnings/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "dow jones futures rise microsoft meta lead big earnings after market tumbles oil prices soar",
-      "s": -0.807992
+      "s": -0.807993
+    },
+    {
+      "ts": "2026-07-30T07:00:00+00:00",
+      "title": "Fortinet Q2 Earnings & Revenues Beat Estimates, Increase Y/Y - Yahoo Finance",
+      "summary": "Fortinet Q2 Earnings & Revenues Beat Estimates, Increase Y/Y Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNVTBkU201SHpoQkF5OXdLNlQtR1Z0bi1xYlZxZE9WRmRDakhzMEx1eVdPX2tybEFUa0VfN0ozVXVnNjl6UmVGZFI5QmZaUHZ4SWhsVjJ6RTAzU0NiYWlVQzNNV09jT201VWtDd0R6M2ZkZHpRam9Dc2FKSmVoNHlfTXhGd1k5a2ViRDFSQjFfVjY5Q0JnUXkyY2FaUzBtWnc1?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet q2 earnings revenues beat estimates increase y y yahoo finance",
+      "s": -0.910764
+    },
+    {
+      "ts": "2026-07-30T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Raises Revenue Outlook After Strong Q2 And New AI Product Push - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Raises Revenue Outlook After Strong Q2 And New AI Product Push Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQRy1UbUVOVWMtYUFqcDZLLUttQ2g3aGgwOGkxVllzWW5obTN1VXAtUzBab2lqTDlaeVNtdlhPSWQxVDBiZFdZcjRnaFlueklNX1NwbENTcXZjek85MnlzaG5xdm5CdzVmdTNScFFvUFoxRFlZOTN4QUlONzlwMGJoc1lCM25LR0lOZFBVU3VXRlJhQV9zbjhxRjN4S1hpUUs5UFBj?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt raises revenue outlook after strong q2 and new ai product push yahoo finance",
+      "s": -0.905889
+    },
+    {
+      "ts": "2026-07-30T07:00:00+00:00",
+      "title": "FTNT Q2 Earnings Call Highlights SASE Firewall Growth - Yahoo Finance",
+      "summary": "FTNT Q2 Earnings Call Highlights SASE Firewall Growth Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOeGRvREdMUW5GWEpkc29NZFZlWlYzMk9wU3BvR1ltM21vcjNDVV9JdzNEamJYRl9ESlpuU3ZJYlZKQUgtSXhfQkFOQ09hTTMzUzNjTEZZWVF5aU1tek5ZWjFKaER5eU45WEdEQldRX295OWl1ZUFOTThudFpOMWRyTWxOZDFpOF9CWVlBeXc0bnVDN0RDWUxFVA?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "ftnt q2 earnings call highlights sase firewall growth yahoo finance",
+      "s": 0.0824
+    },
+    {
+      "ts": "2026-07-30T07:00:00+00:00",
+      "title": "Move Over Memory, Fortinet Earnings Show Cybersecurity Stocks Are Red-Hot AI Plays - Barron's",
+      "summary": "Move Over Memory, Fortinet Earnings Show Cybersecurity Stocks Are Red-Hot AI Plays Barron's",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPU09nOXlXaW5XemtGRm9iSnMxMkhxb193T2MtdlBZMERMZlFhZGNNOF9lT191R0NIYmNwV0g0VUw2SXctUUtZeW9iZ2FkTV9IYkZYZ1hWUzRMYWlFUkludXMybUxtbDVvd2h2dXo5d3NOOTFpSEFOcjhSZWdUUnMtSmgwNEF2S1YwQU1vWnJUVDFaUQ?oc=5",
+      "source": "Barron's",
+      "provider": "google_news_rss",
+      "title_key": "move over memory fortinet earnings show cybersecurity stocks are red hot ai plays barron s",
+      "s": 0.75629
+    },
+    {
+      "ts": "2026-07-30T07:00:00+00:00",
+      "title": "Why Is Fortinet Stock Climbing on Thursday? - Benzinga",
+      "summary": "Why Is Fortinet Stock Climbing on Thursday? Benzinga",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPZTF4RGNzYS1yTHBuMDZuU0ktMzlBdnZHOWUweGFBQTB4TXBmOUVaeXBGV3dUWENqQXN1QjNiRm1PcFk2Z0kzOXRqeVNMeGsyd1E0UXlYa2hHdHN2R1VHQXMzQXVodDh4VlNsRnFTMzRfckhvaWVrczlmR2FaMGszSVh3NkdFczFCYnZ2UDFhZXp5aFA0bDd6LXFCc0FsSkNpQUcxMWhR?oc=5",
+      "source": "Benzinga",
+      "provider": "google_news_rss",
+      "title_key": "why is fortinet stock climbing on thursday benzinga",
+      "s": 0.691878
     },
     {
       "ts": "2026-07-30T05:08:35+00:00",
@@ -452,7 +684,7 @@
       "summary": "Fortinet raised its annual revenue forecast after reporting strong Q2 results that exceeded its prior guidance on revenue and profitability. The company highlighted progress in its shift to a subscription led model and deeper use of generative AI across its product suite. Fortinet announced a collaboration with Intel on the Fortinet Security Processor 6 and rolled out new offerings including FortiGate 1200G and FortiSOC. Moody’s upgraded Fortinet’s ratings to the highest level for any...",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-raises-revenue-outlook-050835724.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet ftnt raises revenue outlook after strong q2 and new ai product push",
       "s": -0.916555
     },
@@ -462,7 +694,7 @@
       "summary": "Fortinet stock has delivered strong gains over the last five years, yet current valuation checks suggest the shares now trade at a premium. Both the Discounted Cash Flow (DCF) intrinsic value estimate and market multiples point to an overvalued profile. Fortinet has returned about 152% over the past five years, which sets a high bar for any further upside to be justified by fundamentals. Expectations around product growth, highlighted by new offerings such as the FortiGate 1200G series and...",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-stock-seems-stretched-042827539.html",
       "source": "Simply Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet ftnt stock seems stretched following its 152 five year run",
       "s": -0.002818
     },
@@ -472,7 +704,7 @@
       "summary": "Fortinet (NASDAQ:FTNT) reported second-quarter 2026 results that exceeded the high end of its guidance, with billings rising 33% year over year to $2.37 billion and total revenue increasing 26% to $2.05 billion. Product revenue grew 52% to $773 million, while service revenue rose 14% to $1.27 billi",
       "url": "https://www.marketbeat.com/instant-alerts/fortinet-q2-earnings-call-highlights-2026-07-29/?utm_source=yahoofinance&utm_medium=yahoofinance",
       "source": "MarketBeat",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet q2 earnings call highlights",
       "s": 0.851323
     },
@@ -482,7 +714,7 @@
       "summary": "While the top- and bottom-line numbers for Fortinet (FTNT) give a sense of how the business performed in the quarter ended June 2026, it could be worth looking at how some of its key metrics compare to Wall Street estimates and year-ago values.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-q2-earnings-key-220003815.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet ftnt q2 earnings how key metrics compare to wall street estimates",
       "s": 0.81293
     },
@@ -492,7 +724,7 @@
       "summary": "Cybersecurity firm Fortinet on Wednesday lifted its annual revenue forecast after ‌reporting strong second-quarter results, signaling strong enterprise ‌spending on its services amid rising data security incidents. Companies are ​ramping up data security budgets to tackle increasingly sophisticated ransomware attacks and other threats. The California-based company now projects annual revenue between $8.02 billion and $8.18 billion, ‌compared with its ⁠previous expectation of $7.71 billion to $7.87 billion.",
       "url": "https://finance.yahoo.com/technology/articles/fortinet-lifts-annual-revenue-forecast-214057875.html",
       "source": "Reuters",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet lifts annual revenue forecast on strong cybersecurity demand",
       "s": -0.910447
     },
@@ -502,7 +734,7 @@
       "summary": "Fortinet (FTNT) delivered earnings and revenue surprises of +20.00% and +8.62%, respectively, for the quarter ended June 2026. Do the numbers hold clues to what lies ahead for the stock?",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-surpasses-q2-earnings-212504264.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet ftnt surpasses q2 earnings and revenue estimates",
       "s": -0.928836
     },
@@ -512,7 +744,7 @@
       "summary": "Fortinet reported Q2 earnings, revenue and billings that handily beat estimates while guidance came in above views.",
       "url": "https://www.investors.com/news/technology/fortinet-stock-fortinet-earnings-news-q22026/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet earnings revenue billings top views cybersecurity stock pops",
       "s": 0.83922
     },
@@ -522,7 +754,7 @@
       "summary": "Exceeds high end of second quarter guidance on revenue and profitability Raises 2026 revenue guidance to 19% year over year growth Highlights Revenue grew 26% year over year to $2.05 billion Product revenue grew 52% year over year to $773 millionBillings grew 33% year over year to $2.37 billion1GAAP operating margin of 34%Non-GAAP operating margin of 38%1GAAP earnings per share grew 44% year over year to $0.82Non-GAAP earnings per share grew 41% year over year to $0.901Operating cash flow of $1.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-reports-strong-second-quarter-200500707.html",
       "source": "GlobeNewswire",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet reports strong second quarter 2026 financial results",
       "s": -0.916965
     },
@@ -532,7 +764,7 @@
       "summary": "The OpenAI cyberattack brought Palo Alto stock and CrowdStrike into focus amid the \"unprecedented\" Hugging Face break-in.",
       "url": "https://www.investors.com/research/ibd-industry-themes/openai-cyberattack-palo-alto-stock-crowdstrike/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "unprecedented openai cyberattack brings palo alto crowdstrike into focus",
       "s": 0.784677
     },
@@ -542,7 +774,7 @@
       "summary": "Beneath the surface of its recent run, the market is pricing a notably wide range of outcomes for the networking giant, a risk you carry whether you trade options or not.",
       "url": "https://www.trefis.com/articles/609111/the-volatility-warning-embedded-in-cisco-stock/2026-07-29",
       "source": "Trefis",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "the volatility warning embedded in cisco stock",
       "s": 0.77231
     },
@@ -552,9 +784,9 @@
       "summary": "Futures were mixed as oil prices jumped on Iran news while Seagate, SK Hynix, KLA, Bloom Energy led AI earnings. Will the Fed surprise?",
       "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-seagate-sk-hynix-kla-bloom-energy-earnings-fed-meeting/?src=A00220&yptr=yahoo",
       "source": "Investor's Business Daily",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "dow jones futures fall oil jumps on iran news seagate sk hynix kla bloom energy are ai earnings movers",
-      "s": 0.328583
+      "s": 0.328584
     },
     {
       "ts": "2026-07-29T08:58:41+00:00",
@@ -562,9 +794,59 @@
       "summary": "Fortinet has outperformed the broader market over the past year, but analysts are cautious about the stock’s prospects.",
       "url": "https://www.barchart.com/story/news/3519043/are-wall-street-analysts-bullish-on-fortinet-stock",
       "source": "Barchart",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "are wall street analysts bullish on fortinet stock",
       "s": 0.678699
+    },
+    {
+      "ts": "2026-07-29T07:00:00+00:00",
+      "title": "Fortinet Earnings, Revenue, Billings Top Views. Cybersecurity Stock Pops. - Investor's Business Daily",
+      "summary": "Fortinet Earnings, Revenue, Billings Top Views. Cybersecurity Stock Pops. Investor's Business Daily",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOaDBraUNEaTVqNHFzb2hDVjl2VThuWkxFa2laRjF6OC1JVHFaN21SSjFCaHZuSjZET3J5MC11bkF4SnBOZ1UxOGhsa2Y3eTExQ3FPUmFhS1I1em1FbkpZSjhIZWFRdF82WDJ3SmR3OEVYN0ZnYjY4QVNWV2MxZVdHanZlMk5Oc1JEdGl6UkZXYzY?oc=5",
+      "source": "Investor's Business Daily",
+      "provider": "google_news_rss",
+      "title_key": "fortinet earnings revenue billings top views cybersecurity stock pops investor s business daily",
+      "s": 0.867832
+    },
+    {
+      "ts": "2026-07-29T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Stock Seems Stretched Following Its 152% Five Year Run - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Stock Seems Stretched Following Its 152% Five Year Run Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNclVQU3laV1oxc3dzU1RkNzQwLWQzOXc5eDFSdmU5QTZTbExONmNLNkdUOG5TQVR5SWQ5UWh3OU0tMDRNV1ZySXRVU1l4TFhqSWxVNHZIQndWR19hWnNjVXBqZUVkb0huZ184c1dReHJreTRLSktQc3N1Z3ZEakdjX05HWHdHV2RPaGdTVllCZWhmdFNaT0JBOE5hMHNzN2pmOWc?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt stock seems stretched following its 152 five year run yahoo finance",
+      "s": 0.006356
+    },
+    {
+      "ts": "2026-07-29T07:00:00+00:00",
+      "title": "Are Wall Street Analysts Bullish on Fortinet Stock? - Yahoo Finance",
+      "summary": "Are Wall Street Analysts Bullish on Fortinet Stock? Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPdThyLTNlU19qQ1BFUHpaSnNVcW5FXzRYQW1mdjZaQTAyWktXS2JrSGdRQVNURloxSkZ1VDQ1SUtJSE1PSkJNQkdhTUFPSVc5T3lyLUJKbFNXWkJkT0JFeDBOYlVyWkJoOXl6SUZjTU0xMnY2dkZldVdUR2ZJRHBJS1EzVUc5eEo5UUl3dVBSLUNKVTZFSjlnVXRzMGRiUXRVUnMwOA?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "are wall street analysts bullish on fortinet stock yahoo finance",
+      "s": 0.795346
+    },
+    {
+      "ts": "2026-07-29T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Surpasses Q2 Earnings and Revenue Estimates - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Surpasses Q2 Earnings and Revenue Estimates Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVnExcHRlTkR3Sm9PdVdmcVlhWnBTbHZYMGg5VVRyYm5nSXRRVHlvbGZsZ2RyTEpua3EyRTljQko1RTZ6YUJDYzlLN3BWYmNBOUctUl9lUHMzVzF2Y0hwMTBWQnk5NUF5d2loQ1JDQVRYZlBVbEZ0b3dUWUpTWmdCLXVaYm1VVkxHQm4zdS03aHhocDZrZTBzaXpnZjRnTHFpWWc?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt surpasses q2 earnings and revenue estimates yahoo finance",
+      "s": -0.903632
+    },
+    {
+      "ts": "2026-07-29T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Q2 Earnings: How Key Metrics Compare to Wall Street Estimates - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Q2 Earnings: How Key Metrics Compare to Wall Street Estimates Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNODh4NFZGZVA4WHRVSXNMZ1JpdVlxRll3SktGRzZUamFVWDdsTmUxQUxsNXZzSnlORl9pTU04bXR0RmxUUTY0ZTFpZkVmQ0lwVDFFdEpwWm9Vd0x2UHJqd3BKNXg3R3p5SnZsei12VGpZajdsWkFBYTIydzQ3OEJHbk5aLVFjdEVGbF9Gdkg3QmhVZjFOQi1FUFJ3?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt q2 earnings how key metrics compare to wall street estimates yahoo finance",
+      "s": 0.812281
     },
     {
       "ts": "2026-07-28T16:10:02+00:00",
@@ -572,7 +854,7 @@
       "summary": "Fortinet (FTNT) has an impressive earnings surprise history and currently possesses the right combination of the two key ingredients for a likely beat in its next quarterly report.",
       "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-beat-estimates-again-161002855.html",
       "source": "Zacks",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "will fortinet ftnt beat estimates again in its next earnings report",
       "s": -0.408662
     },
@@ -582,9 +864,9 @@
       "summary": "AI-powered attacks are accelerating faster than most security budgets can absorb, and a handful of platform vendors are capturing a disproportionate share of that urgent spend. Three Nasdaq-listed cybersecurity names just posted beat-and-raise quarters, and their second-half setups look even more compelling.",
       "url": "https://247wallst.com/investing/2026/07/28/3-cybersecurity-stocks-to-buy-before-threats-get-worse-in-late-july/",
       "source": "24/7 Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "3 cybersecurity stocks to buy before threats get worse in late july",
-      "s": 0.728673
+      "s": 0.728674
     },
     {
       "ts": "2026-07-28T13:00:00+00:00",
@@ -592,9 +874,9 @@
       "summary": "FortiGate 1200G with FortiSASE Outpost brings ASIC-powered threat protection and cloud-delivered SASE to customer-controlled environmentsSUNNYVALE, Calif., July 28, 2026 (GLOBE NEWSWIRE) -- Fortinet® (NASDAQ: FTNT), the global cybersecurity leader driving the convergence of networking and security, today announced the FortiGate 1200G series, the newest addition to the FortiGate G series with FortiSASE Outpost, which brings cloud-delivered security services into customer-controlled environments.",
       "url": "https://finance.yahoo.com/technology/articles/fortinet-expands-fortigate-g-series-130000243.html",
       "source": "GlobeNewswire",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "fortinet expands fortigate g series with 1200g and fortisase outpost to advance firewall and sase convergence",
-      "s": 0.577524
+      "s": 0.577523
     },
     {
       "ts": "2026-07-28T12:51:22+00:00",
@@ -602,9 +884,329 @@
       "summary": "Fortinet carries a streak no other cybersecurity company has matched, a buyback program that dwarfs most dividends, and a firewall refresh cycle that just posted explosive growth. The question is whether Wednesday's Q2 report extends the run or ends it.",
       "url": "https://247wallst.com/investing/2026/07/28/should-you-buy-fortinet-stock-before-july-29-q2-earnings/",
       "source": "24/7 Wall St.",
-      "provider": "yfinance",
+      "provider": "yahoo_public",
       "title_key": "should you buy fortinet stock before july 29 q2 earnings",
       "s": 0.898057
+    },
+    {
+      "ts": "2026-07-28T07:00:00+00:00",
+      "title": "Fortinet’s new FortiGate platform converges firewall, SASE technologies - networkworld.com",
+      "summary": "Fortinet’s new FortiGate platform converges firewall, SASE technologies networkworld.com",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPcWZhUTBvaFZXa3VLU0lyeEV4eUtMWHFENkIwUzRwVllTQzhhM000aDJETUpleXZpd3QtT1ZsQVV4eTVQY0hnU2llS2paUzA3UThqbXJ6R1RWWThJVlRobG5kemt4b2RCend2YjZvQ1pGRjZTakJvZWtHM095RXU5VDBpcTFmSFFTc2VjcFl5U1dubnlUVHctb3BxVGVxbnhJNGEzYUlKMy1xOWctWU5SeG8yNGY3TFJuRGRB?oc=5",
+      "source": "networkworld.com",
+      "provider": "google_news_rss",
+      "title_key": "fortinet s new fortigate platform converges firewall sase technologies networkworld com",
+      "s": 0.848013
+    },
+    {
+      "ts": "2026-07-28T07:00:00+00:00",
+      "title": "Should You Buy Fortinet Stock Before July 29 Q2 Earnings? - Yahoo Finance",
+      "summary": "Should You Buy Fortinet Stock Before July 29 Q2 Earnings? Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQRjRwTkcweUFMUUdiaDJPRzZ2UWdkemJnbXltMHlxTE5CQ3loS09RQ3huazVuQXh4b3E3b2hTSm5Ca0xsR09GV3N2SzhRNlc4eHRJM3dCS2JKZGZRUUNyVFdKaUVGZUp4VzJaOTBRM181Y2g4eUtfbk9hUXlucVk5UkdVZFF0NEo3dktCbDY1WEpkWS1KYmc?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "should you buy fortinet stock before july 29 q2 earnings yahoo finance",
+      "s": 0.906064
+    },
+    {
+      "ts": "2026-07-27T20:56:09+00:00",
+      "title": "Equinix Stock Has A Message For Management",
+      "summary": "The company raised its outlook on booming AI demand, but the stock is telling a different story by standing still.",
+      "url": "https://www.trefis.com/articles/608964/equinix-stock-has-a-message-for-management/2026-07-27",
+      "source": "Trefis",
+      "provider": "yahoo_public",
+      "title_key": "equinix stock has a message for management",
+      "s": 0.770959
+    },
+    {
+      "ts": "2026-07-27T20:50:00+00:00",
+      "title": "Intel Just Secured a Huge Customer for Its Foundry Business",
+      "summary": "The tech company recently landed Fortinet as a customer of its foundry service.",
+      "url": "https://www.fool.com/investing/2026/07/27/intel-just-secured-a-huge-customer-for-its-foundry/",
+      "source": "Motley Fool",
+      "provider": "yahoo_public",
+      "title_key": "intel just secured a huge customer for its foundry business",
+      "s": -0.749699
+    },
+    {
+      "ts": "2026-07-27T14:52:00+00:00",
+      "title": "Fortinet Set to Report Q2 Earnings: What's in Store for the Stock?",
+      "summary": "FTNT gears up for Q2 earnings as AI security, Secure Networking and SASE demand take center stage amid revenue and margin expectations.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-set-report-q2-earnings-145200455.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "fortinet set to report q2 earnings what s in store for the stock",
+      "s": 0.869894
+    },
+    {
+      "ts": "2026-07-27T13:45:23+00:00",
+      "title": "What Cisco's Big Run Actually Adds To Your Portfolio",
+      "summary": "Cisco has outrun the market for years, yet what decides its place in your portfolio is how much of that return is genuinely its own.",
+      "url": "https://www.trefis.com/articles/608967/what-ciscos-big-run-actually-adds-to-your-portfolio/2026-07-27",
+      "source": "Trefis",
+      "provider": "yahoo_public",
+      "title_key": "what cisco s big run actually adds to your portfolio",
+      "s": 0.696851
+    },
+    {
+      "ts": "2026-07-27T07:00:00+00:00",
+      "title": "Fortinet Set to Report Q2 Earnings: What's in Store for the Stock? - Yahoo Finance",
+      "summary": "Fortinet Set to Report Q2 Earnings: What's in Store for the Stock? Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPNGJsYjhZallsSEtPSE9teHQ0NHk1ZWdER19qQ1g2Q0N5Rk81RU5lNTA3ajBXb3VYNUE5ZzhMaXdwTFRvbzBQand1VVBDX1BZNFp1QUQ1S2M0WEdJcGNwdi1XbjdncWRaYXY5YS1lUExxVGZtT1RoQV94OU92T1JRNTlSX0ZJUjA2RGg2cXJpdVpnTThBdjhUTFVUTUo?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet set to report q2 earnings what s in store for the stock yahoo finance",
+      "s": 0.896959
+    },
+    {
+      "ts": "2026-07-25T15:12:04+00:00",
+      "title": "Fortinet (FTNT) Heads Into Q2 Earnings As AI Security Optimism Meets A Pricey Valuation",
+      "summary": "Fortinet (FTNT) heads into its upcoming second quarter earnings report with attention on forecast growth in both services and products, along with recent FortiEndpoint AI features and a broader global distribution pact with TD SYNNEX. See our latest analysis for Fortinet. Fortinet’s share price momentum has been choppy in the very short term, with a 7 day share price return of 5.7% down, but the 90 day share price return of 80.7% and 3 year total shareholder return of 98.4% point to strong...",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-heads-q2-earnings-151204186.html",
+      "source": "Simply Wall St.",
+      "provider": "yahoo_public",
+      "title_key": "fortinet ftnt heads into q2 earnings as ai security optimism meets a pricey valuation",
+      "s": -0.682356
+    },
+    {
+      "ts": "2026-07-25T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Heads Into Q2 Earnings As AI Security Optimism Meets A Pricey Valuation - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Heads Into Q2 Earnings As AI Security Optimism Meets A Pricey Valuation Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOSkpTVGFRUFRRdVhCRUpFNHdsZm92RG5GUkNudlExLXMzbkZKbXBCZU8wOWlVVFFBbWZXckprTjFjZlJPcW1QT0FQSDRMZjN3MkNDZGZGUHpGemZMUWVrYWhlZW50azUwekNiZXFPZ0d3Z2FXcnp1MHFXclBvZWhBYjdoeXdVTklVaG9XRHlfdzk4OXZhbzlSaklyMkQ?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt heads into q2 earnings as ai security optimism meets a pricey valuation yahoo finance",
+      "s": -0.461792
+    },
+    {
+      "ts": "2026-07-24T21:30:51+00:00",
+      "title": "Synopsys Stock: The Price Tag Hides a Patient Investor's Discount",
+      "summary": "The stock's high multiple looks daunting, but a look at future earnings reveals a very different story about its price.",
+      "url": "https://www.trefis.com/articles/608771/synopsys-stock-the-price-tag-hides-a-patient-investors-discount/2026-07-24",
+      "source": "Trefis",
+      "provider": "yahoo_public",
+      "title_key": "synopsys stock the price tag hides a patient investor s discount",
+      "s": 0.91228
+    },
+    {
+      "ts": "2026-07-24T15:35:00+00:00",
+      "title": "Intel Earnings Reveal Whether the Chip Selloff Created a Buy",
+      "summary": "Intel's Q2 2026 revenue and EPS beat estimates, with data center demand and margins improving, though Foundry's external revenue and tougher comps ahead warrant a cautious, hold-rather-than-chase stance.",
+      "url": "https://www.marketbeat.com/articles/intel-earnings-reveal-whether-the-chip-selloff-created-a-buy/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "source": "MarketBeat",
+      "provider": "yahoo_public",
+      "title_key": "intel earnings reveal whether the chip selloff created a buy",
+      "s": 0.397198
+    },
+    {
+      "ts": "2026-07-24T13:15:05+00:00",
+      "title": "Fortinet (FTNT) Q2 Earnings on the Horizon: Analysts' Insights on Key Performance Measures",
+      "summary": "Beyond analysts' top-and-bottom-line estimates for Fortinet (FTNT), evaluate projections for some of its key metrics to gain a better insight into how the business might have performed for the quarter ended June 2026.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-q2-earnings-horizon-131505292.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "fortinet ftnt q2 earnings on the horizon analysts insights on key performance measures",
+      "s": 0.621359
+    },
+    {
+      "ts": "2026-07-24T12:10:49+00:00",
+      "title": "Howmet Aerospace Stock And The Sound Of One Hand Clapping",
+      "summary": "Management raised its full-year profit forecast by double digits, but the market seems to be waiting for a second opinion.",
+      "url": "https://www.trefis.com/articles/608766/howmet-aerospace-stock-and-the-sound-of-one-hand-clapping/2026-07-24",
+      "source": "Trefis",
+      "provider": "yahoo_public",
+      "title_key": "howmet aerospace stock and the sound of one hand clapping",
+      "s": 0.851872
+    },
+    {
+      "ts": "2026-07-24T08:10:39+00:00",
+      "title": "Intel CEO Lip-Bu Tan Eyes $100 Billion Custom AI Chip Market, Backs $20 Over Billion CapEx Push Amid 'Unprecedented Demand for Compute'",
+      "summary": "Intel Corp. (NASDAQ:INTC) is targeting a staggering $100 billion market for custom artificial intelligence silicon, leveraging its robust x86 computing franchise and advanced manufacturing network as global AI demand skyrockets. The Custom Silicon Push During Intel’s second-quarter 2026 earnings call, CEO Lip-Bu Tan outlined the company’s strategic expansion into purpose-built chips. Recognizing the growing necessity for specialized AI architecture, Tan highlighted Intel’s unique position to dom",
+      "url": "https://finance.yahoo.com/technology/ai/articles/intel-ceo-lip-bu-tan-081039230.html",
+      "source": "Benzinga",
+      "provider": "yahoo_public",
+      "title_key": "intel ceo lip bu tan eyes 100 billion custom ai chip market backs 20 over billion capex push amid unprecedented demand for compute",
+      "s": -0.782318
+    },
+    {
+      "ts": "2026-07-24T07:00:00+00:00",
+      "title": "Fortinet (FTNT) Q2 Earnings on the Horizon: Analysts' Insights on Key Performance Measures - Yahoo Finance",
+      "summary": "Fortinet (FTNT) Q2 Earnings on the Horizon: Analysts' Insights on Key Performance Measures Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQWXMzT3ZDNnAySE44TFJkWFhmbGx5dWtsVW0zbE9ySEpMVWsxRHhoQXdXLTR5MURDMnFGdkxYZVNHcThvUTZjN0dBeG5Genc1OTlqYkdzMVJJSzdGYUdyUEREVW02VzMyaC1ZalRIT1BiNDFNRlEtMno1TUY1TW1RNElkLUxpeUQ3RGZGQnlDdGV3c3FOWjdRRnJXT09veFU?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet ftnt q2 earnings on the horizon analysts insights on key performance measures yahoo finance",
+      "s": 0.651232
+    },
+    {
+      "ts": "2026-07-23T18:45:00+00:00",
+      "title": "Fortinet heads into earnings with product growth in the spotlight",
+      "summary": "Fortinet Inc (NASDAQ:FTNT) is set to report its second quarter results on July 29, with Jefferies analysts highlighting that the company needs to show an acceleration in product revenue growth to support investor confidence in the durability of its recent performance. The firm expects solid...",
+      "url": "https://www.proactiveinvestors.com/companies/news/1095961/fortinet-heads-into-earnings-with-product-growth-in-the-spotlight-1095961.html",
+      "source": "Proactive",
+      "provider": "yahoo_public",
+      "title_key": "fortinet heads into earnings with product growth in the spotlight",
+      "s": -0.809339
+    },
+    {
+      "ts": "2026-07-23T07:00:00+00:00",
+      "title": "Fortinet heads into earnings with product growth in the spotlight - Yahoo Finance",
+      "summary": "Fortinet heads into earnings with product growth in the spotlight Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPUEVtdmtSelFwS3Babjluc0pNczlIYVNFZGJULXQ0dEhXdjZ6TzlOZXcxWHZkcm00RXpUcUZnS3JuVGRUWEpUR0lEM3kxRzdIYVVLSWRxbWRNRThBbDFCTVU5UXI2Tngxa21VX0NzNUtPanBsWFN6RnR5QnJtSWNTUm9Wd2pEYlVQclg1ZDNDMS0xYnEzTk1vNkhVU29QbEU3T3p1R3Zn?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet heads into earnings with product growth in the spotlight yahoo finance",
+      "s": -0.001048
+    },
+    {
+      "ts": "2026-07-22T22:12:00+00:00",
+      "title": "Intel's Foundry Just Landed Its First Named Outside Customer Under Lip-Bu Tan. The Stock Jumped More Than 8% -- 2 Days Before Earnings.",
+      "summary": "The chipmaker finally put a name on its foundry momentum -- two days before the report that will test it.",
+      "url": "https://www.fool.com/investing/2026/07/22/intels-foundry-just-landed-its-first-named-outside/",
+      "source": "Motley Fool",
+      "provider": "yahoo_public",
+      "title_key": "intel s foundry just landed its first named outside customer under lip bu tan the stock jumped more than 8 2 days before earnings",
+      "s": -0.876579
+    },
+    {
+      "ts": "2026-07-22T18:51:34+00:00",
+      "title": "Fortinet and Intel Just Announced a New Collaboration. The Real Test for FTNT Stock Is Earnings.",
+      "summary": "Fortinet announced a collaboration with Intel to develop the Fortinet Security Processor 6 on the Intel 4 process, making Fortinet the first named cybersecurity customer for Intel Foundry.",
+      "url": "https://www.barchart.com/story/news/3410535/fortinet-and-intel-just-announced-a-new-collaboration-the-real-test-for-ftnt-stock-is-earnings",
+      "source": "Barchart",
+      "provider": "yahoo_public",
+      "title_key": "fortinet and intel just announced a new collaboration the real test for ftnt stock is earnings",
+      "s": 0.520965
+    },
+    {
+      "ts": "2026-07-22T17:08:00+00:00",
+      "title": "Pegasystems Q2 Earnings Miss Estimates, Revenues Increase Y/Y",
+      "summary": "PEGA's revenues rise 9.4% as cloud sales surge, but earnings miss estimates and delayed AI-era buying decisions slow ACV growth.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/pegasystems-q2-earnings-miss-estimates-170800345.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "pegasystems q2 earnings miss estimates revenues increase y y",
+      "s": -0.911361
+    },
+    {
+      "ts": "2026-07-22T12:23:00+00:00",
+      "title": "Add These 4 GARP Stocks to Your Portfolio to Receive Handsome Returns",
+      "summary": "The GARP strategy helps investors gain exposure to stocks that have solid prospects and are trading at a discount. FTNT, TPR, EXPE and RL are some such stocks.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/add-4-garp-stocks-portfolio-122300781.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "add these 4 garp stocks to your portfolio to receive handsome returns",
+      "s": 0.710545
+    },
+    {
+      "ts": "2026-07-22T07:00:00+00:00",
+      "title": "Fortinet and Intel Just Announced a New Collaboration. The Real Test for FTNT Stock Is Earnings. - Yahoo Finance",
+      "summary": "Fortinet and Intel Just Announced a New Collaboration. The Real Test for FTNT Stock Is Earnings. Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNSjd1bkpsazF6S19tMDMxUTlaanZYcXdmcnA2Uk5Ca0Y5Ry1uNkplTmNUVS1CamNxUy1sb0NsVkJiTDN3eVZYV3JHTVJacE5Dbi11VlFBVkRsc3lsbnhtS0FGbjVBXzBsNHB4N1BGZzBkcWh4SHU3UHF6Vk1rcVhpcEFLZ24xYTRnS19Sb0xuRVZhT2hGcV9kbWhTQUw1VVRISTh3T01QYXZQMjBm?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "fortinet and intel just announced a new collaboration the real test for ftnt stock is earnings yahoo finance",
+      "s": 0.683196
+    },
+    {
+      "ts": "2026-07-22T07:00:00+00:00",
+      "title": "Fortinet sentiment is 'mixed' heading into earnings, despite sharp run-up: Citi (FTNT:NASDAQ) - Seeking Alpha",
+      "summary": "Fortinet sentiment is 'mixed' heading into earnings, despite sharp run-up: Citi (FTNT:NASDAQ) Seeking Alpha",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOakdWeng1eWFqMmlFNFh4UDExS1d4UWVPNkZMdEFQWlh6SnVPZk14QVFaMDR3LWYwdXpId3NTMDVCclVtaHF5elRKZXpfM1F4UFM5ckVVcmVDUzdKZ1RpM1Z6cXVha3JTaWtxMloyaU10eTRtaHJBNHd5T2J2d1pMWnc0SVRlbXNyUTJoaGNldHRVN25PaTRsUXVMY05mMGw1RkxOMlZvaDJTUVF1RTU0cmVUUQ?oc=5",
+      "source": "Seeking Alpha",
+      "provider": "google_news_rss",
+      "title_key": "fortinet sentiment is mixed heading into earnings despite sharp run up citi ftnt nasdaq seeking alpha",
+      "s": -0.050848
+    },
+    {
+      "ts": "2026-07-22T01:12:28+00:00",
+      "title": "What Cisco Stock Was Telling You About Its AI Orders",
+      "summary": "You could be forgiven for glancing at Cisco (CSCO)’s financials in early 2025 and promptly falling asleep. As of its fiscal third-quarter report for FY 2025 (July fiscal ending), trailing-twelve-month revenue had grown 0.5%. It was a picture of a mature tech titan, not a rocket ship.",
+      "url": "https://www.trefis.com/articles/608167/what-cisco-stock-was-telling-you-about-its-ai-orders/2026-07-21",
+      "source": "Trefis",
+      "provider": "yahoo_public",
+      "title_key": "what cisco stock was telling you about its ai orders",
+      "s": 0.90019
+    },
+    {
+      "ts": "2026-07-21T21:50:04+00:00",
+      "title": "Fortinet (FTNT) Stock Sinks As Market Gains: What You Should Know",
+      "summary": "Fortinet (FTNT) reached $158.1 at the closing of the latest trading day, reflecting a -1.41% change compared to its last close.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/fortinet-ftnt-stock-sinks-market-215004530.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "fortinet ftnt stock sinks as market gains what you should know",
+      "s": 0.550388
+    },
+    {
+      "ts": "2026-07-21T21:26:11+00:00",
+      "title": "The Hidden Engine Behind Elevance Health Stock's Next Climb",
+      "summary": "Investors are rightly focused on the company's Medicaid struggles, but the real upside story may be hiding in plain sight across the rest of its business.",
+      "url": "https://www.trefis.com/articles/608179/the-hidden-engine-behind-elevance-health-stocks-next-climb/2026-07-21",
+      "source": "Trefis",
+      "provider": "yahoo_public",
+      "title_key": "the hidden engine behind elevance health stock s next climb",
+      "s": 0.877466
+    },
+    {
+      "ts": "2026-07-21T19:44:05+00:00",
+      "title": "Cybersecurity Stocks' Hefty Valuations Demand Caution Ahead of Earnings, Morgan Stanley Says",
+      "summary": "Cybersecurity stocks' lofty valuations warrant caution ahead of upcoming quarterly results, especial",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/cybersecurity-stocks-apos-hefty-valuations-194405902.html",
+      "source": "MT Newswires",
+      "provider": "yahoo_public",
+      "title_key": "cybersecurity stocks hefty valuations demand caution ahead of earnings morgan stanley says",
+      "s": 0.020941
+    },
+    {
+      "ts": "2026-07-21T18:14:21+00:00",
+      "title": "Intel (INTC) Lands Fortinet As First Named Cybersecurity Customer For Its Foundry",
+      "summary": "Intel (NasdaqGS:INTC) has partnered with Fortinet to manufacture the next-generation Security Processor 6. The chip will be produced using Intel’s advanced semiconductor process within its Intel Foundry business. Fortinet is the first publicly named cybersecurity chip customer for Intel Foundry. For investors tracking Intel, this agreement with Fortinet highlights how the company is using its manufacturing capacity to serve external customers through Intel Foundry. Fortinet brings deep...",
+      "url": "https://finance.yahoo.com/technology/articles/intel-intc-lands-fortinet-first-181421994.html",
+      "source": "Simply Wall St.",
+      "provider": "yahoo_public",
+      "title_key": "intel intc lands fortinet as first named cybersecurity customer for its foundry",
+      "s": -0.606127
+    },
+    {
+      "ts": "2026-07-21T14:29:36+00:00",
+      "title": "Intel and Fortinet Expand Cybersecurity Collaboration to Develop Security Processor 6 (NASDAQ:INTC) (NASDAQ:FTNT)",
+      "summary": "The partnership combines Intel’s semiconductor capabilities with Fortinet’s security processor expertise to accelerate next-generation cybersecurity hardware and diversify the supply chain. Key Investor TakeawaysIntel (NASDAQ:INTC) and Fortinet (NASDAQ:FTNT) announced a strategic collaboration to develop Fortinet’s next-generation Security Processor 6 (SP6).",
+      "url": "https://investorshub.advfn.com/market-news/article/32343/intel-and-fortinet-expand-cybersecurity-collaboration-to-develop-security-processor-6-nasdaqintc-nasdaqftnt",
+      "source": "InvestorsHub",
+      "provider": "yahoo_public",
+      "title_key": "intel and fortinet expand cybersecurity collaboration to develop security processor 6 nasdaq intc nasdaq ftnt",
+      "s": -0.669446
+    },
+    {
+      "ts": "2026-07-21T13:40:26+00:00",
+      "title": "Shopify downgraded, Five Below upgraded: Wall Street's top analyst calls",
+      "summary": "Shopify downgraded, Five Below upgraded: Wall Street's top analyst calls",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/micron-downgraded-five-below-upgraded-133947861.html",
+      "source": "The Fly",
+      "provider": "yahoo_public",
+      "title_key": "shopify downgraded five below upgraded wall street s top analyst calls",
+      "s": 0.317994
+    },
+    {
+      "ts": "2026-07-21T13:37:43+00:00",
+      "title": "Intel Foundry lands Fortinet as first cybersecurity chip customer",
+      "summary": "Fortinet will use Intel's foundry to produce its next-generation SP6 security processor on the Intel 4 manufacturing process",
+      "url": "https://qz.com/intel-foundry-fortinet-cybersecurity-chip-customer-072126",
+      "source": "Quartz",
+      "provider": "yahoo_public",
+      "title_key": "intel foundry lands fortinet as first cybersecurity chip customer",
+      "s": -0.280867
+    },
+    {
+      "ts": "2026-07-21T13:00:00+00:00",
+      "title": "Intel and Fortinet Collaborate to Advance Cybersecurity Innovation and Strengthen Global Supply Chain Resilience",
+      "summary": "SANTA CLARA, Calif. & SUNNYVALE, Calif., July 21, 2026--Intel and Fortinet Collaborate to Advance Cybersecurity Innovation and Strengthen Global Supply Chain Resilience",
+      "url": "https://finance.yahoo.com/technology/articles/intel-fortinet-collaborate-advance-cybersecurity-130000588.html",
+      "source": "Business Wire",
+      "provider": "yahoo_public",
+      "title_key": "intel and fortinet collaborate to advance cybersecurity innovation and strengthen global supply chain resilience",
+      "s": -0.754437
     }
   ]
 }
