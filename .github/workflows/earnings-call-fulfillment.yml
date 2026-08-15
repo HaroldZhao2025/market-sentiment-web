@@ -8,15 +8,15 @@ on:
   workflow_dispatch:
     inputs:
       batch_index:
-        description: "Zero-based fulfillment batch index"
+        description: "Fulfillment sweep label"
         required: false
         default: "0"
       batch_size:
-        description: "Companies per batch"
+        description: "Companies per sweep"
         required: false
-        default: "25"
+        default: "100"
   schedule:
-    - cron: "40 * * * *"
+    - cron: "20 * * * *"
 
 permissions:
   contents: write
@@ -52,7 +52,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/hf-home
-          key: phase8-finbert-${{ runner.os }}-py311
+          key: phase9-finbert-${{ runner.os }}-py311
 
       - name: Install free-source fulfillment dependencies
         run: |
@@ -64,7 +64,7 @@ jobs:
           pip install --disable-pip-version-check --no-cache-dir "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
           pip install --disable-pip-version-check --no-cache-dir "transformers==4.45.2" "tokenizers==0.20.3"
 
-      - name: Resolve batch
+      - name: Resolve sweep
         id: batch
         env:
           EVENT_NAME: ${{ github.event_name }}
@@ -73,13 +73,13 @@ jobs:
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import datetime, os
+          now = datetime.datetime.now(datetime.timezone.utc)
           if os.getenv("EVENT_NAME") == "workflow_dispatch":
               index = int(os.getenv("INPUT_BATCH_INDEX") or 0)
-              size = int(os.getenv("INPUT_BATCH_SIZE") or 25)
+              size = int(os.getenv("INPUT_BATCH_SIZE") or 100)
           else:
-              now = datetime.datetime.now(datetime.timezone.utc)
-              index = ((now.timetuple().tm_yday - 1) * 24 + now.hour) % 60
-              size = 25
+              index = (now.timetuple().tm_yday - 1) * 24 + now.hour
+              size = 100
           print(f"index={index}")
           print(f"size={size}")
           PY
@@ -92,7 +92,8 @@ jobs:
             --batch-index "${{ steps.batch.outputs.index }}" \
             --batch-size "${{ steps.batch.outputs.size }}" \
             --priority-symbols "AAPL,MSFT,NVDA,AMZN,GOOGL,META,TSLA" \
-            --sec-days 550
+            --sec-days 550 \
+            --retry-cooldown-hours 24
 
       - name: Validate fulfillment policy
         run: |
@@ -103,22 +104,30 @@ jobs:
 
           root = Path("apps/web/public/data/v5")
           status = json.loads((root / "earnings_fulfillment_status.json").read_text())
-          if status.get("source_policy") != "free_public_only":
+          coverage = json.loads((root / "earnings_coverage.json").read_text())
+          if status.get("source_policy") != "free_public_only" or coverage.get("source_policy") != "free_public_only":
               raise SystemExit("Fulfillment source policy is not free_public_only")
-          results = status.get("results") or []
-          if not results:
-              raise SystemExit("Fulfillment produced no batch results")
+          if int(coverage.get("company_count") or 0) < 1300:
+              raise SystemExit("Earnings coverage universe is unexpectedly small")
           aapl_path = root / "earnings" / "AAPL.json"
           if not aapl_path.exists():
               raise SystemExit("AAPL earnings artifact missing")
           aapl = json.loads(aapl_path.read_text())
-          if not (aapl.get("calls") or []):
-              raise SystemExit("AAPL structured-call fulfillment gate failed")
+          complete = []
           for call in aapl.get("calls") or []:
+              summary = call.get("summary") or {}
+              if all(summary.get(k) is not None for k in ("overall_sentiment", "prepared_sentiment", "qa_sentiment", "qa_tone_shift")):
+                  complete.append(call)
               for turn in call.get("turns") or []:
                   if turn.get("text"):
                       raise SystemExit("Transcript text must not be redistributed in public artifacts")
-          print(f"FULFILLMENT DATA OK | batch_results={len(results)} aapl_calls={len(aapl.get('calls') or [])}")
+          if not complete:
+              raise SystemExit("AAPL complete structured-call gate failed")
+          print(
+              f"FULFILLMENT DATA OK | sweep_results={len(status.get('results') or [])} "
+              f"market_complete={coverage.get('complete_company_count')}/{coverage.get('company_count')} "
+              f"coverage={float(coverage.get('complete_coverage_rate') or 0):.1%}"
+          )
           PY
 
       - name: Persist fulfillment artifacts
@@ -126,9 +135,13 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f apps/web/public/data/v5/earnings apps/web/public/data/v5/earnings_fulfillment_status.json
+          git add -f \
+            apps/web/public/data/v5/earnings \
+            apps/web/public/data/v5/earnings_fulfillment_status.json \
+            apps/web/public/data/v5/earnings_fulfillment_attempts.json \
+            apps/web/public/data/v5/earnings_coverage.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore: fulfill free earnings calls batch ${{ steps.batch.outputs.index }} [skip ci]"
+            git commit -m "chore: sweep free earnings calls ${{ steps.batch.outputs.index }} [skip ci]"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
