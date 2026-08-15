@@ -1,7 +1,62 @@
 {
   "schema_version": 8,
   "symbol": "CON",
-  "earnings_history": [],
+  "earnings_history": [
+    {
+      "date": "2026-11-05T15:00:00-05:00",
+      "eps_estimate": 0.44,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-06T16:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.52,
+      "surprise_pct": 23.45
+    },
+    {
+      "date": "2026-05-07T16:00:00-04:00",
+      "eps_estimate": 0.34,
+      "reported_eps": 0.4,
+      "surprise_pct": 18.21
+    },
+    {
+      "date": "2026-02-26T16:00:00-05:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.28,
+      "surprise_pct": null
+    },
+    {
+      "date": "2025-11-06T16:00:00-05:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.39,
+      "surprise_pct": 2.2
+    },
+    {
+      "date": "2025-08-07T16:00:00-04:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.37,
+      "surprise_pct": -1.48
+    },
+    {
+      "date": "2025-05-07T16:00:00-04:00",
+      "eps_estimate": 0.32,
+      "reported_eps": 0.32,
+      "surprise_pct": 1.41
+    },
+    {
+      "date": "2025-03-03T16:00:00-05:00",
+      "eps_estimate": 0.17,
+      "reported_eps": 0.17,
+      "surprise_pct": 0.38
+    },
+    {
+      "date": "2024-10-31T16:00:00-04:00",
+      "eps_estimate": 0.36,
+      "reported_eps": 0.37,
+      "surprise_pct": 4.1
+    }
+  ],
   "calls": [
     {
       "quarter": null,
@@ -12,9 +67,9 @@
       "summary": {
         "turn_count": 53,
         "scored_turn_count": 53,
-        "overall_sentiment": 0.262482,
+        "overall_sentiment": 0.262481,
         "prepared_sentiment": null,
-        "qa_sentiment": 0.262482,
+        "qa_sentiment": 0.262481,
         "qa_tone_shift": null,
         "uncertainty_turn_rate": 0.075472,
         "forward_looking_turn_rate": 0.358491,
@@ -22,12 +77,12 @@
           {
             "topic": "Guidance",
             "mentions": 17,
-            "sentiment": 0.074924
+            "sentiment": 0.074923
           },
           {
             "topic": "Demand",
             "mentions": 15,
-            "sentiment": 0.16188
+            "sentiment": 0.161879
           },
           {
             "topic": "Margins & costs",
@@ -37,17 +92,17 @@
           {
             "topic": "Capital allocation",
             "mentions": 8,
-            "sentiment": -0.227811
+            "sentiment": -0.227812
           },
           {
             "topic": "AI & technology",
             "mentions": 3,
-            "sentiment": 0.537275
+            "sentiment": 0.537272
           },
           {
             "topic": "Macro & FX",
             "mentions": 2,
-            "sentiment": -0.211116
+            "sentiment": -0.211117
           },
           {
             "topic": "Regulation & legal",
@@ -73,7 +128,7 @@
           "turn": 1,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": 0.229408,
+          "sentiment": 0.229402,
           "word_count": 486,
           "topic_hits": [
             "Guidance",
@@ -87,7 +142,7 @@
           "turn": 2,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": -0.606833,
+          "sentiment": -0.606834,
           "word_count": 1725,
           "topic_hits": [
             "Guidance",
@@ -103,7 +158,7 @@
           "turn": 3,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": -0.784262,
+          "sentiment": -0.784263,
           "word_count": 428,
           "topic_hits": [
             "Guidance",
@@ -127,7 +182,7 @@
           "turn": 5,
           "speaker": "Ann Hynes",
           "section": "qa",
-          "sentiment": 0.610251,
+          "sentiment": 0.61025,
           "word_count": 138,
           "topic_hits": [
             "Guidance",
@@ -154,7 +209,7 @@
           "turn": 7,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": -0.300753,
+          "sentiment": -0.300754,
           "word_count": 66,
           "topic_hits": [],
           "uncertainty_hits": 0,
@@ -164,7 +219,7 @@
           "turn": 8,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": -0.603528,
+          "sentiment": -0.603529,
           "word_count": 131,
           "topic_hits": [
             "Guidance"
@@ -199,7 +254,7 @@
           "turn": 11,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": -0.346662,
+          "sentiment": -0.346663,
           "word_count": 139,
           "topic_hits": [
             "Margins & costs"
@@ -211,7 +266,7 @@
           "turn": 12,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": -0.463884,
+          "sentiment": -0.463885,
           "word_count": 85,
           "topic_hits": [
             "Margins & costs"
@@ -235,7 +290,7 @@
           "turn": 14,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": -0.279132,
+          "sentiment": -0.279131,
           "word_count": 193,
           "topic_hits": [
             "Guidance"
@@ -267,7 +322,7 @@
           "turn": 17,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": -0.607075,
+          "sentiment": -0.607076,
           "word_count": 235,
           "topic_hits": [
             "Demand"
@@ -289,7 +344,7 @@
           "turn": 19,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": 0.563133,
+          "sentiment": 0.563132,
           "word_count": 192,
           "topic_hits": [
             "Demand"
@@ -311,7 +366,7 @@
           "turn": 21,
           "speaker": "Stephen Baxter",
           "section": "qa",
-          "sentiment": 0.594364,
+          "sentiment": 0.594363,
           "word_count": 101,
           "topic_hits": [],
           "uncertainty_hits": 0,
@@ -321,7 +376,7 @@
           "turn": 22,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": 0.1846,
+          "sentiment": 0.184599,
           "word_count": 181,
           "topic_hits": [
             "Demand",
@@ -346,7 +401,7 @@
           "turn": 24,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": -0.087144,
+          "sentiment": -0.087146,
           "word_count": 156,
           "topic_hits": [
             "Demand",
@@ -359,7 +414,7 @@
           "turn": 25,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": -0.876908,
+          "sentiment": -0.876909,
           "word_count": 98,
           "topic_hits": [
             "Capital allocation"
@@ -403,7 +458,7 @@
           "turn": 29,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": -0.030208,
+          "sentiment": -0.03021,
           "word_count": 106,
           "topic_hits": [
             "Demand"
@@ -415,7 +470,7 @@
           "turn": 30,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": 0.680498,
+          "sentiment": 0.680497,
           "word_count": 153,
           "topic_hits": [],
           "uncertainty_hits": 0,
@@ -452,7 +507,7 @@
           "turn": 33,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": -0.00049,
+          "sentiment": -0.000493,
           "word_count": 94,
           "topic_hits": [
             "Demand"
@@ -488,7 +543,7 @@
           "turn": 36,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": 0.714786,
+          "sentiment": 0.714785,
           "word_count": 229,
           "topic_hits": [
             "Margins & costs"
@@ -512,7 +567,7 @@
           "turn": 38,
           "speaker": "Benjamin Rossi",
           "section": "qa",
-          "sentiment": 0.090177,
+          "sentiment": 0.090179,
           "word_count": 66,
           "topic_hits": [
             "Guidance",
@@ -525,7 +580,7 @@
           "turn": 39,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": -0.72055,
+          "sentiment": -0.720551,
           "word_count": 74,
           "topic_hits": [
             "Guidance"
@@ -605,7 +660,7 @@
           "turn": 46,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": 0.185142,
+          "sentiment": 0.185141,
           "word_count": 96,
           "topic_hits": [
             "Capital allocation"
@@ -640,7 +695,7 @@
           "turn": 49,
           "speaker": "William Newton",
           "section": "qa",
-          "sentiment": 0.529482,
+          "sentiment": 0.52948,
           "word_count": 130,
           "topic_hits": [],
           "uncertainty_hits": 0,
@@ -660,7 +715,7 @@
           "turn": 51,
           "speaker": "Matthew DiCanio",
           "section": "qa",
-          "sentiment": 0.231038,
+          "sentiment": 0.231037,
           "word_count": 70,
           "topic_hits": [
             "Guidance",
@@ -726,7 +781,7 @@
   "methodology": {
     "source_policy": "free_public_only",
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 2
+    "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-08-15T21:33:41.266777+00:00"
+  "updated_at_utc": "2026-08-15T23:34:14.668632+00:00"
 }
