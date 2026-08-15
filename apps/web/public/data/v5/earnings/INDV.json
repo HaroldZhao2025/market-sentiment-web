@@ -1,0 +1,125 @@
+{
+  "schema_version": 6,
+  "symbol": "INDV",
+  "earnings_history": [
+    {
+      "date": "2026-11-05T07:00:00-05:00",
+      "eps_estimate": 1.12,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-03T06:00:00-04:00",
+      "eps_estimate": 0.92,
+      "reported_eps": 1.15,
+      "surprise_pct": 24.76
+    },
+    {
+      "date": "2026-04-30T07:00:00-04:00",
+      "eps_estimate": 0.66,
+      "reported_eps": 0.96,
+      "surprise_pct": 45.45
+    },
+    {
+      "date": "2026-02-26T07:00:00-05:00",
+      "eps_estimate": 0.67,
+      "reported_eps": 0.82,
+      "surprise_pct": 21.66
+    },
+    {
+      "date": "2025-10-30T07:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.72,
+      "surprise_pct": 74.9
+    },
+    {
+      "date": "2025-07-31T07:00:00-04:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.51,
+      "surprise_pct": 104.0
+    },
+    {
+      "date": "2025-04-24T02:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.41,
+      "surprise_pct": 75.72
+    },
+    {
+      "date": "2025-02-20T02:00:00-05:00",
+      "eps_estimate": 0.26,
+      "reported_eps": 0.32,
+      "surprise_pct": 22.65
+    },
+    {
+      "date": "2024-10-24T02:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.54,
+      "surprise_pct": 32.79
+    },
+    {
+      "date": "2024-07-25T06:00:00-04:00",
+      "eps_estimate": 0.4,
+      "reported_eps": 0.44,
+      "surprise_pct": 9.09
+    },
+    {
+      "date": "2024-04-25T02:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.37,
+      "surprise_pct": -10.84
+    },
+    {
+      "date": "2024-02-22T02:00:00-05:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.43,
+      "surprise_pct": 53.57
+    },
+    {
+      "date": "2023-11-09T02:00:00-05:00",
+      "eps_estimate": 0.3,
+      "reported_eps": 0.34,
+      "surprise_pct": 13.33
+    },
+    {
+      "date": "2023-07-27T07:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.39,
+      "surprise_pct": 77.27
+    },
+    {
+      "date": "2017-02-22T02:00:00-05:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.35,
+      "surprise_pct": null
+    },
+    {
+      "date": "2016-11-02T08:00:00-04:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.5,
+      "surprise_pct": 85.19
+    },
+    {
+      "date": "2016-07-29T03:00:00-04:00",
+      "eps_estimate": 0.34,
+      "reported_eps": 0.55,
+      "surprise_pct": 64.18
+    },
+    {
+      "date": "2016-02-18T02:00:00-05:00",
+      "eps_estimate": 0.2,
+      "reported_eps": 0.35,
+      "surprise_pct": 75.0
+    }
+  ],
+  "calls": [],
+  "call_links": [],
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "free_public_only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "SEC exhibits plus free public transcript pages; transcript text is analyzed transiently and not redistributed."
+  },
+  "updated_at_utc": "2026-08-15T03:49:03.450436+00:00"
+}
