@@ -6,7 +6,7 @@ from typing import Any
 
 from market_sentiment.cli import fulfill_company_data as base
 
-NEWS_DEPTH_TARGET = 100
+NEWS_DEPTH_TARGET = 160
 
 
 def article_count(path: Path) -> int:
