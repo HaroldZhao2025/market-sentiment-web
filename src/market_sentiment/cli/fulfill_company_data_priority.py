@@ -7,14 +7,20 @@ from typing import Any
 from market_sentiment.cli import fulfill_company_data as base
 
 NEWS_DEPTH_TARGET = 240
+NEWS_HISTORY_DAYS_TARGET = 730
 
 
-def article_count(path: Path) -> int:
+def news_metadata(path: Path) -> tuple[int, int]:
     payload = base.load_json(path, {})
     if not isinstance(payload, dict):
-        return 0
+        return 0, 0
     articles = payload.get("articles")
-    return len(articles) if isinstance(articles, list) else 0
+    article_count = len(articles) if isinstance(articles, list) else 0
+    try:
+        history_days = int(payload.get("history_days_requested") or 0)
+    except (TypeError, ValueError):
+        history_days = 0
+    return article_count, history_days
 
 
 def target_rows(
@@ -24,9 +30,10 @@ def target_rows(
     attempts: dict[str, Any],
     batch_size: int,
 ) -> list[dict[str, Any]]:
-    """Prioritize missing coverage, then deepen thin news archives, then refresh stale rows."""
+    """Prioritize missing coverage, archive migration, thin news archives, then stale refreshes."""
     missing_news: list[dict[str, Any]] = []
     missing_history: list[dict[str, Any]] = []
+    archive_migration: list[dict[str, Any]] = []
     shallow_news: list[dict[str, Any]] = []
     stale: list[dict[str, Any]] = []
     now = datetime.now(timezone.utc)
@@ -45,7 +52,12 @@ def target_rows(
         if not history_ok:
             missing_history.append(company)
             continue
-        if article_count(news_path) < NEWS_DEPTH_TARGET:
+
+        count, history_days_requested = news_metadata(news_path)
+        if history_days_requested < NEWS_HISTORY_DAYS_TARGET:
+            archive_migration.append(company)
+            continue
+        if count < NEWS_DEPTH_TARGET:
             shallow_news.append(company)
             continue
 
@@ -58,7 +70,7 @@ def target_rows(
         if last_dt is None or now - last_dt >= timedelta(days=7):
             stale.append(company)
 
-    ordered = missing_news + missing_history + shallow_news + stale
+    ordered = missing_news + missing_history + archive_migration + shallow_news + stale
     return ordered[: max(1, batch_size)]
 
 
