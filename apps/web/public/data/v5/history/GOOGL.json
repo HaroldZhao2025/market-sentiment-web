@@ -2,9 +2,9 @@
   "schema_version": 2,
   "symbol": "GOOGL",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-08-15T22:40:54.962047+00:00",
+  "updated_at_utc": "2026-08-16T04:36:56.991123+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
-  "sentiment_source": "Scored retained free-public news; missing days remain missing",
+  "sentiment_source": "Scored retained free-public news including Finnhub when configured; missing days remain missing",
   "date": [
     "2024-08-15",
     "2024-08-16",
@@ -1507,12 +1507,12 @@
     null,
     null,
     null,
-    null,
-    null,
-    null,
-    null,
-    0.193415,
-    0.334613
+    0.870649,
+    0.232819,
+    0.084887,
+    0.280444,
+    0.256018,
+    0.328661
   ],
   "sentiment_observed": [
     false,
@@ -2010,10 +2010,10 @@
     false,
     false,
     false,
-    false,
-    false,
-    false,
-    false,
+    true,
+    true,
+    true,
+    true,
     true,
     true
   ]
