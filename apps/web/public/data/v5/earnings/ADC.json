@@ -1,999 +1,194 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ADC",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-30T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-agree-realty-co-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 75,
-        "scored_turn_count": 75,
-        "overall_sentiment": 0.280942,
-        "prepared_sentiment": -0.032423,
-        "qa_sentiment": 0.387262,
-        "qa_tone_shift": 0.419684,
-        "uncertainty_turn_rate": 0.106667,
-        "forward_looking_turn_rate": 0.213333,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 10,
-            "sentiment": 0.135874
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 9,
-            "sentiment": 0.144693
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 9,
-            "sentiment": -0.07309
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 9,
-            "sentiment": -0.022495
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 3,
-            "sentiment": 0.113595
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 2,
-            "sentiment": -0.128762
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.911403,
-          "word_count": 108,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Reuben Treatman",
-          "role": "Senior Director of Corporate Finance at Agree Realty",
-          "section": "prepared",
-          "sentiment": 0.87991,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Reuben Treatman",
-          "role": "Senior Director of Corporate Finance at Agree Realty",
-          "section": "prepared",
-          "sentiment": 0.882155,
-          "word_count": 73,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.917558,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.903003,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.784876,
-          "word_count": 132,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.493391,
-          "word_count": 137,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.791489,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.674671,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.868094,
-          "word_count": 127,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.02052,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.906432,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.918264,
-          "word_count": 116,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.162697,
-          "word_count": 141,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.529167,
-          "word_count": 146,
-          "topic_hits": [
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.786692,
-          "word_count": 146,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 3,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.878106,
-          "word_count": 149,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.48869,
-          "word_count": 70,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.873548,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.912868,
-          "word_count": 101,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.067667,
-          "word_count": 56,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.666985,
-          "word_count": 87,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.893465,
-          "word_count": 65,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.629219,
-          "word_count": 102,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.570358,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.901682,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.866609,
-          "word_count": 39,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.197924,
-          "word_count": 109,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.63534,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.75487,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.48715,
-          "word_count": 103,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.465778,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905544,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.490326,
-          "word_count": 47,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.6544,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.877886,
-          "word_count": 57,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.321111,
-          "word_count": 67,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.065691,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.604137,
-          "word_count": 119,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911268,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at Evercore",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.709456,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.094229,
-          "word_count": 115,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 42,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.122185,
-          "word_count": 46,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at Evercore",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.49839,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.901555,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.1623,
-          "word_count": 53,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.833129,
-          "word_count": 82,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.793653,
-          "word_count": 49,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 48,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.124205,
-          "word_count": 127,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.288178,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909874,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Analyst at BMO",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.829966,
-          "word_count": 40,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.772178,
-          "word_count": 112,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.356224,
-          "word_count": 66,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Analyst at BMO",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.831233,
-          "word_count": 78,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.15245,
-          "word_count": 112,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.351466,
-          "word_count": 74,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905458,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Analyst at Huntington",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.308556,
-          "word_count": 74,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.452866,
-          "word_count": 144,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.318229,
-          "word_count": 66,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "Analyst at Huntington",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.885274,
-          "word_count": 44,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "CFO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.69349,
-          "word_count": 87,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at Huntington",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.572459,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.562174,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908684,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.714729,
-          "word_count": 57,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.463111,
-          "word_count": 139,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896049,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 69,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.765669,
-          "word_count": 66,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.413889,
-          "word_count": 130,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.548906,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.91433,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "President and CEO at Agree Realty",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.091664,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.817106,
-          "word_count": 897,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 6569,
-      "transcript_text_redistributed": false
+      "date": "2026-10-20T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-30T16:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.47,
+      "surprise_pct": -1.54
+    },
+    {
+      "date": "2026-04-21T16:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.49,
+      "surprise_pct": 4.36
+    },
+    {
+      "date": "2026-02-10T16:00:00-05:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.47,
+      "surprise_pct": -0.14
+    },
+    {
+      "date": "2025-10-21T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.47,
+      "surprise_pct": 2.46
+    },
+    {
+      "date": "2025-07-31T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.46,
+      "surprise_pct": -0.08
+    },
+    {
+      "date": "2025-04-22T16:00:00-04:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.46,
+      "surprise_pct": 8.04
+    },
+    {
+      "date": "2025-02-11T16:00:00-05:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.41,
+      "surprise_pct": -6.51
+    },
+    {
+      "date": "2024-10-22T16:00:00-04:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.4,
+      "surprise_pct": -7.15
+    },
+    {
+      "date": "2024-07-23T16:00:00-04:00",
+      "eps_estimate": 0.45,
+      "reported_eps": 0.45,
+      "surprise_pct": 1.03
+    },
+    {
+      "date": "2024-04-23T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.47,
+      "surprise_pct": 2.8
+    },
+    {
+      "date": "2024-02-13T16:00:00-05:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.47,
+      "surprise_pct": 2.29
+    },
+    {
+      "date": "2023-10-24T16:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.41,
+      "surprise_pct": -2.38
+    },
+    {
+      "date": "2023-08-01T16:00:00-04:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.42,
+      "surprise_pct": -3.37
+    },
+    {
+      "date": "2023-05-04T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.44,
+      "surprise_pct": -4.35
+    },
+    {
+      "date": "2023-02-14T16:00:00-05:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.44,
+      "surprise_pct": -0.23
+    },
+    {
+      "date": "2022-11-01T16:00:00-04:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.43,
+      "surprise_pct": -2.05
+    },
+    {
+      "date": "2022-08-02T16:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.45,
+      "surprise_pct": -3.93
+    },
+    {
+      "date": "2022-05-03T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.45,
+      "surprise_pct": -1.37
+    },
+    {
+      "date": "2022-02-22T16:00:00-05:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.44,
+      "surprise_pct": 4.33
+    },
+    {
+      "date": "2021-11-01T16:00:00-04:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.47,
+      "surprise_pct": 9.22
+    },
+    {
+      "date": "2021-07-26T16:00:00-04:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.24,
+      "surprise_pct": -45.22
+    },
+    {
+      "date": "2021-05-03T16:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.43,
+      "surprise_pct": 2.33
+    },
+    {
+      "date": "2021-02-18T16:00:00-05:00",
+      "eps_estimate": 0.36,
+      "reported_eps": 0.42,
+      "surprise_pct": 15.53
+    },
+    {
+      "date": "2020-10-19T16:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.42,
+      "surprise_pct": 3.51
+    }
+  ],
+  "calls": [],
+  "call_links": [
+    {
+      "title": "ADC Therapeutics S.A. Q2 2026 Earnings Call Summary - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPVHJKS1RHS1pyVlJ4Zm90UFo1a0hMUi1oUXYwR3A4bTJwUkE0NUNTSjdmamo1WG95Ymk1dk5jVDc3VkpEa29taDhFcWdaaDE0eFhnbWxjdDN3VjJ3bWFkY2JPdExqbkFqOFpHdGd0bWFSbkR5YVA4M1UtdjBnd0pQLVBQWmQ4N1dYWUlpS0FQNFladXpveG9sMkF3?oc=5",
+      "ts": "2026-08-14T00:25:00+00:00",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "ADC Therapeutics Q2 Earnings Call Highlights - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPV3EwZDA2UVVzU2xUdFhqakMzYW1OY2g4bk5RTURfRWU0QVBkNS1FZzZRQ0swRVdRMThWOGlQTVgwdmRTUWRZUmV2NFUxREdnbkRtRldsN3ZsUjE5eUNTOXd0enVqR1lqd3F4c09NNlkyanhBRlRObGR3NUNwWXZjUGVGa1g2eVZyX2hRZFVKeEc0aFhtLWFjXzZB?oc=5",
+      "ts": "2026-08-13T20:04:24+00:00",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "ADC Therapeutics Q2 Earnings Call Highlights - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPeEVqUmJQaDA0NXRiUHRSRnB4bzhhZjNZNGNja2QyV2F5VFRhTVA5Wm8zZjhRWFRmQWMtb1pZUGJfajEwQUUyUUdNNVNiVllLTVdhVFBKLU5YOEtESi1tazhvb1B1VFQ3RUk2MllFU3NaVjhsQmF6V3dpV1Vwa3FIbDRxRGVMOWJnaE1wbEZkTFhEN3hnak9McF9GWFF1d01IRlo5bndiV0s?oc=5",
+      "ts": "2026-08-13T20:04:24+00:00",
+      "source": "TradingView",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "Earnings call transcript: ADC Therapeutics beats Q2 2026 estimates but shares fall - Investing.com",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNV2J4Slk4WUdIX013X3pnVk9MQVJOengwQ1JVY3A3SzJoNjhjNDZTckZLeVE1LTczbTFPRDVKS0xMTXdpNlpUZHVvV1N6WGpRTzVDcEcxazFZWW1hM3RRbUtHcl9XSUdtTl9OSGdiT1MwRnFvM3BVSjdBUmVyVE1fNEpRMXVVS1hiMFdHM3RQeHU3eXozMVFocVc1UUJJRHBNY3RVclBCcExHeFdCLUNxeHAyVkpsNk5UX2tCZHhQRUFoU3JHbVpISFlxMDZkckIwbEZr?oc=5",
+      "ts": "2026-08-13T13:21:42+00:00",
+      "source": "Investing.com",
+      "provider": "google_news_rss"
     }
   ],
   "filing_fallback": [],
-  "call_links": [
-    {
-      "title": "Agree Realty Corp (ADC) (Q2 2026) Earnings Call Highlights: Record Investment Volume and Raised ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/agree-realty-corp-adc-q2-210411394.html",
-      "ts": "2026-07-31T21:04:11+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Agree Realty Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/agree-realty-q2-earnings-call-highlights-2026-07-31/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-07-31T15:04:29+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ADC Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/adc/transcripts/652925-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-31T00:00:00+00:00"
-    },
-    {
-      "title": "ADC Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/adc/transcripts/555209-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-22T00:00:00+00:00"
-    },
-    {
-      "title": "ADC Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/adc/transcripts/401750-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-11T00:00:00+00:00"
-    },
-    {
-      "title": "ADC Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-agree-realty-co-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-30T00:00:00+00:00"
-    }
-  ],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:04:35.721668+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

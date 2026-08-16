@@ -1,1597 +1,201 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AEIS",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-03T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-3-advanced-energy-industries-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 116,
-        "scored_turn_count": 116,
-        "overall_sentiment": 0.208888,
-        "prepared_sentiment": -0.544412,
-        "qa_sentiment": 0.356442,
-        "qa_tone_shift": 0.900854,
-        "uncertainty_turn_rate": 0.068966,
-        "forward_looking_turn_rate": 0.301724,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 58,
-            "sentiment": -0.030788
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 29,
-            "sentiment": -0.186549
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 19,
-            "sentiment": -0.273989
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 7,
-            "sentiment": -0.053004
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 6,
-            "sentiment": -0.384789
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 2,
-            "sentiment": -0.492075
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.891009,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Edwin Mok",
-          "role": "SVP of Strategic Markets and Investor Relations at Advanced Energy",
-          "section": "prepared",
-          "sentiment": 0.889989,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Edwin Mok",
-          "role": "SVP of Strategic Markets and Investor Relations at Advanced Energy",
-          "section": "prepared",
-          "sentiment": 0.902082,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.929246,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.806231,
-          "word_count": 152,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.830217,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.673777,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.858045,
-          "word_count": 151,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.902529,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.917354,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.660885,
-          "word_count": 56,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.936238,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 12,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.07092,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 13,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.924248,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.934544,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.933335,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 16,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.91323,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 17,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.929009,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 18,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.807106,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 19,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913729,
-          "word_count": 90,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.64052,
-          "word_count": 65,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.757487,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.306078,
-          "word_count": 30,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.347845,
-          "word_count": 83,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.657081,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.500611,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.903966,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.827673,
-          "word_count": 76,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.636864,
-          "word_count": 121,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.837491,
-          "word_count": 54,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.648723,
-          "word_count": 123,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.563286,
-          "word_count": 38,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.865129,
-          "word_count": 47,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.064203,
-          "word_count": 73,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.183128,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 35,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.905264,
-          "word_count": 66,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 36,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915353,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.350487,
-          "word_count": 99,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.899744,
-          "word_count": 124,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.743581,
-          "word_count": 86,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 40,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.760297,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.860966,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.577378,
-          "word_count": 128,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.446915,
-          "word_count": 40,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 44,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.618168,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.901304,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.764195,
-          "word_count": 68,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.666911,
-          "word_count": 87,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.801418,
-          "word_count": 70,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.801972,
-          "word_count": 79,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909711,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.801761,
-          "word_count": 63,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.138449,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.849368,
-          "word_count": 35,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.835388,
-          "word_count": 67,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.25101,
-          "word_count": 43,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.721384,
-          "word_count": 30,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.851288,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 58,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.728682,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.528559,
-          "word_count": 13,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915361,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "Analyst at SIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.746906,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.802765,
-          "word_count": 68,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at SIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.349151,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.04158,
-          "word_count": 35,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Analyst at SIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.173075,
-          "word_count": 34,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.152538,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.163739,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Analyst at SIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.073388,
-          "word_count": 114,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.841035,
-          "word_count": 44,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "Analyst at SIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.47872,
-          "word_count": 17,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.370166,
-          "word_count": 34,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 72,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.753156,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Analyst at SIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.858516,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913983,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Analyst at Needham & Company",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.724159,
-          "word_count": 52,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 76,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.744096,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 77,
-          "speaker": "Analyst at Needham & Company",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.762377,
-          "word_count": 50,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 78,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.580447,
-          "word_count": 109,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.729488,
-          "word_count": 103,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 80,
-          "speaker": "Analyst at Needham & Company",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.477381,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905228,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 82,
-          "speaker": "Analyst at Seaport Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736713,
-          "word_count": 116,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.753143,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 84,
-          "speaker": "Analyst at Seaport Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.746319,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 85,
-          "speaker": "Analyst at Seaport Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.833633,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 86,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.216481,
-          "word_count": 112,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 87,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.837185,
-          "word_count": 118,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 88,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.917423,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 89,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.498744,
-          "word_count": 97,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 90,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.635927,
-          "word_count": 118,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 91,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.577719,
-          "word_count": 28,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 92,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.600473,
-          "word_count": 56,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 93,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.032572,
-          "word_count": 146,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 94,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.826079,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 95,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905195,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 96,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.13341,
-          "word_count": 128,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 97,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.110232,
-          "word_count": 128,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 98,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.703505,
-          "word_count": 37,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 99,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.564412,
-          "word_count": 65,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 100,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.231593,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 101,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.921357,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 102,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.918455,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 103,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.842104,
-          "word_count": 53,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 104,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.154461,
-          "word_count": 120,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 105,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.719535,
-          "word_count": 48,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 106,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.83585,
-          "word_count": 124,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 107,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.918514,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 108,
-          "speaker": "Analyst at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.863471,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 109,
-          "speaker": "Analyst at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.498264,
-          "word_count": 52,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 110,
-          "speaker": "President and CEO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.810649,
-          "word_count": 111,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 111,
-          "speaker": "Analyst at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.672539,
-          "word_count": 64,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 112,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.598949,
-          "word_count": 132,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 113,
-          "speaker": "EVP and CFO at Advanced Energy",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.751447,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 114,
-          "speaker": "Analyst at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.516331,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 115,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.716509,
-          "word_count": 913,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 9890,
-      "transcript_text_redistributed": false
+      "date": "2026-11-03T15:00:00-05:00",
+      "eps_estimate": 3.04,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-03T16:00:00-04:00",
+      "eps_estimate": 2.21,
+      "reported_eps": 2.74,
+      "surprise_pct": 23.8
+    },
+    {
+      "date": "2026-05-04T16:00:00-04:00",
+      "eps_estimate": 1.98,
+      "reported_eps": 2.09,
+      "surprise_pct": 5.57
+    },
+    {
+      "date": "2026-02-10T16:00:00-05:00",
+      "eps_estimate": 1.78,
+      "reported_eps": 1.94,
+      "surprise_pct": 8.79
+    },
+    {
+      "date": "2025-11-04T16:00:00-05:00",
+      "eps_estimate": 1.47,
+      "reported_eps": 1.74,
+      "surprise_pct": 18.53
+    },
+    {
+      "date": "2025-08-05T16:00:00-04:00",
+      "eps_estimate": 1.31,
+      "reported_eps": 1.5,
+      "surprise_pct": 14.72
+    },
+    {
+      "date": "2025-04-30T16:00:00-04:00",
+      "eps_estimate": 1.06,
+      "reported_eps": 1.23,
+      "surprise_pct": 16.1
+    },
+    {
+      "date": "2025-02-12T16:00:00-05:00",
+      "eps_estimate": 1.1,
+      "reported_eps": 1.3,
+      "surprise_pct": 18.01
+    },
+    {
+      "date": "2024-10-30T16:00:00-04:00",
+      "eps_estimate": 0.91,
+      "reported_eps": 0.98,
+      "surprise_pct": 8.1
+    },
+    {
+      "date": "2024-07-30T16:00:00-04:00",
+      "eps_estimate": 0.71,
+      "reported_eps": 0.85,
+      "surprise_pct": 19.21
+    },
+    {
+      "date": "2024-05-01T16:00:00-04:00",
+      "eps_estimate": 0.68,
+      "reported_eps": 0.58,
+      "surprise_pct": -14.82
+    },
+    {
+      "date": "2024-02-06T16:00:00-05:00",
+      "eps_estimate": 1.16,
+      "reported_eps": 1.24,
+      "surprise_pct": 6.68
+    },
+    {
+      "date": "2023-10-31T16:00:00-04:00",
+      "eps_estimate": 1.14,
+      "reported_eps": 1.28,
+      "surprise_pct": 12.26
+    },
+    {
+      "date": "2023-08-03T16:00:00-04:00",
+      "eps_estimate": 1.05,
+      "reported_eps": 1.11,
+      "surprise_pct": 5.79
+    },
+    {
+      "date": "2023-05-03T16:00:00-04:00",
+      "eps_estimate": 1.14,
+      "reported_eps": 1.24,
+      "surprise_pct": 9.04
+    },
+    {
+      "date": "2023-02-08T16:00:00-05:00",
+      "eps_estimate": 1.6,
+      "reported_eps": 1.7,
+      "surprise_pct": 6.57
+    },
+    {
+      "date": "2022-11-01T16:00:00-04:00",
+      "eps_estimate": 1.38,
+      "reported_eps": 2.12,
+      "surprise_pct": 53.14
+    },
+    {
+      "date": "2022-08-03T16:00:00-04:00",
+      "eps_estimate": 1.11,
+      "reported_eps": 1.44,
+      "surprise_pct": 29.77
+    },
+    {
+      "date": "2022-05-04T16:00:00-04:00",
+      "eps_estimate": 0.95,
+      "reported_eps": 1.24,
+      "surprise_pct": 30.3
+    },
+    {
+      "date": "2022-02-09T16:00:00-05:00",
+      "eps_estimate": 0.94,
+      "reported_eps": 1.36,
+      "surprise_pct": 44.04
+    },
+    {
+      "date": "2021-11-08T16:00:00-05:00",
+      "eps_estimate": 0.82,
+      "reported_eps": 0.89,
+      "surprise_pct": 8.35
+    },
+    {
+      "date": "2021-08-04T07:00:00-04:00",
+      "eps_estimate": 1.27,
+      "reported_eps": 1.25,
+      "surprise_pct": -1.4
+    },
+    {
+      "date": "2021-05-05T07:00:00-04:00",
+      "eps_estimate": 1.26,
+      "reported_eps": 1.29,
+      "surprise_pct": 2.12
+    },
+    {
+      "date": "2021-02-10T07:00:00-05:00",
+      "eps_estimate": 1.35,
+      "reported_eps": 1.49,
+      "surprise_pct": 10.05
+    },
+    {
+      "date": "2020-11-05T08:00:00-05:00",
+      "eps_estimate": 1.16,
+      "reported_eps": 1.66,
+      "surprise_pct": 43.41
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
     {
       "title": "5 Must-Read Analyst Questions From Advanced Energy’s Q2 Earnings Call",
       "url": "https://finance.yahoo.com/markets/stocks/articles/5-must-read-analyst-questions-212522210.html",
       "ts": "2026-08-11T21:25:22+00:00",
       "source": "StockStory",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "5 Must-Read Analyst Questions From Advanced Energy’s Q2 Earnings Call - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQd1ZPOGZnTGkzbWJMRkJnWEl0UlVvc2V3dURoS04yVlMwVWc0Ym5CUGZwcEZqTm14eVV1WE11QWNIYm9ibTVFbDRMc1ZzVUJvLTNxSXVIYmpDTDg1ZE5PUVB0WE42bDV3ZFR5YjlwZzNlSnRrUkJZQ01NbjJOcmk4bzJiUEsybFhRU3lxVjdvOUtrODA5NnJBRktR?oc=5",
+      "ts": "2026-08-11T21:25:22+00:00",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss"
     },
     {
       "title": "Advanced Energy (AEIS) Q2 2026 Earnings Call Transcript",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/08/10/advanced-energy-aeis-q2-2026-earnings-call-transcript/",
       "ts": "2026-08-11T01:32:54+00:00",
       "source": "Motley Fool",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
     },
     {
-      "title": "Advanced Energy Q2 Earnings Call Signals Broader Growth Into 2027",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/advanced-energy-q2-earnings-call-140000767.html",
-      "ts": "2026-08-04T14:00:00+00:00",
-      "source": "Zacks",
-      "provider": "yfinance"
+      "title": "5 Must-Read Analyst Questions From Advanced Energy’s Q2 Earnings Call - StockStory",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPLTQ4WVpOTGdFMGxfbWZ2Um5sc2ZibDV4VEd2N1hDOW8wQXBDaFdzdXFIZ2N6U05rWjl2bTFIWXZuUzhQd0JTMmZYUmk3WTZEZGFjemN6bll5YWZOM19DRnh1cDF6dVpYRjVYQWN6TmlhUndqY0dSVTBqVUxyYTVmcS16RTFxb2MwUjYwSVRwUkwxZ2NlcFkwbWJUbG1LMnZLenVqV0NCNGZfVDgxdWZZMllUZG14ZF9Fb1BOSFJ1V1YwbTJHUTRWVHpoWE8?oc=5",
+      "ts": "2026-08-10T07:43:42+00:00",
+      "source": "StockStory",
+      "provider": "google_news_rss"
     },
     {
-      "title": "Advanced Energy Industries Inc (AEIS) (Q2 2026) Earnings Call Highlights: Record Revenue and ...",
-      "url": "https://finance.yahoo.com/energy/articles/advanced-energy-industries-inc-aeis-050813378.html",
-      "ts": "2026-08-04T05:08:13+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Advanced Energy Industries Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/advanced-energy-industries-q2-earnings-call-highlights-2026-08-03/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-03T22:03:48+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AEIS Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/aeis/transcripts/660299-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-03T00:00:00+00:00"
-    },
-    {
-      "title": "AEIS Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/aeis/transcripts/554659-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-04T00:00:00+00:00"
-    },
-    {
-      "title": "AEIS Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/aeis/transcripts/399840-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-10T00:00:00+00:00"
-    },
-    {
-      "title": "AEIS Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-advanced-energy-industries-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-03T00:00:00+00:00"
+      "title": "5 Must-Read Analyst Questions From Advanced Energy’s Q2 Earnings Call - The Chronicle-Journal",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNajhib1ljalAydFJ1ajl5WTd3RmdXcEdmOU5TbHRibk1TS2hlb2w5WlBNaUFRY1BHd2hmT21MenpsaE5JcDlvc2tHNmxwSjc2bVJxNl9fYVNWRVhwRnlhSmstdm83dVB3QzQzcFFXc2ZLZkxwM1FmYmQzd0dISE9IQTJIR1NYOFNlZ1ladWhtN0dHdFV6ak13TG40QXdXTTZHUFpuT2o1Sy01aE85ZGJfZEVRWVktQ2ViYlAtb0UtT0VrMWw0N2wtUGl6bGV4SFgwY1QwTk1OY2Uwd1l3UkhTQWFzTWw?oc=5",
+      "ts": "2026-08-10T05:35:00+00:00",
+      "source": "The Chronicle-Journal",
+      "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:07:47.589292+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

@@ -1,798 +1,165 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AGX",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-06-04T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-6-4-argan-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 56,
-        "scored_turn_count": 56,
-        "overall_sentiment": 0.22781,
-        "prepared_sentiment": -0.137925,
-        "qa_sentiment": 0.447251,
-        "qa_tone_shift": 0.585176,
-        "uncertainty_turn_rate": 0.125,
-        "forward_looking_turn_rate": 0.285714,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 17,
-            "sentiment": 0.106655
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 15,
-            "sentiment": -0.036674
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 11,
-            "sentiment": 0.106424
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 7,
-            "sentiment": -0.101559
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 2,
-            "sentiment": -0.722938
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 2,
-            "sentiment": 0.026651
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.911492,
-          "word_count": 95,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "SVP at IMS Investor Relations",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.915958,
-          "word_count": 109,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "SVP at IMS Investor Relations",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.860929,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.938427,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.572417,
-          "word_count": 150,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.221695,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.599144,
-          "word_count": 140,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.315533,
-          "word_count": 132,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.758281,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.158759,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 10,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.652734,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 11,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.182847,
-          "word_count": 113,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.9286,
-          "word_count": 109,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.00143,
-          "word_count": 131,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.00541,
-          "word_count": 56,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.828821,
-          "word_count": 50,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.770455,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.885042,
-          "word_count": 149,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.687594,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.766625,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 20,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.719376,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913287,
-          "word_count": 113,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Analyst at CJS Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.147191,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at CJS Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.753474,
-          "word_count": 94,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.884253,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.788839,
-          "word_count": 130,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.602526,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at CJS Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.84589,
-          "word_count": 129,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.815937,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at CJS Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.517486,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.926316,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.852874,
-          "word_count": 61,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.836221,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.65069,
-          "word_count": 54,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.755106,
-          "word_count": 38,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.725967,
-          "word_count": 124,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.623986,
-          "word_count": 120,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.360395,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914134,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Analyst at Lake Street Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.263793,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at Lake Street Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.728702,
-          "word_count": 59,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.140111,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 42,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.292575,
-          "word_count": 30,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at Lake Street Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.718322,
-          "word_count": 71,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.501695,
-          "word_count": 92,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 45,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.86031,
-          "word_count": 95,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Analyst at Lake Street Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.892215,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.907354,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.824826,
-          "word_count": 72,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.556009,
-          "word_count": 90,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.707825,
-          "word_count": 118,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 51,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.084449,
-          "word_count": 47,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.876203,
-          "word_count": 76,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 53,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910269,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "CEO at Argan Inc",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.434,
-          "word_count": 30,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.823757,
-          "word_count": 911,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 5745,
-      "transcript_text_redistributed": false
+      "date": "2026-09-03T16:00:00-04:00",
+      "eps_estimate": 2.69,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-06-04T16:00:00-04:00",
+      "eps_estimate": 2.33,
+      "reported_eps": 3.24,
+      "surprise_pct": 38.87
+    },
+    {
+      "date": "2026-03-26T16:00:00-04:00",
+      "eps_estimate": 1.98,
+      "reported_eps": 3.47,
+      "surprise_pct": 75.47
+    },
+    {
+      "date": "2025-12-04T16:00:00-05:00",
+      "eps_estimate": 2.1,
+      "reported_eps": 2.17,
+      "surprise_pct": 3.51
+    },
+    {
+      "date": "2025-09-04T16:00:00-04:00",
+      "eps_estimate": 1.64,
+      "reported_eps": 2.5,
+      "surprise_pct": 52.44
+    },
+    {
+      "date": "2025-06-04T16:00:00-04:00",
+      "eps_estimate": 1.09,
+      "reported_eps": 1.6,
+      "surprise_pct": 46.79
+    },
+    {
+      "date": "2025-03-27T16:00:00-04:00",
+      "eps_estimate": 1.15,
+      "reported_eps": 2.22,
+      "surprise_pct": 93.89
+    },
+    {
+      "date": "2024-12-05T16:00:00-05:00",
+      "eps_estimate": 1.26,
+      "reported_eps": 2.0,
+      "surprise_pct": 58.73
+    },
+    {
+      "date": "2024-09-05T16:00:00-04:00",
+      "eps_estimate": 0.97,
+      "reported_eps": 1.31,
+      "surprise_pct": 35.05
+    },
+    {
+      "date": "2024-06-06T17:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.58,
+      "surprise_pct": 11.54
+    },
+    {
+      "date": "2024-04-11T16:00:00-04:00",
+      "eps_estimate": 0.75,
+      "reported_eps": 0.89,
+      "surprise_pct": 18.67
+    },
+    {
+      "date": "2023-12-06T16:00:00-05:00",
+      "eps_estimate": 0.86,
+      "reported_eps": 0.4,
+      "surprise_pct": -53.49
+    },
+    {
+      "date": "2023-09-06T16:00:00-04:00",
+      "eps_estimate": 0.75,
+      "reported_eps": 0.94,
+      "surprise_pct": 26.17
+    },
+    {
+      "date": "2023-06-08T16:00:00-04:00",
+      "eps_estimate": 0.37,
+      "reported_eps": 0.16,
+      "surprise_pct": -56.16
+    },
+    {
+      "date": "2023-04-12T16:00:00-04:00",
+      "eps_estimate": 0.71,
+      "reported_eps": 1.0,
+      "surprise_pct": 40.85
+    },
+    {
+      "date": "2022-12-07T16:00:00-05:00",
+      "eps_estimate": 0.74,
+      "reported_eps": 0.56,
+      "surprise_pct": -24.32
+    },
+    {
+      "date": "2022-09-08T16:00:00-04:00",
+      "eps_estimate": 0.39,
+      "reported_eps": 0.73,
+      "surprise_pct": 89.61
+    },
+    {
+      "date": "2022-06-08T16:00:00-04:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.5,
+      "surprise_pct": 51.52
+    },
+    {
+      "date": "2022-04-13T16:00:00-04:00",
+      "eps_estimate": 0.26,
+      "reported_eps": 0.64,
+      "surprise_pct": 152.47
+    },
+    {
+      "date": "2021-12-08T16:00:00-05:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.78,
+      "surprise_pct": 51.46
+    },
+    {
+      "date": "2021-09-07T16:00:00-04:00",
+      "eps_estimate": 0.48,
+      "reported_eps": 0.81,
+      "surprise_pct": 68.75
+    },
+    {
+      "date": "2021-06-08T16:00:00-04:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.67,
+      "surprise_pct": 94.2
+    },
+    {
+      "date": "2021-04-14T16:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.6,
+      "surprise_pct": 27.66
+    },
+    {
+      "date": "2020-12-09T16:00:00-05:00",
+      "eps_estimate": 0.32,
+      "reported_eps": 0.6,
+      "surprise_pct": 90.48
+    },
+    {
+      "date": "2020-09-09T16:00:00-04:00",
+      "eps_estimate": 0.05,
+      "reported_eps": 0.36,
+      "surprise_pct": 700.0
     }
   ],
-  "call_links": [
-    {
-      "title": "AGX Earnings Call: Q1 2027",
-      "url": "https://stockanalysis.com/stocks/agx/transcripts/620533-q1-2027/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-06-04T00:00:00+00:00"
-    },
-    {
-      "title": "AGX Earnings Call: Q4 2026",
-      "url": "https://stockanalysis.com/stocks/agx/transcripts/422209-q4-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-03-26T00:00:00+00:00"
-    },
-    {
-      "title": "AGX Earnings Call: Q3 2026",
-      "url": "https://stockanalysis.com/stocks/agx/transcripts/382936-q3-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2025-12-04T00:00:00+00:00"
-    },
-    {
-      "title": "AGX Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-6-4-argan-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-06-04T00:00:00+00:00"
-    }
-  ],
+  "calls": [],
+  "call_links": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:09:42.147430+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

@@ -1,781 +1,173 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AIN",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-04T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-4-albany-international-corp-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 51,
-        "scored_turn_count": 51,
-        "overall_sentiment": 0.170314,
-        "prepared_sentiment": -0.225129,
-        "qa_sentiment": 0.405108,
-        "qa_tone_shift": 0.630237,
-        "uncertainty_turn_rate": 0.196078,
-        "forward_looking_turn_rate": 0.392157,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 20,
-            "sentiment": -0.278308
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 18,
-            "sentiment": -0.043872
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 9,
-            "sentiment": -0.311693
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 6,
-            "sentiment": -0.132032
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 3,
-            "sentiment": -0.26726
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 1,
-            "sentiment": 0.827641
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.893325,
-          "word_count": 75,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Director of Investor Relations at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.904298,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "Director of Investor Relations at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.921275,
-          "word_count": 54,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.642705,
-          "word_count": 140,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.733528,
-          "word_count": 132,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.895892,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.114431,
-          "word_count": 54,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.222739,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.819767,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 3,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.647474,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.830619,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 11,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.778204,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.908123,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.898194,
-          "word_count": 149,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.357697,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 15,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.937711,
-          "word_count": 140,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.631375,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.005396,
-          "word_count": 141,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 18,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.371605,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 19,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.906186,
-          "word_count": 89,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.507651,
-          "word_count": 68,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.485526,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.501407,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.609549,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.790166,
-          "word_count": 56,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 25,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.714018,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.528593,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.900394,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.865052,
-          "word_count": 15,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.756611,
-          "word_count": 66,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.254602,
-          "word_count": 103,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.819861,
-          "word_count": 63,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.005131,
-          "word_count": 86,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.865146,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915712,
-          "word_count": 40,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.810763,
-          "word_count": 43,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 36,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.297088,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.284781,
-          "word_count": 78,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 38,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.656826,
-          "word_count": 75,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 39,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.716283,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.086553,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 41,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.340277,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914055,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.78141,
-          "word_count": 74,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 44,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.532452,
-          "word_count": 115,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.417381,
-          "word_count": 45,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "EVP and CFO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.473525,
-          "word_count": 72,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.836953,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.923971,
-          "word_count": 51,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "President and CEO at Albany International",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.538374,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.827641,
-          "word_count": 981,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 5165,
-      "transcript_text_redistributed": false
+      "date": "2026-11-04T07:00:00-05:00",
+      "eps_estimate": 0.68,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-04T07:00:00-04:00",
+      "eps_estimate": 0.74,
+      "reported_eps": 0.82,
+      "surprise_pct": 11.55
+    },
+    {
+      "date": "2026-04-30T07:00:00-04:00",
+      "eps_estimate": 0.53,
+      "reported_eps": 0.6,
+      "surprise_pct": 13.92
+    },
+    {
+      "date": "2026-02-24T07:00:00-05:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 0.65,
+      "surprise_pct": -7.39
+    },
+    {
+      "date": "2025-11-05T16:00:00-05:00",
+      "eps_estimate": 0.73,
+      "reported_eps": 0.71,
+      "surprise_pct": -2.63
+    },
+    {
+      "date": "2025-07-30T16:00:00-04:00",
+      "eps_estimate": 0.73,
+      "reported_eps": 0.57,
+      "surprise_pct": -22.39
+    },
+    {
+      "date": "2025-04-30T16:00:00-04:00",
+      "eps_estimate": 0.62,
+      "reported_eps": 0.73,
+      "surprise_pct": 17.41
+    },
+    {
+      "date": "2025-02-26T16:00:00-05:00",
+      "eps_estimate": 0.66,
+      "reported_eps": 0.58,
+      "surprise_pct": -11.98
+    },
+    {
+      "date": "2024-10-30T16:00:00-04:00",
+      "eps_estimate": 0.57,
+      "reported_eps": 0.8,
+      "surprise_pct": 41.05
+    },
+    {
+      "date": "2024-08-06T16:00:00-04:00",
+      "eps_estimate": 0.9,
+      "reported_eps": 0.89,
+      "surprise_pct": -0.64
+    },
+    {
+      "date": "2024-04-29T16:00:00-04:00",
+      "eps_estimate": 0.88,
+      "reported_eps": 0.9,
+      "surprise_pct": 2.04
+    },
+    {
+      "date": "2024-02-26T16:00:00-05:00",
+      "eps_estimate": 0.84,
+      "reported_eps": 1.22,
+      "surprise_pct": 46.11
+    },
+    {
+      "date": "2023-11-06T16:00:00-05:00",
+      "eps_estimate": 0.92,
+      "reported_eps": 1.02,
+      "surprise_pct": 10.47
+    },
+    {
+      "date": "2023-07-26T16:00:00-04:00",
+      "eps_estimate": 0.91,
+      "reported_eps": 0.9,
+      "surprise_pct": -1.42
+    },
+    {
+      "date": "2023-04-25T16:00:00-04:00",
+      "eps_estimate": 0.84,
+      "reported_eps": 0.91,
+      "surprise_pct": 8.77
+    },
+    {
+      "date": "2023-02-13T16:00:00-05:00",
+      "eps_estimate": 0.66,
+      "reported_eps": 0.75,
+      "surprise_pct": 13.75
+    },
+    {
+      "date": "2022-10-24T16:00:00-04:00",
+      "eps_estimate": 0.86,
+      "reported_eps": 1.15,
+      "surprise_pct": 33.86
+    },
+    {
+      "date": "2022-07-25T16:00:00-04:00",
+      "eps_estimate": 0.82,
+      "reported_eps": 1.06,
+      "surprise_pct": 29.21
+    },
+    {
+      "date": "2022-04-25T16:00:00-04:00",
+      "eps_estimate": 0.77,
+      "reported_eps": 0.91,
+      "surprise_pct": 18.74
+    },
+    {
+      "date": "2022-02-15T16:00:00-05:00",
+      "eps_estimate": 0.64,
+      "reported_eps": 0.86,
+      "surprise_pct": 33.76
+    },
+    {
+      "date": "2021-10-25T16:00:00-04:00",
+      "eps_estimate": 0.71,
+      "reported_eps": 0.83,
+      "surprise_pct": 16.9
+    },
+    {
+      "date": "2021-07-26T16:00:00-04:00",
+      "eps_estimate": 0.74,
+      "reported_eps": 1.01,
+      "surprise_pct": 37.26
+    },
+    {
+      "date": "2021-04-26T16:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.87,
+      "surprise_pct": 33.46
+    },
+    {
+      "date": "2021-02-10T16:00:00-05:00",
+      "eps_estimate": 0.68,
+      "reported_eps": 0.89,
+      "surprise_pct": 30.4
+    },
+    {
+      "date": "2020-10-28T16:00:00-04:00",
+      "eps_estimate": 0.64,
+      "reported_eps": 0.96,
+      "surprise_pct": 51.13
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From Albany’s Q2 Earnings Call",
       "url": "https://finance.yahoo.com/markets/stocks/articles/top-5-analyst-questions-albany-214922307.html",
       "ts": "2026-08-12T21:49:22+00:00",
       "source": "StockStory",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Albany International Corp. 2026 Q2 - Results - Earnings Call Presentation",
-      "url": "https://finnhub.io/api/news?id=5ddc6f897293611255fa934294c9ed88c2580ebbc901c9e6c45948805f4ea27b",
-      "ts": "2026-08-06T19:15:58+00:00",
-      "source": "SeekingAlpha",
-      "provider": "finnhub"
-    },
-    {
-      "title": "Albany International Corp (AIN) (Q2 2026) Earnings Call Highlights: Record Engineered ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/albany-international-corp-ain-q2-030119859.html",
-      "ts": "2026-08-06T03:01:19+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Albany International (AIN) Q2 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/04/albany-international-ain-q2-2026-earnings-call-transcript/",
-      "ts": "2026-08-05T00:27:23+00:00",
-      "source": "Motley Fool",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Albany International Corp. Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-albany-international-corp-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-08-04T21:01:02+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Albany International Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/albany-international-q2-earnings-call-highlights-2026-08-04/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-04T20:04:02+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AIN Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/ain/transcripts/658114-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-04T00:00:00+00:00"
-    },
-    {
-      "title": "AIN Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/ain/transcripts/566518-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
-      "title": "AIN Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/ain/transcripts/412429-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-24T00:00:00+00:00"
-    },
-    {
-      "title": "AIN Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-albany-international-corp-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-04T00:00:00+00:00"
+      "provider": "yahoo_public"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:10:51.658432+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
