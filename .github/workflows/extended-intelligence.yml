@@ -1,6 +1,11 @@
 name: Refresh Extended Intelligence
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "src/market_sentiment/v5_universe.py"
+      - ".github/workflows/extended-intelligence.yml"
   workflow_dispatch: {}
   schedule:
     - cron: "50 19 * * *"
@@ -33,7 +38,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/hf-home
-          key: phase7-free-finbert-${{ runner.os }}-py311
+          key: phase11-free-finbert-${{ runner.os }}-py311
       - name: Install dependencies
         run: |
           set -euo pipefail
@@ -66,6 +71,7 @@ jobs:
           sp500 = sum(1 for row in rows if row.get("universe") == "S&P 500")
           midcap = sum(1 for row in rows if row.get("universe") == "S&P MidCap 400")
           smallcap = sum(1 for row in rows if row.get("universe") == "S&P SmallCap 600")
+          broad_us = sum(1 for row in rows if row.get("universe") == "Broad U.S. (IWV)")
           news_files = list((root / "news").glob("*.json"))
           earnings_files = list((root / "earnings").glob("*.json"))
           call_links = int(universe.get("earnings_call_link_companies") or 0)
@@ -75,7 +81,7 @@ jobs:
           if universe.get("source_policy") != "free_public_only":
               raise SystemExit("Production source policy is not free_public_only")
           if len(rows) < 1300:
-              raise SystemExit(f"Composite universe too small: {len(rows)}")
+              raise SystemExit(f"Extended universe too small: {len(rows)}")
           if sp500 < 450 or midcap < 300 or smallcap < 450:
               raise SystemExit(f"Universe composition invalid: sp500={sp500} midcap={midcap} smallcap={smallcap}")
           if len(news_files) < 100:
@@ -87,7 +93,7 @@ jobs:
 
           print(
               f"FREE PUBLIC DATA OK | companies={len(rows)} sp500={sp500} midcap={midcap} smallcap={smallcap} "
-              f"news_artifacts={len(news_files)} earnings_artifacts={len(earnings_files)} "
+              f"broad_us_additions={broad_us} news_artifacts={len(news_files)} earnings_artifacts={len(earnings_files)} "
               f"call_link_companies={call_links} structured_call_companies={structured_calls} "
               f"sec_transcript_companies={sec_transcripts}"
           )
