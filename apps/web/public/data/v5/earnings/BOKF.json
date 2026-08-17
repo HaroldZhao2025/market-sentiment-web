@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "BOKF",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -28,6 +30,31 @@
       "ts": "2026-07-21T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "BOKF Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/bokf/transcripts/652346-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-21T00:00:00+00:00"
+    },
+    {
+      "title": "BOKF Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/bokf/transcripts/543758-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-21T00:00:00+00:00"
+    },
+    {
+      "title": "BOKF Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/bokf/transcripts/401242-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-20T00:00:00+00:00"
+    },
+    {
+      "title": "BOKF Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-20-bok-financial-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-20T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:45:24.516784+00:00"
 }

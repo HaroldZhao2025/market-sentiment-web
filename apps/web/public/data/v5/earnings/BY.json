@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "BY",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -42,6 +44,31 @@
       "ts": "2026-07-24T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "BY Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/by/transcripts/654453-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-24T00:00:00+00:00"
+    },
+    {
+      "title": "BY Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/by/transcripts/545614-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-24T00:00:00+00:00"
+    },
+    {
+      "title": "BY Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/by/transcripts/393996-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-23T00:00:00+00:00"
+    },
+    {
+      "title": "BY Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-byline-bancorp-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:48:44.999421+00:00"
 }

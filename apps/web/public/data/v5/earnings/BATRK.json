@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "BATRK",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -35,6 +37,25 @@
       "ts": "2026-07-09T07:00:00+00:00",
       "source": "Business Wire",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "BATRK Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/batrk/transcripts/665946-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "BATRK Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/batrk/transcripts/568539-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-11T00:00:00+00:00"
+    },
+    {
+      "title": "BATRK Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/batrk/transcripts/396960-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:39:09.301523+00:00"
 }

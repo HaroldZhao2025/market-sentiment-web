@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "BMRC",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -42,6 +44,31 @@
       "ts": "2026-07-27T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "BMRC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/bmrc/transcripts/655684-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-27T00:00:00+00:00"
+    },
+    {
+      "title": "BMRC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/bmrc/transcripts/546604-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-27T00:00:00+00:00"
+    },
+    {
+      "title": "BMRC Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/bmrc/transcripts/403477-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-26T00:00:00+00:00"
+    },
+    {
+      "title": "BMRC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-27-bank-of-marin-bancorp-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-27T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:45:15.895101+00:00"
 }

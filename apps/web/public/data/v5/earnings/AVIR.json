@@ -1,11 +1,726 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "AVIR",
   "earnings_history": [],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-12T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-12-atea-pharmaceuticals-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 55,
+        "scored_turn_count": 55,
+        "overall_sentiment": 0.384032,
+        "prepared_sentiment": 0.078787,
+        "qa_sentiment": 0.700583,
+        "qa_tone_shift": 0.621796,
+        "uncertainty_turn_rate": 0.054545,
+        "forward_looking_turn_rate": 0.254545,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": 0.362542
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": -0.114757
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": 0.080209
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.291418
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": 0.168739
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": 0.90045
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.892854,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Jonae Barnes",
+          "role": "SVP of Investor Relations and Corporate Communications at Atea Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.900025,
+          "word_count": 116,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Jonae Barnes",
+          "role": "SVP of Investor Relations and Corporate Communications at Atea Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.875413,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.720674,
+          "word_count": 125,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.715726,
+          "word_count": 136,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.362836,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.822032,
+          "word_count": 128,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.800529,
+          "word_count": 138,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.06526,
+          "word_count": 130,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.216715,
+          "word_count": 125,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.129714,
+          "word_count": 140,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.132418,
+          "word_count": 137,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Chief Development Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.093409,
+          "word_count": 123,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Chief Development Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.126326,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.270036,
+          "word_count": 132,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.81659,
+          "word_count": 119,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.758622,
+          "word_count": 120,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.721448,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.100551,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Chief Development Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.460684,
+          "word_count": 123,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Chief Development Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.898199,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Andrea Corcoran",
+          "role": "CFO and EVP of Legal at Atea Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.540726,
+          "word_count": 137,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Andrea Corcoran",
+          "role": "CFO and EVP of Legal at Atea Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.373553,
+          "word_count": 138,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Andrea Corcoran",
+          "role": "CFO and EVP of Legal at Atea Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.409793,
+          "word_count": 75,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.319221,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.538607,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.777334,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.65206,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91735,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.811777,
+          "word_count": 131,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.820807,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 31,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.769583,
+          "word_count": 127,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.841765,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879248,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.643466,
+          "word_count": 131,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.531111,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890958,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Analyst at Evercore ISI",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.737007,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.873475,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.353442,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Analyst at Evercore ISI",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.740566,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.514261,
+          "word_count": 109,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900072,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "VP of Equity Research at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.510893,
+          "word_count": 107,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885373,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.708311,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "CMO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.477699,
+          "word_count": 129,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.823362,
+          "word_count": 10,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.825287,
+          "word_count": 138,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.74374,
+          "word_count": 134,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Chief Commercial Officer at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.477422,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "VP of Equity Research at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.589498,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887147,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "VP of Equity Research at Morgan Stanley",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.568566,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Founder, Chairman, and CEO at Atea Pharmaceuticals",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90045,
+          "word_count": 848,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 5716,
+      "transcript_text_redistributed": false
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -49,6 +764,31 @@
       "ts": "2026-08-12T22:04:12+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "AVIR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/avir/transcripts/666889-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-12T00:00:00+00:00"
+    },
+    {
+      "title": "AVIR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/avir/transcripts/583863-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-12T00:00:00+00:00"
+    },
+    {
+      "title": "AVIR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/avir/transcripts/412374-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-05T00:00:00+00:00"
+    },
+    {
+      "title": "AVIR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-12-atea-pharmaceuticals-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-12T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:36:37.858437+00:00"
 }

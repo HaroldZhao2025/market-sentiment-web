@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "CCNE",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -21,6 +23,19 @@
       "ts": "2026-08-06T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CCNE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ccne/transcripts/652494-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "CCNE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-cnb-financial-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:51:00.452971+00:00"
 }
