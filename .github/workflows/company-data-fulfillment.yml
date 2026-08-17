@@ -48,7 +48,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/company-data-cache
-          key: phase10-company-data-${{ runner.os }}-py311
+          key: phase11-company-data-${{ runner.os }}-py311
 
       - name: Install free-source data dependencies
         run: |
@@ -86,9 +86,9 @@ jobs:
           python -m market_sentiment.cli.fulfill_company_data_priority \
             --public-root apps/web/public \
             --batch-size "${{ steps.batch.outputs.size }}" \
-            --news-days 730 \
-            --news-max-items 240 \
-            --history-period 2y \
+            --news-days 1095 \
+            --news-max-items 360 \
+            --history-period 5y \
             --workers 16 \
             --score-cache "${RUNNER_TEMP}/company-data-cache/headline_scores.json.gz"
 
