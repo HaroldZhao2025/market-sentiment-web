@@ -6,8 +6,8 @@ from typing import Any
 
 from market_sentiment.cli import fulfill_company_data as base
 
-NEWS_DEPTH_TARGET = 240
-NEWS_HISTORY_DAYS_TARGET = 730
+NEWS_DEPTH_TARGET = 360
+NEWS_HISTORY_DAYS_TARGET = 1095
 
 
 def news_metadata(path: Path) -> tuple[int, int]:
