@@ -35,11 +35,18 @@ function finite(x: unknown): number | null {
 }
 function ma7(arr: number[]) {
   const out: number[] = [];
+  const window: number[] = [];
   let run = 0;
-  for (let i = 0; i < arr.length; i++) {
-    run += arr[i];
-    if (i >= 7) run -= arr[i - 7];
-    out.push(i >= 6 ? run / 7 : Number.NaN);
+  for (const raw of arr) {
+    const value = finite(raw);
+    if (value == null) {
+      out.push(Number.NaN);
+      continue;
+    }
+    window.push(value);
+    run += value;
+    if (window.length > 7) run -= window.shift() as number;
+    out.push(window.length >= 7 ? run / 7 : Number.NaN);
   }
   return out;
 }

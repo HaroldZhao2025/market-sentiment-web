@@ -10,6 +10,7 @@ from .universe import fetch_sp500
 
 SP400_SOURCE = "https://en.wikipedia.org/wiki/List_of_S%26P_400_companies"
 SP600_SOURCE = "https://en.wikipedia.org/wiki/List_of_S%26P_600_companies"
+IWV_HOLDINGS_SOURCE = "https://www.ishares.com/us/products/239714/ishares-russell-3000-etf/latest-holdings.csv"
 
 
 @dataclass(frozen=True)
@@ -22,7 +23,14 @@ class CompanyRecord:
 
 
 def normalize_ticker(value: object) -> str:
-    return str(value or "").strip().upper().replace(".", "-")
+    ticker = str(value or "").strip().upper().replace(".", "-")
+    aliases = {
+        "BRKA": "BRK-A",
+        "BRKB": "BRK-B",
+        "BFA": "BF-A",
+        "BFB": "BF-B",
+    }
+    return aliases.get(ticker, ticker)
 
 
 def parse_constituent_html(html: str, universe: str, minimum_rows: int) -> list[CompanyRecord]:
@@ -60,7 +68,7 @@ def parse_constituent_html(html: str, universe: str, minimum_rows: int) -> list[
 
 
 def fetch_constituents(source: str, universe: str, minimum_rows: int) -> list[CompanyRecord]:
-    response = requests.get(source, headers={"User-Agent": "market-sentiment-web/7.0"}, timeout=30)
+    response = requests.get(source, headers={"User-Agent": "market-sentiment-web/11.0"}, timeout=30)
     response.raise_for_status()
     return parse_constituent_html(response.text, universe=universe, minimum_rows=minimum_rows)
 
@@ -73,8 +81,46 @@ def fetch_sp600() -> list[CompanyRecord]:
     return fetch_constituents(SP600_SOURCE, "S&P SmallCap 600", 450)
 
 
+def parse_iwv_holdings_csv(text: str) -> list[CompanyRecord]:
+    """Parse the official iShares IWV holdings download as a broad-U.S. equity proxy."""
+    lines = text.splitlines()
+    header_index = next((i for i, line in enumerate(lines) if line.startswith("Ticker,Name,Sector,Asset Class,")), None)
+    if header_index is None:
+        raise RuntimeError("Could not locate IWV holdings CSV header")
+    frame = pd.read_csv(StringIO("\n".join(lines[header_index:])))
+    out: list[CompanyRecord] = []
+    for _, row in frame.iterrows():
+        if str(row.get("Asset Class") or "").strip().lower() != "equity":
+            continue
+        if str(row.get("Location") or "").strip().lower() not in {"united states", ""}:
+            continue
+        ticker = normalize_ticker(row.get("Ticker"))
+        if not ticker or ticker in {"-", "NAN"}:
+            continue
+        name = str(row.get("Name") or "").strip()
+        sector = str(row.get("Sector") or "Unknown").strip()
+        out.append(
+            CompanyRecord(
+                ticker=ticker,
+                name=name if name and name.lower() != "nan" else ticker,
+                sector=sector if sector and sector.lower() != "nan" else "Unknown",
+                industry="Unknown",
+                universe="Broad U.S. (IWV)",
+            )
+        )
+    if len(out) < 2200:
+        raise RuntimeError(f"IWV equity holdings unexpectedly small: {len(out)}")
+    return out
+
+
+def fetch_broad_us_iwv() -> list[CompanyRecord]:
+    response = requests.get(IWV_HOLDINGS_SOURCE, headers={"User-Agent": "market-sentiment-web/11.0"}, timeout=45)
+    response.raise_for_status()
+    return parse_iwv_holdings_csv(response.text)
+
+
 def build_extended_universe() -> list[dict[str, str]]:
-    """Build S&P Composite 1500-style coverage without changing SPX core semantics."""
+    """Build S&P Composite 1500 coverage plus a broader U.S. equity layer from official IWV holdings."""
     merged: dict[str, CompanyRecord] = {}
     sp500 = fetch_sp500()
     for _, row in sp500.iterrows():
@@ -88,13 +134,22 @@ def build_extended_universe() -> list[dict[str, str]]:
                 universe="S&P 500",
             )
 
-    # Larger-cap membership wins if a source briefly overlaps during index transitions.
+    # Larger-cap S&P membership wins if sources briefly overlap during index transitions.
     for record in fetch_sp400():
         merged.setdefault(record.ticker, record)
     for record in fetch_sp600():
         merged.setdefault(record.ticker, record)
 
+    # Keep the S&P tier label for overlaps; add only genuinely new broad-U.S. names.
+    try:
+        broad_us = fetch_broad_us_iwv()
+    except Exception as exc:
+        print(f"[UNIVERSE] broad-U.S. IWV expansion unavailable: {exc}")
+        broad_us = []
+    for record in broad_us:
+        merged.setdefault(record.ticker, record)
+
     rows = [asdict(merged[ticker]) for ticker in sorted(merged)]
     if len(rows) < 1300:
-        raise RuntimeError(f"Composite universe unexpectedly small after deduplication: {len(rows)}")
+        raise RuntimeError(f"Extended universe unexpectedly small after deduplication: {len(rows)}")
     return rows
