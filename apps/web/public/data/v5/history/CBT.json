@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "CBT",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-08-17T13:16:35.488185+00:00",
+  "updated_at_utc": "2026-08-17T13:57:15.544664+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained free-public news including Finnhub when configured; missing days remain missing",
   "date": [
-    "2024-08-15",
-    "2024-08-16",
     "2024-08-19",
     "2024-08-20",
     "2024-08-21",
@@ -506,11 +504,10 @@
     "2026-08-11",
     "2026-08-12",
     "2026-08-13",
-    "2026-08-14"
+    "2026-08-14",
+    "2026-08-17"
   ],
   "price": [
-    98.37000274658203,
-    99.26000213623047,
     100.88999938964844,
     98.75,
     101.0199966430664,
@@ -1009,11 +1006,10 @@
     86.9800033569336,
     86.30000305175781,
     86.2699966430664,
-    87.87999725341797
+    87.87999725341797,
+    87.13999938964844
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -1466,12 +1462,12 @@
     -0.506065,
     0.421647,
     0.384241,
-    0.149491,
+    0.149493,
     0.530651,
     0.812846,
     null,
     null,
-    0.156389,
+    0.177896,
     0.559859,
     -0.004533,
     -0.303754,
@@ -1487,11 +1483,11 @@
     null,
     0.366886,
     0.809267,
-    0.362016,
+    0.150118,
     0.89966,
     0.869853,
     0.886004,
-    null,
+    0.883149,
     0.357115,
     null,
     0.904907,
@@ -1510,9 +1506,10 @@
     0.423159,
     -0.041285,
     0.500456,
-    0.733051,
+    0.724488,
     0.038889,
-    0.003418
+    0.003418,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -1818,8 +1815,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -1994,8 +1989,8 @@
     true,
     true,
     true,
-    false,
     true,
+    true,
     false,
     true,
     false,
@@ -2003,6 +1998,7 @@
     true,
     true,
     false,
+    true,
     true,
     true,
     true,
@@ -2015,6 +2011,6 @@
     true,
     true,
     true,
-    true
+    false
   ]
 }

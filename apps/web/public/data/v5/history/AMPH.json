@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "AMPH",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-08-17T13:11:36.388226+00:00",
+  "updated_at_utc": "2026-08-17T13:51:15.174740+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained free-public news including Finnhub when configured; missing days remain missing",
   "date": [
-    "2024-08-15",
-    "2024-08-16",
     "2024-08-19",
     "2024-08-20",
     "2024-08-21",
@@ -503,13 +501,13 @@
     "2026-08-06",
     "2026-08-07",
     "2026-08-10",
+    "2026-08-11",
     "2026-08-12",
     "2026-08-13",
-    "2026-08-14"
+    "2026-08-14",
+    "2026-08-17"
   ],
   "price": [
-    45.31999969482422,
-    44.959999084472656,
     46.790000915527344,
     46.02000045776367,
     46.869998931884766,
@@ -1005,13 +1003,13 @@
     19.809999465942383,
     20.780000686645508,
     20.309999465942383,
+    20.420000076293945,
     19.979999542236328,
     20.18000030517578,
-    20.90999984741211
+    20.90999984741211,
+    20.781299591064453
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -1507,9 +1505,11 @@
     -0.128723,
     -0.160451,
     0.691402,
+    0.130868,
     0.925926,
     0.886864,
-    0.845441
+    0.845441,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -1889,8 +1889,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     true,
@@ -2011,6 +2009,8 @@
     true,
     true,
     true,
-    true
+    true,
+    true,
+    false
   ]
 }

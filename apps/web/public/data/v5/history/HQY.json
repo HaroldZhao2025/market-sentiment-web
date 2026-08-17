@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "HQY",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-08-17T13:29:31.698136+00:00",
+  "updated_at_utc": "2026-08-17T14:12:15.673489+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained free-public news including Finnhub when configured; missing days remain missing",
   "date": [
-    "2024-08-15",
-    "2024-08-16",
     "2024-08-19",
     "2024-08-20",
     "2024-08-21",
@@ -505,11 +503,10 @@
     "2026-08-10",
     "2026-08-12",
     "2026-08-13",
-    "2026-08-14"
+    "2026-08-14",
+    "2026-08-17"
   ],
   "price": [
-    73.58999633789062,
-    74.87999725341797,
     75.72000122070312,
     73.94000244140625,
     74.94000244140625,
@@ -1007,11 +1004,10 @@
     106.79000091552734,
     105.5,
     105.58999633789062,
-    104.7300033569336
+    104.7300033569336,
+    102.38999938964844
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -1157,7 +1153,7 @@
     null,
     null,
     null,
-    null,
+    0.21549,
     0.056686,
     null,
     null,
@@ -1463,7 +1459,7 @@
     null,
     0.425073,
     null,
-    -0.144316,
+    -0.04038,
     0.666845,
     0.604907,
     -0.651098,
@@ -1501,7 +1497,7 @@
     0.908265,
     null,
     0.861341,
-    0.702334,
+    0.702864,
     -0.914129,
     0.244819,
     0.28567,
@@ -1509,7 +1505,8 @@
     0.732082,
     0.911446,
     0.006292,
-    0.251004
+    0.251004,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -1528,8 +1525,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -1659,8 +1654,8 @@
     false,
     false,
     false,
-    false,
     true,
+    true,
     false,
     false,
     false,
@@ -2002,6 +1997,7 @@
     true,
     true,
     false,
+    true,
     true,
     true,
     true,
@@ -2011,6 +2007,6 @@
     true,
     true,
     true,
-    true
+    false
   ]
 }
