@@ -1,0 +1,14 @@
+{
+  "schema_version": 6,
+  "symbol": "ADRO",
+  "earnings_history": [],
+  "calls": [],
+  "call_links": [],
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
+}
