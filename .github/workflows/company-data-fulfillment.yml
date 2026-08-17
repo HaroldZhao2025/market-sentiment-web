@@ -91,6 +91,8 @@ jobs:
             --history-period 5y \
             --workers 16 \
             --score-cache "${RUNNER_TEMP}/company-data-cache/headline_scores.json.gz"
+          python -m market_sentiment.cli.build_multi_index_sentiment \
+            --public-root apps/web/public
 
       - name: Validate company data coverage artifact
         run: |
@@ -101,16 +103,22 @@ jobs:
 
           root = Path("apps/web/public/data/v5")
           coverage = json.loads((root / "company_data_coverage.json").read_text())
+          indices = json.loads((root / "index_sentiment.json").read_text())
           if coverage.get("source_policy") != "free_public_only":
               raise SystemExit("Company data source policy is not free_public_only")
           if int(coverage.get("company_count") or 0) < 1300:
               raise SystemExit("Company data universe unexpectedly small")
           if int(coverage.get("history_ready_count") or 0) <= 0:
               raise SystemExit("No company price history artifacts were produced")
+          codes = {row.get("code") for row in (indices.get("indexes") or [])}
+          required = {"SP500", "SP400", "SP600", "SP1500", "BROAD_US"}
+          if not required.issubset(codes):
+              raise SystemExit(f"Missing multi-index sentiment series: {sorted(required - codes)}")
           print(
               f"COMPANY DATA OK | news={coverage.get('news_ready_count')}/{coverage.get('company_count')} "
               f"history={coverage.get('history_ready_count')}/{coverage.get('company_count')} "
-              f"attempted={coverage.get('attempted_count')}/{coverage.get('company_count')}"
+              f"attempted={coverage.get('attempted_count')}/{coverage.get('company_count')} "
+              f"indexes={len(codes)}"
           )
           PY
 
@@ -124,6 +132,7 @@ jobs:
             apps/web/public/data/v5/history \
             apps/web/public/data/v5/company_data_coverage.json \
             apps/web/public/data/v5/company_data_fulfillment_attempts.json \
+            apps/web/public/data/v5/index_sentiment.json \
             apps/web/public/data/v5/universe.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: fulfill company news and history [skip ci]"
