@@ -23,6 +23,24 @@ def news_metadata(path: Path) -> tuple[int, int]:
     return article_count, history_days
 
 
+def collect_historical_news(ticker: str, company_name: str, days: int, max_items: int) -> list[dict[str, Any]]:
+    """Extend dated public discovery windows to three years while preserving normal deduplication."""
+    now = base.pd.Timestamp.now(tz="UTC")
+    items = base.collect_company_news(ticker, days=min(days, 180), max_items=max_items, company_name=company_name)
+    horizon = min(max(1, days), NEWS_HISTORY_DAYS_TARGET)
+    if horizon > 120:
+        edges = list(range(0, horizon + 1, 120))
+        if not edges or edges[-1] != horizon:
+            edges.append(horizon)
+        for left, right in zip(edges[:-1], edges[1:]):
+            if right <= left:
+                continue
+            end = now - base.pd.Timedelta(days=left)
+            start = now - base.pd.Timedelta(days=right)
+            items.extend(base.google_news_window(ticker, company_name, start, end, count=100))
+    return base.deduplicate_news(items)[: max(1, max_items)]
+
+
 def target_rows(
     companies: list[dict[str, Any]],
     news_dir: Path,
@@ -76,6 +94,7 @@ def target_rows(
 
 def main() -> None:
     base.target_rows = target_rows
+    base.collect_historical_news = collect_historical_news
     base.main()
 
 
