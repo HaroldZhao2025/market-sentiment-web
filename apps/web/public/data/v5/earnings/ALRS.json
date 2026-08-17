@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "ALRS",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -42,6 +44,31 @@
       "ts": "2026-07-30T17:04:23+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ALRS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/alrs/transcripts/658211-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "ALRS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/alrs/transcripts/548587-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "ALRS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/alrs/transcripts/400143-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-29T00:00:00+00:00"
+    },
+    {
+      "title": "ALRS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-alerus-financial-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T18:59:08.463885+00:00"
 }

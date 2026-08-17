@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "AMPX",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -49,6 +51,31 @@
       "ts": "2026-08-05T21:02:51+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "AMPX Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ampx/transcripts/662391-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "AMPX Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ampx/transcripts/583652-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "AMPX Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ampx/transcripts/403377-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-05T00:00:00+00:00"
+    },
+    {
+      "title": "AMPX Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-5-6-amprius-technologies-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-05-06T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:00:29.769818+00:00"
 }

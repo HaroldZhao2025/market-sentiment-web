@@ -1,11 +1,13 @@
 {
-  "schema_version": 5,
+  "schema_version": 8,
   "symbol": "ATKR",
   "earnings_history": [],
   "calls": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only"
+    "source_policy": "free_public_only",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
   },
   "call_links": [
     {
@@ -14,6 +16,31 @@
       "ts": "2026-08-07T19:01:08+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ATKR Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/atkr/transcripts/660531-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-03T00:00:00+00:00"
+    },
+    {
+      "title": "ATKR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/atkr/transcripts/550849-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "ATKR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/atkr/transcripts/421735-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-03T00:00:00+00:00"
+    },
+    {
+      "title": "ATKR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-atkore-international-group-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
-  ]
+  ],
+  "updated_at_utc": "2026-08-17T19:04:31.621904+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ACRS",
   "earnings_history": [
     {
@@ -154,12 +154,28 @@
     }
   ],
   "calls": [],
-  "call_links": [],
+  "call_links": [
+    {
+      "title": "ACRS Earnings Call: Q1 2024",
+      "url": "https://stockanalysis.com/stocks/acrs/transcripts/171731-q1-2024/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2024-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "ACRS Earnings Call: Q1 2023",
+      "url": "https://stockanalysis.com/stocks/acrs/transcripts/56219-q1-2023/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2023-05-08T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 1
+  },
+  "updated_at_utc": "2026-08-17T18:54:45.202254+00:00"
 }
