@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { LanguageToggle } from "./LanguageProvider";
 
-const primary = [["/", "Market"], ["/companies", "Companies"], ["/sp500", "S&P 500"], ["/lab", "Research Lab"]] as const;
+const primary = [["/", "Market"], ["/companies", "Companies"], ["/sp500", "S&P 500"], ["/indices", "Indices"], ["/lab", "Research Lab"]] as const;
 const intelligence = [["/screener", "Screener"], ["/events", "Events"], ["/attribution", "Attribution"]] as const;
 const platform = [["/portfolio", "Portfolio"], ["/research", "Research"], ["/agent", "Agent"], ["/data", "Data"], ["/methodology", "Methodology"]] as const;
 
