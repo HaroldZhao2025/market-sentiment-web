@@ -1,1200 +1,165 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AGNC",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-20T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-20-agnc-investment-corp-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 91,
-        "scored_turn_count": 91,
-        "overall_sentiment": 0.395318,
-        "prepared_sentiment": -0.159184,
-        "qa_sentiment": 0.504759,
-        "qa_tone_shift": 0.663943,
-        "uncertainty_turn_rate": 0.10989,
-        "forward_looking_turn_rate": 0.373626,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 26,
-            "sentiment": 0.220045
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 10,
-            "sentiment": 0.417652
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 10,
-            "sentiment": 0.151087
-          },
-          {
-            "topic": "Demand",
-            "mentions": 9,
-            "sentiment": 0.261819
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 6,
-            "sentiment": -0.119628
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 3,
-            "sentiment": 0.829639
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.880537
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.918057,
-          "word_count": 99,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Investor Relations at AGNC Investment Corp",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.881209,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Investor Relations at AGNC Investment Corp",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.913597,
-          "word_count": 96,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.833328,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 3,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 4,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.91476,
-          "word_count": 119,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": 0.00771,
-          "word_count": 125,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.749935,
-          "word_count": 104,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 7,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.186932,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.759,
-          "word_count": 101,
-          "topic_hits": [],
-          "uncertainty_hits": 3,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "EVP and CFO at AGNC Investment Corp",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.006779,
-          "word_count": 131,
-          "topic_hits": [
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "EVP and CFO at AGNC Investment Corp",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.00626,
-          "word_count": 106,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "EVP and CFO at AGNC Investment Corp",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.275255,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.47633,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.923227,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "prepared",
-          "sentiment": -0.002603,
-          "word_count": 88,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 15,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.920462,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.816178,
-          "word_count": 39,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.540787,
-          "word_count": 119,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.329938,
-          "word_count": 111,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.020785,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": -0.596677,
-          "word_count": 47,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.11085,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.877811,
-          "word_count": 15,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.144524,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.59312,
-          "word_count": 91,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 3,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 25,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.056962,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.201203,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 27,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": -0.079939,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 28,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.683959,
-          "word_count": 54,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.804009,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.704863,
-          "word_count": 63,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.739522,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.827197,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.516464,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.879449,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.664701,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.706781,
-          "word_count": 33,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": -0.788718,
-          "word_count": 122,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": -0.904727,
-          "word_count": 56,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 39,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.691756,
-          "word_count": 20,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.28718,
-          "word_count": 23,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 41,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.443712,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.868633,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.516448,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.874621,
-          "word_count": 5,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 45,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.462068,
-          "word_count": 137,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 46,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.226632,
-          "word_count": 29,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.577717,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904791,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Analyst at JonesTrading",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.609145,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Analyst at JonesTrading",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.725329,
-          "word_count": 74,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.458534,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": -0.451182,
-          "word_count": 73,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Analyst at JonesTrading",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.72717,
-          "word_count": 39,
-          "topic_hits": [
-            "Demand",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.784937,
-          "word_count": 127,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.525429,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Analyst at JonesTrading",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.389412,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.888668,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.719784,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.880084,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.817374,
-          "word_count": 30,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 61,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.485528,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.39515,
-          "word_count": 97,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.52479,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896217,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.715682,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Analyst at Citizens JMP",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.835769,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Analyst at Citizens JMP",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.719158,
-          "word_count": 57,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.780808,
-          "word_count": 117,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.674531,
-          "word_count": 133,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.809396,
-          "word_count": 68,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 71,
-          "speaker": "Analyst at Citizens JMP",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.231595,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.889193,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.865966,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.609036,
-          "word_count": 38,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.510308,
-          "word_count": 94,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 76,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.894558,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.89213,
-          "word_count": 49,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 78,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.669011,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.767855,
-          "word_count": 134,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.667504,
-          "word_count": 138,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.516894,
-          "word_count": 112,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 82,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.747158,
-          "word_count": 144,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.425919,
-          "word_count": 107,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 84,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.691658,
-          "word_count": 99,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 85,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.556231,
-          "word_count": 59,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 86,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.316936,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 87,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": 0.604352,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 88,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.873154,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 89,
-          "speaker": "Peter Federico",
-          "role": "President, CEO, and CIO at AGNC Investment Corp",
-          "section": "qa",
-          "sentiment": -0.685472,
-          "word_count": 34,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 90,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.880537,
-          "word_count": 923,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 6959,
-      "transcript_text_redistributed": false
+      "date": "2026-10-19T16:00:00-04:00",
+      "eps_estimate": 0.38,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-20T16:00:00-04:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.4,
+      "surprise_pct": 4.91
+    },
+    {
+      "date": "2026-04-20T16:00:00-04:00",
+      "eps_estimate": 0.12,
+      "reported_eps": -0.17,
+      "surprise_pct": -242.25
+    },
+    {
+      "date": "2026-01-26T16:00:00-05:00",
+      "eps_estimate": 0.45,
+      "reported_eps": 0.83,
+      "surprise_pct": 85.33
+    },
+    {
+      "date": "2025-10-20T16:00:00-04:00",
+      "eps_estimate": 0.39,
+      "reported_eps": 0.35,
+      "surprise_pct": -9.44
+    },
+    {
+      "date": "2025-07-21T16:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.38,
+      "surprise_pct": -7.43
+    },
+    {
+      "date": "2025-04-21T16:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.44,
+      "surprise_pct": 8.58
+    },
+    {
+      "date": "2025-01-27T16:00:00-05:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.1,
+      "surprise_pct": -75.46
+    },
+    {
+      "date": "2024-10-21T16:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.39,
+      "surprise_pct": -16.2
+    },
+    {
+      "date": "2024-07-22T16:00:00-04:00",
+      "eps_estimate": 0.54,
+      "reported_eps": 0.53,
+      "surprise_pct": -1.65
+    },
+    {
+      "date": "2024-04-22T16:00:00-04:00",
+      "eps_estimate": 0.57,
+      "reported_eps": 0.58,
+      "surprise_pct": 1.3
+    },
+    {
+      "date": "2024-01-22T16:00:00-05:00",
+      "eps_estimate": 0.61,
+      "reported_eps": 0.6,
+      "surprise_pct": -1.32
+    },
+    {
+      "date": "2023-10-30T16:00:00-04:00",
+      "eps_estimate": 0.63,
+      "reported_eps": 0.65,
+      "surprise_pct": 3.54
+    },
+    {
+      "date": "2023-07-24T16:00:00-04:00",
+      "eps_estimate": 0.63,
+      "reported_eps": 0.67,
+      "surprise_pct": 6.97
+    },
+    {
+      "date": "2023-04-24T16:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.7,
+      "surprise_pct": 7.59
+    },
+    {
+      "date": "2023-01-30T16:00:00-05:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.74,
+      "surprise_pct": 13.02
+    },
+    {
+      "date": "2022-10-24T16:00:00-04:00",
+      "eps_estimate": 0.69,
+      "reported_eps": 0.84,
+      "surprise_pct": 21.62
+    },
+    {
+      "date": "2022-07-25T16:00:00-04:00",
+      "eps_estimate": 0.59,
+      "reported_eps": 0.83,
+      "surprise_pct": 41.31
+    },
+    {
+      "date": "2022-05-02T16:00:00-04:00",
+      "eps_estimate": 0.64,
+      "reported_eps": 0.72,
+      "surprise_pct": 12.75
+    },
+    {
+      "date": "2022-01-31T16:00:00-05:00",
+      "eps_estimate": 0.67,
+      "reported_eps": 0.75,
+      "surprise_pct": 11.32
+    },
+    {
+      "date": "2021-10-25T16:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.75,
+      "surprise_pct": 16.17
+    },
+    {
+      "date": "2021-07-26T16:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.76,
+      "surprise_pct": 17.38
+    },
+    {
+      "date": "2021-04-26T16:00:00-04:00",
+      "eps_estimate": 0.63,
+      "reported_eps": 0.76,
+      "surprise_pct": 20.95
+    },
+    {
+      "date": "2021-01-25T16:00:00-05:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.75,
+      "surprise_pct": 14.77
+    },
+    {
+      "date": "2020-10-26T16:00:00-04:00",
+      "eps_estimate": 0.57,
+      "reported_eps": 0.81,
+      "surprise_pct": 42.02
     }
   ],
-  "call_links": [
-    {
-      "title": "AGNC Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/agnc/transcripts/652181-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-21T00:00:00+00:00"
-    },
-    {
-      "title": "AGNC Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/agnc/transcripts/546959-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-21T00:00:00+00:00"
-    },
-    {
-      "title": "AGNC Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/agnc/transcripts/394292-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-01-27T00:00:00+00:00"
-    },
-    {
-      "title": "AGNC Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-20-agnc-investment-corp-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-20T00:00:00+00:00"
-    }
-  ],
+  "calls": [],
+  "call_links": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-17T18:57:24.587815+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
