@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ALLE",
   "earnings_history": [
     {
@@ -153,13 +153,876 @@
       "surprise_pct": 36.39
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-23T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-23-allegion-plc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 60,
+        "scored_turn_count": 60,
+        "overall_sentiment": 0.288438,
+        "prepared_sentiment": -0.190113,
+        "qa_sentiment": 0.462457,
+        "qa_tone_shift": 0.65257,
+        "uncertainty_turn_rate": 0.116667,
+        "forward_looking_turn_rate": 0.416667,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 24,
+            "sentiment": -0.062765
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 24,
+            "sentiment": -0.05406
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 18,
+            "sentiment": -0.108634
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 5,
+            "sentiment": -0.439705
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.324003
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.094302
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.744196
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.912843,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "VP of Investor Relations at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.915701,
+          "word_count": 148,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "VP of Investor Relations at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.924273,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.897504,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.545086,
+          "word_count": 119,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.528461,
+          "word_count": 123,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.666318,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.900865,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.851628,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.193215,
+          "word_count": 149,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.935192,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.006633,
+          "word_count": 149,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.112477,
+          "word_count": 148,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.889414,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.272895,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.809936,
+          "word_count": 95,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909905,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Analyst at Robert W. Baird & Co",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.851202,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.825477,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Analyst at Robert W. Baird & Co",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.620505,
+          "word_count": 59,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.827999,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.034938,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at Robert W. Baird & Co",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.820512,
+          "word_count": 89,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.676692,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.625893,
+          "word_count": 63,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Analyst at Robert W. Baird & Co",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.697394,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913803,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Evercore ISI",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.815257,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Analyst at Evercore ISI",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.5524,
+          "word_count": 84,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.018845,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.038687,
+          "word_count": 22,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Evercore ISI",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.616631,
+          "word_count": 83,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.739671,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Analyst at Evercore ISI",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.071311,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914575,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Analyst at Bank of America",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.798368,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Analyst at Bank of America",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.877419,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.157655,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at Bank of America",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.730793,
+          "word_count": 83,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.700811,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 40,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.671521,
+          "word_count": 39,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918341,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Analyst at VRP",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.759794,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Analyst at VRP",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.856424,
+          "word_count": 57,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.745459,
+          "word_count": 107,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "SVP and CFO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.689932,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Analyst at VRP",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.174416,
+          "word_count": 66,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.37386,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Analyst at VRP",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.294133,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907972,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.756471,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Analyst at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.838407,
+          "word_count": 63,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.71558,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.729298,
+          "word_count": 59,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Analyst at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.730213,
+          "word_count": 35,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.505728,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.806843,
+          "word_count": 14,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Analyst at JPMorgan",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.758432,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911655,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "President and CEO at Allegion",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.744196,
+          "word_count": 958,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 5613,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "ALLE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/alle/transcripts/656029-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-23T00:00:00+00:00"
+    },
+    {
+      "title": "ALLE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/alle/transcripts/558309-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "ALLE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/alle/transcripts/395910-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-17T00:00:00+00:00"
+    },
+    {
+      "title": "ALLE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-allegion-plc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-08-18T20:36:49.927490+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ALRM",
   "earnings_history": [
     {
@@ -153,7 +153,862 @@
       "surprise_pct": 55.83
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-6-alarmcom-holdings-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 66,
+        "scored_turn_count": 66,
+        "overall_sentiment": 0.427733,
+        "prepared_sentiment": -0.148793,
+        "qa_sentiment": 0.612222,
+        "qa_tone_shift": 0.761015,
+        "uncertainty_turn_rate": 0.015152,
+        "forward_looking_turn_rate": 0.151515,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 18,
+            "sentiment": 0.203281
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": -0.054036
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": -0.052261
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": 0.293457
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.368297
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.881983
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.90729,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Matthew Zartman",
+          "role": "VP of Strategic Communications and Investor Relations at Alarm.com",
+          "section": "prepared",
+          "sentiment": 0.908455,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Matthew Zartman",
+          "role": "VP of Strategic Communications and Investor Relations at Alarm.com",
+          "section": "prepared",
+          "sentiment": 0.906936,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.912323,
+          "word_count": 149,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.761814,
+          "word_count": 143,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.61109,
+          "word_count": 142,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.044943,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.69874,
+          "word_count": 119,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.681532,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.93496,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.547063,
+          "word_count": 146,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.864854,
+          "word_count": 124,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.054014,
+          "word_count": 131,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.662351,
+          "word_count": 149,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 14,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.932201,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 15,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.017142,
+          "word_count": 149,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.920003,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Analyst at Barclays",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.84733,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Analyst at Barclays",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.728329,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.606042,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.350791,
+          "word_count": 128,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.188915,
+          "word_count": 36,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at Barclays",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.709078,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.79888,
+          "word_count": 128,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.747815,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Analyst at Barclays",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.514838,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914665,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.750181,
+          "word_count": 106,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.802959,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.292091,
+          "word_count": 138,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.656805,
+          "word_count": 100,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.847745,
+          "word_count": 141,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.857165,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.678018,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.498339,
+          "word_count": 120,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.693053,
+          "word_count": 132,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.58474,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894526,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at Jefferies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.511351,
+          "word_count": 119,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.612782,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.475152,
+          "word_count": 137,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.237421,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Analyst at Jefferies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.674287,
+          "word_count": 88,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.411713,
+          "word_count": 150,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.808951,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Analyst at Jefferies",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.785075,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910182,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.687712,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.855544,
+          "word_count": 131,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.696155,
+          "word_count": 146,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.850831,
+          "word_count": 53,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.55583,
+          "word_count": 121,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.791026,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.59894,
+          "word_count": 135,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.510531,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901635,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Analyst at Maxim Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.519841,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Analyst at Maxim Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.785795,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881983,
+          "word_count": 116,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.7435,
+          "word_count": 123,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.694351,
+          "word_count": 144,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "CEO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.709872,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Analyst at Maxim Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.338178,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "CFO at Alarm.com",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.804238,
+          "word_count": 110,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Analyst at Maxim Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.862956,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.740115,
+          "word_count": 929,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 6981,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Alarm.com Holdings, Inc. Q2 2026 Earnings Call Summary",
@@ -182,13 +1037,40 @@
       "ts": "2026-08-06T20:30:00+00:00",
       "source": "The Globe and Mail",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ALRM Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/alrm/transcripts/662627-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "ALRM Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/alrm/transcripts/560645-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "ALRM Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/alrm/transcripts/401661-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-19T00:00:00+00:00"
+    },
+    {
+      "title": "ALRM Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-alarmcom-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-08-18T20:37:26.029221+00:00"
 }
