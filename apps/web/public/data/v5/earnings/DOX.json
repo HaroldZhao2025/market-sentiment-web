@@ -2,7 +2,108 @@
   "schema_version": 8,
   "symbol": "DOX",
   "earnings_history": [],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-13T22:02:08+00:00",
+      "source": "Benzinga",
+      "source_url": "https://finance.yahoo.com/markets/stocks/articles/amdocs-q2-2026-earnings-call-220208196.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 4,
+        "scored_turn_count": 4,
+        "overall_sentiment": 0.47779,
+        "prepared_sentiment": -0.708034,
+        "qa_sentiment": 0.873064,
+        "qa_tone_shift": 1.581098,
+        "uncertainty_turn_rate": 0.25,
+        "forward_looking_turn_rate": 0.25,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 1,
+            "sentiment": -0.708034
+          },
+          {
+            "topic": "Demand",
+            "mentions": 1,
+            "sentiment": -0.708034
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 1,
+            "sentiment": -0.708034
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.708034
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.708034
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.708034
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Amdocs (NASDAQ",
+          "section": "prepared",
+          "sentiment": -0.708034,
+          "word_count": 4114,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 4,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 1,
+          "speaker": "Disclaimer",
+          "section": "qa",
+          "sentiment": 0.887584,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "UNLOCKED",
+          "section": "qa",
+          "sentiment": 0.816583,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "AMDOCS (DOX)",
+          "section": "qa",
+          "sentiment": 0.915026,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4242,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "DOX Earnings Call: Q3 2026",
@@ -27,13 +128,31 @@
       "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-amdocs-limited-stock/#transcript",
       "source": "MarketBeat",
       "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "Amdocs (DOX) Q3 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/13/amdocs-dox-q3-2026-earnings-call-transcript/",
+      "source": "Motley Fool",
+      "ts": "2026-08-13T12:59:56+00:00"
+    },
+    {
+      "title": "Amdocs (DOX) Q2 2026 Earnings Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/05/13/amdocs-dox-q2-2026-earnings-transcript/",
+      "source": "Motley Fool",
+      "ts": "2026-05-13T22:26:14+00:00"
+    },
+    {
+      "title": "Amdocs Q2 2026 Earnings Call: Complete Transcript",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/amdocs-q2-2026-earnings-call-220208196.html",
+      "source": "Benzinga",
+      "ts": "2026-05-13T22:02:08+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
     "source_policy": "free_public_only",
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
+    "fulfillment_stage": 2
   },
-  "updated_at_utc": "2026-08-17T20:37:46.584887+00:00"
+  "updated_at_utc": "2026-08-18T01:58:06.445274+00:00"
 }
