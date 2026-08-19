@@ -18,37 +18,29 @@ async function readJSON<T = any>(p: string): Promise<T | null> {
   try { return JSON.parse(await fs.readFile(p, "utf8")) as T; } catch { return null; }
 }
 const strArr = (v: unknown): string[] => (Array.isArray(v) ? v.map((x) => String(x ?? "")) : []);
-const priceArr = (v: unknown): number[] => Array.isArray(v) ? v.map((x) => {
+const numArr = (v: unknown): number[] => Array.isArray(v) ? v.map((x) => {
   if (x === null || x === undefined || x === "") return Number.NaN;
   const n = Number(x);
   return Number.isFinite(n) ? n : Number.NaN;
 }) : [];
-const sentimentArr = (v: unknown): number[] => Array.isArray(v) ? v.map((x) => {
-  if (x === null || x === undefined || x === "") return Number.NaN;
-  const n = Number(x);
-  return Number.isFinite(n) ? n : Number.NaN;
-}) : [];
+const boolArr = (value: unknown, length: number): boolean[] | null => Array.isArray(value)
+  ? Array.from({ length }, (_, index) => value[index] === true || value[index] === 1 || value[index] === "1" || value[index] === "true")
+  : null;
 
 function buildSeries(obj: any): SeriesIn | null {
   const date = strArr(obj?.date ?? obj?.dates);
-  const price = priceArr(obj?.price ?? obj?.close ?? obj?.Close);
+  const price = numArr(obj?.price ?? obj?.close ?? obj?.Close);
   if (!date.length || !price.length) return null;
   const n = Math.min(date.length, price.length);
-  const sourceSentiment = sentimentArr(obj?.S ?? obj?.sentiment);
-  const rawSentiment = Array.from({ length: n }, (_, index) => sourceSentiment[index] ?? Number.NaN);
-  const firstObserved = rawSentiment.findIndex((value) => Number.isFinite(value));
-  const sentiment = firstObserved < 0 ? Array(n).fill(Number.NaN) : (() => {
-    let last = Number.NaN;
-    return rawSentiment.map((value) => {
-      if (Number.isFinite(value)) last = value;
-      return last;
-    });
-  })();
-  return {
-    date: date.slice(0, n),
-    price: price.slice(0, n),
-    sentiment,
-  };
+  const sourceSentiment = numArr(obj?.S ?? obj?.sentiment);
+  const observed = boolArr(obj?.sentiment_observed, n);
+  const sentiment = Array.from({ length: n }, (_, index) => {
+    const value = sourceSentiment[index];
+    if (!Number.isFinite(value)) return Number.NaN;
+    if (observed && !observed[index]) return Number.NaN;
+    return value;
+  });
+  return { date: date.slice(0, n), price: price.slice(0, n), sentiment };
 }
 
 function buildNews(obj: any): NewsItem[] {
@@ -67,6 +59,7 @@ function legacyEarnings(symbol: string, raw: any): EarningsArtifact {
     symbol,
     earnings_history: [],
     calls: [],
+    call_links: [],
     filing_fallback: docs.map((doc: any) => ({
       ts: String(doc?.ts ?? ""),
       title: String(doc?.title ?? ""),
@@ -81,7 +74,7 @@ async function loadEarnings(symbol: string): Promise<EarningsArtifact> {
   const current = await readJSON<EarningsArtifact>(path.join(DATA_ROOT, "v5", "earnings", `${symbol}.json`));
   if (current && typeof current === "object") return current;
   const legacy = await readJSON<any>(path.join(DATA_ROOT, "earnings", `${symbol}.json`));
-  return legacy ? legacyEarnings(symbol, legacy) : { schema_version: 6, symbol, earnings_history: [], calls: [], filing_fallback: [] };
+  return legacy ? legacyEarnings(symbol, legacy) : { schema_version: 8, symbol, earnings_history: [], calls: [], call_links: [], filing_fallback: [] };
 }
 
 export async function generateStaticParams() {
@@ -98,24 +91,22 @@ export default async function Page({ params }: { params: { symbol: string } }) {
   const symbol = (params.symbol || "").toUpperCase();
   const companies = await loadUniverse();
   const company = companies.find((row) => String(row.ticker || "").toUpperCase() === symbol);
-  const [obj, rich, extendedHistory, earnings] = await Promise.all([
+  const [core, rich, extendedHistory, earnings] = await Promise.all([
     readJSON<any>(path.join(DATA_ROOT, "ticker", `${symbol}.json`)),
     readJSON<any>(path.join(DATA_ROOT, "v5", "news", `${symbol}.json`)),
     readJSON<any>(path.join(DATA_ROOT, "v5", "history", `${symbol}.json`)),
     loadEarnings(symbol),
   ]);
   const richNews = buildNews(rich);
-  const compact = buildNews(obj);
-  const news = (richNews.length ? richNews : compact).slice(0, 160);
-  const newsTotal = Number(rich?.article_count ?? obj?.news_total ?? obj?.newsTotal ?? obj?.news_count?.total) || news.length;
+  const compactNews = buildNews(core);
+  const news = (richNews.length ? richNews : compactNews).slice(0, 160);
+  const newsTotal = Number(rich?.article_count ?? core?.news_total ?? core?.newsTotal ?? core?.news_count?.total) || news.length;
   const extendedSeries = extendedHistory ? buildSeries(extendedHistory) : null;
-  const legacySeries = obj ? buildSeries(obj) : null;
-  const series = extendedSeries && extendedSeries.date.length > 0 ? extendedSeries : legacySeries;
+  const coreSeries = core ? buildSeries(core) : null;
+  const series = extendedSeries && extendedSeries.date.length > 0 ? extendedSeries : coreSeries;
   const historyDays = series?.date.length ?? 0;
   const callCount = Array.isArray(earnings.calls) ? earnings.calls.length : 0;
-  const callLinks = Array.isArray((earnings as EarningsArtifact & { call_links?: unknown[] }).call_links)
-    ? ((earnings as EarningsArtifact & { call_links?: unknown[] }).call_links?.length ?? 0)
-    : 0;
+  const callLinks = Array.isArray(earnings.call_links) ? earnings.call_links.length : 0;
 
   return (
     <main className="space-y-6">
@@ -135,8 +126,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
         <div className="flex flex-wrap gap-2 text-xs">
           <span className="pill">{newsTotal} news</span>
           {historyDays > 0 ? <span className="pill">{historyDays} trading days</span> : null}
-          <span className={`pill ${callCount > 0 ? "text-emerald-300" : ""}`}>{callCount} structured call{callCount === 1 ? "" : "s"}</span>
-          {callLinks > 0 ? <span className="pill">{callLinks} public call source{callLinks === 1 ? "" : "s"}</span> : null}
+          {callCount > 0 ? <span className="pill text-emerald-300">{callCount} structured call{callCount === 1 ? "" : "s"}</span> : callLinks > 0 ? <span className="pill">{callLinks} public call source{callLinks === 1 ? "" : "s"}</span> : <span className="pill text-neutral-600">Call search pending</span>}
         </div>
       </section>
 
