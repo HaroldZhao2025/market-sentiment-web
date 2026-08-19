@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLanguage } from "./LanguageProvider";
 
 type Props = {
   mode: "overlay" | "separate";
@@ -13,15 +14,18 @@ type Props = {
 
 type Row = { d: string; t: number; p: number | null; s: number | null; m: number | null };
 type Pt = { x: number; y: number };
-
 type PanelKind = "overlay" | "price" | "sentiment";
+type Locale = "en" | "zh";
+
+const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export function ChartLegend() {
+  const { locale } = useLanguage();
   return (
-    <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-400">
-      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-violet-400" />Sentiment</div>
-      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-emerald-400" />Sentiment MA7</div>
-      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-sky-400" />Price</div>
+    <div data-no-translate="true" className="flex flex-wrap items-center gap-4 text-xs text-neutral-400">
+      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-violet-400" />{locale === "zh" ? "情绪" : "Sentiment"}</div>
+      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-emerald-400" />{locale === "zh" ? "情绪 MA7" : "Sentiment MA7"}</div>
+      <div className="flex items-center gap-2"><span className="inline-block h-2 w-2 rounded-full bg-sky-400" />{locale === "zh" ? "价格" : "Price"}</div>
     </div>
   );
 }
@@ -89,18 +93,32 @@ function extent(values: Array<number | null>, fallback: [number, number], paddin
   return [min - pad, max + pad];
 }
 
-function niceNumber(value: number) {
+function niceNumber(value: number, locale: Locale) {
   const abs = Math.abs(value);
-  if (abs >= 1000) return value.toLocaleString(undefined, { maximumFractionDigits: 0 });
+  if (abs >= 1000) return new Intl.NumberFormat(locale === "zh" ? "zh-CN" : "en-US", { maximumFractionDigits: 0 }).format(value);
   if (abs >= 100) return value.toFixed(0);
   if (abs >= 10) return value.toFixed(1);
   return value.toFixed(2);
 }
 
-function formatDate(value: string, includeYear = false) {
+function parseDateParts(value: string) {
   const dt = new Date(`${value}T00:00:00Z`);
-  if (Number.isNaN(dt.getTime())) return value;
-  return dt.toLocaleDateString(undefined, includeYear ? { month: "short", year: "2-digit" } : { month: "short" });
+  if (Number.isNaN(dt.getTime())) return null;
+  return { year: dt.getUTCFullYear(), month: dt.getUTCMonth(), day: dt.getUTCDate() };
+}
+
+function formatDate(value: string, includeYear: boolean, locale: Locale) {
+  const parts = parseDateParts(value);
+  if (!parts) return value;
+  if (locale === "zh") return includeYear ? `${parts.year}年${parts.month + 1}月` : `${parts.month + 1}月`;
+  return includeYear ? `${MONTHS_EN[parts.month]} '${String(parts.year).slice(-2)}` : MONTHS_EN[parts.month];
+}
+
+function formatFullDate(value: string, locale: Locale) {
+  const parts = parseDateParts(value);
+  if (!parts) return value;
+  if (locale === "zh") return `${parts.year}年${parts.month + 1}月${parts.day}日`;
+  return `${MONTHS_EN[parts.month]} ${parts.day}, ${parts.year}`;
 }
 
 function chooseTickIndices(rows: Row[], maxTicks: number) {
@@ -119,7 +137,7 @@ function polyline(pts: Pt[]) {
   return pts.map((pt) => `${pt.x.toFixed(1)},${pt.y.toFixed(1)}`).join(" ");
 }
 
-function ChartPanel({ width, height, rows, kind }: { width: number; height: number; rows: Row[]; kind: PanelKind }) {
+function ChartPanel({ width, height, rows, kind, locale }: { width: number; height: number; rows: Row[]; kind: PanelKind; locale: Locale }) {
   const pad = { t: 22, r: kind === "overlay" ? 70 : 26, b: 48, l: 58 };
   const w = Math.max(320, width);
   const h = Math.max(220, height);
@@ -158,9 +176,12 @@ function ChartPanel({ width, height, rows, kind }: { width: number; height: numb
 
   const hover = hoverIdx == null ? null : rows[hoverIdx];
   const hoverX = hover ? x(hover.t) : null;
+  const labels = locale === "zh"
+    ? { sentiment: "情绪", ma7: "MA7", price: "价格" }
+    : { sentiment: "Sentiment", ma7: "MA7", price: "Price" };
 
   return (
-    <svg width={w} height={h} className="block select-none overflow-visible">
+    <svg width={w} height={h} className="block select-none overflow-visible" data-no-translate="true">
       <g transform={`translate(${pad.l},${pad.t})`}>
         {(kind === "price" ? priceTicks : sentimentTicks).map((tick, index) => {
           const yy = kind === "price" ? yPrice(tick) : ySentiment(tick);
@@ -170,11 +191,11 @@ function ChartPanel({ width, height, rows, kind }: { width: number; height: numb
         {kind !== "price" ? sentimentTicks.map((tick) => (
           <text key={`sl-${tick}`} x={-12} y={ySentiment(tick)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{tick.toFixed(1)}</text>
         )) : priceTicks.map((tick) => (
-          <text key={`pl-${tick}`} x={-12} y={yPrice(tick)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{niceNumber(tick)}</text>
+          <text key={`pl-${tick}`} x={-12} y={yPrice(tick)} textAnchor="end" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{niceNumber(tick, locale)}</text>
         ))}
 
         {kind === "overlay" ? priceTicks.map((tick) => (
-          <text key={`pr-${tick}`} x={plotW + 10} y={yPrice(tick)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{niceNumber(tick)}</text>
+          <text key={`pr-${tick}`} x={plotW + 10} y={yPrice(tick)} textAnchor="start" dominantBaseline="middle" className="fill-neutral-500" fontSize={11}>{niceNumber(tick, locale)}</text>
         )) : null}
 
         {xTicks.map((index, pos) => {
@@ -183,7 +204,7 @@ function ChartPanel({ width, height, rows, kind }: { width: number; height: numb
           return (
             <g key={`xt-${index}`}>
               <line x1={x(row.t)} y1={0} x2={x(row.t)} y2={plotH} stroke="currentColor" className="text-white" strokeOpacity={0.035} />
-              <text x={x(row.t)} y={plotH + 24} textAnchor="middle" className="fill-neutral-500" fontSize={11}>{formatDate(row.d, includeYear)}</text>
+              <text x={x(row.t)} y={plotH + 24} textAnchor="middle" className="fill-neutral-500" fontSize={11}>{formatDate(row.d, includeYear, locale)}</text>
             </g>
           );
         })}
@@ -203,10 +224,10 @@ function ChartPanel({ width, height, rows, kind }: { width: number; height: numb
             <line x1={hoverX} y1={0} x2={hoverX} y2={plotH} stroke="currentColor" className="text-white" strokeOpacity={0.18} />
             <foreignObject x={Math.min(Math.max(hoverX + 12, 0), Math.max(0, plotW - 220))} y={8} width={220} height={108}>
               <div className="rounded-lg border border-white/10 bg-neutral-950/95 p-2.5 text-xs shadow-2xl">
-                <div className="mb-1.5 font-medium text-neutral-200">{new Date(`${hover.d}T00:00:00Z`).toLocaleDateString()}</div>
-                {kind !== "price" ? <div className="flex justify-between gap-3 text-neutral-400"><span>Sentiment</span><span className="font-mono text-violet-300">{hover.s == null ? "—" : hover.s.toFixed(4)}</span></div> : null}
-                {kind !== "price" ? <div className="flex justify-between gap-3 text-neutral-400"><span>MA7</span><span className="font-mono text-emerald-300">{hover.m == null ? "—" : hover.m.toFixed(4)}</span></div> : null}
-                {kind !== "sentiment" ? <div className="flex justify-between gap-3 text-neutral-400"><span>Price</span><span className="font-mono text-sky-300">{hover.p == null ? "—" : hover.p.toFixed(2)}</span></div> : null}
+                <div className="mb-1.5 font-medium text-neutral-200">{formatFullDate(hover.d, locale)}</div>
+                {kind !== "price" ? <div className="flex justify-between gap-3 text-neutral-400"><span>{labels.sentiment}</span><span className="font-mono text-violet-300">{hover.s == null ? "—" : hover.s.toFixed(4)}</span></div> : null}
+                {kind !== "price" ? <div className="flex justify-between gap-3 text-neutral-400"><span>{labels.ma7}</span><span className="font-mono text-emerald-300">{hover.m == null ? "—" : hover.m.toFixed(4)}</span></div> : null}
+                {kind !== "sentiment" ? <div className="flex justify-between gap-3 text-neutral-400"><span>{labels.price}</span><span className="font-mono text-sky-300">{hover.p == null ? "—" : hover.p.toFixed(2)}</span></div> : null}
               </div>
             </foreignObject>
           </>
@@ -217,25 +238,28 @@ function ChartPanel({ width, height, rows, kind }: { width: number; height: numb
 }
 
 export default function LineChart({ mode, dates, price, sentiment, sentimentMA7, height = 520 }: Props) {
+  const { locale } = useLanguage();
   const rows = useMemo(() => buildRows(dates, price, sentiment, sentimentMA7), [dates, price, sentiment, sentimentMA7]);
   const { ref, width } = useMeasure();
 
-  if (!rows.length) return <div className="grid w-full place-items-center text-sm text-neutral-500" style={{ height }}>No chart data.</div>;
+  if (!rows.length) {
+    return <div data-no-translate="true" className="grid w-full place-items-center text-sm text-neutral-500" style={{ height }}>{locale === "zh" ? "暂无图表数据。" : "No chart data."}</div>;
+  }
 
   if (mode === "overlay") {
-    return <div ref={ref} className="w-full overflow-hidden"><ChartPanel width={width} height={height} rows={rows} kind="overlay" /></div>;
+    return <div ref={ref} data-no-translate="true" className="w-full overflow-hidden"><ChartPanel width={width} height={height} rows={rows} kind="overlay" locale={locale} /></div>;
   }
 
   const panelHeight = Math.max(250, Math.floor((height - 28) / 2));
   return (
-    <div ref={ref} className="w-full space-y-7 overflow-hidden">
+    <div ref={ref} data-no-translate="true" className="w-full space-y-7 overflow-hidden">
       <div>
-        <div className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-neutral-500">Price</div>
-        <ChartPanel width={width} height={panelHeight} rows={rows} kind="price" />
+        <div className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-neutral-500">{locale === "zh" ? "价格" : "Price"}</div>
+        <ChartPanel width={width} height={panelHeight} rows={rows} kind="price" locale={locale} />
       </div>
       <div>
-        <div className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-neutral-500">Sentiment</div>
-        <ChartPanel width={width} height={panelHeight} rows={rows} kind="sentiment" />
+        <div className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-neutral-500">{locale === "zh" ? "情绪" : "Sentiment"}</div>
+        <ChartPanel width={width} height={panelHeight} rows={rows} kind="sentiment" locale={locale} />
       </div>
     </div>
   );
