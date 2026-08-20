@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ALTG",
   "earnings_history": [
     {
@@ -153,7 +153,938 @@
       "surprise_pct": -1029.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-6-alta-equipment-group-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 68,
+        "scored_turn_count": 68,
+        "overall_sentiment": 0.205973,
+        "prepared_sentiment": -0.376079,
+        "qa_sentiment": 0.466038,
+        "qa_tone_shift": 0.842118,
+        "uncertainty_turn_rate": 0.161765,
+        "forward_looking_turn_rate": 0.352941,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 27,
+            "sentiment": -0.04562
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 21,
+            "sentiment": 0.03146
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 18,
+            "sentiment": -0.462625
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 6,
+            "sentiment": -0.338842
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": -0.041226
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.33255
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.89285
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.874301,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Jason Dammeyer",
+          "role": "VP of Accounting and Reporting at Alta Equipment Group",
+          "section": "prepared",
+          "sentiment": 0.906447,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Jason Dammeyer",
+          "role": "VP of Accounting and Reporting at Alta Equipment Group",
+          "section": "prepared",
+          "sentiment": 0.875326,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Jason Dammeyer",
+          "role": "VP of Accounting and Reporting at Alta Equipment Group",
+          "section": "prepared",
+          "sentiment": 0.909417,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.932599,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.942989,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.916687,
+          "word_count": 125,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.889103,
+          "word_count": 148,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.925431,
+          "word_count": 116,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.622252,
+          "word_count": 135,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.649689,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 11,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.347438,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.642732,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.942872,
+          "word_count": 126,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.942914,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.893404,
+          "word_count": 141,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.022864,
+          "word_count": 128,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.48682,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 18,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.927236,
+          "word_count": 136,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.896666,
+          "word_count": 140,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.766928,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909644,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at D.A. Davidson",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.660752,
+          "word_count": 75,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.346764,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Analyst at D.A. Davidson",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.324295,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.462455,
+          "word_count": 141,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Analyst at D.A. Davidson",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.345624,
+          "word_count": 61,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.857562,
+          "word_count": 144,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.877435,
+          "word_count": 52,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Analyst at D.A. Davidson",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.519772,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913181,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Thompson Research Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.437235,
+          "word_count": 61,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.807559,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.89285,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Analyst at Thompson Research Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.861872,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.807907,
+          "word_count": 124,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Analyst at Thompson Research Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.338545,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913755,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.399472,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.52545,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.140243,
+          "word_count": 143,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.693609,
+          "word_count": 103,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.838577,
+          "word_count": 38,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.470423,
+          "word_count": 28,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Analyst at B. Riley Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.503688,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905457,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.772352,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 47,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.674961,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.64615,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.731974,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.113778,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.783405,
+          "word_count": 133,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.840107,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91184,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Analyst at Northland Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.743102,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Analyst at Northland Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.588012,
+          "word_count": 86,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.849755,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Analyst at Northland Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.81552,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.552097,
+          "word_count": 116,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Analyst at Northland Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.7842,
+          "word_count": 123,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.701856,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 61,
+          "speaker": "CFO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.286637,
+          "word_count": 47,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Analyst at Northland Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.551723,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.854577,
+          "word_count": 73,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Analyst at Northland Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.603851,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Chairman and CEO at Alta Equipment Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.676802,
+          "word_count": 119,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Analyst at Northland Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.860308,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.752497,
+          "word_count": 933,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 7014,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The 5 Most Interesting Analyst Questions From Alta’s Q2 Earnings Call",
@@ -196,13 +1127,40 @@
       "ts": "2026-08-07T20:34:37+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ALTG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/altg/transcripts/662653-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "ALTG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/altg/transcripts/572271-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "ALTG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/altg/transcripts/407183-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "ALTG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-alta-equipment-group-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-08-20T20:44:05.339176+00:00"
 }
