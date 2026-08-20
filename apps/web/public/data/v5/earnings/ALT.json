@@ -153,7 +153,90 @@
       "surprise_pct": 28.95
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-13T13:44:29+00:00",
+      "source": "Benzinga",
+      "source_url": "https://finance.yahoo.com/news/altimmune-q1-2026-earnings-call-134429803.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 4,
+        "scored_turn_count": 4,
+        "overall_sentiment": 0.449091,
+        "prepared_sentiment": -0.79611,
+        "qa_sentiment": 0.864158,
+        "qa_tone_shift": 1.660268,
+        "uncertainty_turn_rate": 0.25,
+        "forward_looking_turn_rate": 0.25,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 1,
+            "sentiment": -0.79611
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 1,
+            "sentiment": -0.79611
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.79611
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "On Wednesday, Altimmune (NASDAQ",
+          "section": "prepared",
+          "sentiment": -0.79611,
+          "word_count": 3501,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 1,
+          "speaker": "Disclaimer",
+          "section": "qa",
+          "sentiment": 0.887584,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Up Next",
+          "section": "qa",
+          "sentiment": 0.787469,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "ALTIMMUNE (ALT)",
+          "section": "qa",
+          "sentiment": 0.91742,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3627,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "ALT Earnings Call: Q2 2026",
@@ -178,6 +261,18 @@
       "url": "https://www.marketbeat.com/earnings/reports/2026-8-11-altimmune-inc-stock/#transcript",
       "source": "MarketBeat",
       "ts": "2026-08-11T00:00:00+00:00"
+    },
+    {
+      "title": "Altimmune (ALT) Q1 2026 Earnings Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/05/13/altimmune-alt-q1-2026-earnings-transcript/",
+      "source": "Motley Fool",
+      "ts": "2026-05-13T20:59:12+00:00"
+    },
+    {
+      "title": "Altimmune Q1 2026 Earnings Call: Complete Transcript",
+      "url": "https://finance.yahoo.com/news/altimmune-q1-2026-earnings-call-134429803.html",
+      "source": "Benzinga",
+      "ts": "2026-05-13T13:44:29+00:00"
     }
   ],
   "filing_fallback": [],
@@ -189,5 +284,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-08-20T20:46:04.030530+00:00"
+  "updated_at_utc": "2026-08-20T22:01:49.433220+00:00"
 }
