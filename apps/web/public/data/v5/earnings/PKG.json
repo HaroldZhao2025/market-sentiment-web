@@ -153,7 +153,125 @@
       "surprise_pct": 10.58
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-20T22:28:45+00:00",
+      "source": "Motley Fool",
+      "source_url": "https://finance.yahoo.com/m/c2db68c8-a6bb-312e-80ea-4f369d9afac7/capricor-%28capr%29-q2-2026.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 6,
+        "scored_turn_count": 6,
+        "overall_sentiment": 0.471094,
+        "prepared_sentiment": 0.471094,
+        "qa_sentiment": null,
+        "qa_tone_shift": null,
+        "uncertainty_turn_rate": 0.333333,
+        "forward_looking_turn_rate": 0.166667,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": 0.349905
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": 0.349905
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 1,
+            "sentiment": 0.691554
+          },
+          {
+            "topic": "Demand",
+            "mentions": 1,
+            "sentiment": 0.691554
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.691554
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "section": "prepared",
+          "sentiment": 0.857489,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Anthony J. Bergmann",
+          "section": "prepared",
+          "sentiment": 0.907385,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Linda Marbán",
+          "section": "prepared",
+          "sentiment": 0.691554,
+          "word_count": 1582,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Anthony J. Bergmann",
+          "section": "prepared",
+          "sentiment": 0.008257,
+          "word_count": 223,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Linda Marbán",
+          "section": "prepared",
+          "sentiment": -0.318729,
+          "word_count": 237,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "section": "prepared",
+          "sentiment": 0.680611,
+          "word_count": 197,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 2418,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "PKG Earnings Call: Q2 2026",
@@ -218,6 +336,12 @@
       "ts": "2026-07-23T07:00:00+00:00",
       "source": "GuruFocus",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "Capricor (CAPR) Q2 2026 Earnings Call Transcript",
+      "url": "https://finance.yahoo.com/m/c2db68c8-a6bb-312e-80ea-4f369d9afac7/capricor-%28capr%29-q2-2026.html",
+      "source": "Motley Fool",
+      "ts": "2026-08-20T22:28:45+00:00"
     }
   ],
   "filing_fallback": [],
@@ -226,5 +350,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-08-20T18:59:51.357567+00:00"
+  "updated_at_utc": "2026-08-20T22:41:36.667565+00:00"
 }
