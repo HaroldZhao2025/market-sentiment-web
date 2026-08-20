@@ -1,436 +1,165 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AM",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-04-29T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-4-29-antero-midstream-co-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 25,
-        "scored_turn_count": 25,
-        "overall_sentiment": 0.439589,
-        "prepared_sentiment": -0.208436,
-        "qa_sentiment": 0.744542,
-        "qa_tone_shift": 0.952978,
-        "uncertainty_turn_rate": 0.04,
-        "forward_looking_turn_rate": 0.28,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 8,
-            "sentiment": -0.099185
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 6,
-            "sentiment": -0.291562
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 4,
-            "sentiment": -0.354747
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 4,
-            "sentiment": -0.140614
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.849809
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.849084,
-          "word_count": 29,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "VP of Investor Relations at Antero Midstream",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.919799,
-          "word_count": 125,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.846619,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.22541,
-          "word_count": 124,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.791057,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 5,
-          "speaker": "CFO at Antero Midstream",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.837194,
-          "word_count": 119,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "CFO at Antero Midstream",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.584986,
-          "word_count": 141,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 7,
-          "speaker": "CFO at Antero Midstream",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.601928,
-          "word_count": 35,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914396,
-          "word_count": 100,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.867375,
-          "word_count": 108,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.720883,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.85378,
-          "word_count": 31,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.892703,
-          "word_count": 44,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.807522,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.669818,
-          "word_count": 68,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.650144,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.890622,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.844171,
-          "word_count": 47,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.659364,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.848044,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "CEO and President at Antero Midstream",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.323785,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.712259,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.895203,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "VP of Investor Relations at Antero Midstream",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.257328,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.849809,
-          "word_count": 861,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 2623,
-      "transcript_text_redistributed": false
+      "date": "2026-10-28T16:00:00-04:00",
+      "eps_estimate": 0.36,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-29T16:00:00-04:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.27,
+      "surprise_pct": -18.1
+    },
+    {
+      "date": "2026-04-29T16:00:00-04:00",
+      "eps_estimate": 0.3,
+      "reported_eps": 0.29,
+      "surprise_pct": -3.57
+    },
+    {
+      "date": "2026-02-11T16:00:00-05:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.28,
+      "surprise_pct": 2.19
+    },
+    {
+      "date": "2025-10-29T16:00:00-04:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.27,
+      "surprise_pct": -7.56
+    },
+    {
+      "date": "2025-07-30T17:00:00-04:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.29,
+      "surprise_pct": 1.22
+    },
+    {
+      "date": "2025-04-30T16:00:00-04:00",
+      "eps_estimate": 0.3,
+      "reported_eps": 0.28,
+      "surprise_pct": -5.68
+    },
+    {
+      "date": "2025-02-12T16:00:00-05:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.26,
+      "surprise_pct": -4.09
+    },
+    {
+      "date": "2024-10-30T16:00:00-04:00",
+      "eps_estimate": 0.3,
+      "reported_eps": 0.23,
+      "surprise_pct": -24.44
+    },
+    {
+      "date": "2024-07-31T16:00:00-04:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.23,
+      "surprise_pct": -14.41
+    },
+    {
+      "date": "2024-04-24T16:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.21,
+      "surprise_pct": -6.22
+    },
+    {
+      "date": "2024-02-14T17:00:00-05:00",
+      "eps_estimate": 0.26,
+      "reported_eps": 0.24,
+      "surprise_pct": -5.89
+    },
+    {
+      "date": "2023-10-25T16:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.23,
+      "surprise_pct": 1.04
+    },
+    {
+      "date": "2023-07-26T12:00:00-04:00",
+      "eps_estimate": 0.24,
+      "reported_eps": 0.22,
+      "surprise_pct": -8.18
+    },
+    {
+      "date": "2023-04-26T16:00:00-04:00",
+      "eps_estimate": 0.2,
+      "reported_eps": 0.21,
+      "surprise_pct": 2.77
+    },
+    {
+      "date": "2023-02-15T16:00:00-05:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.2,
+      "surprise_pct": -10.03
+    },
+    {
+      "date": "2022-10-26T16:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.2,
+      "surprise_pct": -10.45
+    },
+    {
+      "date": "2022-07-27T16:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.2,
+      "surprise_pct": -13.58
+    },
+    {
+      "date": "2022-04-27T16:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.19,
+      "surprise_pct": -13.82
+    },
+    {
+      "date": "2022-02-16T16:00:00-05:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.2,
+      "surprise_pct": -12.43
+    },
+    {
+      "date": "2021-10-27T16:00:00-04:00",
+      "eps_estimate": 0.2,
+      "reported_eps": 0.22,
+      "surprise_pct": 9.98
+    },
+    {
+      "date": "2021-07-28T16:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.23,
+      "surprise_pct": 3.65
+    },
+    {
+      "date": "2021-04-28T16:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.21,
+      "surprise_pct": -8.19
+    },
+    {
+      "date": "2021-02-17T16:00:00-05:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.21,
+      "surprise_pct": -9.42
+    },
+    {
+      "date": "2020-10-28T16:00:00-04:00",
+      "eps_estimate": 0.24,
+      "reported_eps": 0.25,
+      "surprise_pct": 2.53
     }
   ],
+  "calls": [],
+  "call_links": [],
   "filing_fallback": [],
-  "call_links": [
-    {
-      "title": "Antero Midstream (AM) Q2 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/antero-midstream-am-q2-2026-earnings-call-transcript/",
-      "ts": "2026-08-08T00:35:14+00:00",
-      "source": "Motley Fool",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Antero Midstream Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/antero-midstream-q2-earnings-call-highlights-2026-07-30/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-01T03:02:48+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Antero Resources Announces Second Quarter 2026 Earnings Release Date and Conference Call",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/antero-resources-announces-second-quarter-201500758.html",
-      "ts": "2026-07-15T20:15:00+00:00",
-      "source": "PR Newswire",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Antero Midstream Announces Second Quarter 2026 Return of Capital and Earnings Release Date and Conference Call",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/antero-midstream-announces-second-quarter-201500188.html",
-      "ts": "2026-07-15T20:15:00+00:00",
-      "source": "PR Newswire",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AM Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/am/transcripts/658224-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
-    {
-      "title": "AM Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/am/transcripts/556007-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
-      "title": "AM Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/am/transcripts/396616-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-12T00:00:00+00:00"
-    },
-    {
-      "title": "AM Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-4-29-antero-midstream-co-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-04-29T00:00:00+00:00"
-    },
-    {
-      "title": "Antero Midstream Q2 Earnings Call Highlights - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPTlhIbTd0ODJkQ1p1ckVzWGNmdmJWTm4yVUtydUlWRU9uY2ZFdmhfSWw2NUYxaVlxSVdTdGlkdFV3UEFvVlNLSnVVdEg4QlBQdUxrQ2RmWE1SV3MzckgyY2IzcUNNTDRIMWRaVHkyQW9Ta0J4V21zTVdSTFNQWkFzS0N1OUhJZXc4VlVSZEx4SGR2ZURQYmVRX3NMRnB4azA?oc=5",
-      "ts": "2026-07-31T07:00:00+00:00",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "Antero Midstream Corporation 2026 Q2 - Results - Earnings Call Presentation (NYSE:AM) 2026-07-30 - Seeking Alpha",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPOXkxS2s1SDNOcDlfd01TNVRoX0h6a3BWYmF4ejlLUDQteExLd3dHZjc3WHRUZWdpc1hWdHMzZ2ZhbTZITEhibElXeDFDT3psTkdYVXpNVjNWWXRaeTF5cXllME5BSUFPaXdHTjV2WTAtNWR1N3lyOWVWSjFMLWZhc0FSdmtBVXdpdWFQWm9QUWlZVVJ5OWw5RHdlMlVBeklJM1lnWklfRUw2QWtvamdzUi13?oc=5",
-      "ts": "2026-07-30T07:00:00+00:00",
-      "source": "Seeking Alpha",
-      "provider": "google_news_rss"
-    }
-  ],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:16:31.562704+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

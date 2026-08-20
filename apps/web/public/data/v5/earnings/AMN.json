@@ -1,1355 +1,194 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AMN",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-06T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-6-amn-healthcare-services-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 97,
-        "scored_turn_count": 97,
-        "overall_sentiment": 0.339229,
-        "prepared_sentiment": -0.183023,
-        "qa_sentiment": 0.492423,
-        "qa_tone_shift": 0.675447,
-        "uncertainty_turn_rate": 0.020619,
-        "forward_looking_turn_rate": 0.381443,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 35,
-            "sentiment": 0.115653
-          },
-          {
-            "topic": "Demand",
-            "mentions": 33,
-            "sentiment": 0.094411
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 22,
-            "sentiment": 0.17914
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 4,
-            "sentiment": 0.111497
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 4,
-            "sentiment": 0.096726
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.911298,
-          "word_count": 86,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "VP of Investor Relations at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.809752,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 2,
-          "speaker": "VP of Investor Relations at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.91002,
-          "word_count": 64,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.934637,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.928315,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.940361,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.909835,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.048166,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.001292,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.010655,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.866372,
-          "word_count": 134,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.727726,
-          "word_count": 127,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.805884,
-          "word_count": 126,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.394138,
-          "word_count": 59,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.472661,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.001167,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.935387,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.835281,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.004771,
-          "word_count": 117,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.223565,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.652141,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 21,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.90644,
-          "word_count": 33,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 22,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.907498,
-          "word_count": 98,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.713814,
-          "word_count": 55,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 24,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.733616,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.847588,
-          "word_count": 38,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.306407,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.765451,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.902812,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.810036,
-          "word_count": 85,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.803306,
-          "word_count": 108,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.607453,
-          "word_count": 78,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.790077,
-          "word_count": 30,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.390858,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.479078,
-          "word_count": 58,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.301782,
-          "word_count": 78,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.625648,
-          "word_count": 51,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.017333,
-          "word_count": 92,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 38,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.866928,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.25514,
-          "word_count": 130,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.099872,
-          "word_count": 26,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.208182,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908976,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.794599,
-          "word_count": 67,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 44,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.385438,
-          "word_count": 125,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 45,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.264241,
-          "word_count": 117,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.398099,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.418956,
-          "word_count": 40,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.434176,
-          "word_count": 83,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.856071,
-          "word_count": 70,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.391249,
-          "word_count": 61,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 51,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905488,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.778617,
-          "word_count": 43,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 53,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.747046,
-          "word_count": 118,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.810552,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910289,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.432899,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.843113,
-          "word_count": 91,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.288705,
-          "word_count": 142,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.135351,
-          "word_count": 141,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 60,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.474015,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.746912,
-          "word_count": 49,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911159,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.539628,
-          "word_count": 82,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.556262,
-          "word_count": 116,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.741128,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.099157,
-          "word_count": 34,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.390868,
-          "word_count": 143,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.881065,
-          "word_count": 44,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.763288,
-          "word_count": 124,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 70,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.575836,
-          "word_count": 34,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.67307,
-          "word_count": 43,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.148606,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 73,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.748044,
-          "word_count": 96,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 74,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.81396,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.893231,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Analyst at William Blair",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.82081,
-          "word_count": 87,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 77,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.144993,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 78,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.460743,
-          "word_count": 92,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 79,
-          "speaker": "Analyst at William Blair",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.592748,
-          "word_count": 79,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 80,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.354136,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 81,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.661618,
-          "word_count": 77,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 82,
-          "speaker": "Analyst at William Blair",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.424472,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.90623,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 84,
-          "speaker": "Analyst at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.648175,
-          "word_count": 134,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 85,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.086444,
-          "word_count": 132,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 86,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.258217,
-          "word_count": 76,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 87,
-          "speaker": "Analyst at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.399304,
-          "word_count": 126,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 88,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.881786,
-          "word_count": 7,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 89,
-          "speaker": "Analyst at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.692267,
-          "word_count": 17,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 90,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.299219,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 91,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.528763,
-          "word_count": 149,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 92,
-          "speaker": "CFO and COO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.296159,
-          "word_count": 32,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 93,
-          "speaker": "Analyst at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.6033,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 94,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.901932,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 95,
-          "speaker": "President and CEO at AMN Healthcare",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.392354,
-          "word_count": 39,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 96,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.823297,
-          "word_count": 995,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 8621,
-      "transcript_text_redistributed": false
+      "date": "2026-11-05T15:00:00-05:00",
+      "eps_estimate": 0.23,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-06T16:00:00-04:00",
+      "eps_estimate": 0.19,
+      "reported_eps": 0.77,
+      "surprise_pct": 307.77
+    },
+    {
+      "date": "2026-05-07T16:00:00-04:00",
+      "eps_estimate": 1.62,
+      "reported_eps": 2.1,
+      "surprise_pct": 29.87
+    },
+    {
+      "date": "2026-02-19T16:00:00-05:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.22,
+      "surprise_pct": -17.86
+    },
+    {
+      "date": "2025-11-06T16:00:00-05:00",
+      "eps_estimate": 0.2,
+      "reported_eps": 0.39,
+      "surprise_pct": 95.2
+    },
+    {
+      "date": "2025-08-07T16:00:00-04:00",
+      "eps_estimate": 0.19,
+      "reported_eps": 0.3,
+      "surprise_pct": 60.9
+    },
+    {
+      "date": "2025-05-08T16:00:00-04:00",
+      "eps_estimate": 0.21,
+      "reported_eps": 0.45,
+      "surprise_pct": 119.32
+    },
+    {
+      "date": "2025-02-20T16:00:00-05:00",
+      "eps_estimate": 0.49,
+      "reported_eps": 0.75,
+      "surprise_pct": 53.67
+    },
+    {
+      "date": "2024-11-07T16:00:00-05:00",
+      "eps_estimate": 0.57,
+      "reported_eps": 0.61,
+      "surprise_pct": 6.29
+    },
+    {
+      "date": "2024-08-08T16:00:00-04:00",
+      "eps_estimate": 0.78,
+      "reported_eps": 0.98,
+      "surprise_pct": 26.02
+    },
+    {
+      "date": "2024-05-09T16:00:00-04:00",
+      "eps_estimate": 0.96,
+      "reported_eps": 0.97,
+      "surprise_pct": 1.37
+    },
+    {
+      "date": "2024-02-15T16:00:00-05:00",
+      "eps_estimate": 1.25,
+      "reported_eps": 1.32,
+      "surprise_pct": 5.41
+    },
+    {
+      "date": "2023-11-02T16:00:00-04:00",
+      "eps_estimate": 1.63,
+      "reported_eps": 1.97,
+      "surprise_pct": 20.54
+    },
+    {
+      "date": "2023-08-03T16:00:00-04:00",
+      "eps_estimate": 2.15,
+      "reported_eps": 2.38,
+      "surprise_pct": 10.96
+    },
+    {
+      "date": "2023-05-04T16:00:00-04:00",
+      "eps_estimate": 2.36,
+      "reported_eps": 2.49,
+      "surprise_pct": 5.56
+    },
+    {
+      "date": "2023-02-16T16:00:00-05:00",
+      "eps_estimate": 2.19,
+      "reported_eps": 2.48,
+      "surprise_pct": 13.31
+    },
+    {
+      "date": "2022-11-03T16:00:00-04:00",
+      "eps_estimate": 2.4,
+      "reported_eps": 2.57,
+      "surprise_pct": 6.92
+    },
+    {
+      "date": "2022-08-04T16:00:00-04:00",
+      "eps_estimate": 2.99,
+      "reported_eps": 3.31,
+      "surprise_pct": 10.61
+    },
+    {
+      "date": "2022-05-05T16:00:00-04:00",
+      "eps_estimate": 3.23,
+      "reported_eps": 3.49,
+      "surprise_pct": 7.97
+    },
+    {
+      "date": "2022-02-17T16:00:00-05:00",
+      "eps_estimate": 2.69,
+      "reported_eps": 2.95,
+      "surprise_pct": 9.72
+    },
+    {
+      "date": "2021-11-04T16:00:00-04:00",
+      "eps_estimate": 1.33,
+      "reported_eps": 1.73,
+      "surprise_pct": 30.57
+    },
+    {
+      "date": "2021-08-05T16:00:00-04:00",
+      "eps_estimate": 1.46,
+      "reported_eps": 1.64,
+      "surprise_pct": 12.59
+    },
+    {
+      "date": "2021-05-06T16:00:00-04:00",
+      "eps_estimate": 1.37,
+      "reported_eps": 1.7,
+      "surprise_pct": 24.2
+    },
+    {
+      "date": "2021-02-18T16:00:00-05:00",
+      "eps_estimate": 0.88,
+      "reported_eps": 1.0,
+      "surprise_pct": 13.35
+    },
+    {
+      "date": "2020-11-05T16:00:00-05:00",
+      "eps_estimate": 0.69,
+      "reported_eps": 0.82,
+      "surprise_pct": 18.65
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
-    {
-      "title": "AMN Healthcare (AMN) Q2 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/14/amn-healthcare-amn-q2-2026-earnings-call-transcript/",
-      "ts": "2026-08-14T04:58:39+00:00",
-      "source": "Motley Fool",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AMN Healthcare Services Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/amn-healthcare-services-q2-earnings-call-highlights-2026-08-07/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-07T22:04:16+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AMN Healthcare Services Inc (AMN) (Q2 2026) Earnings Call Highlights: Revenue Beats Guidance, ...",
-      "url": "https://finance.yahoo.com/healthcare/articles/amn-healthcare-services-inc-amn-050515735.html",
-      "ts": "2026-08-07T05:05:15+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Dassault Aviation SA (DUAVF) (Q2 2026) Earnings Call Highlights: Strategic Partnerships and ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/dassault-aviation-sa-duavf-q2-230101540.html",
-      "ts": "2026-07-22T23:01:01+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AMN Healthcare to Hold Second Quarter 2026 Earnings Conference Call on Thursday, August 6, 2026",
-      "url": "https://finance.yahoo.com/healthcare/articles/amn-healthcare-hold-second-quarter-201500860.html",
-      "ts": "2026-07-07T20:15:00+00:00",
-      "source": "PR Newswire",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AMN Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/amn/transcripts/662833-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-06T00:00:00+00:00"
-    },
-    {
-      "title": "AMN Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/amn/transcripts/560737-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-07T00:00:00+00:00"
-    },
-    {
-      "title": "AMN Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/amn/transcripts/396585-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-19T00:00:00+00:00"
-    },
-    {
-      "title": "AMN Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-amn-healthcare-services-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-06T00:00:00+00:00"
-    },
     {
       "title": "5 Revealing Analyst Questions From AMN Healthcare Services’s Q2 Earnings Call",
       "url": "https://finance.yahoo.com/markets/stocks/articles/5-revealing-analyst-questions-amn-033300547.html",
       "ts": "2026-08-15T03:33:00+00:00",
       "source": "StockStory",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "AMN Healthcare (AMN) Q2 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/14/amn-healthcare-amn-q2-2026-earnings-call-transcript/",
+      "ts": "2026-08-14T04:58:39+00:00",
+      "source": "Motley Fool",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "AMN Healthcare (AMN) Q2 2026 Earnings Call Transcript - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNT3lOdDlfTjZ0UTMyZXI5Vl9aZ1pVYnZaSG4wZHI3ODdPSHRWajJxb0tXQmpIRXg4eGhHUlpSNF90TldsbjlUY3pyRFRJOHNaVXFFOHJIRUhDajFjZUJ1UkFNVVBWSFFQV2VraWFLMFJ3UWk1VExHamk2WmhEcXZrUDN6cDBIY0dNM25tMXVYMVh4UTVqcXV4MEV4RFFhVkVDR3JBU2JfWnZHNnYxeXR5UXhfeTlDRlJmSFdWS2FHYmI0OUtTT2dKZ0Rn?oc=5",
+      "ts": "2026-08-14T04:58:00+00:00",
+      "source": "The Globe and Mail",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "5 Revealing Analyst Questions From AMN Healthcare Services’s Q2 Earnings Call - StockStory",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQUFMxSnJQdWREWFdfcE1odGtWbE9oeUpCSF9kUWdZZ1R0b1VDZFZnTHhXZWpHaDVHbjVxRTdYaUlQeGdHQ01EOFQ4NzE5el9jRFcwemJzSENzMEhPSmdxd0wxWGRYX01vekV0U3ZWVk10RHVqOHd4dFBrNnh4RnhYZ0c1am9nZmI4ak9TRlZwSTMzcHB1VG96SFF6MDVid2Z6SmZHV0dZX1B1aFJRRE1QS05TUVA2Nk83YWxlelZMWVEtVU1TOHBhRG9jMHAwalFDd1NZLXdR?oc=5",
+      "ts": "2026-08-13T07:47:38+00:00",
+      "source": "StockStory",
+      "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:19:06.665731+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

@@ -1,868 +1,165 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AMKR",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-27T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-27-amkor-technology-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 56,
-        "scored_turn_count": 56,
-        "overall_sentiment": 0.122202,
-        "prepared_sentiment": -0.496228,
-        "qa_sentiment": 0.415143,
-        "qa_tone_shift": 0.911371,
-        "uncertainty_turn_rate": 0.089286,
-        "forward_looking_turn_rate": 0.410714,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 23,
-            "sentiment": -0.337178
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 23,
-            "sentiment": -0.047729
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 15,
-            "sentiment": -0.019426
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 9,
-            "sentiment": -0.616594
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 4,
-            "sentiment": -0.753634
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 3,
-            "sentiment": -0.775694
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.906434,
-          "word_count": 82,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "VP of Investor Relations at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.915246,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.933619,
-          "word_count": 149,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.924818,
-          "word_count": 137,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.760026,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.761621,
-          "word_count": 120,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.471997,
-          "word_count": 137,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.751403,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.705115,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.575156,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.624057,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 11,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.435347,
-          "word_count": 91,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 12,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.026219,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 13,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.873547,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.939627,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 15,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.92326,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.877785,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 17,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.170186,
-          "word_count": 90,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 18,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914831,
-          "word_count": 100,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.725027,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 20,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.850645,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.317002,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.024007,
-          "word_count": 84,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.839579,
-          "word_count": 120,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 24,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.856486,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.422589,
-          "word_count": 73,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913869,
-          "word_count": 60,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.757064,
-          "word_count": 80,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 28,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.449631,
-          "word_count": 87,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.823608,
-          "word_count": 87,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.750585,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915901,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at Melius Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.786836,
-          "word_count": 47,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.826942,
-          "word_count": 133,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.740273,
-          "word_count": 42,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.895986,
-          "word_count": 75,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at Melius Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.726079,
-          "word_count": 35,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.012535,
-          "word_count": 48,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Analyst at Melius Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.000878,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.921815,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at Needham & Company",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.764227,
-          "word_count": 71,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.857114,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Analyst at Needham & Company",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.764986,
-          "word_count": 70,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.821916,
-          "word_count": 35,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Analyst at Needham & Company",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.728409,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.916438,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.726742,
-          "word_count": 74,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 47,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.673158,
-          "word_count": 47,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.790899,
-          "word_count": 79,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.193356,
-          "word_count": 57,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Analyst at KeyBanc Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.876655,
-          "word_count": 9,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.813103,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "EVP, CFO, and Treasurer at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.713555,
-          "word_count": 47,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.898154,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "CEO at Amkor Technology",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.874723,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.526036,
-          "word_count": 944,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 5771,
-      "transcript_text_redistributed": false
+      "date": "2026-10-26T16:00:00-04:00",
+      "eps_estimate": 0.78,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-27T16:00:00-04:00",
+      "eps_estimate": 0.48,
+      "reported_eps": 0.7,
+      "surprise_pct": 45.4
+    },
+    {
+      "date": "2026-04-27T16:00:00-04:00",
+      "eps_estimate": 0.24,
+      "reported_eps": 0.33,
+      "surprise_pct": 35.6
+    },
+    {
+      "date": "2026-02-09T16:00:00-05:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.69,
+      "surprise_pct": 56.45
+    },
+    {
+      "date": "2025-10-27T16:00:00-04:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.51,
+      "surprise_pct": 19.64
+    },
+    {
+      "date": "2025-07-28T16:00:00-04:00",
+      "eps_estimate": 0.16,
+      "reported_eps": 0.22,
+      "surprise_pct": 39.62
+    },
+    {
+      "date": "2025-04-28T16:00:00-04:00",
+      "eps_estimate": 0.09,
+      "reported_eps": 0.09,
+      "surprise_pct": 4.54
+    },
+    {
+      "date": "2025-02-10T16:00:00-05:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.43,
+      "surprise_pct": 13.91
+    },
+    {
+      "date": "2024-10-28T16:00:00-04:00",
+      "eps_estimate": 0.5,
+      "reported_eps": 0.49,
+      "surprise_pct": -2.68
+    },
+    {
+      "date": "2024-07-29T16:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.27,
+      "surprise_pct": 19.34
+    },
+    {
+      "date": "2024-04-29T16:00:00-04:00",
+      "eps_estimate": 0.13,
+      "reported_eps": 0.24,
+      "surprise_pct": 80.86
+    },
+    {
+      "date": "2024-02-05T16:00:00-05:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.48,
+      "surprise_pct": 16.69
+    },
+    {
+      "date": "2023-10-30T16:00:00-04:00",
+      "eps_estimate": 0.51,
+      "reported_eps": 0.54,
+      "surprise_pct": 5.37
+    },
+    {
+      "date": "2023-07-31T16:00:00-04:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.26,
+      "surprise_pct": 5.2
+    },
+    {
+      "date": "2023-05-01T16:00:00-04:00",
+      "eps_estimate": 0.18,
+      "reported_eps": 0.18,
+      "surprise_pct": null
+    },
+    {
+      "date": "2023-02-13T16:00:00-05:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 0.67,
+      "surprise_pct": -4.34
+    },
+    {
+      "date": "2022-10-31T16:00:00-04:00",
+      "eps_estimate": 0.89,
+      "reported_eps": 1.24,
+      "surprise_pct": 39.86
+    },
+    {
+      "date": "2022-08-01T16:00:00-04:00",
+      "eps_estimate": 0.48,
+      "reported_eps": 0.51,
+      "surprise_pct": 6.25
+    },
+    {
+      "date": "2022-05-02T16:00:00-04:00",
+      "eps_estimate": 0.57,
+      "reported_eps": 0.69,
+      "surprise_pct": 21.05
+    },
+    {
+      "date": "2022-02-14T16:00:00-05:00",
+      "eps_estimate": 0.66,
+      "reported_eps": 0.88,
+      "surprise_pct": 33.33
+    },
+    {
+      "date": "2021-10-25T16:00:00-04:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 0.74,
+      "surprise_pct": 5.71
+    },
+    {
+      "date": "2021-07-26T16:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.51,
+      "surprise_pct": 8.49
+    },
+    {
+      "date": "2021-04-26T14:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.49,
+      "surprise_pct": 5.65
+    },
+    {
+      "date": "2021-02-08T16:00:00-05:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.52,
+      "surprise_pct": 38.67
+    },
+    {
+      "date": "2020-10-26T16:00:00-04:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.38,
+      "surprise_pct": 43.4
     }
   ],
+  "calls": [],
+  "call_links": [],
   "filing_fallback": [],
-  "call_links": [
-    {
-      "title": "5 Insightful Analyst Questions From Amkor’s Q2 Earnings Call",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/5-insightful-analyst-questions-amkor-160522029.html",
-      "ts": "2026-08-03T16:05:22+00:00",
-      "source": "StockStory",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AMKR Q2 Earnings Call Highlights AI Ramp and Margin Gains",
-      "url": "https://finance.yahoo.com/technology/ai/articles/amkr-q2-earnings-call-highlights-140000766.html",
-      "ts": "2026-07-28T14:00:00+00:00",
-      "source": "Zacks",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Amkor Technology, Inc. Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-amkor-technology-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-07-28T12:30:00+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Amkor Technology Inc (AMKR) Q2 2026 Earnings Call Highlights: Record Revenue and Strategic ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/amkor-technology-inc-amkr-q2-050029769.html",
-      "ts": "2026-07-28T05:00:29+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Amkor Technology Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/amkor-technology-q2-earnings-call-highlights-2026-07-27/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-07-27T22:02:43+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "AMKR Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/amkr/transcripts/655705-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-27T00:00:00+00:00"
-    },
-    {
-      "title": "AMKR Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/amkr/transcripts/554053-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-27T00:00:00+00:00"
-    },
-    {
-      "title": "AMKR Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/amkr/transcripts/398198-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-09T00:00:00+00:00"
-    },
-    {
-      "title": "AMKR Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-27-amkor-technology-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-27T00:00:00+00:00"
-    },
-    {
-      "title": "Amkor Technology, Inc. Q2 2026 Earnings Call Summary - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQZnI4RHlzdHZ6UEl5SWR4RDlfUXdiRmNmeGdScTFrUVNnMWE3X05vc3dUbzVBejd3WjdlazZfV0Y4dGh3Yk1jQlpCZXNERVBXVlU1ZVN1M2paZW5LVFJOckp2SFpMakotd21tNFFNLU43MVpiZ2VReGR6Nmx2akUxWjN4MkJ6VWEyNFdxaklaVWo5Zl93M3p1Vw?oc=5",
-      "ts": "2026-07-28T07:00:00+00:00",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss"
-    }
-  ],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:18:46.714529+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

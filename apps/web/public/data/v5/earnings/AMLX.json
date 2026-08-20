@@ -1,1127 +1,135 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AMLX",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-06T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-6-amylyx-pharmaceuticals-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 86,
-        "scored_turn_count": 86,
-        "overall_sentiment": 0.512441,
-        "prepared_sentiment": 0.207234,
-        "qa_sentiment": 0.593231,
-        "qa_tone_shift": 0.385997,
-        "uncertainty_turn_rate": 0.011628,
-        "forward_looking_turn_rate": 0.197674,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 9,
-            "sentiment": 0.438958
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 7,
-            "sentiment": 0.171861
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 5,
-            "sentiment": 0.341235
-          },
-          {
-            "topic": "Demand",
-            "mentions": 5,
-            "sentiment": -0.024659
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.028451
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 1,
-            "sentiment": 0.028451
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.904012,
-          "word_count": 106,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Lindsey Allen",
-          "role": "VP of Investor Relations and Communications at Amylyx Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": 0.912716,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Lindsey Allen",
-          "role": "VP of Investor Relations and Communications at Amylyx Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": 0.874845,
-          "word_count": 53,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.640193,
-          "word_count": 142,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.001249,
-          "word_count": 123,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.400864,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.3504,
-          "word_count": 149,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.443338,
-          "word_count": 139,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.61014,
-          "word_count": 51,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.695348,
-          "word_count": 145,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.085958,
-          "word_count": 143,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.616366,
-          "word_count": 49,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.91604,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.627503,
-          "word_count": 146,
-          "topic_hits": [
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.904295,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.717839,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.71715,
-          "word_count": 128,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.834134,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.920263,
-          "word_count": 54,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "Analyst at Guggenheim",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.850968,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Analyst at Guggenheim",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.405024,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.792327,
-          "word_count": 147,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.808976,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.081308,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910035,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.748875,
-          "word_count": 101,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.004647,
-          "word_count": 133,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.413077,
-          "word_count": 148,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.225182,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914709,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Analyst at Evercore ISI",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.839508,
-          "word_count": 107,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.878944,
-          "word_count": 144,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.681391,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.823171,
-          "word_count": 130,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.803717,
-          "word_count": 58,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.085433,
-          "word_count": 135,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908443,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at Citibank",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.850264,
-          "word_count": 88,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.850439,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.737013,
-          "word_count": 71,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.780441,
-          "word_count": 76,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.907686,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914873,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at Leerink Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.870945,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 44,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.631163,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.073705,
-          "word_count": 140,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.699064,
-          "word_count": 63,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.878774,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at Leerink Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.847258,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.783264,
-          "word_count": 142,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 50,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.469153,
-          "word_count": 82,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915519,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Analyst at LifeSci Capital",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.819672,
-          "word_count": 64,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.639758,
-          "word_count": 50,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 54,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.502149,
-          "word_count": 141,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 55,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.852959,
-          "word_count": 103,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.917809,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Analyst at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.784339,
-          "word_count": 121,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.581796,
-          "word_count": 135,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.488947,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910869,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "Analyst at Mizuho",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.759634,
-          "word_count": 100,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 62,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.656188,
-          "word_count": 127,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 63,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.376803,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Analyst at Mizuho",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.882464,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.602506,
-          "word_count": 124,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.691021,
-          "word_count": 30,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Analyst at Mizuho",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.565645,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896956,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.752316,
-          "word_count": 107,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 70,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.351353,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 71,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.139694,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.912926,
-          "word_count": 15,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Analyst at H.C. Wainwright & Company",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.861358,
-          "word_count": 118,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.764159,
-          "word_count": 121,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.643187,
-          "word_count": 113,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.518297,
-          "word_count": 65,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.830935,
-          "word_count": 142,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.572185,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.917992,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.876998,
-          "word_count": 87,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "Chief Medical Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.284302,
-          "word_count": 117,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 82,
-          "speaker": "Chief Commercial Officer at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.027227,
-          "word_count": 84,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.917934,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 84,
-          "speaker": "Co-CEO at Amylyx Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.483047,
-          "word_count": 49,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 85,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.028451,
-          "word_count": 963,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        }
-      ],
-      "transcript_word_count": 8209,
-      "transcript_text_redistributed": false
+      "date": "2026-11-05T07:00:00-05:00",
+      "eps_estimate": -0.37,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-06T07:00:00-04:00",
+      "eps_estimate": -0.36,
+      "reported_eps": -0.39,
+      "surprise_pct": -9.04
+    },
+    {
+      "date": "2026-05-07T07:00:00-04:00",
+      "eps_estimate": -0.34,
+      "reported_eps": -0.37,
+      "surprise_pct": -8.71
+    },
+    {
+      "date": "2026-03-03T07:00:00-05:00",
+      "eps_estimate": -0.34,
+      "reported_eps": -0.3,
+      "surprise_pct": 12.23
+    },
+    {
+      "date": "2025-11-06T07:00:00-05:00",
+      "eps_estimate": -0.43,
+      "reported_eps": -0.37,
+      "surprise_pct": 13.93
+    },
+    {
+      "date": "2025-08-07T07:00:00-04:00",
+      "eps_estimate": -0.45,
+      "reported_eps": -0.46,
+      "surprise_pct": -1.23
+    },
+    {
+      "date": "2025-05-08T07:00:00-04:00",
+      "eps_estimate": -0.5,
+      "reported_eps": -0.42,
+      "surprise_pct": 16.0
+    },
+    {
+      "date": "2025-03-04T06:00:00-05:00",
+      "eps_estimate": -0.59,
+      "reported_eps": -0.55,
+      "surprise_pct": 6.78
+    },
+    {
+      "date": "2024-11-07T07:00:00-05:00",
+      "eps_estimate": -0.91,
+      "reported_eps": -1.07,
+      "surprise_pct": -16.94
+    },
+    {
+      "date": "2024-08-08T07:00:00-04:00",
+      "eps_estimate": -0.82,
+      "reported_eps": -0.62,
+      "surprise_pct": 23.91
+    },
+    {
+      "date": "2024-05-09T07:00:00-04:00",
+      "eps_estimate": -0.01,
+      "reported_eps": -0.12,
+      "surprise_pct": -1946.5
+    },
+    {
+      "date": "2024-02-22T07:00:00-05:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.07,
+      "surprise_pct": -69.27
+    },
+    {
+      "date": "2023-11-09T06:00:00-05:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.3,
+      "surprise_pct": -31.3
+    },
+    {
+      "date": "2023-08-10T16:00:00-04:00",
+      "eps_estimate": 0.07,
+      "reported_eps": 0.31,
+      "surprise_pct": 342.86
+    },
+    {
+      "date": "2023-05-11T16:00:00-04:00",
+      "eps_estimate": -0.25,
+      "reported_eps": 0.02,
+      "surprise_pct": 108.11
+    },
+    {
+      "date": "2023-03-13T16:00:00-04:00",
+      "eps_estimate": -0.84,
+      "reported_eps": -0.65,
+      "surprise_pct": 22.77
+    },
+    {
+      "date": "2022-11-10T16:00:00-05:00",
+      "eps_estimate": -0.98,
+      "reported_eps": -0.92,
+      "surprise_pct": 5.69
+    },
+    {
+      "date": "2022-08-11T16:00:00-04:00",
+      "eps_estimate": -0.84,
+      "reported_eps": -0.93,
+      "surprise_pct": -10.28
+    },
+    {
+      "date": "2022-05-12T16:00:00-04:00",
+      "eps_estimate": -0.69,
+      "reported_eps": -0.93,
+      "surprise_pct": -34.78
+    },
+    {
+      "date": "2022-03-31T14:00:00-04:00",
+      "eps_estimate": -0.64,
+      "reported_eps": -4.15,
+      "surprise_pct": -548.44
     }
   ],
+  "calls": [],
+  "call_links": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "call_links": [
-    {
-      "title": "Amylyx (AMLX) Q2 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/13/amylyx-amlx-q2-2026-earnings-call-transcript/",
-      "ts": "2026-08-13T17:02:17+00:00",
-      "source": "Motley Fool",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Amylyx (AMLX) Q2 2026 Earnings Call Transcript - The Globe and Mail",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQUldaMDNIOFAyemVtZ1AtQ1QwemJlcHNuS0ptb2ZJTGcySnBSemwtcW10S2cyZTc2VXRsNy1sUlZ0SkNnajFFLTJ4dGR5QWEtUmEyRlV5QVQ0UnJjbHNGTFhqc3pLRVBNbmlkZzdiaHlzSVpoX04tTkFmaG5COG9DeHloTWRZX2hqUy1xNzJuZzBKVmlvbldWOENuck9UOEpRZEw1WEd5cW9lWkdvWXlwazM1Q1c3c0E4eGNueW50UFNOaVpjU1ItdWllRQ?oc=5",
-      "ts": "2026-08-13T17:02:00+00:00",
-      "source": "The Globe and Mail",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "Amylyx Pharmaceuticals Inc (AMLX) (Q2 2026) Earnings Call Highlights: Advancing Toward Pivotal ...",
-      "url": "https://finance.yahoo.com/healthcare/articles/amylyx-pharmaceuticals-inc-amlx-q2-190128953.html",
-      "ts": "2026-08-06T19:01:28+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Amylyx Pharmaceuticals Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/amylyx-pharmaceuticals-q2-earnings-call-highlights-2026-08-06/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-06T15:04:22+00:00",
-      "source": "MarketBeat",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Amylyx Pharmaceuticals Q2 Earnings Call Highlights - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOaGlENXhVcTdxNGJhYmRUZ2MybXFnX0JXVnBfOGdKVTJ3bUpkVWVWQjhIcnZMOVFQN0I0VjBscTZST2NiNFVoX2d2emJzeDN1dkVsZW1BVGktR1p4YmRZcUZaOUNDb0NPSEZMY2luWmdpQTRwV3p2WXh2M1hYSTZ2ZmJ0MnVVRzdXS0JLOGJNMlhwZVBnV1RSUW5fTUhZSmM3N2c?oc=5",
-      "ts": "2026-08-06T07:00:00+00:00",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "Amylyx Pharmaceuticals Inc (AMLX) (Q2 2026) Earnings Call Highlights: Advancing Toward Pivotal ... By GuruFocus - Investing.com Canada",
-      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQem1BUnVrendqWUVlMTNmLXhuVXNucVlwcGZpWU5nYkRKeS1MZlc4SzRNVENuU0VCM0UydFdFM1pHazFZQjJ5WGl2Z2JhOWtSdTM1TFh6NlBKTkJveDNlTU0zdkVwd3FkRUJFVXhpVE1UTm5NM0F3QmZFRzUzM0FvTFdmTVdFenRFQWx0MTBtY3lLUEZIT3d1N3BxZF9UMGtEN1NENEdGYTlacmRHV25mQkJ2b0ZqcTN2andSbTJ4cHFuQmYxYjFCR25vZGxfbFdjTHpHQ2l5emg?oc=5",
-      "ts": "2026-08-06T07:00:00+00:00",
-      "source": "Investing.com Canada",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "AMLX Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/amlx/transcripts/662114-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-06T00:00:00+00:00"
-    },
-    {
-      "title": "AMLX Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/amlx/transcripts/579657-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-07T00:00:00+00:00"
-    },
-    {
-      "title": "AMLX Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/amlx/transcripts/412328-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-03-03T00:00:00+00:00"
-    },
-    {
-      "title": "AMLX Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-amylyx-pharmaceuticals-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-06T00:00:00+00:00"
-    }
-  ],
-  "updated_at_utc": "2026-08-17T19:00:19.900500+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

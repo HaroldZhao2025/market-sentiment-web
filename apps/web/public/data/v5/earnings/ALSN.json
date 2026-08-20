@@ -1,935 +1,187 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ALSN",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-03T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-3-allison-transmission-holdings-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 61,
-        "scored_turn_count": 61,
-        "overall_sentiment": 0.148011,
-        "prepared_sentiment": -0.091224,
-        "qa_sentiment": 0.282964,
-        "qa_tone_shift": 0.374188,
-        "uncertainty_turn_rate": 0.229508,
-        "forward_looking_turn_rate": 0.47541,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 28,
-            "sentiment": 0.083431
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 24,
-            "sentiment": 0.043747
-          },
-          {
-            "topic": "Demand",
-            "mentions": 18,
-            "sentiment": -0.137291
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 6,
-            "sentiment": -0.009947
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 2,
-            "sentiment": 0.66475
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 2,
-            "sentiment": -0.036091
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.857523
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.906543,
-          "word_count": 113,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Jacalyn Bolles",
-          "role": "Executive Director of Treasury and Investor Relations at Allison Transmission",
-          "section": "prepared",
-          "sentiment": 0.917231,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Jacalyn Bolles",
-          "role": "Executive Director of Treasury and Investor Relations at Allison Transmission",
-          "section": "prepared",
-          "sentiment": 0.912464,
-          "word_count": 124,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "Jacalyn Bolles",
-          "role": "Executive Director of Treasury and Investor Relations at Allison Transmission",
-          "section": "prepared",
-          "sentiment": 0.910343,
-          "word_count": 69,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.588988,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.727311,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.874792,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.883391,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.917484,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.929706,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 10,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.936225,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.209194,
-          "word_count": 146,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.868313,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.739063,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.612258,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 15,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.211662,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.112948,
-          "word_count": 74,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.931711,
-          "word_count": 127,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.844879,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.199882,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 20,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.612382,
-          "word_count": 95,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 21,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.847604,
-          "word_count": 121,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 22,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.906629,
-          "word_count": 87,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at Melius Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.721133,
-          "word_count": 55,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.364825,
-          "word_count": 128,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "COO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.834378,
-          "word_count": 94,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.800451,
-          "word_count": 19,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915874,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.853519,
-          "word_count": 120,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.471977,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 30,
-          "speaker": "Craig Price",
-          "role": "President and Business Unit Leader at Allison Off-Highway",
-          "section": "qa",
-          "sentiment": 0.008003,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "COO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.887186,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "COO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.929846,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908367,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at Oppenheimer",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.805149,
-          "word_count": 58,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Craig Price",
-          "role": "President and Business Unit Leader at Allison Off-Highway",
-          "section": "qa",
-          "sentiment": -0.658088,
-          "word_count": 79,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 36,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.761006,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914789,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.833603,
-          "word_count": 117,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "COO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.571536,
-          "word_count": 36,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.540303,
-          "word_count": 141,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 41,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.655566,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 42,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.228087,
-          "word_count": 122,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.918969,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.373393,
-          "word_count": 75,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 45,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.519441,
-          "word_count": 95,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 46,
-          "speaker": "CFO and Treasurer at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.741748,
-          "word_count": 63,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 47,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913059,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.811656,
-          "word_count": 113,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.827974,
-          "word_count": 122,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 50,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.863731,
-          "word_count": 125,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 51,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.11826,
-          "word_count": 77,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.786074,
-          "word_count": 77,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "COO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.736494,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 54,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915093,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.178056,
-          "word_count": 97,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "COO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.765849,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 57,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.055593,
-          "word_count": 22,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908732,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Chairman, President, and CEO at Allison Transmission",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.184098,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.857523,
-          "word_count": 978,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 6764,
-      "transcript_text_redistributed": false
+      "date": "2026-10-29T16:00:00-04:00",
+      "eps_estimate": 2.42,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-03T16:00:00-04:00",
+      "eps_estimate": 2.61,
+      "reported_eps": 2.73,
+      "surprise_pct": 4.46
+    },
+    {
+      "date": "2026-05-04T16:00:00-04:00",
+      "eps_estimate": 2.1,
+      "reported_eps": 2.57,
+      "surprise_pct": 22.67
+    },
+    {
+      "date": "2026-02-23T16:00:00-05:00",
+      "eps_estimate": 1.46,
+      "reported_eps": 1.42,
+      "surprise_pct": -2.39
+    },
+    {
+      "date": "2025-10-29T16:00:00-04:00",
+      "eps_estimate": 1.85,
+      "reported_eps": 1.75,
+      "surprise_pct": -5.65
+    },
+    {
+      "date": "2025-08-04T16:00:00-04:00",
+      "eps_estimate": 2.22,
+      "reported_eps": 2.25,
+      "surprise_pct": 1.37
+    },
+    {
+      "date": "2025-05-01T16:00:00-04:00",
+      "eps_estimate": 1.98,
+      "reported_eps": 2.25,
+      "surprise_pct": 13.98
+    },
+    {
+      "date": "2025-02-11T16:00:00-05:00",
+      "eps_estimate": 1.93,
+      "reported_eps": 2.05,
+      "surprise_pct": 6.0
+    },
+    {
+      "date": "2024-10-29T16:00:00-04:00",
+      "eps_estimate": 1.98,
+      "reported_eps": 2.28,
+      "surprise_pct": 14.93
+    },
+    {
+      "date": "2024-07-25T16:00:00-04:00",
+      "eps_estimate": 2.03,
+      "reported_eps": 2.22,
+      "surprise_pct": 9.2
+    },
+    {
+      "date": "2024-04-25T16:00:00-04:00",
+      "eps_estimate": 1.85,
+      "reported_eps": 2.1,
+      "surprise_pct": 13.89
+    },
+    {
+      "date": "2024-02-13T16:00:00-05:00",
+      "eps_estimate": 1.5,
+      "reported_eps": 2.04,
+      "surprise_pct": 36.23
+    },
+    {
+      "date": "2023-10-25T16:00:00-04:00",
+      "eps_estimate": 1.89,
+      "reported_eps": 1.88,
+      "surprise_pct": -0.79
+    },
+    {
+      "date": "2023-07-27T16:00:00-04:00",
+      "eps_estimate": 1.72,
+      "reported_eps": 1.92,
+      "surprise_pct": 11.91
+    },
+    {
+      "date": "2023-04-27T16:00:00-04:00",
+      "eps_estimate": 1.74,
+      "reported_eps": 1.89,
+      "surprise_pct": 8.59
+    },
+    {
+      "date": "2023-02-15T16:00:00-05:00",
+      "eps_estimate": 1.44,
+      "reported_eps": 1.65,
+      "surprise_pct": 15.18
+    },
+    {
+      "date": "2022-10-26T16:00:00-04:00",
+      "eps_estimate": 1.44,
+      "reported_eps": 1.66,
+      "surprise_pct": 15.03
+    },
+    {
+      "date": "2022-08-03T16:00:00-04:00",
+      "eps_estimate": 1.57,
+      "reported_eps": 1.35,
+      "surprise_pct": -14.02
+    },
+    {
+      "date": "2022-04-27T16:00:00-04:00",
+      "eps_estimate": 1.27,
+      "reported_eps": 1.48,
+      "surprise_pct": 16.3
+    },
+    {
+      "date": "2022-02-16T16:00:00-05:00",
+      "eps_estimate": 1.12,
+      "reported_eps": 1.2,
+      "surprise_pct": 7.82
+    },
+    {
+      "date": "2021-10-27T16:00:00-04:00",
+      "eps_estimate": 1.04,
+      "reported_eps": 0.95,
+      "surprise_pct": -8.66
+    },
+    {
+      "date": "2021-07-28T16:00:00-04:00",
+      "eps_estimate": 1.13,
+      "reported_eps": 1.1,
+      "surprise_pct": -3.16
+    },
+    {
+      "date": "2021-04-28T16:00:00-04:00",
+      "eps_estimate": 0.99,
+      "reported_eps": 1.15,
+      "surprise_pct": 15.41
+    },
+    {
+      "date": "2021-02-17T16:00:00-05:00",
+      "eps_estimate": 0.74,
+      "reported_eps": 0.74,
+      "surprise_pct": 1.06
+    },
+    {
+      "date": "2020-10-28T16:00:00-04:00",
+      "eps_estimate": 0.75,
+      "reported_eps": 0.76,
+      "surprise_pct": 0.74
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
     {
       "title": "Allison Transmission’s Q2 Earnings Call: Our Top 5 Analyst Questions",
       "url": "https://finance.yahoo.com/markets/stocks/articles/allison-transmission-q2-earnings-call-210122110.html",
       "ts": "2026-08-11T21:01:22+00:00",
       "source": "StockStory",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
     },
     {
       "title": "Allison Transmission (ALSN) Q2 2026 Earnings Call Transcript",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/08/10/allison-transmission-alsn-q2-2026-earnings-call-transcript/",
       "ts": "2026-08-11T01:32:54+00:00",
       "source": "Motley Fool",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
     },
     {
-      "title": "Allison Transmission Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/allison-transmission-q2-earnings-call-highlights-2026-08-03/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-03T23:03:50+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Allison Schedules Second Quarter 2026 Earnings Conference Call",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/allison-schedules-second-quarter-2026-200500493.html",
-      "ts": "2026-07-20T20:05:00+00:00",
-      "source": "PR Newswire",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ALSN Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/alsn/transcripts/660302-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-03T00:00:00+00:00"
-    },
-    {
-      "title": "ALSN Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/alsn/transcripts/564729-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-04T00:00:00+00:00"
-    },
-    {
-      "title": "ALSN Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/alsn/transcripts/396513-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-23T00:00:00+00:00"
-    },
-    {
-      "title": "ALSN Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-allison-transmission-holdings-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-03T00:00:00+00:00"
-    },
-    {
-      "title": "Allison Transmission’s Q2 Earnings Call: Our Top 5 Analyst Questions - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxON3ByeUtDRzFwQm9pSy1pZVEzUHpZUVppc0RDVTdqSmZXYXZoeGRHbWl6bVREcDd4OWVIUkJ2dndlTGV1MnhsMUZNYlYzcS1yT1oxY29JY2Z5ck5nY2NCMVRMSWpsTjhuUkxuZXQ3TnVsWW43aDBnczQ0STNCM2xTVlVPNEhTbGx2RG0zbTR4U2dlcTFsMmFtTVZYaWI2UktfNE0wZA?oc=5",
-      "ts": "2026-08-11T21:01:22+00:00",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "Allison Transmission (ALSN) Q2 2026 Earnings Call Transcript - The Globe and Mail",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOa2lFZlhPRFFvZE4zOEJDTG5XZ1BXV3VPdWY4eEs5WnZBdmlHckV4VS1GNUkwa2hZU2dhWDFYSS1waThCbWJiVjdjY0JKaWg5TlowSHJrSTFFZ2U4ODlrZlhCaVg0aDU5OTFfaEw5RXFtMDdLQkx1d0VIMTZCZWRHeENOZ2l1dkpDR2lwcWNaYWFGRjRXYlBCMmpOZlRYRHNveGtUQ2dMYjRhR1M3TURNNXlDWXFzQW1KNzFvU1BkQ1JHdGh6VTZNVDZFQzdkcnhfSDdhdGZ0REh6T2c?oc=5",
-      "ts": "2026-08-11T01:32:00+00:00",
-      "source": "The Globe and Mail",
+      "title": "Allison Transmission’s Q2 Earnings Call: Our Top 5 Analyst Questions - StockStory",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOMWRheTRYZ3N0S181eWV3NDQxdmRCTy1VUUcyR19ESGRFdm01WkZydVdBdElFYWVtVjlNb25BV3YtR2VRSXF6cmNZbmdXeXkzeF9oSXZKQl81OF8yMi0yRWRBcnRpNERsclk2R0RicjJEQl9uUEFKYjNJdHV6dUhSQkRTYnBENFdldF92LUM3RDZZSm1ocDdUN0pxWnZ1RTU5ZHJTZVRKM1FZdnVFa01UZHVxd3NjWi1rY2c2NjYtMTRJZGZUak1r?oc=5",
+      "ts": "2026-08-10T07:43:42+00:00",
+      "source": "StockStory",
       "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed."
-  },
-  "updated_at_utc": "2026-08-15T14:16:23.082336+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
