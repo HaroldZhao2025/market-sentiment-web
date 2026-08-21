@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-21T21:08:31.100858+00:00",
+  "generated_at_utc": "2026-08-21T21:42:41.908670+00:00",
   "source_policy": "free_public_only",
   "company_count": 2542,
   "complete_company_count": 2003,
   "complete_coverage_rate": 0.787962,
   "totals": {
     "complete": 2003,
-    "partial": 97,
+    "partial": 98,
     "link_only": 373,
-    "no_structured_call": 69
+    "no_structured_call": 68
   },
   "by_universe": {
     "S&P 500": {
@@ -22,9 +22,9 @@
     "S&P MidCap 400": {
       "total": 400,
       "complete": 333,
-      "partial": 9,
+      "partial": 10,
       "link_only": 52,
-      "no_structured_call": 6
+      "no_structured_call": 5
     },
     "S&P SmallCap 600": {
       "total": 603,
@@ -10529,10 +10529,10 @@
     },
     {
       "ticker": "IESC",
-      "status": "no_structured_call",
+      "status": "partial",
       "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 0,
+      "structured_calls": 1,
+      "call_links": 1,
       "filings": 0,
       "source": ""
     },
