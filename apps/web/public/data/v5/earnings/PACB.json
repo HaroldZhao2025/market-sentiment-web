@@ -12,7 +12,7 @@
       "date": "2026-08-05T16:00:00-04:00",
       "eps_estimate": -0.13,
       "reported_eps": -0.14,
-      "surprise_pct": -10.41
+      "surprise_pct": -7.01
     },
     {
       "date": "2026-05-07T16:00:00-04:00",
@@ -153,7 +153,187 @@
       "surprise_pct": -7.69
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-20T23:50:14+00:00",
+      "source": "Motley Fool",
+      "source_url": "https://finance.yahoo.com/m/c8474773-b708-3d19-af95-9b456b02e8e3/co-dx-%28codx%29-q2-2026-earnings.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 11,
+        "scored_turn_count": 11,
+        "overall_sentiment": 0.31562,
+        "prepared_sentiment": null,
+        "qa_sentiment": 0.31562,
+        "qa_tone_shift": null,
+        "uncertainty_turn_rate": 0.090909,
+        "forward_looking_turn_rate": 0.363636,
+        "topics": [
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": -0.151758
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 2,
+            "sentiment": -0.354912
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.354912
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.354912
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.715673
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": 0.005849
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.912605,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Andrew Benson",
+          "section": "qa",
+          "sentiment": 0.872784,
+          "word_count": 343,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Dwight H. Egan",
+          "section": "qa",
+          "sentiment": -0.715673,
+          "word_count": 1711,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Brian L. Brown",
+          "section": "qa",
+          "sentiment": 0.005849,
+          "word_count": 505,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Dwight H. Egan",
+          "section": "qa",
+          "sentiment": -0.769991,
+          "word_count": 241,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.905546,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Jade",
+          "section": "qa",
+          "sentiment": 0.805526,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Dwight H. Egan",
+          "section": "qa",
+          "sentiment": 0.495259,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Jade",
+          "section": "qa",
+          "sentiment": 0.780611,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Dwight H. Egan",
+          "section": "qa",
+          "sentiment": -0.49425,
+          "word_count": 129,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.673553,
+          "word_count": 193,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3359,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "PACB Earnings Call: Q2 2026",
@@ -220,6 +400,12 @@
       "ts": "2026-08-06T04:03:53+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "Co-Dx (CODX) Q2 2026 Earnings Call Transcript",
+      "url": "https://finance.yahoo.com/m/c8474773-b708-3d19-af95-9b456b02e8e3/co-dx-%28codx%29-q2-2026-earnings.html",
+      "source": "Motley Fool",
+      "ts": "2026-08-20T23:50:14+00:00"
     }
   ],
   "filing_fallback": [],
@@ -228,5 +414,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-08-20T20:09:46.150670+00:00"
+  "updated_at_utc": "2026-08-21T00:04:01.883634+00:00"
 }
