@@ -9,8 +9,6 @@ from market_sentiment.cli import fulfill_company_data as base
 
 NEWS_DEPTH_TARGET = 360
 NEWS_HISTORY_DAYS_TARGET = 1095
-FINNHUB_RECENT_LIMIT = 40
-_ORIGINAL_FINNHUB_HISTORY = base.collect_finnhub_history
 
 
 def news_metadata(path: Path) -> tuple[int, int]:
@@ -34,9 +32,14 @@ def _article_key(item: dict[str, Any]) -> tuple[str, str, str]:
     )
 
 
+def _free_public(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Exclude credentialed/provider-specific items from the free-public archive."""
+    return [item for item in items if str(item.get("provider") or "").lower() != "finnhub"]
+
+
 def retain_history(items: list[dict[str, Any]], max_items: int) -> list[dict[str, Any]]:
     """Retain recent depth while reserving evidence across historical calendar months."""
-    clean = base.deduplicate_news(items)
+    clean = base.deduplicate_news(_free_public(items))
     limit = max(1, max_items)
     if len(clean) <= limit:
         return clean
@@ -79,7 +82,7 @@ def retain_history(items: list[dict[str, Any]], max_items: int) -> list[dict[str
 
 
 def collect_historical_news(ticker: str, company_name: str, days: int, max_items: int) -> list[dict[str, Any]]:
-    """Search dated public discovery windows for up to three years and retain monthly breadth."""
+    """Search dated Yahoo/Google public discovery windows for up to three years."""
     now = base.pd.Timestamp.now(tz="UTC")
     items = base.collect_company_news(ticker, days=min(days, 180), max_items=max_items, company_name=company_name)
     horizon = min(max(1, days), NEWS_HISTORY_DAYS_TARGET)
@@ -97,16 +100,19 @@ def collect_historical_news(ticker: str, company_name: str, days: int, max_items
 
 
 def collect_finnhub_history(companies: list[dict[str, Any]], days: int) -> dict[str, list[dict[str, Any]]]:
-    """Keep Finnhub as a recent-source supplement so it cannot crowd out older public evidence."""
-    result = _ORIGINAL_FINNHUB_HISTORY(companies, min(days, 365))
-    return {
-        symbol: base.deduplicate_news(items)[:FINNHUB_RECENT_LIMIT]
-        for symbol, items in result.items()
-    }
+    """Production policy deliberately disables credentialed Finnhub history."""
+    return {}
 
 
 def merge_news(existing: list[dict[str, Any]], fresh: list[dict[str, Any]], max_items: int) -> list[dict[str, Any]]:
     return retain_history([*fresh, *existing], max_items)
+
+
+def history_payload(symbol: str, dates: list[str], prices: list[float | None], news: list[dict[str, Any]]) -> dict[str, Any]:
+    payload = base.history_payload(symbol, dates, prices, _free_public(news))
+    payload["source_policy"] = "free_public_only"
+    payload["sentiment_source"] = "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing"
+    return payload
 
 
 def target_rows(
@@ -156,8 +162,7 @@ def target_rows(
         if last_dt is None or now - last_dt >= timedelta(days=7):
             stale.append(company)
 
-    ordered = missing_news + missing_history + archive_migration + shallow_news + stale
-    return ordered[: max(1, batch_size)]
+    return (missing_news + missing_history + archive_migration + shallow_news + stale)[: max(1, batch_size)]
 
 
 def main() -> None:
@@ -165,6 +170,7 @@ def main() -> None:
     base.collect_historical_news = collect_historical_news
     base.collect_finnhub_history = collect_finnhub_history
     base.merge_news = merge_news
+    base.history_payload = history_payload
     base.main()
 
 
