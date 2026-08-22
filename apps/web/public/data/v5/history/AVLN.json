@@ -2,9 +2,9 @@
   "schema_version": 2,
   "symbol": "AVLN",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-08-21T13:34:59.523455+00:00",
+  "updated_at_utc": "2026-08-22T02:11:49.581043+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
-  "sentiment_source": "Scored retained free-public news including Finnhub when configured; missing days remain missing",
+  "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
     "2026-04-30",
     "2026-05-01",
@@ -83,7 +83,8 @@
     "2026-08-17",
     "2026-08-18",
     "2026-08-19",
-    "2026-08-20"
+    "2026-08-20",
+    "2026-08-21"
   ],
   "price": [
     29.489999771118164,
@@ -163,13 +164,14 @@
     38.25,
     38.86000061035156,
     38.970001220703125,
-    37.130001068115234
+    37.130001068115234,
+    38.369998931884766
   ],
   "sentiment": [
     0.186075,
     0.870488,
     null,
-    0.596759,
+    0.596758,
     null,
     null,
     null,
@@ -181,13 +183,13 @@
     null,
     null,
     null,
-    0.55981,
+    0.559809,
     null,
     null,
     0.705468,
     null,
     null,
-    0.598965,
+    0.598963,
     null,
     0.838854,
     null,
@@ -225,7 +227,7 @@
     null,
     null,
     null,
-    0.295506,
+    0.295509,
     null,
     null,
     null,
@@ -235,14 +237,15 @@
     null,
     0.911115,
     -0.816448,
-    0.073355,
+    0.073354,
     0.905035,
     0.019496,
-    -0.296772,
+    0.135743,
     0.897319,
     0.920455,
     0.917093,
     -0.446755,
+    null,
     null
   ],
   "sentiment_observed": [
@@ -323,6 +326,7 @@
     true,
     true,
     true,
+    false,
     false
   ]
 }
