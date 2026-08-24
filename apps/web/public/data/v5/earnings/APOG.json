@@ -1,667 +1,165 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "APOG",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-06-26T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-6-26-apogee-enterprises-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 41,
-        "scored_turn_count": 41,
-        "overall_sentiment": 0.228946,
-        "prepared_sentiment": -0.130933,
-        "qa_sentiment": 0.396033,
-        "qa_tone_shift": 0.526966,
-        "uncertainty_turn_rate": 0.146341,
-        "forward_looking_turn_rate": 0.341463,
-        "topics": [
-          {
-            "topic": "Margins & costs",
-            "mentions": 20,
-            "sentiment": -0.190266
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 13,
-            "sentiment": -0.056156
-          },
-          {
-            "topic": "Demand",
-            "mentions": 11,
-            "sentiment": -0.299952
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 3,
-            "sentiment": 0.200642
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 2,
-            "sentiment": -0.060817
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.763947
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 1,
-            "sentiment": -0.06557
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.911074,
-          "word_count": 108,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Jeremy Steffan",
-          "role": "VP of Investor Relations and Communications at Apogee Enterprises",
-          "section": "prepared",
-          "sentiment": 0.899395,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.928096,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.931618,
-          "word_count": 146,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.732913,
-          "word_count": 125,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.868489,
-          "word_count": 146,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.755348,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.916495,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.010645,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 9,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.06557,
-          "word_count": 145,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.045698,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.789566,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.67756,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.116323,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 14,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915557,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Analyst at Sidoti & Co",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.498617,
-          "word_count": 48,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.106609,
-          "word_count": 112,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "Analyst at Sidoti & Co",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.559832,
-          "word_count": 74,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.772441,
-          "word_count": 143,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.228171,
-          "word_count": 55,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Analyst at Sidoti & Co",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.791207,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.883654,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Analyst at Sidoti & Co",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.614276,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.86226,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Analyst at Singular Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.843777,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.884277,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Analyst at Singular Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.895076,
-          "word_count": 49,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.740788,
-          "word_count": 40,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 28,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.900441,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at Singular Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.872205,
-          "word_count": 22,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.773696,
-          "word_count": 33,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.76182,
-          "word_count": 22,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at Singular Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.806462,
-          "word_count": 25,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.321437,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.522357,
-          "word_count": 43,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 35,
-          "speaker": "Analyst at Singular Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.735838,
-          "word_count": 57,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "CFO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.770296,
-          "word_count": 106,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at Singular Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.53628,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.898007,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "CEO at Apogee Enterprises",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.684364,
-          "word_count": 94,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.763947,
-          "word_count": 861,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 3987,
-      "transcript_text_redistributed": false
+      "date": "2026-10-08T08:00:00-04:00",
+      "eps_estimate": 0.64,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-06-26T06:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.57,
+      "surprise_pct": 39.02
+    },
+    {
+      "date": "2026-04-24T06:00:00-04:00",
+      "eps_estimate": 0.87,
+      "reported_eps": 0.92,
+      "surprise_pct": 6.36
+    },
+    {
+      "date": "2026-01-07T06:00:00-05:00",
+      "eps_estimate": 1.01,
+      "reported_eps": 1.02,
+      "surprise_pct": 0.99
+    },
+    {
+      "date": "2025-10-09T16:00:00-04:00",
+      "eps_estimate": 0.84,
+      "reported_eps": 0.98,
+      "surprise_pct": 16.21
+    },
+    {
+      "date": "2025-06-27T06:00:00-04:00",
+      "eps_estimate": 0.45,
+      "reported_eps": 0.56,
+      "surprise_pct": 23.53
+    },
+    {
+      "date": "2025-04-24T06:00:00-04:00",
+      "eps_estimate": 0.87,
+      "reported_eps": 0.89,
+      "surprise_pct": 2.3
+    },
+    {
+      "date": "2025-01-07T06:00:00-05:00",
+      "eps_estimate": 1.11,
+      "reported_eps": 1.19,
+      "surprise_pct": 6.89
+    },
+    {
+      "date": "2024-10-04T06:00:00-04:00",
+      "eps_estimate": 1.23,
+      "reported_eps": 1.44,
+      "surprise_pct": 17.39
+    },
+    {
+      "date": "2024-06-27T06:00:00-04:00",
+      "eps_estimate": 0.99,
+      "reported_eps": 1.44,
+      "surprise_pct": 45.45
+    },
+    {
+      "date": "2024-04-18T06:00:00-04:00",
+      "eps_estimate": 1.01,
+      "reported_eps": 1.14,
+      "surprise_pct": 12.5
+    },
+    {
+      "date": "2023-12-21T06:00:00-05:00",
+      "eps_estimate": 1.11,
+      "reported_eps": 1.23,
+      "surprise_pct": 11.06
+    },
+    {
+      "date": "2023-09-19T06:00:00-04:00",
+      "eps_estimate": 1.14,
+      "reported_eps": 1.36,
+      "surprise_pct": 19.51
+    },
+    {
+      "date": "2023-06-23T06:00:00-04:00",
+      "eps_estimate": 0.9,
+      "reported_eps": 1.05,
+      "surprise_pct": 16.41
+    },
+    {
+      "date": "2023-04-12T06:00:00-04:00",
+      "eps_estimate": 0.85,
+      "reported_eps": 0.86,
+      "surprise_pct": 1.47
+    },
+    {
+      "date": "2022-12-22T06:00:00-05:00",
+      "eps_estimate": 0.97,
+      "reported_eps": 1.07,
+      "surprise_pct": 10.08
+    },
+    {
+      "date": "2022-09-20T06:00:00-04:00",
+      "eps_estimate": 0.83,
+      "reported_eps": 1.06,
+      "surprise_pct": 28.33
+    },
+    {
+      "date": "2022-06-23T06:00:00-04:00",
+      "eps_estimate": 0.56,
+      "reported_eps": 1.0,
+      "surprise_pct": 77.3
+    },
+    {
+      "date": "2022-04-07T06:00:00-04:00",
+      "eps_estimate": 0.72,
+      "reported_eps": 0.91,
+      "surprise_pct": 27.09
+    },
+    {
+      "date": "2021-12-21T06:00:00-05:00",
+      "eps_estimate": 0.53,
+      "reported_eps": 0.63,
+      "surprise_pct": 17.98
+    },
+    {
+      "date": "2021-09-21T06:00:00-04:00",
+      "eps_estimate": 0.54,
+      "reported_eps": 0.53,
+      "surprise_pct": -0.93
+    },
+    {
+      "date": "2021-06-25T06:00:00-04:00",
+      "eps_estimate": 0.37,
+      "reported_eps": 0.42,
+      "surprise_pct": 14.29
+    },
+    {
+      "date": "2021-04-08T06:00:00-04:00",
+      "eps_estimate": 0.56,
+      "reported_eps": 0.63,
+      "surprise_pct": 13.0
+    },
+    {
+      "date": "2020-12-18T06:00:00-05:00",
+      "eps_estimate": 0.69,
+      "reported_eps": 0.9,
+      "surprise_pct": 31.39
+    },
+    {
+      "date": "2020-09-17T06:00:00-04:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.73,
+      "surprise_pct": 151.72
     }
   ],
-  "call_links": [
-    {
-      "title": "APOG Earnings Call: Q1 2027",
-      "url": "https://stockanalysis.com/stocks/apog/transcripts/654390-q1-2027/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-06-26T00:00:00+00:00"
-    },
-    {
-      "title": "APOG Earnings Call: Q4 2026",
-      "url": "https://stockanalysis.com/stocks/apog/transcripts/534137-q4-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-24T00:00:00+00:00"
-    },
-    {
-      "title": "APOG Earnings Call: Q3 2026",
-      "url": "https://stockanalysis.com/stocks/apog/transcripts/396963-q3-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-01-07T00:00:00+00:00"
-    },
-    {
-      "title": "APOG Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-6-26-apogee-enterprises-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-06-26T00:00:00+00:00"
-    },
-    {
-      "title": "APOG Q1 Earnings Call Keeps Focus on Kalwall, Guidance",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/apog-q1-earnings-call-keeps-104500615.html",
-      "ts": "2026-06-30T10:45:00+00:00",
-      "source": "Zacks",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "APOG Q1 Earnings Call Keeps Focus on Kalwall, Guidance - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPcTdwYTFBMGNIVXZnQzNDV1BRVHFPX1l1ODZvYjRiT2tIelZDVUh5MkhROUVuYjZGZXVfLUM5NEItbUd2eVQzM21pVHdITGlSN2E0VDdSeXNhRThaYWNSSHl4LU9XZkE3YlNldW9KX1NtdWlnamN6NW12OUF3WmJiM0g5ZE5Vd1d5SjNsWnNJWjVRcGQzOHJz?oc=5",
-      "ts": "2026-06-30T07:00:00+00:00",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "Apogee (APOG) Q1 2027 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/06/26/apogee-apog-q1-2027-earnings-call-transcript/",
-      "ts": "2026-06-27T00:31:59+00:00",
-      "source": "Motley Fool",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Apogee Enterprises Inc (APOG) Q1 2027 Earnings Call Highlights: Navigating Challenges with ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/apogee-enterprises-inc-apog-q1-210022679.html",
-      "ts": "2026-06-26T21:00:22+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Apogee Enterprises, Inc. Q1 2027 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-apogee-enterprises-inc-q1-2027-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-06-26T16:43:09+00:00",
-      "source": "Moby",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Apogee Enterprises, Inc. 2027 Q1 - Results - Earnings Call Presentation (NASDAQ:APOG) 2026-06-26 - Seeking Alpha",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQLVk0d1dNa1FYNXVsaVljdUJ5aTQ4Q3RpZ01aemVva0NLR3NobTh4N0JXeV9hMXJoamtGLWlmZU5qU2RWNmdCdF94OFAyZFR4aFdZVERkbjhOR2RjUGpIcVNtZ1J2N2FfSUhReXd0M1lVUi1IT0dpVHJ3ZmJ2TGZmUjE2UF9NaEw5c1JxY0l0bHpUdklsN2Y3b2wyYUtTanljLTgwNk9sZDVVdw?oc=5",
-      "ts": "2026-06-26T07:00:00+00:00",
-      "source": "Seeking Alpha",
-      "provider": "google_news_rss"
-    }
-  ],
+  "calls": [],
+  "call_links": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:26:17.748274+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

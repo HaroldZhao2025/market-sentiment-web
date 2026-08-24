@@ -1,881 +1,159 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AMTB",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-23T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-23-amerant-bancorp-inc-stock-2/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 64,
-        "scored_turn_count": 64,
-        "overall_sentiment": 0.135565,
-        "prepared_sentiment": -0.447127,
-        "qa_sentiment": 0.509086,
-        "qa_tone_shift": 0.956213,
-        "uncertainty_turn_rate": 0.171875,
-        "forward_looking_turn_rate": 0.375,
-        "topics": [
-          {
-            "topic": "Margins & costs",
-            "mentions": 27,
-            "sentiment": -0.211391
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 20,
-            "sentiment": 0.121764
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 8,
-            "sentiment": -0.486432
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 6,
-            "sentiment": -0.56344
-          },
-          {
-            "topic": "Demand",
-            "mentions": 6,
-            "sentiment": -0.011059
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 3,
-            "sentiment": -0.139265
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.907794,
-          "word_count": 76,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Laura Rossi",
-          "role": "Head of Investor Relations and Strategy at Amerant",
-          "section": "prepared",
-          "sentiment": 0.901793,
-          "word_count": 106,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.100379,
-          "word_count": 151,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.069401,
-          "word_count": 145,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.855086,
-          "word_count": 152,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.862592,
-          "word_count": 112,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.715,
-          "word_count": 144,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.382904,
-          "word_count": 95,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.93213,
-          "word_count": 141,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.017199,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.853029,
-          "word_count": 143,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.928883,
-          "word_count": 106,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.880385,
-          "word_count": 136,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.914966,
-          "word_count": 138,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.931754,
-          "word_count": 148,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.936306,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.009794,
-          "word_count": 143,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.059573,
-          "word_count": 122,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.106533,
-          "word_count": 152,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.238433,
-          "word_count": 125,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.915382,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 21,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.893423,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 22,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.036116,
-          "word_count": 90,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 23,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.735913,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 24,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.823543,
-          "word_count": 124,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.921008,
-          "word_count": 104,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.61908,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.665611,
-          "word_count": 64,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 28,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.079371,
-          "word_count": 130,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.719447,
-          "word_count": 70,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 30,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.59125,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.829585,
-          "word_count": 30,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.791362,
-          "word_count": 8,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.543919,
-          "word_count": 77,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 34,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.689803,
-          "word_count": 116,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.140042,
-          "word_count": 39,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.8628,
-          "word_count": 65,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.374453,
-          "word_count": 96,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 38,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.767325,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.916497,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at Stephens",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.786649,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst at Stephens",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.88606,
-          "word_count": 90,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.674769,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.549688,
-          "word_count": 119,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 44,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.831461,
-          "word_count": 59,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.836723,
-          "word_count": 78,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 46,
-          "speaker": "Analyst at Stephens",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.863973,
-          "word_count": 34,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.71034,
-          "word_count": 52,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at Stephens",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.837387,
-          "word_count": 90,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.840416,
-          "word_count": 99,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 50,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.552401,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 51,
-          "speaker": "Analyst at Stephens",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.844182,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.777539,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914742,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.81728,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.86195,
-          "word_count": 31,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 56,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.887819,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "CFO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.604332,
-          "word_count": 120,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 58,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.692392,
-          "word_count": 49,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 59,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.450715,
-          "word_count": 45,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.595874,
-          "word_count": 122,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 61,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913766,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "President and CEO at Amerant",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.533634,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.749522,
-          "word_count": 899,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 6344,
-      "transcript_text_redistributed": false
+      "date": "2026-10-27T16:00:00-04:00",
+      "eps_estimate": 0.57,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-23T16:00:00-04:00",
+      "eps_estimate": 0.39,
+      "reported_eps": 0.52,
+      "surprise_pct": 33.38
+    },
+    {
+      "date": "2026-04-23T16:00:00-04:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.44,
+      "surprise_pct": 1.15
+    },
+    {
+      "date": "2026-01-22T17:00:00-05:00",
+      "eps_estimate": 0.36,
+      "reported_eps": 0.53,
+      "surprise_pct": 49.3
+    },
+    {
+      "date": "2025-10-28T06:00:00-04:00",
+      "eps_estimate": 0.53,
+      "reported_eps": 0.39,
+      "surprise_pct": -26.42
+    },
+    {
+      "date": "2025-07-23T16:00:00-04:00",
+      "eps_estimate": 0.39,
+      "reported_eps": 0.57,
+      "surprise_pct": 44.67
+    },
+    {
+      "date": "2025-04-23T16:00:00-04:00",
+      "eps_estimate": 0.4,
+      "reported_eps": 0.24,
+      "surprise_pct": -39.24
+    },
+    {
+      "date": "2025-01-22T17:00:00-05:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.5,
+      "surprise_pct": 50.38
+    },
+    {
+      "date": "2024-10-23T16:00:00-04:00",
+      "eps_estimate": 0.21,
+      "reported_eps": 0.27,
+      "surprise_pct": 31.07
+    },
+    {
+      "date": "2024-07-24T16:00:00-04:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.28,
+      "surprise_pct": -20.45
+    },
+    {
+      "date": "2024-04-24T17:00:00-04:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.32,
+      "surprise_pct": -14.67
+    },
+    {
+      "date": "2024-01-24T17:00:00-05:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.46,
+      "surprise_pct": 5.75
+    },
+    {
+      "date": "2023-10-19T16:00:00-04:00",
+      "eps_estimate": 0.59,
+      "reported_eps": 0.64,
+      "surprise_pct": 9.4
+    },
+    {
+      "date": "2023-07-20T17:00:00-04:00",
+      "eps_estimate": 0.21,
+      "reported_eps": 0.24,
+      "surprise_pct": 14.29
+    },
+    {
+      "date": "2023-04-20T16:00:00-04:00",
+      "eps_estimate": 0.69,
+      "reported_eps": 0.59,
+      "surprise_pct": -14.24
+    },
+    {
+      "date": "2023-01-19T17:00:00-05:00",
+      "eps_estimate": 0.68,
+      "reported_eps": 0.4,
+      "surprise_pct": -41.0
+    },
+    {
+      "date": "2022-10-20T16:00:00-04:00",
+      "eps_estimate": 0.53,
+      "reported_eps": 0.63,
+      "surprise_pct": 19.32
+    },
+    {
+      "date": "2022-07-20T16:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.45,
+      "surprise_pct": -2.7
+    },
+    {
+      "date": "2022-04-20T16:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.63,
+      "surprise_pct": 50.6
+    },
+    {
+      "date": "2022-01-19T16:00:00-05:00",
+      "eps_estimate": 0.4,
+      "reported_eps": 0.52,
+      "surprise_pct": 30.0
+    },
+    {
+      "date": "2021-10-20T16:00:00-04:00",
+      "eps_estimate": 0.39,
+      "reported_eps": 0.47,
+      "surprise_pct": 20.51
+    },
+    {
+      "date": "2021-07-21T17:00:00-04:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.46,
+      "surprise_pct": 22.12
+    },
+    {
+      "date": "2021-04-28T17:00:00-04:00",
+      "eps_estimate": 0.24,
+      "reported_eps": 0.39,
+      "surprise_pct": 64.21
+    },
+    {
+      "date": "2021-01-29T06:00:00-05:00",
+      "eps_estimate": 0.13,
+      "reported_eps": 0.27,
+      "surprise_pct": 107.69
+    },
+    {
+      "date": "2020-10-29T06:00:00-04:00",
+      "eps_estimate": 0.06,
+      "reported_eps": 0.08,
+      "surprise_pct": 42.86
     }
   ],
-  "filing_fallback": [],
-  "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
+  "calls": [],
   "call_links": [
     {
       "title": "Amerant Bancorp Inc. 2026 Q2 - Results - Earnings Call Presentation (NYSE:AMTB) 2026-08-01 - Seeking Alpha",
@@ -904,38 +182,13 @@
       "ts": "2026-07-24T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
-    },
-    {
-      "title": "AMTB Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/amtb/transcripts/654387-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-24T00:00:00+00:00"
-    },
-    {
-      "title": "AMTB Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/amtb/transcripts/545626-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-24T00:00:00+00:00"
-    },
-    {
-      "title": "AMTB Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/amtb/transcripts/398291-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-01-23T00:00:00+00:00"
-    },
-    {
-      "title": "AMTB Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-amerant-bancorp-inc-stock-2/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-23T00:00:00+00:00"
-    },
-    {
-      "title": "AMTB Q2 2026 Earnings: EPS Beats Consensus by 32.7% with $0.53 Print - Investor Earnings Call - Vinanet",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQU1VsNUhZVFhURmJhRXRGcjgtT09nVk1GY2ZnaTJuZEJPRFNrb3BwMTFWbldYWU1pU3dCa3A0YTNqczE5WE1CNmE5R3ZxQWhNWHhPUGpIUkZMdU04cG1ybzQ0eEdiYmdHajhQOU5Ed0g1ZjVNYTY0ekd4QVRILWdQekYydVotWERWY214N2RCcjVoVkJzOG1YUFhqS2hPZUlyVGVzWVZrSGI?oc=5",
-      "ts": "2026-08-17T00:47:15+00:00",
-      "source": "Vinanet",
-      "provider": "google_news_rss"
     }
   ],
-  "updated_at_utc": "2026-08-17T19:01:03.072485+00:00"
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

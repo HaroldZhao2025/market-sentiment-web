@@ -1,964 +1,165 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ANGO",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-14T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-14-angiodynamics-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 69,
-        "scored_turn_count": 69,
-        "overall_sentiment": 0.147191,
-        "prepared_sentiment": -0.217174,
-        "qa_sentiment": 0.381425,
-        "qa_tone_shift": 0.598599,
-        "uncertainty_turn_rate": 0.072464,
-        "forward_looking_turn_rate": 0.463768,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 29,
-            "sentiment": -0.013886
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 13,
-            "sentiment": 0.077751
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 9,
-            "sentiment": -0.548593
-          },
-          {
-            "topic": "Demand",
-            "mentions": 9,
-            "sentiment": -0.125146
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 6,
-            "sentiment": -0.240346
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 5,
-            "sentiment": 0.040546
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.929387,
-          "word_count": 113,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 1,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.857171,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.926862,
-          "word_count": 137,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.90382,
-          "word_count": 56,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.855029,
-          "word_count": 118,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.903391,
-          "word_count": 125,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.273982,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.65072,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.143222,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.329549,
-          "word_count": 148,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.767655,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 11,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.268459,
-          "word_count": 144,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.91706,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.897809,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.891162,
-          "word_count": 121,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 15,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.901553,
-          "word_count": 126,
-          "topic_hits": [
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.007969,
-          "word_count": 139,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.930753,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 18,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.226209,
-          "word_count": 119,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.757243,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 20,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.604181,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 21,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.413701,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 22,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.808711,
-          "word_count": 149,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 23,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.086944,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 24,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.738183,
-          "word_count": 122,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.712244,
-          "word_count": 137,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.648316,
-          "word_count": 58,
-          "topic_hits": [
-            "Guidance",
-            "AI & technology",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 27,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.91484,
-          "word_count": 93,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at Canaccord Genuity",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.729366,
-          "word_count": 81,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.402211,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 30,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.284702,
-          "word_count": 84,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at Canaccord Genuity",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.874726,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.760902,
-          "word_count": 123,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.552047,
-          "word_count": 42,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at Canaccord Genuity",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.060864,
-          "word_count": 67,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 35,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.034121,
-          "word_count": 129,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.095829,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at Canaccord Genuity",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.597571,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908149,
-          "word_count": 41,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Frank Takkinen",
-          "role": "Senior Research Analyst at Lake Street Capital Markets",
-          "section": "qa",
-          "sentiment": 0.324355,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 40,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.224798,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 41,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.770476,
-          "word_count": 122,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 42,
-          "speaker": "Frank Takkinen",
-          "role": "Senior Research Analyst at Lake Street Capital Markets",
-          "section": "qa",
-          "sentiment": 0.71823,
-          "word_count": 61,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.235517,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 44,
-          "speaker": "Frank Takkinen",
-          "role": "Senior Research Analyst at Lake Street Capital Markets",
-          "section": "qa",
-          "sentiment": 0.828763,
-          "word_count": 70,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736286,
-          "word_count": 146,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.547519,
-          "word_count": 125,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.237067,
-          "word_count": 85,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Frank Takkinen",
-          "role": "Senior Research Analyst at Lake Street Capital Markets",
-          "section": "qa",
-          "sentiment": 0.553411,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.90308,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Analyst at H.C. Wainwright",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.811016,
-          "word_count": 51,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.683178,
-          "word_count": 146,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.194283,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.357735,
-          "word_count": 65,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Analyst at H.C. Wainwright",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.685484,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904126,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Analyst at Freedom Broker",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.777083,
-          "word_count": 65,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.737849,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.124124,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Analyst at Freedom Broker",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.760469,
-          "word_count": 103,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 60,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.349898,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 61,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.485882,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 62,
-          "speaker": "EVP and CFO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.835563,
-          "word_count": 47,
-          "topic_hits": [
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at Freedom Broker",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.512615,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909873,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.331956,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.132075,
-          "word_count": 147,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 67,
-          "speaker": "President and CEO at AngioDynamics",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.609609,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.321959,
-          "word_count": 936,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 7892,
-      "transcript_text_redistributed": false
+      "date": "2026-10-01T08:00:00-04:00",
+      "eps_estimate": -0.11,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-14T06:00:00-04:00",
+      "eps_estimate": -0.09,
+      "reported_eps": -0.07,
+      "surprise_pct": 22.22
+    },
+    {
+      "date": "2026-04-02T06:00:00-04:00",
+      "eps_estimate": -0.11,
+      "reported_eps": 0.02,
+      "surprise_pct": 118.18
+    },
+    {
+      "date": "2026-01-06T06:00:00-05:00",
+      "eps_estimate": -0.1,
+      "reported_eps": null,
+      "surprise_pct": 100.0
+    },
+    {
+      "date": "2025-10-02T06:00:00-04:00",
+      "eps_estimate": -0.12,
+      "reported_eps": -0.1,
+      "surprise_pct": 18.92
+    },
+    {
+      "date": "2025-07-15T06:00:00-04:00",
+      "eps_estimate": -0.12,
+      "reported_eps": -0.03,
+      "surprise_pct": 75.0
+    },
+    {
+      "date": "2025-04-02T06:00:00-04:00",
+      "eps_estimate": -0.13,
+      "reported_eps": 0.03,
+      "surprise_pct": 123.08
+    },
+    {
+      "date": "2025-01-08T06:00:00-05:00",
+      "eps_estimate": -0.11,
+      "reported_eps": -0.04,
+      "surprise_pct": 63.64
+    },
+    {
+      "date": "2024-10-03T06:00:00-04:00",
+      "eps_estimate": -0.15,
+      "reported_eps": -0.11,
+      "surprise_pct": 25.0
+    },
+    {
+      "date": "2024-07-16T06:00:00-04:00",
+      "eps_estimate": -0.17,
+      "reported_eps": -0.06,
+      "surprise_pct": 64.0
+    },
+    {
+      "date": "2024-04-04T07:00:00-04:00",
+      "eps_estimate": -0.15,
+      "reported_eps": -0.16,
+      "surprise_pct": -3.23
+    },
+    {
+      "date": "2024-01-05T07:00:00-05:00",
+      "eps_estimate": -0.07,
+      "reported_eps": -0.05,
+      "surprise_pct": 33.33
+    },
+    {
+      "date": "2023-10-04T07:00:00-04:00",
+      "eps_estimate": -0.13,
+      "reported_eps": -0.12,
+      "surprise_pct": 7.69
+    },
+    {
+      "date": "2023-07-12T07:00:00-04:00",
+      "eps_estimate": 0.02,
+      "reported_eps": 0.02,
+      "surprise_pct": -11.11
+    },
+    {
+      "date": "2023-03-30T07:00:00-04:00",
+      "eps_estimate": -0.01,
+      "reported_eps": -0.03,
+      "surprise_pct": -300.0
+    },
+    {
+      "date": "2023-01-05T07:00:00-05:00",
+      "eps_estimate": -0.01,
+      "reported_eps": 0.01,
+      "surprise_pct": 200.0
+    },
+    {
+      "date": "2022-10-06T07:00:00-04:00",
+      "eps_estimate": -0.02,
+      "reported_eps": -0.06,
+      "surprise_pct": -166.67
+    },
+    {
+      "date": "2022-07-12T07:00:00-04:00",
+      "eps_estimate": 0.01,
+      "reported_eps": 0.01,
+      "surprise_pct": 33.33
+    },
+    {
+      "date": "2022-04-07T07:00:00-04:00",
+      "eps_estimate": -0.01,
+      "reported_eps": 0.03,
+      "surprise_pct": 340.0
+    },
+    {
+      "date": "2022-01-06T07:00:00-05:00",
+      "eps_estimate": null,
+      "reported_eps": -0.02,
+      "surprise_pct": null
+    },
+    {
+      "date": "2021-09-30T07:00:00-04:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.02,
+      "surprise_pct": 55.56
+    },
+    {
+      "date": "2021-07-13T07:00:00-04:00",
+      "eps_estimate": null,
+      "reported_eps": null,
+      "surprise_pct": 100.0
+    },
+    {
+      "date": "2021-03-30T07:00:00-04:00",
+      "eps_estimate": -0.02,
+      "reported_eps": 0.02,
+      "surprise_pct": 185.73
+    },
+    {
+      "date": "2021-01-07T07:00:00-05:00",
+      "eps_estimate": -0.02,
+      "reported_eps": 0.01,
+      "surprise_pct": 150.0
+    },
+    {
+      "date": "2020-09-29T07:00:00-04:00",
+      "eps_estimate": -0.07,
+      "reported_eps": 0.02,
+      "surprise_pct": 130.0
     }
   ],
-  "call_links": [
-    {
-      "title": "ANGO Earnings Call: Q4 2026",
-      "url": "https://stockanalysis.com/stocks/ango/transcripts/610217-q4-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-14T00:00:00+00:00"
-    },
-    {
-      "title": "ANGO Earnings Call: Q3 2026",
-      "url": "https://stockanalysis.com/stocks/ango/transcripts/537393-q3-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-02T00:00:00+00:00"
-    },
-    {
-      "title": "ANGO Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/ango/transcripts/392757-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-01-06T00:00:00+00:00"
-    },
-    {
-      "title": "ANGO Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-14-angiodynamics-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-14T00:00:00+00:00"
-    }
-  ],
+  "calls": [],
+  "call_links": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-17T19:01:17.096456+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

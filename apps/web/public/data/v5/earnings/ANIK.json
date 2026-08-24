@@ -1,735 +1,159 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ANIK",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-29T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-29-anika-therapeutics-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 51,
-        "scored_turn_count": 51,
-        "overall_sentiment": -0.026121,
-        "prepared_sentiment": -0.361717,
-        "qa_sentiment": 0.296568,
-        "qa_tone_shift": 0.658285,
-        "uncertainty_turn_rate": 0.098039,
-        "forward_looking_turn_rate": 0.490196,
-        "topics": [
-          {
-            "topic": "Margins & costs",
-            "mentions": 24,
-            "sentiment": -0.20897
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 22,
-            "sentiment": -0.179682
-          },
-          {
-            "topic": "Demand",
-            "mentions": 15,
-            "sentiment": -0.347365
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 6,
-            "sentiment": -0.008252
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 3,
-            "sentiment": -0.009687
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 2,
-            "sentiment": 0.435969
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.867129,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Matt Hall",
-          "role": "Executive Director of Corporate Development and Investor Relations at Anika",
-          "section": "prepared",
-          "sentiment": 0.910123,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "Matt Hall",
-          "role": "Executive Director of Corporate Development and Investor Relations at Anika",
-          "section": "prepared",
-          "sentiment": 0.870875,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 3,
-          "speaker": "Matt Hall",
-          "role": "Executive Director of Corporate Development and Investor Relations at Anika",
-          "section": "prepared",
-          "sentiment": 0.826755,
-          "word_count": 82,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.907514,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.904688,
-          "word_count": 143,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.927721,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.910168,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.932736,
-          "word_count": 149,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 5
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.92323,
-          "word_count": 152,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.929549,
-          "word_count": 149,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.879573,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.817885,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 13,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.658894,
-          "word_count": 138,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.844406,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.588307,
-          "word_count": 38,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Ian McLeod",
-          "role": "Senior Vice President, Chief Accounting Officer, and Treasurer at Anika",
-          "section": "prepared",
-          "sentiment": -0.938746,
-          "word_count": 120,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Ian McLeod",
-          "role": "Senior Vice President, Chief Accounting Officer, and Treasurer at Anika",
-          "section": "prepared",
-          "sentiment": -0.917161,
-          "word_count": 112,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "Ian McLeod",
-          "role": "Senior Vice President, Chief Accounting Officer, and Treasurer at Anika",
-          "section": "prepared",
-          "sentiment": -0.002,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "Ian McLeod",
-          "role": "Senior Vice President, Chief Accounting Officer, and Treasurer at Anika",
-          "section": "prepared",
-          "sentiment": -0.150963,
-          "word_count": 127,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Ian McLeod",
-          "role": "Senior Vice President, Chief Accounting Officer, and Treasurer at Anika",
-          "section": "prepared",
-          "sentiment": -0.001544,
-          "word_count": 131,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Ian McLeod",
-          "role": "Senior Vice President, Chief Accounting Officer, and Treasurer at Anika",
-          "section": "prepared",
-          "sentiment": -0.802034,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 22,
-          "speaker": "Ian McLeod",
-          "role": "Senior Vice President, Chief Accounting Officer, and Treasurer at Anika",
-          "section": "prepared",
-          "sentiment": -0.244106,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 23,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.819859,
-          "word_count": 146,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 24,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.406665,
-          "word_count": 55,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.916588,
-          "word_count": 96,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.250816,
-          "word_count": 69,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 27,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.000982,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 28,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.892374,
-          "word_count": 51,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.374851,
-          "word_count": 39,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.794891,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.196094,
-          "word_count": 69,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.86145,
-          "word_count": 29,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.584753,
-          "word_count": 63,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.844298,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.906415,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at Barrington Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.563833,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.498685,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 38,
-          "speaker": "Analyst at Barrington Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.752185,
-          "word_count": 63,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 39,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.025099,
-          "word_count": 113,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 40,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.150479,
-          "word_count": 98,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst at Barrington Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.418454,
-          "word_count": 94,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.195345,
-          "word_count": 127,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.115942,
-          "word_count": 83,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Analyst at Barrington Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.442549,
-          "word_count": 115,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.239141,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 46,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.086856,
-          "word_count": 116,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at Barrington Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.720451,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904198,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "President and CEO at Anika",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.462579,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.873938,
-          "word_count": 892,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        }
-      ],
-      "transcript_word_count": 5970,
-      "transcript_text_redistributed": false
+      "date": "2026-11-04T07:00:00-05:00",
+      "eps_estimate": 0.17,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-29T07:00:00-04:00",
+      "eps_estimate": 0.03,
+      "reported_eps": 0.42,
+      "surprise_pct": 1300.0
+    },
+    {
+      "date": "2026-04-29T07:00:00-04:00",
+      "eps_estimate": null,
+      "reported_eps": 0.27,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-02-26T07:00:00-05:00",
+      "eps_estimate": 0.02,
+      "reported_eps": 0.31,
+      "surprise_pct": 1450.0
+    },
+    {
+      "date": "2025-11-05T07:00:00-05:00",
+      "eps_estimate": 0.02,
+      "reported_eps": 0.04,
+      "surprise_pct": 100.0
+    },
+    {
+      "date": "2025-07-30T07:00:00-04:00",
+      "eps_estimate": -0.13,
+      "reported_eps": -0.13,
+      "surprise_pct": null
+    },
+    {
+      "date": "2025-05-09T07:00:00-04:00",
+      "eps_estimate": 0.09,
+      "reported_eps": -0.06,
+      "surprise_pct": -166.67
+    },
+    {
+      "date": "2025-03-12T16:00:00-04:00",
+      "eps_estimate": 0.09,
+      "reported_eps": -0.03,
+      "surprise_pct": -133.33
+    },
+    {
+      "date": "2024-10-31T07:00:00-04:00",
+      "eps_estimate": 0.3,
+      "reported_eps": -0.25,
+      "surprise_pct": -183.33
+    },
+    {
+      "date": "2024-08-08T16:00:00-04:00",
+      "eps_estimate": 0.2,
+      "reported_eps": 0.17,
+      "surprise_pct": -12.82
+    },
+    {
+      "date": "2024-05-08T16:00:00-04:00",
+      "eps_estimate": -0.08,
+      "reported_eps": 0.09,
+      "surprise_pct": 212.5
+    },
+    {
+      "date": "2024-03-13T16:00:00-04:00",
+      "eps_estimate": -0.23,
+      "reported_eps": 0.05,
+      "surprise_pct": 122.06
+    },
+    {
+      "date": "2023-11-02T16:00:00-04:00",
+      "eps_estimate": -0.35,
+      "reported_eps": null,
+      "surprise_pct": 100.0
+    },
+    {
+      "date": "2023-08-08T16:00:00-04:00",
+      "eps_estimate": -0.32,
+      "reported_eps": 0.06,
+      "surprise_pct": 118.56
+    },
+    {
+      "date": "2023-05-09T16:00:00-04:00",
+      "eps_estimate": -0.32,
+      "reported_eps": -0.36,
+      "surprise_pct": -12.5
+    },
+    {
+      "date": "2023-03-06T16:00:00-05:00",
+      "eps_estimate": -0.22,
+      "reported_eps": -0.21,
+      "surprise_pct": 3.08
+    },
+    {
+      "date": "2022-11-08T16:00:00-05:00",
+      "eps_estimate": -0.23,
+      "reported_eps": -0.05,
+      "surprise_pct": 78.57
+    },
+    {
+      "date": "2022-08-03T16:00:00-04:00",
+      "eps_estimate": -0.21,
+      "reported_eps": -0.12,
+      "surprise_pct": 41.94
+    },
+    {
+      "date": "2022-05-05T16:00:00-04:00",
+      "eps_estimate": -0.31,
+      "reported_eps": -0.11,
+      "surprise_pct": 64.89
+    },
+    {
+      "date": "2022-03-08T16:00:00-05:00",
+      "eps_estimate": -0.21,
+      "reported_eps": -0.23,
+      "surprise_pct": -7.96
+    },
+    {
+      "date": "2021-11-04T16:00:00-04:00",
+      "eps_estimate": 0.05,
+      "reported_eps": 0.05,
+      "surprise_pct": 1.71
+    },
+    {
+      "date": "2021-08-05T16:00:00-04:00",
+      "eps_estimate": -0.03,
+      "reported_eps": 0.09,
+      "surprise_pct": 434.95
+    },
+    {
+      "date": "2021-05-06T16:00:00-04:00",
+      "eps_estimate": 0.01,
+      "reported_eps": 0.06,
+      "surprise_pct": 500.0
+    },
+    {
+      "date": "2021-03-04T16:00:00-05:00",
+      "eps_estimate": 0.11,
+      "reported_eps": 0.12,
+      "surprise_pct": 9.09
+    },
+    {
+      "date": "2020-11-04T16:00:00-05:00",
+      "eps_estimate": 0.13,
+      "reported_eps": 0.05,
+      "surprise_pct": -61.54
     }
   ],
-  "filing_fallback": [],
-  "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
+  "calls": [],
   "call_links": [
     {
       "title": "Anika (ANIK) Q2 2026 Earnings Call Transcript",
@@ -737,38 +161,13 @@
       "ts": "2026-08-08T01:00:31+00:00",
       "source": "Motley Fool",
       "provider": "yahoo_public"
-    },
-    {
-      "title": "Anika (ANIK) Q2 2026 Earnings Call Transcript - The Globe and Mail",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPQndvRXR6SmZjRVJXbk5tSEZJZVgzOTRYMURraEVpSnRuS0pid0ZuQ0tEVlFMLXlZY1Q0VXU0OHdjdTRveTRvRHVRS2xyN2Y5c0Y1dmh5aUd1TnNCQXJ2UmJtUVRZS0Q5YnU2VmM0MzFiRkdjb1FmUHhzcmpnTGF2UkdZYjZnVXprQzJoeWR2TTVIeHd0b1pscHZ4dEtLY3VtVFVtaWJsN2lPc2hrd3lpYjFoTHJOY3FJdjluTG12a0hKa01ZeEJv?oc=5",
-      "ts": "2026-08-08T01:00:00+00:00",
-      "source": "The Globe and Mail",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "ANIK Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/anik/transcripts/656954-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-29T00:00:00+00:00"
-    },
-    {
-      "title": "ANIK Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/anik/transcripts/571881-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-29T00:00:00+00:00"
-    },
-    {
-      "title": "ANIK Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/anik/transcripts/415530-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-26T00:00:00+00:00"
-    },
-    {
-      "title": "ANIK Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-anika-therapeutics-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
-  "updated_at_utc": "2026-08-17T19:01:25.292521+00:00"
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

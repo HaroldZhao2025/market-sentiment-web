@@ -1,1082 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ANIP",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-07T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-7-ani-pharmaceuticals-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 78,
-        "scored_turn_count": 78,
-        "overall_sentiment": 0.180033,
-        "prepared_sentiment": -0.373043,
-        "qa_sentiment": 0.489756,
-        "qa_tone_shift": 0.862799,
-        "uncertainty_turn_rate": 0.064103,
-        "forward_looking_turn_rate": 0.487179,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 34,
-            "sentiment": -0.211128
-          },
-          {
-            "topic": "Demand",
-            "mentions": 22,
-            "sentiment": -0.030118
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 4,
-            "sentiment": -0.229309
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 2,
-            "sentiment": 0.089722
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 2,
-            "sentiment": 0.056999
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.898393
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.914376,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "VP of Investor Relations at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.911851,
-          "word_count": 138,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "VP of Investor Relations at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.920333,
-          "word_count": 90,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.930407,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.889945,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.887521,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.699902,
-          "word_count": 141,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.795196,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.876966,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.718949,
-          "word_count": 119,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.898984,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 11,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.106914,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "Chris Mutz",
-          "role": "SVP and Head of Rare Disease at ANI Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": -0.908797,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "Chris Mutz",
-          "role": "SVP and Head of Rare Disease at ANI Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": 0.606704,
-          "word_count": 106,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "Chris Mutz",
-          "role": "SVP and Head of Rare Disease at ANI Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": -0.887623,
-          "word_count": 137,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Chris Mutz",
-          "role": "SVP and Head of Rare Disease at ANI Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": 0.795023,
-          "word_count": 121,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 16,
-          "speaker": "Chris Mutz",
-          "role": "SVP and Head of Rare Disease at ANI Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": -0.88216,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Chris Mutz",
-          "role": "SVP and Head of Rare Disease at ANI Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": -0.675675,
-          "word_count": 139,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "Chris Mutz",
-          "role": "SVP and Head of Rare Disease at ANI Pharmaceuticals",
-          "section": "prepared",
-          "sentiment": -0.705961,
-          "word_count": 122,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.863449,
-          "word_count": 123,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 20,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.933126,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.03713,
-          "word_count": 126,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.784395,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.537723,
-          "word_count": 114,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 24,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.041244,
-          "word_count": 118,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 25,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.845374,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 26,
-          "speaker": "SVP and CFO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.913113,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.812998,
-          "word_count": 109,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.907744,
-          "word_count": 58,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Managing Director at Guggenheim Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.603045,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 30,
-          "speaker": "Managing Director at Guggenheim Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.73162,
-          "word_count": 65,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.645915,
-          "word_count": 113,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.555544,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.155297,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 34,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.476454,
-          "word_count": 62,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.890129,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Managing Director at Barclays",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.539446,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Managing Director at Barclays",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.861448,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.084464,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 39,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.230554,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 40,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.229878,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 41,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.891944,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "SVP of Equity Research at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.388268,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 43,
-          "speaker": "SVP of Equity Research at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.587283,
-          "word_count": 28,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 44,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.684784,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 45,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.484764,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 46,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.541141,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "SVP of Equity Research at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.724419,
-          "word_count": 96,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.821105,
-          "word_count": 60,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.862571,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Managing Director at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.821851,
-          "word_count": 125,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Managing Director at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.274597,
-          "word_count": 38,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.876642,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.530028,
-          "word_count": 130,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.790196,
-          "word_count": 62,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 55,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.886978,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.814559,
-          "word_count": 102,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 57,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.779883,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.550086,
-          "word_count": 106,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.885254,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Managing Director at Canaccord Genuity",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.77574,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 61,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.604854,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 62,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.622506,
-          "word_count": 139,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 63,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.828119,
-          "word_count": 118,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.747409,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.894524,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Managing Director at Canaccord Genuity",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.734583,
-          "word_count": 101,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.724304,
-          "word_count": 120,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 68,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.579966,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896649,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "Senior Managing Director at Leerink Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.701826,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 71,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.344148,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.576984,
-          "word_count": 79,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.897768,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Managing Director at H.C. Wainwright",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.745421,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 75,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.487469,
-          "word_count": 125,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "President and CEO at ANI Pharmaceuticals",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.5406,
-          "word_count": 87,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.898393,
-          "word_count": 830,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 8534,
-      "transcript_text_redistributed": false
+      "date": "2026-11-06T07:00:00-05:00",
+      "eps_estimate": 2.2,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-07T06:00:00-04:00",
+      "eps_estimate": 2.04,
+      "reported_eps": 2.21,
+      "surprise_pct": 8.22
+    },
+    {
+      "date": "2026-05-08T06:00:00-04:00",
+      "eps_estimate": 1.3,
+      "reported_eps": 2.05,
+      "surprise_pct": 57.77
+    },
+    {
+      "date": "2026-02-27T06:00:00-05:00",
+      "eps_estimate": 1.98,
+      "reported_eps": 2.33,
+      "surprise_pct": 17.85
+    },
+    {
+      "date": "2025-11-07T06:00:00-05:00",
+      "eps_estimate": 1.77,
+      "reported_eps": 2.04,
+      "surprise_pct": 15.25
+    },
+    {
+      "date": "2025-08-08T06:00:00-04:00",
+      "eps_estimate": 1.42,
+      "reported_eps": 1.8,
+      "surprise_pct": 26.77
+    },
+    {
+      "date": "2025-05-09T06:00:00-04:00",
+      "eps_estimate": 1.38,
+      "reported_eps": 1.7,
+      "surprise_pct": 22.96
+    },
+    {
+      "date": "2025-02-28T06:00:00-05:00",
+      "eps_estimate": 1.44,
+      "reported_eps": 1.63,
+      "surprise_pct": 13.59
+    },
+    {
+      "date": "2024-11-08T06:00:00-05:00",
+      "eps_estimate": 1.09,
+      "reported_eps": 1.34,
+      "surprise_pct": 23.39
+    },
+    {
+      "date": "2024-08-06T06:00:00-04:00",
+      "eps_estimate": 0.95,
+      "reported_eps": 1.02,
+      "surprise_pct": 7.37
+    },
+    {
+      "date": "2024-05-10T07:00:00-04:00",
+      "eps_estimate": 1.0,
+      "reported_eps": 1.21,
+      "surprise_pct": 21.49
+    },
+    {
+      "date": "2024-02-29T06:00:00-05:00",
+      "eps_estimate": 0.86,
+      "reported_eps": 1.0,
+      "surprise_pct": 16.96
+    },
+    {
+      "date": "2023-11-08T07:00:00-05:00",
+      "eps_estimate": 0.84,
+      "reported_eps": 1.27,
+      "surprise_pct": 50.59
+    },
+    {
+      "date": "2023-08-09T06:00:00-04:00",
+      "eps_estimate": 0.67,
+      "reported_eps": 1.28,
+      "surprise_pct": 92.0
+    },
+    {
+      "date": "2023-05-08T06:00:00-04:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 1.17,
+      "surprise_pct": 232.39
+    },
+    {
+      "date": "2023-03-09T06:00:00-05:00",
+      "eps_estimate": 0.67,
+      "reported_eps": 0.76,
+      "surprise_pct": 13.1
+    },
+    {
+      "date": "2022-11-09T06:00:00-05:00",
+      "eps_estimate": 0.55,
+      "reported_eps": 0.64,
+      "surprise_pct": 15.84
+    },
+    {
+      "date": "2022-08-08T06:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.13,
+      "surprise_pct": -40.91
+    },
+    {
+      "date": "2022-05-10T06:00:00-04:00",
+      "eps_estimate": 0.09,
+      "reported_eps": -0.12,
+      "surprise_pct": -228.58
+    },
+    {
+      "date": "2022-03-15T06:00:00-04:00",
+      "eps_estimate": 0.74,
+      "reported_eps": 0.52,
+      "surprise_pct": -29.18
+    },
+    {
+      "date": "2021-11-01T08:00:00-04:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 1.01,
+      "surprise_pct": 44.29
+    },
+    {
+      "date": "2021-08-06T08:00:00-04:00",
+      "eps_estimate": 0.61,
+      "reported_eps": 0.67,
+      "surprise_pct": 10.74
+    },
+    {
+      "date": "2021-05-07T06:00:00-04:00",
+      "eps_estimate": 0.71,
+      "reported_eps": 1.04,
+      "surprise_pct": 46.48
+    },
+    {
+      "date": "2021-03-09T06:00:00-05:00",
+      "eps_estimate": 0.94,
+      "reported_eps": 0.8,
+      "surprise_pct": -15.19
+    },
+    {
+      "date": "2020-11-05T08:00:00-05:00",
+      "eps_estimate": 0.88,
+      "reported_eps": 0.97,
+      "surprise_pct": 9.81
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
-    {
-      "title": "ANI Pharmaceuticals (ANIP) Q2 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/14/ani-pharmaceuticals-anip-q2-2026-earnings-call-transcript/",
-      "ts": "2026-08-14T13:14:20+00:00",
-      "source": "Motley Fool",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ANI Pharmaceuticals, Inc. Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-ani-pharmaceuticals-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-08-07T21:22:02+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ANI Pharmaceuticals Inc (ANIP) (Q2 2026) Earnings Call Highlights: Record Revenue and Strategic ...",
-      "url": "https://finance.yahoo.com/healthcare/articles/ani-pharmaceuticals-inc-anip-q2-190135224.html",
-      "ts": "2026-08-07T19:01:35+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ANI Pharmaceuticals Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/ani-pharmaceuticals-q2-earnings-call-highlights-2026-08-07/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-07T14:04:28+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ANIP Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/anip/transcripts/663755-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-07T00:00:00+00:00"
-    },
-    {
-      "title": "ANIP Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/anip/transcripts/574794-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-08T00:00:00+00:00"
-    },
-    {
-      "title": "ANIP Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/anip/transcripts/403119-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-27T00:00:00+00:00"
-    },
-    {
-      "title": "ANIP Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-7-ani-pharmaceuticals-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-07T00:00:00+00:00"
-    },
     {
       "title": "The Top 5 Analyst Questions From ANI Pharmaceuticals’s Q2 Earnings Call",
       "url": "https://finance.yahoo.com/markets/stocks/articles/top-5-analyst-questions-ani-090900137.html",
@@ -1087,15 +165,44 @@
     {
       "title": "ANI Pharmaceuticals (ANIP) Q2 2026 Earnings Call Transcript - AOL.com",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNbGpaN2F4Q3ZWVGRhSHZ2SjhUX2EydkxsVFg2a2JybGp6dzlsbDktTjdTdGtoQ2xveEpnQlVscHlOc1dwenh2NFZ2U2ZsYmNBMzhoM29VNjM2b1AxckVCSG90ckI5aXJhSXNkOWpDamNjUzRPc2MyRGplZUZBX0lsXzhB?oc=5",
-      "ts": "2026-08-14T13:14:20+00:00",
+      "ts": "2026-08-14T13:27:50+00:00",
       "source": "AOL.com",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "ANI Pharmaceuticals (ANIP) Q2 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/14/ani-pharmaceuticals-anip-q2-2026-earnings-call-transcript/",
+      "ts": "2026-08-14T13:14:20+00:00",
+      "source": "Motley Fool",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "ANI Pharmaceuticals (ANIP) Q2 2026 Earnings Call Transcript - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQRl9aOERYU0QwcDFqNmJQdzdCcll3TWJYWlpqNnlnblVMYmx3aTByeW9vUXhyQnRtTlZkd0o3RTdjYURSbDRSSmI2SkdjaGxzVlM0UWZsYTUyNzZxamtEYXpPVTM2R3R1dVlheXlpdlFXbkhteWMtdjBMR0E0Wk1yMjBhMEtuOE5UaGFBaENWQ2swRGpscHROZDFHTFNVQzhTc1o3Q2dvWGVqc3JDYlpJYlFyTFZmQmNOZTVfNkdYSzljeHJ5YzFxLTU5SktPMW9zVlVhdU1WTVM4UQ?oc=5",
+      "ts": "2026-08-14T13:14:00+00:00",
+      "source": "The Globe and Mail",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "The Top 5 Analyst Questions From ANI Pharmaceuticals’s Q2 Earnings Call - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQaV9YUUNPV3FaSG93THpSWWlwa2tZaUhaZVZxUXpyeUd5Z2lEWG9TUGJjYWZDOE4wNEVCMWhWYUU1QXBhT193V1hpSHlZUG5QVG1rdWdTb0JhcUNJdlVPallIakRaX1RhcTNiYTRKdHdrbkI3NEl0anNsZmdUakt0dm52VHdVMEMtOTRNRUJ2T1pGYWZOQ2lqX0VnVWdyWFNqdldyYnd1c085NmgxbGJlb1VfUlFpNzVUWFBYUm5MdG5wTHpSRVJtMHBZQnY?oc=5",
+      "ts": "2026-08-14T05:32:00+00:00",
+      "source": "TradingView",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "The Top 5 Analyst Questions From ANI Pharmaceuticals’s Q2 Earnings Call - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNUFp2aEpFczhIZFlYRDdWMEVQM2hqa3pkT0gzcW5lTV9YeFY0akxmdkVlb2M2OW9ueTM0dEx4ZUhBNzFObHBGbnI3U29faGlHN3loaVRDSTlQVVc3eW1oZW1wQWhmTVVidDVKOXdZUlVFTFZPaWFSVlJJTjhZTjVsNkdjNDhwRGV3SWYtcy1Oa1ZOMVNUenpXVTBrellQZHhEZjBkckxxdDc3U2hBdnJBMUNfSWhlSm8ybTFEbDRHY1l1TnNLdGM2aXAyOGZMYkJEbzc5U25aU3BlZmp5dVFnQnd1SHdFc0tsclVJ?oc=5",
+      "ts": "2026-08-14T05:32:00+00:00",
+      "source": "The Globe and Mail",
       "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:23:32.031786+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
