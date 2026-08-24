@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ANDE",
   "earnings_history": [
     {
@@ -153,7 +153,799 @@
       "surprise_pct": 39.13
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-03T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-3-the-andersons-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 59,
+        "scored_turn_count": 59,
+        "overall_sentiment": -0.022074,
+        "prepared_sentiment": -0.519545,
+        "qa_sentiment": 0.179283,
+        "qa_tone_shift": 0.698828,
+        "uncertainty_turn_rate": 0.050847,
+        "forward_looking_turn_rate": 0.355932,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 18,
+            "sentiment": -0.345994
+          },
+          {
+            "topic": "Demand",
+            "mentions": 16,
+            "sentiment": -0.532651
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": -0.460633
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.347133
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.072417
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.024216
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.572215
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.914302,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Mike Hoelter",
+          "role": "VP of Corporate Controller, and Investor Relations at The Andersons",
+          "section": "prepared",
+          "sentiment": 0.870957,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Mike Hoelter",
+          "role": "VP of Corporate Controller, and Investor Relations at The Andersons",
+          "section": "prepared",
+          "sentiment": 0.910465,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.798142,
+          "word_count": 81,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.901824,
+          "word_count": 104,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.891926,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "EVP and CFO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.92481,
+          "word_count": 127,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "EVP and CFO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.902372,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "EVP and CFO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.630995,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "EVP and CFO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.82489,
+          "word_count": 113,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "EVP and CFO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.919031,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "EVP and CFO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.931068,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.755323,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.741619,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.885912,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.572215,
+          "word_count": 112,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.847859,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915303,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Analyst at The Benchmark Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.744499,
+          "word_count": 105,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.038344,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Analyst at The Benchmark Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.073848,
+          "word_count": 34,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.588493,
+          "word_count": 93,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at The Benchmark Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.673312,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.348215,
+          "word_count": 127,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.737753,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Analyst at The Benchmark Company",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.120421,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909487,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.066149,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.681814,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.862482,
+          "word_count": 38,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902967,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.85643,
+          "word_count": 38,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885964,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.647422,
+          "word_count": 53,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.486934,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908875,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Analyst at BMO",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.312557,
+          "word_count": 103,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.020563,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.892334,
+          "word_count": 86,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "EVP and CFO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.083217,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Analyst at BMO",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.637004,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.627399,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Analyst at BMO",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.540428,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902484,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Analyst at Stephens",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.875674,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 45,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.506886,
+          "word_count": 145,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.785934,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.621868,
+          "word_count": 96,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Analyst at Stephens",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.798464,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913547,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at Bloomberg",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.820111,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.539981,
+          "word_count": 142,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.705665,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Analyst at Bloomberg",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.380231,
+          "word_count": 54,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "President and CEO at The Andersons",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.708559,
+          "word_count": 130,
+          "topic_hits": [
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Analyst at Bloomberg",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.82333,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912095,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Mike Hoelter",
+          "role": "VP of Corporate Controller, and Investor Relations at The Andersons",
+          "section": "qa",
+          "sentiment": -0.19364,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.853393,
+          "word_count": 912,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 5509,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Andersons (ANDE) Q2 2026 Earnings Call Transcript",
@@ -196,13 +988,40 @@
       "ts": "2026-08-04T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ANDE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ande/transcripts/661399-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "ANDE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ande/transcripts/559155-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "ANDE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ande/transcripts/398595-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-18T00:00:00+00:00"
+    },
+    {
+      "title": "ANDE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-the-andersons-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-08-24T20:43:03.404123+00:00"
 }
