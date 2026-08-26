@@ -1,769 +1,187 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ARR",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-22T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-22-armour-residential-reit-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 53,
-        "scored_turn_count": 53,
-        "overall_sentiment": 0.385373,
-        "prepared_sentiment": 0.152779,
-        "qa_sentiment": 0.477187,
-        "qa_tone_shift": 0.324408,
-        "uncertainty_turn_rate": 0.188679,
-        "forward_looking_turn_rate": 0.169811,
-        "topics": [
-          {
-            "topic": "Margins & costs",
-            "mentions": 11,
-            "sentiment": 0.061088
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 9,
-            "sentiment": 0.149317
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 9,
-            "sentiment": -0.108237
-          },
-          {
-            "topic": "Demand",
-            "mentions": 6,
-            "sentiment": -0.121123
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 4,
-            "sentiment": 0.144136
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 2,
-            "sentiment": 0.016537
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.429709
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.914312,
-          "word_count": 97,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.811729,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "CFO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.865638,
-          "word_count": 148,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CFO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.729389,
-          "word_count": 144,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "CFO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.755361,
-          "word_count": 130,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "CFO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.914909,
-          "word_count": 50,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.740406,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 3,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.46387,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.832565,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Macro & FX",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.913015,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.513803,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 11,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.004165,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.318303,
-          "word_count": 142,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.775552,
-          "word_count": 56,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.012712,
-          "word_count": 102,
-          "topic_hits": [
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.918241,
-          "word_count": 84,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.848401,
-          "word_count": 57,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 17,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.724133,
-          "word_count": 106,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.862071,
-          "word_count": 29,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.889099,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.753442,
-          "word_count": 102,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.406837,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.897488,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.750889,
-          "word_count": 32,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.329243,
-          "word_count": 143,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.388395,
-          "word_count": 47,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.011313,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.50106,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896217,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at Citizens JMP",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.004778,
-          "word_count": 80,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.652216,
-          "word_count": 142,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.090092,
-          "word_count": 133,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at Citizens JMP",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.516553,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.90241,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at Jones Trading",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.619357,
-          "word_count": 35,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 35,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.481306,
-          "word_count": 140,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at Jones Trading",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.616223,
-          "word_count": 41,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.256779,
-          "word_count": 147,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Analyst at Jones Trading",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.21879,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.90816,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at Stonegate Capital",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.378672,
-          "word_count": 52,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.418815,
-          "word_count": 139,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.457409,
-          "word_count": 38,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at Stonegate Capital",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.34907,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Co-Chief Investment Officer at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.754648,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Analyst at Stonegate Capital",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.380306,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.902939,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.779859,
-          "word_count": 78,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.517069,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Analyst at B. Riley Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.587337,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.916769,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "CEO at ARMOUR Residential REIT",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.712716,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.429709,
-          "word_count": 964,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 4843,
-      "transcript_text_redistributed": false
+      "date": "2026-10-28T16:00:00-04:00",
+      "eps_estimate": 0.72,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-22T16:00:00-04:00",
+      "eps_estimate": 0.72,
+      "reported_eps": 0.72,
+      "surprise_pct": -0.07
+    },
+    {
+      "date": "2026-04-22T16:00:00-04:00",
+      "eps_estimate": 0.49,
+      "reported_eps": -0.49,
+      "surprise_pct": -200.68
+    },
+    {
+      "date": "2026-02-18T16:00:00-05:00",
+      "eps_estimate": 0.77,
+      "reported_eps": 0.71,
+      "surprise_pct": -7.62
+    },
+    {
+      "date": "2025-10-22T16:00:00-04:00",
+      "eps_estimate": 0.79,
+      "reported_eps": 0.72,
+      "surprise_pct": -8.65
+    },
+    {
+      "date": "2025-07-23T16:00:00-04:00",
+      "eps_estimate": 0.83,
+      "reported_eps": 0.77,
+      "surprise_pct": -6.7
+    },
+    {
+      "date": "2025-04-23T16:00:00-04:00",
+      "eps_estimate": 0.87,
+      "reported_eps": 0.86,
+      "surprise_pct": -1.54
+    },
+    {
+      "date": "2025-02-12T16:00:00-05:00",
+      "eps_estimate": 0.97,
+      "reported_eps": 0.78,
+      "surprise_pct": -20.0
+    },
+    {
+      "date": "2024-10-23T16:00:00-04:00",
+      "eps_estimate": 0.98,
+      "reported_eps": 1.0,
+      "surprise_pct": 1.96
+    },
+    {
+      "date": "2024-07-24T16:00:00-04:00",
+      "eps_estimate": 0.97,
+      "reported_eps": 1.08,
+      "surprise_pct": 11.64
+    },
+    {
+      "date": "2024-04-25T16:00:00-04:00",
+      "eps_estimate": 1.05,
+      "reported_eps": 0.82,
+      "surprise_pct": -21.72
+    },
+    {
+      "date": "2024-02-14T17:00:00-05:00",
+      "eps_estimate": 0.99,
+      "reported_eps": 1.07,
+      "surprise_pct": 7.73
+    },
+    {
+      "date": "2023-10-25T16:00:00-04:00",
+      "eps_estimate": 1.2,
+      "reported_eps": 1.08,
+      "surprise_pct": -10.0
+    },
+    {
+      "date": "2023-07-26T16:00:00-04:00",
+      "eps_estimate": 1.31,
+      "reported_eps": 1.15,
+      "surprise_pct": -12.38
+    },
+    {
+      "date": "2023-04-26T16:00:00-04:00",
+      "eps_estimate": 1.31,
+      "reported_eps": 1.35,
+      "surprise_pct": 3.05
+    },
+    {
+      "date": "2023-02-15T16:00:00-05:00",
+      "eps_estimate": 1.48,
+      "reported_eps": 1.35,
+      "surprise_pct": -8.78
+    },
+    {
+      "date": "2022-10-26T16:00:00-04:00",
+      "eps_estimate": 1.46,
+      "reported_eps": 1.6,
+      "surprise_pct": 9.4
+    },
+    {
+      "date": "2022-07-27T16:00:00-04:00",
+      "eps_estimate": 1.3,
+      "reported_eps": 1.45,
+      "surprise_pct": 11.54
+    },
+    {
+      "date": "2022-04-27T16:00:00-04:00",
+      "eps_estimate": 1.21,
+      "reported_eps": 1.4,
+      "surprise_pct": 15.46
+    },
+    {
+      "date": "2022-02-16T16:00:00-05:00",
+      "eps_estimate": 1.38,
+      "reported_eps": 1.35,
+      "surprise_pct": -1.82
+    },
+    {
+      "date": "2021-10-27T16:00:00-04:00",
+      "eps_estimate": 1.28,
+      "reported_eps": 1.25,
+      "surprise_pct": -2.34
+    },
+    {
+      "date": "2021-07-22T16:00:00-04:00",
+      "eps_estimate": 1.38,
+      "reported_eps": 1.05,
+      "surprise_pct": -23.64
+    },
+    {
+      "date": "2021-04-21T16:00:00-04:00",
+      "eps_estimate": 1.55,
+      "reported_eps": 1.15,
+      "surprise_pct": -25.81
+    },
+    {
+      "date": "2021-02-17T16:00:00-05:00",
+      "eps_estimate": 1.75,
+      "reported_eps": 1.6,
+      "surprise_pct": -8.57
+    },
+    {
+      "date": "2020-10-21T16:00:00-04:00",
+      "eps_estimate": 1.7,
+      "reported_eps": 1.75,
+      "surprise_pct": 2.94
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
-    {
-      "title": "ARMOUR Residential REIT Inc (ARR) Q2 2026 Earnings Call Highlights: Strong Economic Return Amid ...",
-      "url": "https://finance.yahoo.com/real-estate/articles/armour-residential-reit-inc-arr-190113081.html",
-      "ts": "2026-07-23T19:01:13+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ARMOUR Residential REIT Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/armour-residential-reit-q2-earnings-call-highlights-2026-07-23/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-07-23T13:06:19+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ARMOUR Residential REIT, Inc. Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-armour-residential-reit-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-07-23T12:30:00+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ARR Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/arr/transcripts/653541-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-23T00:00:00+00:00"
-    },
-    {
-      "title": "ARR Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/arr/transcripts/560333-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-23T00:00:00+00:00"
-    },
-    {
-      "title": "ARR Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/arr/transcripts/401903-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-19T00:00:00+00:00"
-    },
-    {
-      "title": "ARR Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-22-armour-residential-reit-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-22T00:00:00+00:00"
-    },
     {
       "title": "Trimble Inc (TRMB) (Q2 2026) Earnings Call Highlights: Record ARR and Raised Guidance Amid ... - Yahoo Finance",
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPRlVyZW9CNnZpdVV4eVZmOGlIRFhkM3JwU0ZPc3F0M2V1ZXp3X2xBMUxWM0F4XzEtajFjNEJ2YlRMbkhNa1F5SkhaVUw3Si1yUzNfbkNQNW9Ha1pWd1VhWm1IYlFVT1dQZncxZEw2eUhuQ2tnaFg3SFFUYU9kTUhsSElxd25YQUVnQ0wtSHFFeG12QzA?oc=5",
       "ts": "2026-08-12T23:04:56+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ARMOUR Residential REIT Inc (ARR) Q2 2026 Earnings Call Highlights: Strong Economic Return Amid ...",
+      "url": "https://finance.yahoo.com/real-estate/articles/armour-residential-reit-inc-arr-190113081.html",
+      "ts": "2026-07-23T19:01:13+00:00",
+      "source": "GuruFocus.com",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "ARMOUR Residential REIT Q2 Earnings Call Highlights",
+      "url": "https://www.marketbeat.com/instant-alerts/armour-residential-reit-q2-earnings-call-highlights-2026-07-23/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "ts": "2026-07-23T13:06:19+00:00",
+      "source": "MarketBeat",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "ARMOUR Residential REIT, Inc. Q2 2026 Earnings Call Summary",
+      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-armour-residential-reit-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
+      "ts": "2026-07-23T12:30:00+00:00",
+      "source": "Moby",
+      "provider": "yahoo_public"
     },
     {
       "title": "ARMOUR Residential REIT Q2 Earnings Call Highlights - Yahoo Finance",
@@ -780,10 +198,11 @@
       "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:28:42.824021+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

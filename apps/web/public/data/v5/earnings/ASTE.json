@@ -1,882 +1,208 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ASTE",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-05T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-5-astec-industries-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 60,
-        "scored_turn_count": 60,
-        "overall_sentiment": 0.187654,
-        "prepared_sentiment": -0.259444,
-        "qa_sentiment": 0.364414,
-        "qa_tone_shift": 0.623857,
-        "uncertainty_turn_rate": 0.183333,
-        "forward_looking_turn_rate": 0.183333,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 21,
-            "sentiment": -0.252134
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 11,
-            "sentiment": 0.134927
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 11,
-            "sentiment": -0.122332
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 4,
-            "sentiment": -0.188946
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 4,
-            "sentiment": 0.057938
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 3,
-            "sentiment": 0.089271
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.80275,
-          "word_count": 43,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Steve Anderson",
-          "role": "Senior VP of Administration and Investor Relations at Astec Industries",
-          "section": "prepared",
-          "sentiment": 0.918607,
-          "word_count": 124,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "Steve Anderson",
-          "role": "Senior VP of Administration and Investor Relations at Astec Industries",
-          "section": "prepared",
-          "sentiment": 0.868486,
-          "word_count": 63,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.934722,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.855954,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 5,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.919753,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.428223,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.810079,
-          "word_count": 146,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.727857,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.831859,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.268637,
-          "word_count": 57,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.936228,
-          "word_count": 136,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.934559,
-          "word_count": 144,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.392445,
-          "word_count": 102,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 14,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.836578,
-          "word_count": 152,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 15,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.384207,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.144332,
-          "word_count": 38,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911227,
-          "word_count": 103,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "President at Longbow Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904593,
-          "word_count": 43,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.251705,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.886229,
-          "word_count": 91,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "President at Longbow Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.696403,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "President at Longbow Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.220446,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.325801,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.892552,
-          "word_count": 39,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "President at Longbow Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.751643,
-          "word_count": 105,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.839345,
-          "word_count": 112,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "President at Longbow Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.761975,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896964,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.891378,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.719495,
-          "word_count": 86,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.058464,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.128155,
-          "word_count": 58,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.274717,
-          "word_count": 90,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.305598,
-          "word_count": 90,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.85366,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.358881,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.843509,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.467095,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.85366,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.167445,
-          "word_count": 85,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.628926,
-          "word_count": 57,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.303102,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Senior Equity Analyst at Sidoti",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.561352,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913181,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Senior Equity Analyst at Thompson Research Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.842469,
-          "word_count": 53,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.409115,
-          "word_count": 139,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.882077,
-          "word_count": 105,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Senior Equity Analyst at Thompson Research Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.447712,
-          "word_count": 56,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.059846,
-          "word_count": 121,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Senior Equity Analyst at Thompson Research Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.349625,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908899,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Junior Equity Analyst at Freedom Broker",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.884337,
-          "word_count": 44,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.513123,
-          "word_count": 68,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 54,
-          "speaker": "Junior Equity Analyst at Freedom Broker",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.879599,
-          "word_count": 38,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 55,
-          "speaker": "CEO at Astec Industries",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.429328,
-          "word_count": 93,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 56,
-          "speaker": "Junior Equity Analyst at Freedom Broker",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.804364,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.912281,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Steve Anderson",
-          "role": "Senior VP of Administration and Investor Relations at Astec Industries",
-          "section": "qa",
-          "sentiment": 0.736605,
-          "word_count": 99,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.876735,
-          "word_count": 867,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 5430,
-      "transcript_text_redistributed": false
+      "date": "2026-11-04T07:00:00-05:00",
+      "eps_estimate": 0.48,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-05T07:00:00-04:00",
+      "eps_estimate": 1.03,
+      "reported_eps": 0.94,
+      "surprise_pct": -9.18
+    },
+    {
+      "date": "2026-05-06T07:00:00-04:00",
+      "eps_estimate": 0.84,
+      "reported_eps": 0.54,
+      "surprise_pct": -35.46
+    },
+    {
+      "date": "2026-02-25T07:00:00-05:00",
+      "eps_estimate": 0.83,
+      "reported_eps": 1.06,
+      "surprise_pct": 27.71
+    },
+    {
+      "date": "2025-11-05T07:00:00-05:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.47,
+      "surprise_pct": 23.68
+    },
+    {
+      "date": "2025-08-06T07:00:00-04:00",
+      "eps_estimate": 0.56,
+      "reported_eps": 0.88,
+      "surprise_pct": 58.56
+    },
+    {
+      "date": "2025-04-29T07:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.88,
+      "surprise_pct": 91.3
+    },
+    {
+      "date": "2025-02-26T07:00:00-05:00",
+      "eps_estimate": 0.73,
+      "reported_eps": 1.19,
+      "surprise_pct": 63.01
+    },
+    {
+      "date": "2024-11-06T07:00:00-05:00",
+      "eps_estimate": 0.31,
+      "reported_eps": 0.31,
+      "surprise_pct": null
+    },
+    {
+      "date": "2024-08-07T07:00:00-04:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 0.61,
+      "surprise_pct": -12.23
+    },
+    {
+      "date": "2024-05-01T07:00:00-04:00",
+      "eps_estimate": 0.81,
+      "reported_eps": 0.34,
+      "surprise_pct": -57.85
+    },
+    {
+      "date": "2024-02-28T07:00:00-05:00",
+      "eps_estimate": 0.67,
+      "reported_eps": 0.9,
+      "surprise_pct": 35.34
+    },
+    {
+      "date": "2023-11-01T07:00:00-04:00",
+      "eps_estimate": 0.62,
+      "reported_eps": -0.01,
+      "surprise_pct": -101.61
+    },
+    {
+      "date": "2023-08-02T07:00:00-04:00",
+      "eps_estimate": 0.68,
+      "reported_eps": 0.87,
+      "surprise_pct": 28.89
+    },
+    {
+      "date": "2023-05-03T07:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.9,
+      "surprise_pct": 73.91
+    },
+    {
+      "date": "2023-03-01T07:00:00-05:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.34,
+      "surprise_pct": -9.33
+    },
+    {
+      "date": "2022-11-02T07:00:00-04:00",
+      "eps_estimate": 0.31,
+      "reported_eps": 0.28,
+      "surprise_pct": -8.2
+    },
+    {
+      "date": "2022-08-02T07:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.19,
+      "surprise_pct": -63.64
+    },
+    {
+      "date": "2022-05-04T07:00:00-04:00",
+      "eps_estimate": 0.17,
+      "reported_eps": 0.41,
+      "surprise_pct": 141.18
+    },
+    {
+      "date": "2022-02-28T07:00:00-05:00",
+      "eps_estimate": 0.03,
+      "reported_eps": -0.03,
+      "surprise_pct": -220.0
+    },
+    {
+      "date": "2021-11-03T07:00:00-04:00",
+      "eps_estimate": 0.31,
+      "reported_eps": 0.5,
+      "surprise_pct": 60.0
+    },
+    {
+      "date": "2021-08-04T07:00:00-04:00",
+      "eps_estimate": 0.55,
+      "reported_eps": 0.49,
+      "surprise_pct": -10.91
+    },
+    {
+      "date": "2021-05-05T07:00:00-04:00",
+      "eps_estimate": 0.83,
+      "reported_eps": 0.41,
+      "surprise_pct": -50.45
+    },
+    {
+      "date": "2021-03-01T07:00:00-05:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.56,
+      "surprise_pct": 34.13
+    },
+    {
+      "date": "2020-11-04T07:00:00-05:00",
+      "eps_estimate": 0.11,
+      "reported_eps": 0.2,
+      "surprise_pct": 87.49
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
     {
       "title": "5 Insightful Analyst Questions From Astec’s Q2 Earnings Call",
       "url": "https://finance.yahoo.com/markets/stocks/articles/5-insightful-analyst-questions-astec-032500676.html",
       "ts": "2026-08-14T03:25:00+00:00",
       "source": "StockStory",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "Astec Industries (ASTE) Q2 2026 Earnings Call Transcript - AOL.com",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9iR2JVZFlmRS1mWGlWczFYTmtqdGRUMVBleXBTY1A0bS1TMFR2SV82UzJ0VndNZ3JaN0U1LTZHclBSNjExY1FVZDZ2STlPREV1aXNlMlpSSndTeERKUTgzaUNiaG9Pc0ppY0JIYkNaM0s2T3VzeThZcTg2YUVqQQ?oc=5",
+      "ts": "2026-08-12T18:04:41+00:00",
+      "source": "AOL.com",
+      "provider": "google_news_rss"
     },
     {
       "title": "Astec Industries (ASTE) Q2 2026 Earnings Call Transcript",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/08/12/astec-industries-aste-q2-2026-earnings-call-transcript/",
       "ts": "2026-08-12T17:44:45+00:00",
       "source": "Motley Fool",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
     },
     {
-      "title": "Astec Industries Inc (ASTE) (Q2 2026) Earnings Call Highlights: Record Revenue and EBITDA ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/astec-industries-inc-aste-q2-210520269.html",
-      "ts": "2026-08-05T21:05:20+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
+      "title": "Astec Industries (ASTE) Q2 2026 Earnings Call Transcript - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPWmQyRS13dTN0OHVnM01JTkl5S2RBX0ZsWFB3VDZLOUJEa3RONHVzY2FiUG1vXzRvSTYtS0k4OXhmYkJ4bG5EYS1lNHAxRy1CRmh3aVp3dVZhZURqdG5ZVzVOdUR1QVJuWV9idE9ONXREZGhrVHlBdkpXSGs2cS1kclEtNWh5bkczUkV6RC1oSUJISVdkTzA3LVNtRmxNaGFRWHRST0RlbDN5S0xqSUJMVVhEclJiVlB1MEN3MXg0UkxkZjFYakQ0X29QNnM2YXlsbWppdkNUVQ?oc=5",
+      "ts": "2026-08-12T17:44:00+00:00",
+      "source": "The Globe and Mail",
+      "provider": "google_news_rss"
     },
     {
-      "title": "Astec Industries, Inc. Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-astec-industries-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-08-05T20:50:49+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
+      "title": "5 Insightful Analyst Questions From Astec’s Q2 Earnings Call - StockStory",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPOU56d2pna3h4bEJEX0g0c1hUMlVpd3FUVU1mbUZHaGtOeVNfMkVUYUFqb1JFbEFQZDN4YWZKSGI1ZXVlZkNHVXRRNUE1UGFTY2p6cmc3S1V4cnZQUF96Z01zWmdRdUktbDhnUXQtUFRsZmZoaFBsemJYajlsWkZua1h3R255ajFjc3FOOE1neThxUlNJNVhCajVQaUFIVEZSLUMwbDl0RkdOdFNIVzFzclRkbGxCMk5TR3ZJb3pDeFg?oc=5",
+      "ts": "2026-08-12T09:23:11+00:00",
+      "source": "StockStory",
+      "provider": "google_news_rss"
     },
     {
-      "title": "Astec Industries, Inc. (ASTE) Q2 2026 Earnings Call Transcript",
-      "url": "https://finnhub.io/api/news?id=20ea556c3451db3227ca0d09148d0a655827e97dff00022d5da7a03c33630a10",
-      "ts": "2026-08-05T15:50:05+00:00",
-      "source": "SeekingAlpha",
-      "provider": "finnhub"
-    },
-    {
-      "title": "Astec Industries Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/astec-industries-q2-earnings-call-highlights-2026-08-05/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-05T14:04:28+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "ASTE Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/aste/transcripts/661488-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-05T00:00:00+00:00"
-    },
-    {
-      "title": "ASTE Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/aste/transcripts/568543-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-06T00:00:00+00:00"
-    },
-    {
-      "title": "ASTE Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/aste/transcripts/400145-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-25T00:00:00+00:00"
-    },
-    {
-      "title": "ASTE Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-astec-industries-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-05T00:00:00+00:00"
+      "title": "5 Insightful Analyst Questions From Astec’s Q2 Earnings Call - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQZ1dNaUhnR2tzd3ctT0dlNFR4MUNNR2NKNDBOcHg4cTRTZ3lCNEZDZXNLSkNyQUo1UUEwZ0ZPVjJ0cURUZk93elFBR0xKVExPMTNxaHBtRC01S1YyWVNiWW13MElYajZUZXhhdXZzN09MR0UwbktvSXdReGxZelZGWHBsNHYyX3BYVzVIYTFNUk1kZjk4cUhtTFdpMFE1eXlVZmg5ZFJsZFRwZXk0bzVPYUdZQUFaOTNtYjAzY2p6NzBpajVwX1phbnZ3MkZZcFFhLVhLMEQyMjRVZk1w?oc=5",
+      "ts": "2026-08-12T07:00:00+00:00",
+      "source": "The Globe and Mail",
+      "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:30:31.718680+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
