@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ATEN",
   "earnings_history": [
     {
@@ -153,7 +153,855 @@
       "surprise_pct": 33.33
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-5-a10-networks-inc-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 63,
+        "scored_turn_count": 63,
+        "overall_sentiment": 0.437193,
+        "prepared_sentiment": -0.066791,
+        "qa_sentiment": 0.568228,
+        "qa_tone_shift": 0.635019,
+        "uncertainty_turn_rate": 0.063492,
+        "forward_looking_turn_rate": 0.190476,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 25,
+            "sentiment": 0.20294
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 18,
+            "sentiment": 0.053457
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": -0.133526
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": 0.114314
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.04898
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": 0.294035
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.903858,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "VP at FNK IR",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910837,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "VP at FNK IR",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.847132,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "VP at FNK IR",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.928192,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.615857,
+          "word_count": 138,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.510688,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.839947,
+          "word_count": 120,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 7,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.65334,
+          "word_count": 63,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "CFO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.664784,
+          "word_count": 150,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "CFO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.205891,
+          "word_count": 151,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "CFO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.908903,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 11,
+          "speaker": "CFO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.440978,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.924593,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901468,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.660184,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.322125,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.036295,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.356295,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.774071,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.632318,
+          "word_count": 76,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Analyst at BTIG",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.757793,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882386,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Analyst at Craig-Hallum Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.536718,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.812513,
+          "word_count": 138,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.423943,
+          "word_count": 142,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.585461,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.449734,
+          "word_count": 135,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Analyst at Craig-Hallum Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892707,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Analyst at Craig-Hallum Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.817268,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.74061,
+          "word_count": 142,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.726838,
+          "word_count": 37,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Craig-Hallum Group",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.874148,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911693,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Analyst at BWS Financial",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.858655,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.240863,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.487333,
+          "word_count": 27,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Analyst at BWS Financial",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.614669,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.463741,
+          "word_count": 100,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Analyst at BWS Financial",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.827283,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912374,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Analyst at Mizuho Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.651865,
+          "word_count": 96,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.385882,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.592361,
+          "word_count": 65,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Analyst at Mizuho Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878758,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.858916,
+          "word_count": 75,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Analyst at Mizuho Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.219004,
+          "word_count": 81,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.305679,
+          "word_count": 149,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885686,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Analyst at Mizuho Securities",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.715561,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896272,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.812288,
+          "word_count": 50,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.858748,
+          "word_count": 96,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88625,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.863938,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.852934,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.834362,
+          "word_count": 44,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.829148,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.770689,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.890389,
+          "word_count": 60,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 59,
+          "speaker": "Analyst at Raymond James",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.75807,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900459,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "President and CEO at A10 Networks",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.50757,
+          "word_count": 42,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.833454,
+          "word_count": 927,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 5474,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Q3 2025 A10 Networks Inc Earnings Call Transcript - GuruFocus",
@@ -196,13 +1044,40 @@
       "ts": "2026-08-13T01:00:57+00:00",
       "source": "Motley Fool",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ATEN Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/aten/transcripts/656445-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "ATEN Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/aten/transcripts/552002-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "ATEN Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/aten/transcripts/395636-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "ATEN Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-a10-networks-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-08-27T03:27:30.224656+00:00"
 }
