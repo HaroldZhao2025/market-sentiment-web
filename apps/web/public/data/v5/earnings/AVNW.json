@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "AVNW",
   "earnings_history": [
     {
@@ -196,13 +196,46 @@
       "ts": "2026-05-10T07:00:00+00:00",
       "source": "Investing.com",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "AVNW Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/avnw/transcripts/661253-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-27T00:00:00+00:00"
+    },
+    {
+      "title": "AVNW Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/avnw/transcripts/551292-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-04T00:00:00+00:00"
+    },
+    {
+      "title": "AVNW Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/avnw/transcripts/410054-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-03T00:00:00+00:00"
+    },
+    {
+      "title": "AVNW Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-27-aviat-networks-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-27T00:00:00+00:00"
+    },
+    {
+      "title": "Aviat (AVNW) Q1 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/05/04/aviat-avnw-q1-2026-earnings-call-transcript/",
+      "source": "Motley Fool",
+      "ts": "2026-05-04T21:07:18+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-08-28T11:16:49.512708+00:00"
 }
