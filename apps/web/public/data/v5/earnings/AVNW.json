@@ -1,814 +1,188 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "AVNW",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-05-04T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-5-4-aviat-networks-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 59,
-        "scored_turn_count": 59,
-        "overall_sentiment": 0.290565,
-        "prepared_sentiment": -0.039343,
-        "qa_sentiment": 0.472883,
-        "qa_tone_shift": 0.512226,
-        "uncertainty_turn_rate": 0.101695,
-        "forward_looking_turn_rate": 0.338983,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 20,
-            "sentiment": -0.006548
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 16,
-            "sentiment": 0.022045
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 13,
-            "sentiment": 0.010566
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 6,
-            "sentiment": -0.1144
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 5,
-            "sentiment": -0.206298
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 1,
-            "sentiment": 0.596123
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.904883,
-          "word_count": 61,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "VP of Corporate Finance at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.917787,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 2,
-          "speaker": "VP of Corporate Finance at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.886813,
-          "word_count": 143,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "VP of Corporate Finance at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.902535,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.004213,
-          "word_count": 92,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.896782,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.817252,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.843219,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.358391,
-          "word_count": 124,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.636719,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.788972,
-          "word_count": 44,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.710899,
-          "word_count": 125,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.916489,
-          "word_count": 92,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.070594,
-          "word_count": 110,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.01226,
-          "word_count": 111,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.902313,
-          "word_count": 128,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.587109,
-          "word_count": 125,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.486331,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.003601,
-          "word_count": 116,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.442779,
-          "word_count": 65,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.019737,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 21,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911341,
-          "word_count": 60,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Analyst at Lake Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.75566,
-          "word_count": 29,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.718313,
-          "word_count": 88,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Analyst at Lake Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.573605,
-          "word_count": 35,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.744698,
-          "word_count": 122,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.765841,
-          "word_count": 52,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at Lake Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.739288,
-          "word_count": 43,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.145277,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.306048,
-          "word_count": 50,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Analyst at Lake Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.258714,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.875209,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at ROTH Capital Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.683532,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at ROTH Capital Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.875546,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.688413,
-          "word_count": 103,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 35,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.791425,
-          "word_count": 104,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 36,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.504504,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at ROTH Capital Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.13929,
-          "word_count": 103,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 38,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.751329,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 39,
-          "speaker": "CFO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.898975,
-          "word_count": 72,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at ROTH Capital Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.873568,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.878509,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.716339,
-          "word_count": 124,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.846726,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Analyst at ROTH Capital Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.596123,
-          "word_count": 121,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 45,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.031627,
-          "word_count": 87,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.883382,
-          "word_count": 117,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.80996,
-          "word_count": 68,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at ROTH Capital Partners",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.779838,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.899556,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Analyst at Litchfield Hills Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.838602,
-          "word_count": 50,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.760412,
-          "word_count": 58,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Analyst at Litchfield Hills Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.85634,
-          "word_count": 54,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.421357,
-          "word_count": 124,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.205792,
-          "word_count": 56,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 55,
-          "speaker": "Analyst at Litchfield Hills Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.490873,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905563,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "President and CEO at Aviat Networks",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.643127,
-          "word_count": 96,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 58,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.293106,
-          "word_count": 922,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 5693,
-      "transcript_text_redistributed": false
+      "date": "2026-08-27T08:00:00-04:00",
+      "eps_estimate": 0.55,
+      "reported_eps": 0.64,
+      "surprise_pct": 17.28
+    },
+    {
+      "date": "2026-05-04T16:00:00-04:00",
+      "eps_estimate": 0.44,
+      "reported_eps": 0.06,
+      "surprise_pct": -86.42
+    },
+    {
+      "date": "2026-02-03T16:00:00-05:00",
+      "eps_estimate": 0.5,
+      "reported_eps": 0.54,
+      "surprise_pct": 8.0
+    },
+    {
+      "date": "2025-11-04T16:00:00-05:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.43,
+      "surprise_pct": 50.88
+    },
+    {
+      "date": "2025-09-10T16:00:00-04:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 0.83,
+      "surprise_pct": 18.57
+    },
+    {
+      "date": "2025-05-06T16:00:00-04:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.88,
+      "surprise_pct": 209.86
+    },
+    {
+      "date": "2025-02-04T16:00:00-05:00",
+      "eps_estimate": 0.06,
+      "reported_eps": 0.82,
+      "surprise_pct": 1346.97
+    },
+    {
+      "date": "2024-11-05T16:00:00-05:00",
+      "eps_estimate": -0.03,
+      "reported_eps": -0.87,
+      "surprise_pct": -3007.14
+    },
+    {
+      "date": "2024-10-04T16:00:00-04:00",
+      "eps_estimate": 0.7,
+      "reported_eps": 0.72,
+      "surprise_pct": 3.6
+    },
+    {
+      "date": "2024-05-01T16:00:00-04:00",
+      "eps_estimate": 0.51,
+      "reported_eps": 0.73,
+      "surprise_pct": 43.61
+    },
+    {
+      "date": "2024-02-06T16:00:00-05:00",
+      "eps_estimate": 0.72,
+      "reported_eps": 0.97,
+      "surprise_pct": 34.72
+    },
+    {
+      "date": "2023-11-01T16:00:00-04:00",
+      "eps_estimate": 0.77,
+      "reported_eps": 0.87,
+      "surprise_pct": 12.74
+    },
+    {
+      "date": "2023-08-23T16:00:00-04:00",
+      "eps_estimate": 0.86,
+      "reported_eps": 0.87,
+      "surprise_pct": 0.77
+    },
+    {
+      "date": "2023-05-03T16:00:00-04:00",
+      "eps_estimate": 0.76,
+      "reported_eps": 0.75,
+      "surprise_pct": -1.83
+    },
+    {
+      "date": "2023-02-01T16:00:00-05:00",
+      "eps_estimate": 0.79,
+      "reported_eps": 0.94,
+      "surprise_pct": 18.69
+    },
+    {
+      "date": "2022-11-02T16:00:00-04:00",
+      "eps_estimate": 0.71,
+      "reported_eps": 0.75,
+      "surprise_pct": 5.34
+    },
+    {
+      "date": "2022-08-23T16:00:00-04:00",
+      "eps_estimate": 0.68,
+      "reported_eps": 0.67,
+      "surprise_pct": -0.74
+    },
+    {
+      "date": "2022-05-04T16:00:00-04:00",
+      "eps_estimate": 0.56,
+      "reported_eps": 0.67,
+      "surprise_pct": 20.72
+    },
+    {
+      "date": "2022-02-02T16:00:00-05:00",
+      "eps_estimate": 0.61,
+      "reported_eps": 0.71,
+      "surprise_pct": 16.39
+    },
+    {
+      "date": "2021-11-03T16:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.67,
+      "surprise_pct": 28.85
+    },
+    {
+      "date": "2021-08-25T16:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.45,
+      "surprise_pct": 7.14
+    },
+    {
+      "date": "2021-05-05T16:00:00-04:00",
+      "eps_estimate": 0.37,
+      "reported_eps": 0.49,
+      "surprise_pct": 33.33
+    },
+    {
+      "date": "2021-02-03T16:00:00-05:00",
+      "eps_estimate": 0.36,
+      "reported_eps": 0.74,
+      "surprise_pct": 104.14
+    },
+    {
+      "date": "2020-11-05T16:00:00-05:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.62,
+      "surprise_pct": 111.97
+    },
+    {
+      "date": "2020-08-27T16:00:00-04:00",
+      "eps_estimate": 0.14,
+      "reported_eps": 0.38,
+      "surprise_pct": 177.78
     }
   ],
-  "filing_fallback": [],
-  "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
+  "calls": [],
   "call_links": [
+    {
+      "title": "Aviat Networks Inc (AVNW) (Q4 2026) Earnings Call Highlights: Re - GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxOZDFqanVFalBacXYwYVF4YUh2eGgtNEFfQW9Ya05ReTM0NDREYUQ2d25OYnZ5T19TTnBRYW1fdjEyRGwwQjN2MWM0b2VuSWp3M2tJTlNkZDFoa3VHTEthV092U0M4cXkwaFFjcW5iRnlkck5QMGVQdURqZTdwTktEbzhTUUFEVWNiVzJ6YVM4MzJteDJJUmo5eU1NZ3JkSjZaYTB1ZEdPRlZoeC1zQnFla1M0UFNTWjJUUnFPQmV6dWdrZWs3SXNxOXUwYmpud0N5VnF5TWw2T0tXempySFNZSkpxUGxhYlBqMF9DVkYzbmx3NVZtVGtPcA?oc=5",
+      "ts": "2026-08-27T20:39:47+00:00",
+      "source": "GuruFocus",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "Aviat Networks (AVNW) Q4 FY2026 Earnings Call: FY2027 Growth Led by MDU - TradingKey",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9Pd0lGYUg1aGpFSmZKTUk4RTcyWHViS1RYeXgteEJlR2lKcXZzMHdEd3Q3RzVGNWFBWGtjZGE5U0U2S2FOM09URlBRVTNrVmgwNG5qUVQ0cVZ2c2ozeVdfNS1Pdk5fYkJXek1yY2pRYjNIQQ?oc=5",
+      "ts": "2026-08-27T20:00:34+00:00",
+      "source": "TradingKey",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "Aviat Networks Q4 Earnings Call Highlights",
+      "url": "https://www.marketbeat.com/instant-alerts/transcript-aviat-networks-q4-earnings-call-highlights-2026-08-27/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "ts": "2026-08-27T14:04:37+00:00",
+      "source": "MarketBeat",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "Aviat Networks Sets Date for Its Fiscal 2026 Fourth Quarter Financial Results Conference Call and Announces Participation in Upcoming Investor Conferences",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/aviat-networks-sets-date-fiscal-130000988.html",
+      "ts": "2026-08-26T13:00:00+00:00",
+      "source": "PR Newswire",
+      "provider": "yahoo_public"
+    },
     {
       "title": "Q1 2026 Aviat Networks Inc Earnings Call Transcript - GuruFocus",
       "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBraHV5NXd3Z0V4Z1Vrck9lb2Q2MVF2MHhzMFZ6MGFVbWNCSTRWY25ZN0ZVU2dDSzNabzVfUm84eHI4WWRtUExic3E5d2Vxam5qLUk5cEl0aVZjYmVGcndWUXotYlM5bmN4ZFI0Mg?oc=5",
@@ -817,64 +191,18 @@
       "provider": "google_news_rss"
     },
     {
-      "title": "AVNW Earnings Call: Q3 2026",
-      "url": "https://stockanalysis.com/stocks/avnw/transcripts/551292-q3-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-04T00:00:00+00:00"
-    },
-    {
-      "title": "AVNW Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/avnw/transcripts/410054-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-03T00:00:00+00:00"
-    },
-    {
-      "title": "AVNW Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/avnw/transcripts/385833-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2025-11-04T00:00:00+00:00"
-    },
-    {
-      "title": "AVNW Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-5-4-aviat-networks-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-05-04T00:00:00+00:00"
-    },
-    {
       "title": "Earnings call transcript: Aviat Networks Q3 2026 misses EPS forecast, stock drops - Investing.com",
       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPMEJsNzhtRE8wVjNwNEhMOGhveVBTaUlsU3Z2N2JvVFBILXRLOHN4d0VjQ20xR3JMZVpqbHlsTlN3bkdlMEd4Y1JkNTNDOWZEUEsybW9FVmkwN21hTlhtUU1IVEJuZ3R2eUNUclRCUmVRVW1hOF8xZXhvVXFxY2wyZjVOQVlJS2NvVXdFckVsamhsWFp1ZXlGaW9XdjFMQ0g5TVlid2xFcGdwS1NBZHdfR3lDMWg0bDhyU2otSkt3X3ZNeWNvSHJhb3dPa0FkTnNa?oc=5",
       "ts": "2026-05-10T07:00:00+00:00",
       "source": "Investing.com",
       "provider": "google_news_rss"
-    },
-    {
-      "title": "Aviat Networks, Inc. Q3 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-aviat-networks-inc-q3-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-05-05T12:30:00+00:00",
-      "source": "Moby",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Aviat Networks, Inc. Q3 2026 Earnings Call Summary - Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNZEExdVlhYVdEZlVDVEk1OWxmSlhXZVhaa0FFQVJhd0p5Yy1ndGxTNnMtMjVqUGNvY2g2aXNiR0NJM1V3Rm81NU5ET3BuajRFN1FCQVhEaUFJTVZQQU1JZF8tX1Nsdi1jaGE4TndkVDVER0RGcENSbnFNTG9PcXo5TTJXQlNXZWpmamVxT2NHVW1ZaXpDaHc?oc=5",
-      "ts": "2026-05-05T07:00:00+00:00",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss"
-    },
-    {
-      "title": "Aviat Networks Q3 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/aviat-networks-q3-earnings-call-highlights-2026-05-04/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-05-04T22:17:51+00:00",
-      "source": "MarketBeat",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "Aviat (AVNW) Q1 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/05/04/aviat-avnw-q1-2026-earnings-call-transcript/",
-      "ts": "2026-05-04T21:07:18+00:00",
-      "source": "Motley Fool",
-      "provider": "yahoo_public"
     }
   ],
-  "updated_at_utc": "2026-08-17T19:36:52.326595+00:00"
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
