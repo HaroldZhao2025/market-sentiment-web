@@ -1,1166 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BDC",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-30T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-belden-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 81,
-        "scored_turn_count": 81,
-        "overall_sentiment": 0.427516,
-        "prepared_sentiment": 0.085968,
-        "qa_sentiment": 0.571325,
-        "qa_tone_shift": 0.485357,
-        "uncertainty_turn_rate": 0.024691,
-        "forward_looking_turn_rate": 0.308642,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 30,
-            "sentiment": 0.109889
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 29,
-            "sentiment": 0.393089
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 23,
-            "sentiment": -0.021761
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 22,
-            "sentiment": 0.216196
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 5,
-            "sentiment": -0.106495
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 5,
-            "sentiment": -0.083306
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.918082,
-          "word_count": 100,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "SVP of Investor Relations at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.913807,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "SVP of Investor Relations at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.905572,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.927651,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.678941,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.530123,
-          "word_count": 143,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.495378,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.261544,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.521902,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.674336,
-          "word_count": 152,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.663149,
-          "word_count": 137,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.456516,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.669238,
-          "word_count": 136,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.41088,
-          "word_count": 152,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.200979,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 15,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.403431,
-          "word_count": 150,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.672221,
-          "word_count": 63,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.91335,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.940488,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 19,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.928441,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.844457,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.842539,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.719693,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 23,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.684726,
-          "word_count": 45,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.210076,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.451557,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.804509,
-          "word_count": 50,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.902768,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.608156,
-          "word_count": 111,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.696781,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.135904,
-          "word_count": 110,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.507221,
-          "word_count": 111,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.823323,
-          "word_count": 66,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.479459,
-          "word_count": 41,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.575195,
-          "word_count": 76,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 35,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.813173,
-          "word_count": 79,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.504469,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.482005,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.760386,
-          "word_count": 143,
-          "topic_hits": [
-            "AI & technology",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.65294,
-          "word_count": 30,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.844128,
-          "word_count": 88,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 41,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.917782,
-          "word_count": 32,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.754574,
-          "word_count": 121,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.829935,
-          "word_count": 148,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.102949,
-          "word_count": 118,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.509846,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.643137,
-          "word_count": 14,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.831261,
-          "word_count": 96,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.755412,
-          "word_count": 142,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.518122,
-          "word_count": 65,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913347,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Analyst at Fox Advisors",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.759139,
-          "word_count": 73,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 52,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.603315,
-          "word_count": 77,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 53,
-          "speaker": "Analyst at Fox Advisors",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.850799,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.852648,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Analyst at Fox Advisors",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.706879,
-          "word_count": 113,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.786345,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.702842,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.230755,
-          "word_count": 62,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Analyst at Fox Advisors",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.624153,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.89714,
-          "word_count": 15,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.834611,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.819703,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 63,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.620695,
-          "word_count": 57,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.492464,
-          "word_count": 73,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 65,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.082813,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 66,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.431983,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 67,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.761462,
-          "word_count": 68,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 68,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.232676,
-          "word_count": 31,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 69,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.645122,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911033,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "Analyst at D.A. Davidson",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.820272,
-          "word_count": 74,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "EVP and CFO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.452908,
-          "word_count": 104,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 73,
-          "speaker": "Analyst at D.A. Davidson",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.822875,
-          "word_count": 70,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.705948,
-          "word_count": 147,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "President and CEO at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.694651,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Analyst at D.A. Davidson",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.747995,
-          "word_count": 59,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 77,
-          "speaker": "Analyst at D.A. Davidson",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.790923,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904843,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "SVP of Investor Relations at Belden",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.813197,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.877893,
-          "word_count": 900,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 8427,
-      "transcript_text_redistributed": false
+      "date": "2026-10-29T08:00:00-04:00",
+      "eps_estimate": 2.26,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-30T08:00:00-04:00",
+      "eps_estimate": 2.02,
+      "reported_eps": 2.34,
+      "surprise_pct": 15.73
+    },
+    {
+      "date": "2026-04-30T08:00:00-04:00",
+      "eps_estimate": 1.7,
+      "reported_eps": 1.77,
+      "surprise_pct": 3.91
+    },
+    {
+      "date": "2026-02-12T07:00:00-05:00",
+      "eps_estimate": 1.95,
+      "reported_eps": 2.08,
+      "surprise_pct": 6.41
+    },
+    {
+      "date": "2025-10-30T07:00:00-04:00",
+      "eps_estimate": 1.92,
+      "reported_eps": 1.97,
+      "surprise_pct": 2.59
+    },
+    {
+      "date": "2025-07-31T07:00:00-04:00",
+      "eps_estimate": 1.76,
+      "reported_eps": 1.89,
+      "surprise_pct": 7.5
+    },
+    {
+      "date": "2025-05-01T07:00:00-04:00",
+      "eps_estimate": 1.49,
+      "reported_eps": 1.6,
+      "surprise_pct": 7.1
+    },
+    {
+      "date": "2025-02-06T07:00:00-05:00",
+      "eps_estimate": 1.69,
+      "reported_eps": 1.92,
+      "surprise_pct": 13.61
+    },
+    {
+      "date": "2024-10-31T07:00:00-04:00",
+      "eps_estimate": 1.61,
+      "reported_eps": 1.7,
+      "surprise_pct": 5.58
+    },
+    {
+      "date": "2024-08-01T07:00:00-04:00",
+      "eps_estimate": 1.37,
+      "reported_eps": 1.51,
+      "surprise_pct": 10.38
+    },
+    {
+      "date": "2024-05-02T07:00:00-04:00",
+      "eps_estimate": 1.07,
+      "reported_eps": 1.24,
+      "surprise_pct": 16.32
+    },
+    {
+      "date": "2024-02-08T08:00:00-05:00",
+      "eps_estimate": 1.13,
+      "reported_eps": 1.46,
+      "surprise_pct": 29.75
+    },
+    {
+      "date": "2023-11-02T06:00:00-04:00",
+      "eps_estimate": 1.76,
+      "reported_eps": 1.78,
+      "surprise_pct": 1.17
+    },
+    {
+      "date": "2023-08-03T07:00:00-04:00",
+      "eps_estimate": 1.77,
+      "reported_eps": 1.91,
+      "surprise_pct": 7.91
+    },
+    {
+      "date": "2023-05-03T07:00:00-04:00",
+      "eps_estimate": 1.54,
+      "reported_eps": 1.68,
+      "surprise_pct": 8.91
+    },
+    {
+      "date": "2023-02-08T07:00:00-05:00",
+      "eps_estimate": 1.66,
+      "reported_eps": 1.75,
+      "surprise_pct": 5.74
+    },
+    {
+      "date": "2022-11-02T07:00:00-04:00",
+      "eps_estimate": 1.57,
+      "reported_eps": 1.77,
+      "surprise_pct": 13.03
+    },
+    {
+      "date": "2022-08-03T07:00:00-04:00",
+      "eps_estimate": 1.41,
+      "reported_eps": 1.6,
+      "surprise_pct": 13.48
+    },
+    {
+      "date": "2022-05-04T07:00:00-04:00",
+      "eps_estimate": 1.1,
+      "reported_eps": 1.31,
+      "surprise_pct": 19.27
+    },
+    {
+      "date": "2022-02-09T07:00:00-05:00",
+      "eps_estimate": 1.26,
+      "reported_eps": 1.32,
+      "surprise_pct": 4.49
+    },
+    {
+      "date": "2021-11-03T07:00:00-04:00",
+      "eps_estimate": 1.18,
+      "reported_eps": 1.31,
+      "surprise_pct": 11.29
+    },
+    {
+      "date": "2021-08-04T07:00:00-04:00",
+      "eps_estimate": 0.93,
+      "reported_eps": 1.21,
+      "surprise_pct": 29.83
+    },
+    {
+      "date": "2021-05-05T07:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.94,
+      "surprise_pct": 43.78
+    },
+    {
+      "date": "2021-02-10T07:00:00-05:00",
+      "eps_estimate": 0.81,
+      "reported_eps": 0.9,
+      "surprise_pct": 11.11
+    },
+    {
+      "date": "2020-10-28T07:00:00-04:00",
+      "eps_estimate": 0.61,
+      "reported_eps": 0.72,
+      "surprise_pct": 18.86
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
-    {
-      "title": "Belden Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/belden-q2-earnings-call-highlights-2026-07-30/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-01T04:02:46+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Belden Inc (BDC) (Q2 2026) Earnings Call Highlights: Record Revenue and Orders Fueled by AI and ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/belden-inc-bdc-q2-2026-210421171.html",
-      "ts": "2026-07-30T21:04:21+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "BDC Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/bdc/transcripts/658101-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
-    {
-      "title": "BDC Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/bdc/transcripts/555853-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
-      "title": "BDC Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/bdc/transcripts/396968-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-12T00:00:00+00:00"
-    },
-    {
-      "title": "BDC Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-belden-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
     {
       "title": "Chicago Atlantic BDC Q2 Earnings Call Highlights - Yahoo Finance",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPQkZ0MHQ3cW9OdTd6Z1doUlhrOUR5aWt4cldvMUJZMFZkWHVzdFRGc0ZseGdPZVo0d3R1YjQ1UlRNWGZTc0pOY0hwdm50Q0RSRjJQZEtqdVo3ZTIyZVdTbVRlUnVaRHhjMW5yQUFYYkY2ZnFTcXZORWlPOGY3SWY3RVFJN0xGSzMydmk4ellINnJEU0w3MlFPajR3QlVMdw?oc=5",
@@ -1176,6 +170,13 @@
       "provider": "google_news_rss"
     },
     {
+      "title": "Kayne Anderson BDC Q2 Earnings Call Highlights - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQOEFQQWIwZ2V1TnBzem9ISnV2TnQ1UzlSdi1lS2lwc1YtalRHU0E1YkZ5N2lRcjVFUXRhcmJBTERoMDNDVHRKWWE5MHVkcThPa25PNjROTEJjY3p2dElGMzN3OWw5M2ZDcTFhX2NxZEl6TzAtTjVTdDZIa3l1S3cySi1Jbk5jbThsUnZ6NnBaS0x6bzBOOUEzSHV2QQ?oc=5",
+      "ts": "2026-08-11T19:04:37+00:00",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss"
+    },
+    {
       "title": "Crescent Capital BDC, Inc. Q2 2026 Earnings Call Summary - Yahoo Finance",
       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQQll3NkFUQXlsVUJLT2dDTDVfUUE4aDJtSUstLUU3MVZzZWJNRXdMNXZ6bkQ2bEgtV19leVF5b0hkNldoU1RWUzlXSFVITVZRangwbHVpRTZ2R1JjSEJ6d1d2dzlJcUM4NXJtUTYyOXR4NGFxR3E3U28zYjFGeVM4NmFrdHZuR293NmppdU9PbWpVS2M0TFVJ?oc=5",
       "ts": "2026-08-11T12:30:00+00:00",
@@ -1183,17 +184,25 @@
       "provider": "google_news_rss"
     },
     {
-      "title": "Kayne Anderson BDC, Inc. Q2 2026 Earnings Call Summary - Yahoo Finance",
+      "title": "Kayne Anderson BDC, Inc. Q2 2026 Earnings Call Summary - finance.yahoo.com",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPTTFSUndsektBYlc4NEhLZ3ZmZEc2U1RfSjZVaDF2bHpTajM1QmhNYmtRLThEZmdkOHJmZW0tYjNKb0ZFNG1SOE1VUkNYZlpTTVdRZmppVHRVQTBXUlBXZ1IyaVc4U0swZmZDT0JLRjNJZmpUNEFhMzlpbU1WQTYyTEdPN3dxcjZ6UFBjM2xCZUp5RFdy?oc=5",
       "ts": "2026-08-11T12:30:00+00:00",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "Goldman Sachs BDC Q2 Earnings Call Highlights - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOc2I5dXE3V25aZDk4d091LW1wa2pVTDhhbjBrTTUtYU1rZi1pZk51V0JZWFN6Wk95bkZ2VE1vWFF3MDZHeGoxRGlueG9VSjZ1eUxtUTZ4VDNwTDllQmJaejc0d2w1Rnk3TDFWZDJ5US1MYVNCVVVndEZzbXBaVVFHZWZZT1NrMEhGQmRrdEVwaEVUZ202bFFFX0R3?oc=5",
+      "ts": "2026-08-08T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:38:35.844811+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

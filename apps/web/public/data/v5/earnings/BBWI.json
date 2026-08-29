@@ -1,1221 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BBWI",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-05-27T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-5-27-bath-body-works-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 88,
-        "scored_turn_count": 88,
-        "overall_sentiment": 0.268795,
-        "prepared_sentiment": -0.105872,
-        "qa_sentiment": 0.44364,
-        "qa_tone_shift": 0.549512,
-        "uncertainty_turn_rate": 0.125,
-        "forward_looking_turn_rate": 0.340909,
-        "topics": [
-          {
-            "topic": "Macro & FX",
-            "mentions": 36,
-            "sentiment": 0.012878
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 30,
-            "sentiment": 0.065187
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 17,
-            "sentiment": 0.239221
-          },
-          {
-            "topic": "Demand",
-            "mentions": 8,
-            "sentiment": 0.339673
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 7,
-            "sentiment": 0.305198
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 4,
-            "sentiment": 0.003173
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 3,
-            "sentiment": 0.21949
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.901714,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Luke Long",
-          "role": "VP of Investor Relations at Bath & Body Works",
-          "section": "prepared",
-          "sentiment": 0.895644,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 2,
-          "speaker": "Luke Long",
-          "role": "VP of Investor Relations at Bath & Body Works",
-          "section": "prepared",
-          "sentiment": 0.864349,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.002213,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.391812,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.237348,
-          "word_count": 147,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.469331,
-          "word_count": 143,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.688376,
-          "word_count": 136,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.586646,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.751948,
-          "word_count": 151,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 10,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.633188,
-          "word_count": 137,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.614779,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.407203,
-          "word_count": 132,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.618637,
-          "word_count": 138,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.842425,
-          "word_count": 150,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.438498,
-          "word_count": 130,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.597688,
-          "word_count": 150,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.908662,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.009631,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.875162,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.182918,
-          "word_count": 149,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.022351,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 22,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.080435,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 23,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.025738,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 24,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.41137,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 25,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.525136,
-          "word_count": 116,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.228594,
-          "word_count": 134,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.182338,
-          "word_count": 47,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915549,
-          "word_count": 78,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.824458,
-          "word_count": 86,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 30,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.261203,
-          "word_count": 149,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.53368,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.489402,
-          "word_count": 53,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.664004,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.277675,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 35,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.703373,
-          "word_count": 53,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910455,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.813894,
-          "word_count": 45,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.889648,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 39,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.695995,
-          "word_count": 110,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.603898,
-          "word_count": 94,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.810086,
-          "word_count": 43,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.238456,
-          "word_count": 119,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.836011,
-          "word_count": 37,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 44,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.90171,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Analyst at Guggenheim Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.630748,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.634291,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at Guggenheim Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.722203,
-          "word_count": 100,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.111583,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.577194,
-          "word_count": 147,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.2933,
-          "word_count": 29,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.328521,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904768,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.380635,
-          "word_count": 43,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 54,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.641907,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 55,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.45317,
-          "word_count": 30,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.197855,
-          "word_count": 79,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 57,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908044,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.842019,
-          "word_count": 51,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 59,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.847516,
-          "word_count": 107,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 60,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.789234,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.178843,
-          "word_count": 106,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.258115,
-          "word_count": 114,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.907233,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.825603,
-          "word_count": 83,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.077127,
-          "word_count": 81,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910817,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.626925,
-          "word_count": 72,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.259036,
-          "word_count": 132,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.629997,
-          "word_count": 107,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.862716,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.087437,
-          "word_count": 140,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.523856,
-          "word_count": 23,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Analyst at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.728545,
-          "word_count": 62,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.074562,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 75,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.482638,
-          "word_count": 47,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "CFO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.508444,
-          "word_count": 68,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914285,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "Analyst at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.60173,
-          "word_count": 108,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.60975,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 80,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.274268,
-          "word_count": 97,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.903077,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 82,
-          "speaker": "Analyst at Telsey Advisory Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.847294,
-          "word_count": 66,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.754686,
-          "word_count": 141,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 84,
-          "speaker": "CEO at Bath & Body Works",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.508048,
-          "word_count": 113,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 85,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.903321,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 86,
-          "speaker": "Luke Long",
-          "role": "VP of Investor Relations at Bath & Body Works",
-          "section": "qa",
-          "sentiment": -0.516342,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 87,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.868765,
-          "word_count": 958,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 8947,
-      "transcript_text_redistributed": false
+      "date": "2026-11-19T07:00:00-05:00",
+      "eps_estimate": 0.4,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-26T06:00:00-04:00",
+      "eps_estimate": 0.24,
+      "reported_eps": 0.62,
+      "surprise_pct": 154.91
+    },
+    {
+      "date": "2026-05-27T06:00:00-04:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.32,
+      "surprise_pct": 9.99
+    },
+    {
+      "date": "2026-03-04T06:00:00-05:00",
+      "eps_estimate": 1.77,
+      "reported_eps": 2.05,
+      "surprise_pct": 15.8
+    },
+    {
+      "date": "2025-11-20T06:00:00-05:00",
+      "eps_estimate": 0.4,
+      "reported_eps": 0.35,
+      "surprise_pct": -11.87
+    },
+    {
+      "date": "2025-08-28T06:00:00-04:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.37,
+      "surprise_pct": -1.89
+    },
+    {
+      "date": "2025-05-29T06:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.49,
+      "surprise_pct": 3.99
+    },
+    {
+      "date": "2025-02-27T06:00:00-05:00",
+      "eps_estimate": 2.04,
+      "reported_eps": 2.09,
+      "surprise_pct": 2.22
+    },
+    {
+      "date": "2024-11-25T06:00:00-05:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.49,
+      "surprise_pct": 4.82
+    },
+    {
+      "date": "2024-08-28T06:00:00-04:00",
+      "eps_estimate": 0.36,
+      "reported_eps": 0.37,
+      "surprise_pct": 3.63
+    },
+    {
+      "date": "2024-06-04T06:00:00-04:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.38,
+      "surprise_pct": 14.63
+    },
+    {
+      "date": "2024-02-29T06:00:00-05:00",
+      "eps_estimate": 1.87,
+      "reported_eps": 2.06,
+      "surprise_pct": 10.09
+    },
+    {
+      "date": "2023-11-16T06:00:00-05:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.48,
+      "surprise_pct": 36.76
+    },
+    {
+      "date": "2023-08-23T06:00:00-04:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.4,
+      "surprise_pct": 20.22
+    },
+    {
+      "date": "2023-05-18T06:00:00-04:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.33,
+      "surprise_pct": 19.86
+    },
+    {
+      "date": "2023-02-23T06:00:00-05:00",
+      "eps_estimate": 1.62,
+      "reported_eps": 1.86,
+      "surprise_pct": 14.83
+    },
+    {
+      "date": "2022-11-16T16:00:00-05:00",
+      "eps_estimate": 0.2,
+      "reported_eps": 0.4,
+      "surprise_pct": 101.69
+    },
+    {
+      "date": "2022-08-17T16:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.52,
+      "surprise_pct": 26.5
+    },
+    {
+      "date": "2022-05-18T16:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.64,
+      "surprise_pct": 21.96
+    },
+    {
+      "date": "2022-02-23T16:00:00-05:00",
+      "eps_estimate": 2.27,
+      "reported_eps": 2.3,
+      "surprise_pct": 1.18
+    },
+    {
+      "date": "2021-11-17T16:00:00-05:00",
+      "eps_estimate": 0.61,
+      "reported_eps": 0.92,
+      "surprise_pct": 51.0
+    },
+    {
+      "date": "2021-08-18T16:00:00-04:00",
+      "eps_estimate": 0.77,
+      "reported_eps": 1.34,
+      "surprise_pct": 73.9
+    },
+    {
+      "date": "2021-05-19T16:00:00-04:00",
+      "eps_estimate": 1.21,
+      "reported_eps": 1.25,
+      "surprise_pct": 3.01
+    },
+    {
+      "date": "2021-02-24T16:00:00-05:00",
+      "eps_estimate": 2.98,
+      "reported_eps": 3.03,
+      "surprise_pct": 1.54
+    },
+    {
+      "date": "2020-11-18T16:00:00-05:00",
+      "eps_estimate": 0.1,
+      "reported_eps": 1.13,
+      "surprise_pct": 997.51
     }
   ],
+  "calls": [],
   "call_links": [
-    {
-      "title": "BBWI Earnings Call: Q1 2027",
-      "url": "https://stockanalysis.com/stocks/bbwi/transcripts/580657-q1-2027/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-27T00:00:00+00:00"
-    },
-    {
-      "title": "BBWI Earnings Call: Q4 2026",
-      "url": "https://stockanalysis.com/stocks/bbwi/transcripts/421737-q4-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-03-04T00:00:00+00:00"
-    },
-    {
-      "title": "BBWI Earnings Call: Q3 2026",
-      "url": "https://stockanalysis.com/stocks/bbwi/transcripts/379911-q3-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2025-11-20T00:00:00+00:00"
-    },
-    {
-      "title": "BBWI Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-5-27-bath-body-works-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-05-27T00:00:00+00:00"
-    },
     {
       "title": "Vera Bradley, Inc. Q1 2027 Earnings Call Summary",
       "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-vera-bradley-inc-q1-2027-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
@@ -1261,9 +200,9 @@
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:37:01.578124+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

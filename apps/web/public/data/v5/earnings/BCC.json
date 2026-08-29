@@ -1,1327 +1,208 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BCC",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-03T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-3-boise-cascade-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 95,
-        "scored_turn_count": 95,
-        "overall_sentiment": 0.286668,
-        "prepared_sentiment": -0.21628,
-        "qa_sentiment": 0.412405,
-        "qa_tone_shift": 0.628685,
-        "uncertainty_turn_rate": 0.126316,
-        "forward_looking_turn_rate": 0.263158,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 34,
-            "sentiment": -0.052279
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 21,
-            "sentiment": 0.036725
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 18,
-            "sentiment": 0.122812
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 6,
-            "sentiment": -0.372819
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 5,
-            "sentiment": -0.445911
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 3,
-            "sentiment": 0.255474
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 3,
-            "sentiment": -0.241374
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.904311,
-          "word_count": 129,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Chris Forrey",
-          "role": "SVP of Finance and Investor Relations at Boise Cascade",
-          "section": "prepared",
-          "sentiment": 0.910658,
-          "word_count": 124,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.580759,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 4,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.649712,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.696131,
-          "word_count": 95,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 5,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.94125,
-          "word_count": 144,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.57994,
-          "word_count": 150,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.013022,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.026317,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 9,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.000138,
-          "word_count": 137,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 10,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.611235,
-          "word_count": 132,
-          "topic_hits": [
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.620681,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.882661,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.39288,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.41338,
-          "word_count": 58,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 15,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.865698,
-          "word_count": 149,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 4,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.835547,
-          "word_count": 139,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.865514,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.41696,
-          "word_count": 87,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.918967,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.77845,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.764592,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.67261,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.62637,
-          "word_count": 103,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.072584,
-          "word_count": 119,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 25,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.198148,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.197736,
-          "word_count": 108,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.720497,
-          "word_count": 46,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": 0.543398,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": -0.621753,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.356518,
-          "word_count": 92,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.566003,
-          "word_count": 116,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.018049,
-          "word_count": 68,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 33,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.606654,
-          "word_count": 90,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at Goldman Sachs",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736197,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909128,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at Truist",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.780247,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at Truist",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.836164,
-          "word_count": 70,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.744766,
-          "word_count": 123,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.832178,
-          "word_count": 49,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": 0.538464,
-          "word_count": 144,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": 0.551577,
-          "word_count": 62,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Analyst at Truist",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.119032,
-          "word_count": 83,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.494208,
-          "word_count": 98,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": 0.63904,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Analyst at Truist",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.112748,
-          "word_count": 65,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.355229,
-          "word_count": 73,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.677334,
-          "word_count": 113,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at Truist",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.424396,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.903871,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.818125,
-          "word_count": 99,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 51,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.332966,
-          "word_count": 120,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 52,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.697877,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 53,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": 0.622174,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": 0.791984,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.877108,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.024817,
-          "word_count": 61,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.650203,
-          "word_count": 60,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.15718,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.650806,
-          "word_count": 113,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.455381,
-          "word_count": 121,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 61,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.831177,
-          "word_count": 76,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.824407,
-          "word_count": 40,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909301,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915508,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.154665,
-          "word_count": 99,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 66,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.268139,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.899055,
-          "word_count": 29,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.455136,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": 0.70553,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "Jo Barney",
-          "role": "EVP of Building Materials Distribution at Boise Cascade",
-          "section": "qa",
-          "sentiment": -0.793299,
-          "word_count": 101,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.743342,
-          "word_count": 53,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.629205,
-          "word_count": 71,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.048876,
-          "word_count": 83,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.816534,
-          "word_count": 65,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.877611,
-          "word_count": 121,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Analyst at BMO Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.729328,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911237,
-          "word_count": 15,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "Analyst at Loop Capital",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.163968,
-          "word_count": 66,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.17743,
-          "word_count": 139,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.784529,
-          "word_count": 80,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 81,
-          "speaker": "Analyst at Loop Capital",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.776312,
-          "word_count": 47,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 82,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.416061,
-          "word_count": 107,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.903871,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 84,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.428903,
-          "word_count": 106,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 85,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.861529,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 86,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.559215,
-          "word_count": 104,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 87,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.809341,
-          "word_count": 100,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 88,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.530556,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 89,
-          "speaker": "CFO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.645866,
-          "word_count": 41,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 90,
-          "speaker": "EVP of Wood Products at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.153629,
-          "word_count": 92,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 91,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.356455,
-          "word_count": 46,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 92,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.91557,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 93,
-          "speaker": "CEO at Boise Cascade",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.014707,
-          "word_count": 36,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 94,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.756977,
-          "word_count": 943,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 8840,
-      "transcript_text_redistributed": false
+      "date": "2026-11-02T15:00:00-05:00",
+      "eps_estimate": 1.14,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-03T16:00:00-04:00",
+      "eps_estimate": 1.21,
+      "reported_eps": 1.63,
+      "surprise_pct": 34.9
+    },
+    {
+      "date": "2026-05-04T16:00:00-04:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.5,
+      "surprise_pct": 17.19
+    },
+    {
+      "date": "2026-02-23T16:00:00-05:00",
+      "eps_estimate": 0.12,
+      "reported_eps": 0.24,
+      "surprise_pct": 108.7
+    },
+    {
+      "date": "2025-11-03T16:00:00-05:00",
+      "eps_estimate": 0.69,
+      "reported_eps": 0.58,
+      "surprise_pct": -15.74
+    },
+    {
+      "date": "2025-08-04T16:00:00-04:00",
+      "eps_estimate": 1.74,
+      "reported_eps": 1.64,
+      "surprise_pct": -5.84
+    },
+    {
+      "date": "2025-05-05T16:00:00-04:00",
+      "eps_estimate": 1.29,
+      "reported_eps": 1.06,
+      "surprise_pct": -17.51
+    },
+    {
+      "date": "2025-02-20T16:00:00-05:00",
+      "eps_estimate": 1.78,
+      "reported_eps": 1.78,
+      "surprise_pct": 0.09
+    },
+    {
+      "date": "2024-11-04T16:00:00-05:00",
+      "eps_estimate": 2.33,
+      "reported_eps": 2.33,
+      "surprise_pct": 0.22
+    },
+    {
+      "date": "2024-08-05T16:00:00-04:00",
+      "eps_estimate": 2.69,
+      "reported_eps": 2.84,
+      "surprise_pct": 5.73
+    },
+    {
+      "date": "2024-05-06T16:00:00-04:00",
+      "eps_estimate": 2.28,
+      "reported_eps": 2.61,
+      "surprise_pct": 14.67
+    },
+    {
+      "date": "2024-02-20T16:00:00-05:00",
+      "eps_estimate": 2.51,
+      "reported_eps": 2.44,
+      "surprise_pct": -2.94
+    },
+    {
+      "date": "2023-10-30T16:00:00-04:00",
+      "eps_estimate": 3.36,
+      "reported_eps": 3.58,
+      "surprise_pct": 6.42
+    },
+    {
+      "date": "2023-07-31T16:00:00-04:00",
+      "eps_estimate": 2.42,
+      "reported_eps": 3.67,
+      "surprise_pct": 51.65
+    },
+    {
+      "date": "2023-05-04T16:00:00-04:00",
+      "eps_estimate": 1.63,
+      "reported_eps": 2.43,
+      "surprise_pct": 49.08
+    },
+    {
+      "date": "2023-02-21T16:00:00-05:00",
+      "eps_estimate": 2.92,
+      "reported_eps": 2.95,
+      "surprise_pct": 1.17
+    },
+    {
+      "date": "2022-10-31T16:00:00-04:00",
+      "eps_estimate": 4.13,
+      "reported_eps": 5.52,
+      "surprise_pct": 33.66
+    },
+    {
+      "date": "2022-08-01T16:00:00-04:00",
+      "eps_estimate": 4.71,
+      "reported_eps": 5.49,
+      "surprise_pct": 16.61
+    },
+    {
+      "date": "2022-05-05T16:00:00-04:00",
+      "eps_estimate": 6.71,
+      "reported_eps": 7.61,
+      "surprise_pct": 13.41
+    },
+    {
+      "date": "2022-02-22T16:00:00-05:00",
+      "eps_estimate": 2.25,
+      "reported_eps": 4.26,
+      "surprise_pct": 89.76
+    },
+    {
+      "date": "2021-11-01T16:00:00-04:00",
+      "eps_estimate": 2.16,
+      "reported_eps": 2.31,
+      "surprise_pct": 7.07
+    },
+    {
+      "date": "2021-08-02T16:00:00-04:00",
+      "eps_estimate": 4.42,
+      "reported_eps": 7.62,
+      "surprise_pct": 72.48
+    },
+    {
+      "date": "2021-05-06T16:00:00-04:00",
+      "eps_estimate": 2.46,
+      "reported_eps": 3.76,
+      "surprise_pct": 52.69
+    },
+    {
+      "date": "2021-02-22T16:00:00-05:00",
+      "eps_estimate": 1.08,
+      "reported_eps": 0.65,
+      "surprise_pct": -39.36
+    },
+    {
+      "date": "2020-10-30T16:00:00-04:00",
+      "eps_estimate": 1.86,
+      "reported_eps": 2.88,
+      "surprise_pct": 55.05
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From Boise Cascade’s Q2 Earnings Call",
       "url": "https://finance.yahoo.com/markets/stocks/articles/5-revealing-analyst-questions-boise-215722933.html",
       "ts": "2026-08-11T21:57:22+00:00",
       "source": "StockStory",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "5 Revealing Analyst Questions From Boise Cascade’s Q2 Earnings Call - finance.yahoo.com",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOeGEyMXRsRDNVTGdCVUdNUzdPbldTU3p2dE52RGRBSjRFYW5MeThWUlpQdEZTT3N3SkYxU3kwdzdHYXlUanpiY3ptamwzT3EyY0RaMU1GOXdmQnNIdGJma08yWG9IT3JVMnUyaWpLbldWeHVfNGJhandhU1VJTm9sWGlRVlI3WE1yNHlMZ3FTOWw2ODVBcDhvSTBMRmxScGxSOWc?oc=5",
+      "ts": "2026-08-11T21:57:22+00:00",
+      "source": "finance.yahoo.com",
+      "provider": "google_news_rss"
     },
     {
       "title": "Boise Cascade (BCC) Q2 2026 Earnings Call Transcript",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/08/10/boise-cascade-bcc-q2-2026-earnings-call-transcript/",
       "ts": "2026-08-11T01:29:40+00:00",
       "source": "Motley Fool",
-      "provider": "yfinance"
+      "provider": "yahoo_public"
     },
     {
-      "title": "James Hardie Industries PLC (JHIUF) (Q1 2027) Earnings Call Highlights: Record Growth and ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/james-hardie-industries-plc-jhiuf-051237356.html",
-      "ts": "2026-08-07T05:12:37+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
+      "title": "Boise Cascade (BCC) Q2 2026 Earnings Call Transcript - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOSlI0ZC1zTnpZNjdUQUJRMGlBLWo4aEtFbmwtSy0xd1YwcXZWQWJaMHVBcUhPZ2RaLVcwT3pRNmdCZlEtT285ZUNjN0QyUml6WlZfYzJsZUQzLTVhSzFWSW5aeTE3V0Fsc0djOXJSUVpxbVVxcG9VbFhWbEZfRkZTckNKZmEySXlRMFVvVmMyNnp0QTdHTmR3RU5vcVE5ZmdnV3VaNzh0YnZJUC0yWk1DUl9zMENxeW9tcjJqck1fQU9MVmpjNWdGazEyUFhHZnM?oc=5",
+      "ts": "2026-08-11T01:29:00+00:00",
+      "source": "The Globe and Mail",
+      "provider": "google_news_rss"
     },
     {
-      "title": "Boise Cascade Co (BCC) (Q2 2026) Earnings Call Highlights: Record Sales and Strategic Expansion ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/boise-cascade-co-bcc-q2-230103244.html",
-      "ts": "2026-08-04T23:01:03+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
+      "title": "5 Revealing Analyst Questions From Boise Cascade’s Q2 Earnings Call - The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNTzh2TG1ZdGcyT2lNWS00UnhDMkNCX1h3Zm1NbkN0dXFfdE1GT29tU3R4YkJ5aFd2Q2poUmJocmpreU1lRDVtSkNieWYxUWhDMDJFVU1qM0xYR1JsOTZnSGQtRFdHek9iQWZQMjU5VG5QdXdEUUlfeFlaV3VZMEpyN3B0QWVNUlZuM0doNFRfcmJfVy1PWlRTbGt5UERlMTZEVmdqdV9hcUl4WThLNXhnUE5HOF9yaWxrSjlvblBaN2NzMmZPTllGZG40NHZlTDBkN1pnSXBrSDdGVEdQSlNxUTJhYkc?oc=5",
+      "ts": "2026-08-10T07:00:00+00:00",
+      "source": "The Globe and Mail",
+      "provider": "google_news_rss"
     },
     {
-      "title": "Boise Cascade Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/boise-cascade-q2-earnings-call-highlights-2026-08-04/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-08-04T21:03:55+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Boise Cascade Company Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-boise-cascade-company-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-08-04T12:30:00+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
-    },
-    {
-      "title": "BCC Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/bcc/transcripts/660784-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-04T00:00:00+00:00"
-    },
-    {
-      "title": "BCC Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/bcc/transcripts/566585-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-05T00:00:00+00:00"
-    },
-    {
-      "title": "BCC Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/bcc/transcripts/408640-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-24T00:00:00+00:00"
-    },
-    {
-      "title": "BCC Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-boise-cascade-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-03T00:00:00+00:00"
+      "title": "5 Revealing Analyst Questions From Boise Cascade’s Q2 Earnings Call - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQV1pFUG9kbktJMVNZY1BNbWlTNUliUVJsUDZUVmJNbXJkb3FobGVEeG01WjFKb3hzdEltQkRZeTVxN01mMXZyRHNoeVEwUjd1QkJzc1JoZ196d21tMU9FTFJkMEJNeVlvcHFyQzBPaGRfRHQ0X3d2ejE2dWVXWEhUcnN0QVJLVVRXbVgwYnExM3hRWHlUZFd1X3R2aTA4UVR3X09ldzRoN3VhMUxud2o0b29WdTJ2UHBRMEZDY1Y0RUFMVkxiSnQ0?oc=5",
+      "ts": "2026-08-10T05:34:00+00:00",
+      "source": "TradingView",
+      "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:38:04.860768+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
