@@ -1,579 +1,141 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BFLY",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-18T01:29:45+00:00",
-      "source": "Motley Fool",
-      "source_url": "https://finance.yahoo.com/m/8c80da50-b538-36a8-b14f-b95315143a68/compass-diversified-%28codi%29-q2.html",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 43,
-        "scored_turn_count": 43,
-        "overall_sentiment": 0.371041,
-        "prepared_sentiment": -0.056974,
-        "qa_sentiment": 0.440449,
-        "qa_tone_shift": 0.497423,
-        "uncertainty_turn_rate": 0.139535,
-        "forward_looking_turn_rate": 0.44186,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 16,
-            "sentiment": 0.18597
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 9,
-            "sentiment": -0.010564
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 6,
-            "sentiment": 0.102711
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 6,
-            "sentiment": -0.09948
-          },
-          {
-            "topic": "Demand",
-            "mentions": 5,
-            "sentiment": -0.322819
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 5,
-            "sentiment": 0.156255
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 2,
-            "sentiment": -0.504483
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "section": "prepared",
-          "sentiment": 0.887744,
-          "word_count": 42,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Ben Avenia-Tapper",
-          "section": "prepared",
-          "sentiment": 0.907442,
-          "word_count": 430,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 6
-        },
-        {
-          "turn": 2,
-          "speaker": "Elias Sabo",
-          "section": "prepared",
-          "sentiment": -0.814065,
-          "word_count": 459,
-          "topic_hits": [
-            "Guidance",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 3,
-          "speaker": "Zachary Sawtelle",
-          "section": "prepared",
-          "sentiment": -0.912485,
-          "word_count": 409,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation",
-            "Macro & FX",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "Stephen Keller",
-          "section": "prepared",
-          "sentiment": -0.194902,
-          "word_count": 963,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 5,
-          "speaker": "Zachary Sawtelle",
-          "section": "prepared",
-          "sentiment": -0.215576,
-          "word_count": 126,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.888689,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "Cristopher Kennedy",
-          "section": "qa",
-          "sentiment": 0.742267,
-          "word_count": 34,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": 0.156764,
-          "word_count": 79,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "Cristopher Kennedy",
-          "section": "qa",
-          "sentiment": -0.889591,
-          "word_count": 26,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 10,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": 0.856176,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "Stephen Keller",
-          "section": "qa",
-          "sentiment": 0.598048,
-          "word_count": 64,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.89225,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "Lance Vitanza",
-          "section": "qa",
-          "sentiment": 0.659551,
-          "word_count": 80,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "Stephen Keller",
-          "section": "qa",
-          "sentiment": 0.794145,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 15,
-          "speaker": "Lance Vitanza",
-          "section": "qa",
-          "sentiment": 0.574993,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": -0.319913,
-          "word_count": 77,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "Lance Vitanza",
-          "section": "qa",
-          "sentiment": -0.82396,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": -0.232672,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.89333,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Lawrence Solow",
-          "section": "qa",
-          "sentiment": 0.636946,
-          "word_count": 165,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": 0.735649,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Lawrence Solow",
-          "section": "qa",
-          "sentiment": 0.314691,
-          "word_count": 76,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": -0.703213,
-          "word_count": 59,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 24,
-          "speaker": "Lawrence Solow",
-          "section": "qa",
-          "sentiment": 0.881133,
-          "word_count": 64,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 25,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": 0.479108,
-          "word_count": 37,
-          "topic_hits": [
-            "Guidance",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "Lawrence Solow",
-          "section": "qa",
-          "sentiment": 0.89155,
-          "word_count": 12,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 27,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": 0.877483,
-          "word_count": 8,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.91059,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Timothy D'Agostino",
-          "section": "qa",
-          "sentiment": 0.846433,
-          "word_count": 88,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 30,
-          "speaker": "Stephen Keller",
-          "section": "qa",
-          "sentiment": 0.516401,
-          "word_count": 196,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Timothy D'Agostino",
-          "section": "qa",
-          "sentiment": 0.801029,
-          "word_count": 65,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Stephen Keller",
-          "section": "qa",
-          "sentiment": 0.286774,
-          "word_count": 68,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.90277,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Robert Dodd",
-          "section": "qa",
-          "sentiment": 0.782817,
-          "word_count": 112,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": 0.831297,
-          "word_count": 180,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 36,
-          "speaker": "Robert Dodd",
-          "section": "qa",
-          "sentiment": 0.528422,
-          "word_count": 123,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": -0.91274,
-          "word_count": 119,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 38,
-          "speaker": "Robert Dodd",
-          "section": "qa",
-          "sentiment": 0.589869,
-          "word_count": 68,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": -0.907159,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.895921,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Zachary Sawtelle",
-          "section": "qa",
-          "sentiment": 0.637539,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.683223,
-          "word_count": 194,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        }
-      ],
-      "transcript_word_count": 5199,
-      "transcript_text_redistributed": false
+      "date": "2026-10-30T08:00:00-04:00",
+      "eps_estimate": -0.03,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-30T06:00:00-04:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.01,
+      "surprise_pct": 72.73
+    },
+    {
+      "date": "2026-04-30T06:00:00-04:00",
+      "eps_estimate": -0.05,
+      "reported_eps": -0.03,
+      "surprise_pct": 40.0
+    },
+    {
+      "date": "2026-02-26T06:00:00-05:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.02,
+      "surprise_pct": 55.56
+    },
+    {
+      "date": "2025-10-31T06:00:00-04:00",
+      "eps_estimate": -0.05,
+      "reported_eps": -0.04,
+      "surprise_pct": 20.0
+    },
+    {
+      "date": "2025-08-01T06:00:00-04:00",
+      "eps_estimate": -0.05,
+      "reported_eps": -0.03,
+      "surprise_pct": 42.86
+    },
+    {
+      "date": "2025-05-02T06:00:00-04:00",
+      "eps_estimate": -0.07,
+      "reported_eps": -0.04,
+      "surprise_pct": 42.86
+    },
+    {
+      "date": "2025-02-28T06:00:00-05:00",
+      "eps_estimate": -0.08,
+      "reported_eps": -0.08,
+      "surprise_pct": null
+    },
+    {
+      "date": "2024-11-01T06:00:00-04:00",
+      "eps_estimate": -0.09,
+      "reported_eps": -0.05,
+      "surprise_pct": 42.31
+    },
+    {
+      "date": "2024-08-01T16:00:00-04:00",
+      "eps_estimate": -0.1,
+      "reported_eps": -0.07,
+      "surprise_pct": 30.0
+    },
+    {
+      "date": "2024-05-01T16:00:00-04:00",
+      "eps_estimate": -0.12,
+      "reported_eps": -0.1,
+      "surprise_pct": 14.0
+    },
+    {
+      "date": "2024-02-28T16:00:00-05:00",
+      "eps_estimate": -0.15,
+      "reported_eps": -0.21,
+      "surprise_pct": -39.93
+    },
+    {
+      "date": "2023-11-02T16:00:00-04:00",
+      "eps_estimate": -0.15,
+      "reported_eps": -0.12,
+      "surprise_pct": 23.07
+    },
+    {
+      "date": "2023-08-03T08:00:00-04:00",
+      "eps_estimate": -0.16,
+      "reported_eps": -0.14,
+      "surprise_pct": 14.44
+    },
+    {
+      "date": "2023-05-11T08:00:00-04:00",
+      "eps_estimate": -0.19,
+      "reported_eps": -0.16,
+      "surprise_pct": 13.37
+    },
+    {
+      "date": "2023-02-28T08:00:00-05:00",
+      "eps_estimate": -0.23,
+      "reported_eps": -0.15,
+      "surprise_pct": 34.3
+    },
+    {
+      "date": "2022-11-03T08:00:00-04:00",
+      "eps_estimate": -0.24,
+      "reported_eps": -0.26,
+      "surprise_pct": -10.12
+    },
+    {
+      "date": "2022-08-03T07:00:00-04:00",
+      "eps_estimate": -0.27,
+      "reported_eps": -0.18,
+      "surprise_pct": 33.33
+    },
+    {
+      "date": "2022-05-05T08:00:00-04:00",
+      "eps_estimate": -0.25,
+      "reported_eps": -0.22,
+      "surprise_pct": 12.0
+    },
+    {
+      "date": "2022-02-28T08:00:00-05:00",
+      "eps_estimate": -0.26,
+      "reported_eps": -0.22,
+      "surprise_pct": 16.93
+    },
+    {
+      "date": "2021-11-15T08:00:00-05:00",
+      "eps_estimate": -0.25,
+      "reported_eps": -0.23,
+      "surprise_pct": 9.6
+    },
+    {
+      "date": "2021-08-09T08:00:00-04:00",
+      "eps_estimate": -0.24,
+      "reported_eps": -0.02,
+      "surprise_pct": 91.67
     }
   ],
-  "filing_fallback": [],
-  "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 2
-  },
+  "calls": [],
   "call_links": [
     {
       "title": "BFLY Q2 Earnings Call Spotlights Embedded Growth and Raised Outlook",
@@ -604,41 +166,25 @@
       "provider": "google_news_rss"
     },
     {
-      "title": "BFLY Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/bfly/transcripts/657879-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
-    {
-      "title": "BFLY Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/bfly/transcripts/571605-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
-      "title": "BFLY Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/bfly/transcripts/400692-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-26T00:00:00+00:00"
-    },
-    {
-      "title": "BFLY Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-butterfly-network-inc-stock/#transcript",
+      "title": "Butterfly Network Q2 Earnings Call Highlights",
+      "url": "https://www.marketbeat.com/instant-alerts/butterfly-network-q2-earnings-call-highlights-2026-07-30/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "ts": "2026-08-01T04:02:46+00:00",
       "source": "MarketBeat",
-      "ts": "2026-07-30T00:00:00+00:00"
+      "provider": "yahoo_public"
     },
     {
-      "title": "Ur-Energy (URG) Q2 2026 Earnings Call Transcript",
-      "url": "https://finance.yahoo.com/m/4baaea9d-3756-3292-8db6-e2b1305bbf4c/ur-energy-%28urg%29-q2-2026.html",
-      "source": "Motley Fool",
-      "ts": "2026-08-18T01:30:48+00:00"
-    },
-    {
-      "title": "Compass Diversified (CODI) Q2 2026 Earnings Call Transcript",
-      "url": "https://finance.yahoo.com/m/8c80da50-b538-36a8-b14f-b95315143a68/compass-diversified-%28codi%29-q2.html",
-      "source": "Motley Fool",
-      "ts": "2026-08-18T01:29:45+00:00"
+      "title": "Butterfly Network, Inc. Q2 2026 Earnings Call Summary",
+      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-butterfly-network-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
+      "ts": "2026-07-31T02:34:36+00:00",
+      "source": "Moby",
+      "provider": "yahoo_public"
     }
   ],
-  "updated_at_utc": "2026-08-18T01:47:06.329189+00:00"
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

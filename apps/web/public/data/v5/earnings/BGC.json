@@ -1,679 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BGC",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-30T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-bgc-partners-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 45,
-        "scored_turn_count": 45,
-        "overall_sentiment": 0.207051,
-        "prepared_sentiment": -0.307676,
-        "qa_sentiment": 0.464415,
-        "qa_tone_shift": 0.772091,
-        "uncertainty_turn_rate": 0.066667,
-        "forward_looking_turn_rate": 0.333333,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 12,
-            "sentiment": -0.111703
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 11,
-            "sentiment": 0.414834
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 8,
-            "sentiment": -0.032802
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 5,
-            "sentiment": 0.067037
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 4,
-            "sentiment": 0.065662
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 2,
-            "sentiment": 0.863294
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.890431,
-          "word_count": 82,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Head of Investor Relations at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.931116,
-          "word_count": 140,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Head of Investor Relations at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.888788,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 3,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.921007,
-          "word_count": 133,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.674283,
-          "word_count": 75,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.183275,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.932411,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 7,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.928934,
-          "word_count": 149,
-          "topic_hits": [
-            "Demand",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.932625,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.574659,
-          "word_count": 80,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.912747,
-          "word_count": 77,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.922463,
-          "word_count": 110,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.412234,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.614292,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 14,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.683448,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910459,
-          "word_count": 87,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Senior Research Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.846049,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.817441,
-          "word_count": 129,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.368171,
-          "word_count": 96,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "Senior Research Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.092944,
-          "word_count": 91,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.819172,
-          "word_count": 94,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.563616,
-          "word_count": 92,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "Senior Research Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.728328,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909049,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Research Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.320973,
-          "word_count": 70,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.778509,
-          "word_count": 50,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Research Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.79108,
-          "word_count": 55,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.140373,
-          "word_count": 116,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 28,
-          "speaker": "Research Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.87487,
-          "word_count": 75,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.390602,
-          "word_count": 68,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Research Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.030504,
-          "word_count": 87,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.595787,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "Research Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.762879,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905612,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Senior Research Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.863805,
-          "word_count": 112,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.813552,
-          "word_count": 122,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.77116,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.231522,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.345125,
-          "word_count": 81,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Senior Research Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.899478,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.470236,
-          "word_count": 71,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Senior Research Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.853085,
-          "word_count": 40,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Co-CEO at BGC Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.862169,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Senior Research Analyst at Piper Sandler",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.080535,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909147,
-          "word_count": 914,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 4788,
-      "transcript_text_redistributed": false
+      "date": "2026-11-05T07:00:00-05:00",
+      "eps_estimate": 0.33,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-30T08:00:00-04:00",
+      "eps_estimate": 0.34,
+      "reported_eps": 0.35,
+      "surprise_pct": 4.48
+    },
+    {
+      "date": "2026-05-07T08:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.41,
+      "surprise_pct": 1.23
+    },
+    {
+      "date": "2026-02-12T08:00:00-05:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.31,
+      "surprise_pct": 6.9
+    },
+    {
+      "date": "2025-11-06T08:00:00-05:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.29,
+      "surprise_pct": 3.57
+    },
+    {
+      "date": "2025-07-31T08:00:00-04:00",
+      "eps_estimate": 0.31,
+      "reported_eps": 0.31,
+      "surprise_pct": null
+    },
+    {
+      "date": "2025-05-07T08:00:00-04:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.29,
+      "surprise_pct": 1.75
+    },
+    {
+      "date": "2025-02-14T08:00:00-05:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.25,
+      "surprise_pct": null
+    },
+    {
+      "date": "2024-10-31T08:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.26,
+      "surprise_pct": 13.04
+    },
+    {
+      "date": "2024-07-30T08:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.23,
+      "surprise_pct": null
+    },
+    {
+      "date": "2024-04-30T08:00:00-04:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.25,
+      "surprise_pct": null
+    },
+    {
+      "date": "2024-02-14T08:00:00-05:00",
+      "eps_estimate": 0.2,
+      "reported_eps": 0.21,
+      "surprise_pct": 5.0
+    },
+    {
+      "date": "2023-10-30T07:00:00-04:00",
+      "eps_estimate": 0.18,
+      "reported_eps": 0.19,
+      "surprise_pct": 5.56
+    },
+    {
+      "date": "2023-08-02T09:00:00-04:00",
+      "eps_estimate": 0.19,
+      "reported_eps": 0.2,
+      "surprise_pct": 5.26
+    },
+    {
+      "date": "2023-05-03T08:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.23,
+      "surprise_pct": null
+    },
+    {
+      "date": "2023-02-27T08:00:00-05:00",
+      "eps_estimate": 0.16,
+      "reported_eps": 0.16,
+      "surprise_pct": 3.23
+    },
+    {
+      "date": "2022-11-02T08:00:00-04:00",
+      "eps_estimate": 0.15,
+      "reported_eps": 0.16,
+      "surprise_pct": 6.67
+    },
+    {
+      "date": "2022-08-03T08:00:00-04:00",
+      "eps_estimate": 0.16,
+      "reported_eps": 0.17,
+      "surprise_pct": 6.25
+    },
+    {
+      "date": "2022-05-03T06:00:00-04:00",
+      "eps_estimate": 0.21,
+      "reported_eps": 0.21,
+      "surprise_pct": null
+    },
+    {
+      "date": "2022-02-16T08:00:00-05:00",
+      "eps_estimate": 0.17,
+      "reported_eps": 0.17,
+      "surprise_pct": 2.0
+    },
+    {
+      "date": "2021-11-03T08:00:00-04:00",
+      "eps_estimate": 0.15,
+      "reported_eps": 0.14,
+      "surprise_pct": -6.67
+    },
+    {
+      "date": "2021-08-04T08:00:00-04:00",
+      "eps_estimate": 0.16,
+      "reported_eps": 0.16,
+      "surprise_pct": 3.23
+    },
+    {
+      "date": "2021-04-29T08:00:00-04:00",
+      "eps_estimate": 0.19,
+      "reported_eps": 0.18,
+      "surprise_pct": -2.7
+    },
+    {
+      "date": "2021-02-24T09:00:00-05:00",
+      "eps_estimate": 0.12,
+      "reported_eps": 0.13,
+      "surprise_pct": 8.33
+    },
+    {
+      "date": "2020-10-28T09:00:00-04:00",
+      "eps_estimate": 0.11,
+      "reported_eps": 0.11,
+      "surprise_pct": null
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
-    {
-      "title": "BGC Group, Inc. 2026 Q2 - Results - Earnings Call Presentation",
-      "url": "https://finnhub.io/api/news?id=a56d717eb0ae512960d0e249fa90e995e7082b883af0b9ff65823794386fc950",
-      "ts": "2026-08-04T19:03:07+00:00",
-      "source": "SeekingAlpha",
-      "provider": "finnhub"
-    },
-    {
-      "title": "BGC (BGC) Q2 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/07/30/bgc-bgc-q2-2026-earnings-call-transcript/",
-      "ts": "2026-07-31T02:17:17+00:00",
-      "source": "Motley Fool",
-      "provider": "yfinance"
-    },
-    {
-      "title": "BGC Group Inc (BGC) (Q2 2026) Earnings Call Highlights: Record Revenues and Strategic Fanatics ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/bgc-group-inc-bgc-q2-230049926.html",
-      "ts": "2026-07-30T23:00:49+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "BGC Group, Inc Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-bgc-group-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-07-30T21:25:28+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
-    },
-    {
-      "title": "BGC Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/bgc/transcripts/662388-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
-    {
-      "title": "BGC Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/bgc/transcripts/555952-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-07T00:00:00+00:00"
-    },
-    {
-      "title": "BGC Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/bgc/transcripts/395641-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-12T00:00:00+00:00"
-    },
-    {
-      "title": "BGC Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-bgc-partners-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
     {
       "title": "5 Must-Read Analyst Questions From BGC’s Q2 Earnings Call - StockStory",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPU2tGUGFqVHA5NXItSHRxemQxWWduMXFSYWNsYk1qTWEyQ2tiX1RJaXVVRDNsMG55UVVSc21mY192R1dQaXBkT3daeTAzRE5EZlp2WEJuRjVJaVZFYXVCcVFVa2N2SjBmQTE4RjVsRTUzWVg3c051MUpvZncyTkxXNlhGMTZwcFN3QkFyaEVKZHgxQl9tdVdOVTlQRk9GVHVsVmVqNG44LXVtdDhWRldfVDZYMnF5aXNnMmV3?oc=5",
@@ -687,12 +168,41 @@
       "ts": "2026-08-06T07:00:00+00:00",
       "source": "The Globe and Mail",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "5 Must-Read Analyst Questions From BGC’s Q2 Earnings Call - TradingView",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPWVFVcDFPY0YyYmJBMGFkWERsMEthREQ1QWp0eDlJbmNhQnZEMWdSTXdtYktWTFRSdWd2SkhrZGpuSUZsQi1VXzRZQTlUX3FycXBEQnNqUFZOMjVaa0JZa0xXU0JweGYzUVQyNE9hWE9NVHRiRktzTngyZllEZkJXUkRVdFQ4eXlELVlmV19IX3JsdGxEeTg4OXFWTE1iMHpnbk1mWVJvcEYydjl3aTFHOUUyVXA4QnhlbUE?oc=5",
+      "ts": "2026-08-06T05:45:00+00:00",
+      "source": "TradingView",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "BGC Group, Inc. 2026 Q2 - Results - Earnings Call Presentation",
+      "url": "https://finnhub.io/api/news?id=a56d717eb0ae512960d0e249fa90e995e7082b883af0b9ff65823794386fc950",
+      "ts": "2026-08-04T19:03:07+00:00",
+      "source": "SeekingAlpha",
+      "provider": "finnhub"
+    },
+    {
+      "title": "BGC Group, Inc. 2026 Q2 - Results - Earnings Call Presentation (NASDAQ:BGC) 2026-08-04 - Seeking Alpha",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxONjFVdThOMzdwTlZuMEthQVRwWHR0cm5LNk44X1NPUW9qRmVvQkNMZHJjOXEzOEViQUduMGY5NXdfOWhaNjE1Slh3YWtMZWpPLUdFU2p1WG5hb0laMXpHVmlPTVU0WlhmdFFTb0tmRHdkdzNzcUViWXZoSHB1WVl0Qkw1V3F6aVpYRkNTd1BQeXlHX2dQZkc5NG8xR0NLdw?oc=5",
+      "ts": "2026-08-04T07:00:00+00:00",
+      "source": "Seeking Alpha",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "BGC (BGC) Q2 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/07/30/bgc-bgc-q2-2026-earnings-call-transcript/",
+      "ts": "2026-07-31T02:17:17+00:00",
+      "source": "Motley Fool",
+      "provider": "yahoo_public"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:40:12.061525+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
