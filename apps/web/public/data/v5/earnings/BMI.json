@@ -1,1142 +1,208 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BMI",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-22T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-22-badger-meter-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 82,
-        "scored_turn_count": 82,
-        "overall_sentiment": 0.516056,
-        "prepared_sentiment": -0.152442,
-        "qa_sentiment": 0.653688,
-        "qa_tone_shift": 0.806131,
-        "uncertainty_turn_rate": 0.109756,
-        "forward_looking_turn_rate": 0.219512,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 17,
-            "sentiment": 0.179091
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 14,
-            "sentiment": 0.213335
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 13,
-            "sentiment": 0.423828
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 10,
-            "sentiment": 0.212216
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 4,
-            "sentiment": 0.135512
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 2,
-            "sentiment": 0.805292
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 2,
-            "sentiment": 0.769406
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.886332,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.889366,
-          "word_count": 142,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.592799,
-          "word_count": 150,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 3,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.01277,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 4,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.016554,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.156446,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.003734,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 7,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.620807,
-          "word_count": 108,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "prepared",
-          "sentiment": -0.747337,
-          "word_count": 127,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "prepared",
-          "sentiment": -0.791992,
-          "word_count": 132,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "prepared",
-          "sentiment": 0.446172,
-          "word_count": 93,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.654454,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 12,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.817517,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 13,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.02534,
-          "word_count": 65,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909182,
-          "word_count": 95,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Analyst at RBC Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.614119,
-          "word_count": 48,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.515391,
-          "word_count": 96,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "Analyst at RBC Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.673222,
-          "word_count": 35,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.073297,
-          "word_count": 97,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "Analyst at RBC Capital Markets",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.101404,
-          "word_count": 49,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.88857,
-          "word_count": 34,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.914261,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Research Associate at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.701355,
-          "word_count": 66,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.649684,
-          "word_count": 94,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 24,
-          "speaker": "Research Associate at Baird",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.859465,
-          "word_count": 46,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.891729,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.784823,
-          "word_count": 109,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.809248,
-          "word_count": 43,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909591,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Equity Research Senior Associate at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.738951,
-          "word_count": 62,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 30,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.574924,
-          "word_count": 149,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Equity Research Senior Associate at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.681236,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.86835,
-          "word_count": 129,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.248608,
-          "word_count": 99,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 34,
-          "speaker": "Equity Research Senior Associate at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.581968,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.907907,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Managing Director at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.177884,
-          "word_count": 88,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.580013,
-          "word_count": 146,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 38,
-          "speaker": "Managing Director at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.739054,
-          "word_count": 93,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.697943,
-          "word_count": 139,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.711123,
-          "word_count": 52,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Managing Director at Stifel",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.669321,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.899553,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.499326,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.40778,
-          "word_count": 88,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.372587,
-          "word_count": 41,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.585536,
-          "word_count": 70,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 47,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.787473,
-          "word_count": 70,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.884368,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.546666,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.906505,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Director at Deutsche Bank",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.07676,
-          "word_count": 49,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.682155,
-          "word_count": 74,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 53,
-          "speaker": "Director at Deutsche Bank",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.672475,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.766449,
-          "word_count": 140,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.572716,
-          "word_count": 49,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909225,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Analyst at Seaport",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.830286,
-          "word_count": 109,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.85776,
-          "word_count": 115,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Analyst at Seaport",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.845493,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.841065,
-          "word_count": 119,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.726247,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.294832,
-          "word_count": 52,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at Seaport",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.5737,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.91194,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Managing Director at Northcoast Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.794551,
-          "word_count": 92,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.00043,
-          "word_count": 59,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Bob Wrocklage",
-          "role": "EVP of North America Municipal Utility at Badger Meter",
-          "section": "qa",
-          "sentiment": 0.479263,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Managing Director at Northcoast Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.793316,
-          "word_count": 101,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.815246,
-          "word_count": 157,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "Managing Director at Northcoast Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.810231,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.912761,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "Equity Research Associate at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896985,
-          "word_count": 29,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.884337,
-          "word_count": 83,
-          "topic_hits": [
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.880355,
-          "word_count": 81,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Chairman, President, and CEO at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.221451,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Equity Research Associate at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.724058,
-          "word_count": 41,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.600094,
-          "word_count": 123,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.347726,
-          "word_count": 101,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 79,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.903283,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "CFO and Treasurer at Badger Meter",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.860115,
-          "word_count": 56,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.75134,
-          "word_count": 953,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 7135,
-      "transcript_text_redistributed": false
+      "date": "2026-10-21T08:00:00-04:00",
+      "eps_estimate": 1.22,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-22T08:00:00-04:00",
+      "eps_estimate": 1.01,
+      "reported_eps": 1.02,
+      "surprise_pct": 0.72
+    },
+    {
+      "date": "2026-04-17T08:00:00-04:00",
+      "eps_estimate": 1.22,
+      "reported_eps": 0.93,
+      "surprise_pct": -24.0
+    },
+    {
+      "date": "2026-01-28T08:00:00-05:00",
+      "eps_estimate": 1.16,
+      "reported_eps": 1.14,
+      "surprise_pct": -1.52
+    },
+    {
+      "date": "2025-10-21T08:00:00-04:00",
+      "eps_estimate": 1.14,
+      "reported_eps": 1.19,
+      "surprise_pct": 4.62
+    },
+    {
+      "date": "2025-07-22T08:00:00-04:00",
+      "eps_estimate": 1.25,
+      "reported_eps": 1.17,
+      "surprise_pct": -6.69
+    },
+    {
+      "date": "2025-04-17T08:00:00-04:00",
+      "eps_estimate": 1.05,
+      "reported_eps": 1.3,
+      "surprise_pct": 23.27
+    },
+    {
+      "date": "2025-01-31T08:00:00-05:00",
+      "eps_estimate": 1.1,
+      "reported_eps": 1.04,
+      "surprise_pct": -5.07
+    },
+    {
+      "date": "2024-10-17T08:00:00-04:00",
+      "eps_estimate": 1.11,
+      "reported_eps": 1.08,
+      "surprise_pct": -2.67
+    },
+    {
+      "date": "2024-07-19T08:00:00-04:00",
+      "eps_estimate": 0.97,
+      "reported_eps": 1.12,
+      "surprise_pct": 15.07
+    },
+    {
+      "date": "2024-04-18T08:00:00-04:00",
+      "eps_estimate": 0.82,
+      "reported_eps": 0.99,
+      "surprise_pct": 20.86
+    },
+    {
+      "date": "2024-01-26T08:00:00-05:00",
+      "eps_estimate": 0.82,
+      "reported_eps": 0.84,
+      "surprise_pct": 2.37
+    },
+    {
+      "date": "2023-10-19T08:00:00-04:00",
+      "eps_estimate": 0.81,
+      "reported_eps": 0.88,
+      "surprise_pct": 8.85
+    },
+    {
+      "date": "2023-07-20T08:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.76,
+      "surprise_pct": 16.52
+    },
+    {
+      "date": "2023-04-20T08:00:00-04:00",
+      "eps_estimate": 0.55,
+      "reported_eps": 0.66,
+      "surprise_pct": 19.46
+    },
+    {
+      "date": "2023-01-27T08:00:00-05:00",
+      "eps_estimate": 0.6,
+      "reported_eps": 0.6,
+      "surprise_pct": 0.28
+    },
+    {
+      "date": "2022-10-19T08:00:00-04:00",
+      "eps_estimate": 0.57,
+      "reported_eps": 0.61,
+      "surprise_pct": 6.75
+    },
+    {
+      "date": "2022-07-20T08:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.57,
+      "surprise_pct": 10.68
+    },
+    {
+      "date": "2022-04-19T08:00:00-04:00",
+      "eps_estimate": 0.51,
+      "reported_eps": 0.49,
+      "surprise_pct": -3.16
+    },
+    {
+      "date": "2022-01-28T08:00:00-05:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.59,
+      "surprise_pct": 28.26
+    },
+    {
+      "date": "2021-10-15T08:00:00-04:00",
+      "eps_estimate": 0.5,
+      "reported_eps": 0.54,
+      "surprise_pct": 8.0
+    },
+    {
+      "date": "2021-07-20T08:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.48,
+      "surprise_pct": 3.97
+    },
+    {
+      "date": "2021-04-20T08:00:00-04:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.47,
+      "surprise_pct": 9.73
+    },
+    {
+      "date": "2021-01-29T08:00:00-05:00",
+      "eps_estimate": 0.43,
+      "reported_eps": 0.45,
+      "surprise_pct": 3.69
+    },
+    {
+      "date": "2020-10-16T08:00:00-04:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.51,
+      "surprise_pct": 33.51
     }
   ],
-  "filing_fallback": [],
+  "calls": [],
   "call_links": [
-    {
-      "title": "Badger Meter (BMI) Q2 2026 Earnings Call Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/07/22/badger-meter-bmi-q2-2026-earnings-call-transcript/",
-      "ts": "2026-07-23T01:27:18+00:00",
-      "source": "Motley Fool",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Badger Meter Inc (BMI) Q2 2026 Earnings Call Highlights: Navigating Challenges with Strategic ...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/badger-meter-inc-bmi-q2-230022218.html",
-      "ts": "2026-07-22T23:00:22+00:00",
-      "source": "GuruFocus.com",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Badger Meter, Inc. Q2 2026 Earnings Call Summary",
-      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-badger-meter-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
-      "ts": "2026-07-22T16:59:50+00:00",
-      "source": "Moby",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Badger Meter Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/badger-meter-q2-earnings-call-highlights-2026-07-22/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-07-22T16:06:29+00:00",
-      "source": "MarketBeat",
-      "provider": "yfinance"
-    },
-    {
-      "title": "Badger Meter Schedules Second Quarter 2026 Earnings Call",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/badger-meter-schedules-second-quarter-131500894.html",
-      "ts": "2026-07-01T13:15:00+00:00",
-      "source": "Business Wire",
-      "provider": "yfinance"
-    },
-    {
-      "title": "BMI Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/bmi/transcripts/651055-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-22T00:00:00+00:00"
-    },
-    {
-      "title": "BMI Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/bmi/transcripts/547880-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-17T00:00:00+00:00"
-    },
-    {
-      "title": "BMI Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/bmi/transcripts/394092-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-01-28T00:00:00+00:00"
-    },
-    {
-      "title": "BMI Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-22-badger-meter-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-22T00:00:00+00:00"
-    },
     {
       "title": "Badger Meter, Inc. 2026 Q2 - Results - Earnings Call Presentation (NYSE:BMI) 2026-07-23 - Seeking Alpha",
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQVzZ4dVhhYlp5MVRFeTNmMm1taTZGbEs1aGNMOURhZGtocXhqMTdKa0xVaW5Uc1lIQ3Y0WC1ucHFacDVpTnBOQzJOdnlQVm95VnotN050ZkY5UGtnUmZ6R2k4R0tBa0k4T2d2bVllUjJpNTBOcm0wUlZXSTVqc1ZYMzlWSmxSZXhuY3FiZE5tcFpvQ1g4RG5lQk13aGdMbEc4eVE?oc=5",
       "ts": "2026-07-23T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "Badger Meter (BMI) Q2 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/07/22/badger-meter-bmi-q2-2026-earnings-call-transcript/",
+      "ts": "2026-07-23T01:27:18+00:00",
+      "source": "Motley Fool",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "Badger Meter Inc (BMI) Q2 2026 Earnings Call Highlights: Navigating Challenges with Strategic ...",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/badger-meter-inc-bmi-q2-230022218.html",
+      "ts": "2026-07-22T23:00:22+00:00",
+      "source": "GuruFocus.com",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "Badger Meter, Inc. Q2 2026 Earnings Call Summary",
+      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-badger-meter-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
+      "ts": "2026-07-22T16:59:50+00:00",
+      "source": "Moby",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "Badger Meter Q2 Earnings Call Highlights",
+      "url": "https://www.marketbeat.com/instant-alerts/badger-meter-q2-earnings-call-highlights-2026-07-22/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "ts": "2026-07-22T16:06:29+00:00",
+      "source": "MarketBeat",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "Badger Meter, Inc. Q2 2026 Earnings Call Summary - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZmNiX3lVUUxZNXo0ODFoSDFPbGVwZGYyYW1GcHYxSlE5VlpxT2NKZHZEckNBWnZOSVo4eW5hOW9HNTdGZUZvWDNsUzlJd1BEZ1hJWU5lNk1WMUtkSktxTWxGYnltbHYxY1d4cHNBLTZaMFJ5OUZQQ0t3UHlMcWhrc1FlVkxQa05FOExtbTdRZ2lhcjA?oc=5",
+      "ts": "2026-07-22T07:00:00+00:00",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss"
     }
   ],
+  "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:43:09.458297+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
