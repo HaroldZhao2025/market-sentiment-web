@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "BOX",
   "earnings_history": [
     {
@@ -153,7 +153,494 @@
       "surprise_pct": 38.36
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-09-01T22:13:38+00:00",
+      "source": "Motley Fool",
+      "source_url": "https://finance.yahoo.com/m/aa0c8ffb-d1a5-3a9d-9efd-a610cd7e31d0/box-%28box%29-q2-2027-earnings.html",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 35,
+        "scored_turn_count": 35,
+        "overall_sentiment": 0.61985,
+        "prepared_sentiment": -0.345401,
+        "qa_sentiment": 0.710342,
+        "qa_tone_shift": 1.055743,
+        "uncertainty_turn_rate": 0.142857,
+        "forward_looking_turn_rate": 0.228571,
+        "topics": [
+          {
+            "topic": "AI & technology",
+            "mentions": 18,
+            "sentiment": 0.558292
+          },
+          {
+            "topic": "Demand",
+            "mentions": 16,
+            "sentiment": 0.448647
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 9,
+            "sentiment": 0.381163
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.023474
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": -0.298016
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.069788
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.035788
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Cynthia Hiponia",
+          "section": "prepared",
+          "sentiment": 0.790255,
+          "word_count": 460,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 1,
+          "speaker": "Aaron Levie",
+          "section": "prepared",
+          "sentiment": -0.896629,
+          "word_count": 1820,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Dylan Smith",
+          "section": "prepared",
+          "sentiment": -0.92983,
+          "word_count": 949,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.896604,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Lucky Schreiner",
+          "section": "qa",
+          "sentiment": 0.852618,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.831381,
+          "word_count": 418,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Lucky Schreiner",
+          "section": "qa",
+          "sentiment": 0.573536,
+          "word_count": 75,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.858338,
+          "word_count": 376,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.888888,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "George Michael Kurosawa",
+          "section": "qa",
+          "sentiment": 0.869046,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.827285,
+          "word_count": 732,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "George Michael Kurosawa",
+          "section": "qa",
+          "sentiment": 0.895676,
+          "word_count": 53,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Dylan Smith",
+          "section": "qa",
+          "sentiment": 0.312121,
+          "word_count": 172,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.896592,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Unknown Analyst",
+          "section": "qa",
+          "sentiment": 0.889553,
+          "word_count": 78,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.853386,
+          "word_count": 457,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Dylan Smith",
+          "section": "qa",
+          "sentiment": 0.682455,
+          "word_count": 161,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.89819,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Christopher Quintero",
+          "section": "qa",
+          "sentiment": 0.824152,
+          "word_count": 61,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.825054,
+          "word_count": 397,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Christopher Quintero",
+          "section": "qa",
+          "sentiment": 0.694824,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.72149,
+          "word_count": 435,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.8907,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Johnathan McCary",
+          "section": "qa",
+          "sentiment": 0.75287,
+          "word_count": 99,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.624504,
+          "word_count": 378,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.885592,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Joshua Trautman",
+          "section": "qa",
+          "sentiment": 0.281938,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Aaron Levie",
+          "section": "qa",
+          "sentiment": 0.443501,
+          "word_count": 143,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.893843,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Jason Ader",
+          "section": "qa",
+          "sentiment": 0.605106,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Dylan Smith",
+          "section": "qa",
+          "sentiment": -0.500489,
+          "word_count": 237,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 31,
+          "speaker": "Jason Ader",
+          "section": "qa",
+          "sentiment": 0.663833,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Dylan Smith",
+          "section": "qa",
+          "sentiment": 0.536272,
+          "word_count": 191,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "section": "qa",
+          "sentiment": 0.897391,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Cynthia Hiponia",
+          "section": "qa",
+          "sentiment": 0.664687,
+          "word_count": 230,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8375,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The 5 Most Interesting Analyst Questions From Box’s Q1 Earnings Call",
@@ -196,13 +683,40 @@
       "ts": "2026-05-26T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "BOX Earnings Call: Q2 2027",
+      "url": "https://stockanalysis.com/stocks/box/transcripts/680669-q2-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-25T00:00:00+00:00"
+    },
+    {
+      "title": "BOX Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/box/transcripts/579851-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-26T00:00:00+00:00"
+    },
+    {
+      "title": "BOX Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/box/transcripts/411058-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-03T00:00:00+00:00"
+    },
+    {
+      "title": "Box (BOX) Q2 2027 Earnings Call Transcript",
+      "url": "https://finance.yahoo.com/m/aa0c8ffb-d1a5-3a9d-9efd-a610cd7e31d0/box-%28box%29-q2-2027-earnings.html",
+      "source": "Motley Fool",
+      "ts": "2026-09-01T22:13:38+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-01T23:25:51.160886+00:00"
 }
