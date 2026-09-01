@@ -1,1209 +1,166 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BPOP",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-23T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-23-popular-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 90,
-        "scored_turn_count": 90,
-        "overall_sentiment": 0.149287,
-        "prepared_sentiment": -0.507611,
-        "qa_sentiment": 0.430815,
-        "qa_tone_shift": 0.938427,
-        "uncertainty_turn_rate": 0.066667,
-        "forward_looking_turn_rate": 0.3,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 26,
-            "sentiment": -0.106243
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 21,
-            "sentiment": -0.20895
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 13,
-            "sentiment": -0.428939
-          },
-          {
-            "topic": "Demand",
-            "mentions": 12,
-            "sentiment": -0.453047
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 8,
-            "sentiment": 0.039249
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 2,
-            "sentiment": 0.668891
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.894822,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "SVP and Investor Relations Officer at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.897123,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "SVP and Investor Relations Officer at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.92458,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.180524,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.880037,
-          "word_count": 146,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.929332,
-          "word_count": 139,
-          "topic_hits": [
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.940431,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.651813,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.834849,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.847491,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.635061,
-          "word_count": 150,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.28227,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.917574,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.932176,
-          "word_count": 135,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.593528,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.931827,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.933425,
-          "word_count": 110,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.939137,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.917096,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.720583,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "Chief Risk Officer at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.862769,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Chief Risk Officer at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.849988,
-          "word_count": 151,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Chief Risk Officer at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.010925,
-          "word_count": 152,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Chief Risk Officer at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.892337,
-          "word_count": 76,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 24,
-          "speaker": "Chief Risk Officer at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.927833,
-          "word_count": 134,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.758675,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.02206,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911771,
-          "word_count": 59,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Managing Director at Barclays",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.248571,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.437199,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Managing Director at Barclays",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.753808,
-          "word_count": 55,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.026584,
-          "word_count": 143,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 32,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.534557,
-          "word_count": 78,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Managing Director at Barclays",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.03367,
-          "word_count": 65,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 34,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.236864,
-          "word_count": 130,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.111027,
-          "word_count": 112,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 36,
-          "speaker": "Managing Director at Barclays",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.869247,
-          "word_count": 63,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.399304,
-          "word_count": 90,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.878419,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Senior Managing Director at StoneX Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.598743,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.15581,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.790686,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Senior Managing Director at StoneX Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.437663,
-          "word_count": 63,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.790893,
-          "word_count": 143,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.902572,
-          "word_count": 15,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.391131,
-          "word_count": 114,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 46,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.728862,
-          "word_count": 31,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Senior Managing Director at StoneX Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.447062,
-          "word_count": 80,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.51797,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "Senior Managing Director at StoneX Group",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.712014,
-          "word_count": 11,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.882014,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.112853,
-          "word_count": 45,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.828412,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.437992,
-          "word_count": 62,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.008943,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 55,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.031103,
-          "word_count": 124,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Analyst at Truist Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.435541,
-          "word_count": 54,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Chief Risk Officer at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.047267,
-          "word_count": 100,
-          "topic_hits": [
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.841825,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Executive Director at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.761881,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Executive Director at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.013941,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 61,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.655413,
-          "word_count": 135,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.814831,
-          "word_count": 26,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 63,
-          "speaker": "Executive Director at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.804893,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.866587,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Executive Director at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.318728,
-          "word_count": 96,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 66,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.698615,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.886145,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Executive Director at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.818993,
-          "word_count": 93,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 69,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.772147,
-          "word_count": 127,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.790164,
-          "word_count": 31,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.160199,
-          "word_count": 122,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.273024,
-          "word_count": 84,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.584199,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.849348,
-          "word_count": 43,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 75,
-          "speaker": "Executive Director at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.80087,
-          "word_count": 59,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.521717,
-          "word_count": 32,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Executive Director at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.299558,
-          "word_count": 30,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.725633,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.879913,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "Director at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.42738,
-          "word_count": 51,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "President and CEO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.86556,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 82,
-          "speaker": "Director at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.86989,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "Director at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.364912,
-          "word_count": 76,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 84,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.803864,
-          "word_count": 141,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 85,
-          "speaker": "CFO at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.82331,
-          "word_count": 120,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 86,
-          "speaker": "Director at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.595831,
-          "word_count": 104,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 87,
-          "speaker": "Chief Risk Officer at Popular",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.06782,
-          "word_count": 89,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 88,
-          "speaker": "Director at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.724775,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 89,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.533919,
-          "word_count": 929,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 8256,
-      "transcript_text_redistributed": false
+      "date": "2026-10-22T08:00:00-04:00",
+      "eps_estimate": 3.92,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-23T08:00:00-04:00",
+      "eps_estimate": 3.68,
+      "reported_eps": 4.35,
+      "surprise_pct": 18.1
+    },
+    {
+      "date": "2026-04-23T07:00:00-04:00",
+      "eps_estimate": 3.21,
+      "reported_eps": 3.78,
+      "surprise_pct": 17.9
+    },
+    {
+      "date": "2026-01-27T07:00:00-05:00",
+      "eps_estimate": 3.04,
+      "reported_eps": 3.4,
+      "surprise_pct": 11.57
+    },
+    {
+      "date": "2025-10-23T07:00:00-04:00",
+      "eps_estimate": 2.91,
+      "reported_eps": 3.14,
+      "surprise_pct": 8.05
+    },
+    {
+      "date": "2025-07-23T07:00:00-04:00",
+      "eps_estimate": 2.54,
+      "reported_eps": 3.09,
+      "surprise_pct": 21.77
+    },
+    {
+      "date": "2025-04-23T07:00:00-04:00",
+      "eps_estimate": 2.18,
+      "reported_eps": 2.56,
+      "surprise_pct": 17.32
+    },
+    {
+      "date": "2025-01-28T07:00:00-05:00",
+      "eps_estimate": 2.1,
+      "reported_eps": 2.52,
+      "surprise_pct": 20.4
+    },
+    {
+      "date": "2024-10-23T07:00:00-04:00",
+      "eps_estimate": 2.38,
+      "reported_eps": 2.16,
+      "surprise_pct": -9.32
+    },
+    {
+      "date": "2024-07-24T07:00:00-04:00",
+      "eps_estimate": 2.15,
+      "reported_eps": 2.46,
+      "surprise_pct": 14.55
+    },
+    {
+      "date": "2024-04-23T08:00:00-04:00",
+      "eps_estimate": 1.85,
+      "reported_eps": 1.88,
+      "surprise_pct": 1.67
+    },
+    {
+      "date": "2024-01-25T07:00:00-05:00",
+      "eps_estimate": 1.69,
+      "reported_eps": 1.95,
+      "surprise_pct": 15.59
+    },
+    {
+      "date": "2023-10-26T08:00:00-04:00",
+      "eps_estimate": 1.84,
+      "reported_eps": 1.9,
+      "surprise_pct": 3.37
+    },
+    {
+      "date": "2023-07-26T08:00:00-04:00",
+      "eps_estimate": 1.83,
+      "reported_eps": 2.1,
+      "surprise_pct": 14.88
+    },
+    {
+      "date": "2023-04-26T08:00:00-04:00",
+      "eps_estimate": 2.03,
+      "reported_eps": 2.22,
+      "surprise_pct": 9.1
+    },
+    {
+      "date": "2023-01-25T07:00:00-05:00",
+      "eps_estimate": 2.62,
+      "reported_eps": 2.62,
+      "surprise_pct": 0.08
+    },
+    {
+      "date": "2022-10-26T08:00:00-04:00",
+      "eps_estimate": 2.74,
+      "reported_eps": 2.64,
+      "surprise_pct": -3.48
+    },
+    {
+      "date": "2022-07-28T08:00:00-04:00",
+      "eps_estimate": 2.53,
+      "reported_eps": 2.77,
+      "surprise_pct": 9.33
+    },
+    {
+      "date": "2022-04-26T08:00:00-04:00",
+      "eps_estimate": 2.3,
+      "reported_eps": 2.69,
+      "surprise_pct": 16.79
+    },
+    {
+      "date": "2022-01-27T07:00:00-05:00",
+      "eps_estimate": 2.28,
+      "reported_eps": 2.58,
+      "surprise_pct": 13.21
+    },
+    {
+      "date": "2021-10-20T08:00:00-04:00",
+      "eps_estimate": 2.24,
+      "reported_eps": 3.09,
+      "surprise_pct": 38.1
+    },
+    {
+      "date": "2021-07-22T08:00:00-04:00",
+      "eps_estimate": 2.05,
+      "reported_eps": 2.66,
+      "surprise_pct": 29.62
+    },
+    {
+      "date": "2021-04-28T08:00:00-04:00",
+      "eps_estimate": 1.88,
+      "reported_eps": 3.12,
+      "surprise_pct": 66.01
+    },
+    {
+      "date": "2021-01-28T07:00:00-05:00",
+      "eps_estimate": 1.63,
+      "reported_eps": 2.1,
+      "surprise_pct": 28.81
+    },
+    {
+      "date": "2020-10-28T08:00:00-04:00",
+      "eps_estimate": 1.19,
+      "reported_eps": 2.0,
+      "surprise_pct": 67.42
     }
   ],
+  "calls": [],
   "call_links": [
     {
-      "title": "BPOP Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/bpop/transcripts/653675-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-23T00:00:00+00:00"
-    },
-    {
-      "title": "BPOP Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/bpop/transcripts/547049-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-23T00:00:00+00:00"
-    },
-    {
-      "title": "BPOP Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/bpop/transcripts/397725-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-01-27T00:00:00+00:00"
-    },
-    {
-      "title": "BPOP Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-popular-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-23T00:00:00+00:00"
+      "title": "BPOP Q2 2026 Earnings: EPS Beat of 14.44% Highlights Strong Profitability - Earnings Call Q&A - vinanet.vn",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOcEhvclRrQXk0bWhKNkRaWU5RS180MHMwY3k1UW43TmQwV1pJNTFKVkRVbWxHU1Bud1o1WUpxeV8zZWFKcnhrOXotMlF3VlNnak5rejFsVGl4MVJoTDdEVzNnWmMwV2M2VU9haGlXSmhXZDhnZmJZT3dCSXRTNlN3bVJmQTlzS00zSXdCZHhUMldjM1JzYUxLY0pKcHU0T09rWmYtd1lNbmJscURRUm5mRw?oc=5",
+      "ts": "2026-08-02T07:00:00+00:00",
+      "source": "vinanet.vn",
+      "provider": "google_news_rss"
     },
     {
       "title": "Popular, Inc. 2026 Q2 - Results - Earnings Call Presentation (NASDAQ:BPOP) 2026-07-24 - Seeking Alpha",
@@ -1239,20 +196,13 @@
       "ts": "2026-07-23T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
-    },
-    {
-      "title": "Popular, Inc. to Report Second Quarter Results and Hold Conference Call on Thursday, July 23, 2026",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/popular-inc-report-second-quarter-130000530.html",
-      "ts": "2026-06-30T13:00:00+00:00",
-      "source": "Business Wire",
-      "provider": "yahoo_public"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-17T19:45:53.347101+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

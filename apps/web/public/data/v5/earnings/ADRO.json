@@ -1,17 +1,14 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ADRO",
   "earnings_history": [],
   "calls": [],
   "call_links": [],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
+    "source_policy": "Free public sources only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 3
-  },
-  "updated_at_utc": "2026-09-01T18:41:52.355481+00:00"
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
