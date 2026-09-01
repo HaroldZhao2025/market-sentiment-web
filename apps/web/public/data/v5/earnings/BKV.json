@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "BKV",
   "earnings_history": [
     {
@@ -100,13 +100,52 @@
       "ts": "2026-08-07T07:00:00+00:00",
       "source": "MarketBeat",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "BKV Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/bkv/transcripts/662255-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "BKV Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/bkv/transcripts/568513-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "BKV Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/bkv/transcripts/401339-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "BKV Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-bkv-corporation-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "BKV (BKV) Q2 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/06/bkv-bkv-q2-2026-earnings-call-transcript/",
+      "source": "Motley Fool",
+      "ts": "2026-08-07T03:57:23+00:00"
+    },
+    {
+      "title": "Bkv (BKV) Q1 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/06/01/bkv-bkv-q1-2026-earnings-call-transcript/",
+      "source": "Motley Fool",
+      "ts": "2026-06-01T19:45:42+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-01T00:38:33.777028+00:00"
 }
