@@ -1,989 +1,159 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "CABO",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-04-30T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-4-30-cable-one-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 74,
-        "scored_turn_count": 74,
-        "overall_sentiment": 0.252085,
-        "prepared_sentiment": -0.076473,
-        "qa_sentiment": 0.391091,
-        "qa_tone_shift": 0.467564,
-        "uncertainty_turn_rate": 0.148649,
-        "forward_looking_turn_rate": 0.324324,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 20,
-            "sentiment": -0.123429
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 18,
-            "sentiment": 0.097594
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 13,
-            "sentiment": 0.094302
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 10,
-            "sentiment": 0.319839
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 3,
-            "sentiment": 0.195175
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 1,
-            "sentiment": 0.659691
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.887523,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "VP of Investor Relations at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.680861,
-          "word_count": 26,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "VP of Investor Relations at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.774774,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 3,
-          "speaker": "VP of Investor Relations at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.870938,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 4,
-          "speaker": "VP of Investor Relations at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.912457,
-          "word_count": 77,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.572245,
-          "word_count": 143,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.81623,
-          "word_count": 119,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.389141,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.751512,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.705997,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 10,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.927924,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 11,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.682137,
-          "word_count": 120,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.826627,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.339575,
-          "word_count": 47,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.009865,
-          "word_count": 113,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.001627,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.012662,
-          "word_count": 101,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.07288,
-          "word_count": 101,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.375035,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.790912,
-          "word_count": 130,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.481362,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 21,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.674884,
-          "word_count": 35,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913902,
-          "word_count": 102,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.576516,
-          "word_count": 138,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.202099,
-          "word_count": 97,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.898501,
-          "word_count": 97,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904937,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.821447,
-          "word_count": 87,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 28,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.89588,
-          "word_count": 15,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.137771,
-          "word_count": 87,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.125805,
-          "word_count": 65,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.119382,
-          "word_count": 96,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.113641,
-          "word_count": 70,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.594901,
-          "word_count": 29,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.880558,
-          "word_count": 34,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.806685,
-          "word_count": 32,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 36,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.277879,
-          "word_count": 33,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.868785,
-          "word_count": 96,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.435382,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913178,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.81799,
-          "word_count": 80,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.730182,
-          "word_count": 118,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.718562,
-          "word_count": 85,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.214315,
-          "word_count": 70,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.770441,
-          "word_count": 83,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.079469,
-          "word_count": 123,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 46,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.67021,
-          "word_count": 80,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908064,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at KeyBanc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.119195,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.398887,
-          "word_count": 120,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 50,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.714372,
-          "word_count": 105,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.463306,
-          "word_count": 98,
-          "topic_hits": [
-            "Guidance",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 52,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.412389,
-          "word_count": 44,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Analyst at KeyBanc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.797272,
-          "word_count": 76,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.596888,
-          "word_count": 118,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Analyst at KeyBanc",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.861823,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.906055,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Analyst at BNP Paribas Exane",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.838722,
-          "word_count": 89,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.69307,
-          "word_count": 82,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.607645,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 60,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.125931,
-          "word_count": 137,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.618798,
-          "word_count": 56,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.904071,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at MoffettNathanson",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.819998,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.872625,
-          "word_count": 15,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 65,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.321563,
-          "word_count": 79,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.750406,
-          "word_count": 126,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.236399,
-          "word_count": 71,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 68,
-          "speaker": "CFO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.806124,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 69,
-          "speaker": "Analyst at MoffettNathanson",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.789961,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "Analyst at MoffettNathanson",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.72328,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.906689,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "CEO at Cable One",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.625666,
-          "word_count": 90,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.659691,
-          "word_count": 914,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 7057,
-      "transcript_text_redistributed": false
+      "date": "2026-11-09T15:00:00-05:00",
+      "eps_estimate": 7.95,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-06T16:00:00-04:00",
+      "eps_estimate": 8.0,
+      "reported_eps": 2.75,
+      "surprise_pct": -65.61
+    },
+    {
+      "date": "2026-04-30T16:00:00-04:00",
+      "eps_estimate": 10.23,
+      "reported_eps": 6.85,
+      "surprise_pct": -33.03
+    },
+    {
+      "date": "2026-02-26T16:00:00-05:00",
+      "eps_estimate": 10.42,
+      "reported_eps": 10.41,
+      "surprise_pct": -0.04
+    },
+    {
+      "date": "2025-11-06T16:00:00-05:00",
+      "eps_estimate": 9.25,
+      "reported_eps": 18.89,
+      "surprise_pct": 104.22
+    },
+    {
+      "date": "2025-07-31T16:00:00-04:00",
+      "eps_estimate": 8.23,
+      "reported_eps": 7.73,
+      "surprise_pct": -6.03
+    },
+    {
+      "date": "2025-05-01T16:00:00-04:00",
+      "eps_estimate": 12.21,
+      "reported_eps": 12.58,
+      "surprise_pct": 3.07
+    },
+    {
+      "date": "2025-02-27T16:00:00-05:00",
+      "eps_estimate": 11.89,
+      "reported_eps": 18.82,
+      "surprise_pct": 58.27
+    },
+    {
+      "date": "2024-11-07T16:00:00-05:00",
+      "eps_estimate": 12.44,
+      "reported_eps": 10.76,
+      "surprise_pct": -13.49
+    },
+    {
+      "date": "2024-08-01T16:00:00-04:00",
+      "eps_estimate": 11.52,
+      "reported_eps": 10.29,
+      "surprise_pct": -10.65
+    },
+    {
+      "date": "2024-05-02T16:00:00-04:00",
+      "eps_estimate": 10.75,
+      "reported_eps": 10.23,
+      "surprise_pct": -4.82
+    },
+    {
+      "date": "2024-02-22T16:00:00-05:00",
+      "eps_estimate": 12.59,
+      "reported_eps": 12.0,
+      "surprise_pct": -4.68
+    },
+    {
+      "date": "2023-11-02T16:00:00-04:00",
+      "eps_estimate": 12.41,
+      "reported_eps": 10.41,
+      "surprise_pct": -16.11
+    },
+    {
+      "date": "2023-08-03T16:00:00-04:00",
+      "eps_estimate": 12.63,
+      "reported_eps": 11.45,
+      "surprise_pct": -9.33
+    },
+    {
+      "date": "2023-05-04T16:00:00-04:00",
+      "eps_estimate": 13.86,
+      "reported_eps": 11.49,
+      "surprise_pct": -17.12
+    },
+    {
+      "date": "2023-02-23T16:00:00-05:00",
+      "eps_estimate": 12.05,
+      "reported_eps": -10.64,
+      "surprise_pct": -188.32
+    },
+    {
+      "date": "2022-11-03T16:00:00-04:00",
+      "eps_estimate": 12.41,
+      "reported_eps": 11.6,
+      "surprise_pct": -6.54
+    },
+    {
+      "date": "2022-08-04T16:00:00-04:00",
+      "eps_estimate": 13.04,
+      "reported_eps": 11.95,
+      "surprise_pct": -8.34
+    },
+    {
+      "date": "2022-05-05T16:00:00-04:00",
+      "eps_estimate": 11.31,
+      "reported_eps": 12.97,
+      "surprise_pct": 14.63
+    },
+    {
+      "date": "2022-02-24T16:00:00-05:00",
+      "eps_estimate": 11.77,
+      "reported_eps": 10.57,
+      "surprise_pct": -10.19
+    },
+    {
+      "date": "2021-11-04T16:00:00-04:00",
+      "eps_estimate": 12.59,
+      "reported_eps": 8.56,
+      "surprise_pct": -32.03
+    },
+    {
+      "date": "2021-08-09T17:00:00-04:00",
+      "eps_estimate": 11.48,
+      "reported_eps": 17.79,
+      "surprise_pct": 55.01
+    },
+    {
+      "date": "2021-05-06T16:00:00-04:00",
+      "eps_estimate": 10.59,
+      "reported_eps": 11.81,
+      "surprise_pct": 11.54
+    },
+    {
+      "date": "2021-02-25T16:00:00-05:00",
+      "eps_estimate": 12.06,
+      "reported_eps": 8.09,
+      "surprise_pct": -32.93
+    },
+    {
+      "date": "2020-11-05T16:00:00-05:00",
+      "eps_estimate": 10.93,
+      "reported_eps": 11.35,
+      "surprise_pct": 3.87
     }
   ],
-  "filing_fallback": [],
-  "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
+  "calls": [],
   "call_links": [
     {
       "title": "Cable One (CABO) Q2 2026 Earnings Call Transcript - AOL.com",
@@ -1021,30 +191,6 @@
       "provider": "yahoo_public"
     },
     {
-      "title": "CABO Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/cabo/transcripts/658587-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-06T00:00:00+00:00"
-    },
-    {
-      "title": "CABO Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/cabo/transcripts/572321-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
-      "title": "CABO Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/cabo/transcripts/412584-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-26T00:00:00+00:00"
-    },
-    {
-      "title": "CABO Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-4-30-cable-one-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
       "title": "Cable One Inc (CABO) (Q2 2026) Earnings Call Highlights: Strategic Investments and Debt ...",
       "url": "https://finance.yahoo.com/markets/stocks/articles/cable-one-inc-cabo-q2-050349515.html",
       "ts": "2026-08-07T05:03:49+00:00",
@@ -1052,5 +198,11 @@
       "provider": "yahoo_public"
     }
   ],
-  "updated_at_utc": "2026-08-17T19:49:00.750136+00:00"
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

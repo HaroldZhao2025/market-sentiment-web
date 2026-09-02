@@ -1,827 +1,172 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "BWIN",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-30T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-the-baldwin-insurance-group-inc-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 62,
-        "scored_turn_count": 62,
-        "overall_sentiment": 0.200945,
-        "prepared_sentiment": -0.277227,
-        "qa_sentiment": 0.381588,
-        "qa_tone_shift": 0.658816,
-        "uncertainty_turn_rate": 0.306452,
-        "forward_looking_turn_rate": 0.306452,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 14,
-            "sentiment": -0.129615
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 13,
-            "sentiment": -0.294134
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 8,
-            "sentiment": 0.244446
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 8,
-            "sentiment": 0.004227
-          },
-          {
-            "topic": "Demand",
-            "mentions": 2,
-            "sentiment": 0.745341
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.913228,
-          "word_count": 112,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Executive Director of Investor Relations at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.877925,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "Executive Director of Investor Relations at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.913251,
-          "word_count": 61,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.332777,
-          "word_count": 129,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.076214,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.016338,
-          "word_count": 127,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.884523,
-          "word_count": 110,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.883238,
-          "word_count": 129,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.936155,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.935842,
-          "word_count": 120,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 10,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.765468,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 11,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.81446,
-          "word_count": 139,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.904483,
-          "word_count": 67,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "CFO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.01417,
-          "word_count": 125,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.937736,
-          "word_count": 146,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.918456,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Baldwin",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.867393,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.606971,
-          "word_count": 35,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911966,
-          "word_count": 59,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.675029,
-          "word_count": 91,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.172282,
-          "word_count": 147,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.235038,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.641309,
-          "word_count": 132,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.551865,
-          "word_count": 64,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.820256,
-          "word_count": 134,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.761325,
-          "word_count": 34,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.86766,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.700381,
-          "word_count": 84,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 28,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.499407,
-          "word_count": 131,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.844033,
-          "word_count": 51,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "CFO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.553879,
-          "word_count": 85,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.609534,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.893316,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at BMO",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.379298,
-          "word_count": 87,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.150072,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 35,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.905414,
-          "word_count": 124,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at BMO",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736227,
-          "word_count": 69,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.865603,
-          "word_count": 135,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 38,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.124951,
-          "word_count": 82,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 39,
-          "speaker": "CFO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.592308,
-          "word_count": 80,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.894508,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.605451,
-          "word_count": 57,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 42,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.822536,
-          "word_count": 112,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.632796,
-          "word_count": 64,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.164098,
-          "word_count": 140,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.897059,
-          "word_count": 134,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Analyst at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.57526,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.902707,
-          "word_count": 28,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.564195,
-          "word_count": 96,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.741016,
-          "word_count": 139,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.750005,
-          "word_count": 94,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.846807,
-          "word_count": 84,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.793884,
-          "word_count": 132,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 53,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.867101,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.903793,
-          "word_count": 32,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.886569,
-          "word_count": 8,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Analyst at J.P. Morgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.810197,
-          "word_count": 102,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.135232,
-          "word_count": 137,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.881518,
-          "word_count": 95,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 59,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.917101,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "CEO at Baldwin",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.757807,
-          "word_count": 108,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.849374,
-          "word_count": 855,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 6475,
-      "transcript_text_redistributed": false
+      "date": "2026-11-03T15:00:00-05:00",
+      "eps_estimate": 0.43,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-30T16:00:00-04:00",
+      "eps_estimate": 0.47,
+      "reported_eps": 0.48,
+      "surprise_pct": 2.09
+    },
+    {
+      "date": "2026-05-04T16:00:00-04:00",
+      "eps_estimate": 0.63,
+      "reported_eps": 0.63,
+      "surprise_pct": 0.44
+    },
+    {
+      "date": "2026-02-26T16:00:00-05:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.31,
+      "surprise_pct": 7.28
+    },
+    {
+      "date": "2025-11-04T16:00:00-05:00",
+      "eps_estimate": 0.31,
+      "reported_eps": 0.31,
+      "surprise_pct": -0.57
+    },
+    {
+      "date": "2025-08-05T16:00:00-04:00",
+      "eps_estimate": 0.42,
+      "reported_eps": 0.42,
+      "surprise_pct": 1.03
+    },
+    {
+      "date": "2025-05-06T16:00:00-04:00",
+      "eps_estimate": 0.65,
+      "reported_eps": 0.65,
+      "surprise_pct": 0.33
+    },
+    {
+      "date": "2025-02-25T16:00:00-05:00",
+      "eps_estimate": 0.26,
+      "reported_eps": 0.27,
+      "surprise_pct": 5.59
+    },
+    {
+      "date": "2024-11-04T16:00:00-05:00",
+      "eps_estimate": 0.34,
+      "reported_eps": 0.33,
+      "surprise_pct": -3.78
+    },
+    {
+      "date": "2024-08-06T16:00:00-04:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.34,
+      "surprise_pct": 2.84
+    },
+    {
+      "date": "2024-05-07T16:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.56,
+      "surprise_pct": 7.28
+    },
+    {
+      "date": "2024-02-28T16:00:00-05:00",
+      "eps_estimate": 0.11,
+      "reported_eps": 0.14,
+      "surprise_pct": 21.79
+    },
+    {
+      "date": "2023-11-07T16:00:00-05:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.29,
+      "surprise_pct": 5.87
+    },
+    {
+      "date": "2023-08-09T16:00:00-04:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.27,
+      "surprise_pct": 0.73
+    },
+    {
+      "date": "2023-05-09T16:00:00-04:00",
+      "eps_estimate": 0.41,
+      "reported_eps": 0.42,
+      "surprise_pct": 3.36
+    },
+    {
+      "date": "2023-02-28T16:00:00-05:00",
+      "eps_estimate": 0.1,
+      "reported_eps": 0.12,
+      "surprise_pct": 18.66
+    },
+    {
+      "date": "2022-11-07T16:00:00-05:00",
+      "eps_estimate": 0.16,
+      "reported_eps": 0.18,
+      "surprise_pct": 9.57
+    },
+    {
+      "date": "2022-08-09T16:00:00-04:00",
+      "eps_estimate": 0.19,
+      "reported_eps": 0.23,
+      "surprise_pct": 18.01
+    },
+    {
+      "date": "2022-05-10T16:00:00-04:00",
+      "eps_estimate": 0.51,
+      "reported_eps": 0.5,
+      "surprise_pct": -2.67
+    },
+    {
+      "date": "2022-03-01T16:00:00-05:00",
+      "eps_estimate": 0.09,
+      "reported_eps": 0.1,
+      "surprise_pct": 16.4
+    },
+    {
+      "date": "2021-11-08T16:00:00-05:00",
+      "eps_estimate": 0.11,
+      "reported_eps": 0.11,
+      "surprise_pct": 0.84
+    },
+    {
+      "date": "2021-08-09T16:00:00-04:00",
+      "eps_estimate": 0.09,
+      "reported_eps": 0.14,
+      "surprise_pct": 55.69
+    },
+    {
+      "date": "2021-05-10T16:00:00-04:00",
+      "eps_estimate": 0.4,
+      "reported_eps": 0.44,
+      "surprise_pct": 10.0
+    },
+    {
+      "date": "2021-03-11T16:00:00-05:00",
+      "eps_estimate": 0.05,
+      "reported_eps": 0.06,
+      "surprise_pct": 19.28
+    },
+    {
+      "date": "2020-11-12T16:00:00-05:00",
+      "eps_estimate": 0.1,
+      "reported_eps": 0.11,
+      "surprise_pct": 10.55
     }
   ],
-  "filing_fallback": [],
-  "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
+  "calls": [],
   "call_links": [
     {
       "title": "5 Must-Read Analyst Questions From Baldwin Insurance Group’s Q2 Earnings Call - The Globe and Mail",
       "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPNkMzVnY3ZlByeWVDOE94UzNjUm5mQmRGdU9FZ043c0taaTJocGdLOS1EM3ItVWNiYUJvaE9aZWhWUkYwSV96Nm5feDg3VjdxVFpuSHF5S2ktNXREOHM1S0hMMVdpazdwNjBxaFQ1UkJ0bWlPVnhlZHFVREJuSkxZTXpUZG5xSm8yRzd0SGNEd3F4RHNXWXdDUWw4dlZfa21JNmNJQ2tFSnVrdTRjeVVlVG82NWQ4QmxwRzh0QUQ0V3NoRHl2aGEydzRYdk55NERQbmNycDNFS2FwV2lXb25DZnpyOGxyVWdoS3NoeFF0bXBmdkk?oc=5",
       "ts": "2026-08-06T05:40:00+00:00",
       "source": "The Globe and Mail",
+      "provider": "google_news_rss"
+    },
+    {
+      "title": "5 Must-Read Analyst Questions From Baldwin Insurance Group’s Q2 Earnings Call - StockStory",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxORFA5dkMzYjlOYzB2TkdyUkdDcDl0MXo0UjJxMzRVZEphcFRjOXpVZWYxa3lnQktndGFJeVRHZ05fcHYwSnRYdE52eVA3QW0zeVZwRUtGRV9yR3M0VHdJSTVOVHNPU2gxZXdlN0FGUTAtbzlQYWRMRDRrbmZ4UXVneVZFc09Udm4wZUpPUFB0cnRqc2pNa0FXWWs4OTA3aDZyNWcyVFhRYnBKUjZhVWxTVGl3Q0E4VjBqVVFlU3lGdjdUNUkxNkFJZ1pDMW43R2ZYMWM0WFdQdw?oc=5",
+      "ts": "2026-08-05T07:00:00+00:00",
+      "source": "StockStory",
       "provider": "google_news_rss"
     },
     {
@@ -851,38 +196,13 @@
       "ts": "2026-07-31T02:29:57+00:00",
       "source": "Motley Fool",
       "provider": "yahoo_public"
-    },
-    {
-      "title": "Baldwin Insurance Group Q2 Earnings Call Highlights",
-      "url": "https://www.marketbeat.com/instant-alerts/baldwin-insurance-group-q2-earnings-call-highlights-2026-07-30/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "ts": "2026-07-30T22:04:04+00:00",
-      "source": "MarketBeat",
-      "provider": "yahoo_public"
-    },
-    {
-      "title": "BWIN Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/bwin/transcripts/660309-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
-    {
-      "title": "BWIN Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/bwin/transcripts/572335-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-04T00:00:00+00:00"
-    },
-    {
-      "title": "BWIN Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/bwin/transcripts/395864-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-26T00:00:00+00:00"
-    },
-    {
-      "title": "BWIN Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-the-baldwin-insurance-group-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
-  "updated_at_utc": "2026-08-17T19:48:26.391114+00:00"
+  "filing_fallback": [],
+  "methodology": {
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
