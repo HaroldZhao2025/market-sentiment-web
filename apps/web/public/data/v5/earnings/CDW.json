@@ -1,1229 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "CDW",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-05T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-5-cdw-co-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 83,
-        "scored_turn_count": 83,
-        "overall_sentiment": 0.14627,
-        "prepared_sentiment": -0.183218,
-        "qa_sentiment": 0.332773,
-        "qa_tone_shift": 0.515991,
-        "uncertainty_turn_rate": 0.120482,
-        "forward_looking_turn_rate": 0.313253,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 53,
-            "sentiment": -0.0698
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 38,
-            "sentiment": 0.00424
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 32,
-            "sentiment": -0.075468
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 24,
-            "sentiment": -0.336126
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 9,
-            "sentiment": -0.011886
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 2,
-            "sentiment": -0.068192
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 1,
-            "sentiment": 0.885695
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.893633,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Senior VP of Investor Relations at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.885695,
-          "word_count": 146,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "Senior VP of Investor Relations at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.900024,
-          "word_count": 134,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "Senior VP of Investor Relations at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.926913,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.712458,
-          "word_count": 144,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.928968,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 6,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.41677,
-          "word_count": 148,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.492482,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.938886,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.935229,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.872357,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 11,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.393999,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.129051,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.157722,
-          "word_count": 151,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.396387,
-          "word_count": 149,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.892437,
-          "word_count": 151,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 16,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.405376,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 17,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.639576,
-          "word_count": 61,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.909118,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 19,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": 0.00859,
-          "word_count": 71,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.935613,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": 0.002592,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.929066,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.367915,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 24,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.902546,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 25,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.666943,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.903386,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 27,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.248701,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 4
-        },
-        {
-          "turn": 28,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": -0.063841,
-          "word_count": 122,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 29,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "prepared",
-          "sentiment": 0.799229,
-          "word_count": 84,
-          "topic_hits": [
-            "Demand",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910843,
-          "word_count": 91,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Managing Director at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.752981,
-          "word_count": 110,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.679568,
-          "word_count": 130,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.861049,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 34,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.427804,
-          "word_count": 117,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Managing Director at Raymond James",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.678372,
-          "word_count": 106,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": -0.030166,
-          "word_count": 116,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": -0.799942,
-          "word_count": 44,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 38,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896867,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Erik Woodring",
-          "role": "Managing Director of Equity Research at Morgan Stanley",
-          "section": "qa",
-          "sentiment": 0.804459,
-          "word_count": 114,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": 0.783264,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": -0.912643,
-          "word_count": 96,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Erik Woodring",
-          "role": "Managing Director of Equity Research at Morgan Stanley",
-          "section": "qa",
-          "sentiment": 0.228605,
-          "word_count": 121,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": -0.379281,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Erik Woodring",
-          "role": "Managing Director of Equity Research at Morgan Stanley",
-          "section": "qa",
-          "sentiment": 0.55288,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.916547,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Technology Equity Research at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.739068,
-          "word_count": 99,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 47,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.713377,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.264322,
-          "word_count": 127,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 49,
-          "speaker": "Technology Equity Research at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.591196,
-          "word_count": 62,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": -0.202887,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 51,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": 0.711385,
-          "word_count": 31,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Technology Equity Research at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.654983,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.901008,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "David Vogt",
-          "role": "Managing Director and Senior Stock Analyst at UBS",
-          "section": "qa",
-          "sentiment": -0.024721,
-          "word_count": 149,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736475,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.775447,
-          "word_count": 54,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": 0.810278,
-          "word_count": 125,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": -0.70646,
-          "word_count": 42,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "David Vogt",
-          "role": "Managing Director and Senior Stock Analyst at UBS",
-          "section": "qa",
-          "sentiment": 0.717085,
-          "word_count": 110,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.812344,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 61,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.51303,
-          "word_count": 27,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.889297,
-          "word_count": 17,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Amit Daryanani",
-          "role": "Senior Managing Director of Equity Research at Evercore",
-          "section": "qa",
-          "sentiment": 0.660406,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.33448,
-          "word_count": 130,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.651857,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.76554,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Amit Daryanani",
-          "role": "Senior Managing Director of Equity Research at Evercore",
-          "section": "qa",
-          "sentiment": 0.6355,
-          "word_count": 84,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": 0.313073,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": -0.774235,
-          "word_count": 118,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 70,
-          "speaker": "Al Miralles",
-          "role": "CFO and EVP of Enterprise Business Operations at CDW",
-          "section": "qa",
-          "sentiment": 0.401258,
-          "word_count": 76,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 71,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.89352,
-          "word_count": 18,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "Joseph Cardoso",
-          "role": "VP of Equity Research in IT Hardware and Networking Equipment at J.P. Morgan",
-          "section": "qa",
-          "sentiment": 0.705442,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.861383,
-          "word_count": 38,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Joseph Cardoso",
-          "role": "VP of Equity Research in IT Hardware and Networking Equipment at J.P. Morgan",
-          "section": "qa",
-          "sentiment": 0.888769,
-          "word_count": 38,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.555398,
-          "word_count": 121,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.207693,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Joseph Cardoso",
-          "role": "VP of Equity Research in IT Hardware and Networking Equipment at J.P. Morgan",
-          "section": "qa",
-          "sentiment": 0.86729,
-          "word_count": 112,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.061026,
-          "word_count": 87,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 79,
-          "speaker": "Joseph Cardoso",
-          "role": "VP of Equity Research in IT Hardware and Networking Equipment at J.P. Morgan",
-          "section": "qa",
-          "sentiment": 0.613051,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.901434,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "Chair, President, and CEO at CDW",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.495583,
-          "word_count": 73,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 82,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.794443,
-          "word_count": 914,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        }
-      ],
-      "transcript_word_count": 9112,
-      "transcript_text_redistributed": false
+      "date": "2026-11-03T07:00:00-05:00",
+      "eps_estimate": 2.93,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-05T07:00:00-04:00",
+      "eps_estimate": 2.8,
+      "reported_eps": 2.91,
+      "surprise_pct": 3.97
+    },
+    {
+      "date": "2026-05-06T07:00:00-04:00",
+      "eps_estimate": 2.29,
+      "reported_eps": 2.28,
+      "surprise_pct": -0.26
+    },
+    {
+      "date": "2026-02-04T07:00:00-05:00",
+      "eps_estimate": 2.44,
+      "reported_eps": 2.57,
+      "surprise_pct": 5.13
+    },
+    {
+      "date": "2025-11-04T07:00:00-05:00",
+      "eps_estimate": 2.62,
+      "reported_eps": 2.71,
+      "surprise_pct": 3.35
+    },
+    {
+      "date": "2025-08-06T07:00:00-04:00",
+      "eps_estimate": 2.49,
+      "reported_eps": 2.6,
+      "surprise_pct": 4.36
+    },
+    {
+      "date": "2025-05-07T07:00:00-04:00",
+      "eps_estimate": 1.96,
+      "reported_eps": 2.15,
+      "surprise_pct": 9.54
+    },
+    {
+      "date": "2025-02-05T07:00:00-05:00",
+      "eps_estimate": 2.32,
+      "reported_eps": 2.48,
+      "surprise_pct": 6.74
+    },
+    {
+      "date": "2024-10-30T07:00:00-04:00",
+      "eps_estimate": 2.85,
+      "reported_eps": 2.63,
+      "surprise_pct": -7.87
+    },
+    {
+      "date": "2024-07-31T07:00:00-04:00",
+      "eps_estimate": 2.53,
+      "reported_eps": 2.5,
+      "surprise_pct": -1.17
+    },
+    {
+      "date": "2024-05-01T07:00:00-04:00",
+      "eps_estimate": 2.15,
+      "reported_eps": 1.92,
+      "surprise_pct": -10.71
+    },
+    {
+      "date": "2024-02-07T07:00:00-05:00",
+      "eps_estimate": 2.56,
+      "reported_eps": 2.57,
+      "surprise_pct": 0.36
+    },
+    {
+      "date": "2023-11-01T07:00:00-04:00",
+      "eps_estimate": 2.59,
+      "reported_eps": 2.72,
+      "surprise_pct": 5.14
+    },
+    {
+      "date": "2023-08-02T07:00:00-04:00",
+      "eps_estimate": 2.33,
+      "reported_eps": 2.56,
+      "surprise_pct": 9.9
+    },
+    {
+      "date": "2023-05-03T07:00:00-04:00",
+      "eps_estimate": 2.03,
+      "reported_eps": 2.03,
+      "surprise_pct": 0.16
+    },
+    {
+      "date": "2023-02-08T07:00:00-05:00",
+      "eps_estimate": 2.48,
+      "reported_eps": 2.5,
+      "surprise_pct": 0.74
+    },
+    {
+      "date": "2022-11-02T07:00:00-04:00",
+      "eps_estimate": 2.52,
+      "reported_eps": 2.6,
+      "surprise_pct": 3.03
+    },
+    {
+      "date": "2022-08-03T07:00:00-04:00",
+      "eps_estimate": 2.42,
+      "reported_eps": 2.49,
+      "surprise_pct": 2.73
+    },
+    {
+      "date": "2022-05-04T07:00:00-04:00",
+      "eps_estimate": 2.02,
+      "reported_eps": 2.2,
+      "surprise_pct": 9.16
+    },
+    {
+      "date": "2022-02-09T07:00:00-05:00",
+      "eps_estimate": 1.93,
+      "reported_eps": 2.08,
+      "surprise_pct": 7.79
+    },
+    {
+      "date": "2021-11-03T07:00:00-04:00",
+      "eps_estimate": 2.05,
+      "reported_eps": 2.13,
+      "surprise_pct": 3.99
+    },
+    {
+      "date": "2021-08-04T07:00:00-04:00",
+      "eps_estimate": 1.8,
+      "reported_eps": 2.02,
+      "surprise_pct": 11.96
+    },
+    {
+      "date": "2021-05-05T07:00:00-04:00",
+      "eps_estimate": 1.53,
+      "reported_eps": 1.74,
+      "surprise_pct": 14.05
+    },
+    {
+      "date": "2021-02-10T07:00:00-05:00",
+      "eps_estimate": 1.51,
+      "reported_eps": 1.82,
+      "surprise_pct": 20.31
+    },
+    {
+      "date": "2020-11-02T07:00:00-05:00",
+      "eps_estimate": 1.51,
+      "reported_eps": 1.83,
+      "surprise_pct": 21.39
     }
   ],
+  "calls": [],
   "call_links": [
-    {
-      "title": "CDW Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/cdw/transcripts/661493-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-05T00:00:00+00:00"
-    },
-    {
-      "title": "CDW Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/cdw/transcripts/551678-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-06T00:00:00+00:00"
-    },
-    {
-      "title": "CDW Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/cdw/transcripts/399257-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-04T00:00:00+00:00"
-    },
-    {
-      "title": "CDW Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-cdw-co-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-05T00:00:00+00:00"
-    },
     {
       "title": "5 Insightful Analyst Questions From CDW’s Q2 Earnings Call",
       "url": "https://finance.yahoo.com/markets/stocks/articles/5-insightful-analyst-questions-cdw-100500766.html",
@@ -1269,9 +200,9 @@
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:59:58.718084+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

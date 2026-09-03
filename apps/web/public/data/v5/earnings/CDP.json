@@ -1,1111 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "CDP",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-27T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-27-copt-defense-properties-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 84,
-        "scored_turn_count": 84,
-        "overall_sentiment": 0.327004,
-        "prepared_sentiment": -0.259924,
-        "qa_sentiment": 0.605022,
-        "qa_tone_shift": 0.864946,
-        "uncertainty_turn_rate": 0.035714,
-        "forward_looking_turn_rate": 0.369048,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 28,
-            "sentiment": -0.071198
-          },
-          {
-            "topic": "Demand",
-            "mentions": 20,
-            "sentiment": 0.157201
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 4,
-            "sentiment": 0.556808
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 4,
-            "sentiment": -0.081061
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 1,
-            "sentiment": -0.928753
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 1,
-            "sentiment": 0.885971
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.888264,
-          "word_count": 44,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Venkat Kommineni",
-          "role": "VP of Investor Relations at COPT Defense Properties",
-          "section": "prepared",
-          "sentiment": 0.895803,
-          "word_count": 114,
-          "topic_hits": [],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.928753,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.926922,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.933933,
-          "word_count": 115,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.440176,
-          "word_count": 112,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.310441,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.681223,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.675039,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.341775,
-          "word_count": 120,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.914257,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.761201,
-          "word_count": 129,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.006362,
-          "word_count": 124,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.702737,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 14,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.033094,
-          "word_count": 146,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.372361,
-          "word_count": 134,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 16,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.054993,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.907671,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 18,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.549318,
-          "word_count": 143,
-          "topic_hits": [
-            "Demand",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 19,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.786503,
-          "word_count": 124,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.626484,
-          "word_count": 36,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "EVP and CFO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.937901,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "EVP and CFO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.921043,
-          "word_count": 98,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 23,
-          "speaker": "EVP and CFO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.917841,
-          "word_count": 132,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 24,
-          "speaker": "EVP and CFO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.716958,
-          "word_count": 89,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 25,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.908713,
-          "word_count": 144,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.120924,
-          "word_count": 75,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.910917,
-          "word_count": 63,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.348294,
-          "word_count": 78,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 29,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.776913,
-          "word_count": 66,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.838971,
-          "word_count": 46,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 31,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.047026,
-          "word_count": 106,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at Citi",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.584694,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.868491,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at Evercore",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.805036,
-          "word_count": 82,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.377717,
-          "word_count": 115,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.154045,
-          "word_count": 49,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at Evercore",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.432485,
-          "word_count": 87,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.769076,
-          "word_count": 55,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Analyst at Evercore",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.371476,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.893508,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.020973,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 42,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.791851,
-          "word_count": 104,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 43,
-          "speaker": "Analyst",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.899094,
-          "word_count": 42,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.500321,
-          "word_count": 101,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 45,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.890948,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.870015,
-          "word_count": 59,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.494208,
-          "word_count": 122,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.711105,
-          "word_count": 43,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.729771,
-          "word_count": 77,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 50,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.354324,
-          "word_count": 75,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 51,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.902664,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.840178,
-          "word_count": 77,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 53,
-          "speaker": "EVP and CFO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.787417,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.66162,
-          "word_count": 94,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 55,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.829894,
-          "word_count": 60,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.879425,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905317,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.894207,
-          "word_count": 108,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.545887,
-          "word_count": 143,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.871873,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.883145,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "EVP and CFO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.781911,
-          "word_count": 83,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905547,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.88773,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 65,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.868598,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.869866,
-          "word_count": 33,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Analyst at Cantor Fitzgerald",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.040196,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.901366,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.63171,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "EVP and COO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.761302,
-          "word_count": 66,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.868512,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.796551,
-          "word_count": 74,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.783696,
-          "word_count": 114,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 74,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.151688,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905632,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.678975,
-          "word_count": 94,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 77,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.60752,
-          "word_count": 10,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 78,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.877927,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.181918,
-          "word_count": 42,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 80,
-          "speaker": "Analyst at Green Street",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.740137,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.911214,
-          "word_count": 20,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 82,
-          "speaker": "President and CEO at COPT Defense Properties",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.590214,
-          "word_count": 27,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 83,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.885971,
-          "word_count": 936,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 7144,
-      "transcript_text_redistributed": false
+      "date": "2026-10-29T16:00:00-04:00",
+      "eps_estimate": 0.35,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-27T16:00:00-04:00",
+      "eps_estimate": 0.32,
+      "reported_eps": 0.4,
+      "surprise_pct": 25.41
+    },
+    {
+      "date": "2026-04-27T16:00:00-04:00",
+      "eps_estimate": 0.32,
+      "reported_eps": 0.34,
+      "surprise_pct": 6.5
+    },
+    {
+      "date": "2026-02-05T16:00:00-05:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.33,
+      "surprise_pct": -0.3
+    },
+    {
+      "date": "2025-10-30T16:00:00-04:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.35,
+      "surprise_pct": -0.43
+    },
+    {
+      "date": "2025-07-28T16:00:00-04:00",
+      "eps_estimate": 0.34,
+      "reported_eps": 0.34,
+      "surprise_pct": 1.13
+    },
+    {
+      "date": "2025-04-28T16:00:00-04:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.31,
+      "surprise_pct": -5.17
+    },
+    {
+      "date": "2025-02-06T16:00:00-05:00",
+      "eps_estimate": 0.34,
+      "reported_eps": 0.32,
+      "surprise_pct": -7.35
+    },
+    {
+      "date": "2024-10-28T16:00:00-04:00",
+      "eps_estimate": 0.32,
+      "reported_eps": 0.33,
+      "surprise_pct": 1.59
+    },
+    {
+      "date": "2024-07-29T16:00:00-04:00",
+      "eps_estimate": 0.3,
+      "reported_eps": 1.03,
+      "surprise_pct": 243.97
+    },
+    {
+      "date": "2024-04-25T16:00:00-04:00",
+      "eps_estimate": 0.28,
+      "reported_eps": 0.3,
+      "surprise_pct": 3.61
+    },
+    {
+      "date": "2024-02-08T16:00:00-05:00",
+      "eps_estimate": 0.29,
+      "reported_eps": 0.3,
+      "surprise_pct": 4.59
+    },
+    {
+      "date": "2023-10-26T16:00:00-04:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.33,
+      "surprise_pct": 25.62
+    },
+    {
+      "date": "2023-07-27T16:00:00-04:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.28,
+      "surprise_pct": 11.68
+    },
+    {
+      "date": "2023-04-27T16:00:00-04:00",
+      "eps_estimate": 0.4,
+      "reported_eps": 0.7,
+      "surprise_pct": 74.22
+    },
+    {
+      "date": "2023-02-09T16:00:00-05:00",
+      "eps_estimate": 0.3,
+      "reported_eps": 0.28,
+      "surprise_pct": -6.16
+    },
+    {
+      "date": "2022-10-27T16:00:00-04:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.29,
+      "surprise_pct": 17.96
+    },
+    {
+      "date": "2022-07-28T16:00:00-04:00",
+      "eps_estimate": 0.3,
+      "reported_eps": 0.29,
+      "surprise_pct": -3.99
+    },
+    {
+      "date": "2022-04-28T16:00:00-04:00",
+      "eps_estimate": 0.27,
+      "reported_eps": 0.27,
+      "surprise_pct": 1.56
+    },
+    {
+      "date": "2022-02-10T16:00:00-05:00",
+      "eps_estimate": 0.25,
+      "reported_eps": 0.26,
+      "surprise_pct": 2.36
+    },
+    {
+      "date": "2021-10-28T16:00:00-04:00",
+      "eps_estimate": 0.26,
+      "reported_eps": 0.25,
+      "surprise_pct": -2.33
+    },
+    {
+      "date": "2021-07-29T16:00:00-04:00",
+      "eps_estimate": 0.22,
+      "reported_eps": 0.25,
+      "surprise_pct": 15.14
+    },
+    {
+      "date": "2021-04-29T16:00:00-04:00",
+      "eps_estimate": 0.23,
+      "reported_eps": 0.24,
+      "surprise_pct": 3.47
+    },
+    {
+      "date": "2021-02-04T16:00:00-05:00",
+      "eps_estimate": 0.55,
+      "reported_eps": 0.22,
+      "surprise_pct": -59.98
+    },
+    {
+      "date": "2020-10-29T16:00:00-04:00",
+      "eps_estimate": -0.17,
+      "reported_eps": -0.29,
+      "surprise_pct": -70.59
     }
   ],
+  "calls": [],
   "call_links": [
-    {
-      "title": "CDP Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/cdp/transcripts/656204-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-28T00:00:00+00:00"
-    },
-    {
-      "title": "CDP Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/cdp/transcripts/553177-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-28T00:00:00+00:00"
-    },
-    {
-      "title": "CDP Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/cdp/transcripts/397082-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-06T00:00:00+00:00"
-    },
-    {
-      "title": "CDP Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-27-copt-defense-properties-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-27T00:00:00+00:00"
-    },
     {
       "title": "COPT Defense Properties (CDP) Q2 2026 Earnings Call Highlights: Strong Growth and Strategic ...",
       "url": "https://finance.yahoo.com/real-estate/articles/copt-defense-properties-cdp-q2-230111561.html",
@@ -1151,9 +200,9 @@
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T14:59:39.547474+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
