@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CBOE",
   "earnings_history": [
     {
@@ -196,13 +196,40 @@
       "ts": "2026-07-30T12:30:00+00:00",
       "source": "GlobeNewswire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CBOE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cboe/transcripts/659135-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-31T00:00:00+00:00"
+    },
+    {
+      "title": "CBOE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cboe/transcripts/553083-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-01T00:00:00+00:00"
+    },
+    {
+      "title": "CBOE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cboe/transcripts/407208-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-06T00:00:00+00:00"
+    },
+    {
+      "title": "CBOE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-31-cboe-global-markets-inc-stock-3/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-31T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-03T23:32:47.291564+00:00"
 }
