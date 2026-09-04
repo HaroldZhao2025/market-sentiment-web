@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CHRD",
   "earnings_history": [
     {
@@ -147,7 +147,823 @@
       "surprise_pct": -49.91
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "MarketBeat",
+      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-5-chord-energy-stock/#transcript",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 61,
+        "scored_turn_count": 61,
+        "overall_sentiment": 0.281894,
+        "prepared_sentiment": -0.326867,
+        "qa_sentiment": 0.430979,
+        "qa_tone_shift": 0.757845,
+        "uncertainty_turn_rate": 0.098361,
+        "forward_looking_turn_rate": 0.377049,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 19,
+            "sentiment": 0.065963
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": -0.386111
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 8,
+            "sentiment": -0.451422
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 7,
+            "sentiment": 0.55504
+          },
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": -0.442051
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.036119
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.869317
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.922674,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "VP of Finance at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.869317,
+          "word_count": 127,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "VP of Finance at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.929992,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.927696,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.765812,
+          "word_count": 127,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.887168,
+          "word_count": 133,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.856879,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 7,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.903203,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.931404,
+          "word_count": 139,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.018439,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 10,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.88642,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 11,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "prepared",
+          "sentiment": -0.46736,
+          "word_count": 84,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908443,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.809873,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.088621,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.111261,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.528354,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Michael Lou",
+          "role": "EVP, Chief Strategy Officer, and Chief Commercial Officer at Chord Energy",
+          "section": "qa",
+          "sentiment": -0.441388,
+          "word_count": 110,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Michael Lou",
+          "role": "EVP, Chief Strategy Officer, and Chief Commercial Officer at Chord Energy",
+          "section": "qa",
+          "sentiment": 0.013375,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Analyst at William Blair",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.547289,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910906,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.795929,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.683286,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.489662,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.77994,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "EVP and COO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.528658,
+          "word_count": 65,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.855186,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "EVP and COO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.285112,
+          "word_count": 126,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "EVP and COO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89642,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Analyst at Wolfe Research",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.852162,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909268,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872358,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.694224,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.046319,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.160128,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.757061,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "EVP and COO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.143103,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.726764,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.856871,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.415193,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Analyst at Texas Capital",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.637421,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903881,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Analyst at Citi",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.768651,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.800194,
+          "word_count": 136,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.629992,
+          "word_count": 124,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "EVP and COO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.861677,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Analyst at Citi",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.415523,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.374886,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Analyst at Citi",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.875455,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910541,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Analyst at Daniel Energy Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.833014,
+          "word_count": 96,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.323185,
+          "word_count": 142,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.369387,
+          "word_count": 139,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.788706,
+          "word_count": 128,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.779259,
+          "word_count": 144,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.655993,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Analyst at Daniel Energy Partners",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.603186,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.92164,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.860801,
+          "word_count": 138,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "President and CEO at Chord Energy",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.0121,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.83805,
+          "word_count": 867,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        }
+      ],
+      "transcript_word_count": 5813,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Insightful Analyst Questions From Chord Energy’s Q2 Earnings Call",
@@ -190,13 +1006,40 @@
       "ts": "2026-08-06T16:11:51+00:00",
       "source": "MarketBeat",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CHRD Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/chrd/transcripts/661522-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "CHRD Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/chrd/transcripts/571953-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "CHRD Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/chrd/transcripts/395370-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "CHRD Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-chord-energy-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-04T23:03:42.769346+00:00"
 }
