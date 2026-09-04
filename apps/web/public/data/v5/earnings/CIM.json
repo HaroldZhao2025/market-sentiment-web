@@ -1,829 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "CIM",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-05T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-8-5-chimera-investment-co-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 59,
-        "scored_turn_count": 59,
-        "overall_sentiment": 0.20591,
-        "prepared_sentiment": -0.129188,
-        "qa_sentiment": 0.488649,
-        "qa_tone_shift": 0.617838,
-        "uncertainty_turn_rate": 0.135593,
-        "forward_looking_turn_rate": 0.288136,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 15,
-            "sentiment": -0.032505
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 12,
-            "sentiment": -0.243994
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 10,
-            "sentiment": 0.418393
-          },
-          {
-            "topic": "Demand",
-            "mentions": 9,
-            "sentiment": -0.628768
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 7,
-            "sentiment": -0.344735
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 2,
-            "sentiment": 0.63888
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 1,
-            "sentiment": 0.852982
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.913137,
-          "word_count": 75,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Head of Investor Relations at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.912768,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Head of Investor Relations at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.9233,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 3,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.850662,
-          "word_count": 123,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.664813,
-          "word_count": 151,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.424777,
-          "word_count": 139,
-          "topic_hits": [
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 3,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.880363,
-          "word_count": 137,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.011943,
-          "word_count": 113,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.368859,
-          "word_count": 131,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 9,
-          "speaker": "CFO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.02794,
-          "word_count": 135,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "CFO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.890196,
-          "word_count": 137,
-          "topic_hits": [
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "CFO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.392095,
-          "word_count": 151,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "CFO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.639117,
-          "word_count": 84,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.865325,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 14,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.501179,
-          "word_count": 150,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.917339,
-          "word_count": 123,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.049242,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.301418,
-          "word_count": 137,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.834208,
-          "word_count": 124,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.126554,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.259297,
-          "word_count": 80,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "President and CEO at HomeXpress Mortgage",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.931849,
-          "word_count": 128,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "President and CEO at HomeXpress Mortgage",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.799778,
-          "word_count": 146,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "President and CEO at HomeXpress Mortgage",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.189409,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "President and CEO at HomeXpress Mortgage",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.850812,
-          "word_count": 127,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "President and CEO at HomeXpress Mortgage",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.826542,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 26,
-          "speaker": "President and CEO at HomeXpress Mortgage",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.653135,
-          "word_count": 87,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.864745,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915352,
-          "word_count": 87,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.870471,
-          "word_count": 37,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.412301,
-          "word_count": 143,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.65298,
-          "word_count": 138,
-          "topic_hits": [
-            "Capital allocation",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.897095,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.010406,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.828375,
-          "word_count": 44,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.802462,
-          "word_count": 36,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Analyst at KBW",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.659091,
-          "word_count": 62,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 37,
-          "speaker": "President and CEO at HomeXpress Mortgage",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.580155,
-          "word_count": 109,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.916323,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 39,
-          "speaker": "Analyst at JMP Securities",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736696,
-          "word_count": 49,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 40,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.04576,
-          "word_count": 128,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.472308,
-          "word_count": 96,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.629012,
-          "word_count": 79,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.899667,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 44,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.854884,
-          "word_count": 33,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 45,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.875052,
-          "word_count": 141,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.799697,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.873159,
-          "word_count": 35,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 48,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.134745,
-          "word_count": 144,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "CFO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.024242,
-          "word_count": 19,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 50,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.752306,
-          "word_count": 6,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.918462,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.747738,
-          "word_count": 41,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.745443,
-          "word_count": 138,
-          "topic_hits": [
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "CIO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.749594,
-          "word_count": 77,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Analyst at BTIG",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.306717,
-          "word_count": 74,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913857,
-          "word_count": 25,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 57,
-          "speaker": "President and CEO at Chimera Investment",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.792389,
-          "word_count": 36,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 58,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.852982,
-          "word_count": 931,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 6199,
-      "transcript_text_redistributed": false
+      "date": "2026-11-05T07:00:00-05:00",
+      "eps_estimate": 0.46,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-08-05T06:00:00-04:00",
+      "eps_estimate": 0.52,
+      "reported_eps": 0.46,
+      "surprise_pct": -11.54
+    },
+    {
+      "date": "2026-05-07T06:00:00-04:00",
+      "eps_estimate": 0.51,
+      "reported_eps": 0.54,
+      "surprise_pct": 6.58
+    },
+    {
+      "date": "2026-02-11T06:00:00-05:00",
+      "eps_estimate": 0.5,
+      "reported_eps": 0.53,
+      "surprise_pct": 5.02
+    },
+    {
+      "date": "2025-11-06T06:00:00-05:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.37,
+      "surprise_pct": -20.03
+    },
+    {
+      "date": "2025-08-06T06:00:00-04:00",
+      "eps_estimate": 0.46,
+      "reported_eps": 0.41,
+      "surprise_pct": -10.48
+    },
+    {
+      "date": "2025-05-08T06:00:00-04:00",
+      "eps_estimate": 0.4,
+      "reported_eps": 0.41,
+      "surprise_pct": 1.59
+    },
+    {
+      "date": "2025-02-12T06:00:00-05:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.37,
+      "surprise_pct": -3.77
+    },
+    {
+      "date": "2024-11-06T06:00:00-05:00",
+      "eps_estimate": 0.38,
+      "reported_eps": 0.36,
+      "surprise_pct": -4.91
+    },
+    {
+      "date": "2024-08-07T06:00:00-04:00",
+      "eps_estimate": 0.35,
+      "reported_eps": 0.37,
+      "surprise_pct": 4.49
+    },
+    {
+      "date": "2024-05-09T06:00:00-04:00",
+      "eps_estimate": 0.48,
+      "reported_eps": 0.36,
+      "surprise_pct": -25.47
+    },
+    {
+      "date": "2024-02-14T07:00:00-05:00",
+      "eps_estimate": 0.5,
+      "reported_eps": 0.39,
+      "surprise_pct": -22.49
+    },
+    {
+      "date": "2023-11-02T06:00:00-04:00",
+      "eps_estimate": 0.56,
+      "reported_eps": 0.39,
+      "surprise_pct": -30.11
+    },
+    {
+      "date": "2023-08-03T06:00:00-04:00",
+      "eps_estimate": 0.5,
+      "reported_eps": 0.36,
+      "surprise_pct": -27.27
+    },
+    {
+      "date": "2023-05-04T07:00:00-04:00",
+      "eps_estimate": 0.49,
+      "reported_eps": 0.39,
+      "surprise_pct": -20.41
+    },
+    {
+      "date": "2023-02-15T07:00:00-05:00",
+      "eps_estimate": 0.33,
+      "reported_eps": 0.33,
+      "surprise_pct": null
+    },
+    {
+      "date": "2022-11-03T07:00:00-04:00",
+      "eps_estimate": 0.8,
+      "reported_eps": 0.81,
+      "surprise_pct": 0.75
+    },
+    {
+      "date": "2022-08-04T07:00:00-04:00",
+      "eps_estimate": 1.05,
+      "reported_eps": 0.93,
+      "surprise_pct": -11.0
+    },
+    {
+      "date": "2022-05-05T07:00:00-04:00",
+      "eps_estimate": 1.11,
+      "reported_eps": 1.17,
+      "surprise_pct": 5.88
+    },
+    {
+      "date": "2022-02-17T07:00:00-05:00",
+      "eps_estimate": 1.16,
+      "reported_eps": 1.38,
+      "surprise_pct": 18.97
+    },
+    {
+      "date": "2021-11-03T07:00:00-04:00",
+      "eps_estimate": 1.1,
+      "reported_eps": 1.26,
+      "surprise_pct": 14.84
+    },
+    {
+      "date": "2021-08-04T07:00:00-04:00",
+      "eps_estimate": 1.03,
+      "reported_eps": 1.62,
+      "surprise_pct": 57.28
+    },
+    {
+      "date": "2021-05-05T07:00:00-04:00",
+      "eps_estimate": 0.9,
+      "reported_eps": 1.08,
+      "surprise_pct": 20.67
+    },
+    {
+      "date": "2021-02-10T07:00:00-05:00",
+      "eps_estimate": 0.94,
+      "reported_eps": 0.87,
+      "surprise_pct": -7.45
+    },
+    {
+      "date": "2020-11-04T07:00:00-05:00",
+      "eps_estimate": 0.93,
+      "reported_eps": 0.99,
+      "surprise_pct": 6.45
     }
   ],
+  "calls": [],
   "call_links": [
-    {
-      "title": "CIM Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/cim/transcripts/662214-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-08-05T00:00:00+00:00"
-    },
-    {
-      "title": "CIM Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/cim/transcripts/555094-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-07T00:00:00+00:00"
-    },
-    {
-      "title": "CIM Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/cim/transcripts/412386-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-11T00:00:00+00:00"
-    },
-    {
-      "title": "CIM Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-chimera-investment-co-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-08-05T00:00:00+00:00"
-    },
     {
       "title": "Chimera Investment (CIM) Q2 2026 Earnings Call Transcript",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/08/12/chimera-investment-cim-q2-2026-earnings-call-transcript/",
@@ -869,9 +200,9 @@
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-17T20:02:19.963100+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }

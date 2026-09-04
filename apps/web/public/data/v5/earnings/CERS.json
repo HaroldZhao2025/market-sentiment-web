@@ -1,586 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "CERS",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-30T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-cerus-co-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 39,
-        "scored_turn_count": 39,
-        "overall_sentiment": -0.103518,
-        "prepared_sentiment": -0.337669,
-        "qa_sentiment": 0.271123,
-        "qa_tone_shift": 0.608791,
-        "uncertainty_turn_rate": 0.128205,
-        "forward_looking_turn_rate": 0.538462,
-        "topics": [
-          {
-            "topic": "Guidance",
-            "mentions": 15,
-            "sentiment": -0.229261
-          },
-          {
-            "topic": "Demand",
-            "mentions": 9,
-            "sentiment": -0.416559
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 9,
-            "sentiment": -0.339985
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 5,
-            "sentiment": -0.182129
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 5,
-            "sentiment": -0.090199
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 3,
-            "sentiment": 0.405754
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.894361,
-          "word_count": 52,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Head of Investor Relations at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.902104,
-          "word_count": 130,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 2,
-          "speaker": "Head of Investor Relations at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.862871,
-          "word_count": 151,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 3,
-          "speaker": "Head of Investor Relations at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.896541,
-          "word_count": 128,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 4,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.8861,
-          "word_count": 139,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.803662,
-          "word_count": 149,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 6,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.906874,
-          "word_count": 131,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.757108,
-          "word_count": 148,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 8,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.895124,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 9,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.735223,
-          "word_count": 152,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 10,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.061654,
-          "word_count": 145,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.864914,
-          "word_count": 138,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.919884,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 13,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.902631,
-          "word_count": 24,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.85668,
-          "word_count": 139,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 15,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.931908,
-          "word_count": 136,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 16,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.934746,
-          "word_count": 129,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 17,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.926012,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.008059,
-          "word_count": 151,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 19,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.937241,
-          "word_count": 148,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 20,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.399034,
-          "word_count": 142,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 21,
-          "speaker": "CFO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.87211,
-          "word_count": 135,
-          "topic_hits": [
-            "Guidance",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 22,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": -0.641593,
-          "word_count": 151,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 23,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.77537,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.916019,
-          "word_count": 73,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.664699,
-          "word_count": 124,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.338141,
-          "word_count": 134,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.700665,
-          "word_count": 71,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.759807,
-          "word_count": 101,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 29,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.063751,
-          "word_count": 134,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 30,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.431965,
-          "word_count": 75,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.733474,
-          "word_count": 7,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.917296,
-          "word_count": 44,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Analyst at TD Cowen",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.774392,
-          "word_count": 83,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 34,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.416249,
-          "word_count": 137,
-          "topic_hits": [
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.651394,
-          "word_count": 130,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 36,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.166628,
-          "word_count": 120,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 37,
-          "speaker": "President and CEO at Cerus",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.484947,
-          "word_count": 145,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 38,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.88718,
-          "word_count": 854,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 3
-        }
-      ],
-      "transcript_word_count": 5283,
-      "transcript_text_redistributed": false
+      "date": "2026-11-05T15:00:00-05:00",
+      "eps_estimate": -0.01,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-30T16:00:00-04:00",
+      "eps_estimate": -0.01,
+      "reported_eps": -0.01,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-04-30T16:00:00-04:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.01,
+      "surprise_pct": 71.43
+    },
+    {
+      "date": "2026-03-02T16:00:00-05:00",
+      "eps_estimate": null,
+      "reported_eps": -0.01,
+      "surprise_pct": -100.0
+    },
+    {
+      "date": "2025-11-06T16:00:00-05:00",
+      "eps_estimate": -0.02,
+      "reported_eps": null,
+      "surprise_pct": 100.0
+    },
+    {
+      "date": "2025-08-05T16:00:00-04:00",
+      "eps_estimate": -0.02,
+      "reported_eps": -0.03,
+      "surprise_pct": -50.0
+    },
+    {
+      "date": "2025-05-01T16:00:00-04:00",
+      "eps_estimate": -0.05,
+      "reported_eps": -0.04,
+      "surprise_pct": 20.0
+    },
+    {
+      "date": "2025-02-20T16:00:00-05:00",
+      "eps_estimate": -0.01,
+      "reported_eps": -0.01,
+      "surprise_pct": 20.0
+    },
+    {
+      "date": "2024-10-30T16:00:00-04:00",
+      "eps_estimate": -0.03,
+      "reported_eps": -0.02,
+      "surprise_pct": 33.33
+    },
+    {
+      "date": "2024-08-01T16:00:00-04:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.03,
+      "surprise_pct": 14.29
+    },
+    {
+      "date": "2024-05-02T16:00:00-04:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.05,
+      "surprise_pct": -17.65
+    },
+    {
+      "date": "2024-03-05T16:00:00-05:00",
+      "eps_estimate": -0.02,
+      "reported_eps": -0.01,
+      "surprise_pct": 57.14
+    },
+    {
+      "date": "2023-11-02T16:00:00-04:00",
+      "eps_estimate": -0.05,
+      "reported_eps": -0.03,
+      "surprise_pct": 40.0
+    },
+    {
+      "date": "2023-08-02T16:00:00-04:00",
+      "eps_estimate": -0.06,
+      "reported_eps": -0.06,
+      "surprise_pct": -2.83
+    },
+    {
+      "date": "2023-05-04T16:00:00-04:00",
+      "eps_estimate": -0.07,
+      "reported_eps": -0.09,
+      "surprise_pct": -28.57
+    },
+    {
+      "date": "2023-02-28T16:00:00-05:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.08,
+      "surprise_pct": -77.78
+    },
+    {
+      "date": "2022-11-03T16:00:00-04:00",
+      "eps_estimate": -0.05,
+      "reported_eps": -0.05,
+      "surprise_pct": null
+    },
+    {
+      "date": "2022-08-04T16:00:00-04:00",
+      "eps_estimate": -0.06,
+      "reported_eps": -0.06,
+      "surprise_pct": 5.26
+    },
+    {
+      "date": "2022-05-05T16:00:00-04:00",
+      "eps_estimate": -0.08,
+      "reported_eps": -0.07,
+      "surprise_pct": 16.0
+    },
+    {
+      "date": "2022-02-22T16:00:00-05:00",
+      "eps_estimate": -0.08,
+      "reported_eps": -0.05,
+      "surprise_pct": 37.5
+    },
+    {
+      "date": "2021-11-02T16:00:00-04:00",
+      "eps_estimate": -0.1,
+      "reported_eps": -0.07,
+      "surprise_pct": 27.08
+    },
+    {
+      "date": "2021-08-03T16:00:00-04:00",
+      "eps_estimate": -0.09,
+      "reported_eps": -0.09,
+      "surprise_pct": 5.26
+    },
+    {
+      "date": "2021-05-04T16:00:00-04:00",
+      "eps_estimate": -0.09,
+      "reported_eps": -0.1,
+      "surprise_pct": -5.26
+    },
+    {
+      "date": "2021-02-25T16:00:00-05:00",
+      "eps_estimate": -0.09,
+      "reported_eps": -0.09,
+      "surprise_pct": -3.84
+    },
+    {
+      "date": "2020-10-29T16:00:00-04:00",
+      "eps_estimate": -0.1,
+      "reported_eps": -0.08,
+      "surprise_pct": 22.58
     }
   ],
+  "calls": [],
   "call_links": [
-    {
-      "title": "CERS Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/cers/transcripts/658555-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
-    {
-      "title": "CERS Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/cers/transcripts/578196-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
-      "title": "CERS Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/cers/transcripts/400146-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-03-02T00:00:00+00:00"
-    },
-    {
-      "title": "CERS Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-cerus-co-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
     {
       "title": "Cerus Corporation 2026 Q2 - Results - Earnings Call Presentation (NASDAQ:CERS) 2026-08-08 - Seeking Alpha",
       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNRnlLZjd2N2FNU3dLM1JrS3pYUmhBLUE3S1VkUkhVRmFOcmlLc0hrcGdncy1EbXVMbmVGcXBaVGxPVU5WbFhBNlNJVTlRc1JYV01FYXp6bGFFYnRrQWFaZi12cER5ZDN3cXo5X28yWmppUXVSSF9zdG5UTHYzR241UXhwU190NmtGOFp3dWlpZmw1N0l3ZjNUNzRBMFpqNHFqQnZj?oc=5",
@@ -589,18 +163,18 @@
       "provider": "google_news_rss"
     },
     {
-      "title": "Cerus Corporation 2026 Q2 - Results - Earnings Call Presentation",
-      "url": "https://finnhub.io/api/news?id=2f6e07c0e6519a197a7dbb2bda972d9ac0a82cb0201213acdac33549a044cfc8",
-      "ts": "2026-08-08T19:03:14+00:00",
-      "source": "SeekingAlpha",
-      "provider": "finnhub"
-    },
-    {
       "title": "Cerus Q2 Earnings Call Highlights",
       "url": "https://www.marketbeat.com/instant-alerts/cerus-q2-earnings-call-highlights-2026-07-30/?utm_source=yahoofinance&utm_medium=yahoofinance",
       "ts": "2026-07-30T22:04:05+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "Earnings call transcript: Cerus beats Q2 2026 estimates but shares fall after hours - Investing.com",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOaTZoR01nWFcxbTI0cVA3RDA3MGlrOEVFY01MdnY4azBKRF9qcWVJSTBOUF9UM0hoWlhDZkxvWC05cnBZYVl4c19BeHBLYkJGTC1YVVdwUkUxdHAxNWJjbTBLZXNnVmFCVjV1LXVMdUhwNWRzMTBtRHdmN1ZmOUEtR1RIWWJ0TFY3dmNnNjRwVmp3eEU1emNkckdFMjdERFNmd3dwV20tYnFWbHI2TlQtTV9Ucmg1MWZZSUlkUVRLLXo0aHhZb25JeTRNSC1kSFNvUlRDWA?oc=5",
+      "ts": "2026-07-30T07:00:00+00:00",
+      "source": "Investing.com",
+      "provider": "google_news_rss"
     },
     {
       "title": "Cerus Corporation Q1 2026 Earnings Call Summary",
@@ -626,9 +200,9 @@
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-17T20:01:25.774979+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
