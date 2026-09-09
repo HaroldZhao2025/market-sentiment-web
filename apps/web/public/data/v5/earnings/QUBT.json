@@ -129,7 +129,570 @@
       "surprise_pct": -6.67
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-03-02T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/qubt/transcripts/408330-q4-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 42,
+        "scored_turn_count": 42,
+        "overall_sentiment": 0.404867,
+        "prepared_sentiment": 0.138785,
+        "qa_sentiment": 0.432876,
+        "qa_tone_shift": 0.294091,
+        "uncertainty_turn_rate": 0.047619,
+        "forward_looking_turn_rate": 0.214286,
+        "topics": [
+          {
+            "topic": "AI & technology",
+            "mentions": 8,
+            "sentiment": 0.40737
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.366918
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 6,
+            "sentiment": -0.146069
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.479612
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": 0.770824
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.801322
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.889383,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Roz Christian",
+          "role": "Account Manager, IMS Investor Relations",
+          "section": "prepared",
+          "sentiment": 0.914742,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "prepared",
+          "sentiment": -0.801322,
+          "word_count": 1131,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "prepared",
+          "sentiment": -0.447664,
+          "word_count": 432,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": -0.651856,
+          "word_count": 121,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916589,
+          "word_count": 110,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "John McPeake",
+          "role": "Senior Research Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": -0.141379,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "John McPeake",
+          "role": "Senior Research Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": 0.825074,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "John McPeake",
+          "role": "Senior Research Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": 0.766079,
+          "word_count": 47,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.867676,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Sure, I'd be happy to.",
+          "role": "John, I've seen a couple of analyst reports.",
+          "section": "qa",
+          "sentiment": 0.645807,
+          "word_count": 70,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.729584,
+          "word_count": 87,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.013022,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "John McPeake",
+          "role": "Senior Research Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": 0.799356,
+          "word_count": 83,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.893241,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.780099,
+          "word_count": 72,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.742292,
+          "word_count": 85,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "John McPeake",
+          "role": "Senior Research Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": 0.1941,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916405,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Mark Michaelis",
+          "role": "Senior Research Analyst, Lake Street Capital Markets",
+          "section": "qa",
+          "sentiment": 0.72745,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": -0.898707,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": -0.84714,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Mark Michaelis",
+          "role": "Senior Research Analyst, Lake Street Capital Markets",
+          "section": "qa",
+          "sentiment": 0.771526,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": -0.289269,
+          "word_count": 298,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.923228,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Antoine Legault",
+          "role": "Senior Associate, Equity Research, Wedbush Securities",
+          "section": "qa",
+          "sentiment": 0.869354,
+          "word_count": 63,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.618289,
+          "word_count": 194,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Antoine Legault",
+          "role": "Senior Associate, Equity Research, Wedbush Securities",
+          "section": "qa",
+          "sentiment": 0.655415,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": -0.74277,
+          "word_count": 88,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900556,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Edward Woo",
+          "role": "Director of Research and Senior Analyst, Ascendiant Capital Markets",
+          "section": "qa",
+          "sentiment": 0.606435,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.696594,
+          "word_count": 100,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Edward Woo",
+          "role": "Director of Research and Senior Analyst, Ascendiant Capital Markets",
+          "section": "qa",
+          "sentiment": 0.017042,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Chris Roberts",
+          "role": "CFO, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": -0.34302,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899095,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Troy Jensen",
+          "role": "Managing Director and Senior Equity Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.458525,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Troy Jensen",
+          "role": "Managing Director and Senior Equity Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.807895,
+          "word_count": 76,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.558347,
+          "word_count": 244,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Troy Jensen",
+          "role": "Managing Director and Senior Equity Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": -0.676814,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917153,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Yuping Huang",
+          "role": "CEO and Chairman, Quantum Computing Inc.",
+          "section": "qa",
+          "sentiment": 0.6071,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916899,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4192,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "QUBT Earnings Call: Q2 2026",
@@ -204,5 +767,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T17:38:24.112945+00:00"
+  "updated_at_utc": "2026-09-09T18:47:50.121889+00:00"
 }

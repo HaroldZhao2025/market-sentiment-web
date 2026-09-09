@@ -135,7 +135,749 @@
       "surprise_pct": -2.22
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-03-12T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/s/transcripts/419925-q4-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 54,
+        "scored_turn_count": 54,
+        "overall_sentiment": 0.475328,
+        "prepared_sentiment": -0.099262,
+        "qa_sentiment": 0.53396,
+        "qa_tone_shift": 0.633222,
+        "uncertainty_turn_rate": 0.074074,
+        "forward_looking_turn_rate": 0.296296,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 16,
+            "sentiment": 0.100273
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 15,
+            "sentiment": 0.165776
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": 0.214015
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 12,
+            "sentiment": 0.01375
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.345986
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.908048
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.87683,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Saad Nazir",
+          "role": "Head of Investor Relations, SentinelOne",
+          "section": "prepared",
+          "sentiment": 0.888023,
+          "word_count": 421,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "prepared",
+          "sentiment": -0.858523,
+          "word_count": 2580,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "I look forward to our partnership.",
+          "role": "I would also like to thank Barry for his leadership and steady hand as interim CFO.",
+          "section": "prepared",
+          "sentiment": -0.494591,
+          "word_count": 73,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Barry Padgett",
+          "role": "Interim CFO, SentinelOne",
+          "section": "prepared",
+          "sentiment": -0.908048,
+          "word_count": 1062,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897819,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Brian Essex",
+          "role": "Executive Director, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.782851,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": -0.822951,
+          "word_count": 274,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890931,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "John DiFucci",
+          "role": "Senior Managing Director, Guggenheim",
+          "section": "qa",
+          "sentiment": 0.26573,
+          "word_count": 73,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Barry Padgett",
+          "role": "Interim CFO, SentinelOne",
+          "section": "qa",
+          "sentiment": -0.1975,
+          "word_count": 77,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902241,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Meta Marshall",
+          "role": "Managing Director, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.703863,
+          "word_count": 68,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.239408,
+          "word_count": 191,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.8945,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Nasr Islam",
+          "role": "Equity Research Associate, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.726865,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.199142,
+          "word_count": 193,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892026,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Shrenik Kothari",
+          "role": "Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.818431,
+          "word_count": 51,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.06759,
+          "word_count": 244,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896583,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Patrick Colville",
+          "role": "Lead Equity Research Analyst of US Software Equity Research, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.748592,
+          "word_count": 112,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": -0.343143,
+          "word_count": 238,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895055,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Richard Poland",
+          "role": "VP of Equity Research, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.015509,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": -0.48779,
+          "word_count": 63,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886849,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Mike Cikos",
+          "role": "Senior Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.680587,
+          "word_count": 85,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.654569,
+          "word_count": 285,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900354,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Shaul Eyal",
+          "role": "Managing Director of Equity Research, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.887629,
+          "word_count": 35,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Barry Padgett",
+          "role": "Interim CFO, SentinelOne",
+          "section": "qa",
+          "sentiment": -0.194492,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.456534,
+          "word_count": 260,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894082,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Roger Boyd",
+          "role": "Executive Director, UBS",
+          "section": "qa",
+          "sentiment": 0.375693,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.481462,
+          "word_count": 243,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892832,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Joseph Gallo",
+          "role": "SVP, Jefferies",
+          "section": "qa",
+          "sentiment": 0.739861,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.716782,
+          "word_count": 384,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896999,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Eric Heath",
+          "role": "VP and Equity Research Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": -0.428392,
+          "word_count": 53,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.644909,
+          "word_count": 179,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892752,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Adam Tindle",
+          "role": "Managing Director, Raymond James",
+          "section": "qa",
+          "sentiment": 0.455526,
+          "word_count": 169,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 44,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.294664,
+          "word_count": 138,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895463,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Jonathan Ho",
+          "role": "Research Analyst, Technology, Media, and Communications, William Blair",
+          "section": "qa",
+          "sentiment": 0.431416,
+          "word_count": 49,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.560489,
+          "word_count": 227,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896035,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Ittai Kidron",
+          "role": "Managing Director, Oppenheimer & Co",
+          "section": "qa",
+          "sentiment": 0.836554,
+          "word_count": 124,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.667558,
+          "word_count": 176,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Barry Padgett",
+          "role": "Interim CFO, SentinelOne",
+          "section": "qa",
+          "sentiment": -0.040973,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911109,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Tomer Weingarten",
+          "role": "CEO, SentinelOne",
+          "section": "qa",
+          "sentiment": 0.92246,
+          "word_count": 57,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 9101,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "S Earnings Call: Q1 2027",
@@ -201,6 +943,12 @@
       "url": "https://stockanalysis.com/stocks/s/transcripts/682011-q2-2027/",
       "source": "Stock Analysis / Quartr",
       "ts": "2026-08-27T00:00:00+00:00"
+    },
+    {
+      "title": "S Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-27-sentinelone-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-27T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
@@ -209,5 +957,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T20:22:04.832972+00:00"
+  "updated_at_utc": "2026-09-09T18:52:12.894552+00:00"
 }
