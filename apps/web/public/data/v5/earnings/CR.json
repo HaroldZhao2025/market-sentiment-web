@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CR",
   "earnings_history": [
     {
@@ -153,7 +153,960 @@
       "surprise_pct": -8.98
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cr/transcripts/656137-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 73,
+        "scored_turn_count": 73,
+        "overall_sentiment": 0.227116,
+        "prepared_sentiment": -0.011678,
+        "qa_sentiment": 0.240959,
+        "qa_tone_shift": 0.252638,
+        "uncertainty_turn_rate": 0.082192,
+        "forward_looking_turn_rate": 0.205479,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 18,
+            "sentiment": -0.357302
+          },
+          {
+            "topic": "Demand",
+            "mentions": 17,
+            "sentiment": -0.278145
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 15,
+            "sentiment": -0.313905
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.023954
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.756268
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.482397
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.942091
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.915323,
+          "word_count": 120,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Allison Poliniak",
+          "role": "VP of Investor Relations, Crane Company",
+          "section": "prepared",
+          "sentiment": 0.91155,
+          "word_count": 186,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "prepared",
+          "sentiment": -0.931495,
+          "word_count": 1246,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 3,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "prepared",
+          "sentiment": -0.942091,
+          "word_count": 898,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.75287,
+          "word_count": 163,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.900682,
+          "word_count": 369,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.724746,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.307722,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879705,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.790657,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.7418,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.404893,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.803485,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.554507,
+          "word_count": 104,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.87295,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Scott Deuschle",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.807502,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.890021,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Scott Deuschle",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.900416,
+          "word_count": 21,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.461406,
+          "word_count": 25,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Scott Deuschle",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": -0.077922,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.550116,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 21,
+          "speaker": "Scott Deuschle",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.813829,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.025553,
+          "word_count": 126,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.85957,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Nathan Jones",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.832504,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.70894,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Nathan Jones",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.249531,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.923562,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Nathan Jones",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.598303,
+          "word_count": 116,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.749919,
+          "word_count": 185,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Nathan Jones",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.34482,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.850787,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Dan DiCicco",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.676893,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.007691,
+          "word_count": 116,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Dan DiCicco",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.006513,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.287743,
+          "word_count": 116,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Dan DiCicco",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.584694,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Thank you.",
+          "role": "We'll take our next question from Myles Walton with Wolfe Research.",
+          "section": "qa",
+          "sentiment": 0.892084,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Myles Walton",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.852317,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.879582,
+          "word_count": 9,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.875002,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.664835,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.215138,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Myles Walton",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.787659,
+          "word_count": 24,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.924707,
+          "word_count": 61,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.925839,
+          "word_count": 67,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Myles Walton",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.88571,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.00159,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Myles Walton",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.545223,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872213,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.715253,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.5902,
+          "word_count": 116,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.527604,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.74573,
+          "word_count": 28,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.825291,
+          "word_count": 83,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889982,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research",
+          "section": "qa",
+          "sentiment": 0.056783,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research",
+          "section": "qa",
+          "sentiment": 0.744661,
+          "word_count": 66,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.923071,
+          "word_count": 97,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research",
+          "section": "qa",
+          "sentiment": 0.822895,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 60,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.48664,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research",
+          "section": "qa",
+          "sentiment": 0.672338,
+          "word_count": 8,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.015933,
+          "word_count": 127,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research",
+          "section": "qa",
+          "sentiment": 0.809868,
+          "word_count": 5,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.922199,
+          "word_count": 21,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research",
+          "section": "qa",
+          "sentiment": 0.462234,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.816749,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Scott Deuschle",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": -0.09871,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.022703,
+          "word_count": 86,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896786,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Alex Alcala",
+          "role": "President and CEO, Crane Company",
+          "section": "qa",
+          "sentiment": -0.762617,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 71,
+          "speaker": "Rich Maue",
+          "role": "EVP and CFO, Crane Company",
+          "section": "qa",
+          "sentiment": 0.543972,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905424,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6560,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From Crane NXT’s Q2 Earnings Call",
@@ -196,13 +1149,40 @@
       "ts": "2026-08-04T09:24:10+00:00",
       "source": "StockStory",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cr/transcripts/656137-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "CR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cr/transcripts/547053-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "CR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cr/transcripts/396472-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-27T00:00:00+00:00"
+    },
+    {
+      "title": "CR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-crane-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:23:23.630667+00:00"
 }

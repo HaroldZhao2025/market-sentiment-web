@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CPS",
   "earnings_history": [
     {
@@ -153,7 +153,658 @@
       "surprise_pct": 112.8
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cps/transcripts/662204-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 47,
+        "scored_turn_count": 47,
+        "overall_sentiment": 0.32822,
+        "prepared_sentiment": -0.139489,
+        "qa_sentiment": 0.396665,
+        "qa_tone_shift": 0.536154,
+        "uncertainty_turn_rate": 0.12766,
+        "forward_looking_turn_rate": 0.382979,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 17,
+            "sentiment": 0.010801
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 12,
+            "sentiment": 0.159287
+          },
+          {
+            "topic": "Demand",
+            "mentions": 12,
+            "sentiment": 0.083213
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": -0.131898
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": 0.27242
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": -0.040626
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.160296
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.913226,
+          "word_count": 104,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Roger Hendriksen",
+          "role": "Director of Investor Relations, Cooper-Standard",
+          "section": "prepared",
+          "sentiment": 0.908191,
+          "word_count": 157,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "prepared",
+          "sentiment": -0.848797,
+          "word_count": 300,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "We appreciate all you're doing.",
+          "role": "In addition, we did a nice job managing working capital and spending in order to optimize cash flow.",
+          "section": "prepared",
+          "sentiment": -0.906057,
+          "word_count": 290,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Jon Banas",
+          "role": "EVP and CFO, Cooper-Standard",
+          "section": "prepared",
+          "sentiment": -0.104418,
+          "word_count": 997,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "prepared",
+          "sentiment": -0.799079,
+          "word_count": 1359,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910258,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Michael Ward",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.529054,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Michael Ward",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.815142,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.482544,
+          "word_count": 241,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Michael Ward",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": -0.171702,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.787807,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Michael Ward",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.776165,
+          "word_count": 70,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Jon Banas",
+          "role": "EVP and CFO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": -0.876814,
+          "word_count": 112,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Michael Ward",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": -0.494873,
+          "word_count": 31,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896801,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Doug Karson",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.78162,
+          "word_count": 167,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.858516,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.642124,
+          "word_count": 196,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.451634,
+          "word_count": 275,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Doug Karson",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.189141,
+          "word_count": 82,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.281411,
+          "word_count": 33,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.838373,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Doug Karson",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.629676,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904011,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Andrés Loret de Mola",
+          "role": "Analyst, Stifel Financial",
+          "section": "qa",
+          "sentiment": 0.761381,
+          "word_count": 87,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Jon Banas",
+          "role": "EVP and CFO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.160296,
+          "word_count": 200,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Andrés Loret de Mola",
+          "role": "Analyst, Stifel Financial",
+          "section": "qa",
+          "sentiment": 0.774327,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.06982,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Andrés Loret de Mola",
+          "role": "Analyst, Stifel Financial",
+          "section": "qa",
+          "sentiment": -0.176995,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903676,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Wolf Joffe",
+          "role": "Analyst, EVR Research",
+          "section": "qa",
+          "sentiment": 0.050111,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Wolf Joffe",
+          "role": "Analyst, EVR Research",
+          "section": "qa",
+          "sentiment": -0.609122,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Roger Hendriksen",
+          "role": "Director of Investor Relations, Cooper-Standard",
+          "section": "qa",
+          "sentiment": -0.123582,
+          "word_count": 82,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.23121,
+          "word_count": 267,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 35,
+          "speaker": "Wolf Joffe",
+          "role": "Analyst, EVR Research",
+          "section": "qa",
+          "sentiment": 0.660237,
+          "word_count": 55,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": -0.805552,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.837659,
+          "word_count": 158,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Wolf Joffe",
+          "role": "Analyst, EVR Research",
+          "section": "qa",
+          "sentiment": 0.318613,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 39,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.826331,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Wolf Joffe",
+          "role": "Analyst, EVR Research",
+          "section": "qa",
+          "sentiment": 0.809764,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.119642,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Wolf Joffe",
+          "role": "Analyst, EVR Research",
+          "section": "qa",
+          "sentiment": -0.869491,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Jeff Edwards",
+          "role": "Chairman and CEO, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.734982,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893363,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Roger Hendriksen",
+          "role": "Director of Investor Relations, Cooper-Standard",
+          "section": "qa",
+          "sentiment": 0.559496,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906214,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6095,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Cooper-Standard Q2 Earnings Call Highlights",
@@ -196,13 +847,40 @@
       "ts": "2026-05-07T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CPS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cps/transcripts/662204-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "CPS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cps/transcripts/556793-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "CPS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cps/transcripts/398800-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-13T00:00:00+00:00"
+    },
+    {
+      "title": "CPS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-cooper-standard-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:25:00.351092+00:00"
 }

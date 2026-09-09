@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CSGP",
   "earnings_history": [
     {
@@ -153,7 +153,932 @@
       "surprise_pct": 9.2
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-28T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/csgp/transcripts/656424-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 69,
+        "scored_turn_count": 69,
+        "overall_sentiment": 0.391345,
+        "prepared_sentiment": -0.038052,
+        "qa_sentiment": 0.43224,
+        "qa_tone_shift": 0.470292,
+        "uncertainty_turn_rate": 0.086957,
+        "forward_looking_turn_rate": 0.289855,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 24,
+            "sentiment": 0.168798
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 19,
+            "sentiment": 0.335792
+          },
+          {
+            "topic": "Demand",
+            "mentions": 11,
+            "sentiment": 0.203833
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 8,
+            "sentiment": 0.115307
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": 0.117146
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.929982
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.132053
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.899086,
+          "word_count": 96,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Rich Simonelli",
+          "role": "Head of Investor Relations, CoStar Group",
+          "section": "prepared",
+          "sentiment": 0.873561,
+          "word_count": 274,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "prepared",
+          "sentiment": -0.92984,
+          "word_count": 3356,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 3,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "prepared",
+          "sentiment": -0.930125,
+          "word_count": 1124,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Thank you, Chris.",
+          "role": "As announced, this is Chris' last earnings call in our CFO seat.",
+          "section": "prepared",
+          "sentiment": 0.700488,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Allstate will be in good hands.",
+          "role": "As Chris departs, we congratulate Robin Rossmann on his promotion to CoStar Group's new Chief Financial Officer.",
+          "section": "prepared",
+          "sentiment": -0.841482,
+          "word_count": 269,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90712,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "George Tong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.005946,
+          "word_count": 71,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.685582,
+          "word_count": 204,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.828367,
+          "word_count": 95,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.76679,
+          "word_count": 124,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882871,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Stephen Sheldon",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.721614,
+          "word_count": 105,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.870825,
+          "word_count": 35,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Stephen Sheldon",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.834981,
+          "word_count": 28,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.828092,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Stephen Sheldon",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.886047,
+          "word_count": 10,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.829167,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.779271,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870511,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ryan Tomasello",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.313903,
+          "word_count": 79,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.413798,
+          "word_count": 185,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.910856,
+          "word_count": 48,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.876355,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Pete Christiansen",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.375705,
+          "word_count": 57,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.459839,
+          "word_count": 281,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887962,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Surinder Thind",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.823081,
+          "word_count": 129,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.842981,
+          "word_count": 333,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884358,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Curtis Nagle",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.050651,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.832152,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Curtis Nagle",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.435987,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.663943,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.905029,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.525593,
+          "word_count": 20,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879559,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Brett Huff",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.737518,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.697531,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.528772,
+          "word_count": 202,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Brett Huff",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": -0.507281,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870429,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Faiza Alwy",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.670724,
+          "word_count": 75,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.666018,
+          "word_count": 250,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.435944,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.856867,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.866507,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Andrew Boone",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.787355,
+          "word_count": 58,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.277199,
+          "word_count": 269,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.195545,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887952,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Scott Wurtzel",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.535536,
+          "word_count": 70,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.753278,
+          "word_count": 313,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872639,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Nick Jones",
+          "role": "Analyst, BNP Paribas",
+          "section": "qa",
+          "sentiment": 0.69589,
+          "word_count": 63,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.793214,
+          "word_count": 324,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 56,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.677543,
+          "word_count": 232,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.877001,
+          "word_count": 11,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870011,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Jason Haas",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.752989,
+          "word_count": 55,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.816662,
+          "word_count": 212,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Jason Haas",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.493622,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.874645,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Ashish Sabadra",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.823961,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Chris Lown",
+          "role": "CFO, CoStar Group",
+          "section": "qa",
+          "sentiment": 0.811097,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 65,
+          "speaker": "Ashish Sabadra",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.576398,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906156,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Andy Florance",
+          "role": "CEO and Founder, CoStar Group",
+          "section": "qa",
+          "sentiment": -0.211731,
+          "word_count": 38,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 68,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899278,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 10168,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "CoStar Group, Inc. Q2 2026 Earnings Call Summary",
@@ -196,13 +1121,40 @@
       "ts": "2026-04-29T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CSGP Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/csgp/transcripts/656424-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "CSGP Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/csgp/transcripts/566787-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "CSGP Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/csgp/transcripts/393568-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-24T00:00:00+00:00"
+    },
+    {
+      "title": "CSGP Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-costar-group-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:24:42.811334+00:00"
 }

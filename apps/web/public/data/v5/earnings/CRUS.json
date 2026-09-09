@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRUS",
   "earnings_history": [
     {
@@ -153,7 +153,453 @@
       "surprise_pct": 40.94
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crus/transcripts/537648-q4-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 31,
+        "scored_turn_count": 31,
+        "overall_sentiment": 0.358748,
+        "prepared_sentiment": 0.314948,
+        "qa_sentiment": 0.363441,
+        "qa_tone_shift": 0.048494,
+        "uncertainty_turn_rate": 0.096774,
+        "forward_looking_turn_rate": 0.451613,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 13,
+            "sentiment": -0.141809
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": -0.034955
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.141913
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.149262
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.667662
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.413666
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.897806,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Thank you and good afternoon.",
+          "role": "Joining me on today's call is John Forsyth, Cirrus Logic's Chief Executive Officer, and Jeff Woolard, our Chief Financial Officer.",
+          "section": "prepared",
+          "sentiment": 0.920254,
+          "word_count": 232,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "prepared",
+          "sentiment": -0.873217,
+          "word_count": 1110,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Jeff Woolard",
+          "role": "CFO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": -0.413666,
+          "word_count": 784,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Chelsea Heffernan",
+          "role": "VP of Investor Relations, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.907268,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887011,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Yash Shah",
+          "role": "Analyst, Susquehanna",
+          "section": "qa",
+          "sentiment": 0.874985,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": -0.691941,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Yash Shah",
+          "role": "Analyst, Susquehanna",
+          "section": "qa",
+          "sentiment": 0.805724,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": -0.462107,
+          "word_count": 511,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894836,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Tom O'Malley",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.832281,
+          "word_count": 109,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.684568,
+          "word_count": 220,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Tom O'Malley",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.793598,
+          "word_count": 97,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.487611,
+          "word_count": 158,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899216,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Wei Mok",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.078711,
+          "word_count": 95,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": -0.784555,
+          "word_count": 228,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Wei Mok",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.501568,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.488721,
+          "word_count": 242,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888131,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Tore Svanberg",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.637003,
+          "word_count": 121,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.015752,
+          "word_count": 299,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tore Svanberg",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.594398,
+          "word_count": 95,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.476846,
+          "word_count": 259,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Jeff Woolard",
+          "role": "CFO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.788358,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Jeff Woolard",
+          "role": "CFO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": -0.838594,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Tore Svanberg",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": -0.247537,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Chelsea Heffernan",
+          "role": "VP of Investor Relations, Cirrus Logic",
+          "section": "qa",
+          "sentiment": 0.885836,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "John Forsyth",
+          "role": "CEO, Cirrus Logic",
+          "section": "qa",
+          "sentiment": -0.726528,
+          "word_count": 113,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918862,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5319,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Cirrus Logic (CRUS) Q1 2027 Earnings Call Transcript",
@@ -196,13 +642,40 @@
       "ts": "2026-08-05T07:00:00+00:00",
       "source": "MarketBeat",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CRUS Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/crus/transcripts/661660-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "CRUS Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/crus/transcripts/537648-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "CRUS Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/crus/transcripts/410041-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-03T00:00:00+00:00"
+    },
+    {
+      "title": "CRUS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-cirrus-logic-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:24:19.442385+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRK",
   "earnings_history": [
     {
@@ -153,7 +153,573 @@
       "surprise_pct": -601.25
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crk/transcripts/661523-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 43,
+        "scored_turn_count": 43,
+        "overall_sentiment": 0.570557,
+        "prepared_sentiment": 0.118506,
+        "qa_sentiment": 0.616921,
+        "qa_tone_shift": 0.498415,
+        "uncertainty_turn_rate": 0.162791,
+        "forward_looking_turn_rate": 0.27907,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 13,
+            "sentiment": 0.504839
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.426706
+          },
+          {
+            "topic": "Demand",
+            "mentions": 6,
+            "sentiment": 0.496313
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.181126
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.911989,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "prepared",
+          "sentiment": 0.48033,
+          "word_count": 651,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Roland Burns",
+          "role": "President and CFO, Comstock Resources",
+          "section": "prepared",
+          "sentiment": -0.674246,
+          "word_count": 2545,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "prepared",
+          "sentiment": -0.244048,
+          "word_count": 191,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91144,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": -0.496072,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": 0.707356,
+          "word_count": 839,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.858882,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.664955,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.75941,
+          "word_count": 251,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.665945,
+          "word_count": 299,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.759676,
+          "word_count": 383,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.813141,
+          "word_count": 125,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": -0.271902,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Kevin McCurdy",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.631744,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ron Mills",
+          "role": "VP of Finance and Investor Relations, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.127332,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Kevin McCurdy",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.681113,
+          "word_count": 158,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.817003,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jacob Roberts",
+          "role": "Analyst, TPH&Co",
+          "section": "qa",
+          "sentiment": 0.843368,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jacob Roberts",
+          "role": "Analyst, TPH&Co",
+          "section": "qa",
+          "sentiment": 0.822749,
+          "word_count": 222,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.730569,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Jacob Roberts",
+          "role": "Analyst, TPH&Co",
+          "section": "qa",
+          "sentiment": 0.567653,
+          "word_count": 186,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.770704,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Jacob Roberts",
+          "role": "Analyst, TPH&Co",
+          "section": "qa",
+          "sentiment": -0.130378,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Noel Parks",
+          "role": "Analyst, Tuohy Brothers Investment Research",
+          "section": "qa",
+          "sentiment": 0.791404,
+          "word_count": 227,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.799911,
+          "word_count": 166,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Noel Parks",
+          "role": "Analyst, Tuohy Brothers Investment Research",
+          "section": "qa",
+          "sentiment": 0.83347,
+          "word_count": 477,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.83507,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Carlos Escalante",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": 0.80337,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.887614,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Carlos Escalante",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": 0.654517,
+          "word_count": 338,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Carlos Escalante",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": 0.83903,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Roland Burns",
+          "role": "President and CFO, Comstock Resources",
+          "section": "qa",
+          "sentiment": -0.122427,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Carlos Escalante",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": 0.839814,
+          "word_count": 118,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Roland Burns",
+          "role": "President and CFO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.799189,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Carlos Escalante",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": 0.088084,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.737294,
+          "word_count": 321,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Carlos Escalante",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": 0.540483,
+          "word_count": 85,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Roland Burns",
+          "role": "President and CFO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.231741,
+          "word_count": 162,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.888368,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913663,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Jay Allison",
+          "role": "Chairman and CEO, Comstock Resources",
+          "section": "qa",
+          "sentiment": 0.561851,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902792,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8836,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Comstock Resources (CRK) Q2 2026 Earnings Call Transcript",
@@ -196,13 +762,40 @@
       "ts": "2026-07-30T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CRK Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crk/transcripts/661523-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "CRK Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/crk/transcripts/555995-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "CRK Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/crk/transcripts/409946-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "CRK Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-comstock-resources-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:23:59.136591+00:00"
 }

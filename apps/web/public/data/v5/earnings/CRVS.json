@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRVS",
   "earnings_history": [
     {
@@ -153,7 +153,514 @@
       "surprise_pct": -51.72
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crvs/transcripts/662596-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 40,
+        "scored_turn_count": 40,
+        "overall_sentiment": 0.611518,
+        "prepared_sentiment": 0.346068,
+        "qa_sentiment": 0.641012,
+        "qa_tone_shift": 0.294944,
+        "uncertainty_turn_rate": 0.025,
+        "forward_looking_turn_rate": 0.175,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 5,
+            "sentiment": 0.313425
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.32762
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.845711
+          },
+          {
+            "topic": "Demand",
+            "mentions": 1,
+            "sentiment": -0.423892
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 1,
+            "sentiment": 0.004017
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.888835,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Zack Kubow",
+          "role": "Senior Group Director, Investor Relations, Real Chemistry",
+          "section": "prepared",
+          "sentiment": 0.915312,
+          "word_count": 197,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Leiv Lea",
+          "role": "CFO, Corvus Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.004017,
+          "word_count": 300,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.423892,
+          "word_count": 2345,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909665,
+          "word_count": 86,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Jeff Jones",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.818864,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Jeff Jones",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.771919,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.764719,
+          "word_count": 161,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Jeff Jones",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.806408,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.563671,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Jeff Jones",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": -0.667558,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90925,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Salim Syed",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.833318,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.877444,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Salim Syed",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": -0.634443,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906228,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Erik Wong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.688263,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "I have a quick question.",
+          "role": "Are you able to use the Angel partner data as part of the safety database for further FDA filings?",
+          "section": "qa",
+          "sentiment": 0.649461,
+          "word_count": 39,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.642032,
+          "word_count": 211,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Erik Wong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.608924,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904171,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Cha Cha Yang",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.829722,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.715423,
+          "word_count": 252,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Cha Cha Yang",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.877188,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.814929,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.845711,
+          "word_count": 112,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.774891,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.695509,
+          "word_count": 158,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902681,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Kevin DeGeeter",
+          "role": "Analyst, Ladenburg",
+          "section": "qa",
+          "sentiment": 0.748231,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.890989,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.73666,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Kevin DeGeeter",
+          "role": "Analyst, Ladenburg",
+          "section": "qa",
+          "sentiment": 0.878779,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.798791,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Kevin DeGeeter",
+          "role": "Analyst, Ladenburg",
+          "section": "qa",
+          "sentiment": 0.768665,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.804085,
+          "word_count": 126,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Kevin DeGeeter",
+          "role": "Analyst, Ladenburg",
+          "section": "qa",
+          "sentiment": -0.164136,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90987,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Richard Miller",
+          "role": "President and CEO, Corvus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.203109,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910855,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5078,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Corvus Pharmaceuticals (CRVS) Q2 2026 Earnings Call Transcript",
@@ -196,13 +703,40 @@
       "ts": "2026-08-06T07:00:00+00:00",
       "source": "MarketBeat",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CRVS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crvs/transcripts/662596-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "CRVS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/crvs/transcripts/412087-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-12T00:00:00+00:00"
+    },
+    {
+      "title": "CRVS Earnings Call: Q3 2025",
+      "url": "https://stockanalysis.com/stocks/crvs/transcripts/372503-q3-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-11-04T00:00:00+00:00"
+    },
+    {
+      "title": "CRVS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-corvus-pharmaceuticals-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:25:55.521153+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRSR",
   "earnings_history": [
     {
@@ -153,7 +153,382 @@
       "surprise_pct": 95.38
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crsr/transcripts/662750-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 25,
+        "scored_turn_count": 25,
+        "overall_sentiment": 0.21022,
+        "prepared_sentiment": 0.129211,
+        "qa_sentiment": 0.230472,
+        "qa_tone_shift": 0.101261,
+        "uncertainty_turn_rate": 0.16,
+        "forward_looking_turn_rate": 0.36,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": -0.026644
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.008378
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.272751
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.190711
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": -0.645594
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.849114
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.849114
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905849,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "David Pasquale",
+          "role": "Investor Relations, Corsair Gaming",
+          "section": "prepared",
+          "sentiment": 0.542167,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Thank you for joining us today.",
+          "role": "With me on the call are Thi La, our Chief Executive Officer, and Gordon Mattingly, our Chief Financial Officer.",
+          "section": "prepared",
+          "sentiment": 0.896269,
+          "word_count": 183,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Thi La",
+          "role": "CEO, Corsair Gaming",
+          "section": "prepared",
+          "sentiment": -0.912269,
+          "word_count": 867,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Gordon Mattingly",
+          "role": "CFO, Corsair Gaming",
+          "section": "prepared",
+          "sentiment": -0.78596,
+          "word_count": 1018,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910113,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Aaron Lee",
+          "role": "Analyst, Macquarie",
+          "section": "qa",
+          "sentiment": -0.692428,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 7,
+          "speaker": "Gordon Mattingly",
+          "role": "CFO, Corsair Gaming",
+          "section": "qa",
+          "sentiment": -0.458393,
+          "word_count": 103,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Aaron Lee",
+          "role": "Analyst, Macquarie",
+          "section": "qa",
+          "sentiment": 0.708635,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Thi La",
+          "role": "CEO, Corsair Gaming",
+          "section": "qa",
+          "sentiment": 0.494054,
+          "word_count": 161,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Aaron Lee",
+          "role": "Analyst, Macquarie",
+          "section": "qa",
+          "sentiment": -0.80729,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909999,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Drew Crum",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.786702,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Gordon Mattingly",
+          "role": "CFO, Corsair Gaming",
+          "section": "qa",
+          "sentiment": 0.119532,
+          "word_count": 177,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Drew Crum",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.275136,
+          "word_count": 43,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Gordon Mattingly",
+          "role": "CFO, Corsair Gaming",
+          "section": "qa",
+          "sentiment": 0.537976,
+          "word_count": 117,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 16,
+          "speaker": "Thi La",
+          "role": "CEO, Corsair Gaming",
+          "section": "qa",
+          "sentiment": -0.883434,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Drew Crum",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": -0.066092,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902172,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Colin Loyet",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.822214,
+          "word_count": 81,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Thi La",
+          "role": "CEO, Corsair Gaming",
+          "section": "qa",
+          "sentiment": 0.113173,
+          "word_count": 293,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Colin Loyet",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.358955,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889052,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Thi La",
+          "role": "CEO, Corsair Gaming",
+          "section": "qa",
+          "sentiment": -0.500809,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908081,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3728,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Corsair (CRSR) Q2 2026 Earnings Call Transcript",
@@ -196,13 +571,40 @@
       "ts": "2026-08-07T00:10:04+00:00",
       "source": "MarketBeat",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CRSR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crsr/transcripts/662750-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "CRSR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/crsr/transcripts/556167-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "CRSR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/crsr/transcripts/402218-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "CRSR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-corsair-gaming-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:24:12.734951+00:00"
 }

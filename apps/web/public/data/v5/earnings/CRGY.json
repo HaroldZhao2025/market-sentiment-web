@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRGY",
   "earnings_history": [
     {
@@ -117,7 +117,687 @@
       "surprise_pct": -444.07
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-04T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crgy/transcripts/660799-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 51,
+        "scored_turn_count": 51,
+        "overall_sentiment": 0.340826,
+        "prepared_sentiment": -0.194487,
+        "qa_sentiment": 0.399013,
+        "qa_tone_shift": 0.593499,
+        "uncertainty_turn_rate": 0.058824,
+        "forward_looking_turn_rate": 0.372549,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 17,
+            "sentiment": -0.044762
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 12,
+            "sentiment": -0.300428
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": -0.052818
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.150374
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.423825
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.892173,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Reid Gallagher",
+          "role": "Head of Investor Relations, Crescent Energy",
+          "section": "prepared",
+          "sentiment": 0.902292,
+          "word_count": 159,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "prepared",
+          "sentiment": -0.925646,
+          "word_count": 1043,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "prepared",
+          "sentiment": -0.927709,
+          "word_count": 329,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "prepared",
+          "sentiment": -0.913543,
+          "word_count": 177,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907006,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Neal Dingmann",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.0257,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "qa",
+          "sentiment": -0.883284,
+          "word_count": 238,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Neal Dingmann",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.778311,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "qa",
+          "sentiment": -0.745371,
+          "word_count": 75,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879104,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Michael Furrow",
+          "role": "VP of Research, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.221796,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.00647,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Michael Furrow",
+          "role": "VP of Research, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.567715,
+          "word_count": 467,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Michael Furrow",
+          "role": "VP of Research, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.411639,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895905,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.767026,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.011999,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.700373,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Clay Rynd",
+          "role": "EVP of Investments, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.483831,
+          "word_count": 159,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886402,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "John Freeman",
+          "role": "Managing Director, Raymond James",
+          "section": "qa",
+          "sentiment": 0.654923,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.037146,
+          "word_count": 26,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "John Freeman",
+          "role": "Managing Director, Raymond James",
+          "section": "qa",
+          "sentiment": 0.874348,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Clay Rynd",
+          "role": "EVP of Investments, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.25224,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "John Freeman",
+          "role": "Managing Director, Raymond James",
+          "section": "qa",
+          "sentiment": 0.324139,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890441,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Oliver Huang",
+          "role": "Analyst, TPH Research",
+          "section": "qa",
+          "sentiment": -0.605683,
+          "word_count": 80,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.002495,
+          "word_count": 91,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Oliver Huang",
+          "role": "Analyst, TPH Research",
+          "section": "qa",
+          "sentiment": 0.871855,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "qa",
+          "sentiment": -0.12691,
+          "word_count": 367,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88703,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.802485,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Clay Rynd",
+          "role": "EVP of Investments, Crescent Energy",
+          "section": "qa",
+          "sentiment": -0.078933,
+          "word_count": 213,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.858839,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "qa",
+          "sentiment": -0.406385,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "qa",
+          "sentiment": -0.641817,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.529182,
+          "word_count": 428,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889573,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "John Abbott",
+          "role": "VP of E&P Research, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.807858,
+          "word_count": 365,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "John Abbott",
+          "role": "VP of E&P Research, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.814502,
+          "word_count": 35,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.346994,
+          "word_count": 156,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "John Abbott",
+          "role": "VP of E&P Research, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.468237,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89441,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Michael Scialla",
+          "role": "Managing Director, Stephens",
+          "section": "qa",
+          "sentiment": 0.454558,
+          "word_count": 69,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Brandi Kendall",
+          "role": "CFO, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.513206,
+          "word_count": 58,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Michael Scialla",
+          "role": "Managing Director, Stephens",
+          "section": "qa",
+          "sentiment": 0.540341,
+          "word_count": 209,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "qa",
+          "sentiment": 0.620885,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891625,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "David Rockecharlie",
+          "role": "CEO, Crescent Energy",
+          "section": "qa",
+          "sentiment": -0.824011,
+          "word_count": 98,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89638,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6471,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From Crescent Energy’s Q2 Earnings Call",
@@ -160,13 +840,40 @@
       "ts": "2026-08-05T13:07:00+00:00",
       "source": "Zacks",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CRGY Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crgy/transcripts/660799-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "CRGY Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/crgy/transcripts/571950-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "CRGY Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/crgy/transcripts/395875-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "CRGY Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-crescent-energy-company-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:23:43.706273+00:00"
 }

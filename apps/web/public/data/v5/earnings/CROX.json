@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CROX",
   "earnings_history": [
     {
@@ -153,7 +153,605 @@
       "surprise_pct": 33.58
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crox/transcripts/658057-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 43,
+        "scored_turn_count": 43,
+        "overall_sentiment": 0.263845,
+        "prepared_sentiment": 0.066051,
+        "qa_sentiment": 0.28987,
+        "qa_tone_shift": 0.223819,
+        "uncertainty_turn_rate": 0.116279,
+        "forward_looking_turn_rate": 0.325581,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": -0.118517
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 9,
+            "sentiment": -0.386116
+          },
+          {
+            "topic": "Demand",
+            "mentions": 6,
+            "sentiment": -0.251319
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": -0.035615
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": 0.182991
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.054772
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.909281
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.913507,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Abigail Ritter",
+          "role": "Senior Manager of Investor Relations, Crocs",
+          "section": "prepared",
+          "sentiment": 0.91665,
+          "word_count": 209,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "prepared",
+          "sentiment": -0.931249,
+          "word_count": 1820,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Turning to collaborations.",
+          "role": "During the quarter, we launched several relevant partnerships, beginning with Bulova, an outdoor lifestyle brand.",
+          "section": "prepared",
+          "sentiment": 0.351704,
+          "word_count": 499,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Patraic Reagan",
+          "role": "EVP and CFO, Crocs",
+          "section": "prepared",
+          "sentiment": -0.920357,
+          "word_count": 1551,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911959,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Jonathan Komp",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.822679,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Patraic Reagan",
+          "role": "EVP and CFO, Crocs",
+          "section": "qa",
+          "sentiment": -0.021104,
+          "word_count": 233,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": 0.026076,
+          "word_count": 168,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Jonathan Komp",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.642715,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": -0.867758,
+          "word_count": 432,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905896,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Adrienne Yih",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.824775,
+          "word_count": 104,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Obviously, this is just Crocs confirming that.",
+          "role": "Number two, what percentage of your marketplace partners is this happening with?",
+          "section": "qa",
+          "sentiment": 0.750176,
+          "word_count": 69,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Patraic Reagan",
+          "role": "EVP and CFO, Crocs",
+          "section": "qa",
+          "sentiment": 0.462653,
+          "word_count": 391,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 15,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": 0.585646,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Adrienne Yih",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.424469,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902339,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Rick Patel",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": -0.487721,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Patraic Reagan",
+          "role": "EVP and CFO, Crocs",
+          "section": "qa",
+          "sentiment": 0.613351,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": -0.858192,
+          "word_count": 345,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885225,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Tom Nikic",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.54558,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": -0.922122,
+          "word_count": 261,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Patraic Reagan",
+          "role": "EVP and CFO, Crocs",
+          "section": "qa",
+          "sentiment": -0.467752,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Tom Nikic",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": -0.812455,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904894,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Brooke Roach",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.48757,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": -0.693774,
+          "word_count": 311,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Brooke Roach",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.578444,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897689,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Kendall Toscano",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.705499,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": 0.577624,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Kendall Toscano",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.026036,
+          "word_count": 43,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Patraic Reagan",
+          "role": "EVP and CFO, Crocs",
+          "section": "qa",
+          "sentiment": 0.439491,
+          "word_count": 240,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893203,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Anna Andreeva",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": -0.188249,
+          "word_count": 157,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": 0.66796,
+          "word_count": 392,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903415,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Aubrey Tianello",
+          "role": "Analyst, BNP Paribas",
+          "section": "qa",
+          "sentiment": 0.67392,
+          "word_count": 76,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Patraic Reagan",
+          "role": "EVP and CFO, Crocs",
+          "section": "qa",
+          "sentiment": -0.876237,
+          "word_count": 213,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Andrew Rees",
+          "role": "CEO, Crocs",
+          "section": "qa",
+          "sentiment": -0.74282,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893969,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8737,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Crocs (CROX) Q2 2026 Earnings Call Transcript",
@@ -196,13 +794,40 @@
       "ts": "2026-07-30T16:04:21+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CROX Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crox/transcripts/658057-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "CROX Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/crox/transcripts/555829-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "CROX Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/crox/transcripts/405852-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "CROX Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-crocs-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:24:07.397298+00:00"
 }

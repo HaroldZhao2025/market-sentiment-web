@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRCL",
   "earnings_history": [
     {
@@ -39,7 +39,448 @@
       "surprise_pct": 813.92
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crcl/transcripts/665890-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 30,
+        "scored_turn_count": 30,
+        "overall_sentiment": 0.60303,
+        "prepared_sentiment": -0.063466,
+        "qa_sentiment": 0.650637,
+        "qa_tone_shift": 0.714103,
+        "uncertainty_turn_rate": 0.033333,
+        "forward_looking_turn_rate": 0.366667,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": 0.503793
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 6,
+            "sentiment": 0.452913
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.365893
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": 0.318813
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": 0.344757
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": 0.317654
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.406182
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "prepared",
+          "sentiment": 0.186526,
+          "word_count": 2672,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Jeremy Fox-Geen",
+          "role": "CFO, Circle",
+          "section": "prepared",
+          "sentiment": -0.313459,
+          "word_count": 1232,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 2,
+          "speaker": "Thanks, Jeremy.",
+          "role": "We're starting Q&A again with a few questions we collected from analysts on the Say platform.",
+          "section": "qa",
+          "sentiment": 0.867123,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "qa",
+          "sentiment": 0.743731,
+          "word_count": 374,
+          "topic_hits": [
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Jeremy Fox-Geen",
+          "role": "CFO, Circle",
+          "section": "qa",
+          "sentiment": 0.288288,
+          "word_count": 203,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "qa",
+          "sentiment": -0.749022,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "There are multiple pieces to this.",
+          "role": "There's the partnerships that we build around infrastructure that supports our stablecoin network expansion.",
+          "section": "qa",
+          "sentiment": 0.553752,
+          "word_count": 308,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Jeremy Fox-Geen",
+          "role": "CFO, Circle",
+          "section": "qa",
+          "sentiment": 0.807265,
+          "word_count": 242,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.863869,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Pete Christiansen",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.508543,
+          "word_count": 163,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "qa",
+          "sentiment": 0.472663,
+          "word_count": 424,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.85519,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ken Suchoski",
+          "role": "Analyst, Autonomous",
+          "section": "qa",
+          "sentiment": 0.821589,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Jeremy Fox-Geen",
+          "role": "CFO, Circle",
+          "section": "qa",
+          "sentiment": 0.714883,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ken Suchoski",
+          "role": "Analyst, Autonomous",
+          "section": "qa",
+          "sentiment": 0.84703,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "qa",
+          "sentiment": 0.762231,
+          "word_count": 316,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Jeremy Fox-Geen",
+          "role": "CFO, Circle",
+          "section": "qa",
+          "sentiment": 0.913814,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Ken Suchoski",
+          "role": "Analyst, Autonomous",
+          "section": "qa",
+          "sentiment": 0.738065,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "qa",
+          "sentiment": 0.430989,
+          "word_count": 302,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Jeremy Fox-Geen",
+          "role": "CFO, Circle",
+          "section": "qa",
+          "sentiment": 0.636483,
+          "word_count": 164,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894406,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Owen Lau",
+          "role": "Analyst, Clear Street",
+          "section": "qa",
+          "sentiment": 0.827922,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Owen Lau",
+          "role": "Analyst, Clear Street",
+          "section": "qa",
+          "sentiment": 0.306054,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "qa",
+          "sentiment": 0.658704,
+          "word_count": 524,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896804,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Ken Worthington",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.486828,
+          "word_count": 86,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Jeremy Fox-Geen",
+          "role": "CFO, Circle",
+          "section": "qa",
+          "sentiment": 0.850719,
+          "word_count": 251,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.880506,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "John Todaro",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.600561,
+          "word_count": 83,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Jeremy Allaire",
+          "role": "Co-Founder, Chairman, and CEO, Circle",
+          "section": "qa",
+          "sentiment": 0.738844,
+          "word_count": 423,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 8345,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Circle (CRCL) Q2 2026 Earnings Call Transcript",
@@ -75,13 +516,40 @@
       "ts": "2026-07-30T22:04:06+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CRCL Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crcl/transcripts/665890-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "CRCL Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/crcl/transcripts/568445-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-11T00:00:00+00:00"
+    },
+    {
+      "title": "CRCL Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/crcl/transcripts/398046-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "CRCL Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-circle-internet-group-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:25:13.380310+00:00"
 }

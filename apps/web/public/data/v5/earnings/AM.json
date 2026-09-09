@@ -153,7 +153,284 @@
       "surprise_pct": 2.53
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-04-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/am/transcripts/556007-q1-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 20,
+        "scored_turn_count": 20,
+        "overall_sentiment": 0.579241,
+        "prepared_sentiment": -0.01845,
+        "qa_sentiment": 0.728664,
+        "qa_tone_shift": 0.747114,
+        "uncertainty_turn_rate": 0.05,
+        "forward_looking_turn_rate": 0.15,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.176053
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 2,
+            "sentiment": -0.882721
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.882721
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 1,
+            "sentiment": -0.855135
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.776129,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Dan Katzenberg",
+          "role": "VP of Investor Relations, Antero Midstream",
+          "section": "prepared",
+          "sentiment": 0.915513,
+          "word_count": 123,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Michael Kennedy",
+          "role": "CEO and President, Antero Midstream",
+          "section": "prepared",
+          "sentiment": -0.855135,
+          "word_count": 386,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Justin Agnew",
+          "role": "CFO, Antero Midstream",
+          "section": "prepared",
+          "sentiment": -0.910308,
+          "word_count": 291,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915436,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "John Mackay",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.87111,
+          "word_count": 106,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Michael Kennedy",
+          "role": "CEO and President, Antero Midstream",
+          "section": "qa",
+          "sentiment": 0.714469,
+          "word_count": 134,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "John Mackay",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.848048,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Michael Kennedy",
+          "role": "CEO and President, Antero Midstream",
+          "section": "qa",
+          "sentiment": 0.885154,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "John Mackay",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.778103,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Michael Kennedy",
+          "role": "CEO and President, Antero Midstream",
+          "section": "qa",
+          "sentiment": 0.55989,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "John Mackay",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.650143,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.860218,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Ivan Scotto",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.842495,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Michael Kennedy",
+          "role": "CEO and President, Antero Midstream",
+          "section": "qa",
+          "sentiment": 0.678058,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ivan Scotto",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.823815,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Michael Kennedy",
+          "role": "CEO and President, Antero Midstream",
+          "section": "qa",
+          "sentiment": 0.190121,
+          "word_count": 140,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.876299,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Dan Katzenberg",
+          "role": "VP of Investor Relations, Antero Midstream",
+          "section": "qa",
+          "sentiment": 0.257327,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907933,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 1771,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "AM Earnings Call: Q2 2026",
@@ -208,5 +485,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-09T01:16:02.647738+00:00"
+  "updated_at_utc": "2026-09-09T23:29:35.712492+00:00"
 }

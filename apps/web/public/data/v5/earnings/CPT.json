@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CPT",
   "earnings_history": [
     {
@@ -153,7 +153,978 @@
       "surprise_pct": 20.75
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-31T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cpt/transcripts/659238-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 75,
+        "scored_turn_count": 75,
+        "overall_sentiment": 0.451167,
+        "prepared_sentiment": -0.259415,
+        "qa_sentiment": 0.4912,
+        "qa_tone_shift": 0.750614,
+        "uncertainty_turn_rate": 0.04,
+        "forward_looking_turn_rate": 0.32,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 20,
+            "sentiment": 0.251157
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 14,
+            "sentiment": 0.004389
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 8,
+            "sentiment": 0.08035
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.320504
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.747928
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.67364
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.065423
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Kim Callahan",
+          "role": "SVP of Investor Relations, Camden Property Trust",
+          "section": "prepared",
+          "sentiment": 0.914432,
+          "word_count": 318,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 1,
+          "speaker": "Ric Campo",
+          "role": "Executive Chairman, Camden Property Trust",
+          "section": "prepared",
+          "sentiment": -0.71946,
+          "word_count": 467,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "prepared",
+          "sentiment": -0.62782,
+          "word_count": 802,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Laurie Baker",
+          "role": "President and COO, Camden Property Trust",
+          "section": "prepared",
+          "sentiment": -0.604811,
+          "word_count": 374,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Ben Fraker",
+          "role": "CFO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.887021,
+          "word_count": 1005,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898821,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Eric Wolfe",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.680294,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.198681,
+          "word_count": 290,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907347,
+          "word_count": 63,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.628849,
+          "word_count": 103,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89495,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Haendel St. Juste",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.850015,
+          "word_count": 72,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ric Campo",
+          "role": "Executive Chairman, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.775454,
+          "word_count": 416,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.570568,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896421,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Brad Heffern",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.263785,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.266115,
+          "word_count": 164,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894409,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Steve Sakwa",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": -0.668876,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.136917,
+          "word_count": 115,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891721,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Jana Galan",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.904598,
+          "word_count": 26,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Ben Fraker",
+          "role": "CFO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.745062,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891432,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.807903,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.529245,
+          "word_count": 126,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ric Campo",
+          "role": "Executive Chairman, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.065423,
+          "word_count": 291,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893312,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Wes Golladay",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.742043,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Laurie Baker",
+          "role": "President and COO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.465226,
+          "word_count": 333,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894493,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "John Kim",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.668516,
+          "word_count": 58,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.827341,
+          "word_count": 354,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "We are very bullish about it.",
+          "role": "Every Senior Vice President in this company meets once a month to discuss the AI initiatives coming out of each of their departments.",
+          "section": "qa",
+          "sentiment": 0.374362,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.883518,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.314871,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897485,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Adam Kramer",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.825468,
+          "word_count": 94,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 38,
+          "speaker": "Ben Fraker",
+          "role": "CFO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.479685,
+          "word_count": 166,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 39,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.016363,
+          "word_count": 347,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Laurie Baker",
+          "role": "President and COO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.919351,
+          "word_count": 118,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896568,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Austin Wurschmidt",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.84741,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.758358,
+          "word_count": 176,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886939,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Alexander Goldfarb",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.419414,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.780986,
+          "word_count": 266,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89437,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Rich Hightower",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": -0.723444,
+          "word_count": 72,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Laurie Baker",
+          "role": "President and COO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.925644,
+          "word_count": 184,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895252,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Peter Abramowitz",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.324788,
+          "word_count": 53,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.805829,
+          "word_count": 289,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899444,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Julien Blouin",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.625236,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Ben Fraker",
+          "role": "CFO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.783764,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.734411,
+          "word_count": 72,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892105,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "John Pawlowski",
+          "role": "Analyst, Green Street",
+          "section": "qa",
+          "sentiment": 0.843622,
+          "word_count": 75,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.831149,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Stanley Jones",
+          "role": "SVP of Real Estate Investments, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.696387,
+          "word_count": 208,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.573038,
+          "word_count": 80,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898515,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Alex Kim",
+          "role": "Analyst, Zelman & Associates",
+          "section": "qa",
+          "sentiment": 0.835029,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.621514,
+          "word_count": 252,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 65,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900294,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Eric Wolfe",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.69706,
+          "word_count": 81,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 67,
+          "speaker": "Laurie Baker",
+          "role": "President and COO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.174223,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Eric Wolfe",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.860924,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.740821,
+          "word_count": 150,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Ric Campo",
+          "role": "Executive Chairman, Camden Property Trust",
+          "section": "qa",
+          "sentiment": -0.623175,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Ric Campo",
+          "role": "Executive Chairman, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.74084,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 72,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898891,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 73,
+          "speaker": "Alex Jessett",
+          "role": "CEO, Camden Property Trust",
+          "section": "qa",
+          "sentiment": 0.645471,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913034,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 10128,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Camden Property Trust (CPT) Q2 2026 Earnings Call Transcript",
@@ -196,13 +1167,40 @@
       "ts": "2026-07-31T07:00:00+00:00",
       "source": "MarketBeat",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CPT Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cpt/transcripts/659238-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-31T00:00:00+00:00"
+    },
+    {
+      "title": "CPT Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cpt/transcripts/553183-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-01T00:00:00+00:00"
+    },
+    {
+      "title": "CPT Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cpt/transcripts/413807-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-06T00:00:00+00:00"
+    },
+    {
+      "title": "CPT Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-camden-property-trust-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:23:13.366279+00:00"
 }

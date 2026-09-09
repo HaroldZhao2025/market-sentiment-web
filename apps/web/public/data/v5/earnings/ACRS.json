@@ -153,7 +153,675 @@
       "surprise_pct": 11.5
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2023-05-08T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/acrs/transcripts/56219-q1-2023/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 54,
+        "scored_turn_count": 54,
+        "overall_sentiment": 0.604743,
+        "prepared_sentiment": 0.164745,
+        "qa_sentiment": 0.659742,
+        "qa_tone_shift": 0.494997,
+        "uncertainty_turn_rate": 0.092593,
+        "forward_looking_turn_rate": 0.166667,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.469428
+          },
+          {
+            "topic": "Demand",
+            "mentions": 1,
+            "sentiment": -0.55631
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.55631
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.55631
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 1,
+            "sentiment": -0.275489
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.089042
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.902809,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Thank you.",
+          "role": "I am Robert Doody, Head of Investor Relations for Aclaris.",
+          "section": "prepared",
+          "sentiment": 0.909392,
+          "word_count": 336,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "prepared",
+          "sentiment": -0.55631,
+          "word_count": 2360,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Joseph Monahan",
+          "role": "Chief Scientific Officer, Aclaris Therapeutics",
+          "section": "prepared",
+          "sentiment": 0.624833,
+          "word_count": 1136,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Kevin Balthaser",
+          "role": "CFO, Aclaris Therapeutics",
+          "section": "prepared",
+          "sentiment": -0.275489,
+          "word_count": 319,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "prepared",
+          "sentiment": -0.616764,
+          "word_count": 278,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910969,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Louise Chen",
+          "role": "Managing Director and Senior Equity Research Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.810737,
+          "word_count": 162,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.521883,
+          "word_count": 596,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.876952,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Corinne Jenkins",
+          "role": "VP of Global Investment Research, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.795258,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.692067,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.750358,
+          "word_count": 83,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.776648,
+          "word_count": 181,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Corinne Jenkins",
+          "role": "VP of Global Investment Research, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.72514,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.701273,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Joseph Monahan",
+          "role": "Chief Scientific Officer, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.098462,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Corinne Jenkins",
+          "role": "VP of Global Investment Research, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.229062,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.9044,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Thomas Smith",
+          "role": "Managing Director and Senior Research Analyst, SVB Securities",
+          "section": "qa",
+          "sentiment": 0.848032,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.823484,
+          "word_count": 226,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Thomas Smith",
+          "role": "Managing Director and Senior Research Analyst, SVB Securities",
+          "section": "qa",
+          "sentiment": 0.871916,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.722553,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Thomas Smith",
+          "role": "Managing Director and Senior Research Analyst, SVB Securities",
+          "section": "qa",
+          "sentiment": 0.477797,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.865997,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Alex Thompson",
+          "role": "Managing Director and Senior Equity Research Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.827612,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.816266,
+          "word_count": 339,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Joseph Monahan",
+          "role": "Chief Scientific Officer, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.386557,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.672413,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89288,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Roger Song",
+          "role": "Senior Equity Research Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.819988,
+          "word_count": 121,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.762228,
+          "word_count": 277,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Roger Song",
+          "role": "Senior Equity Research Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.860936,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.894367,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Joseph Monahan",
+          "role": "Chief Scientific Officer, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.823025,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.706481,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895994,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Dilesh Patel",
+          "role": "Equity Research Analyst, HC Wainwright",
+          "section": "qa",
+          "sentiment": 0.853746,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.365654,
+          "word_count": 184,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Dilesh Patel",
+          "role": "Equity Research Analyst, HC Wainwright",
+          "section": "qa",
+          "sentiment": 0.338205,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": -0.089042,
+          "word_count": 169,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.137585,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Dilesh Patel",
+          "role": "Equity Research Analyst, HC Wainwright",
+          "section": "qa",
+          "sentiment": -0.504985,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884441,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Julian Harrison",
+          "role": "Managing Director and Biotechnology Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.858244,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.681462,
+          "word_count": 218,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889289,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Lachlan Hanbury-Brown",
+          "role": "Senior Equity Research Associate, William Blair",
+          "section": "qa",
+          "sentiment": 0.807661,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": 0.893649,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Lachlan Hanbury-Brown",
+          "role": "Senior Equity Research Associate, William Blair",
+          "section": "qa",
+          "sentiment": 0.845875,
+          "word_count": 226,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Lachlan Hanbury-Brown",
+          "role": "Senior Equity Research Associate, William Blair",
+          "section": "qa",
+          "sentiment": 0.652051,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895604,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Douglas Manion",
+          "role": "CEO, Aclaris Therapeutics",
+          "section": "qa",
+          "sentiment": -0.523901,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.920355,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8809,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "ACRS Earnings Call: Q1 2024",
@@ -183,5 +851,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-09T01:14:26.107772+00:00"
+  "updated_at_utc": "2026-09-09T23:26:40.291055+00:00"
 }

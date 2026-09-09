@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRMD",
   "earnings_history": [
     {
@@ -153,7 +153,392 @@
       "surprise_pct": 13.73
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-13T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crmd/transcripts/669135-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 27,
+        "scored_turn_count": 27,
+        "overall_sentiment": 0.425869,
+        "prepared_sentiment": -0.228136,
+        "qa_sentiment": 0.612728,
+        "qa_tone_shift": 0.840863,
+        "uncertainty_turn_rate": 0.185185,
+        "forward_looking_turn_rate": 0.481481,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": 0.148268
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": -0.112848
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.405249
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": -0.224708
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906374,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Dan Ferry",
+          "role": "Managing Director, LifeSci Advisors",
+          "section": "prepared",
+          "sentiment": 0.909185,
+          "word_count": 318,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "prepared",
+          "sentiment": -0.820862,
+          "word_count": 728,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 3,
+          "speaker": "Liz Hurlburt",
+          "role": "EVP and Chief Operating and Commercial Officer, CorMedix",
+          "section": "prepared",
+          "sentiment": -0.87358,
+          "word_count": 533,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Susan Blum",
+          "role": "EVP and CFO, CorMedix",
+          "section": "prepared",
+          "sentiment": -0.584181,
+          "word_count": 723,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "prepared",
+          "sentiment": -0.90575,
+          "word_count": 179,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.841256,
+          "word_count": 157,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.747742,
+          "word_count": 132,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.481973,
+          "word_count": 60,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89803,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Leonid Timashev",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.153292,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.43784,
+          "word_count": 187,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870487,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Jason Butler",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.801067,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.480645,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "We're taking that one day by day.",
+          "role": "On REZZAYO Prophy, the full data set is not yet out, so we really haven't been able to conduct a robust market research.",
+          "section": "qa",
+          "sentiment": 0.725263,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887718,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Serge Belanger",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.332194,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.812585,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900125,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Brandon Folkes",
+          "role": "Analyst, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": 0.789697,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Joe Todisco",
+          "role": "Chairman and CEO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.565942,
+          "word_count": 39,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Susan Blum",
+          "role": "EVP and CFO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.245897,
+          "word_count": 120,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Brandon Folkes",
+          "role": "Analyst, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": 0.827919,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Susan Blum",
+          "role": "EVP and CFO, CorMedix",
+          "section": "qa",
+          "sentiment": 0.861738,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Brandon Folkes",
+          "role": "Analyst, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": -0.396725,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909179,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3920,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "CorMedix (CRMD) Q2 2026 Earnings Call: Revenue Hits $101.9M, EBITDA Guidance Raised - TradingKey",
@@ -196,13 +581,40 @@
       "ts": "2026-08-13T15:06:38+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CRMD Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crmd/transcripts/669135-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-13T00:00:00+00:00"
+    },
+    {
+      "title": "CRMD Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/crmd/transcripts/583626-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-14T00:00:00+00:00"
+    },
+    {
+      "title": "CRMD Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/crmd/transcripts/402751-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-05T00:00:00+00:00"
+    },
+    {
+      "title": "CRMD Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-13-cormedix-inc-stock-1/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-13T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:25:36.205841+00:00"
 }

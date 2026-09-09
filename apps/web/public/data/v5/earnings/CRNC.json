@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRNC",
   "earnings_history": [
     {
@@ -153,7 +153,416 @@
       "surprise_pct": 74.29
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crnc/transcripts/662722-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 28,
+        "scored_turn_count": 28,
+        "overall_sentiment": 0.316322,
+        "prepared_sentiment": -0.14021,
+        "qa_sentiment": 0.415568,
+        "qa_tone_shift": 0.555778,
+        "uncertainty_turn_rate": 0.178571,
+        "forward_looking_turn_rate": 0.357143,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.021171
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 6,
+            "sentiment": 0.000765
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.46686
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 3,
+            "sentiment": -0.30725
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.902653
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.381487
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.90488
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.907201,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Kate Hickman",
+          "role": "VP of Corporate Communications and Investor Relations, Cerence",
+          "section": "prepared",
+          "sentiment": 0.909551,
+          "word_count": 253,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Good afternoon, everyone.",
+          "role": "Before we dig in, I'd like to briefly reflect on Cerence's progress as I approach my two-year anniversary as CEO in October.",
+          "section": "prepared",
+          "sentiment": -0.900425,
+          "word_count": 1758,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 3,
+          "speaker": "Tony Rodriguez",
+          "role": "CFO, Cerence",
+          "section": "prepared",
+          "sentiment": -0.90488,
+          "word_count": 1793,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "prepared",
+          "sentiment": -0.712497,
+          "word_count": 155,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903284,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Mark Delaney",
+          "role": "Managing Director and Senior Equity Research Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.335074,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "qa",
+          "sentiment": 0.594371,
+          "word_count": 390,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Tony Rodriguez",
+          "role": "CFO, Cerence",
+          "section": "qa",
+          "sentiment": -0.381602,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Mark Delaney",
+          "role": "Managing Director and Senior Equity Research Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.761172,
+          "word_count": 85,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "qa",
+          "sentiment": 0.310447,
+          "word_count": 329,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 11,
+          "speaker": "Tony Rodriguez",
+          "role": "CFO, Cerence",
+          "section": "qa",
+          "sentiment": 0.331822,
+          "word_count": 119,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "qa",
+          "sentiment": 0.875738,
+          "word_count": 109,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Mark Delaney",
+          "role": "Managing Director and Senior Equity Research Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.76688,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.817106,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Tony Rodriguez",
+          "role": "CFO, Cerence",
+          "section": "qa",
+          "sentiment": 0.739716,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tony Rodriguez",
+          "role": "CFO, Cerence",
+          "section": "qa",
+          "sentiment": 0.141906,
+          "word_count": 212,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "qa",
+          "sentiment": 0.290371,
+          "word_count": 157,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909428,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Daniel Hibshman",
+          "role": "Associate Analyst, Craig-Hallum Capital Group",
+          "section": "qa",
+          "sentiment": 0.904725,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "qa",
+          "sentiment": 0.883554,
+          "word_count": 445,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Daniel Hibshman",
+          "role": "Associate Analyst, Craig-Hallum Capital Group",
+          "section": "qa",
+          "sentiment": 0.041597,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "qa",
+          "sentiment": -0.025233,
+          "word_count": 127,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tony Rodriguez",
+          "role": "CFO, Cerence",
+          "section": "qa",
+          "sentiment": 0.528187,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Daniel Hibshman",
+          "role": "Associate Analyst, Craig-Hallum Capital Group",
+          "section": "qa",
+          "sentiment": -0.52295,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881025,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Brian Krzanich",
+          "role": "CEO, Cerence",
+          "section": "qa",
+          "sentiment": -0.763366,
+          "word_count": 162,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904951,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6899,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Cerence Host Earnings Call for Third Quarter Fiscal 26 - sekbernews.id",
@@ -196,13 +605,40 @@
       "ts": "2026-08-12T20:27:35+00:00",
       "source": "GuruFocus",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CRNC Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/crnc/transcripts/662722-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "CRNC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/crnc/transcripts/552004-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "CRNC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/crnc/transcripts/421265-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "CRNC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-cerence-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:25:48.321741+00:00"
 }

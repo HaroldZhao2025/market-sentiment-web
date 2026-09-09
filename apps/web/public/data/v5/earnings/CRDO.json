@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CRDO",
   "earnings_history": [
     {
@@ -123,7 +123,645 @@
       "surprise_pct": 340.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-09-01T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/crdo/transcripts/683506-q1-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 47,
+        "scored_turn_count": 47,
+        "overall_sentiment": 0.513896,
+        "prepared_sentiment": 0.12847,
+        "qa_sentiment": 0.549749,
+        "qa_tone_shift": 0.421279,
+        "uncertainty_turn_rate": 0.085106,
+        "forward_looking_turn_rate": 0.234043,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 18,
+            "sentiment": 0.201909
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": 0.229174
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 9,
+            "sentiment": 0.291569
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 3,
+            "sentiment": -0.20735
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.925639
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.925639
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.911544,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Dan O'Neil",
+          "role": "Treasurer and VP of Investor Relations, Credo Technology Group",
+          "section": "prepared",
+          "sentiment": 0.919486,
+          "word_count": 292,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "prepared",
+          "sentiment": -0.391512,
+          "word_count": 1377,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Dan Fleming",
+          "role": "CFO, Credo Technology Group",
+          "section": "prepared",
+          "sentiment": -0.925639,
+          "word_count": 605,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907561,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.028132,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Tore Svanberg",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.804242,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": -0.732908,
+          "word_count": 397,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902312,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Quinn Bolton",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.741898,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.58515,
+          "word_count": 179,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895918,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Tom O'Malley",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.584317,
+          "word_count": 182,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": -0.353465,
+          "word_count": 212,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896625,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Sean O'Loughlin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.566152,
+          "word_count": 93,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Dan Fleming",
+          "role": "CFO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.326392,
+          "word_count": 118,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902857,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Blayne Curtis",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.806638,
+          "word_count": 69,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.735906,
+          "word_count": 321,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.653721,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.846362,
+          "word_count": 391,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898225,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Vivek Arya",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.821022,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": -0.630951,
+          "word_count": 204,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892708,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Sebastien Naji",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.669073,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.866236,
+          "word_count": 723,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Sebastien Naji",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.041485,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890195,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Karl Ackerman",
+          "role": "Analyst, BNP",
+          "section": "qa",
+          "sentiment": -0.66442,
+          "word_count": 36,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.775427,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Karl Ackerman",
+          "role": "Analyst, BNP",
+          "section": "qa",
+          "sentiment": -0.184061,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.656431,
+          "word_count": 224,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893294,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Vijay Rakesh",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.782246,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.667206,
+          "word_count": 435,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897649,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Mark Lipacis",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.689865,
+          "word_count": 102,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.644061,
+          "word_count": 613,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891124,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Suji Desilva",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": 0.6951,
+          "word_count": 108,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": 0.213103,
+          "word_count": 225,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895731,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Christopher Rolland",
+          "role": "Analyst, Susquehanna",
+          "section": "qa",
+          "sentiment": 0.736599,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Bill Brennan",
+          "role": "CEO, Credo Technology Group",
+          "section": "qa",
+          "sentiment": -0.35244,
+          "word_count": 213,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91276,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8334,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Credo Schedules First Quarter Fiscal Year 2027 Financial Results Conference Call",
@@ -166,13 +804,40 @@
       "ts": "2026-06-01T22:03:05+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CRDO Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/crdo/transcripts/683506-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-09-01T00:00:00+00:00"
+    },
+    {
+      "title": "CRDO Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/crdo/transcripts/555786-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-06-01T00:00:00+00:00"
+    },
+    {
+      "title": "CRDO Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/crdo/transcripts/455378-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-02T00:00:00+00:00"
+    },
+    {
+      "title": "CRDO Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-9-1-credo-technology-group-holding-ltd-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-09-01T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-09T23:25:27.287136+00:00"
 }
