@@ -153,7 +153,439 @@
       "surprise_pct": 2.9
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-01-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/vz/transcripts/393614-q4-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 29,
+        "scored_turn_count": 29,
+        "overall_sentiment": 0.435591,
+        "prepared_sentiment": 0.078429,
+        "qa_sentiment": 0.528764,
+        "qa_tone_shift": 0.450336,
+        "uncertainty_turn_rate": 0.206897,
+        "forward_looking_turn_rate": 0.37931,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": 0.188727
+          },
+          {
+            "topic": "Demand",
+            "mentions": 10,
+            "sentiment": 0.047537
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": -0.19744
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 8,
+            "sentiment": 0.03198
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.377223
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.578191
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.90783,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Brady Connor",
+          "role": "Head of Investor Relations, Verizon",
+          "section": "prepared",
+          "sentiment": 0.880574,
+          "word_count": 142,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "prepared",
+          "sentiment": -0.230664,
+          "word_count": 1627,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "prepared",
+          "sentiment": -0.925718,
+          "word_count": 1754,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "prepared",
+          "sentiment": -0.928755,
+          "word_count": 771,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "prepared",
+          "sentiment": 0.767306,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904047,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Michael Ng",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.582484,
+          "word_count": 81,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "qa",
+          "sentiment": 0.567555,
+          "word_count": 594,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Michael Ng",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.566605,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Michael Ng",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.299954,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "qa",
+          "sentiment": 0.323764,
+          "word_count": 181,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "qa",
+          "sentiment": 0.784403,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911131,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ben Swinburne",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.37891,
+          "word_count": 161,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "qa",
+          "sentiment": 0.692798,
+          "word_count": 414,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "qa",
+          "sentiment": 0.319908,
+          "word_count": 348,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "qa",
+          "sentiment": 0.625596,
+          "word_count": 286,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "qa",
+          "sentiment": 0.76614,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91108,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "John Hodulik",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.510515,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "qa",
+          "sentiment": -0.861886,
+          "word_count": 751,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "qa",
+          "sentiment": 0.509376,
+          "word_count": 352,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "qa",
+          "sentiment": 0.779805,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897925,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Michael Rollins",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.427073,
+          "word_count": 153,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Dan Schulman",
+          "role": "CEO, Verizon",
+          "section": "qa",
+          "sentiment": 0.763235,
+          "word_count": 464,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Tony Skiadas",
+          "role": "CFO, Verizon",
+          "section": "qa",
+          "sentiment": 0.718981,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915391,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8629,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "VZ Earnings Call: Q2 2026",
@@ -228,5 +660,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T22:56:46.710862+00:00"
+  "updated_at_utc": "2026-09-09T21:23:50.685538+00:00"
 }

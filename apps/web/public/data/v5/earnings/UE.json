@@ -156,6 +156,484 @@
   "calls": [
     {
       "quarter": null,
+      "date": "2026-02-11T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ue/transcripts/404863-q4-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 35,
+        "scored_turn_count": 35,
+        "overall_sentiment": 0.367646,
+        "prepared_sentiment": 0.069182,
+        "qa_sentiment": 0.406158,
+        "qa_tone_shift": 0.336976,
+        "uncertainty_turn_rate": 0.142857,
+        "forward_looking_turn_rate": 0.257143,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": -0.034737
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.188388
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": 0.138677
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.255182
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.187075
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.696638
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.888282,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Areeba Ahmed",
+          "role": "Investor Relations Associate, Urban Edge Properties",
+          "section": "prepared",
+          "sentiment": 0.906097,
+          "word_count": 164,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Jeff Olson",
+          "role": "Chairman and CEO, Urban Edge Properties",
+          "section": "prepared",
+          "sentiment": -0.821013,
+          "word_count": 1304,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Mark Langer",
+          "role": "CFO, Urban Edge Properties",
+          "section": "prepared",
+          "sentiment": -0.696638,
+          "word_count": 623,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893614,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Ronald Kamdem",
+          "role": "Managing Director and Head of U.S. Real Estate Investment Trusts (REITs) and Commercial Real Estate Research Analyst, REITs",
+          "section": "qa",
+          "sentiment": 0.016021,
+          "word_count": 259,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "Ronald Kamdem",
+          "role": "Managing Director and Head of U.S. Real Estate Investment Trusts (REITs) and Commercial Real Estate Research Analyst, REITs",
+          "section": "qa",
+          "sentiment": 0.771041,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Jeff Olson",
+          "role": "Chairman and CEO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": -0.531058,
+          "word_count": 256,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Ronald Kamdem",
+          "role": "Managing Director and Head of U.S. Real Estate Investment Trusts (REITs) and Commercial Real Estate Research Analyst, REITs",
+          "section": "qa",
+          "sentiment": -0.611735,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Jeff Olson",
+          "role": "Chairman and CEO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": 0.338632,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901086,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Michael Goldsmith",
+          "role": "U.S. REIT Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.465986,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Mark Langer",
+          "role": "CFO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": 0.783556,
+          "word_count": 247,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Michael Goldsmith",
+          "role": "U.S. REIT Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.731526,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Mark Langer",
+          "role": "CFO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": 0.730658,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Michael Goldsmith",
+          "role": "U.S. REIT Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.484376,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90148,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Michael Gorman",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": 0.40168,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Mark Langer",
+          "role": "CFO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": -0.091498,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Michael Gorman",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": 0.656439,
+          "word_count": 429,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Michael Gorman",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": -0.148534,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898638,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Michael Griffin",
+          "role": "Equity Research Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.731148,
+          "word_count": 134,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Michael Griffin",
+          "role": "Equity Research Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.859201,
+          "word_count": 226,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Michael Griffin",
+          "role": "Equity Research Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.065585,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jeff Olson",
+          "role": "Chairman and CEO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": 0.861822,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905455,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Floris Van Dijkum",
+          "role": "Managing Director and Senior REIT Analyst, Ladenburg Thalmann",
+          "section": "qa",
+          "sentiment": 0.543812,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Jeff Olson",
+          "role": "Chairman and CEO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": 0.321025,
+          "word_count": 137,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Floris Van Dijkum",
+          "role": "Managing Director and Senior REIT Analyst, Ladenburg Thalmann",
+          "section": "qa",
+          "sentiment": 0.790846,
+          "word_count": 581,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Jeff Olson",
+          "role": "Chairman and CEO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": -0.54863,
+          "word_count": 43,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Floris Van Dijkum",
+          "role": "Managing Director and Senior REIT Analyst, Ladenburg Thalmann",
+          "section": "qa",
+          "sentiment": -0.315841,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900526,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Jeff Olson",
+          "role": "Chairman and CEO, Urban Edge Properties",
+          "section": "qa",
+          "sentiment": -0.061233,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914024,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5447,
+      "transcript_text_redistributed": false
+    },
+    {
+      "quarter": null,
       "date": "2026-08-20T23:50:14+00:00",
       "source": "Motley Fool",
       "source_url": "https://finance.yahoo.com/m/c8474773-b708-3d19-af95-9b456b02e8e3/co-dx-%28codx%29-q2-2026-earnings.html",
@@ -408,5 +886,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T22:54:27.955565+00:00"
+  "updated_at_utc": "2026-09-09T21:17:10.481402+00:00"
 }

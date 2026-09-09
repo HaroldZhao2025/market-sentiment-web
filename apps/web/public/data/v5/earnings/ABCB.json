@@ -153,7 +153,730 @@
       "surprise_pct": 88.98
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-24T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/abcb/transcripts/654392-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 54,
+        "scored_turn_count": 54,
+        "overall_sentiment": 0.397384,
+        "prepared_sentiment": 0.146919,
+        "qa_sentiment": 0.417421,
+        "qa_tone_shift": 0.270502,
+        "uncertainty_turn_rate": 0.037037,
+        "forward_looking_turn_rate": 0.296296,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": 0.11556
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 12,
+            "sentiment": 0.163747
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.30076
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.137898
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.618452
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.600874
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.474962
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.91268,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "prepared",
+          "sentiment": 0.911898,
+          "word_count": 203,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "prepared",
+          "sentiment": -0.931788,
+          "word_count": 513,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "prepared",
+          "sentiment": -0.305116,
+          "word_count": 646,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909739,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Catherine Mealor",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.392805,
+          "word_count": 82,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": -0.532183,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.060078,
+          "word_count": 96,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Catherine Mealor",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.28107,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.293534,
+          "word_count": 116,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Catherine Mealor",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": -0.470594,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901813,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Good morning.",
+          "role": "Wanted to ask about the reserve and losses and how we should think of this as well as managing capital.",
+          "section": "qa",
+          "sentiment": 0.880294,
+          "word_count": 55,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Doug Strange",
+          "role": "Chief Credit Officer, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.467294,
+          "word_count": 89,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Christopher Marinac",
+          "role": "Analyst, Brean Capital",
+          "section": "qa",
+          "sentiment": 0.284984,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Doug Strange",
+          "role": "Chief Credit Officer, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.797959,
+          "word_count": 21,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Christopher Marinac",
+          "role": "Analyst, Brean Capital",
+          "section": "qa",
+          "sentiment": 0.838732,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Christopher Marinac",
+          "role": "Analyst, Brean Capital",
+          "section": "qa",
+          "sentiment": 0.865439,
+          "word_count": 32,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.287316,
+          "word_count": 124,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.77075,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Christopher Marinac",
+          "role": "Analyst, Brean Capital",
+          "section": "qa",
+          "sentiment": 0.787149,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": -0.699698,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Christopher Marinac",
+          "role": "Analyst, Brean Capital",
+          "section": "qa",
+          "sentiment": 0.473393,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904172,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Jacob Morton",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.843852,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jacob Morton",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.772026,
+          "word_count": 43,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": -0.638121,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Jacob Morton",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": -0.471908,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.565555,
+          "word_count": 90,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Jacob Morton",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.778211,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909596,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Zita Lopez Wong",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.796296,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.140634,
+          "word_count": 124,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Zita Lopez Wong",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.743387,
+          "word_count": 59,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.299903,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 35,
+          "speaker": "Zita Lopez Wong",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": -0.083816,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Nicole Stokes",
+          "role": "CFO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.171072,
+          "word_count": 178,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 37,
+          "speaker": "Zita Lopez Wong",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.626558,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894921,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Jackson Andrew",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.857764,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 40,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": -0.896633,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Jackson Andrew",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.827581,
+          "word_count": 24,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.48263,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900878,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Tim Mitchell",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.54447,
+          "word_count": 70,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": 0.764704,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Tim Mitchell",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.695013,
+          "word_count": 100,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": -0.147648,
+          "word_count": 96,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Tim Mitchell",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.702905,
+          "word_count": 71,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": -0.010547,
+          "word_count": 134,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Tim Mitchell",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.337195,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.924242,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Palmer Proctor",
+          "role": "CEO, Ameris Bancorp",
+          "section": "qa",
+          "sentiment": -0.851885,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898166,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4496,
+      "transcript_text_redistributed": false
+    }
+  ],
   "methodology": {
     "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative), chunk-averaged for long turns",
     "tone_shift": "mean Q&A sentiment minus mean prepared-remarks sentiment",
@@ -233,5 +956,5 @@
     }
   ],
   "filing_fallback": [],
-  "updated_at_utc": "2026-09-09T01:13:59.028657+00:00"
+  "updated_at_utc": "2026-09-09T21:29:12.205994+00:00"
 }

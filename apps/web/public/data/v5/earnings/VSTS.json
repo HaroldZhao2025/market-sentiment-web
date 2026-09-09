@@ -75,7 +75,557 @@
       "surprise_pct": 1.45
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-12T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/vsts/transcripts/554346-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 38,
+        "scored_turn_count": 38,
+        "overall_sentiment": 0.375283,
+        "prepared_sentiment": 0.223752,
+        "qa_sentiment": 0.39311,
+        "qa_tone_shift": 0.169358,
+        "uncertainty_turn_rate": 0.105263,
+        "forward_looking_turn_rate": 0.394737,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 14,
+            "sentiment": 0.218722
+          },
+          {
+            "topic": "Demand",
+            "mentions": 13,
+            "sentiment": 0.223753
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.153834
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 6,
+            "sentiment": 0.070963
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": 0.814609
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.516478
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.140182
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.920359,
+          "word_count": 123,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Stefan Neely",
+          "role": "Investor Relations, Vestis",
+          "section": "prepared",
+          "sentiment": 0.890626,
+          "word_count": 206,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "prepared",
+          "sentiment": -0.918991,
+          "word_count": 1132,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Adam Bowen",
+          "role": "Interim CFO, Vestis",
+          "section": "prepared",
+          "sentiment": 0.003014,
+          "word_count": 1281,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898947,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Stephanie Moore",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.136314,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.738591,
+          "word_count": 1002,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Adam Bowen",
+          "role": "Interim CFO, Vestis",
+          "section": "qa",
+          "sentiment": 0.639593,
+          "word_count": 109,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.131567,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Stephanie Moore",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.039698,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Adam Bowen",
+          "role": "Interim CFO, Vestis",
+          "section": "qa",
+          "sentiment": 0.261399,
+          "word_count": 682,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 11,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.712401,
+          "word_count": 237,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Stephanie Moore",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.599946,
+          "word_count": 32,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Adam Bowen",
+          "role": "Interim CFO, Vestis",
+          "section": "qa",
+          "sentiment": 0.440711,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Stephanie Moore",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.504827,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.853657,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Ronan Kennedy",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.147753,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Adam Bowen",
+          "role": "Interim CFO, Vestis",
+          "section": "qa",
+          "sentiment": -0.697092,
+          "word_count": 265,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.179866,
+          "word_count": 168,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Ronan Kennedy",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.64427,
+          "word_count": 88,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.725484,
+          "word_count": 364,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Ronan Kennedy",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": -0.244985,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.864091,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tim Mulrooney",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.48177,
+          "word_count": 74,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Adam Bowen",
+          "role": "Interim CFO, Vestis",
+          "section": "qa",
+          "sentiment": 0.606402,
+          "word_count": 253,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.771557,
+          "word_count": 247,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Tim Mulrooney",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.140182,
+          "word_count": 160,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Adam Bowen",
+          "role": "Interim CFO, Vestis",
+          "section": "qa",
+          "sentiment": 0.281497,
+          "word_count": 161,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.554151,
+          "word_count": 204,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91279,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "George Tong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.316128,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": 0.627332,
+          "word_count": 398,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "George Tong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.117577,
+          "word_count": 30,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Jim Barber",
+          "role": "President and CEO, Vestis",
+          "section": "qa",
+          "sentiment": -0.029611,
+          "word_count": 270,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "George Tong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.281312,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.883786,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Stefan Neely",
+          "role": "Investor Relations, Vestis",
+          "section": "qa",
+          "sentiment": -0.101776,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909149,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8371,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "VSTS Earnings Call: Q3 2026",
@@ -149,5 +699,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T22:56:38.650784+00:00"
+  "updated_at_utc": "2026-09-09T21:23:09.479819+00:00"
 }
