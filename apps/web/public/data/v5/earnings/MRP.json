@@ -42,6 +42,375 @@
   "calls": [
     {
       "quarter": null,
+      "date": "2026-05-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/mrp/transcripts/571835-q1-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 24,
+        "scored_turn_count": 24,
+        "overall_sentiment": 0.56456,
+        "prepared_sentiment": 0.346186,
+        "qa_sentiment": 0.622027,
+        "qa_tone_shift": 0.275841,
+        "uncertainty_turn_rate": 0.291667,
+        "forward_looking_turn_rate": 0.375,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": 0.415728
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.363336
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.236069
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": 0.322111
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": 0.451091
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.160194
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": 0.772444
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.894472,
+          "word_count": 219,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Darren Richman",
+          "role": "CEO and President, Millrose Properties",
+          "section": "prepared",
+          "sentiment": -0.216285,
+          "word_count": 2168,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 5,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Steven Hensley",
+          "role": "Senior Market Risk Analyst, Millrose Properties",
+          "section": "prepared",
+          "sentiment": 0.701373,
+          "word_count": 866,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 5,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Garett Rosenblum",
+          "role": "CFO, Millrose Properties",
+          "section": "prepared",
+          "sentiment": -0.004505,
+          "word_count": 426,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Darren Richman",
+          "role": "CEO and President, Millrose Properties",
+          "section": "prepared",
+          "sentiment": 0.355875,
+          "word_count": 301,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902819,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Julien Blouin",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.868185,
+          "word_count": 214,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Julien Blouin",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.782467,
+          "word_count": 93,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Darren Richman",
+          "role": "CEO and President, Millrose Properties",
+          "section": "qa",
+          "sentiment": 0.665558,
+          "word_count": 143,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899694,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Eric Wolfe",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.658,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Eric Wolfe",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.809911,
+          "word_count": 198,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Eric Wolfe",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.843516,
+          "word_count": 99,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Darren Richman",
+          "role": "CEO and President, Millrose Properties",
+          "section": "qa",
+          "sentiment": 0.567953,
+          "word_count": 198,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892509,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": 0.513824,
+          "word_count": 209,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Darren Richman",
+          "role": "CEO and President, Millrose Properties",
+          "section": "qa",
+          "sentiment": 0.504081,
+          "word_count": 142,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": 0.270757,
+          "word_count": 187,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": 0.269653,
+          "word_count": 33,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Darren Richman",
+          "role": "CEO and President, Millrose Properties",
+          "section": "qa",
+          "sentiment": 0.310301,
+          "word_count": 91,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": -0.363966,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906944,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Darren Richman",
+          "role": "CEO and President, Millrose Properties",
+          "section": "qa",
+          "sentiment": 0.604314,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911995,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5992,
+      "transcript_text_redistributed": false
+    },
+    {
+      "quarter": null,
       "date": "2026-08-11T17:28:08+00:00",
       "source": "Motley Fool",
       "source_url": "https://finance.yahoo.com/m/8a021703-020a-3854-ac55-f2c5f48e4e89/millrose-properties-%28mrp%29-q2.html",
@@ -794,5 +1163,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T17:34:33.869824+00:00"
+  "updated_at_utc": "2026-09-09T15:28:29.638030+00:00"
 }

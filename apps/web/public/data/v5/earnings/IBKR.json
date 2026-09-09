@@ -153,7 +153,582 @@
       "surprise_pct": -3.34
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-01-20T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ibkr/transcripts/399580-q4-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 42,
+        "scored_turn_count": 42,
+        "overall_sentiment": 0.516426,
+        "prepared_sentiment": 0.275077,
+        "qa_sentiment": 0.534991,
+        "qa_tone_shift": 0.259914,
+        "uncertainty_turn_rate": 0.071429,
+        "forward_looking_turn_rate": 0.238095,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.192461
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": 0.141797
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 9,
+            "sentiment": 0.083103
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.263121
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.2502
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.042757
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.042757
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910744,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Nancy Stuebe",
+          "role": "Director of Investor Relations, Interactive Brokers Group",
+          "section": "prepared",
+          "sentiment": 0.846892,
+          "word_count": 1493,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Paul Brody",
+          "role": "CFO, Interactive Brokers Group",
+          "section": "prepared",
+          "sentiment": -0.932406,
+          "word_count": 1643,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896436,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Brennan Hawken",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.281916,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Paul Brody",
+          "role": "CFO, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": -0.497977,
+          "word_count": 108,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Brennan Hawken",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.795112,
+          "word_count": 71,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Milan Galik",
+          "role": "President and CEO, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.874876,
+          "word_count": 168,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Brennan Hawken",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.561824,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879484,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Patrick Moley",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.813355,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.666568,
+          "word_count": 98,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Patrick Moley",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.78942,
+          "word_count": 81,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.8829,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Milan Galik",
+          "role": "President and CEO, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": -0.102445,
+          "word_count": 58,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Patrick Moley",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.811709,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890705,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "James Yaro",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.448058,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.379129,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "James Yaro",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.736484,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.856042,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "James Yaro",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.282648,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.84718,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Craig Siegenthaler",
+          "role": "Analyst, BofA",
+          "section": "qa",
+          "sentiment": 0.80285,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Milan Galik",
+          "role": "President and CEO, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": -0.572316,
+          "word_count": 219,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": -0.172035,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Craig Siegenthaler",
+          "role": "Analyst, BofA",
+          "section": "qa",
+          "sentiment": 0.712368,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886979,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Daniel Fannon",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.710547,
+          "word_count": 56,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Milan Galik",
+          "role": "President and CEO, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": -0.885712,
+          "word_count": 85,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Daniel Fannon",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.807872,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Milan Galik",
+          "role": "President and CEO, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.494371,
+          "word_count": 49,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887852,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Benjamin Budish",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.264138,
+          "word_count": 122,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.303361,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.100598,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Benjamin Budish",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.772584,
+          "word_count": 108,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Thomas Peterffy",
+          "role": "Chairman, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.881247,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Benjamin Budish",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.726786,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895912,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Nancy Stuebe",
+          "role": "Director of Investor Relations, Interactive Brokers Group",
+          "section": "qa",
+          "sentiment": 0.805336,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913785,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5494,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "IBKR Earnings Call: Q2 2026",
@@ -230,5 +805,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T13:35:42.464921+00:00"
+  "updated_at_utc": "2026-09-09T15:20:55.978368+00:00"
 }

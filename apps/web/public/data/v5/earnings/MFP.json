@@ -2,7 +2,562 @@
   "schema_version": 8,
   "symbol": "MFP",
   "earnings_history": [],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-13T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/mfp/transcripts/708072-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 40,
+        "scored_turn_count": 40,
+        "overall_sentiment": 0.435734,
+        "prepared_sentiment": 0.507252,
+        "qa_sentiment": 0.425517,
+        "qa_tone_shift": -0.081735,
+        "uncertainty_turn_rate": 0.125,
+        "forward_looking_turn_rate": 0.275,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 10,
+            "sentiment": 0.325592
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 9,
+            "sentiment": 0.3104
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": 0.303367
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": 0.444479
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.278987
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": 0.90272
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.90272
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.838832,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Rob Fagan",
+          "role": "VP of FP&A and Investor Relations, Midera Food Processing",
+          "section": "prepared",
+          "sentiment": 0.919386,
+          "word_count": 419,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "prepared",
+          "sentiment": -0.640246,
+          "word_count": 1789,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "prepared",
+          "sentiment": 0.90272,
+          "word_count": 1487,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "prepared",
+          "sentiment": 0.515567,
+          "word_count": 248,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908077,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.708278,
+          "word_count": 77,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.700366,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.838343,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.619907,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.662113,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.869272,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Mircea Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.820188,
+          "word_count": 54,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Mircea Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.086278,
+          "word_count": 57,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.887368,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.829258,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.746903,
+          "word_count": 164,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Mircea Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.418777,
+          "word_count": 53,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.62587,
+          "word_count": 224,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Mircea Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.11952,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": -0.176134,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Mircea Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.78562,
+          "word_count": 103,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": -0.379218,
+          "word_count": 161,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Mircea Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.709251,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.876934,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Ian Zaffino",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.865713,
+          "word_count": 108,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.820815,
+          "word_count": 173,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Ian Zaffino",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.485967,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 28,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": -0.831725,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Ian Zaffino",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.424472,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.870098,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90553,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Sam Kusswurm",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.797867,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Sam Kusswurm",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.617189,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": 0.574487,
+          "word_count": 365,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Sam Kusswurm",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.510699,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903743,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Amy Campbell",
+          "role": "CFO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": -0.218203,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Mark Salman",
+          "role": "CEO, Midera Food Processing",
+          "section": "qa",
+          "sentiment": -0.574008,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910782,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6463,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "MFP Earnings Call: Q2 2026",
@@ -48,5 +603,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T17:34:10.040015+00:00"
+  "updated_at_utc": "2026-09-09T15:28:07.808141+00:00"
 }

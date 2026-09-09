@@ -153,7 +153,928 @@
       "surprise_pct": 26.72
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-01-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/lbrt/transcripts/396033-q4-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 70,
+        "scored_turn_count": 70,
+        "overall_sentiment": 0.537342,
+        "prepared_sentiment": 0.005746,
+        "qa_sentiment": 0.56956,
+        "qa_tone_shift": 0.563814,
+        "uncertainty_turn_rate": 0.142857,
+        "forward_looking_turn_rate": 0.242857,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 18,
+            "sentiment": 0.166869
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 16,
+            "sentiment": 0.357429
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": 0.330392
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": -0.210675
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.036143
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.926696
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.926696
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.897525,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Anjali Voria",
+          "role": "VP of Investor Relations, Liberty Energy",
+          "section": "prepared",
+          "sentiment": 0.849233,
+          "word_count": 232,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "prepared",
+          "sentiment": -0.926696,
+          "word_count": 1541,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 7,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "prepared",
+          "sentiment": -0.797078,
+          "word_count": 1129,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90871,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Stephen Gengaro",
+          "role": "Managing Director, Stifel",
+          "section": "qa",
+          "sentiment": 0.522517,
+          "word_count": 54,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.130752,
+          "word_count": 353,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.8219,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Stephen Gengaro",
+          "role": "Managing Director, Stifel",
+          "section": "qa",
+          "sentiment": 0.850893,
+          "word_count": 59,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.688087,
+          "word_count": 348,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.604934,
+          "word_count": 183,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Stephen Gengaro",
+          "role": "Managing Director, Stifel",
+          "section": "qa",
+          "sentiment": -0.277383,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90853,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Keith Mackey",
+          "role": "Director and Global Equity Research, Oil and Gas Services, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.683315,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": -0.260599,
+          "word_count": 203,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Keith Mackey",
+          "role": "Director and Global Equity Research, Oil and Gas Services, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.828722,
+          "word_count": 53,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": -0.627313,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Keith Mackey",
+          "role": "Director and Global Equity Research, Oil and Gas Services, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.190119,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90545,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Marc Bianchi",
+          "role": "Managing Director, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.737886,
+          "word_count": 75,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.841317,
+          "word_count": 224,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 21,
+          "speaker": "Marc Bianchi",
+          "role": "Managing Director, TD Cowen",
+          "section": "qa",
+          "sentiment": -0.13459,
+          "word_count": 61,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.011409,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.610389,
+          "word_count": 188,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Marc Bianchi",
+          "role": "Managing Director, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.855448,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.875691,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Thank you for taking my question.",
+          "role": "I believe in the past, you've mentioned that LPI intends to help their hyperscaler partners secure the fuel source.",
+          "section": "qa",
+          "sentiment": -0.559604,
+          "word_count": 46,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.470665,
+          "word_count": 255,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890391,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Josh Silverstein",
+          "role": "Managing Director, UBS",
+          "section": "qa",
+          "sentiment": 0.77286,
+          "word_count": 64,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.722767,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Josh Silverstein",
+          "role": "Managing Director, UBS",
+          "section": "qa",
+          "sentiment": 0.443857,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.174139,
+          "word_count": 233,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.570114,
+          "word_count": 347,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Josh Silverstein",
+          "role": "Managing Director, UBS",
+          "section": "qa",
+          "sentiment": -0.35632,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895717,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Derek Podhaizer",
+          "role": "Director, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.817932,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.779903,
+          "word_count": 322,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.66797,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.683303,
+          "word_count": 107,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Derek Podhaizer",
+          "role": "Director, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.625621,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.850172,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "That is our focus.",
+          "role": "We will develop partnerships.",
+          "section": "qa",
+          "sentiment": 0.494641,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.645664,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.605985,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Derek Podhaizer",
+          "role": "Director, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.820434,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903334,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Dan Kutz",
+          "role": "VP of Equity Research, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.544661,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.824117,
+          "word_count": 72,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "Dan Kutz",
+          "role": "VP of Equity Research, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.840198,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Dan Kutz",
+          "role": "VP of Equity Research, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.647476,
+          "word_count": 91,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.109096,
+          "word_count": 348,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Dan Kutz",
+          "role": "VP of Equity Research, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.699993,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892861,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Eddie Kim",
+          "role": "VP of Equity Research, Barclays",
+          "section": "qa",
+          "sentiment": 0.868822,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.795602,
+          "word_count": 151,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Eddie Kim",
+          "role": "VP of Equity Research, Barclays",
+          "section": "qa",
+          "sentiment": 0.827665,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": -0.049522,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 58,
+          "speaker": "Eddie Kim",
+          "role": "VP of Equity Research, Barclays",
+          "section": "qa",
+          "sentiment": 0.850429,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905277,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Caitlin Donohue",
+          "role": "Equity Research Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.718602,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Caitlin Donohue",
+          "role": "Equity Research Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.702789,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.658954,
+          "word_count": 364,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 63,
+          "speaker": "Caitlin Donohue",
+          "role": "Equity Research Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.766085,
+          "word_count": 59,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.784133,
+          "word_count": 143,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Caitlin Donohue",
+          "role": "Equity Research Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.826413,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Michael Stock",
+          "role": "CFO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.647733,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918589,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Ron Gusek",
+          "role": "CEO, Liberty Energy",
+          "section": "qa",
+          "sentiment": 0.599631,
+          "word_count": 515,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 69,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910568,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 9687,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "LBRT Earnings Call: Q2 2026",
@@ -229,5 +1150,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T17:33:26.694900+00:00"
+  "updated_at_utc": "2026-09-09T15:25:57.884625+00:00"
 }

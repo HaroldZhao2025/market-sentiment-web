@@ -153,7 +153,700 @@
       "surprise_pct": 5.74
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-02-24T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/jazz/transcripts/402467-q4-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 53,
+        "scored_turn_count": 53,
+        "overall_sentiment": 0.421471,
+        "prepared_sentiment": -0.338704,
+        "qa_sentiment": 0.53715,
+        "qa_tone_shift": 0.875854,
+        "uncertainty_turn_rate": 0.075472,
+        "forward_looking_turn_rate": 0.358491,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 16,
+            "sentiment": 0.11352
+          },
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": -0.314616
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 6,
+            "sentiment": -0.256827
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.087424
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.03531
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.814603
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909361,
+          "word_count": 110,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "John Bluth",
+          "role": "Head of Investor Relations, Jazz Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.910269,
+          "word_count": 249,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Renee Gala",
+          "role": "President and CEO, Jazz Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.855078,
+          "word_count": 670,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.892915,
+          "word_count": 1115,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.920979,
+          "word_count": 972,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Phil Johnson",
+          "role": "EVP and CFO, Jazz Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.814603,
+          "word_count": 758,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 6,
+          "speaker": "Renee Gala",
+          "role": "President and CEO, Jazz Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.706984,
+          "word_count": 168,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905319,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Jason Gerberry",
+          "role": "Managing Director and Equity Research Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.808365,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Phil Johnson",
+          "role": "EVP and CFO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.034711,
+          "word_count": 315,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.754738,
+          "word_count": 203,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.772454,
+          "word_count": 86,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Phil Johnson",
+          "role": "EVP and CFO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.832315,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.813395,
+          "word_count": 38,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.863899,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Marc Goodman",
+          "role": "Senior Research Analyst, Leerink",
+          "section": "qa",
+          "sentiment": 0.873446,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.514149,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879794,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Anastasia Parafestas",
+          "role": "Senior Biotechnology Equity Research Associate, Jefferies",
+          "section": "qa",
+          "sentiment": 0.79352,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.883982,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Renee Gala",
+          "role": "President and CEO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.855126,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.841831,
+          "word_count": 161,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.639754,
+          "word_count": 40,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Renee Gala",
+          "role": "President and CEO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.587489,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.862611,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Mohit Bansal",
+          "role": "Managing Director, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.68043,
+          "word_count": 83,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 26,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.462314,
+          "word_count": 279,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.86666,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "David Hong",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.674907,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.51418,
+          "word_count": 260,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Phil Johnson",
+          "role": "EVP and CFO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.210384,
+          "word_count": 118,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887426,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Brian Skorney",
+          "role": "Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.654548,
+          "word_count": 110,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.217081,
+          "word_count": 193,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.731487,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.853094,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "David Amsellem",
+          "role": "Managing Director and Senior Research Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.772737,
+          "word_count": 102,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Renee Gala",
+          "role": "President and CEO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.030086,
+          "word_count": 284,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.860163,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Joseph Thome",
+          "role": "Managing Director and Senior Research Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.706064,
+          "word_count": 127,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Renee Gala",
+          "role": "President and CEO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.759157,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.090523,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Phil Johnson",
+          "role": "EVP and CFO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.094987,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.743983,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.854653,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Leonid Timashev",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.720516,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Sam Pearce",
+          "role": "Chief Commercial Officer, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.41895,
+          "word_count": 333,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.868034,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Ami Fadia",
+          "role": "Senior Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.846412,
+          "word_count": 70,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Rob Iannone",
+          "role": "EVP of Research and Development, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.793269,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889282,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Renee Gala",
+          "role": "President and CEO, Jazz Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.109851,
+          "word_count": 284,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901922,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8605,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "JAZZ Earnings Call: Q2 2026",
@@ -230,5 +923,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-08T13:37:09.769163+00:00"
+  "updated_at_utc": "2026-09-09T15:24:03.284308+00:00"
 }
