@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CSTM",
   "earnings_history": [
     {
@@ -153,7 +153,638 @@
       "surprise_pct": 489.49
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cstm/transcripts/656903-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 45,
+        "scored_turn_count": 45,
+        "overall_sentiment": 0.260272,
+        "prepared_sentiment": -0.185955,
+        "qa_sentiment": 0.31605,
+        "qa_tone_shift": 0.502005,
+        "uncertainty_turn_rate": 0.2,
+        "forward_looking_turn_rate": 0.422222,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 19,
+            "sentiment": -0.0611
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": -0.155731
+          },
+          {
+            "topic": "Demand",
+            "mentions": 10,
+            "sentiment": -0.296553
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": -0.617248
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.916839
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": -0.301315
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.932412
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.899098,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Jason Hershiser",
+          "role": "Director of Investor Relations, Constellium",
+          "section": "prepared",
+          "sentiment": 0.921647,
+          "word_count": 249,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "prepared",
+          "sentiment": -0.924925,
+          "word_count": 769,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Jack Guo",
+          "role": "EVP and CFO, Constellium",
+          "section": "prepared",
+          "sentiment": -0.939899,
+          "word_count": 1358,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "prepared",
+          "sentiment": -0.885694,
+          "word_count": 1137,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911003,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Corinne Blanchard",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.476651,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": -0.304154,
+          "word_count": 132,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Jack Guo",
+          "role": "EVP and CFO, Constellium",
+          "section": "qa",
+          "sentiment": -0.273559,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Corinne Blanchard",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.356685,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Jack Guo",
+          "role": "EVP and CFO, Constellium",
+          "section": "qa",
+          "sentiment": 0.74729,
+          "word_count": 208,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Corinne Blanchard",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.726212,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.876046,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Katja Jancic",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.676355,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": -0.77277,
+          "word_count": 544,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 15,
+          "speaker": "Katja Jancic",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.888675,
+          "word_count": 36,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Jack Guo",
+          "role": "EVP and CFO, Constellium",
+          "section": "qa",
+          "sentiment": 0.723794,
+          "word_count": 31,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898536,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Bill Peterson",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.652513,
+          "word_count": 125,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jack Guo",
+          "role": "EVP and CFO, Constellium",
+          "section": "qa",
+          "sentiment": 0.729523,
+          "word_count": 97,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Bill Peterson",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.751481,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": 0.853042,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Bill Peterson",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.751895,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": 0.091255,
+          "word_count": 106,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": 0.461201,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jack Guo",
+          "role": "EVP and CFO, Constellium",
+          "section": "qa",
+          "sentiment": 0.878139,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Bill Peterson",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.812832,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": 0.186584,
+          "word_count": 107,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Bill Peterson",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.386773,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897315,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Timna Tanners",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.101759,
+          "word_count": 68,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": -0.335164,
+          "word_count": 162,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Timna Tanners",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.026152,
+          "word_count": 107,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": 0.281527,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909509,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Alex Stansbury",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.080173,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": -0.709003,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Jack Guo",
+          "role": "EVP and CFO, Constellium",
+          "section": "qa",
+          "sentiment": -0.58419,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Alex Stansbury",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.06516,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": 0.874924,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Alex Stansbury",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.851512,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": 0.066945,
+          "word_count": 67,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Alex Stansbury",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.160181,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Ingrid Joerg",
+          "role": "CEO, Constellium",
+          "section": "qa",
+          "sentiment": -0.852255,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91916,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6581,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Constellium (CSTM) Q2 2026 Earnings Call Transcript",
@@ -196,13 +827,40 @@
       "ts": "2026-08-01T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CSTM Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cstm/transcripts/656903-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "CSTM Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cstm/transcripts/559226-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "CSTM Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cstm/transcripts/398802-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-18T00:00:00+00:00"
+    },
+    {
+      "title": "CSTM Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-constellium-se-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:19:24.063214+00:00"
 }

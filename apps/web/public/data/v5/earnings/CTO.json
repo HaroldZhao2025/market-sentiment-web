@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CTO",
   "earnings_history": [
     {
@@ -153,7 +153,768 @@
       "surprise_pct": 46.96
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cto/transcripts/656899-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 58,
+        "scored_turn_count": 58,
+        "overall_sentiment": 0.487469,
+        "prepared_sentiment": 0.003267,
+        "qa_sentiment": 0.523335,
+        "qa_tone_shift": 0.520069,
+        "uncertainty_turn_rate": 0.034483,
+        "forward_looking_turn_rate": 0.37931,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 16,
+            "sentiment": 0.383199
+          },
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": 0.311165
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.097203
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.143634
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": -0.25899
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.376731
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.911285,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Jenna McKinney",
+          "role": "Director of Finance, CTO Realty Growth",
+          "section": "prepared",
+          "sentiment": 0.894169,
+          "word_count": 165,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "prepared",
+          "sentiment": -0.890883,
+          "word_count": 1182,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "prepared",
+          "sentiment": -0.901505,
+          "word_count": 968,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912863,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, Jones",
+          "section": "qa",
+          "sentiment": 0.641792,
+          "word_count": 44,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.755014,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, Jones",
+          "section": "qa",
+          "sentiment": 0.640869,
+          "word_count": 50,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.609538,
+          "word_count": 123,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.116785,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, Jones",
+          "section": "qa",
+          "sentiment": -0.532239,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.880101,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": 0.649339,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.531046,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": 0.837844,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.22446,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": 0.880509,
+          "word_count": 42,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.45852,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": -0.376731,
+          "word_count": 15,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Craig Kucera",
+          "role": "Analyst, Lucid Capital Markets",
+          "section": "qa",
+          "sentiment": 0.784193,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.769063,
+          "word_count": 43,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.869055,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Jay Kornreich",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.782874,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.711778,
+          "word_count": 156,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.122137,
+          "word_count": 153,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Jay Kornreich",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.817691,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.702374,
+          "word_count": 120,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.880116,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Jay Kornreich",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.879632,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.815054,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Jay Kornreich",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": -0.080993,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886388,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "RJ Milligan",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.863458,
+          "word_count": 27,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": -0.226566,
+          "word_count": 90,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "RJ Milligan",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.861348,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.679672,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "RJ Milligan",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.551159,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": -0.755975,
+          "word_count": 77,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "RJ Milligan",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": -0.298431,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Thank you.",
+          "role": "Our next question comes from the line of Gaurav Mehta from Alliance Global Partnership.",
+          "section": "qa",
+          "sentiment": 0.8675,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Gaurav Mehta",
+          "role": "Analyst, Alliance Global Partnership",
+          "section": "qa",
+          "sentiment": 0.894174,
+          "word_count": 23,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Gaurav Mehta",
+          "role": "Analyst, Alliance Global Partnership",
+          "section": "qa",
+          "sentiment": 0.824927,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.812311,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.813364,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Gaurav Mehta",
+          "role": "Analyst, Alliance Global Partnership",
+          "section": "qa",
+          "sentiment": 0.316328,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.017905,
+          "word_count": 98,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Gaurav Mehta",
+          "role": "Analyst, Alliance Global Partnership",
+          "section": "qa",
+          "sentiment": 0.74373,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.559203,
+          "word_count": 66,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Gaurav Mehta",
+          "role": "Analyst, Alliance Global Partnership",
+          "section": "qa",
+          "sentiment": 0.377162,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900298,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "John Massocca",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.536342,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.04557,
+          "word_count": 120,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "John Massocca",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.683978,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "Philip Mays",
+          "role": "CFO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": 0.140788,
+          "word_count": 112,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "John Massocca",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.887907,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "John Albright",
+          "role": "President and CEO, CTO Realty Growth",
+          "section": "qa",
+          "sentiment": -0.39354,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "John Massocca",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.478101,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910331,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5410,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "CTO Realty Growth, Inc. 2026 Q2 - Results - Earnings Call Presentation (NYSE:CTO) 2026-07-31 - Seeking Alpha",
@@ -196,13 +957,40 @@
       "ts": "2026-04-30T05:06:10+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CTO Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cto/transcripts/656899-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "CTO Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cto/transcripts/562152-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "CTO Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cto/transcripts/404865-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-20T00:00:00+00:00"
+    },
+    {
+      "title": "CTO Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-cto-realty-growth-inc-stock-1/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:19:50.860288+00:00"
 }

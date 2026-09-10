@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CURB",
   "earnings_history": [
     {
@@ -51,7 +51,664 @@
       "surprise_pct": -1.16
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-28T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/curb/transcripts/656016-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 49,
+        "scored_turn_count": 49,
+        "overall_sentiment": 0.609231,
+        "prepared_sentiment": 0.215096,
+        "qa_sentiment": 0.654019,
+        "qa_tone_shift": 0.438924,
+        "uncertainty_turn_rate": 0.040816,
+        "forward_looking_turn_rate": 0.367347,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 16,
+            "sentiment": 0.391236
+          },
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": 0.210147
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.400023
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.264596
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.100474
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.852498
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.889398,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Stephanie Ruys de Perez",
+          "role": "VP of Capital Markets, Curbline Properties",
+          "section": "prepared",
+          "sentiment": 0.906539,
+          "word_count": 188,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "prepared",
+          "sentiment": -0.610642,
+          "word_count": 692,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "prepared",
+          "sentiment": -0.930448,
+          "word_count": 924,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "prepared",
+          "sentiment": 0.820632,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912531,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ronald Kamdem",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.18439,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "qa",
+          "sentiment": -0.164636,
+          "word_count": 263,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Ronald Kamdem",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.878681,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.81159,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Ronald Kamdem",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.167758,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.78358,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903833,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890607,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Craig Mailman",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.857095,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Craig Mailman",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.765635,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.814068,
+          "word_count": 219,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Craig Mailman",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.616693,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.852498,
+          "word_count": 426,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "qa",
+          "sentiment": -0.191856,
+          "word_count": 144,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Craig Mailman",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.572422,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.437774,
+          "word_count": 225,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898479,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Todd Thomas",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.735118,
+          "word_count": 91,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.735381,
+          "word_count": 138,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Todd Thomas",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.845103,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.879127,
+          "word_count": 237,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Todd Thomas",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": -0.338548,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899764,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Floris van Dijkum",
+          "role": "Analyst, Ladenburg",
+          "section": "qa",
+          "sentiment": 0.807085,
+          "word_count": 180,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.620088,
+          "word_count": 297,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Floris van Dijkum",
+          "role": "Analyst, Ladenburg",
+          "section": "qa",
+          "sentiment": 0.820762,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 32,
+          "speaker": "Well, that certainly is an open question.",
+          "role": "Given how little the entire industry has used of Operating Partnership units in the last decade or so, I think there's a reason for that.",
+          "section": "qa",
+          "sentiment": 0.749054,
+          "word_count": 120,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890202,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Alexander Goldfarb",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.843732,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.097679,
+          "word_count": 115,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 36,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.766624,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Alexander Goldfarb",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.828697,
+          "word_count": 123,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.765256,
+          "word_count": 345,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899585,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Mike Mueller",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.824111,
+          "word_count": 30,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.796041,
+          "word_count": 193,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Mike Mueller",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.776801,
+          "word_count": 45,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Conor Fennerty",
+          "role": "CFO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.874269,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": 0.840385,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Mike Mueller",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.575669,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902739,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "David Lukes",
+          "role": "CEO, Curbline Properties",
+          "section": "qa",
+          "sentiment": -0.192385,
+          "word_count": 16,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912154,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6691,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Curbline Properties Corp. 2026 Q2 - Results - Earnings Call Presentation (NYSE:CURB) 2026-07-30 - Seeking Alpha",
@@ -94,13 +751,40 @@
       "ts": "2026-07-28T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CURB Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/curb/transcripts/656016-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "CURB Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/curb/transcripts/554005-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "CURB Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/curb/transcripts/398963-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-09T00:00:00+00:00"
+    },
+    {
+      "title": "CURB Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-curbline-properties-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:18:09.927293+00:00"
 }

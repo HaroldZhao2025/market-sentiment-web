@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-09-10T21:19:13.700723+00:00",
+  "generated_at_utc": "2026-09-10T23:25:17.925321+00:00",
   "source_policy": "free_public_only",
-  "company_count": 2538,
-  "complete_company_count": 2277,
-  "complete_coverage_rate": 0.897163,
+  "company_count": 2539,
+  "complete_company_count": 2273,
+  "complete_coverage_rate": 0.895234,
   "totals": {
-    "complete": 2277,
-    "partial": 73,
-    "link_only": 124,
-    "no_structured_call": 64
+    "complete": 2273,
+    "partial": 72,
+    "link_only": 127,
+    "no_structured_call": 67
   },
   "by_universe": {
     "S&P 500": {
@@ -34,11 +34,11 @@
       "no_structured_call": 17
     },
     "Broad U.S. (IWV)": {
-      "total": 1032,
-      "complete": 902,
-      "partial": 39,
-      "link_only": 50,
-      "no_structured_call": 41
+      "total": 1033,
+      "complete": 898,
+      "partial": 38,
+      "link_only": 53,
+      "no_structured_call": 44
     }
   },
   "companies": [
@@ -776,7 +776,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 12,
+      "call_links": 11,
       "filings": 0,
       "source": ""
     },
@@ -1478,7 +1478,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 9,
+      "call_links": 10,
       "filings": 0,
       "source": "MarketBeat"
     },
@@ -1766,7 +1766,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 5,
+      "call_links": 10,
       "filings": 0,
       "source": "MarketBeat"
     },
@@ -2014,15 +2014,6 @@
       "source": "MarketBeat"
     },
     {
-      "ticker": "ATAI",
-      "status": "link_only",
-      "complete_calls": 0,
-      "structured_calls": 0,
-      "call_links": 4,
-      "filings": 0,
-      "source": ""
-    },
-    {
       "ticker": "ATEC",
       "status": "complete",
       "complete_calls": 1,
@@ -2162,7 +2153,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": "Stock Analysis / Quartr"
     },
@@ -2486,7 +2477,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 6,
+      "call_links": 7,
       "filings": 0,
       "source": "Stock Analysis / Quartr"
     },
@@ -2788,13 +2779,22 @@
       "source": "MarketBeat"
     },
     {
-      "ticker": "BF-A",
-      "status": "complete",
-      "complete_calls": 1,
-      "structured_calls": 1,
-      "call_links": 10,
+      "ticker": "BF A",
+      "status": "no_structured_call",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 0,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": ""
+    },
+    {
+      "ticker": "BF B",
+      "status": "link_only",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 1,
+      "filings": 0,
+      "source": ""
     },
     {
       "ticker": "BF-B",
@@ -3337,6 +3337,15 @@
       "source": "MarketBeat"
     },
     {
+      "ticker": "BRK B",
+      "status": "no_structured_call",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 0,
+      "filings": 0,
+      "source": ""
+    },
+    {
       "ticker": "BRK-B",
       "status": "complete",
       "complete_calls": 1,
@@ -3530,7 +3539,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": "Stock Analysis / Quartr"
     },
@@ -3764,7 +3773,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 2,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": "Stock Analysis / Quartr"
     },
@@ -4844,7 +4853,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 2,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": "Stock Analysis / Quartr"
     },
@@ -4916,7 +4925,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 2,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": "Stock Analysis / Quartr"
     },
@@ -5485,7 +5494,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CSTL",
@@ -5494,7 +5503,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CSTM",
@@ -5503,7 +5512,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CSV",
@@ -5557,7 +5566,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CTMX",
@@ -5566,7 +5575,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CTO",
@@ -5575,7 +5584,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CTOS",
@@ -5584,7 +5593,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CTRE",
@@ -5593,7 +5602,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CTRI",
@@ -5602,7 +5611,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CTS",
@@ -5611,7 +5620,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CTSH",
@@ -5629,7 +5638,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CUBE",
@@ -5638,7 +5647,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CUBI",
@@ -5647,7 +5656,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CURB",
@@ -5656,7 +5665,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CUZ",
@@ -5683,7 +5692,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "Motley Fool"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CVI",
@@ -5692,7 +5701,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CVLG",
@@ -5701,7 +5710,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CVLT",
@@ -5710,7 +5719,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CVNA",
@@ -5719,7 +5728,7 @@
       "structured_calls": 1,
       "call_links": 9,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "CVRX",
@@ -6671,7 +6680,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -6968,7 +6977,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -7418,7 +7427,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -8809,11 +8818,11 @@
       "source": "Motley Fool"
     },
     {
-      "ticker": "GEFB",
-      "status": "partial",
+      "ticker": "GEF B",
+      "status": "link_only",
       "complete_calls": 0,
-      "structured_calls": 1,
-      "call_links": 1,
+      "structured_calls": 0,
+      "call_links": 2,
       "filings": 0,
       "source": ""
     },
@@ -9673,13 +9682,13 @@
       "source": "Motley Fool"
     },
     {
-      "ticker": "HEIA",
-      "status": "complete",
-      "complete_calls": 1,
-      "structured_calls": 1,
-      "call_links": 7,
+      "ticker": "HEI A",
+      "status": "link_only",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 2,
       "filings": 0,
-      "source": "Motley Fool"
+      "source": ""
     },
     {
       "ticker": "HELE",
@@ -10028,7 +10037,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": "Stock Analysis / Quartr"
     },
@@ -10577,7 +10586,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -11198,7 +11207,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -11423,7 +11432,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -12085,13 +12094,13 @@
       "source": "MarketBeat"
     },
     {
-      "ticker": "LENB",
-      "status": "complete",
-      "complete_calls": 1,
-      "structured_calls": 1,
-      "call_links": 2,
+      "ticker": "LEN B",
+      "status": "link_only",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 1,
       "filings": 0,
-      "source": "Motley Fool"
+      "source": ""
     },
     {
       "ticker": "LENZ",
@@ -13034,7 +13043,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -13115,7 +13124,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -13223,7 +13232,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -13525,6 +13534,15 @@
       "source": "MarketBeat"
     },
     {
+      "ticker": "MOG A",
+      "status": "no_structured_call",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 0,
+      "filings": 0,
+      "source": ""
+    },
+    {
       "ticker": "MOG-A",
       "status": "complete",
       "complete_calls": 1,
@@ -13532,15 +13550,6 @@
       "call_links": 7,
       "filings": 0,
       "source": "MarketBeat"
-    },
-    {
-      "ticker": "MOGA",
-      "status": "complete",
-      "complete_calls": 1,
-      "structured_calls": 1,
-      "call_links": 1,
-      "filings": 0,
-      "source": "Motley Fool"
     },
     {
       "ticker": "MOH",
@@ -16148,7 +16157,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -16166,7 +16175,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -20878,7 +20887,7 @@
       "source": "Stock Analysis / Quartr"
     },
     {
-      "ticker": "UHALB",
+      "ticker": "UHAL B",
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
@@ -20954,7 +20963,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -21116,7 +21125,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 13,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -22754,7 +22763,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -22886,8 +22895,8 @@
     }
   ],
   "search_progress": {
-    "tier1_attempted": 2523,
-    "tier2_attempted": 1298,
-    "tier3_attempted": 922
+    "tier1_attempted": 2524,
+    "tier2_attempted": 1309,
+    "tier3_attempted": 916
   }
 }

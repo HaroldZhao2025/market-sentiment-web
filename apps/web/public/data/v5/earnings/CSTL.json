@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CSTL",
   "earnings_history": [
     {
@@ -153,7 +153,729 @@
       "surprise_pct": -48.39
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cstl/transcripts/661659-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 55,
+        "scored_turn_count": 55,
+        "overall_sentiment": 0.470793,
+        "prepared_sentiment": -0.03794,
+        "qa_sentiment": 0.521667,
+        "qa_tone_shift": 0.559606,
+        "uncertainty_turn_rate": 0.109091,
+        "forward_looking_turn_rate": 0.363636,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 18,
+            "sentiment": 0.197477
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 15,
+            "sentiment": 0.464138
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.22054
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 3,
+            "sentiment": -0.028148
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.936086
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.880082,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Camilla Zuccaro",
+          "role": "VP of Investor Relations and Corporate Affairs, Castle Biosciences",
+          "section": "prepared",
+          "sentiment": 0.912319,
+          "word_count": 335,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "prepared",
+          "sentiment": -0.909263,
+          "word_count": 881,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Frank Stokes",
+          "role": "CFO, Castle Biosciences",
+          "section": "prepared",
+          "sentiment": -0.936086,
+          "word_count": 751,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "prepared",
+          "sentiment": -0.136751,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90673,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Max Masucci",
+          "role": "Analyst, Roth Capital Partners",
+          "section": "qa",
+          "sentiment": 0.722167,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.240782,
+          "word_count": 238,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Max Masucci",
+          "role": "Analyst, Roth Capital Partners",
+          "section": "qa",
+          "sentiment": 0.519441,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 9,
+          "speaker": "Frank Stokes",
+          "role": "CFO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.322586,
+          "word_count": 118,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900605,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Thomas Flaten",
+          "role": "Analyst, Lake Street Capital",
+          "section": "qa",
+          "sentiment": -0.241775,
+          "word_count": 34,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.128782,
+          "word_count": 137,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Thomas Flaten",
+          "role": "Analyst, Lake Street Capital",
+          "section": "qa",
+          "sentiment": 0.875795,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.831761,
+          "word_count": 641,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Thomas Flaten",
+          "role": "Analyst, Lake Street Capital",
+          "section": "qa",
+          "sentiment": -0.240957,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.821955,
+          "word_count": 118,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Frank Stokes",
+          "role": "CFO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.27972,
+          "word_count": 182,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.833206,
+          "word_count": 120,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893435,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ethan Kriss",
+          "role": "Analyst, Guggenheim Securities",
+          "section": "qa",
+          "sentiment": 0.642524,
+          "word_count": 32,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Frank Stokes",
+          "role": "CFO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": -0.566974,
+          "word_count": 152,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896628,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Matthew Parisi",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.641739,
+          "word_count": 54,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.596974,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Matthew Parisi",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.825037,
+          "word_count": 14,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.886094,
+          "word_count": 234,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Matthew Parisi",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.747894,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892781,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Alex Vukasin",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": -0.060676,
+          "word_count": 143,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.87474,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Frank Stokes",
+          "role": "CFO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.738831,
+          "word_count": 175,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Alex Vukasin",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": 0.551592,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.549988,
+          "word_count": 265,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 34,
+          "speaker": "Alex Vukasin",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": 0.424394,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909356,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Meaghan Rockey",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.894117,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.872972,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.839964,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.807711,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Meaghan Rockey",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": -0.624578,
+          "word_count": 34,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": -0.527942,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902973,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Philip Song",
+          "role": "Analyst, Leerink",
+          "section": "qa",
+          "sentiment": 0.785262,
+          "word_count": 106,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Frank Stokes",
+          "role": "CFO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": -0.174572,
+          "word_count": 128,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Philip Song",
+          "role": "Analyst, Leerink",
+          "section": "qa",
+          "sentiment": 0.626258,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.850832,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.783731,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Philip Song",
+          "role": "Analyst, Leerink",
+          "section": "qa",
+          "sentiment": -0.219053,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.529985,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.764048,
+          "word_count": 163,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 51,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": 0.477387,
+          "word_count": 214,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894406,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Derek Maetzold",
+          "role": "Founder, President, and CEO, Castle Biosciences",
+          "section": "qa",
+          "sentiment": -0.636842,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891521,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6582,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Castle Biosciences, Inc. Q2 2026 Earnings Call Summary",
@@ -196,13 +918,40 @@
       "ts": "2026-07-30T07:00:00+00:00",
       "source": "Investing.com",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CSTL Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cstl/transcripts/661659-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "CSTL Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cstl/transcripts/572270-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "CSTL Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cstl/transcripts/398147-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "CSTL Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-castle-biosciences-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:19:13.473842+00:00"
 }

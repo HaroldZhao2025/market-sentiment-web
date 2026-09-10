@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CTRE",
   "earnings_history": [
     {
@@ -153,7 +153,919 @@
       "surprise_pct": 1.85
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-07T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ctre/transcripts/664025-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 73,
+        "scored_turn_count": 73,
+        "overall_sentiment": 0.533705,
+        "prepared_sentiment": 0.056335,
+        "qa_sentiment": 0.584336,
+        "qa_tone_shift": 0.528001,
+        "uncertainty_turn_rate": 0.09589,
+        "forward_looking_turn_rate": 0.109589,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 12,
+            "sentiment": 0.306224
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.14743
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.009878
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.269131
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": 0.016375
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.762754
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.892802,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Lauren Beale",
+          "role": "Chief Accounting Officer, CareTrust",
+          "section": "prepared",
+          "sentiment": 0.847775,
+          "word_count": 198,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "prepared",
+          "sentiment": -0.756205,
+          "word_count": 561,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "prepared",
+          "sentiment": 0.350975,
+          "word_count": 195,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Turning to what's ahead.",
+          "role": "The pipeline sits at approximately $540 million, roughly 2/3 skilled nursing and 1/3 loans to strategic partners, plus U.K. care homes.",
+          "section": "prepared",
+          "sentiment": -0.755497,
+          "word_count": 274,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Derek Bunker",
+          "role": "CFO, CareTrust",
+          "section": "prepared",
+          "sentiment": -0.815025,
+          "word_count": 475,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "prepared",
+          "sentiment": 0.629518,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907607,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "John Kilichowski",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.797237,
+          "word_count": 68,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.632098,
+          "word_count": 186,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "John Kilichowski",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.885555,
+          "word_count": 65,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.766689,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902302,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Austin Wurschmidt",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.514682,
+          "word_count": 67,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": -0.750518,
+          "word_count": 98,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Austin Wurschmidt",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.616769,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.815209,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Austin Wurschmidt",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.655617,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894659,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Robin Hanlon",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.783041,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.623515,
+          "word_count": 149,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Robin Hanlon",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.873754,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": -0.801226,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896686,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Michael Goldsmith",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.642054,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.417794,
+          "word_count": 138,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Michael Goldsmith",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.771189,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.648599,
+          "word_count": 205,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Michael Goldsmith",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.837015,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900657,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Michael Carroll",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.375669,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.583141,
+          "word_count": 183,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Michael Carroll",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.871973,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Derek Bunker",
+          "role": "CFO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.730077,
+          "word_count": 99,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892124,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Farrell Granath",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.876536,
+          "word_count": 53,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Derek Bunker",
+          "role": "CFO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.828524,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Farrell Granath",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.77848,
+          "word_count": 48,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Derek Bunker",
+          "role": "CFO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.762754,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Farrell Granath",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.28265,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879603,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.65658,
+          "word_count": 146,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.562343,
+          "word_count": 226,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.855085,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.84692,
+          "word_count": 165,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.813193,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.773923,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": -0.777326,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": -0.478945,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88943,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Alec Feygin",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.824534,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.86128,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Alec Feygin",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.795499,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.731983,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "Alec Feygin",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.697346,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.771833,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.77221,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.791389,
+          "word_count": 118,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.844302,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": 0.857708,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885277,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Michael Stroyeck",
+          "role": "Analyst, Green Street",
+          "section": "qa",
+          "sentiment": 0.086037,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 62,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.704573,
+          "word_count": 150,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Michael Stroyeck",
+          "role": "Analyst, Green Street",
+          "section": "qa",
+          "sentiment": 0.867463,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "James Callister",
+          "role": "Chief Investment Officer, CareTrust",
+          "section": "qa",
+          "sentiment": -0.814429,
+          "word_count": 76,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Michael Stroyeck",
+          "role": "Analyst, Green Street",
+          "section": "qa",
+          "sentiment": 0.497626,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888559,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Jyoti Yadav",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.819825,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": 0.725473,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Jyoti Yadav",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.838921,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911949,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "David Sedgwick",
+          "role": "President and CEO, CareTrust",
+          "section": "qa",
+          "sentiment": -0.699814,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912212,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6247,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "CareTrust REIT (CTRE) Q2 2026 Earnings Call Transcript",
@@ -196,13 +1108,40 @@
       "ts": "2026-08-07T23:01:12+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CTRE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ctre/transcripts/664025-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-07T00:00:00+00:00"
+    },
+    {
+      "title": "CTRE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ctre/transcripts/556854-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-08T00:00:00+00:00"
+    },
+    {
+      "title": "CTRE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ctre/transcripts/412510-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-13T00:00:00+00:00"
+    },
+    {
+      "title": "CTRE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-caretrust-reit-inc-stock-1/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:17:03.230476+00:00"
 }

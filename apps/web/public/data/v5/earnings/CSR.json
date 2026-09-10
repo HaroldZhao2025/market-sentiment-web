@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CSR",
   "earnings_history": [
     {
@@ -153,7 +153,474 @@
       "surprise_pct": -6.91
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-04T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/csr/transcripts/660733-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 33,
+        "scored_turn_count": 33,
+        "overall_sentiment": 0.349048,
+        "prepared_sentiment": 0.469227,
+        "qa_sentiment": 0.332471,
+        "qa_tone_shift": -0.136755,
+        "uncertainty_turn_rate": 0.151515,
+        "forward_looking_turn_rate": 0.363636,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 12,
+            "sentiment": 0.192755
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": 0.132775
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": 0.542333
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.184907
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.920154
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905357,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Anne Olson",
+          "role": "President and CEO, Centerspace",
+          "section": "prepared",
+          "sentiment": 0.920154,
+          "word_count": 562,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Grant Campbell",
+          "role": "SVP of Investments in Capital Markets, Centerspace",
+          "section": "prepared",
+          "sentiment": 0.007446,
+          "word_count": 567,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "prepared",
+          "sentiment": 0.04395,
+          "word_count": 502,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90653,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Brad Heffern",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.869983,
+          "word_count": 57,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Anne Olson",
+          "role": "President and CEO, Centerspace",
+          "section": "qa",
+          "sentiment": 0.830476,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Grant Campbell",
+          "role": "SVP of Investments in Capital Markets, Centerspace",
+          "section": "qa",
+          "sentiment": 0.551699,
+          "word_count": 78,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "qa",
+          "sentiment": 0.870134,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Brad Heffern",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.868295,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "qa",
+          "sentiment": 0.578404,
+          "word_count": 162,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.552939,
+          "word_count": 72,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Anne Olson",
+          "role": "President and CEO, Centerspace",
+          "section": "qa",
+          "sentiment": -0.037223,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "qa",
+          "sentiment": -0.891783,
+          "word_count": 155,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Anne Olson",
+          "role": "President and CEO, Centerspace",
+          "section": "qa",
+          "sentiment": -0.783843,
+          "word_count": 110,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902226,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.79915,
+          "word_count": 106,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "qa",
+          "sentiment": 0.89106,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "qa",
+          "sentiment": -0.829711,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.776298,
+          "word_count": 96,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Grant Campbell",
+          "role": "SVP of Investments in Capital Markets, Centerspace",
+          "section": "qa",
+          "sentiment": 0.430375,
+          "word_count": 78,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.772916,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Anne Olson",
+          "role": "President and CEO, Centerspace",
+          "section": "qa",
+          "sentiment": 0.807066,
+          "word_count": 154,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Grant Campbell",
+          "role": "SVP of Investments in Capital Markets, Centerspace",
+          "section": "qa",
+          "sentiment": -0.67054,
+          "word_count": 155,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897189,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Ami Probandt",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.781174,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "qa",
+          "sentiment": 0.048323,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Ami Probandt",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.144204,
+          "word_count": 70,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Anne Olson",
+          "role": "President and CEO, Centerspace",
+          "section": "qa",
+          "sentiment": -0.107434,
+          "word_count": 197,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Bhairav Patel",
+          "role": "CFO, Centerspace",
+          "section": "qa",
+          "sentiment": -0.199044,
+          "word_count": 169,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91643,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Anne Olson",
+          "role": "President and CEO, Centerspace",
+          "section": "qa",
+          "sentiment": -0.838367,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910623,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4120,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Centerspace (CSR) Q2 2026 Earnings Call Transcript - AOL.com",
@@ -196,13 +663,40 @@
       "ts": "2026-08-04T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CSR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/csr/transcripts/660733-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "CSR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/csr/transcripts/559239-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "CSR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/csr/transcripts/395859-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-18T00:00:00+00:00"
+    },
+    {
+      "title": "CSR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-investors-real-estate-trust-stock-1/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:16:46.224668+00:00"
 }

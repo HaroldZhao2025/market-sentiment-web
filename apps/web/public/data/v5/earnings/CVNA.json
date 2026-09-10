@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CVNA",
   "earnings_history": [
     {
@@ -153,7 +153,1113 @@
       "surprise_pct": 61.47
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cvna/transcripts/657355-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 83,
+        "scored_turn_count": 83,
+        "overall_sentiment": 0.513118,
+        "prepared_sentiment": 0.549263,
+        "qa_sentiment": 0.511762,
+        "qa_tone_shift": -0.037501,
+        "uncertainty_turn_rate": 0.13253,
+        "forward_looking_turn_rate": 0.325301,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 26,
+            "sentiment": 0.446327
+          },
+          {
+            "topic": "Demand",
+            "mentions": 22,
+            "sentiment": 0.401923
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 22,
+            "sentiment": 0.37974
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": 0.380541
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 5,
+            "sentiment": 0.340362
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.205606
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": -0.122975
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.901567,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Meg Kehan",
+          "role": "Senior Director of Investor Relations, Carvana",
+          "section": "prepared",
+          "sentiment": 0.911537,
+          "word_count": 204,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "prepared",
+          "sentiment": -0.165315,
+          "word_count": 587,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Mark Jenkins",
+          "role": "CFO, Carvana",
+          "section": "qa",
+          "sentiment": -0.919723,
+          "word_count": 742,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912225,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Daniela Haigian",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.749948,
+          "word_count": 78,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": -0.098053,
+          "word_count": 352,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Daniela Haigian",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.87745,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.462115,
+          "word_count": 153,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895931,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "John Colantuoni",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.817447,
+          "word_count": 61,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.248124,
+          "word_count": 257,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "John Colantuoni",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.367846,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.109148,
+          "word_count": 250,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902284,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Rajat Gupta",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.790689,
+          "word_count": 107,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": -0.031935,
+          "word_count": 387,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Rajat Gupta",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.014799,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.709934,
+          "word_count": 203,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Rajat Gupta",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.30449,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902103,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Ron Josey",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.615646,
+          "word_count": 102,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.544601,
+          "word_count": 359,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ron Josey",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.789124,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": -0.151278,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893301,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Brian Nagel",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.792234,
+          "word_count": 110,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Mark Jenkins",
+          "role": "CFO, Carvana",
+          "section": "qa",
+          "sentiment": 0.343904,
+          "word_count": 558,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 28,
+          "speaker": "Brian Nagel",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": -0.585788,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897684,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Sharon Zackfia",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.083209,
+          "word_count": 81,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.786123,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Sharon Zackfia",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.896048,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Sharon Zackfia",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.502699,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.738056,
+          "word_count": 474,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902104,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Andrew Boone",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.851399,
+          "word_count": 104,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.7283,
+          "word_count": 659,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Andrew Boone",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.819929,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Mark Jenkins",
+          "role": "CFO, Carvana",
+          "section": "qa",
+          "sentiment": 0.618348,
+          "word_count": 221,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899617,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Jeff Lick",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.676762,
+          "word_count": 77,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.582732,
+          "word_count": 208,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Jeff Lick",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.324096,
+          "word_count": 104,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.247312,
+          "word_count": 505,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Jeff Lick",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": -0.527971,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89881,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Tom Babcock",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.719186,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.484611,
+          "word_count": 100,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "Tom Babcock",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.741722,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.072637,
+          "word_count": 161,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Tom Babcock",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.031728,
+          "word_count": 99,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Mark Jenkins",
+          "role": "CFO, Carvana",
+          "section": "qa",
+          "sentiment": 0.856666,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "Tom Babcock",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.124031,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907888,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Marvin Fong",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.753177,
+          "word_count": 117,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.489004,
+          "word_count": 246,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Marvin Fong",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.756837,
+          "word_count": 37,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.739738,
+          "word_count": 173,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 59,
+          "speaker": "Marvin Fong",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": -0.634867,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899045,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Joseph Spak",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.583975,
+          "word_count": 81,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": -0.295303,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 63,
+          "speaker": "Joseph Spak",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.818636,
+          "word_count": 58,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Mark Jenkins",
+          "role": "CFO, Carvana",
+          "section": "qa",
+          "sentiment": 0.867853,
+          "word_count": 35,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 65,
+          "speaker": "Joseph Spak",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.808241,
+          "word_count": 48,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.851487,
+          "word_count": 177,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Joseph Spak",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.824876,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.817379,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898928,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Michael McGovern",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.481709,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.179734,
+          "word_count": 100,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Michael McGovern",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.871947,
+          "word_count": 53,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 73,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.661707,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901314,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Chris Pierce",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.780847,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.759073,
+          "word_count": 283,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "Chris Pierce",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.326876,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": 0.646355,
+          "word_count": 172,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "Chris Pierce",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": -0.337556,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890592,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 81,
+          "speaker": "Ernie Garcia",
+          "role": "CEO, Carvana",
+          "section": "qa",
+          "sentiment": -0.07677,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 82,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90051,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 10363,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "CVNA Q2 Earnings Call Highlights Machine-Building Focus",
@@ -189,13 +1295,40 @@
       "ts": "2026-07-01T07:00:00+00:00",
       "source": "businesswire.com",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CVNA Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cvna/transcripts/657355-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "CVNA Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cvna/transcripts/559435-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "CVNA Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cvna/transcripts/405186-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-18T00:00:00+00:00"
+    },
+    {
+      "title": "CVNA Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-carvana-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:18:59.578556+00:00"
 }

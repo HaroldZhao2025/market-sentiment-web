@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CVI",
   "earnings_history": [
     {
@@ -153,7 +153,380 @@
       "surprise_pct": -13.75
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cvi/transcripts/658274-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 27,
+        "scored_turn_count": 27,
+        "overall_sentiment": 0.341941,
+        "prepared_sentiment": 0.04023,
+        "qa_sentiment": 0.410511,
+        "qa_tone_shift": 0.370281,
+        "uncertainty_turn_rate": 0.111111,
+        "forward_looking_turn_rate": 0.259259,
+        "topics": [
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": -0.170935
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 4,
+            "sentiment": -0.155145
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 3,
+            "sentiment": -0.507834
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": -0.025084
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.285616
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.87371,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Richard Roberts",
+          "role": "Interim CFO and VP of FP&A and Investor Relations, CVR Energy",
+          "section": "prepared",
+          "sentiment": 0.897074,
+          "word_count": 234,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Dane Neumann",
+          "role": "CEO, CVR Energy",
+          "section": "prepared",
+          "sentiment": -0.742997,
+          "word_count": 102,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Richard Roberts",
+          "role": "Interim CFO and VP of FP&A and Investor Relations, CVR Energy",
+          "section": "prepared",
+          "sentiment": -0.834545,
+          "word_count": 1142,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Dane Neumann",
+          "role": "CEO, CVR Energy",
+          "section": "prepared",
+          "sentiment": 0.007907,
+          "word_count": 640,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910699,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.696864,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Dane Neumann",
+          "role": "CEO, CVR Energy",
+          "section": "qa",
+          "sentiment": 0.281813,
+          "word_count": 164,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.706098,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Dane Neumann",
+          "role": "CEO, CVR Energy",
+          "section": "qa",
+          "sentiment": 0.657608,
+          "word_count": 182,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.419764,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898722,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.694662,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Richard Roberts",
+          "role": "Interim CFO and VP of FP&A and Investor Relations, CVR Energy",
+          "section": "qa",
+          "sentiment": 0.751386,
+          "word_count": 187,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.705794,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Richard Roberts",
+          "role": "Interim CFO and VP of FP&A and Investor Relations, CVR Energy",
+          "section": "qa",
+          "sentiment": 0.125632,
+          "word_count": 188,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.902924,
+          "word_count": 17,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Richard Roberts",
+          "role": "Interim CFO and VP of FP&A and Investor Relations, CVR Energy",
+          "section": "qa",
+          "sentiment": -0.468692,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907024,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Alexa Petrick",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.72269,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Dane Neumann",
+          "role": "CEO, CVR Energy",
+          "section": "qa",
+          "sentiment": -0.244391,
+          "word_count": 136,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Alexa Petrick",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.830702,
+          "word_count": 52,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Dane Neumann",
+          "role": "CEO, CVR Energy",
+          "section": "qa",
+          "sentiment": -0.389649,
+          "word_count": 210,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Alexa Petrick",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.780152,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.92131,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Dane Neumann",
+          "role": "CEO, CVR Energy",
+          "section": "qa",
+          "sentiment": -0.46835,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.921741,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3879,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "CVR Energy (CVI) Q2 2026 Earnings Call Transcript",
@@ -196,13 +569,40 @@
       "ts": "2026-07-30T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CVI Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cvi/transcripts/658274-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "CVI Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cvi/transcripts/560422-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "CVI Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cvi/transcripts/399983-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-19T00:00:00+00:00"
+    },
+    {
+      "title": "CVI Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-cvr-energy-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:18:17.004458+00:00"
 }

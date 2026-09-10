@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CTVA",
   "earnings_history": [
     {
@@ -153,7 +153,802 @@
       "surprise_pct": 7.05
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-31T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ctva/transcripts/661448-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 59,
+        "scored_turn_count": 59,
+        "overall_sentiment": 0.404063,
+        "prepared_sentiment": 0.143392,
+        "qa_sentiment": 0.428199,
+        "qa_tone_shift": 0.284807,
+        "uncertainty_turn_rate": 0.152542,
+        "forward_looking_turn_rate": 0.322034,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 20,
+            "sentiment": 0.096504
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 18,
+            "sentiment": 0.217623
+          },
+          {
+            "topic": "Demand",
+            "mentions": 17,
+            "sentiment": 0.105042
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.537833
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.444105
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.933701
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.878292,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Kim Booth",
+          "role": "Head of Investor Relations, Corteva",
+          "section": "prepared",
+          "sentiment": 0.916588,
+          "word_count": 238,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "prepared",
+          "sentiment": -0.927281,
+          "word_count": 1341,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 6,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "prepared",
+          "sentiment": -0.933701,
+          "word_count": 985,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Kim Booth",
+          "role": "Head of Investor Relations, Corteva",
+          "section": "prepared",
+          "sentiment": 0.783062,
+          "word_count": 152,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909542,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Vincent Andrews",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.808837,
+          "word_count": 83,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Judd O'Connor",
+          "role": "EVP, Seed Business Unit, Corteva",
+          "section": "qa",
+          "sentiment": -0.793038,
+          "word_count": 138,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": -0.812557,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Judd O'Connor",
+          "role": "EVP, Seed Business Unit, Corteva",
+          "section": "qa",
+          "sentiment": -0.871492,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.871555,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "David Begleiter",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.870367,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894526,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Chris Parkinson",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.791766,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Luke Kissam",
+          "role": "CEO, New Corteva",
+          "section": "qa",
+          "sentiment": 0.533501,
+          "word_count": 296,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886616,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Joel Jackson",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.836513,
+          "word_count": 113,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.593434,
+          "word_count": 244,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": 0.143651,
+          "word_count": 166,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.529361,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890669,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Matt Hettwer",
+          "role": "Analyst, Vertical Research Partners",
+          "section": "qa",
+          "sentiment": 0.069687,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.417065,
+          "word_count": 419,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882481,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "David Begleiter",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.360984,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.848463,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Judd O'Connor",
+          "role": "EVP, Seed Business Unit, Corteva",
+          "section": "qa",
+          "sentiment": 0.119742,
+          "word_count": 160,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890828,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Frank Mitsch",
+          "role": "Analyst, Fermium Research",
+          "section": "qa",
+          "sentiment": 0.683857,
+          "word_count": 109,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.586414,
+          "word_count": 292,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": -0.827921,
+          "word_count": 85,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887565,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Kristen Owen",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.812082,
+          "word_count": 128,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Judd O'Connor",
+          "role": "EVP, Seed Business Unit, Corteva",
+          "section": "qa",
+          "sentiment": 0.610982,
+          "word_count": 233,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": -0.556895,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889949,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Fabian Jimenez",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.849335,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Judd O'Connor",
+          "role": "EVP, Seed Business Unit, Corteva",
+          "section": "qa",
+          "sentiment": -0.592458,
+          "word_count": 126,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": 0.300491,
+          "word_count": 73,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88825,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Lucas Beaumont",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.45442,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": -0.192387,
+          "word_count": 373,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89397,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Ben Theurer",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.250365,
+          "word_count": 111,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": 0.335952,
+          "word_count": 125,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.470532,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901132,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Rachel Lee",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.300335,
+          "word_count": 56,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "David Johnson",
+          "role": "EVP and CFO, Corteva",
+          "section": "qa",
+          "sentiment": 0.045491,
+          "word_count": 114,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886623,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Arun Viswanathan",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.306442,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": -0.141964,
+          "word_count": 272,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.880347,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Edlain Rodriguez",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.737417,
+          "word_count": 69,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.238733,
+          "word_count": 453,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.87952,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Chuck Magro",
+          "role": "CEO, Corteva",
+          "section": "qa",
+          "sentiment": 0.518298,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Kim Booth",
+          "role": "Head of Investor Relations, Corteva",
+          "section": "qa",
+          "sentiment": -0.75742,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910789,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8528,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Corteva (CTVA) Q2 2026 Earnings Call Transcript",
@@ -196,13 +991,40 @@
       "ts": "2026-05-10T00:04:54+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CTVA Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ctva/transcripts/661448-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-31T00:00:00+00:00"
+    },
+    {
+      "title": "CTVA Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ctva/transcripts/551895-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "CTVA Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ctva/transcripts/394828-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "CTVA Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-corteva-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:17:27.939641+00:00"
 }

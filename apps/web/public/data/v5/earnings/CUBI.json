@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CUBI",
   "earnings_history": [
     {
@@ -153,7 +153,764 @@
       "surprise_pct": 21.95
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-24T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cubi/transcripts/654393-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 57,
+        "scored_turn_count": 57,
+        "overall_sentiment": 0.375075,
+        "prepared_sentiment": -0.158051,
+        "qa_sentiment": 0.426337,
+        "qa_tone_shift": 0.584388,
+        "uncertainty_turn_rate": 0.052632,
+        "forward_looking_turn_rate": 0.263158,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 15,
+            "sentiment": 0.049652
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": 0.074585
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": 0.023536
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.411553
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.564066
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.932613
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.887938,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Phil Watkins",
+          "role": "EVP and Head of Corporate Development and Investor Relations, Customers Bancorp",
+          "section": "prepared",
+          "sentiment": 0.917635,
+          "word_count": 196,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "prepared",
+          "sentiment": -0.889475,
+          "word_count": 1766,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "prepared",
+          "sentiment": -0.932613,
+          "word_count": 1258,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "prepared",
+          "sentiment": -0.773741,
+          "word_count": 140,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910228,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Steve Moss",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.694184,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.714679,
+          "word_count": 35,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Steve Moss",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.332674,
+          "word_count": 83,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.062417,
+          "word_count": 215,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Steve Moss",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.672787,
+          "word_count": 61,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": -0.424223,
+          "word_count": 63,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Steve Moss",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.54779,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888602,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Kelly Motta",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.038031,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.01759,
+          "word_count": 184,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Kelly Motta",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.259418,
+          "word_count": 35,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.893441,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Kelly Motta",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.572655,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": -0.018713,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Kelly Motta",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.245313,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901009,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Mike Pietrini",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.543827,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": -0.333328,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Mike Pietrini",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.361406,
+          "word_count": 56,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.378409,
+          "word_count": 109,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895938,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.886617,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.847929,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.032119,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.590851,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.819012,
+          "word_count": 30,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.38595,
+          "word_count": 31,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895791,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Brian Wilczynski",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.10094,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 35,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.689975,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Brian Wilczynski",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.885331,
+          "word_count": 42,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.6884,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Brian Wilczynski",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.209598,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906071,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Securities",
+          "section": "qa",
+          "sentiment": 0.035005,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.023244,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Securities",
+          "section": "qa",
+          "sentiment": 0.896824,
+          "word_count": 54,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": -0.238657,
+          "word_count": 124,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Securities",
+          "section": "qa",
+          "sentiment": 0.809501,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.659648,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885941,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.745122,
+          "word_count": 38,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Mark McCollom",
+          "role": "CFO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": -0.402695,
+          "word_count": 113,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.838363,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": 0.25434,
+          "word_count": 160,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.610447,
+          "word_count": 42,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": -0.839076,
+          "word_count": 84,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.375252,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901755,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Sam Sidhu",
+          "role": "CEO, Customers Bancorp",
+          "section": "qa",
+          "sentiment": -0.666801,
+          "word_count": 21,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911411,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6328,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From Customers Bancorp’s Q2 Earnings Call",
@@ -196,13 +953,40 @@
       "ts": "2026-07-24T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CUBI Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cubi/transcripts/654393-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-24T00:00:00+00:00"
+    },
+    {
+      "title": "CUBI Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cubi/transcripts/545621-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-24T00:00:00+00:00"
+    },
+    {
+      "title": "CUBI Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cubi/transcripts/398951-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-23T00:00:00+00:00"
+    },
+    {
+      "title": "CUBI Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-customers-bancorp-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:17:56.872040+00:00"
 }

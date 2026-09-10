@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CTOS",
   "earnings_history": [
     {
@@ -153,7 +153,597 @@
       "surprise_pct": 212.61
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-04T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ctos/transcripts/656121-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 42,
+        "scored_turn_count": 42,
+        "overall_sentiment": 0.474804,
+        "prepared_sentiment": -0.04208,
+        "qa_sentiment": 0.529212,
+        "qa_tone_shift": 0.571292,
+        "uncertainty_turn_rate": 0.119048,
+        "forward_looking_turn_rate": 0.261905,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 15,
+            "sentiment": 0.224133
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.260175
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.318435
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": -0.197247
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": 0.163496
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.67514
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.939775
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.810109,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Brian Perman",
+          "role": "VP of Investor Relations, Custom Truck One Source",
+          "section": "prepared",
+          "sentiment": 0.893903,
+          "word_count": 330,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "prepared",
+          "sentiment": -0.932557,
+          "word_count": 701,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Chris Eperjesy",
+          "role": "CFO, Custom Truck One Source",
+          "section": "prepared",
+          "sentiment": -0.939775,
+          "word_count": 1459,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905952,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Swetha Rakhecha",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.648656,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Chris Eperjesy",
+          "role": "CFO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.27273,
+          "word_count": 230,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894686,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Michael Shlisky",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.775256,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.72979,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Michael Shlisky",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.174365,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": -0.455886,
+          "word_count": 37,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Michael Shlisky",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.173364,
+          "word_count": 86,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.175124,
+          "word_count": 165,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Michael Shlisky",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.738953,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.667399,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": -0.738743,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906906,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Naim Kaplan",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.722313,
+          "word_count": 96,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.597556,
+          "word_count": 183,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Naim Kaplan",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.627967,
+          "word_count": 76,
+          "topic_hits": [
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.473733,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Naim Kaplan",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.815294,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.34039,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897523,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Justin Hauke",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.835293,
+          "word_count": 75,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.879046,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Chris Eperjesy",
+          "role": "CFO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.813861,
+          "word_count": 81,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.529125,
+          "word_count": 84,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Justin Hauke",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.743237,
+          "word_count": 94,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Chris Eperjesy",
+          "role": "CFO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": -0.485109,
+          "word_count": 66,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89899,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Scott Schneeberger",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.606736,
+          "word_count": 103,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.695561,
+          "word_count": 301,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Scott Schneeberger",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.454659,
+          "word_count": 105,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.650995,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Chris Eperjesy",
+          "role": "CFO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.075121,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Scott Schneeberger",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.785931,
+          "word_count": 33,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Chris Eperjesy",
+          "role": "CFO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": 0.68584,
+          "word_count": 83,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913513,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Ryan McMonagle",
+          "role": "CEO, Custom Truck One Source",
+          "section": "qa",
+          "sentiment": -0.231599,
+          "word_count": 45,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915544,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5340,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Custom Truck One Source (CTOS) Q2 2026 Earnings Call Transcript - aol.com",
@@ -196,13 +786,40 @@
       "ts": "2026-08-04T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CTOS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ctos/transcripts/656121-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "CTOS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ctos/transcripts/592522-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "CTOS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ctos/transcripts/400203-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-10T00:00:00+00:00"
+    },
+    {
+      "title": "CTOS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-custom-truck-one-source-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-10T23:20:01.250943+00:00"
 }
