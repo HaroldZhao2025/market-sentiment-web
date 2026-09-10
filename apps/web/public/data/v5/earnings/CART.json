@@ -81,7 +81,708 @@
       "surprise_pct": -55.86
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cart/transcripts/556161-q1-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 50,
+        "scored_turn_count": 50,
+        "overall_sentiment": 0.438134,
+        "prepared_sentiment": 0.018284,
+        "qa_sentiment": 0.474643,
+        "qa_tone_shift": 0.456359,
+        "uncertainty_turn_rate": 0.06,
+        "forward_looking_turn_rate": 0.22,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 18,
+            "sentiment": 0.001185
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 11,
+            "sentiment": 0.116828
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 11,
+            "sentiment": 0.008244
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": 0.128941
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": -0.031172
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.273628
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.935555
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.894019,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Rebecca Yoshiyama",
+          "role": "VP, Head of Investor Relations, Instacart",
+          "section": "prepared",
+          "sentiment": 0.886104,
+          "word_count": 188,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "prepared",
+          "sentiment": -0.771433,
+          "word_count": 1798,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Emily Reuter",
+          "role": "CFO, Instacart",
+          "section": "prepared",
+          "sentiment": -0.935555,
+          "word_count": 854,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912029,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Colin Sebastian",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.255737,
+          "word_count": 102,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": -0.843333,
+          "word_count": 325,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889992,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Eric Sheridan",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.402786,
+          "word_count": 86,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": 0.593391,
+          "word_count": 401,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.864381,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "John Colantuoni",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.765525,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": -0.683802,
+          "word_count": 776,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898683,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ron Josey",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.619466,
+          "word_count": 125,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": 0.364617,
+          "word_count": 512,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Thank you.",
+          "role": "Our next question comes from the line of Shweta Khajuria of Wolfe Research.",
+          "section": "qa",
+          "sentiment": 0.8675,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Shweta Khajuria",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.817994,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Shweta Khajuria",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.857143,
+          "word_count": 121,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": 0.1139,
+          "word_count": 261,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Emily Reuter",
+          "role": "CFO, Instacart",
+          "section": "qa",
+          "sentiment": -0.007054,
+          "word_count": 349,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886064,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Josh Beck",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.769279,
+          "word_count": 120,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": 0.790366,
+          "word_count": 507,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Josh Beck",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": -0.240954,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887529,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Justin Patterson",
+          "role": "Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": 0.592205,
+          "word_count": 78,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Emily Reuter",
+          "role": "CFO, Instacart",
+          "section": "qa",
+          "sentiment": 0.559153,
+          "word_count": 146,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": 0.556126,
+          "word_count": 118,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872211,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Nikhil Devnani",
+          "role": "Analyst, Bernstein",
+          "section": "qa",
+          "sentiment": 0.792224,
+          "word_count": 88,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": -0.226023,
+          "word_count": 267,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Emily Reuter",
+          "role": "CFO, Instacart",
+          "section": "qa",
+          "sentiment": 0.836897,
+          "word_count": 188,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Nikhil Devnani",
+          "role": "Analyst, Bernstein",
+          "section": "qa",
+          "sentiment": 0.788952,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": -0.619348,
+          "word_count": 190,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 35,
+          "speaker": "Emily Reuter",
+          "role": "CFO, Instacart",
+          "section": "qa",
+          "sentiment": 0.728803,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885718,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Jason Helfstein",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.667717,
+          "word_count": 69,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": -0.749164,
+          "word_count": 319,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 39,
+          "speaker": "Emily Reuter",
+          "role": "CFO, Instacart",
+          "section": "qa",
+          "sentiment": 0.301652,
+          "word_count": 218,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.871713,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Ken Gawrelski",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.787317,
+          "word_count": 45,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Question two, please.",
+          "role": "Maybe can you talk about the success you are having with partners working towards price parity?",
+          "section": "qa",
+          "sentiment": 0.533116,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": -0.367737,
+          "word_count": 275,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Emily Reuter",
+          "role": "CFO, Instacart",
+          "section": "qa",
+          "sentiment": 0.638902,
+          "word_count": 324,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": 0.4273,
+          "word_count": 178,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888998,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Andrew Boone",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.609279,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 48,
+          "speaker": "Chris Rogers",
+          "role": "CEO, Instacart",
+          "section": "qa",
+          "sentiment": -0.235275,
+          "word_count": 228,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911586,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 10013,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "CART Earnings Call: Q2 2026",
@@ -155,5 +856,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-09T06:11:02.436828+00:00"
+  "updated_at_utc": "2026-09-10T01:19:21.657995+00:00"
 }

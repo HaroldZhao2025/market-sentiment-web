@@ -132,6 +132,521 @@
   "calls": [
     {
       "quarter": null,
+      "date": "2026-02-10T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ccsi/transcripts/411188-q4-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 36,
+        "scored_turn_count": 36,
+        "overall_sentiment": 0.477247,
+        "prepared_sentiment": 0.00896,
+        "qa_sentiment": 0.552777,
+        "qa_tone_shift": 0.543817,
+        "uncertainty_turn_rate": 0.194444,
+        "forward_looking_turn_rate": 0.361111,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": 0.255664
+          },
+          {
+            "topic": "Demand",
+            "mentions": 11,
+            "sentiment": 0.153026
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.09087
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": 0.022113
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.216539
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.91238
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.882929
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.899258,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Adam Varon",
+          "role": "SVP of Finance, Consensus Cloud Solutions",
+          "section": "prepared",
+          "sentiment": 0.91238,
+          "word_count": 224,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "prepared",
+          "sentiment": 0.010959,
+          "word_count": 700,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Johnny Hecker",
+          "role": "Chief Revenue Officer and EVP of Operations, Consensus Cloud Solutions",
+          "section": "prepared",
+          "sentiment": -0.84537,
+          "word_count": 1344,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Jim Malone",
+          "role": "CFO, Consensus Cloud Solutions",
+          "section": "prepared",
+          "sentiment": -0.932428,
+          "word_count": 1049,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.808499,
+          "word_count": 205,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907159,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "David Larsen",
+          "role": "Equity Research Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.514158,
+          "word_count": 78,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Johnny Hecker",
+          "role": "Chief Revenue Officer and EVP of Operations, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": -0.574689,
+          "word_count": 284,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "David Larsen",
+          "role": "Equity Research Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.723795,
+          "word_count": 77,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Johnny Hecker",
+          "role": "Chief Revenue Officer and EVP of Operations, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.837978,
+          "word_count": 210,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "David Larsen",
+          "role": "Equity Research Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.867514,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Johnny Hecker",
+          "role": "Chief Revenue Officer and EVP of Operations, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.877537,
+          "word_count": 113,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "David Larsen",
+          "role": "Equity Research Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.887789,
+          "word_count": 20,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.718301,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.805577,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "David Larsen",
+          "role": "Equity Research Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.644011,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897756,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Gene Mannheimer",
+          "role": "Senior Research Analyst, Freedom Capital Markets",
+          "section": "qa",
+          "sentiment": 0.189341,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Gene Mannheimer",
+          "role": "Senior Research Analyst, Freedom Capital Markets",
+          "section": "qa",
+          "sentiment": 0.85332,
+          "word_count": 114,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.874292,
+          "word_count": 26,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Johnny Hecker",
+          "role": "Chief Revenue Officer and EVP of Operations, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.862589,
+          "word_count": 358,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Gene Mannheimer",
+          "role": "Senior Research Analyst, Freedom Capital Markets",
+          "section": "qa",
+          "sentiment": 0.316531,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.882929,
+          "word_count": 915,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Gene Mannheimer",
+          "role": "Senior Research Analyst, Freedom Capital Markets",
+          "section": "qa",
+          "sentiment": -0.641315,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899654,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Isaac Saulson",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.756157,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Johnny Hecker",
+          "role": "Chief Revenue Officer and EVP of Operations, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.238343,
+          "word_count": 48,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": -0.159116,
+          "word_count": 59,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.382189,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Isaac Saulson",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.134691,
+          "word_count": 53,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.522718,
+          "word_count": 155,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 32,
+          "speaker": "Isaac Saulson",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": -0.505439,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889693,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Scott Turicchi",
+          "role": "CEO, Consensus Cloud Solutions",
+          "section": "qa",
+          "sentiment": 0.802873,
+          "word_count": 154,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.92124,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6807,
+      "transcript_text_redistributed": false
+    },
+    {
+      "quarter": null,
       "date": "2026-08-21T23:14:33+00:00",
       "source": "Motley Fool",
       "source_url": "https://finance.yahoo.com/m/e2a7cd5e-6ade-30b9-814a-e61054bf033f/largo-%28lgo%29-q2-2026-earnings.html",
@@ -640,5 +1155,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-09-09T06:11:43.965351+00:00"
+  "updated_at_utc": "2026-09-10T01:21:25.611960+00:00"
 }
