@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "D",
   "earnings_history": [
     {
@@ -153,7 +153,402 @@
       "surprise_pct": 9.14
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-31T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/d/transcripts/659241-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 28,
+        "scored_turn_count": 28,
+        "overall_sentiment": 0.441096,
+        "prepared_sentiment": 0.134,
+        "qa_sentiment": 0.492278,
+        "qa_tone_shift": 0.358278,
+        "uncertainty_turn_rate": 0.214286,
+        "forward_looking_turn_rate": 0.25,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.239635
+          },
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": 0.079627
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": -0.011176
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 3,
+            "sentiment": -0.225357
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.469862
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.200501
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.913047,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "David McFarland",
+          "role": "Senior VP of Investor Relations and Treasurer, Dominion Energy",
+          "section": "prepared",
+          "sentiment": 0.894155,
+          "word_count": 168,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Steven Ridge",
+          "role": "EVP and CFO, Dominion Energy",
+          "section": "prepared",
+          "sentiment": -0.469862,
+          "word_count": 617,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Bob Blue",
+          "role": "Chair, President, and CEO, Dominion Energy",
+          "section": "prepared",
+          "sentiment": -0.80134,
+          "word_count": 1705,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899182,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Nick Campanella",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.814846,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Bob Blue",
+          "role": "Chair, President, and CEO, Dominion Energy",
+          "section": "qa",
+          "sentiment": 0.595132,
+          "word_count": 379,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Nick Campanella",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.741067,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Bob Blue",
+          "role": "Chair, President, and CEO, Dominion Energy",
+          "section": "qa",
+          "sentiment": 0.853984,
+          "word_count": 167,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Nick Campanella",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.500143,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.875216,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.673086,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.750864,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "It's a great question.",
+          "role": "At a high level, I'll answer that and then turn it over to Ed Baine, who is our EVP of EVP of Utility Operations.",
+          "section": "qa",
+          "sentiment": 0.529072,
+          "word_count": 141,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ed Baine",
+          "role": "EVP of Utility Operations, Dominion Energy",
+          "section": "qa",
+          "sentiment": 0.51779,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.832327,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Bob Blue",
+          "role": "Chair, President, and CEO, Dominion Energy",
+          "section": "qa",
+          "sentiment": 0.200501,
+          "word_count": 197,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.293396,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890748,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Carly Davenport",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.330157,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Bob Blue",
+          "role": "Chair, President, and CEO, Dominion Energy",
+          "section": "qa",
+          "sentiment": 0.316568,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Carly Davenport",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.631368,
+          "word_count": 84,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Steven Ridge",
+          "role": "EVP and CFO, Dominion Energy",
+          "section": "qa",
+          "sentiment": 0.603698,
+          "word_count": 84,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Bob Blue",
+          "role": "Chair, President, and CEO, Dominion Energy",
+          "section": "qa",
+          "sentiment": -0.088531,
+          "word_count": 99,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Carly Davenport",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.427376,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918246,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Bob Blue",
+          "role": "Chair, President, and CEO, Dominion Energy",
+          "section": "qa",
+          "sentiment": 0.671303,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89838,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4471,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "D Q2 Earnings Call Puts CVOW Schedule and Demand in Focus",
@@ -189,13 +584,40 @@
       "ts": "2026-07-09T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "D Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/d/transcripts/659241-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-31T00:00:00+00:00"
+    },
+    {
+      "title": "D Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/d/transcripts/564702-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-01T00:00:00+00:00"
+    },
+    {
+      "title": "D Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/d/transcripts/393558-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-23T00:00:00+00:00"
+    },
+    {
+      "title": "D Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-31-dominion-energy-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-31T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:24:40.090890+00:00"
 }

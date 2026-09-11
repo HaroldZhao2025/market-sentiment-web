@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DAR",
   "earnings_history": [
     {
@@ -153,7 +153,889 @@
       "surprise_pct": 38.64
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dar/transcripts/658008-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 65,
+        "scored_turn_count": 65,
+        "overall_sentiment": 0.30079,
+        "prepared_sentiment": -0.186624,
+        "qa_sentiment": 0.341408,
+        "qa_tone_shift": 0.528033,
+        "uncertainty_turn_rate": 0.092308,
+        "forward_looking_turn_rate": 0.338462,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 18,
+            "sentiment": -0.002067
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 17,
+            "sentiment": -0.022017
+          },
+          {
+            "topic": "Demand",
+            "mentions": 14,
+            "sentiment": -0.062453
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 10,
+            "sentiment": 0.002382
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 8,
+            "sentiment": -0.165083
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.108113
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.052016
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.877557,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Suann Guthrie",
+          "role": "SVP of Investor Relations, Darling Ingredients",
+          "section": "prepared",
+          "sentiment": 0.920453,
+          "word_count": 187,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "prepared",
+          "sentiment": -0.912878,
+          "word_count": 541,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "prepared",
+          "sentiment": -0.905401,
+          "word_count": 993,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "prepared",
+          "sentiment": -0.912853,
+          "word_count": 390,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912923,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Heather Jones",
+          "role": "Analyst, Heather Jones Research",
+          "section": "qa",
+          "sentiment": -0.348805,
+          "word_count": 78,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.245524,
+          "word_count": 84,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Heather Jones",
+          "role": "Analyst, Heather Jones Research",
+          "section": "qa",
+          "sentiment": 0.831204,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.349944,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Heather Jones",
+          "role": "Analyst, Heather Jones Research",
+          "section": "qa",
+          "sentiment": -0.158224,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895924,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.052016,
+          "word_count": 95,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.709193,
+          "word_count": 164,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.403859,
+          "word_count": 91,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.437041,
+          "word_count": 142,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.808362,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89492,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": -0.798154,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": 0.780553,
+          "word_count": 34,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.268757,
+          "word_count": 163,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": 0.09304,
+          "word_count": 41,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.88085,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": 0.644092,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": 0.872134,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": -0.053347,
+          "word_count": 6,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.83431,
+          "word_count": 94,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.136812,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": -0.363396,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896907,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Andrew Strelzik",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.797185,
+          "word_count": 114,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.145656,
+          "word_count": 372,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.821304,
+          "word_count": 35,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.778562,
+          "word_count": 36,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Andrew Strelzik",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.773465,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.640089,
+          "word_count": 213,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Andrew Strelzik",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.247533,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898779,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Ben Kallo",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.210563,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.661396,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Ben Kallo",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.594742,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.643915,
+          "word_count": 318,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900705,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Conor Fitzpatrick",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.120585,
+          "word_count": 136,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.889687,
+          "word_count": 158,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Conor Fitzpatrick",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.362667,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.008545,
+          "word_count": 215,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893916,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.618752,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.807361,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.294711,
+          "word_count": 22,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Bob Day",
+          "role": "CFO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.847883,
+          "word_count": 50,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899225,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Jason Gabelman",
+          "role": "Analyst, TD",
+          "section": "qa",
+          "sentiment": 0.488294,
+          "word_count": 47,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.689175,
+          "word_count": 266,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Jason Gabelman",
+          "role": "Analyst, TD",
+          "section": "qa",
+          "sentiment": 0.514547,
+          "word_count": 67,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": -0.269321,
+          "word_count": 182,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897668,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Carla Casella",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.833466,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.846513,
+          "word_count": 143,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 60,
+          "speaker": "Carla Casella",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.885999,
+          "word_count": 36,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.865561,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909962,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Randall C. Stuewe",
+          "role": "Chairman and CEO, Darling Ingredients",
+          "section": "qa",
+          "sentiment": 0.003135,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910328,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6980,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Must-Read Analyst Questions From Darling Ingredients’s Q2 Earnings Call - TradingView",
@@ -196,13 +1078,40 @@
       "ts": "2026-07-30T16:57:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DAR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dar/transcripts/658008-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "DAR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dar/transcripts/555896-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "DAR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dar/transcripts/397089-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "DAR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-darling-ingredients-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:25:09.237409+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DBX",
   "earnings_history": [
     {
@@ -153,7 +153,473 @@
       "surprise_pct": 40.06
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dbx/transcripts/662668-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 33,
+        "scored_turn_count": 33,
+        "overall_sentiment": 0.465983,
+        "prepared_sentiment": 0.371787,
+        "qa_sentiment": 0.482804,
+        "qa_tone_shift": 0.111017,
+        "uncertainty_turn_rate": 0.151515,
+        "forward_looking_turn_rate": 0.333333,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.115178
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 8,
+            "sentiment": 0.299976
+          },
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": 0.338383
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.121459
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": 0.08144
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.14708
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.91302,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Sarah Schubach",
+          "role": "Chief Accounting Officer and Head of Investor Relations, Dropbox",
+          "section": "prepared",
+          "sentiment": 0.907261,
+          "word_count": 178,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Good afternoon, everyone.",
+          "role": "Before I turn it over to Ashraf, I want to briefly address the CEO transition we announced in May.",
+          "section": "prepared",
+          "sentiment": 0.332811,
+          "word_count": 159,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Ashraf Alkarmi",
+          "role": "Co-CEO, Dropbox",
+          "section": "prepared",
+          "sentiment": -0.628723,
+          "word_count": 1395,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Ross Tennenbaum",
+          "role": "CFO, Dropbox",
+          "section": "prepared",
+          "sentiment": 0.334564,
+          "word_count": 1602,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901247,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Rishi Jaluria",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.067268,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Ross Tennenbaum",
+          "role": "CFO, Dropbox",
+          "section": "qa",
+          "sentiment": -0.287341,
+          "word_count": 203,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Rishi Jaluria",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.685619,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Ashraf Alkarmi",
+          "role": "Co-CEO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.84067,
+          "word_count": 255,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Rishi Jaluria",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": -0.534705,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885203,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Steve Enders",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.682696,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Ashraf Alkarmi",
+          "role": "Co-CEO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.8793,
+          "word_count": 513,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Steve Enders",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.762009,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ross Tennenbaum",
+          "role": "CFO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.202868,
+          "word_count": 355,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Steve Enders",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.447627,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.849279,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Matt Bullock",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.737601,
+          "word_count": 104,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Ashraf Alkarmi",
+          "role": "Co-CEO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.099113,
+          "word_count": 245,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Ross Tennenbaum",
+          "role": "CFO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.771316,
+          "word_count": 88,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Matt Bullock",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.654656,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Ashraf Alkarmi",
+          "role": "Co-CEO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.640892,
+          "word_count": 167,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Ross Tennenbaum",
+          "role": "CFO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.715745,
+          "word_count": 119,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887241,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jaiden Patel",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.529754,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ashraf Alkarmi",
+          "role": "Co-CEO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.607747,
+          "word_count": 313,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Jaiden Patel",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.505182,
+          "word_count": 41,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Ross Tennenbaum",
+          "role": "CFO, Dropbox",
+          "section": "qa",
+          "sentiment": 0.274815,
+          "word_count": 279,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 29,
+          "speaker": "Jaiden Patel",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.637699,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900511,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Sarah Schubach",
+          "role": "Chief Accounting Officer and Head of Investor Relations, Dropbox",
+          "section": "qa",
+          "sentiment": -0.458942,
+          "word_count": 15,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908828,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6854,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Dropbox (DBX) Q2 2026 Earnings Call Transcript - aol.com",
@@ -196,13 +662,40 @@
       "ts": "2026-08-07T01:03:46+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DBX Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dbx/transcripts/662668-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "DBX Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dbx/transcripts/560750-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "DBX Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dbx/transcripts/400180-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-19T00:00:00+00:00"
+    },
+    {
+      "title": "DBX Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-dropbox-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:26:07.620696+00:00"
 }

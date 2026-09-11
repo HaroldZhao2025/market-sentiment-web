@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DBD",
   "earnings_history": [
     {
@@ -75,7 +75,553 @@
       "surprise_pct": 111.19
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dbd/transcripts/658030-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 38,
+        "scored_turn_count": 38,
+        "overall_sentiment": 0.173642,
+        "prepared_sentiment": -0.153198,
+        "qa_sentiment": 0.223164,
+        "qa_tone_shift": 0.376362,
+        "uncertainty_turn_rate": 0.078947,
+        "forward_looking_turn_rate": 0.315789,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 14,
+            "sentiment": -0.129503
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": -0.410757
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": -0.180136
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": -0.422029
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": -0.003496
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": -0.844771
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.885106,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Maynard Um",
+          "role": "VP of Investor Relations, Diebold Nixdorf",
+          "section": "prepared",
+          "sentiment": 0.885891,
+          "word_count": 157,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "prepared",
+          "sentiment": -0.931457,
+          "word_count": 1628,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Tom Timko",
+          "role": "EVP and CFO, Diebold Nixdorf",
+          "section": "prepared",
+          "sentiment": -0.743004,
+          "word_count": 1367,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "prepared",
+          "sentiment": -0.862527,
+          "word_count": 170,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901718,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.572574,
+          "word_count": 112,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Tom Timko",
+          "role": "EVP and CFO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.859853,
+          "word_count": 306,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.77474,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.780095,
+          "word_count": 170,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Tom Timko",
+          "role": "EVP and CFO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.470655,
+          "word_count": 220,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 11,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.6145,
+          "word_count": 70,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Tom Timko",
+          "role": "EVP and CFO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": 0.840441,
+          "word_count": 223,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.37189,
+          "word_count": 674,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900425,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": -0.853196,
+          "word_count": 44,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tom Timko",
+          "role": "EVP and CFO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.035245,
+          "word_count": 238,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.741914,
+          "word_count": 55,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": 0.593977,
+          "word_count": 236,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Justin Ages",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.404216,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897259,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Matt Bryson",
+          "role": "Analyst, Wedbush",
+          "section": "qa",
+          "sentiment": 0.398661,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": 0.650292,
+          "word_count": 329,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 23,
+          "speaker": "Matt Bryson",
+          "role": "Analyst, Wedbush",
+          "section": "qa",
+          "sentiment": 0.029494,
+          "word_count": 48,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.499723,
+          "word_count": 101,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Matt Bryson",
+          "role": "Analyst, Wedbush",
+          "section": "qa",
+          "sentiment": 0.856429,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.648064,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Matt Bryson",
+          "role": "Analyst, Wedbush",
+          "section": "qa",
+          "sentiment": 0.862057,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.471133,
+          "word_count": 216,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Matt Bryson",
+          "role": "Analyst, Wedbush",
+          "section": "qa",
+          "sentiment": 0.861387,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Octavio Marquez",
+          "role": "President and CEO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.522464,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Matt Bryson",
+          "role": "Analyst, Wedbush",
+          "section": "qa",
+          "sentiment": -0.246803,
+          "word_count": 54,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Tom Timko",
+          "role": "EVP and CFO, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.083487,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Matt Bryson",
+          "role": "Analyst, Wedbush",
+          "section": "qa",
+          "sentiment": 0.373091,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Maynard Um",
+          "role": "VP of Investor Relations, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": -0.177019,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.651911,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Maynard Um",
+          "role": "VP of Investor Relations, Diebold Nixdorf",
+          "section": "qa",
+          "sentiment": 0.550575,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908362,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7235,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Diebold Nixdorf (DBD) Q2 2026 Earnings Call Transcript",
@@ -118,13 +664,40 @@
       "ts": "2026-07-29T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DBD Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dbd/transcripts/658030-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "DBD Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dbd/transcripts/555815-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "DBD Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dbd/transcripts/398799-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "DBD Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-diebold-nixdorf-incorporated-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:25:58.271962+00:00"
 }

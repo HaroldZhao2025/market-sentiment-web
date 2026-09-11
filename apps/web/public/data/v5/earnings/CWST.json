@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CWST",
   "earnings_history": [
     {
@@ -153,7 +153,781 @@
       "surprise_pct": 26.73
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-07T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cwst/transcripts/659119-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 58,
+        "scored_turn_count": 58,
+        "overall_sentiment": 0.427272,
+        "prepared_sentiment": 0.017317,
+        "qa_sentiment": 0.45764,
+        "qa_tone_shift": 0.440323,
+        "uncertainty_turn_rate": 0.137931,
+        "forward_looking_turn_rate": 0.206897,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 20,
+            "sentiment": 0.272287
+          },
+          {
+            "topic": "Demand",
+            "mentions": 14,
+            "sentiment": 0.162729
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.091607
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.092811
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.897486
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.844035
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.189578
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905056,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Henry Baby",
+          "role": "VP of Investor Relations and Finance, Casella Waste Systems",
+          "section": "prepared",
+          "sentiment": 0.897486,
+          "word_count": 310,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "prepared",
+          "sentiment": -0.88924,
+          "word_count": 1160,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "prepared",
+          "sentiment": -0.844035,
+          "word_count": 968,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90253,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Adam Bubes",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.858784,
+          "word_count": 56,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": -0.78068,
+          "word_count": 36,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Adam Bubes",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.581676,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": -0.843103,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.278039,
+          "word_count": 253,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Adam Bubes",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.853714,
+          "word_count": 53,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": -0.189578,
+          "word_count": 47,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": -0.275545,
+          "word_count": 203,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Liza Casella has done a great job.",
+          "role": "We've got Chris Rains now on the team as our Chief Revenue Officer.",
+          "section": "qa",
+          "sentiment": -0.486433,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897285,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "James Schumm",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.290258,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.359759,
+          "word_count": 222,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "James Schumm",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.735365,
+          "word_count": 141,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.48149,
+          "word_count": 251,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "James Schumm",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.765211,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.707949,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "James Schumm",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": -0.547034,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891714,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tami Zakaria",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.607972,
+          "word_count": 43,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.432961,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "Tami Zakaria",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.200603,
+          "word_count": 31,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.874461,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.883679,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Trevor Romeo",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.618401,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.415349,
+          "word_count": 165,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Trevor Romeo",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.524059,
+          "word_count": 42,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Trevor Romeo",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.679259,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.727331,
+          "word_count": 175,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Trevor Romeo",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.778688,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": -0.078916,
+          "word_count": 214,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Trevor Romeo",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.59667,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870928,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Shlomo Rosenbaum",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.698161,
+          "word_count": 71,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.511706,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "We've got great leadership from the team.",
+          "role": "As I mentioned earlier, it's slipped under Liza Casella, who's been our VP of Sales for years, and that responsibility is tucked under her.",
+          "section": "qa",
+          "sentiment": 0.663845,
+          "word_count": 238,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Shlomo Rosenbaum",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.366228,
+          "word_count": 38,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Brad Helgeson",
+          "role": "CFO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.669631,
+          "word_count": 115,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Shlomo Rosenbaum",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.856834,
+          "word_count": 27,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Shlomo Rosenbaum",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.844005,
+          "word_count": 28,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.855464,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Shlomo Rosenbaum",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.235231,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891517,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Ethan Trollinger",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.785242,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.559201,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Ethan Trollinger",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.837339,
+          "word_count": 57,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.129316,
+          "word_count": 280,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Ethan Trollinger",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.464409,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893264,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Stephanie Moore",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.488862,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Stephanie Moore",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.406928,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": 0.564298,
+          "word_count": 235,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Ned Coletta",
+          "role": "President and CEO, Casella Waste Systems",
+          "section": "qa",
+          "sentiment": -0.346625,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918174,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6705,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Clairvest Group Inc (TSX:CVG) (FY 2026) Earnings Call Highlights: Book Value Surges 10. ...",
@@ -196,13 +970,40 @@
       "ts": "2026-08-07T21:04:54+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CWST Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cwst/transcripts/659119-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-07T00:00:00+00:00"
+    },
+    {
+      "title": "CWST Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cwst/transcripts/562145-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-01T00:00:00+00:00"
+    },
+    {
+      "title": "CWST Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cwst/transcripts/398302-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-20T00:00:00+00:00"
+    },
+    {
+      "title": "CWST Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-casella-waste-systems-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:24:20.290329+00:00"
 }

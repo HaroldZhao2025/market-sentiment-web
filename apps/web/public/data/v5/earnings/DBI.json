@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DBI",
   "earnings_history": [
     {
@@ -153,7 +153,263 @@
       "surprise_pct": 37.02
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-09-10T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dbi/transcripts/688243-q2-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 15,
+        "scored_turn_count": 15,
+        "overall_sentiment": -0.032283,
+        "prepared_sentiment": 0.437077,
+        "qa_sentiment": -0.202959,
+        "qa_tone_shift": -0.640036,
+        "uncertainty_turn_rate": 0.133333,
+        "forward_looking_turn_rate": 0.466667,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": -0.180804
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": -0.561747
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": -0.438379
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.465541
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.464151
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.044485
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.044485
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910167,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Matt Crummy",
+          "role": "SVP, Designer Brands",
+          "section": "prepared",
+          "sentiment": 0.882309,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Doug Howe",
+          "role": "CEO, Designer Brands",
+          "section": "prepared",
+          "sentiment": -0.044485,
+          "word_count": 1822,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 7
+        },
+        {
+          "turn": 3,
+          "speaker": "Sheamus Toal",
+          "role": "CFO, Designer Brands",
+          "section": "prepared",
+          "sentiment": 0.000316,
+          "word_count": 889,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914292,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Mauricio Serna",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.534201,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Doug Howe",
+          "role": "CEO, Designer Brands",
+          "section": "qa",
+          "sentiment": -0.886598,
+          "word_count": 299,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Sheamus Toal",
+          "role": "CFO, Designer Brands",
+          "section": "qa",
+          "sentiment": -0.699763,
+          "word_count": 76,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Mauricio Serna",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.822749,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 9,
+          "speaker": "Sheamus Toal",
+          "role": "CFO, Designer Brands",
+          "section": "qa",
+          "sentiment": -0.928619,
+          "word_count": 170,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Mauricio Serna",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.580733,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Doug Howe",
+          "role": "CEO, Designer Brands",
+          "section": "qa",
+          "sentiment": -0.875185,
+          "word_count": 85,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911229,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Doug Howe",
+          "role": "CEO, Designer Brands",
+          "section": "qa",
+          "sentiment": -0.715404,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916776,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4097,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Designer Brands Q1 Earnings Call Signals Margin-Led Momentum",
@@ -196,13 +452,40 @@
       "ts": "2026-03-26T19:02:15+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DBI Earnings Call: Q2 2027",
+      "url": "https://stockanalysis.com/stocks/dbi/transcripts/688243-q2-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-09-10T00:00:00+00:00"
+    },
+    {
+      "title": "DBI Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/dbi/transcripts/620138-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-06-09T00:00:00+00:00"
+    },
+    {
+      "title": "DBI Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/dbi/transcripts/421121-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-26T00:00:00+00:00"
+    },
+    {
+      "title": "DBI Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-9-10-designer-brands-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-09-10T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:27:07.193723+00:00"
 }

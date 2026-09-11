@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CXT",
   "earnings_history": [
     {
@@ -93,7 +93,642 @@
       "surprise_pct": 30.2
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cxt/transcripts/662364-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 46,
+        "scored_turn_count": 46,
+        "overall_sentiment": 0.181913,
+        "prepared_sentiment": -0.17613,
+        "qa_sentiment": 0.225577,
+        "qa_tone_shift": 0.401707,
+        "uncertainty_turn_rate": 0.130435,
+        "forward_looking_turn_rate": 0.478261,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 21,
+            "sentiment": -0.084759
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 15,
+            "sentiment": -0.104876
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": -0.644111
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.611958
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.91094
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.279283
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.908881,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Matt Roache",
+          "role": "VP of Investor Relations, Crane NXT",
+          "section": "prepared",
+          "sentiment": 0.91094,
+          "word_count": 248,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "prepared",
+          "sentiment": -0.915097,
+          "word_count": 230,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Christina Cristiano",
+          "role": "SVP and CFO, Crane NXT",
+          "section": "prepared",
+          "sentiment": -0.899556,
+          "word_count": 911,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "prepared",
+          "sentiment": -0.88582,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912043,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.865227,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.864309,
+          "word_count": 185,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.088976,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Christina Cristiano",
+          "role": "SVP and CFO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.085981,
+          "word_count": 197,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.839,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": 0.490402,
+          "word_count": 41,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.64405,
+          "word_count": 233,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.791259,
+          "word_count": 199,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.875729,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Bob Labick",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": -0.843284,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.586602,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Bob Labick",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.781559,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": 0.630548,
+          "word_count": 308,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Bob Labick",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.367786,
+          "word_count": 69,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Christina Cristiano",
+          "role": "SVP and CFO, Crane NXT",
+          "section": "qa",
+          "sentiment": 0.08665,
+          "word_count": 113,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881097,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": -0.09924,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": 0.759628,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.851246,
+          "word_count": 159,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": 0.840761,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.518893,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": 0.592989,
+          "word_count": 39,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": 0.723523,
+          "word_count": 40,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.445082,
+          "word_count": 262,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": -0.846245,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.863148,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Ian Zaffino",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.879748,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Ian Zaffino",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.766253,
+          "word_count": 21,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": 0.279283,
+          "word_count": 298,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 35,
+          "speaker": "Ian Zaffino",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.764087,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": 0.075124,
+          "word_count": 237,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Ian Zaffino",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.548812,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.865069,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Zach Walljasper",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.542006,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 40,
+          "speaker": "Christina Cristiano",
+          "role": "SVP and CFO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.499083,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 41,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.041145,
+          "word_count": 94,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Zach Walljasper",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.168968,
+          "word_count": 13,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911108,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Aaron Saak",
+          "role": "President and CEO, Crane NXT",
+          "section": "qa",
+          "sentiment": -0.604309,
+          "word_count": 104,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90778,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5276,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From Crane NXT’s Q2 Earnings Call",
@@ -136,13 +771,40 @@
       "ts": "2026-08-08T03:03:48+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CXT Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cxt/transcripts/662364-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "CXT Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cxt/transcripts/555940-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "CXT Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cxt/transcripts/396580-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "CXT Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-crane-nxt-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:24:32.984031+00:00"
 }

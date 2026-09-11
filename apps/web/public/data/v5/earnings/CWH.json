@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "CWH",
   "earnings_history": [
     {
@@ -153,7 +153,1009 @@
       "surprise_pct": 32.46
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/cwh/transcripts/658096-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 74,
+        "scored_turn_count": 74,
+        "overall_sentiment": 0.352788,
+        "prepared_sentiment": -0.047925,
+        "qa_sentiment": 0.381826,
+        "qa_tone_shift": 0.429751,
+        "uncertainty_turn_rate": 0.135135,
+        "forward_looking_turn_rate": 0.297297,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 25,
+            "sentiment": 0.174215
+          },
+          {
+            "topic": "Demand",
+            "mentions": 18,
+            "sentiment": 0.251438
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 14,
+            "sentiment": 0.074173
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": 0.162628
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 9,
+            "sentiment": 0.059245
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": 0.885611
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.601796
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906716,
+          "word_count": 127,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Lindsey Christen",
+          "role": "Chief Administrative and Legal Officer, Camping World",
+          "section": "prepared",
+          "sentiment": 0.864507,
+          "word_count": 251,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "prepared",
+          "sentiment": -0.877578,
+          "word_count": 1132,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Tom Kirn",
+          "role": "CFO, Camping World",
+          "section": "prepared",
+          "sentiment": -0.326014,
+          "word_count": 431,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "prepared",
+          "sentiment": -0.807256,
+          "word_count": 63,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912169,
+          "word_count": 86,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Sean Wagner",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.834777,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.127114,
+          "word_count": 262,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Sean Wagner",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.029891,
+          "word_count": 52,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.072928,
+          "word_count": 228,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Sean Wagner",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.096937,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.418078,
+          "word_count": 149,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Sean Wagner",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.246401,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895648,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Joe Altobello",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.000873,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.867743,
+          "word_count": 208,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Joe Altobello",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.126199,
+          "word_count": 31,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.013642,
+          "word_count": 161,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Joe Altobello",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.880314,
+          "word_count": 22,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.544818,
+          "word_count": 174,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910932,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Tristan Thomas-Martin",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.550602,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.445518,
+          "word_count": 221,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tristan Thomas-Martin",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.691469,
+          "word_count": 43,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.216174,
+          "word_count": 101,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Tristan Thomas-Martin",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.74309,
+          "word_count": 43,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.033502,
+          "word_count": 126,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906156,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Arjun Gupta",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.004545,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Tom Kirn",
+          "role": "CFO, Camping World",
+          "section": "qa",
+          "sentiment": 0.009443,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Arjun Gupta",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.834215,
+          "word_count": 41,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Tom Kirn",
+          "role": "CFO, Camping World",
+          "section": "qa",
+          "sentiment": 0.503355,
+          "word_count": 193,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Arjun Gupta",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.773478,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90419,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Scott Stember",
+          "role": "Analyst, Roth Capital Partners",
+          "section": "qa",
+          "sentiment": 0.428899,
+          "word_count": 68,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.044606,
+          "word_count": 225,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Scott Stember",
+          "role": "Analyst, Roth Capital Partners",
+          "section": "qa",
+          "sentiment": 0.549105,
+          "word_count": 72,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.082507,
+          "word_count": 352,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Tom Kirn",
+          "role": "CFO, Camping World",
+          "section": "qa",
+          "sentiment": 0.631692,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Scott Stember",
+          "role": "Analyst, Roth Capital Partners",
+          "section": "qa",
+          "sentiment": 0.793507,
+          "word_count": 24,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.349428,
+          "word_count": 215,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90313,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Alice Wycklendt",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.731197,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Brett Andress",
+          "role": "SVP of Investor Relations, Camping World",
+          "section": "qa",
+          "sentiment": 0.353183,
+          "word_count": 190,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Alice Wycklendt",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.819403,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Tom Kirn",
+          "role": "CFO, Camping World",
+          "section": "qa",
+          "sentiment": -0.6937,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Alice Wycklendt",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.504555,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911387,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Noah Zatzkin",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.810537,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.739477,
+          "word_count": 248,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Brett Andress",
+          "role": "SVP of Investor Relations, Camping World",
+          "section": "qa",
+          "sentiment": 0.372856,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Noah Zatzkin",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.843014,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.514967,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907798,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Jim Chartier",
+          "role": "Analyst, Monness, Crespi, Hardt & Co.",
+          "section": "qa",
+          "sentiment": 0.530305,
+          "word_count": 57,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 55,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.538036,
+          "word_count": 248,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "Jim Chartier",
+          "role": "Analyst, Monness, Crespi, Hardt & Co.",
+          "section": "qa",
+          "sentiment": 0.859427,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.4746,
+          "word_count": 131,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 58,
+          "speaker": "Jim Chartier",
+          "role": "Analyst, Monness, Crespi, Hardt & Co.",
+          "section": "qa",
+          "sentiment": -0.010822,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903868,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Brandon Rolle",
+          "role": "Analyst, Loop Capital",
+          "section": "qa",
+          "sentiment": 0.460856,
+          "word_count": 51,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.59532,
+          "word_count": 217,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Brandon Rolle",
+          "role": "Analyst, Loop Capital",
+          "section": "qa",
+          "sentiment": 0.585522,
+          "word_count": 20,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.80615,
+          "word_count": 161,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909373,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Patrick Buckley",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.723914,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Patrick Buckley",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.715068,
+          "word_count": 46,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.346863,
+          "word_count": 147,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Patrick Buckley",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.193905,
+          "word_count": 51,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": 0.019398,
+          "word_count": 267,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 70,
+          "speaker": "Patrick Buckley",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.407369,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905199,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Matthew Wagner",
+          "role": "CEO and President, Camping World",
+          "section": "qa",
+          "sentiment": -0.363971,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 73,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906458,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8270,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Camping World (CWH) Q2 2026 Earnings Call Transcript",
@@ -196,13 +1198,40 @@
       "ts": "2026-07-30T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "CWH Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/cwh/transcripts/658096-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "CWH Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/cwh/transcripts/568537-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "CWH Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/cwh/transcripts/400187-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "CWH Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-camping-world-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-11T23:26:34.493353+00:00"
 }
