@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DFIN",
   "earnings_history": [
     {
@@ -153,7 +153,496 @@
       "surprise_pct": 164.71
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dfin/transcripts/660674-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 34,
+        "scored_turn_count": 34,
+        "overall_sentiment": 0.35592,
+        "prepared_sentiment": -0.088032,
+        "qa_sentiment": 0.432463,
+        "qa_tone_shift": 0.520495,
+        "uncertainty_turn_rate": 0.088235,
+        "forward_looking_turn_rate": 0.264706,
+        "topics": [
+          {
+            "topic": "AI & technology",
+            "mentions": 9,
+            "sentiment": 0.01969
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 9,
+            "sentiment": 0.002055
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.091996
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": -0.027469
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": -0.197322
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.702434
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.9365
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.877497,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Mike Zhao",
+          "role": "Head of Investor Relations, Donnelley Financial Solutions",
+          "section": "prepared",
+          "sentiment": 0.890751,
+          "word_count": 200,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Dan Leib",
+          "role": "President and CEO, Donnelley Financial Solutions",
+          "section": "prepared",
+          "sentiment": -0.468369,
+          "word_count": 1264,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "prepared",
+          "sentiment": -0.9365,
+          "word_count": 1760,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Dan Leib",
+          "role": "President and CEO, Donnelley Financial Solutions",
+          "section": "prepared",
+          "sentiment": -0.803537,
+          "word_count": 153,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.9049,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Charles Strauzer",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.877773,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Dan Leib",
+          "role": "President and CEO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.632406,
+          "word_count": 169,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Charles Strauzer",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.407234,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": -0.888553,
+          "word_count": 164,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Dan Leib",
+          "role": "President and CEO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.812904,
+          "word_count": 27,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Charles Strauzer",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.748468,
+          "word_count": 36,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Dan Leib",
+          "role": "President and CEO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": -0.30884,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Charles Strauzer",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.699305,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.231598,
+          "word_count": 160,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "Charles Strauzer",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.453523,
+          "word_count": 28,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": -0.43496,
+          "word_count": 147,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Charles Strauzer",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.825142,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.438309,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Charles Strauzer",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": -0.222213,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903775,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Ross Cole",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": -0.087735,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Ross Cole",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.331404,
+          "word_count": 59,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.754584,
+          "word_count": 106,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Dan Leib",
+          "role": "President and CEO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": -0.379901,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Ross Cole",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.731926,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 26,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.689482,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Ross Cole",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.614362,
+          "word_count": 78,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Dave Gardella",
+          "role": "CFO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.731822,
+          "word_count": 105,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Ross Cole",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.433596,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912123,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Dan Leib",
+          "role": "President and CEO, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": -0.066879,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.87813,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Mike Zhao",
+          "role": "Head of Investor Relations, Donnelley Financial Solutions",
+          "section": "qa",
+          "sentiment": 0.917743,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5338,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From Donnelley Financial Solutions’s Q2 Earnings Call - StockStory",
@@ -196,13 +685,40 @@
       "ts": "2026-07-31T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DFIN Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dfin/transcripts/660674-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "DFIN Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dfin/transcripts/558467-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "DFIN Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dfin/transcripts/402282-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-17T00:00:00+00:00"
+    },
+    {
+      "title": "DFIN Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-donnelley-financial-solutions-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-12T23:08:46.764542+00:00"
 }

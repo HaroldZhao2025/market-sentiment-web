@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DD",
   "earnings_history": [
     {
@@ -153,7 +153,973 @@
       "surprise_pct": 18.06
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-04T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dd/transcripts/660530-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 73,
+        "scored_turn_count": 73,
+        "overall_sentiment": 0.36296,
+        "prepared_sentiment": 0.004375,
+        "qa_sentiment": 0.383748,
+        "qa_tone_shift": 0.379373,
+        "uncertainty_turn_rate": 0.123288,
+        "forward_looking_turn_rate": 0.30137,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 22,
+            "sentiment": -0.051337
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 21,
+            "sentiment": 0.198781
+          },
+          {
+            "topic": "Demand",
+            "mentions": 14,
+            "sentiment": -0.118515
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 8,
+            "sentiment": -0.092159
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.104573
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909906,
+          "word_count": 104,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Ann Giancristoforo",
+          "role": "VP of Investor Relations, DuPont",
+          "section": "prepared",
+          "sentiment": 0.89361,
+          "word_count": 231,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "prepared",
+          "sentiment": -0.868779,
+          "word_count": 895,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "prepared",
+          "sentiment": -0.917239,
+          "word_count": 1169,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906192,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research Partners",
+          "section": "qa",
+          "sentiment": -0.385639,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research Partners",
+          "section": "qa",
+          "sentiment": 0.845542,
+          "word_count": 74,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.692201,
+          "word_count": 350,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Jeff Sprague",
+          "role": "Analyst, Vertical Research Partners",
+          "section": "qa",
+          "sentiment": 0.780026,
+          "word_count": 52,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": 0.78025,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896559,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Scott Davis",
+          "role": "Analyst, Melius Research",
+          "section": "qa",
+          "sentiment": 0.339464,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Scott Davis",
+          "role": "Analyst, Melius Research",
+          "section": "qa",
+          "sentiment": 0.794351,
+          "word_count": 67,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.695153,
+          "word_count": 111,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Scott Davis",
+          "role": "Analyst, Melius Research",
+          "section": "qa",
+          "sentiment": 0.849489,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": 0.780477,
+          "word_count": 192,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891185,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Joe Ritchie",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.796041,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.091718,
+          "word_count": 197,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Joe Ritchie",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.129837,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": -0.699734,
+          "word_count": 80,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.802284,
+          "word_count": 114,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903167,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "John McNulty",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.773812,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": 0.737416,
+          "word_count": 179,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "John McNulty",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.835643,
+          "word_count": 90,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.53178,
+          "word_count": 192,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903709,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Chigusa Katoku",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.73527,
+          "word_count": 66,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 29,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.555757,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Chigusa Katoku",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.681859,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": -0.868435,
+          "word_count": 123,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903685,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Harris Fein",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.852036,
+          "word_count": 51,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.290296,
+          "word_count": 196,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Harris Fein",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.783304,
+          "word_count": 48,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": 0.784068,
+          "word_count": 95,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892849,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "John Roberts",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.848319,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.722399,
+          "word_count": 170,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "John Roberts",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.771428,
+          "word_count": 33,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.598455,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902415,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Josh Spector",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.411644,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": -0.901639,
+          "word_count": 192,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Josh Spector",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.899303,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": -0.132,
+          "word_count": 95,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904101,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "David Begleiter",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": -0.80333,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": 0.462726,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "David Begleiter",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.783312,
+          "word_count": 36,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": 0.554879,
+          "word_count": 123,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902067,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Matthew DeYoe",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.739485,
+          "word_count": 56,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": 0.641752,
+          "word_count": 238,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Matthew DeYoe",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.745196,
+          "word_count": 26,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": 0.666448,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902687,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Vincent Andrews",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.702591,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 59,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": 0.482268,
+          "word_count": 160,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 60,
+          "speaker": "Vincent Andrews",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.822501,
+          "word_count": 80,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Lori Koch",
+          "role": "CEO, DuPont",
+          "section": "qa",
+          "sentiment": 0.595914,
+          "word_count": 166,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904599,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Rachael Lee",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.782602,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": -0.338001,
+          "word_count": 176,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 65,
+          "speaker": "Rachael Lee",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.462125,
+          "word_count": 41,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": -0.747253,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 67,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905584,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Abigail Eberts",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.784427,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Antonella Franzen",
+          "role": "CFO, DuPont",
+          "section": "qa",
+          "sentiment": -0.861986,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917243,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Ann Giancristoforo",
+          "role": "VP of Investor Relations, DuPont",
+          "section": "qa",
+          "sentiment": 0.887521,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908563,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7800,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "DuPont (DD) Q2 2026 Earnings Call Transcript",
@@ -196,13 +1162,40 @@
       "ts": "2026-08-04T21:38:46+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DD Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dd/transcripts/660530-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "DD Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dd/transcripts/554334-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "DD Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dd/transcripts/398864-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-10T00:00:00+00:00"
+    },
+    {
+      "title": "DD Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-dupont-de-nemours-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-12T23:07:28.429187+00:00"
 }

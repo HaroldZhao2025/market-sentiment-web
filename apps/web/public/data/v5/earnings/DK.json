@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DK",
   "earnings_history": [
     {
@@ -153,7 +153,688 @@
       "surprise_pct": 27.18
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dk/transcripts/656936-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 52,
+        "scored_turn_count": 52,
+        "overall_sentiment": 0.261101,
+        "prepared_sentiment": 0.319105,
+        "qa_sentiment": 0.25755,
+        "qa_tone_shift": -0.061554,
+        "uncertainty_turn_rate": 0.076923,
+        "forward_looking_turn_rate": 0.269231,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": -0.091003
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 9,
+            "sentiment": -0.056366
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.021725
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.577237
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.135778
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.547674
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.897317,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Robert Wright",
+          "role": "EVP and CFO, Delek US",
+          "section": "prepared",
+          "sentiment": 0.923273,
+          "word_count": 153,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "prepared",
+          "sentiment": -0.863276,
+          "word_count": 804,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Robert Wright",
+          "role": "EVP and CFO, Delek US",
+          "section": "qa",
+          "sentiment": -0.924708,
+          "word_count": 613,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906703,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Thanks for taking my question.",
+          "role": "This is Aayush Gupta on behalf of Doug Leggate at Wolfe Research.",
+          "section": "qa",
+          "sentiment": 0.770645,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.814166,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": -0.55601,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Aayush Gupta",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.579576,
+          "word_count": 35,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.469348,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.8967,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Alexa Petrick",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.845092,
+          "word_count": 62,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.193764,
+          "word_count": 126,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Alexa Petrick",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.83669,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.434173,
+          "word_count": 212,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": -0.903141,
+          "word_count": 108,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Alexa Petrick",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.768284,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893075,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.792862,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": -0.36193,
+          "word_count": 145,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Mark Hobbs",
+          "role": "EVP of Delek Logistics Partners, Delek US",
+          "section": "qa",
+          "sentiment": -0.882688,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Manav Gupta",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.543341,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": -0.773599,
+          "word_count": 297,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": -0.271785,
+          "word_count": 185,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899368,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jason Gabelman",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.880556,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.55617,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": 0.561197,
+          "word_count": 147,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Jason Gabelman",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.880247,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": -0.464945,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Jason Gabelman",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": -0.383852,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.583259,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891685,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Joe Laetsch",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.108448,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Joe Laetsch",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.324425,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.556174,
+          "word_count": 326,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Joe Laetsch",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.239949,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.306019,
+          "word_count": 157,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Joe Laetsch",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.616602,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892936,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.461446,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": -0.566996,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.758946,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": -0.86466,
+          "word_count": 214,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 44,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, TPH",
+          "section": "qa",
+          "sentiment": 0.841123,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": 0.831564,
+          "word_count": 52,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 46,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": 0.890642,
+          "word_count": 98,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Robert Wright",
+          "role": "EVP and CFO, Delek US",
+          "section": "qa",
+          "sentiment": 0.547674,
+          "word_count": 62,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Mohit Bhardwaj",
+          "role": "EVP of New Energy, Strategy, and Investor Relations, Delek US",
+          "section": "qa",
+          "sentiment": -0.40154,
+          "word_count": 34,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918064,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Avigal Soreq",
+          "role": "President and CEO, Delek US",
+          "section": "qa",
+          "sentiment": -0.279418,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911994,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5717,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Delek US Q2 Earnings Call Highlights",
@@ -196,13 +877,40 @@
       "ts": "2026-08-05T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DK Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dk/transcripts/656936-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "DK Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dk/transcripts/575090-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "DK Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dk/transcripts/405400-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-27T00:00:00+00:00"
+    },
+    {
+      "title": "DK Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-delek-us-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-12T23:10:07.722306+00:00"
 }

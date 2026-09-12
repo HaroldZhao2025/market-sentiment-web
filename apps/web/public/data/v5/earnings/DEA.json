@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DEA",
   "earnings_history": [
     {
@@ -153,7 +153,678 @@
       "surprise_pct": 66.67
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-03T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dea/transcripts/655680-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 49,
+        "scored_turn_count": 49,
+        "overall_sentiment": 0.379085,
+        "prepared_sentiment": 0.185239,
+        "qa_sentiment": 0.401113,
+        "qa_tone_shift": 0.215874,
+        "uncertainty_turn_rate": 0.061224,
+        "forward_looking_turn_rate": 0.22449,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 14,
+            "sentiment": 0.194786
+          },
+          {
+            "topic": "Demand",
+            "mentions": 13,
+            "sentiment": 0.124566
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": -0.113926
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 8,
+            "sentiment": -0.119618
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.875831
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.488426
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.864698
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.90943,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Cole Bardawill",
+          "role": "Director of Investor Relations, Easterly Government Properties",
+          "section": "prepared",
+          "sentiment": 0.864698,
+          "word_count": 218,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "prepared",
+          "sentiment": -0.821826,
+          "word_count": 675,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Allison Marino",
+          "role": "EVP and CFO, Easterly Government Properties",
+          "section": "prepared",
+          "sentiment": -0.929836,
+          "word_count": 660,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Thank you for your time this morning.",
+          "role": "We appreciate your partnership and look forward to updating you on our progress.",
+          "section": "prepared",
+          "sentiment": 0.903728,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Thank you.",
+          "role": "As a reminder to the analysts, to ask the question, you will need to press star one one on your telephone.",
+          "section": "qa",
+          "sentiment": 0.901499,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Seth Bergey",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.540621,
+          "word_count": 73,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.653711,
+          "word_count": 226,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Seth Bergey",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.834694,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Allison Marino",
+          "role": "EVP and CFO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.511739,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.357965,
+          "word_count": 119,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886777,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Michael Lewis",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.883699,
+          "word_count": 85,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Allison Marino",
+          "role": "EVP and CFO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.17545,
+          "word_count": 145,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Michael Lewis",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.855669,
+          "word_count": 36,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Allison Marino",
+          "role": "EVP and CFO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.194074,
+          "word_count": 109,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.748596,
+          "word_count": 142,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Michael Lewis",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.434806,
+          "word_count": 28,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Allison Marino",
+          "role": "EVP and CFO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.62409,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Michael Lewis",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.089873,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903254,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "John Kim",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.798364,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.334,
+          "word_count": 182,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "John Kim",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.894779,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.542552,
+          "word_count": 252,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "John Kim",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.761128,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.418519,
+          "word_count": 400,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902314,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "RJ Milligan",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.833433,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.48874,
+          "word_count": 321,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "RJ Milligan",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.887641,
+          "word_count": 23,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Allison Marino",
+          "role": "EVP and CFO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.730443,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.089211,
+          "word_count": 61,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888982,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Michael Carroll",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.897795,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.468751,
+          "word_count": 192,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Michael Carroll",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.794727,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.183139,
+          "word_count": 208,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Michael Carroll",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.875088,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": 0.729848,
+          "word_count": 189,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Michael Carroll",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.089873,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.129053,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910744,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Merrill Ross",
+          "role": "Analyst, Compass Point Research & Trading",
+          "section": "qa",
+          "sentiment": 0.821567,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Allison Marino",
+          "role": "EVP and CFO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.35999,
+          "word_count": 165,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 45,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.114753,
+          "word_count": 202,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Merrill Ross",
+          "role": "Analyst, Compass Point Research & Trading",
+          "section": "qa",
+          "sentiment": -0.622723,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Darrell Crate",
+          "role": "President and CEO, Easterly Government Properties",
+          "section": "qa",
+          "sentiment": -0.756099,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905453,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5970,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Easterly (DEA) Q2 2026 Earnings Call Transcript",
@@ -196,13 +867,40 @@
       "ts": "2026-08-03T16:03:12+00:00",
       "source": "TradingView",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DEA Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dea/transcripts/655680-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-03T00:00:00+00:00"
+    },
+    {
+      "title": "DEA Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dea/transcripts/564703-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-27T00:00:00+00:00"
+    },
+    {
+      "title": "DEA Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dea/transcripts/395913-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-23T00:00:00+00:00"
+    },
+    {
+      "title": "DEA Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-easterly-government-properties-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-12T23:08:18.398197+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DIOD",
   "earnings_history": [
     {
@@ -153,7 +153,410 @@
       "surprise_pct": 5.44
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/diod/transcripts/662768-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 27,
+        "scored_turn_count": 27,
+        "overall_sentiment": 0.261439,
+        "prepared_sentiment": -0.01606,
+        "qa_sentiment": 0.324507,
+        "qa_tone_shift": 0.340566,
+        "uncertainty_turn_rate": 0.037037,
+        "forward_looking_turn_rate": 0.222222,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 12,
+            "sentiment": -0.124349
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 6,
+            "sentiment": -0.343294
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": -0.685517
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.286553
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.765657
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.628805
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.905949
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.917151,
+          "word_count": 102,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Leanne Sievers",
+          "role": "President, Shelton Group",
+          "section": "prepared",
+          "sentiment": 0.905949,
+          "word_count": 368,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Gary Yu",
+          "role": "President and CEO, Diodes Incorporated",
+          "section": "prepared",
+          "sentiment": -0.924903,
+          "word_count": 463,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Brett Whitmire",
+          "role": "CFO, Diodes Incorporated",
+          "section": "prepared",
+          "sentiment": -0.606411,
+          "word_count": 787,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Emily Yang",
+          "role": "SVP of Worldwide Sales and Marketing, Diodes Incorporated",
+          "section": "prepared",
+          "sentiment": -0.372084,
+          "word_count": 1185,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.83773,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Gary Yu",
+          "role": "President and CEO, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": -0.147953,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Emily Yang",
+          "role": "SVP of Worldwide Sales and Marketing, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": -0.885526,
+          "word_count": 270,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893595,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tristan Gerra",
+          "role": "Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.563411,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Emily Yang",
+          "role": "SVP of Worldwide Sales and Marketing, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": 0.592065,
+          "word_count": 128,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Gary Yu",
+          "role": "President and CEO, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": -0.63866,
+          "word_count": 98,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Tristan Gerra",
+          "role": "Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.803023,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Gary Yu",
+          "role": "President and CEO, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": -0.755138,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Leverage our external partner.",
+          "role": "No matter if that partner is in Korea or in Taiwan, to get more capacity from them.",
+          "section": "qa",
+          "sentiment": 0.448418,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Tristan Gerra",
+          "role": "Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.837995,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Gary Yu",
+          "role": "President and CEO, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": 0.860407,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Tristan Gerra",
+          "role": "Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.247533,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909339,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "David Williams",
+          "role": "Senior Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.278846,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "David Williams",
+          "role": "Senior Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.625636,
+          "word_count": 85,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Gary Yu",
+          "role": "President and CEO, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": -0.155005,
+          "word_count": 192,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "David Williams",
+          "role": "Senior Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.52434,
+          "word_count": 83,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Emily Yang",
+          "role": "SVP of Worldwide Sales and Marketing, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": 0.0479,
+          "word_count": 85,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "David Williams",
+          "role": "Senior Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": -0.049822,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Gary Yu",
+          "role": "President and CEO, Diodes Incorporated",
+          "section": "qa",
+          "sentiment": 0.877113,
+          "word_count": 26,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918968,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4483,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Diodes (DIOD) Q2 2026 Earnings Call Transcript - The Globe and Mail",
@@ -196,13 +599,40 @@
       "ts": "2026-08-06T06:22:40+00:00",
       "source": "GuruFocus",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DIOD Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/diod/transcripts/662768-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "DIOD Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/diod/transcripts/554720-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "DIOD Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/diod/transcripts/398286-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-10T00:00:00+00:00"
+    },
+    {
+      "title": "DIOD Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-diodes-incorporated-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-12T23:09:33.842092+00:00"
 }

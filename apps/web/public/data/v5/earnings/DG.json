@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DG",
   "earnings_history": [
     {
@@ -153,7 +153,698 @@
       "surprise_pct": 17.6
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-27T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dg/transcripts/661375-q2-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 48,
+        "scored_turn_count": 48,
+        "overall_sentiment": 0.181511,
+        "prepared_sentiment": -0.171831,
+        "qa_sentiment": 0.222597,
+        "qa_tone_shift": 0.394427,
+        "uncertainty_turn_rate": 0.1875,
+        "forward_looking_turn_rate": 0.416667,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 18,
+            "sentiment": -0.210789
+          },
+          {
+            "topic": "Demand",
+            "mentions": 16,
+            "sentiment": -0.16669
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": -0.355374
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 11,
+            "sentiment": -0.127868
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 9,
+            "sentiment": -0.161901
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.380779
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.37357
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.915582,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Thank you, and good morning, everyone.",
+          "role": "On the call with me today are Todd Vasos, our CEO, and Donny Lau, our CFO.",
+          "section": "prepared",
+          "sentiment": 0.912124,
+          "word_count": 228,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "prepared",
+          "sentiment": -0.912077,
+          "word_count": 928,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Donny Lau",
+          "role": "CFO, Dollar General",
+          "section": "prepared",
+          "sentiment": -0.924919,
+          "word_count": 1031,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 7
+        },
+        {
+          "turn": 4,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "prepared",
+          "sentiment": -0.849863,
+          "word_count": 1304,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906207,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Rupesh Parikh",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.591731,
+          "word_count": 89,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Donny Lau",
+          "role": "CFO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.745702,
+          "word_count": 503,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 8,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.537064,
+          "word_count": 273,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91303,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Matthew Boss",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.837984,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Matthew Boss",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.610302,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.729663,
+          "word_count": 369,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Donny Lau",
+          "role": "CFO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.826071,
+          "word_count": 213,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Matthew Boss",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.549771,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911325,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Michael Lasser",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.250737,
+          "word_count": 115,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": 0.307446,
+          "word_count": 376,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915721,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Seth Sigman",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.653274,
+          "word_count": 117,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Donny Lau",
+          "role": "CFO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.353594,
+          "word_count": 164,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913478,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Simeon Gutman",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.217703,
+          "word_count": 76,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": 0.312229,
+          "word_count": 573,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898565,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Chuck Grom",
+          "role": "Analyst, Gordon Haskett",
+          "section": "qa",
+          "sentiment": 0.086374,
+          "word_count": 366,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 26,
+          "speaker": "Donny Lau",
+          "role": "CFO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.358635,
+          "word_count": 269,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914496,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Zhihan Ma",
+          "role": "Analyst, Bernstein",
+          "section": "qa",
+          "sentiment": -0.068853,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 29,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.329413,
+          "word_count": 218,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916036,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Spencer Hanus",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.083223,
+          "word_count": 97,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": 0.580842,
+          "word_count": 446,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916727,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Kate McShane",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.152591,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": 0.103447,
+          "word_count": 259,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916143,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Scot Ciccarelli",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": -0.181317,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": 0.018649,
+          "word_count": 255,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Donny Lau",
+          "role": "CFO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.916808,
+          "word_count": 179,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909599,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Corey Tarlowe",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.703969,
+          "word_count": 327,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908935,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Rob Ohmes",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.32343,
+          "word_count": 219,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": -0.573899,
+          "word_count": 234,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Rob Ohmes",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.612928,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Todd Vasos",
+          "role": "CEO, Dollar General",
+          "section": "qa",
+          "sentiment": 0.650652,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914895,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 10068,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Dollar General Corporation Announces Webcast of its Second Quarter 2026 Earnings Conference Call",
@@ -196,13 +887,40 @@
       "ts": "2026-06-03T07:06:00+00:00",
       "source": "Zacks",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DG Earnings Call: Q2 2027",
+      "url": "https://stockanalysis.com/stocks/dg/transcripts/661375-q2-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-27T00:00:00+00:00"
+    },
+    {
+      "title": "DG Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/dg/transcripts/596044-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-06-02T00:00:00+00:00"
+    },
+    {
+      "title": "DG Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/dg/transcripts/484328-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-12T00:00:00+00:00"
+    },
+    {
+      "title": "DG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-27-dollar-general-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-27T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-12T23:09:00.062159+00:00"
 }
