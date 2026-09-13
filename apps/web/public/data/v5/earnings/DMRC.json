@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DMRC",
   "earnings_history": [
     {
@@ -153,7 +153,408 @@
       "surprise_pct": 12.68
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-13T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dmrc/transcripts/666856-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 28,
+        "scored_turn_count": 28,
+        "overall_sentiment": 0.626605,
+        "prepared_sentiment": 0.520365,
+        "qa_sentiment": 0.65558,
+        "qa_tone_shift": 0.135215,
+        "uncertainty_turn_rate": 0.178571,
+        "forward_looking_turn_rate": 0.321429,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": 0.566322
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.468286
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.339433
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 4,
+            "sentiment": 0.271918
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.737345
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.733427
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.91857,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Please note this conference is being recorded.",
+          "role": "I will now turn the conference over to Charles Beck, Chief Financial Officer.",
+          "section": "prepared",
+          "sentiment": 0.828347,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Welcome everyone to our Q2 earnings call.",
+          "role": "I'm Charles Beck, Digimarc's CFO, and I'm joined today by Paul Carreiro, Digimarc's CEO.",
+          "section": "prepared",
+          "sentiment": 0.891577,
+          "word_count": 86,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "prepared",
+          "sentiment": 0.579631,
+          "word_count": 1559,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "I'm going to close on market trends.",
+          "role": "This slide will answer a question I would expect every analyst on this call to be asking directly.",
+          "section": "prepared",
+          "sentiment": 0.637494,
+          "word_count": 351,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Charles Beck",
+          "role": "CFO, Digimarc",
+          "section": "prepared",
+          "sentiment": -0.733427,
+          "word_count": 841,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91648,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Joshua Reilly",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.769796,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.519359,
+          "word_count": 234,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "Joshua Reilly",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.874033,
+          "word_count": 50,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.424679,
+          "word_count": 221,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Joshua Reilly",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.637246,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.722109,
+          "word_count": 177,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Joshua Reilly",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.748267,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Charles Beck",
+          "role": "CFO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.847533,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Joshua Reilly",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": -0.577802,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904573,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Vijay Homan",
+          "role": "Analyst, Craig-Hallum Capital Group",
+          "section": "qa",
+          "sentiment": 0.846641,
+          "word_count": 79,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.760297,
+          "word_count": 93,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Vijay Homan",
+          "role": "Analyst, Craig-Hallum Capital Group",
+          "section": "qa",
+          "sentiment": 0.837657,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.622493,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Vijay Homan",
+          "role": "Analyst, Craig-Hallum Capital Group",
+          "section": "qa",
+          "sentiment": 0.88272,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.532992,
+          "word_count": 91,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Vijay Homan",
+          "role": "Analyst, Craig-Hallum Capital Group",
+          "section": "qa",
+          "sentiment": -0.182514,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903521,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jeff Bernstein",
+          "role": "Analyst, Silverberg Bernstein Capital Management",
+          "section": "qa",
+          "sentiment": 0.788419,
+          "word_count": 53,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Paul Carreiro",
+          "role": "CEO, Digimarc",
+          "section": "qa",
+          "sentiment": 0.737345,
+          "word_count": 159,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906913,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4759,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Digimarc Corporation Q2 2026 Earnings Call Summary",
@@ -196,13 +597,40 @@
       "ts": "2026-08-13T22:08:31+00:00",
       "source": "Investing.com",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DMRC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dmrc/transcripts/666856-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-13T00:00:00+00:00"
+    },
+    {
+      "title": "DMRC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dmrc/transcripts/594439-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-12T00:00:00+00:00"
+    },
+    {
+      "title": "DMRC Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dmrc/transcripts/598238-q4-2025-q-a/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-16T00:00:00+00:00"
+    },
+    {
+      "title": "DMRC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-5-12-digimarc-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-05-12T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-13T23:20:00.780760+00:00"
 }

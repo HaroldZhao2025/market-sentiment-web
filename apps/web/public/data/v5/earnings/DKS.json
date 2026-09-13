@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DKS",
   "earnings_history": [
     {
@@ -153,7 +153,799 @@
       "surprise_pct": 85.51
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-25T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dks/transcripts/681133-q2-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 60,
+        "scored_turn_count": 60,
+        "overall_sentiment": 0.402339,
+        "prepared_sentiment": 0.008373,
+        "qa_sentiment": 0.438154,
+        "qa_tone_shift": 0.429781,
+        "uncertainty_turn_rate": 0.233333,
+        "forward_looking_turn_rate": 0.283333,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 15,
+            "sentiment": -0.002773
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": -0.027332
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 6,
+            "sentiment": -0.18144
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": 0.030297
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": -0.164908
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.13894
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.203223
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.887123,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Nate Gilch",
+          "role": "VP of Investor Relations, DICK'S Sporting Goods, Inc",
+          "section": "prepared",
+          "sentiment": 0.916765,
+          "word_count": 244,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "prepared",
+          "sentiment": -0.849886,
+          "word_count": 961,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Lauren Hobart",
+          "role": "President and CEO, DICK'S Sporting Goods, Inc",
+          "section": "prepared",
+          "sentiment": -0.916362,
+          "word_count": 919,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Navdeep Gupta",
+          "role": "CFO, DICK'S Sporting Goods, Inc",
+          "section": "prepared",
+          "sentiment": 0.004226,
+          "word_count": 1521,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902586,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Simeon Gutman",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.82218,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": -0.410671,
+          "word_count": 592,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Simeon Gutman",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.428841,
+          "word_count": 114,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.231272,
+          "word_count": 342,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Simeon Gutman",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.337552,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905971,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Christopher Horvers",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.725478,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.56917,
+          "word_count": 323,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Lauren Hobart",
+          "role": "President and CEO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.19935,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.436127,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Christopher Horvers",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.856266,
+          "word_count": 68,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.741809,
+          "word_count": 333,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Lauren Hobart",
+          "role": "President and CEO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.782203,
+          "word_count": 49,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.857314,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Kate McShane",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.85278,
+          "word_count": 78,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.30358,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Kate McShane",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.824921,
+          "word_count": 29,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.685631,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910093,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Adrienne Yih",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.828558,
+          "word_count": 172,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.796925,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": -0.569812,
+          "word_count": 283,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.857901,
+          "word_count": 106,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Adrienne Yih",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.309266,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90214,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Lorraine Hutchinson",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.47627,
+          "word_count": 35,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.746963,
+          "word_count": 73,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Lauren Hobart",
+          "role": "President and CEO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": -0.666842,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": -0.327974,
+          "word_count": 39,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900306,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Ike Boruchow",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.123501,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.339271,
+          "word_count": 237,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Ike Boruchow",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.760147,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.905998,
+          "word_count": 45,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90264,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Michael Lasser",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.759806,
+          "word_count": 91,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Lauren Hobart",
+          "role": "President and CEO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.271552,
+          "word_count": 124,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Navdeep Gupta",
+          "role": "CFO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": -0.507302,
+          "word_count": 199,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Michael Lasser",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.090899,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.859325,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Navdeep Gupta",
+          "role": "CFO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": -0.39996,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Michael Lasser",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.50191,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900175,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Paul Lejuez",
+          "role": "Analyst, Citibank",
+          "section": "qa",
+          "sentiment": 0.829397,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.520922,
+          "word_count": 149,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Lauren Hobart",
+          "role": "President and CEO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.586328,
+          "word_count": 132,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Paul Lejuez",
+          "role": "Analyst, Citibank",
+          "section": "qa",
+          "sentiment": 0.891878,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Navdeep Gupta",
+          "role": "CFO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": -0.464477,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908753,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Bob Drbul",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.772397,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Ed Stack",
+          "role": "Executive Chairman, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.379708,
+          "word_count": 187,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Bob Drbul",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": -0.247533,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Lauren Hobart",
+          "role": "President and CEO, DICK'S Sporting Goods, Inc",
+          "section": "qa",
+          "sentiment": 0.180453,
+          "word_count": 23,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894994,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8780,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Must-Read Analyst Questions From Dick's’s Q1 Earnings Call",
@@ -175,13 +967,40 @@
       "ts": "2026-05-27T19:00:34+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DKS Earnings Call: Q2 2027",
+      "url": "https://stockanalysis.com/stocks/dks/transcripts/681133-q2-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-25T00:00:00+00:00"
+    },
+    {
+      "title": "DKS Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/dks/transcripts/596024-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-27T00:00:00+00:00"
+    },
+    {
+      "title": "DKS Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/dks/transcripts/409906-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-12T00:00:00+00:00"
+    },
+    {
+      "title": "DKS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-25-dicks-sporting-goods-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-25T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-13T23:17:15.778280+00:00"
 }

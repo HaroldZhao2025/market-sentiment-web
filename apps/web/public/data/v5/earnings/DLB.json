@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DLB",
   "earnings_history": [
     {
@@ -153,7 +153,486 @@
       "surprise_pct": 33.27
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dlb/transcripts/658613-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 34,
+        "scored_turn_count": 34,
+        "overall_sentiment": 0.430368,
+        "prepared_sentiment": 0.02672,
+        "qa_sentiment": 0.484188,
+        "qa_tone_shift": 0.457468,
+        "uncertainty_turn_rate": 0.058824,
+        "forward_looking_turn_rate": 0.294118,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 14,
+            "sentiment": 0.17859
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": 0.167892
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.288527
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.094665
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.067955
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.755962
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.90414,
+          "word_count": 104,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Peter Goldmacher",
+          "role": "VP of Investor Relations, Dolby Laboratories",
+          "section": "prepared",
+          "sentiment": 0.861029,
+          "word_count": 214,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "prepared",
+          "sentiment": -0.740716,
+          "word_count": 1054,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Robert Park",
+          "role": "SVP and CFO, Dolby Laboratories",
+          "section": "prepared",
+          "sentiment": -0.917574,
+          "word_count": 703,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906784,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Ralph Schackart",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.746028,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Robert Park",
+          "role": "SVP and CFO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.496793,
+          "word_count": 103,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Ralph Schackart",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.11435,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.634384,
+          "word_count": 222,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899248,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Steven Frankel",
+          "role": "Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": 0.482725,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.174932,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Steven Frankel",
+          "role": "Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": -0.106658,
+          "word_count": 39,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": -0.006242,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Steven Frankel",
+          "role": "Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": 0.848659,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Robert Park",
+          "role": "SVP and CFO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.383395,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Robert Park",
+          "role": "SVP and CFO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.274241,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Steven Frankel",
+          "role": "Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": 0.650895,
+          "word_count": 69,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.559756,
+          "word_count": 519,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Steven Frankel",
+          "role": "Analyst, Rosenblatt Securities",
+          "section": "qa",
+          "sentiment": -0.584694,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902537,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Patrick Sholl",
+          "role": "Analyst, Barrington Research",
+          "section": "qa",
+          "sentiment": 0.698794,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": -0.268456,
+          "word_count": 94,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 23,
+          "speaker": "Patrick Sholl",
+          "role": "Analyst, Barrington Research",
+          "section": "qa",
+          "sentiment": 0.84645,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.755006,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886985,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "John Regotti",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.722375,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.384825,
+          "word_count": 200,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "John Regotti",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.805825,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.741889,
+          "word_count": 538,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "John Regotti",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.682451,
+          "word_count": 151,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Kevin Yeaman",
+          "role": "President and CEO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": 0.256615,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Robert Park",
+          "role": "SVP and CFO, Dolby Laboratories",
+          "section": "qa",
+          "sentiment": -0.048873,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913312,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5167,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Dolby Laboratories’s Q2 Earnings Call: Our Top 5 Analyst Questions - StockStory",
@@ -196,13 +675,40 @@
       "ts": "2026-07-31T00:47:15+00:00",
       "source": "Motley Fool",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DLB Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/dlb/transcripts/658613-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "DLB Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dlb/transcripts/548680-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "DLB Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dlb/transcripts/420935-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-29T00:00:00+00:00"
+    },
+    {
+      "title": "DLB Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-dolby-laboratories-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-13T23:17:25.301446+00:00"
 }

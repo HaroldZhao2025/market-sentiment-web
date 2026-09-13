@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DOCS",
   "earnings_history": [
     {
@@ -135,7 +135,854 @@
       "surprise_pct": 44.57
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/docs/transcripts/668286-q1-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 62,
+        "scored_turn_count": 62,
+        "overall_sentiment": 0.56001,
+        "prepared_sentiment": 0.004046,
+        "qa_sentiment": 0.598353,
+        "qa_tone_shift": 0.594307,
+        "uncertainty_turn_rate": 0.032258,
+        "forward_looking_turn_rate": 0.225806,
+        "topics": [
+          {
+            "topic": "AI & technology",
+            "mentions": 31,
+            "sentiment": 0.368258
+          },
+          {
+            "topic": "Demand",
+            "mentions": 14,
+            "sentiment": 0.304047
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": 0.17748
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": -0.032278
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.644091
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.117414
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.930994
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906694,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Perry Gold",
+          "role": "Senior VP of Investor Relations, Doximity",
+          "section": "prepared",
+          "sentiment": 0.908569,
+          "word_count": 327,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 2,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "prepared",
+          "sentiment": -0.868085,
+          "word_count": 635,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "prepared",
+          "sentiment": -0.930994,
+          "word_count": 1163,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903778,
+          "word_count": 136,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Brian Peterson",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.763473,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.71365,
+          "word_count": 594,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Brian Peterson",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": -0.000489,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": -0.041202,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886432,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Craig Hettenbach",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.848225,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.339005,
+          "word_count": 276,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Craig Hettenbach",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.800173,
+          "word_count": 90,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": -0.373557,
+          "word_count": 181,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872194,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Michael Cherny",
+          "role": "Analyst, Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.729221,
+          "word_count": 118,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.890647,
+          "word_count": 361,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881142,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Ryan Daniels",
+          "role": "Analyst, Blair",
+          "section": "qa",
+          "sentiment": 0.698945,
+          "word_count": 85,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": 0.73186,
+          "word_count": 126,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Perry Gold",
+          "role": "Senior VP of Investor Relations, Doximity",
+          "section": "qa",
+          "sentiment": 0.679131,
+          "word_count": 291,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Ryan Daniels",
+          "role": "Analyst, Blair",
+          "section": "qa",
+          "sentiment": -0.089852,
+          "word_count": 101,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.572451,
+          "word_count": 148,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893221,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ryan MacDonald",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.879035,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.779811,
+          "word_count": 522,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": 0.200332,
+          "word_count": 114,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Ryan MacDonald",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": -0.037528,
+          "word_count": 83,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.845424,
+          "word_count": 25,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886858,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Elizabeth Anderson",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.634476,
+          "word_count": 126,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.608385,
+          "word_count": 322,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Elizabeth Anderson",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.305957,
+          "word_count": 54,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Elizabeth Anderson",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.793913,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": 0.130119,
+          "word_count": 177,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Elizabeth Anderson",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.424396,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88442,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Steven Valiquette",
+          "role": "Analyst, Mizuho Securities",
+          "section": "qa",
+          "sentiment": 0.419075,
+          "word_count": 162,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": 0.078697,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.87542,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Hi, guys.",
+          "role": "Thank you so much for the question and congratulations on a really strong print and Matt on a really strong first quarter as CFO.",
+          "section": "qa",
+          "sentiment": 0.722851,
+          "word_count": 71,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": -0.622424,
+          "word_count": 198,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": 0.765057,
+          "word_count": 194,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Jessica Tassan",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.733792,
+          "word_count": 101,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.779505,
+          "word_count": 322,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886913,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Sean Dodge",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.355538,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Perry Gold",
+          "role": "Senior VP of Investor Relations, Doximity",
+          "section": "qa",
+          "sentiment": -0.305199,
+          "word_count": 186,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881991,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Alexei Gogolev",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.880048,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.843036,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Perry Gold",
+          "role": "Senior VP of Investor Relations, Doximity",
+          "section": "qa",
+          "sentiment": 0.544078,
+          "word_count": 258,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Alexei Gogolev",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.874407,
+          "word_count": 34,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": 0.773479,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Perry Gold",
+          "role": "Senior VP of Investor Relations, Doximity",
+          "section": "qa",
+          "sentiment": 0.823065,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Alexei Gogolev",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.594944,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884695,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Scott Schoenhaus",
+          "role": "Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": 0.784538,
+          "word_count": 69,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Matt Sonefeldt",
+          "role": "CFO, Doximity",
+          "section": "qa",
+          "sentiment": 0.621643,
+          "word_count": 200,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908859,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Jeff Tangney",
+          "role": "Co-Founder and CEO, Doximity",
+          "section": "qa",
+          "sentiment": 0.654432,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911971,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 9208,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The 5 Most Interesting Analyst Questions From Doximity’s Q2 Earnings Call",
@@ -178,13 +1025,40 @@
       "ts": "2026-08-07T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DOCS Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/docs/transcripts/668286-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "DOCS Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/docs/transcripts/552736-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-13T00:00:00+00:00"
+    },
+    {
+      "title": "DOCS Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/docs/transcripts/412553-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-05T00:00:00+00:00"
+    },
+    {
+      "title": "DOCS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-doximity-inc-stock-1/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-13T23:18:28.567940+00:00"
 }

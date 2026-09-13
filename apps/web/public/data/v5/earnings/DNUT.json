@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DNUT",
   "earnings_history": [
     {
@@ -135,7 +135,498 @@
       "surprise_pct": -1.86
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dnut/transcripts/662237-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 35,
+        "scored_turn_count": 35,
+        "overall_sentiment": 0.130523,
+        "prepared_sentiment": -0.041494,
+        "qa_sentiment": 0.159193,
+        "qa_tone_shift": 0.200687,
+        "uncertainty_turn_rate": 0.085714,
+        "forward_looking_turn_rate": 0.314286,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 12,
+            "sentiment": -0.30151
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": -0.24728
+          },
+          {
+            "topic": "Demand",
+            "mentions": 6,
+            "sentiment": -0.011396
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.448476
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.236755
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.920815
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.891545,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Steve West",
+          "role": "VP of Investor Relations, Krispy Kreme",
+          "section": "prepared",
+          "sentiment": 0.915038,
+          "word_count": 199,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "prepared",
+          "sentiment": -0.920815,
+          "word_count": 1399,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Raphael Duvivier",
+          "role": "CFO, Krispy Kreme",
+          "section": "prepared",
+          "sentiment": -0.268755,
+          "word_count": 944,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "prepared",
+          "sentiment": -0.824482,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911681,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Brian Harbour",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.755996,
+          "word_count": 71,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Raphael Duvivier",
+          "role": "CFO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.866128,
+          "word_count": 98,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.832052,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Brian Harbour",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.524353,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Yeah.",
+          "role": "We're working closely with our strategic partners.",
+          "section": "qa",
+          "sentiment": -0.879277,
+          "word_count": 169,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89544,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "David Palmer",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.479304,
+          "word_count": 94,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.811001,
+          "word_count": 129,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Raphael Duvivier",
+          "role": "CFO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.925454,
+          "word_count": 65,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "David Palmer",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.803704,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Raphael Duvivier",
+          "role": "CFO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.387073,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.794418,
+          "word_count": 110,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Raphael Duvivier",
+          "role": "CFO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.358218,
+          "word_count": 155,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.724041,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Yeah.",
+          "role": "One of the great things about the strategic partners that we are growing with is that we are, you're right, relatively under-penetrated.",
+          "section": "qa",
+          "sentiment": -0.21583,
+          "word_count": 203,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": 0.745695,
+          "word_count": 180,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902458,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Val Tuonanda",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.746481,
+          "word_count": 33,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Raphael Duvivier",
+          "role": "CFO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.578268,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Val Tuonanda",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.686553,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": 0.339155,
+          "word_count": 103,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897665,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Daniel Guglielmo",
+          "role": "Analyst, Capital One Securities",
+          "section": "qa",
+          "sentiment": -0.02946,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Raphael Duvivier",
+          "role": "CFO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": 0.261794,
+          "word_count": 191,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Daniel Guglielmo",
+          "role": "Analyst, Capital One Securities",
+          "section": "qa",
+          "sentiment": -0.655862,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.307903,
+          "word_count": 211,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917481,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Josh Charlesworth",
+          "role": "President and CEO, Krispy Kreme",
+          "section": "qa",
+          "sentiment": -0.676989,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913081,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5399,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Krispy Kreme’s Q2 Earnings Call: Our Top 5 Analyst Questions",
@@ -178,13 +669,40 @@
       "ts": "2026-08-07T10:01:33+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DNUT Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dnut/transcripts/662237-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "DNUT Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dnut/transcripts/571806-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "DNUT Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dnut/transcripts/402823-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "DNUT Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-krispy-kreme-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-13T23:19:28.417478+00:00"
 }

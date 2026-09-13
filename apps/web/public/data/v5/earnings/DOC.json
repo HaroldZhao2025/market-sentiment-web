@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DOC",
   "earnings_history": [
     {
@@ -153,7 +153,607 @@
       "surprise_pct": -155.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/doc/transcripts/661451-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 45,
+        "scored_turn_count": 45,
+        "overall_sentiment": 0.474605,
+        "prepared_sentiment": 0.253413,
+        "qa_sentiment": 0.496184,
+        "qa_tone_shift": 0.242771,
+        "uncertainty_turn_rate": 0.066667,
+        "forward_looking_turn_rate": 0.244444,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 13,
+            "sentiment": -0.07481
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.18268
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.321734
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": 0.215318
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.812143
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.908344,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Andrew Johns",
+          "role": "SVP of Investor Relations, Healthpeak Properties",
+          "section": "prepared",
+          "sentiment": 0.812143,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "prepared",
+          "sentiment": -0.049121,
+          "word_count": 815,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Kelvin Moses",
+          "role": "CFO, Healthpeak Properties",
+          "section": "prepared",
+          "sentiment": -0.657714,
+          "word_count": 912,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91596,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Ronald Kamdem",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.156919,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Kelvin Moses",
+          "role": "CFO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": -0.845235,
+          "word_count": 158,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.564006,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897602,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Juan Sanabria",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.846805,
+          "word_count": 92,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Kelvin Moses",
+          "role": "CFO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.4423,
+          "word_count": 285,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Scott Bohn",
+          "role": "Chief Development Officer and Head of Lab, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": -0.619879,
+          "word_count": 61,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898558,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "John Kilichowski",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.669678,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": -0.099445,
+          "word_count": 279,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901482,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Austin Wurschmidt",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.790377,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Kelvin Moses",
+          "role": "CFO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": -0.750244,
+          "word_count": 155,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904872,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Seth Bergey",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.190001,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Scott Bohn",
+          "role": "Chief Development Officer and Head of Lab, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.790595,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906284,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Connor Mitchell",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.790625,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Kelvin Moses",
+          "role": "CFO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.021948,
+          "word_count": 191,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.837165,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901519,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Rich Anderson",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.623592,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Kelvin Moses",
+          "role": "CFO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": -0.132909,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897172,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Rich Hightower",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.394814,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": -0.470752,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900772,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Farrell Granath",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.637742,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.5505,
+          "word_count": 326,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901551,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Michael Carroll",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.882591,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.733802,
+          "word_count": 161,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896231,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Michael Stroyeck",
+          "role": "Analyst, Green Street",
+          "section": "qa",
+          "sentiment": 0.511587,
+          "word_count": 39,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Kelvin Moses",
+          "role": "CFO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": -0.405261,
+          "word_count": 268,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.844831,
+          "word_count": 183,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902403,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Mike Mueller",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.483766,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Scott Brinker",
+          "role": "President and CEO, Healthpeak Properties",
+          "section": "qa",
+          "sentiment": 0.480386,
+          "word_count": 156,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912688,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5817,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Healthpeak Properties (DOC) Q2 2026 Earnings Call Transcript",
@@ -196,13 +796,40 @@
       "ts": "2026-08-05T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DOC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/doc/transcripts/661451-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "DOC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/doc/transcripts/550972-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "DOC Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/doc/transcripts/399548-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-03T00:00:00+00:00"
+    },
+    {
+      "title": "DOC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-physicians-realty-trust-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-13T23:18:00.520073+00:00"
 }

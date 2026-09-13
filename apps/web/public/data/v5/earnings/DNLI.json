@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DNLI",
   "earnings_history": [
     {
@@ -153,7 +153,883 @@
       "surprise_pct": -124.6
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dnli/transcripts/664214-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 70,
+        "scored_turn_count": 70,
+        "overall_sentiment": 0.565392,
+        "prepared_sentiment": 0.548094,
+        "qa_sentiment": 0.566722,
+        "qa_tone_shift": 0.018629,
+        "uncertainty_turn_rate": 0.042857,
+        "forward_looking_turn_rate": 0.271429,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 18,
+            "sentiment": 0.485743
+          },
+          {
+            "topic": "Demand",
+            "mentions": 6,
+            "sentiment": 0.459972
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": 0.619294
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.638198
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": 0.38007
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910092,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Laura Hansen",
+          "role": "VP of Investor Relations, Denali Therapeutics",
+          "section": "prepared",
+          "sentiment": 0.91232,
+          "word_count": 205,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "prepared",
+          "sentiment": 0.477921,
+          "word_count": 553,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "prepared",
+          "sentiment": -0.124453,
+          "word_count": 1529,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "prepared",
+          "sentiment": 0.564588,
+          "word_count": 1127,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Alexander Schuth",
+          "role": "Chief Operating and Financial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.195552,
+          "word_count": 593,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.799444,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": -0.797093,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Alexander Schuth",
+          "role": "Chief Operating and Financial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.305289,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.782978,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.494613,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.860874,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Andrew Tsai",
+          "role": "Managing Director, Jefferies",
+          "section": "qa",
+          "sentiment": 0.766135,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.324821,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.773032,
+          "word_count": 200,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.874291,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tazeen Ahmad",
+          "role": "Managing Director and Senior Equity Research Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.870397,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.609104,
+          "word_count": 216,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.733903,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.434217,
+          "word_count": 195,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.861117,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Michael Riad",
+          "role": "Executive Director and Senior Equity Research Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.801562,
+          "word_count": 69,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.797385,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Peter Chin",
+          "role": "Chief Medical Officer and Head of Development, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": -0.293382,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Michael Riad",
+          "role": "Executive Director and Senior Equity Research Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.686258,
+          "word_count": 42,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": -0.618616,
+          "word_count": 71,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.858423,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Paul Matteis",
+          "role": "Managing Director and Head of Therapeutics Research, Stifel",
+          "section": "qa",
+          "sentiment": 0.493091,
+          "word_count": 148,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": -0.388872,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.562779,
+          "word_count": 478,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893529,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Mayank Mamtani",
+          "role": "Senior Managing Director, Group Head of Healthcare Research and Senior Biotechnology Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.839153,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.787228,
+          "word_count": 297,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Peter Chin",
+          "role": "Chief Medical Officer and Head of Development, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.49331,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889317,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Ananda Ghosh",
+          "role": "Senior Biotech Analyst, H.C. Wainwright & Co",
+          "section": "qa",
+          "sentiment": 0.711348,
+          "word_count": 188,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.35099,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.864277,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.892278,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.803371,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.830657,
+          "word_count": 202,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Peter Chin",
+          "role": "Chief Medical Officer and Head of Development, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.499656,
+          "word_count": 134,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882541,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Laura Chico",
+          "role": "Managing Director and Co-Head of Healthcare Research, Wedbush",
+          "section": "qa",
+          "sentiment": 0.783347,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.638766,
+          "word_count": 130,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "We will take our next question.",
+          "role": "The question comes from Marc Goodman from Leerink Partners.",
+          "section": "qa",
+          "sentiment": 0.892084,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Alyssa Larios",
+          "role": "Equity Research Associate, Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.728255,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.87554,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.841369,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Alyssa Larios",
+          "role": "Equity Research Associate, Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.424472,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.864912,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Michael DiFiore",
+          "role": "Managing Director of Equity Research, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.49556,
+          "word_count": 93,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.832745,
+          "word_count": 188,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "Michael DiFiore",
+          "role": "Managing Director of Equity Research, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.842156,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Michael DiFiore",
+          "role": "Managing Director of Equity Research, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.118022,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.312012,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.713066,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.551016,
+          "word_count": 38,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.728715,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.756883,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Katie Peng",
+          "role": "Chief Commercial Officer, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": -0.649824,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89921,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Charles Moore",
+          "role": "Senior Biotech Equity Research Associate, Baird",
+          "section": "qa",
+          "sentiment": 0.632348,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.858345,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Peter Chin",
+          "role": "Chief Medical Officer and Head of Development, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.885612,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": 0.112983,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Charles Moore",
+          "role": "Senior Biotech Equity Research Associate, Baird",
+          "section": "qa",
+          "sentiment": -0.082312,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907202,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Ryan Watts",
+          "role": "CEO, Denali Therapeutics",
+          "section": "qa",
+          "sentiment": -0.560288,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909793,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 9642,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Denali Therapeutics (DNLI) Q2 2026 Earnings Call Transcript",
@@ -196,13 +1072,28 @@
       "ts": "2026-08-07T01:03:46+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DNLI Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dnli/transcripts/664214-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "DNLI Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-denali-therapeutics-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-13T23:19:18.422872+00:00"
 }

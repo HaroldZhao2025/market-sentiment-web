@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DOMO",
   "earnings_history": [
     {
@@ -153,7 +153,456 @@
       "surprise_pct": 8.29
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-03-10T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/domo/transcripts/418920-q4-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 31,
+        "scored_turn_count": 31,
+        "overall_sentiment": 0.366569,
+        "prepared_sentiment": 0.161803,
+        "qa_sentiment": 0.405946,
+        "qa_tone_shift": 0.244143,
+        "uncertainty_turn_rate": 0.096774,
+        "forward_looking_turn_rate": 0.258065,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 12,
+            "sentiment": 0.045285
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": -0.336157
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 8,
+            "sentiment": 0.116793
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.929415
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.929415
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.921619
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.906923
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.919163,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Please note this conference is being recorded.",
+          "role": "I will now turn the conference over to Cory Edwards, Vice President of Corporate Communications.",
+          "section": "prepared",
+          "sentiment": 0.841761,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "I'll begin with our safe harbor statement.",
+          "role": "Our press release was issued after the market close and is available on the investor relations section of our website.",
+          "section": "prepared",
+          "sentiment": 0.906923,
+          "word_count": 206,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Josh James",
+          "role": "Founder and CEO, Domo",
+          "section": "prepared",
+          "sentiment": -0.921619,
+          "word_count": 2000,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Tod Crane",
+          "role": "CFO, Domo",
+          "section": "prepared",
+          "sentiment": -0.937212,
+          "word_count": 701,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909972,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Cole Erskine",
+          "role": "Equity Research Associate, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.748223,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Josh James",
+          "role": "Founder and CEO, Domo",
+          "section": "qa",
+          "sentiment": 0.373588,
+          "word_count": 257,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Cole Erskine",
+          "role": "Equity Research Associate, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.639145,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tod Crane",
+          "role": "CFO, Domo",
+          "section": "qa",
+          "sentiment": -0.447851,
+          "word_count": 176,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909417,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Brett Huff",
+          "role": "Managing Director, Stephens",
+          "section": "qa",
+          "sentiment": 0.848307,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Brett Huff",
+          "role": "Managing Director, Stephens",
+          "section": "qa",
+          "sentiment": 0.573817,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Josh James",
+          "role": "Founder and CEO, Domo",
+          "section": "qa",
+          "sentiment": 0.699077,
+          "word_count": 502,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Brett Huff",
+          "role": "Managing Director, Stephens",
+          "section": "qa",
+          "sentiment": 0.804003,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Tod Crane",
+          "role": "CFO, Domo",
+          "section": "qa",
+          "sentiment": 0.227832,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Yeah.",
+          "role": "We're, you know, we're making good progress on just figuring out these deals with the different ecosystem partners.",
+          "section": "qa",
+          "sentiment": -0.018843,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Brett Huff",
+          "role": "Managing Director, Stephens",
+          "section": "qa",
+          "sentiment": -0.433949,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902906,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Kincaid LaCorte",
+          "role": "Equity Research Associate, Citizens JMP",
+          "section": "qa",
+          "sentiment": 0.72737,
+          "word_count": 82,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Josh James",
+          "role": "Founder and CEO, Domo",
+          "section": "qa",
+          "sentiment": 0.769871,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "RJ Tracy",
+          "role": "Chief Revenue Officer, Domo",
+          "section": "qa",
+          "sentiment": 0.790263,
+          "word_count": 249,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Kincaid LaCorte",
+          "role": "Equity Research Associate, Citizens JMP",
+          "section": "qa",
+          "sentiment": -0.440357,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911311,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Lucky Schreiner",
+          "role": "VP and Research Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": -0.53494,
+          "word_count": 52,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Tod Crane",
+          "role": "CFO, Domo",
+          "section": "qa",
+          "sentiment": 0.542454,
+          "word_count": 222,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Lucky Schreiner",
+          "role": "VP and Research Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": -0.385879,
+          "word_count": 57,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Tod Crane",
+          "role": "CFO, Domo",
+          "section": "qa",
+          "sentiment": 0.264238,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903503,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Max Michaelis",
+          "role": "Senior Research Analyst, Lake Street Capital Markets",
+          "section": "qa",
+          "sentiment": 0.50317,
+          "word_count": 95,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Tod Crane",
+          "role": "CFO, Domo",
+          "section": "qa",
+          "sentiment": -0.232039,
+          "word_count": 212,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 5679,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Domo Inc (DOMO) Q1 2027 Earnings Call Highlights: Strategic Moves and AI Advancements Amid ...",
@@ -196,13 +645,34 @@
       "ts": "2026-06-08T20:37:00+00:00",
       "source": "Business Wire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DOMO Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/domo/transcripts/592575-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-06-15T00:00:00+00:00"
+    },
+    {
+      "title": "DOMO Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/domo/transcripts/418920-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-10T00:00:00+00:00"
+    },
+    {
+      "title": "DOMO Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/domo/transcripts/379520-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-12-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-13T23:19:47.728046+00:00"
 }
