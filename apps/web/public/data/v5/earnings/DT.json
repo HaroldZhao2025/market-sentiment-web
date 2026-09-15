@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DT",
   "earnings_history": [
     {
@@ -153,7 +153,818 @@
       "surprise_pct": 76.42
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dt/transcripts/667911-q1-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 59,
+        "scored_turn_count": 59,
+        "overall_sentiment": 0.478429,
+        "prepared_sentiment": 0.165429,
+        "qa_sentiment": 0.507411,
+        "qa_tone_shift": 0.341981,
+        "uncertainty_turn_rate": 0.067797,
+        "forward_looking_turn_rate": 0.372881,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 24,
+            "sentiment": 0.332727
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 21,
+            "sentiment": 0.136546
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 19,
+            "sentiment": 0.366901
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.162892
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.885058
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.894753
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.918235,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Please note this conference is being recorded.",
+          "role": "I will now turn the conference over to Noelle Faris, VP of Investor Relations.",
+          "section": "prepared",
+          "sentiment": 0.841761,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Noelle Faris",
+          "role": "VP of Investor Relations, Dynatrace",
+          "section": "prepared",
+          "sentiment": 0.837268,
+          "word_count": 203,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "prepared",
+          "sentiment": -0.875364,
+          "word_count": 1656,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "prepared",
+          "sentiment": -0.894753,
+          "word_count": 1340,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914703,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Brent Thill",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.494003,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.200288,
+          "word_count": 192,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901527,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Gray Powell",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.708314,
+          "word_count": 120,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.857791,
+          "word_count": 311,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.637448,
+          "word_count": 86,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884123,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Will Power",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.829191,
+          "word_count": 119,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.813208,
+          "word_count": 210,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.31622,
+          "word_count": 115,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.876044,
+          "word_count": 107,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892421,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Keith Bachman",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.835733,
+          "word_count": 175,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.664628,
+          "word_count": 296,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901488,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Andrew Sherman",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": -0.679401,
+          "word_count": 54,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.318011,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.079016,
+          "word_count": 67,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899181,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Fatima Boolani",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.771113,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.83252,
+          "word_count": 121,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899795,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Sanjit Singh",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.352866,
+          "word_count": 116,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.717941,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895943,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Matt Hedberg",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.682794,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.355976,
+          "word_count": 232,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.532359,
+          "word_count": 81,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892229,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Koji Ikeda",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.689931,
+          "word_count": 108,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.46117,
+          "word_count": 183,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.855179,
+          "word_count": 236,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903477,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Samik Chatterjee",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.839008,
+          "word_count": 98,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.322338,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89537,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Ryan MacWilliams",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.567943,
+          "word_count": 64,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.855065,
+          "word_count": 259,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893187,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Ittai Kidron",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.894889,
+          "word_count": 85,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.608447,
+          "word_count": 140,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897082,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Matthew Martino",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.529359,
+          "word_count": 57,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.647975,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.569994,
+          "word_count": 146,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893103,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Radi Sultan",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.620747,
+          "word_count": 77,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.64816,
+          "word_count": 165,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896957,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Eric Heath",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.780163,
+          "word_count": 78,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Jim Benson",
+          "role": "CFO, Dynatrace",
+          "section": "qa",
+          "sentiment": 0.545452,
+          "word_count": 102,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Rick McConnell",
+          "role": "CEO, Dynatrace",
+          "section": "qa",
+          "sentiment": -0.730971,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915931,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8770,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Insightful Analyst Questions From Dynatrace’s Q2 Earnings Call",
@@ -196,13 +1007,40 @@
       "ts": "2026-08-08T05:03:48+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DT Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/dt/transcripts/667911-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "DT Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/dt/transcripts/537765-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-13T00:00:00+00:00"
+    },
+    {
+      "title": "DT Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/dt/transcripts/410971-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-09T00:00:00+00:00"
+    },
+    {
+      "title": "DT Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-dynatrace-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-15T00:34:00.768438+00:00"
 }

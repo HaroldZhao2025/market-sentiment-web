@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DOW",
   "earnings_history": [
     {
@@ -153,7 +153,842 @@
       "surprise_pct": 63.81
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-23T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dow/transcripts/546438-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 60,
+        "scored_turn_count": 60,
+        "overall_sentiment": 0.310537,
+        "prepared_sentiment": -0.034628,
+        "qa_sentiment": 0.371449,
+        "qa_tone_shift": 0.406077,
+        "uncertainty_turn_rate": 0.166667,
+        "forward_looking_turn_rate": 0.383333,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 25,
+            "sentiment": -0.014342
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 21,
+            "sentiment": -0.035455
+          },
+          {
+            "topic": "Demand",
+            "mentions": 16,
+            "sentiment": -0.337846
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 9,
+            "sentiment": 0.030475
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 7,
+            "sentiment": -0.22102
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.575874
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.914928
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.912712,
+          "word_count": 83,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Andrew Riker",
+          "role": "VP of Investor Relations, Dow",
+          "section": "prepared",
+          "sentiment": 0.885801,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Leading today's call are Karen S.",
+          "role": "Carter, Chief Executive Officer, and Jeff Tate, Chief Financial Officer.",
+          "section": "prepared",
+          "sentiment": 0.844748,
+          "word_count": 206,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "prepared",
+          "sentiment": -0.536207,
+          "word_count": 527,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Jeff Tate",
+          "role": "CFO, Dow",
+          "section": "prepared",
+          "sentiment": -0.941563,
+          "word_count": 1227,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 5,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "prepared",
+          "sentiment": -0.551455,
+          "word_count": 493,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Jeff Tate",
+          "role": "CFO, Dow",
+          "section": "prepared",
+          "sentiment": -0.914928,
+          "word_count": 300,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "prepared",
+          "sentiment": -0.918398,
+          "word_count": 624,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Andrew Riker",
+          "role": "VP of Investor Relations, Dow",
+          "section": "prepared",
+          "sentiment": 0.907635,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900376,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Hassan Ahmed",
+          "role": "Analyst, Alembic Global",
+          "section": "qa",
+          "sentiment": 0.742228,
+          "word_count": 157,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 11,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.025627,
+          "word_count": 309,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889213,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Vincent Andrews",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.406215,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": 0.590017,
+          "word_count": 163,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886776,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Frank Mitsch",
+          "role": "Analyst, Fermium Research",
+          "section": "qa",
+          "sentiment": 0.024828,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": 0.684646,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jeff Tate",
+          "role": "CFO, Dow",
+          "section": "qa",
+          "sentiment": -0.537649,
+          "word_count": 121,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.68075,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890223,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Jeff Zekauskas",
+          "role": "Analyst, J.P. Morgan",
+          "section": "qa",
+          "sentiment": 0.530513,
+          "word_count": 111,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Jeff Tate",
+          "role": "CFO, Dow",
+          "section": "qa",
+          "sentiment": 0.639087,
+          "word_count": 350,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": 0.626624,
+          "word_count": 148,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889107,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "John McNulty",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.456507,
+          "word_count": 118,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 26,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.600293,
+          "word_count": 286,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886206,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "David Begleiter",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.494434,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.081746,
+          "word_count": 277,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.647979,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.265364,
+          "word_count": 193,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890307,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Matthew DeYoe",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.806417,
+          "word_count": 158,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": 0.85943,
+          "word_count": 341,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Jeff Tate",
+          "role": "CFO, Dow",
+          "section": "qa",
+          "sentiment": 0.623108,
+          "word_count": 115,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893973,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Kevin McCarthy",
+          "role": "Analyst, Vertical Research Partners",
+          "section": "qa",
+          "sentiment": 0.742982,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.443621,
+          "word_count": 100,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898853,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Abigail Eberts",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.468381,
+          "word_count": 59,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": 0.375856,
+          "word_count": 95,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895776,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Josh Spector",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.103747,
+          "word_count": 143,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": 0.005982,
+          "word_count": 169,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894799,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Duffy Fischer",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.127706,
+          "word_count": 100,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.579017,
+          "word_count": 239,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Jeff Tate",
+          "role": "CFO, Dow",
+          "section": "qa",
+          "sentiment": 0.731208,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888586,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "John Roberts",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.759946,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": 0.859156,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Andrew Riker",
+          "role": "VP of Investor Relations, Dow",
+          "section": "qa",
+          "sentiment": 0.755077,
+          "word_count": 157,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.885201,
+          "word_count": 43,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902996,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Matthew Blair",
+          "role": "Analyst, Tudor, Pickering",
+          "section": "qa",
+          "sentiment": -0.505149,
+          "word_count": 55,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.362834,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Karen S. Carter",
+          "role": "CEO, Dow",
+          "section": "qa",
+          "sentiment": -0.79682,
+          "word_count": 211,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Andrew Riker",
+          "role": "VP of Investor Relations, Dow",
+          "section": "qa",
+          "sentiment": 0.888874,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899028,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8933,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Dow Q2 Earnings Call Focuses on Cost Actions and Portfolio Shift",
@@ -196,13 +1031,40 @@
       "ts": "2026-07-23T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DOW Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dow/transcripts/546438-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-23T00:00:00+00:00"
+    },
+    {
+      "title": "DOW Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dow/transcripts/534358-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-23T00:00:00+00:00"
+    },
+    {
+      "title": "DOW Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dow/transcripts/370095-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-29T00:00:00+00:00"
+    },
+    {
+      "title": "DOW Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-dow-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-15T00:33:33.765515+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DSP",
   "earnings_history": [
     {
@@ -147,7 +147,547 @@
       "surprise_pct": 28.99
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-10T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dsp/transcripts/665982-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 38,
+        "scored_turn_count": 38,
+        "overall_sentiment": 0.48585,
+        "prepared_sentiment": 0.034594,
+        "qa_sentiment": 0.554222,
+        "qa_tone_shift": 0.519628,
+        "uncertainty_turn_rate": 0.052632,
+        "forward_looking_turn_rate": 0.342105,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 17,
+            "sentiment": 0.417376
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": 0.192286
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.03598
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": -0.203726
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.070085
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.060864
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.919757,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Nicholas Zangler",
+          "role": "SVP of Investor Relations, Viant Technology",
+          "section": "prepared",
+          "sentiment": 0.89741,
+          "word_count": 309,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "prepared",
+          "sentiment": -0.929379,
+          "word_count": 2453,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Chris Vanderhook",
+          "role": "Co-founder and Chief Operating Officer, Viant Technology",
+          "section": "prepared",
+          "sentiment": 0.21175,
+          "word_count": 1451,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Larry Madden",
+          "role": "CFO, Viant Technology",
+          "section": "prepared",
+          "sentiment": -0.926567,
+          "word_count": 1104,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.795786,
+          "word_count": 116,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Larry Madden",
+          "role": "CFO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.726247,
+          "word_count": 203,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.480921,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896734,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tom White",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.521747,
+          "word_count": 103,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Larry Madden",
+          "role": "CFO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.512199,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Tom White",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": -0.386833,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.573475,
+          "word_count": 75,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.507373,
+          "word_count": 155,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Chris Vanderhook",
+          "role": "Co-founder and Chief Operating Officer, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.764676,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Chris Vanderhook",
+          "role": "Co-founder and Chief Operating Officer, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.843966,
+          "word_count": 185,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.631652,
+          "word_count": 138,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.8828,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Barton Crockett",
+          "role": "Analyst, Rosenblatt",
+          "section": "qa",
+          "sentiment": 0.106452,
+          "word_count": 154,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.559082,
+          "word_count": 176,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Chris Vanderhook",
+          "role": "Co-founder and Chief Operating Officer, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.825557,
+          "word_count": 139,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.754251,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Barton Crockett",
+          "role": "Analyst, Rosenblatt",
+          "section": "qa",
+          "sentiment": 0.874876,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.716851,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Barton Crockett",
+          "role": "Analyst, Rosenblatt",
+          "section": "qa",
+          "sentiment": 0.782511,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888119,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Naved Khan",
+          "role": "Analyst, B. Riley",
+          "section": "qa",
+          "sentiment": 0.758506,
+          "word_count": 37,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Larry Madden",
+          "role": "CFO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.375321,
+          "word_count": 29,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Naved Khan",
+          "role": "Analyst, B. Riley",
+          "section": "qa",
+          "sentiment": 0.85455,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.280369,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Naved Khan",
+          "role": "Analyst, B. Riley",
+          "section": "qa",
+          "sentiment": -0.879964,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.873458,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Brianna Diaz",
+          "role": "Analyst, JMP Securities",
+          "section": "qa",
+          "sentiment": 0.584831,
+          "word_count": 57,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.558062,
+          "word_count": 67,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Brianna Diaz",
+          "role": "Analyst, JMP Securities",
+          "section": "qa",
+          "sentiment": 0.735001,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": -0.930095,
+          "word_count": 15,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905122,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Tim Vanderhook",
+          "role": "Co-founder and CEO, Viant Technology",
+          "section": "qa",
+          "sentiment": 0.915733,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 7710,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Viant Technology Inc (DSP) (Q2 2026) Earnings Call Highlights: Record Revenue and CTV Surge ...",
@@ -190,13 +730,40 @@
       "ts": "2026-05-12T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DSP Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dsp/transcripts/665982-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-10T00:00:00+00:00"
+    },
+    {
+      "title": "DSP Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dsp/transcripts/594430-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-11T00:00:00+00:00"
+    },
+    {
+      "title": "DSP Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dsp/transcripts/402419-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-11T00:00:00+00:00"
+    },
+    {
+      "title": "DSP Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-5-11-viant-technology-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-05-11T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-15T00:35:49.759488+00:00"
 }

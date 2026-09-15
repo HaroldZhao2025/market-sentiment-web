@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DTE",
   "earnings_history": [
     {
@@ -153,7 +153,977 @@
       "surprise_pct": 26.46
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-28T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dte/transcripts/658050-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 77,
+        "scored_turn_count": 77,
+        "overall_sentiment": 0.517497,
+        "prepared_sentiment": 0.272826,
+        "qa_sentiment": 0.530904,
+        "qa_tone_shift": 0.258078,
+        "uncertainty_turn_rate": 0.077922,
+        "forward_looking_turn_rate": 0.155844,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 22,
+            "sentiment": 0.532199
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": 0.283897
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": 0.439519
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.363339
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.217778
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": 0.127891
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909987,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Matt Krupinski",
+          "role": "Director of Investor Relations, DTE Energy",
+          "section": "prepared",
+          "sentiment": 0.907993,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "prepared",
+          "sentiment": -0.854568,
+          "word_count": 2136,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 4,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "David Ruud",
+          "role": "CFO, DTE Energy",
+          "section": "prepared",
+          "sentiment": 0.127891,
+          "word_count": 844,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905441,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.819564,
+          "word_count": 59,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.419012,
+          "word_count": 151,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.586045,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.664072,
+          "word_count": 128,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.819821,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.893374,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.806729,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.444444,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898879,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": -0.078348,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.851018,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.547932,
+          "word_count": 203,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.844629,
+          "word_count": 96,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.822895,
+          "word_count": 72,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.867481,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900511,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Diana Niles",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.716295,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Diana Niles",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.836626,
+          "word_count": 39,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": -0.260672,
+          "word_count": 222,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Diana Niles",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.808624,
+          "word_count": 30,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": -0.284277,
+          "word_count": 156,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Diana Niles",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.424394,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894822,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.683375,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "David Ruud",
+          "role": "CFO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.401395,
+          "word_count": 113,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.883189,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "David Ruud",
+          "role": "CFO, DTE Energy",
+          "section": "qa",
+          "sentiment": -0.205789,
+          "word_count": 30,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.654242,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.334425,
+          "word_count": 70,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.838947,
+          "word_count": 19,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.866278,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.85466,
+          "word_count": 9,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.747342,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.206814,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.068895,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894095,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Michael Lonegan",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": -0.028431,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.891928,
+          "word_count": 114,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Michael Lonegan",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.2823,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.590931,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Michael Lonegan",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": -0.247535,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891762,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.18439,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.77942,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 49,
+          "speaker": "David Ruud",
+          "role": "CFO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.692442,
+          "word_count": 118,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.705173,
+          "word_count": 85,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.862786,
+          "word_count": 9,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.515458,
+          "word_count": 15,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.837996,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "David Ruud",
+          "role": "CFO, DTE Energy",
+          "section": "qa",
+          "sentiment": -0.908605,
+          "word_count": 90,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": -0.333366,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895171,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Michael Sullivan",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.802636,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.075012,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Michael Sullivan",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.877594,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.768372,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Michael Sullivan",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": -0.318151,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894729,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Anthony Crowdell",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.876144,
+          "word_count": 60,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.882018,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Anthony Crowdell",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.837685,
+          "word_count": 7,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.799822,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Anthony Crowdell",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": -0.420079,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889622,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Travis Miller",
+          "role": "Analyst, Morningstar",
+          "section": "qa",
+          "sentiment": 0.88869,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.878157,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Travis Miller",
+          "role": "Analyst, Morningstar",
+          "section": "qa",
+          "sentiment": 0.340989,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": 0.8792,
+          "word_count": 33,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 73,
+          "speaker": "Travis Miller",
+          "role": "Analyst, Morningstar",
+          "section": "qa",
+          "sentiment": -0.410167,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913449,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Joi Harris",
+          "role": "President and CEO, DTE Energy",
+          "section": "qa",
+          "sentiment": -0.572456,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910408,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6842,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "DTE Energy Company 2026 Q2 - Results - Earnings Call Presentation (NYSE:DTE) 2026-07-31 - Seeking Alpha",
@@ -196,13 +1166,40 @@
       "ts": "2026-05-01T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DTE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dte/transcripts/658050-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "DTE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dte/transcripts/558470-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "DTE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dte/transcripts/400088-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-17T00:00:00+00:00"
+    },
+    {
+      "title": "DTE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-dte-energy-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-15T00:34:13.140055+00:00"
 }

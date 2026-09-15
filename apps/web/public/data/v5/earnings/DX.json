@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DX",
   "earnings_history": [
     {
@@ -153,7 +153,582 @@
       "surprise_pct": 29.1
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-04-20T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dx/transcripts/546600-q1-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 43,
+        "scored_turn_count": 43,
+        "overall_sentiment": 0.448726,
+        "prepared_sentiment": 0.122147,
+        "qa_sentiment": 0.482221,
+        "qa_tone_shift": 0.360074,
+        "uncertainty_turn_rate": 0.209302,
+        "forward_looking_turn_rate": 0.255814,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": 0.366289
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.202414
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.166704
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": 0.03281
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.102412
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": 0.001227
+          },
+          {
+            "topic": "Demand",
+            "mentions": 1,
+            "sentiment": -0.913584
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.673006,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Alison Griffin",
+          "role": "VP of Investor Relations, Dynex Capital Incorporated",
+          "section": "prepared",
+          "sentiment": 0.916037,
+          "word_count": 254,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "prepared",
+          "sentiment": -0.18687,
+          "word_count": 267,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Good morning everyone joining us today.",
+          "role": "I'd like to begin by welcoming [Kaitlyn Mauritz] , who joins Dynex today to lead Capital Markets and Investor Relations.",
+          "section": "prepared",
+          "sentiment": -0.913584,
+          "word_count": 987,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": -0.68892,
+          "word_count": 190,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913229,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Bose George",
+          "role": "Managing Director, KBW",
+          "section": "qa",
+          "sentiment": 0.882862,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": -0.929966,
+          "word_count": 30,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Bose George",
+          "role": "Managing Director, KBW",
+          "section": "qa",
+          "sentiment": 0.774085,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Bose George",
+          "role": "Managing Director, KBW",
+          "section": "qa",
+          "sentiment": -0.536036,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900283,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Trevor Cranston",
+          "role": "Director of Mortgage Finance Equity Research, Citizens JMP",
+          "section": "qa",
+          "sentiment": 0.769461,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Trevor Cranston",
+          "role": "Director of Mortgage Finance Equity Research, Citizens JMP",
+          "section": "qa",
+          "sentiment": 0.320219,
+          "word_count": 244,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Trevor Cranston",
+          "role": "Director of Mortgage Finance Equity Research, Citizens JMP",
+          "section": "qa",
+          "sentiment": 0.708759,
+          "word_count": 240,
+          "topic_hits": [
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Trevor Cranston",
+          "role": "Director of Mortgage Finance Equity Research, Citizens JMP",
+          "section": "qa",
+          "sentiment": 0.869911,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908975,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Jason Weaver",
+          "role": "Managing Director of Equity Research, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.840416,
+          "word_count": 141,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": 0.689594,
+          "word_count": 201,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jason Weaver",
+          "role": "Managing Director of Equity Research, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.659773,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jason Weaver",
+          "role": "Managing Director of Equity Research, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.772284,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": -0.54207,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": 0.55216,
+          "word_count": 85,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Jason Weaver",
+          "role": "Managing Director of Equity Research, JonesTrading",
+          "section": "qa",
+          "sentiment": -0.365744,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": 0.562253,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914043,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Marissa Lobo",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.440923,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Marissa Lobo",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.634457,
+          "word_count": 281,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Marissa Lobo",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.687045,
+          "word_count": 196,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Marissa Lobo",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.862182,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894163,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Merrill Ross",
+          "role": "REIT Research Analyst, Compass Point",
+          "section": "qa",
+          "sentiment": 0.597236,
+          "word_count": 258,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Merrill Ross",
+          "role": "REIT Research Analyst, Compass Point",
+          "section": "qa",
+          "sentiment": 0.467974,
+          "word_count": 223,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Merrill Ross",
+          "role": "REIT Research Analyst, Compass Point",
+          "section": "qa",
+          "sentiment": -0.219806,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906266,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Eric Hagen",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": -0.432087,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Eric Hagen",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": 0.848207,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": 0.760068,
+          "word_count": 384,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Eric Hagen",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": 0.692366,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Eric Hagen",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": 0.770088,
+          "word_count": 137,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Eric Hagen",
+          "role": "Managing Director, BTIG",
+          "section": "qa",
+          "sentiment": -0.679757,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909582,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Smriti Popenoe",
+          "role": "Co-CEO and President, Dynex Capital Incorporated",
+          "section": "qa",
+          "sentiment": 0.770864,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.921268,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4774,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Dynex Capital, Inc. Q2 2026 Earnings Call Summary",
@@ -196,13 +771,40 @@
       "ts": "2026-07-06T07:00:00+00:00",
       "source": "Business Wire",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DX Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dx/transcripts/651808-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-20T00:00:00+00:00"
+    },
+    {
+      "title": "DX Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dx/transcripts/546600-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-20T00:00:00+00:00"
+    },
+    {
+      "title": "DX Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dx/transcripts/395191-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-26T00:00:00+00:00"
+    },
+    {
+      "title": "DX Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-20-dynex-capital-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-20T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-15T00:36:43.800310+00:00"
 }

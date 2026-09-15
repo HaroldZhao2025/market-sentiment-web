@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DORM",
   "earnings_history": [
     {
@@ -153,7 +153,485 @@
       "surprise_pct": 38.18
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dorm/transcripts/571586-q1-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 33,
+        "scored_turn_count": 33,
+        "overall_sentiment": 0.427864,
+        "prepared_sentiment": -0.222577,
+        "qa_sentiment": 0.51758,
+        "qa_tone_shift": 0.740157,
+        "uncertainty_turn_rate": 0.151515,
+        "forward_looking_turn_rate": 0.363636,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": -0.116762
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 10,
+            "sentiment": 0.007904
+          },
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": -0.01513
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": -0.361231
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.657081
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.653442
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.653442
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Alexander Whitelam",
+          "role": "VP of Investor Relations and Risk Management, Dorman Products",
+          "section": "prepared",
+          "sentiment": 0.888673,
+          "word_count": 271,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 1,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "prepared",
+          "sentiment": -0.653442,
+          "word_count": 1555,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 2,
+          "speaker": "Charles Rayfield",
+          "role": "CFO, Dorman Products",
+          "section": "prepared",
+          "sentiment": -0.660721,
+          "word_count": 868,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "prepared",
+          "sentiment": -0.464817,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908817,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Jeff Lick",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.686961,
+          "word_count": 110,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": -0.391084,
+          "word_count": 392,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 7,
+          "speaker": "Jeff Lick",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.682926,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.108948,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Jeff Lick",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.811454,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90314,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Scott Stember",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": -0.14738,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Scott Stember",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": -0.028471,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": -0.845279,
+          "word_count": 227,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Scott Stember",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": 0.63609,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.846077,
+          "word_count": 120,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Scott Stember",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": 0.655041,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898034,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "David Lantz",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.711898,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": -0.780237,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "David Lantz",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.704934,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.077298,
+          "word_count": 224,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898997,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Bret Jordan",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.710378,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Bret Jordan",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.888285,
+          "word_count": 37,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.41161,
+          "word_count": 164,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Bret Jordan",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.752474,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.660031,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.84908,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.884329,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.90568,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Kevin Olsen",
+          "role": "Chairman, President, and CEO, Dorman Products",
+          "section": "qa",
+          "sentiment": 0.69237,
+          "word_count": 120,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917423,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5077,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Dorman Products (DORM) Q2 2026 Earnings Call Transcript",
@@ -196,13 +674,40 @@
       "ts": "2026-08-04T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "DORM Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dorm/transcripts/660509-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "DORM Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dorm/transcripts/571586-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "DORM Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dorm/transcripts/404205-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "DORM Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-dorman-products-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-15T00:35:58.024855+00:00"
 }

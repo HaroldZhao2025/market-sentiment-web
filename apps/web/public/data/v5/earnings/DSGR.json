@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DSGR",
   "earnings_history": [
     {
@@ -105,7 +105,513 @@
       "surprise_pct": 77.78
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2025-10-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dsgr/transcripts/369241-q3-2025/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 34,
+        "scored_turn_count": 34,
+        "overall_sentiment": 0.211813,
+        "prepared_sentiment": -0.301742,
+        "qa_sentiment": 0.280287,
+        "qa_tone_shift": 0.582029,
+        "uncertainty_turn_rate": 0.323529,
+        "forward_looking_turn_rate": 0.264706,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 16,
+            "sentiment": -0.110216
+          },
+          {
+            "topic": "Demand",
+            "mentions": 15,
+            "sentiment": -0.094435
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": -0.229132
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 6,
+            "sentiment": -0.147753
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.499626
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.392227
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.891735
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.899291,
+          "word_count": 302,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 1,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "prepared",
+          "sentiment": -0.891735,
+          "word_count": 2263,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 4,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Ron Knutson",
+          "role": "EVP and CFO, Distribution Solutions Group",
+          "section": "prepared",
+          "sentiment": -0.334499,
+          "word_count": 1172,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "prepared",
+          "sentiment": -0.880024,
+          "word_count": 533,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894572,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Tommy Moll",
+          "role": "Equity Research Analyst, Stevens",
+          "section": "qa",
+          "sentiment": 0.720984,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Tommy Moll",
+          "role": "Equity Research Analyst, Stevens",
+          "section": "qa",
+          "sentiment": 0.828466,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Ron Knutson",
+          "role": "EVP and CFO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": -0.059425,
+          "word_count": 325,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": -0.32156,
+          "word_count": 137,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tommy Moll",
+          "role": "Equity Research Analyst, Stevens",
+          "section": "qa",
+          "sentiment": -0.015403,
+          "word_count": 29,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Ron Knutson",
+          "role": "EVP and CFO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": 0.812577,
+          "word_count": 218,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Tommy Moll",
+          "role": "Equity Research Analyst, Stevens",
+          "section": "qa",
+          "sentiment": 0.553574,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": -0.726847,
+          "word_count": 322,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Tommy Moll",
+          "role": "Equity Research Analyst, Stevens",
+          "section": "qa",
+          "sentiment": 0.802338,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": -0.651072,
+          "word_count": 523,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "Tommy Moll",
+          "role": "Equity Research Analyst, Stevens",
+          "section": "qa",
+          "sentiment": 0.859089,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906334,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Ken Newman",
+          "role": "VP and Equity Research Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": 0.821487,
+          "word_count": 47,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": 0.320557,
+          "word_count": 207,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Ron Knutson",
+          "role": "EVP and CFO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": -0.075481,
+          "word_count": 99,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ken Newman",
+          "role": "VP and Equity Research Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": 0.204561,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": 0.326841,
+          "word_count": 176,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Ken Newman",
+          "role": "VP and Equity Research Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": 0.786316,
+          "word_count": 64,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": 0.049553,
+          "word_count": 377,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Ron Knutson",
+          "role": "EVP and CFO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": 0.120511,
+          "word_count": 217,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": 0.107756,
+          "word_count": 168,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ken Newman",
+          "role": "VP and Equity Research Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": -0.596525,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90769,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Kevin Steinke",
+          "role": "Managing Director, Barrington Research",
+          "section": "qa",
+          "sentiment": -0.82586,
+          "word_count": 55,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Ron Knutson",
+          "role": "EVP and CFO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": -0.777455,
+          "word_count": 216,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Kevin Steinke",
+          "role": "Managing Director, Barrington Research",
+          "section": "qa",
+          "sentiment": 0.541586,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908314,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Bryan King",
+          "role": "Chairman and CEO, Distribution Solutions Group",
+          "section": "qa",
+          "sentiment": 0.063151,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.921974,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7930,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "No earnings call after 78.7% holder makes $29.50-a-share bid - Stock Titan",
@@ -141,13 +647,34 @@
       "ts": "2026-03-05T21:01:43+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DSGR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dsgr/transcripts/398150-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-05T00:00:00+00:00"
+    },
+    {
+      "title": "DSGR Earnings Call: Q3 2025",
+      "url": "https://stockanalysis.com/stocks/dsgr/transcripts/369241-q3-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-10-30T00:00:00+00:00"
+    },
+    {
+      "title": "DSGR Earnings Call: Q2 2025",
+      "url": "https://stockanalysis.com/stocks/dsgr/transcripts/340844-q2-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-07-31T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-15T00:36:33.108977+00:00"
 }
