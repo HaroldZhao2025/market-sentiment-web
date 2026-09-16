@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EE",
   "earnings_history": [
     {
@@ -117,7 +117,714 @@
       "surprise_pct": 359.39
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ee/transcripts/662300-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 54,
+        "scored_turn_count": 54,
+        "overall_sentiment": 0.553705,
+        "prepared_sentiment": 0.431809,
+        "qa_sentiment": 0.563457,
+        "qa_tone_shift": 0.131648,
+        "uncertainty_turn_rate": 0.111111,
+        "forward_looking_turn_rate": 0.240741,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": 0.327587
+          },
+          {
+            "topic": "Demand",
+            "mentions": 10,
+            "sentiment": 0.523408
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.61937
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 6,
+            "sentiment": 0.297749
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.470992
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.082317
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.882552,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Craig Hicks",
+          "role": "VP of Investor Relations and Strategy, Excelerate Energy",
+          "section": "prepared",
+          "sentiment": 0.905547,
+          "word_count": 136,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "prepared",
+          "sentiment": 0.082317,
+          "word_count": 1294,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Dana Armstrong",
+          "role": "CFO, Excelerate Energy",
+          "section": "prepared",
+          "sentiment": -0.143181,
+          "word_count": 621,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909847,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Theresa Chen",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.838777,
+          "word_count": 71,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.499743,
+          "word_count": 155,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Theresa Chen",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.446612,
+          "word_count": 115,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Dana Armstrong",
+          "role": "CFO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.674359,
+          "word_count": 230,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": -0.005456,
+          "word_count": 261,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Theresa Chen",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.593914,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896796,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Olivia Foster",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.621566,
+          "word_count": 90,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Hey, Olivia.",
+          "role": "Thank you for being here, and we really want to welcome Goldman Sachs to our analyst coverage universe.",
+          "section": "qa",
+          "sentiment": -0.357221,
+          "word_count": 592,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Olivia Foster",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.783926,
+          "word_count": 100,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.859668,
+          "word_count": 256,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Dana Armstrong",
+          "role": "CFO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.360542,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Olivia Foster",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.825204,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891213,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Eli Jossen",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.229113,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.765453,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Oliver Simpson",
+          "role": "Chief Commercial Officer, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.710067,
+          "word_count": 358,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 22,
+          "speaker": "Eli Jossen",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.797507,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.013432,
+          "word_count": 314,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899131,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": 0.698784,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Oliver Simpson",
+          "role": "Chief Commercial Officer, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.525622,
+          "word_count": 189,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": 0.750833,
+          "word_count": 72,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.04104,
+          "word_count": 142,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Bobby Brooks",
+          "role": "Analyst, Northland Capital Markets",
+          "section": "qa",
+          "sentiment": 0.042463,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906128,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Michael Scialla",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": -0.523794,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Dana Armstrong",
+          "role": "CFO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.872945,
+          "word_count": 67,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Michael Scialla",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.660198,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.629735,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Oliver Simpson",
+          "role": "Chief Commercial Officer, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.425613,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892958,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Chris Robertson",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": -0.024095,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Chris Robertson",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.809185,
+          "word_count": 118,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.794449,
+          "word_count": 256,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Chris Robertson",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.880278,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.854423,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Chris Robertson",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.043983,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889516,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Wade Suki",
+          "role": "Analyst, Capital One",
+          "section": "qa",
+          "sentiment": 0.670176,
+          "word_count": 131,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.835187,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Oliver Simpson",
+          "role": "Chief Commercial Officer, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.407307,
+          "word_count": 342,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Wade Suki",
+          "role": "Analyst, Capital One",
+          "section": "qa",
+          "sentiment": 0.823364,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.794936,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Oliver Simpson",
+          "role": "Chief Commercial Officer, Excelerate Energy",
+          "section": "qa",
+          "sentiment": 0.739122,
+          "word_count": 134,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Wade Suki",
+          "role": "Analyst, Capital One",
+          "section": "qa",
+          "sentiment": 0.092049,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892539,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Steven Kobos",
+          "role": "President and CEO, Excelerate Energy",
+          "section": "qa",
+          "sentiment": -0.416715,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910439,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7387,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The 5 Most Interesting Analyst Questions From Excelerate Energy’s Q2 Earnings Call",
@@ -160,13 +867,40 @@
       "ts": "2026-07-07T20:15:00+00:00",
       "source": "Business Wire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ee/transcripts/662300-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "EE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ee/transcripts/571844-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "EE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ee/transcripts/395865-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "EE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-excelerate-energy-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:34:55.061981+00:00"
 }

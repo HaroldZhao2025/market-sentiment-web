@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EDIT",
   "earnings_history": [
     {
@@ -153,13 +153,795 @@
       "surprise_pct": 119.14
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2024-05-08T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/edit/transcripts/171753-q1-2024/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 61,
+        "scored_turn_count": 61,
+        "overall_sentiment": 0.512486,
+        "prepared_sentiment": 0.141347,
+        "qa_sentiment": 0.552974,
+        "qa_tone_shift": 0.411627,
+        "uncertainty_turn_rate": 0.016393,
+        "forward_looking_turn_rate": 0.163934,
+        "topics": [
+          {
+            "topic": "Regulation & legal",
+            "mentions": 9,
+            "sentiment": 0.313956
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": 0.207415
+          },
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": 0.111453
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.281571
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906834,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Cristi Barnett",
+          "role": "Head of Corporate Communications and Investor Relations, Editas Medicine",
+          "section": "prepared",
+          "sentiment": 0.909491,
+          "word_count": 211,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "prepared",
+          "sentiment": 0.14468,
+          "word_count": 1566,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Linda Burkly",
+          "role": "Chief Scientific Officer, Editas Medicine",
+          "section": "prepared",
+          "sentiment": 0.145562,
+          "word_count": 712,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Erick Lucera",
+          "role": "CFO, Editas Medicine",
+          "section": "prepared",
+          "sentiment": -0.708704,
+          "word_count": 795,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "prepared",
+          "sentiment": -0.549784,
+          "word_count": 272,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913774,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Samantha Semenkow",
+          "role": "VP of SMid Biotech Equity Research Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.614633,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.801273,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Linda Burkly",
+          "role": "Chief Scientific Officer, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.037388,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90765,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Joon Lee",
+          "role": "Managing Director and Senior Biotech Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.705491,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.656415,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Linda Burkly",
+          "role": "Chief Scientific Officer, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.70356,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.713853,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.086457,
+          "word_count": 175,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905889,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Jack Allen",
+          "role": "Biotech Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.363938,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.595632,
+          "word_count": 202,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908774,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Gena Wang",
+          "role": "Managing Director and Biotech Equity Research Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.760946,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.853514,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Linda Burkly",
+          "role": "Chief Scientific Officer, Editas Medicine",
+          "section": "qa",
+          "sentiment": -0.728653,
+          "word_count": 267,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.764776,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.864192,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Erick Lucera",
+          "role": "CFO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.731095,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908922,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Brian Cheng",
+          "role": "Executive Director and Senior Biotech Analyst, JP Morgan",
+          "section": "qa",
+          "sentiment": 0.70058,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.473433,
+          "word_count": 238,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Brian Cheng",
+          "role": "Executive Director and Senior Biotech Analyst, JP Morgan",
+          "section": "qa",
+          "sentiment": -0.457935,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912295,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Eric Schmidt",
+          "role": "Biotechnology Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.113075,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.425231,
+          "word_count": 250,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906697,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Jay Olson",
+          "role": "Research Analyst, Oppenheimer & Company",
+          "section": "qa",
+          "sentiment": 0.634913,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.602781,
+          "word_count": 136,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Erick Lucera",
+          "role": "CFO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.531001,
+          "word_count": 206,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910652,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Alex Kelly",
+          "role": "Research Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.849766,
+          "word_count": 59,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Erick Lucera",
+          "role": "CFO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.65307,
+          "word_count": 236,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910882,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Yanan Zhu",
+          "role": "Senior Analyst and Biotechnology Equity Research Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.707999,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Erick Lucera",
+          "role": "CFO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.819827,
+          "word_count": 193,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Erick Lucera",
+          "role": "CFO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.663372,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.790838,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Linda Burkly",
+          "role": "Chief Scientific Officer, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.657158,
+          "word_count": 114,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Yanan Zhu",
+          "role": "Senior Analyst and Biotechnology Equity Research Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.377591,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906823,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Luca Issi",
+          "role": "Senior Biotechnology Analyst, RBC Capital",
+          "section": "qa",
+          "sentiment": 0.67663,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": -0.211471,
+          "word_count": 172,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Caren Deardorf",
+          "role": "Chief Commercial and Strategy Officer, Editas Medicine",
+          "section": "qa",
+          "sentiment": -0.682165,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.397637,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.753917,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Caren Deardorf",
+          "role": "Chief Commercial and Strategy Officer, Editas Medicine",
+          "section": "qa",
+          "sentiment": -0.03203,
+          "word_count": 197,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899372,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Jack Allen",
+          "role": "Biotech Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.656153,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Gilmore O’Neill",
+          "role": "CEO, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.816427,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": -0.359101,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Jack Allen",
+          "role": "Biotech Senior Research Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.716995,
+          "word_count": 143,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Caren Deardorf",
+          "role": "Chief Commercial and Strategy Officer, Editas Medicine",
+          "section": "qa",
+          "sentiment": 0.461953,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914861,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8176,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "EDIT Earnings Call: Q2 2024",
+      "url": "https://stockanalysis.com/stocks/edit/transcripts/193079-q2-2024/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2024-08-07T00:00:00+00:00"
+    },
+    {
+      "title": "EDIT Earnings Call: Q1 2024",
+      "url": "https://stockanalysis.com/stocks/edit/transcripts/171753-q1-2024/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2024-05-08T00:00:00+00:00"
+    },
+    {
+      "title": "EDIT Earnings Call: Q4 2023",
+      "url": "https://stockanalysis.com/stocks/edit/transcripts/127595-q4-2023/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2024-02-28T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-16T00:35:40.812396+00:00"
 }

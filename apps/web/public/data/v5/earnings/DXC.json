@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DXC",
   "earnings_history": [
     {
@@ -153,7 +153,676 @@
       "surprise_pct": 71.48
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dxc/transcripts/662733-q1-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 48,
+        "scored_turn_count": 48,
+        "overall_sentiment": 0.388219,
+        "prepared_sentiment": 0.64849,
+        "qa_sentiment": 0.357955,
+        "qa_tone_shift": -0.290535,
+        "uncertainty_turn_rate": 0.104167,
+        "forward_looking_turn_rate": 0.25,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 22,
+            "sentiment": 0.115159
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": -0.02243
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 7,
+            "sentiment": 0.594952
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.075143
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 5,
+            "sentiment": 0.390397
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": 0.262308
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.013354
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906992,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Roger Sachs",
+          "role": "VP of Investor Relations, DXC Technology Services",
+          "section": "prepared",
+          "sentiment": 0.911894,
+          "word_count": 225,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Raul Fernandez",
+          "role": "President and CEO, DXC Technology Services",
+          "section": "prepared",
+          "sentiment": 0.537971,
+          "word_count": 1568,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "prepared",
+          "sentiment": -0.013354,
+          "word_count": 1163,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Roger Sachs",
+          "role": "VP of Investor Relations, DXC Technology Services",
+          "section": "prepared",
+          "sentiment": 0.898946,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900755,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.593938,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.610198,
+          "word_count": 302,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.626564,
+          "word_count": 68,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.272333,
+          "word_count": 217,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Raul Fernandez",
+          "role": "President and CEO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.561628,
+          "word_count": 146,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906599,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Jonathan Lee",
+          "role": "Analyst, Guggenheim Securities",
+          "section": "qa",
+          "sentiment": -0.397826,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.04264,
+          "word_count": 172,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Raul Fernandez",
+          "role": "President and CEO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.466762,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Jonathan Lee",
+          "role": "Analyst, Guggenheim Securities",
+          "section": "qa",
+          "sentiment": 0.390127,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.135565,
+          "word_count": 197,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Jonathan Lee",
+          "role": "Analyst, Guggenheim Securities",
+          "section": "qa",
+          "sentiment": 0.134896,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897034,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jamie Friedman",
+          "role": "Analyst, Susquehanna",
+          "section": "qa",
+          "sentiment": 0.638819,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Raul Fernandez",
+          "role": "President and CEO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.341096,
+          "word_count": 233,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Jamie Friedman",
+          "role": "Analyst, Susquehanna",
+          "section": "qa",
+          "sentiment": 0.825908,
+          "word_count": 36,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.945213,
+          "word_count": 26,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jamie Friedman",
+          "role": "Analyst, Susquehanna",
+          "section": "qa",
+          "sentiment": 0.461236,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900287,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Keith Bachman",
+          "role": "Analyst, BMO",
+          "section": "qa",
+          "sentiment": 0.528502,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Raul Fernandez",
+          "role": "President and CEO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.743369,
+          "word_count": 176,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Keith Bachman",
+          "role": "Analyst, BMO",
+          "section": "qa",
+          "sentiment": 0.792819,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.599249,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.389112,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Keith Bachman",
+          "role": "Analyst, BMO",
+          "section": "qa",
+          "sentiment": -0.616041,
+          "word_count": 35,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.058564,
+          "word_count": 95,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904364,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Tien-Tsin Huang",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.650164,
+          "word_count": 50,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.81676,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909437,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "James Faucette",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.033575,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.18634,
+          "word_count": 104,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "James Faucette",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.712044,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Raul Fernandez",
+          "role": "President and CEO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.78484,
+          "word_count": 277,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900334,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Rod Bourgeois",
+          "role": "Analyst, DeepDive Equity Research",
+          "section": "qa",
+          "sentiment": 0.751327,
+          "word_count": 114,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Raul Fernandez",
+          "role": "President and CEO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": 0.798882,
+          "word_count": 263,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Rod Bourgeois",
+          "role": "Analyst, DeepDive Equity Research",
+          "section": "qa",
+          "sentiment": 0.109499,
+          "word_count": 49,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Rob Del Bene",
+          "role": "CFO, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.008746,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916053,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Roger Sachs",
+          "role": "VP of Investor Relations, DXC Technology Services",
+          "section": "qa",
+          "sentiment": -0.710676,
+          "word_count": 24,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906614,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6967,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "DXC (DXC) Q1 2027 Earnings Call Transcript",
@@ -196,13 +865,40 @@
       "ts": "2026-07-31T05:01:04+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DXC Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/dxc/transcripts/662733-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "DXC Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/dxc/transcripts/548667-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "DXC Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/dxc/transcripts/406171-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-29T00:00:00+00:00"
+    },
+    {
+      "title": "DXC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-dxc-technology-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:32:37.881983+00:00"
 }

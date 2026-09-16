@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EBS",
   "earnings_history": [
     {
@@ -153,7 +153,363 @@
       "surprise_pct": 1.98
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ebs/transcripts/658562-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 23,
+        "scored_turn_count": 23,
+        "overall_sentiment": 0.467299,
+        "prepared_sentiment": 0.262244,
+        "qa_sentiment": 0.524259,
+        "qa_tone_shift": 0.262016,
+        "uncertainty_turn_rate": 0.217391,
+        "forward_looking_turn_rate": 0.478261,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.287695
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 7,
+            "sentiment": 0.187325
+          },
+          {
+            "topic": "Demand",
+            "mentions": 6,
+            "sentiment": 0.149609
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.270999
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.490523
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.192306
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.434228
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.911017,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Frank Vargo",
+          "role": "VP and Treasurer, Emergent BioSolutions",
+          "section": "prepared",
+          "sentiment": 0.922716,
+          "word_count": 330,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Joseph Papa",
+          "role": "President and CEO, Emergent BioSolutions",
+          "section": "prepared",
+          "sentiment": 0.434228,
+          "word_count": 997,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Rich Lindahl",
+          "role": "EVP and CFO, Emergent BioSolutions",
+          "section": "prepared",
+          "sentiment": -0.931431,
+          "word_count": 1393,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Joseph Papa",
+          "role": "President and CEO, Emergent BioSolutions",
+          "section": "prepared",
+          "sentiment": -0.025312,
+          "word_count": 334,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915934,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Raghuram Selvaraju",
+          "role": "Analyst, H.C. Wainwright & Co",
+          "section": "qa",
+          "sentiment": 0.066137,
+          "word_count": 206,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Joseph Papa",
+          "role": "President and CEO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": 0.546818,
+          "word_count": 770,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878828,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Jessica Fye",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.807211,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Rich Lindahl",
+          "role": "EVP and CFO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": -0.792719,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Joseph Papa",
+          "role": "President and CEO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": -0.219731,
+          "word_count": 287,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Rich Lindahl",
+          "role": "EVP and CFO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": 0.018588,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Joseph Papa",
+          "role": "President and CEO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": 0.901667,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892334,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Alex Kelsey",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.883485,
+          "word_count": 110,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Rich Lindahl",
+          "role": "EVP and CFO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": 0.860943,
+          "word_count": 141,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Alex Kelsey",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.645763,
+          "word_count": 34,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Joseph Papa",
+          "role": "President and CEO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": 0.678102,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Alex Kelsey",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.247533,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913025,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Joseph Papa",
+          "role": "President and CEO, Emergent BioSolutions",
+          "section": "qa",
+          "sentiment": 0.776218,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.9116,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5333,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Emergent BioSolutions (EBS) Q2 2026 Earnings Call Transcript",
@@ -196,13 +552,40 @@
       "ts": "2026-05-01T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EBS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ebs/transcripts/658562-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EBS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ebs/transcripts/572288-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "EBS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ebs/transcripts/396463-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "EBS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-emergent-biosolutions-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:34:40.562189+00:00"
 }

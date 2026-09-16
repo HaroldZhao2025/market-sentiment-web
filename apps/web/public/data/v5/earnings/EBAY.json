@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EBAY",
   "earnings_history": [
     {
@@ -153,7 +153,556 @@
       "surprise_pct": 4.25
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ebay/transcripts/657361-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 40,
+        "scored_turn_count": 40,
+        "overall_sentiment": 0.31797,
+        "prepared_sentiment": -0.002653,
+        "qa_sentiment": 0.353595,
+        "qa_tone_shift": 0.356248,
+        "uncertainty_turn_rate": 0.075,
+        "forward_looking_turn_rate": 0.15,
+        "topics": [
+          {
+            "topic": "Macro & FX",
+            "mentions": 9,
+            "sentiment": -0.241097
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 9,
+            "sentiment": -0.114122
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": -0.095792
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.43768
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 5,
+            "sentiment": -0.175606
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.911518
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905697,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "John Egbert",
+          "role": "VP and Head of Investor Relations, eBay",
+          "section": "prepared",
+          "sentiment": 0.893831,
+          "word_count": 277,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "prepared",
+          "sentiment": -0.89862,
+          "word_count": 2600,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Peggy Alford",
+          "role": "CFO, eBay",
+          "section": "prepared",
+          "sentiment": -0.911518,
+          "word_count": 2076,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 7
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916627,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Colin Sebastian",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.780147,
+          "word_count": 100,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": -0.771559,
+          "word_count": 351,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917256,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Michael Morton",
+          "role": "Analyst, MoffettNathanson",
+          "section": "qa",
+          "sentiment": 0.741989,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": -0.57667,
+          "word_count": 151,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Peggy Alford",
+          "role": "CFO, eBay",
+          "section": "qa",
+          "sentiment": 0.005992,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916228,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ken Gawrelski",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.694503,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": 0.002029,
+          "word_count": 249,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Peggy Alford",
+          "role": "CFO, eBay",
+          "section": "qa",
+          "sentiment": -0.270161,
+          "word_count": 140,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ken Gawrelski",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.424374,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": 0.222785,
+          "word_count": 201,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91804,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Ross Sandler",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.473819,
+          "word_count": 107,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": 0.86962,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Peggy Alford",
+          "role": "CFO, eBay",
+          "section": "qa",
+          "sentiment": -0.70371,
+          "word_count": 243,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914461,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Deepak Mathivanan",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.660541,
+          "word_count": 101,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": 0.395614,
+          "word_count": 231,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Peggy Alford",
+          "role": "CFO, eBay",
+          "section": "qa",
+          "sentiment": -0.330887,
+          "word_count": 191,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907905,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Tom Champion",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.592119,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": 0.405795,
+          "word_count": 175,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Peggy Alford",
+          "role": "CFO, eBay",
+          "section": "qa",
+          "sentiment": -0.680189,
+          "word_count": 147,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915228,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Michael McGovern",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.713799,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": -0.67182,
+          "word_count": 156,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "John Egbert",
+          "role": "VP and Head of Investor Relations, eBay",
+          "section": "qa",
+          "sentiment": 0.895314,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": 0.894076,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916202,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Nikhil Devnani",
+          "role": "Analyst, Bernstein",
+          "section": "qa",
+          "sentiment": 0.559461,
+          "word_count": 87,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": 0.656305,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Peggy Alford",
+          "role": "CFO, eBay",
+          "section": "qa",
+          "sentiment": 0.198816,
+          "word_count": 122,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Jamie Iannone",
+          "role": "CEO, eBay",
+          "section": "qa",
+          "sentiment": -0.261965,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91494,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 9011,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From eBay’s Q2 Earnings Call",
@@ -196,13 +745,40 @@
       "ts": "2026-08-06T05:11:49+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EBAY Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ebay/transcripts/657361-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EBAY Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ebay/transcripts/559417-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "EBAY Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ebay/transcripts/404303-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-18T00:00:00+00:00"
+    },
+    {
+      "title": "EBAY Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-ebay-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:33:22.944090+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ECG",
   "earnings_history": [
     {
@@ -57,7 +57,523 @@
       "surprise_pct": -97.86
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ecg/transcripts/568616-q1-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 37,
+        "scored_turn_count": 37,
+        "overall_sentiment": 0.114286,
+        "prepared_sentiment": -0.318336,
+        "qa_sentiment": 0.152459,
+        "qa_tone_shift": 0.470795,
+        "uncertainty_turn_rate": 0.135135,
+        "forward_looking_turn_rate": 0.324324,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": -0.061931
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": -0.275958
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": -0.328111
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.428917
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.365918
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.903924,
+          "word_count": 290,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 1,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "prepared",
+          "sentiment": -0.924572,
+          "word_count": 1399,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Max Marcy",
+          "role": "CFO, Everus Construction Group",
+          "section": "prepared",
+          "sentiment": -0.934361,
+          "word_count": 874,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908926,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Brian Brophy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": -0.211333,
+          "word_count": 63,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.619635,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Brian Brophy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": -0.589528,
+          "word_count": 60,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.788879,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Max Marcy",
+          "role": "CFO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": 0.118288,
+          "word_count": 47,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Brian Brophy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.593405,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885962,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Mike Shatoti",
+          "role": "Analyst, Guggenheim",
+          "section": "qa",
+          "sentiment": 0.792598,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.789593,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Max Marcy",
+          "role": "CFO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.289853,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887868,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Swetha Rakhecha",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.406607,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Max Marcy",
+          "role": "CFO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.21054,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.841333,
+          "word_count": 61,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Swetha Rakhecha",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.766668,
+          "word_count": 65,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Max Marcy",
+          "role": "CFO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.863785,
+          "word_count": 45,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 20,
+          "speaker": "Swetha Rakhecha",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.274528,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Max Marcy",
+          "role": "CFO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": 0.719829,
+          "word_count": 69,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Swetha Rakhecha",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.779911,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885021,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Chris Senyek",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.839696,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": 0.385697,
+          "word_count": 89,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Max Marcy",
+          "role": "CFO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.310067,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Chris Senyek",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": -0.12764,
+          "word_count": 44,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.707559,
+          "word_count": 111,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Chris Senyek",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.230556,
+          "word_count": 69,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.015471,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Chris Senyek",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.479603,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": -0.53863,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Chris Senyek",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": -0.479108,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908721,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Jeff Thiede",
+          "role": "President and CEO, Everus Construction Group",
+          "section": "qa",
+          "sentiment": 0.793212,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909464,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4603,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Everus Construction (ECG) Q2 2026 Earnings Call Transcript",
@@ -100,13 +616,40 @@
       "ts": "2026-08-05T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ECG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ecg/transcripts/661545-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "ECG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ecg/transcripts/568616-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "ECG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ecg/transcripts/402409-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "ECG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-everus-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:33:46.896753+00:00"
 }

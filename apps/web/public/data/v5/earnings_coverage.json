@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-09-15T22:26:32.133854+00:00",
+  "generated_at_utc": "2026-09-16T00:40:21.508051+00:00",
   "source_policy": "free_public_only",
   "company_count": 2539,
-  "complete_company_count": 2264,
-  "complete_coverage_rate": 0.89169,
+  "complete_company_count": 2261,
+  "complete_coverage_rate": 0.890508,
   "totals": {
-    "complete": 2264,
-    "partial": 105,
-    "link_only": 112,
-    "no_structured_call": 58
+    "complete": 2261,
+    "partial": 101,
+    "link_only": 114,
+    "no_structured_call": 63
   },
   "by_universe": {
     "S&P 500": {
@@ -35,10 +35,10 @@
     },
     "Broad U.S. (IWV)": {
       "total": 1033,
-      "complete": 889,
-      "partial": 59,
-      "link_only": 49,
-      "no_structured_call": 36
+      "complete": 886,
+      "partial": 55,
+      "link_only": 51,
+      "no_structured_call": 41
     }
   },
   "companies": [
@@ -128,7 +128,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 8,
+      "call_links": 10,
       "filings": 0,
       "source": "Motley Fool"
     },
@@ -740,7 +740,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -776,7 +776,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -2780,19 +2780,19 @@
     },
     {
       "ticker": "BF A",
-      "status": "partial",
+      "status": "no_structured_call",
       "complete_calls": 0,
-      "structured_calls": 1,
-      "call_links": 1,
+      "structured_calls": 0,
+      "call_links": 0,
       "filings": 0,
       "source": ""
     },
     {
       "ticker": "BF B",
-      "status": "partial",
+      "status": "link_only",
       "complete_calls": 0,
-      "structured_calls": 1,
-      "call_links": 2,
+      "structured_calls": 0,
+      "call_links": 1,
       "filings": 0,
       "source": ""
     },
@@ -3338,10 +3338,10 @@
     },
     {
       "ticker": "BRK B",
-      "status": "partial",
+      "status": "no_structured_call",
       "complete_calls": 0,
-      "structured_calls": 1,
-      "call_links": 1,
+      "structured_calls": 0,
+      "call_links": 0,
       "filings": 0,
       "source": ""
     },
@@ -4574,7 +4574,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 2,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -5077,8 +5077,8 @@
       "ticker": "CON",
       "status": "partial",
       "complete_calls": 0,
-      "structured_calls": 1,
-      "call_links": 10,
+      "structured_calls": 2,
+      "call_links": 11,
       "filings": 0,
       "source": ""
     },
@@ -5168,7 +5168,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 2,
-      "call_links": 14,
+      "call_links": 13,
       "filings": 0,
       "source": ""
     },
@@ -5339,7 +5339,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 2,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -5363,10 +5363,10 @@
     },
     {
       "ticker": "CRML",
-      "status": "partial",
+      "status": "no_structured_call",
       "complete_calls": 0,
-      "structured_calls": 1,
-      "call_links": 1,
+      "structured_calls": 0,
+      "call_links": 0,
       "filings": 0,
       "source": ""
     },
@@ -5897,7 +5897,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 11,
       "filings": 0,
       "source": ""
     },
@@ -6041,7 +6041,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -6257,7 +6257,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 11,
       "filings": 0,
       "source": ""
     },
@@ -6347,7 +6347,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 11,
       "filings": 0,
       "source": ""
     },
@@ -6374,7 +6374,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -6536,7 +6536,7 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": "Benzinga"
     },
@@ -6563,7 +6563,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -6680,7 +6680,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 11,
       "filings": 0,
       "source": ""
     },
@@ -6709,7 +6709,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "DXCM",
@@ -6718,7 +6718,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "DXPE",
@@ -6727,7 +6727,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "DY",
@@ -6736,16 +6736,16 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "DYN",
-      "status": "complete",
-      "complete_calls": 1,
-      "structured_calls": 1,
-      "call_links": 1,
+      "status": "no_structured_call",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 0,
       "filings": 0,
-      "source": "Motley Fool"
+      "source": ""
     },
     {
       "ticker": "EAT",
@@ -6763,7 +6763,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "EBC",
@@ -6772,16 +6772,16 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "EBF",
-      "status": "complete",
-      "complete_calls": 1,
-      "structured_calls": 1,
-      "call_links": 1,
+      "status": "no_structured_call",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 0,
       "filings": 0,
-      "source": "Motley Fool"
+      "source": ""
     },
     {
       "ticker": "EBS",
@@ -6790,7 +6790,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "ECG",
@@ -6799,7 +6799,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "ECHO",
@@ -6808,7 +6808,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "ECL",
@@ -6826,16 +6826,16 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "ECVT",
-      "status": "complete",
-      "complete_calls": 1,
-      "structured_calls": 1,
-      "call_links": 10,
+      "status": "link_only",
+      "complete_calls": 0,
+      "structured_calls": 0,
+      "call_links": 12,
       "filings": 0,
-      "source": "Motley Fool"
+      "source": ""
     },
     {
       "ticker": "ED",
@@ -6851,9 +6851,9 @@
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 4,
+      "call_links": 3,
       "filings": 0,
-      "source": "Motley Fool"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "EE",
@@ -6862,7 +6862,7 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "EEFT",
@@ -6871,14 +6871,14 @@
       "structured_calls": 1,
       "call_links": 10,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "EFC",
       "status": "complete",
       "complete_calls": 1,
       "structured_calls": 1,
-      "call_links": 10,
+      "call_links": 13,
       "filings": 0,
       "source": "Motley Fool"
     },
@@ -6889,7 +6889,7 @@
       "structured_calls": 1,
       "call_links": 7,
       "filings": 0,
-      "source": "MarketBeat"
+      "source": "Stock Analysis / Quartr"
     },
     {
       "ticker": "EFSC",
@@ -6959,7 +6959,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -7022,7 +7022,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -7130,7 +7130,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -7220,7 +7220,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -7283,7 +7283,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -7427,7 +7427,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -8210,7 +8210,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -8300,7 +8300,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -8759,7 +8759,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 2,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -9011,7 +9011,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 2,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -10586,7 +10586,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -11207,7 +11207,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -11432,7 +11432,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -13043,7 +13043,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -13124,7 +13124,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -13232,7 +13232,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -13538,7 +13538,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 4,
+      "call_links": 5,
       "filings": 0,
       "source": ""
     },
@@ -16157,7 +16157,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 2,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -16175,7 +16175,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -19784,7 +19784,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -20963,7 +20963,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 12,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -21125,7 +21125,7 @@
       "status": "partial",
       "complete_calls": 0,
       "structured_calls": 1,
-      "call_links": 13,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -22763,7 +22763,7 @@
       "status": "link_only",
       "complete_calls": 0,
       "structured_calls": 0,
-      "call_links": 11,
+      "call_links": 10,
       "filings": 0,
       "source": ""
     },
@@ -22896,7 +22896,7 @@
   ],
   "search_progress": {
     "tier1_attempted": 2524,
-    "tier2_attempted": 1375,
-    "tier3_attempted": 938
+    "tier2_attempted": 1388,
+    "tier3_attempted": 943
   }
 }

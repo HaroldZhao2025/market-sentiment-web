@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ECHO",
   "earnings_history": [
     {
@@ -153,7 +153,620 @@
       "surprise_pct": 159.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-03T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/echo/transcripts/669129-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 47,
+        "scored_turn_count": 47,
+        "overall_sentiment": 0.756361,
+        "prepared_sentiment": 0.891596,
+        "qa_sentiment": 0.747141,
+        "qa_tone_shift": -0.144455,
+        "uncertainty_turn_rate": 0.148936,
+        "forward_looking_turn_rate": 0.234043,
+        "topics": [
+          {
+            "topic": "Capital allocation",
+            "mentions": 9,
+            "sentiment": 0.792144
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": 0.814007
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 4,
+            "sentiment": 0.813752
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": 0.756565
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.83763
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": 0.799532
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.87715,
+          "word_count": 72,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Good afternoon.",
+          "role": "I'm here with Charlie Ergen, Paul Orban, our CFO, and John Swieringa, our COO.",
+          "section": "prepared",
+          "sentiment": 0.911387,
+          "word_count": 264,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "prepared",
+          "sentiment": 0.88625,
+          "word_count": 218,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906121,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "David Barden",
+          "role": "Partner, New Street Research",
+          "section": "qa",
+          "sentiment": 0.842772,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.454104,
+          "word_count": 145,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "David Barden",
+          "role": "Partner, New Street Research",
+          "section": "qa",
+          "sentiment": 0.547535,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913823,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Brent Penter",
+          "role": "Equity Research Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.878335,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.628737,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Brent Penter",
+          "role": "Equity Research Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.678345,
+          "word_count": 75,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.789962,
+          "word_count": 154,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Brent Penter",
+          "role": "Equity Research Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.864488,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": -0.094349,
+          "word_count": 192,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Brent Penter",
+          "role": "Equity Research Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": -0.531668,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915452,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Sebastiano Petti",
+          "role": "Senior Research Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.833015,
+          "word_count": 96,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.866158,
+          "word_count": 489,
+          "topic_hits": [
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913237,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Walter Piecyk",
+          "role": "Partner and TMT Analyst, LightShed",
+          "section": "qa",
+          "sentiment": 0.871843,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.80178,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.611692,
+          "word_count": 186,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Walter Piecyk",
+          "role": "Partner and TMT Analyst, LightShed",
+          "section": "qa",
+          "sentiment": 0.843099,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.78492,
+          "word_count": 116,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Walter Piecyk",
+          "role": "Partner and TMT Analyst, LightShed",
+          "section": "qa",
+          "sentiment": 0.891188,
+          "word_count": 111,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.814755,
+          "word_count": 172,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902713,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Michael Rollins",
+          "role": "Managing Director, Citi",
+          "section": "qa",
+          "sentiment": 0.866797,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.649363,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Jeff Blum",
+          "role": "Acting Chief Legal Officer and Secretary, EchoStar",
+          "section": "qa",
+          "sentiment": 0.62333,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915918,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Bryan Kraft",
+          "role": "Lead Equity Research Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.885635,
+          "word_count": 236,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.881314,
+          "word_count": 283,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Bryan Kraft",
+          "role": "Lead Equity Research Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.838976,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Bryan Kraft",
+          "role": "Lead Equity Research Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.828223,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.771752,
+          "word_count": 233,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Bryan Kraft",
+          "role": "Lead Equity Research Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.662434,
+          "word_count": 107,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.744062,
+          "word_count": 290,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Bryan Kraft",
+          "role": "Lead Equity Research Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.511045,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.841711,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913937,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Mark Dunbar",
+          "role": "Research Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.806036,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.707573,
+          "word_count": 255,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917814,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Michael Abatemarco",
+          "role": "Analyst, Helix Partners",
+          "section": "qa",
+          "sentiment": 0.855659,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Charles Ergen",
+          "role": "Co-Founder and Chairman of the Board, EchoStar",
+          "section": "qa",
+          "sentiment": 0.809101,
+          "word_count": 191,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915456,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5043,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "EchoStar (ECHO) Q2 2026 Earnings Call Transcript",
@@ -196,13 +809,40 @@
       "ts": "2026-07-22T17:06:22+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ECHO Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/echo/transcripts/669129-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-03T00:00:00+00:00"
+    },
+    {
+      "title": "ECHO Earnings Call: Q2 2025",
+      "url": "https://stockanalysis.com/stocks/echo/transcripts/343525-q2-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-08-01T00:00:00+00:00"
+    },
+    {
+      "title": "ECHO Earnings Call: Q1 2025",
+      "url": "https://stockanalysis.com/stocks/echo/transcripts/320320-q1-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-05-09T00:00:00+00:00"
+    },
+    {
+      "title": "ECHO Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-7-echostar-corp-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-07T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:34:00.218676+00:00"
 }

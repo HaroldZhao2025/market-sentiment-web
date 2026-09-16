@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EEFT",
   "earnings_history": [
     {
@@ -153,7 +153,647 @@
       "surprise_pct": 111.17
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/eeft/transcripts/656941-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 48,
+        "scored_turn_count": 48,
+        "overall_sentiment": 0.3283,
+        "prepared_sentiment": -0.022479,
+        "qa_sentiment": 0.369088,
+        "qa_tone_shift": 0.391567,
+        "uncertainty_turn_rate": 0.083333,
+        "forward_looking_turn_rate": 0.3125,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": 0.063369
+          },
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": -0.068367
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": 0.346077
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 5,
+            "sentiment": -0.320627
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.098836
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.083328
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.886229,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Stephanie Taylor",
+          "role": "Head of Investor Relations, Euronet Worldwide",
+          "section": "prepared",
+          "sentiment": 0.859789,
+          "word_count": 148,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "prepared",
+          "sentiment": -0.921789,
+          "word_count": 2158,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "prepared",
+          "sentiment": -0.039771,
+          "word_count": 876,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "prepared",
+          "sentiment": -0.896853,
+          "word_count": 194,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908678,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Pete Heckmann",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": -0.445404,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": -0.257143,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Pete Heckmann",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": -0.145709,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.828553,
+          "word_count": 44,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.874713,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Pete Heckmann",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": -0.370984,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.868617,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Mike Grondahl",
+          "role": "Analyst, Northland",
+          "section": "qa",
+          "sentiment": 0.105491,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.06025,
+          "word_count": 11,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.032724,
+          "word_count": 127,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Mike Grondahl",
+          "role": "Analyst, Northland",
+          "section": "qa",
+          "sentiment": 0.593572,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.091102,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Mike Grondahl",
+          "role": "Analyst, Northland",
+          "section": "qa",
+          "sentiment": 0.84657,
+          "word_count": 19,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": -0.884162,
+          "word_count": 91,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884982,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Chris Kennedy",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.77005,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.274372,
+          "word_count": 121,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Chris Kennedy",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.214095,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.612901,
+          "word_count": 241,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.19503,
+          "word_count": 191,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Chris Kennedy",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.393977,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.832639,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Vasu Govil",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.144979,
+          "word_count": 71,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": -0.5834,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Vasu Govil",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": -0.144083,
+          "word_count": 91,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.660835,
+          "word_count": 163,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.805849,
+          "word_count": 97,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Vasu Govil",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.755133,
+          "word_count": 67,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": -0.418854,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.861837,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Gus Galá",
+          "role": "Analyst, MCH",
+          "section": "qa",
+          "sentiment": 0.39983,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Gus Galá",
+          "role": "Analyst, MCH",
+          "section": "qa",
+          "sentiment": 0.750771,
+          "word_count": 94,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.874158,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.25019,
+          "word_count": 381,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Gus Galá",
+          "role": "Analyst, MCH",
+          "section": "qa",
+          "sentiment": 0.652848,
+          "word_count": 34,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Thank you.",
+          "role": "Our last question comes from the line of Josh Levin from Autonomous Research.",
+          "section": "qa",
+          "sentiment": 0.876443,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Josh Levin",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.357326,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": -0.006931,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.006272,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Rick Weller",
+          "role": "CFO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.853929,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Mike Brown",
+          "role": "Chairman and CEO, Euronet Worldwide",
+          "section": "qa",
+          "sentiment": 0.580653,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908105,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6319,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Euronet (EEFT) Q2 2026 Earnings Call Transcript - AOL.com",
@@ -196,13 +836,40 @@
       "ts": "2026-08-01T07:00:00+00:00",
       "source": "TipRanks",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EEFT Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/eeft/transcripts/656941-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "EEFT Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/eeft/transcripts/555932-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "EEFT Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/eeft/transcripts/399506-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "EEFT Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-euronet-worldwide-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:34:22.577666+00:00"
 }

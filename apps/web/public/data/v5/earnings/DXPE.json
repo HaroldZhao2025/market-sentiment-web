@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "DXPE",
   "earnings_history": [
     {
@@ -153,7 +153,223 @@
       "surprise_pct": 169.57
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/dxpe/transcripts/662786-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 12,
+        "scored_turn_count": 12,
+        "overall_sentiment": 0.527484,
+        "prepared_sentiment": 0.295936,
+        "qa_sentiment": 0.604667,
+        "qa_tone_shift": 0.308731,
+        "uncertainty_turn_rate": 0.083333,
+        "forward_looking_turn_rate": 0.333333,
+        "topics": [
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": 0.285182
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 4,
+            "sentiment": 0.084428
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.027384
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.636916
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.00302
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.90882
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.90882
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.893848,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Kent Yee",
+          "role": "CFO, DXP Enterprises",
+          "section": "prepared",
+          "sentiment": 0.90882,
+          "word_count": 1760,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Kent Yee",
+          "role": "CFO, DXP Enterprises",
+          "section": "prepared",
+          "sentiment": -0.914859,
+          "word_count": 1572,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908238,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Zach Marriott",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.818999,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Kent Yee",
+          "role": "CFO, DXP Enterprises",
+          "section": "qa",
+          "sentiment": 0.793108,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Zach Marriott",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.56493,
+          "word_count": 39,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Kent Yee",
+          "role": "CFO, DXP Enterprises",
+          "section": "qa",
+          "sentiment": -0.449356,
+          "word_count": 121,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Zach Marriott",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.781754,
+          "word_count": 38,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Kent Yee",
+          "role": "CFO, DXP Enterprises",
+          "section": "qa",
+          "sentiment": 0.365012,
+          "word_count": 100,
+          "topic_hits": [
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Zach Marriott",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.751268,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908051,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3984,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From DXP’s Q2 Earnings Call",
@@ -196,13 +412,40 @@
       "ts": "2026-08-06T23:20:50+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "DXPE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/dxpe/transcripts/662786-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "DXPE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/dxpe/transcripts/571942-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "DXPE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/dxpe/transcripts/409942-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "DXPE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-dxp-enterprises-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:32:57.285819+00:00"
 }

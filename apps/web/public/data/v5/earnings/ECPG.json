@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ECPG",
   "earnings_history": [
     {
@@ -153,7 +153,489 @@
       "surprise_pct": 6.7
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ecpg/transcripts/661725-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 35,
+        "scored_turn_count": 35,
+        "overall_sentiment": 0.152104,
+        "prepared_sentiment": -0.153773,
+        "qa_sentiment": 0.203084,
+        "qa_tone_shift": 0.356857,
+        "uncertainty_turn_rate": 0.057143,
+        "forward_looking_turn_rate": 0.285714,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": -0.067666
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 6,
+            "sentiment": -0.338018
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.565592
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.864334
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": 0.053067
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.58799
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.912996,
+          "word_count": 139,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Bruce Thomas",
+          "role": "VP of Global Investor Relations, Encore Capital Group",
+          "section": "prepared",
+          "sentiment": 0.911139,
+          "word_count": 237,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "prepared",
+          "sentiment": -0.938441,
+          "word_count": 1473,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Tomas Hernanz",
+          "role": "EVP and CFO, Encore Capital Group",
+          "section": "prepared",
+          "sentiment": -0.75099,
+          "word_count": 654,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "prepared",
+          "sentiment": -0.90357,
+          "word_count": 546,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91448,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Mark Hughes",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.857233,
+          "word_count": 20,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Tomas Hernanz",
+          "role": "EVP and CFO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.715876,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Mark Hughes",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.821925,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tomas Hernanz",
+          "role": "EVP and CFO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.930446,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Mark Hughes",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.836794,
+          "word_count": 17,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Tomas Hernanz",
+          "role": "EVP and CFO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": 0.88445,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Mark Hughes",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.274514,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Tomas Hernanz",
+          "role": "EVP and CFO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": 0.840945,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Mark Hughes",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.569963,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.532018,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Mark Hughes",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.735067,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.919686,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Mark Hughes",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": -0.656003,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": 0.290871,
+          "word_count": 118,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903622,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Robert Dodd",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.769011,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": 0.449426,
+          "word_count": 161,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Robert Dodd",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.844833,
+          "word_count": 127,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.034363,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "Robert Dodd",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.25281,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.684383,
+          "word_count": 83,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.922022,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Robert Dodd",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.464289,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.741499,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.23754,
+          "word_count": 244,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.771053,
+          "word_count": 103,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912503,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Ashish Masih",
+          "role": "President and CEO, Encore Capital Group",
+          "section": "qa",
+          "sentiment": -0.779929,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.9116,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4934,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Encore Capital Group, Inc. 2026 Q2 - Results - Earnings Call Presentation (NASDAQ:ECPG) 2026-08-06 - Seeking Alpha",
@@ -196,13 +678,40 @@
       "ts": "2026-05-07T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ECPG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ecpg/transcripts/661725-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "ECPG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ecpg/transcripts/568966-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "ECPG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ecpg/transcripts/411177-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "ECPG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-encore-capital-group-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-16T00:34:09.926944+00:00"
 }
