@@ -1,1464 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "EMN",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-07-30T00:00:00+00:00",
-      "source": "MarketBeat",
-      "source_url": "https://www.marketbeat.com/earnings/reports/2026-7-30-eastman-chemical-stock/#transcript",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 105,
-        "scored_turn_count": 105,
-        "overall_sentiment": 0.277773,
-        "prepared_sentiment": 0.905821,
-        "qa_sentiment": 0.259302,
-        "qa_tone_shift": -0.646519,
-        "uncertainty_turn_rate": 0.133333,
-        "forward_looking_turn_rate": 0.180952,
-        "topics": [
-          {
-            "topic": "Margins & costs",
-            "mentions": 66,
-            "sentiment": 0.139293
-          },
-          {
-            "topic": "Demand",
-            "mentions": 42,
-            "sentiment": 0.056565
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 17,
-            "sentiment": 0.077316
-          },
-          {
-            "topic": "Macro & FX",
-            "mentions": 10,
-            "sentiment": 0.272467
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 3,
-            "sentiment": 0.196978
-          },
-          {
-            "topic": "Regulation & legal",
-            "mentions": 2,
-            "sentiment": -0.297447
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 1,
-            "sentiment": -0.750255
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "role": "",
-          "section": "prepared",
-          "sentiment": 0.884801,
-          "word_count": 47,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Greg Riddle",
-          "role": "VP of Investor Relations and Corporate Communications at Eastman",
-          "section": "prepared",
-          "sentiment": 0.912502,
-          "word_count": 93,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 2,
-          "speaker": "Greg Riddle",
-          "role": "VP of Investor Relations and Corporate Communications at Eastman",
-          "section": "prepared",
-          "sentiment": 0.920159,
-          "word_count": 130,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 3,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.915095,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 4,
-          "speaker": "Analyst at Citigroup",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.160546,
-          "word_count": 63,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.640769,
-          "word_count": 115,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.717927,
-          "word_count": 141,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.374398,
-          "word_count": 142,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.324828,
-          "word_count": 134,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.865434,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.718147,
-          "word_count": 117,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 11,
-          "speaker": "Analyst at Citigroup",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.040753,
-          "word_count": 74,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 12,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.13012,
-          "word_count": 145,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 13,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.176396,
-          "word_count": 75,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "Analyst at Citigroup",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.584694,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.90461,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.597999,
-          "word_count": 95,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.223944,
-          "word_count": 139,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.31897,
-          "word_count": 147,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.785749,
-          "word_count": 144,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.049923,
-          "word_count": 40,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "Analyst at UBS",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736005,
-          "word_count": 97,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 22,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.041366,
-          "word_count": 145,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 23,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.284625,
-          "word_count": 107,
-          "topic_hits": [
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 24,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.896779,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 25,
-          "speaker": "Analyst at Deutsche Bank",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.606349,
-          "word_count": 48,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 26,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.235293,
-          "word_count": 134,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 27,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.793015,
-          "word_count": 96,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 28,
-          "speaker": "Analyst at Deutsche Bank",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.747072,
-          "word_count": 24,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 29,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.471807,
-          "word_count": 126,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 30,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.900263,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 31,
-          "speaker": "Analyst at Fermium Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.69058,
-          "word_count": 76,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 32,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.366725,
-          "word_count": 116,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 33,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.111421,
-          "word_count": 147,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 34,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.093221,
-          "word_count": 108,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 35,
-          "speaker": "Analyst at Fermium Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.674773,
-          "word_count": 67,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 36,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908271,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 37,
-          "speaker": "Analyst at Fermium Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.87689,
-          "word_count": 8,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 38,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.444634,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 39,
-          "speaker": "Analyst at Fermium Research",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.631586,
-          "word_count": 11,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 40,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.905125,
-          "word_count": 21,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 41,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.801539,
-          "word_count": 112,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 42,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.85332,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 43,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.55059,
-          "word_count": 122,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 44,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.705182,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 45,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.886929,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 46,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.683884,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 47,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.092878,
-          "word_count": 126,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 48,
-          "speaker": "Analyst at JPMorgan",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.69382,
-          "word_count": 48,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 49,
-          "speaker": "EVP and CFO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.750255,
-          "word_count": 123,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 50,
-          "speaker": "EVP and CFO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.095419,
-          "word_count": 74,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 51,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.908554,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 52,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.673087,
-          "word_count": 51,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 53,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.736444,
-          "word_count": 123,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 54,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.560067,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 55,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.013955,
-          "word_count": 138,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 56,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.373783,
-          "word_count": 128,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 57,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.043486,
-          "word_count": 135,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 58,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.490466,
-          "word_count": 140,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 59,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.774479,
-          "word_count": 54,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 60,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.573638,
-          "word_count": 68,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 61,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.866591,
-          "word_count": 19,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 62,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.739232,
-          "word_count": 56,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 63,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.351469,
-          "word_count": 133,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 64,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.192227,
-          "word_count": 137,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 65,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.131218,
-          "word_count": 136,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 66,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.544018,
-          "word_count": 16,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 67,
-          "speaker": "Analyst at Morgan Stanley",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.424472,
-          "word_count": 5,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 68,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.906024,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 69,
-          "speaker": "Analyst at Wells Fargo",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.827038,
-          "word_count": 37,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 70,
-          "speaker": "EVP and CFO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.530863,
-          "word_count": 98,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 71,
-          "speaker": "Greg Riddle",
-          "role": "VP of Investor Relations and Corporate Communications at Eastman",
-          "section": "qa",
-          "sentiment": 0.884624,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 72,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.909766,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 73,
-          "speaker": "Analyst at Mizuho",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.841449,
-          "word_count": 43,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 74,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.656208,
-          "word_count": 127,
-          "topic_hits": [
-            "Margins & costs",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 75,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.446678,
-          "word_count": 143,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 76,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.831059,
-          "word_count": 32,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 77,
-          "speaker": "Analyst at Mizuho",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.766145,
-          "word_count": 30,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 78,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.045046,
-          "word_count": 69,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 79,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.892792,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 80,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.648484,
-          "word_count": 86,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 81,
-          "speaker": "EVP and CFO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.026019,
-          "word_count": 118,
-          "topic_hits": [],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 82,
-          "speaker": "EVP and CFO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.364323,
-          "word_count": 133,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 83,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.852988,
-          "word_count": 72,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 84,
-          "speaker": "Analyst at Bank of America",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.540385,
-          "word_count": 91,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 85,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.60885,
-          "word_count": 123,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Regulation & legal"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 86,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.209343,
-          "word_count": 125,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 87,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.482955,
-          "word_count": 126,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 88,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.580113,
-          "word_count": 86,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 89,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.912708,
-          "word_count": 19,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 90,
-          "speaker": "Analyst at VRP",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.624793,
-          "word_count": 53,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 91,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.331197,
-          "word_count": 124,
-          "topic_hits": [
-            "Margins & costs",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 92,
-          "speaker": "Analyst at VRP",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.338381,
-          "word_count": 79,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 93,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.602307,
-          "word_count": 137,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 94,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.471064,
-          "word_count": 137,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 95,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.426898,
-          "word_count": 47,
-          "topic_hits": [
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 96,
-          "speaker": "Analyst at VRP",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.744282,
-          "word_count": 7,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 97,
-          "speaker": "Greg Riddle",
-          "role": "VP of Investor Relations and Corporate Communications at Eastman",
-          "section": "qa",
-          "sentiment": 0.869322,
-          "word_count": 9,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 98,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.913132,
-          "word_count": 22,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 99,
-          "speaker": "Analyst at Jefferies",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.865114,
-          "word_count": 49,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 100,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.110229,
-          "word_count": 137,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 101,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.312332,
-          "word_count": 125,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 102,
-          "speaker": "Board Chair and CEO at Eastman",
-          "role": "",
-          "section": "qa",
-          "sentiment": -0.324869,
-          "word_count": 106,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 103,
-          "speaker": "Greg Riddle",
-          "role": "VP of Investor Relations and Corporate Communications at Eastman",
-          "section": "qa",
-          "sentiment": -0.331632,
-          "word_count": 23,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 104,
-          "speaker": "Operator",
-          "role": "",
-          "section": "qa",
-          "sentiment": 0.820243,
-          "word_count": 915,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Macro & FX"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 2
-        }
-      ],
-      "transcript_word_count": 9679,
-      "transcript_text_redistributed": false
+      "date": "2026-11-02T15:00:00-05:00",
+      "eps_estimate": 1.96,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2026-07-30T16:00:00-04:00",
+      "eps_estimate": 1.82,
+      "reported_eps": 1.97,
+      "surprise_pct": 8.18
+    },
+    {
+      "date": "2026-04-30T16:00:00-04:00",
+      "eps_estimate": 1.06,
+      "reported_eps": 1.09,
+      "surprise_pct": 2.42
+    },
+    {
+      "date": "2026-01-29T16:00:00-05:00",
+      "eps_estimate": 0.72,
+      "reported_eps": 0.75,
+      "surprise_pct": 4.15
+    },
+    {
+      "date": "2025-11-03T16:00:00-05:00",
+      "eps_estimate": 1.17,
+      "reported_eps": 1.14,
+      "surprise_pct": -2.16
+    },
+    {
+      "date": "2025-07-31T16:00:00-04:00",
+      "eps_estimate": 1.75,
+      "reported_eps": 1.6,
+      "surprise_pct": -8.71
+    },
+    {
+      "date": "2025-04-24T16:00:00-04:00",
+      "eps_estimate": 1.89,
+      "reported_eps": 1.91,
+      "surprise_pct": 1.23
+    },
+    {
+      "date": "2025-01-30T16:00:00-05:00",
+      "eps_estimate": 1.57,
+      "reported_eps": 1.87,
+      "surprise_pct": 18.85
+    },
+    {
+      "date": "2024-10-31T16:00:00-04:00",
+      "eps_estimate": 2.14,
+      "reported_eps": 2.26,
+      "surprise_pct": 5.41
+    },
+    {
+      "date": "2024-07-25T16:00:00-04:00",
+      "eps_estimate": 2.01,
+      "reported_eps": 2.15,
+      "surprise_pct": 6.88
+    },
+    {
+      "date": "2024-04-25T16:00:00-04:00",
+      "eps_estimate": 1.43,
+      "reported_eps": 1.61,
+      "surprise_pct": 12.89
+    },
+    {
+      "date": "2024-02-01T16:00:00-05:00",
+      "eps_estimate": 1.3,
+      "reported_eps": 1.31,
+      "surprise_pct": 0.76
+    },
+    {
+      "date": "2023-10-26T16:00:00-04:00",
+      "eps_estimate": 1.45,
+      "reported_eps": 1.47,
+      "surprise_pct": 1.51
+    },
+    {
+      "date": "2023-07-27T16:00:00-04:00",
+      "eps_estimate": 1.94,
+      "reported_eps": 1.99,
+      "surprise_pct": 2.49
+    },
+    {
+      "date": "2023-04-27T16:00:00-04:00",
+      "eps_estimate": 1.23,
+      "reported_eps": 1.63,
+      "surprise_pct": 32.54
+    },
+    {
+      "date": "2023-01-26T16:00:00-05:00",
+      "eps_estimate": 1.24,
+      "reported_eps": 0.89,
+      "surprise_pct": -28.33
+    },
+    {
+      "date": "2022-10-27T16:00:00-04:00",
+      "eps_estimate": 2.0,
+      "reported_eps": 2.05,
+      "surprise_pct": 2.44
+    },
+    {
+      "date": "2022-07-28T16:00:00-04:00",
+      "eps_estimate": 2.7,
+      "reported_eps": 2.83,
+      "surprise_pct": 4.95
+    },
+    {
+      "date": "2022-04-28T16:00:00-04:00",
+      "eps_estimate": 2.1,
+      "reported_eps": 2.06,
+      "surprise_pct": -1.96
+    },
+    {
+      "date": "2022-01-27T16:00:00-05:00",
+      "eps_estimate": 1.87,
+      "reported_eps": 1.81,
+      "surprise_pct": -2.96
+    },
+    {
+      "date": "2021-10-28T16:00:00-04:00",
+      "eps_estimate": 2.46,
+      "reported_eps": 2.46,
+      "surprise_pct": 0.08
+    },
+    {
+      "date": "2021-08-02T16:00:00-04:00",
+      "eps_estimate": 2.33,
+      "reported_eps": 2.46,
+      "surprise_pct": 5.38
+    },
+    {
+      "date": "2021-04-29T17:00:00-04:00",
+      "eps_estimate": 2.04,
+      "reported_eps": 2.13,
+      "surprise_pct": 4.63
+    },
+    {
+      "date": "2021-01-28T16:00:00-05:00",
+      "eps_estimate": 1.51,
+      "reported_eps": 1.69,
+      "surprise_pct": 12.03
+    },
+    {
+      "date": "2020-10-29T16:00:00-04:00",
+      "eps_estimate": 1.37,
+      "reported_eps": 1.57,
+      "surprise_pct": 15.01
     }
   ],
+  "calls": [],
   "call_links": [
-    {
-      "title": "EMN Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/emn/transcripts/659049-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-31T00:00:00+00:00"
-    },
-    {
-      "title": "EMN Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/emn/transcripts/549158-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-05-01T00:00:00+00:00"
-    },
-    {
-      "title": "EMN Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/emn/transcripts/409799-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-01-30T00:00:00+00:00"
-    },
-    {
-      "title": "EMN Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-eastman-chemical-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
     {
       "title": "Eastman (EMN) Q2 2026 Earnings Call Transcript",
       "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/eastman-emn-q2-2026-earnings-call-transcript/",
@@ -1504,9 +200,9 @@
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 1
-  },
-  "updated_at_utc": "2026-08-15T15:46:03.768917+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
