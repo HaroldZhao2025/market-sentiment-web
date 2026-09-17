@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ENTA",
   "earnings_history": [
     {
@@ -153,13 +153,739 @@
       "surprise_pct": -50.0
     }
   ],
-  "calls": [],
-  "call_links": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2024-05-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/enta/transcripts/165662-q2-2024/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 56,
+        "scored_turn_count": 56,
+        "overall_sentiment": 0.691065,
+        "prepared_sentiment": 0.65281,
+        "qa_sentiment": 0.694008,
+        "qa_tone_shift": 0.041198,
+        "uncertainty_turn_rate": 0.107143,
+        "forward_looking_turn_rate": 0.178571,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": 0.588025
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.52964
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": 0.811613
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": 0.465666
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.855541
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": 0.767686
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.767686
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.912222,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Jennifer Viera",
+          "role": "Head of Investor Relations, Enanta Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.914804,
+          "word_count": 194,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.016528,
+          "word_count": 1480,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Paul Mellett",
+          "role": "CFO, Enanta Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": 0.767686,
+          "word_count": 669,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892346,
+          "word_count": 157,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.895163,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Tara Kieffer",
+          "role": "Chief Product Strategy Officer, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.779345,
+          "word_count": 338,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.867545,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Eric Joseph",
+          "role": "Biotechnology Equity Research Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.744263,
+          "word_count": 119,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.807812,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "With regards to...",
+          "role": "I wasn't quite sure on your, the first part of your question, you were talking about strategic partnering.",
+          "section": "qa",
+          "sentiment": 0.624903,
+          "word_count": 171,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Tara Kieffer",
+          "role": "Chief Product Strategy Officer, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.684719,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Eric Joseph",
+          "role": "Biotechnology Equity Research Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.325612,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.867469,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Thomas Yip",
+          "role": "Equity Research Associate, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": 0.894498,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.886679,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Thomas Yip",
+          "role": "Equity Research Associate, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": 0.910968,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.88236,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Scott Rottinghaus",
+          "role": "Chief Medical Officer, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.818639,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.182569,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Thomas Yip",
+          "role": "Equity Research Associate, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": 0.65422,
+          "word_count": 58,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.811017,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Thomas Yip",
+          "role": "Equity Research Associate, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": 0.786115,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.224547,
+          "word_count": 203,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 24,
+          "speaker": "Thomas Yip",
+          "role": "Equity Research Associate, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": -0.692729,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.869196,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Roy Buchanan",
+          "role": "Equity Research Analyst, Citizens JMP",
+          "section": "qa",
+          "sentiment": 0.784016,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.740534,
+          "word_count": 236,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Roy Buchanan",
+          "role": "Equity Research Analyst, Citizens JMP",
+          "section": "qa",
+          "sentiment": 0.75892,
+          "word_count": 55,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.258469,
+          "word_count": 187,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "One moment for our next question.",
+          "role": "Our next question comes from Roanna Ruiz from Leerink Partners.",
+          "section": "qa",
+          "sentiment": 0.8675,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Nik Gasic",
+          "role": "Equity Research Associate, Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.743341,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Thanks for taking our questions.",
+          "role": "Maybe first on RSV, could you give us a sense of how close you are to completing enrollment of the younger age cohort of RSVP?",
+          "section": "qa",
+          "sentiment": 0.882865,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.822104,
+          "word_count": 133,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Nik Gasic",
+          "role": "Equity Research Associate, Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.886349,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.676207,
+          "word_count": 149,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.865913,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.816529,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "They just.",
+          "role": "We found out from our RSVP trial that they're otherwise healthy folks just resolve the self-resolve the infection so quickly on their own.",
+          "section": "qa",
+          "sentiment": 0.295897,
+          "word_count": 226,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878688,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Seema Sheoran",
+          "role": "Senior Biotechnology Equity Research Associate, Evercore",
+          "section": "qa",
+          "sentiment": 0.897859,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.855541,
+          "word_count": 174,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Seema Sheoran",
+          "role": "Senior Biotechnology Equity Research Associate, Evercore",
+          "section": "qa",
+          "sentiment": 0.829505,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.804706,
+          "word_count": 41,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Seema Sheoran",
+          "role": "Senior Biotechnology Equity Research Associate, Evercore",
+          "section": "qa",
+          "sentiment": -0.579432,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887509,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Jay Olson",
+          "role": "Biotechnology Equity Research Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.839701,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Jay Luly",
+          "role": "President and CEO, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.799853,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Tara Kieffer",
+          "role": "Chief Product Strategy Officer, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.423636,
+          "word_count": 294,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Jay Olson",
+          "role": "Biotechnology Equity Research Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.774247,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Tara Kieffer",
+          "role": "Chief Product Strategy Officer, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.866942,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Tara Kieffer",
+          "role": "Chief Product Strategy Officer, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.76044,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Jay Olson",
+          "role": "Biotechnology Equity Research Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.399208,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900447,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Jennifer Viera",
+          "role": "Head of Investor Relations, Enanta Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.724483,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909179,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6331,
+      "transcript_text_redistributed": false
+    }
+  ],
+  "call_links": [
+    {
+      "title": "ENTA Earnings Call: Q2 2024",
+      "url": "https://stockanalysis.com/stocks/enta/transcripts/165662-q2-2024/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2024-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "ENTA Earnings Call: Q1 2024",
+      "url": "https://stockanalysis.com/stocks/enta/transcripts/131972-q1-2024/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2024-02-07T00:00:00+00:00"
+    },
+    {
+      "title": "ENTA Earnings Call: Q4 2023",
+      "url": "https://stockanalysis.com/stocks/enta/transcripts/83897-q4-2023/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2023-11-20T00:00:00+00:00"
+    }
+  ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-17T00:24:37.074810+00:00"
 }

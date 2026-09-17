@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ENSG",
   "earnings_history": [
     {
@@ -153,7 +153,498 @@
       "surprise_pct": 7.22
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ensg/transcripts/659277-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 35,
+        "scored_turn_count": 35,
+        "overall_sentiment": 0.295254,
+        "prepared_sentiment": 0.203507,
+        "qa_sentiment": 0.318191,
+        "qa_tone_shift": 0.114684,
+        "uncertainty_turn_rate": 0.057143,
+        "forward_looking_turn_rate": 0.342857,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": 0.173457
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.126365
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": 0.303605
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.278259
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.034774
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.021336
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.773435
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.890312,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Thank you, Operator, and welcome everyone.",
+          "role": "We filed our earnings press release on Monday, and it is available on the Investor Relations section of our website at ensigngroup.net.",
+          "section": "prepared",
+          "sentiment": 0.819197,
+          "word_count": 492,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Barry Port",
+          "role": "CEO, The Ensign Group",
+          "section": "prepared",
+          "sentiment": 0.687354,
+          "word_count": 1649,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Spencer Burton",
+          "role": "President and COO, The Ensign Group",
+          "section": "prepared",
+          "sentiment": 0.146993,
+          "word_count": 1105,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Chad A. Keetch",
+          "role": "Chief Investment Officer, EVP, and Secretary, The Ensign Group",
+          "section": "prepared",
+          "sentiment": -0.730026,
+          "word_count": 1284,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Suzanne D. Snapper",
+          "role": "CFO, EVP, and Director, The Ensign Group",
+          "section": "prepared",
+          "sentiment": -0.773435,
+          "word_count": 493,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "Thanks, Suzanne.",
+          "role": "To wrap up, we again want to thank our exceptional team of caregivers, our local operational leaders, and our service center partners.",
+          "section": "prepared",
+          "sentiment": 0.384153,
+          "word_count": 230,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909522,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Raj Kumar",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.744665,
+          "word_count": 129,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Spencer Burton",
+          "role": "President and COO, The Ensign Group",
+          "section": "qa",
+          "sentiment": 0.621759,
+          "word_count": 174,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Barry Port",
+          "role": "CEO, The Ensign Group",
+          "section": "qa",
+          "sentiment": -0.667112,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Raj Kumar",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.822096,
+          "word_count": 61,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Barry Port",
+          "role": "CEO, The Ensign Group",
+          "section": "qa",
+          "sentiment": -0.883439,
+          "word_count": 54,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Suzanne D. Snapper",
+          "role": "CFO, EVP, and Director, The Ensign Group",
+          "section": "qa",
+          "sentiment": 0.144409,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897964,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ben Hendrix",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.267606,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 16,
+          "speaker": "Barry Port",
+          "role": "CEO, The Ensign Group",
+          "section": "qa",
+          "sentiment": 0.572549,
+          "word_count": 238,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Suzanne D. Snapper",
+          "role": "CFO, EVP, and Director, The Ensign Group",
+          "section": "qa",
+          "sentiment": -0.919756,
+          "word_count": 24,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Ben Hendrix",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.770104,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Chad A. Keetch",
+          "role": "Chief Investment Officer, EVP, and Secretary, The Ensign Group",
+          "section": "qa",
+          "sentiment": 0.82758,
+          "word_count": 409,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898511,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "A.J. Rice",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.860684,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Barry Port",
+          "role": "CEO, The Ensign Group",
+          "section": "qa",
+          "sentiment": -0.601416,
+          "word_count": 118,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Obviously encouraged by that increase.",
+          "role": "On the managed care side, we continue to benefit from great relationships with our managed care partners.",
+          "section": "qa",
+          "sentiment": -0.759948,
+          "word_count": 104,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "A.J. Rice",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.842912,
+          "word_count": 28,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Spencer Burton",
+          "role": "President and COO, The Ensign Group",
+          "section": "qa",
+          "sentiment": -0.202014,
+          "word_count": 222,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "A.J. Rice",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.203441,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904728,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Clarke Murphy",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.800508,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Barry Port",
+          "role": "CEO, The Ensign Group",
+          "section": "qa",
+          "sentiment": -0.439122,
+          "word_count": 158,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Clarke Murphy",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.843613,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Spencer Burton",
+          "role": "President and COO, The Ensign Group",
+          "section": "qa",
+          "sentiment": 0.423474,
+          "word_count": 357,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Chad A. Keetch",
+          "role": "Chief Investment Officer, EVP, and Secretary, The Ensign Group",
+          "section": "qa",
+          "sentiment": 0.697261,
+          "word_count": 151,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Clarke Murphy",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": -0.175141,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910795,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8394,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Ensign Group Inc (ENSG) (Q2 2026) Earnings Call Highlights: Record EPS, Raised Guidance, and ...",
@@ -196,13 +687,40 @@
       "ts": "2026-05-01T18:53:03+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ENSG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/ensg/transcripts/659277-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "ENSG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/ensg/transcripts/552651-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-01T00:00:00+00:00"
+    },
+    {
+      "title": "ENSG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/ensg/transcripts/401310-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "ENSG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-27-the-ensign-group-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-27T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-17T00:23:58.493262+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EFX",
   "earnings_history": [
     {
@@ -153,7 +153,1665 @@
       "surprise_pct": 16.98
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-21T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/efx/transcripts/652182-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 126,
+        "scored_turn_count": 126,
+        "overall_sentiment": 0.370567,
+        "prepared_sentiment": -0.011525,
+        "qa_sentiment": 0.389672,
+        "qa_tone_shift": 0.401196,
+        "uncertainty_turn_rate": 0.055556,
+        "forward_looking_turn_rate": 0.261905,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 39,
+            "sentiment": 0.139694
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 31,
+            "sentiment": -0.089264
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 27,
+            "sentiment": 0.130449
+          },
+          {
+            "topic": "Demand",
+            "mentions": 22,
+            "sentiment": 0.191995
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 13,
+            "sentiment": 0.197752
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": -0.349503
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 6,
+            "sentiment": 0.394435
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.886953,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Trevor Burns",
+          "role": "SVP of Investor Relations, Equifax",
+          "section": "prepared",
+          "sentiment": 0.735957,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "I'm Trevor Burns.",
+          "role": "With me today are Mark Begor, Chief Executive Officer, and John Gamble, Chief Financial Officer.",
+          "section": "prepared",
+          "sentiment": 0.89116,
+          "word_count": 261,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "prepared",
+          "sentiment": -0.862959,
+          "word_count": 4223,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 4,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "prepared",
+          "sentiment": -0.815996,
+          "word_count": 756,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 5,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "prepared",
+          "sentiment": -0.904263,
+          "word_count": 252,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91277,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Jeff Meuler",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.164964,
+          "word_count": 93,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.694703,
+          "word_count": 379,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Jeff Meuler",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.878978,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Jeff Meuler",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.877445,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.445989,
+          "word_count": 172,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90448,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Toni Kaplan",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.578297,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.342451,
+          "word_count": 423,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Toni Kaplan",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.773324,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.443926,
+          "word_count": 208,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901747,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Alex Hess",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.871616,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.815416,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.699365,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Alex Hess",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.429896,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.010098,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Alex Hess",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.796964,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.864224,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878644,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Shlomo Rosenbaum",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.71366,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.830641,
+          "word_count": 327,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Shlomo Rosenbaum",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.656739,
+          "word_count": 114,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.868639,
+          "word_count": 260,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893652,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Manav Patnaik",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.507405,
+          "word_count": 80,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.844076,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.754978,
+          "word_count": 94,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Manav Patnaik",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.677319,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": 0.894272,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.745296,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Manav Patnaik",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.57698,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.836346,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.035456,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886782,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Faiza Alwy",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.653508,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.925165,
+          "word_count": 168,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 43,
+          "speaker": "Faiza Alwy",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.49142,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.331131,
+          "word_count": 182,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901617,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Andrew Nicholas",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.844722,
+          "word_count": 77,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.074194,
+          "word_count": 504,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": 0.856354,
+          "word_count": 41,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Andrew Nicholas",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.748412,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.561795,
+          "word_count": 387,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.161866,
+          "word_count": 27,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894396,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Ashish Sabadra",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.499775,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.652836,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 55,
+          "speaker": "Ashish Sabadra",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.255541,
+          "word_count": 58,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.922573,
+          "word_count": 121,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 57,
+          "speaker": "Ashish Sabadra",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.399022,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895956,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Jason Haas",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.63624,
+          "word_count": 72,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.111393,
+          "word_count": 195,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 61,
+          "speaker": "Jason Haas",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.684162,
+          "word_count": 61,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Jason Haas",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.271129,
+          "word_count": 42,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.452935,
+          "word_count": 258,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 64,
+          "speaker": "Jason Haas",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.303746,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902225,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Kyle Peterson",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.460829,
+          "word_count": 94,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.843358,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.924159,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Kyle Peterson",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.58153,
+          "word_count": 86,
+          "topic_hits": [
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.399807,
+          "word_count": 198,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 71,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": 0.25912,
+          "word_count": 179,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Kyle Peterson",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": -0.458238,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 73,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896442,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "Kevin McVeigh",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.807366,
+          "word_count": 34,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 75,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": 0.784381,
+          "word_count": 84,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 76,
+          "speaker": "Kevin McVeigh",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.872061,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": 0.7318,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903847,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "Surinder Thind",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.574274,
+          "word_count": 46,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.846948,
+          "word_count": 8,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 81,
+          "speaker": "Surinder Thind",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.285383,
+          "word_count": 54,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 82,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.450944,
+          "word_count": 123,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 83,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.4056,
+          "word_count": 13,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 84,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.581945,
+          "word_count": 73,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 85,
+          "speaker": "Surinder Thind",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.856279,
+          "word_count": 107,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 86,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.598922,
+          "word_count": 259,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 87,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898666,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 88,
+          "speaker": "Curtis Nagle",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.778836,
+          "word_count": 64,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 89,
+          "speaker": "John Gamble",
+          "role": "CFO, Equifax",
+          "section": "qa",
+          "sentiment": -0.864481,
+          "word_count": 171,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 90,
+          "speaker": "Curtis Nagle",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.334073,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 91,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.648058,
+          "word_count": 125,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 92,
+          "speaker": "Curtis Nagle",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.408375,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 93,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901761,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 94,
+          "speaker": "Rayna Kumar",
+          "role": "Analyst, Oppenheimer Company",
+          "section": "qa",
+          "sentiment": 0.682956,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 95,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.136464,
+          "word_count": 558,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 96,
+          "speaker": "Thank you.",
+          "role": "Our next question comes from the line of Kelsey Zhu with Autonomous Research.",
+          "section": "qa",
+          "sentiment": 0.904142,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 97,
+          "speaker": "Kelsey Zhu",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.747193,
+          "word_count": 42,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 98,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.234174,
+          "word_count": 350,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 99,
+          "speaker": "Kelsey Zhu",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.810782,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 100,
+          "speaker": "Kelsey Zhu",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.838842,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 101,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.873012,
+          "word_count": 143,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 102,
+          "speaker": "Kelsey Zhu",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.881588,
+          "word_count": 40,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 103,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.849194,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 104,
+          "speaker": "Kelsey Zhu",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.047174,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 105,
+          "speaker": "Thank you.",
+          "role": "Our next question comes from the line of Scott Wurtzel with Wolfe Research.",
+          "section": "qa",
+          "sentiment": 0.904142,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 106,
+          "speaker": "Scott Wurtzel",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.793175,
+          "word_count": 67,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 107,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.825275,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 108,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904131,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 109,
+          "speaker": "Simon Clinch",
+          "role": "Analyst, Rothschild & Co Redburn",
+          "section": "qa",
+          "sentiment": 0.824656,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 110,
+          "speaker": "Simon Clinch",
+          "role": "Analyst, Rothschild & Co Redburn",
+          "section": "qa",
+          "sentiment": -0.38673,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 111,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.433805,
+          "word_count": 226,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 112,
+          "speaker": "Simon Clinch",
+          "role": "Analyst, Rothschild & Co Redburn",
+          "section": "qa",
+          "sentiment": 0.811979,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 113,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": 0.812161,
+          "word_count": 383,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 114,
+          "speaker": "Simon Clinch",
+          "role": "Analyst, Rothschild & Co Redburn",
+          "section": "qa",
+          "sentiment": -0.329524,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 115,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.8985,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 116,
+          "speaker": "Ryan Griffin",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.746687,
+          "word_count": 56,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 117,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.58232,
+          "word_count": 247,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 118,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895818,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 119,
+          "speaker": "George Tong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.819496,
+          "word_count": 39,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 120,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.90241,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 121,
+          "speaker": "George Tong",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.061578,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 122,
+          "speaker": "Mark Begor",
+          "role": "CEO, Equifax",
+          "section": "qa",
+          "sentiment": -0.776036,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 123,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897861,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 124,
+          "speaker": "Trevor Burns",
+          "role": "SVP of Investor Relations, Equifax",
+          "section": "qa",
+          "sentiment": 0.43491,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 125,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915981,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 16729,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Equifax Inc (EFX) Q2 2026 Earnings Call Highlights: Strong Revenue Growth and Strategic ...",
@@ -196,13 +1854,40 @@
       "ts": "2026-07-07T20:20:00+00:00",
       "source": "PR Newswire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EFX Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/efx/transcripts/652182-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-21T00:00:00+00:00"
+    },
+    {
+      "title": "EFX Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/efx/transcripts/551689-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-21T00:00:00+00:00"
+    },
+    {
+      "title": "EFX Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/efx/transcripts/395606-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "EFX Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-21-equifax-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-21T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-17T00:22:25.237902+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EME",
   "earnings_history": [
     {
@@ -153,7 +153,1036 @@
       "surprise_pct": -9.94
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/eme/transcripts/657013-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 81,
+        "scored_turn_count": 81,
+        "overall_sentiment": 0.413668,
+        "prepared_sentiment": -0.079847,
+        "qa_sentiment": 0.460351,
+        "qa_tone_shift": 0.540199,
+        "uncertainty_turn_rate": 0.074074,
+        "forward_looking_turn_rate": 0.148148,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 17,
+            "sentiment": 0.168651
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 15,
+            "sentiment": 0.055711
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.001724
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.368757
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.218475
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.723181
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910195,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Lucas Sullivan",
+          "role": "Director of Financial Planning and Analysis, EMCOR Group",
+          "section": "prepared",
+          "sentiment": 0.912357,
+          "word_count": 233,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "prepared",
+          "sentiment": -0.928761,
+          "word_count": 706,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "prepared",
+          "sentiment": -0.919322,
+          "word_count": 1105,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "prepared",
+          "sentiment": -0.587516,
+          "word_count": 583,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "prepared",
+          "sentiment": 0.777297,
+          "word_count": 253,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 6,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "prepared",
+          "sentiment": -0.723181,
+          "word_count": 483,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908234,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Adam Thalhimer",
+          "role": "Analyst, Thompson Davis",
+          "section": "qa",
+          "sentiment": -0.87319,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Adam Thalhimer",
+          "role": "Analyst, Thompson Davis",
+          "section": "qa",
+          "sentiment": 0.866191,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Adam Thalhimer",
+          "role": "Analyst, Thompson Davis",
+          "section": "qa",
+          "sentiment": 0.847998,
+          "word_count": 32,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.169151,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.894627,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.459414,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Adam Thalhimer",
+          "role": "Analyst, Thompson Davis",
+          "section": "qa",
+          "sentiment": 0.520372,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.898251,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.844404,
+          "word_count": 530,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.19929,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.547388,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895793,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Brent Thielman",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.741918,
+          "word_count": 65,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.780782,
+          "word_count": 71,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.865834,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.535144,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.761943,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Brent Thielman",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.810536,
+          "word_count": 88,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.426757,
+          "word_count": 185,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Brent Thielman",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.59965,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891016,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Justin Hauke",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.856227,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.824554,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Justin Hauke",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.66589,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.683488,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Justin Hauke",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.50567,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904536,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Avi Jaroslawicz",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.791251,
+          "word_count": 30,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.280699,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Avi Jaroslawicz",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.395265,
+          "word_count": 33,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Avi Jaroslawicz",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.348311,
+          "word_count": 47,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.351218,
+          "word_count": 149,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 40,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.106705,
+          "word_count": 132,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Avi Jaroslawicz",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.623938,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899535,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Brian Brophy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.50875,
+          "word_count": 54,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.783986,
+          "word_count": 203,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Brian Brophy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.815099,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.762889,
+          "word_count": 111,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Brian Brophy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.586003,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904067,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Tim Mulrooney",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.817513,
+          "word_count": 121,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.819474,
+          "word_count": 391,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Tim Mulrooney",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.854814,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.78895,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.514125,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.824267,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.105917,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Tim Mulrooney",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.892115,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.083167,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Tim Mulrooney",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.412245,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893122,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Manish Somaiya",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.054657,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Manish Somaiya",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.883887,
+          "word_count": 57,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 62,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.727195,
+          "word_count": 462,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Manish Somaiya",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.844839,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.575655,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Manish Somaiya",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.811197,
+          "word_count": 41,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.162985,
+          "word_count": 132,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Manish Somaiya",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": -0.684349,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902805,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Adam Bubes",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.562879,
+          "word_count": 52,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.796496,
+          "word_count": 252,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Adam Bubes",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.676207,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.420929,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 73,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.113806,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.500985,
+          "word_count": 214,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Jason Nalbandian",
+          "role": "SVP and CFO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.540183,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": 0.210438,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "Adam Bubes",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.335786,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912462,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "Tony Guzzi",
+          "role": "Chairman, President, and CEO, EMCOR Group",
+          "section": "qa",
+          "sentiment": -0.673814,
+          "word_count": 77,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893895,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 9040,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From EMCOR’s Q2 Earnings Call - StockStory",
@@ -196,13 +1225,40 @@
       "ts": "2026-07-31T07:00:00+00:00",
       "source": "MarketBeat",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EME Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/eme/transcripts/657013-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "EME Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/eme/transcripts/571984-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "EME Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/eme/transcripts/399924-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "EME Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-emcor-group-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-17T00:23:17.120659+00:00"
 }

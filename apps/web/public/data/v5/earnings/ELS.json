@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ELS",
   "earnings_history": [
     {
@@ -153,7 +153,818 @@
       "surprise_pct": 7.98
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-23T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/els/transcripts/652980-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 63,
+        "scored_turn_count": 63,
+        "overall_sentiment": 0.448851,
+        "prepared_sentiment": -0.34668,
+        "qa_sentiment": 0.502786,
+        "qa_tone_shift": 0.849465,
+        "uncertainty_turn_rate": 0.079365,
+        "forward_looking_turn_rate": 0.222222,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 16,
+            "sentiment": -0.236714
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": -0.064699
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": -0.240769
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.926689
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.905192
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.71144
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.926689,
+          "word_count": 220,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "prepared",
+          "sentiment": -0.905192,
+          "word_count": 482,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "prepared",
+          "sentiment": -0.696775,
+          "word_count": 637,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Paul Seavey",
+          "role": "EVP and CFO, Equity LifeStyle Properties",
+          "section": "prepared",
+          "sentiment": -0.71144,
+          "word_count": 1025,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915288,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Michael Goldsmith",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.604706,
+          "word_count": 110,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "Paul Seavey",
+          "role": "EVP and CFO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": -0.789702,
+          "word_count": 124,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870198,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Steve Sakwa",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.711146,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.66277,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": -0.865244,
+          "word_count": 155,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": -0.556741,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887764,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Jamie Feldman",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.855473,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.756148,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Paul Seavey",
+          "role": "EVP and CFO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.81133,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897395,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Jeffrey Spector",
+          "role": "Analyst, Bank of America Securities",
+          "section": "qa",
+          "sentiment": 0.613265,
+          "word_count": 53,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.562211,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884883,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Eric Wolfe",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.385292,
+          "word_count": 106,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Paul Seavey",
+          "role": "EVP and CFO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.366381,
+          "word_count": 195,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.876013,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Brad Heffern",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.341224,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.437059,
+          "word_count": 200,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878083,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "John Kim",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.840479,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.822532,
+          "word_count": 220,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901683,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Haendel St. Juste",
+          "role": "Analyst, Mizuho Securities",
+          "section": "qa",
+          "sentiment": 0.474106,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Haendel St. Juste",
+          "role": "Analyst, Mizuho Securities",
+          "section": "qa",
+          "sentiment": 0.10905,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.12841,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886245,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Adam Kramer",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.786157,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Adam Kramer",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.725704,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": -0.726158,
+          "word_count": 167,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897019,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Jason Wayne",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.888666,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": -0.133204,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887914,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Wesley Golladay",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.740868,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.726907,
+          "word_count": 86,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.871177,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Peter Abramowitz",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.813953,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Paul Seavey",
+          "role": "EVP and CFO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.722784,
+          "word_count": 226,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 45,
+          "speaker": "Peter Abramowitz",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.468073,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887745,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "David Segall",
+          "role": "Analyst, Green Street",
+          "section": "qa",
+          "sentiment": 0.139013,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": -0.60354,
+          "word_count": 94,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878995,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Jesse Lederman",
+          "role": "Analyst, Zelman",
+          "section": "qa",
+          "sentiment": -0.291338,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Jesse Lederman",
+          "role": "Analyst, Zelman",
+          "section": "qa",
+          "sentiment": 0.455602,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.708714,
+          "word_count": 144,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Jesse Lederman",
+          "role": "Analyst, Zelman",
+          "section": "qa",
+          "sentiment": 0.594643,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.878083,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "John Kim",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.844035,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.621678,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.742163,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "John Kim",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.795642,
+          "word_count": 25,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Patrick Waite",
+          "role": "President and COO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": -0.451998,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897196,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Marguerite Nader",
+          "role": "Vice Chairman and CEO, Equity LifeStyle Properties",
+          "section": "qa",
+          "sentiment": 0.40905,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909431,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6365,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Equity Lifestyle Properties Inc (ELS) Q2 2026 Earnings Call Highlights: Strong Financial Growth ...",
@@ -196,13 +1007,40 @@
       "ts": "2026-07-23T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ELS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/els/transcripts/652980-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-23T00:00:00+00:00"
+    },
+    {
+      "title": "ELS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/els/transcripts/548582-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-22T00:00:00+00:00"
+    },
+    {
+      "title": "ELS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/els/transcripts/397074-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-29T00:00:00+00:00"
+    },
+    {
+      "title": "ELS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-equity-lifestyle-properties-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-17T00:23:04.445275+00:00"
 }

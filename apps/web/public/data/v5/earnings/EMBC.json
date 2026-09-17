@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EMBC",
   "earnings_history": [
     {
@@ -111,7 +111,435 @@
       "surprise_pct": 39.53
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/embc/transcripts/552469-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 29,
+        "scored_turn_count": 29,
+        "overall_sentiment": 0.480614,
+        "prepared_sentiment": 0.38237,
+        "qa_sentiment": 0.501081,
+        "qa_tone_shift": 0.118711,
+        "uncertainty_turn_rate": 0.275862,
+        "forward_looking_turn_rate": 0.482759,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": 0.303051
+          },
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": 0.293723
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": 0.197041
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": 0.190022
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": -0.252159
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.19715
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.003949
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.908068,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Pravesh Khandelwal",
+          "role": "VP of Investor Relations, Embecta Corp",
+          "section": "prepared",
+          "sentiment": 0.906599,
+          "word_count": 374,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "prepared",
+          "sentiment": 0.008089,
+          "word_count": 2038,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 3,
+          "speaker": "Jake Elguicze",
+          "role": "CFO, Embecta Corp",
+          "section": "prepared",
+          "sentiment": 0.003949,
+          "word_count": 1067,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "prepared",
+          "sentiment": 0.085146,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908605,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Marie Thibault",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.201151,
+          "word_count": 104,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.033933,
+          "word_count": 560,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 8,
+          "speaker": "Marie Thibault",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.855099,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.731554,
+          "word_count": 227,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Marie Thibault",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": -0.194308,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.38621,
+          "word_count": 495,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.660168,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.857304,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Anthony Petrone",
+          "role": "Analyst, Mizuho Financial Group",
+          "section": "qa",
+          "sentiment": 0.718415,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.090946,
+          "word_count": 153,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Anthony Petrone",
+          "role": "Analyst, Mizuho Financial Group",
+          "section": "qa",
+          "sentiment": 0.876463,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.860865,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Anthony Petrone",
+          "role": "Analyst, Mizuho Financial Group",
+          "section": "qa",
+          "sentiment": 0.738084,
+          "word_count": 171,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.618943,
+          "word_count": 340,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Jake Elguicze",
+          "role": "CFO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.662903,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.802853,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Ryan Schiller",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.714705,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": 0.716789,
+          "word_count": 98,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ryan Schiller",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.079787,
+          "word_count": 33,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": -0.512407,
+          "word_count": 268,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897649,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Dev Kurdikar",
+          "role": "Chairman and CEO, Embecta Corp",
+          "section": "qa",
+          "sentiment": -0.591673,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911915,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6873,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Embecta (EMBC) Q3 2026 Earnings Call Transcript - aol.com",
@@ -154,13 +582,40 @@
       "ts": "2026-08-07T19:00:31+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EMBC Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/embc/transcripts/660540-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-07T00:00:00+00:00"
+    },
+    {
+      "title": "EMBC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/embc/transcripts/552469-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "EMBC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/embc/transcripts/422982-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-05T00:00:00+00:00"
+    },
+    {
+      "title": "EMBC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-7-embecta-corp-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-07T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 3
+  },
+  "updated_at_utc": "2026-09-17T00:24:28.053433+00:00"
 }

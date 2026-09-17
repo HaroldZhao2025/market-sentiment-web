@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ELF",
   "earnings_history": [
     {
@@ -153,7 +153,640 @@
       "surprise_pct": 27.49
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/elf/transcripts/676143-q1-2027/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 44,
+        "scored_turn_count": 44,
+        "overall_sentiment": 0.333559,
+        "prepared_sentiment": -0.055931,
+        "qa_sentiment": 0.395057,
+        "qa_tone_shift": 0.450988,
+        "uncertainty_turn_rate": 0.045455,
+        "forward_looking_turn_rate": 0.454545,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 17,
+            "sentiment": 0.080677
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 16,
+            "sentiment": 0.171691
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": -0.233148
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 8,
+            "sentiment": -0.159117
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 6,
+            "sentiment": -0.135944
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": -0.327888
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.5992
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "KC Katten",
+          "role": "VP of Corporate Development and Investor Relations, e.l.f. Beauty",
+          "section": "prepared",
+          "sentiment": 0.693841,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Beauty's first quarter fiscal 2027 results.",
+          "role": "I'm KC Katten, Vice President of Corporate Development and Investor Relations.",
+          "section": "prepared",
+          "sentiment": 0.850268,
+          "word_count": 123,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "prepared",
+          "sentiment": -0.907473,
+          "word_count": 951,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "prepared",
+          "sentiment": -0.800499,
+          "word_count": 636,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "prepared",
+          "sentiment": 0.621085,
+          "word_count": 169,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "prepared",
+          "sentiment": -0.792807,
+          "word_count": 374,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.5992,
+          "word_count": 1199,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90983,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Olivia Tong",
+          "role": "Managing Director and Senior Equity Research Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.538707,
+          "word_count": 136,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.109363,
+          "word_count": 699,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.675712,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884425,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Anna Lizzul",
+          "role": "Equity Research, Bank of America",
+          "section": "qa",
+          "sentiment": 0.716714,
+          "word_count": 128,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.905302,
+          "word_count": 310,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 14,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.567748,
+          "word_count": 210,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892757,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Susan Anderson",
+          "role": "Senior Equity Research Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": 0.262125,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.497906,
+          "word_count": 218,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.613462,
+          "word_count": 106,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887171,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Cristian Rios",
+          "role": "Senior Equity Research Analyst, Bernstein",
+          "section": "qa",
+          "sentiment": 0.774923,
+          "word_count": 109,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.722455,
+          "word_count": 172,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 22,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.045316,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.679812,
+          "word_count": 143,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897231,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Sydney Wagner",
+          "role": "Equity Research Analyst and Equity Research Senior Associate, Jefferies",
+          "section": "qa",
+          "sentiment": 0.576604,
+          "word_count": 103,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.141144,
+          "word_count": 464,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892758,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Andrea Teixeira",
+          "role": "Lead Equity Research Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.76763,
+          "word_count": 293,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.584351,
+          "word_count": 271,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.812123,
+          "word_count": 135,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881719,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Steve Powers",
+          "role": "Managing Director and Senior Equity Research Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.854479,
+          "word_count": 169,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.505232,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.04636,
+          "word_count": 177,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895438,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Peter Grom",
+          "role": "Senior Equity Research Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.411269,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 37,
+          "speaker": "Mandy Fields",
+          "role": "SVP and CFO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.775205,
+          "word_count": 156,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.8861,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Filippo Falorni",
+          "role": "Director of Equity Research, Citi",
+          "section": "qa",
+          "sentiment": 0.75871,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": 0.063707,
+          "word_count": 390,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917869,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Tarang Amin",
+          "role": "Chairman and CEO, e.l.f. Beauty",
+          "section": "qa",
+          "sentiment": -0.438368,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892593,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8860,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From e.l.f. Beauty’s Q2 Earnings Call",
@@ -196,13 +829,40 @@
       "ts": "2026-05-27T11:05:24+00:00",
       "source": "StockStory",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ELF Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/elf/transcripts/676143-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "ELF Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/elf/transcripts/551992-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-20T00:00:00+00:00"
+    },
+    {
+      "title": "ELF Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/elf/transcripts/411172-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-04T00:00:00+00:00"
+    },
+    {
+      "title": "ELF Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-elf-beauty-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-17T00:22:55.147726+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ELAN",
   "earnings_history": [
     {
@@ -153,7 +153,648 @@
       "surprise_pct": 5.96
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/elan/transcripts/661312-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 48,
+        "scored_turn_count": 48,
+        "overall_sentiment": 0.271125,
+        "prepared_sentiment": 0.001601,
+        "qa_sentiment": 0.309628,
+        "qa_tone_shift": 0.308028,
+        "uncertainty_turn_rate": 0.104167,
+        "forward_looking_turn_rate": 0.270833,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": -0.345693
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": -0.462853
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": -0.374035
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 5,
+            "sentiment": -0.422268
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.594414
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.903343
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905904,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Tiffany Kanaga",
+          "role": "VP of Investor Relations and ESG, Elanco Animal Health",
+          "section": "prepared",
+          "sentiment": 0.911873,
+          "word_count": 215,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "prepared",
+          "sentiment": -0.904042,
+          "word_count": 2260,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 3,
+          "speaker": "Bob VanHimbergen",
+          "role": "CFO, Elanco Animal Health",
+          "section": "prepared",
+          "sentiment": -0.911617,
+          "word_count": 1055,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "prepared",
+          "sentiment": -0.902644,
+          "word_count": 865,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 5,
+          "speaker": "Tiffany Kanaga",
+          "role": "VP of Investor Relations and ESG, Elanco Animal Health",
+          "section": "prepared",
+          "sentiment": 0.91013,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911593,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Glen Santangelo",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.59926,
+          "word_count": 191,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.028112,
+          "word_count": 283,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Bob VanHimbergen",
+          "role": "CFO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.810609,
+          "word_count": 434,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Glen Santangelo",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.424469,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.816465,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Jon Block",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.653114,
+          "word_count": 102,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Bob VanHimbergen",
+          "role": "CFO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.709074,
+          "word_count": 195,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Jon Block",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.531707,
+          "word_count": 89,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.553589,
+          "word_count": 309,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.853101,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Daniel Clark",
+          "role": "Analyst, Leerink",
+          "section": "qa",
+          "sentiment": 0.611373,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.702774,
+          "word_count": 204,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Daniel Clark",
+          "role": "Analyst, Leerink",
+          "section": "qa",
+          "sentiment": 0.869596,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": 0.088737,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.849885,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Michael Ryskin",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.667552,
+          "word_count": 161,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": 0.605174,
+          "word_count": 253,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "It's outstanding.",
+          "role": "Look, new research, I point a competitive study.",
+          "section": "qa",
+          "sentiment": -0.745495,
+          "word_count": 83,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Michael Ryskin",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.271408,
+          "word_count": 171,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Bob VanHimbergen",
+          "role": "CFO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": 0.464388,
+          "word_count": 151,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Michael Ryskin",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.50974,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.79275,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Umer Raffat",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": -0.603783,
+          "word_count": 115,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Bob VanHimbergen",
+          "role": "CFO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.605317,
+          "word_count": 188,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.842146,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Brandon Vazquez",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.629759,
+          "word_count": 84,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": 0.415583,
+          "word_count": 225,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Brandon Vazquez",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.68062,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.304909,
+          "word_count": 176,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.834605,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Dave Westenberg",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.76816,
+          "word_count": 145,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.178166,
+          "word_count": 210,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Bob VanHimbergen",
+          "role": "CFO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": 0.340648,
+          "word_count": 91,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.826105,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Chris Schott",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.75349,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.486013,
+          "word_count": 273,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872619,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Steve Decker",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.690343,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.009054,
+          "word_count": 179,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Jeff Simmons",
+          "role": "President and CEO, Elanco Animal Health",
+          "section": "qa",
+          "sentiment": -0.333691,
+          "word_count": 180,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900584,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 9616,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Must-Read Analyst Questions From Elanco’s Q2 Earnings Call",
@@ -196,13 +837,40 @@
       "ts": "2026-08-08T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ELAN Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/elan/transcripts/661312-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "ELAN Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/elan/transcripts/566347-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "ELAN Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/elan/transcripts/410973-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-24T00:00:00+00:00"
+    },
+    {
+      "title": "ELAN Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-elanco-animal-health-incorporated-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-17T00:22:47.920808+00:00"
 }
