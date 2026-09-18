@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ESAB",
   "earnings_history": [
     {
@@ -111,7 +111,667 @@
       "surprise_pct": 6.93
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/esab/transcripts/662078-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 49,
+        "scored_turn_count": 49,
+        "overall_sentiment": 0.370226,
+        "prepared_sentiment": 0.137886,
+        "qa_sentiment": 0.396629,
+        "qa_tone_shift": 0.258743,
+        "uncertainty_turn_rate": 0.102041,
+        "forward_looking_turn_rate": 0.265306,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 15,
+            "sentiment": 0.161652
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": 0.222309
+          },
+          {
+            "topic": "Demand",
+            "mentions": 13,
+            "sentiment": 0.128731
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.479928
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": 0.823891
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.675281
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.883427,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Mark Barbalato",
+          "role": "VP of Investor Relations, ESAB",
+          "section": "prepared",
+          "sentiment": 0.906789,
+          "word_count": 129,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "prepared",
+          "sentiment": -0.284575,
+          "word_count": 1172,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Brent Jones",
+          "role": "CFO, ESAB",
+          "section": "prepared",
+          "sentiment": -0.675281,
+          "word_count": 773,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "prepared",
+          "sentiment": -0.14093,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909267,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Bryan Blair",
+          "role": "Analyst, Oppenheimer & Co",
+          "section": "qa",
+          "sentiment": 0.409252,
+          "word_count": 41,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": -0.592454,
+          "word_count": 171,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Bryan Blair",
+          "role": "Analyst, Oppenheimer & Co",
+          "section": "qa",
+          "sentiment": 0.680739,
+          "word_count": 66,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": 0.13418,
+          "word_count": 240,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Bryan Blair",
+          "role": "Analyst, Oppenheimer & Co",
+          "section": "qa",
+          "sentiment": -0.103692,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892213,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Tami Zakaria",
+          "role": "Analyst, J.P. Morgan",
+          "section": "qa",
+          "sentiment": -0.459273,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Tami Zakaria",
+          "role": "Analyst, J.P. Morgan",
+          "section": "qa",
+          "sentiment": 0.074051,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": -0.578057,
+          "word_count": 96,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Tami Zakaria",
+          "role": "Analyst, J.P. Morgan",
+          "section": "qa",
+          "sentiment": 0.755051,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Brent Jones",
+          "role": "CFO, ESAB",
+          "section": "qa",
+          "sentiment": 0.746448,
+          "word_count": 101,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": 0.842319,
+          "word_count": 13,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": -0.344843,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88748,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Nathan Jones",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.823891,
+          "word_count": 89,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": 0.534145,
+          "word_count": 264,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Nathan Jones",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.77418,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": 0.487809,
+          "word_count": 219,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885223,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Mig Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.855841,
+          "word_count": 73,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": 0.872116,
+          "word_count": 405,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Mig Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.788002,
+          "word_count": 30,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Brent Jones",
+          "role": "CFO, ESAB",
+          "section": "qa",
+          "sentiment": 0.79777,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Mig Dobre",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.129143,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Brent Jones",
+          "role": "CFO, ESAB",
+          "section": "qa",
+          "sentiment": -0.435417,
+          "word_count": 27,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894435,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Neal Burk",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.577401,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Neal Burk",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.87,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": 0.531706,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Neal Burk",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.513225,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": 0.664518,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": -0.094264,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Neal Burk",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.705202,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": -0.426185,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909812,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Chris Dankert",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.30706,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": -0.712671,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Chris Dankert",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.64401,
+          "word_count": 38,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Shyam Kambeyanda",
+          "role": "President and CEO, ESAB",
+          "section": "qa",
+          "sentiment": -0.710922,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Chris Dankert",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.424394,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908258,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Mark Barbalato",
+          "role": "VP of Investor Relations, ESAB",
+          "section": "qa",
+          "sentiment": -0.233059,
+          "word_count": 16,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913358,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5238,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From ESAB’s Q2 Earnings Call",
@@ -154,13 +814,40 @@
       "ts": "2026-08-13T08:36:28+00:00",
       "source": "StockStory",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ESAB Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/esab/transcripts/662078-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "ESAB Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/esab/transcripts/564195-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "ESAB Earnings Call: Q3 2025",
+      "url": "https://stockanalysis.com/stocks/esab/transcripts/371167-q3-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-10-29T00:00:00+00:00"
+    },
+    {
+      "title": "ESAB Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-esab-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:11:46.266899+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EPAC",
   "earnings_history": [
     {
@@ -153,7 +153,619 @@
       "surprise_pct": 16.67
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-08T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/epac/transcripts/620125-q3-2026-acquisition/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 47,
+        "scored_turn_count": 47,
+        "overall_sentiment": 0.332967,
+        "prepared_sentiment": 0.021185,
+        "qa_sentiment": 0.378593,
+        "qa_tone_shift": 0.357409,
+        "uncertainty_turn_rate": 0.106383,
+        "forward_looking_turn_rate": 0.212766,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 6,
+            "sentiment": -0.274783
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 6,
+            "sentiment": -0.091239
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.065457
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.670351
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": -0.294129
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 1,
+            "sentiment": -0.74381
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.607694
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909062,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Darren Kozik",
+          "role": "CFO, Enerpac Tool Group",
+          "section": "prepared",
+          "sentiment": 0.733517,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Christian Audi",
+          "role": "Senior Director of Investor Relations, Enerpac Tool Group",
+          "section": "prepared",
+          "sentiment": 0.909394,
+          "word_count": 119,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "prepared",
+          "sentiment": -0.817006,
+          "word_count": 537,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Darren Kozik",
+          "role": "CFO, Enerpac Tool Group",
+          "section": "prepared",
+          "sentiment": -0.74381,
+          "word_count": 1205,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 5,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "prepared",
+          "sentiment": -0.86405,
+          "word_count": 593,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907761,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Will Gildea",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": -0.571187,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Will Gildea",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.691428,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": -0.7797,
+          "word_count": 312,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Darren Kozik",
+          "role": "CFO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": -0.624479,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.517473,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Will Gildea",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.607694,
+          "word_count": 59,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": -0.572535,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Will Gildea",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.187724,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89552,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tom Hayes",
+          "role": "Analyst, ROTH Capital Partners",
+          "section": "qa",
+          "sentiment": -0.165408,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Tom Hayes",
+          "role": "Analyst, ROTH Capital Partners",
+          "section": "qa",
+          "sentiment": 0.877441,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Darren Kozik",
+          "role": "CFO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.678428,
+          "word_count": 202,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.668818,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Tom Hayes",
+          "role": "Analyst, ROTH Capital Partners",
+          "section": "qa",
+          "sentiment": 0.423814,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.615082,
+          "word_count": 287,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Tom Hayes",
+          "role": "Analyst, ROTH Capital Partners",
+          "section": "qa",
+          "sentiment": 0.763368,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894419,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ross Sparenblek",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.127875,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Ross Sparenblek",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.899404,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": -0.405014,
+          "word_count": 174,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Ross Sparenblek",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.849066,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": -0.353362,
+          "word_count": 122,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Ross Sparenblek",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.620617,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.73095,
+          "word_count": 221,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Ross Sparenblek",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.896054,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.753644,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Ross Sparenblek",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.744238,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910044,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Steve Silver",
+          "role": "Analyst, Argus Research",
+          "section": "qa",
+          "sentiment": -0.619493,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Steve Silver",
+          "role": "Analyst, Argus Research",
+          "section": "qa",
+          "sentiment": 0.389869,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Darren Kozik",
+          "role": "CFO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": -0.403194,
+          "word_count": 110,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.483065,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Steve Silver",
+          "role": "Analyst, Argus Research",
+          "section": "qa",
+          "sentiment": 0.610122,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Darren Kozik",
+          "role": "CFO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.75824,
+          "word_count": 110,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Steve Silver",
+          "role": "Analyst, Argus Research",
+          "section": "qa",
+          "sentiment": 0.767757,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.360284,
+          "word_count": 169,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Steve Silver",
+          "role": "Analyst, Argus Research",
+          "section": "qa",
+          "sentiment": -0.272216,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.917253,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Paul Sternlieb",
+          "role": "President and CEO, Enerpac Tool Group",
+          "section": "qa",
+          "sentiment": 0.085814,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911403,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5679,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "EPAC Q2 2026 Earnings: EPS Beat by 19.2% Amid Market Challenges - Earnings Call Highlights - dars.gov.et",
@@ -196,13 +808,40 @@
       "ts": "2026-06-24T21:04:00+00:00",
       "source": "GlobeNewswire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EPAC Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/epac/transcripts/620125-q3-2026-acquisition/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-08T00:00:00+00:00"
+    },
+    {
+      "title": "EPAC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/epac/transcripts/532771-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-26T00:00:00+00:00"
+    },
+    {
+      "title": "EPAC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/epac/transcripts/399444-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-12-18T00:00:00+00:00"
+    },
+    {
+      "title": "EPAC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-8-enerpac-tool-group-corp-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-08T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:10:12.281610+00:00"
 }

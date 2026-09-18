@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ENVA",
   "earnings_history": [
     {
@@ -153,7 +153,586 @@
       "surprise_pct": 272.41
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-23T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/enva/transcripts/653917-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 40,
+        "scored_turn_count": 40,
+        "overall_sentiment": 0.277311,
+        "prepared_sentiment": -0.000762,
+        "qa_sentiment": 0.308208,
+        "qa_tone_shift": 0.30897,
+        "uncertainty_turn_rate": 0.175,
+        "forward_looking_turn_rate": 0.4,
+        "topics": [
+          {
+            "topic": "Macro & FX",
+            "mentions": 17,
+            "sentiment": 0.141262
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 15,
+            "sentiment": 0.023286
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": -0.208103
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 9,
+            "sentiment": 0.037597
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.911955
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.911955
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.80915
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.90639,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Lindsay Savarese",
+          "role": "Investor Relations Representative, Enova",
+          "section": "prepared",
+          "sentiment": 0.914473,
+          "word_count": 266,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "prepared",
+          "sentiment": -0.889689,
+          "word_count": 994,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Scott Cornelis",
+          "role": "CFO, Enova",
+          "section": "prepared",
+          "sentiment": -0.934222,
+          "word_count": 1197,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913995,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "David Scharf",
+          "role": "Analyst, Citizens Capital Markets",
+          "section": "qa",
+          "sentiment": 0.706558,
+          "word_count": 107,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": 0.420626,
+          "word_count": 282,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "David Scharf",
+          "role": "Analyst, Citizens Capital Markets",
+          "section": "qa",
+          "sentiment": 0.748542,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 8,
+          "speaker": "Scott Cornelis",
+          "role": "CFO, Enova",
+          "section": "qa",
+          "sentiment": -0.825712,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": 0.511832,
+          "word_count": 128,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "David Scharf",
+          "role": "Analyst, Citizens Capital Markets",
+          "section": "qa",
+          "sentiment": 0.879386,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": -0.096348,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904639,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Bill Ryan",
+          "role": "Analyst, Seaport Research Partners",
+          "section": "qa",
+          "sentiment": 0.555054,
+          "word_count": 108,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": -0.648481,
+          "word_count": 305,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 15,
+          "speaker": "Bill Ryan",
+          "role": "Analyst, Seaport Research Partners",
+          "section": "qa",
+          "sentiment": 0.126245,
+          "word_count": 55,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": 0.356628,
+          "word_count": 54,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Bill Ryan",
+          "role": "Analyst, Seaport Research Partners",
+          "section": "qa",
+          "sentiment": 0.494575,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904815,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Vincent Caintic",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.621104,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": 0.203811,
+          "word_count": 255,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Vincent Caintic",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.80915,
+          "word_count": 170,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "It's a great question.",
+          "role": "Well, I think you're recognizing why we thought Grasshopper was such a great partner to combine with.",
+          "section": "qa",
+          "sentiment": -0.12437,
+          "word_count": 181,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Vincent Caintic",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": -0.68919,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907871,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Kyle Joseph",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.806029,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 26,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": -0.298086,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Scott Cornelis",
+          "role": "CFO, Enova",
+          "section": "qa",
+          "sentiment": 0.233301,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 28,
+          "speaker": "Kyle Joseph",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.4365,
+          "word_count": 87,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": 0.081281,
+          "word_count": 64,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Kyle Joseph",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.4985,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908584,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "John Hecht",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.734681,
+          "word_count": 76,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": -0.252697,
+          "word_count": 154,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "John Hecht",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.66672,
+          "word_count": 47,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": -0.146091,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "John Hecht",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.576277,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918792,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Steve Cunningham",
+          "role": "CEO, Enova",
+          "section": "qa",
+          "sentiment": -0.162457,
+          "word_count": 18,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899417,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5743,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From Enova’s Q2 Earnings Call",
@@ -196,13 +775,40 @@
       "ts": "2026-07-24T05:00:23+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ENVA Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/enva/transcripts/653917-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-23T00:00:00+00:00"
+    },
+    {
+      "title": "ENVA Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/enva/transcripts/547369-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-23T00:00:00+00:00"
+    },
+    {
+      "title": "ENVA Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/enva/transcripts/402386-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-27T00:00:00+00:00"
+    },
+    {
+      "title": "ENVA Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-enova-international-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:09:45.065826+00:00"
 }

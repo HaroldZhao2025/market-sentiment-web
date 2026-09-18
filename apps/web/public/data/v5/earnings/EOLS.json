@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EOLS",
   "earnings_history": [
     {
@@ -153,7 +153,555 @@
       "surprise_pct": 11.28
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/eols/transcripts/660290-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 39,
+        "scored_turn_count": 39,
+        "overall_sentiment": 0.31744,
+        "prepared_sentiment": -0.185453,
+        "qa_sentiment": 0.408876,
+        "qa_tone_shift": 0.594329,
+        "uncertainty_turn_rate": 0.025641,
+        "forward_looking_turn_rate": 0.333333,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": -0.120602
+          },
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": -0.265478
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 6,
+            "sentiment": -0.58294
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 6,
+            "sentiment": -0.191462
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.266055
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 3,
+            "sentiment": 0.220255
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.929931
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.895342,
+          "word_count": 91,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Nareg Sagherian",
+          "role": "VP and Head of Global Investor Relations and Corporate Communications, Evolus",
+          "section": "prepared",
+          "sentiment": 0.869601,
+          "word_count": 193,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "prepared",
+          "sentiment": -0.932206,
+          "word_count": 877,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Rui Avelar",
+          "role": "Chief Medical Officer and Head of R&D, Evolus",
+          "section": "prepared",
+          "sentiment": -0.268745,
+          "word_count": 362,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Tatjana Mitchell",
+          "role": "CFO, Evolus",
+          "section": "prepared",
+          "sentiment": -0.929931,
+          "word_count": 958,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "prepared",
+          "sentiment": -0.74678,
+          "word_count": 239,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910358,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Annabel Samimy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.743682,
+          "word_count": 109,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "qa",
+          "sentiment": 0.824057,
+          "word_count": 149,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Rui Avelar",
+          "role": "Chief Medical Officer and Head of R&D, Evolus",
+          "section": "qa",
+          "sentiment": 0.870395,
+          "word_count": 211,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Tatjana Mitchell",
+          "role": "CFO, Evolus",
+          "section": "qa",
+          "sentiment": 0.808895,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Tatjana Mitchell",
+          "role": "CFO, Evolus",
+          "section": "qa",
+          "sentiment": -0.093264,
+          "word_count": 54,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Annabel Samimy",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.304914,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "qa",
+          "sentiment": -0.358953,
+          "word_count": 166,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901602,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Marc Goodman",
+          "role": "Analyst, Leerink Partners",
+          "section": "qa",
+          "sentiment": 0.556788,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Rui Avelar",
+          "role": "Chief Medical Officer and Head of R&D, Evolus",
+          "section": "qa",
+          "sentiment": 0.835852,
+          "word_count": 168,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "qa",
+          "sentiment": -0.796532,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90993,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Navann Ty",
+          "role": "Analyst, BNP Paribas Asset Management",
+          "section": "qa",
+          "sentiment": 0.65014,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "qa",
+          "sentiment": -0.898852,
+          "word_count": 308,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911049,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Doug Tsao",
+          "role": "Analyst, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": -0.424505,
+          "word_count": 96,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "qa",
+          "sentiment": -0.195446,
+          "word_count": 292,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Doug Tsao",
+          "role": "Analyst, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": 0.834009,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Rui Avelar",
+          "role": "Chief Medical Officer and Head of R&D, Evolus",
+          "section": "qa",
+          "sentiment": 0.869288,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Doug Tsao",
+          "role": "Analyst, H.C. Wainwright",
+          "section": "qa",
+          "sentiment": -0.470596,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908163,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Sam Eiber",
+          "role": "Analyst, U.S. Bancorp BTIG",
+          "section": "qa",
+          "sentiment": -0.010589,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "qa",
+          "sentiment": -0.192821,
+          "word_count": 216,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Rui Avelar",
+          "role": "Chief Medical Officer and Head of R&D, Evolus",
+          "section": "qa",
+          "sentiment": 0.766638,
+          "word_count": 150,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Tatjana Mitchell",
+          "role": "CFO, Evolus",
+          "section": "qa",
+          "sentiment": 0.104817,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Sam Eiber",
+          "role": "Analyst, U.S. Bancorp BTIG",
+          "section": "qa",
+          "sentiment": 0.718699,
+          "word_count": 40,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Tatjana Mitchell",
+          "role": "CFO, Evolus",
+          "section": "qa",
+          "sentiment": 0.669781,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903498,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "John Todaro",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.728416,
+          "word_count": 157,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 36,
+          "speaker": "David Moatazedi",
+          "role": "President and CEO, Evolus",
+          "section": "qa",
+          "sentiment": -0.055515,
+          "word_count": 334,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Tatjana Mitchell",
+          "role": "CFO, Evolus",
+          "section": "qa",
+          "sentiment": 0.346958,
+          "word_count": 80,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912038,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6446,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Evolus Inc (EOLS) (Q2 2026) Earnings Call Highlights: Revenue Surges 21% and Adjusted EBITDA ...",
@@ -196,13 +744,40 @@
       "ts": "2026-05-04T20:34:49+00:00",
       "source": "Motley Fool",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EOLS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/eols/transcripts/660290-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EOLS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/eols/transcripts/579864-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-04T00:00:00+00:00"
+    },
+    {
+      "title": "EOLS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/eols/transcripts/402294-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-03T00:00:00+00:00"
+    },
+    {
+      "title": "EOLS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-5-4-evolus-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-05-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:12:43.891183+00:00"
 }

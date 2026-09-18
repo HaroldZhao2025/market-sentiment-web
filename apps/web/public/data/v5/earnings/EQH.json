@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EQH",
   "earnings_history": [
     {
@@ -153,7 +153,720 @@
       "surprise_pct": 5.12
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/eqh/transcripts/660739-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 54,
+        "scored_turn_count": 54,
+        "overall_sentiment": 0.225098,
+        "prepared_sentiment": -0.127111,
+        "qa_sentiment": 0.261038,
+        "qa_tone_shift": 0.388149,
+        "uncertainty_turn_rate": 0.074074,
+        "forward_looking_turn_rate": 0.37037,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": -0.369768
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 13,
+            "sentiment": -0.552355
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.674051
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": -0.141115
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.859965
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.690338
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.88596,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Erik Bass",
+          "role": "Chief Strategy Officer and Head of Investor Relations, Equitable Holdings, Inc",
+          "section": "prepared",
+          "sentiment": 0.913858,
+          "word_count": 237,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Mark Pearson",
+          "role": "President and CEO, Equitable Holdings, Inc",
+          "section": "prepared",
+          "sentiment": -0.838792,
+          "word_count": 1337,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "prepared",
+          "sentiment": -0.881138,
+          "word_count": 1070,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Mark Pearson",
+          "role": "President and CEO, Equitable Holdings, Inc",
+          "section": "prepared",
+          "sentiment": -0.715444,
+          "word_count": 133,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910319,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ryan Krueger",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.719971,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Mark Pearson",
+          "role": "President and CEO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": 0.041383,
+          "word_count": 237,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Ryan Krueger",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.788787,
+          "word_count": 37,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Nick Lane",
+          "role": "President, Equitable Financial",
+          "section": "qa",
+          "sentiment": -0.891114,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881388,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Suneet Kamath",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.764268,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.060753,
+          "word_count": 236,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Suneet Kamath",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.873471,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": 0.671213,
+          "word_count": 169,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902122,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tom Gallagher",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.882625,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": 0.502826,
+          "word_count": 227,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Tom Simeone",
+          "role": "CFO, AllianceBernstein",
+          "section": "qa",
+          "sentiment": 0.729886,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Tom Gallagher",
+          "role": "Analyst, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.673226,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.470034,
+          "word_count": 193,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906524,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Wes Carmichael",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.71387,
+          "word_count": 84,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.856766,
+          "word_count": 244,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 24,
+          "speaker": "Wes Carmichael",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.607041,
+          "word_count": 70,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.506546,
+          "word_count": 213,
+          "topic_hits": [
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904396,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Pablo Singzon",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.455665,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Nick Lane",
+          "role": "President, Equitable Financial",
+          "section": "qa",
+          "sentiment": -0.87413,
+          "word_count": 220,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897858,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Yaron Kinar",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": -0.813891,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.548943,
+          "word_count": 145,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Yaron Kinar",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": -0.581334,
+          "word_count": 35,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.823433,
+          "word_count": 28,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Yaron Kinar",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": -0.561421,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Nick Lane",
+          "role": "President, Equitable Financial",
+          "section": "qa",
+          "sentiment": -0.928741,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90836,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Tracy Benguigui",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.818916,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": 0.432813,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Tom Simeone",
+          "role": "CFO, AllianceBernstein",
+          "section": "qa",
+          "sentiment": -0.322098,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Onur Erzan",
+          "role": "President, AllianceBernstein",
+          "section": "qa",
+          "sentiment": 0.597119,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Tracy Benguigui",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.485435,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": 0.73873,
+          "word_count": 109,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Tracy Benguigui",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.876034,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": 0.870572,
+          "word_count": 114,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902235,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Wilma Burdis",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.164432,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.824467,
+          "word_count": 73,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Wilma Burdis",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.547075,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.617931,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905411,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Maxwell Fritscher",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.128119,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Robin Raju",
+          "role": "CFO, Equitable Holdings, Inc",
+          "section": "qa",
+          "sentiment": -0.639791,
+          "word_count": 163,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910157,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7200,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Equitable Holdings (EQH) Q1 2026 Earnings Call Transcript - Fortune",
@@ -196,13 +909,40 @@
       "ts": "2026-08-11T06:15:30+00:00",
       "source": "StockStory",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EQH Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/eqh/transcripts/660739-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EQH Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/eqh/transcripts/552602-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "EQH Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/eqh/transcripts/411029-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-05T00:00:00+00:00"
+    },
+    {
+      "title": "EQH Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-equitable-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:10:54.664451+00:00"
 }

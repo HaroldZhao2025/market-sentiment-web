@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EOG",
   "earnings_history": [
     {
@@ -153,7 +153,676 @@
       "surprise_pct": 133.82
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/eog/transcripts/661414-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 49,
+        "scored_turn_count": 49,
+        "overall_sentiment": 0.422014,
+        "prepared_sentiment": -0.139962,
+        "qa_sentiment": 0.50043,
+        "qa_tone_shift": 0.640392,
+        "uncertainty_turn_rate": 0.163265,
+        "forward_looking_turn_rate": 0.244898,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 12,
+            "sentiment": -0.042951
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": -0.038231
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 11,
+            "sentiment": -0.013956
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.317817
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": -0.193301
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.89907
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.177695
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.856782,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Pearce Hammond",
+          "role": "VP of Investor Relations, EOG Resources",
+          "section": "prepared",
+          "sentiment": 0.901641,
+          "word_count": 191,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "prepared",
+          "sentiment": -0.917444,
+          "word_count": 1007,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Ann Janssen",
+          "role": "CFO, EOG Resources",
+          "section": "prepared",
+          "sentiment": -0.866665,
+          "word_count": 356,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Jeff Leitzell",
+          "role": "EVP and COO, EOG Resources",
+          "section": "prepared",
+          "sentiment": -0.913102,
+          "word_count": 1067,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "prepared",
+          "sentiment": 0.099016,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913289,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Josh Silverstein",
+          "role": "Managing Director, UBS",
+          "section": "qa",
+          "sentiment": -0.623877,
+          "word_count": 83,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.181725,
+          "word_count": 189,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "Josh Silverstein",
+          "role": "Managing Director, UBS",
+          "section": "qa",
+          "sentiment": 0.758502,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.224586,
+          "word_count": 335,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907394,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Stephen Richardson",
+          "role": "Senior Managing Director, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.848189,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Jeff Leitzell",
+          "role": "EVP and COO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.650216,
+          "word_count": 511,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Stephen Richardson",
+          "role": "Senior Managing Director, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.725247,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.187566,
+          "word_count": 274,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915849,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan Securities",
+          "section": "qa",
+          "sentiment": 0.746404,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Keith Trasko",
+          "role": "SVP of Exploration and Production, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.474906,
+          "word_count": 254,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": -0.893543,
+          "word_count": 33,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan Securities",
+          "section": "qa",
+          "sentiment": 0.822442,
+          "word_count": 46,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Jeff Leitzell",
+          "role": "EVP and COO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.530256,
+          "word_count": 224,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910647,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Scott Hanold",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.811774,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.177695,
+          "word_count": 333,
+          "topic_hits": [
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Scott Hanold",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.031936,
+          "word_count": 74,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Jeff Leitzell",
+          "role": "EVP and COO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.306697,
+          "word_count": 246,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912347,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Phillip Jungwirth",
+          "role": "Managing Director, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.738564,
+          "word_count": 91,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.619666,
+          "word_count": 293,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Phillip Jungwirth",
+          "role": "Managing Director, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.76358,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Keith Trasko",
+          "role": "SVP of Exploration and Production, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.762498,
+          "word_count": 152,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910738,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Gabe Daoud",
+          "role": "Managing Director, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.388636,
+          "word_count": 60,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.104456,
+          "word_count": 113,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Gabe Daoud",
+          "role": "Managing Director, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.82918,
+          "word_count": 68,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": -0.59115,
+          "word_count": 264,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909771,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Scott Gruber",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.210826,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.473643,
+          "word_count": 261,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Scott Gruber",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": -0.283837,
+          "word_count": 95,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Jeff Leitzell",
+          "role": "EVP and COO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.703693,
+          "word_count": 203,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908221,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.841183,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Keith Trasko",
+          "role": "SVP of Exploration and Production, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.655807,
+          "word_count": 317,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.650886,
+          "word_count": 108,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Jeff Leitzell",
+          "role": "EVP and COO, EOG Resources",
+          "section": "qa",
+          "sentiment": -0.35631,
+          "word_count": 181,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906037,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Ezra Yacob",
+          "role": "Chairman and CEO, EOG Resources",
+          "section": "qa",
+          "sentiment": 0.916015,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8548,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "EOG Resources (EOG) Q2 2026 Earnings Call Transcript",
@@ -196,13 +865,40 @@
       "ts": "2026-08-06T07:00:00+00:00",
       "source": "The Globe and Mail",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EOG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/eog/transcripts/661414-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EOG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/eog/transcripts/568553-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "EOG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/eog/transcripts/404806-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "EOG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-eog-resources-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:09:58.899468+00:00"
 }

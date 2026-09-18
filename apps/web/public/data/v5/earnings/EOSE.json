@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EOSE",
   "earnings_history": [
     {
@@ -141,7 +141,571 @@
       "surprise_pct": -142.48
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/eose/transcripts/668080-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 41,
+        "scored_turn_count": 41,
+        "overall_sentiment": 0.61849,
+        "prepared_sentiment": 0.358743,
+        "qa_sentiment": 0.663018,
+        "qa_tone_shift": 0.304275,
+        "uncertainty_turn_rate": 0.097561,
+        "forward_looking_turn_rate": 0.195122,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 11,
+            "sentiment": 0.385667
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 9,
+            "sentiment": 0.305192
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": 0.48111
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": 0.216432
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.348218
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": 0.049428
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.92575
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.869199,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Welcome to Eos' Q2 2026 conference call.",
+          "role": "Today, I'm joined by Eos CEO, Joe Mastrangelo, COO, John Mahaz, and CFO, Alessandro Lagi.",
+          "section": "prepared",
+          "sentiment": 0.921046,
+          "word_count": 191,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "prepared",
+          "sentiment": 0.30324,
+          "word_count": 1559,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Three commercial developments frame the H2.",
+          "role": "After the quarter closed, we were awarded a strategic partnership agreement under Golden Dome for America program with the U.S.",
+          "section": "prepared",
+          "sentiment": 0.463632,
+          "word_count": 632,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "We're building installed base operating hours.",
+          "role": "The capital partner that unlocks accelerated growth.",
+          "section": "prepared",
+          "sentiment": -0.92575,
+          "word_count": 851,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Alessandro Lagi",
+          "role": "CFO, Eos Energy Enterprises",
+          "section": "prepared",
+          "sentiment": 0.521091,
+          "word_count": 1405,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903722,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Christopher Souther",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.884602,
+          "word_count": 63,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.776223,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Christopher Souther",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.602549,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.429113,
+          "word_count": 127,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Christopher Souther",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.781983,
+          "word_count": 84,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.685822,
+          "word_count": 334,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Christopher Souther",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.760917,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884997,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Stephen Gengaro",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.543596,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.604447,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Stephen Gengaro",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.803194,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.212955,
+          "word_count": 257,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908422,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Stephen Gengaro",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.816891,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Stephen Gengaro",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.877823,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.393195,
+          "word_count": 367,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Stephen Gengaro",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.796231,
+          "word_count": 70,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.822169,
+          "word_count": 497,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Stephen Gengaro",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.759554,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.495777,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.471811,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Stephen Gengaro",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.182278,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.481556,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.880239,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Joseph Osha",
+          "role": "Analyst, Guggenheim",
+          "section": "qa",
+          "sentiment": 0.689388,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.793389,
+          "word_count": 324,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Joseph Osha",
+          "role": "Analyst, Guggenheim",
+          "section": "qa",
+          "sentiment": 0.82589,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.745369,
+          "word_count": 67,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Joseph Osha",
+          "role": "Analyst, Guggenheim",
+          "section": "qa",
+          "sentiment": 0.847342,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": 0.8385,
+          "word_count": 150,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Joseph Osha",
+          "role": "Analyst, Guggenheim",
+          "section": "qa",
+          "sentiment": 0.314105,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906294,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Joe Mastrangelo",
+          "role": "CEO, Eos Energy Enterprises",
+          "section": "qa",
+          "sentiment": -0.422234,
+          "word_count": 380,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907504,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8238,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Eos Energy (EOSE) Q2 2026 Earnings Call Transcript",
@@ -184,13 +748,40 @@
       "ts": "2026-05-13T23:00:48+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EOSE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/eose/transcripts/668080-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EOSE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/eose/transcripts/571873-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-13T00:00:00+00:00"
+    },
+    {
+      "title": "EOSE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/eose/transcripts/404214-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "EOSE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-eos-energy-enterprises-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:12:56.226815+00:00"
 }

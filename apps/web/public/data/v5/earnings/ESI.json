@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ESI",
   "earnings_history": [
     {
@@ -153,7 +153,867 @@
       "surprise_pct": 8.84
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-28T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/esi/transcripts/656944-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 63,
+        "scored_turn_count": 63,
+        "overall_sentiment": 0.348907,
+        "prepared_sentiment": -0.160119,
+        "qa_sentiment": 0.392789,
+        "qa_tone_shift": 0.552908,
+        "uncertainty_turn_rate": 0.142857,
+        "forward_looking_turn_rate": 0.396825,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 24,
+            "sentiment": -0.022672
+          },
+          {
+            "topic": "Demand",
+            "mentions": 21,
+            "sentiment": 0.042749
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 16,
+            "sentiment": 0.248841
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.839033
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.522657
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.097018
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.914815
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.884816,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Varun Gokarn",
+          "role": "VP of Strategy and Integration, Element Solutions",
+          "section": "prepared",
+          "sentiment": 0.914815,
+          "word_count": 233,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "prepared",
+          "sentiment": -0.758224,
+          "word_count": 935,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Carey Dorman",
+          "role": "CFO, Element Solutions",
+          "section": "prepared",
+          "sentiment": -0.935218,
+          "word_count": 954,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "prepared",
+          "sentiment": -0.906783,
+          "word_count": 444,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909565,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Josh Spector",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.159255,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.019288,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Josh Spector",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.674019,
+          "word_count": 97,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.782572,
+          "word_count": 81,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904041,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Bhavesh Lodaya",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.912125,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.125472,
+          "word_count": 122,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Bhavesh Lodaya",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.576426,
+          "word_count": 43,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.705631,
+          "word_count": 114,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893703,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Mike Harrison",
+          "role": "Analyst, Seaport Research Partners",
+          "section": "qa",
+          "sentiment": 0.592434,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 17,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.156611,
+          "word_count": 146,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Mike Harrison",
+          "role": "Analyst, Seaport Research Partners",
+          "section": "qa",
+          "sentiment": 0.257396,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Carey Dorman",
+          "role": "CFO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.823656,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.744633,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895517,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Chris Parkinson",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.729301,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.520193,
+          "word_count": 179,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Chris Parkinson",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.45441,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Carey Dorman",
+          "role": "CFO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.670769,
+          "word_count": 168,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Chris Parkinson",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.424394,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.8947,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Pete Osterland",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.819271,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.786986,
+          "word_count": 184,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Pete Osterland",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.075499,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.640538,
+          "word_count": 134,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Carey Dorman",
+          "role": "CFO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.535541,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889747,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "John Roberts",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.798396,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.805384,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "John Roberts",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.174749,
+          "word_count": 18,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.067128,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "John Roberts",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.868812,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.016319,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "John Roberts",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.796925,
+          "word_count": 37,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Carey Dorman",
+          "role": "CFO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.827335,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.91863,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89975,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "John Tanwanteng",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.22959,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 45,
+          "speaker": "Carey Dorman",
+          "role": "CFO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.584271,
+          "word_count": 91,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "John Tanwanteng",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": 0.301827,
+          "word_count": 57,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.465027,
+          "word_count": 320,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "John Tanwanteng",
+          "role": "Analyst, CJS Securities",
+          "section": "qa",
+          "sentiment": -0.52961,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894916,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Frank Mitsch",
+          "role": "Analyst, Fermium Research",
+          "section": "qa",
+          "sentiment": -0.30122,
+          "word_count": 99,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.746768,
+          "word_count": 189,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 52,
+          "speaker": "Frank Mitsch",
+          "role": "Analyst, Fermium Research",
+          "section": "qa",
+          "sentiment": 0.266707,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Carey Dorman",
+          "role": "CFO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.819259,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 54,
+          "speaker": "Frank Mitsch",
+          "role": "Analyst, Fermium Research",
+          "section": "qa",
+          "sentiment": -0.688752,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893856,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Arun Viswanathan",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.354389,
+          "word_count": 80,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.758391,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 58,
+          "speaker": "Arun Viswanathan",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.801164,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 59,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": 0.260768,
+          "word_count": 187,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911085,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Ben Gliklich",
+          "role": "CEO, Element Solutions",
+          "section": "qa",
+          "sentiment": -0.185273,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909983,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6883,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Solstice Advanced Materials Inc. Q2 2026 Earnings Call Summary",
@@ -196,13 +1056,40 @@
       "ts": "2026-07-28T07:00:00+00:00",
       "source": "Yahoo Finance",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ESI Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/esi/transcripts/656944-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "ESI Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/esi/transcripts/559171-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "ESI Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/esi/transcripts/402403-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-18T00:00:00+00:00"
+    },
+    {
+      "title": "ESI Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-27-element-solutions-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-27T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:12:16.564973+00:00"
 }

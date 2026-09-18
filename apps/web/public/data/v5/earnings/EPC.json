@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EPC",
   "earnings_history": [
     {
@@ -153,7 +153,538 @@
       "surprise_pct": 4.72
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/epc/transcripts/661329-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 37,
+        "scored_turn_count": 37,
+        "overall_sentiment": 0.231176,
+        "prepared_sentiment": 0.005905,
+        "qa_sentiment": 0.258482,
+        "qa_tone_shift": 0.252577,
+        "uncertainty_turn_rate": 0.162162,
+        "forward_looking_turn_rate": 0.486486,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 18,
+            "sentiment": -0.140538
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": 0.022096
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 6,
+            "sentiment": -0.284762
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 5,
+            "sentiment": 0.324038
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.891922
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.891922
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.02149
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.913869,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Chris Gough",
+          "role": "VP of Investor Relations, Edgewell",
+          "section": "prepared",
+          "sentiment": 0.893594,
+          "word_count": 442,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "prepared",
+          "sentiment": -0.936574,
+          "word_count": 1324,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 4,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 3,
+          "speaker": "Fran Weissman",
+          "role": "CFO, Edgewell",
+          "section": "prepared",
+          "sentiment": -0.84727,
+          "word_count": 1330,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911685,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Peter Grom",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.323628,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.337729,
+          "word_count": 243,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Fran Weissman",
+          "role": "CFO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.593277,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Peter Grom",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.06231,
+          "word_count": 47,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.408849,
+          "word_count": 427,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Peter Grom",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.69211,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.900301,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890644,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Chris Carey",
+          "role": "Analyst, Wells Fargo Securities",
+          "section": "qa",
+          "sentiment": 0.269717,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.495435,
+          "word_count": 221,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Fran Weissman",
+          "role": "CFO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.52068,
+          "word_count": 301,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 16,
+          "speaker": "Chris Carey",
+          "role": "Analyst, Wells Fargo Securities",
+          "section": "qa",
+          "sentiment": 0.700545,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.659901,
+          "word_count": 169,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Chris Carey",
+          "role": "Analyst, Wells Fargo Securities",
+          "section": "qa",
+          "sentiment": -0.203442,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.901007,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.87199,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Susan Anderson",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": 0.552687,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.568202,
+          "word_count": 351,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Fran Weissman",
+          "role": "CFO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.838936,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Susan Anderson",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": 0.655736,
+          "word_count": 52,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.314088,
+          "word_count": 237,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Susan Anderson",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": -0.470596,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.904432,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.610259,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Olivia Tong",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": -0.524604,
+          "word_count": 191,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 30,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.393283,
+          "word_count": 217,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Fran Weissman",
+          "role": "CFO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.600188,
+          "word_count": 82,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.002775,
+          "word_count": 219,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": 0.904354,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916377,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Rod Little",
+          "role": "President and CEO, Edgewell",
+          "section": "qa",
+          "sentiment": -0.703206,
+          "word_count": 238,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912898,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6943,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The 5 Most Interesting Analyst Questions From Edgewell Personal Care’s Q2 Earnings Call",
@@ -196,13 +727,40 @@
       "ts": "2026-08-08T07:03:55+00:00",
       "source": "TradingView",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EPC Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/epc/transcripts/661329-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EPC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/epc/transcripts/554002-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "EPC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/epc/transcripts/418768-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-09T00:00:00+00:00"
+    },
+    {
+      "title": "EPC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-edgewell-personal-care-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:10:36.124297+00:00"
 }

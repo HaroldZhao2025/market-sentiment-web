@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EQIX",
   "earnings_history": [
     {
@@ -153,7 +153,717 @@
       "surprise_pct": -56.64
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/eqix/transcripts/657330-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 50,
+        "scored_turn_count": 50,
+        "overall_sentiment": 0.346121,
+        "prepared_sentiment": -0.189398,
+        "qa_sentiment": 0.419147,
+        "qa_tone_shift": 0.608545,
+        "uncertainty_turn_rate": 0.14,
+        "forward_looking_turn_rate": 0.32,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 21,
+            "sentiment": -0.088976
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 14,
+            "sentiment": -0.120331
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": -0.059325
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 13,
+            "sentiment": 0.05313
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": -0.074972
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.916069
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910387,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Ryan Burke",
+          "role": "VP of Investor Relations, Equinix",
+          "section": "prepared",
+          "sentiment": 0.916069,
+          "word_count": 202,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "prepared",
+          "sentiment": -0.931933,
+          "word_count": 1252,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 3,
+          "speaker": "We're just getting started.",
+          "role": "This week, we welcomed Chris Audie to Equinix as our Chief Product Officer.",
+          "section": "prepared",
+          "sentiment": -0.512362,
+          "word_count": 456,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "prepared",
+          "sentiment": -0.926703,
+          "word_count": 1021,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "prepared",
+          "sentiment": -0.591847,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "We will now begin the Q&A session.",
+          "role": "We would like to ask analysts to limit their questions to one question.",
+          "section": "qa",
+          "sentiment": 0.897507,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Eric Luebchow",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.588305,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": -0.249319,
+          "word_count": 322,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": -0.69092,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88352,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Ari Klein",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.485486,
+          "word_count": 44,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": -0.90374,
+          "word_count": 147,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": 0.569938,
+          "word_count": 43,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.845249,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Matt Niknam",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.152375,
+          "word_count": 66,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": -0.333087,
+          "word_count": 226,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.855533,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Frank Louthan",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.841247,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 19,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": 0.740331,
+          "word_count": 16,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.860521,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Michael Rollins",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": -0.269605,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 22,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": -0.829831,
+          "word_count": 315,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": -0.486091,
+          "word_count": 118,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.87552,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90068,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Jonathan Atkin",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.694354,
+          "word_count": 50,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": -0.663732,
+          "word_count": 217,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": 0.105293,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.845229,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Nick Del Deo",
+          "role": "Analyst, MoffettNathanson",
+          "section": "qa",
+          "sentiment": 0.68296,
+          "word_count": 86,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": -0.419936,
+          "word_count": 309,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.831876,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Michael Funk",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.491686,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": 0.208911,
+          "word_count": 500,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": -0.460058,
+          "word_count": 77,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.860684,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Michael Elias",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.610603,
+          "word_count": 134,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": 0.691449,
+          "word_count": 386,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": 0.726261,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870655,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Michael Ng",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.814005,
+          "word_count": 97,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": 0.669205,
+          "word_count": 27,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.853146,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Cameron McVeigh",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.664899,
+          "word_count": 83,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Olivier Leonetti",
+          "role": "CFO, Equinix",
+          "section": "qa",
+          "sentiment": 0.546969,
+          "word_count": 173,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Adaire Fox-Martin",
+          "role": "CEO and President, Equinix",
+          "section": "qa",
+          "sentiment": 0.752716,
+          "word_count": 271,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901125,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Ryan Burke",
+          "role": "VP of Investor Relations, Equinix",
+          "section": "qa",
+          "sentiment": 0.530632,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899902,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7644,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Equinix (EQIX) Q2 2026 Earnings Call Transcript",
@@ -196,13 +906,40 @@
       "ts": "2026-04-30T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EQIX Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/eqix/transcripts/657330-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "EQIX Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/eqix/transcripts/555468-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "EQIX Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/eqix/transcripts/404289-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-11T00:00:00+00:00"
+    },
+    {
+      "title": "EQIX Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-equinix-inc-reit-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T00:11:08.852721+00:00"
 }
