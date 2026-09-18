@@ -1,356 +1,160 @@
 {
-  "schema_version": 8,
+  "schema_version": 6,
   "symbol": "ESRT",
-  "earnings_history": [],
-  "calls": [
+  "earnings_history": [
     {
-      "quarter": null,
-      "date": "2026-08-18T01:43:27+00:00",
-      "source": "Motley Fool",
-      "source_url": "https://finance.yahoo.com/m/34e9522c-b118-316e-9e27-f2d6788bc793/quantum-%28qmco%29-q1-2027.html",
-      "source_type": "free_public_transcript",
-      "summary": {
-        "turn_count": 22,
-        "scored_turn_count": 22,
-        "overall_sentiment": 0.341477,
-        "prepared_sentiment": -0.005896,
-        "qa_sentiment": 0.418671,
-        "qa_tone_shift": 0.424567,
-        "uncertainty_turn_rate": 0.136364,
-        "forward_looking_turn_rate": 0.318182,
-        "topics": [
-          {
-            "topic": "Demand",
-            "mentions": 11,
-            "sentiment": 0.21011
-          },
-          {
-            "topic": "Margins & costs",
-            "mentions": 6,
-            "sentiment": -0.168685
-          },
-          {
-            "topic": "Guidance",
-            "mentions": 6,
-            "sentiment": 0.097532
-          },
-          {
-            "topic": "Capital allocation",
-            "mentions": 3,
-            "sentiment": -0.297755
-          },
-          {
-            "topic": "AI & technology",
-            "mentions": 2,
-            "sentiment": 0.02234
-          }
-        ]
-      },
-      "turns": [
-        {
-          "turn": 0,
-          "speaker": "Operator",
-          "section": "prepared",
-          "sentiment": 0.869683,
-          "word_count": 46,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 1,
-          "speaker": "Tara Ilges",
-          "section": "prepared",
-          "sentiment": 0.899406,
-          "word_count": 265,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 2
-        },
-        {
-          "turn": 2,
-          "speaker": "Hugues Meyrath",
-          "section": "prepared",
-          "sentiment": -0.857747,
-          "word_count": 740,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "AI & technology",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 1,
-          "forward_looking_hits": 3
-        },
-        {
-          "turn": 3,
-          "speaker": "William White",
-          "section": "prepared",
-          "sentiment": -0.934925,
-          "word_count": 1064,
-          "topic_hits": [
-            "Guidance",
-            "Demand",
-            "Margins & costs",
-            "Capital allocation"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 5
-        },
-        {
-          "turn": 4,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.902268,
-          "word_count": 14,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 5,
-          "speaker": "Jacob Stephan",
-          "section": "qa",
-          "sentiment": 0.124776,
-          "word_count": 66,
-          "topic_hits": [
-            "Guidance",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 6,
-          "speaker": "William White",
-          "section": "qa",
-          "sentiment": 0.552392,
-          "word_count": 97,
-          "topic_hits": [
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 2,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 7,
-          "speaker": "Jacob Stephan",
-          "section": "qa",
-          "sentiment": 0.764561,
-          "word_count": 46,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 8,
-          "speaker": "Hugues Meyrath",
-          "section": "qa",
-          "sentiment": 0.609457,
-          "word_count": 12,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 9,
-          "speaker": "Jacob Stephan",
-          "section": "qa",
-          "sentiment": 0.126579,
-          "word_count": 63,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 10,
-          "speaker": "Hugues Meyrath",
-          "section": "qa",
-          "sentiment": -0.345808,
-          "word_count": 92,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 11,
-          "speaker": "Jacob Stephan",
-          "section": "qa",
-          "sentiment": 0.757727,
-          "word_count": 76,
-          "topic_hits": [
-            "Guidance",
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 12,
-          "speaker": "Hugues Meyrath",
-          "section": "qa",
-          "sentiment": 0.595952,
-          "word_count": 61,
-          "topic_hits": [
-            "Guidance"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 13,
-          "speaker": "Jacob Stephan",
-          "section": "qa",
-          "sentiment": -0.568186,
-          "word_count": 10,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 14,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.900943,
-          "word_count": 13,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 15,
-          "speaker": "Nehal Chokshi",
-          "section": "qa",
-          "sentiment": 0.877298,
-          "word_count": 52,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 16,
-          "speaker": "Hugues Meyrath",
-          "section": "qa",
-          "sentiment": -0.796014,
-          "word_count": 75,
-          "topic_hits": [
-            "Demand",
-            "Margins & costs"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 17,
-          "speaker": "Nehal Chokshi",
-          "section": "qa",
-          "sentiment": 0.88076,
-          "word_count": 79,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 18,
-          "speaker": "Hugues Meyrath",
-          "section": "qa",
-          "sentiment": -0.305323,
-          "word_count": 70,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 1
-        },
-        {
-          "turn": 19,
-          "speaker": "Nehal Chokshi",
-          "section": "qa",
-          "sentiment": 0.902428,
-          "word_count": 24,
-          "topic_hits": [
-            "Demand",
-            "AI & technology"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 20,
-          "speaker": "Hugues Meyrath",
-          "section": "qa",
-          "sentiment": 0.761021,
-          "word_count": 12,
-          "topic_hits": [
-            "Demand"
-          ],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        },
-        {
-          "turn": 21,
-          "speaker": "Operator",
-          "section": "qa",
-          "sentiment": 0.795247,
-          "word_count": 194,
-          "topic_hits": [],
-          "uncertainty_hits": 0,
-          "forward_looking_hits": 0
-        }
-      ],
-      "transcript_word_count": 3171,
-      "transcript_text_redistributed": false
+      "date": "2026-11-04T15:00:00-05:00",
+      "eps_estimate": null,
+      "reported_eps": null,
+      "surprise_pct": null
+    },
+    {
+      "date": "2024-07-24T17:00:00-04:00",
+      "eps_estimate": 0.04,
+      "reported_eps": 0.1,
+      "surprise_pct": 129.99
+    },
+    {
+      "date": "2024-04-24T16:00:00-04:00",
+      "eps_estimate": null,
+      "reported_eps": 0.03,
+      "surprise_pct": 998.2
+    },
+    {
+      "date": "2024-02-20T16:00:00-05:00",
+      "eps_estimate": 0.01,
+      "reported_eps": 0.06,
+      "surprise_pct": 362.96
+    },
+    {
+      "date": "2023-10-25T16:00:00-04:00",
+      "eps_estimate": 0.01,
+      "reported_eps": 0.07,
+      "surprise_pct": 1027.21
+    },
+    {
+      "date": "2023-07-26T16:00:00-04:00",
+      "eps_estimate": 0.02,
+      "reported_eps": 0.14,
+      "surprise_pct": 519.74
+    },
+    {
+      "date": "2023-04-26T16:00:00-04:00",
+      "eps_estimate": -0.03,
+      "reported_eps": 0.04,
+      "surprise_pct": 258.1
+    },
+    {
+      "date": "2022-07-27T16:00:00-04:00",
+      "eps_estimate": 0.04,
+      "reported_eps": 0.18,
+      "surprise_pct": 322.63
+    },
+    {
+      "date": "2022-04-27T16:00:00-04:00",
+      "eps_estimate": null,
+      "reported_eps": -0.07,
+      "surprise_pct": -5882.91
+    },
+    {
+      "date": "2022-02-16T16:00:00-05:00",
+      "eps_estimate": -0.08,
+      "reported_eps": -0.02,
+      "surprise_pct": 74.01
+    },
+    {
+      "date": "2021-07-28T16:00:00-04:00",
+      "eps_estimate": -0.01,
+      "reported_eps": 0.01,
+      "surprise_pct": 188.89
+    },
+    {
+      "date": "2021-04-28T16:00:00-04:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.02,
+      "surprise_pct": 48.94
+    },
+    {
+      "date": "2021-02-17T16:00:00-05:00",
+      "eps_estimate": 0.01,
+      "reported_eps": null,
+      "surprise_pct": -100.0
+    },
+    {
+      "date": "2020-10-28T16:00:00-04:00",
+      "eps_estimate": -0.02,
+      "reported_eps": -0.05,
+      "surprise_pct": -136.29
+    },
+    {
+      "date": "2020-07-29T16:00:00-04:00",
+      "eps_estimate": -0.04,
+      "reported_eps": -0.04,
+      "surprise_pct": 7.75
+    },
+    {
+      "date": "2020-04-22T18:00:00-04:00",
+      "eps_estimate": 0.01,
+      "reported_eps": 0.02,
+      "surprise_pct": 56.5
+    },
+    {
+      "date": "2020-02-19T16:00:00-05:00",
+      "eps_estimate": 0.06,
+      "reported_eps": 0.09,
+      "surprise_pct": 56.09
+    },
+    {
+      "date": "2019-10-23T16:00:00-04:00",
+      "eps_estimate": 0.12,
+      "reported_eps": 0.09,
+      "surprise_pct": -21.74
+    },
+    {
+      "date": "2019-07-24T16:00:00-04:00",
+      "eps_estimate": 0.08,
+      "reported_eps": 0.06,
+      "surprise_pct": -20.91
+    },
+    {
+      "date": "2019-04-24T16:00:00-04:00",
+      "eps_estimate": 0.03,
+      "reported_eps": 0.03,
+      "surprise_pct": -3.54
+    },
+    {
+      "date": "2019-02-20T16:00:00-05:00",
+      "eps_estimate": 0.07,
+      "reported_eps": 0.13,
+      "surprise_pct": 85.71
+    },
+    {
+      "date": "2018-10-31T16:00:00-04:00",
+      "eps_estimate": 0.1,
+      "reported_eps": 0.1,
+      "surprise_pct": null
+    },
+    {
+      "date": "2018-07-25T16:00:00-04:00",
+      "eps_estimate": 0.1,
+      "reported_eps": 0.1,
+      "surprise_pct": 1.25
+    },
+    {
+      "date": "2018-04-25T16:00:00-04:00",
+      "eps_estimate": 0.06,
+      "reported_eps": 0.06,
+      "surprise_pct": 3.27
+    },
+    {
+      "date": "2018-02-21T16:00:00-05:00",
+      "eps_estimate": 0.13,
+      "reported_eps": 0.11,
+      "surprise_pct": -12.1
     }
   ],
+  "calls": [],
   "call_links": [
-    {
-      "title": "ESRT Earnings Call: Q2 2026",
-      "url": "https://stockanalysis.com/stocks/esrt/transcripts/658171-q2-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-07-30T00:00:00+00:00"
-    },
-    {
-      "title": "ESRT Earnings Call: Q1 2026",
-      "url": "https://stockanalysis.com/stocks/esrt/transcripts/559289-q1-2026/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-04-30T00:00:00+00:00"
-    },
-    {
-      "title": "ESRT Earnings Call: Q4 2025",
-      "url": "https://stockanalysis.com/stocks/esrt/transcripts/398262-q4-2025/",
-      "source": "Stock Analysis / Quartr",
-      "ts": "2026-02-18T00:00:00+00:00"
-    },
-    {
-      "title": "ESRT Earnings Call Transcript",
-      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-empire-state-realty-trust-inc-stock/#transcript",
-      "source": "MarketBeat",
-      "ts": "2026-07-29T00:00:00+00:00"
-    },
-    {
-      "title": "Empire State (ESRT) Q1 2026 Earnings Transcript",
-      "url": "https://www.fool.com/earnings/call-transcripts/2026/04/30/empire-state-esrt-q1-2026-earnings-transcript/",
-      "source": "Motley Fool",
-      "ts": "2026-04-30T17:19:26+00:00"
-    },
-    {
-      "title": "Quantum (QMCO) Q1 2027 Earnings Call Transcript",
-      "url": "https://finance.yahoo.com/m/34e9522c-b118-316e-9e27-f2d6788bc793/quantum-%28qmco%29-q1-2027.html",
-      "source": "Motley Fool",
-      "ts": "2026-08-18T01:43:27+00:00"
-    },
     {
       "title": "Empire State Realty Trust, Inc. 2026 Q2 - Results - Earnings Call Presentation",
       "url": "https://finnhub.io/api/news?id=e30d41083669e180f2f76c29c1bd995666d0fb53f268fcac98f854869b0431f7",
@@ -378,13 +182,27 @@
       "ts": "2026-07-30T23:05:27+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "Empire State Realty Trust, Inc. Q2 2026 Earnings Call Summary",
+      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-empire-state-realty-trust-inc-q2-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
+      "ts": "2026-07-30T12:30:00+00:00",
+      "source": "Moby",
+      "provider": "yahoo_public"
+    },
+    {
+      "title": "Empire State Realty Trust Announces Dates for Second Quarter 2026 Earnings Release and Conference Call",
+      "url": "https://finance.yahoo.com/real-estate/articles/empire-state-realty-trust-announces-201500836.html",
+      "ts": "2026-06-25T20:15:00+00:00",
+      "source": "Business Wire",
+      "provider": "yahoo_public"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "free_public_only",
-    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
-    "fulfillment_stage": 2
-  },
-  "updated_at_utc": "2026-08-18T02:00:15.675391+00:00"
+    "source_policy": "Free public sources only",
+    "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
+    "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
+  }
 }
