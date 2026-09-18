@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EVGO",
   "earnings_history": [
     {
@@ -135,7 +135,412 @@
       "surprise_pct": -471.43
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/evgo/transcripts/660535-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 28,
+        "scored_turn_count": 28,
+        "overall_sentiment": 0.376638,
+        "prepared_sentiment": 0.111427,
+        "qa_sentiment": 0.42084,
+        "qa_tone_shift": 0.309414,
+        "uncertainty_turn_rate": 0.035714,
+        "forward_looking_turn_rate": 0.357143,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": -0.112755
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.561075
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 5,
+            "sentiment": -0.097668
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.411688
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.093817
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.858229
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910251,
+          "word_count": 111,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Heather Davis",
+          "role": "VP of Investor Relations, EVgo",
+          "section": "prepared",
+          "sentiment": 0.912238,
+          "word_count": 260,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "prepared",
+          "sentiment": -0.858229,
+          "word_count": 2560,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Keefer Lehner",
+          "role": "CFO, EVgo",
+          "section": "prepared",
+          "sentiment": -0.518554,
+          "word_count": 1349,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 7
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911118,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Chris Dendrinos",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.658732,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Chris Dendrinos",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.542334,
+          "word_count": 70,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": -0.583286,
+          "word_count": 351,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 8,
+          "speaker": "Chris Dendrinos",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.746805,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": 0.45918,
+          "word_count": 354,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.868098,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Anand Balaji",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.763219,
+          "word_count": 78,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": -0.226375,
+          "word_count": 217,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Anand Balaji",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.095293,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": 0.369178,
+          "word_count": 477,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Anand Balaji",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.166344,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908233,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Chris Pierce",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.750766,
+          "word_count": 49,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Keefer Lehner",
+          "role": "CFO, EVgo",
+          "section": "qa",
+          "sentiment": 0.313317,
+          "word_count": 124,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Chris Pierce",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.892955,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": 0.157615,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": 0.351597,
+          "word_count": 149,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Chris Pierce",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.750603,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": -0.618929,
+          "word_count": 421,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 24,
+          "speaker": "Chris Pierce",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.808223,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908344,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Badar Khan",
+          "role": "CEO, EVgo",
+          "section": "qa",
+          "sentiment": -0.813543,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.920342,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7263,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "EVgo (EVGO) Q2 2026 Earnings Call Transcript",
@@ -178,13 +583,40 @@
       "ts": "2026-05-15T03:24:55+00:00",
       "source": "StockStory",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EVGO Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/evgo/transcripts/660535-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EVGO Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/evgo/transcripts/579673-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "EVGO Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/evgo/transcripts/404807-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-03T00:00:00+00:00"
+    },
+    {
+      "title": "EVGO Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-evgo-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:59.056843+00:00"
 }

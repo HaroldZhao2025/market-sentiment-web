@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EVH",
   "earnings_history": [
     {
@@ -153,7 +153,595 @@
       "surprise_pct": 40.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/evh/transcripts/662084-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 43,
+        "scored_turn_count": 43,
+        "overall_sentiment": 0.573864,
+        "prepared_sentiment": -0.033559,
+        "qa_sentiment": 0.61942,
+        "qa_tone_shift": 0.65298,
+        "uncertainty_turn_rate": 0.209302,
+        "forward_looking_turn_rate": 0.325581,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": 0.260608
+          },
+          {
+            "topic": "Demand",
+            "mentions": 12,
+            "sentiment": 0.249369
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": 0.288215
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.496805
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.928846
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.064764
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.892932,
+          "word_count": 271,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 1,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "prepared",
+          "sentiment": -0.928846,
+          "word_count": 1172,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 2,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "prepared",
+          "sentiment": -0.064764,
+          "word_count": 1347,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 3,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904739,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Kevin Caliendo",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.832328,
+          "word_count": 173,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": 0.626766,
+          "word_count": 347,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.887751,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "John Stansel",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.247834,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": 0.576642,
+          "word_count": 138,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.824906,
+          "word_count": 87,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.665672,
+          "word_count": 111,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882285,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Eduardo Ron",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.701722,
+          "word_count": 99,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": 0.576363,
+          "word_count": 232,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.877664,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Lucas Romanski",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.855825,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": 0.82734,
+          "word_count": 159,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.362733,
+          "word_count": 137,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890891,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Luis Hilado",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.679993,
+          "word_count": 63,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": -0.356231,
+          "word_count": 136,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.890774,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Dustin Scaringe",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.675163,
+          "word_count": 59,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.228245,
+          "word_count": 268,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88824,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "David Larsen",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": -0.612929,
+          "word_count": 105,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": -0.543783,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.871122,
+          "word_count": 108,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879383,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Kevin Gillie",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.693803,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": 0.785364,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.565806,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881356,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Sahil Vyas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.701294,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": -0.4414,
+          "word_count": 212,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.875847,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Matthew Shea",
+          "role": "Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.670062,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.845572,
+          "word_count": 226,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Mario Ramos",
+          "role": "CFO, Evolent",
+          "section": "qa",
+          "sentiment": 0.86797,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.72541,
+          "word_count": 270,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907765,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Seth Blackley",
+          "role": "CEO, Evolent",
+          "section": "qa",
+          "sentiment": 0.670139,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.886384,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6857,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Must-Read Analyst Questions From Evolent Health’s Q2 Earnings Call",
@@ -196,13 +784,40 @@
       "ts": "2026-08-10T23:12:13+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EVH Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/evh/transcripts/662084-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "EVH Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/evh/transcripts/566795-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "EVH Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/evh/transcripts/396973-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-24T00:00:00+00:00"
+    },
+    {
+      "title": "EVH Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-evolent-health-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:30:05.709159+00:00"
 }

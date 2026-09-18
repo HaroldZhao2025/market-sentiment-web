@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ETD",
   "earnings_history": [
     {
@@ -153,7 +153,428 @@
       "surprise_pct": 1.89
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/etd/transcripts/657362-q4-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 30,
+        "scored_turn_count": 30,
+        "overall_sentiment": 0.369059,
+        "prepared_sentiment": 0.05667,
+        "qa_sentiment": 0.431537,
+        "qa_tone_shift": 0.374867,
+        "uncertainty_turn_rate": 0.166667,
+        "forward_looking_turn_rate": 0.2,
+        "topics": [
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.220526
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 5,
+            "sentiment": 0.627333
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 4,
+            "sentiment": 0.554065
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.181116
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": -0.125542
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.406376
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.859266,
+          "word_count": 81,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Matt McNulty",
+          "role": "Senior VP, CFO, and Treasurer, Ethan Allen",
+          "section": "prepared",
+          "sentiment": 0.920402,
+          "word_count": 225,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "prepared",
+          "sentiment": -0.804613,
+          "word_count": 113,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Matt McNulty",
+          "role": "Senior VP, CFO, and Treasurer, Ethan Allen",
+          "section": "prepared",
+          "sentiment": -0.008139,
+          "word_count": 822,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "prepared",
+          "sentiment": -0.683567,
+          "word_count": 294,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912973,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.673974,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Taylor Zick",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.730168,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Taylor Zick",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": -0.043564,
+          "word_count": 66,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.010808,
+          "word_count": 56,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Taylor Zick",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.776972,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Matt McNulty",
+          "role": "Senior VP, CFO, and Treasurer, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.59774,
+          "word_count": 154,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.133323,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Taylor Zick",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": -0.151105,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": -0.057285,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Taylor Zick",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": -0.359933,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.659527,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889777,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.595655,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Cristina Fernández",
+          "role": "Analyst, Telsey Advisory Group",
+          "section": "qa",
+          "sentiment": 0.849689,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.519735,
+          "word_count": 84,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Cristina Fernández",
+          "role": "Analyst, Telsey Advisory Group",
+          "section": "qa",
+          "sentiment": 0.821357,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": -0.379295,
+          "word_count": 233,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Cristina Fernández",
+          "role": "Analyst, Telsey Advisory Group",
+          "section": "qa",
+          "sentiment": 0.893603,
+          "word_count": 35,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": -0.046994,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": -0.522565,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.863995,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892281,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Farooq Kathwari",
+          "role": "Chairman, President, and CEO, Ethan Allen",
+          "section": "qa",
+          "sentiment": 0.607651,
+          "word_count": 217,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.919928,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3164,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Ethan Allen (ETD) Q4 2026 Earnings Call Transcript - aol.com",
@@ -196,13 +617,40 @@
       "ts": "2026-07-30T05:02:22+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ETD Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/etd/transcripts/657362-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "ETD Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/etd/transcripts/547926-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "ETD Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/etd/transcripts/405187-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-28T00:00:00+00:00"
+    },
+    {
+      "title": "ETD Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-ethan-allen-interiors-inc-stock-1/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:36.646280+00:00"
 }

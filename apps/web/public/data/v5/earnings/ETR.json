@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ETR",
   "earnings_history": [
     {
@@ -153,7 +153,681 @@
       "surprise_pct": 1.68
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/etr/transcripts/657026-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 51,
+        "scored_turn_count": 51,
+        "overall_sentiment": 0.483418,
+        "prepared_sentiment": 0.206641,
+        "qa_sentiment": 0.506973,
+        "qa_tone_shift": 0.300333,
+        "uncertainty_turn_rate": 0.078431,
+        "forward_looking_turn_rate": 0.156863,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 16,
+            "sentiment": 0.415069
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 8,
+            "sentiment": 0.201192
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 6,
+            "sentiment": 0.092037
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.106299
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.543504
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.40956
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.902402,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Liz Hunter",
+          "role": "VP of Investor Relations, Entergy Corporation",
+          "section": "prepared",
+          "sentiment": 0.877224,
+          "word_count": 130,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "prepared",
+          "sentiment": -0.40956,
+          "word_count": 1656,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Kimberly Fontan",
+          "role": "CFO, Entergy Corporation",
+          "section": "prepared",
+          "sentiment": -0.543504,
+          "word_count": 608,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889867,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.518018,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.197569,
+          "word_count": 179,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.879972,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.916694,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.805427,
+          "word_count": 42,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.741283,
+          "word_count": 56,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 11,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": -0.633315,
+          "word_count": 83,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Shar Pourreza",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.390979,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896775,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Jeremy Tonet",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.060221,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.427684,
+          "word_count": 148,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Jeremy Tonet",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.602425,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.504953,
+          "word_count": 105,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jeremy Tonet",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.680652,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": -0.320251,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888044,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.537188,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.441603,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.50906,
+          "word_count": 51,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.444045,
+          "word_count": 119,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.751224,
+          "word_count": 52,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.587541,
+          "word_count": 257,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Paul Zimbardo",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.255432,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.780853,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.770842,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.693292,
+          "word_count": 65,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": -0.490375,
+          "word_count": 197,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.8701,
+          "word_count": 63,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.260648,
+          "word_count": 107,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Richard Sunderland",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.780731,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889373,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.543596,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.806077,
+          "word_count": 102,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.557931,
+          "word_count": 227,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": 0.749383,
+          "word_count": 99,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.324401,
+          "word_count": 141,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Andrew Weisel",
+          "role": "Analyst, Scotiabank",
+          "section": "qa",
+          "sentiment": -0.709112,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885198,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Steve D'Ambrisi",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.633024,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Kimberly Fontan",
+          "role": "CFO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.274584,
+          "word_count": 145,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Steve D'Ambrisi",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.809774,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Drew Marsh",
+          "role": "Chair and CEO, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.604197,
+          "word_count": 146,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Steve D'Ambrisi",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.517649,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909188,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Liz Hunter",
+          "role": "VP of Investor Relations, Entergy Corporation",
+          "section": "qa",
+          "sentiment": 0.889807,
+          "word_count": 140,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91676,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5813,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Entergy Q2 Earnings Call Highlights",
@@ -168,13 +842,40 @@
       "ts": "2026-04-30T07:15:08+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ETR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/etr/transcripts/657026-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "ETR Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/etr/transcripts/555997-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "ETR Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/etr/transcripts/402325-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "ETR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-entergy-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:05.837134+00:00"
 }

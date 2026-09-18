@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EVRG",
   "earnings_history": [
     {
@@ -153,7 +153,498 @@
       "surprise_pct": 11.13
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/evrg/transcripts/662200-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 34,
+        "scored_turn_count": 34,
+        "overall_sentiment": 0.49482,
+        "prepared_sentiment": -0.008575,
+        "qa_sentiment": 0.561939,
+        "qa_tone_shift": 0.570514,
+        "uncertainty_turn_rate": 0.117647,
+        "forward_looking_turn_rate": 0.264706,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 14,
+            "sentiment": 0.320485
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": 0.18125
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 7,
+            "sentiment": 0.423104
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.006453
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": -0.499372
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.390433
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.287789
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.90796,
+          "word_count": 113,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Peter Flynn",
+          "role": "Senior Director of Insurance and Investor Relations, Evergy, Inc",
+          "section": "prepared",
+          "sentiment": 0.902312,
+          "word_count": 156,
+          "topic_hits": [
+            "Guidance",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "prepared",
+          "sentiment": -0.922538,
+          "word_count": 2018,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 3,
+          "speaker": "Bryan Buckler",
+          "role": "EVP and CFO, Evergy, Inc",
+          "section": "prepared",
+          "sentiment": -0.922032,
+          "word_count": 1140,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907868,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Steve D'Ambrisi",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.40374,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Steve D'Ambrisi",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.690012,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.67327,
+          "word_count": 450,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Steve D'Ambrisi",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.766165,
+          "word_count": 83,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.01162,
+          "word_count": 213,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Steve D'Ambrisi",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.267101,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.822188,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Andrew Kadavy",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.886347,
+          "word_count": 31,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.523746,
+          "word_count": 167,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Andrew Kadavy",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.628196,
+          "word_count": 36,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.532835,
+          "word_count": 411,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Andrew Kadavy",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.865892,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.866316,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Paul Patterson",
+          "role": "Analyst, Glenrock Associates",
+          "section": "qa",
+          "sentiment": 0.70488,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.581101,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Paul Patterson",
+          "role": "Analyst, Glenrock Associates",
+          "section": "qa",
+          "sentiment": 0.792579,
+          "word_count": 103,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.346454,
+          "word_count": 649,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 22,
+          "speaker": "Paul Patterson",
+          "role": "Analyst, Glenrock Associates",
+          "section": "qa",
+          "sentiment": 0.806922,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.747617,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": -0.035003,
+          "word_count": 47,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.858131,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Anthony Crowdell",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.866228,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.568334,
+          "word_count": 221,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 28,
+          "speaker": "Anthony Crowdell",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.798188,
+          "word_count": 118,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.631206,
+          "word_count": 228,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Anthony Crowdell",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.870923,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.28116,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Anthony Crowdell",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": -0.385681,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "David Campbell",
+          "role": "Chairman and CEO, Evergy, Inc",
+          "section": "qa",
+          "sentiment": 0.921521,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6787,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Evergy (EVRG) Q2 2026 Earnings Call Transcript",
@@ -196,13 +687,40 @@
       "ts": "2026-07-16T13:00:00+00:00",
       "source": "Business Wire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EVRG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/evrg/transcripts/662200-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "EVRG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/evrg/transcripts/560344-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "EVRG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/evrg/transcripts/396732-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-19T00:00:00+00:00"
+    },
+    {
+      "title": "EVRG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-evergy-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:10.895998+00:00"
 }

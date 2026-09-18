@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EVCM",
   "earnings_history": [
     {
@@ -135,7 +135,510 @@
       "surprise_pct": -4419.11
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/evcm/transcripts/662776-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 37,
+        "scored_turn_count": 37,
+        "overall_sentiment": 0.443598,
+        "prepared_sentiment": 0.772202,
+        "qa_sentiment": 0.414603,
+        "qa_tone_shift": -0.357598,
+        "uncertainty_turn_rate": 0.135135,
+        "forward_looking_turn_rate": 0.324324,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": 0.111943
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": 0.128396
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.416615
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": 0.193895
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.135392
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909524,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Good afternoon, and thank you for joining.",
+          "role": "Joining me on today's call is Eric Remer, EverCommerce's Chairman and Chief Executive Officer.",
+          "section": "prepared",
+          "sentiment": 0.911341,
+          "word_count": 265,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Eric Remer",
+          "role": "Chairman and CEO, EverCommerce",
+          "section": "prepared",
+          "sentiment": 0.49574,
+          "word_count": 766,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Ryan Siurek",
+          "role": "CFO, EverCommerce",
+          "section": "qa",
+          "sentiment": -0.873133,
+          "word_count": 749,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909711,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Bhavin Shah",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.771538,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Alex Goor",
+          "role": "CEO, EverCommerce",
+          "section": "qa",
+          "sentiment": -0.619927,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Bhavin Shah",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.776291,
+          "word_count": 95,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Ryan Siurek",
+          "role": "CFO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.677332,
+          "word_count": 270,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "Matt Feierstein",
+          "role": "President, EverCommerce",
+          "section": "qa",
+          "sentiment": -0.783524,
+          "word_count": 130,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Bhavin Shah",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.634557,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906763,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Saket Kalia",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.833951,
+          "word_count": 86,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Eric Remer",
+          "role": "Chairman and CEO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.53635,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Alex Goor",
+          "role": "CEO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.367308,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Saket Kalia",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.789256,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Ryan Siurek",
+          "role": "CFO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.241631,
+          "word_count": 136,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Saket Kalia",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.738352,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888595,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Aaron Kimson",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.496559,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Ryan Siurek",
+          "role": "CFO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.83171,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Aaron Kimson",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.040281,
+          "word_count": 34,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Ryan Siurek",
+          "role": "CFO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.144031,
+          "word_count": 131,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Aaron Kimson",
+          "role": "Analyst, Citizens",
+          "section": "qa",
+          "sentiment": 0.861464,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Alex Goor",
+          "role": "CEO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.759519,
+          "word_count": 119,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.644361,
+          "word_count": 94,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Matt Feierstein",
+          "role": "President, EverCommerce",
+          "section": "qa",
+          "sentiment": -0.884042,
+          "word_count": 386,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Ryan Siurek",
+          "role": "CFO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.414638,
+          "word_count": 141,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908593,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Matt Hedberg",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.343018,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Ryan Siurek",
+          "role": "CFO, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.214805,
+          "word_count": 129,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 31,
+          "speaker": "Matt Feierstein",
+          "role": "President, EverCommerce",
+          "section": "qa",
+          "sentiment": -0.685953,
+          "word_count": 88,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 32,
+          "speaker": "Matt Hedberg",
+          "role": "Analyst, RBC",
+          "section": "qa",
+          "sentiment": 0.866446,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Matt Feierstein",
+          "role": "President, EverCommerce",
+          "section": "qa",
+          "sentiment": 0.837807,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915635,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Eric Remer",
+          "role": "Chairman and CEO, EverCommerce",
+          "section": "qa",
+          "sentiment": -0.323924,
+          "word_count": 142,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916514,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4772,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "EverCommerce (EVCM) Q2 2026 Earnings Call Transcript",
@@ -178,13 +681,40 @@
       "ts": "2026-08-05T21:00:00+00:00",
       "source": "theglobeandmail.com",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EVCM Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/evcm/transcripts/662776-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EVCM Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/evcm/transcripts/596057-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "EVCM Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/evcm/transcripts/401841-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-12T00:00:00+00:00"
+    },
+    {
+      "title": "EVCM Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-evercommerce-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:48.551992+00:00"
 }

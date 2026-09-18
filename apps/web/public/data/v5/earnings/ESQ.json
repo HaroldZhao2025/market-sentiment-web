@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ESQ",
   "earnings_history": [
     {
@@ -153,7 +153,487 @@
       "surprise_pct": null
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-23T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/esq/transcripts/653669-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 34,
+        "scored_turn_count": 34,
+        "overall_sentiment": 0.558078,
+        "prepared_sentiment": 0.465768,
+        "qa_sentiment": 0.570387,
+        "qa_tone_shift": 0.104619,
+        "uncertainty_turn_rate": 0.088235,
+        "forward_looking_turn_rate": 0.205882,
+        "topics": [
+          {
+            "topic": "Regulation & legal",
+            "mentions": 9,
+            "sentiment": 0.250937
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 6,
+            "sentiment": 0.63078
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": 0.079814
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": 0.294481
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.640974
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": 0.015905
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 1,
+            "sentiment": 0.784747
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905265,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "prepared",
+          "sentiment": 0.642613,
+          "word_count": 292,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Michael Lacapria",
+          "role": "SVP and CFO, Esquire",
+          "section": "prepared",
+          "sentiment": -0.56107,
+          "word_count": 692,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "prepared",
+          "sentiment": 0.876263,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891321,
+          "word_count": 101,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": -0.269015,
+          "word_count": 40,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": 0.176606,
+          "word_count": 167,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": -0.085984,
+          "word_count": 216,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901238,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.557765,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": 0.683496,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.094303,
+          "word_count": 59,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "The process has gone extremely well.",
+          "role": "The cooperation and partnership has been outstanding.",
+          "section": "qa",
+          "sentiment": 0.791,
+          "word_count": 204,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.732249,
+          "word_count": 57,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": 0.514483,
+          "word_count": 183,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.669116,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.75364,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": 0.784747,
+          "word_count": 189,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.583681,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891336,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Alan Strauss",
+          "role": "Analyst, Ithaca",
+          "section": "qa",
+          "sentiment": 0.864974,
+          "word_count": 17,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": 0.831852,
+          "word_count": 89,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Eric Bader",
+          "role": "EVP and COO, Esquire",
+          "section": "qa",
+          "sentiment": 0.789251,
+          "word_count": 68,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Alan Strauss",
+          "role": "Analyst, Ithaca",
+          "section": "qa",
+          "sentiment": 0.883301,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Eric Bader",
+          "role": "EVP and COO, Esquire",
+          "section": "qa",
+          "sentiment": 0.709879,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": 0.084769,
+          "word_count": 181,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Alan Strauss",
+          "role": "Analyst, Ithaca",
+          "section": "qa",
+          "sentiment": 0.91424,
+          "word_count": 57,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": 0.832076,
+          "word_count": 200,
+          "topic_hits": [
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Alan Strauss",
+          "role": "Analyst, Ithaca",
+          "section": "qa",
+          "sentiment": 0.504106,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": -0.089736,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Alan Strauss",
+          "role": "Analyst, Ithaca",
+          "section": "qa",
+          "sentiment": 0.87026,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914847,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Andrew Sagliocca",
+          "role": "Vice Chairman, CEO, and President, Esquire",
+          "section": "qa",
+          "sentiment": -0.581554,
+          "word_count": 128,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913349,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3353,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Esquire Financial Holdings Inc (ESQ) Q2 2026 Earnings Call Highlights: Strong Net Income and ...",
@@ -189,13 +669,34 @@
       "ts": "2026-04-08T12:30:00+00:00",
       "source": "PR Newswire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ESQ Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/esq/transcripts/653669-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-23T00:00:00+00:00"
+    },
+    {
+      "title": "ESQ Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/esq/transcripts/545617-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-23T00:00:00+00:00"
+    },
+    {
+      "title": "ESQ Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-esquire-financial-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:16.241130+00:00"
 }

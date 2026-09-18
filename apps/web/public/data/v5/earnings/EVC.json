@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EVC",
   "earnings_history": [
     {
@@ -153,7 +153,136 @@
       "surprise_pct": 371.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-10T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/evc/transcripts/661000-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 6,
+        "scored_turn_count": 6,
+        "overall_sentiment": 0.583092,
+        "prepared_sentiment": 0.280004,
+        "qa_sentiment": 0.886179,
+        "qa_tone_shift": 0.606175,
+        "uncertainty_turn_rate": 0.166667,
+        "forward_looking_turn_rate": 0.333333,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": 0.576882
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 2,
+            "sentiment": -0.03353
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.03353
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.03353
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.058518
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Good afternoon, everyone.",
+          "role": "I am Roy Nir, Vice President of Financial Reporting and Investor Relations.",
+          "section": "prepared",
+          "sentiment": 0.907072,
+          "word_count": 167,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Michael Christenson",
+          "role": "CEO and Chair of the Board, Entravision",
+          "section": "prepared",
+          "sentiment": -0.008541,
+          "word_count": 1046,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Mark Boelke",
+          "role": "CFO and COO, Entravision",
+          "section": "prepared",
+          "sentiment": -0.058518,
+          "word_count": 1072,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Roy Nir",
+          "role": "VP of Financial Reporting and Investor Relations, Entravision",
+          "section": "qa",
+          "sentiment": 0.885413,
+          "word_count": 83,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Michael Christenson",
+          "role": "CEO and Chair of the Board, Entravision",
+          "section": "qa",
+          "sentiment": 0.853774,
+          "word_count": 174,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Roy Nir",
+          "role": "VP of Financial Reporting and Investor Relations, Entravision",
+          "section": "qa",
+          "sentiment": 0.91935,
+          "word_count": 178,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 2720,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Entravision Communications Corporation Q2 2026 Earnings Call Summary",
@@ -196,13 +325,40 @@
       "ts": "2026-03-12T01:02:21+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EVC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/evc/transcripts/661000-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-10T00:00:00+00:00"
+    },
+    {
+      "title": "EVC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/evc/transcripts/583858-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "EVC Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/evc/transcripts/404072-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-05T00:00:00+00:00"
+    },
+    {
+      "title": "EVC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-10-entravision-communications-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-10T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:43.389150+00:00"
 }

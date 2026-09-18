@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ESTC",
   "earnings_history": [
     {
@@ -153,7 +153,832 @@
       "surprise_pct": 85.16
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-05-28T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/estc/transcripts/557510-q4-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 59,
+        "scored_turn_count": 59,
+        "overall_sentiment": 0.42897,
+        "prepared_sentiment": 0.001542,
+        "qa_sentiment": 0.460056,
+        "qa_tone_shift": 0.458514,
+        "uncertainty_turn_rate": 0.033898,
+        "forward_looking_turn_rate": 0.389831,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 27,
+            "sentiment": 0.247458
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 24,
+            "sentiment": 0.194241
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 21,
+            "sentiment": 0.237726
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.069184
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.917051
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": 0.725695
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909977,
+          "word_count": 72,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Eric Prengel",
+          "role": "Global VP of Finance, Elastic",
+          "section": "prepared",
+          "sentiment": 0.918361,
+          "word_count": 310,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "prepared",
+          "sentiment": -0.90512,
+          "word_count": 1661,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "prepared",
+          "sentiment": -0.917051,
+          "word_count": 1574,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902344,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Rob Owens",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.562068,
+          "word_count": 105,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": 0.728876,
+          "word_count": 512,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Rob Owens",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": -0.427376,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908157,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Matthew Hedberg",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.016983,
+          "word_count": 94,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": -0.018889,
+          "word_count": 160,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Matthew Hedberg",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.555069,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": -0.207793,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90744,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Miller Jump",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.783071,
+          "word_count": 63,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": 0.82724,
+          "word_count": 246,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 16,
+          "speaker": "Miller Jump",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.790141,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": 0.388009,
+          "word_count": 168,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Miller Jump",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.281311,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909132,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Kingsley Crane",
+          "role": "Analyst, Canaccord",
+          "section": "qa",
+          "sentiment": 0.780065,
+          "word_count": 88,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": 0.793514,
+          "word_count": 178,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905319,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Alexander Isaac",
+          "role": "Analyst, J.P. Morgan",
+          "section": "qa",
+          "sentiment": 0.809425,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": 0.296601,
+          "word_count": 288,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Alexander Isaac",
+          "role": "Analyst, J.P. Morgan",
+          "section": "qa",
+          "sentiment": 0.318767,
+          "word_count": 70,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": -0.451772,
+          "word_count": 236,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906825,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "George McGreehan",
+          "role": "Analyst, Bank of America Securities",
+          "section": "qa",
+          "sentiment": 0.390891,
+          "word_count": 82,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": -0.7091,
+          "word_count": 292,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907558,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Joseph DiBartolomeo",
+          "role": "Analyst, Guggenheim Securities",
+          "section": "qa",
+          "sentiment": 0.832668,
+          "word_count": 61,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": 0.273913,
+          "word_count": 144,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Joseph DiBartolomeo",
+          "role": "Analyst, Guggenheim Securities",
+          "section": "qa",
+          "sentiment": -0.558846,
+          "word_count": 47,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": 0.36433,
+          "word_count": 202,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": 0.874361,
+          "word_count": 54,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907126,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Eamon Coughlin",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.755249,
+          "word_count": 73,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": 0.725695,
+          "word_count": 269,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Eamon Coughlin",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.875794,
+          "word_count": 32,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": -0.071228,
+          "word_count": 233,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907945,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Matt Calitri",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.886602,
+          "word_count": 51,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": -0.774781,
+          "word_count": 101,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Matt Calitri",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.834838,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": -0.085036,
+          "word_count": 129,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.786093,
+          "word_count": 58,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": -0.446557,
+          "word_count": 187,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907907,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Matthew Martino",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.785411,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": 0.505683,
+          "word_count": 224,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Matthew Martino",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.172991,
+          "word_count": 69,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Navam Welihinda",
+          "role": "CFO, Elastic",
+          "section": "qa",
+          "sentiment": -0.396081,
+          "word_count": 97,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901868,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Robert Galvin",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.692027,
+          "word_count": 83,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": 0.693344,
+          "word_count": 189,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914481,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Ashutosh Kulkarni",
+          "role": "CEO, Elastic",
+          "section": "qa",
+          "sentiment": -0.718664,
+          "word_count": 41,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902054,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 9241,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Revealing Analyst Questions From Elastic’s Q1 Earnings Call",
@@ -196,13 +1021,40 @@
       "ts": "2026-05-28T23:07:26+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "ESTC Earnings Call: Q1 2027",
+      "url": "https://stockanalysis.com/stocks/estc/transcripts/682010-q1-2027/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-27T00:00:00+00:00"
+    },
+    {
+      "title": "ESTC Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/estc/transcripts/557510-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-28T00:00:00+00:00"
+    },
+    {
+      "title": "ESTC Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/estc/transcripts/421847-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "ESTC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-27-elastic-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-27T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:29:31.618009+00:00"
 }

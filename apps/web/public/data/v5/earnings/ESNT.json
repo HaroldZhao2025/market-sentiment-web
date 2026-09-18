@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "ESNT",
   "earnings_history": [
     {
@@ -153,7 +153,479 @@
       "surprise_pct": 16.6
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-07T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/esnt/transcripts/663995-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 34,
+        "scored_turn_count": 34,
+        "overall_sentiment": 0.524984,
+        "prepared_sentiment": 0.220711,
+        "qa_sentiment": 0.577445,
+        "qa_tone_shift": 0.356734,
+        "uncertainty_turn_rate": 0.264706,
+        "forward_looking_turn_rate": 0.205882,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.350906
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.233835
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.516646
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": 0.376818
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": 0.111902
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.043845
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.906263,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Phil Stefano",
+          "role": "VP of Investor Relations, Essent Group",
+          "section": "prepared",
+          "sentiment": 0.913405,
+          "word_count": 229,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "prepared",
+          "sentiment": -0.756567,
+          "word_count": 697,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "David Weinstock",
+          "role": "CFO, Essent Group",
+          "section": "prepared",
+          "sentiment": -0.049925,
+          "word_count": 670,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "prepared",
+          "sentiment": 0.090378,
+          "word_count": 51,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914831,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Bose George",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.266124,
+          "word_count": 39,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.808936,
+          "word_count": 359,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Bose George",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.578413,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.712371,
+          "word_count": 376,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Bose George",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": -0.483838,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899198,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Mihir Bhatia",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.846746,
+          "word_count": 110,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.573964,
+          "word_count": 239,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Mihir Bhatia",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.785253,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.795009,
+          "word_count": 210,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Mihir Bhatia",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.05223,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911076,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Thanks for taking my questions.",
+          "role": "Look, it's a pretty straightforward quarter and I'm following two analysts who asked really good questions.",
+          "section": "qa",
+          "sentiment": 0.841139,
+          "word_count": 113,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.848734,
+          "word_count": 875,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Rick Shane",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.833187,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.472766,
+          "word_count": 101,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Rick Shane",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.201844,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907608,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Rowland Mayor",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.867442,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.796973,
+          "word_count": 1091,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Rowland Mayor",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.313435,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": 0.668878,
+          "word_count": 422,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Rowland Mayor",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.894387,
+          "word_count": 36,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": -0.133413,
+          "word_count": 86,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Rowland Mayor",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.600749,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.919032,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Mark Casale",
+          "role": "Chairman and CEO, Essent Group",
+          "section": "qa",
+          "sentiment": -0.120012,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904176,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6317,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "5 Insightful Analyst Questions From Essent Group’s Q2 Earnings Call",
@@ -196,13 +668,40 @@
       "ts": "2026-08-08T16:01:40+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "ESNT Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/esnt/transcripts/663995-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-07T00:00:00+00:00"
+    },
+    {
+      "title": "ESNT Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/esnt/transcripts/556803-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-08T00:00:00+00:00"
+    },
+    {
+      "title": "ESNT Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/esnt/transcripts/400653-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-13T00:00:00+00:00"
+    },
+    {
+      "title": "ESNT Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-7-essent-group-ltd-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-07T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-18T22:28:42.028419+00:00"
 }
