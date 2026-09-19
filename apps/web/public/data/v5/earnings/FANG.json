@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FANG",
   "earnings_history": [
     {
@@ -153,7 +153,1025 @@
       "surprise_pct": 72.17
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-04T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fang/transcripts/660684-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 81,
+        "scored_turn_count": 81,
+        "overall_sentiment": 0.409321,
+        "prepared_sentiment": 0.867622,
+        "qa_sentiment": 0.391694,
+        "qa_tone_shift": -0.475928,
+        "uncertainty_turn_rate": 0.049383,
+        "forward_looking_turn_rate": 0.098765,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 17,
+            "sentiment": 0.432576
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.376595
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 6,
+            "sentiment": 0.085273
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": -0.099409
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.14053
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": 0.262003
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.90444,
+          "word_count": 112,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Adam Lawlis",
+          "role": "VP of Investor Relations, Diamondback Energy",
+          "section": "prepared",
+          "sentiment": 0.885306,
+          "word_count": 151,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "prepared",
+          "sentiment": 0.813119,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902376,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Neal Dingmann",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.159761,
+          "word_count": 73,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.81954,
+          "word_count": 322,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Neal Dingmann",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.747052,
+          "word_count": 96,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.13407,
+          "word_count": 337,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.155108,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Neal Dingmann",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.726086,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892385,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Neil Mehta",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.333782,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.334492,
+          "word_count": 338,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 13,
+          "speaker": "Jere Thompson",
+          "role": "CFO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.653092,
+          "word_count": 196,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.874497,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.785244,
+          "word_count": 148,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Neil Mehta",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.805478,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.334085,
+          "word_count": 375,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900385,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Scott Hanold",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.615783,
+          "word_count": 322,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Scott Hanold",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.713978,
+          "word_count": 379,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 21,
+          "speaker": "Scott Hanold",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.479593,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90272,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.667423,
+          "word_count": 70,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.231896,
+          "word_count": 220,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.59172,
+          "word_count": 76,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.365463,
+          "word_count": 252,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 27,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.702762,
+          "word_count": 92,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884427,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "John Freeman",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.807973,
+          "word_count": 323,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "John Freeman",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.883155,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Very little, John.",
+          "role": "I think we're continuing the Barnett leasing play with our partners at Double Eagle, so that's continuing onward.",
+          "section": "qa",
+          "sentiment": -0.776452,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.783338,
+          "word_count": 42,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900497,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Phillip Jungwirth",
+          "role": "Analyst, BMO",
+          "section": "qa",
+          "sentiment": 0.273308,
+          "word_count": 104,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.150573,
+          "word_count": 223,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Phillip Jungwirth",
+          "role": "Analyst, BMO",
+          "section": "qa",
+          "sentiment": 0.835159,
+          "word_count": 70,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Jere Thompson",
+          "role": "CFO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.238319,
+          "word_count": 148,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.379505,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Kevin MacCurdy",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.148505,
+          "word_count": 188,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Kevin MacCurdy",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.025309,
+          "word_count": 248,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.077179,
+          "word_count": 106,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Kevin MacCurdy",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.407704,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901089,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Doug Leggate",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": 0.658874,
+          "word_count": 186,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.267021,
+          "word_count": 306,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Doug Leggate",
+          "role": "Analyst, Wolfe",
+          "section": "qa",
+          "sentiment": -0.207699,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Geoff Jay",
+          "role": "Analyst, Daniel Energy Partners",
+          "section": "qa",
+          "sentiment": 0.797776,
+          "word_count": 60,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.745084,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Chad McAllaster",
+          "role": "EVP of Operations, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.617536,
+          "word_count": 72,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.362858,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Paul Sankey",
+          "role": "Analyst, Sankey Research",
+          "section": "qa",
+          "sentiment": 0.821746,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.472029,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Paul Sankey",
+          "role": "Analyst, Sankey Research",
+          "section": "qa",
+          "sentiment": 0.614426,
+          "word_count": 87,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.20636,
+          "word_count": 206,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889401,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Gabe Daoud",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.744491,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.358368,
+          "word_count": 202,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Gabe Daoud",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.813525,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.550485,
+          "word_count": 95,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Gabe Daoud",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.162349,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892041,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": -0.884401,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": 0.697204,
+          "word_count": 27,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.766839,
+          "word_count": 164,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.817546,
+          "word_count": 46,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Derrick Whitfield",
+          "role": "Analyst, Texas Capital",
+          "section": "qa",
+          "sentiment": 0.70525,
+          "word_count": 235,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899473,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.683766,
+          "word_count": 108,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 69,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.111622,
+          "word_count": 156,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.663628,
+          "word_count": 123,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.119923,
+          "word_count": 173,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Charles Meade",
+          "role": "Analyst, Johnson Rice",
+          "section": "qa",
+          "sentiment": 0.338655,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 73,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.888126,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 74,
+          "speaker": "Leo Mariani",
+          "role": "Analyst, Roth",
+          "section": "qa",
+          "sentiment": 0.646067,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.535416,
+          "word_count": 133,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 76,
+          "speaker": "Leo Mariani",
+          "role": "Analyst, Roth",
+          "section": "qa",
+          "sentiment": 0.130543,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": -0.193016,
+          "word_count": 122,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "Kaes Van't Hof",
+          "role": "CEO, Diamondback Energy",
+          "section": "qa",
+          "sentiment": 0.588663,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "We again used up a full hour.",
+          "role": "I continue to be impressed with the analyst community.",
+          "section": "qa",
+          "sentiment": 0.532071,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906055,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8818,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From Diamondback Energy’s Q2 Earnings Call",
@@ -196,13 +1214,40 @@
       "ts": "2026-08-04T19:04:21+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FANG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fang/transcripts/660684-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "FANG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fang/transcripts/566515-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
+    },
+    {
+      "title": "FANG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fang/transcripts/409920-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-24T00:00:00+00:00"
+    },
+    {
+      "title": "FANG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-3-diamondback-energy-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-03T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-19T23:20:31.983973+00:00"
 }

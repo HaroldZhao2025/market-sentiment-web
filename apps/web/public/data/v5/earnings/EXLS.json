@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EXLS",
   "earnings_history": [
     {
@@ -153,7 +153,641 @@
       "surprise_pct": 3.11
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/exls/transcripts/656901-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 46,
+        "scored_turn_count": 46,
+        "overall_sentiment": 0.295095,
+        "prepared_sentiment": -0.150237,
+        "qa_sentiment": 0.349404,
+        "qa_tone_shift": 0.499641,
+        "uncertainty_turn_rate": 0.086957,
+        "forward_looking_turn_rate": 0.195652,
+        "topics": [
+          {
+            "topic": "AI & technology",
+            "mentions": 22,
+            "sentiment": 0.239761
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.339425
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 4,
+            "sentiment": -0.497181
+          },
+          {
+            "topic": "Demand",
+            "mentions": 4,
+            "sentiment": -0.369061
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.659645
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.164691
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.206005
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.910199,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Andrew Thut",
+          "role": "Head of Investor Relations and Capital Markets, EXL",
+          "section": "prepared",
+          "sentiment": 0.8944,
+          "word_count": 209,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "prepared",
+          "sentiment": -0.898108,
+          "word_count": 1028,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "The AI opportunity for enterprises is immense.",
+          "role": "Capturing it requires partners that can make AI scalable, effective, and accountable inside complex regulated environments.",
+          "section": "prepared",
+          "sentiment": -0.763041,
+          "word_count": 483,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Maurizio Nicolelli",
+          "role": "CFO, EXL",
+          "section": "prepared",
+          "sentiment": -0.894633,
+          "word_count": 860,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912576,
+          "word_count": 114,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.248828,
+          "word_count": 80,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": -0.783715,
+          "word_count": 220,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.462789,
+          "word_count": 90,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.384219,
+          "word_count": 236,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": -0.540743,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913038,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Surinder Thind",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.429398,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": -0.364452,
+          "word_count": 191,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Surinder Thind",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.77846,
+          "word_count": 69,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.416472,
+          "word_count": 149,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916331,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Puneet Jain",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.286963,
+          "word_count": 52,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.52453,
+          "word_count": 248,
+          "topic_hits": [
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Puneet Jain",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.865084,
+          "word_count": 81,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.86765,
+          "word_count": 370,
+          "topic_hits": [
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91496,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Maggie Nolan",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.301103,
+          "word_count": 69,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Maurizio Nicolelli",
+          "role": "CFO, EXL",
+          "section": "qa",
+          "sentiment": 0.012501,
+          "word_count": 280,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Maggie Nolan",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.595088,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": -0.327374,
+          "word_count": 156,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907611,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "David Grossman",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.168594,
+          "word_count": 115,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": -0.931399,
+          "word_count": 128,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 29,
+          "speaker": "David Grossman",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.600349,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 30,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.482623,
+          "word_count": 163,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "David Grossman",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.148494,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Maurizio Nicolelli",
+          "role": "CFO, EXL",
+          "section": "qa",
+          "sentiment": -0.321262,
+          "word_count": 110,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "David Grossman",
+          "role": "Analyst, Stifel",
+          "section": "qa",
+          "sentiment": -0.505668,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Thank you.",
+          "role": "Our next question is from Vincent Colicchio from Barrington Research.",
+          "section": "qa",
+          "sentiment": 0.912006,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Vincent Colicchio",
+          "role": "Analyst, Barrington Research",
+          "section": "qa",
+          "sentiment": 0.848155,
+          "word_count": 35,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.786605,
+          "word_count": 190,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Vincent Colicchio",
+          "role": "Analyst, Barrington Research",
+          "section": "qa",
+          "sentiment": -0.576836,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.680951,
+          "word_count": 94,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91094,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "David Koning",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.712347,
+          "word_count": 101,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.617132,
+          "word_count": 241,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "David Koning",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.778162,
+          "word_count": 39,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Rohit Kapoor",
+          "role": "Chairman and CEO, EXL",
+          "section": "qa",
+          "sentiment": 0.874149,
+          "word_count": 87,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "David Koning",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": -0.888095,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909218,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 6820,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "ExlService Holdings Inc (EXLS) Q2 2026 Earnings Call Highlights: Strong Growth in AI and Data ...",
@@ -196,13 +830,40 @@
       "ts": "2026-04-30T07:14:04+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "EXLS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/exls/transcripts/656901-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-29T00:00:00+00:00"
+    },
+    {
+      "title": "EXLS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/exls/transcripts/568505-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "EXLS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/exls/transcripts/396459-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "title": "EXLS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-exlservice-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-19T23:18:49.363425+00:00"
 }

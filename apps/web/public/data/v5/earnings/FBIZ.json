@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FBIZ",
   "earnings_history": [
     {
@@ -153,7 +153,554 @@
       "surprise_pct": 3.73
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-31T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fbiz/transcripts/654508-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 42,
+        "scored_turn_count": 42,
+        "overall_sentiment": 0.388906,
+        "prepared_sentiment": -0.310012,
+        "qa_sentiment": 0.462477,
+        "qa_tone_shift": 0.772488,
+        "uncertainty_turn_rate": 0.071429,
+        "forward_looking_turn_rate": 0.261905,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.23197
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.133655
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.271634
+          },
+          {
+            "topic": "Demand",
+            "mentions": 2,
+            "sentiment": -0.254402
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.252066
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.899003,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Dave Seiler",
+          "role": "CEO, First Business Financial Services",
+          "section": "prepared",
+          "sentiment": -0.861592,
+          "word_count": 1296,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 2,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "prepared",
+          "sentiment": -0.532126,
+          "word_count": 1178,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 3,
+          "speaker": "Dave Seiler",
+          "role": "CEO, First Business Financial Services",
+          "section": "prepared",
+          "sentiment": -0.745332,
+          "word_count": 150,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910525,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Tim Delaney",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.725423,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Tim Delaney",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.614465,
+          "word_count": 48,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.728908,
+          "word_count": 108,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Tim Delaney",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.600585,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Dave Seiler",
+          "role": "CEO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.481193,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Tim Delaney",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.270152,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893623,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Jeff Rulis",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.496497,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.644621,
+          "word_count": 81,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Jeff Rulis",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.786195,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.792023,
+          "word_count": 77,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Jeff Rulis",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.74569,
+          "word_count": 73,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.781391,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Jeff Rulis",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.385802,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897453,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.779597,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.844438,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.879919,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": -0.267736,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.185895,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 25,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.027994,
+          "word_count": 129,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.352787,
+          "word_count": 95,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Dave Seiler",
+          "role": "CEO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.159839,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.597772,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884618,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Nathan Race",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": -0.025479,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Nathan Race",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.800777,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Dave Seiler",
+          "role": "CEO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.499905,
+          "word_count": 199,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": 0.062671,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Nathan Race",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.557559,
+          "word_count": 97,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 35,
+          "speaker": "Brian Spielmann",
+          "role": "CFO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": -0.055208,
+          "word_count": 146,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Dave Seiler",
+          "role": "CEO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": -0.880563,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "Nathan Race",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.716351,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Nathan Race",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": -0.836641,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.896592,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Dave Seiler",
+          "role": "CEO, First Business Financial Services",
+          "section": "qa",
+          "sentiment": -0.275153,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91363,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5090,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "FBIZ Q2 2026 Earnings Call Transcript - aol.com",
@@ -196,13 +743,40 @@
       "ts": "2026-07-31T12:30:00+00:00",
       "source": "Moby",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FBIZ Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fbiz/transcripts/654508-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-31T00:00:00+00:00"
+    },
+    {
+      "title": "FBIZ Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fbiz/transcripts/549386-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-24T00:00:00+00:00"
+    },
+    {
+      "title": "FBIZ Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fbiz/transcripts/395634-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-30T00:00:00+00:00"
+    },
+    {
+      "title": "FBIZ Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-30-first-business-financial-services-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-30T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-19T23:22:18.793295+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "EXTR",
   "earnings_history": [
     {
@@ -153,7 +153,791 @@
       "surprise_pct": 46.01
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/extr/transcripts/656813-q4-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 59,
+        "scored_turn_count": 59,
+        "overall_sentiment": 0.324405,
+        "prepared_sentiment": 0.016115,
+        "qa_sentiment": 0.346826,
+        "qa_tone_shift": 0.330711,
+        "uncertainty_turn_rate": 0.152542,
+        "forward_looking_turn_rate": 0.288136,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 23,
+            "sentiment": 0.035467
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 16,
+            "sentiment": 0.12925
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 11,
+            "sentiment": 0.077793
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 4,
+            "sentiment": -0.701861
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.934619
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.87748,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Stan Kovler",
+          "role": "SVP of Finance and Corporate Development, Extreme Networks",
+          "section": "prepared",
+          "sentiment": 0.904144,
+          "word_count": 238,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 2,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "prepared",
+          "sentiment": -0.782546,
+          "word_count": 1034,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "prepared",
+          "sentiment": -0.934619,
+          "word_count": 895,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907875,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Jeff Hopson",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": 0.806597,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.349245,
+          "word_count": 465,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Jeff Hopson",
+          "role": "Analyst, Needham & Company",
+          "section": "qa",
+          "sentiment": -0.414699,
+          "word_count": 75,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.440362,
+          "word_count": 280,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.445956,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901832,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Tomer Zilberman",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.756218,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.779223,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.58972,
+          "word_count": 214,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.220792,
+          "word_count": 58,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.275606,
+          "word_count": 110,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tomer Zilberman",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.622449,
+          "word_count": 76,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.39428,
+          "word_count": 126,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 18,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.793968,
+          "word_count": 128,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898712,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Dave Kang",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.793725,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.814312,
+          "word_count": 27,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.860031,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.640263,
+          "word_count": 113,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.214683,
+          "word_count": 145,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Dave Kang",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.717219,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.441394,
+          "word_count": 16,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Dave Kang",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.503015,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.06004,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.842247,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.864412,
+          "word_count": 5,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.558296,
+          "word_count": 108,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Dave Kang",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": 0.756915,
+          "word_count": 43,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.86554,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.709402,
+          "word_count": 125,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.109572,
+          "word_count": 58,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904232,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "David Vogt",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.604433,
+          "word_count": 157,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.481028,
+          "word_count": 474,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "David Vogt",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.849587,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.776777,
+          "word_count": 59,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.741035,
+          "word_count": 90,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "David Vogt",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.840962,
+          "word_count": 79,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.027089,
+          "word_count": 88,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.804399,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": -0.722908,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "David Vogt",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": -0.71183,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909125,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Eric Martinuzzi",
+          "role": "Analyst, Lake Street Capital Markets",
+          "section": "qa",
+          "sentiment": 0.692983,
+          "word_count": 23,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Eric Martinuzzi",
+          "role": "Analyst, Lake Street Capital Markets",
+          "section": "qa",
+          "sentiment": 0.891541,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Kevin Rhodes",
+          "role": "EVP and CFO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.790873,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Eric Martinuzzi",
+          "role": "Analyst, Lake Street Capital Markets",
+          "section": "qa",
+          "sentiment": 0.806804,
+          "word_count": 54,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.884713,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.479236,
+          "word_count": 202,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Eric Martinuzzi",
+          "role": "Analyst, Lake Street Capital Markets",
+          "section": "qa",
+          "sentiment": 0.474472,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.453903,
+          "word_count": 335,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915034,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Ed Meyercord",
+          "role": "President and CEO, Extreme Networks",
+          "section": "qa",
+          "sentiment": 0.034138,
+          "word_count": 171,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.915944,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7055,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Extreme Networks (EXTR) Q4 2026 Earnings Call Transcript",
@@ -196,13 +980,40 @@
       "ts": "2026-08-05T12:00:00+00:00",
       "source": "The Globe and Mail",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "EXTR Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/extr/transcripts/656813-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-05T00:00:00+00:00"
+    },
+    {
+      "title": "EXTR Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/extr/transcripts/547706-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-29T00:00:00+00:00"
+    },
+    {
+      "title": "EXTR Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/extr/transcripts/404877-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-28T00:00:00+00:00"
+    },
+    {
+      "title": "EXTR Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-extreme-networks-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-19T23:19:52.119679+00:00"
 }

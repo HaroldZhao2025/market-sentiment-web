@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FBRT",
   "earnings_history": [
     {
@@ -117,7 +117,521 @@
       "surprise_pct": 183.83
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-04-30T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fbrt/transcripts/555924-q1-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 39,
+        "scored_turn_count": 39,
+        "overall_sentiment": 0.50129,
+        "prepared_sentiment": 0.16312,
+        "qa_sentiment": 0.539939,
+        "qa_tone_shift": 0.376819,
+        "uncertainty_turn_rate": 0.179487,
+        "forward_looking_turn_rate": 0.153846,
+        "topics": [
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": 0.077108
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 5,
+            "sentiment": 0.158186
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": 0.158705
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": 0.059993
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": -0.304645
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.82364,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Lindsey Crabbe",
+          "role": "Executive Director of Investor Relations, Franklin BSP Realty Trust",
+          "section": "prepared",
+          "sentiment": 0.913473,
+          "word_count": 207,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "prepared",
+          "sentiment": -0.364865,
+          "word_count": 467,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Jerry Baglien",
+          "role": "CFO and COO, Franklin BSP Realty Trust",
+          "section": "prepared",
+          "sentiment": -0.719768,
+          "word_count": 522,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 4,
+          "speaker": "Brian Buffone",
+          "role": "President, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.552632,
+          "word_count": 417,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894862,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.701269,
+          "word_count": 77,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Jerry Baglien",
+          "role": "CFO and COO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.621661,
+          "word_count": 130,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.606604,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.650825,
+          "word_count": 208,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.36964,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912054,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Timothy D'Agostino",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": -0.426891,
+          "word_count": 107,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.346848,
+          "word_count": 271,
+          "topic_hits": [
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Timothy D'Agostino",
+          "role": "Analyst, B. Riley Securities",
+          "section": "qa",
+          "sentiment": -0.119371,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.912652,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "John Nicodemus",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.782465,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.706151,
+          "word_count": 258,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "John Nicodemus",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.732337,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.866433,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Brian Buffone",
+          "role": "President, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": -0.223923,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": -0.263441,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "John Nicodemus",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.601635,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916322,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Chris Mueller",
+          "role": "Analyst, JMP Securities",
+          "section": "qa",
+          "sentiment": 0.72174,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.758999,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Jerry Baglien",
+          "role": "CFO and COO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.775784,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Chris Mueller",
+          "role": "Analyst, JMP Securities",
+          "section": "qa",
+          "sentiment": 0.465116,
+          "word_count": 79,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.170697,
+          "word_count": 213,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Chris Mueller",
+          "role": "Analyst, JMP Securities",
+          "section": "qa",
+          "sentiment": 0.187722,
+          "word_count": 67,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.659204,
+          "word_count": 222,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Chris Mueller",
+          "role": "Analyst, JMP Securities",
+          "section": "qa",
+          "sentiment": -0.170479,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90213,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Gabe Poggi",
+          "role": "Analyst, Raymond James",
+          "section": "qa",
+          "sentiment": 0.799807,
+          "word_count": 140,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.450074,
+          "word_count": 467,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Michael Comparato",
+          "role": "CEO, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.87453,
+          "word_count": 224,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913343,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Lindsey Crabbe",
+          "role": "Executive Director of Investor Relations, Franklin BSP Realty Trust",
+          "section": "qa",
+          "sentiment": 0.348897,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899521,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4741,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Franklin BSP Realty Trust (FBRT) Q2 2026 Earnings Call Transcript - AOL.com",
@@ -160,13 +674,40 @@
       "ts": "2026-07-31T08:03:59+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FBRT Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fbrt/transcripts/658078-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-30T00:00:00+00:00"
+    },
+    {
+      "title": "FBRT Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fbrt/transcripts/555924-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "FBRT Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fbrt/transcripts/398966-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-12T00:00:00+00:00"
+    },
+    {
+      "title": "FBRT Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-29-franklin-bsp-realty-trust-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-29T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-19T23:20:54.859378+00:00"
 }

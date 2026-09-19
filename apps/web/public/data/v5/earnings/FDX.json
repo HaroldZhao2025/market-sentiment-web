@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FDX",
   "earnings_history": [
     {
@@ -153,7 +153,784 @@
       "surprise_pct": 79.21
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-03-19T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fdx/transcripts/388546-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 57,
+        "scored_turn_count": 57,
+        "overall_sentiment": 0.352828,
+        "prepared_sentiment": -0.451442,
+        "qa_sentiment": 0.413527,
+        "qa_tone_shift": 0.86497,
+        "uncertainty_turn_rate": 0.175439,
+        "forward_looking_turn_rate": 0.350877,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 21,
+            "sentiment": -0.092148
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 16,
+            "sentiment": -0.076248
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 15,
+            "sentiment": -0.134948
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": -0.492926
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.713676
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.893487
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.92087
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Jeni Hollander",
+          "role": "VP of Investor Relations, FedEx Corporation",
+          "section": "prepared",
+          "sentiment": 0.92087,
+          "word_count": 201,
+          "topic_hits": [
+            "Demand",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "prepared",
+          "sentiment": -0.86619,
+          "word_count": 1293,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 2,
+          "speaker": "Brie Carere",
+          "role": "EVP and Chief Customer Officer, FedEx Corporation",
+          "section": "prepared",
+          "sentiment": -0.939664,
+          "word_count": 1037,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "John Dietrich",
+          "role": "EVP and CFO, FedEx Corporation",
+          "section": "prepared",
+          "sentiment": -0.920785,
+          "word_count": 1425,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914884,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Ari Rosa",
+          "role": "Senior Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.092021,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.17109,
+          "word_count": 185,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906225,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Stephanie Moore",
+          "role": "SVP of Equity Research, Jefferies",
+          "section": "qa",
+          "sentiment": 0.556315,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 9,
+          "speaker": "Marshall Witt",
+          "role": "CFO, FedEx Freight",
+          "section": "qa",
+          "sentiment": 0.06275,
+          "word_count": 212,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910749,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Richa Harnain",
+          "role": "Director of Lead Surface Transportation and Airfreight Equity Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.789722,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Richa Harnain",
+          "role": "Director of Lead Surface Transportation and Airfreight Equity Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": -0.169943,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.335173,
+          "word_count": 339,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913094,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Scott Group",
+          "role": "Managing Director, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.47097,
+          "word_count": 112,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.760541,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Brie Carere",
+          "role": "EVP and Chief Customer Officer, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.823562,
+          "word_count": 300,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.530744,
+          "word_count": 58,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894746,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "David Vernon",
+          "role": "Managing Director and Senior Analyst, Bernstein",
+          "section": "qa",
+          "sentiment": 0.878775,
+          "word_count": 100,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Brie Carere",
+          "role": "EVP and Chief Customer Officer, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.387388,
+          "word_count": 162,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899961,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Ken Hoexter",
+          "role": "Managing Director, Bank of America",
+          "section": "qa",
+          "sentiment": -0.743797,
+          "word_count": 100,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 24,
+          "speaker": "John Dietrich",
+          "role": "EVP and CFO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.640375,
+          "word_count": 80,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907538,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Tom Wadewitz",
+          "role": "Senior Equity Research Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.653736,
+          "word_count": 102,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 27,
+          "speaker": "Brie Carere",
+          "role": "EVP and Chief Customer Officer, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.145561,
+          "word_count": 183,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90471,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Conor Cunningham",
+          "role": "Director and Travel and Transports Analyst, Melius Research",
+          "section": "qa",
+          "sentiment": 0.802128,
+          "word_count": 117,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 30,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.376294,
+          "word_count": 128,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906796,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Jonathan Chappell",
+          "role": "Managing Director, Evercore ISI",
+          "section": "qa",
+          "sentiment": 0.654263,
+          "word_count": 184,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Marshall Witt",
+          "role": "CFO, FedEx Freight",
+          "section": "qa",
+          "sentiment": -0.820112,
+          "word_count": 150,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "John Smith",
+          "role": "CEO, FedEx Freight",
+          "section": "qa",
+          "sentiment": 0.320514,
+          "word_count": 118,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90028,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Chris Wetherbee",
+          "role": "Senior Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.636877,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 37,
+          "speaker": "John Dietrich",
+          "role": "EVP and CFO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.424148,
+          "word_count": 160,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.9074,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Jordan Alliger",
+          "role": "VP and Equity Research Analyst of Transportation and Logistics, Goldman Sachs",
+          "section": "qa",
+          "sentiment": -0.475624,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Brie Carere",
+          "role": "EVP and Chief Customer Officer, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.598929,
+          "word_count": 191,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908537,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Eric Morgan",
+          "role": "Equity Research Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.683379,
+          "word_count": 105,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Brie Carere",
+          "role": "EVP and Chief Customer Officer, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.555393,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907907,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Brian Ossenbeck",
+          "role": "Managing Director and Senior Analyst of Transportation, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.778447,
+          "word_count": 131,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.874084,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Marshall Witt",
+          "role": "CFO, FedEx Freight",
+          "section": "qa",
+          "sentiment": 0.825478,
+          "word_count": 143,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "John Dietrich",
+          "role": "EVP and CFO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.65149,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": 0.883182,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "John Smith",
+          "role": "CEO, FedEx Freight",
+          "section": "qa",
+          "sentiment": 0.383125,
+          "word_count": 93,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90413,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Jason Seidl",
+          "role": "Managing Director, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.00436,
+          "word_count": 106,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "John Smith",
+          "role": "CEO, FedEx Freight",
+          "section": "qa",
+          "sentiment": -0.312238,
+          "word_count": 147,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.920133,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Raj Subramaniam",
+          "role": "President and CEO, FedEx Corporation",
+          "section": "qa",
+          "sentiment": -0.754251,
+          "word_count": 62,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893421,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8778,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Global Net Lease, Inc. Q2 2026 Earnings Call Summary",
@@ -196,13 +973,40 @@
       "ts": "2026-06-24T09:32:00+00:00",
       "source": "Zacks",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FDX Earnings Call: Q4 2026",
+      "url": "https://stockanalysis.com/stocks/fdx/transcripts/609942-q4-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-06-23T00:00:00+00:00"
+    },
+    {
+      "title": "FDX Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/fdx/transcripts/388546-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-03-19T00:00:00+00:00"
+    },
+    {
+      "title": "FDX Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fdx/transcripts/359884-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2025-12-18T00:00:00+00:00"
+    },
+    {
+      "title": "FDX Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-21-fedex-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-21T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-19T23:21:38.868967+00:00"
 }
