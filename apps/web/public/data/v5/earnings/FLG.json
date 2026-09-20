@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FLG",
   "earnings_history": [
     {
@@ -153,7 +153,1351 @@
       "surprise_pct": -0.18
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-24T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/flg/transcripts/654371-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 104,
+        "scored_turn_count": 104,
+        "overall_sentiment": 0.437157,
+        "prepared_sentiment": -0.296877,
+        "qa_sentiment": 0.482098,
+        "qa_tone_shift": 0.778976,
+        "uncertainty_turn_rate": 0.076923,
+        "forward_looking_turn_rate": 0.336538,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 29,
+            "sentiment": 0.020015
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 18,
+            "sentiment": -0.016808
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 17,
+            "sentiment": 0.37711
+          },
+          {
+            "topic": "Demand",
+            "mentions": 9,
+            "sentiment": -0.490566
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 7,
+            "sentiment": -0.058093
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": 0.064868
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 2,
+            "sentiment": 0.623968
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.903113,
+          "word_count": 107,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Sal DiMartino",
+          "role": "Director of Investor Relations, Flagstar Bank",
+          "section": "prepared",
+          "sentiment": 0.919926,
+          "word_count": 222,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "prepared",
+          "sentiment": -0.925291,
+          "word_count": 642,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 3,
+          "speaker": "Rich Raffetto",
+          "role": "Co-President, Co-COO, and Chief Banking Officer, Flagstar Bank",
+          "section": "prepared",
+          "sentiment": -0.915482,
+          "word_count": 570,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "prepared",
+          "sentiment": -0.927236,
+          "word_count": 1800,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 5,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "prepared",
+          "sentiment": -0.836295,
+          "word_count": 224,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906318,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "David Chiaverini",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.643107,
+          "word_count": 42,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.817328,
+          "word_count": 116,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "David Chiaverini",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.58976,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.880778,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Rich Raffetto",
+          "role": "Co-President, Co-COO, and Chief Banking Officer, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.912682,
+          "word_count": 84,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901612,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Dave Rochester",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.685884,
+          "word_count": 90,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.151838,
+          "word_count": 129,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Dave Rochester",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.598763,
+          "word_count": 90,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.041782,
+          "word_count": 334,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Dave Rochester",
+          "role": "Analyst, Cantor",
+          "section": "qa",
+          "sentiment": 0.26224,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905971,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Casey Haire",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.057248,
+          "word_count": 63,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 20,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.160155,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Casey Haire",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.086583,
+          "word_count": 68,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Casey Haire",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.897698,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.433511,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903007,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Jared Shaw",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.160099,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.58485,
+          "word_count": 170,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Jared Shaw",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.787191,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.515428,
+          "word_count": 198,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903848,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Bernard von-Gizycki",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.831695,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.766081,
+          "word_count": 239,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 32,
+          "speaker": "Bernard von-Gizycki",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": 0.833122,
+          "word_count": 54,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.583333,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 34,
+          "speaker": "Bernard von-Gizycki",
+          "role": "Analyst, Deutsche Bank",
+          "section": "qa",
+          "sentiment": -0.088396,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.899927,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Manan Gosalia",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.026429,
+          "word_count": 51,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.849362,
+          "word_count": 89,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Manan Gosalia",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.483759,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 39,
+          "speaker": "Rich Raffetto",
+          "role": "Co-President, Co-COO, and Chief Banking Officer, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.652678,
+          "word_count": 160,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.90006,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.730044,
+          "word_count": 79,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.755848,
+          "word_count": 211,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 43,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.721034,
+          "word_count": 180,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.832517,
+          "word_count": 31,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.854508,
+          "word_count": 18,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.89386,
+          "word_count": 29,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 47,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.855094,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.822933,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904681,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Ben Gerlinger",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.684656,
+          "word_count": 153,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.059222,
+          "word_count": 182,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 52,
+          "speaker": "Ben Gerlinger",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.508617,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 53,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.065025,
+          "word_count": 37,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905192,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "David Smith",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": -0.096136,
+          "word_count": 54,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Rich Raffetto",
+          "role": "Co-President, Co-COO, and Chief Banking Officer, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.211618,
+          "word_count": 139,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "David Smith",
+          "role": "Analyst, Truist Securities",
+          "section": "qa",
+          "sentiment": 0.328009,
+          "word_count": 34,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.415059,
+          "word_count": 121,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900722,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Timur Braziler",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.470136,
+          "word_count": 83,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 61,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.322317,
+          "word_count": 326,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 62,
+          "speaker": "Timur Braziler",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.32123,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 63,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.787232,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905815,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Matthew Breese",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.582934,
+          "word_count": 43,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.186169,
+          "word_count": 149,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 67,
+          "speaker": "Matthew Breese",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.615841,
+          "word_count": 100,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.51756,
+          "word_count": 309,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Matthew Breese",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.76202,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905433,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.261286,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 72,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.555488,
+          "word_count": 147,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 73,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.669789,
+          "word_count": 21,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 74,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.893191,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 75,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.678576,
+          "word_count": 37,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 76,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.392442,
+          "word_count": 51,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 77,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.591558,
+          "word_count": 57,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 78,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.87498,
+          "word_count": 24,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 79,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.819321,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 80,
+          "speaker": "Janet Lee",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.893345,
+          "word_count": 25,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 81,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.78437,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 82,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906097,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 83,
+          "speaker": "Anthony Elian",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.403606,
+          "word_count": 67,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 84,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.780049,
+          "word_count": 46,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 85,
+          "speaker": "Anthony Elian",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.004837,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 86,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.024434,
+          "word_count": 139,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 87,
+          "speaker": "Rich Raffetto",
+          "role": "Co-President, Co-COO, and Chief Banking Officer, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.697356,
+          "word_count": 215,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 88,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.883628,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 89,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.448271,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 90,
+          "speaker": "Rich Raffetto",
+          "role": "Co-President, Co-COO, and Chief Banking Officer, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.200909,
+          "word_count": 283,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 91,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.867301,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 92,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.038325,
+          "word_count": 289,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 93,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.610634,
+          "word_count": 15,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 94,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.795136,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 95,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.722091,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 96,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.276255,
+          "word_count": 69,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 97,
+          "speaker": "Manuel Navas",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.592539,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 98,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904243,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 99,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.678999,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 100,
+          "speaker": "Lee Smith",
+          "role": "Co-President, Co-COO, and CFO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": 0.54679,
+          "word_count": 64,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 101,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.918248,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 102,
+          "speaker": "Joseph Otting",
+          "role": "Executive Chairman and CEO, Flagstar Bank",
+          "section": "qa",
+          "sentiment": -0.656628,
+          "word_count": 69,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 103,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.904768,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 10844,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From Flagstar Financial’s Q2 Earnings Call",
@@ -196,13 +1540,40 @@
       "ts": "2026-07-24T14:03:54+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FLG Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/flg/transcripts/654371-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-24T00:00:00+00:00"
+    },
+    {
+      "title": "FLG Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/flg/transcripts/549159-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-24T00:00:00+00:00"
+    },
+    {
+      "title": "FLG Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/flg/transcripts/394094-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-30T00:00:00+00:00"
+    },
+    {
+      "title": "FLG Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-24-flagstar-financial-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-24T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:14:28.427187+00:00"
 }

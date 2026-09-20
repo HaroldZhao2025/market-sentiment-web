@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FLNC",
   "earnings_history": [
     {
@@ -129,7 +129,931 @@
       "surprise_pct": 50.69
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/flnc/transcripts/662289-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 73,
+        "scored_turn_count": 73,
+        "overall_sentiment": 0.482739,
+        "prepared_sentiment": -0.251038,
+        "qa_sentiment": 0.525277,
+        "qa_tone_shift": 0.776315,
+        "uncertainty_turn_rate": 0.068493,
+        "forward_looking_turn_rate": 0.260274,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 16,
+            "sentiment": 0.39881
+          },
+          {
+            "topic": "Demand",
+            "mentions": 15,
+            "sentiment": 0.220833
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 13,
+            "sentiment": 0.417813
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.343233
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Chris Shelton",
+          "role": "VP of Investor Relations and Sustainability, Fluence Energy",
+          "section": "prepared",
+          "sentiment": 0.906187,
+          "word_count": 325,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 1,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "prepared",
+          "sentiment": -0.593041,
+          "word_count": 1577,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 2,
+          "speaker": "Ahmed Pasha",
+          "role": "CFO, Fluence Energy",
+          "section": "prepared",
+          "sentiment": -0.527023,
+          "word_count": 710,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "prepared",
+          "sentiment": -0.790274,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898868,
+          "word_count": 127,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "George Gianarikas",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": -0.544061,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.579478,
+          "word_count": 77,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "George Gianarikas",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": 0.833546,
+          "word_count": 35,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": -0.642923,
+          "word_count": 511,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 9,
+          "speaker": "George Gianarikas",
+          "role": "Analyst, Canaccord Genuity",
+          "section": "qa",
+          "sentiment": 0.80661,
+          "word_count": 47,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": -0.399745,
+          "word_count": 183,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909067,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Brian Lee",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.87315,
+          "word_count": 70,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.22532,
+          "word_count": 172,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Brian Lee",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.749202,
+          "word_count": 128,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.734115,
+          "word_count": 163,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 16,
+          "speaker": "Brian Lee",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.159542,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906084,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.547565,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.881305,
+          "word_count": 101,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.827428,
+          "word_count": 177,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.871683,
+          "word_count": 46,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.898993,
+          "word_count": 51,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": 0.808397,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.63221,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Julien Dumoulin-Smith",
+          "role": "Analyst, Jefferies",
+          "section": "qa",
+          "sentiment": -0.067305,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": -0.443042,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906777,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.611627,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Dylan Nassano",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.486274,
+          "word_count": 44,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.867195,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Dylan Nassano",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.887685,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Dylan Nassano",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.820807,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.666028,
+          "word_count": 172,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Dylan Nassano",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": -0.49362,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": -0.503772,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910501,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Vikram Bagri",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.348767,
+          "word_count": 85,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.603309,
+          "word_count": 163,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Vikram Bagri",
+          "role": "Analyst, Citi",
+          "section": "qa",
+          "sentiment": 0.745412,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.792433,
+          "word_count": 75,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "We have very good suppliers.",
+          "role": "We have great manufacturing partners.",
+          "section": "qa",
+          "sentiment": 0.353617,
+          "word_count": 129,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.704171,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909465,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Justin Clare",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": 0.700506,
+          "word_count": 78,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 45,
+          "speaker": "Ahmed Pasha",
+          "role": "CFO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.511687,
+          "word_count": 94,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 46,
+          "speaker": "Justin Clare",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": 0.566831,
+          "word_count": 74,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 47,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.613744,
+          "word_count": 127,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 48,
+          "speaker": "Justin Clare",
+          "role": "Analyst, Roth Capital",
+          "section": "qa",
+          "sentiment": 0.57567,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909352,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Christine Cho",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.895519,
+          "word_count": 87,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.779242,
+          "word_count": 182,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Christine Cho",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.666218,
+          "word_count": 28,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 53,
+          "speaker": "Ahmed Pasha",
+          "role": "CFO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.508709,
+          "word_count": 37,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Christine Cho",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.803355,
+          "word_count": 8,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.836264,
+          "word_count": 31,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903824,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Chris Dendrinos",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.691901,
+          "word_count": 80,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 58,
+          "speaker": "Ahmed Pasha",
+          "role": "CFO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.701033,
+          "word_count": 104,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 59,
+          "speaker": "Chris Dendrinos",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.608104,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911605,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Ameet Thakkar",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.448761,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Ameet Thakkar",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.814732,
+          "word_count": 135,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 63,
+          "speaker": "Ahmed Pasha",
+          "role": "CFO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.891606,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.0006,
+          "word_count": 111,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 65,
+          "speaker": "Ameet Thakkar",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.895453,
+          "word_count": 49,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 66,
+          "speaker": "Ameet Thakkar",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.544115,
+          "word_count": 36,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Ameet Thakkar",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.709297,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.818462,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.835818,
+          "word_count": 103,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Ahmed Pasha",
+          "role": "CFO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.892124,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 71,
+          "speaker": "Julian Nebreda",
+          "role": "President and CEO, Fluence Energy",
+          "section": "qa",
+          "sentiment": 0.524146,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 72,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.895067,
+          "word_count": 52,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7558,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Fluence Energy Earnings Call: Demand Surges, Risks Rise - TipRanks",
@@ -172,13 +1096,40 @@
       "ts": "2026-08-06T18:04:06+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FLNC Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/flnc/transcripts/662289-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "FLNC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/flnc/transcripts/537650-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-07T00:00:00+00:00"
+    },
+    {
+      "title": "FLNC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/flnc/transcripts/422979-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-05T00:00:00+00:00"
+    },
+    {
+      "title": "FLNC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-fluence-energy-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:15:44.445763+00:00"
 }

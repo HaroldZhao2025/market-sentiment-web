@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FIP",
   "earnings_history": [
     {
@@ -105,7 +105,416 @@
       "surprise_pct": -78.97
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fip/transcripts/663748-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 31,
+        "scored_turn_count": 31,
+        "overall_sentiment": 0.45387,
+        "prepared_sentiment": 0.434508,
+        "qa_sentiment": 0.456738,
+        "qa_tone_shift": 0.02223,
+        "uncertainty_turn_rate": 0.064516,
+        "forward_looking_turn_rate": 0.129032,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 7,
+            "sentiment": -0.029091
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 4,
+            "sentiment": -0.421841
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": -0.05677
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.853244
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.909391,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Alan Andreini",
+          "role": "Head of Investor Relations, FTAI Infrastructure",
+          "section": "prepared",
+          "sentiment": 0.897776,
+          "word_count": 208,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "prepared",
+          "sentiment": -0.853244,
+          "word_count": 1853,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 3,
+          "speaker": "Alan Andreini",
+          "role": "Head of Investor Relations, FTAI Infrastructure",
+          "section": "prepared",
+          "sentiment": 0.78411,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.914183,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Giuliano Bologna",
+          "role": "Analyst, Compass Point",
+          "section": "qa",
+          "sentiment": 0.626963,
+          "word_count": 46,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": -0.905095,
+          "word_count": 204,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Giuliano Bologna",
+          "role": "Analyst, Compass Point",
+          "section": "qa",
+          "sentiment": 0.904877,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": 0.690526,
+          "word_count": 175,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Giuliano Bologna",
+          "role": "Analyst, Compass Point",
+          "section": "qa",
+          "sentiment": -0.240881,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.889726,
+          "word_count": 27,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Jeff Kauffman",
+          "role": "Analyst, Citizens Bank",
+          "section": "qa",
+          "sentiment": 0.601118,
+          "word_count": 66,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": -0.561279,
+          "word_count": 274,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Jeff Kauffman",
+          "role": "Analyst, Citizens Bank",
+          "section": "qa",
+          "sentiment": 0.780565,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": 0.857525,
+          "word_count": 274,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Jeff Kauffman",
+          "role": "Analyst, Citizens Bank",
+          "section": "qa",
+          "sentiment": 0.791456,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.874344,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Sherif Elmaghrabi",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.626502,
+          "word_count": 110,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": 0.632255,
+          "word_count": 329,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Sherif Elmaghrabi",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": 0.329917,
+          "word_count": 68,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": 0.08669,
+          "word_count": 225,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Sherif Elmaghrabi",
+          "role": "Analyst, BTIG",
+          "section": "qa",
+          "sentiment": -0.725166,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884347,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.756304,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": 0.539509,
+          "word_count": 249,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, JonesTrading",
+          "section": "qa",
+          "sentiment": 0.744877,
+          "word_count": 58,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Ken Nicholson",
+          "role": "CEO, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": 0.837074,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Matthew Erdner",
+          "role": "Analyst, JonesTrading",
+          "section": "qa",
+          "sentiment": -0.467429,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913535,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Alan Andreini",
+          "role": "Head of Investor Relations, FTAI Infrastructure",
+          "section": "qa",
+          "sentiment": 0.037734,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911748,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4742,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "The Top 5 Analyst Questions From FTAI Infrastructure’s Q2 Earnings Call",
@@ -148,13 +557,40 @@
       "ts": "2026-08-12T09:39:11+00:00",
       "source": "StockStory",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "FIP Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fip/transcripts/663748-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "FIP Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fip/transcripts/574796-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-08T00:00:00+00:00"
+    },
+    {
+      "title": "FIP Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fip/transcripts/393575-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-27T00:00:00+00:00"
+    },
+    {
+      "title": "FIP Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-5-ftai-infrastructure-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:15:18.530260+00:00"
 }

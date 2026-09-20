@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FIVN",
   "earnings_history": [
     {
@@ -153,7 +153,614 @@
       "surprise_pct": 51.69
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-06T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fivn/transcripts/658545-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 43,
+        "scored_turn_count": 43,
+        "overall_sentiment": 0.479401,
+        "prepared_sentiment": -0.360454,
+        "qa_sentiment": 0.54239,
+        "qa_tone_shift": 0.902845,
+        "uncertainty_turn_rate": 0.069767,
+        "forward_looking_turn_rate": 0.255814,
+        "topics": [
+          {
+            "topic": "AI & technology",
+            "mentions": 20,
+            "sentiment": 0.286299
+          },
+          {
+            "topic": "Demand",
+            "mentions": 20,
+            "sentiment": 0.236953
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 11,
+            "sentiment": 0.003028
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 2,
+            "sentiment": -0.878986
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.926085
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": 0.676609
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "prepared",
+          "sentiment": 0.676609,
+          "word_count": 361,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 1,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "prepared",
+          "sentiment": -0.831887,
+          "word_count": 1615,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 2,
+          "speaker": "Bryan Lee",
+          "role": "CFO, Five9",
+          "section": "prepared",
+          "sentiment": -0.926085,
+          "word_count": 963,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 3,
+          "speaker": "Thank you, Bryan.",
+          "role": "Before we begin our Q&A session, we ask that our analysts limit themselves to one question to allow for as many questions as time permits.",
+          "section": "qa",
+          "sentiment": 0.90691,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 4,
+          "speaker": "DJ Hines",
+          "role": "Analyst, Canaccord",
+          "section": "qa",
+          "sentiment": 0.811296,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.655488,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "DJ Hines",
+          "role": "Analyst, Canaccord",
+          "section": "qa",
+          "sentiment": 0.859599,
+          "word_count": 71,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.810302,
+          "word_count": 388,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.910923,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Sitikantha Panigrahi",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.609801,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Bryan Lee",
+          "role": "CFO, Five9",
+          "section": "qa",
+          "sentiment": -0.7898,
+          "word_count": 334,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 11,
+          "speaker": "Sitikantha Panigrahi",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": -0.650512,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.91455,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Arjun Bhatia",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": -0.199688,
+          "word_count": 90,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 14,
+          "speaker": "Bryan Lee",
+          "role": "CFO, Five9",
+          "section": "qa",
+          "sentiment": 0.194112,
+          "word_count": 175,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Arjun Bhatia",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.495537,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.912113,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Raimo Lenschow",
+          "role": "Analyst, Barclays",
+          "section": "qa",
+          "sentiment": 0.754358,
+          "word_count": 132,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.768326,
+          "word_count": 342,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.909526,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Scott Berg",
+          "role": "Senior Analyst, Needham",
+          "section": "qa",
+          "sentiment": 0.680808,
+          "word_count": 141,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.803831,
+          "word_count": 150,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.913832,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Elizabeth Porter",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": -0.592644,
+          "word_count": 66,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Bryan Lee",
+          "role": "CFO, Five9",
+          "section": "qa",
+          "sentiment": 0.643686,
+          "word_count": 188,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.721897,
+          "word_count": 194,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.909755,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Catharine Trebnick",
+          "role": "Senior Research Analyst, Rosenblatt",
+          "section": "qa",
+          "sentiment": 0.156418,
+          "word_count": 55,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Bryan Lee",
+          "role": "CFO, Five9",
+          "section": "qa",
+          "sentiment": -0.702753,
+          "word_count": 66,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.346109,
+          "word_count": 230,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.913707,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Giancarlo Valle",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.612553,
+          "word_count": 55,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Bryan Lee",
+          "role": "CFO, Five9",
+          "section": "qa",
+          "sentiment": -0.220528,
+          "word_count": 155,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.91378,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Yanni Samoilis",
+          "role": "Research Associate, Baird",
+          "section": "qa",
+          "sentiment": 0.840914,
+          "word_count": 102,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.781007,
+          "word_count": 91,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.916045,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Jack Nichols",
+          "role": "Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": 0.754936,
+          "word_count": 44,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Bryan Lee",
+          "role": "CFO, Five9",
+          "section": "qa",
+          "sentiment": 0.232111,
+          "word_count": 187,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 39,
+          "speaker": "Jack Nichols",
+          "role": "Analyst, KeyBanc",
+          "section": "qa",
+          "sentiment": 0.802723,
+          "word_count": 43,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.629824,
+          "word_count": 133,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Tony Righetti",
+          "role": "SVP of Investor Relations, Five9",
+          "section": "qa",
+          "sentiment": 0.918876,
+          "word_count": 71,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Amit Mathradas",
+          "role": "CEO, Five9",
+          "section": "qa",
+          "sentiment": 0.845889,
+          "word_count": 128,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        }
+      ],
+      "transcript_word_count": 6821,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Five9, Inc. 2026 Q2 - Results - Earnings Call Presentation (NASDAQ:FIVN) 2026-08-07 - Seeking Alpha",
@@ -196,13 +803,40 @@
       "ts": "2026-04-30T23:21:12+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FIVN Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fivn/transcripts/658545-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-06T00:00:00+00:00"
+    },
+    {
+      "title": "FIVN Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fivn/transcripts/560653-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-30T00:00:00+00:00"
+    },
+    {
+      "title": "FIVN Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fivn/transcripts/412541-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-19T00:00:00+00:00"
+    },
+    {
+      "title": "FIVN Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-6-five9-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-06T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:14:01.976140+00:00"
 }

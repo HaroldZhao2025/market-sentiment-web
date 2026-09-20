@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FITB",
   "earnings_history": [
     {
@@ -153,7 +153,974 @@
       "surprise_pct": 45.17
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-17T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fitb/transcripts/651011-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 71,
+        "scored_turn_count": 71,
+        "overall_sentiment": 0.42392,
+        "prepared_sentiment": 0.192096,
+        "qa_sentiment": 0.441482,
+        "qa_tone_shift": 0.249386,
+        "uncertainty_turn_rate": 0.098592,
+        "forward_looking_turn_rate": 0.295775,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 20,
+            "sentiment": 0.163999
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 20,
+            "sentiment": 0.140141
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 16,
+            "sentiment": -0.032801
+          },
+          {
+            "topic": "Demand",
+            "mentions": 15,
+            "sentiment": 0.314503
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 10,
+            "sentiment": 0.062582
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": 0.446795
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.253722
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.885824,
+          "word_count": 69,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Matt Curoe",
+          "role": "Director of Investor Relations, Fifth Third",
+          "section": "prepared",
+          "sentiment": 0.924953,
+          "word_count": 121,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "prepared",
+          "sentiment": -0.923892,
+          "word_count": 919,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "prepared",
+          "sentiment": -0.84475,
+          "word_count": 1855,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Matt Curoe",
+          "role": "Director of Investor Relations, Fifth Third",
+          "section": "prepared",
+          "sentiment": 0.918344,
+          "word_count": 42,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91243,
+          "word_count": 102,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Ebrahim Poonawala",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.168305,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.705443,
+          "word_count": 757,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Ebrahim Poonawala",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.760584,
+          "word_count": 105,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.678676,
+          "word_count": 432,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.8524,
+          "word_count": 236,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89321,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Manan Gosalia",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.650087,
+          "word_count": 82,
+          "topic_hits": [
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.656229,
+          "word_count": 335,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 14,
+          "speaker": "Manan Gosalia",
+          "role": "Analyst, Morgan Stanley",
+          "section": "qa",
+          "sentiment": 0.584364,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.30222,
+          "word_count": 186,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.34611,
+          "word_count": 106,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.89192,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Ryan Nash",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.725353,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.523001,
+          "word_count": 464,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ryan Nash",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.093266,
+          "word_count": 62,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 21,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.024065,
+          "word_count": 432,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 22,
+          "speaker": "Ryan Nash",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.578292,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894939,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Erika Najarian",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.30253,
+          "word_count": 113,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 25,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.6219,
+          "word_count": 280,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 26,
+          "speaker": "Erika Najarian",
+          "role": "Analyst, UBS",
+          "section": "qa",
+          "sentiment": 0.610877,
+          "word_count": 111,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.783049,
+          "word_count": 292,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894914,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Gerard Cassidy",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.404819,
+          "word_count": 164,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.785837,
+          "word_count": 314,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Gerard Cassidy",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": 0.805472,
+          "word_count": 163,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.622803,
+          "word_count": 338,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 33,
+          "speaker": "Gerard Cassidy",
+          "role": "Analyst, RBC Capital Markets",
+          "section": "qa",
+          "sentiment": -0.592755,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.894201,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Mike Mayo",
+          "role": "Analyst, Wells Fargo Securities",
+          "section": "qa",
+          "sentiment": 0.801736,
+          "word_count": 20,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.462701,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Mike Mayo",
+          "role": "Analyst, Wells Fargo Securities",
+          "section": "qa",
+          "sentiment": 0.816836,
+          "word_count": 22,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.853949,
+          "word_count": 24,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.906885,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Mike Mayo",
+          "role": "Analyst, Wells Fargo Securities",
+          "section": "qa",
+          "sentiment": 0.511817,
+          "word_count": 100,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 41,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.835366,
+          "word_count": 390,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "Mike Mayo",
+          "role": "Analyst, Wells Fargo Securities",
+          "section": "qa",
+          "sentiment": 0.82651,
+          "word_count": 51,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.847667,
+          "word_count": 47,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.636038,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.882996,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "John Pancari",
+          "role": "Analyst, Evercore",
+          "section": "qa",
+          "sentiment": 0.767788,
+          "word_count": 119,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 47,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.838128,
+          "word_count": 316,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.21934,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893913,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Brian Foran",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.810488,
+          "word_count": 141,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 51,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.811207,
+          "word_count": 423,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.089486,
+          "word_count": 46,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 53,
+          "speaker": "Brian Foran",
+          "role": "Analyst, Truist",
+          "section": "qa",
+          "sentiment": 0.81472,
+          "word_count": 126,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.030969,
+          "word_count": 109,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 55,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.757315,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.893781,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Ben Gerlinger",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.85856,
+          "word_count": 89,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 58,
+          "speaker": "Ben Gerlinger",
+          "role": "Analyst, Citigroup",
+          "section": "qa",
+          "sentiment": 0.89952,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 59,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.501102,
+          "word_count": 460,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 60,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.891487,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 61,
+          "speaker": "Ken Usdin",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": 0.767069,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 62,
+          "speaker": "Bryan Preston",
+          "role": "CFO, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.405312,
+          "word_count": 231,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 63,
+          "speaker": "Ken Usdin",
+          "role": "Analyst, Autonomous Research",
+          "section": "qa",
+          "sentiment": -0.45531,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 64,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897798,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 65,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.082113,
+          "word_count": 53,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 66,
+          "speaker": "Tim Spence",
+          "role": "Chairman, CEO, and President, Fifth Third",
+          "section": "qa",
+          "sentiment": -0.250912,
+          "word_count": 228,
+          "topic_hits": [
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 67,
+          "speaker": "Chris McGratty",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": -0.435382,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 68,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907495,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 69,
+          "speaker": "Matt Curoe",
+          "role": "Director of Investor Relations, Fifth Third",
+          "section": "qa",
+          "sentiment": 0.912094,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 70,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.910366,
+          "word_count": 56,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 12014,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Fifth Third Bancorp Q2 2026 Earnings Call Summary",
@@ -196,13 +1163,40 @@
       "ts": "2026-07-17T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "FITB Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fitb/transcripts/651011-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-17T00:00:00+00:00"
+    },
+    {
+      "title": "FITB Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fitb/transcripts/400822-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-17T00:00:00+00:00"
+    },
+    {
+      "title": "FITB Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fitb/transcripts/367717-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-20T00:00:00+00:00"
+    },
+    {
+      "title": "FITB Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-17-fifth-third-bancorp-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-17T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:13:49.526384+00:00"
 }

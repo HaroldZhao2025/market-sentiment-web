@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FISI",
   "earnings_history": [
     {
@@ -153,7 +153,361 @@
       "surprise_pct": 53.1
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-24T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fisi/transcripts/654375-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 24,
+        "scored_turn_count": 24,
+        "overall_sentiment": 0.165716,
+        "prepared_sentiment": -0.136554,
+        "qa_sentiment": 0.24526,
+        "qa_tone_shift": 0.381814,
+        "uncertainty_turn_rate": 0.125,
+        "forward_looking_turn_rate": 0.416667,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 9,
+            "sentiment": -0.392172
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 4,
+            "sentiment": -0.129448
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": -0.687444
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 3,
+            "sentiment": -0.090085
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 2,
+            "sentiment": -0.269946
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": 0.194935
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.874188,
+          "word_count": 79,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Kate Croft",
+          "role": "Director of Investor and External Relations, Financial Institutions",
+          "section": "prepared",
+          "sentiment": 0.900779,
+          "word_count": 187,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Marty Birmingham",
+          "role": "President and CEO, Financial Institutions",
+          "section": "prepared",
+          "sentiment": -0.939404,
+          "word_count": 782,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Jack Plant",
+          "role": "EVP, CFO, and Treasurer, Financial Institutions",
+          "section": "prepared",
+          "sentiment": -0.591563,
+          "word_count": 746,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 6
+        },
+        {
+          "turn": 4,
+          "speaker": "Marty Birmingham",
+          "role": "President and CEO, Financial Institutions",
+          "section": "prepared",
+          "sentiment": -0.926769,
+          "word_count": 180,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.905736,
+          "word_count": 80,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": -0.722737,
+          "word_count": 96,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Marty Birmingham",
+          "role": "President and CEO, Financial Institutions",
+          "section": "qa",
+          "sentiment": -0.748032,
+          "word_count": 133,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.434148,
+          "word_count": 37,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Jack Plant",
+          "role": "EVP, CFO, and Treasurer, Financial Institutions",
+          "section": "qa",
+          "sentiment": -0.078206,
+          "word_count": 100,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.449548,
+          "word_count": 72,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Jack Plant",
+          "role": "EVP, CFO, and Treasurer, Financial Institutions",
+          "section": "qa",
+          "sentiment": 0.399513,
+          "word_count": 29,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Damon DelMonte",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.653857,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884293,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Eknor Najjar",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.253315,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Marty Birmingham",
+          "role": "President and CEO, Financial Institutions",
+          "section": "qa",
+          "sentiment": -0.884254,
+          "word_count": 75,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 16,
+          "speaker": "Eknor Najjar",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.813565,
+          "word_count": 31,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Jack Plant",
+          "role": "EVP, CFO, and Treasurer, Financial Institutions",
+          "section": "qa",
+          "sentiment": -0.423695,
+          "word_count": 47,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Eknor Najjar",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.563627,
+          "word_count": 32,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jack Plant",
+          "role": "EVP, CFO, and Treasurer, Financial Institutions",
+          "section": "qa",
+          "sentiment": -0.618516,
+          "word_count": 53,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Eknor Najjar",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.747724,
+          "word_count": 7,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.900737,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Marty Birmingham",
+          "role": "President and CEO, Financial Institutions",
+          "section": "qa",
+          "sentiment": 0.218167,
+          "word_count": 18,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911151,
+          "word_count": 64,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 2939,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Financial Institutions, Inc. 2026 Q2 - Results - Earnings Call Presentation (NASDAQ:FISI) 2026-07-28 - Seeking Alpha",
@@ -196,13 +550,40 @@
       "ts": "2026-06-30T20:05:00+00:00",
       "source": "GlobeNewswire",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FISI Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fisi/transcripts/654375-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-24T00:00:00+00:00"
+    },
+    {
+      "title": "FISI Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fisi/transcripts/549166-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-24T00:00:00+00:00"
+    },
+    {
+      "title": "FISI Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fisi/transcripts/402819-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-01-30T00:00:00+00:00"
+    },
+    {
+      "title": "FISI Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-23-financial-institutions-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-23T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:15:23.846727+00:00"
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FELE",
   "earnings_history": [
     {
@@ -153,7 +153,654 @@
       "surprise_pct": 31.23
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-07-28T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fele/transcripts/656221-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 47,
+        "scored_turn_count": 47,
+        "overall_sentiment": 0.343857,
+        "prepared_sentiment": -0.214882,
+        "qa_sentiment": 0.425624,
+        "qa_tone_shift": 0.640506,
+        "uncertainty_turn_rate": 0.148936,
+        "forward_looking_turn_rate": 0.212766,
+        "topics": [
+          {
+            "topic": "Demand",
+            "mentions": 13,
+            "sentiment": -0.13515
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 10,
+            "sentiment": -0.296756
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": -0.251994
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 8,
+            "sentiment": 0.124863
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 5,
+            "sentiment": -0.125013
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 4,
+            "sentiment": -0.4808
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.902783
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.890186,
+          "word_count": 99,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Dean Cantrell",
+          "role": "Director of Investor Relations, Franklin Electric",
+          "section": "prepared",
+          "sentiment": 0.916792,
+          "word_count": 267,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "prepared",
+          "sentiment": -0.884664,
+          "word_count": 649,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 3,
+          "speaker": "Our margin expansion efforts continue to accelerate.",
+          "role": "We have recently announced VT Rajeshnath as our new Chief Supply Chain and Transformation Officer.",
+          "section": "prepared",
+          "sentiment": -0.757703,
+          "word_count": 199,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Jennifer Wolfenbarger",
+          "role": "CFO, Franklin Electric",
+          "section": "prepared",
+          "sentiment": -0.902783,
+          "word_count": 1421,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 5,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "prepared",
+          "sentiment": -0.55112,
+          "word_count": 353,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907405,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.897193,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.427545,
+          "word_count": 472,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Matt Summerville",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.887223,
+          "word_count": 50,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.56623,
+          "word_count": 756,
+          "topic_hits": [
+            "Demand",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Ryan Connors",
+          "role": "Analyst, Northcoast Research",
+          "section": "qa",
+          "sentiment": -0.789467,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Ryan Connors",
+          "role": "Analyst, Northcoast Research",
+          "section": "qa",
+          "sentiment": 0.071403,
+          "word_count": 83,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": -0.143443,
+          "word_count": 255,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Ryan Connors",
+          "role": "Analyst, Northcoast Research",
+          "section": "qa",
+          "sentiment": -0.536323,
+          "word_count": 67,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.608579,
+          "word_count": 450,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Ryan Connors",
+          "role": "Analyst, Northcoast Research",
+          "section": "qa",
+          "sentiment": 0.849627,
+          "word_count": 64,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.603678,
+          "word_count": 100,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Jennifer Wolfenbarger",
+          "role": "CFO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.717411,
+          "word_count": 32,
+          "topic_hits": [
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Jennifer Wolfenbarger",
+          "role": "CFO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.557787,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Ryan Connors",
+          "role": "Analyst, Northcoast Research",
+          "section": "qa",
+          "sentiment": -0.433098,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.885384,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Bryan Blair",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": -0.495158,
+          "word_count": 106,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 23,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": -0.000487,
+          "word_count": 296,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 24,
+          "speaker": "Jennifer Wolfenbarger",
+          "role": "CFO, Franklin Electric",
+          "section": "qa",
+          "sentiment": -0.300671,
+          "word_count": 114,
+          "topic_hits": [
+            "Margins & costs",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Bryan Blair",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.812496,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Bryan Blair",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.624137,
+          "word_count": 55,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Jennifer Wolfenbarger",
+          "role": "CFO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.000887,
+          "word_count": 119,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.642097,
+          "word_count": 116,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 29,
+          "speaker": "Bryan Blair",
+          "role": "Analyst, Oppenheimer",
+          "section": "qa",
+          "sentiment": 0.491325,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898789,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.399849,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.901291,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.873433,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Mike Halloran",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.843722,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870598,
+          "word_count": 22,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 36,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.800082,
+          "word_count": 24,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.705226,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Mike Halloran",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.684586,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Mike Halloran",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.691282,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Mike Halloran",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.679165,
+          "word_count": 124,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.452301,
+          "word_count": 180,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Mike Halloran",
+          "role": "Analyst, Baird",
+          "section": "qa",
+          "sentiment": 0.872361,
+          "word_count": 35,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": 0.358905,
+          "word_count": 394,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 44,
+          "speaker": "Joe Ruzynski",
+          "role": "CEO, Franklin Electric",
+          "section": "qa",
+          "sentiment": -0.828944,
+          "word_count": 137,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 45,
+          "speaker": "We like the direction that we're heading.",
+          "role": "We appreciate the continued support of our employees, partners, and shareholders.",
+          "section": "qa",
+          "sentiment": -0.513487,
+          "word_count": 11,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 46,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909668,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 7370,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Franklin Electric Co Inc (FELE) Q2 2026 Earnings Call Highlights: Record EPS and Strategic ...",
@@ -196,13 +843,40 @@
       "ts": "2026-07-28T07:00:00+00:00",
       "source": "Seeking Alpha",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "FELE Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fele/transcripts/656221-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-07-28T00:00:00+00:00"
+    },
+    {
+      "title": "FELE Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fele/transcripts/558477-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-04-28T00:00:00+00:00"
+    },
+    {
+      "title": "FELE Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fele/transcripts/398801-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-17T00:00:00+00:00"
+    },
+    {
+      "title": "FELE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-franklin-electric-co-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-07-28T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:11:48.890939+00:00"
 }

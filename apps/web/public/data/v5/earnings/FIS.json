@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FIS",
   "earnings_history": [
     {
@@ -153,7 +153,778 @@
       "surprise_pct": 0.71
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-04T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/fis/transcripts/663981-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 58,
+        "scored_turn_count": 58,
+        "overall_sentiment": 0.341828,
+        "prepared_sentiment": -0.00677,
+        "qa_sentiment": 0.367651,
+        "qa_tone_shift": 0.374421,
+        "uncertainty_turn_rate": 0.172414,
+        "forward_looking_turn_rate": 0.293103,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 14,
+            "sentiment": 0.095194
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 8,
+            "sentiment": 0.275655
+          },
+          {
+            "topic": "Demand",
+            "mentions": 8,
+            "sentiment": 0.090104
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.074701
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 5,
+            "sentiment": 0.211315
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": -0.596012
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 1,
+            "sentiment": -0.912701
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.902388,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "George Mihalos",
+          "role": "Head of Investor Relations, FIS",
+          "section": "prepared",
+          "sentiment": 0.923784,
+          "word_count": 209,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "prepared",
+          "sentiment": -0.912701,
+          "word_count": 1794,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "prepared",
+          "sentiment": -0.940551,
+          "word_count": 1415,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.902206,
+          "word_count": 51,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Tien-Tsin Huang",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.798457,
+          "word_count": 68,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.599529,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Tien-Tsin Huang",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.825739,
+          "word_count": 65,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.884503,
+          "word_count": 261,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Tien-Tsin Huang",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.036861,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.870464,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Dan Dolev",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.065217,
+          "word_count": 53,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": -0.537319,
+          "word_count": 117,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "We are the large-scale player.",
+          "role": "I think you heard from the CEO of Visa.",
+          "section": "qa",
+          "sentiment": -0.769695,
+          "word_count": 74,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Dan Dolev",
+          "role": "Analyst, Mizuho",
+          "section": "qa",
+          "sentiment": 0.054948,
+          "word_count": 45,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": -0.461164,
+          "word_count": 156,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.866183,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Vasu Govil",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.862179,
+          "word_count": 44,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.858878,
+          "word_count": 62,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Vasu Govil",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.787549,
+          "word_count": 69,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.273847,
+          "word_count": 246,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Darrin Peller",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.890224,
+          "word_count": 38,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Darrin Peller",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.687563,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.542195,
+          "word_count": 218,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Darrin Peller",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": 0.648115,
+          "word_count": 96,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.642966,
+          "word_count": 257,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Darrin Peller",
+          "role": "Analyst, Wolfe Research",
+          "section": "qa",
+          "sentiment": -0.549398,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884242,
+          "word_count": 16,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Andrew Schmidt",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.39983,
+          "word_count": 96,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.771544,
+          "word_count": 364,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Andrew Schmidt",
+          "role": "Analyst, KeyBanc Capital Markets",
+          "section": "qa",
+          "sentiment": 0.535872,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": -0.292647,
+          "word_count": 255,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 32,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": 0.374449,
+          "word_count": 237,
+          "topic_hits": [
+            "Guidance",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 33,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.87111,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Jason Kupferberg",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": -0.856936,
+          "word_count": 55,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.467543,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": 0.817806,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": -0.716819,
+          "word_count": 35,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 38,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": -0.695132,
+          "word_count": 17,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": -0.79586,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 40,
+          "speaker": "Jason Kupferberg",
+          "role": "Analyst, Wells Fargo",
+          "section": "qa",
+          "sentiment": 0.319533,
+          "word_count": 98,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": 0.804173,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 42,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": 0.722176,
+          "word_count": 151,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.884989,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Will Nance",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.781884,
+          "word_count": 151,
+          "topic_hits": [],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": 0.409096,
+          "word_count": 152,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 46,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": 0.739916,
+          "word_count": 239,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 47,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": -0.514661,
+          "word_count": 122,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 48,
+          "speaker": "Will Nance",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.889677,
+          "word_count": 84,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 49,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": 0.496632,
+          "word_count": 100,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 50,
+          "speaker": "Will Nance",
+          "role": "Analyst, Goldman Sachs",
+          "section": "qa",
+          "sentiment": 0.637136,
+          "word_count": 8,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 51,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.872975,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 52,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.316819,
+          "word_count": 93,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 53,
+          "speaker": "James Kehoe",
+          "role": "CFO, FIS",
+          "section": "qa",
+          "sentiment": 0.067358,
+          "word_count": 144,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 54,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.646217,
+          "word_count": 46,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 55,
+          "speaker": "Stephanie Ferris",
+          "role": "CEO and President, FIS",
+          "section": "qa",
+          "sentiment": -0.289846,
+          "word_count": 210,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 56,
+          "speaker": "Bryan Bergin",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": -0.382152,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 57,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.906159,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 8665,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Fidelity National Information Services Q2 Earnings Call Highlights",
@@ -196,13 +967,40 @@
       "ts": "2026-05-09T07:03:19+00:00",
       "source": "GuruFocus.com",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FIS Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/fis/transcripts/663981-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-04T00:00:00+00:00"
+    },
+    {
+      "title": "FIS Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/fis/transcripts/566504-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-08T00:00:00+00:00"
+    },
+    {
+      "title": "FIS Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/fis/transcripts/402323-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-24T00:00:00+00:00"
+    },
+    {
+      "title": "FIS Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-4-fidelity-national-information-services-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-04T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:13:16.065618+00:00"
 }

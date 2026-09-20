@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 8,
   "symbol": "FLOC",
   "earnings_history": [
     {
@@ -51,7 +51,509 @@
       "surprise_pct": 710.68
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-08-11T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/floc/transcripts/661342-q2-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 35,
+        "scored_turn_count": 35,
+        "overall_sentiment": 0.284492,
+        "prepared_sentiment": -0.192098,
+        "qa_sentiment": 0.363924,
+        "qa_tone_shift": 0.556021,
+        "uncertainty_turn_rate": 0.171429,
+        "forward_looking_turn_rate": 0.4,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 13,
+            "sentiment": -0.16951
+          },
+          {
+            "topic": "Demand",
+            "mentions": 12,
+            "sentiment": 0.042108
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": -0.244142
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 7,
+            "sentiment": -0.198192
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 7,
+            "sentiment": -0.111758
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.830427,
+          "word_count": 59,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Andrew Leonpacher",
+          "role": "VP of Finance, Corporate Development, and Investor Relations, Flowco",
+          "section": "prepared",
+          "sentiment": 0.907777,
+          "word_count": 228,
+          "topic_hits": [],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "prepared",
+          "sentiment": -0.924877,
+          "word_count": 537,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Jon Byers",
+          "role": "CFO, Flowco",
+          "section": "prepared",
+          "sentiment": -0.889996,
+          "word_count": 685,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 5
+        },
+        {
+          "turn": 4,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "prepared",
+          "sentiment": -0.88382,
+          "word_count": 319,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 5,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.9134,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": 0.352893,
+          "word_count": 98,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 7,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": -0.115876,
+          "word_count": 184,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 8,
+          "speaker": "Arun Jayaram",
+          "role": "Analyst, JPMorgan",
+          "section": "qa",
+          "sentiment": -0.527943,
+          "word_count": 76,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 9,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": 0.540342,
+          "word_count": 182,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Jon Byers",
+          "role": "CFO, Flowco",
+          "section": "qa",
+          "sentiment": -0.925093,
+          "word_count": 48,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 11,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.892084,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Derek Podhaizer",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.721591,
+          "word_count": 94,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": 0.751819,
+          "word_count": 400,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Derek Podhaizer",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.698116,
+          "word_count": 152,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 15,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": 0.796262,
+          "word_count": 151,
+          "topic_hits": [
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": 0.659265,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Jon Byers",
+          "role": "CFO, Flowco",
+          "section": "qa",
+          "sentiment": -0.464101,
+          "word_count": 90,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 18,
+          "speaker": "Derek Podhaizer",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.79635,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.908535,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Phillip Jungwirth",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.38014,
+          "word_count": 79,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 21,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": -0.637612,
+          "word_count": 142,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Jon Byers",
+          "role": "CFO, Flowco",
+          "section": "qa",
+          "sentiment": 0.862299,
+          "word_count": 122,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 23,
+          "speaker": "Phillip Jungwirth",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": 0.718251,
+          "word_count": 78,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": 0.797325,
+          "word_count": 427,
+          "topic_hits": [
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Phillip Jungwirth",
+          "role": "Analyst, BMO Capital Markets",
+          "section": "qa",
+          "sentiment": -0.472672,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898706,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Keith Beckmann",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.111107,
+          "word_count": 82,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 28,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": 0.109652,
+          "word_count": 224,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Keith Beckmann",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.706521,
+          "word_count": 128,
+          "topic_hits": [
+            "Demand",
+            "AI & technology",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": -0.305713,
+          "word_count": 214,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 31,
+          "speaker": "Keith Beckmann",
+          "role": "Analyst, Pickering Energy Partners",
+          "section": "qa",
+          "sentiment": 0.678834,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.909399,
+          "word_count": 23,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Joe Bob Edwards",
+          "role": "President and CEO, Flowco",
+          "section": "qa",
+          "sentiment": -0.747768,
+          "word_count": 21,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.911597,
+          "word_count": 63,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5063,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "Flowco Holdings Inc. Q2 2026 Earnings Call Summary",
@@ -94,13 +596,40 @@
       "ts": "2026-05-10T11:05:08+00:00",
       "source": "MarketBeat",
       "provider": "yahoo_public"
+    },
+    {
+      "title": "FLOC Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/floc/transcripts/661342-q2-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-11T00:00:00+00:00"
+    },
+    {
+      "title": "FLOC Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/floc/transcripts/571616-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-06T00:00:00+00:00"
+    },
+    {
+      "title": "FLOC Earnings Call: Q4 2025",
+      "url": "https://stockanalysis.com/stocks/floc/transcripts/415556-q4-2025/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-02-26T00:00:00+00:00"
+    },
+    {
+      "title": "FLOC Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-11-flowco-holdings-inc-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-08-11T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
   "methodology": {
-    "source_policy": "Free public sources only",
+    "source_policy": "free_public_only",
     "structured_transcript_source": "SEC transcript exhibits and free public transcript pages",
     "transcript_missing": "Absence of a free public transcript is preserved as missing; filings are never relabeled as calls.",
-    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed."
-  }
+    "turn_sentiment": "ProsusAI/FinBERT P(positive) - P(negative) on transcript turns; third-party transcript text is not redistributed.",
+    "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
+    "fulfillment_stage": 2
+  },
+  "updated_at_utc": "2026-09-20T23:15:54.261785+00:00"
 }
