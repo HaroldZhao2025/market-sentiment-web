@@ -6,9 +6,9 @@ on:
     paths:
       - ".github/workflows/company-data-fulfillment.yml"
       - ".github/company-data-fulfillment-trigger"
-      - "src/market_sentiment/news_schedule.py"
+      - "src/market_sentiment/news_*.py"
       - "src/market_sentiment/cli/fulfill_company_data*.py"
-      - "tests/test_news_schedule.py"
+      - "tests/test_news_*.py"
   workflow_dispatch:
     inputs:
       batch_size:
@@ -44,15 +44,15 @@ jobs:
           sparse-checkout: |
             src/market_sentiment
             apps/web/public/data/v5
-            tests/test_news_schedule.py
+            tests/test_news_*.py
           sparse-checkout-cone-mode: false
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Test news scheduling before fetching data
-        run: python -m unittest discover -s tests -p 'test_news_schedule.py' -v
+      - name: Test news scheduling and freshness before fetching data
+        run: python -m unittest discover -s tests -p 'test_news_*.py' -v
 
       - uses: actions/cache@v4
         with:
@@ -127,6 +127,8 @@ jobs:
               f"attempted={coverage.get('attempted_count')}/{coverage.get('company_count')} "
               f"indexes={len(codes)}"
           )
+          print(f"NEWS RECENCY | window_days={coverage.get('news_recency_window_days')} "
+                f"recent_companies={coverage.get('news_recent_count')}/{coverage.get('company_count')}")
           PY
 
       - name: Persist company data artifacts

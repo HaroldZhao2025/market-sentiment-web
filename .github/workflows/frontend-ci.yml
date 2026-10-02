@@ -40,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Company news merge and page regression tests
+        run: node --test tests/company-news.test.cjs
+
       - name: TypeScript typecheck
         run: npx tsc --noEmit
 
