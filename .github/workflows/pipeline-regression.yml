@@ -317,6 +317,209 @@ jobs:
                   self.assertIn('"numpy>=1.26,<2"', WORKFLOW.read_text())
                   self.assertNotIn('npm run build || true', WORKFLOW.read_text())
 
+          class CheckpointTests(unittest.TestCase):
+              def setUp(self):
+                  self.tmp = tempfile.TemporaryDirectory()
+                  self.addCleanup(self.tmp.cleanup)
+                  self.checkpoint = Path(self.tmp.name) / 'progress/scores.sqlite3'
+                  self.calls = []
+
+              def predict(self, texts, **kwargs):
+                  self.calls.extend(texts)
+                  return [[{'label': 'positive', 'score': .7}, {'label': 'neutral', 'score': .2},
+                           {'label': 'negative', 'score': .1}] for _ in texts]
+
+              def run_score(self, texts, **kwargs):
+                  return S.score_headlines(self.predict, texts, self.checkpoint, 2, model_revision='fixture-revision', **kwargs)
+
+              def test_17_interrupted_inference_resumes_committed_chunks(self):
+                  def interrupted(texts, **kwargs):
+                      if texts == ['second']:
+                          raise RuntimeError('fixture inference interruption')
+                      return self.predict(texts, **kwargs)
+                  with self.assertRaisesRegex(RuntimeError, 'fixture inference interruption'):
+                      S.score_headlines(interrupted, {'a': 'first', 'b': 'second'}, self.checkpoint, 2,
+                                        model_revision='fixture-revision', chunk_size=1)
+                  self.calls.clear()
+                  result = self.run_score({'a': 'first', 'b': 'second'}, chunk_size=1)
+                  self.assertEqual(self.calls, ['second'])
+                  self.assertAlmostEqual(result['a']['s'], .6)
+                  self.assertAlmostEqual(result['b']['s'], .6)
+
+              def test_18_completed_checkpoint_never_reinfers(self):
+                  self.run_score({'a': 'first'})
+                  self.calls.clear()
+                  result = self.run_score({'a': 'first'})
+                  self.assertEqual(self.calls, [])
+                  self.assertEqual(result['a']['sentiment_label'], 'Strong Positive')
+
+              def test_19_model_revision_is_part_of_cache_identity(self):
+                  self.run_score({'a': 'first'})
+                  self.calls.clear()
+                  S.score_headlines(self.predict, {'a': 'first'}, self.checkpoint, 2, model_revision='different-revision')
+                  self.assertEqual(self.calls, ['first'])
+
+              def test_20_exact_text_is_part_of_cache_identity(self):
+                  self.run_score({'a': 'FIRST'})
+                  self.calls.clear()
+                  self.run_score({'a': 'first'})
+                  self.assertEqual(self.calls, ['first'])
+
+              def test_21_inference_uses_bounded_chunks(self):
+                  batches = []
+                  def predictor(texts, **kwargs):
+                      batches.append(len(texts))
+                      return self.predict(texts, **kwargs)
+                  result = S.score_headlines(predictor, {str(i):str(i) for i in range(5)}, self.checkpoint, 2,
+                                            model_revision='fixture-revision', chunk_size=2)
+                  self.assertEqual(batches, [2,2,1])
+                  self.assertEqual(len(result), 5)
+
+              def test_22_invalid_predictions_never_enter_checkpoint(self):
+                  import sqlite3
+                  good = self.predict(['first'])[0]
+                  invalid = [good[:1], good + [good[0]],
+                             [{'label':'positive','score':.2},{'label':'neutral','score':.2},{'label':'negative','score':.2}],
+                             [{'label':'positive','score':float('nan')},{'label':'neutral','score':.2},{'label':'negative','score':.1}],
+                             [{'label':'LABEL_0','score':.7},{'label':'neutral','score':.2},{'label':'negative','score':.1}]]
+                  for per in invalid:
+                      with self.subTest(per=per), self.assertRaises(RuntimeError):
+                          S.score_headlines(lambda *a, **k:[per], {'a':'first'}, self.checkpoint, 1, model_revision='fixture-revision')
+                  with sqlite3.connect(self.checkpoint) as connection:
+                      self.assertEqual(connection.execute('SELECT count(*) FROM predictions').fetchone()[0],0)
+
+              def test_23_length_mismatch_never_becomes_missing_or_neutral(self):
+                  with self.assertRaisesRegex(RuntimeError, 'output length mismatch'):
+                      S.score_headlines(lambda *a, **k:[], {'a':'first'}, self.checkpoint, 1, model_revision='fixture-revision')
+
+              def test_24_invalid_disposable_score_is_recomputed(self):
+                  import sqlite3
+                  self.run_score({'a':'first'})
+                  with sqlite3.connect(self.checkpoint) as connection:
+                      connection.execute('UPDATE predictions SET pos=5')
+                  self.calls.clear()
+                  result=self.run_score({'a':'first'})
+                  self.assertEqual(self.calls,['first'])
+                  self.assertAlmostEqual(result['a']['s'],.6)
+
+              def test_25_pipeline_saves_progress_on_failed_scoring(self):
+                  steps=workflow['jobs']['build']['steps']
+                  score=next(s for s in steps if s.get('name')=='Score unique headlines with FinBERT')
+                  save=next(s for s in steps if s.get('name')=='Save validated FinBERT progress even after a failed step')
+                  diagnostics=next(s for s in steps if s.get('name')=='Preserve pipeline diagnostics')
+                  self.assertIn('always()',save['if'])
+                  self.assertLess(int(score['timeout-minutes']),int(workflow['jobs']['build']['timeout-minutes']))
+                  self.assertIn('--checkpoint',score['run'])
+                  self.assertIn('2>&1 | tee',score['run'])
+                  self.assertEqual(diagnostics['if'],'always()')
+                  self.assertEqual(workflow['env']['PYTHONUNBUFFERED'],'1')
+
+          class PublicNewsFallbackTests(unittest.TestCase):
+              def setUp(self):
+                  self.tmp=tempfile.TemporaryDirectory()
+                  self.addCleanup(self.tmp.cleanup)
+                  self.root=Path(self.tmp.name)
+                  self.now=datetime.now(timezone.utc)
+                  self.rss_calls=[]
+                  self.yahoo_items=[]
+                  self.yahoo_error=False
+                  self.rss_items=[{'title':'Company results improve - Example Publisher', 'source':'Example Publisher',
+                                   'url':'https://news.google.com/rss/articles/example', 'ts':self.now.isoformat()}]
+                  owner=self
+                  class MiniTimestamp:
+                      @staticmethod
+                      def now(**kwargs): return owner.now
+                      @staticmethod
+                      def fromtimestamp(value, **kwargs): return datetime.fromtimestamp(value,timezone.utc)
+                  pd=types.ModuleType('pandas')
+                  pd.Timestamp=MiniTimestamp
+                  pd.Timedelta=timedelta
+                  pd.to_datetime=lambda value, **kwargs:datetime.fromisoformat(str(value).replace('Z','+00:00'))
+                  pd.isna=lambda value:value is None
+                  yf=types.ModuleType('yfinance')
+                  class Ticker:
+                      def __init__(self,ticker): pass
+                      def get_news(self,**kwargs):
+                          if owner.yahoo_error: raise RuntimeError('fixture Yahoo outage')
+                          return owner.yahoo_items
+                  yf.Ticker=Ticker
+                  with patch.dict(sys.modules,{'pandas':pd,'yfinance':yf}):
+                      self.raw=load_module(scripts['refresh_raw_data.py'],'raw_news_under_test')
+                  rss=types.ModuleType('market_sentiment.v5_news')
+                  def fetch(ticker,**kwargs):
+                      owner.rss_calls.append(ticker)
+                      return owner.rss_items
+                  rss.google_news_rss=fetch
+                  self.mock_modules={'market_sentiment.v5_news':rss}
+
+              def refresh(self, tickers=None, run_kind='manual'):
+                  with patch.dict(sys.modules,self.mock_modules):
+                      self.raw.refresh_yahoo_news(tickers or ['AAA'],self.root,run_kind)
+
+              def test_26_empty_yahoo_uses_separately_attributed_rss(self):
+                  self.refresh()
+                  path=self.root/'AAA/news/google_news_rss'/f'{self.now.date().isoformat()}.json'
+                  rows=json.loads(path.read_text())
+                  self.assertEqual(self.rss_calls,['AAA'])
+                  self.assertEqual(rows[0]['provider'],'google_news_rss')
+                  self.assertEqual(rows[0]['source'],'Example Publisher')
+                  self.assertEqual(rows[0]['headline'],'Company results improve')
+                  self.assertFalse((self.root/'AAA/news/yfinance').exists())
+
+              def test_27_yahoo_exception_does_not_skip_fallback(self):
+                  self.yahoo_error=True
+                  self.refresh()
+                  self.assertEqual(self.rss_calls,['AAA'])
+                  self.assertTrue(list((self.root/'AAA/news/google_news_rss').glob('*.json')))
+
+              def test_28_usable_yahoo_avoids_unnecessary_fallback(self):
+                  self.yahoo_items=[{'content':{'title':'Company results improve','pubDate':self.now.isoformat(),
+                                     'canonicalUrl':{'url':'https://example.test/a'}}}]
+                  self.refresh()
+                  self.assertEqual(self.rss_calls,[])
+                  self.assertTrue(list((self.root/'AAA/news/yfinance').glob('*.json')))
+
+              def test_29_empty_rss_stops_after_five_consecutive_misses(self):
+                  self.rss_items=[]
+                  self.refresh([f'T{i}' for i in range(10)])
+                  self.assertEqual(len(self.rss_calls),5)
+                  self.assertFalse(list(self.root.rglob('*.json')))
+
+              def test_30_future_or_old_rss_is_not_written(self):
+                  self.rss_items=[dict(self.rss_items[0],ts=(self.now+timedelta(days=2)).isoformat()),
+                                  dict(self.rss_items[0],ts=(self.now-timedelta(days=100)).isoformat())]
+                  self.refresh()
+                  self.assertFalse(list(self.root.rglob('*.json')))
+
+              def test_31_hourly_fallback_is_bounded_and_rotates(self):
+                  tickers=[f'T{i}' for i in range(210)]
+                  self.refresh(tickers,run_kind='hourly')
+                  first=set(self.rss_calls)
+                  self.assertGreater(len(first),0)
+                  self.assertLessEqual(len(first),100)
+                  self.now+=timedelta(hours=1)
+                  self.rss_calls.clear()
+                  self.refresh(tickers,run_kind='hourly')
+                  self.assertTrue(first.isdisjoint(self.rss_calls))
+
+              def test_32_rss_enters_scoring_and_public_article_evidence(self):
+                  f=Fixture(self.root/'pipeline')
+                  day=TODAY.isoformat()
+                  f.news('AAA',day,'google_news_rss',[{'headline':'Unique current RSS story','ts':self.now.isoformat(),
+                      'url':'https://news.google.com/rss/articles/current','source':'Example Publisher','provider':'google_news_rss'}])
+                  S.scan(f.args)
+                  f.score()
+                  records=f.read_cache()['records']
+                  record=records['AAA'][day]
+                  self.assertEqual(record['n_total'],1)
+                  self.assertEqual(record['n_google_news_rss_raw'],1)
+                  self.assertEqual(record['articles'][0]['providers'],['google_news_rss'])
+                  displayed=SITE.recent_news(f.data,'AAA',records)
+                  rss=[row for row in displayed if row['provider']=='google_news_rss']
+                  self.assertEqual(len(rss),1)
+                  self.assertEqual(rss[0]['source'],'Example Publisher')
+                  self.assertAlmostEqual(rss[0]['s'],.6)
+
           result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__]))
           if not result.wasSuccessful():
               raise SystemExit(1)
