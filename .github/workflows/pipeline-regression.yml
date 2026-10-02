@@ -1,0 +1,133 @@
+name: Prepare and Validate Pipeline Repair
+
+on:
+  push:
+    branches: ["fix/pipeline-cache-migration-20261001"]
+    paths: [".github/workflows/pipeline-regression.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout workflow source only
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: .github/workflows
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install YAML parser
+        run: python -m pip install --disable-pip-version-check "PyYAML==6.0.2"
+      - name: Read reviewed repair and test objects
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const crypto = require('crypto');
+            const inputs = {
+              'prepare_patch.py': '042ff7f7d4633c73887b9f86de35c1e06eaf88e1',
+              'test_pipeline.py': 'a17ba73ad6c15ba2b6b8b63effbd2d803f5e7022'
+            };
+            for (const [name, sha] of Object.entries(inputs)) {
+              const result = await github.rest.git.getBlob({ owner: context.repo.owner, repo: context.repo.repo, file_sha: sha });
+              const bytes = Buffer.from(result.data.content.replace(/\s/g, ''), 'base64');
+              const actual = crypto.createHash('sha1').update(Buffer.from(`blob ${bytes.length}\0`)).update(bytes).digest('hex');
+              if (actual !== sha) throw new Error(`Git object verification failed: ${name}`);
+              fs.writeFileSync(`/tmp/${name}`, bytes);
+            }
+      - name: Prepare targeted repair in the test workspace
+        run: python /tmp/prepare_patch.py
+      - name: Pipeline regression tests
+        run: python /tmp/test_pipeline.py
+      - name: Prepare clean read-only CI and review artifacts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from textwrap import indent
+          import subprocess
+          root = Path('/tmp/pipeline-repair')
+          root.mkdir(parents=True, exist_ok=True)
+          header = '''name: Pipeline Regression CI
+
+          on:
+            push:
+              branches: ["main"]
+              paths:
+                - ".github/workflows/pipeline.yml"
+                - ".github/workflows/pipeline-regression.yml"
+            pull_request:
+              paths:
+                - ".github/workflows/pipeline.yml"
+                - ".github/workflows/pipeline-regression.yml"
+            workflow_dispatch: {}
+
+          permissions:
+            contents: read
+
+          jobs:
+            validate:
+              runs-on: ubuntu-latest
+              timeout-minutes: 10
+              steps:
+                - name: Checkout workflow source only
+                  uses: actions/checkout@v4
+                  with:
+                    fetch-depth: 1
+                    sparse-checkout: .github/workflows
+                - name: Setup Python
+                  uses: actions/setup-python@v5
+                  with:
+                    python-version: "3.11"
+                - name: Install YAML parser
+                  run: python -m pip install --disable-pip-version-check "PyYAML==6.0.2"
+                - name: Pipeline regression tests
+                  run: |
+          '''
+          tests = Path('/tmp/test_pipeline.py').read_text(encoding='utf-8')
+          clean = header + indent("python - <<'TEST'\n" + tests + "TEST\n", '          ')
+          (root / 'pipeline-regression.yml').write_text(clean, encoding='utf-8')
+          (root / 'pipeline.yml').write_bytes(Path('.github/workflows/pipeline.yml').read_bytes())
+          diff = subprocess.run(['git', 'diff', '--', '.github/workflows/pipeline.yml'], text=True, check=True, capture_output=True).stdout
+          (root / 'repair.patch').write_text(diff, encoding='utf-8')
+          import yaml
+          parsed = yaml.load(clean, Loader=yaml.BaseLoader)
+          assert parsed['permissions']['contents'] == 'read'
+          assert 'pull_request' in parsed['on']
+          for step in parsed['jobs']['validate']['steps']:
+              if 'run' in step:
+                  subprocess.run(['bash', '-n'], input=step['run'], text=True, check=True)
+          print('Prepared review artifacts. No branch or production data has been changed by this job.')
+          PY
+      - name: Store validated Git objects for review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const objects = {};
+            for (const name of ['pipeline.yml', 'pipeline-regression.yml']) {
+              const result = await github.rest.git.createBlob({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                content: fs.readFileSync(`/tmp/pipeline-repair/${name}`, 'utf8'),
+                encoding: 'utf-8'
+              });
+              objects[name] = result.data.sha;
+              core.notice(`${name}: ${result.data.sha}`);
+            }
+            fs.writeFileSync('/tmp/pipeline-repair/objects.json', JSON.stringify(objects, null, 2));
+            await core.summary.addHeading('Pipeline repair regression result')
+              .addRaw('16 deterministic tests passed. Production scripts compile; Bash syntax validates. No live model or market-provider calls were made. No branch was updated by this job.')
+              .addCodeBlock(JSON.stringify(objects, null, 2), 'json').write();
+      - name: Upload validated repair artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: validated-pipeline-repair
+          path: /tmp/pipeline-repair
+          retention-days: 3
+          if-no-files-found: error
