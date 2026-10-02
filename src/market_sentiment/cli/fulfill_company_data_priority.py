@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 from market_sentiment.cli import fulfill_company_data as base
+from market_sentiment.news_schedule import select_company_targets
 
 NEWS_DEPTH_TARGET = 360
 NEWS_HISTORY_DAYS_TARGET = 1095
@@ -123,47 +123,12 @@ def target_rows(
     attempts: dict[str, Any],
     batch_size: int,
 ) -> list[dict[str, Any]]:
-    """Prioritize missing coverage, archive migration, thin news archives, then stale refreshes."""
-    missing_news: list[dict[str, Any]] = []
-    missing_history: list[dict[str, Any]] = []
-    archive_migration: list[dict[str, Any]] = []
-    shallow_news: list[dict[str, Any]] = []
-    stale: list[dict[str, Any]] = []
-    now = datetime.now(timezone.utc)
-
-    for company in companies:
-        symbol = str(company.get("ticker") or "").upper()
-        if not symbol:
-            continue
-        news_path = news_dir / f"{symbol}.json"
-        history_path = history_dir / f"{symbol}.json"
-        news_ok = base.news_ready(news_path)
-        history_ok = base.history_ready(history_path)
-        if not news_ok:
-            missing_news.append(company)
-            continue
-        if not history_ok:
-            missing_history.append(company)
-            continue
-
-        count, history_days_requested = news_metadata(news_path)
-        if history_days_requested < NEWS_HISTORY_DAYS_TARGET:
-            archive_migration.append(company)
-            continue
-        if count < NEWS_DEPTH_TARGET:
-            shallow_news.append(company)
-            continue
-
-        meta = attempts.get(symbol) if isinstance(attempts.get(symbol), dict) else {}
-        last = str(meta.get("last_attempt_utc") or "")
-        try:
-            last_dt = datetime.fromisoformat(last.replace("Z", "+00:00")) if last else None
-        except ValueError:
-            last_dt = None
-        if last_dt is None or now - last_dt >= timedelta(days=7):
-            stale.append(company)
-
-    return (missing_news + missing_history + archive_migration + shallow_news + stale)[: max(1, batch_size)]
+    """Rotate by oldest attempt; missing/thin archives must not starve stale news."""
+    return select_company_targets(
+        companies, news_dir, history_dir, attempts, batch_size,
+        news_depth_target=NEWS_DEPTH_TARGET,
+        news_history_days_target=NEWS_HISTORY_DAYS_TARGET,
+    )
 
 
 def main() -> None:
