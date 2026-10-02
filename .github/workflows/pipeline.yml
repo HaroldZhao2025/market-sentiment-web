@@ -26,6 +26,7 @@ env:
   NEXT_PUBLIC_BASE_PATH: "/market-sentiment-web"
   HF_HUB_DISABLE_TELEMETRY: "1"
   TOKENIZERS_PARALLELISM: "false"
+  PYTHONUNBUFFERED: "1"
   SENTIMENT_ALGORITHM_VERSION: "dedup-finbert-v3-article-sentiment"
 
 jobs:
@@ -37,7 +38,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 0
+          fetch-depth: 1
           persist-credentials: true
 
       - name: Classify run
@@ -278,11 +279,19 @@ jobs:
               cutoff=today-pd.Timedelta(days=window_days)
               count=120 if run_kind=='hourly' else 250
               saved=0
+              rss_saved=0
+              rss_attempts=0
+              rss_empty_streak=0
+              fallback_started=time.monotonic()
+              fallback_limit=100 if run_kind=='hourly' else len(tickers)
+              blocks=max(1, math.ceil(len(tickers)/max(1, fallback_limit)))
+              block=int(today.timestamp()//3600)%blocks if run_kind=='hourly' else 0
+              fallback_tickers=set(tickers[block*fallback_limit:(block+1)*fallback_limit])
               for j,t in enumerate(tickers,1):
                   try: items=yf.Ticker(t).get_news(count=count, tab='all') or []
                   except Exception as e:
                       if j%50==0: print(f'[YF NEWS] {t} error: {e}')
-                      continue
+                      items=[]
                   by_day=defaultdict(list)
                   for it in items:
                       if not isinstance(it,dict): continue
@@ -303,10 +312,38 @@ jobs:
                       by_day[ts.date().isoformat()].append(row)
                   for day,rows in by_day.items():
                       merge_news(data_root/t/'news'/'yfinance'/f'{day}.json',rows); saved+=len(rows)
+                  # Use the repository's existing free RSS source only when Yahoo has no
+                  # usable recent headlines. Never store RSS under a Yahoo/Finnhub label.
+                  if (not by_day and t in fallback_tickers and rss_empty_streak < 5
+                          and time.monotonic()-fallback_started < 900):
+                      from market_sentiment.v5_news import google_news_rss
+                      rss_attempts += 1
+                      fallback = google_news_rss(t, days=window_days, count=20)
+                      rss_by_day=defaultdict(list)
+                      for row in fallback:
+                          ts=norm_ts(row.get('ts'))
+                          title=str(row.get('title') or row.get('headline') or '').strip()
+                          source=str(row.get('source') or 'Google News')
+                          suffix=' - '+source
+                          if title.endswith(suffix):
+                              title=title[:-len(suffix)].rstrip()
+                          if not title or ts is None or ts<cutoff or ts>today+pd.Timedelta(hours=2):
+                              continue
+                          rss_by_day[ts.date().isoformat()].append({
+                              'ts':ts.isoformat(), 'headline':title,
+                              'summary':str(row.get('summary') or '').strip(),
+                              'url':str(row.get('url') or ''), 'source':source,
+                              'provider':'google_news_rss',
+                          })
+                      for day,rows in rss_by_day.items():
+                          merge_news(data_root/t/'news'/'google_news_rss'/f'{day}.json',rows)
+                          rss_saved+=len(rows)
+                      rss_empty_streak=0 if rss_by_day else rss_empty_streak+1
                   if j%100==0: print(f'[YF NEWS] processed {j}/{len(tickers)}')
               print(f'[YF NEWS] merged_items={saved}')
+              print(f'[RSS FALLBACK] attempted_tickers={rss_attempts} merged_items={rss_saved}')
               if saved == 0:
-                  print('::warning::Yahoo returned no usable recent headlines; do not interpret unavailable sentiment as neutral')
+                  print('::warning::Yahoo returned no usable recent headlines; RSS fallback is separately attributed and missing sentiment is not neutral')
 
 
           def refresh_finnhub_news(tickers:list[str], data_root:Path, run_kind:str):
@@ -380,6 +417,7 @@ jobs:
 
           ALGORITHM_VERSION = os.environ.get("SENTIMENT_ALGORITHM_VERSION", "dedup-finbert-v3-article-sentiment")
           SCHEMA_VERSION = 2
+          NEWS_PROVIDERS = ("finnhub", "yfinance", "google_news_rss")
 
 
           def load_json(path: Path, default: Any) -> Any:
@@ -457,7 +495,7 @@ jobs:
                   obj["algorithm_version"] = ALGORITHM_VERSION
               obj["generated_at_utc"] = datetime.now(timezone.utc).isoformat()
               obj["methodology"] = {
-                  "article_dedup": "within ticker/day across Finnhub and Yahoo Finance by normalized headline or canonical URL",
+                  "article_dedup": "within ticker/day across Finnhub, Yahoo Finance and separately attributed public RSS by normalized headline or canonical URL",
                   "article_score": "ProsusAI/finbert: P(positive) - P(negative), headline text only",
                   "ticker_daily_aggregation": "equal-weight mean across unique headlines",
                   "no_news": "missing observation (score_mean=null), never neutral zero",
@@ -597,10 +635,10 @@ jobs:
 
           def collect_day(data_root: Path, ticker: str, day: str) -> tuple[list[dict[str, Any]], dict[str, int], str]:
               raw_items: list[dict[str, Any]] = []
-              counts = {"finnhub": 0, "yfinance": 0}
+              counts = {provider: 0 for provider in NEWS_PROVIDERS}
               fingerprint_rows: list[tuple[str, str, str]] = []
 
-              for provider in ("finnhub", "yfinance"):
+              for provider in NEWS_PROVIDERS:
                   path = data_root / ticker / "news" / provider / f"{day}.json"
                   arr = load_json(path, [])
                   if not isinstance(arr, list):
@@ -662,7 +700,7 @@ jobs:
                   t_rec = records.setdefault(ticker, {})
                   news_root = Path(args.data_root) / ticker / "news"
                   candidate_days: set[str] = set()
-                  for provider in ("finnhub", "yfinance"):
+                  for provider in NEWS_PROVIDERS:
                       pdir = news_root / provider
                       if pdir.exists():
                           candidate_days.update(p.stem[:10] for p in pdir.glob("*.json") if start <= p.stem[:10] <= end)
@@ -686,7 +724,8 @@ jobs:
                               "n_total": 0, "n_raw": int(sum(raw_counts.values())),
                               "n_duplicates": int(sum(raw_counts.values())),
                               "n_finnhub_raw": int(raw_counts["finnhub"]),
-                              "n_yfinance_raw": int(raw_counts["yfinance"]), "articles": [],
+                              "n_yfinance_raw": int(raw_counts["yfinance"]),
+                              "n_google_news_rss_raw": int(raw_counts["google_news_rss"]), "articles": [],
                           }
                           empty += 1
                       else:
@@ -705,6 +744,98 @@ jobs:
               manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
               print(f"SENTIMENT SCAN | range={start}..{end} universe={len(universe)} pending={len(manifest)} "
                     f"unchanged={unchanged} empty={empty} touched={touched}")
+
+
+          def prediction_record(per: Any) -> dict[str, Any]:
+              """Validate all three FinBERT probabilities before persisting any result."""
+              if not isinstance(per, list) or len(per) != 3:
+                  raise RuntimeError("FinBERT must return all three class probabilities")
+              try:
+                  labels = {str(row["label"]).lower(): float(row["score"]) for row in per}
+                  if set(labels) != {"positive", "neutral", "negative"}:
+                      raise ValueError("unexpected labels")
+                  pos, neu, neg = (labels[k] for k in ("positive", "neutral", "negative"))
+                  if any(not math.isfinite(v) or not 0 <= v <= 1 for v in (pos, neu, neg)):
+                      raise ValueError("invalid probability")
+                  if abs(pos + neu + neg - 1.0) > 1e-5:
+                      raise ValueError("probabilities do not sum to one")
+              except (KeyError, TypeError, ValueError, OverflowError) as error:
+                  raise RuntimeError("Invalid FinBERT class probabilities") from error
+              score = pos - neg
+              label = ("Strong Positive" if score >= .4 else "Positive" if score >= .1 else
+                       "Strong Negative" if score <= -.4 else "Negative" if score <= -.1 else "Neutral")
+              return {"s": score, "sentiment_label": label, "probs": {"pos": pos, "neu": neu, "neg": neg}}
+
+
+          def score_headlines(clf: Any, text_by_key: dict[str, str], checkpoint: Path,
+                              batch_size: int, *, model_revision: str,
+                              chunk_size: int = 256) -> dict[str, dict[str, Any]]:
+              """Checkpoint validated inference, not aggregates, after every bounded chunk.
+
+              Exact model revision and exact input text are part of the key. An interrupted
+              run can reuse committed chunks, while changed inputs are always re-inferred.
+              This disposable SQLite cache never changes the historical sentiment cache.
+              """
+              import sqlite3
+              import time
+
+              if batch_size < 1 or chunk_size < 1:
+                  raise ValueError("Inference batch and chunk sizes must be positive")
+              checkpoint.parent.mkdir(parents=True, exist_ok=True)
+              namespace = f"{ALGORITHM_VERSION}|ProsusAI/finbert|{model_revision}"
+              started = time.monotonic()
+              result: dict[str, dict[str, Any]] = {}
+              missing = []
+              connection = sqlite3.connect(checkpoint)
+              try:
+                  connection.execute("PRAGMA synchronous=FULL")
+                  connection.execute("CREATE TABLE IF NOT EXISTS predictions "
+                                     "(namespace TEXT NOT NULL, digest TEXT NOT NULL, "
+                                     "pos REAL NOT NULL, neu REAL NOT NULL, neg REAL NOT NULL, "
+                                     "PRIMARY KEY(namespace, digest))")
+                  connection.commit()
+                  for key in sorted(text_by_key):
+                      text = text_by_key[key]
+                      digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+                      cached = connection.execute(
+                          "SELECT pos, neu, neg FROM predictions WHERE namespace=? AND digest=?",
+                          (namespace, digest),
+                      ).fetchone()
+                      if cached is not None:
+                          try:
+                              result[key] = prediction_record([
+                                  {"label": label, "score": value}
+                                  for label, value in zip(("positive", "neutral", "negative"), cached)
+                              ])
+                              continue
+                          except RuntimeError:
+                              # Recompute an invalid disposable score; never trust it.
+                              pass
+                      missing.append((key, text, digest))
+                  print(f"SENTIMENT CHECKPOINT | reused={len(result)} pending={len(missing)} "
+                        f"model_revision={model_revision}", flush=True)
+                  reused = len(result)
+                  for offset in range(0, len(missing), chunk_size):
+                      chunk = missing[offset:offset + chunk_size]
+                      predictions = clf([text for _, text, _ in chunk], batch_size=batch_size)
+                      if not isinstance(predictions, list) or len(predictions) != len(chunk):
+                          raise RuntimeError("FinBERT output length mismatch")
+                      validated = [prediction_record(per) for per in predictions]
+                      # Validate the entire chunk before its transaction is committed.
+                      with connection:
+                          connection.executemany(
+                              "INSERT OR REPLACE INTO predictions VALUES (?, ?, ?, ?, ?)",
+                              [(namespace, digest, pred["probs"]["pos"], pred["probs"]["neu"],
+                                pred["probs"]["neg"])
+                               for (_, _, digest), pred in zip(chunk, validated)],
+                          )
+                      for (key, _, _), pred in zip(chunk, validated):
+                          result[key] = pred
+                      print(f"SENTIMENT PROGRESS | completed={len(result)}/{len(text_by_key)} "
+                            f"reused={reused} elapsed_seconds={time.monotonic()-started:.1f}", flush=True)
+              finally:
+                  connection.close()
+              return result
 
 
           def score_manifest(args: argparse.Namespace) -> None:
@@ -740,40 +871,10 @@ jobs:
                           if key not in text_by_key or len(title) > len(text_by_key[key]):
                               text_by_key[key] = title
 
-              keys = sorted(text_by_key)
-              texts = [text_by_key[k] for k in keys]
-              print(f"SENTIMENT SCORE | unique_headlines_to_infer={len(texts)} ticker_days={len(manifest)}")
-
-              predictions = clf(texts, batch_size=max(1, int(args.batch_size)))
-              if len(predictions) != len(texts):
-                  raise RuntimeError(f"FinBERT output length mismatch: {len(predictions)} != {len(texts)}")
-
-              score_by_key: dict[str, dict[str, Any]] = {}
-
-              def sentiment_label(v: float) -> str:
-                  if v >= 0.4:
-                      return "Strong Positive"
-                  if v >= 0.1:
-                      return "Positive"
-                  if v <= -0.4:
-                      return "Strong Negative"
-                  if v <= -0.1:
-                      return "Negative"
-                  return "Neutral"
-
-              for key, per in zip(keys, predictions):
-                  if isinstance(per, dict):
-                      per = [per]
-                  labels = {str(x.get("label") or "").lower(): float(x.get("score") or 0.0) for x in per}
-                  pos = float(labels.get("positive", 0.0))
-                  neu = float(labels.get("neutral", 0.0))
-                  neg = float(labels.get("negative", 0.0))
-                  s_val = pos - neg
-                  score_by_key[key] = {
-                      "s": s_val,
-                      "sentiment_label": sentiment_label(s_val),
-                      "probs": {"pos": pos, "neu": neu, "neg": neg},
-                  }
+              checkpoint = Path(getattr(args, "checkpoint", "") or (str(args.cache) + ".scores.sqlite3"))
+              model_revision = str(getattr(getattr(model, "config", None), "_commit_hash", None) or f"unversioned-{os.getpid()}")
+              score_by_key = score_headlines(clf, text_by_key, checkpoint,
+                                            max(1, int(args.batch_size)), model_revision=model_revision)
 
               cache_path = Path(args.cache)
               cache = load_cache(cache_path)
@@ -787,7 +888,7 @@ jobs:
                       key = str(article.get("title_key") or "")
                       pred = score_by_key.get(key)
                       if pred is None:
-                          continue
+                          raise RuntimeError(f"Missing FinBERT prediction for {key!r}")
                       s_val = float(pred["s"])
                       scores.append(s_val)
                       scored_articles.append(
@@ -834,6 +935,7 @@ jobs:
                       "n_duplicates": max(0, n_raw - int(n_total)),
                       "n_finnhub_raw": int(raw_counts.get("finnhub", 0) or 0),
                       "n_yfinance_raw": int(raw_counts.get("yfinance", 0) or 0),
+                      "n_google_news_rss_raw": int(raw_counts.get("google_news_rss", 0) or 0),
                       "articles": scored_articles,
                   }
 
@@ -897,6 +999,7 @@ jobs:
               ap.add_argument("--days", type=int, default=14)
               ap.add_argument("--initial-days", type=int, default=365)
               ap.add_argument("--batch-size", type=int, default=64)
+              ap.add_argument("--checkpoint", default="")
               args = ap.parse_args()
               if args.mode == "scan":
                   scan(args)
@@ -1109,7 +1212,7 @@ jobs:
               rows: list[dict[str, Any]] = []
               seen_titles: set[str] = set()
               seen_urls: set[str] = set()
-              for provider in ("finnhub", "yfinance"):
+              for provider in ("finnhub", "yfinance", "google_news_rss"):
                   root = data_root / ticker / "news" / provider
                   if not root.exists():
                       continue
@@ -1433,7 +1536,7 @@ jobs:
                   "asof": asof,
                   "updated_at_utc": datetime.now(timezone.utc).isoformat(),
                   "aggregation": {
-                      "article_level": "deduplicate ticker/day news across Finnhub and Yahoo Finance, then FinBERT P(pos)-P(neg)",
+                      "article_level": "deduplicate ticker/day news across Finnhub, Yahoo Finance and public RSS, then FinBERT P(pos)-P(neg)",
                       "ticker_day": "equal-weight mean of unique headline scores",
                       "index_day": "current-market-cap snapshot weights, renormalized only across tickers with an observed sentiment that day",
                       "no_news": "missing; never inserted as zero",
@@ -1980,7 +2083,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python /tmp/market-final/refresh_raw_data.py             --universe data/sp500.csv             --data-root data             --run-kind "$RUN_KIND" | tee /tmp/market-final/raw-refresh.log
+          python /tmp/market-final/refresh_raw_data.py             --universe data/sp500.csv             --data-root data             --run-kind "$RUN_KIND" 2>&1 | tee /tmp/market-final/raw-refresh.log
 
       - name: Refresh S&P market-cap weights
         if: env.RUN_KIND != 'hourly'
@@ -2015,7 +2118,7 @@ jobs:
           DAYS=14
           [ "$RUN_KIND" = daily ] && DAYS=30
           [ "$RUN_KIND" = manual ] && DAYS=365
-          python /tmp/market-final/build_sentiment_v2.py scan             --universe data/sp500.csv --data-root data             --cache data/derived/sentiment_v2.json.gz             --manifest /tmp/market-final/sentiment_manifest.json             --days "$DAYS" --initial-days 365 | tee /tmp/market-final/sentiment-scan.log
+          python /tmp/market-final/build_sentiment_v2.py scan             --universe data/sp500.csv --data-root data             --cache data/derived/sentiment_v2.json.gz             --manifest /tmp/market-final/sentiment_manifest.json             --days "$DAYS" --initial-days 365 2>&1 | tee /tmp/market-final/sentiment-scan.log
           PENDING=$(python - <<'PY'
           import json
           from pathlib import Path
@@ -2044,18 +2147,35 @@ jobs:
           pip install --no-cache-dir "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
           pip install --no-cache-dir "transformers==4.45.2" "tokenizers==0.20.3"
 
+      - name: Restore validated FinBERT progress
+        if: steps.sentiment_scan.outputs.need_model == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/finbert-progress
+          key: finbert-progress-v3-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            finbert-progress-v3-${{ runner.os }}-
+
       - name: Score unique headlines with FinBERT
+        timeout-minutes: 300
         if: steps.sentiment_scan.outputs.need_model == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          python /tmp/market-final/build_sentiment_v2.py score             --cache data/derived/sentiment_v2.json.gz             --manifest /tmp/market-final/sentiment_manifest.json             --batch-size 64 | tee /tmp/market-final/sentiment-score.log
+          python /tmp/market-final/build_sentiment_v2.py score             --cache data/derived/sentiment_v2.json.gz             --manifest /tmp/market-final/sentiment_manifest.json             --batch-size 64 --checkpoint "${RUNNER_TEMP}/finbert-progress/scores.sqlite3" 2>&1 | tee /tmp/market-final/sentiment-score.log
+
+      - name: Save validated FinBERT progress even after a failed step
+        if: always() && steps.sentiment_scan.outputs.need_model == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/finbert-progress
+          key: finbert-progress-v3-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Validate sentiment aggregation
         shell: bash
         run: |
           set -euo pipefail
-          python /tmp/market-final/build_sentiment_v2.py validate             --cache data/derived/sentiment_v2.json.gz | tee /tmp/market-final/sentiment-validate.log
+          python /tmp/market-final/build_sentiment_v2.py validate             --cache data/derived/sentiment_v2.json.gz 2>&1 | tee /tmp/market-final/sentiment-validate.log
 
           python - <<'PY'
           import gzip
@@ -2110,7 +2230,7 @@ jobs:
           set -euo pipefail
           rm -rf apps/web/public/data/ticker apps/web/public/data/SPX /tmp/portfolio-input
           mkdir -p apps/web/public/data
-          python /tmp/market-final/build_complete_site.py             --universe data/sp500.csv --data-root data             --public-root apps/web/public/data             --cache data/derived/sentiment_v2.json.gz             --portfolio-input /tmp/portfolio-input --days 365             | tee /tmp/market-final/site-data.log
+          python /tmp/market-final/build_complete_site.py             --universe data/sp500.csv --data-root data             --public-root apps/web/public/data             --cache data/derived/sentiment_v2.json.gz             --portfolio-input /tmp/portfolio-input --days 365             2>&1 | tee /tmp/market-final/site-data.log
           # Homepage compatibility:
           # apps/web/app/page.tsx currently checks ../../data/SPX/sp500_index.json first.
           # Make that first-choice file the FINAL aggregate, not the earlier price-only file.
@@ -2159,10 +2279,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python /tmp/market-final/build_research_input_v2.py             --universe data/sp500.csv --data-root data             --cache data/derived/sentiment_v2.json.gz             --out-root /tmp/research-input --days 365             | tee /tmp/market-final/research-input.log
+          python /tmp/market-final/build_research_input_v2.py             --universe data/sp500.csv --data-root data             --cache data/derived/sentiment_v2.json.gz             --out-root /tmp/research-input --days 365             2>&1 | tee /tmp/market-final/research-input.log
           rm -rf apps/web/public/research
           mkdir -p apps/web/public/research
-          python src/market_sentiment/cli/build_research.py             --data-root /tmp/research-input --out-dir apps/web/public/research --min-obs 80             | tee /tmp/market-final/research-build.log
+          python src/market_sentiment/cli/build_research.py             --data-root /tmp/research-input --out-dir apps/web/public/research --min-obs 80             2>&1 | tee /tmp/market-final/research-build.log
 
       - name: Apply dependency upgrade and run regression tests
         shell: bash
@@ -2179,7 +2299,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python /tmp/market-final/validate_final_data.py | tee /tmp/market-final/final-data.log
+          python /tmp/market-final/validate_final_data.py 2>&1 | tee /tmp/market-final/final-data.log
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -2248,7 +2368,7 @@ jobs:
             echo "- S&P price source: ^GSPC; public JSON includes canonical close and close_^GSPC compatibility alias."
             echo "- Homepage SPX: final public aggregate is synchronized to data/SPX before build, matching the homepage first-read path."
             echo "- React/TypeScript runtime rewriting: disabled."
-            echo "- Sentiment: Finnhub + Yahoo cross-provider dedup; FinBERT P(positive)-P(negative); no-news is missing, not neutral zero."
+            echo "- Sentiment: Finnhub + Yahoo + separately attributed public RSS fallback; cross-provider dedup; FinBERT P(positive)-P(negative); no-news is missing, not neutral zero."
             echo "- Sentiment cache contract: $SENTIMENT_ALGORITHM_VERSION (single shared version for generator, site, and research)."
             echo "- News table: every displayed headline carries article-level FinBERT score, label, and pos/neutral/neg probabilities."
             echo "- S&P aggregate: current market-cap weights renormalized only across tickers with real sentiment observations."
@@ -2259,6 +2379,15 @@ jobs:
             echo
             cat /tmp/market-final/final-data.log
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Preserve pipeline diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/market-final/*.log
+          retention-days: 7
+          if-no-files-found: warn
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
