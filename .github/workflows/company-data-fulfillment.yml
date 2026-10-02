@@ -2,13 +2,17 @@ name: Fulfill Company News and History
 
 on:
   push:
+    branches: [main]
     paths:
       - ".github/workflows/company-data-fulfillment.yml"
       - ".github/company-data-fulfillment-trigger"
+      - "src/market_sentiment/news_schedule.py"
+      - "src/market_sentiment/cli/fulfill_company_data*.py"
+      - "tests/test_news_schedule.py"
   workflow_dispatch:
     inputs:
       batch_size:
-        description: "Companies per fulfillment batch"
+        description: "Companies per fulfillment batch (1-500)"
         required: false
         default: "250"
   schedule:
@@ -16,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: company-data-fulfillment
@@ -39,11 +44,15 @@ jobs:
           sparse-checkout: |
             src/market_sentiment
             apps/web/public/data/v5
+            tests/test_news_schedule.py
           sparse-checkout-cone-mode: false
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Test news scheduling before fetching data
+        run: python -m unittest discover -s tests -p 'test_news_schedule.py' -v
 
       - uses: actions/cache@v4
         with:
@@ -56,7 +65,7 @@ jobs:
           mkdir -p "${RUNNER_TEMP}/company-data-cache"
           echo "HF_HOME=${RUNNER_TEMP}/company-data-cache/hf-home" >> "$GITHUB_ENV"
           pip install --disable-pip-version-check --no-cache-dir \
-            "numpy>=1.26,<3" "pandas>=2.1,<3" "requests>=2.31" "yfinance>=0.2.50" \
+            "numpy>=1.26,<2" "pandas>=2.1,<3" "requests>=2.31" "yfinance>=0.2.50" \
             "beautifulsoup4>=4.12" "lxml>=5.2"
           pip install --disable-pip-version-check --no-cache-dir "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
           pip install --disable-pip-version-check --no-cache-dir "transformers==4.45.2" "tokenizers==0.20.3"
@@ -73,6 +82,8 @@ jobs:
               size = int(os.getenv("INPUT_BATCH_SIZE") or 250)
           else:
               size = 250
+          if not 1 <= size <= 500:
+              raise SystemExit("batch_size must be between 1 and 500")
           print(f"size={size}")
           PY
 
@@ -119,8 +130,10 @@ jobs:
           PY
 
       - name: Persist company data artifacts
+        id: persist
         run: |
           set -euo pipefail
+          echo "changed=false" >> "$GITHUB_OUTPUT"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f \
@@ -134,4 +147,24 @@ jobs:
             git commit -m "chore: fulfill company news and history [skip ci]"
             git pull --rebase origin main
             git push origin HEAD:main
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Request validated site publication
+        if: steps.persist.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # GITHUB_TOKEN pushes do not trigger push workflows. Explicitly dispatch
+          # the existing validated pipeline, without creating duplicate active builds.
+          active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow pipeline.yml \
+            --branch main --limit 50 --json status \
+            --jq '[.[] | select(.status != "completed")] | length')
+          if [ "$active" -gt 0 ]; then
+            echo "A site build is already active; publication remains pending."
+          else
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/workflows/pipeline.yml/dispatches" \
+              -f ref=main
+            echo "Requested Build Data & Deploy Site; deployment must still pass its validation gates."
           fi
