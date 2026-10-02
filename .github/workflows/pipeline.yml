@@ -1,6 +1,9 @@
 name: Build Data & Deploy Site
 
 on:
+  push:
+    branches: ["main"]
+    paths: [".github/workflows/pipeline.yml"]
   workflow_dispatch: {}
   schedule:
     - cron: "0 * * * *"
@@ -15,7 +18,8 @@ permissions:
 
 concurrency:
   group: market-site-production
-  cancel-in-progress: true
+  # A full cache migration can take longer than the hourly schedule.
+  cancel-in-progress: false
 
 env:
   PYTHONPATH: src
@@ -27,7 +31,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 360
     steps:
       - name: Checkout latest main
         uses: actions/checkout@v4
@@ -77,7 +81,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip wheel setuptools
-          pip install --no-cache-dir             "numpy>=1.26,<3" "pandas>=2.1,<3" "statsmodels>=0.14,<1"             "requests>=2.31" "yfinance>=0.2.50" "finnhub-python>=2.4.18"             "beautifulsoup4>=4.12" "lxml>=5.2" "html5lib>=1.1"
+          pip install --no-cache-dir             "numpy>=1.26,<2" "pandas>=2.1,<3" "statsmodels>=0.14,<1"             "requests>=2.31" "yfinance>=0.2.50" "finnhub-python>=2.4.18"             "beautifulsoup4>=4.12" "lxml>=5.2" "html5lib>=1.1"
 
       - name: Install final pipeline scripts
         shell: bash
@@ -301,6 +305,8 @@ jobs:
                       merge_news(data_root/t/'news'/'yfinance'/f'{day}.json',rows); saved+=len(rows)
                   if j%100==0: print(f'[YF NEWS] processed {j}/{len(tickers)}')
               print(f'[YF NEWS] merged_items={saved}')
+              if saved == 0:
+                  print('::warning::Yahoo returned no usable recent headlines; do not interpret unavailable sentiment as neutral')
 
 
           def refresh_finnhub_news(tickers:list[str], data_root:Path, run_kind:str):
@@ -389,33 +395,66 @@ jobs:
                       "schema_version": SCHEMA_VERSION,
                       "algorithm_version": ALGORITHM_VERSION,
                       "generated_at_utc": None,
-                      "methodology": {
-                          "article_dedup": "within ticker/day across Finnhub and Yahoo Finance by normalized headline or canonical URL",
-                          "article_score": "ProsusAI/finbert: P(positive) - P(negative), headline text only",
-                          "ticker_daily_aggregation": "equal-weight mean across unique headlines",
-                          "no_news": "missing observation (score_mean=null), never neutral zero",
-                      },
                       "records": {},
                   }
               try:
                   with gzip.open(path, "rt", encoding="utf-8") as f:
                       obj = json.load(f)
-              except Exception:
-                  obj = {}
-              if not isinstance(obj, dict):
-                  obj = {}
+              except (OSError, ValueError, EOFError) as error:
+                  raise RuntimeError(f"Cannot read sentiment cache {path}; refusing to replace historical data") from error
+              if not isinstance(obj, dict) or not isinstance(obj.get("records"), dict):
+                  raise RuntimeError(f"Invalid sentiment cache structure: {path}")
+              if any(not isinstance(days, dict) for days in obj["records"].values()):
+                  raise RuntimeError(f"Invalid ticker-day mapping in sentiment cache: {path}")
               obj.setdefault("schema_version", SCHEMA_VERSION)
-              obj.setdefault("algorithm_version", ALGORITHM_VERSION)
-              obj.setdefault("records", {})
-              if not isinstance(obj["records"], dict):
-                  obj["records"] = {}
+              obj.setdefault("algorithm_version", "unknown")
               return obj
 
 
-          def save_cache(path: Path, obj: dict[str, Any]) -> None:
+          def record_is_current(rec: Any) -> bool:
+              """A version string alone does not prove that article scores exist."""
+              if not isinstance(rec, dict) or rec.get("algorithm_version") != ALGORITHM_VERSION:
+                  return False
+              n = rec.get("n_total")
+              if isinstance(n, bool) or not isinstance(n, int) or n < 0:
+                  return False
+              articles = rec.get("articles")
+              if not isinstance(articles, list) or len(articles) != n:
+                  return False
+              if n == 0:
+                  return rec.get("score_mean") is None
+              scores = []
+              try:
+                  mean = float(rec["score_mean"])
+                  if not math.isfinite(mean) or not -1 <= mean <= 1:
+                      return False
+                  for article in articles:
+                      if not isinstance(article, dict) or not str(article.get("sentiment_label") or "").strip():
+                          return False
+                      score = float(article["s"])
+                      probs = article["probs"]
+                      values = [float(probs[key]) for key in ("pos", "neu", "neg")]
+                      if not math.isfinite(score) or not -1 <= score <= 1:
+                          return False
+                      if any(not math.isfinite(x) or not 0 <= x <= 1 for x in values):
+                          return False
+                      if abs(sum(values) - 1.0) > 1e-5 or abs(score - (values[0] - values[2])) > 2e-6:
+                          return False
+                      scores.append(score)
+                  return abs(mean - sum(scores) / n) <= 2e-6
+              except (KeyError, TypeError, ValueError, OverflowError):
+                  return False
+
+
+          def save_cache(path: Path, obj: dict[str, Any], *, finalize: bool = True) -> None:
               path.parent.mkdir(parents=True, exist_ok=True)
               obj["schema_version"] = SCHEMA_VERSION
-              obj["algorithm_version"] = ALGORITHM_VERSION
+              if finalize:
+                  incomplete = [(ticker, day) for ticker, days in obj["records"].items()
+                                for day, rec in days.items() if not record_is_current(rec)]
+                  if incomplete:
+                      raise RuntimeError(f"Cannot finalize an incomplete sentiment migration: {incomplete[:5]}")
+                  obj["algorithm_version"] = ALGORITHM_VERSION
               obj["generated_at_utc"] = datetime.now(timezone.utc).isoformat()
               obj["methodology"] = {
                   "article_dedup": "within ticker/day across Finnhub and Yahoo Finance by normalized headline or canonical URL",
@@ -596,87 +635,76 @@ jobs:
               cache = load_cache(cache_path)
               records = cache.setdefault("records", {})
               universe = read_universe(Path(args.universe))
+              migration = cache.get("algorithm_version") != ALGORITHM_VERSION or any(
+                  not record_is_current(rec)
+                  for ticker_days in records.values() for rec in ticker_days.values()
+              )
               days = int(args.days)
-              if not cache_existed:
+              if not cache_existed or migration:
                   days = max(days, int(args.initial_days))
               start, end = daterange(days)
+              if migration:
+                  # Include retired constituents and every retained cache date, not only the
+                  # normal hourly/daily window. A mixed V2/V3 cache also needs repair.
+                  universe = list(dict.fromkeys(universe + sorted(records)))
+                  retained_days = [str(day) for ticker_days in records.values() for day in ticker_days]
+                  for day in retained_days:
+                      if datetime.strptime(day, "%Y-%m-%d").date().isoformat() != day:
+                          raise RuntimeError(f"Invalid retained cache date: {day}")
+                      if day > end:
+                          raise RuntimeError(f"Future retained cache date: {day}")
+                  start = min([start] + retained_days)
+                  print(f"SENTIMENT MIGRATION | from={cache.get('algorithm_version')} to={ALGORITHM_VERSION} range={start}..{end}")
 
               manifest: list[dict[str, Any]] = []
-              touched = 0
-              unchanged = 0
-              empty = 0
+              touched = unchanged = empty = 0
               for ticker in universe:
                   t_rec = records.setdefault(ticker, {})
                   news_root = Path(args.data_root) / ticker / "news"
                   candidate_days: set[str] = set()
                   for provider in ("finnhub", "yfinance"):
                       pdir = news_root / provider
-                      if not pdir.exists():
-                          continue
-                      for p in pdir.glob("*.json"):
-                          day = p.stem[:10]
-                          if start <= day <= end:
-                              candidate_days.add(day)
-                  # Recheck cached days too: if an upstream raw file is corrected/removed,
-                  # the derived cache must follow the raw source rather than retain stale sentiment.
-                  for day in list(t_rec):
-                      if start <= str(day) <= end:
-                          candidate_days.add(str(day))
-
+                      if pdir.exists():
+                          candidate_days.update(p.stem[:10] for p in pdir.glob("*.json") if start <= p.stem[:10] <= end)
+                  candidate_days.update(str(day) for day in t_rec if start <= str(day) <= end)
                   for day in sorted(candidate_days):
                       raw_items, raw_counts, fingerprint = collect_day(Path(args.data_root), ticker, day)
                       dedup = dedup_items(raw_items)
                       current = t_rec.get(day) if isinstance(t_rec.get(day), dict) else {}
-                      if (
-                          current.get("algorithm_version") == ALGORITHM_VERSION
-                          and current.get("source_fingerprint") == fingerprint
-                      ):
+                      if record_is_current(current) and current.get("source_fingerprint") == fingerprint:
                           unchanged += 1
                           continue
-
                       if not dedup:
+                          if migration and not record_is_current(current) and int(current.get("n_total", 0) or 0) > 0:
+                              raise RuntimeError(
+                                  f"Cannot migrate {ticker} {day}: original raw headlines are unavailable; "
+                                  "refusing to erase a historical observation or invent article scores"
+                              )
                           t_rec[day] = {
-                              "date": day,
-                              "ticker": ticker,
-                              "algorithm_version": ALGORITHM_VERSION,
-                              "source_fingerprint": fingerprint,
-                              "score_mean": None,
-                              "score_std": None,
-                              "n_total": 0,
-                              "n_raw": int(sum(raw_counts.values())),
+                              "date": day, "ticker": ticker, "algorithm_version": ALGORITHM_VERSION,
+                              "source_fingerprint": fingerprint, "score_mean": None, "score_std": None,
+                              "n_total": 0, "n_raw": int(sum(raw_counts.values())),
                               "n_duplicates": int(sum(raw_counts.values())),
                               "n_finnhub_raw": int(raw_counts["finnhub"]),
-                              "n_yfinance_raw": int(raw_counts["yfinance"]),
-                              "articles": [],
+                              "n_yfinance_raw": int(raw_counts["yfinance"]), "articles": [],
                           }
                           empty += 1
-                          touched += 1
-                          continue
-
-                      manifest.append(
-                          {
-                              "ticker": ticker,
-                              "day": day,
-                              "source_fingerprint": fingerprint,
-                              "raw_counts": raw_counts,
-                              "n_raw": len(raw_items),
-                              "articles": dedup,
-                          }
-                      )
+                      else:
+                          manifest.append({
+                              "ticker": ticker, "day": day, "source_fingerprint": fingerprint,
+                              "raw_counts": raw_counts, "n_raw": len(raw_items), "articles": dedup,
+                          })
                       touched += 1
 
-              # Save only if something changed (or this is the first cache creation), so hourly
-              # post-processing does not create meaningless commits.
-              if touched > 0 or not cache_existed:
-                  save_cache(cache_path, cache)
-              Path(args.manifest).write_text(
-                  json.dumps(manifest, ensure_ascii=False, separators=(",", ":")),
-                  encoding="utf-8",
-              )
-              print(
-                  f"SENTIMENT SCAN | range={start}..{end} universe={len(universe)} "
-                  f"pending={len(manifest)} unchanged={unchanged} empty={empty} touched={touched}"
-              )
+              # Never label an old cache as V3 before inference and article-level validation
+              # have succeeded. A failed migration leaves the committed cache untouched.
+              if touched > 0 or not cache_existed or migration:
+                  save_cache(cache_path, cache, finalize=not manifest)
+              manifest_path = Path(args.manifest)
+              manifest_path.parent.mkdir(parents=True, exist_ok=True)
+              manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+              print(f"SENTIMENT SCAN | range={start}..{end} universe={len(universe)} pending={len(manifest)} "
+                    f"unchanged={unchanged} empty={empty} touched={touched}")
 
 
           def score_manifest(args: argparse.Namespace) -> None:
@@ -815,6 +843,12 @@ jobs:
 
           def validate(args: argparse.Namespace) -> None:
               cache = load_cache(Path(args.cache))
+              if cache.get("algorithm_version") != ALGORITHM_VERSION:
+                  raise RuntimeError("Sentiment migration has not completed")
+              incomplete = [(ticker, day) for ticker, days in cache["records"].items()
+                            for day, rec in days.items() if not record_is_current(rec)]
+              if incomplete:
+                  raise RuntimeError(f"Invalid or unmigrated article sentiment records: {incomplete[:5]}")
               records = cache.get("records") or {}
               total = 0
               observed = 0
@@ -1348,6 +1382,15 @@ jobs:
 
               latest = daily_out[-1]
               asof = latest["date"]
+              sentiment_asof = next((row["date"] for row in reversed(daily_out)
+                                     if row["sentiment_cap_weighted"] is not None), None)
+              if sentiment_asof is None:
+                  raise RuntimeError("No observed S&P sentiment history")
+              freshness = {
+                  "price_asof": asof,
+                  "sentiment_asof": sentiment_asof,
+                  "sentiment_status": "available" if latest["sentiment_cap_weighted"] is not None else "unavailable",
+              }
               tiles_out = []
               observed_tiles = 0
               nonzero_tiles = 0
@@ -1383,6 +1426,7 @@ jobs:
                   }
               )
               heat_out = {
+                  **freshness,
                   "schema_version": 3,
                   "symbol": "SPX",
                   "name": "S&P 500 Index",
@@ -1403,6 +1447,7 @@ jobs:
               }
 
               index_out = {
+                  **freshness,
                   "schema_version": 3,
                   "symbol": str(src.get("symbol") or "SPX"),
                   "name": str(src.get("name") or "S&P 500 Index"),
@@ -1426,6 +1471,22 @@ jobs:
                   "heatmap_observed": observed_tiles,
                   "heatmap_nonzero": nonzero_tiles,
               }
+
+
+          def validate_spx_observation(sentiment: Any, observed: int, coverage: float) -> None:
+              """Missing is valid only with exactly zero observed coverage, never fake zero."""
+              if observed < 0 or not math.isfinite(coverage) or not 0 <= coverage <= 1.000001:
+                  raise RuntimeError("Invalid S&P sentiment coverage")
+              if observed == 0:
+                  if sentiment is not None or coverage != 0:
+                      raise RuntimeError("Unobserved S&P sentiment must be null with zero coverage")
+                  print("::warning::Latest S&P sentiment unavailable; prices remain current and sentiment is not backfilled")
+                  return
+              if observed < 5 or coverage <= 0 or sentiment is None:
+                  raise RuntimeError("Insufficient observed S&P sentiment coverage")
+              value = float(sentiment)
+              if not math.isfinite(value) or not -1 <= value <= 1:
+                  raise RuntimeError("Invalid observed S&P sentiment score")
 
 
           def validate_public(
@@ -1466,8 +1527,8 @@ jobs:
               if close <= 1000:
                   raise RuntimeError(f"SPX price scale invalid: {close}")
               observed = int(spx_summary["latest_observed_tickers"])
-              if observed < 5:
-                  raise RuntimeError(f"Too few SPX tickers with real sentiment on latest SPX date: {observed}")
+              validate_spx_observation(spx_summary["latest_sentiment"], observed,
+                                       float(spx_summary["latest_coverage_market_cap"]))
               if latest_real < 100 or latest_nonzero < 20:
                   raise RuntimeError(
                       f"Suspicious ticker sentiment coverage: latest_real={latest_real}, latest_nonzero={latest_nonzero}"
@@ -1785,8 +1846,25 @@ jobs:
           from __future__ import annotations
           import json, math
           from pathlib import Path
+          from typing import Any
 
           def load(p): return json.loads(Path(p).read_text(encoding='utf-8'))
+
+          def validate_spx_observation(sentiment: Any, observed: int, coverage: float) -> None:
+              """Missing is valid only with exactly zero observed coverage, never fake zero."""
+              if observed < 0 or not math.isfinite(coverage) or not 0 <= coverage <= 1.000001:
+                  raise RuntimeError("Invalid S&P sentiment coverage")
+              if observed == 0:
+                  if sentiment is not None or coverage != 0:
+                      raise RuntimeError("Unobserved S&P sentiment must be null with zero coverage")
+                  print("::warning::Latest S&P sentiment unavailable; prices remain current and sentiment is not backfilled")
+                  return
+              if observed < 5 or coverage <= 0 or sentiment is None:
+                  raise RuntimeError("Insufficient observed S&P sentiment coverage")
+              value = float(sentiment)
+              if not math.isfinite(value) or not -1 <= value <= 1:
+                  raise RuntimeError("Invalid observed S&P sentiment score")
+
 
           def main():
               pub=Path('apps/web/public/data')
@@ -1800,10 +1878,16 @@ jobs:
               alias=float(latest.get('close_^GSPC'))
               sent=latest.get('sentiment_cap_weighted')
               if close<=1000 or abs(close-alias)>1e-8: raise RuntimeError(f'SPX price contract invalid: {latest}')
-              if sent is None or not math.isfinite(float(sent)): raise RuntimeError(f'Latest SPX cap sentiment missing: {latest}')
               obs=int(latest.get('sentiment_observed_tickers',0) or 0)
               coverage=float(latest.get('sentiment_coverage_market_cap',0) or 0)
-              if obs<5 or coverage<=0: raise RuntimeError(f'SPX sentiment coverage invalid: obs={obs}, coverage={coverage}')
+              validate_spx_observation(sent, obs, coverage)
+              expected_asof = next((row["date"] for row in reversed(daily)
+                                    if row.get("sentiment_cap_weighted") is not None), None)
+              expected_status = "available" if sent is not None else "unavailable"
+              if expected_asof is None or spx.get("sentiment_asof") != expected_asof:
+                  raise RuntimeError("S&P sentiment observation timestamp is missing or inconsistent")
+              if spx.get("price_asof") != latest["date"] or spx.get("sentiment_status") != expected_status:
+                  raise RuntimeError("S&P price/sentiment freshness metadata is inconsistent")
 
               tickers=load(pub/'_tickers.json')
               real=0; nonzero=0; price_ok=0
@@ -1863,7 +1947,7 @@ jobs:
                   slug=str(item.get('slug') or '')
                   if not slug or not (research/f'{slug}.json').is_file(): raise RuntimeError(f'Missing research payload: {slug}')
 
-              print(f'FINAL DATA OK | SPX={close:.2f} cap_sent={float(sent):.6f} coverage={coverage:.3f} obs={obs} ticker_price={price_ok} ticker_sent={real} nonzero={nonzero} portfolio_days={len(dates)} research={len(idx)}')
+              print(f'FINAL DATA OK | SPX={close:.2f} cap_sent={sent} coverage={coverage:.3f} obs={obs} ticker_price={price_ok} ticker_sent={real} nonzero={nonzero} portfolio_days={len(dates)} research={len(idx)}')
 
           if __name__=='__main__': main()
           PY

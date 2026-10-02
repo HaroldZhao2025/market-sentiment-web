@@ -1,17 +1,24 @@
-name: Prepare and Validate Pipeline Repair
+name: Pipeline Regression CI
 
 on:
   push:
-    branches: ["fix/pipeline-cache-migration-20261001"]
-    paths: [".github/workflows/pipeline-regression.yml"]
+    branches: ["main"]
+    paths:
+      - ".github/workflows/pipeline.yml"
+      - ".github/workflows/pipeline-regression.yml"
+  pull_request:
+    paths:
+      - ".github/workflows/pipeline.yml"
+      - ".github/workflows/pipeline-regression.yml"
+  workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - name: Checkout workflow source only
         uses: actions/checkout@v4
@@ -24,110 +31,294 @@ jobs:
           python-version: "3.11"
       - name: Install YAML parser
         run: python -m pip install --disable-pip-version-check "PyYAML==6.0.2"
-      - name: Read reviewed repair and test objects
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const crypto = require('crypto');
-            const inputs = {
-              'prepare_patch.py': '042ff7f7d4633c73887b9f86de35c1e06eaf88e1',
-              'test_pipeline.py': 'a17ba73ad6c15ba2b6b8b63effbd2d803f5e7022'
-            };
-            for (const [name, sha] of Object.entries(inputs)) {
-              const result = await github.rest.git.getBlob({ owner: context.repo.owner, repo: context.repo.repo, file_sha: sha });
-              const bytes = Buffer.from(result.data.content.replace(/\s/g, ''), 'base64');
-              const actual = crypto.createHash('sha1').update(Buffer.from(`blob ${bytes.length}\0`)).update(bytes).digest('hex');
-              if (actual !== sha) throw new Error(`Git object verification failed: ${name}`);
-              fs.writeFileSync(`/tmp/${name}`, bytes);
-            }
-      - name: Prepare targeted repair in the test workspace
-        run: python /tmp/prepare_patch.py
       - name: Pipeline regression tests
-        run: python /tmp/test_pipeline.py
-      - name: Prepare clean read-only CI and review artifacts
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          from textwrap import indent
+          python - <<'TEST'
+          """Deterministic regression tests for the actual Python embedded in pipeline.yml."""
+          from __future__ import annotations
+          import argparse
+          import copy
+          import gzip
+          import json
+          import math
+          import os
+          import re
           import subprocess
-          root = Path('/tmp/pipeline-repair')
-          root.mkdir(parents=True, exist_ok=True)
-          header = '''name: Pipeline Regression CI
-
-          on:
-            push:
-              branches: ["main"]
-              paths:
-                - ".github/workflows/pipeline.yml"
-                - ".github/workflows/pipeline-regression.yml"
-            pull_request:
-              paths:
-                - ".github/workflows/pipeline.yml"
-                - ".github/workflows/pipeline-regression.yml"
-            workflow_dispatch: {}
-
-          permissions:
-            contents: read
-
-          jobs:
-            validate:
-              runs-on: ubuntu-latest
-              timeout-minutes: 10
-              steps:
-                - name: Checkout workflow source only
-                  uses: actions/checkout@v4
-                  with:
-                    fetch-depth: 1
-                    sparse-checkout: .github/workflows
-                - name: Setup Python
-                  uses: actions/setup-python@v5
-                  with:
-                    python-version: "3.11"
-                - name: Install YAML parser
-                  run: python -m pip install --disable-pip-version-check "PyYAML==6.0.2"
-                - name: Pipeline regression tests
-                  run: |
-          '''
-          tests = Path('/tmp/test_pipeline.py').read_text(encoding='utf-8')
-          clean = header + indent("python - <<'TEST'\n" + tests + "TEST\n", '          ')
-          (root / 'pipeline-regression.yml').write_text(clean, encoding='utf-8')
-          (root / 'pipeline.yml').write_bytes(Path('.github/workflows/pipeline.yml').read_bytes())
-          diff = subprocess.run(['git', 'diff', '--', '.github/workflows/pipeline.yml'], text=True, check=True, capture_output=True).stdout
-          (root / 'repair.patch').write_text(diff, encoding='utf-8')
+          import sys
+          import tempfile
+          import types
+          import unittest
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+          from unittest.mock import patch
           import yaml
-          parsed = yaml.load(clean, Loader=yaml.BaseLoader)
-          assert parsed['permissions']['contents'] == 'read'
-          assert 'pull_request' in parsed['on']
-          for step in parsed['jobs']['validate']['steps']:
-              if 'run' in step:
-                  subprocess.run(['bash', '-n'], input=step['run'], text=True, check=True)
-          print('Prepared review artifacts. No branch or production data has been changed by this job.')
-          PY
-      - name: Store validated Git objects for review
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const objects = {};
-            for (const name of ['pipeline.yml', 'pipeline-regression.yml']) {
-              const result = await github.rest.git.createBlob({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                content: fs.readFileSync(`/tmp/pipeline-repair/${name}`, 'utf8'),
-                encoding: 'utf-8'
-              });
-              objects[name] = result.data.sha;
-              core.notice(`${name}: ${result.data.sha}`);
-            }
-            fs.writeFileSync('/tmp/pipeline-repair/objects.json', JSON.stringify(objects, null, 2));
-            await core.summary.addHeading('Pipeline repair regression result')
-              .addRaw('16 deterministic tests passed. Production scripts compile; Bash syntax validates. No live model or market-provider calls were made. No branch was updated by this job.')
-              .addCodeBlock(JSON.stringify(objects, null, 2), 'json').write();
-      - name: Upload validated repair artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: validated-pipeline-repair
-          path: /tmp/pipeline-repair
-          retention-days: 3
-          if-no-files-found: error
+
+          ROOT = Path.cwd()
+          WORKFLOW = ROOT / '.github/workflows/pipeline.yml'
+          VERSION = 'dedup-finbert-v3-article-sentiment'
+          LEGACY = 'dedup-finbert-v2'
+          TODAY = datetime.now(timezone.utc).date()
+
+          def scripts_from(path):
+              workflow = yaml.load(path.read_text(encoding='utf-8'), Loader=yaml.BaseLoader)
+              steps = workflow['jobs']['build']['steps']
+              run = next(s['run'] for s in steps if s.get('name') == 'Install final pipeline scripts')
+              scripts = dict(re.findall(r"(?m)^cat > /tmp/market-final/(\w+\.py) <<'PY'\n(.*?)(?=^PY$)", run, re.S))
+              assert len(scripts) == 6, f'Unexpected embedded scripts: {sorted(scripts)}'
+              for name, text in scripts.items():
+                  compile(text, name, 'exec')
+              for step in steps:
+                  if 'run' in step and step.get('shell', 'bash') == 'bash':
+                      shell = re.sub(r'\$\{\{.*?\}\}', 'CI_PLACEHOLDER', step['run'])
+                      subprocess.run(['bash', '-n'], input=shell, text=True, check=True)
+              return workflow, scripts
+
+          def load_module(text, name):
+              module = types.ModuleType(name)
+              exec(compile(text, name + '.py', 'exec'), module.__dict__)
+              return module
+
+          workflow, scripts = scripts_from(WORKFLOW)
+          S = load_module(scripts['build_sentiment_v2.py'], 'sentiment_under_test')
+          SITE = load_module(scripts['build_complete_site.py'], 'site_under_test')
+          FINAL = load_module(scripts['validate_final_data.py'], 'final_under_test')
+          assert S.ALGORITHM_VERSION == VERSION
+
+          class Fixture:
+              def __init__(self, root):
+                  self.root = Path(root)
+                  self.data = self.root / 'data'
+                  self.data.mkdir(parents=True, exist_ok=True)
+                  self.universe = self.data / 'sp500.csv'
+                  self.universe.write_text('ticker\nAAA\n', encoding='utf-8')
+                  self.cache = self.data / 'derived/sentiment_v2.json.gz'
+                  self.manifest = self.root / 'work/manifest.json'
+                  self.old = (TODAY - timedelta(days=40)).isoformat()
+                  self.retired = (TODAY - timedelta(days=400)).isoformat()
+                  self.args = argparse.Namespace(cache=str(self.cache), manifest=str(self.manifest),
+                      universe=str(self.universe), data_root=str(self.data), days=14, initial_days=365, batch_size=2)
+                  self.payload = {'schema_version': 2, 'algorithm_version': LEGACY, 'records': {}}
+                  for ticker, day in [('AAA', self.old), ('ZZZ', self.retired)]:
+                      self.payload['records'][ticker] = {day: {'date': day, 'ticker': ticker,
+                          'algorithm_version': LEGACY, 'score_mean': 0.2, 'score_std': 0.0,
+                          'n_total': 1, 'n_raw': 2, 'n_duplicates': 1, 'source_fingerprint': 'legacy'}}
+                      article = {'headline': f'{ticker} earnings improve', 'url': f'https://example.test/{ticker}', 'ts': day + 'T12:00:00Z'}
+                      self.news(ticker, day, 'yfinance', [article, article.copy()])
+                      self.news(ticker, day, 'finnhub', [article.copy()])
+                  self.write_cache()
+              def news(self, ticker, day, provider, rows):
+                  path = self.data / ticker / 'news' / provider / f'{day}.json'
+                  path.parent.mkdir(parents=True, exist_ok=True)
+                  path.write_text(json.dumps(rows), encoding='utf-8')
+              def write_cache(self):
+                  self.cache.parent.mkdir(parents=True, exist_ok=True)
+                  with gzip.open(self.cache, 'wt', encoding='utf-8') as f:
+                      json.dump(self.payload, f)
+              def read_cache(self):
+                  with gzip.open(self.cache, 'rt', encoding='utf-8') as f:
+                      return json.load(f)
+              def pending(self):
+                  return json.loads(self.manifest.read_text(encoding='utf-8'))
+              def score(self):
+                  fake = types.ModuleType('transformers')
+                  class Factory:
+                      @staticmethod
+                      def from_pretrained(*args, **kwargs):
+                          return object()
+                  fake.AutoModelForSequenceClassification = Factory
+                  fake.AutoTokenizer = Factory
+                  def pipeline(*args, **kwargs):
+                      def predict(texts, **kwargs):
+                          return [[{'label': 'positive', 'score': .7}, {'label': 'neutral', 'score': .2},
+                                   {'label': 'negative', 'score': .1}] for _ in texts]
+                      return predict
+                  fake.pipeline = pipeline
+                  with patch.dict(sys.modules, {'transformers': fake}):
+                      S.score_manifest(self.args)
+
+          # Reproduce the production failure before testing the patch on the preparation run.
+          baseline = Path('/tmp/pipeline-before.yml')
+          if baseline.exists():
+              _, before_scripts = scripts_from(baseline)
+              before = load_module(before_scripts['build_sentiment_v2.py'], 'baseline_sentiment')
+              with tempfile.TemporaryDirectory() as tmp:
+                  f = Fixture(tmp)
+                  f.manifest.parent.mkdir(parents=True)
+                  before.scan(f.args)
+                  assert not f.pending() and f.read_cache()['algorithm_version'] == LEGACY
+                  print('BASELINE REPRODUCED: old cache + no recent news => pending=0 and V2 header, rejected by V3 deployment')
+
+          class MigrationTests(unittest.TestCase):
+              def setUp(self):
+                  self.tmp = tempfile.TemporaryDirectory()
+                  self.addCleanup(self.tmp.cleanup)
+                  self.f = Fixture(self.tmp.name)
+              def test_01_migrates_outside_hourly_window_and_retired_tickers(self):
+                  S.scan(self.f.args)
+                  self.assertEqual({(r['ticker'], r['day']) for r in self.f.pending()}, {('AAA', self.f.old), ('ZZZ', self.f.retired)})
+                  self.assertEqual(self.f.read_cache()['algorithm_version'], LEGACY)
+                  self.assertEqual(self.f.read_cache()['records']['AAA'][self.f.old]['score_mean'], .2)
+              def test_02_real_scoring_contract_and_dedup(self):
+                  S.scan(self.f.args)
+                  self.f.score()
+                  obj = self.f.read_cache()
+                  self.assertEqual(obj['algorithm_version'], VERSION)
+                  for days in obj['records'].values():
+                      for record in days.values():
+                          self.assertTrue(S.record_is_current(record))
+                          self.assertEqual(record['n_total'], 1)
+                          self.assertEqual(record['n_raw'], 3)
+                          self.assertEqual(record['n_duplicates'], 2)
+                          self.assertAlmostEqual(record['score_mean'], .6)
+              def test_03_mixed_cache_is_not_trusted_by_header(self):
+                  self.f.payload['algorithm_version'] = VERSION
+                  self.f.write_cache()
+                  S.scan(self.f.args)
+                  self.assertEqual(len(self.f.pending()), 2)
+              def test_04_missing_article_fields_trigger_migration(self):
+                  self.f.payload['algorithm_version'] = VERSION
+                  for days in self.f.payload['records'].values():
+                      for rec in days.values():
+                          rec['algorithm_version'] = VERSION
+                  self.f.write_cache()
+                  S.scan(self.f.args)
+                  self.assertEqual(len(self.f.pending()), 2)
+              def test_05_corrupt_cache_is_not_erased(self):
+                  self.f.cache.write_bytes(b'not a gzip file')
+                  with self.assertRaisesRegex(RuntimeError, 'refusing to replace'):
+                      S.scan(self.f.args)
+                  self.assertEqual(self.f.cache.read_bytes(), b'not a gzip file')
+              def test_06_missing_historical_raw_data_is_not_invented(self):
+                  for path in (self.f.data / 'AAA/news').glob('*/*.json'):
+                      path.unlink()
+                  before = self.f.cache.read_bytes()
+                  with self.assertRaisesRegex(RuntimeError, 'original raw headlines are unavailable'):
+                      S.scan(self.f.args)
+                  self.assertEqual(self.f.cache.read_bytes(), before)
+              def test_07_empty_news_stays_null(self):
+                  day = (TODAY - timedelta(days=2)).isoformat()
+                  self.f.payload['records']['AAA'][day] = {'date': day, 'ticker': 'AAA', 'algorithm_version': LEGACY,
+                                                          'n_total': 0, 'score_mean': None}
+                  self.f.write_cache()
+                  S.scan(self.f.args)
+                  rec = self.f.read_cache()['records']['AAA'][day]
+                  self.assertIsNone(rec['score_mean'])
+                  self.assertEqual(rec['articles'], [])
+                  self.f.score()
+                  self.assertTrue(S.record_is_current(self.f.read_cache()['records']['AAA'][day]))
+              def test_08_noop_scan_does_not_rewrite_cache(self):
+                  S.scan(self.f.args)
+                  self.f.score()
+                  before = self.f.cache.read_bytes()
+                  S.scan(self.f.args)
+                  self.assertEqual(self.f.pending(), [])
+                  self.assertEqual(self.f.cache.read_bytes(), before)
+              def test_09_incomplete_finalize_is_rejected(self):
+                  before = self.f.cache.read_bytes()
+                  with self.assertRaisesRegex(RuntimeError, 'incomplete sentiment migration'):
+                      S.save_cache(self.f.cache, self.f.read_cache())
+                  self.assertEqual(self.f.cache.read_bytes(), before)
+              def test_10_scoring_failure_preserves_unfinished_cache(self):
+                  S.scan(self.f.args)
+                  before = self.f.cache.read_bytes()
+                  fake = types.ModuleType('transformers')
+                  class FailingFactory:
+                      @staticmethod
+                      def from_pretrained(*args, **kwargs):
+                          raise RuntimeError('fixture model outage')
+                  fake.AutoModelForSequenceClassification = FailingFactory
+                  fake.AutoTokenizer = FailingFactory
+                  fake.pipeline = lambda **kwargs: None
+                  with patch.dict(sys.modules, {'transformers': fake}):
+                      with self.assertRaisesRegex(RuntimeError, 'fixture model outage'):
+                          S.score_manifest(self.f.args)
+                  self.assertEqual(self.f.cache.read_bytes(), before)
+              def test_11_full_validator_requires_every_article_contract(self):
+                  S.scan(self.f.args)
+                  self.f.score()
+                  obj = self.f.read_cache()
+                  template = obj['records']['AAA'][self.f.old]
+                  for i in range(100):
+                      obj['records'][f'T{i}'] = {self.f.old: copy.deepcopy(template)}
+                  self.f.payload = obj
+                  self.f.write_cache()
+                  S.validate(self.f.args)
+                  obj['records']['T0'][self.f.old]['articles'][0]['probs']['pos'] = .2
+                  self.f.write_cache()
+                  with self.assertRaisesRegex(RuntimeError, 'Invalid or unmigrated'):
+                      S.validate(self.f.args)
+              def test_12_cache_date_validation_rejects_future(self):
+                  day = (TODAY + timedelta(days=1)).isoformat()
+                  self.f.payload['records']['AAA'][day] = self.f.payload['records']['AAA'].pop(self.f.old)
+                  self.f.write_cache()
+                  before = self.f.cache.read_bytes()
+                  with self.assertRaisesRegex(RuntimeError, 'Future retained cache date'):
+                      S.scan(self.f.args)
+                  self.assertEqual(self.f.cache.read_bytes(), before)
+
+          class FreshnessTests(unittest.TestCase):
+              def test_13_missing_is_valid_but_not_numeric_zero(self):
+                  for module in (SITE, FINAL):
+                      module.validate_spx_observation(None, 0, 0.0)
+                      with self.assertRaises(RuntimeError):
+                          module.validate_spx_observation(0.0, 0, 0.0)
+              def test_14_observed_contract_stays_strict(self):
+                  for module in (SITE, FINAL):
+                      module.validate_spx_observation(.2, 100, .8)
+                      for args in [(None, 10, .2), (.2, 1, .2), (.2, 10, 0), (.2, 10, 2), (float('nan'), 10, .5), (2, 10, .5), (None, 0, .1)]:
+                          with self.subTest(args=args), self.assertRaises(RuntimeError):
+                              module.validate_spx_observation(*args)
+              def test_15_both_site_validation_layers_allow_honest_missing_data(self):
+                  with tempfile.TemporaryDirectory() as tmp:
+                      root = Path(tmp)
+                      pub = root / 'apps/web/public/data'
+                      def dump(path, value):
+                          path.parent.mkdir(parents=True, exist_ok=True)
+                          path.write_text(json.dumps(value), encoding='utf-8')
+                      yesterday = (TODAY - timedelta(days=1)).isoformat()
+                      today = TODAY.isoformat()
+                      daily = [{'date': yesterday, 'close': 6000., 'close_^GSPC': 6000., 'sentiment_cap_weighted': .6,
+                                'sentiment_observed_tickers': 100, 'sentiment_coverage_market_cap': .7},
+                               {'date': today, 'close': 6100., 'close_^GSPC': 6100., 'sentiment_cap_weighted': None,
+                                'sentiment_observed_tickers': 0, 'sentiment_coverage_market_cap': 0.}]
+                      spx = {'price_asof': today, 'sentiment_asof': yesterday, 'sentiment_status': 'unavailable', 'daily': daily}
+                      dump(pub / 'SPX/sp500_index.json', spx)
+                      dump(root / 'data/SPX/sp500_index.json', spx)
+                      tickers = [f'T{i}' for i in range(100)]
+                      dump(pub / '_tickers.json', tickers)
+                      article = {'s': .6, 'sentiment_label': 'Strong Positive', 'probs': {'pos': .7, 'neu': .2, 'neg': .1}}
+                      for ticker in tickers:
+                          dump(pub / f'ticker/{ticker}.json', {'dates': [yesterday], 'price': [100.], 'S': [.6],
+                              'sentiment_observed': [True], 'n_total': [1], 'news': [article]})
+                      dump(pub / 'portfolio_strategy.json', {'dates': [today], 'equity': [1.], 'gross_exposure': [.5]})
+                      research = root / 'apps/web/public/research'
+                      dump(research / 'index.json', [{'slug': f's{i}'} for i in range(8)])
+                      dump(research / 'overview.json', {})
+                      for i in range(8):
+                          dump(research / f's{i}.json', {})
+                      SITE.validate_public(pub, tickers, {'latest_close': 6100., 'latest_date': today,
+                          'latest_observed_tickers': 0, 'latest_sentiment': None, 'latest_coverage_market_cap': 0., 'latest_unique_news': 0})
+                      cwd = Path.cwd()
+                      try:
+                          os.chdir(root)
+                          FINAL.main()
+                          spx['sentiment_status'] = 'available'
+                          dump(pub / 'SPX/sp500_index.json', spx)
+                          dump(root / 'data/SPX/sp500_index.json', spx)
+                          with self.assertRaisesRegex(RuntimeError, 'freshness metadata'):
+                              FINAL.main()
+                      finally:
+                          os.chdir(cwd)
+              def test_16_production_guards_and_triggers(self):
+                  self.assertEqual(workflow['concurrency']['cancel-in-progress'], 'false')
+                  self.assertEqual(workflow['jobs']['build']['timeout-minutes'], '360')
+                  self.assertIn('push', workflow['on'])
+                  self.assertEqual(workflow['on']['push']['branches'], ['main'])
+                  self.assertIn('"numpy>=1.26,<2"', WORKFLOW.read_text())
+                  self.assertNotIn('npm run build || true', WORKFLOW.read_text())
+
+          result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__]))
+          if not result.wasSuccessful():
+              raise SystemExit(1)
+          print(f'PIPELINE REGRESSION PASS | tests={result.testsRun} embedded_scripts=6 bash_syntax=OK')
+          TEST
