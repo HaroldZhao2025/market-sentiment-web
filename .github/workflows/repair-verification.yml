@@ -1,0 +1,136 @@
+name: Verify Production Hardening
+on:
+  push:
+    branches: ["fix/production-hardening-20261001"]
+    paths: [".github/workflows/repair-verification.yml"]
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONPATH: src
+      PYTHONUNBUFFERED: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            .github/workflows
+            src/market_sentiment
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Read and authenticate reviewed patch
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const crypto = require('crypto');
+            const zlib = require('zlib');
+            const result = await github.rest.git.getBlob({owner: context.repo.owner, repo: context.repo.repo, file_sha: '20574eb059246272cbf1b9cc651398ec2f3c6e9e'});
+            const patch = zlib.gunzipSync(Buffer.from(result.data.content.replace(/\s/g,''),'base64'));
+            const digest = crypto.createHash('sha256').update(patch).digest('hex');
+            if (digest !== '711ac6dd61d1e9c2c543d61b605d1e243b828520d8278af7480e4bb57cc3ad14') throw new Error('Patch integrity mismatch');
+            fs.writeFileSync('/tmp/hardening.patch', patch);
+      - name: Apply patch only in verification workspace
+        run: |
+          git apply --check /tmp/hardening.patch
+          git apply /tmp/hardening.patch
+          python -m pip install --disable-pip-version-check "PyYAML==6.0.2"
+      - name: Run all 32 deterministic regression tests
+        run: |
+          mkdir -p /tmp/hardening-verification
+          python - <<'PY' 2>&1 | tee /tmp/hardening-verification/regression.log
+          import subprocess, yaml
+          from pathlib import Path
+          workflow=yaml.load(Path('.github/workflows/pipeline-regression.yml').read_text(),Loader=yaml.BaseLoader)
+          step=next(s['run'] for s in workflow['jobs']['validate']['steps'] if s.get('name')=='Pipeline regression tests')
+          subprocess.run(['bash','-c',step],check=True)
+          PY
+      - name: Install production model and public-source dependencies
+        run: |
+          python -m pip install --disable-pip-version-check "numpy>=1.26,<2" "pandas>=2.1,<3" "yfinance>=0.2.50" "requests>=2.31" "beautifulsoup4>=4.12" "lxml>=5.2"
+          python -m pip install "torch==2.3.1+cpu" --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers==4.45.2" "tokenizers==0.20.3"
+      - name: Real RSS to FinBERT and checkpoint integration
+        run: |
+          python -u - <<'PY' 2>&1 | tee /tmp/hardening-verification/live-smoke.log
+          import argparse, gzip, json, os, re, sqlite3, sys, yaml
+          from pathlib import Path
+          workflow=yaml.load(Path('.github/workflows/pipeline.yml').read_text(),Loader=yaml.BaseLoader)
+          source=next(s['run'] for s in workflow['jobs']['build']['steps'] if s.get('name')=='Install final pipeline scripts')
+          script_root=Path(os.environ['RUNNER_TEMP'])/'verified-scripts'
+          script_root.mkdir()
+          for name,text in re.findall(r"(?m)^cat > /tmp/market-final/(\w+\.py) <<'PY'\n(.*?)(?=^PY$)",source,re.S):
+              (script_root/name).write_text(text)
+          sys.path.insert(0,str(script_root))
+          import refresh_raw_data as raw
+          import build_sentiment_v2 as sentiment
+          import build_complete_site as site
+          root=Path(os.environ['RUNNER_TEMP'])/'real-news-smoke'
+          root.mkdir()
+          universe=root/'sp500.csv'
+          universe.write_text('ticker\nAAPL\nMSFT\n')
+          raw.refresh_yahoo_news(['AAPL','MSFT'],root,'manual')
+          args=argparse.Namespace(universe=str(universe),data_root=str(root),cache=str(root/'sentiment.json.gz'),
+              manifest=str(root/'manifest.json'),checkpoint=str(root/'scores.sqlite3'),days=5,initial_days=45,batch_size=8)
+          sentiment.scan(args)
+          manifest=json.loads(Path(args.manifest).read_text())
+          assert manifest, 'No usable live news, cannot claim live integration passed'
+          sentiment.score_manifest(args)
+          with gzip.open(args.cache,'rt') as handle:
+              cache=json.load(handle)
+          assert cache['algorithm_version']==sentiment.ALGORITHM_VERSION
+          records=[r for days in cache['records'].values() for r in days.values()]
+          assert records and all(sentiment.record_is_current(r) for r in records)
+          text_by_key={}
+          for rec in manifest:
+              for article in rec['articles']:
+                  key,title=article['title_key'],article['title']
+                  if key not in text_by_key or len(title)>len(text_by_key[key]): text_by_key[key]=title
+          with sqlite3.connect(args.checkpoint) as connection:
+              namespaces=[r[0] for r in connection.execute('SELECT DISTINCT namespace FROM predictions')]
+          assert len(namespaces)==1
+          revision=namespaces[0].split('|')[-1]
+          def must_not_infer(*args,**kwargs):
+              raise AssertionError('Checkpoint failed to reuse a completed real prediction')
+          reused=sentiment.score_headlines(must_not_infer,text_by_key,Path(args.checkpoint),8,model_revision=revision)
+          assert len(reused)==len(text_by_key)
+          public_news={ticker:site.recent_news(root,ticker,cache['records']) for ticker in ['AAPL','MSFT']}
+          assert all(public_news.values()), 'Missing article-scored public news evidence'
+          report={'tickers':2,'ticker_days':len(records),'article_observations':sum(r['n_total'] for r in records),
+              'unique_real_headlines':len(text_by_key),'checkpoint_reused':len(reused),'model_revision':revision,
+              'public_article_count':sum(len(rows) for rows in public_news.values()),
+              'providers':sorted({p for r in records for article in r['articles'] for p in article['providers']}),
+              'latest_news_date':max(r['date'] for r in records),'all_article_contracts_valid':True}
+          Path('/tmp/hardening-verification/live-smoke.json').write_text(json.dumps(report,indent=2))
+          print('LIVE INTEGRATION PASS | '+json.dumps(report))
+          PY
+      - name: Store validated source objects without updating any branch
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const objects = {};
+            for (const name of ['pipeline.yml','pipeline-regression.yml']) {
+              const result = await github.rest.git.createBlob({owner:context.repo.owner,repo:context.repo.repo,
+                content:fs.readFileSync(`.github/workflows/${name}`,'utf8'),encoding:'utf-8'});
+              objects[name]=result.data.sha;
+            }
+            fs.writeFileSync('/tmp/hardening-verification/objects.json',JSON.stringify(objects,null,2));
+            await core.summary.addHeading('Production hardening verification')
+              .addRaw('32 deterministic tests passed. Real public-news/FinBERT/checkpoint/public-evidence integration passed. No branch or production data was updated by this verification job.')
+              .addCodeBlock(fs.readFileSync('/tmp/hardening-verification/live-smoke.json','utf8'),'json')
+              .addCodeBlock(JSON.stringify(objects,null,2),'json').write();
+      - name: Preserve verification result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hardening-verification
+          path: /tmp/hardening-verification
+          retention-days: 3
+          if-no-files-found: warn
