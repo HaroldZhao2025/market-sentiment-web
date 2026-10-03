@@ -3,9 +3,9 @@ import path from "node:path";
 import CompanyVisual from "../../../components/CompanyVisual";
 import type { EarningsArtifact } from "../../earnings/[symbol]/EarningsIntelligenceClient";
 import CompanyDetailTabs from "./CompanyDetailTabs";
+import { mergeCompanyNews } from "../../../lib/company-news";
 
 type SeriesIn = { date: string[]; price: number[]; sentiment: number[] };
-type NewsItem = { ts: string; title: string; url: string; text?: string; summary?: string; source?: string; provider?: string; s?: number | null; sentiment_label?: string; probs?: { pos?: number; neu?: number; neg?: number } };
 type CompanyMeta = { ticker?: string; name?: string; sector?: string; industry?: string; universe?: string };
 
 export const dynamic = "error";
@@ -41,11 +41,6 @@ function buildSeries(obj: any): SeriesIn | null {
     return value;
   });
   return { date: date.slice(0, n), price: price.slice(0, n), sentiment };
-}
-
-function buildNews(obj: any): NewsItem[] {
-  const raw = Array.isArray(obj?.news) ? obj.news : Array.isArray(obj?.articles) ? obj.articles : [];
-  return raw.map((r: any) => ({ ...r, ts: String(r?.ts ?? r?.date ?? ""), title: String(r?.title ?? r?.headline ?? ""), url: String(r?.url ?? ""), text: r?.text ? String(r.text) : undefined, summary: r?.summary ? String(r.summary) : undefined })).filter((r: NewsItem) => r.ts && r.title);
 }
 
 async function loadUniverse() {
@@ -97,10 +92,7 @@ export default async function Page({ params }: { params: { symbol: string } }) {
     readJSON<any>(path.join(DATA_ROOT, "v5", "history", `${symbol}.json`)),
     loadEarnings(symbol),
   ]);
-  const richNews = buildNews(rich);
-  const compactNews = buildNews(core);
-  const news = (richNews.length ? richNews : compactNews).slice(0, 160);
-  const newsTotal = Number(rich?.article_count ?? core?.news_total ?? core?.newsTotal ?? core?.news_count?.total) || news.length;
+  const { news, total: newsTotal, latestArticleAt } = mergeCompanyNews(rich, core);
   const extendedSeries = extendedHistory ? buildSeries(extendedHistory) : null;
   const coreSeries = core ? buildSeries(core) : null;
   const series = extendedSeries && extendedSeries.date.length > 0 ? extendedSeries : coreSeries;
@@ -125,12 +117,13 @@ export default async function Page({ params }: { params: { symbol: string } }) {
         </div>
         <div className="flex flex-wrap gap-2 text-xs">
           <span className="pill">{newsTotal} news</span>
+          {latestArticleAt ? <span className="pill">Latest article (UTC): {latestArticleAt.slice(0, 10)}</span> : null}
           {historyDays > 0 ? <span className="pill">{historyDays} trading days</span> : null}
           {callCount > 0 ? <span className="pill text-emerald-300">{callCount} structured call{callCount === 1 ? "" : "s"}</span> : callLinks > 0 ? <span className="pill">{callLinks} public call source{callLinks === 1 ? "" : "s"}</span> : <span className="pill text-neutral-600">Call search pending</span>}
         </div>
       </section>
 
-      <CompanyDetailTabs symbol={symbol} series={series} news={news as any} newsTotal={newsTotal} earnings={earnings} />
+      <CompanyDetailTabs symbol={symbol} series={series} news={news} newsTotal={newsTotal} earnings={earnings} />
     </main>
   );
 }

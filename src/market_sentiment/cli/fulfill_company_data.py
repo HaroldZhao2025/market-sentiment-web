@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 from market_sentiment.cli.build_v5_market import atomic_json, close_series, finite, load_json
 from market_sentiment.v5_news import PUBLIC_UA, collect_company_news, deduplicate_news
 from market_sentiment.v6_news import ReusableNewsScorer
+from market_sentiment.news_freshness import latest_article_timestamp, news_refresh_metadata
 
 GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
 
@@ -283,12 +284,20 @@ def history_payload(symbol: str, dates: list[str], prices: list[float | None], n
 
 def coverage(companies: list[dict[str, Any]], news_dir: Path, history_dir: Path, attempts: dict[str, Any]) -> dict[str, Any]:
     news_count = 0
+    recent_news_count = 0
+    now = datetime.now(timezone.utc)
+    recent_cutoff = (now - timedelta(days=7)).isoformat()
     history_count = 0
     attempted = 0
     company_rows: list[dict[str, Any]] = []
     for company in companies:
         symbol = str(company.get("ticker") or "").upper()
-        n_ready = news_ready(news_dir / f"{symbol}.json")
+        news_payload = load_json(news_dir / f"{symbol}.json", {})
+        articles = rows(news_payload.get("articles") if isinstance(news_payload, dict) else None)
+        n_ready = bool(articles)
+        latest_article = latest_article_timestamp(articles, now)
+        recent = latest_article is not None and latest_article >= recent_cutoff
+        recent_news_count += int(recent)
         h_ready = history_ready(history_dir / f"{symbol}.json")
         meta = attempts.get(symbol) if isinstance(attempts.get(symbol), dict) else {}
         if n_ready:
@@ -303,7 +312,12 @@ def coverage(companies: list[dict[str, Any]], news_dir: Path, history_dir: Path,
                 "news_ready": n_ready,
                 "history_ready": h_ready,
                 "attempted": bool(meta),
-                "article_count": int(meta.get("article_count") or 0),
+                "article_count": len(articles),
+                "latest_article_at_utc": latest_article,
+                "news_recent": recent,
+                "last_attempt_utc": meta.get("last_attempt_utc"),
+                "last_refresh_status": meta.get("refresh_status"),
+                "last_new_article_count": meta.get("new_article_count"),
                 "history_days": int(meta.get("history_days") or 0),
             }
         )
@@ -314,6 +328,9 @@ def coverage(companies: list[dict[str, Any]], news_dir: Path, history_dir: Path,
         "source_policy": "free_public_only",
         "company_count": len(companies),
         "news_ready_count": news_count,
+        "news_recency_window_days": 7,
+        "news_recent_count": recent_news_count,
+        "news_recent_coverage_rate": round(recent_news_count / total, 6),
         "history_ready_count": history_count,
         "attempted_count": attempted,
         "news_coverage_rate": round(news_count / total, 6),
@@ -361,6 +378,7 @@ def main() -> None:
     finnhub_items = collect_finnhub_history(targets, args.news_days)
 
     fetched: dict[str, list[dict[str, Any]]] = {}
+    fetch_errors: dict[str, str] = {}
     with ThreadPoolExecutor(max_workers=max(1, min(args.workers, 24))) as pool:
         futures = {
             pool.submit(
@@ -377,8 +395,10 @@ def main() -> None:
             symbol = str(company.get("ticker") or "").upper()
             try:
                 public_items = future.result()
-            except Exception:
+            except Exception as exc:
                 public_items = []
+                # Do not expose exception messages that might contain credentials.
+                fetch_errors[symbol] = type(exc).__name__
             fetched[symbol] = deduplicate_news([*public_items, *finnhub_items.get(symbol, [])])[: max(1, args.news_max_items)]
 
     scorer = ReusableNewsScorer(Path(args.score_cache), batch_size=48)
@@ -387,6 +407,8 @@ def main() -> None:
     universe_companies = rows(universe_payload.get("companies") if isinstance(universe_payload, dict) else None)
     universe_by_symbol = {str(row.get("ticker") or "").upper(): row for row in universe_companies}
 
+    batch_new_articles = 0
+    batch_nonempty_fetches = 0
     for index, company in enumerate(targets, 1):
         symbol = str(company.get("ticker") or "").upper()
         existing_payload = load_json(news_dir / f"{symbol}.json", {})
@@ -395,13 +417,19 @@ def main() -> None:
         if combined:
             combined = scorer.score(combined)
         scores = [value for value in (finite(item.get("s")) for item in combined) if value is not None]
+        freshness = news_refresh_metadata(
+            existing_payload, fetched.get(symbol, []), combined, now,
+            fetch_error_type=fetch_errors.get(symbol),
+        )
+        batch_new_articles += freshness["new_article_count"]
+        batch_nonempty_fetches += int(freshness["fetched_article_count"] > 0)
         atomic_json(
             news_dir / f"{symbol}.json",
             {
                 "schema_version": 6,
                 "symbol": symbol,
                 "source_policy": "free_public_only",
-                "updated_at_utc": now.isoformat(),
+                **freshness,
                 "history_days_requested": args.news_days,
                 "article_count": len(combined),
                 "scored_article_count": len(scores),
@@ -419,13 +447,14 @@ def main() -> None:
             dates = old_history.get("date") if isinstance(old_history, dict) else []
 
         attempts[symbol] = {
-            "last_attempt_utc": now.isoformat(),
+            **freshness,
             "article_count": len(combined),
             "history_days": len(dates) if isinstance(dates, list) else 0,
         }
         row = universe_by_symbol.get(symbol)
         if row is not None:
             row["news_count"] = len(combined)
+            row["latest_article_at_utc"] = freshness["latest_article_at_utc"]
             row["history_available"] = history_ready(history_dir / f"{symbol}.json")
             if scores:
                 row["sentiment"] = sum(scores) / len(scores)
@@ -447,6 +476,13 @@ def main() -> None:
         universe_payload["company_data_coverage_rate"] = min(result["news_coverage_rate"], result["history_coverage_rate"])
         atomic_json(v5 / "universe.json", universe_payload)
 
+    if batch_new_articles == 0:
+        print("::warning::This batch retained no new news articles; existing coverage is not a fresh-news check.", flush=True)
+    print(
+        f"NEWS REFRESH | targets={len(targets)} nonempty_fetches={batch_nonempty_fetches} "
+        f"new_articles={batch_new_articles} collector_errors={len(fetch_errors)} "
+        f"companies_with_articles_in_last_7_days={result['news_recent_count']}"
+    )
     print(
         f"COMPANY DATA FULFILLMENT OK | targets={len(targets)} news={result['news_ready_count']}/{result['company_count']} "
         f"history={result['history_ready_count']}/{result['company_count']} attempted={result['attempted_count']}/{result['company_count']}"
@@ -455,3 +491,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
