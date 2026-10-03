@@ -1,0 +1,140 @@
+name: Publish Validated News Recovery
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/news-recovery.yml'
+      - 'scripts/verify_news_publication.py'
+      - 'tests/test_news_publication.py'
+  push:
+    branches: [main]
+    paths: ['.github/workflows/news-recovery.yml']
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('news-recovery-review-{0}', github.ref) || 'market-site-production' }}
+  cancel-in-progress: false
+
+# One-off recovery of the already-validated October 3 export. IDs and digest
+# deliberately fail closed after expiry; this workflow is not scheduled.
+env:
+  SOURCE_RUN: '37050177489'
+  SOURCE_ARTIFACT: '11260874513'
+  SOURCE_COMMIT: 'fa9f0a8623bdaf1fd93126fac9a2590517fc62bc'
+
+jobs:
+  validate-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            tests
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test publication verifier
+        run: python -m unittest discover -s tests -p 'test_news_publication.py' -v
+      - name: Check exact source artifact provenance (read only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, subprocess
+          def read(path):
+              return json.loads(subprocess.check_output(['gh','api',f'repos/{os.environ["GITHUB_REPOSITORY"]}/{path}'],text=True))
+          artifact=read('actions/artifacts/'+os.environ['SOURCE_ARTIFACT'])
+          if artifact['id']!=11260874513 or artifact['name']!='github-pages' or artifact['expired']:
+              raise SystemExit('Wrong or expired source artifact')
+          if artifact['workflow_run']['id']!=37050177489:
+              raise SystemExit('Artifact belongs to another run')
+          if artifact.get('digest')!='sha256:e55e7048621f563024c2b61f5f6a48c0f9d9c96f6c167835aa5fab1d600a723f8b':
+              raise SystemExit('Source artifact digest mismatch')
+          run=read('actions/runs/'+os.environ['SOURCE_RUN'])
+          if run['head_branch']!='main' or run['workflow_id']!=197970241:
+              raise SystemExit('Source is not the production main workflow')
+          job=read('actions/jobs/111100092189')
+          if job['run_id']!=37050177489 or job['conclusion']!='success':
+              raise SystemExit('The exact source build did not pass validation')
+          print('Verified exact artifact and successful attempt-2 build; not the older same-name artifact.')
+          PY
+      - name: Download exact validated artifact, never select by ambiguous name
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: '11260874513'
+          run-id: '37050177489'
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/source-pages
+      - name: Safely unpack static export and verify actual news visibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os, tarfile
+          from pathlib import Path, PurePosixPath
+          archive=Path(os.environ['RUNNER_TEMP'])/'source-pages'/'artifact.tar'
+          out=Path(os.environ['RUNNER_TEMP'])/'recovered-pages'
+          out.mkdir()
+          with tarfile.open(archive) as handle:
+              members=handle.getmembers()
+              if len(members)>100000 or sum(m.size for m in members)>3*1024**3:
+                  raise SystemExit('Unexpected static artifact size')
+              for member in members:
+                  path=PurePosixPath(member.name)
+                  if path.is_absolute() or '..' in path.parts or not (member.isfile() or member.isdir()):
+                      raise SystemExit('Unsafe static archive member')
+              handle.extractall(out, members=members, filter='data')
+          PY
+          python scripts/verify_news_publication.py prepare \
+            --out "$RUNNER_TEMP/recovered-pages" \
+            --run-id "$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" \
+            --commit "$SOURCE_COMMIT"
+      - name: Package verified static pages with a unique per-attempt name
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/recovered-pages
+          name: news-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 1
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: validate-export
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the exact verified recovery artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: news-pages-${{ github.run_id }}-${{ github.run_attempt }}
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+          fetch-depth: 1
+      - name: Verify actual public HTML after deployment
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_news_publication.py verify \
+            --run-id "$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" --base-url "$SITE_URL"
