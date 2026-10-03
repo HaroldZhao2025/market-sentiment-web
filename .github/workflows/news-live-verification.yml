@@ -1,0 +1,63 @@
+name: Verify Live Company News
+on:
+  push:
+    branches: [fix/news-live-verification-20261002]
+    paths: ['.github/workflows/news-live-verification.yml']
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read actual public data and rendered HTML
+        shell: python
+        run: |
+          import json, re
+          from datetime import datetime, timedelta, timezone
+          from html.parser import HTMLParser
+          from urllib.request import Request, urlopen
+          class Text(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.hidden=0; self.parts=[]
+              def handle_starttag(self, tag, attrs):
+                  if tag in ('script','style'): self.hidden+=1
+              def handle_endtag(self, tag):
+                  if tag in ('script','style') and self.hidden: self.hidden-=1
+              def handle_data(self, data):
+                  if not self.hidden: self.parts.append(data)
+          def fetch(path):
+              url='https://haroldzhao2025.github.io/market-sentiment-web/'+path
+              request=Request(url,headers={'Cache-Control':'no-cache','User-Agent':'market-news-verification'})
+              with urlopen(request,timeout=20) as response: return response.read()
+          def norm(text): return ' '.join(text.split())
+          def stamp(text):
+              value=datetime.fromisoformat(str(text).replace('Z','+00:00'))
+              return value.replace(tzinfo=timezone.utc) if value.tzinfo is None else value.astimezone(timezone.utc)
+          now=datetime.now(timezone.utc); reports=[]; errors=[]
+          for symbol in ('AAPL','MSFT','NVDA','AMZN'):
+              try:
+                  items=[]; dates={}
+                  for folder in ('ticker','v5/news'):
+                      obj=json.loads(fetch(f'data/{folder}/{symbol}.json'))
+                      rows=obj.get('news',obj.get('articles',[])); valid=[]
+                      for row in rows:
+                          try:
+                              date=stamp(row.get('ts') or row.get('date'))
+                              title=str(row.get('title') or row.get('headline') or '').strip()
+                              if title and date<=now+timedelta(hours=2): valid.append((date,title))
+                          except (ValueError,TypeError): pass
+                      dates[folder]=max((d.isoformat() for d,_ in valid),default=None)
+                      items.extend(valid)
+                  latest,title=max(items,key=lambda row:row[0])
+                  parser=Text(); parser.feed(fetch(f'ticker/{symbol}/').decode())
+                  visible=norm(' '.join(parser.parts))
+                  report={'symbol':symbol,'input_latest_utc':latest.isoformat(),'input_dates':dates,'headline_visible':norm(title) in visible,'latest_label_visible':f'Latest article (UTC): {latest.date().isoformat()}' in visible,'checked_at_utc':now.isoformat()}
+                  reports.append(report)
+                  print(json.dumps(report),flush=True)
+                  if not report['headline_visible'] or not report['latest_label_visible'] or now-latest>timedelta(days=7): errors.append(symbol)
+              except Exception as error:
+                  errors.append(symbol); print(json.dumps({'symbol':symbol,'error_type':type(error).__name__,'error':str(error)}),flush=True)
+          print('LIVE NEWS RESULT '+json.dumps({'samples':reports,'failed':errors}),flush=True)
+          if errors: raise SystemExit('Live news verification incomplete or failed: '+','.join(errors))
