@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/workflows/news-recovery.yml'
       - 'scripts/verify_news_publication.py'
-      - 'tests/test_news_publication.py'
+      - 'tests/test_publication_verifier.py'
   push:
     branches: [main]
     paths: ['.github/workflows/news-recovery.yml']
@@ -41,7 +41,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Test publication verifier
-        run: python -m unittest discover -s tests -p 'test_news_publication.py' -v
+        run: python -m unittest discover -s tests -p 'test_publication_verifier.py' -v
       - name: Check exact source artifact provenance (read only)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -57,7 +57,7 @@ jobs:
               raise SystemExit('Wrong or expired source artifact')
           if artifact['workflow_run']['id']!=37050177489:
               raise SystemExit('Artifact belongs to another run')
-          if artifact.get('digest')!='sha256:e55e7048621f563024c2b61f5f6a48c0f9d9c96f6c167835aa5fab1d600a723f8b':
+          if artifact.get('digest')!='sha256:e55e1033d27d3dc7e1148dc1da26c218e3c6a85d821496ce5109621306abc81c':
               raise SystemExit('Source artifact digest mismatch')
           run=read('actions/runs/'+os.environ['SOURCE_RUN'])
           if run['head_branch']!='main' or run['workflow_id']!=197970241:
