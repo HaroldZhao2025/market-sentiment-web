@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "PAR",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-07T00:40:50.311316+00:00",
+  "updated_at_utc": "2026-10-09T16:45:55.219989+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-07",
-    "2021-10-08",
     "2021-10-11",
     "2021-10-12",
     "2021-10-13",
@@ -1259,11 +1257,12 @@
     "2026-10-01",
     "2026-10-02",
     "2026-10-05",
-    "2026-10-06"
+    "2026-10-06",
+    "2026-10-07",
+    "2026-10-08",
+    "2026-10-09"
   ],
   "price": [
-    65.12000274658203,
-    65.0199966430664,
     63.9900016784668,
     65.9000015258789,
     65.01000213623047,
@@ -2515,11 +2514,12 @@
     14.390000343322754,
     14.25,
     14.619999885559082,
-    14.5
+    14.5,
+    14.779999732971191,
+    15.430000305175781,
+    15.449999809265137
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3771,7 +3771,10 @@
     0.838636,
     0.826807,
     0.355165,
-    0.672573
+    0.672573,
+    null,
+    null,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -4293,8 +4296,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -5027,6 +5028,9 @@
     true,
     true,
     true,
-    true
+    true,
+    false,
+    false,
+    false
   ]
 }
