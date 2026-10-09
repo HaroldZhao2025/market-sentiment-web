@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "MSEX",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-07T13:51:59.431187+00:00",
+  "updated_at_utc": "2026-10-09T21:12:16.397520+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-07",
-    "2021-10-08",
     "2021-10-11",
     "2021-10-12",
     "2021-10-13",
@@ -1260,11 +1258,11 @@
     "2026-10-02",
     "2026-10-05",
     "2026-10-06",
-    "2026-10-07"
+    "2026-10-07",
+    "2026-10-08",
+    "2026-10-09"
   ],
   "price": [
-    105.6500015258789,
-    104.4800033569336,
     103.7300033569336,
     104.66999816894531,
     104.79000091552734,
@@ -2517,11 +2515,11 @@
     53.560001373291016,
     53.06999969482422,
     52.900001525878906,
-    52.82500076293945
+    53.13999938964844,
+    53.08000183105469,
+    53.43000030517578
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3455,7 +3453,7 @@
     null,
     null,
     null,
-    null,
+    0.785626,
     null,
     null,
     null,
@@ -3536,7 +3534,7 @@
     null,
     null,
     null,
-    null,
+    -0.372829,
     null,
     null,
     0.406098,
@@ -3686,7 +3684,7 @@
     0.021488,
     null,
     null,
-    0.885792,
+    0.867486,
     null,
     null,
     null,
@@ -3754,7 +3752,7 @@
     -0.011342,
     null,
     null,
-    -0.025198,
+    -0.009234,
     null,
     null,
     null,
@@ -3773,8 +3771,10 @@
     0.895742,
     0.884961,
     null,
-    0.415121,
-    0.5414
+    -0.224503,
+    0.5414,
+    null,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -4448,8 +4448,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     true,
@@ -4712,7 +4710,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     false,
     false,
@@ -4793,7 +4791,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     false,
     true,
@@ -5031,6 +5029,8 @@
     true,
     false,
     true,
-    true
+    true,
+    false,
+    false
   ]
 }
