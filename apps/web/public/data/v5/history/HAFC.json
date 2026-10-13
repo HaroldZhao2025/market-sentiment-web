@@ -2,13 +2,10 @@
   "schema_version": 2,
   "symbol": "HAFC",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-11T11:53:39.510931+00:00",
+  "updated_at_utc": "2026-10-13T22:12:46.108773+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-11",
-    "2021-10-12",
-    "2021-10-13",
     "2021-10-14",
     "2021-10-15",
     "2021-10-18",
@@ -1260,12 +1257,11 @@
     "2026-10-06",
     "2026-10-07",
     "2026-10-08",
-    "2026-10-09"
+    "2026-10-09",
+    "2026-10-12",
+    "2026-10-13"
   ],
   "price": [
-    20.290000915527344,
-    20.040000915527344,
-    19.719999313354492,
     20.100000381469727,
     19.90999984741211,
     20.110000610351562,
@@ -2517,12 +2513,11 @@
     31.68000030517578,
     31.3799991607666,
     31.280000686645508,
-    30.780000686645508
+    30.780000686645508,
+    31.079999923706055,
+    30.889999389648438
   ],
   "sentiment": [
-    null,
-    null,
-    null,
     null,
     null,
     null,
@@ -3454,7 +3449,7 @@
     null,
     null,
     null,
-    null,
+    -0.611575,
     null,
     null,
     null,
@@ -3690,7 +3685,7 @@
     null,
     null,
     null,
-    0.874696,
+    0.859171,
     null,
     0.86834,
     0.418077,
@@ -3719,7 +3714,7 @@
     -0.148206,
     0.334979,
     -0.018657,
-    -0.074858,
+    -0.243877,
     null,
     0.751222,
     0.239902,
@@ -3773,8 +3768,10 @@
     0.068571,
     null,
     0.76832,
-    0.07318,
-    null
+    0.058731,
+    null,
+    0.881709,
+    0.621906
   ],
   "sentiment_observed": [
     false,
@@ -4505,9 +4502,6 @@
     false,
     false,
     false,
-    false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4711,7 +4705,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     false,
     false,
@@ -5030,7 +5024,9 @@
     true,
     false,
     true,
+    true,
+    false,
     true,
-    false
+    true
   ]
 }
