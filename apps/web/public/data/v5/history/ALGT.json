@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "ALGT",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-12T22:16:17.361582+00:00",
+  "updated_at_utc": "2026-10-14T23:03:57.756781+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-13",
-    "2021-10-14",
     "2021-10-15",
     "2021-10-18",
     "2021-10-19",
@@ -1259,11 +1257,11 @@
     "2026-10-07",
     "2026-10-08",
     "2026-10-09",
-    "2026-10-12"
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14"
   ],
   "price": [
-    190.47999572753906,
-    192.94000244140625,
     190.07000732421875,
     188.2899932861328,
     187.77999877929688,
@@ -2515,11 +2513,11 @@
     76.27999877929688,
     76.41999816894531,
     76.43000030517578,
-    74.5999984741211
+    74.5999984741211,
+    72.33999633789062,
+    66.9000015258789
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3574,7 +3572,7 @@
     null,
     null,
     null,
-    null,
+    0.886609,
     null,
     null,
     null,
@@ -3691,7 +3689,7 @@
     0.880085,
     null,
     0.494904,
-    0.323321,
+    0.603111,
     null,
     null,
     0.359017,
@@ -3712,9 +3710,9 @@
     null,
     null,
     null,
-    0.707075,
+    0.166412,
     null,
-    -0.190107,
+    -0.190106,
     -0.299501,
     null,
     0.211445,
@@ -3733,7 +3731,7 @@
     null,
     0.84811,
     -0.368322,
-    0.444649,
+    0.507536,
     null,
     null,
     null,
@@ -3770,8 +3768,10 @@
     null,
     0.14456,
     -0.092413,
-    0.9081,
-    null
+    0.913295,
+    null,
+    0.64246,
+    -0.923655
   ],
   "sentiment_observed": [
     false,
@@ -4278,8 +4278,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4821,7 +4819,6 @@
     false,
     false,
     true,
-    false,
     false,
     false,
     false,
@@ -4831,6 +4828,7 @@
     false,
     false,
     false,
+    true,
     false,
     false,
     false,
@@ -5026,7 +5024,9 @@
     false,
     true,
     true,
+    true,
+    false,
     true,
-    false
+    true
   ]
 }
