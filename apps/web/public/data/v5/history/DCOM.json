@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "DCOM",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-13T02:56:53.945242+00:00",
+  "updated_at_utc": "2026-10-15T01:09:39.855089+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-13",
-    "2021-10-14",
     "2021-10-15",
     "2021-10-18",
     "2021-10-19",
@@ -1259,11 +1257,11 @@
     "2026-10-07",
     "2026-10-08",
     "2026-10-09",
-    "2026-10-12"
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14"
   ],
   "price": [
-    34.47999954223633,
-    35.02000045776367,
     34.790000915527344,
     34.560001373291016,
     34.63999938964844,
@@ -2515,11 +2513,11 @@
     38.56999969482422,
     38.54999923706055,
     38.13999938964844,
-    38.5
+    38.5,
+    38.38999938964844,
+    38.040000915527344
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3327,7 +3325,7 @@
     null,
     null,
     0.799175,
-    null,
+    0.074702,
     null,
     null,
     null,
@@ -3660,7 +3658,7 @@
     null,
     null,
     0.607466,
-    0.824995,
+    0.836066,
     null,
     0.768756,
     null,
@@ -3730,8 +3728,8 @@
     0.267058,
     null,
     0.909081,
-    0.268367,
-    0.791317,
+    0.100169,
+    0.788231,
     0.584101,
     0.453537,
     0.012162,
@@ -3747,7 +3745,7 @@
     0.531919,
     0.841057,
     0.812648,
-    null,
+    0.351624,
     -0.047144,
     0.85586,
     null,
@@ -3756,7 +3754,7 @@
     null,
     null,
     0.758125,
-    0.840947,
+    0.257563,
     0.489142,
     0.00028,
     0.604766,
@@ -3771,7 +3769,9 @@
     0.874117,
     0.905562,
     null,
-    null
+    null,
+    0.835423,
+    0.04392
   ],
   "sentiment_observed": [
     false,
@@ -4247,8 +4247,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4583,7 +4581,7 @@
     false,
     false,
     true,
-    false,
+    true,
     false,
     false,
     false,
@@ -5003,7 +5001,7 @@
     true,
     true,
     true,
-    false,
+    true,
     true,
     true,
     false,
@@ -5027,6 +5025,8 @@
     true,
     true,
     false,
-    false
+    false,
+    true,
+    true
   ]
 }
