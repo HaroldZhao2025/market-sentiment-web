@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "SBET",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-13T17:23:25.679437+00:00",
+  "updated_at_utc": "2026-10-15T15:17:32.692899+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-13",
-    "2021-10-14",
     "2021-10-15",
     "2021-10-18",
     "2021-10-19",
@@ -1260,11 +1258,11 @@
     "2026-10-08",
     "2026-10-09",
     "2026-10-12",
-    "2026-10-13"
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
   ],
   "price": [
-    518.4000244140625,
-    514.7999877929688,
     504.0,
     508.79998779296875,
     504.0,
@@ -2517,11 +2515,11 @@
     8.8100004196167,
     8.59000015258789,
     8.489999771118164,
-    8.484999656677246
+    8.40999984741211,
+    7.900000095367432,
+    7.824999809265137
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3612,7 +3610,7 @@
     null,
     null,
     null,
-    0.649374,
+    null,
     0.62049,
     null,
     -0.306115,
@@ -3623,7 +3621,7 @@
     null,
     null,
     null,
-    0.08063,
+    0.086404,
     0.347191,
     0.863184,
     0.734165,
@@ -3710,7 +3708,7 @@
     -0.063276,
     null,
     null,
-    0.529217,
+    0.420613,
     -0.925234,
     0.878048,
     null,
@@ -3742,7 +3740,7 @@
     null,
     null,
     0.188118,
-    -0.1387,
+    0.042488,
     null,
     null,
     null,
@@ -3774,6 +3772,8 @@
     0.91474,
     0.925222,
     0.910782,
+    0.923198,
+    null,
     null
   ],
   "sentiment_observed": [
@@ -4311,8 +4311,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4869,7 +4867,7 @@
     false,
     false,
     false,
-    true,
+    false,
     true,
     false,
     true,
@@ -5031,6 +5029,8 @@
     true,
     true,
     true,
+    true,
+    false,
     false
   ]
 }
