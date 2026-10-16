@@ -2,11 +2,10 @@
   "schema_version": 2,
   "symbol": "ACHV",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-14T22:59:15.150361+00:00",
+  "updated_at_utc": "2026-10-16T14:29:56.093454+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-15",
     "2021-10-18",
     "2021-10-19",
     "2021-10-20",
@@ -1259,10 +1258,11 @@
     "2026-10-09",
     "2026-10-12",
     "2026-10-13",
-    "2026-10-14"
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
   ],
   "price": [
-    8.050000190734863,
     7.889999866485596,
     7.96999979019165,
     8.1899995803833,
@@ -2515,10 +2515,11 @@
     7.409999847412109,
     7.059999942779541,
     7.0,
-    7.0
+    7.0,
+    6.96999979019165,
+    6.699999809265137
   ],
   "sentiment": [
-    null,
     null,
     null,
     null,
@@ -3649,7 +3650,7 @@
     0.370637,
     null,
     0.3482,
-    0.57474,
+    0.574741,
     null,
     null,
     null,
@@ -3762,7 +3763,7 @@
     0.69633,
     0.420544,
     0.220331,
-    0.86583,
+    0.867344,
     0.888745,
     0.92675,
     0.642274,
@@ -3771,7 +3772,9 @@
     0.897754,
     null,
     null,
-    null
+    null,
+    null,
+    0.559888
   ],
   "sentiment_observed": [
     false,
@@ -4415,7 +4418,6 @@
     false,
     false,
     false,
-    false,
     true,
     false,
     false,
@@ -5025,8 +5027,10 @@
     true,
     true,
     true,
+    false,
+    false,
     false,
     false,
-    false
+    true
   ]
 }
