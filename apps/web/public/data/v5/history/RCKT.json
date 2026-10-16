@@ -2,11 +2,10 @@
   "schema_version": 2,
   "symbol": "RCKT",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-15T06:25:17.487489+00:00",
+  "updated_at_utc": "2026-10-16T21:30:53.992876+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-15",
     "2021-10-18",
     "2021-10-19",
     "2021-10-20",
@@ -1259,10 +1258,11 @@
     "2026-10-09",
     "2026-10-12",
     "2026-10-13",
-    "2026-10-14"
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16"
   ],
   "price": [
-    27.920000076293945,
     27.59000015258789,
     28.139999389648438,
     28.989999771118164,
@@ -2515,10 +2515,11 @@
     2.559999942779541,
     2.4800000190734863,
     2.299999952316284,
-    2.2100000381469727
+    2.2100000381469727,
+    2.359999895095825,
+    2.180000066757202
   ],
   "sentiment": [
-    null,
     null,
     null,
     null,
@@ -3540,7 +3541,7 @@
     null,
     null,
     null,
-    null,
+    0.842051,
     null,
     null,
     null,
@@ -3601,7 +3602,7 @@
     null,
     null,
     null,
-    null,
+    0.222439,
     null,
     null,
     null,
@@ -3750,7 +3751,7 @@
     0.908963,
     0.911838,
     0.929051,
-    0.127042,
+    0.169642,
     -0.170662,
     0.747157,
     null,
@@ -3765,13 +3766,15 @@
     null,
     0.350424,
     null,
-    -0.212031,
+    -0.160161,
     0.240059,
     0.254581,
     0.283806,
     null,
     null,
-    0.01359
+    0.01359,
+    0.551974,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -4301,7 +4304,6 @@
     false,
     false,
     false,
-    false,
     true,
     false,
     false,
@@ -4796,7 +4798,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     false,
     false,
@@ -4857,7 +4859,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     false,
     false,
@@ -5027,6 +5029,8 @@
     true,
     false,
     false,
-    true
+    true,
+    true,
+    false
   ]
 }
