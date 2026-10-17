@@ -2,7 +2,7 @@
   "schema_version": 2,
   "symbol": "MMM",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-15T23:03:11.774468+00:00",
+  "updated_at_utc": "2026-10-17T11:31:17.019439+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
@@ -1259,7 +1259,8 @@
     "2026-10-12",
     "2026-10-13",
     "2026-10-14",
-    "2026-10-15"
+    "2026-10-15",
+    "2026-10-16"
   ],
   "price": [
     151.93980407714844,
@@ -2515,7 +2516,8 @@
     160.88999938964844,
     162.77000427246094,
     164.4600067138672,
-    165.3300018310547
+    165.3300018310547,
+    164.75
   ],
   "sentiment": [
     null,
@@ -3348,7 +3350,7 @@
     null,
     null,
     null,
-    null,
+    0.004503,
     null,
     null,
     null,
@@ -3711,7 +3713,7 @@
     null,
     null,
     null,
-    0.394262,
+    null,
     0.327296,
     0.768336,
     0.700441,
@@ -3730,9 +3732,9 @@
     0.211935,
     -0.037477,
     0.252922,
-    0.415364,
+    0.415365,
     0.107739,
-    null,
+    0.073651,
     0.875305,
     0.21661,
     0.872962,
@@ -3745,7 +3747,7 @@
     -0.834284,
     0.480633,
     null,
-    0.711367,
+    0.711368,
     null,
     null,
     null,
@@ -3759,7 +3761,7 @@
     0.425096,
     0.756614,
     0.753784,
-    0.382964,
+    0.382962,
     -0.265776,
     0.889019,
     0.876227,
@@ -3771,7 +3773,8 @@
     null,
     0.920006,
     -0.881723,
-    null
+    0.569897,
+    0.53619
   ],
   "sentiment_observed": [
     false,
@@ -4604,7 +4607,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     false,
     false,
@@ -4967,6 +4970,7 @@
     false,
     false,
     false,
+    false,
     true,
     true,
     true,
@@ -4988,7 +4992,6 @@
     true,
     true,
     true,
-    false,
     true,
     true,
     true,
@@ -5025,8 +5028,9 @@
     true,
     true,
     false,
+    true,
     true,
     true,
-    false
+    true
   ]
 }
