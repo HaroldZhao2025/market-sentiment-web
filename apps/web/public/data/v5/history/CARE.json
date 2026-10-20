@@ -2,13 +2,10 @@
   "schema_version": 2,
   "symbol": "CARE",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-19T00:33:53.674084+00:00",
+  "updated_at_utc": "2026-10-20T22:23:20.042331+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-18",
-    "2021-10-19",
-    "2021-10-20",
     "2021-10-21",
     "2021-10-22",
     "2021-10-25",
@@ -1260,12 +1257,11 @@
     "2026-10-13",
     "2026-10-14",
     "2026-10-15",
-    "2026-10-16"
+    "2026-10-16",
+    "2026-10-19",
+    "2026-10-20"
   ],
   "price": [
-    14.710000038146973,
-    14.699999809265137,
-    14.75,
     14.789999961853027,
     14.880000114440918,
     14.979999542236328,
@@ -2517,12 +2513,11 @@
     30.190000534057617,
     30.030000686645508,
     30.309999465942383,
-    30.209999084472656
+    30.209999084472656,
+    29.75,
+    30.18000030517578
   ],
   "sentiment": [
-    null,
-    null,
-    null,
     null,
     null,
     null,
@@ -3671,7 +3666,7 @@
     null,
     null,
     null,
-    0.740803,
+    null,
     0.53841,
     0.418076,
     0.637427,
@@ -3709,7 +3704,7 @@
     -0.433415,
     0.311262,
     0.389283,
-    0.334329,
+    0.33433,
     null,
     0.894615,
     0.35996,
@@ -3773,8 +3768,10 @@
     null,
     null,
     null,
-    0.465174,
-    0.896018
+    0.492329,
+    0.896018,
+    null,
+    -0.211491
   ],
   "sentiment_observed": [
     false,
@@ -4329,9 +4326,6 @@
     false,
     false,
     false,
-    false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4928,7 +4922,7 @@
     false,
     false,
     false,
-    true,
+    false,
     true,
     true,
     true,
@@ -5031,6 +5025,8 @@
     false,
     false,
     true,
+    true,
+    false,
     true
   ]
 }
