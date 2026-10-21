@@ -2,7 +2,7 @@
   "schema_version": 2,
   "symbol": "GRDN",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-19T07:16:40.909239+00:00",
+  "updated_at_utc": "2026-10-21T04:52:53.372746+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
@@ -521,7 +521,9 @@
     "2026-10-13",
     "2026-10-14",
     "2026-10-15",
-    "2026-10-16"
+    "2026-10-16",
+    "2026-10-19",
+    "2026-10-20"
   ],
   "price": [
     16.0,
@@ -1039,7 +1041,9 @@
     39.810001373291016,
     40.58000183105469,
     39.68000030517578,
-    39.470001220703125
+    39.470001220703125,
+    40.13999938964844,
+    41.869998931884766
   ],
   "sentiment": [
     null,
@@ -1498,7 +1502,7 @@
     null,
     null,
     0.883268,
-    0.325682,
+    0.325109,
     null,
     null,
     null,
@@ -1520,7 +1524,7 @@
     null,
     null,
     null,
-    null,
+    0.01472,
     null,
     null,
     null,
@@ -1557,7 +1561,9 @@
     0.430722,
     null,
     -0.351087,
-    0.922188
+    0.922188,
+    null,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -2038,18 +2044,18 @@
     false,
     false,
     false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    true,
     true,
     false,
     false,
     false,
     false,
     true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
     false,
     false,
     false,
@@ -2059,12 +2065,6 @@
     true,
     false,
     true,
-    false,
-    false,
-    true,
-    true,
-    true,
-    false,
     false,
     false,
     true,
@@ -2072,9 +2072,17 @@
     true,
     false,
     false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    false,
     true,
     false,
     true,
-    true
+    true,
+    false,
+    false
   ]
 }
