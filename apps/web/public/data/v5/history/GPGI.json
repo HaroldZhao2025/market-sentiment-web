@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "GPGI",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-21T04:52:48.667519+00:00",
+  "updated_at_utc": "2026-10-22T22:44:39.940560+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-21",
-    "2021-10-22",
     "2021-10-25",
     "2021-10-26",
     "2021-10-27",
@@ -1259,11 +1257,11 @@
     "2026-10-15",
     "2026-10-16",
     "2026-10-19",
-    "2026-10-20"
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22"
   ],
   "price": [
-    8.421927452087402,
-    8.426079750061035,
     8.463455200195312,
     8.480066299438477,
     8.463455200195312,
@@ -2515,11 +2513,11 @@
     12.6899995803833,
     12.470000267028809,
     12.430000305175781,
-    12.75
+    12.75,
+    12.920000076293945,
+    12.550000190734863
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3682,7 +3680,7 @@
     null,
     0.078515,
     0.865518,
-    0.762052,
+    0.733133,
     0.766696,
     0.748682,
     -0.331033,
@@ -3703,7 +3701,7 @@
     0.580807,
     null,
     0.872062,
-    0.499834,
+    0.535396,
     0.85629,
     0.418074,
     0.693082,
@@ -3745,10 +3743,10 @@
     0.875319,
     0.611639,
     0.834749,
-    0.771531,
+    0.820945,
     0.851246,
     0.907792,
-    null,
+    0.049507,
     null,
     null,
     null,
@@ -3767,11 +3765,13 @@
     0.926061,
     null,
     null,
-    0.921736,
+    0.921057,
     0.867072,
-    0.880409,
     null,
-    null
+    null,
+    null,
+    0.912583,
+    0.920238
   ],
   "sentiment_observed": [
     false,
@@ -4857,8 +4857,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -5004,7 +5002,7 @@
     true,
     true,
     true,
-    false,
+    true,
     false,
     false,
     false,
@@ -5025,8 +5023,10 @@
     false,
     true,
     true,
-    true,
+    false,
     false,
-    false
+    false,
+    true,
+    true
   ]
 }
