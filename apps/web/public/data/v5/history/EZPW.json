@@ -2,13 +2,10 @@
   "schema_version": 2,
   "symbol": "EZPW",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-10-26T07:10:24.844691+00:00",
+  "updated_at_utc": "2026-10-28T08:35:25.137788+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-10-25",
-    "2021-10-26",
-    "2021-10-27",
     "2021-10-28",
     "2021-10-29",
     "2021-11-01",
@@ -1260,12 +1257,11 @@
     "2026-10-20",
     "2026-10-21",
     "2026-10-22",
-    "2026-10-23"
+    "2026-10-23",
+    "2026-10-26",
+    "2026-10-27"
   ],
   "price": [
-    7.650000095367432,
-    7.710000038146973,
-    7.380000114440918,
     7.340000152587891,
     7.460000038146973,
     7.610000133514404,
@@ -2517,12 +2513,11 @@
     33.04999923706055,
     33.20000076293945,
     29.350000381469727,
-    28.700000762939453
+    28.700000762939453,
+    28.739999771118164,
+    29.549999237060547
   ],
   "sentiment": [
-    null,
-    null,
-    null,
     null,
     null,
     null,
@@ -3102,7 +3097,7 @@
     null,
     null,
     null,
-    null,
+    0.9222,
     null,
     null,
     null,
@@ -3399,7 +3394,7 @@
     null,
     null,
     null,
-    null,
+    -0.915418,
     null,
     null,
     0.571548,
@@ -3774,7 +3769,9 @@
     -0.341356,
     null,
     0.757393,
-    0.358456
+    0.358456,
+    null,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -4292,11 +4289,7 @@
     false,
     false,
     false,
-    false,
-    false,
-    false,
     true,
-    false,
     false,
     false,
     false,
@@ -4360,6 +4353,7 @@
     false,
     false,
     false,
+    true,
     false,
     false,
     false,
@@ -4639,7 +4633,6 @@
     false,
     false,
     true,
-    false,
     false,
     false,
     false,
@@ -4657,6 +4650,7 @@
     false,
     false,
     false,
+    true,
     false,
     false,
     true,
@@ -5031,6 +5025,8 @@
     true,
     false,
     true,
-    true
+    true,
+    false,
+    false
   ]
 }
