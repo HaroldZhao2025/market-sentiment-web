@@ -156,6 +156,618 @@
   "calls": [
     {
       "quarter": null,
+      "date": "2026-10-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/ccne/transcripts/715279-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 46,
+        "scored_turn_count": 46,
+        "overall_sentiment": 0.391161,
+        "prepared_sentiment": 0.277553,
+        "qa_sentiment": 0.408203,
+        "qa_tone_shift": 0.130649,
+        "uncertainty_turn_rate": 0.043478,
+        "forward_looking_turn_rate": 0.217391,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 10,
+            "sentiment": 0.210308
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": -0.101395
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 6,
+            "sentiment": 0.082093
+          },
+          {
+            "topic": "Demand",
+            "mentions": 5,
+            "sentiment": 0.019119
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 3,
+            "sentiment": 0.346925
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 3,
+            "sentiment": 0.095072
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.913189,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "prepared",
+          "sentiment": 0.869277,
+          "word_count": 144,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 2,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "prepared",
+          "sentiment": 0.815845,
+          "word_count": 200,
+          "topic_hits": [
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 3,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "prepared",
+          "sentiment": -0.388246,
+          "word_count": 787,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 4,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "prepared",
+          "sentiment": -0.914488,
+          "word_count": 502,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 5,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "prepared",
+          "sentiment": 0.369744,
+          "word_count": 61,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.91262,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": -0.718182,
+          "word_count": 13,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 8,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.645188,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.066771,
+          "word_count": 186,
+          "topic_hits": [
+            "Guidance",
+            "Demand"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 10,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.368162,
+          "word_count": 139,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.648845,
+          "word_count": 64,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 12,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": -0.863553,
+          "word_count": 259,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 13,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.872664,
+          "word_count": 32,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.169203,
+          "word_count": 93,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.584726,
+          "word_count": 6,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.897797,
+          "word_count": 25,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 17,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.796367,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.570769,
+          "word_count": 55,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 19,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.727701,
+          "word_count": 431,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 20,
+          "speaker": "Emily Lee",
+          "role": "Analyst, KBW",
+          "section": "qa",
+          "sentiment": 0.695997,
+          "word_count": 30,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88729,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.706642,
+          "word_count": 10,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Jake Civiello",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.235807,
+          "word_count": 253,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.506225,
+          "word_count": 43,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": -0.742965,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 26,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.552924,
+          "word_count": 256,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 27,
+          "speaker": "Jake Civiello",
+          "role": "Analyst, D.A. Davidson",
+          "section": "qa",
+          "sentiment": 0.79093,
+          "word_count": 63,
+          "topic_hits": [
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 28,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.55881,
+          "word_count": 178,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 29,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.88539,
+          "word_count": 14,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 30,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.75902,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 31,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": 0.878223,
+          "word_count": 41,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 32,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": -0.109114,
+          "word_count": 49,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 33,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.638092,
+          "word_count": 179,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 34,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": -0.500916,
+          "word_count": 41,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 35,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": -0.142383,
+          "word_count": 273,
+          "topic_hits": [
+            "Guidance",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 36,
+          "speaker": "Tyler Cacciatori",
+          "role": "Analyst, Stephens",
+          "section": "qa",
+          "sentiment": -0.186457,
+          "word_count": 9,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 37,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.821289,
+          "word_count": 15,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 38,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.838665,
+          "word_count": 39,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 39,
+          "speaker": "Tito Lima",
+          "role": "CFO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.054196,
+          "word_count": 151,
+          "topic_hits": [
+            "Guidance",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 40,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.783904,
+          "word_count": 12,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 41,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": 0.442624,
+          "word_count": 266,
+          "topic_hits": [
+            "AI & technology"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 42,
+          "speaker": "Adam Kroll",
+          "role": "Analyst, Piper Sandler",
+          "section": "qa",
+          "sentiment": 0.205911,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 43,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.903035,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 44,
+          "speaker": "Michael Peduzzi",
+          "role": "President and CEO, CNB Financial Corporation",
+          "section": "qa",
+          "sentiment": -0.712445,
+          "word_count": 83,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 45,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.898329,
+          "word_count": 57,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 5353,
+      "transcript_text_redistributed": false
+    },
+    {
+      "quarter": null,
       "date": "2026-08-21T23:14:33+00:00",
       "source": "Motley Fool",
       "source_url": "https://finance.yahoo.com/m/e2a7cd5e-6ade-30b9-814a-e61054bf033f/largo-%28lgo%29-q2-2026-earnings.html",
@@ -650,7 +1262,19 @@
       "ts": "2026-09-17T13:43:03+00:00",
       "source": "dars.gov.et",
       "provider": "google_news_rss"
+    },
+    {
+      "title": "CCNE Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/ccne/transcripts/715279-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-10-29T00:00:00+00:00"
+    },
+    {
+      "title": "CCNE Earnings Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-10-21-cnb-financial-co-stock/#transcript",
+      "source": "MarketBeat",
+      "ts": "2026-10-21T00:00:00+00:00"
     }
   ],
-  "updated_at_utc": "2026-10-29T16:54:30.613531+00:00"
+  "updated_at_utc": "2026-10-30T01:28:09.727887+00:00"
 }
