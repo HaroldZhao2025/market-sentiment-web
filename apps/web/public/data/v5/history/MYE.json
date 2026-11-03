@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "MYE",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-11-01T01:12:58.635624+00:00",
+  "updated_at_utc": "2026-11-03T16:22:51.092895+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-11-01",
-    "2021-11-02",
     "2021-11-03",
     "2021-11-04",
     "2021-11-05",
@@ -1260,11 +1258,11 @@
     "2026-10-27",
     "2026-10-28",
     "2026-10-29",
-    "2026-10-30"
+    "2026-10-30",
+    "2026-11-02",
+    "2026-11-03"
   ],
   "price": [
-    21.170000076293945,
-    21.110000610351562,
     21.549999237060547,
     20.239999771118164,
     20.700000762939453,
@@ -2517,11 +2515,11 @@
     32.369998931884766,
     32.20000076293945,
     30.389999389648438,
-    29.56999969482422
+    29.56999969482422,
+    28.920000076293945,
+    28.354999542236328
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3287,7 +3285,7 @@
     null,
     null,
     null,
-    null,
+    0.840774,
     null,
     0.91198,
     0.712901,
@@ -3573,7 +3571,7 @@
     null,
     null,
     null,
-    0.89786,
+    0.889508,
     null,
     null,
     null,
@@ -3737,7 +3735,7 @@
     0.848197,
     -0.043935,
     null,
-    null,
+    0.903617,
     null,
     0.890136,
     0.870506,
@@ -3774,7 +3772,9 @@
     null,
     0.741352,
     0.243656,
-    0.673908
+    0.68615,
+    0.903911,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -4319,8 +4319,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4544,7 +4542,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     true,
     true,
@@ -4994,7 +4992,7 @@
     true,
     true,
     false,
-    false,
+    true,
     false,
     true,
     true,
@@ -5029,8 +5027,10 @@
     true,
     false,
     false,
+    true,
+    true,
     true,
     true,
-    true
+    false
   ]
 }

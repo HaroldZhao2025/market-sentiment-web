@@ -2,7 +2,7 @@
   "schema_version": 2,
   "symbol": "PURR",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-11-01T01:49:20.950589+00:00",
+  "updated_at_utc": "2026-11-03T16:59:52.835288+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
@@ -234,7 +234,9 @@
     "2026-10-27",
     "2026-10-28",
     "2026-10-29",
-    "2026-10-30"
+    "2026-10-30",
+    "2026-11-02",
+    "2026-11-03"
   ],
   "price": [
     3.9000000953674316,
@@ -465,7 +467,9 @@
     9.850000381469727,
     9.970000267028809,
     12.289999961853027,
-    11.010000228881836
+    11.010000228881836,
+    9.710000038146973,
+    10.170999526977539
   ],
   "sentiment": [
     null,
@@ -652,18 +656,18 @@
     null,
     null,
     null,
-    0.437816,
-    0.118525,
+    null,
+    0.214435,
     -0.445806,
     -0.335063,
-    0.479195,
+    0.31246,
     0.178048,
     0.873773,
     0.029923,
     0.032866,
     0.552871,
     0.880659,
-    -0.202465,
+    -0.06427,
     -0.906099,
     0.635585,
     0.149147,
@@ -695,8 +699,10 @@
     0.369988,
     0.609224,
     0.753489,
-    0.289068,
-    0.1946
+    0.177071,
+    0.392523,
+    null,
+    0.832419
   ],
   "sentiment_observed": [
     false,
@@ -883,7 +889,7 @@
     false,
     false,
     false,
-    true,
+    false,
     true,
     true,
     true,
@@ -927,6 +933,8 @@
     true,
     true,
     true,
+    true,
+    false,
     true
   ]
 }
