@@ -117,7 +117,373 @@
       "surprise_pct": 75.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-10-29T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/supn/transcripts/723440-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 26,
+        "scored_turn_count": 26,
+        "overall_sentiment": 0.350759,
+        "prepared_sentiment": 0.299763,
+        "qa_sentiment": 0.357411,
+        "qa_tone_shift": 0.057648,
+        "uncertainty_turn_rate": 0.038462,
+        "forward_looking_turn_rate": 0.307692,
+        "topics": [
+          {
+            "topic": "Guidance",
+            "mentions": 8,
+            "sentiment": 0.315311
+          },
+          {
+            "topic": "Margins & costs",
+            "mentions": 5,
+            "sentiment": -0.04091
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": -0.570867
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 2,
+            "sentiment": -0.854271
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 1,
+            "sentiment": -0.601299
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.905629,
+          "word_count": 78,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Peter Vozzo",
+          "role": "Investor Relations, ICR Healthcare",
+          "section": "prepared",
+          "sentiment": 0.910926,
+          "word_count": 204,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "prepared",
+          "sentiment": -0.917266,
+          "word_count": 797,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Tim Dec",
+          "role": "CFO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.881306,
+          "word_count": 744,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.907679,
+          "word_count": 73,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Kristen Kluska",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.510038,
+          "word_count": 123,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 6,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.601299,
+          "word_count": 492,
+          "topic_hits": [
+            "Demand",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 7,
+          "speaker": "Kristen Kluska",
+          "role": "Analyst, Cantor Fitzgerald",
+          "section": "qa",
+          "sentiment": 0.639623,
+          "word_count": 14,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.881079,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 9,
+          "speaker": "Stacy Ku",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.802295,
+          "word_count": 145,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 10,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.151747,
+          "word_count": 507,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Stacy Ku",
+          "role": "Analyst, TD Cowen",
+          "section": "qa",
+          "sentiment": 0.047172,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 12,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.875556,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Annabel Samimy",
+          "role": "Managing Director and Analyst, Stifel",
+          "section": "qa",
+          "sentiment": 0.557219,
+          "word_count": 167,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.446967,
+          "word_count": 167,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.868052,
+          "word_count": 19,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 16,
+          "speaker": "Chi Fong",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.568141,
+          "word_count": 92,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 17,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.223587,
+          "word_count": 169,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 18,
+          "speaker": "Chi Fong",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.890034,
+          "word_count": 36,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 19,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": 0.814648,
+          "word_count": 137,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 20,
+          "speaker": "Chi Fong",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": 0.666825,
+          "word_count": 82,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 21,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.194035,
+          "word_count": 202,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 22,
+          "speaker": "Chi Fong",
+          "role": "Analyst, Bank of America",
+          "section": "qa",
+          "sentiment": -0.685875,
+          "word_count": 5,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 23,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913096,
+          "word_count": 26,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 24,
+          "speaker": "Jack Khattar",
+          "role": "President and CEO, Supernus Pharmaceuticals",
+          "section": "qa",
+          "sentiment": -0.791276,
+          "word_count": 87,
+          "topic_hits": [
+            "Capital allocation"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 25,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.913972,
+          "word_count": 60,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 4470,
+      "transcript_text_redistributed": false
+    }
+  ],
   "call_links": [
     {
       "title": "INDV Earnings Call: Q2 2026",
@@ -178,6 +544,24 @@
       "url": "https://stockanalysis.com/stocks/spun/transcripts/647952-q2-2026-merger/",
       "source": "Stock Analysis / Quartr",
       "ts": "2026-08-03T00:00:00+00:00"
+    },
+    {
+      "title": "INDV Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/supn/transcripts/723440-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-10-29T00:00:00+00:00"
+    },
+    {
+      "title": "INDV Earnings Call: Q2 2026",
+      "url": "https://stockanalysis.com/stocks/supn/transcripts/660918-q2-2026-merger/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-08-03T00:00:00+00:00"
+    },
+    {
+      "title": "INDV Earnings Call: Q1 2026",
+      "url": "https://stockanalysis.com/stocks/supn/transcripts/566767-q1-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-05-05T00:00:00+00:00"
     }
   ],
   "filing_fallback": [],
@@ -189,5 +573,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-11-03T22:39:53.644147+00:00"
+  "updated_at_utc": "2026-11-04T17:59:00.481837+00:00"
 }
