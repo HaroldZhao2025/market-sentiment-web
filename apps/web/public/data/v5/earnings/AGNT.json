@@ -153,7 +153,281 @@
       "surprise_pct": 150.0
     }
   ],
-  "calls": [],
+  "calls": [
+    {
+      "quarter": null,
+      "date": "2026-11-05T00:00:00+00:00",
+      "source": "Stock Analysis / Quartr",
+      "source_url": "https://stockanalysis.com/stocks/agnt/transcripts/724040-q3-2026/",
+      "source_type": "free_public_transcript",
+      "summary": {
+        "turn_count": 16,
+        "scored_turn_count": 16,
+        "overall_sentiment": 0.529144,
+        "prepared_sentiment": 0.017611,
+        "qa_sentiment": 0.699655,
+        "qa_tone_shift": 0.682044,
+        "uncertainty_turn_rate": 0.25,
+        "forward_looking_turn_rate": 0.4375,
+        "topics": [
+          {
+            "topic": "Margins & costs",
+            "mentions": 8,
+            "sentiment": 0.168294
+          },
+          {
+            "topic": "Guidance",
+            "mentions": 7,
+            "sentiment": 0.139735
+          },
+          {
+            "topic": "Macro & FX",
+            "mentions": 4,
+            "sentiment": 0.077553
+          },
+          {
+            "topic": "Demand",
+            "mentions": 3,
+            "sentiment": -0.168272
+          },
+          {
+            "topic": "Regulation & legal",
+            "mentions": 3,
+            "sentiment": -0.162899
+          },
+          {
+            "topic": "AI & technology",
+            "mentions": 2,
+            "sentiment": -0.867196
+          },
+          {
+            "topic": "Capital allocation",
+            "mentions": 1,
+            "sentiment": -0.84989
+          }
+        ]
+      },
+      "turns": [
+        {
+          "turn": 0,
+          "speaker": "Operator",
+          "role": "",
+          "section": "prepared",
+          "sentiment": 0.891227,
+          "word_count": 29,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 1,
+          "speaker": "Denise Garcia",
+          "role": "Investor Relations Representative, AGNT",
+          "section": "prepared",
+          "sentiment": 0.91361,
+          "word_count": 310,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 2,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 2,
+          "speaker": "Thank you, Denise, and good afternoon, everyone.",
+          "role": "It's a pleasure to be speaking to you for the first time as the CEO of AGNT.",
+          "section": "prepared",
+          "sentiment": -0.884502,
+          "word_count": 1394,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "AI & technology"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 3,
+          "speaker": "Jesse Hill",
+          "role": "CFO, AGNT",
+          "section": "prepared",
+          "sentiment": -0.84989,
+          "word_count": 599,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "AI & technology",
+            "Capital allocation",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 3,
+          "forward_looking_hits": 4
+        },
+        {
+          "turn": 4,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916681,
+          "word_count": 106,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 5,
+          "speaker": "Thanks, Danny.",
+          "role": "While we are waiting, I will kick it off with a couple questions that we received from our analysts.",
+          "section": "qa",
+          "sentiment": 0.891064,
+          "word_count": 27,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 6,
+          "speaker": "Leo Pareja",
+          "role": "CEO, AGNT",
+          "section": "qa",
+          "sentiment": 0.57961,
+          "word_count": 107,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 7,
+          "speaker": "Denise Garcia",
+          "role": "Investor Relations Representative, AGNT",
+          "section": "qa",
+          "sentiment": 0.858125,
+          "word_count": 25,
+          "topic_hits": [
+            "Guidance"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 1
+        },
+        {
+          "turn": 8,
+          "speaker": "Jesse Hill",
+          "role": "CFO, AGNT",
+          "section": "qa",
+          "sentiment": -0.473725,
+          "word_count": 147,
+          "topic_hits": [
+            "Guidance",
+            "Demand",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 1,
+          "forward_looking_hits": 3
+        },
+        {
+          "turn": 9,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.879536,
+          "word_count": 20,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 10,
+          "speaker": "Stephen Sheldon",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.449971,
+          "word_count": 75,
+          "topic_hits": [
+            "Margins & costs"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 11,
+          "speaker": "Jesse Hill",
+          "role": "CFO, AGNT",
+          "section": "qa",
+          "sentiment": 0.834918,
+          "word_count": 184,
+          "topic_hits": [
+            "Guidance",
+            "Margins & costs",
+            "Macro & FX",
+            "Regulation & legal"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 2
+        },
+        {
+          "turn": 12,
+          "speaker": "Stephen Sheldon",
+          "role": "Analyst, William Blair",
+          "section": "qa",
+          "sentiment": 0.818799,
+          "word_count": 92,
+          "topic_hits": [
+            "Demand"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 13,
+          "speaker": "Leo Pareja",
+          "role": "CEO, AGNT",
+          "section": "qa",
+          "sentiment": 0.798909,
+          "word_count": 296,
+          "topic_hits": [
+            "Margins & costs",
+            "Macro & FX"
+          ],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 14,
+          "speaker": "Operator",
+          "role": "",
+          "section": "qa",
+          "sentiment": 0.916929,
+          "word_count": 97,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        },
+        {
+          "turn": 15,
+          "speaker": "Thank you to everyone who joined.",
+          "role": "A recording of this call and our latest investor presentation are available on our investor relations website at agnt.inc.",
+          "section": "qa",
+          "sentiment": 0.925046,
+          "word_count": 50,
+          "topic_hits": [],
+          "uncertainty_hits": 0,
+          "forward_looking_hits": 0
+        }
+      ],
+      "transcript_word_count": 3558,
+      "transcript_text_redistributed": false
+    }
+  ],
   "filing_fallback": [],
   "call_links": [
     {
@@ -233,6 +507,12 @@
       "url": "https://stockanalysis.com/stocks/agnt/transcripts/412572-q4-2025/",
       "source": "Stock Analysis / Quartr",
       "ts": "2026-02-24T00:00:00+00:00"
+    },
+    {
+      "title": "AGNT Earnings Call: Q3 2026",
+      "url": "https://stockanalysis.com/stocks/agnt/transcripts/724040-q3-2026/",
+      "source": "Stock Analysis / Quartr",
+      "ts": "2026-11-05T00:00:00+00:00"
     }
   ],
   "methodology": {
@@ -240,5 +520,5 @@
     "fulfillment": "Free public transcript sweep: Stock Analysis/Quartr public pages, MarketBeat public transcripts, Yahoo/Motley Fool public pages, and SEC exhibits. Transcript text is analyzed transiently and not redistributed.",
     "fulfillment_stage": 3
   },
-  "updated_at_utc": "2026-11-05T11:43:07.985713+00:00"
+  "updated_at_utc": "2026-11-06T06:27:52.132587+00:00"
 }
