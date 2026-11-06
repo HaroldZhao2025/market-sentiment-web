@@ -2,12 +2,10 @@
   "schema_version": 2,
   "symbol": "GBCI",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-11-04T02:46:12.245059+00:00",
+  "updated_at_utc": "2026-11-06T18:25:02.863789+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-11-04",
-    "2021-11-05",
     "2021-11-08",
     "2021-11-09",
     "2021-11-10",
@@ -1258,11 +1256,13 @@
     "2026-10-28",
     "2026-10-29",
     "2026-10-30",
-    "2026-11-02"
+    "2026-11-02",
+    "2026-11-03",
+    "2026-11-04",
+    "2026-11-05",
+    "2026-11-06"
   ],
   "price": [
-    57.5099983215332,
-    59.470001220703125,
     59.22999954223633,
     58.66999816894531,
     59.15999984741211,
@@ -2513,11 +2513,13 @@
     48.11000061035156,
     48.790000915527344,
     48.560001373291016,
-    49.959999084472656
+    49.959999084472656,
+    48.88999938964844,
+    49.63999938964844,
+    48.560001373291016,
+    48.13999938964844
   ],
   "sentiment": [
-    null,
-    null,
     null,
     null,
     null,
@@ -3648,7 +3650,7 @@
     null,
     null,
     null,
-    0.512541,
+    null,
     0.708751,
     0.494508,
     0.2338,
@@ -3762,13 +3764,17 @@
     0.746717,
     0.479522,
     0.104705,
-    0.387132,
+    0.363408,
     0.491108,
     0.071892,
     0.891035,
-    0.492387,
+    0.507082,
     0.827881,
-    0.844346
+    0.844346,
+    0.343961,
+    null,
+    null,
+    null
   ],
   "sentiment_observed": [
     false,
@@ -4264,8 +4270,6 @@
     false,
     false,
     false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4903,7 +4907,7 @@
     false,
     false,
     false,
-    true,
+    false,
     true,
     true,
     true,
@@ -5023,6 +5027,10 @@
     true,
     true,
     true,
-    true
+    true,
+    true,
+    false,
+    false,
+    false
   ]
 }
