@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="endfield">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e8ed72">
+<meta name="description" content="MIT Sloan 上班激励器 · 每一秒，都算数。实时计薪、工时趋势与本地数据备份。">
+<meta name="color-scheme" content="light">
+<title>SLOAN / SHIFT — 每一秒，都算数</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23212520'/%3E%3Cpath d='M16 14h32v10H26v6h22v20H16V40h22v-6H16z' fill='%23e8ed72'/%3E%3C/svg%3E">
+<style>
+/* Original industrial-terminal and research-archive interface. No external assets. */
+:root{--bg:#eeefea;--paper:#f9faf5;--ink:#252923;--muted:#687064;--line:#d6d9ce;--accent:#e8ed72;--accent-ink:#22271c;--hero:#242921;--hero-ink:#f5f7ed;--hero-muted:#a6ad9b;--chart:#8d9963;--tint:#e7ebdb;--red:#a84032;--radius:2px;--serif:Arial,"PingFang SC","Microsoft YaHei",sans-serif;--sans:Arial,"PingFang SC","Microsoft YaHei",sans-serif;--mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+:root[data-theme=hongshan]{--bg:#efeee6;--paper:#faf9f2;--ink:#233d37;--muted:#687b71;--line:#d5dbce;--accent:#cbe4cc;--accent-ink:#183e32;--hero:#173e33;--hero-ink:#f3f6e8;--hero-muted:#a7c4af;--chart:#4b8873;--tint:#e0eadd;--red:#ae4a37;--radius:12px;--serif:"Songti SC","STSong","Noto Serif CJK SC",Georgia,serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 var(--sans);background-image:radial-gradient(var(--line) .7px,transparent .7px);background-size:8px 8px}button,input,select{font:inherit}button{cursor:pointer;color:inherit}button:disabled{cursor:not-allowed;opacity:.45}button,a,input,select{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--chart);outline-offset:3px}button{border:0}a{color:inherit}input,select{min-width:0;max-width:100%}button,select{min-height:40px}input{font-size:16px}button{transition:background .15s,transform .15s}button:hover:not(:disabled){filter:brightness(.96)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}.eyebrow{font:11px/1.4 var(--mono);letter-spacing:1.5px;text-transform:uppercase}.muted{color:var(--muted)}.tiny{font-size:12px}.nowrap{white-space:nowrap}.shell{max-width:1320px;margin:auto;padding:0 38px}.topbar{border-bottom:1px solid var(--line);background:var(--paper)}.topline{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:14px}.brand-mark{width:38px;height:38px;background:var(--ink);color:var(--accent);display:grid;place-items:center}.brand-mark svg{width:24px;height:24px}.brand-name{font:900 21px/1 var(--sans);letter-spacing:-1px}.brand-name span{font-weight:400;color:var(--muted)}.brand-sub{font:10px var(--mono);letter-spacing:2px;color:var(--muted);margin-top:6px}.top-tools{display:flex;gap:12px;align-items:center}.theme-switch{display:flex;border:1px solid var(--line);padding:3px;gap:3px;border-radius:var(--radius)}.theme-switch button{background:transparent;min-height:34px;padding:0 12px;font-size:12px;border-radius:calc(var(--radius)/2)}.theme-switch button[aria-pressed=true]{background:var(--ink);color:var(--paper)}.theme-dot{display:inline-block;width:7px;height:7px;background:#e8ed72;margin-right:7px}.theme-dot.green{background:#6c9d88}.ghost{background:transparent;border:1px solid var(--line);border-radius:var(--radius);padding:9px 15px;display:inline-flex;align-items:center;justify-content:center;gap:8px}.icon{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.65;vertical-align:middle}.intro{display:flex;justify-content:space-between;align-items:end;padding:32px 0 24px;gap:20px}.intro h1{font:700 35px/1.3 var(--serif);letter-spacing:-1.5px;margin:7px 0}.intro p{margin:0;color:var(--muted);font-size:13px}.intro-side{text-align:right}.intro-side strong{display:block;font:11px var(--mono);letter-spacing:1.5px;margin-bottom:6px}.flag{color:var(--muted);font:11px var(--mono);letter-spacing:1px}.flag:before{content:'+';font-size:16px;margin-right:10px}.main-grid{display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:20px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius)}.meter{position:relative;overflow:hidden;background:var(--hero);color:var(--hero-ink);min-height:395px;border-radius:var(--radius);padding:26px 30px 0;border:1px solid var(--hero);display:flex;flex-direction:column}.meter:before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:32px 32px}.meter:after{content:'';position:absolute;width:6px;height:58px;left:0;top:78px;background:var(--accent)}.meter-top{display:flex;justify-content:space-between;align-items:center;position:relative;gap:14px}.meter-top .eyebrow{color:var(--hero-muted)}.status{font:11px var(--mono);display:flex;align-items:center;gap:7px;color:var(--hero-muted);letter-spacing:1px}.status-dot{display:inline-block;width:6px;height:6px;background:var(--hero-muted);border-radius:50%}.running .status-dot{background:var(--accent);box-shadow:0 0 0 4px #ffffff0c;animation:breathe 2s infinite}.running .status{color:var(--accent)}@keyframes breathe{50%{opacity:.5}}.money-label{position:relative;margin:34px 0 3px;font-size:13px;color:var(--hero-muted)}.money{position:relative;font-family:var(--mono);line-height:1.15;white-space:nowrap;letter-spacing:-5px;display:flex;align-items:baseline;font-variant-numeric:tabular-nums}.currency{font-size:36px;margin-right:14px;color:var(--accent);letter-spacing:0}.money-main{font-size:clamp(46px,6.1vw,81px);font-weight:500}.money-sub{font-size:clamp(27px,3.6vw,46px);color:var(--hero-muted);letter-spacing:-2px}.money-micro{font-size:clamp(20px,2.3vw,30px);opacity:.72;letter-spacing:-1px}.money-caption{color:var(--hero-muted);font-size:11px;margin:9px 0 21px;position:relative}.timer-row{display:flex;align-items:center;gap:20px;position:relative}.elapsed{font:25px/1.1 var(--mono);letter-spacing:1px}.elapsed-label{color:var(--hero-muted);font-size:10px;margin-top:5px}.meter-controls{display:flex;gap:9px;margin-left:auto}.primary{background:var(--accent);color:var(--accent-ink);padding:11px 22px;min-height:46px;border-radius:var(--radius);font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:10px}.secondary-dark{border:1px solid #ffffff35;background:transparent;color:var(--hero-ink);padding:10px 16px;border-radius:var(--radius);min-height:46px}.meter-foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;border-top:1px solid #ffffff25;padding:17px 0 18px;margin-top:23px;position:relative}.meter-foot small{display:block;color:var(--hero-muted);font-size:11px;margin-bottom:5px}.meter-foot b{font:17px var(--mono)}.meter-art{position:absolute;right:-15px;top:45px;width:240px;height:220px;opacity:.12;pointer-events:none;color:var(--accent)}.hs-art{display:none}:root[data-theme=hongshan] .hs-art{display:block}:root[data-theme=hongshan] .ef-art{display:none}:root[data-theme=hongshan] .meter:after{background:#c9674f;height:38px}:root[data-theme=hongshan] .brand-mark{border-radius:50%;background:var(--hero)}.settings{padding:22px;display:flex;flex-direction:column}.section-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.section-top h2{font-size:15px;margin:0;font-weight:700}.index{font:11px var(--mono);color:var(--muted)}.unit-label{font-size:11px;color:var(--muted);margin-top:18px}.unit{font-weight:700;font-size:20px;letter-spacing:-.5px;margin:2px 0 18px}.field-label{display:block;font-size:12px;margin:0 0 6px}.input-wrap{display:flex;align-items:center;border:1px solid var(--line);background:var(--bg);border-radius:var(--radius);padding:0 11px;gap:8px}.input-wrap input{background:transparent;border:0;padding:9px 0;width:100%;color:var(--ink);font:20px var(--mono);min-height:44px}.input-wrap span{font-size:12px;color:var(--muted)}.settings-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-field{margin-bottom:13px}.rate-line{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-top:1px solid var(--line);margin-top:1px;font-size:12px}.rate-line b{font:16px var(--mono)}.apply{background:var(--ink);color:var(--paper);border-radius:var(--radius);width:100%;font-size:12px;margin-top:7px}.formula{font:10px/1.7 var(--mono);color:var(--muted);margin-top:8px}.work-note{display:flex;gap:14px;align-items:center;margin:15px 0 26px}.work-note label{white-space:nowrap;font-size:12px;color:var(--muted)}.work-note input{flex:1;background:transparent;border:0;border-bottom:1px solid var(--line);padding:7px 3px;font-size:13px;color:var(--ink);min-width:0}.work-note .ghost{font-size:12px;min-height:34px;padding:5px 12px}.quote-line{display:flex;align-items:center;gap:12px;margin:0 0 26px;color:var(--muted);font-size:12px}.quote-line:before{content:'';width:23px;height:2px;background:var(--chart)}.summary-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:14px}.summary-heading h2{font:700 23px var(--serif);margin:0}.summary-heading .eyebrow{color:var(--muted);margin-bottom:4px}.period-toggle{display:flex;gap:4px;background:var(--line);padding:3px;border-radius:var(--radius)}.period-toggle button{padding:5px 15px;min-height:31px;background:transparent;font-size:12px;border-radius:calc(var(--radius)/2)}.period-toggle button[aria-pressed=true]{background:var(--paper)}.summary-grid{display:grid;grid-template-columns:274px minmax(0,1fr);gap:20px}.weekly{padding:22px}.weekly-label{font-size:12px}.ring-wrap{height:153px;position:relative;display:grid;place-items:center;margin:12px 0}.ring-wrap svg{height:148px;width:148px;transform:rotate(-90deg)}.ring-track{stroke:var(--tint);fill:none;stroke-width:9}.ring-value{stroke:var(--chart);fill:none;stroke-width:9;stroke-linecap:round;transition:stroke-dasharray .5s}.ring-center{position:absolute;text-align:center}.ring-center strong{font:28px var(--mono);letter-spacing:-1px;display:block}.ring-center span{font-size:10px;color:var(--muted)}.weekly-foot{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}.weekly-foot b{color:var(--ink);font:13px var(--mono)}.week-gentle{margin:10px 0 0;font-size:10px;color:var(--muted)}.trend{padding:22px;min-width:0}.trend-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.range-nav{display:flex;gap:5px;align-items:center}.range-nav button{background:transparent;border:1px solid var(--line);min-width:31px;min-height:31px;padding:2px 8px;border-radius:var(--radius);font-size:12px}.range-label{font:12px var(--mono)}.trend-stats{display:flex;align-items:baseline;gap:22px;margin-top:16px}.trend-hours{font:29px var(--mono);letter-spacing:-1px}.trend-hours small{font:12px var(--sans);letter-spacing:0;margin-left:5px;color:var(--muted)}.trend-income{font:17px var(--mono);color:var(--chart)}.compare{font-size:11px;color:var(--muted);margin-top:3px}.chart{display:flex;gap:10px;align-items:stretch;height:143px;margin-top:14px;padding-top:15px;border-bottom:1px solid var(--line);position:relative;background:repeating-linear-gradient(to top,transparent 0,transparent 38px,var(--line) 39px,transparent 40px)}.bar-column{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:transparent;padding:0;position:relative}.bar-fill{background:var(--chart);width:60%;max-width:48px;min-height:3px;opacity:.55;border-radius:3px 3px 0 0;transition:height .35s}.bar-column.today .bar-fill{opacity:1}.bar-column.selected .bar-fill{outline:2px solid var(--ink);outline-offset:2px;opacity:1}.bar-column .bar-value{font:10px var(--mono);color:var(--muted);margin-bottom:5px;white-space:nowrap}.chart-labels{display:flex;gap:10px;margin-top:8px}.chart-labels span{flex:1;text-align:center;font:10px var(--mono);color:var(--muted)}.chart.month,.chart-labels.month{gap:4px}.chart.month .bar-fill{width:80%;max-width:20px}.chart.month .bar-value{display:none}.chart-empty{position:absolute;inset:20px 0 0;display:grid;place-items:center;font-size:12px;color:var(--muted);pointer-events:none}.chart-detail{font-size:11px;color:var(--muted);min-height:18px;margin-top:10px}.records{margin-top:22px;padding:22px}.records-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.records-head>.ghost{flex-shrink:0;white-space:nowrap}.records-head h2{font-size:15px;margin:0}.records-head .tiny{margin-top:4px}.table-scroll{overflow-x:auto}.records table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap;font-size:12px}.records th{font-size:10px;letter-spacing:.5px;font-weight:400;color:var(--muted);border-bottom:1px solid var(--line);padding:0 12px 10px 0}.records td{padding:13px 12px 13px 0;border-bottom:1px solid var(--line)}.record-note{max-width:260px;white-space:normal;overflow-wrap:anywhere}.records td button{min-height:30px;background:transparent;font-size:11px;padding:3px 8px;border:1px solid var(--line);border-radius:var(--radius)}.records td .delete{color:var(--red);margin-left:5px}.empty{padding:30px 15px 35px;text-align:center;color:var(--muted);font-size:12px}.empty strong{display:block;color:var(--ink);font-size:14px;margin-bottom:8px}.empty svg{width:34px;height:34px;margin-bottom:10px;opacity:.5}.footer{border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;margin:26px 0 0;padding:18px 0 28px;font-size:10px;color:var(--muted)}.footer-right{text-align:right}.theme-name{letter-spacing:1px;font-family:var(--mono)}.storage-dot{display:inline-block;width:5px;height:5px;background:var(--chart);margin-right:5px;border-radius:50%}.notice{padding:12px 15px;border:1px solid #c38c42;background:#fff3d8;color:#5c421f;font-size:12px;margin-bottom:15px}.notice button{background:transparent;text-decoration:underline;font-size:12px;min-height:25px}.error{color:var(--red);font-size:12px;margin:10px 0 0;min-height:0}.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:12px 22px;border:1px solid var(--line);font-size:13px;border-radius:var(--radius);max-width:calc(100% - 30px);z-index:50;box-shadow:0 5px 30px #0002}.modal{color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:25px;max-width:min(600px,calc(100vw - 28px));width:600px;max-height:85dvh;overflow:auto;box-shadow:0 25px 100px #0003}.modal::backdrop{background:#15231988;backdrop-filter:blur(4px)}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal h2{font-size:21px;margin:0;font-family:var(--serif)}.close{background:transparent;border:1px solid var(--line);min-width:34px;min-height:34px;font-size:21px;border-radius:var(--radius)}.modal p{font-size:12px;color:var(--muted)}.modal .form-input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);min-height:43px;padding:8px;border-radius:var(--radius)}.modal label{font-size:12px;display:block;margin-bottom:6px}.modal .form-field{margin-bottom:17px}.segment-row{padding:12px;background:var(--bg);border:1px solid var(--line);margin-bottom:10px;border-radius:var(--radius)}.segment-inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}.segment-row .form-input{background:var(--paper);font-size:12px}.segment-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:7px}.segment-top button{min-height:25px;background:transparent;color:var(--red);font-size:11px}.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}.export-option{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px 0;border-bottom:1px solid var(--line)}.export-option strong{display:block;font-size:13px}.export-option small{display:block;font-size:11px;color:var(--muted);margin-top:4px}.export-option button{flex-shrink:0;font-size:12px}.settings select{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);font-size:12px;padding:5px 8px;min-height:34px}.timezone-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:8px 0 5px}.pill{border:1px solid var(--line);padding:2px 5px;font-size:9px;color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}noscript{display:block;padding:24px;background:#fff3d8;color:#542}
+@media(min-width:1000px){.settings{grid-row:span 2}.main-grid .work-note{margin:-3px 0 0;grid-column:1}.main-grid{row-gap:16px}.meter{min-height:405px}.settings{align-self:stretch}.quote-line{margin-top:20px}}
+@media(max-width:1000px){.shell{padding:0 24px}.main-grid{grid-template-columns:minmax(0,1fr) 285px;gap:15px}.meter{padding:23px 24px 0}.money-main{font-size:60px}.money-sub{font-size:35px}.currency{font-size:28px}.timer-row{align-items:start;flex-wrap:wrap;gap:15px}.meter-controls{margin-left:0}.meter-foot{margin-top:auto}.elapsed{font-size:23px}.money-caption{margin-bottom:16px}.money-label{margin-top:26px}.summary-grid{grid-template-columns:235px minmax(0,1fr);gap:15px}.work-note{grid-column:1 / -1;margin:0}.quote-line{margin-top:20px}.settings{padding:20px}.meter-art{width:190px}}
+@media(max-width:740px){.shell{padding:0 18px}.topline{min-height:72px}.brand-name{font-size:18px}.brand-sub{font-size:8px;letter-spacing:1px}.brand-mark{width:31px;height:31px}.brand{gap:9px}.top-tools{gap:7px}.theme-switch button{padding:0 9px;font-size:11px}.top-tools>.ghost{width:36px;min-height:36px;padding:7px}.data-label{display:none}.intro{padding:26px 0 20px}.intro h1{font-size:29px}.intro-side{display:none}.main-grid{grid-template-columns:1fr;gap:15px}.meter{min-height:365px;padding:23px 23px 0}.money-main{font-size:68px}.money-sub{font-size:39px}.money-micro{font-size:26px}.money-label{margin-top:29px}.currency{font-size:31px}.money{letter-spacing:-4px}.timer-row{align-items:center;flex-wrap:nowrap;margin-top:1px}.meter-controls{margin-left:auto}.primary{padding:11px 16px;font-size:13px}.secondary-dark{padding:10px 12px;font-size:12px}.elapsed{font-size:22px}.meter-foot{margin-top:23px}.meter-foot b{font-size:15px}.settings{padding:18px 20px;display:block}.settings .unit-label,.settings .unit{display:none}.settings .section-top{margin-bottom:14px}.settings-pair{grid-template-columns:1fr 1fr}.settings .form-field{margin-bottom:8px}.rate-line{margin-top:4px}.formula{font-size:10px}.settings-bottom{display:grid;grid-template-columns:1fr 110px;gap:15px;align-items:end}.settings-bottom .apply{height:35px;min-height:35px;margin:0}.settings-bottom .timezone-label{margin:0 0 4px}.work-note{grid-row:2;margin:0 0 3px;gap:9px}.work-note .ghost{display:none}.quote-line{margin:19px 0 24px;font-size:11px}.summary-heading h2{font-size:22px}.summary-grid{grid-template-columns:1fr}.weekly{display:grid;grid-template-columns:1fr 135px;position:relative;padding:18px 20px;min-height:150px}.weekly-label{grid-column:1;align-self:center;font-size:14px}.ring-wrap{grid-column:2;grid-row:1 / 4;height:115px;margin:0}.ring-wrap svg{height:115px;width:115px}.ring-center strong{font-size:24px}.weekly-foot{grid-column:1;display:block;border:0;padding:0;margin:9px 0 0;font-size:11px;align-self:end}.weekly-foot b{display:block;font-size:19px;margin-top:4px}.week-gentle{grid-column:1;font-size:10px}.trend{padding:19px}.trend-head{flex-wrap:wrap}.range-label{font-size:11px}.records{padding:18px;margin-top:16px}.footer{flex-wrap:wrap;gap:7px}.footer-right{text-align:left}.modal{padding:20px}.segment-inputs{grid-template-columns:1fr}.chart,.chart-labels{gap:7px}.chart.month,.chart-labels.month{gap:3px}.chart-labels.month span{font-size:8px}.money-caption{font-size:10px}.intro p{font-size:12px}}
+@media(max-width:390px){.shell{padding:0 12px}.brand-sub{display:none}.brand-name{font-size:16px}.theme-switch button{font-size:10px;padding:0 6px}.theme-dot{display:none}.top-tools{gap:5px}.money-main{font-size:58px}.money-sub{font-size:32px}.money-micro{font-size:22px}.meter{padding-left:18px;padding-right:18px}.currency{margin-right:9px}.timer-row{gap:9px}.elapsed{font-size:19px}.primary{padding:10px 12px}.secondary-dark{padding:10px}.meter-controls{gap:6px}.range-label{font-size:10px}.range-nav{gap:3px}.trend-stats{gap:13px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{body{background:white}.top-tools,.meter-controls,.settings,.work-note,.quote-line,.records-head button,.records td:last-child,.range-nav,.period-toggle,.footer,.toast,.modal{display:none!important}.main-grid,.summary-grid{display:block}.meter{min-height:auto;color:#111;background:white;border:1px solid #999}.meter *{color:#111!important}.meter-foot{border-color:#999}.meter-art,.meter:before,.meter:after{display:none}.panel{margin-top:14px;break-inside:avoid}.weekly{display:none}.shell{padding:0}.intro{padding:15px 0}.money-label{margin-top:10px}.records{break-inside:auto}}
+</style>
+</head>
+<body>
+<noscript>请启用 JavaScript，才能使用计时和数据保存功能。页面不需要联网。</noscript>
+<svg class="sr-only" aria-hidden="true"><defs><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol><symbol id="i-add" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol><symbol id="i-log" viewBox="0 0 24 24"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></symbol></defs></svg>
+<header class="topbar"><div class="shell topline">
+<div class="brand"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 28 28" fill="currentColor"><path d="M4 3h20v6H10v4h14v12H4v-6h14v-3H4z"/></svg></div><div><div class="brand-name">SLOAN <span>/</span> SHIFT</div><div class="brand-sub">PERSONAL WORK TERMINAL</div></div></div>
+<div class="top-tools"><div class="theme-switch" role="group" aria-label="页面主题"><button type="button" data-theme-button="endfield" aria-pressed="true"><span class="theme-dot"></span>终末地</button><button type="button" data-theme-button="hongshan" aria-pressed="false"><span class="theme-dot green"></span>宏山</button></div><button type="button" class="ghost" id="dataButton" aria-label="打开数据中心"><svg class="icon"><use href="#i-download"/></svg><span class="data-label">数据中心</span></button></div>
+</div></header>
+<main class="shell">
+<section class="intro"><div><div class="flag" id="introFlag">ENDFIELD-INSPIRED / PERSONAL EDITION</div><h1 id="introTitle">每一秒，都算数。</h1><p id="introCopy">今天的投入，正在变成看得见的回报。</p></div><div class="intro-side"><strong id="todayDate">—</strong><span class="tiny muted" id="zoneDisplay">America/New_York</span></div></section>
+<div class="notice" id="storageWarning" role="alert" hidden></div>
+<div class="notice" id="longWarning" hidden>计时已持续超过 12 小时，包含离开页面的时间。若忘记下班，请结束后在记录中「修正」；休息也很重要。</div>
+<section class="main-grid" aria-label="计时与薪资设置">
+<div class="meter" id="meter">
+<svg class="meter-art ef-art" viewBox="0 0 250 230" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="145" cy="112" r="85"/><circle cx="145" cy="112" r="66" stroke-dasharray="3 8"/><path d="M145 0v224M33 112h224M85 48l120 128M79 177 208 47M145 59l46 80H99z"/><circle cx="145" cy="112" r="7"/><path d="M10 20h30M25 5v30M214 203h26M227 190v26"/></svg>
+<svg class="meter-art hs-art" viewBox="0 0 250 230" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="137" cy="104" r="86"/><circle cx="137" cy="104" r="73"/><path d="m32 157 52-77 24 35 36-73 68 115M50 157h174M84 80v77m60-115v115M42 173h182M62 189h145M115 104l29-36 37 67"/><path d="M137 6V0M39 104H26M235 104h13M137 197v20"/></svg>
+<div class="meter-top"><span class="eyebrow">MIT SLOAN / LIVE EARNINGS</span><span class="status" id="status" role="status"><i class="status-dot"></i><span id="statusText">READY · 待启动</span></span></div>
+<div class="money-label" id="moneyLabel">本次工作 · 折算收入 / USD</div>
+<div class="money" aria-label="本次折算收入"><span class="currency">$</span><span class="money-main" id="moneyMain">0</span><span class="money-sub" id="moneySub">.00</span><span class="money-micro" id="moneyMicro">00</span></div>
+<div class="money-caption" id="moneyCaption">按下启动，让每一秒有迹可循。</div>
+<div class="timer-row"><div><div class="elapsed" id="elapsed">00:00:00</div><div class="elapsed-label">本次有效工时</div></div><div class="meter-controls"><button type="button" class="primary" id="startButton"><svg class="icon"><use href="#i-play" id="startIcon"/></svg><span id="startText">启动计时</span></button><button type="button" class="secondary-dark" id="stopButton" disabled>结束保存</button></div></div>
+<div class="meter-foot"><div><small>今日投入</small><b id="todayHours">0h 00m</b></div><div><small>今日折算收入</small><b id="todayEarned">$0.00</b></div><div><small>本次时薪</small><b id="sessionRate">$19.23</b></div></div>
+</div>
+<form class="settings panel" id="settingsForm"><div class="section-top"><h2>薪资参数</h2><span class="index">02 / PAYROLL</span></div><div class="unit-label">任职单位 / ORGANIZATION</div><div class="unit">MIT Sloan <span class="pill">USD</span></div><div class="settings-pair"><div class="form-field"><label class="field-label" for="salary">月薪</label><div class="input-wrap"><span>$</span><input id="salary" name="salary" type="number" min="0" max="10000000" step="0.01" value="5000" required inputmode="decimal" aria-label="月薪美元"></div></div><div class="form-field"><label class="field-label" for="weeklyHours">每周工时</label><div class="input-wrap"><input id="weeklyHours" name="weeklyHours" type="number" min="0.1" max="168" step="0.1" value="60" required inputmode="decimal"><span>h</span></div></div></div><div class="rate-line"><span class="muted">折算时薪</span><b id="ratePreview">$19.2308</b></div><div class="formula">月薪 × 12 ÷ 52 ÷ 每周工时<br>全年 52 周口径 · 不做税费或实际工资核算</div><div class="settings-bottom"><div><label for="timeZone" class="timezone-label">统计时区 <span>周一为每周起点</span></label><select id="timeZone"><option value="America/New_York">纽约 / 波士顿</option><option value="America/Panama">巴拿马</option><option value="Asia/Shanghai">北京</option><option value="Etc/UTC">UTC</option></select></div><button class="apply" type="submit">保存参数 ↗</button></div><p class="tiny muted" id="rateNote" style="font-size:10px;margin:9px 0 0">新费率用于下一次工作，历史记录不变。</p><p class="error" id="settingsError" role="alert"></p></form>
+<div class="work-note"><label for="note">工作事项</label><input id="note" type="text" maxlength="200" placeholder="例如：读论文、整理数据、写代码…" aria-label="本次工作事项"><button type="button" class="ghost" id="saveNote">保存备注</button></div>
+</section>
+<div class="quote-line" id="quote">不是每一分钟都需要证明自己，但你的每一分钟都值得被看见。</div>
+<section aria-labelledby="summaryTitle"><div class="summary-heading"><div><div class="eyebrow">YOUR TIME, MADE VISIBLE</div><h2 id="summaryTitle">投入，有迹可循。</h2></div><div class="period-toggle" role="group" aria-label="统计周期"><button type="button" data-view="week" aria-pressed="true">周</button><button type="button" data-view="month" aria-pressed="false">月</button></div></div>
+<div class="summary-grid"><div class="weekly panel"><div class="weekly-label">本周累计 <span class="muted tiny">/ TIME</span></div><div class="ring-wrap"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-track" cx="60" cy="60" r="48"/><circle class="ring-value" id="weekRing" cx="60" cy="60" r="48" pathLength="100" stroke-dasharray="0 100"/></svg><div class="ring-center"><strong id="weekHours">0.00</strong><span id="weekGoal">/ 60 小时</span></div></div><div class="weekly-foot"><span>本周折算收入</span><b id="weekEarned">$0.00</b></div><p class="week-gentle" id="weekGentle">记录投入，不鼓励超时。记得好好休息。</p></div>
+<div class="trend panel"><div class="trend-head"><span class="range-label" id="rangeLabel">—</span><div class="range-nav"><button type="button" id="prevPeriod" aria-label="上一个周期">←</button><button type="button" id="currentPeriod">本周</button><button type="button" id="nextPeriod" aria-label="下一个周期">→</button></div></div><div class="trend-stats"><span class="trend-hours"><span id="periodHours">0.00</span><small>小时</small></span><span class="trend-income" id="periodEarned">$0.00</span></div><div class="compare" id="comparison">完整周期对比</div><div class="chart" id="chart" aria-label="每日工作时长柱状图"></div><div class="chart-labels" id="chartLabels" aria-hidden="true"></div><div class="chart-detail" id="chartDetail" aria-live="polite">点击柱形，查看当天时长与收入。</div></div></div></section>
+<section class="records panel" aria-labelledby="recordsTitle"><div class="records-head"><div><h2 id="recordsTitle">工作记录 <span class="index" id="recordsCount">/ 00</span></h2><div class="tiny muted">当前所选周期 · 运行中的记录将在结束后归档</div></div><button type="button" class="ghost" id="addRecord"><svg class="icon"><use href="#i-add"/></svg><span class="tiny">补录工时</span></button></div><div class="table-scroll" id="recordTable" hidden><table><thead><tr><th>日期 / 事项</th><th>有效工时</th><th>折算收入</th><th>操作</th></tr></thead><tbody id="recordRows"></tbody></table></div><div class="empty" id="emptyRecords"><svg class="icon"><use href="#i-log"/></svg><strong>你的第一段投入，从这里开始。</strong>点击「启动计时」，或补录已经完成的工作。</div><button type="button" class="ghost" id="moreRecords" hidden style="margin-top:13px;width:100%">显示更多记录</button></section>
+<footer class="footer"><div><span class="theme-name" id="themeName">ENDFIELD / INDUSTRIAL TERMINAL</span><br>MIT Sloan 为自定义单位标签；本工具非 MIT 或游戏官方产品。</div><div class="footer-right"><span class="storage-dot"></span><span id="storageStatus">仅存此浏览器 · 请定期导出备份</span><br>独立 HTML / 无第三方依赖 / SLOAN SHIFT v1.0</div></footer>
+</main>
+<dialog class="modal" id="dataDialog" aria-labelledby="dataTitle"><div class="modal-head"><h2 id="dataTitle">数据中心</h2><button type="button" class="close" data-close="dataDialog" aria-label="关闭数据中心">×</button></div><p>记录保存在当前设备的当前浏览器中，不会上传 GitHub。清理网站数据或换设备会丢失本地记录；请用 JSON 备份迁移。代码中包含默认月薪 $5,000。</p><div class="export-option"><div><strong>完整备份 · JSON</strong><small>所有记录与参数，可重新导入恢复。</small></div><button type="button" class="ghost" id="exportJson">导出 JSON</button></div><div class="export-option"><div><strong>工时明细 · CSV</strong><small>每个有效工作时段一行，保留时薪与时区。</small></div><button type="button" class="ghost" id="exportCsv">导出 CSV</button></div><div class="export-option"><div><strong>所选周期日报 · CSV</strong><small>每日时长、收入，包含正在计时的部分。</small></div><button type="button" class="ghost" id="exportSummary">导出汇总</button></div><div class="export-option"><div><strong>恢复备份</strong><small>替换此浏览器数据；先下载当前备份，再确认恢复。</small></div><button type="button" class="ghost" id="importButton">导入 JSON</button><input id="importFile" type="file" accept=".json,application/json" hidden></div><p>导出运行中的计时不会影响原页面；备份中的该条记录为暂停状态，恢复后请手动继续。浏览器关闭期间仍按时间戳累计，离岗请主动暂停或结束。</p><div class="modal-actions"><button type="button" class="ghost" id="clearData" style="color:var(--red)">清空本地记录</button><button type="button" class="primary" data-close="dataDialog">完成</button></div><p class="error" id="importError" role="alert"></p></dialog>
+<dialog class="modal" id="editDialog" aria-labelledby="editTitle"><form id="editForm"><div class="modal-head"><h2 id="editTitle">补录工时</h2><button type="button" class="close" data-close="editDialog" aria-label="关闭工时编辑">×</button></div><p id="editZone">时间按纽约 / 波士顿时区输入。可跨日，暂停时间不算工时。</p><div class="form-field"><label for="editNote">工作事项</label><input id="editNote" type="text" class="form-input" maxlength="200" placeholder="给这段投入留一个名字"></div><div class="form-field"><label for="editRate">这条记录的时薪（USD / h）</label><input id="editRate" type="number" class="form-input" min="0" max="1000000000" step="any" required></div><div id="editSegments"></div><button type="button" class="ghost" id="addSegment">＋ 增加有效时段</button><p>同一条记录可包含多个时段。重叠时段与未来时间会被拒绝，避免重复计薪。修改不会改变其他记录。</p><p class="error" id="editError" role="alert"></p><div class="modal-actions"><button type="button" class="ghost" data-close="editDialog">取消</button><button type="submit" class="primary">保存记录</button></div></form></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+<script id="sloan-core">
+/* Pure calculation and validation utilities. No dependencies. */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.WorkMeterCore = factory();
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const HOUR = 3600000;
+  const DAY = 24 * HOUR;
+  const DEFAULTS = Object.freeze({monthlySalary: 5000, weeklyHours: 60, theme: 'endfield', timeZone: 'America/New_York'});
+  const formatters = new Map();
+  function assert(condition, message) { if (!condition) throw new Error(message); }
+  function finite(value) { return typeof value === 'number' && Number.isFinite(value); }
+  function hourlyRate(monthlySalary, weeklyHours) {
+    assert(finite(monthlySalary) && monthlySalary >= 0 && monthlySalary <= 10000000, '月薪须为 0–10,000,000 之间的数字。');
+    assert(finite(weeklyHours) && weeklyHours >= 0.1 && weeklyHours <= 168, '每周工时须为 0.1–168 小时。');
+    return monthlySalary * 12 / (52 * weeklyHours);
+  }
+  function parts(ms, timeZone) {
+    let fmt = formatters.get(timeZone);
+    if (!fmt) {
+      fmt = new Intl.DateTimeFormat('en-CA', {timeZone, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hourCycle:'h23'});
+      formatters.set(timeZone, fmt);
+    }
+    const result = {};
+    for (const part of fmt.formatToParts(new Date(ms))) if (part.type !== 'literal') result[part.type] = part.value;
+    return result;
+  }
+  function dateKey(ms, tz) { const p = parts(ms, tz); return `${p.year}-${p.month}-${p.day}`; }
+  function localInput(ms, tz) { const p = parts(ms, tz); return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}`; }
+  function addDays(key, days) {
+    const d = new Date(`${key}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + days); return d.toISOString().slice(0, 10);
+  }
+  function weekStart(key) {
+    const weekday = new Date(`${key}T12:00:00Z`).getUTCDay();
+    return addDays(key, -(weekday + 6) % 7);
+  }
+  function shiftMonth(key, delta) {
+    const d = new Date(`${key.slice(0,7)}-01T12:00:00Z`);
+    d.setUTCMonth(d.getUTCMonth() + delta); return d.toISOString().slice(0,10);
+  }
+  function zoneOffset(ms, tz) {
+    const p = parts(ms, tz);
+    return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second) - Math.floor(ms / 1000) * 1000;
+  }
+  function localCandidates(value, tz) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(value);
+    assert(match, '时间格式无效。');
+    const target = `${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6] || '00'}`;
+    const guess = Date.UTC(+match[1], +match[2]-1, +match[3], +match[4], +match[5], +(match[6] || 0));
+    const offsets = new Set([-36,-12,0,12,36].map(h => zoneOffset(guess + h*HOUR, tz)));
+    return [...offsets].map(offset => guess - offset).filter(ms => localInput(ms, tz) === target).sort((a,b) => a-b);
+  }
+  function fromLocal(value, tz, allowAmbiguous = false) {
+    const matches = localCandidates(value, tz);
+    assert(matches.length, '这个本地时间不存在；请检查日期或夏令时跳时。');
+    assert(allowAmbiguous || matches.length === 1, '这个时间在夏令时切换时出现两次。请避开重复的小时，或通过 JSON 保留准确时间戳。');
+    return matches[0];
+  }
+  function midnight(key, tz) { return fromLocal(`${key}T00:00:00`, tz, true); }
+  function period(key, view, tz) {
+    const startKey = view === 'month' ? `${key.slice(0,7)}-01` : weekStart(key);
+    const endKey = view === 'month' ? shiftMonth(startKey, 1) : addDays(startKey, 7);
+    const days = [];
+    for (let cursor=startKey; cursor<endKey; cursor=addDays(cursor,1)) days.push(cursor);
+    return {startKey, endKey, start:midnight(startKey,tz), end:midnight(endKey,tz), days};
+  }
+  function sessionSegments(session, now = Date.now()) {
+    if (!session) return [];
+    const result = session.segments.map(s => ({start:s.start, end:s.end, rate:session.hourlyRate, sessionId:session.id, note:session.note, source:session.source || 'timer'}));
+    if (finite(session.runningSince) && now > session.runningSince) result.push({start:session.runningSince, end:now, rate:session.hourlyRate, sessionId:session.id, note:session.note, source:session.source || 'timer'});
+    return result;
+  }
+  function allSegments(state, now = Date.now()) {
+    return [...state.sessions, ...(state.current ? [state.current] : [])].flatMap(s => sessionSegments(s,now));
+  }
+  function totals(segments, start=-Infinity, end=Infinity) {
+    let duration=0, earned=0;
+    for (const s of segments) {
+      const ms = Math.max(0, Math.min(end,s.end) - Math.max(start,s.start));
+      duration += ms; earned += ms/HOUR*s.rate;
+    }
+    return {duration, earned};
+  }
+  function aggregateDays(segments, keys, tz) {
+    return keys.map(key => ({key, ...totals(segments, midnight(key,tz), midnight(addDays(key,1),tz))}));
+  }
+  function duration(ms, includeSeconds = false) {
+    const s = Math.max(0, Math.floor(ms / 1000));
+    const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), r = s % 60;
+    return includeSeconds ? `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(r).padStart(2,'0')}` : `${h} 小时 ${String(m).padStart(2,'0')} 分`;
+  }
+  function newState() { return {schemaVersion:1, revision:0, updatedAt:Date.now(), settings:{...DEFAULTS}, sessions:[], current:null}; }
+  function validateSettings(raw) {
+    assert(raw && typeof raw === 'object', '缺少设置。');
+    hourlyRate(raw.monthlySalary, raw.weeklyHours);
+    assert(['endfield','hongshan'].includes(raw.theme), '不支持的主题。');
+    assert(typeof raw.timeZone === 'string' && raw.timeZone.length < 80, '时区无效。');
+    try { parts(Date.now(), raw.timeZone); } catch (_) { throw new Error('时区无效。'); }
+    return {monthlySalary:raw.monthlySalary, weeklyHours:raw.weeklyHours, theme:raw.theme, timeZone:raw.timeZone};
+  }
+  function validateSession(raw, isCurrent, now=Date.now()) {
+    assert(raw && typeof raw === 'object', '工作记录格式无效。');
+    assert(typeof raw.id === 'string' && raw.id.length > 0 && raw.id.length <= 160, '记录 ID 无效。');
+    assert(typeof raw.note === 'string' && raw.note.length <= 200, '工作备注最多 200 字。');
+    assert(finite(raw.hourlyRate) && raw.hourlyRate >= 0 && raw.hourlyRate <= 1000000000, '时薪无效。');
+    assert(Array.isArray(raw.segments) && raw.segments.length <= 10000, '工作时段格式无效或数量过多。');
+    const segments = raw.segments.map(s => {
+      assert(s && finite(s.start) && finite(s.end) && s.start >= 0 && s.end > s.start && s.end <= now + 1000, '每个时段的结束时间必须晚于开始时间，且不能在未来。');
+      assert(s.end - s.start <= 366*DAY, '单个工作时段不能超过一年。');
+      return {start:s.start, end:s.end};
+    }).sort((a,b) => a.start-b.start);
+    for (let i=1;i<segments.length;i++) assert(segments[i].start >= segments[i-1].end, '同一记录内存在重叠时段。');
+    const runningSince = isCurrent && raw.runningSince != null ? raw.runningSince : null;
+    if (runningSince !== null) {
+      assert(finite(runningSince) && runningSince>=0 && runningSince<=now+1000, '运行中的计时起点无效；请检查设备时间。');
+      if (segments.length) assert(runningSince>=segments[segments.length-1].end, '计时时段重叠。');
+    }
+    assert(isCurrent || segments.length > 0, '已完成记录不能没有时段。');
+    const startedAt = segments.length ? segments[0].start : (runningSince ?? raw.startedAt);
+    assert(finite(startedAt) && startedAt>=0 && startedAt<=now+1000, '记录开始时间无效。');
+    return {
+      id:raw.id, note:raw.note, hourlyRate:raw.hourlyRate, segments, runningSince,
+      startedAt, endedAt:isCurrent ? null : segments[segments.length-1].end,
+      source:raw.source === 'manual' ? 'manual' : 'timer',
+      monthlySalary:finite(raw.monthlySalary) ? raw.monthlySalary : null,
+      weeklyHours:finite(raw.weeklyHours) ? raw.weeklyHours : null,
+      organization:'MIT Sloan'
+    };
+  }
+  function assertNoOverlap(segments) {
+    const sorted = segments.filter(s=>s.end>s.start).slice().sort((a,b)=>a.start-b.start);
+    for (let i=1;i<sorted.length;i++) assert(sorted[i].start >= sorted[i-1].end, '工作时段与另一条记录重叠，请先校正，避免重复计薪。');
+  }
+  function validateState(raw, now=Date.now()) {
+    assert(raw && raw.schemaVersion === 1, '这不是受支持的 Sloan Shift 备份（需要版本 1）。');
+    assert(Array.isArray(raw.sessions) && raw.sessions.length <= 20000, '记录列表无效或过大。');
+    const state = {schemaVersion:1, revision:Number.isSafeInteger(raw.revision) ? raw.revision : 0, updatedAt:finite(raw.updatedAt)?raw.updatedAt:now,
+      settings:validateSettings(raw.settings), sessions:raw.sessions.map(s=>validateSession(s,false,now)), current:raw.current ? validateSession(raw.current,true,now) : null};
+    const ids = [...state.sessions, ...(state.current ? [state.current] : [])].map(s=>s.id);
+    assert(new Set(ids).size === ids.length, '备份包含重复记录 ID。');
+    assertNoOverlap(allSegments(state,now));
+    return state;
+  }
+  function snapshot(state, now=Date.now()) {
+    const result = JSON.parse(JSON.stringify(state));
+    if (result.current && result.current.runningSince !== null) {
+      if (now>result.current.runningSince) result.current.segments.push({start:result.current.runningSince,end:now});
+      result.current.runningSince = null;
+    }
+    result.exportedAt = new Date(now).toISOString();
+    result.application = 'MIT Sloan / Shift';
+    return result;
+  }
+  function csv(rows) {
+    return '\uFEFF' + rows.map(row => row.map(value => {
+      let text = String(value ?? '');
+      if (typeof value === 'string' && /^[\s\uFEFF]*[=+@-]/.test(text)) text = "'" + text;
+      return '"' + text.replace(/"/g,'""') + '"';
+    }).join(',')).join('\r\n');
+  }
+  return Object.freeze({HOUR,DAY,DEFAULTS,hourlyRate,parts,dateKey,localInput,addDays,weekStart,shiftMonth,localCandidates,fromLocal,midnight,period,sessionSegments,allSegments,totals,aggregateDays,duration,newState,validateSettings,validateSession,validateState,assertNoOverlap,snapshot,csv});
+});
+</script>
+<script>
+/* Local-only controller. No network requests or third-party scripts. */
+(() => {
+  'use strict';
+  const C = window.WorkMeterCore;
+  const KEY = 'sloan-shift:v1';
+  const $ = id => document.getElementById(id);
+  const text = (id,value) => { const e=$(id); if(e.textContent!==String(value)) e.textContent=String(value); };
+  const money = (value,digits=2) => '$'+value.toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits});
+  const clone = obj => JSON.parse(JSON.stringify(obj));
+  const uid = () => globalThis.crypto?.randomUUID?.() || Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
+  const compactDuration = ms => Math.floor(ms/C.HOUR)+'h '+String(Math.floor(ms/60000)%60).padStart(2,'0')+'m';
+  let state=C.newState(), memoryOnly=false, corrupt=false, initialRaw=null;
+  let view='week', anchor=null, selectedDay=null, lastFinished=null, visibleRecords=40;
+  let editingId=null, editingZone=C.DEFAULTS.timeZone, toastTimeout, tickCount=0;
+  function notify(message) { text('toast',message); $('toast').hidden=false; clearTimeout(toastTimeout); toastTimeout=setTimeout(()=>$('toast').hidden=true,3500); }
+  function storageNotice(message) { text('storageWarning',message); $('storageWarning').hidden=false; }
+  function readState() {
+    if(memoryOnly) return state;
+    const raw=localStorage.getItem(KEY);
+    return raw ? C.validateState(JSON.parse(raw)) : C.newState();
+  }
+  try {
+    initialRaw=localStorage.getItem(KEY);
+    if(initialRaw) state=C.validateState(JSON.parse(initialRaw));
+    localStorage.setItem(KEY+':probe','1'); localStorage.removeItem(KEY+':probe');
+  } catch(error) {
+    if(initialRaw) {
+      corrupt=true;
+      storageNotice('已有数据无法读取，原文件未被覆盖。请到「数据中心」导出原始备份，再导入有效备份或确认清空。原因：'+error.message);
+    } else {
+      memoryOnly=true;
+      storageNotice('浏览器无法持久保存数据，当前仅为临时内存模式。关闭页面前务必导出 JSON；建议使用普通浏览器窗口而非无痕模式。');
+    }
+  }
+  async function transaction(change,{replace=false}={}) {
+    const run=()=>{
+      if(corrupt&&!replace) throw new Error('请先在数据中心备份并修复原始数据。');
+      let latest;
+      try { latest=replace ? state : readState(); }
+      catch(error) { throw new Error('本地数据读取失败，未覆盖记录：'+error.message); }
+      const now=Date.now(), draft=clone(latest);
+      const output=change(draft,now);
+      const next=C.validateState(output||draft,now);
+      next.revision=(latest.revision||0)+1; next.updatedAt=now;
+      if(!memoryOnly) {
+        try { localStorage.setItem(KEY,JSON.stringify(next)); }
+        catch(error) { throw new Error('保存失败，操作未生效。可能存储空间不足或浏览器禁用了保存；请先导出备份。'); }
+      }
+      state=next; corrupt=false; initialRaw=null;
+      render();
+    };
+    if(navigator.locks?.request) return navigator.locks.request(KEY+':write',run);
+    return run();
+  }
+  function handleError(error,target) { if(target) text(target,error.message); else notify(error.message||String(error)); }
+  function applyTheme() {
+    const hs=state.settings.theme==='hongshan';
+    document.documentElement.dataset.theme=state.settings.theme;
+    document.querySelector('meta[name="theme-color"]').content=hs?'#173e33':'#e8ed72';
+    document.querySelectorAll('[data-theme-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeButton===state.settings.theme)));
+    text('introFlag',hs?'HONGSHAN-INSPIRED / RESEARCH ARCHIVE':'ENDFIELD-INSPIRED / PERSONAL EDITION');
+    text('introTitle',hs?'积微成著，日有所进。':'每一秒，都算数。');
+    text('introCopy',hs?'把日常的钻研，写进属于你的时间档案。':'今天的投入，正在变成看得见的回报。');
+    text('themeName',hs?'宏山科学院风格 / RESEARCH ARCHIVE':'ENDFIELD / INDUSTRIAL TERMINAL');
+    text('quote',hs?'不必急于抵达。每一段认真投入的时间，都在让远处的山更近一点。':'不是每一分钟都需要证明自己，但你的每一分钟都值得被看见。');
+  }
+  function syncFields() {
+    $('salary').value=state.settings.monthlySalary; $('weeklyHours').value=state.settings.weeklyHours;
+    const zone=state.settings.timeZone;
+    if(![...$('timeZone').options].some(o=>o.value===zone)) { const o=new Option(zone,zone); $('timeZone').add(o); }
+    $('timeZone').value=zone;
+    if(state.current) $('note').value=state.current.note;
+    previewRate();
+  }
+  function previewRate() {
+    try { text('ratePreview',money(C.hourlyRate(Number($('salary').value),Number($('weeklyHours').value)),4)); }
+    catch(_) { text('ratePreview','—'); }
+  }
+  function getPeriod() { return C.period(anchor||C.dateKey(Date.now(),state.settings.timeZone),view,state.settings.timeZone); }
+  function closeRunning(current,now) {
+    if(current.runningSince!==null) {
+      if(now<current.runningSince) throw new Error('设备时间早于计时起点。请校准系统时间后再操作，避免误记。');
+      if(now>current.runningSince) current.segments.push({start:current.runningSince,end:now});
+      current.runningSince=null;
+    }
+  }
+  function renderClock(now=Date.now()) {
+    const current=state.current, running=current&&current.runningSince!==null;
+    const display=current || state.sessions.find(s=>s.id===lastFinished);
+    const total=C.totals(C.sessionSegments(display,now));
+    const fixed=total.earned.toFixed(4).split('.');
+    text('moneyMain',Number(fixed[0]).toLocaleString('en-US')); text('moneySub','.'+fixed[1].slice(0,2)); text('moneyMicro',fixed[1].slice(2));
+    text('elapsed',C.duration(total.duration,true));
+    const rate=display?.hourlyRate ?? C.hourlyRate(state.settings.monthlySalary,state.settings.weeklyHours);
+    text('sessionRate',money(rate));
+    text('moneyLabel',display&&!current?'最近一次 · 已归档 / USD':'本次工作 · 折算收入 / USD');
+    text('moneyCaption',running?`+$${(rate/3600).toFixed(6)} / 秒 · 每一秒，都在积累。`:current?'暂停中。休息一下，回来再继续。':display?'这一段投入已保存。下一次启动，将开启新的记录。':'按下启动，让每一秒有迹可循。');
+    $('meter').classList.toggle('running',!!running);
+    text('statusText',running?'LIVE · 记录中':current?'PAUSED · 已暂停':'READY · 待启动');
+    text('startText',running?'暂停计时':current?'继续计时':'启动计时');
+    $('startIcon').setAttribute('href',running?'#i-pause':'#i-play');
+    $('startButton').disabled=corrupt; $('stopButton').disabled=!current||corrupt;
+    text('rateNote',current?'本次费率已锁定；保存的新参数从下次工作生效。':'新费率用于下一次工作，历史记录不变。');
+    const tz=state.settings.timeZone, today=C.dateKey(now,tz);
+    const dayTotal=C.totals(C.allSegments(state,now),C.midnight(today,tz),C.midnight(C.addDays(today,1),tz));
+    text('todayHours',compactDuration(dayTotal.duration)); text('todayEarned',money(dayTotal.earned));
+    text('todayDate',today.replaceAll('-',' / ')); text('zoneDisplay',tz);
+    $('longWarning').hidden=!(running&&(now-current.runningSince)>12*C.HOUR);
+    text('storageStatus',corrupt?'原始数据待修复，尚未覆盖':memoryOnly?'临时内存模式 · 关闭前请导出':'仅存此浏览器 · 请定期导出备份');
+    document.title=running?money(total.earned)+' · SLOAN / SHIFT':'SLOAN / SHIFT — 每一秒，都算数';
+  }
+  function renderStats(now=Date.now()) {
+    const tz=state.settings.timeZone, today=C.dateKey(now,tz), segments=C.allSegments(state,now);
+    const thisWeek=C.period(today,'week',tz), week=C.totals(segments,thisWeek.start,thisWeek.end);
+    const goal=state.settings.weeklyHours, progress=Math.min(100,week.duration/C.HOUR/goal*100);
+    text('weekHours',(week.duration/C.HOUR).toFixed(2)); text('weekGoal','/ '+goal+' 小时');
+    text('weekEarned',money(week.earned)); $('weekRing').setAttribute('stroke-dasharray',`${progress} ${100-progress}`);
+    text('weekGentle',progress>=100?'本周已达到设定工时。做得很好，也该留些时间给自己。':'记录投入，不鼓励超时。记得好好休息。');
+    const p=getPeriod(), days=C.aggregateDays(segments,p.days,tz), total=C.totals(segments,p.start,p.end);
+    text('rangeLabel',p.startKey.replaceAll('-','.')+' — '+C.addDays(p.endKey,-1).replaceAll('-','.'));
+    text('periodHours',(total.duration/C.HOUR).toFixed(2)); text('periodEarned',money(total.earned));
+    text('currentPeriod',view==='week'?'本周':'本月');
+    const prev=C.period(view==='week'?C.addDays(p.startKey,-7):C.shiftMonth(p.startKey,-1),view,tz);
+    const last=C.totals(segments,prev.start,prev.end);
+    text('comparison',last.duration?`较上一完整${view==='week'?'周':'月'} ${total.duration>=last.duration?'+':''}${((total.duration-last.duration)/C.HOUR).toFixed(2)} 小时 · 当前周期可能尚未结束`:'上一周期暂无记录 · 不把休息当作落后');
+    const nowPeriod=C.period(today,view,tz); $('nextPeriod').disabled=p.startKey>=nowPeriod.startKey;
+    document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
+    const chart=$('chart'), labels=$('chartLabels');
+    chart.classList.toggle('month',view==='month'); labels.classList.toggle('month',view==='month');
+    const structure=days.map(d=>d.key).join(',');
+    if(chart.dataset.structure!==structure) {
+      chart.replaceChildren(); labels.replaceChildren(); chart.dataset.structure=structure;
+      days.forEach((d,i)=>{
+        const b=document.createElement('button'); b.type='button'; b.className='bar-column'; b.dataset.day=d.key;
+        const value=document.createElement('span'); value.className='bar-value';
+        const fill=document.createElement('span'); fill.className='bar-fill'; b.append(value,fill);
+        b.addEventListener('click',()=>{selectedDay=d.key; renderStats();}); chart.append(b);
+        const label=document.createElement('span');
+        label.textContent=view==='week'?['一','二','三','四','五','六','日'][i]:(i===0||(i+1)%5===0||i===days.length-1?String(i+1):'');
+        labels.append(label);
+      });
+      const empty=document.createElement('div'); empty.className='chart-empty'; empty.id='chartEmpty'; empty.textContent='今天，从一小段专注开始。'; chart.append(empty);
+    }
+    const max=Math.max(1,...days.map(d=>d.duration/C.HOUR));
+    days.forEach(d=>{
+      const b=chart.querySelector(`[data-day="${d.key}"]`), hours=d.duration/C.HOUR;
+      b.classList.toggle('today',d.key===today); b.classList.toggle('selected',d.key===selectedDay);
+      b.setAttribute('aria-pressed',String(d.key===selectedDay));
+      const label=`${d.key}：${C.duration(d.duration)}，折算收入 ${money(d.earned)}`;
+      b.title=label; b.setAttribute('aria-label',label);
+      b.querySelector('.bar-fill').style.height=(hours/max*98)+'px';
+      b.querySelector('.bar-value').textContent=hours>0?hours.toFixed(1)+'h':'';
+    });
+    $('chartEmpty').hidden=total.duration>0;
+    const chosen=days.find(d=>d.key===selectedDay);
+    text('chartDetail',chosen?`${chosen.key} · ${C.duration(chosen.duration,true)} · ${money(chosen.earned,4)}`:'点击柱形，查看当天时长与收入。');
+  }
+  function renderRecords() {
+    const p=getPeriod(), tz=state.settings.timeZone;
+    const sessions=state.sessions.map(s=>({session:s,total:C.totals(C.sessionSegments(s),p.start,p.end)})).filter(r=>r.total.duration>0).sort((a,b)=>b.session.startedAt-a.session.startedAt);
+    text('recordsCount','/ '+String(sessions.length).padStart(2,'0'));
+    $('emptyRecords').hidden=sessions.length>0; $('recordTable').hidden=!sessions.length;
+    const body=$('recordRows'); body.replaceChildren();
+    sessions.slice(0,visibleRecords).forEach(({session:s,total})=>{
+      const tr=document.createElement('tr');
+      const name=document.createElement('td');
+      const date=document.createElement('div'); date.className='mono'; date.textContent=C.localInput(s.startedAt,tz).replace('T',' ').slice(0,16);
+      const note=document.createElement('div'); note.className='record-note muted tiny'; note.textContent=(s.note||'未命名的工作')+(s.source==='manual'?' · 补录':'');
+      name.append(date,note);
+      const time=document.createElement('td'); time.className='mono'; time.textContent=C.duration(total.duration,true);
+      const earned=document.createElement('td'); earned.className='mono'; earned.textContent=money(total.earned,2);
+      const actions=document.createElement('td');
+      const edit=document.createElement('button'); edit.type='button'; edit.textContent='修正'; edit.setAttribute('aria-label','修正 '+(s.note||date.textContent)); edit.onclick=()=>openEditor(s.id);
+      const del=document.createElement('button'); del.type='button'; del.className='delete'; del.textContent='删除'; del.setAttribute('aria-label','删除 '+(s.note||date.textContent));
+      del.onclick=async()=>{
+        if(!confirm('删除这条工作记录？此操作不能撤销，建议先导出备份。'))return;
+        try { await transaction(d=>{ d.sessions=d.sessions.filter(x=>x.id!==s.id); }); notify('记录已删除'); } catch(e) { handleError(e); }
+      };
+      actions.append(edit,del); tr.append(name,time,earned,actions); body.append(tr);
+    });
+    $('moreRecords').hidden=sessions.length<=visibleRecords;
+  }
+  function render() { applyTheme(); renderClock(); renderStats(); renderRecords(); }
+  $('startButton').addEventListener('click',async()=>{
+    try {
+      const note=$('note').value.trim();
+      await transaction((d,now)=>{
+        if(!d.current) {
+          d.current={id:uid(),note,organization:'MIT Sloan',source:'timer',startedAt:now,endedAt:null,segments:[],runningSince:now,hourlyRate:C.hourlyRate(d.settings.monthlySalary,d.settings.weeklyHours),monthlySalary:d.settings.monthlySalary,weeklyHours:d.settings.weeklyHours};
+          lastFinished=null;
+        } else {
+          d.current.note=note;
+          if(d.current.runningSince===null) d.current.runningSince=now; else closeRunning(d.current,now);
+        }
+      });
+      notify(state.current?.runningSince!==null?'已开始记录。慢慢来，认真做。':'已暂停，休息不计入工时。');
+    } catch(e) { handleError(e); }
+  });
+  $('stopButton').addEventListener('click',async()=>{
+    let saved=null;
+    try {
+      await transaction((d,now)=>{
+        if(!d.current)return;
+        d.current.note=$('note').value.trim(); closeRunning(d.current,now);
+        if(d.current.segments.length) { d.current.endedAt=d.current.segments.at(-1).end; saved=d.current.id; d.sessions.push(d.current); }
+        d.current=null; lastFinished=saved;
+      });
+      $('note').value=''; notify(saved?'已保存。这一段投入，值得被记住。':'计时不足一瞬，未生成空记录。');
+    } catch(e) { handleError(e); }
+  });
+  async function saveNote(showToast=false) {
+    try { if(state.current) await transaction(d=>{ if(d.current)d.current.note=$('note').value.trim(); }); if(showToast)notify(state.current?'备注已保存':'备注将在启动时记录'); }
+    catch(e) { handleError(e); }
+  }
+  $('saveNote').onclick=()=>saveNote(true); $('note').addEventListener('change',()=>saveNote());
+  $('settingsForm').addEventListener('submit',async event=>{
+    event.preventDefault(); text('settingsError','');
+    try {
+      const monthlySalary=Number($('salary').value), weeklyHours=Number($('weeklyHours').value), timeZone=$('timeZone').value;
+      C.hourlyRate(monthlySalary,weeklyHours);
+      await transaction(d=>{d.settings={...d.settings,monthlySalary,weeklyHours,timeZone};});
+      anchor=null; selectedDay=null; syncFields(); render(); notify('参数已保存，历史收入保持不变。');
+    } catch(e) { handleError(e,'settingsError'); }
+  });
+  ['salary','weeklyHours'].forEach(id=>$(id).addEventListener('input',previewRate));
+  document.querySelectorAll('[data-theme-button]').forEach(b=>b.onclick=async()=>{
+    try { await transaction(d=>{d.settings.theme=b.dataset.themeButton;}); } catch(e) { handleError(e); }
+  });
+  document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view; anchor=null; selectedDay=null; visibleRecords=40; renderStats(); renderRecords();});
+  function movePeriod(delta) { const p=getPeriod(); anchor=view==='week'?C.addDays(p.startKey,delta*7):C.shiftMonth(p.startKey,delta); selectedDay=null; visibleRecords=40; renderStats(); renderRecords(); }
+  $('prevPeriod').onclick=()=>movePeriod(-1); $('nextPeriod').onclick=()=>movePeriod(1);
+  $('currentPeriod').onclick=()=>{anchor=null; selectedDay=null; visibleRecords=40; renderStats(); renderRecords();};
+  $('moreRecords').onclick=()=>{visibleRecords+=40; renderRecords();};
+  document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
+  $('dataButton').onclick=()=>{text('importError',''); $('dataDialog').showModal();};
+  function addSegmentRow(start,end) {
+    const row=document.createElement('div'); row.className='segment-row';
+    const top=document.createElement('div'); top.className='segment-top';
+    const label=document.createElement('span'); label.textContent='有效时段';
+    const del=document.createElement('button'); del.type='button'; del.textContent='移除'; del.onclick=()=>row.remove(); top.append(label,del);
+    const inputs=document.createElement('div'); inputs.className='segment-inputs';
+    [['开始',start,'start'],['结束',end,'end']].forEach(([caption,ms,key])=>{
+      const box=document.createElement('div'), lab=document.createElement('label'), input=document.createElement('input');
+      input.type='datetime-local'; input.step='1'; input.required=true; input.className='form-input'; input.dataset.segment=key;
+      input.id='dt-'+uid(); lab.htmlFor=input.id; lab.textContent=caption;
+      input.value=C.localInput(ms,editingZone); input.dataset.originalValue=input.value; input.dataset.original=String(ms);
+      box.append(lab,input); inputs.append(box);
+    });
+    row.append(top,inputs); $('editSegments').append(row);
+  }
+  function openEditor(id=null) {
+    editingId=id; editingZone=state.settings.timeZone;
+    const s=state.sessions.find(s=>s.id===id);
+    if(id&&!s)return notify('这条记录已被移除。');
+    text('editTitle',id?'修正记录':'补录工时'); text('editError','');
+    text('editZone','输入时区：'+editingZone+'。可跨日；每段只填实际工作的起止时间。');
+    $('editNote').value=s?.note||'';
+    $('editRate').value=s?.hourlyRate ?? C.hourlyRate(state.settings.monthlySalary,state.settings.weeklyHours);
+    $('editSegments').replaceChildren();
+    (s?.segments||[{start:Math.floor((Date.now()-C.HOUR)/1000)*1000,end:Math.floor(Date.now()/1000)*1000}]).forEach(x=>addSegmentRow(x.start,x.end));
+    $('editDialog').showModal();
+  }
+  $('addRecord').onclick=()=>openEditor();
+  $('addSegment').onclick=()=>{const now=Math.floor(Date.now()/1000)*1000; addSegmentRow(now-1800000,now);};
+  $('editForm').addEventListener('submit',async event=>{
+    event.preventDefault(); text('editError','');
+    try {
+      const segments=[...$('editSegments').querySelectorAll('.segment-row')].map(row=>{
+        const read=kind=>{const input=row.querySelector(`[data-segment="${kind}"]`); return input.value===input.dataset.originalValue?Number(input.dataset.original):C.fromLocal(input.value,editingZone);};
+        return {start:read('start'),end:read('end')};
+      });
+      if(!segments.length) throw new Error('请保留至少一个有效工作时段。');
+      const note=$('editNote').value.trim(), hourlyRate=Number($('editRate').value), id=editingId;
+      await transaction(d=>{
+        const existing=d.sessions.find(x=>x.id===id);
+        if(id&&!existing)throw new Error('这条记录已在另一页面删除，请重新打开编辑。');
+        const item={...(existing||{}),id:id||uid(),note,hourlyRate,segments,runningSince:null,source:existing?.source||'manual',monthlySalary:existing?.monthlySalary??d.settings.monthlySalary,weeklyHours:existing?.weeklyHours??d.settings.weeklyHours,organization:'MIT Sloan'};
+        if(id)d.sessions=d.sessions.map(x=>x.id===id?item:x); else d.sessions.push(item);
+      });
+      $('editDialog').close(); notify('工作记录已保存');
+    } catch(e) { handleError(e,'editError'); }
+  });
+  function download(name,content,type) {
+    const blob=new Blob([content],{type}), url=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=url; a.download=name; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),30000);
+  }
+  function stamp(){return new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);}
+  function exportJson() {
+    if(corrupt) download('sloan-shift-original-'+stamp()+'.json',initialRaw||localStorage.getItem(KEY)||'', 'application/json;charset=utf-8');
+    else download('sloan-shift-backup-'+stamp()+'.json',JSON.stringify(C.snapshot(state),null,2),'application/json;charset=utf-8');
+  }
+  $('exportJson').onclick=()=>{try{exportJson();notify(corrupt?'已导出未经改动的原始数据':'JSON 备份已生成');}catch(e){handleError(e);}};
+  $('exportCsv').onclick=()=>{
+    try {
+      if(corrupt)throw new Error('请先导出原始 JSON 并修复数据。');
+      const tz=state.settings.timeZone, now=Date.now();
+      const rows=[['session_id','organization','source','note','start_utc','end_utc','time_zone','start_local','end_local','duration_seconds','hourly_rate_usd','earned_usd','record_state']];
+      C.allSegments(state,now).sort((a,b)=>a.start-b.start).forEach(s=>rows.push([s.sessionId,'MIT Sloan',s.source,s.note,new Date(s.start).toISOString(),new Date(s.end).toISOString(),tz,C.localInput(s.start,tz),C.localInput(s.end,tz),((s.end-s.start)/1000).toFixed(3),s.rate,(s.end-s.start)/C.HOUR*s.rate,s.sessionId===state.current?.id?'current_snapshot':'completed']));
+      download('sloan-shift-sessions-'+stamp()+'.csv',C.csv(rows),'text/csv;charset=utf-8'); notify('工时明细已导出');
+    } catch(e){handleError(e);}
+  };
+  $('exportSummary').onclick=()=>{
+    try {
+      if(corrupt)throw new Error('请先导出原始 JSON 并修复数据。');
+      const p=getPeriod(), tz=state.settings.timeZone, days=C.aggregateDays(C.allSegments(state),p.days,tz);
+      const rows=[['date','organization','time_zone','duration_seconds','hours','earned_usd']];
+      days.forEach(d=>rows.push([d.key,'MIT Sloan',tz,(d.duration/1000).toFixed(3),d.duration/C.HOUR,d.earned]));
+      download('sloan-shift-'+view+'-'+p.startKey+'.csv',C.csv(rows),'text/csv;charset=utf-8'); notify('所选周期汇总已导出');
+    } catch(e){handleError(e);}
+  };
+  $('importButton').onclick=()=>$('importFile').click();
+  $('importFile').addEventListener('change',async event=>{
+    const file=event.target.files[0]; if(!file)return;
+    text('importError','');
+    try {
+      if(file.size>10*1024*1024)throw new Error('备份不能超过 10 MB。');
+      const parsed=C.validateState(JSON.parse(await file.text()));
+      const incoming=C.validateState(C.snapshot(parsed));
+      if(!confirm(`确认用这份备份替换本地的全部记录和参数？备份含 ${incoming.sessions.length} 条已完成记录${incoming.current?'及 1 条暂停中的记录':''}。当前数据会先导出供你保留。`))return;
+      exportJson();
+      await transaction(()=>incoming,{replace:true});
+      anchor=null; selectedDay=null; lastFinished=null; $('note').value='';
+      $('storageWarning').hidden=!memoryOnly; syncFields(); render();
+      $('dataDialog').close(); notify('恢复成功。备份中的当前计时保持暂停。');
+    } catch(e) { handleError(e,'importError'); }
+    finally {event.target.value='';}
+  });
+  $('clearData').onclick=async()=>{
+    if(!confirm('这会删除所有本地工作记录与当前计时。删除前将导出一份备份。确认清空？'))return;
+    try {
+      exportJson();
+      await transaction(d=>{ const n=C.newState(); n.settings={...d.settings}; return n; },{replace:true});
+      $('storageWarning').hidden=!memoryOnly; lastFinished=null; $('note').value=''; syncFields(); render();
+      $('dataDialog').close(); notify('记录已清空，薪资参数保留。');
+    } catch(e) {handleError(e,'importError');}
+  };
+  window.addEventListener('storage',event=>{
+    if(event.key!==KEY||memoryOnly)return;
+    try {state=readState();corrupt=false;lastFinished=null; if(!['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName))syncFields();render();}
+    catch(e) {corrupt=true;storageNotice('另一页面写入的数据无法读取，计时操作已停用。请到数据中心备份并修复。');renderClock();}
+  });
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){try{if(!memoryOnly&&!corrupt)state=readState();render();}catch(e){handleError(e);}}});
+  syncFields(); render();
+  setInterval(()=>{
+    try {renderClock();if(++tickCount%10===0)renderStats();}
+    catch(e) {storageNotice('无法按当前设备时间计算，请检查时钟与时区；原始数据尚未被改动。');}
+  },1000);
+})();
+</script>
+</body>
+</html>
