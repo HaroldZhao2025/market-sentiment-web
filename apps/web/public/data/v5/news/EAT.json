@@ -2,19 +2,629 @@
   "schema_version": 6,
   "symbol": "EAT",
   "source_policy": "free_public_only",
-  "last_attempt_utc": "2026-11-08T19:59:19.612770+00:00",
-  "updated_at_utc": "2026-11-08T19:59:19.612770+00:00",
-  "latest_article_at_utc": "2026-11-08T17:17:56+00:00",
-  "last_nonempty_fetch_utc": "2026-11-08T19:59:19.612770+00:00",
-  "fetched_article_count": 250,
-  "new_article_count": 41,
+  "last_attempt_utc": "2026-11-11T13:01:12.195612+00:00",
+  "updated_at_utc": "2026-11-11T13:01:12.195612+00:00",
+  "latest_article_at_utc": "2026-11-11T12:41:00+00:00",
+  "last_nonempty_fetch_utc": "2026-11-11T13:01:12.195612+00:00",
+  "fetched_article_count": 253,
+  "new_article_count": 66,
   "refresh_status": "updated",
   "fetch_error_type": null,
   "history_days_requested": 1095,
   "article_count": 360,
   "scored_article_count": 360,
-  "sentiment_mean": 0.6312436249999999,
+  "sentiment_mean": 0.6472373416666669,
   "articles": [
+    {
+      "ts": "2026-11-11T12:41:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WMTV 15 NEWS",
+      "summary": "USDA warns consumers not to eat these frozen meat products WMTV 15 NEWS",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPczRFNjJkMUN0RlRuYUFHU0pzd3ZtaEk1MWd5YTNkV2VSQnNKSVpuZGo4Y1dHbGM2TElwQktWUlRqN1hPZk5XYTM5c1RkNjNzTHdxeTZpNDIyWkpBWG1fVFFNaFF5QmRTNGFrWU1TUEhLVU5Ic1RHSXNEdWxHTUlSZWgtd2cwS2NkWUIxQi0yOWhOcGJyZjhQUU9B0gGuAUFVX3lxTFBQaUFlWFZpYmt0Tm1OYk1BeVZScVdoOHJBeERqWEVlRXFKeGdzUEo0SkVCWlVqSU1XaTZyQ1lYUWF0alR2aWtzUkJYMFM4amVTYXlGdnlXVHEzZW9jTUxVaTZuYndTaDNONEFnSjgyVkdFdlJWcWZ4aHA3QVBBOEdOOVU5WkVrWU5hNVBVc3l0a0E2SFlwMGFfRkJOTWNJOFNsM2o2aE1qUnNqUGtjZw?oc=5",
+      "source": "WMTV 15 NEWS",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wmtv 15 news",
+      "s": 0.811452
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - Cleveland 19 News",
+      "summary": "USDA warns consumers not to eat these frozen meat products Cleveland 19 News",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQdHFKQWU5OUVwRGNad0NYNG1yeldKamJRQVBvN2pacENpbE9mdXpHcUowcEZOSkstNTF6N2w4Ny1iNXdJaWdYejhGVk5oLThfZFQ5ZkF3cGpBTzloemx6aHJSRWdqVUhPUndMN2xaZ0g1V3NsdTlvdHBibkN1UXk2TGk2UDlVLURiUVZ5MGZ4R1d4SWRCM3NHb0pVdjlabzExOXhZ?oc=5",
+      "source": "Cleveland 19 News",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products cleveland 19 news",
+      "s": 0.819025
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - ABC7 WWSB",
+      "summary": "USDA warns consumers not to eat these frozen meat products ABC7 WWSB",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQck1wUG9Pak93TzRZeC1hLW1qQWpKZEFrdjdzXzFxZWozR1NjLWM5NWhEcFFzWmtKVnM3Mm4xS25KZnM3SVkxWVR6cmZlR3lKSEN6eEdBN080el8xdFg4TU81TDJsbGROd25GbEtTSHBUeDdKQTRKdVpaZVJlazhJTW53eTFjRHVCdjRiZVFyZ3pkVVJzcmxkZmVfT2ZOTUswSmc?oc=5",
+      "source": "ABC7 WWSB",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products abc7 wwsb",
+      "s": 0.803995
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - FOX Carolina News",
+      "summary": "USDA warns consumers not to eat these frozen meat products FOX Carolina News",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOeVVNZG9YN0NmUVpIdEVFWU55VW1pODJfRURyTjJnZnpHOHRuWWJyajBOU1RGRXZxZVVrcWIzQklrSzhaNlpXdXkyclQzNTdMVW9TWjRFUXlZZGVEYUJqUUhRVHlWVFlRaGhuM3dBMm45eFZRS2pHWGJRaW5CLW8tRzJfNG1iZDJxMzhKTnZHVEtEX0hUQzZmOExDbkx4MEZLR3Zz?oc=5",
+      "source": "FOX Carolina News",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products fox carolina news",
+      "s": 0.848066
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - KWQC",
+      "summary": "USDA warns consumers not to eat these frozen meat products KWQC",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxObnFnSnRrSEVSY0xJYnQtY1ZLWk9pTkNpcWZaTTRVQkYydTk3U0dfdy0wSXV5bm5CLXpSQzBXZGxDTUJfSUZHal9FbDJweElESmtzRjA5YzlldXZoZXZYWTdYT1dlcF9mVldleDgzd1FGYUphMFhTNTRRSHp6YzhfUTREemI5U2lwWUlaenA3cmtXU2J6UGEzUl9n?oc=5",
+      "source": "KWQC",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products kwqc",
+      "s": 0.841442
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WCAX",
+      "summary": "USDA warns consumers not to eat these frozen meat products WCAX",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOSDRfaGFiRzNmUVl0ZDVwR1R6bWxSdkJBYnBvaXVQSmtXZjRHX2c3ekN5MllQYmxBQkhSMkhrM1h5MnBsdXppMDh0NE9Hb2Q4U05ySlZsOWRfNmN0Nm81aV9KT1Zla1hVR1BpSWxQVGRZSEdHRGdKd0Qxb0dVWFEyTTNNV0h0bVh5NWNJZDY1UFkzNGdWd0pGeDF3?oc=5",
+      "source": "WCAX",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wcax",
+      "s": 0.874913
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - KTTC | Rochester, MN",
+      "summary": "USDA warns consumers not to eat these frozen meat products KTTC | Rochester, MN",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPMzZneGpxQm5qam5hdmZVNm5fRjA1dmhGOGxNMkVPcUVnMzRXZ2UwT3EtdDJuLTVjOUR6c3ZOdjNZZ3hzdnRDRHBPelJkZWlQQUNlSVZNa3B5NHBtaHhYNkxBV0VfS21NOThlM0tOVFVjTFgyeERkdGo5V3FWZDAtd1FTaTMybGdGX2xFRHFXZHZOVWlvOGxRMTR3?oc=5",
+      "source": "KTTC | Rochester, MN",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products kttc rochester mn",
+      "s": 0.835782
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - KFVS12",
+      "summary": "USDA warns consumers not to eat these frozen meat products KFVS12",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQd3RXbVZ5cmtnTUxMSVN5V0NsUmZkbWNRem5WUzBHUWl5cmhkZXluTlhRY0JYdDR0TVVJdEhqNE1IME9HUEZBS19ET2t2TV9DSkgzWFRHdlpsVF9yWU9GM2g0N0lwTlFhVTBoLW1XdzBERlNHT0NROVdEc3F4NUNnV1l3RTQwR3ZreWJydmRWaDZ4SUhBNHZMZ3YzaWI?oc=5",
+      "source": "KFVS12",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products kfvs12",
+      "s": 0.80658
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WTOC",
+      "summary": "USDA warns consumers not to eat these frozen meat products WTOC",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPVWhUenRtaXpRaFFUMDd3OGcwQzhZQ21iLUtNZGhlU0xtaGNQaHhqZWM2Q2RKWjk2cE5Ya0lHUFhRanZKLWtoMWtOQ2I5aWgxMTF3OHVnQzdTVE5TTF84dG96TVhDRjFjR1hRTldhSkhQUExzNHBUckRKbmFrTHNMU3ZZekRrdVQ2Y2xPYi1oTm5aM0ozTDlsXzNn?oc=5",
+      "source": "WTOC",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wtoc",
+      "s": 0.87241
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WIBW",
+      "summary": "USDA warns consumers not to eat these frozen meat products WIBW",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOdGZEX19SaWd5UmRYLTl1OGZscFJnZXBlTFBuQU9qZi1tOTZYUVQ0LTdOZVdsRnZrUDF3MWE4MnBPMlNyTmZ2TkVKZ2ZsQVE4WU5VMmdpRlh1bHBFR3JkSExoNk92M0EyM0JCYkp0ZzNKWlBnd0k4MFlUSnFtMUN5cFZ5R2hZTkRsNHpCY0lZeS1ZTmNaTHRVUUtB?oc=5",
+      "source": "WIBW",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wibw",
+      "s": 0.853905
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WECT",
+      "summary": "USDA warns consumers not to eat these frozen meat products WECT",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQQlFSeDIzTERFZ3F3aThwZVNMa3NkMUZZZWZzaFVvQUYzcXhsWHFZVzhCSjlic1pXTGtzcW1lcHJKZF9HVlhfQklCM2ZsMENUTWx6QnpMZU4xdmN4dUpoNGNqZkZWTGJBRU1zYl9jSWh4RklCWG1jVVA4cG5SVmp4ZldBRDl5bG5lQXN5QVQ0NkpMVWNMYndxQWhn?oc=5",
+      "source": "WECT",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wect",
+      "s": 0.877555
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - KCRG",
+      "summary": "USDA warns consumers not to eat these frozen meat products KCRG",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPZEpCRHMxMjdGYjNkcG9yYi1yc21wbkdiMFZzc3RQVVVOOHg2QVY2UEdUMjBRMU1xMVNMS180U1ZtVkFIb1B5TW5ZQVV4QWRiZ0ppNnpmcmRVT1h4bGl4YzNvV1RiSGVjTnBYTHJDcXJjSWVySGpsV040U0NSbElBUFpyM1UyY3dVbDNXbHdZYnJhaTRucnUzRk13?oc=5",
+      "source": "KCRG",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products kcrg",
+      "s": 0.884011
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WKYT",
+      "summary": "USDA warns consumers not to eat these frozen meat products WKYT",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPVHoxOFVWQzFnLUR6alZYSmJzd0haUGx4QXVqbEphOWZpUVpZRGx3MzVUNFRyRzhLUE95VnpXbmJ2cEwtV1lCdWJrVmEzT180SmUxeDBqZzJQX1JtZjc5VzBwaS0xUHZPT2JEaWNwTVlKRXRVd0JYZDZIUUtDMTN0RzdjMDVYLXZqNngxODZITURTLXQxcE81MWdB?oc=5",
+      "source": "WKYT",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wkyt",
+      "s": 0.864085
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WVLT",
+      "summary": "USDA warns consumers not to eat these frozen meat products WVLT",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQdnVBVm11VnphcWxuUDR0SlVTcU9ublJ6MTZrTXZuRE9JRTJWcVRVWjNsNFdrWDJSRUtISFR1NURtc2cyMmxSRmRfWVdxMWl6d0k2bjhHR3RRb1JBR2xHdmFLS2hCcFRhdjFtXzNZNmJTXzRia2NQSnpJTFdxLVVHSEg2MzIwTHFqVFF6YVAyNGU3Q3U5NjJDMQ?oc=5",
+      "source": "WVLT",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wvlt",
+      "s": 0.808027
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WTVG",
+      "summary": "USDA warns consumers not to eat these frozen meat products WTVG",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNYjFWcWQ0eFEwNXlUYjljTHA3ZFRVejFmU2JDWXNOUE04bFRDVnY2TlZxSzN5Tk9PLTVSNG9LWDItMDZGVGlrejdxX1J0Ync1eXduX0Eyd3BQS1ZKeU9lQ1BJS3NXc3F4OVZVZFpaTmVvUFdMWC1ETVhZN3JpVTNvR1Uza2JEcExSb1FucGppa1dsUzBYR0EzWjBpYw?oc=5",
+      "source": "WTVG",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wtvg",
+      "s": 0.862672
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - Hawaii News Now",
+      "summary": "USDA warns consumers not to eat these frozen meat products Hawaii News Now",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQdkYwLUJGejdfZjF4ekpwdUtrMm9jR3U3Wlg1aWVqc003Ql8yOXB6ZVh1bko1MkdxQXFpS3VhMzVxQksyaDYxSUxvMkFZUWlqbVJtQ0JBVDRUa1hpMVZ0cWczekc0QVQ4b0VlRDRNRWdiTDJ5aVJmZE84enJhMXFXeDlselU4alBxNFhvY0QzdDF1b2VkU2lfS2x1al9lQ1J0WWxsMjB3?oc=5",
+      "source": "Hawaii News Now",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products hawaii news now",
+      "s": 0.718732
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - KY3",
+      "summary": "USDA warns consumers not to eat these frozen meat products KY3",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNaEdsZU9lOVY0RjVxd3d5SVdpRGdJWlU5TGRBcGJhTDZ4R0h4dHRNX2FCNTVyRDlFSnc3VHFwY2YtMlNpcDJwX3BCV1B0dEI3bzVmYllNN3JxSGJEMy1kaXNtOWN1TXBWU0JVcDNFQWVYZXBNVEhJQlZEQU1DWm1xZkFPNEFaODVqX3k1SlNvaDVtUzBSVzN2Vg?oc=5",
+      "source": "KY3",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products ky3",
+      "s": 0.856229
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WEEK | 25 News Now",
+      "summary": "USDA warns consumers not to eat these frozen meat products WEEK | 25 News Now",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNUU5NbHJTTXFZODA3ZVRIWU5xZU11V193ZERra0VlVTZBT243TklCclR5eUZsRTF3dVZNdnpockZOMGVVZ2VEd0xlVEJVXy02MEpFU3J4ZWJuQ2dQUzA2TW42bE53ajJsUDI4VU16RWxOMjJxSXA4RDNMMGdISktOM3ZKd1FmTHRXQm1tZkhBZnRTaHFadUU4dTRCNjdwWXBO?oc=5",
+      "source": "WEEK | 25 News Now",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products week 25 news now",
+      "s": 0.657538
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WFSB",
+      "summary": "USDA warns consumers not to eat these frozen meat products WFSB",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNTjNXVVp3ZFVjMkZscEh1clJKRkJqMGQ4MVNla2ZpdmV2R2F5SWNJWWJzMWJqZnRBSUNWU2xUNnZfNjhwazR3eE90T3lLZzJPaTd4eU0yd1J5M0FsVGd5a19fajdqNnR4dDlQY0JhZmtvZW5wT1pDLW85R2xPSWNsSmhvalJrME5wOGM3S2l0VmcyZENaMU9JVmRB?oc=5",
+      "source": "WFSB",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wfsb",
+      "s": 0.849672
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - KWCH",
+      "summary": "USDA warns consumers not to eat these frozen meat products KWCH",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPZHlmM1plVkJHQUVIaHBnTVhQOWxPcy1ZUG1vWlRDc2VfNnFjRUl2dy1xUDJUbjZ6SmktOFpPa3dESXpGOExGRXFNTVlad2YydWowVUJTakk1cGJjcGp3Z2RjY3pPUldGWm9UcTVmRXdlNkp1YkhIZ3BFdWFMbXZOTFBZSlNkWU5SQW02ZEhST1FEV2k2M0ZhRndn?oc=5",
+      "source": "KWCH",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products kwch",
+      "s": 0.840621
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - FOX19 | Cincinnati",
+      "summary": "USDA warns consumers not to eat these frozen meat products FOX19 | Cincinnati",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPaEZQRkh3Uk5OTnFNNkZsQzRDWkRqbS1VY3h3TG04bnZWT1dZMjRUMnBWYUxPb0lFMjhhRUdyLWQyY0l2SFBwdWdWamR4ZTl2d01tdU9QbXdnNkd5UHY4VGZXd3QtQ1ptbVlGdS1XNHAtRTg0SjlZTlh5YjJzODFrMkFKRGVUMk80SHhrazJ3aEVuakZUbUcyZFNrWQ?oc=5",
+      "source": "FOX19 | Cincinnati",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products fox19 cincinnati",
+      "s": 0.867645
+    },
+    {
+      "ts": "2026-11-11T12:31:00+00:00",
+      "title": "USDA warns consumers not to eat these frozen meat products - WCTV",
+      "summary": "USDA warns consumers not to eat these frozen meat products WCTV",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNN0tTUFJURjUzMHM1ak1fbS1SS3dkRkhxUmhKT250OUdyZVo0MlNMcExfNTFfSzJRSlpZYzZfRmxDNkp4aDZtMWR0VTJCY3FmU0JDMEV1c2V0clk1Wkl0WFVaTDZhM1o5VDNnSW1LT0dvWmF4b05KWWRlbHBjQVE2Qm5HcHFENWVoaTJXWnVEcWdrdVlyUFNfVw?oc=5",
+      "source": "WCTV",
+      "provider": "google_news_rss",
+      "title_key": "usda warns consumers not to eat these frozen meat products wctv",
+      "s": 0.844822
+    },
+    {
+      "ts": "2026-11-11T12:30:00+00:00",
+      "title": "10 Costco Ready-to-Eat Meals That Are Better Than Takeout for a Fraction of the Cost - FinanceBuzz",
+      "summary": "10 Costco Ready-to-Eat Meals That Are Better Than Takeout for a Fraction of the Cost FinanceBuzz",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5rNmRWQVQ5eUhPOE54RUhpaExZOFNzWnFFSm5fWV82UEhvcHhoY1hQODkxV1dRM2VudkpFOFJ0Xy01cEVqRkZvbXJaSVpQaUVUN3dYTDB2dm5xY0xWRHdiU2w0QXhDaEdYTk1fR1JrMA?oc=5",
+      "source": "FinanceBuzz",
+      "provider": "google_news_rss",
+      "title_key": "10 costco ready to eat meals that are better than takeout for a fraction of the cost financebuzz",
+      "s": 0.301308
+    },
+    {
+      "ts": "2026-11-11T11:10:00+00:00",
+      "title": "What To Eat Before It Gets Dark, According to a Dietitian - Newsweek",
+      "summary": "What To Eat Before It Gets Dark, According to a Dietitian Newsweek",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPSVp0THE0XzQtV2thZ01hY0xKZ0hlTzhNd19MeVpRTFJkMVRkU3NQV1I1MEtIdWIzcE9ReEJIRU5IaXVPaFNpcUhnVzZsZTIwTy1rbi1nWVZ5Ul90UU1iS01aZTJrQWp4WmtqQngwVkg3VEkxcnl6dXY3Q1VOX2otb0l1SVJwZjU1U0NJZUw2Mm5tYVJ2?oc=5",
+      "source": "Newsweek",
+      "provider": "google_news_rss",
+      "title_key": "what to eat before it gets dark according to a dietitian newsweek",
+      "s": 0.899039
+    },
+    {
+      "ts": "2026-11-11T05:00:00+00:00",
+      "title": "Trout stocking to resume in Wissahickon Creek; ‘do not eat’ order remains - The Chestnut Hill Local",
+      "summary": "Trout stocking to resume in Wissahickon Creek; ‘do not eat’ order remains The Chestnut Hill Local",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPZjFnN2E1cHRrNWZZQ2pDN1dzc0ZUNVYtU1l2SUFvMjZvWHlaZWVRRDZ1bWlaMFNHcGJ6eFFfZzItVUthaHI5WDdmSnVkQzhZNDlVWjB2dHc4Q1V0aVFjcHk3WG9oVmNuaVh6aEtWREdOV1c4OTdKVjZoUHY2a0Jzd2FqRzAzSkhDZnJORTJKajlQSzhlSExDelp1M0lZekNVVDV4TUtGNkRMZzNJSW5pNUZKaXBmVnFFbVE?oc=5",
+      "source": "The Chestnut Hill Local",
+      "provider": "google_news_rss",
+      "title_key": "trout stocking to resume in wissahickon creek do not eat order remains the chestnut hill local",
+      "s": 0.850118
+    },
+    {
+      "ts": "2026-11-11T04:37:58+00:00",
+      "title": "Where veterans can eat for free in Kent County on Veterans Day - FOX 17 West Michigan News",
+      "summary": "Where veterans can eat for free in Kent County on Veterans Day FOX 17 West Michigan News",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNbU1qWU9kMnVSUS1TOHJ2eUNwdVllNzRIeVJ4TG1rV1dqb1FNVWw4S3piOEhidmxPOXBQTjFxdFRSUGEwRTJocDB0SXRiNzhTV2ZjZ0M2M19BMmxZUUpqdDJIbGxLaEpmckJDYTN2eUF2WFhXbGNRd2hJMkxTTGtvMkxXUnNKcHpmTUJzUHJJWDRNNURKbjh6eHFaN29CRXI5Z3E5M1BIZGNoLXVpeXJMNw?oc=5",
+      "source": "FOX 17 West Michigan News",
+      "provider": "google_news_rss",
+      "title_key": "where veterans can eat for free in kent county on veterans day fox 17 west michigan news",
+      "s": 0.899451
+    },
+    {
+      "ts": "2026-11-11T01:40:44+00:00",
+      "title": "Buy Once, Eat Twice at Surcheros Tanger Outlets - Nashville Lifestyles",
+      "summary": "Buy Once, Eat Twice at Surcheros Tanger Outlets Nashville Lifestyles",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNVnk3bnlNbHFDR1llT1pjVkZNZm5mVWRWVVh5TGRtQWJsaV8wNmJLRjQxSUxtRjdqMEVyYjkyN29LbW1IRWg5VWk1RVJrS3JSVUpnTW9VUUFuRVcyQWh0YzBBWUVkSl9RbjY2c3hwNkJtSHhYZVpjUkxCaVh3dEtlY0otOFNTTzdSdzRiMUxxdlpuanl6a3UzQTZLYTAtc0RjeFY5aW1kZk82RFJvM0RBdUhR?oc=5",
+      "source": "Nashville Lifestyles",
+      "provider": "google_news_rss",
+      "title_key": "buy once eat twice at surcheros tanger outlets nashville lifestyles",
+      "s": 0.871044
+    },
+    {
+      "ts": "2026-11-11T01:37:24+00:00",
+      "title": "Brinker International, Inc. (EAT) Stock Forecasts - Yahoo Finance",
+      "summary": "Brinker International, Inc. (EAT) Stock Forecasts Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNZ3FqREVKdHFibG9nV3ZuSS1MNkNFdmpWbjlaZTc0QnZtZGplN1E3TmxuZlg1X3g3Y2ZvdjRFVkd6M2xUTU43cFVzOF9UUXBSdHpQRnJra1E2LVphcUdjWFVXbDRLMnNUM2JSMV9JRUt3ckhRRkJyQnJlbzBZRGxZRnhnb0RmZUl3NjluTQ?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "brinker international inc eat stock forecasts yahoo finance",
+      "s": 0.853707
+    },
+    {
+      "ts": "2026-11-10T23:39:59+00:00",
+      "title": "Brinker International Inc (EAT) Shares Fall 4.1% -- GF Value Says Still Overvalued - GuruFocus",
+      "summary": "Brinker International Inc (EAT) Shares Fall 4.1% -- GF Value Says Still Overvalued GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQSks0MHJuMlpoQnpMOEVqZC1ZWGhUdUVXZUxFUFQxaDRSRDJBYlYtc0xIbTZsUE5zbV8yTGxrTnp3cHN0eWVEbEFZaUx1RjN0cXM5bWJmZXh1RWZWZkxtSnd0RHJKU0E5ams5UFVSOWdzUFpXaVBIanRidWJSbVRjZ0lfVFhfSFphM1BIYW55Y2dISktOWEFRZ1g1cmpjeHhBckpjREZlNFFieUdEQWFSQmpRcTY?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "brinker international inc eat shares fall 4 1 gf value says still overvalued gurufocus",
+      "s": 0.009351
+    },
+    {
+      "ts": "2026-11-10T22:03:00+00:00",
+      "title": "Sarasota Outback being replaced by new all-you-can-eat steakhouse - Sarasota Herald-Tribune",
+      "summary": "Sarasota Outback being replaced by new all-you-can-eat steakhouse Sarasota Herald-Tribune",
+      "url": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxPMFdIc096UktZZzVZSFFpbHVVV2J4aW1ZVGk5b2lRTVU1RE4ycjJYM1QtZEF3NFVOb3BKYXpCYmRGeGJUeUM2N2JiYUpPWVQwYTk2SnFPVHJ4dDV3dF8wUmNOWG12UXpYdV9qV3hkU3ItYWhHc3ZBSDFNNExTVmZ6UVN0TS1ySnRHbldHblJTSlhaN1hpUG5UR1ZPcTFrQmt2c2VRR0tNQWZxR3Fidm56TUdLalc2N1VTWE41NHBDNXpvT0hnQ0owbFZlcDRBZVg4NHNJbFp3NXJPWmlGdEYxdlliTkRSUXNVem9GMkhIZF83TmlvcjVuT1J5dlRIQzVzZDFubFlmWFU?oc=5",
+      "source": "Sarasota Herald-Tribune",
+      "provider": "google_news_rss",
+      "title_key": "sarasota outback being replaced by new all you can eat steakhouse sarasota herald tribune",
+      "s": 0.817801
+    },
+    {
+      "ts": "2026-11-10T21:42:11+00:00",
+      "title": "What to See, Eat, and Experience in Novi - Visit Detroit",
+      "summary": "What to See, Eat, and Experience in Novi Visit Detroit",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE15WFFCYnVabFlsbGxxeGtHUEE2SFB5eExEY3RiTDFZRlpNNlc4QWRybU1SdDhsTkZJQmdtWHVfWmo3enYtZnBHdlh3dHdDYWstd3c3VkVkcnY4MkxFNE9vbFRLYU9MbHM?oc=5",
+      "source": "Visit Detroit",
+      "provider": "google_news_rss",
+      "title_key": "what to see eat and experience in novi visit detroit",
+      "s": 0.890284
+    },
+    {
+      "ts": "2026-11-10T21:37:00+00:00",
+      "title": "Google Introduces 3 More Top-Level Domain Names, Including .Eat and .Fly - CNET",
+      "summary": "Google Introduces 3 More Top-Level Domain Names, Including .Eat and .Fly CNET",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5uNUhMYTktWXBBNk9ESVEtUjU5cWdtb0VfMTBXdVVnckotNlVnR3VBMG96XzhPNFJqdHZSNk1Gc1ZqVXBvZmdQQXhtMTg1U0tXbVB2T3RabHpSTm1LMFg3ZVdnMW5UdFY2eHVaWDN6UFo?oc=5",
+      "source": "CNET",
+      "provider": "google_news_rss",
+      "title_key": "google introduces 3 more top level domain names including eat and fly cnet",
+      "s": 0.75559
+    },
+    {
+      "ts": "2026-11-10T19:20:39+00:00",
+      "title": "Food Babe Vani Hari: Why Clean Eating Is the Best Skincare - Forbes",
+      "summary": "Food Babe Vani Hari: Why Clean Eating Is the Best Skincare Forbes",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNbXJJbEl6X2I0YS1TUVpsRlNCNUhHMnNoWnBuM0dhS3dpcklWS2VIdnFXaGdXOEt3SXRjejlDLVJjamtaWVM5VFNQYjFXSmR5enJaWUhiTkJmWlljYXIxT3VtOEk2d2IwUFA5Mnhzb2FHSVUzMFFoeTJuT0hNUDlVRzVCamJxYnlVZV9qbmNaei0wSTEzV0swaHY0LXZicm8zazhkem5RNEZfalUtN2EzMDBnSQ?oc=5",
+      "source": "Forbes",
+      "provider": "google_news_rss",
+      "title_key": "food babe vani hari why clean eating is the best skincare forbes",
+      "s": 0.877147
+    },
+    {
+      "ts": "2026-11-10T19:05:00+00:00",
+      "title": "Where veterans can eat for free in Tallahassee this Veterans Day - Tallahassee Democrat",
+      "summary": "Where veterans can eat for free in Tallahassee this Veterans Day Tallahassee Democrat",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPXzA5VXBCXzBGU24ycWZSazFqNmJaaDRDSFA3WXN6V25ZX19MZDZxZjZjOUdmLU9iMm9SZ3hlRnd0elQwWEtNcGNrY3JDQVF1ejZiQTlZUnprOHlxYTFfbFJ1UmRqeENEdXVkZjA2UFhaNW5yNnB2RWotdFBZaFhlVDh3Qy1vRDBHMTdiMEFIODhNMjQyMUp2ZmhvRXVhRDNCbHFxSU1pSFgxVmxHcVFSZmsxaXlRbE02MXQ4aGprMUlHcURJMFg3Qzd4TVNaQ2xDeG1rZTVaZno2ek1jWDhNN3ZR?oc=5",
+      "source": "Tallahassee Democrat",
+      "provider": "google_news_rss",
+      "title_key": "where veterans can eat for free in tallahassee this veterans day tallahassee democrat",
+      "s": 0.896695
+    },
+    {
+      "ts": "2026-11-10T18:40:05+00:00",
+      "title": "Night owls who eat late may face higher health risks - Medical Xpress",
+      "summary": "Night owls who eat late may face higher health risks Medical Xpress",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE05ckFTbTcwWUFaYnlUaDhOc1pmX1VDNjZjd21uSnpZMXJPemJvZWZZbTN3Q2tCLXV5YnVuTS15a2lTTlpsTWRHNVZENG9STTBSWDFMR3VDQ2xnNzR1aDhfMWFKNGZabk5Nb2t0Zk1EeGJZcVp5aFNMZElVckRVZw?oc=5",
+      "source": "Medical Xpress",
+      "provider": "google_news_rss",
+      "title_key": "night owls who eat late may face higher health risks medical xpress",
+      "s": 0.529151
+    },
+    {
+      "ts": "2026-11-10T17:47:20+00:00",
+      "title": "Is It Healthy To Eat Canned Tuna Every Day? A Dietitian Weighs In - TODAY.com",
+      "summary": "Is It Healthy To Eat Canned Tuna Every Day? A Dietitian Weighs In TODAY.com",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNblJvUS1nUFBMUXI2TTA3emtLZ3dNd2lXY3R5VGlpWm5fb0pSNHoycDFfSlJLVm9VR3hpbnpvQU9lSEFaRC16THZRMnJsaEgzLXNYcFJvT084aDMtOGpGYkFtaGU0ckp0VENMUGpkM1JxdEtiU05IN3VIWlBnNElfcU5kbVlvQUhWZGxUY1ZWNldEbVZTcWc?oc=5",
+      "source": "TODAY.com",
+      "provider": "google_news_rss",
+      "title_key": "is it healthy to eat canned tuna every day a dietitian weighs in today com",
+      "s": 0.854271
+    },
+    {
+      "ts": "2026-11-10T17:43:38+00:00",
+      "title": "Brinker International (NYSE:EAT) Stock Falls 6.2% - What's Next? - MarketBeat",
+      "summary": "Brinker International (NYSE:EAT) Stock Falls 6.2% - What's Next? MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPN2tTMnAtZFRQb0ZYTnZXMERfUHRsX0wwaWNZbFh5NDZQTGFLWjk2aW5KYjdIWVJZYlZWcXptY25WVlZ4X0lrX0FXeDV0akw5YVdBMzZMZEVZYVFrSkw1enBwZW5XQTlEMElTRk1vNXdRWVE3UmljRVpZMUR6eWU0VUNidzY1eWxiUDNUY000eVlxUHVXbE9FRFEzdk5DdDNsWHYxb0FXUDlLeGxDNVFTdFYxb2xqTlE?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "brinker international nyse eat stock falls 6 2 what s next marketbeat",
+      "s": 0.129054
+    },
+    {
+      "ts": "2026-11-10T17:20:00+00:00",
+      "title": "Where to Eat During AFM 2026: Century City and Beverly Hills’ Best Restaurants - Variety",
+      "summary": "Where to Eat During AFM 2026: Century City and Beverly Hills’ Best Restaurants Variety",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeGZ4eVNCd2VQckdkeGJIYkswZTg0SllmQWF5aENuX0xiV1JIWDZEdEZRb2YxR3JGLS1zU1BDay13NGdVWEcwcXpYYjhZVUZvNlBwTGhkT2hfTzBvU3VvNHVmdU5WR05pRzQxOFBwVzd1RmpqTDZiMVM5ak1rWG1Wekhn?oc=5",
+      "source": "Variety",
+      "provider": "google_news_rss",
+      "title_key": "where to eat during afm 2026 century city and beverly hills best restaurants variety",
+      "s": 0.875943
+    },
+    {
+      "ts": "2026-11-10T17:15:00+00:00",
+      "title": "What to Eat When You’re Craving Comfort Food, According to RDs - Real Simple",
+      "summary": "What to Eat When You’re Craving Comfort Food, According to RDs Real Simple",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPOVNNbktJbWtfNmIwQnNIV0MxS0xfNTF5SE0yUEVybkYxc3U4eEdZQk91V1pqUk5LNWtad2dTclNtcTVWMHM5STREWkJCdHowbFptWmNpbU1XMWFqRTJ5aldLbXhrZkFKaE9OZ3JjQmQ4UFZUNlRDcmxaRC04bDh4aw?oc=5",
+      "source": "Real Simple",
+      "provider": "google_news_rss",
+      "title_key": "what to eat when you re craving comfort food according to rds real simple",
+      "s": 0.901355
+    },
+    {
+      "ts": "2026-11-10T17:00:06+00:00",
+      "title": "Where to Eat With Broadway Star Jessica Vosk - The New York Times",
+      "summary": "Where to Eat With Broadway Star Jessica Vosk The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1tLWNObEdXcmo0bDY0MlJRVE9KLUxqWlNCRGdWMnE5aWZ2cVByZzFpOUFHc1FvWk9XX1FYaVZwTU50OWQ1LUk5d0ZpQzdFY25MazhuQUg4SElVMkw3VDZiOVQtNDlINUJsZ1pLTG54VnRnRGxmTU00?oc=5",
+      "source": "The New York Times",
+      "provider": "google_news_rss",
+      "title_key": "where to eat with broadway star jessica vosk the new york times",
+      "s": 0.879159
+    },
+    {
+      "ts": "2026-11-10T17:00:00+00:00",
+      "title": "Here’s What Happens When You Eat Roasted Chickpeas Every Day, According to Registered Dietitians - Real Simple",
+      "summary": "Here’s What Happens When You Eat Roasted Chickpeas Every Day, According to Registered Dietitians Real Simple",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPd29zNmxDT3ZsWmk2dWstby0yemMwc3RLQjRmZnpSaTdCbUpkM0hJcFRqR3I1bDNQQnVOUGx6WEt4OHdSaVVqVUdTaDVZQW1PVEo0T1ZkWkNXdThLdlE3UUxvOTFfREQ0X25ub2RwSl9XeGZ6aG94OFZEdlFuNU51dHFwdHpKaHc1cm85aEUzYVE0UFU?oc=5",
+      "source": "Real Simple",
+      "provider": "google_news_rss",
+      "title_key": "here s what happens when you eat roasted chickpeas every day according to registered dietitians real simple",
+      "s": 0.912545
+    },
+    {
+      "ts": "2026-11-10T16:30:00+00:00",
+      "title": "Where Las Cruces veterans can eat for free on Veterans Day - Las Cruces Sun-News",
+      "summary": "Where Las Cruces veterans can eat for free on Veterans Day Las Cruces Sun-News",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOQ3J5dndiSzRQTGxITThHM1NTSmRzOFpUeUkzTlExTThXSlpaRFdOLXRYNjljdEg3QmpmSVFrM2VaUHFYUE9aNk4xeHpXV1AxY3RWNzI1S244ZmQtTmNxemRwOWdhLXFZT3BubmQ3VVFQWG90Yi1ZMk0tVFgyMENRT00tUDJiOWR4SElmT2wtQlVKZ2FhQTI5ZUcwUXZsTl9HMXhhdEtYZHZGc0RpM21iR2hseHcwQjdIMHU4UmRCbG9qQWZJY0J6TGN5aFdqdHh0MlE?oc=5",
+      "source": "Las Cruces Sun-News",
+      "provider": "google_news_rss",
+      "title_key": "where las cruces veterans can eat for free on veterans day las cruces sun news",
+      "s": 0.897231
+    },
+    {
+      "ts": "2026-11-10T16:05:31+00:00",
+      "title": "Introducing 3 new domains: .eat, .fly, and .here - blog.google",
+      "summary": "Introducing 3 new domains: .eat, .fly, and .here blog.google",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPeGRoVVhqZE1KVVViZnVXcUo4R0Z4LWtaTENhR3BjVlI0SmVmRFNUUTZSekY3R09FNTBTZ210RGxkNEVkanJMRkhaaUhwQXY3dWI3UnVJSWlEaFU5SVR0Q1JzTzlCWFQ2bWdsTjlpV3dReGNxT21zLWgwY1Nnd2kyRUM3cFdjbVhYZjhJYTVkSEp2X0ZBVnZvOA?oc=5",
+      "source": "blog.google",
+      "provider": "google_news_rss",
+      "title_key": "introducing 3 new domains eat fly and here blog google",
+      "s": 0.873591
+    },
+    {
+      "ts": "2026-11-10T15:10:31+00:00",
+      "title": "Scratch-Made Meals with Fresh Ingredients Earn Fullerton School District Eat Real Silver Certification - Fullerton Observer",
+      "summary": "Scratch-Made Meals with Fresh Ingredients Earn Fullerton School District Eat Real Silver Certification Fullerton Observer",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQTGhrNTF2dnhTTWw5bzNGUkNCQm5JMFBUMFhSSVJjOXhONDJfQzVwZ2JvM096U3ZaZXdZczF3ZmpONzc3Y0Q2M09pMnJRSWZRSmJVT3Y1QjdqTjFVQ3NhNExOREwzZmVEOFAxanZfakpuMG5TSnJrVURKTUlNaTRfUEM4VHBvMjhESUppNzAtWnQ1RWNQNE00LVBFVXZwdU1TOUM1WF9zRkllUjAzNnN4QmxtR01tV29fMHJiRFBGdFVkN2xCYlhfd2pnTUppb1ExS0l0SmZUV3NCSzlK?oc=5",
+      "source": "Fullerton Observer",
+      "provider": "google_news_rss",
+      "title_key": "scratch made meals with fresh ingredients earn fullerton school district eat real silver certification fullerton observer",
+      "s": 0.131
+    },
+    {
+      "ts": "2026-11-10T14:01:52+00:00",
+      "title": "Brinker International, Inc. (EAT) latest stock news and headlines - Yahoo Finance Singapore",
+      "summary": "Brinker International, Inc. (EAT) latest stock news and headlines Yahoo Finance Singapore",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBtWXRmUm16OUZaLXE0aENDZEZVSGRYX2M1WXRhRGlBdDBBMG0xTi03YnJ1bkJPbjhxOUJtOW9aQkZNOUVlMnlFc0FkYk1JQ2dWR1c0QVhJaw?oc=5",
+      "source": "Yahoo Finance Singapore",
+      "provider": "google_news_rss",
+      "title_key": "brinker international inc eat latest stock news and headlines yahoo finance singapore",
+      "s": 0.877003
+    },
+    {
+      "ts": "2026-11-10T13:27:00+00:00",
+      "title": "Can Cheesecake Factory Sustain Its 15.2% Comps Surge Into 2027?",
+      "summary": "Can CAKE turn a 15.2% comps surge into lasting growth? Strong traffic and rewards momentum face tougher 2027 comparisons and a test of repeat visits.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/cheesecake-factory-sustain-15-2-132700095.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "can cheesecake factory sustain its 15 2 comps surge into 2027",
+      "s": -0.654897
+    },
+    {
+      "ts": "2026-11-10T11:35:00+00:00",
+      "title": "West Town's food and drink scene is booming. We sent a reporter to find out what the fuss is all about - WBEZ Chicago",
+      "summary": "West Town's food and drink scene is booming. We sent a reporter to find out what the fuss is all about WBEZ Chicago",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5hUElvNXplQmxIZjR0UHBMWVVkUmZiaEo2NXNsSF9wM1hFRlhuMjY0Um9lX0VPbVNpMFI0Ry15VEdyak1MbV9rdHhRdmxLLVo4WFBjcHRYVXh6aXpXTWViaGZuYTNMdi1nTVU3aG9tYVR3QmxIN2pYQg?oc=5",
+      "source": "WBEZ Chicago",
+      "provider": "google_news_rss",
+      "title_key": "west town s food and drink scene is booming we sent a reporter to find out what the fuss is all about wbez chicago",
+      "s": 0.759021
+    },
+    {
+      "ts": "2026-11-10T11:34:31+00:00",
+      "title": "Brinker International (NYSE:EAT) Stock Price Breaks Below Fifty Day Moving Average - What's Next? - MarketBeat",
+      "summary": "Brinker International (NYSE:EAT) Stock Price Breaks Below Fifty Day Moving Average - What's Next? MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOSnZjaVNwZEpXaC1EMmdXTGcxTXRoX0lKWDN1VWx6ck5Nc0R6TXlSenh5M1lpeURHdUNIeHIxcWZ6ajJGakFCRk5UbXpPN05Nb3ExVUx1cVVyR0M2UXI1TmlkZmlJSTdZSjd0aFVkRm5fZEl4TlJhX2pGZS1TT2pBWHAzaU5Uc2JOM2x4RTNfb1RMYjFUT1Zkb2VDN2M3UXN6NnBRRHhKaXFTZ0plQ0NaZFFjczRicjVSTzRtQjF2TjJLSDNOb3p5bGNfX2kxY2ZzQWpFUHJxZWllYWJNdWpDRFA2MmNKZw?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "brinker international nyse eat stock price breaks below fifty day moving average what s next marketbeat",
+      "s": 0.405736
+    },
+    {
+      "ts": "2026-11-10T10:00:00+00:00",
+      "title": "Where to eat for Falcons-Chiefs game or while visiting Zoo Atlanta’s pandas - The Atlanta Journal-Constitution",
+      "summary": "Where to eat for Falcons-Chiefs game or while visiting Zoo Atlanta’s pandas The Atlanta Journal-Constitution",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNZ1FMOFo1V3l3Q18xMWpyMFhuR2MwVko1ZkNfOVF3Ni1WcWw0Y0ZVMnFoR194ZXBNSVBqbnV1eWhyVkRfZHpnZTZsRXNZV1g2MUNYSllSdm9weURnU01xUTNXaE11emdkS1Nkb1huYXFzVC1JRGMwWU9vYUo4SV9KVTduOS1NMWxrREN5RS1VRlNMU0wyZ2ZrOFpTY1BsWEhYd1E?oc=5",
+      "source": "The Atlanta Journal-Constitution",
+      "provider": "google_news_rss",
+      "title_key": "where to eat for falcons chiefs game or while visiting zoo atlanta s pandas the atlanta journal constitution",
+      "s": 0.891758
+    },
+    {
+      "ts": "2026-11-10T01:22:00+00:00",
+      "title": "Hunters reminded not to eat deer taken from Clark’s Marsh - clipped version - WNEM",
+      "summary": "Hunters reminded not to eat deer taken from Clark’s Marsh - clipped version WNEM",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQZldEWjlINE5NWnZKdWZkQkJuRzZvUVlkZ2p6OWtjYmprczdFQks5YkYyZnA0OEVELTRyYklhWThSNUUyVUMzMjM1cTB1ZG51X2lVTFRtQlk0dVQ3MUN5dG9ncE04Z3ZlcFNLX1N3N0psTE5IcmlWSzVEVktPQ0tmMER4aU56OGE1aTMxTUVhVVpvMFhObzc4dzJUdmIxQmRkd2NaYVNn?oc=5",
+      "source": "WNEM",
+      "provider": "google_news_rss",
+      "title_key": "hunters reminded not to eat deer taken from clark s marsh clipped version wnem",
+      "s": 0.830214
+    },
+    {
+      "ts": "2026-11-09T22:35:41+00:00",
+      "title": "USDA warns: Don't eat these frozen meat products - USA Today",
+      "summary": "USDA warns: Don't eat these frozen meat products USA Today",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNMG9faTVyanFkQkxIVGlHcDdwM0M5VTZkSUVrd1dJVG1hWmJCYXN1R1F1LWdpNS01ZU00MUVaa0xmdzNnakpBT0Q2ZmUwT013UlVoQlZUdzB3UjJPa1pjelVNLWJaTEhsVE1LcUM2WG9ENFFOZ3Bzd2g2Rm9jcER3OU9QSVV4SVY5NzUwMG9URU5kSlJXMjEwdDlIdF9lNFFwdC1DbjlRbHJkalZZWjFaWGdQbmQtUWJiZjVNZkFCTHNKVlFiOFp5ZWxpQVI?oc=5",
+      "source": "USA Today",
+      "provider": "google_news_rss",
+      "title_key": "usda warns don t eat these frozen meat products usa today",
+      "s": 0.819189
+    },
+    {
+      "ts": "2026-11-09T22:00:00+00:00",
+      "title": "What 3 top nutrition experts eat for breakfast - The Washington Post",
+      "summary": "What 3 top nutrition experts eat for breakfast The Washington Post",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNd2VpUXVDWFVRYUVReHcxSjR1elF1dXNLc01uTFI3N0RsQmtDRDZLSEZCdEVLVzFFMVZiNnJGcXlJY0N0N3Z1bG41QnQwbWhsWHdoanQxYkhZZ0U0QjhVb1g2U3BKVVQwNVFLbkhwTG1Ld3hfSzg3VG9JRTE0X2paNjYxenlaOHBrVjZZWmt4VjdDNDdGMXg4WldR?oc=5",
+      "source": "The Washington Post",
+      "provider": "google_news_rss",
+      "title_key": "what 3 top nutrition experts eat for breakfast the washington post",
+      "s": 0.892007
+    },
+    {
+      "ts": "2026-11-09T20:58:12+00:00",
+      "title": "The Sundance Film Festival is Moving to Boulder, Colorado—Here’s Where to Stay, Eat, and Shop When You’re Not Watching Movies - Travel + Leisure",
+      "summary": "The Sundance Film Festival is Moving to Boulder, Colorado—Here’s Where to Stay, Eat, and Shop When You’re Not Watching Movies Travel + Leisure",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNY0VDY0ZYRU9KMnJ4VW16Q3EwZzEycEt2SWk5MjJXdFNFYTVJZ2w4bkVMTFh2TGNtYktLOVRJbWt3cHY2el9yNnZtU1BvRmJYek4zdWRLbElKTTd4TVh0MlZTMUM5TENnNXlKZ3prYWhTYWxDTVRyNFF6cTh0NURSVzY0cE8?oc=5",
+      "source": "Travel + Leisure",
+      "provider": "google_news_rss",
+      "title_key": "the sundance film festival is moving to boulder colorado here s where to stay eat and shop when you re not watching movies travel leisure",
+      "s": 0.908303
+    },
+    {
+      "ts": "2026-11-09T13:30:00+00:00",
+      "title": "The Crimson Tide Made Me Eat My Words, But I'm Still Not Convinced. - Bama Hammer",
+      "summary": "The Crimson Tide Made Me Eat My Words, But I'm Still Not Convinced. Bama Hammer",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQTjBvS1ZhUHJ5VWI3N0VHVWo0eWVGb1k3b05BZXlrWEszdHhUUGRtSFhNbjdTTWpCRTA1Ql9najhCRE80NWhUckRRVkUyTG5HZGxYWkdiekU2SXNjd1FwRnUwTTBsckxsYTBma3R3VTNiUkpham9FODRBLWw3eV9DWnVtcG8xMGN0N056X2NSU0lSMEIwbmNLV0NNc256TjFrUjJIVU0wOEt5aEha?oc=5",
+      "source": "Bama Hammer",
+      "provider": "google_news_rss",
+      "title_key": "the crimson tide made me eat my words but i m still not convinced bama hammer",
+      "s": 0.786591
+    },
+    {
+      "ts": "2026-11-09T11:17:48+00:00",
+      "title": "Darden Just Raised Its Dividend 8%. Is Olive Garden Still a Retirement Staple?",
+      "summary": "Darden's payout outpaces inflation, yet shareholder returns now outrun the cash the restaurants generate. Retirees counting on that quarterly check should see which lever management can pull first, and which warning sign could show up at the next earnings report.",
+      "url": "https://247wallst.com/investing/2026/11/09/darden-just-raised-its-dividend-8-is-olive-garden-still-a-retirement-staple/",
+      "source": "24/7 Wall St.",
+      "provider": "yahoo_public",
+      "title_key": "darden just raised its dividend 8 is olive garden still a retirement staple",
+      "s": 0.736033
+    },
+    {
+      "ts": "2026-11-09T11:05:20+00:00",
+      "title": "What iShares Russell 2000 Index Fund (IWM) Bought: Jackson Leads on Nov. 5",
+      "summary": "The ETF added $500.0 million in net buys across 1,847 increased positions while trimming just one holding.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/ishares-russell-2000-index-fund-110520795.html",
+      "source": "GuruFocus.com",
+      "provider": "yahoo_public",
+      "title_key": "what ishares russell 2000 index fund iwm bought jackson leads on nov 5",
+      "s": 0.860731
+    },
+    {
+      "ts": "2026-11-09T10:00:00+00:00",
+      "title": "'Eat Street' celebrates planned reopening of uninterrupted Nicollet Avenue in Minneapolis - MPR News",
+      "summary": "'Eat Street' celebrates planned reopening of uninterrupted Nicollet Avenue in Minneapolis MPR News",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxObDY4dmtSNDRaUU1zTm9ocUxzazFsRktFMEwzd3RwODg3Z1p3c2RrU2lKZ2dJY1F3ai1rMkxyYlJBenBSTW1yS2FNc1lIci1aVlowZUtwZDdGcnB2NjFPWF9aczFBeEYxbWRUYjJ2Und6ZDk4SFJUNzY2MjVXRG0wWnBQTUlSYTg0aEs5eXc0ZkNlQ2ZPUlZ4SHgwUUNhUQ?oc=5",
+      "source": "MPR News",
+      "provider": "google_news_rss",
+      "title_key": "eat street celebrates planned reopening of uninterrupted nicollet avenue in minneapolis mpr news",
+      "s": 0.695497
+    },
+    {
+      "ts": "2026-11-09T08:00:00+00:00",
+      "title": "What Eating Broccoli Every Day Really Does to Your Body, According to Nutrition Experts - Real Simple",
+      "summary": "What Eating Broccoli Every Day Really Does to Your Body, According to Nutrition Experts Real Simple",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOeFlFRm9vd0tlTEZSTkVwekp6STFsS21Ib3E2bVVkbDkxWU5rNWRRWFB3WVRrY0RnMk9hMm1lT0IteC1LM2IyMkdqdi15ZkpjTGZZTGgyYjI0azcyVFZiODV4dUgtMGdOTXFtN0k5SDRfOWlTMEZaSFY0T0RJN29WTFkxbzcwczg?oc=5",
+      "source": "Real Simple",
+      "provider": "google_news_rss",
+      "title_key": "what eating broccoli every day really does to your body according to nutrition experts real simple",
+      "s": 0.868853
+    },
+    {
+      "ts": "2026-11-09T00:00:00+00:00",
+      "title": "4 Processed Foods to Eat Every Week to Prevent Strokes - EatingWell",
+      "summary": "4 Processed Foods to Eat Every Week to Prevent Strokes EatingWell",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9IZTJfZDNHX1h3cU9DZlp3Q2dlajY1SDUxVDJVeDQ0emVqOXNWa0FaVzRLTTUwWEdTaGotbU0zWmxiRWNwb0NiY1loa3Q2c1B0clNBUzNqU1VvV3A4UmlQTjluZFU5MUxoczliVDEzQTFvQjhLZXFmbmRR?oc=5",
+      "source": "EatingWell",
+      "provider": "google_news_rss",
+      "title_key": "4 processed foods to eat every week to prevent strokes eatingwell",
+      "s": 0.866111
+    },
+    {
+      "ts": "2026-11-08T21:00:00+00:00",
+      "title": "Costco Brought Back the Holiday Heat-And-Eat Dinner Fans Buy 4 at a Time - Allrecipes",
+      "summary": "Costco Brought Back the Holiday Heat-And-Eat Dinner Fans Buy 4 at a Time Allrecipes",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPUk16M1JqQV9RcW9aOHdiN19HS04yMGZXQjBJYTlWZTFTZGNIXzRTY3BvRnFNaGVlMzVxelNjNUlBbW1uNER6bDdTRGVIWmdHanVKbENqRWh3Ty14N1hReEY0Mk11SUhISWE1MTJzbDByU0hGSVdHRHZCZzJBVzJacENWTQ?oc=5",
+      "source": "Allrecipes",
+      "provider": "google_news_rss",
+      "title_key": "costco brought back the holiday heat and eat dinner fans buy 4 at a time allrecipes",
+      "s": 0.720147
+    },
+    {
+      "ts": "2026-11-08T20:00:00+00:00",
+      "title": "Why Americans Eat Dinner So Much Earlier Than the Rest of the World - Mental Floss",
+      "summary": "Why Americans Eat Dinner So Much Earlier Than the Rest of the World Mental Floss",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNRndpX1FwRUVxLWZMajJvYmxWOTJ3S0ozMGlDSzFhb1FMYkVuSGVEN094dXB0VmNEeDN3VVRYOFloNlRLczR2TEloSllrVlJQWWZlRGs1OVNUY1NCb0tBVi1yQmZKQjI1UkpubXBLY244VVVWTE9DcjlQRmFZYXJtT193YjI2NU9LUmd5LVFLNUk?oc=5",
+      "source": "Mental Floss",
+      "provider": "google_news_rss",
+      "title_key": "why americans eat dinner so much earlier than the rest of the world mental floss",
+      "s": 0.822702
+    },
     {
       "ts": "2026-11-08T17:17:56+00:00",
       "title": "Where to Eat Thanksgiving Dinner in Alexandria This Year - Alexandria Living Magazine",
@@ -76,6 +686,16 @@
       "s": 0.828279
     },
     {
+      "ts": "2026-11-08T11:03:11+00:00",
+      "title": "The Worst Time to Eat Breakfast, According to Dietitians - EatingWell",
+      "summary": "The Worst Time to Eat Breakfast, According to Dietitians EatingWell",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE53RzRqNmxPVGRnNnplNlExc1IzLVZNTk9ZOXRLMllFblVaX0VrOG5ucjk0M0Y3dk1wRDdyaHJENks2R3M1U0haU2dpR05PbnZPSEdqU0NLcUpMOVpISVRselpUNjB5anVLNFZUTS1vZWs?oc=5",
+      "source": "EatingWell",
+      "provider": "google_news_rss",
+      "title_key": "the worst time to eat breakfast according to dietitians eatingwell",
+      "s": 0.676961
+    },
+    {
       "ts": "2026-11-08T11:03:00+00:00",
       "title": "What's safe to eat? Recent food recalls you might have missed - The Oklahoman",
       "summary": "What's safe to eat? Recent food recalls you might have missed The Oklahoman",
@@ -84,16 +704,6 @@
       "provider": "google_news_rss",
       "title_key": "what s safe to eat recent food recalls you might have missed the oklahoman",
       "s": 0.782167
-    },
-    {
-      "ts": "2026-11-08T11:00:00+00:00",
-      "title": "The Worst Time to Eat Breakfast, According to Dietitians - EatingWell",
-      "summary": "The Worst Time to Eat Breakfast, According to Dietitians EatingWell",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE53RzRqNmxPVGRnNnplNlExc1IzLVZNTk9ZOXRLMllFblVaX0VrOG5ucjk0M0Y3dk1wRDdyaHJENks2R3M1U0haU2dpR05PbnZPSEdqU0NLcUpMOVpISVRselpUNjB5anVLNFZUTS1vZWs?oc=5",
-      "source": "EatingWell",
-      "provider": "google_news_rss",
-      "title_key": "the worst time to eat breakfast according to dietitians eatingwell",
-      "s": 0.676961
     },
     {
       "ts": "2026-11-08T05:04:00+00:00",
@@ -644,6 +1254,16 @@
       "provider": "yahoo_public",
       "title_key": "here s how much a 1000 investment in brinker international made 10 years ago would be worth today",
       "s": 0.871931
+    },
+    {
+      "ts": "2026-11-05T12:30:01+00:00",
+      "title": "Here's How Much a $1000 Investment in Brinker International Made 10 Years Ago Would Be Worth Today - Yahoo Finance",
+      "summary": "Here's How Much a $1000 Investment in Brinker International Made 10 Years Ago Would Be Worth Today Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxON3lYNnpkTVMyZTJXSWRmTklPRloxR3hkcHhtdlZyUnNKa1MxdmxsUi0yQlBHMTJ5VHU2aUwxeWthUW4tc1FmdF9xOFR5LXhZdkdFVDEwS3RPMWh3MHh6TC16OHp3MlpwV2VkT0NJTnNmTGZSbU5QQVRfWjA5MlRtWXVBSlBIeFpvaWxvVWx1WHRsRWZRb3hQYkF0b0F5MExu?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "here s how much a 1000 investment in brinker international made 10 years ago would be worth today yahoo finance",
+      "s": 0.887689
     },
     {
       "ts": "2026-11-05T12:00:17+00:00",
@@ -1766,16 +2386,6 @@
       "s": 0.8113
     },
     {
-      "ts": "2026-10-29T01:38:58+00:00",
-      "title": "Brinker International, Inc. (EAT) Stock Forecasts - Yahoo Finance",
-      "summary": "Brinker International, Inc. (EAT) Stock Forecasts Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQRE9rdXhHeWNZYkV5U0xZVkJqWDRpVGJLTV9UNFZycmQtZTFUREFGeFZvT3RtdVhTa0FxRWNPRmxSOUdFVXFvVGlkR0N5M2U1Smx0eGdsQjNOZGNtWkpXM2pLUWtSX3AyWVA0WUl3T0RTVFJWME55eE1GWW1VWWF2elJjZkJzdjBHNWR1Zg?oc=5",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss",
-      "title_key": "brinker international inc eat stock forecasts yahoo finance",
-      "s": 0.853707
-    },
-    {
       "ts": "2026-10-29T01:35:14+00:00",
       "title": "Let them all eat lunch - High Plains Reader",
       "summary": "Let them all eat lunch High Plains Reader",
@@ -2023,7 +2633,7 @@
       "source": "www.marketscreener.com",
       "provider": "google_news_rss",
       "title_key": "earnings flash eat brinker international inc reports q1 revenue 1 48b vs factset est of 1 46b www marketscreener com",
-      "s": 0.576638
+      "s": 0.576637
     },
     {
       "ts": "2026-10-28T13:04:23+00:00",
@@ -2116,616 +2726,6 @@
       "s": 0.57291
     },
     {
-      "ts": "2026-10-28T11:52:36+00:00",
-      "title": "Brinker International (NYSE:EAT) beats Q3 CY2026 sales expectations",
-      "summary": "Casual restaurant chain Brinker International (NYSE:EAT) reported calendar Q3 2026 (fiscal Q1 2027) results exceeding the market’s revenue expectations, with revenue up 9.4% year on year to $1.48 billion. The company expects the full year’s revenue to be around $6.28 billion, close to analysts’ consensus estimates. Its non-GAAP profit of $2.77 per share was 13.2% above analysts’ consensus estimates.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/brinker-international-nyse-eat-beats-115236060.html",
-      "source": "StockStory",
-      "provider": "yahoo_public",
-      "title_key": "brinker international nyse eat beats q3 cy2026 sales expectations",
-      "s": -0.575114
-    },
-    {
-      "ts": "2026-10-28T11:45:00+00:00",
-      "title": "BRINKER INTERNATIONAL REPORTS FIRST QUARTER FISCAL 2027 RESULTS AND UPDATES FISCAL 2027 GUIDANCE",
-      "summary": "Brinker International, Inc. (NYSE: EAT) today announced its financial results for the first quarter ended September 23, 2026 and updated guidance for fiscal 2027.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/brinker-international-reports-first-quarter-114500096.html",
-      "source": "PR Newswire",
-      "provider": "yahoo_public",
-      "title_key": "brinker international reports first quarter fiscal 2027 results and updates fiscal 2027 guidance",
-      "s": 0.87704
-    },
-    {
-      "ts": "2026-10-28T05:54:00+00:00",
-      "title": "I Want My Cake and Eat It Too: A Democratic Senate Without Abdul El-Sayed - The Times of Israel",
-      "summary": "I Want My Cake and Eat It Too: A Democratic Senate Without Abdul El-Sayed The Times of Israel",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRTFHblZ4X2pSQlhwekNyekk2ODRBYXpVNVUxbEdqYU1pVUpOWDdiNzNCTEh6VWhjRm9PVmdaU0RkeVhuSGZzeWwtT1VrelFmU3JFaTExQXhVbzZjYlI1emI4R29ZV0t2eHZtUXFRUTU5SGpyZkxvZUVJaGpfN2c4TlJNd0hQazJPYzZlNkhuTkdqNWthMm43SkJuSTEtbVJfUEREd3hIbjA?oc=5",
-      "source": "The Times of Israel",
-      "provider": "google_news_rss",
-      "title_key": "i want my cake and eat it too a democratic senate without abdul el sayed the times of israel",
-      "s": 0.864682
-    },
-    {
-      "ts": "2026-10-27T21:52:52+00:00",
-      "title": "Brinker International (EAT) Set to Report Q1 Earnings Amid Modes - GuruFocus",
-      "summary": "Brinker International (EAT) Set to Report Q1 Earnings Amid Modes GuruFocus",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPMTBNdGltZGp4QTExbnVTU2hxZkxLYUNHT0xsSDZ6aVlXeU1icHcyQ3FqQ1lCSDhXVzh5Q19feWF5RmY5cVl4NXNockdVeDI4YjhsemZMaEcwUEtjTi1qSTFXa1A5UXZRN0VZQjUtenZ1NjJZNnNybWh3dEI2cFgtZkZyX2xIWk9sbW9IWWRrc2FDOUVHT3lmdG5qbHlQYmZYNDk2QUlRanVfRHZjM0VibUk0RnZtVGs?oc=5",
-      "source": "GuruFocus",
-      "provider": "google_news_rss",
-      "title_key": "brinker international eat set to report q1 earnings amid modes gurufocus",
-      "s": -0.651089
-    },
-    {
-      "ts": "2026-10-27T20:54:30+00:00",
-      "title": "‘Do I want to stay warm or do I want to eat?’: Upper Valley residents brace for costly winter heating - Valley News",
-      "summary": "‘Do I want to stay warm or do I want to eat?’: Upper Valley residents brace for costly winter heating Valley News",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5hTDNYZE9waF9PV0NDNTBFeGdiczMxRG9OM1BKV1hQVTRmYWxsSHhwSjNGMFBCalZtdGdXZVE3M3pLa2NvUWRFcFl2c2puX0RXV1FBUmZEel9OUTVjcnM2WnluYVJwdmpFZnlN?oc=5",
-      "source": "Valley News",
-      "provider": "google_news_rss",
-      "title_key": "do i want to stay warm or do i want to eat upper valley residents brace for costly winter heating valley news",
-      "s": 0.863165
-    },
-    {
-      "ts": "2026-10-27T16:00:00+00:00",
-      "title": "The FDA rarely inspects much of the produce Americans eat - The Washington Post",
-      "summary": "The FDA rarely inspects much of the produce Americans eat The Washington Post",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNb0JxMy1JQVRtTFE1azRnSTZ3clJ3YmpxTE1Tam9TMmZUcHJ5cE5GWHBKY3MwZHM0MUItVF9xS0c0WUxxbXN4VEF1WW9weVpETTVDSTN4ZkkwcjhmcnFPNUQ3WGs2TlY2SkhsQUJucFhsWXMxRjRfcm1JOHlqR3JPMVVtdlVzZ1lldWQyNGdZSGJ3YndUbzN6VVBTSFhzUWs1OGU5MEpLNHh1Z3VsbzY1cWQ2OXYtUjRPMHlQNnZSR0Y?oc=5",
-      "source": "The Washington Post",
-      "provider": "google_news_rss",
-      "title_key": "the fda rarely inspects much of the produce americans eat the washington post",
-      "s": 0.877439
-    },
-    {
-      "ts": "2026-10-27T15:55:00+00:00",
-      "title": "Giants' J.J. McCarthy made experts, analysts eat their words in Week 7 - Giants Wire",
-      "summary": "Giants' J.J. McCarthy made experts, analysts eat their words in Week 7 Giants Wire",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNTHFzdVZDanJtV3lmMUEzXzFycXNybDVJRlBaZmZMc2g2VGZ5WTdHV0lvaWt3dXFZQ3JuTkNId2JQa21uRXBaR0FVRWtzWF9yczlDUDF5d2w3b1Y2LV8yczllRWphc0ZEbF85RHhXSG5BMlE4NThOY3pRTTNzcnB3UnlYeU41S1AwXzcwaU5aZHl6bU9VOGlQdVp5RWx6ZFlfSnZjejBZTktlemdWSlVxQnJFT2EzaHR2SVdJck9ncXR1M3kzNElSY1hQeGJRclhvQnE0TXlBSUtaTE0?oc=5",
-      "source": "Giants Wire",
-      "provider": "google_news_rss",
-      "title_key": "giants j j mccarthy made experts analysts eat their words in week 7 giants wire",
-      "s": 0.862491
-    },
-    {
-      "ts": "2026-10-27T10:11:34+00:00",
-      "title": "Debate Settled! Is It Safe to Eat an Egg If It Cracked in the Carton? - Reader's Digest",
-      "summary": "Debate Settled! Is It Safe to Eat an Egg If It Cracked in the Carton? Reader's Digest",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA4b3d1djZYTVc2Z2I5MzViVmc1QlRYdlY4aGNVVHNuMExCNWZwOEQwY29ienFmbzVHZ0VuWUJrVVVPUmJVdzRBQTdXWllLTVdob1FidUFDTjhYUQ?oc=5",
-      "source": "Reader's Digest",
-      "provider": "google_news_rss",
-      "title_key": "debate settled is it safe to eat an egg if it cracked in the carton reader s digest",
-      "s": 0.872659
-    },
-    {
-      "ts": "2026-10-27T08:00:00+00:00",
-      "title": "Pittsburgh’s Best Restaurants: The 26 spots that reflect how we eat in the region right now - Pittsburgh Post-Gazette",
-      "summary": "Pittsburgh’s Best Restaurants: The 26 spots that reflect how we eat in the region right now Pittsburgh Post-Gazette",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNZ1NQZWdPT2liT1UwM2NjN25oeFdzNWhVbktwZWhJc3ZJbVNsMkhOMUdGVmdQQW1nUHdvakhqcUF4dkZOVDhTYWFxaTR2S0FfRkpuR0RvbGJwYTZDNEtWajIzNG1IY1VEZDdUT0txdzVMd05uaFFsWUVjS1lRZEt2cTd5UEJFT1N6R255ejVqeWFlWk9CQUluUFFNMXRJMUNhYzFISFg5dTY?oc=5",
-      "source": "Pittsburgh Post-Gazette",
-      "provider": "google_news_rss",
-      "title_key": "pittsburgh s best restaurants the 26 spots that reflect how we eat in the region right now pittsburgh post gazette",
-      "s": 0.808413
-    },
-    {
-      "ts": "2026-10-27T05:50:47+00:00",
-      "title": "Brinker International (EAT) reports Q3: everything you need to know ahead of earnings",
-      "summary": "Casual restaurant chain Brinker International (NYSE:EAT) will be reporting results this Wednesday before the bell. Here’s what you need to know.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/brinker-international-eat-reports-q3-055047645.html",
-      "source": "StockStory",
-      "provider": "yahoo_public",
-      "title_key": "brinker international eat reports q3 everything you need to know ahead of earnings",
-      "s": 0.907255
-    },
-    {
-      "ts": "2026-10-26T16:20:15+00:00",
-      "title": "Brinker International (NYSE:EAT) Stock Price Up 5% - Here's Why - MarketBeat",
-      "summary": "Brinker International (NYSE:EAT) Stock Price Up 5% - Here's Why MarketBeat",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPOGN5bElmaVhVTEpnV09FckFLRUVqYjRKanQyOEh4enNfM1lkZTBUaV9EazU0bjUta1BDUjZIQWtTZjdrejA1eEZqbldaOF9VeTBUSlQ0MW5pVVQ2b0k3SUIzUDhwQjcxY3RrRC1SeGFaVkVQclNLX29VajgtQWdPRlh4a050cVlDVWdEZ2V5OHM1Q2hWZzNJX1NGMERublJYdVp0ZnV2NkdOU0Q1TzNFa0lJTXlObEdw?oc=5",
-      "source": "MarketBeat",
-      "provider": "google_news_rss",
-      "title_key": "brinker international nyse eat stock price up 5 here s why marketbeat",
-      "s": -0.323769
-    },
-    {
-      "ts": "2026-10-26T12:15:05+00:00",
-      "title": "Gear Up for Brinker International (EAT) Q1 Earnings: Wall Street Estimates for Key Metrics",
-      "summary": "Beyond analysts' top-and-bottom-line estimates for Brinker International (EAT), evaluate projections for some of its key metrics to gain a better insight into how the business might have performed for the quarter ended September 2026.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/gear-brinker-international-eat-q1-121505198.html",
-      "source": "Zacks",
-      "provider": "yahoo_public",
-      "title_key": "gear up for brinker international eat q1 earnings wall street estimates for key metrics",
-      "s": 0.851701
-    },
-    {
-      "ts": "2026-10-26T12:15:05+00:00",
-      "title": "Gear Up for Brinker International (EAT) Q1 Earnings: Wall Street Estimates for Key Metrics - Yahoo Finance",
-      "summary": "Gear Up for Brinker International (EAT) Q1 Earnings: Wall Street Estimates for Key Metrics Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMUR4UXB1WW9wZjNhZmc5U1hwV2pOZXJEaDkwd1hVX1J0ZWR0QUI0V2E5cmpVWVoteTRqS1B2TU5iZWlyMVhfUEFqVW1vNHRjbXBtOW9jQ0s0VThGWFZjZXI5T1NDVFY5SmxRZTFuNVZaYmJuaW5WX0tnOTFvaEs1R2hBMFlHMzFwbTFfc1JsaU04YlF2QmJmYURUN3Bicm8?oc=5",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss",
-      "title_key": "gear up for brinker international eat q1 earnings wall street estimates for key metrics yahoo finance",
-      "s": 0.840225
-    },
-    {
-      "ts": "2026-10-26T07:00:00+00:00",
-      "title": "Where to Eat in Brooklyn This Week - BKMAG",
-      "summary": "Where to Eat in Brooklyn This Week BKMAG",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1OYnFiXzB3RWRSRFFhZWZKWkhRZ29ZRFZzbjdLU29qMmVrWEVqcmdSaVplQVV0UnBJSEJER0pVOE5CN0dZQ2tFaXp0WTNXMzFZeU81dXZlbE1OMUdRRnRLME9pdU5jT0Y0TkExcllOX3pjS0Jja01N?oc=5",
-      "source": "BKMAG",
-      "provider": "google_news_rss",
-      "title_key": "where to eat in brooklyn this week bkmag",
-      "s": 0.895334
-    },
-    {
-      "ts": "2026-10-26T05:41:25+00:00",
-      "title": "Stocktwits Retail Therapy: Defensive Bets Hold Firm As Hasbro, Kohl’s, Boston Beer Lead Weekly Consumer Gains",
-      "summary": "Hasbro’s record Magic: The Gathering quarter powered the winners, while LKQ, Six Flags and Brinker lagged.",
-      "url": "https://stocktwits.com/news-articles/markets/equity/stocktwits-retail-therapy-defensive-bets-hold-firm-as-hasbro-kohl-s-boston-beer-lead-weekly-consumer-gains/cZUdpr4RBy2",
-      "source": "Stocktwits",
-      "provider": "yahoo_public",
-      "title_key": "stocktwits retail therapy defensive bets hold firm as hasbro kohl s boston beer lead weekly consumer gains",
-      "s": -0.735987
-    },
-    {
-      "ts": "2026-10-25T14:00:00+00:00",
-      "title": "The joy of veg-maxxing: how to eat many, many more plants – without really trying - The Guardian",
-      "summary": "The joy of veg-maxxing: how to eat many, many more plants – without really trying The Guardian",
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbzNOT0RreDN4MHR1WEVPUk0yTUs2VklTQkZiLWZEQW92cU9aemViU1d0Ymx4STAwNm9kTWQ2THVoWWxPZmNaMEtIYTF4UE92SHV1LTVBRkppUzJFR0RIVnNLSGp1UXpHRTdQUHVNd3ltdnJibmFxLTAyc2psQ28zd2JpZXdYWng1TWJ1MUxLc0gyLTI0akdkV3NSR3hRUDhQUVN0cXJwa1A1ZnZJQnRJOWtCeGtWUldwQ1FYR0xqX2N3WW8?oc=5",
-      "source": "The Guardian",
-      "provider": "google_news_rss",
-      "title_key": "the joy of veg maxxing how to eat many many more plants without really trying the guardian",
-      "s": 0.829222
-    },
-    {
-      "ts": "2026-10-25T10:00:00+00:00",
-      "title": "An All-You-Can-Eat Time Machine - The New Yorker",
-      "summary": "An All-You-Can-Eat Time Machine The New Yorker",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOTVpOY0xidzlrblhwNkVrRHRxaEVrZDZkRHoySXlUd0ZMdUV2NkRzZDBjNy1HMUxuSnRsUTBNbFdob0xXbDlKT2dNWUxXdUc1LWM1dVRiVV8xMFQ2VmZwa2JUZkpFNWl6STh0MHBiTUR6ajZVX0gxMDJLeDBRSDJUYk1uN2NIYVk?oc=5",
-      "source": "The New Yorker",
-      "provider": "google_news_rss",
-      "title_key": "an all you can eat time machine the new yorker",
-      "s": 0.884244
-    },
-    {
-      "ts": "2026-10-24T22:46:00+00:00",
-      "title": "What’s Next for Brinker International (NYSE:EAT) After Its Pullback? - Kalkine Media",
-      "summary": "What’s Next for Brinker International (NYSE:EAT) After Its Pullback? Kalkine Media",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPS3lhdHBBZG93SU1YTkdKYjVhVlZDQklmZzVncERiN2pIaHRRa3c3cC0wYUJGbmNldFNlSnhNcmtsWDRmWGdsQ3BHaDRrNWd2TExrczdVZXFaLWpfVzRiQmVOdnR1WVdULU9pYVlHU3lKa2tDT1hEQ3kzVVY5Nmpza1FrdG5XMzNDUC1fZDNmWEs2aWN6a3lFWnlqLW9MX1A3dUdqVjBLbE5mdlE?oc=5",
-      "source": "Kalkine Media",
-      "provider": "google_news_rss",
-      "title_key": "what s next for brinker international nyse eat after its pullback kalkine media",
-      "s": 0.864365
-    },
-    {
-      "ts": "2026-10-24T17:48:00+00:00",
-      "title": "Where to eat in Sarasota before tourist season packs restaurants - Sarasota Herald-Tribune",
-      "summary": "Where to eat in Sarasota before tourist season packs restaurants Sarasota Herald-Tribune",
-      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNZkZyYzFKM2pJdFJmbWZnZG1jeEcteHdvVHdpd1IzeFEwNUhnNVFYbXFReC1LRFB3dGIxMTRaNHZYOE51dS1JUS16R0NwVC16NUtOSURvQjhGZUpqR3lxdV9LNnRZYlB2dW1PUkVPeXZiQjBTblZ2R2p6Z0dmdWJxR19RdkFVUWxSNUQ3Y1ZYRGdHWEUyUmhBOFhMeG5WR0VEa3ZqYXZuMUZ0MFJwMk54UmREOVJNeDhTcXZzMmNtcTRmLTBmdTVXQlhpdUNZQW5YcG5Qd2ZaR0tqYUtaSnVhSkxEVDdHNFpxWWlr?oc=5",
-      "source": "Sarasota Herald-Tribune",
-      "provider": "google_news_rss",
-      "title_key": "where to eat in sarasota before tourist season packs restaurants sarasota herald tribune",
-      "s": 0.898547
-    },
-    {
-      "ts": "2026-10-24T17:27:59+00:00",
-      "title": "We Eat Candy Corn In A Weird Way & We’ve Got To Talk About It - Sporked",
-      "summary": "We Eat Candy Corn In A Weird Way & We’ve Got To Talk About It Sporked",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQQ040REU2M3ZhWUxhalBzMEdBUXBCTm1mM0FjbFh3Ujl3ZS1vM2UxVnMyUmdrZUt4V2RUWlV0dlNEeURTeUYtU1F6UklXY09pSVlaaElRT0dBREwzSjk2d2RwMGdEX3B3RGwwd1Rpa0I1eEswNnlRYUlvWHV6N2V3LVlSU3lxdUhjVVlWTjBicTk?oc=5",
-      "source": "Sporked",
-      "provider": "google_news_rss",
-      "title_key": "we eat candy corn in a weird way we ve got to talk about it sporked",
-      "s": 0.731394
-    },
-    {
-      "ts": "2026-10-24T14:36:06+00:00",
-      "title": "'Eat grandma' | Bill Maher explains why he thinks young Americans want socialism - KBOI",
-      "summary": "'Eat grandma' | Bill Maher explains why he thinks young Americans want socialism KBOI",
-      "url": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxNb1JETmZyVllTa2ZFWGdXMnNiNUJBcEVTZVUzdG1GSTVMWGpUT05tTkgzU190WTZEa1UtZHJEOFFTMl9MSk4xaDEyVUFxbGN6bnptdW52dnpVU005bzJqaG1ua3ZXaGg2VkFTaW93MGdUX1czcnFTMG5QeEdFbkxwZ1N5WjY3NGxIUUhkUWphVk5JZ0lsSFpKNEtCQlFCTURUdmU2RXF3R3lIb1ZZdndBRFhMMHRoelJqaklyN0NxdXRIR0ZtM195MlpMZ0dPMWlNaDNZRkNhZHp4SXRSTGRoa1NQa2xsNG00UWRwWUJoaUJMT3lsUHZrRUpVeVlFMkx1ZWxtaHc1VmtZZWZ6amRiakh0dGplM0lfSnE5SE5neWZpYV9XQTlYVnJLdjI5N3dqVUc0cWZxQTdKOHJ3c25TTC1kNXJrcnJ2c1VrM0YyLXFiVjNFQW5EOGRpcUpPUmQ1eXMzaFZaYWI4clk?oc=5",
-      "source": "KBOI",
-      "provider": "google_news_rss",
-      "title_key": "eat grandma bill maher explains why he thinks young americans want socialism kboi",
-      "s": 0.710067
-    },
-    {
-      "ts": "2026-10-24T14:00:00+00:00",
-      "title": "FROM AROUND HERE | OPINION: Take and eat — These are things that help preserve family - The Arkansas Democrat-Gazette",
-      "summary": "FROM AROUND HERE | OPINION: Take and eat — These are things that help preserve family The Arkansas Democrat-Gazette",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNcVZOVEQwNDN1OUdCTUdDUUw4LV9vNzJZdG85OU1uNTNsMkw4OHloN1I5LVdGYWhPRk5jRTRJS3RzRTUwNWZiQkJEZkR1cDF2czdKRjR3OVk0dEdpQ0lxM2JJN0pkWUNtbmkxY2pjTnJFR0xBdVNWTmg0NnFiTlVNVjktXy1MSEdPUEh0NVk1TW85TGw2LS1mVDRBcGU?oc=5",
-      "source": "The Arkansas Democrat-Gazette",
-      "provider": "google_news_rss",
-      "title_key": "from around here opinion take and eat these are things that help preserve family the arkansas democrat gazette",
-      "s": 0.843751
-    },
-    {
-      "ts": "2026-10-24T12:40:00+00:00",
-      "title": "I Tried More Than 60 Bowls of Lu Rou Fan in Taiwan — These 6 Are the Best - Food & Wine",
-      "summary": "I Tried More Than 60 Bowls of Lu Rou Fan in Taiwan — These 6 Are the Best Food & Wine",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9tQk44bG1INV9CajBwMkNMQjdBd3NRZGNfMEhHT2JPXzJPN2VadUdPdHB0cEljZ2V2X29hOE5FRFpiZGoxZVpzaXRhR1VFQUdZdmcxYkpXNk1DR0JZemlEendfSzE?oc=5",
-      "source": "Food & Wine",
-      "provider": "google_news_rss",
-      "title_key": "i tried more than 60 bowls of lu rou fan in taiwan these 6 are the best food wine",
-      "s": 0.756328
-    },
-    {
-      "ts": "2026-10-24T12:36:04+00:00",
-      "title": "As a Dietitian Over 40, This Is What I Actually Eat for Breakfast - Prevention",
-      "summary": "As a Dietitian Over 40, This Is What I Actually Eat for Breakfast Prevention",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPZHRqd0lNWkpqbDJuV3RYVnZWUFJZUWVBU010eGt1WDZzaHlWYW1kMUZBRHhoTmk5UkpuRFlZSndSVkIyUUJkQXBBR1lxanVnSUVKV1JMVEhFcXlnNGV0YlBVaVhxUUhqZkRDMjlONnFlLWVScjJfa092elVpa0dzenR6OGZnX3E2X3ZjcGMtek5yUVlMRTVxRWZSVlg?oc=5",
-      "source": "Prevention",
-      "provider": "google_news_rss",
-      "title_key": "as a dietitian over 40 this is what i actually eat for breakfast prevention",
-      "s": 0.886516
-    },
-    {
-      "ts": "2026-10-24T12:30:00+00:00",
-      "title": "The Best Time to Eat Yogurt for Gut Health, According to Dietitians - EatingWell",
-      "summary": "The Best Time to Eat Yogurt for Gut Health, According to Dietitians EatingWell",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE83NmRRQ0E0cVlTSVcyWXNPeFpjN2pNekhYNmkwVS12Q2hWVTZVYTZwSEFWZ3RqQnRiRV83cjZkSXhrb1JnQTFQTU4tSlBiYmF3a1BMdjEwZ3ktWU1wa2lBb1RnN0huLXgzcE1nXzV1UXg5REdWM2stbjZvZGpkcG8?oc=5",
-      "source": "EatingWell",
-      "provider": "google_news_rss",
-      "title_key": "the best time to eat yogurt for gut health according to dietitians eatingwell",
-      "s": 0.818345
-    },
-    {
-      "ts": "2026-10-24T12:30:00+00:00",
-      "title": "The Best Time to Eat Yogurt for Gut Health, According to Dietitians - Yahoo Health",
-      "summary": "The Best Time to Eat Yogurt for Gut Health, According to Dietitians Yahoo Health",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQTWhfX0VWX3VUNjUzLUVLUzYzUkgtRnBGaGNXZjVDODN4MnJ2QVNlczhfYVBKcjhPWmNsMkhmMTFtT3dRWlBPQks3MmFHSndCVVMxcS1LWXhXbjN6ZnFEU1dIdURLeFFRZzdwbU9JZHBmM0NMN1NlaE5KU0YxTVFnZTNYYnpqOC1aRFZzTjZadm8xSjJpQmFJMzV0QWkyQU81a1JaSGVOTjQxZDA?oc=5",
-      "source": "Yahoo Health",
-      "provider": "google_news_rss",
-      "title_key": "the best time to eat yogurt for gut health according to dietitians yahoo health",
-      "s": 0.760039
-    },
-    {
-      "ts": "2026-10-24T12:10:05+00:00",
-      "title": "What we want to eat when we’re sick ultimately comes down to one thing: comfort. Here are the recipes our readers love to make when they — or their loved ones — are under the weather. https://nyti.ms/4yFNf10 - Facebook",
-      "summary": "What we want to eat when we’re sick ultimately comes down to one thing: comfort. Here are the recipes our readers love to make when they — or their loved ones — are under the weather. https://nyti.ms/4yFNf10 Facebook",
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOb0JHVG1DaElWNmtHT0xCVkJtRkRaT05ZdVhpVVVGTWJCb2U1OGhuVWVIU09GclNIb29HMmh0UWRmX1UxU0xVT1M3RzNEUXVaYUx0LUcwbnROMV9oTFZhVkNkeXg0a0VrTTFnZENfdXY3MFMyc2RZLVRDdGhtM3VqbVlLZDlzN0l4b0pKelFNLU5nVTdFT1B4N1lqNkxydy1ycHBXbjUydTRQakpGYjdGaVlGZ2k5UTZVWS0wdlVrODRaNV9ja05jbVpVT0MyMFVrMjJz?oc=5",
-      "source": "Facebook",
-      "provider": "google_news_rss",
-      "title_key": "what we want to eat when we re sick ultimately comes down to one thing comfort here are the recipes our readers love to make when they or their loved ones are under the weather facebook",
-      "s": 0.90666
-    },
-    {
-      "ts": "2026-10-24T12:00:38+00:00",
-      "title": "Woman's life transformed when she rejected fast food and vowed to eat what she grows - Fox News",
-      "summary": "Woman's life transformed when she rejected fast food and vowed to eat what she grows Fox News",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPNUV3MDdJcTV5SHB5TEZJczhsQ2kxcUNMamZfQ3B0Zk0yWVJJU0U2RU9vb1VLTkhMdk9iT04yeXNVVlgyQnFtTUNPU0JaY2lWUzE5bjdsbE1hbFBCTWh2YzNRVTlSY3dHbi1FbmtCWXNKUEd2cThObkRmMlc0c09LbzU2VnBQVUg1M1VKcFJaV292REdPSVF5TGpOMi00ZTFUX3FNeUVuamJZU0JZRHMwVtIBtgFBVV95cUxQblhUZWJhUkd2VloycV9nclhWU0xGNnVPTVBUYkdITWJ2bVpVTVRHN2Fma1ZzaHQ5Vk55M0N5MUhILS0ycjVic0JuNHpUazRDTzlYMWdMMFZJMnltdklMeXhBZTIwQzFRR1JXS3NpcnZvRWg4TjJQRlVqYm5xTWRubHpZNEhGRGxMX3R1dWFsc1p5RDE0R1M4Vi1iTTRCdEhWR2FYSXJvZHZnQUJTanRyamZubjlzQQ?oc=5",
-      "source": "Fox News",
-      "provider": "google_news_rss",
-      "title_key": "woman s life transformed when she rejected fast food and vowed to eat what she grows fox news",
-      "s": 0.819309
-    },
-    {
-      "ts": "2026-10-24T09:30:02+00:00",
-      "title": "Just Eat apologises after AI-generated images blunder - Al Jazeera",
-      "summary": "Just Eat apologises after AI-generated images blunder Al Jazeera",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPZmJ0SG5DamFha2xaMmlBclhsSUgyblpBZ2lpNE5BZWRoMWY2RXdNSU15dVRmS0loZTR1M3h5dWd5cUM4VXVFX01GOTFRdkxSeWpnQVdTamVPVzhxMUVFbTlDbVliUnZ5WHZlcWFtR3lONHlkQkNLaW1lWVNwZUs4WUc4OGFybXNsSXg5WTgzNkpMLW4wNU5QSFc2by1Oem9DYk83LU16Yk3SAa4BQVVfeXFMUHNURnNjcllBQkh6cXJtWXFFZkR3X212ZkxTRG9kVFY5Smh2M0VYbWkwODU5eWFwOEUzTWNpYXQ2dXZMRmZ1WmdUUlBkcmFvM2daQXBZdDM2eXVqa3BpLXIwM2Q1WU54MXVTZG56c2ZFblZ6UTgxU1pSNl9uNVl0cDNSQVlwRHJURU9ZY0JDbjhYamd1RHRzS3R5V3M1ZDZxcHVPaHlFRDZrQW00dXpR?oc=5",
-      "source": "Al Jazeera",
-      "provider": "google_news_rss",
-      "title_key": "just eat apologises after ai generated images blunder al jazeera",
-      "s": 0.166124
-    },
-    {
-      "ts": "2026-10-24T09:00:00+00:00",
-      "title": "ASW Distillery and Georgia Athletics are partnering up - The Red & Black",
-      "summary": "ASW Distillery and Georgia Athletics are partnering up The Red & Black",
-      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQQWF5UXJidkVGdENQbWFnS2VVNG5zOXpEUkNBYmhIbC1QZDdTVk9CMnZ2bHZONDJLeW5jeTVyVVBJZ0RiQmIwWDNscUdQdy15c3pRUHpBRGNsanNmaWpST0lNdzBLb1dsSnYyQU1YZXJSdThXSDBWMnBKS2plWVkxLVFMZjhLNld4THFQTUt0cHQ1OVVxdDFyRE5RVk5FRm5FRmVuUWhhQXp4cURPZXdXYm1ncl9RenkyQWQtQVZCQ1N5NG5uNnRhQ2ZobXJuQVBGRWVjbTZRUjllQQ?oc=5",
-      "source": "The Red & Black",
-      "provider": "google_news_rss",
-      "title_key": "asw distillery and georgia athletics are partnering up the red black",
-      "s": 0.678461
-    },
-    {
-      "ts": "2026-10-24T06:15:00+00:00",
-      "title": "Boonville dance team members Elizabeth Eichelberger, left, and Marley Schuster, right, eat snacks during the game against Fulton - Columbia Missourian",
-      "summary": "Boonville dance team members Elizabeth Eichelberger, left, and Marley Schuster, right, eat snacks during the game against Fulton Columbia Missourian",
-      "url": "https://news.google.com/rss/articles/CBMinwJBVV95cUxNUnNtVlBPbmkwRndGUWJwd0hFaUcxN3lCUk9JYmg1WE9OUnJxRXUxaGRIdUhtTWV1cmV6OXl3VUhobzBrZUVwMG9pRHozTi1kdHhucDVXaEJUVU5YZ1FCOUtfRk10QVFTR3cyMkVfWXlaVUtXXzZZT3VRaDdoazRrVWptelM3dXJxMzlhY3NsZ2tlRHRlMDl6YUdEY0hYb2tiTkp3a2JIMFFQeVNza3VJRVZZemJVQXZCOTJ6Y2VkYk95R3YxQjdBRE5DdnFWUjNLVnA5OFRHLVUyVHR5ZjQxaUVSUjNfVFZBejRzUGRmaTY4TTlMRHRQQnQ1bG1uR2Vtc2s2Zi1TOHk0QVMxLUc3emdob2RMeDBPRjJubnNCcw?oc=5",
-      "source": "Columbia Missourian",
-      "provider": "google_news_rss",
-      "title_key": "boonville dance team members elizabeth eichelberger left and marley schuster right eat snacks during the game against fulton columbia missourian",
-      "s": 0.856044
-    },
-    {
-      "ts": "2026-10-24T05:00:00+00:00",
-      "title": "‘It annoys people when I eat’: Siobhán McSweeney on perfect snacks, parental pressure – and the power of being ‘a delicious fatty’ - The Guardian",
-      "summary": "‘It annoys people when I eat’: Siobhán McSweeney on perfect snacks, parental pressure – and the power of being ‘a delicious fatty’ The Guardian",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNbWo2eVA5VmRyR3FGdnphbG9NWXhSY0hQWmpZNzdtM2xiNE9VbXFack4ydmczSHRYR1dHb2hIOU1hYXRiUGJ1ZS1IcDUwOE1OTHlCc3djVWdUWVk0T09xeVRzNHhVamN5Q0V2akJQTUVlYk5jYllJTy1BM3hCdURfLThUb01SbXZBZDF4SWtfNmZEenZoMTl5R2VhWGlCenNNdnRTdFdmMTRac281MTRWUmR5ajJVUzY2ZlcwX2tjd1FVal9Bb0dXeWpmNEpkN2VoVUpnb1hB?oc=5",
-      "source": "The Guardian",
-      "provider": "google_news_rss",
-      "title_key": "it annoys people when i eat siobh n mcsweeney on perfect snacks parental pressure and the power of being a delicious fatty the guardian",
-      "s": 0.738046
-    },
-    {
-      "ts": "2026-10-23T22:58:21+00:00",
-      "title": "Angel Reese Is Making Her Critics Eat Their Words in the WNBA Finals - Yahoo Sports",
-      "summary": "Angel Reese Is Making Her Critics Eat Their Words in the WNBA Finals Yahoo Sports",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaGxGSlg2OE8yMHhoMVlyZnp0Y1FQTmxPU1EyVzBzQTFneWhQWGxjUFNVbWEzTkZ1WXc1dFp0VWlpQ2F2cEJsejJpMFRtdzFRV2tIYXQ1SzBkMXc5TXI3V3c4cmdjaUFqTllBS0liMllwS0ZBTzFJZDBkR0FfYUNnV3lUdGNVQQ?oc=5",
-      "source": "Yahoo Sports",
-      "provider": "google_news_rss",
-      "title_key": "angel reese is making her critics eat their words in the wnba finals yahoo sports",
-      "s": 0.669251
-    },
-    {
-      "ts": "2026-10-23T22:00:00+00:00",
-      "title": "From coffee house owner to seasoned restaurant owner, JoJo isn’t going anywhere - Arizona Daily Star",
-      "summary": "From coffee house owner to seasoned restaurant owner, JoJo isn’t going anywhere Arizona Daily Star",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPSmRNNkk1VWpSczhsWndMR01SRXVmOGtCN2dVN2dOYWw0Q3hoQWFoMzU3WFVBUHFjbEhDTDI1T2ZrNm9uU1ZIVHh1LWE4UVgyWEhwUjFCeEQ3UnpBVXhueTZhWlBoal9ockk5RGdyY01lUkt5RVVFdDhycVZsN2JOUUc0dFJxRXZqTVp4UF9n?oc=5",
-      "source": "Arizona Daily Star",
-      "provider": "google_news_rss",
-      "title_key": "from coffee house owner to seasoned restaurant owner jojo isn t going anywhere arizona daily star",
-      "s": 0.833382
-    },
-    {
-      "ts": "2026-10-23T21:13:38+00:00",
-      "title": "Shoppers are heading to the mall this holiday season — to eat, not to buy - Yahoo Finance",
-      "summary": "Shoppers are heading to the mall this holiday season — to eat, not to buy Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNV0JMaXlYOTZkWmhLc3BtRzBEZC0tUXVXSlJuRmxnamUwUG4yS3RJX0FOZDRSVDZlWWNsNGs5VlRhbkl1RFBmUzlVNExVZnc1aV9jOTBNT01HYXM2WFhYLVJhd1pROFYteDk5ZV9OMVIxMlVSd2xNcnowQ1UtdjZEMl84V2ItaE5mMm9mc2x4ekdNS1hCeVAzMlpBQ0hsRXBvcUtqUS1zMTdtbkZxVFQwRWx2cHdMREVfa1E?oc=5",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss",
-      "title_key": "shoppers are heading to the mall this holiday season to eat not to buy yahoo finance",
-      "s": 0.883371
-    },
-    {
-      "ts": "2026-10-23T21:00:00+00:00",
-      "title": "Research Says Eat This Many Dates for Maximum Health Benefits - Yahoo Lifestyle Canada",
-      "summary": "Research Says Eat This Many Dates for Maximum Health Benefits Yahoo Lifestyle Canada",
-      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE45NWRxYmZTSTBMSmstejhaZDBxcFFwZDRqaDdHWFJ4SEg2X0xnSGk3UU9hNm5TWUVfdW1ONjFzclZLeDRzZm5SQ1YxblZuZk1iOEkycm45eko4NUE0cjZBa1ZZMjB0djBSYjZoSUx6U2tMWTlsWlZYT19n?oc=5",
-      "source": "Yahoo Lifestyle Canada",
-      "provider": "google_news_rss",
-      "title_key": "research says eat this many dates for maximum health benefits yahoo lifestyle canada",
-      "s": 0.841237
-    },
-    {
-      "ts": "2026-10-23T20:51:37+00:00",
-      "title": "Children who eat more ultra-processed foods show stronger brain responses to appetizing foods - Keck School of Medicine of USC",
-      "summary": "Children who eat more ultra-processed foods show stronger brain responses to appetizing foods Keck School of Medicine of USC",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOcXVhNE13Z1dQbXZDOXNPTEUzX3VETFVRNTBsMUZRQ0VXZlV1ZDRjbEFzZ2ZBUWNocmE0YTJsOTV6S2VjcDNDWktwSlJaeFVzLTRrWWVPT1luVjJsem1md0VDRVJfZERDWkNTTms4NnVzajlFa05NbFhXWHVJLW1YQVJhbjR0dlJFOFhUOERUZDBrMERjU3k5bmxmdE4tLXRiajhJMXBJbFB0NzZQX0ZjVUlzbDlGbHVCT2t1Yw?oc=5",
-      "source": "Keck School of Medicine of USC",
-      "provider": "google_news_rss",
-      "title_key": "children who eat more ultra processed foods show stronger brain responses to appetizing foods keck school of medicine of usc",
-      "s": 0.0453
-    },
-    {
-      "ts": "2026-10-23T19:09:00+00:00",
-      "title": "Here’s What Happens When You Eat Pumpkin Every Day, According to Registered Dietitians - Real Simple",
-      "summary": "Here’s What Happens When You Eat Pumpkin Every Day, According to Registered Dietitians Real Simple",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOOExYakVoYUczYU1rQ1RSLVhMa0p3VW5oVnZ2c3AtWlJ1SzRSWk4yMzNUM2VtNUtrcXE4RENwdEVYQnBQcklyZVA4dGRUWG5oY25mOFJpWm5PUXlFNGp3cTIzTXlwaFF2SzJUOUJIRmQzb0xmWnBGNGxqZHBlX0drTG9YU1hqQQ?oc=5",
-      "source": "Real Simple",
-      "provider": "google_news_rss",
-      "title_key": "here s what happens when you eat pumpkin every day according to registered dietitians real simple",
-      "s": 0.906457
-    },
-    {
-      "ts": "2026-10-23T19:03:20+00:00",
-      "title": "13 Foods Experts Say You Should NEVER Eat After They Expire - Delish",
-      "summary": "13 Foods Experts Say You Should NEVER Eat After They Expire Delish",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE41akV5T0xETnFjZzFiY1Zia2JUT1pONndUdFpNNElLNGZaUTljMnJjekV0bFBHNGZqQjlGek5tWWJia21LOFZrQTRCMUJzNTV4U19PWXlRdm5nTktya1NxWFh1VkladU9FOUY5LWpfUklvTmZFVnE0?oc=5",
-      "source": "Delish",
-      "provider": "google_news_rss",
-      "title_key": "13 foods experts say you should never eat after they expire delish",
-      "s": 0.855041
-    },
-    {
-      "ts": "2026-10-23T19:00:00+00:00",
-      "title": "What Happens to Your Body When You Eat Dark Chocolate Every Day? - Martha Stewart",
-      "summary": "What Happens to Your Body When You Eat Dark Chocolate Every Day? Martha Stewart",
-      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE41MWtHLUZYaDg0WmpRR0l2TGNHRm15cF9VWTBvU3lvdmJfMHpjMzNmd1RMQ3N2d21jOElvd0V1MlIweWpzdVhTSXJBZjVsN2ZNNms3NFNST2JhUzJlTkFPdGVRMV9qZDNhOU5fV201ZjQ4Nl9mVlNzS1JB?oc=5",
-      "source": "Martha Stewart",
-      "provider": "google_news_rss",
-      "title_key": "what happens to your body when you eat dark chocolate every day martha stewart",
-      "s": 0.833083
-    },
-    {
-      "ts": "2026-10-23T18:44:24+00:00",
-      "title": "Top restaurant stocks to watch, according to Raymond James",
-      "summary": "Investing.com -- Raymond James has identified select restaurant stocks as top investment ideas following the sector’s significant underperformance during the third quarter, particularly in September. The firm attributes the weakness to broader market flows into AI and technology stocks, along with macro and valuation concerns tied to higher oil prices and interest rates.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/top-restaurant-stocks-watch-according-184424881.html",
-      "source": "Investing.com",
-      "provider": "yahoo_public",
-      "title_key": "top restaurant stocks to watch according to raymond james",
-      "s": 0.744166
-    },
-    {
-      "ts": "2026-10-23T18:08:01+00:00",
-      "title": "Rutherford Eat & Drink News for October 23, 2026 - Rutherford Source",
-      "summary": "Rutherford Eat & Drink News for October 23, 2026 Rutherford Source",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNLTRDUEZwZl8wZk85TGNLMUN6LXdndFdqVk40WmhiZ2RwNnJzRzBvRHEwM0w3RklFb1piUkppM28xT2UxbkZnV3ZlUmFCdGZMTXNPcXZjSVZ4cXAwVVc4RVlsUjBPZDAzM2U1VDdmeWIzNnNpNG9YcjB2TU4xdTdmeUN4bkloQW9jMG1jNmltOFR1c2Fl?oc=5",
-      "source": "Rutherford Source",
-      "provider": "google_news_rss",
-      "title_key": "rutherford eat drink news for october 23 2026 rutherford source",
-      "s": 0.916398
-    },
-    {
-      "ts": "2026-10-23T18:01:43+00:00",
-      "title": "Applebee’s Is Offering Kids Eat Free This Halloween Weekend at Participating Locations in These States - Yahoo",
-      "summary": "Applebee’s Is Offering Kids Eat Free This Halloween Weekend at Participating Locations in These States Yahoo",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOZ2w2aFJsNEM5d1hwaFFOSENPbGxFak93QUZrbXNFbnh3QnQxOW13RzRxZV8yUUsxTUlaRjJoNVFROUZiZVJCUURmLXFOUkxTdlg2dnZlVWVOT1JZcFBhdVZpb1BreUdxemhlUnE4Qkx3VzBabnhwVmFIYzRjdENnTXBzSW0za1FOLXVlb09VT3U?oc=5",
-      "source": "Yahoo",
-      "provider": "google_news_rss",
-      "title_key": "applebee s is offering kids eat free this halloween weekend at participating locations in these states yahoo",
-      "s": 0.774641
-    },
-    {
-      "ts": "2026-10-23T17:41:21+00:00",
-      "title": "All-you-can-eat oysters, barbecue, live music headline Friends of the Hunley benefit night - WCIV",
-      "summary": "All-you-can-eat oysters, barbecue, live music headline Friends of the Hunley benefit night WCIV",
-      "url": "https://news.google.com/rss/articles/CBMiswJBVV95cUxPdnNEbnlDNk52ZGh1NnpVMkRpVnNwWm9LS1JkNi00cVBQczF0ZUszeU9fSkttTXFXamRMeXRwS2F4eFh0R3JnSWFuaFprQ2Y0UGk1NTZtRTByX1FQNWxQYnNsU0tuSktEUVAwazhoZFp4SEo2RzhqMEZ6a1VHMUdFbEppT0ZvN3NxV2N1NHdLeTc2cFRBLWNJSERNb3NYSGdycGJqUTZSSUV4MUxlcmhNSjRYQ3ZHSkk5XzRsbG5SNHY2Q2RqTGNZeEx6MWc0dDhuTGthbVBLZzRZYmpPQkRqNzNRcGlyS1pGNEVrS0NRZU13VW5WZnRfaFFDcUFWTnFWakgycW5yYUJIWTdjeVRDUWZ6Nml5X3VfdkF2RjhCZE9kQmE0NTVaZFFGZjNCa3BpeG1N?oc=5",
-      "source": "WCIV",
-      "provider": "google_news_rss",
-      "title_key": "all you can eat oysters barbecue live music headline friends of the hunley benefit night wciv",
-      "s": 0.847536
-    },
-    {
-      "ts": "2026-10-23T17:04:13+00:00",
-      "title": "Why You Should Eat Halloween Candy With Your Kids - Psychology Today",
-      "summary": "Why You Should Eat Halloween Candy With Your Kids Psychology Today",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPUU1JNzlneUFObk5lZUJfTVQxWnVlM2FDV0xQZmgxUkVwWFRBTGpwSDJLSmhPcFFCNlNrb3FMajlMOG5uR2ludzBuSFFtOEpDa0Q5VE9BV3lXUXlJZlVEZUdFelh0WHFtRGtQcWhneTlrUDgxVEV6TnVmODZscml0dVNhZGdRN0RWM3Y0bWVKRDFrWXpwSlBDYmJLUDYtNzZuRnZMX0JsTkNfM2RnUmc?oc=5",
-      "source": "Psychology Today",
-      "provider": "google_news_rss",
-      "title_key": "why you should eat halloween candy with your kids psychology today",
-      "s": 0.868276
-    },
-    {
-      "ts": "2026-10-23T15:00:01+00:00",
-      "title": "Children who eat more ultraprocessed foods show stronger brain responses to appetizing foods - Medical Xpress",
-      "summary": "Children who eat more ultraprocessed foods show stronger brain responses to appetizing foods Medical Xpress",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOMWVLbC1CTVZMQlNQSXVBbHBjd2xKTXlxSkQtV1dNcm9qWENuS1BhczJsb0E3cmNPR0tCWXFBSUF0a19kaTlZLUN3ZVBieThXWjJmUS1rUzMzRzM4VVlFQVMwZFFfZ2duUkE0S3BTUUo1d25MR2JBbUltZmRUbC1LN1N2UjRGSHgzLVBwV2xFcTZIdw?oc=5",
-      "source": "Medical Xpress",
-      "provider": "google_news_rss",
-      "title_key": "children who eat more ultraprocessed foods show stronger brain responses to appetizing foods medical xpress",
-      "s": 0.171093
-    },
-    {
-      "ts": "2026-10-23T14:43:15+00:00",
-      "title": "U-M Parent and Family weekend is here: Where to eat, shop and explore - Detroit Free Press",
-      "summary": "U-M Parent and Family weekend is here: Where to eat, shop and explore Detroit Free Press",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNaV9UQkhGMjI2NllJdThHOFNwUGpxXzJ6ZXQtei1PeDdxSURmRV95TlRVdmhVZ2tVdUoyd2hRWTB5OXVYeFpBSHh5bkFnTU1yeWZiX0dma1JhbzRNblFjR0ZBcTFnS1hJUmc5UDFEN2xucUVSaXc4ek1hdG04d0plQkc5S2ZTMEFRc1FpemlWSkNHMk11aUozcVJsME85Y3pVY1c4Y1NMMGpsMXVOa2RSbjB2Nk85M0ZQQnh3UmtnRHNUR1BGaGlyVHU2Uy04dUkyYlRFSXFrMFJJR0RLdnYxVGVR?oc=5",
-      "source": "Detroit Free Press",
-      "provider": "google_news_rss",
-      "title_key": "u m parent and family weekend is here where to eat shop and explore detroit free press",
-      "s": 0.869825
-    },
-    {
-      "ts": "2026-10-23T14:41:23+00:00",
-      "title": "This Central Maine Mom Makes Cookies That Are Almost Too Pretty to Eat - 92 Moose",
-      "summary": "This Central Maine Mom Makes Cookies That Are Almost Too Pretty to Eat 92 Moose",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5fTkpZcllhWTZlRHo5QS1sZlF3MU9UUzFSY09QNDE4S2RjbjctZENQODk5bDVnaGhtakVsck1mNUhiX0hEbFROYWYxTWhZdkJQZnV3cnFEcEZCS1U?oc=5",
-      "source": "92 Moose",
-      "provider": "google_news_rss",
-      "title_key": "this central maine mom makes cookies that are almost too pretty to eat 92 moose",
-      "s": 0.880554
-    },
-    {
-      "ts": "2026-10-23T14:35:00+00:00",
-      "title": "Chipotle Gears Up for Q3 Earnings: Can It Overcome Cost Pressures?",
-      "summary": "CMG heads into Q3 earnings with menu innovation, digital initiatives and pricing supporting sales, but rising food, labor and operating costs threaten margins.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/chipotle-gears-q3-earnings-overcome-143500592.html",
-      "source": "Zacks",
-      "provider": "yahoo_public",
-      "title_key": "chipotle gears up for q3 earnings can it overcome cost pressures",
-      "s": -0.485114
-    },
-    {
-      "ts": "2026-10-23T14:16:10+00:00",
-      "title": "Will a macaque eat a grape sitting on a pile of poo? A study on germophobia - NPR",
-      "summary": "Will a macaque eat a grape sitting on a pile of poo? A study on germophobia NPR",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNSVI3UTctZk0zY1Rhem1VeUZrX2tsQTJxMlNYVGxrYVgwT2p2RGlpdEEtVFVoLXRfclpsUnJkVkhpb3M5bEJiMVRqWXBEZXBwcWswOVRFSmFiVlZ1UkpNUExnT21XU0pWRVBiX2NaZVdtbi1rME02dndOb1NjUURzLURpRzF2SXc?oc=5",
-      "source": "NPR",
-      "provider": "google_news_rss",
-      "title_key": "will a macaque eat a grape sitting on a pile of poo a study on germophobia npr",
-      "s": 0.873388
-    },
-    {
-      "ts": "2026-10-23T14:02:21+00:00",
-      "title": "All-You-Can-Eat Steakhouse Debuts + New Taproom Coming: MA Food Week - Patch",
-      "summary": "All-You-Can-Eat Steakhouse Debuts + New Taproom Coming: MA Food Week Patch",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNzVoYU8wZXVWdmRnNnBoTWJvUzhhbExTd1hleGQ3RXNVY2pqeUtaeEVkTk04MER5ZXNIWHoyMmFTbTFHZ29EZHllYmR3bHZZWmtLMDdzSzlpaURidC1LaHdGeGh3d0lLWGFhZUJpZF9zaFVMZG15dUJtd0UweHJsazlFTWV1NkRCVW9iaXFRRjN6WVYxNkJIQzNHTTdmNWFzcUdTWTR4cFUxYlHSAbwBQVVfeXFMTjJWQ3Q1YjZvZ1VWS0JGZWlTTkpVakRSUWc1Q0s5cWRDZHdFZ0pTemJRaF9kbTVLX1dJN2UtdzlKZWx5TGxaTDBwb2ZEOFBKZXN2SWZRV0F5SzRwOXRHOG51cFk2RnUxOG95UGI2OUIxT29NSjdjRTBidDRqZERHa0JCXzVIUjhiYksyckR6eXJPY3ZzeGR6N2RUZXZSWnE2WW5ETjlXQ1hNRW5TRnVEaEZrMVpNSXFpQXJOQnI?oc=5",
-      "source": "Patch",
-      "provider": "google_news_rss",
-      "title_key": "all you can eat steakhouse debuts new taproom coming ma food week patch",
-      "s": 0.581692
-    },
-    {
-      "ts": "2026-10-23T14:00:00+00:00",
-      "title": "What Happens to Your Cholesterol When You Eat Peanut Butter - Yahoo Health",
-      "summary": "What Happens to Your Cholesterol When You Eat Peanut Butter Yahoo Health",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQckx4aGgta0pPd2JTdEZCdWxlYms4Z1JUZ3o2WXBCT2hkWTZhQng5Q0k3ZVZfS0RjS1RZdjRhdDNRVzF3MVRUSURQSXg2eGxPdWQ0bXpVRmtMYmdjT1hnWUxiQ1hyU3lzeGVhNURUczFvdWd2bFljc0QtaS1RRFVRX2FlZXZkQ1A1dlZjS1M5Mkh6b1pxYmgzYi11U3loVFpQdkpZYXNZTWxEV00waXFuaFdaSzhOaC1obWQ3VzNDelhCQQ?oc=5",
-      "source": "Yahoo Health",
-      "provider": "google_news_rss",
-      "title_key": "what happens to your cholesterol when you eat peanut butter yahoo health",
-      "s": 0.771844
-    },
-    {
-      "ts": "2026-10-23T13:49:00+00:00",
-      "title": "Cheesecake Factory to Post Q3 Earnings: What's in the Cards?",
-      "summary": "CAKE gears up for Q3 earnings with higher sales, robust guest traffic and expansion, but rising labor and commodity costs may pressure margins.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/cheesecake-factory-post-q3-earnings-134900544.html",
-      "source": "Zacks",
-      "provider": "yahoo_public",
-      "title_key": "cheesecake factory to post q3 earnings what s in the cards",
-      "s": 0.87022
-    },
-    {
-      "ts": "2026-10-23T13:49:00+00:00",
-      "title": "Cheesecake Factory to Post Q3 Earnings: What's in the Cards? - TradingView",
-      "summary": "Cheesecake Factory to Post Q3 Earnings: What's in the Cards? TradingView",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNSGRTTEtJeFp3N1BoOTNBMTVCQ2JOc3FHMk1hYlp3RlMtOG41MkRMazhBbDF1dmxuZ0tsSl82aThleVFvLTcxUmMzSFBPek9UamFzVm43VHZKVDdzbXZScXBBX1I2R0VPZXV5TTdXakQyNFdhbkM3WXBHMi0zSjRJMTNwMk44dmE1bWU1OHp4cjRpV2o0aVZiVzR0eXAweDdLS3lmNkdNM2JCcjk4ZExIMmI1NE0?oc=5",
-      "source": "TradingView",
-      "provider": "google_news_rss",
-      "title_key": "cheesecake factory to post q3 earnings what s in the cards tradingview",
-      "s": 0.864695
-    },
-    {
-      "ts": "2026-10-23T13:11:16+00:00",
-      "title": "Brinker International (NYSE:EAT) Stock Price Target Lowered at KeyCorp - MarketBeat",
-      "summary": "Brinker International (NYSE:EAT) Stock Price Target Lowered at KeyCorp MarketBeat",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPTE56a296cFVXMUg0aER1RURIYy1WcUczVFUzVk8yRHZvM2tSdlpxSk54SWo5RzF2WVEwc2FqcGN4MEp5MVRibGNObDVRMDRCOWlhazVpVWRwV1JPQ3N3ZnFBTDNjQmxxUUxfWjJtVkp6TDRiTnEyenUzaW96SmtVeHBZMG16UDdKRHR6UzFrcVZmUXJJajlBbG9Dd280OXItQ3NoQXVCaU1SY2YzS2thQzI1bFp4ckhPQTFvU2UtbGIxQlIyYzFWMHNn?oc=5",
-      "source": "MarketBeat",
-      "provider": "google_news_rss",
-      "title_key": "brinker international nyse eat stock price target lowered at keycorp marketbeat",
-      "s": 0.464609
-    },
-    {
-      "ts": "2026-10-23T12:58:12+00:00",
-      "title": "Brinker International, Inc. Estimates – NYSE:EAT - TradingView",
-      "summary": "Brinker International, Inc. Estimates – NYSE:EAT TradingView",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9ReG9vTWluTmlHOFJtQ2VUc3ZoTWRad2tQWTBzQjNYcTJYOGFDY3dCZGhPTmk1Wklqa0tfdnpkZzhZOHJkeEk5ZFVWdmNWT0RIZUc3S1A3V3RZX0tBclB5bEhGLVdUUl9makFYSnF6T0JoejIx?oc=5",
-      "source": "TradingView",
-      "provider": "google_news_rss",
-      "title_key": "brinker international inc estimates nyse eat tradingview",
-      "s": 0.909062
-    },
-    {
-      "ts": "2026-10-23T12:00:24+00:00",
-      "title": "Michigan Stadium game day guide: Where to eat and what to do in Ann Arbor - The New York Times",
-      "summary": "Michigan Stadium game day guide: Where to eat and what to do in Ann Arbor The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNa2xiZ1hwekRNaFA0X1REbThfZVJvR1J4ZWVFWDVtdlhCZEFSZmhtYmZ0U3FFdnRndjIxb21CdDRKaU5jaFdEVG4ybFF5WVBfU0x6Q1MxWm1scUYtd3pKTXZyZFktNWx3VDNDMHgyenBtNGdXY3daMWVZVmJaeWRoMi1fQ19iSld2ZVM0TWJsb0kycDBDR2g2Vml4aHV0VElrVVRDY3hZVQ?oc=5",
-      "source": "The New York Times",
-      "provider": "google_news_rss",
-      "title_key": "michigan stadium game day guide where to eat and what to do in ann arbor the new york times",
-      "s": 0.897205
-    },
-    {
-      "ts": "2026-10-23T12:00:10+00:00",
-      "title": "11 Downtown Sacramento restaurants to eat at before Kings games, Golden 1 Center events - Abridged – PBS KVIE",
-      "summary": "11 Downtown Sacramento restaurants to eat at before Kings games, Golden 1 Center events Abridged – PBS KVIE",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9wQUx5dHdxMk1RakRHa0paYlZJNHFHOVAyX3hKaUZ5TWlCQXVNVlBSRG1vQ2ZTUG1qM216ZEd6elE1QnhSSXd5MFp0TmJYWWVlZFpRRmZ2VS1GQUY4aGtsTUNDSlVSbTYycTB0c2ZTNlBIdw?oc=5",
-      "source": "Abridged – PBS KVIE",
-      "provider": "google_news_rss",
-      "title_key": "11 downtown sacramento restaurants to eat at before kings games golden 1 center events abridged pbs kvie",
-      "s": 0.887282
-    },
-    {
-      "ts": "2026-10-23T12:00:07+00:00",
-      "title": "America's biggest buffet chain cracked the code to all-you-can-eat profits - Fox News",
-      "summary": "America's biggest buffet chain cracked the code to all-you-can-eat profits Fox News",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQNkQwWF9zU0paWnpNNFlWa1RaYldYdHJfWnU0X2ZGVlV4TFpOQl8yZEljX0VKUGV4cGtva3o0eG9RVFhjMUY1V2Z5QW5RUS1VTm9pZVpoMmw1cjlMVnh5SEJUZjA5YkVZNm9uN2ZzbTRydmpyQWxHRXlQNWV3SUZpcUpfYjZTRW56SzlHRlRCTE05dXJza0tqdDNwVms5N1NibXNNelZZNGvSAa4BQVVfeXFMT2pZNk5LVFJPV2hWMnAwNkxLNzAzbENBTGJpRlVGbFlKdXVkQ1NQXzBGbENHcGpJd1E3bkF2MVVfVkZ5T19sS2hSdTkyWUljQ1dTc0RKdTN2UE5WNlAzM1M2b3FvMnRzVXNyM1VoZzNMdzQtWkhVaTJLUkJ0R0lIYjNHT2tQaktzT295RDdiRy1rNWViaXBDejN4cE9tSDZPM1QxSHpFLVZVajMtUDNB?oc=5",
-      "source": "Fox News",
-      "provider": "google_news_rss",
-      "title_key": "america s biggest buffet chain cracked the code to all you can eat profits fox news",
-      "s": 0.765023
-    },
-    {
-      "ts": "2026-10-23T09:46:34+00:00",
-      "title": "You Are What You Eat: An Alternative to MAHA for Healthy Food and Fewer Chemicals - Center for American Progress",
-      "summary": "You Are What You Eat: An Alternative to MAHA for Healthy Food and Fewer Chemicals Center for American Progress",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQRmpid0FieWNZc1lEY1d4NGx2emF5QXZpclppT3YzR1pVU0dWOTNMUU8wNEtoajljQlRyRnBuVGg1N3U4N2p6UFkwNHpkRkpPVTdTY1lOSjRCT21Namctd0w2ZG5YRVNqbjJ5WFNCUzJlWEVITC1CbUJtSWhLbWFQVnFnRnJLOHJwY0lSRVcwZzRjb09DR1ZndDRTcjhqQk5lUGFwVjRoTGlzMS1PcjBGQ0VtQW10UUpEQ2dKYXkwMA?oc=5",
-      "source": "Center for American Progress",
-      "provider": "google_news_rss",
-      "title_key": "you are what you eat an alternative to maha for healthy food and fewer chemicals center for american progress",
-      "s": 0.649091
-    },
-    {
-      "ts": "2026-10-23T07:00:00+00:00",
-      "title": "Top Brinker International (EAT) Competitors 2026 - MarketBeat",
-      "summary": "Top Brinker International (EAT) Competitors 2026 MarketBeat",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBIUE9sdXRpRTJFdlhyV3Fac3puNUpoTWI1ME5SclN4WUkxdk42dHRyTVo0V2xIRlJYU28zUE53cUNHZ3M3SzRkZV9fQWRDVnJ0ZlBCZ1BxdzN5bFItOG9La1pqSVZ3NHpWTmxlRHdrb1FObmc0aWRsQlNPeFE?oc=5",
-      "source": "MarketBeat",
-      "provider": "google_news_rss",
-      "title_key": "top brinker international eat competitors 2026 marketbeat",
-      "s": 0.609077
-    },
-    {
       "ts": "2026-09-30T16:09:00+00:00",
       "title": "New Sushi Oishii in Sterling Heights offers all-you-can-eat Japanese - The Detroit News",
       "summary": "New Sushi Oishii in Sterling Heights offers all-you-can-eat Japanese The Detroit News",
@@ -2803,7 +2803,7 @@
       "source": "Simply Wall St.",
       "provider": "yahoo_public",
       "title_key": "brinker international eat heads into earnings with valuation questions still in play",
-      "s": 0.464631
+      "s": 0.46463
     },
     {
       "ts": "2026-07-31T07:00:00+00:00",
@@ -2813,7 +2813,7 @@
       "source": "Yahoo Finance",
       "provider": "google_news_rss",
       "title_key": "brinker international eat heads into earnings with valuation questions still in play yahoo finance",
-      "s": 0.709552
+      "s": 0.709551
     },
     {
       "ts": "2026-06-30T13:31:22+00:00",
@@ -2976,6 +2976,16 @@
       "s": 0.789453
     },
     {
+      "ts": "2026-01-28T08:00:00+00:00",
+      "title": "BRINKER INTERNATIONAL INC. R (BKJ.HA) Q2 FY2026 earnings call transcript - Yahoo Finance",
+      "summary": "BRINKER INTERNATIONAL INC. R (BKJ.HA) Q2 FY2026 earnings call transcript Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPR2F5OVAyZGdPdUc3a19aZFJvZUcwMmRUVW5sOWhsa2VwVXlwNkJNeGwwRjRCcnpDQ1VmelRJU1Fyc2J3NDJwYWllRVFfT05JRG8zUkoxRzBnbW14aTl4ZVFIenRLS0Y0azJmdUdCVTRxckFENHY0cWZtV2tLbk9GemZQWXlicTIzenZpcjZmT3hJUQ?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "brinker international inc r bkj ha q2 fy2026 earnings call transcript yahoo finance",
+      "s": 0.888945
+    },
+    {
       "ts": "2026-01-27T08:00:00+00:00",
       "title": "Microsoft, Tesla, Meta and more set to report earnings Wednesday By Investing.com - Investing.com Nigeria",
       "summary": "Microsoft, Tesla, Meta and more set to report earnings Wednesday By Investing.com Investing.com Nigeria",
@@ -2984,16 +2994,6 @@
       "provider": "google_news_rss",
       "title_key": "microsoft tesla meta and more set to report earnings wednesday by investing com investing com nigeria",
       "s": 0.924877
-    },
-    {
-      "ts": "2026-01-23T08:42:06+00:00",
-      "title": "SEMY Forecast — Price Prediction for 2026. Should I Buy SEMY? - Intellectia AI",
-      "summary": "SEMY Forecast — Price Prediction for 2026. Should I Buy SEMY? Intellectia AI",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1IN3hXMUxkYzRvZk9aeTRoZWRNQWxsTUxrd1VBZm5EQ21HVzliQXdla3NjTDlPZEdxRVNBdjBoWnFkRkFRdTZ4NDNTTDRobTdJUTZJRA?oc=5",
-      "source": "Intellectia AI",
-      "provider": "google_news_rss",
-      "title_key": "semy forecast price prediction for 2026 should i buy semy intellectia ai",
-      "s": 0.882651
     },
     {
       "ts": "2025-12-30T08:00:00+00:00",
@@ -3067,6 +3067,16 @@
     },
     {
       "ts": "2025-10-29T07:00:00+00:00",
+      "title": "BRINKER INTERNATIONAL INC. R (BKJ.HA) Q1 FY2026 earnings call transcript - Yahoo Finance",
+      "summary": "BRINKER INTERNATIONAL INC. R (BKJ.HA) Q1 FY2026 earnings call transcript Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdlBnNFVWTkVQZkR1SUVWS0I5V2xtZEctejFxU3F0NmN4SGQ3YTQxOVlsZkE1NXRtMm9kMUVYeURvQThHbUxfdEVwZzhrLXhkQTg4WXprUFZkNkkzZU8zQU5sMVMtLUNZcHdocUU4Z1hWVFh1UGN0WGxyeTZuakJ1Q3d1UkduMExMVHhFSjlnQ21rZw?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "brinker international inc r bkj ha q1 fy2026 earnings call transcript yahoo finance",
+      "s": 0.891195
+    },
+    {
+      "ts": "2025-10-29T07:00:00+00:00",
       "title": "BRINKER INTERNATIONAL REPORTS FIRST QUARTER OF FISCAL 2026 RESULTS AND REITERATES FISCAL 2026 GUIDANCE - PR Newswire",
       "summary": "BRINKER INTERNATIONAL REPORTS FIRST QUARTER OF FISCAL 2026 RESULTS AND REITERATES FISCAL 2026 GUIDANCE PR Newswire",
       "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPRDVZc0NMTV9oVlJUa1FjbzhCMXVRVTJ5VDJLQ2NsVFNmTUkza3VvYzg2SjlXdi1KdlhmdmlXSDFoaXVUOWdyZ3BDakNQOEkxSmxHa21ZNzF0bzBxTjBtelFETC1xQVhDMXV2LXNxVENVQzFiTFpxX0Q4aERaQTZLVFFocUl6Mk1aeFlkSDkwcC1mTl9LajkxaU1hRmVxLTRmbU9haDliazFBcXJncU5xRk5razV6UWxoLTh6Vmp3XzRwSGNEQmJTUlZpQ2JxaTZhZHIwaHBnLTdjWlRNMENKOXVIWnpDWnpSNGE1V1pmcw?oc=5",
@@ -3074,16 +3084,6 @@
       "provider": "google_news_rss",
       "title_key": "brinker international reports first quarter of fiscal 2026 results and reiterates fiscal 2026 guidance pr newswire",
       "s": 0.906833
-    },
-    {
-      "ts": "2025-10-23T07:00:00+00:00",
-      "title": "Light & Wonder (NASDAQ: LNW) to delist from Nasdaq; ASX sole primary listing Nov 13, 2025 - Stock Titan",
-      "summary": "Light & Wonder (NASDAQ: LNW) to delist from Nasdaq; ASX sole primary listing Nov 13, 2025 Stock Titan",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNTlp2MWw4cldkZHVwWlNZTzc3dlludnZXT3FXTUxxenpoSG52NDlCcl9ZelJIaW1yZFNzOEVKWDZsXzh2MkxSQXB1SFNiSllHNkhDQUVlOEVUQlNCRElqdDRBU1N2dTFGUlItNEhLcGN1S21FTE9vYUpjUFZzQW5zamk3TEZjM1ZoM2ZDY0w5N2xSNU9ZY3RzTm14dw?oc=5",
-      "source": "Stock Titan",
-      "provider": "google_news_rss",
-      "title_key": "light wonder nasdaq lnw to delist from nasdaq asx sole primary listing nov 13 2025 stock titan",
-      "s": 0.898371
     },
     {
       "ts": "2025-09-30T19:16:22+00:00",
@@ -3116,6 +3116,16 @@
       "s": 0.904075
     },
     {
+      "ts": "2025-08-29T07:00:00+00:00",
+      "title": "Jim Cramer Just Couldn’t Stop Talking About These 13 Stocks - Insider Monkey",
+      "summary": "Jim Cramer Just Couldn’t Stop Talking About These 13 Stocks Insider Monkey",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPYXJQOFViLTlXakRiODg5ZjFoeWl3ZHpjTDdwOEtETEVwVDRIanNDelU2MTFneHcxSk9OaU5YS2VEcWpXWmFvNlhSdC1fem1WRW1GMFZIYVBRV3NXX3FaTm50eFhvUG1DelJXUXJXM19HeHhxT1NJbXl5c1V4WTJPRWNoVmFValVGM1VCRjl2MFl0OElseHBYVVFsdzVpdHluZjlsag?oc=5",
+      "source": "Insider Monkey",
+      "provider": "google_news_rss",
+      "title_key": "jim cramer just couldn t stop talking about these 13 stocks insider monkey",
+      "s": 0.841381
+    },
+    {
       "ts": "2025-08-26T07:00:00+00:00",
       "title": "Brinker International on a Steady Rise: Why is EAT Up? - www.timothysykes.com",
       "summary": "Brinker International on a Steady Rise: Why is EAT Up? www.timothysykes.com",
@@ -3134,16 +3144,6 @@
       "provider": "google_news_rss",
       "title_key": "chili s turns viral triple dipper trend into a new social media marketing push yahoo finance",
       "s": 0.571175
-    },
-    {
-      "ts": "2025-08-20T07:00:00+00:00",
-      "title": "Jim Cramer Said Quantum Computing Could Quench AI’s Thirst For Water As He Discussed These 14 Stocks - Insider Monkey",
-      "summary": "Jim Cramer Said Quantum Computing Could Quench AI’s Thirst For Water As He Discussed These 14 Stocks Insider Monkey",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOUzQ2VUhmanBDODhOTFRnclVmaTVUc0xxNDlDNTRQb096U1g1cjd5VlA1dUVVa19hRGhJWTFYRXF0Vm9FX19TWGdXcHhqQzhfRklHMk1oNXRLYW5BSFgyWk1FU2RjRzY2d3lOaVczOFA3b2IwT0VnQndudzc5c1phQ3VrcTc0Q1RfUmJkVklIWUNNSmYwTDF1N3M4MmpBZ3dvWGhSTm9hVU1hYlN0SkdIV2NLZFN6T3NFdDBTUHBOWDMxaUFwck9yYXNiYjduTkVHUGlHOXhGLXpMTDjSAeMBQVVfeXFMTlpOUFZDdWFDc2VJNE1RQ2J2RHVNaS1kMEpzQzVWZlhESkVNUDgya24yek56enJwa0hzUVZGb0FGem96cGkyOVFIZ0Y3VWVwRUhicGs4Mk1DMDlGY20xZHhrUjF5RWZveFlMQU1seUZYQTBrSVd5Rmd3STVHTUxsZG9wVXZYSWhhSkdyMUplLUdsX2swdlFHUGN5ZndMbXVaLW02b1BMWVkxUFJ4dzJvX1BIVHd4YWRNeWxBWXRhNlpQM0dNeVpqb0ZhU29iRldTeXhRSnlrZTZwM01rZHR0d0hISk0?oc=5",
-      "source": "Insider Monkey",
-      "provider": "google_news_rss",
-      "title_key": "jim cramer said quantum computing could quench ai s thirst for water as he discussed these 14 stocks insider monkey",
-      "s": 0.537012
     },
     {
       "ts": "2025-07-28T07:00:00+00:00",
@@ -3416,6 +3416,16 @@
       "s": 0.016764
     },
     {
+      "ts": "2024-10-30T07:00:00+00:00",
+      "title": "BRINKER INTERNATIONAL INC. R (BKJ.HA) Q1 FY2025 earnings call transcript - Yahoo Finance",
+      "summary": "BRINKER INTERNATIONAL INC. R (BKJ.HA) Q1 FY2025 earnings call transcript Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPc002NU1Ib3ZLdC1iNm4tVjF3WDU5OWJJVi1WcDZEU2FYeG1QTUJPSkNDZnZNRWF0TWxjZjQ1QmxqQTlXRG9pdVhEVlNELTQ3RGFVLTBQWnFsTDJyTm5iYmNWdWtFQUw2Z2t5ME41VGY2S1hLcmNVaXFTeHozZlg2eTJOcWI0ZVdHLUZpSGI1eFRzdw?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "brinker international inc r bkj ha q1 fy2025 earnings call transcript yahoo finance",
+      "s": 0.8931
+    },
+    {
       "ts": "2024-10-29T06:59:37+00:00",
       "title": "Top Stock Losers Today - Yahoo Finance",
       "summary": "Top Stock Losers Today Yahoo Finance",
@@ -3424,16 +3434,6 @@
       "provider": "google_news_rss",
       "title_key": "top stock losers today yahoo finance",
       "s": 0.050301
-    },
-    {
-      "ts": "2024-10-17T07:00:00+00:00",
-      "title": "Why Brinker International (EAT) is a Top Momentum Stock for the Long-Term - Yahoo Finance",
-      "summary": "Why Brinker International (EAT) is a Top Momentum Stock for the Long-Term Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPMGNLOUpYYktXQWZ6dE12OVJEQlFrZGZaMXhDZzJIMXVrQU41MUd6SWl1SUg1MW9XMnp6dF9DcDkta2R5SHZheDZHVXFkNjlMOGE1ZTFSc2dRWU9JcTQ0UnpJazk5NGp6ekNHNXh4ck5veC1udkMwdW9qRHo3OTgtZGJtQmdpZw?oc=5",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss",
-      "title_key": "why brinker international eat is a top momentum stock for the long term yahoo finance",
-      "s": 0.782249
     },
     {
       "ts": "2024-09-11T07:00:00+00:00",
