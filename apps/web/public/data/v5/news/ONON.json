@@ -2,19 +2,679 @@
   "schema_version": 6,
   "symbol": "ONON",
   "source_policy": "free_public_only",
-  "last_attempt_utc": "2026-11-09T11:17:43.860936+00:00",
-  "updated_at_utc": "2026-11-09T11:17:43.860936+00:00",
-  "latest_article_at_utc": "2026-11-09T02:15:02+00:00",
-  "last_nonempty_fetch_utc": "2026-11-09T11:17:43.860936+00:00",
-  "fetched_article_count": 120,
-  "new_article_count": 3,
+  "last_attempt_utc": "2026-11-12T09:40:54.671116+00:00",
+  "updated_at_utc": "2026-11-12T09:40:54.671116+00:00",
+  "latest_article_at_utc": "2026-11-11T21:15:00+00:00",
+  "last_nonempty_fetch_utc": "2026-11-12T09:40:54.671116+00:00",
+  "fetched_article_count": 152,
+  "new_article_count": 65,
   "refresh_status": "updated",
   "fetch_error_type": null,
   "history_days_requested": 1095,
   "article_count": 360,
   "scored_article_count": 360,
-  "sentiment_mean": 0.7006938027777783,
+  "sentiment_mean": 0.5739706666666671,
   "articles": [
+    {
+      "ts": "2026-11-11T21:15:00+00:00",
+      "title": "ON (NYSE:ONON) Stock Price Target Lowered at UBS Group - MarketBeat",
+      "summary": "ON (NYSE:ONON) Stock Price Target Lowered at UBS Group MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQYUdyQUFlTGJRZXNoLW5XbFozeTNjc3AxQl8tWFBpOHVFUUpERS11Y1oya2ZlMWxmakRGa1NDQ2tfeEIwUVRzNDk1TnAwdUw4VkpvU0paREhNMVFsdHNLX1BVZ1h2X3JiMks5dmIySFBvNXJLQXB1VTBiakJBRUZLcUFLVVg2M3dfRmw2TE5uT2VzSTFjT3d2OGM2QzFseTF3UzBZdWNnMnVuVlVkWnBpaXZENlM?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "on nyse onon stock price target lowered at ubs group marketbeat",
+      "s": 0.427797
+    },
+    {
+      "ts": "2026-11-11T20:03:25+00:00",
+      "title": "ONON Maintained by Morgan Stanley -- Price Target Raised to $43 - GuruFocus",
+      "summary": "ONON Maintained by Morgan Stanley -- Price Target Raised to $43 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOX3A5Ni1hRlE2eGR5N2ExZWlBZ3NOLXFGczh6Nkh5Vm9WTnRad2ZDY2Y2LUVhM3VYbERFSGZUMVdGZm5BdXlpNlNDRkVnb0lLNkQ4OHhQR1Uxa0xlWDV4ODRobXBfckRfZnRFTlI2blJxMWJhTHptbVdzVjhsR01vZGxTRkhXQ1JlQjZveTZtenR1ZldsaVJZVXZYRXRBTlE?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "onon maintained by morgan stanley price target raised to 43 gurufocus",
+      "s": -0.901804
+    },
+    {
+      "ts": "2026-11-11T18:45:35+00:00",
+      "title": "ON (NYSE:ONON) Posts Quarterly Earnings Results, Beats Expectations By $0.18 EPS - MarketBeat",
+      "summary": "ON (NYSE:ONON) Posts Quarterly Earnings Results, Beats Expectations By $0.18 EPS MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOci1PeTItSS1ySWZXOTNvdXEyMmdrdVRxSUo3TlRiOHE2WWotZG5Pa2VSNDlNR2pjZy1wd1ZtVTItRXFSaFNuclJJSUd6a09Oczk5Uml2YjJhYXh4d2dxbWNMWEo2UVNOZnpMQTU4Y19PTVZ4TXpkN0lla250SGpBTnJZZzgya2dtQS1XSE1YeDBNYWJTZzVHT0F3VklPdkRRTFdGWl9UMUV2enlyNm81Zzhjam9zLWFhVC1FZnFnTmtzQXNtWWVENkdPa2h4YTN4OVNXMw?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "on nyse onon posts quarterly earnings results beats expectations by 0 18 eps marketbeat",
+      "s": -0.895274
+    },
+    {
+      "ts": "2026-11-11T18:14:16+00:00",
+      "title": "Morgan Stanley Issues Positive Forecast for ON (NYSE:ONON) Stock Price - MarketBeat",
+      "summary": "Morgan Stanley Issues Positive Forecast for ON (NYSE:ONON) Stock Price MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPT1FBRUpKX0JaMnlRWGdGNXFZZ0J0bjFYWHNZMFY5VmtlZ0JSNzRXd3FXWm0xVlJMV25oSjlPc1U3eWVQekRYSVU2ZlYzRm5VSEUxRWtaNUhZUjBxY0oxTTh0R0FwQUlMVXZiZ3RnVms4eVp2bzJaMUNGSkxIaUZKY2xRT2dQZEVsRlExdmtuTXpTXzJuLUh0VTRCcGF1UWNJaEN1NWg2cG1xWFV6STRVaUV5T3ExXzF4Q1pHQ1BvQ3E2dzZDNm9KQnB3?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "morgan stanley issues positive forecast for on nyse onon stock price marketbeat",
+      "s": -0.873504
+    },
+    {
+      "ts": "2026-11-11T17:11:30+00:00",
+      "title": "ONON Maintains by JP Morgan -- Price Target Raised to $46.00 - GuruFocus",
+      "summary": "ONON Maintains by JP Morgan -- Price Target Raised to $46.00 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOTjVuVEV1VkcxSE1DMFBpdC1WNlJ0UWVqYURwd0IyLUZycUtSaVE1dHJBSlI2ZjFabnR6LThBNTZIUnZsX1Z3YmZrVmZmdm9OekRtZTJiOU5ZVnVscFZYMEpCRjlLbjU3cE5VbXFDajUydXU1ZnRUaXNzSVFRZGYyMi1CXzVkMUtTSmdJaWhtNzNvTmpEQWtlWVFR?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "onon maintains by jp morgan price target raised to 46 00 gurufocus",
+      "s": -0.870518
+    },
+    {
+      "ts": "2026-11-11T16:25:12+00:00",
+      "title": "ONON Maintains Overweight Rating -- Price Target Lowered to $42 - GuruFocus",
+      "summary": "ONON Maintains Overweight Rating -- Price Target Lowered to $42 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOT2dlU0s0R29CMWt3aUV6WE5vREZlMjJRbFBDenJ0d0dYY0NtMzBYVENBVjNsMUlZQ3B6N2h2RF91UGpFMk9zc0hMMVJuZXAyUURTa2FEMGwyYmZVMk5JOG42NkJwTFcyZEZiUGR2UFFmN0VscEJLYUhQTEZEdUNBS2tpOGJSVFhXcmRHbHU5d1oyVV91dUx6VWYwQW04UVU?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "onon maintains overweight rating price target lowered to 42 gurufocus",
+      "s": 0.120689
+    },
+    {
+      "ts": "2026-11-11T16:14:46+00:00",
+      "title": "On Holding’s Sell-Off Overlooks a Key Part of Its Earnings Story - MarketBeat",
+      "summary": "On Holding’s Sell-Off Overlooks a Key Part of Its Earnings Story MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPd1BLajI3MWtVVWxqeXZMdDAySkpDRWNjRWdlcGhGSkJJeU9WQkN2SVI3by11cGUwZDN0OG1DT1BLOHNuOGMzOEFlNk9ZMTJ1MUxxWWZLYTFTdUxfVnhveUx5MUJaMXdnNGxwSDVFbzU4SllQbEljVzItNFBXdzZTWmFRRU55MFpvZnNyd1FWc2Eya0h4QU5wRkljRFlkWHd2b0E?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "on holding s sell off overlooks a key part of its earnings story marketbeat",
+      "s": 0.890557
+    },
+    {
+      "ts": "2026-11-11T14:28:26+00:00",
+      "title": "ONON Maintains Overweight by Keybanc -- Price Target Raised to $42 - GuruFocus",
+      "summary": "ONON Maintains Overweight by Keybanc -- Price Target Raised to $42 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPRC1aQ0dVM0MyZ0ZLdktVSzdsaFBSUUotSVgwZ0dFTVFkT0xlVnV4dUxyRFlrcWpIRXJBYk9SY1Nxa1FZaG4yQmxDVjJCVm9LRkZKMEQwNlV5NGZzZXhMblhlblF1ODdHdUlNVEZLZ0xqNndwSDlFeWxsTFd2cmg4eEtVZVloajV4WTR2dFZ2cEJ2TU5WNmY2dzJDS2YyUk95dEE4?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "onon maintains overweight by keybanc price target raised to 42 gurufocus",
+      "s": -0.922718
+    },
+    {
+      "ts": "2026-11-11T13:45:52+00:00",
+      "title": "ON (NYSE:ONON) Stock Gets Price Target Bump from KeyCorp - MarketBeat",
+      "summary": "ON (NYSE:ONON) Stock Gets Price Target Bump from KeyCorp MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPLTBqNkhvUVpQa1Zna0hrSm1lVDdqSHY4OWN0TnhweXlrT0Q2WjhDSnNEZExwWjl3OGxxNm9rNVJxLVBIeFRlSTVyZWxWSndUeHNtZnA5RFBEd0F3Z21kS2owM0hya2V3SldoTmtpTThEb3Zmbk1UdVdKYVlqdXBEU0R5aHhjMV9KVk45NkFVS2pHN3ctb2VCMmczZ2owb1g3TkZuWkdKSHBvclp3MVdMY2NzRnhEYkk?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "on nyse onon stock gets price target bump from keycorp marketbeat",
+      "s": -0.799896
+    },
+    {
+      "ts": "2026-11-11T13:29:16+00:00",
+      "title": "3 Beaten-Down Stocks With a Real Catalyst for a Comeback",
+      "summary": "One stock fell on a margin squeeze, another on a blockbuster merger, and a third despite record sales. Each has a specific catalyst for recovery, and each catalyst has its own way of failing. Which comeback deserves your trust?",
+      "url": "https://247wallst.com/investing/2026/11/11/3-beaten-down-stocks-with-a-real-catalyst-for-a-comeback/",
+      "source": "24/7 Wall St.",
+      "provider": "yahoo_public",
+      "title_key": "3 beaten down stocks with a real catalyst for a comeback",
+      "s": -0.210689
+    },
+    {
+      "ts": "2026-11-11T13:18:03+00:00",
+      "title": "ONON Reiterates by Cantor Fitzgerald -- Price Target Maintained at $46 - GuruFocus",
+      "summary": "ONON Reiterates by Cantor Fitzgerald -- Price Target Maintained at $46 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNUjdZME5vM2lUZ202V1I0LU5neFg0MFRFek1OX2V2b0szRUZITWloYVJ2MVRKaGYwanZNd2xxdER6ZWxjd0VjVnlVQWRPYnJ1dnhQVjMxazRmZy1Fd19pd0RSM1pFdkhZYm5IR3lwV1ZlaTh5NjB0QkdueUZ0LUFnSjRQMm0ydmViUGE2M05EVEdoMk4xbDRLcXQtSHEwYks0X2VNSjdkajc?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "onon reiterates by cantor fitzgerald price target maintained at 46 gurufocus",
+      "s": 0.800846
+    },
+    {
+      "ts": "2026-11-11T11:54:07+00:00",
+      "title": "On Holding Stock Rises as KeyBanc Backs Fourth-Quarter Pickup",
+      "summary": "KeyBanc raised its target to $42 from $37 and kept an Overweight rating",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-stock-rises-keybanc-backs-115407546.html",
+      "source": "GuruFocus.com",
+      "provider": "yahoo_public",
+      "title_key": "on holding stock rises as keybanc backs fourth quarter pickup",
+      "s": -0.463743
+    },
+    {
+      "ts": "2026-11-11T11:17:49+00:00",
+      "title": "Your Easiest Way to Crypto - Trade Bitcoin, Ethereum &Most Trending Tokens - MEXC",
+      "summary": "Your Easiest Way to Crypto - Trade Bitcoin, Ethereum &Most Trending Tokens MEXC",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWHVnQTNnRVY5WU9JTU1qWnUtVmNjdC1VOXlsMm4zTVItQ2hQcFZzeFgtb3cyMndCTDNIWVJmZGFxeEJzXzFRcGtpYm82ZmxwcjMtNDRyWmNVakhWT0oyazZvUFBTS3NYR1lSWUpPX2tYM096ZUk4Q3JyWWJQMVU2SGxjTnc?oc=5",
+      "source": "MEXC",
+      "provider": "google_news_rss",
+      "title_key": "your easiest way to crypto trade bitcoin ethereum most trending tokens mexc",
+      "s": 0.88684
+    },
+    {
+      "ts": "2026-11-11T09:07:14+00:00",
+      "title": "ONON Stock Rises Premarket: Retail Says 'Smack That Buy Button' - Stocktwits",
+      "summary": "ONON Stock Rises Premarket: Retail Says 'Smack That Buy Button' Stocktwits",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQOGV2Q3RUYm93OG05cGM3clVtVDMwbVZRNjYwdXktSXk0djFjSi1sTXZfTy1Ja0FSZEIzcDE3YXNzZG1ia0ZlcldoM1BTU0dYZi1pUkEyNHJhWHZua2FPRVRjRFRXN0tlRGtzQWd6MkNjSzI4TDYtVjdGMHl5UC13eGJhdFc5Qy05T2hOUF9ObWs1bm5vUk1IdFEzTDhfQU9way1MbGpRRDlGeVhXTi1JTUxYd1AtbGF1RHI1YWlJRUxLZw?oc=5",
+      "source": "Stocktwits",
+      "provider": "google_news_rss",
+      "title_key": "onon stock rises premarket retail says smack that buy button stocktwits",
+      "s": 0.631296
+    },
+    {
+      "ts": "2026-11-11T09:04:25+00:00",
+      "title": "ONON Stock Rises Premarket: Retail Says 'Smack That Buy Button'",
+      "summary": "Retail investors turned ‘extremely bullish’ on On Holding following its quarterly print, with many encouraging a purchase of the sports products company.",
+      "url": "https://stocktwits.com/news-articles/markets/equity/onon-stock-rises-premarket-retail-says-smack-that-buy-button/cNGDjZhR9B3",
+      "source": "Stocktwits",
+      "provider": "yahoo_public",
+      "title_key": "onon stock rises premarket retail says smack that buy button",
+      "s": 0.641929
+    },
+    {
+      "ts": "2026-11-11T07:04:03+00:00",
+      "title": "On Holding AG (ONON) Stock Price, News, Quote & History - Yahoo! Finance Canada",
+      "summary": "On Holding AG (ONON) Stock Price, News, Quote & History Yahoo! Finance Canada",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5HQktWakdQbHg0Y0M1LW41UkxfWEpRYTZrUy01WU40aHdQTzVqeENnVlNhVWFOLVVvaVE1QzY4T1hYWV9lRmcyRFI4bGpXWFk2Unc?oc=5",
+      "source": "Yahoo! Finance Canada",
+      "provider": "google_news_rss",
+      "title_key": "on holding ag onon stock price news quote history yahoo finance canada",
+      "s": 0.925371
+    },
+    {
+      "ts": "2026-11-11T04:34:35+00:00",
+      "title": "On Holding (ONON) Stock Still Looks Undervalued As Its 35% Gain Draws Scrutiny",
+      "summary": "On Holding has treated long term shareholders to a 35.3% gain over the past three years, yet the recent share price slide and shifting news flow leave a simple question hanging over the stock. Are today's cash flows, and the ones investors expect it to generate, enough to back up where the price now sits? A 35.3% return over three years puts real weight on whether the current valuation is properly grounded in the company’s cash generation rather than just share price momentum. Record sales,...",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-onon-stock-still-looks-043435028.html",
+      "source": "Simply Wall St.",
+      "provider": "yahoo_public",
+      "title_key": "on holding onon stock still looks undervalued as its 35 gain draws scrutiny",
+      "s": -0.191472
+    },
+    {
+      "ts": "2026-11-11T04:29:26+00:00",
+      "title": "On Holding: 3 Key Takeaways for Long-Term Investors",
+      "summary": "Apparel grew 38% at constant currency, and management's plan to triple that category over three years is a goal worth tracking.",
+      "url": "https://www.fool.com/earnings/takeaways/2026/11/10/on-holding-3-key-takeaways-for-long-term-investors/",
+      "source": "Motley Fool",
+      "provider": "yahoo_public",
+      "title_key": "on holding 3 key takeaways for long term investors",
+      "s": 0.770938
+    },
+    {
+      "ts": "2026-11-11T02:46:44+00:00",
+      "title": "On Holding AG Q3 2026 Earnings Call Summary",
+      "summary": "Moby summary of On Holding AG's Q3 2026 earnings call",
+      "url": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-on-holding-ag-q3-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss",
+      "source": "Moby",
+      "provider": "yahoo_public",
+      "title_key": "on holding ag q3 2026 earnings call summary",
+      "s": 0.885284
+    },
+    {
+      "ts": "2026-11-10T23:37:33+00:00",
+      "title": "On Holding (NYSE:ONON) Stock Price Sinks Despite Record Q3 Earnings - Simply Wall St",
+      "summary": "On Holding (NYSE:ONON) Stock Price Sinks Despite Record Q3 Earnings Simply Wall St",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOLUJpZUU3M0lkZTRNdW42ODY0T1RISWltV012aWgyS3l0RlJOQXhqLVdZUUFLdkh3VFVNWTFVcmlrSEpIdkJKVEtmWlBtbzkzNHdPU3pFYjZXUlJxX2hoM2RqVEJKUWtYYkNDTml6b0R3MGRldGRTNzZZd1ltM01hRDA4dXlLZnQxUEJLNnR0NVRVN1RXVDNBQVlIUklPY0JKeTdTRGZPakl4ZF9IbnVDRF9lcWdIbXFSR2R6UFJudkJBTExFaU90MVc4WEZvM2FJUUHSAdcBQVVfeXFMT2FjV1dTU3hVRlMzZDlGTTZRYW00TUh6WTJ2cDVtbnhHMm9uaGNiZkszWWFLUzVoRU9Ednh6aTRCOUJ4UHdNRkVPMURqQ2ZRMC05elFTSXNYcGRJbFFpdFJ2UncxVnVDQzhLb3p5Z3pScDR3MzVtVU8zbmZOMEM4R080ejlPWjQ1LXBWbzV3UXpvQmN0VXlQZmJBaGZ1Q3gwdS1tcEZEM3hKR3dvXzRjN3dCaWtoN21fa2E4U255VVBWQ2hYUWhRS25saHlmMVpqX3dXYlpKY1E?oc=5",
+      "source": "Simply Wall St",
+      "provider": "google_news_rss",
+      "title_key": "on holding nyse onon stock price sinks despite record q3 earnings simply wall st",
+      "s": -0.008466
+    },
+    {
+      "ts": "2026-11-10T23:18:55+00:00",
+      "title": "On Holding (NYSE:ONON) Stock Slides Despite Strong Q3 Earnings Execution",
+      "summary": "On Holding just gave shareholders a reality check. The stock closed down 7.5% at $34.73 after its Q3 2026 report, even as the Swiss sportswear group delivered CHF 931.4m in net sales and basic earnings per share of CHF 0.49. Traders focused on the short term and sold first. Long term holders are looking at a business with trailing twelve month basic earnings per share of CHF 1.32 and a P/E multiple that still prices On as a premium growth story. Love On Holding's premium P/E and solid...",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-nyse-onon-stock-slides-231855102.html",
+      "source": "Simply Wall St.",
+      "provider": "yahoo_public",
+      "title_key": "on holding nyse onon stock slides despite strong q3 earnings execution",
+      "s": 0.010078
+    },
+    {
+      "ts": "2026-11-10T23:18:55+00:00",
+      "title": "On Holding (NYSE:ONON) Stock Slides Despite Strong Q3 Earnings Execution - Yahoo Finance",
+      "summary": "On Holding (NYSE:ONON) Stock Slides Despite Strong Q3 Earnings Execution Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQRDJVaDExYVRXWEhQbzlPRGtqeTdxeTRfX2ZrWXNJLVZmcC1iZXFVbGFla2d4M3F0TDhOZEtvZEtxbEVlbkV5WUtqVWptOEEwM25pMFBiSm1FN0xNSTF4STdnODR1U2RYWHJEb1pLdEt6VDdrM3NHN3I5RlFFVmRWQmVPRFowUzlSalUwdUZEaEN3b1ZlelhmR0dRUQ?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "on holding nyse onon stock slides despite strong q3 earnings execution yahoo finance",
+      "s": 0.014377
+    },
+    {
+      "ts": "2026-11-10T23:05:52+00:00",
+      "title": "On Holding AG (ONON) Shares Fall 7.5% -- What GF Score of 87 Tel - GuruFocus",
+      "summary": "On Holding AG (ONON) Shares Fall 7.5% -- What GF Score of 87 Tel GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPbi1vWVRLTWwxWmpNWkpQZ1BaUVl2MXp0RW02T0NncUFGc3htV3F3cnFFSEVfTnBNU3dteTB5LUROSE00U05lS0dmdFdDcnlPNU5vQ0Q3WmtqS1ZLc01mN2FoLTloR0g5WlRuZFpScVNhdUZkUUdPZzRuX21qcWJzNERKdk9HZFF0YWRNbmVpM3JOWHpaU2Q5UFhubkw1N2lRQzE4YmlRRHROWE4t?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "on holding ag onon shares fall 7 5 what gf score of 87 tel gurufocus",
+      "s": 0.011295
+    },
+    {
+      "ts": "2026-11-10T22:46:46+00:00",
+      "title": "On Holding (ONON) Q3 2026 Earnings Call Transcript - The Globe and Mail",
+      "summary": "On Holding (ONON) Q3 2026 Earnings Call Transcript The Globe and Mail",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPaXRfNGpHNG1xVjF0Y1FtbVVBVzhjZGhFMkNJMnAxR1gxa1M1QnpjOWRQXzA5MUktN2toSF8wU1owYlR0dUc2V2RheWU1NGVzaWhWWUtFT09zeTgzdW1GMXJ5SHlUcGh0SlhHMk44YWNZX0tDaVZDbVdSREZDa3d0RmFkQWZkZkxHaDVlbzFxMUZTTUxJVTRjeTJGcDFCYkh3UkZERXJTZG82QU95Nmk3NFV1eEhTMV9EODQ4OENrODNkanZSRWc?oc=5",
+      "source": "The Globe and Mail",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon q3 2026 earnings call transcript the globe and mail",
+      "s": 0.876845
+    },
+    {
+      "ts": "2026-11-10T22:29:48+00:00",
+      "title": "On Holding (ONON) Q3 2026 Earnings Call Transcript",
+      "summary": "Record sales and margins, with LightSpray demand outrunning production.",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/11/10/on-holding-onon-q3-2026-earnings-call-transcript/",
+      "source": "Motley Fool",
+      "provider": "yahoo_public",
+      "title_key": "on holding onon q3 2026 earnings call transcript",
+      "s": 0.897367
+    },
+    {
+      "ts": "2026-11-10T22:14:43+00:00",
+      "title": "ON Q3 Earnings Call Highlights",
+      "summary": "ON (NYSE:ONON) reported record third-quarter sales and raised its full-year gross margin outlook, as demand for its footwear and apparel helped the company maintain full-price sales in a promotional market. Net sales rose 17.2% to CHF 931.4 million, or 17.8% on a constant-currency basis, the compan",
+      "url": "https://www.marketbeat.com/instant-alerts/transcript-on-q3-earnings-call-highlights-2026-11-10/?utm_source=yahoofinance&utm_medium=yahoofinance",
+      "source": "MarketBeat",
+      "provider": "yahoo_public",
+      "title_key": "on q3 earnings call highlights",
+      "s": 0.862177
+    },
+    {
+      "ts": "2026-11-10T20:15:28+00:00",
+      "title": "On Holding AG Stock (ONON) Moved Down by 7.03% on Nov 10: Drivers Behind the Movement - TradingKey",
+      "summary": "On Holding AG Stock (ONON) Moved Down by 7.03% on Nov 10: Drivers Behind the Movement TradingKey",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQLWozQXhBTXFwTTRLbTZqaEpyYS1xT19fblVuQmFrc1VSZDUwTm1pNHp3SlJiVlM5dWNxdW1jRmZ1dndoMFFNODJHOS1nd3VZeVB4cW1VS0VEQzlHSkJmYlZFWk5ZOVp2STkycElRYU9xZGktZFQ2aER2M1YwdmgtQ2N5SEVrdXdjMGJB?oc=5",
+      "source": "TradingKey",
+      "provider": "google_news_rss",
+      "title_key": "on holding ag stock onon moved down by 7 03 on nov 10 drivers behind the movement tradingkey",
+      "s": 0.010802
+    },
+    {
+      "ts": "2026-11-10T18:26:43+00:00",
+      "title": "On Holding Stocks Fall 7.86% as Tariff Refunds Flatter Record Q3 Margins",
+      "summary": "Sales rose 17.2% to a record CHF 931.4 million, but excluding a CHF 52.6 million refund, gross margin dropped nearly six points.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-stocks-fall-7-86-182643226.html",
+      "source": "GuruFocus.com",
+      "provider": "yahoo_public",
+      "title_key": "on holding stocks fall 7 86 as tariff refunds flatter record q3 margins",
+      "s": 0.011338
+    },
+    {
+      "ts": "2026-11-10T18:26:00+00:00",
+      "title": "On Holding Stock Tumbles on Slowing U.S. Growth. Why Analysts See Better Days Ahead.",
+      "summary": "Wall Street still sees plenty of upside in On Holding’s full-price strategy and long-term innovations, but the stock is tumbling anyway.",
+      "url": "https://www.barrons.com/articles/on-holding-earnings-stock-price-c3007787?siteid=yhoof2&yptr=yahoo",
+      "source": "Barrons.com",
+      "provider": "yahoo_public",
+      "title_key": "on holding stock tumbles on slowing u s growth why analysts see better days ahead",
+      "s": 0.059241
+    },
+    {
+      "ts": "2026-11-10T17:27:36+00:00",
+      "title": "On Holding backs FY26 revenue view up low-20% range - TipRanks",
+      "summary": "On Holding backs FY26 revenue view up low-20% range TipRanks",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZ3pQeXUzNEhiWTFXNmNCaEYwREZEaGFVd0ZOTm52VDlsM0xRZ1VhTWFwN1Z4VUl0VzRfM3g3eHNSZ3pnOHkxYlpjTnF5N0tUVUIzbWs1SlRSNExHSDNNUTJaVWRzNGd5eF9QN01hTEM2UEU5UWFQN05wd2trUkEyLTloWFVfYm96R2dzajNxYTd2R0FUQ2RzZGZaOFNRSzI1YVE?oc=5",
+      "source": "TipRanks",
+      "provider": "google_news_rss",
+      "title_key": "on holding backs fy26 revenue view up low 20 range tipranks",
+      "s": -0.865337
+    },
+    {
+      "ts": "2026-11-10T17:09:47+00:00",
+      "title": "ON (NYSE:ONON) Shares Gap Down - Time to Sell? - MarketBeat",
+      "summary": "ON (NYSE:ONON) Shares Gap Down - Time to Sell? MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQdUttdjVHaEN0NGFyVmZ4SllOVUJTN2tMbFlUbTJqTnRMS2c1VS1WMTRqZWNMVVZMVERCbEVfOWF1dEFqUTFReEtsX2F6S3pwYVRGY0VhUWtqRW5YNWQxdVFROVFhTXlOWEV2WGZ6T29pMUhVVkxFLTNxZThfS2RhbVpMYkFfdGdnSTJJT1B0UmVST0tZUkdOMWJwRkhlMUpVUUNz?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "on nyse onon shares gap down time to sell marketbeat",
+      "s": 0.404992
+    },
+    {
+      "ts": "2026-11-10T16:19:25+00:00",
+      "title": "On Holding (ONON) Stock Still Looks Undervalued After A 41% Run - Simply Wall St",
+      "summary": "On Holding (ONON) Stock Still Looks Undervalued After A 41% Run Simply Wall St",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPOGI2X3ZIYUowSzhpNUU4eTBvOEVJMmU1ekxKaWdGVUQ1OXBRbm82d3pOYzVrQm1odVIySWlkRzdRNVA2NFN2T1VKUmN3d2tXTGlaWFpKYUtvVlZaQ2xVRlFGb1BUYi11U2RuSkhmcFNSbHU4UG81RzliUVRYbFJQZlp5UTQ2ZzNOb2VHc0M4OENHR1FpWE5sR25UUGh0eUlXVDh6WkZyNjNFSDV4dkJySTBPUjRDOWdRZ1BzcW11U2U2NDlRVUVqYWc0b3ZSSmhra2fSAdcBQVVfeXFMTmlZVzlzZGh3UmI2TWNEYjZwX1YxeV95eEpGVnpjT1hXVGxPQ2REakZOLWZWWEJGVVFuQk41YTVhWmtFbl9jVGFZTVRiZ1l5c19sNG84TjBjSThuOTRIYmJXeHRpQ1AyR0FHeWs0ZWJNNGxSZXRwT3Q2TDVvcWdEVGlHUUxWOFNmaDUzS1h6MTFWLVptbVBUR3dKX1ExY2hGSm9YU2EwaU4xVzJtdEZQczF1b09pN3ozTHNiQ2RsX2ZTZjE3RTYxUmo0WFRnTjZNdVZCTjN6RVE?oc=5",
+      "source": "Simply Wall St",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon stock still looks undervalued after a 41 run simply wall st",
+      "s": -0.318847
+    },
+    {
+      "ts": "2026-11-10T16:17:18+00:00",
+      "title": "On Holding (ONON) Reports Q3 Earnings: Revenue Matches Expectati - GuruFocus",
+      "summary": "On Holding (ONON) Reports Q3 Earnings: Revenue Matches Expectati GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNV0pZRjVqWWR2QnNzbnY3NlVPM1FzSGZTWXhnQkVQbk93amd6aFVyNUVRMTMxeTNaMEl5Z1RKTXItVVhuM0Fqb3RHZEd3dEJnV2JwanpYOGprNEIzVk5wcHlCdmNMT0hFd1NDRHB0Q2ZnSkRtZ1psdkRFaHdPMXRWZWdNWXphZFpHSl9CcDJMQ0VHQXl3V1EzbFlzbTk0M1JkbWJQam9RWWdWNjZGRGVBLVZiak1XdDlma1RYTXdFRVRibTc1RzY5WE1sUQ?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon reports q3 earnings revenue matches expectati gurufocus",
+      "s": 0.85625
+    },
+    {
+      "ts": "2026-11-10T16:04:32+00:00",
+      "title": "ONON: Record sales and underlying margins amid a promotional market, with higher FY26 gross-margin guidance - TradingView",
+      "summary": "ONON: Record sales and underlying margins amid a promotional market, with higher FY26 gross-margin guidance TradingView",
+      "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxPSDU3T0JENHpNVEw1YTB5ZjJjVDJwMVZJcWE4YzNwa2hpVUkxSmZTc0NlS1BRX1FIaG5ZbHpFUncxRUkzRmVxMGhISFNhZnNHaEg2X2tKOTMzVXJPc1FoMmtlU3c2WEp1Sk1aaHVwRGczbG1IejQxZVZGYk9pa1I0OW5ILWZPX2RRcEt1ZGlyV2JyUzJkazZsWHE3SFl0UU9DaVZNem1LWGs3eUp6eTFOVVJEc251d2lXOWk5dC0td0NBaHlPQWN6QktKSm1QSi13OHFKNXVwV0hkcHZFY2tDWXAxTnZOQm1wd1FhRWlKOV9xY3oxWmVFanJQNktNX05odnk1WjJwcUtycnEtTjJvNzBGTGFrVHc5bDRPSg?oc=5",
+      "source": "TradingView",
+      "provider": "google_news_rss",
+      "title_key": "onon record sales and underlying margins amid a promotional market with higher fy26 gross margin guidance tradingview",
+      "s": -0.937668
+    },
+    {
+      "ts": "2026-11-10T15:50:00+00:00",
+      "title": "On raises 2026 gross margin outlook as quarterly sales top CHF 900 million",
+      "summary": "On Holding (NYSE:ONON), the Swiss sportswear group, raised its full-year gross margin outlook after quarterly sales exceeded CHF 900 million for the first time. Revenue increased 17% to CHF 931.4 million in the three months to September, or 18% at constant exchange rates, with growth across all...",
+      "url": "https://www.proactiveinvestors.com/companies/news/1101527/on-raises-2026-gross-margin-outlook-as-quarterly-sales-top-chf-900-million-1101527.html",
+      "source": "Proactive",
+      "provider": "yahoo_public",
+      "title_key": "on raises 2026 gross margin outlook as quarterly sales top chf 900 million",
+      "s": -0.633265
+    },
+    {
+      "ts": "2026-11-10T15:46:59+00:00",
+      "title": "On Holding (ONON) Reports Strong Q3 Sales Growth Amid Tariff Cha - GuruFocus",
+      "summary": "On Holding (ONON) Reports Strong Q3 Sales Growth Amid Tariff Cha GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNV2szdWpEWWR1YU5KSE9oWU1xQ0ZTMU9VZnplWDJPQUtOU3NEVnNDMDl3SV9rWFRFaWdCdUpNOGpEZEJCSXJLUk5LcnBPTWFOR1Btb3JhVW9mOWRESFJGR1hkbE1Oc2k5bHNiemJ1MmVWSjBvUU1MU0d4U2xLYXF6b0pLNG45ZC05M0MyUGN3ZzAyRXhrWnpJRWFET1llS3A5OXU0LS1vd0U1c2st?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon reports strong q3 sales growth amid tariff cha gurufocus",
+      "s": -0.935138
+    },
+    {
+      "ts": "2026-11-10T15:31:00+00:00",
+      "title": "On Holding Q3 Revenue Rises 17.2% to CHF931.4 Million - grafa.com",
+      "summary": "On Holding Q3 Revenue Rises 17.2% to CHF931.4 Million grafa.com",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQN3ExMUlhc2xmLXF4VWNuN3lBTmN3S0Y4ZnFpenRjQ2lCcXRVOWY1RnBSVDdwV2FiQTVsSTU0Z1RrWm9jRFlLQ25TZ2wzajVjU2QyS0dya2xueC1qRzBHVEE3WUY3ZUhUUFphVDNxU2N1dnZhSnBhN0pld3l0bnlVaUVmUllodmtlUlFENy1DUURadkFZdlVsYVRiazNkNDFqR0NjMG1VNUY?oc=5",
+      "source": "grafa.com",
+      "provider": "google_news_rss",
+      "title_key": "on holding q3 revenue rises 17 2 to chf931 4 million grafa com",
+      "s": -0.835512
+    },
+    {
+      "ts": "2026-11-10T15:07:09+00:00",
+      "title": "On Keeps Selling Premium Sneakers Like a Slowdown Never Happened",
+      "summary": "The Swiss brand delivered record sales and a 37% jump in profit while holding the line on full-price selling, showing that its mix of running credibility, fashion appeal and expensive sneakers is still pulling customers from bigger rivals.",
+      "url": "https://app.moby.co/home/news/news-on-keeps-selling-premium-sneakers-like-a-slowdown-never-happened?utm_source=yahoo_finance&utm_medium=rss",
+      "source": "Moby",
+      "provider": "yahoo_public",
+      "title_key": "on keeps selling premium sneakers like a slowdown never happened",
+      "s": 0.672369
+    },
+    {
+      "ts": "2026-11-10T15:07:03+00:00",
+      "title": "On Holding AG (ONON) Stock: Slides Despite Strong Q3 Earnings and 25% DTC Sales Growth - Blockonomi",
+      "summary": "On Holding AG (ONON) Stock: Slides Despite Strong Q3 Earnings and 25% DTC Sales Growth Blockonomi",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPY2lsXzlVdGJqQXZxU2hHRk5rOGNKc0FGMXNJUnNjN0F1SHQ4SThVejM5VklHblNHemI3cHFqM3g1XzFuRHYtOEgtZEZsWURyQVpnRlc4akE2aHFlQjVZTXlLYU1CY0RJZ0RYS2FWZzhaRXQ2UGwwRkp5QnNhQXVZa25qNjNGV1lQVHZ2dFctMmdDTEkwWnhwQ1ZSWTJvdW81U1ZqUElncU81UQ?oc=5",
+      "source": "Blockonomi",
+      "provider": "google_news_rss",
+      "title_key": "on holding ag onon stock slides despite strong q3 earnings and 25 dtc sales growth blockonomi",
+      "s": 0.012315
+    },
+    {
+      "ts": "2026-11-10T14:46:58+00:00",
+      "title": "DraftKings downgraded, Sarepta upgraded: Wall Street's top analyst calls",
+      "summary": "DraftKings downgraded, Sarepta upgraded: Wall Street's top analyst calls",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/draftkings-downgraded-sarepta-upgraded-wall-144658393.html",
+      "source": "The Fly",
+      "provider": "yahoo_public",
+      "title_key": "draftkings downgraded sarepta upgraded wall street s top analyst calls",
+      "s": 0.636006
+    },
+    {
+      "ts": "2026-11-10T14:40:32+00:00",
+      "title": "ONON Initiates Coverage On by Cantor Fitzgerald -- Price Target Announced at $46 - GuruFocus",
+      "summary": "ONON Initiates Coverage On by Cantor Fitzgerald -- Price Target Announced at $46 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOaWFGaVc4LWNmOWVrMFVibmhjenlsY0g4eGlFNEFWZ3JjYUpwczZlMDltbFRucTdycXN3YUpKay1DWXpOa0QtVnRNajBJR052SExUWlBNbFZpZFhyLW42ZngxZ2QyWm9VX3hxem1uWEFRSHpDb25kcTFCRHlaUjRtamkyaExaMHhJU3YzMk9IS1BQQWl6UWZGblUxMm1oRVJYaWZibmYyOVlxNFlTSG9HX1dtY0VWUQ?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "onon initiates coverage on by cantor fitzgerald price target announced at 46 gurufocus",
+      "s": 0.767079
+    },
+    {
+      "ts": "2026-11-10T14:05:07+00:00",
+      "title": "On Holding Q3 2026 Earnings Call Transcript - Benzinga",
+      "summary": "On Holding Q3 2026 Earnings Call Transcript Benzinga",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPSEd2c1c1UEk1aVhQZTFhYUZVVE5uYVJ0RTZvcDU3ZVdhSWVTTzBsQmplVmJKY2FGeGpELUxpeVl5cHFnTUpndzA0V2JlbFJIX2Zxamw5c0NJbmZGajRwcWhzSlE1RjRzY3ZjU2tkZWFmaTk2dDREa2VMRlNsSEFzdDdERTNZVWJMbDdRUjFWUm5adw?oc=5",
+      "source": "Benzinga",
+      "provider": "google_news_rss",
+      "title_key": "on holding q3 2026 earnings call transcript benzinga",
+      "s": 0.882748
+    },
+    {
+      "ts": "2026-11-10T13:42:55+00:00",
+      "title": "On Holdings' shares undermined by tariff-inflated margins; unchanged FY sales outlook - TradingView",
+      "summary": "On Holdings' shares undermined by tariff-inflated margins; unchanged FY sales outlook TradingView",
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOaEt0aFdtZnhmWWlNVkhTaWdXdXRyTkFsN3F5dTBlMXZ2WHBfaGkzUmJnazlTOHRxUVFwT3VkZUNOOFlGVTYwLUxmZWtBSlQ2RGhFMENUaFVNMWxVNFRRRk9wcDFRXzhabnZ0SWgxSnY0TVBRSDB6U2NyLTVHZm5SaFpJeEZMempCYUNzRWF1Y3pIR0ZvVVVtZmRzNUt4aURhX05naVd3TWlILUZxaU01OUxadVpkN3RxUEY1bGJSdGZUNU9qZ0tDZXR2dFhNMUdZZDFZLVdLb2RxRUxla2dV?oc=5",
+      "source": "TradingView",
+      "provider": "google_news_rss",
+      "title_key": "on holdings shares undermined by tariff inflated margins unchanged fy sales outlook tradingview",
+      "s": 0.003671
+    },
+    {
+      "ts": "2026-11-10T13:28:10+00:00",
+      "title": "ON (NYSE:ONON) Now Covered by Cantor Fitzgerald - MarketBeat",
+      "summary": "ON (NYSE:ONON) Now Covered by Cantor Fitzgerald MarketBeat",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRWUxOG0wU3ZoeXJpZnR0ZFhjYmd4NEFpT3doNGpxWWVnOWloVEJNeXA2WTgwWEs2OENMZ2dqNk5qQjk2dWQ0bTNfaTBsRnk2eURoZmMxTTc0MkNmazZOWEgtLWNtLTlJSC1XaEdPeER3VHc4WHpITUxhTXYyeXNHNzBBV1VRaC1Yb2FRS1FmMldDbFNkNzZ5UWo5ZndTc0xXX3FoSDlCU2M0SHM?oc=5",
+      "source": "MarketBeat",
+      "provider": "google_news_rss",
+      "title_key": "on nyse onon now covered by cantor fitzgerald marketbeat",
+      "s": 0.930094
+    },
+    {
+      "ts": "2026-11-10T12:03:07+00:00",
+      "title": "On Third-Quarter Earnings Unexpectedly Rise; Maintains Full-Year Sales Growth Outlook",
+      "summary": "On Holding (ONON) reported an unexpected year-over-year increase in its third-quarter earnings on Tu",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/third-quarter-earnings-unexpectedly-rise-120307507.html",
+      "source": "MT Newswires",
+      "provider": "yahoo_public",
+      "title_key": "on third quarter earnings unexpectedly rise maintains full year sales growth outlook",
+      "s": -0.892086
+    },
+    {
+      "ts": "2026-11-10T12:02:34+00:00",
+      "title": "On Holding stock trades on Lang & Schwarz on Tuesday - ad-hoc-news.de",
+      "summary": "On Holding stock trades on Lang & Schwarz on Tuesday ad-hoc-news.de",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQVUtNMGhMUjdsOTJtS0xudlNNUmNYYkI4QXdVUUZ2VFlLX1hNM0JyVnZ3NkNwcllVUGxfNWliLUZkTFR5SFhoYmRFNTlsU1ZKV0p3UnBaWjAyVEJtOWhvNkF0bUZnY01oazVodFZmUHdRV0tuNWs4V3pBLVNGYnZqSnhSZHJ5cXc4M1A2VlNDSlAzMkVQTE4tVkN4bDYwQThhaGV2cVFxYXd4S3lNN240ajRQTQ?oc=5",
+      "source": "ad-hoc-news.de",
+      "provider": "google_news_rss",
+      "title_key": "on holding stock trades on lang schwarz on tuesday ad hoc news de",
+      "s": 0.919894
+    },
+    {
+      "ts": "2026-11-10T11:32:40+00:00",
+      "title": "On Holding Delivers Record Q3 Sales As Apparel Revenue Jumps 39%, Raises Gross Margin Outlook — Why ONON Stock Is Falling Premarket",
+      "summary": "CEO Caspar Coppetti called the Cloudsurfer 3 the first proof point of On’s biggest innovation cycle, while highlighting the growth of its Cloudtilt sneaker franchise and the visibility of its latest Zendaya collection.",
+      "url": "https://stocktwits.com/news-articles/markets/equity/on-holding-delivers-record-q3-sales-as-apparel-revenue-jumps-39-raises-gross-margin-outlook-why-onon-stock-is-falling-premarket/cNGuLgXR97x",
+      "source": "Stocktwits",
+      "provider": "yahoo_public",
+      "title_key": "on holding delivers record q3 sales as apparel revenue jumps 39 raises gross margin outlook why onon stock is falling premarket",
+      "s": -0.724305
+    },
+    {
+      "ts": "2026-11-10T11:32:40+00:00",
+      "title": "On Holding Delivers Record Q3 Sales As Apparel Revenue Jumps 39%, Raises Gross Margin Outlook — Why ONON Stock Is Falling Premarket - Yahoo Finance",
+      "summary": "On Holding Delivers Record Q3 Sales As Apparel Revenue Jumps 39%, Raises Gross Margin Outlook — Why ONON Stock Is Falling Premarket Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPaGZfT1BPdzI5LVY0ZFQ2LUw0bl9zTk9JS0ZidXBtX3lhaWN6LU5rY2VJV05XNU9lRmJUWWRnRkZUbU9KMGJqMlpkOGRBd19jdFJhd3lxUjR1aWtuMEVFT1o5ZnNJM2YyLTlJMkpJMnFFdUJYeWVMV1VtWUQ4ai1nT3lwNDVBZlFfUUFOUjNfejNpOWlPUEU5dmhxa0VvUQ?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "on holding delivers record q3 sales as apparel revenue jumps 39 raises gross margin outlook why onon stock is falling premarket yahoo finance",
+      "s": -0.718222
+    },
+    {
+      "ts": "2026-11-10T11:32:40+00:00",
+      "title": "On Holding Delivers Record Q3 Sales As Apparel Revenue Jumps 39%, Raises Gross Margin Outlook — Why ONON Stock Is Falling Premarket - TradingView",
+      "summary": "On Holding Delivers Record Q3 Sales As Apparel Revenue Jumps 39%, Raises Gross Margin Outlook — Why ONON Stock Is Falling Premarket TradingView",
+      "url": "https://news.google.com/rss/articles/CBMilwJBVV95cUxQbGN3Z0ttYy1abmZlUElwbDByT3YtV3dHMThGeW9LdFJnaHJtbl9uR2w0eDNRaGdzUGZ6X0R2M04yZHdJUVpId3Nvc2ZGNGR4MHBkSUpmX1Rqdm5fUk1BU1FqbW9OMDdJSm5fellvTjZuckFibFRKVkF4MDFCNlVwdGM2elIxcFBDWmdWNy1TWGttdWhEbUgyc3oySWZHaVc2Z0poYmhDWlZud0hWcW1EV3J5a0tneUJkcWFxdDZudHV2RmFlWjdZeFRTRlJscURVVTdkbS13WmV3M0k4YkRQMVlOdEI4cWJMWE5QcWNUSVN4dDdSRHlRV1hWMl9MckxLaTA3QUZfckVxUkVqbEdmREZ6Qm5WZFk?oc=5",
+      "source": "TradingView",
+      "provider": "google_news_rss",
+      "title_key": "on holding delivers record q3 sales as apparel revenue jumps 39 raises gross margin outlook why onon stock is falling premarket tradingview",
+      "s": -0.511212
+    },
+    {
+      "ts": "2026-11-10T11:11:11+00:00",
+      "title": "On Holding (ONON): Q3 2026 net sales up 17.2% to CHF 931.4M; outlook reiterated - Quantisnow",
+      "summary": "On Holding (ONON): Q3 2026 net sales up 17.2% to CHF 931.4M; outlook reiterated Quantisnow",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxONXN1aFhDLTRjbzhvMU5EbUhPQmpQenQtNU1wQTVWZERjam4zYVBseUNLQWJaV3U5aVlZZmF5RUFhcTgwWEVxRENDUl91elJCZkhXMHZfSW9DcGZsMUludWVTQzZ1bzlleTE2X1Q3d29UVW9BY2psTi1KZ3ZKcUxIVTJfeG0?oc=5",
+      "source": "Quantisnow",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon q3 2026 net sales up 17 2 to chf 931 4m outlook reiterated quantisnow",
+      "s": -0.92388
+    },
+    {
+      "ts": "2026-11-10T11:10:01+00:00",
+      "title": "On Holding (ONON) Beats Q3 Earnings and Revenue Estimates",
+      "summary": "On Holding (ONON) delivered earnings and revenue surprises of +32.00% and +1.00%, respectively, for the quarter ended September 2026. Do the numbers hold clues to what lies ahead for the stock?",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-onon-beats-q3-earnings-111001836.html",
+      "source": "Zacks",
+      "provider": "yahoo_public",
+      "title_key": "on holding onon beats q3 earnings and revenue estimates",
+      "s": -0.887329
+    },
+    {
+      "ts": "2026-11-10T11:10:01+00:00",
+      "title": "On Holding (ONON) Beats Q3 Earnings and Revenue Estimates - Yahoo Finance",
+      "summary": "On Holding (ONON) Beats Q3 Earnings and Revenue Estimates Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQNzg2N0dHNE9qZ25MTXM5Vk5yXzBaUklvUDFZNjFMdlg1WE44VkdWcmVNSENPSHZXX3M3VkRiQXBicEFYdnNxcVdwY3FIVEVHQUJtc0ZEakc2TmZxN1V2ZFFxamlvWmZkNVQ0SmVwSFN5enB4NDg5NnJmektmdTdPYThGQVROSl90NDNSZzVoR1RVdzYwbXBMRHVsVQ?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon beats q3 earnings and revenue estimates yahoo finance",
+      "s": -0.340378
+    },
+    {
+      "ts": "2026-11-10T11:07:06+00:00",
+      "title": "CHF 52.6M in U.S. tariff refunds lift On Holding (ONON)'s Q3 gross margin. - Stock Titan",
+      "summary": "CHF 52.6M in U.S. tariff refunds lift On Holding (ONON)'s Q3 gross margin. Stock Titan",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNRC1USGFvUWFkRWVPdk8tc295N3czcVNQWnRmXzJCd0hwRmdQZ3hlQjVJalQ2a0ZITDRPYWxvUlJ4MVpINmZtZVRyMlZHUUVxWWs5YWtsU2U5dTFZY1ZqWGdhaExjZ19BcmNpZGZkNWotc1UwNk1zTG03N0hMSTJSci1ZeVFzOVdKLXhESV9MNlJWZFNpcVo2c1N0N2ZjYW5DUG5xeGZDQkpMTmJOMGc?oc=5",
+      "source": "Stock Titan",
+      "provider": "google_news_rss",
+      "title_key": "chf 52 6m in u s tariff refunds lift on holding onon s q3 gross margin stock titan",
+      "s": -0.270299
+    },
+    {
+      "ts": "2026-11-10T11:02:53+00:00",
+      "title": "On Holding AG (ONON) Tops Q3 EPS by 16c - StreetInsider",
+      "summary": "On Holding AG (ONON) Tops Q3 EPS by 16c StreetInsider",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTU1MQzBUaVFnZkpRa09qS3NEWFc0d2NvWVBSLUptT0hIRW9JTzdkeUF1cllQWjNDRURZV09XUC1JZE40d1NHb1hfNzd4MEtiVERBSmlrcXJPYlFGVUJoNXQ2MkY3T1o0UTRwa2lmQkdFRWFqQUc1SjNwaHpXcjdkVFlPcHFBNkNLZXVobXlLTkhjTGlwTzVva1pBWUo?oc=5",
+      "source": "StreetInsider",
+      "provider": "google_news_rss",
+      "title_key": "on holding ag onon tops q3 eps by 16c streetinsider",
+      "s": -0.809756
+    },
+    {
+      "ts": "2026-11-10T10:58:05+00:00",
+      "title": "On Holding shares fall 5% in premarket as tariff refund flatters Q3 profit beat",
+      "summary": "Investing.com -- Shares of On Holding fell 5% in premarket trading on Tuesday after the Swiss running-shoe maker’s third-quarter profit beat was flattered by a one-off 52.6 million Swiss franc U.S. tariff refund, while revenue was only marginally above forecasts and it left its underlying full-year profit margin outlook unchanged.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-shares-fall-5-premarket-105805412.html",
+      "source": "Investing.com",
+      "provider": "yahoo_public",
+      "title_key": "on holding shares fall 5 in premarket as tariff refund flatters q3 profit beat",
+      "s": 0.011169
+    },
+    {
+      "ts": "2026-11-10T10:30:04+00:00",
+      "title": "ONON: Record Q3 sales and gross margin support reiterated FY26 growth guidance - TradingView",
+      "summary": "ONON: Record Q3 sales and gross margin support reiterated FY26 growth guidance TradingView",
+      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNWUpXbGl0dW9wZEZrOFFFbXlGckxOZ3lfZ2hrY1pqZnNtTUZjejBSQ1RWbWI3RklCd2ItU2VMZjNkenlQbGVZUWxuZS0zSFRnWTAweHBrN1llekZ3eTYwcWZaaVM0VGkycmpTNkZfTWk3ZDlaVmpYaWtBVHRBWkR6OEZNVVVZMExOME02eWd6Z1B2R1NLeXpVemRiVjlBQ2NhRzFzV1pheWI5bGVZeTlkZmVjNlBBYmJ2RVVSOU15N1piT1FYcHhNSjZINnVYRTFUSGFMUmlneGs5ZlRHNE5QaHBoMHZQVXRzWDZCREhIMkpMQQ?oc=5",
+      "source": "TradingView",
+      "provider": "google_news_rss",
+      "title_key": "onon record q3 sales and gross margin support reiterated fy26 growth guidance tradingview",
+      "s": -0.865755
+    },
+    {
+      "ts": "2026-11-10T10:09:07+00:00",
+      "title": "On Holding: Q3 Earnings Snapshot",
+      "summary": "ZURICH (AP) — ZURICH (AP) — On Holding AG (ONON) on Tuesday reported third-quarter earnings of $180.The Zurich-based company said it had net income of 59 cents per share.",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-q3-earnings-snapshot-100907787.html",
+      "source": "Associated Press",
+      "provider": "yahoo_public",
+      "title_key": "on holding q3 earnings snapshot",
+      "s": 0.621761
+    },
+    {
+      "ts": "2026-11-10T10:09:07+00:00",
+      "title": "On Holding: Q3 Earnings Snapshot - Yahoo Finance",
+      "summary": "On Holding: Q3 Earnings Snapshot Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQejBzUXR5WENWR3BySS1zc0ViY3d6WVAtR1pqZ0JOUFhVejNEUkNXYmJPWU9SVEpjeGFDSGlTUWZxZ2dzbE5rLVZLUUpETEtzSVpZMWRNRnRHOC12ZmNMbHJ5cFZ5eHhvckszcVNiS2FZbGxlZDhBYzZIdTJnaDNyeFdneDU3aHgtNU5ydk1DT2ZnN2ZJa1g2eA?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "on holding q3 earnings snapshot yahoo finance",
+      "s": 0.734749
+    },
+    {
+      "ts": "2026-11-10T10:00:00+00:00",
+      "title": "On Reports Results for the Third Quarter and Nine-Month Period Ended September 30, 2026",
+      "summary": "ZURICH, Switzerland, November 10, 2026--On Reports Results for the Third Quarter and Nine-Month Period Ended September 30, 2026",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/reports-results-third-quarter-nine-100000626.html",
+      "source": "Business Wire",
+      "provider": "yahoo_public",
+      "title_key": "on reports results for the third quarter and nine month period ended september 30 2026",
+      "s": 0.877099
+    },
+    {
+      "ts": "2026-11-10T10:00:00+00:00",
+      "title": "On Holding Posts Record Results as It Holds to Premium Positioning",
+      "summary": "The Zurich-based running brand is beginning to focus more on soccer, tennis and apparel.",
+      "url": "https://wwd.com/footwear-news/shoe-industry-news/on-holdings-earnings-sales-1239407933/",
+      "source": "Footwear News",
+      "provider": "yahoo_public",
+      "title_key": "on holding posts record results as it holds to premium positioning",
+      "s": -0.868653
+    },
+    {
+      "ts": "2026-11-10T08:00:00+00:00",
+      "title": "ONON 6-K & SEC Filings - Yahoo Finance",
+      "summary": "ONON 6-K & SEC Filings Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5uUC1Ka2daMGhMZmlXRmhXaWoyWEpmWUdISUROSVN5ZVd4bnpVdWprRVIwR0Y2eEZkcE00M2xCTDBmdGJVZTQyX29vbkNtVTkxU2VzUXhvVUd0a3EzTmVKZTFTZmdwVnpXNWxTbnRPSXg3TnVjdmFkMHlB?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "onon 6 k sec filings yahoo finance",
+      "s": 0.844565
+    },
+    {
+      "ts": "2026-11-10T03:20:02+00:00",
+      "title": "Dutch Bros vs. On: Which Stock Is a Better Buy?",
+      "summary": "Both are growth stocks, but one stands out more than the other.",
+      "url": "https://www.fool.com/coverage/better-buy/2026/11/09/dutch-bros-vs-on-which-stock-is-a-better-buy/",
+      "source": "Motley Fool",
+      "provider": "yahoo_public",
+      "title_key": "dutch bros vs on which stock is a better buy",
+      "s": 0.843893
+    },
+    {
+      "ts": "2026-11-10T01:55:49+00:00",
+      "title": "On Holding Delivers Record Q3 Sales As Apparel Revenue Jumps 39%, Raises Gross Margin Outlook — Why ONON Stock Is Falling Premarket - Stocktwits",
+      "summary": "On Holding Delivers Record Q3 Sales As Apparel Revenue Jumps 39%, Raises Gross Margin Outlook — Why ONON Stock Is Falling Premarket Stocktwits",
+      "url": "https://news.google.com/rss/articles/CBMimwJBVV95cUxPUjZxUHp6NkItX2dKa05vR3RISGh6Ty1mZG9EUmIxeENvTm1vMWR2b3VPTHhGdlhMZndqWTJsWmpVWXRHTHY4TUdETWpSaFo1YThBakctUmxBSWIxbGJZQjkzckZ1bjhPV3ZoSWVaOHpFUHNjQmg1X0VGRnlBN1dKN09uNjhnbjNoNzV2Zl9rcVJZNkEyRHNwazNTdlItZGxKcllzbmVpZ0VwcmJrUXAyRXMwRFFLYjhvamlUeGdLdFp0a2Rid0x6QmNqdEdVbVBEaG9uZ1hzd0lvT3BLSktIMTI3aFhrdUJSTWg0MmFlbmlCeUFWNnd2NzQ0OFJmdTJfUUxvQUpsR3dGSGtQSEdxNjhscXowbkhsSHdF?oc=5",
+      "source": "Stocktwits",
+      "provider": "google_news_rss",
+      "title_key": "on holding delivers record q3 sales as apparel revenue jumps 39 raises gross margin outlook why onon stock is falling premarket stocktwits",
+      "s": -0.607299
+    },
+    {
+      "ts": "2026-11-09T17:08:25+00:00",
+      "title": "On Holding (ONON) Shares Rise 1.1% After Hedgeye Switches to Lon - GuruFocus",
+      "summary": "On Holding (ONON) Shares Rise 1.1% After Hedgeye Switches to Lon GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNS3VvZzJ2VjFIR0EtWGdvTlhpRWQtQWwxOFpRa3hrUW84V2QtWC1ydzIwMWF6ZFU4SzI0UE9LbUszeFE3Qkotd09yOVdXeGRFbVg3ZXg2UUY4bDFFelVhRVdWVFJXSVlOWUszcFhDcXJlMmxEM0g2LUdIN0RIa3lHRzdTMGk5aTZEWDZ5R0IwaXNVaEJ0UVNNVGxRTXpoLWpKUUtQZ2JybkFDWmljYXc?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon shares rise 1 1 after hedgeye switches to lon gurufocus",
+      "s": -0.70751
+    },
+    {
+      "ts": "2026-11-09T17:08:25+00:00",
+      "title": "On Holding (ONON) Set to Report Q3 Earnings on November 10 - GuruFocus",
+      "summary": "On Holding (ONON) Set to Report Q3 Earnings on November 10 GuruFocus",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNTnlPRnNnamE0R0NKSm45cmJrVUoxQXpfRnc1U0h2ZXNtR0hRdjdoNzUzSWlVd1VMb3FKWjJaSFVKM3VraFpLMDNtX3BtaDRRd0hfTVVFVjUxdFM5LU1zc3VuRVdtbHNycWZlOXc5T00xdUoxU21EYUJGbXNIbmQyYlRGdkd2bUhxZzYxOGNSaXhYd0VqRmFpOGIyMA?oc=5",
+      "source": "GuruFocus",
+      "provider": "google_news_rss",
+      "title_key": "on holding onon set to report q3 earnings on november 10 gurufocus",
+      "s": 0.892728
+    },
+    {
+      "ts": "2026-11-09T16:54:07+00:00",
+      "title": "On Holding AG (ONON) Stock Forecasts - Yahoo Finance",
+      "summary": "On Holding AG (ONON) Stock Forecasts Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNUC1XQndZTTZNMVpYSG4yS1NQa3U4MV9SOXh2RXllV0RHOGZ2cnB5c3ZpMERGR0xOZl9HOVR3cWdCc0VUNVM0MkhYb3RzZWdCUGNwTmc5WndQRVp0SzZtRmZKcmRLLUEwcU9zVTJXbXNWZG9aakcwZXRQMG1BZThFRFhWWUVrRmtYZUl3Yw?oc=5",
+      "source": "Yahoo Finance",
+      "provider": "google_news_rss",
+      "title_key": "on holding ag onon stock forecasts yahoo finance",
+      "s": 0.888488
+    },
     {
       "ts": "2026-11-09T02:15:02+00:00",
       "title": "Lululemon Athletica vs. On: Which Consumer Stock Is a Better Buy for 2027?",
@@ -73,7 +733,7 @@
       "source": "Yahoo Finance Singapore",
       "provider": "google_news_rss",
       "title_key": "on holding onon posted strong quarterly growth is the stock still a bargain yahoo finance singapore",
-      "s": -0.02673
+      "s": -0.026733
     },
     {
       "ts": "2026-11-06T15:24:17+00:00",
@@ -84,16 +744,6 @@
       "provider": "google_news_rss",
       "title_key": "why did on holding onon move today simply wall st",
       "s": 0.900077
-    },
-    {
-      "ts": "2026-11-06T01:11:12+00:00",
-      "title": "On Holding AG (ONON) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "On Holding AG (ONON) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5HQktWakdQbHg0Y0M1LW41UkxfWEpRYTZrUy01WU40aHdQTzVqeENnVlNhVWFOLVVvaVE1QzY4T1hYWV9lRmcyRFI4bGpXWFk2Unc?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "on holding ag onon stock price news quote history yahoo finance canada",
-      "s": 0.925371
     },
     {
       "ts": "2026-11-05T21:37:59+00:00",
@@ -113,7 +763,7 @@
       "source": "Simply Wall St",
       "provider": "google_news_rss",
       "title_key": "why on onon is up 5 8 and what s next simply wall st",
-      "s": -0.51924
+      "s": -0.519241
     },
     {
       "ts": "2026-11-05T12:15:08+00:00",
@@ -133,7 +783,7 @@
       "source": "MarketBeat",
       "provider": "google_news_rss",
       "title_key": "on nyse onon shares break above 200 day moving average what s next marketbeat",
-      "s": -0.63667
+      "s": -0.636669
     },
     {
       "ts": "2026-11-04T19:02:00+00:00",
@@ -153,7 +803,7 @@
       "source": "24/7 Wall St.",
       "provider": "yahoo_public",
       "title_key": "nike climbs 7 as dow rally lifts consumer stocks deckers gains 7 lululemon rises 6",
-      "s": -0.810621
+      "s": -0.81062
     },
     {
       "ts": "2026-11-04T16:14:20+00:00",
@@ -173,7 +823,7 @@
       "source": "GuruFocus",
       "provider": "google_news_rss",
       "title_key": "onon initiates coverage on wells fargo rating set to overweig gurufocus",
-      "s": 0.064715
+      "s": 0.064723
     },
     {
       "ts": "2026-11-04T15:00:34+00:00",
@@ -183,7 +833,7 @@
       "source": "Seeking Alpha",
       "provider": "google_news_rss",
       "title_key": "nike s pain is on s gain wells fargo onon nyse seeking alpha",
-      "s": 0.492078
+      "s": 0.492077
     },
     {
       "ts": "2026-11-04T14:43:22+00:00",
@@ -253,7 +903,7 @@
       "source": "ChartMill",
       "provider": "google_news_rss",
       "title_key": "onon news on holding ag class a nyse onon chartmill",
-      "s": 0.79488
+      "s": 0.794881
     },
     {
       "ts": "2026-11-03T18:00:31+00:00",
@@ -273,7 +923,7 @@
       "source": "Investing.com Canada",
       "provider": "google_news_rss",
       "title_key": "on holding shares may move 9 9 on nov 10 earnings report by investing com investing com canada",
-      "s": 0.607594
+      "s": 0.607593
     },
     {
       "ts": "2026-11-03T15:57:53+00:00",
@@ -283,7 +933,7 @@
       "source": "Investing.com Australia",
       "provider": "google_news_rss",
       "title_key": "on holding shares may move 9 9 on nov 10 earnings report by investing com investing com australia",
-      "s": 0.671462
+      "s": 0.671461
     },
     {
       "ts": "2026-11-03T14:10:55+00:00",
@@ -293,7 +943,7 @@
       "source": "Investing.com",
       "provider": "yahoo_public",
       "title_key": "evercore names new top pick this fashion stock joins top 5 outperformers",
-      "s": -0.196811
+      "s": -0.196809
     },
     {
       "ts": "2026-11-03T14:00:04+00:00",
@@ -333,7 +983,7 @@
       "source": "Zacks",
       "provider": "yahoo_public",
       "title_key": "sony s q2 earnings on deck can gaming maintain its profit growth",
-      "s": -0.419605
+      "s": -0.419606
     },
     {
       "ts": "2026-11-02T17:00:00+00:00",
@@ -513,7 +1163,7 @@
       "source": "Yahoo Finance UK",
       "provider": "google_news_rss",
       "title_key": "onon nov 2026 31 500 put onon261106p00031500 stock price news quote and history yahoo finance uk",
-      "s": 0.921436
+      "s": 0.921435
     },
     {
       "ts": "2026-10-31T01:20:32+00:00",
@@ -623,7 +1273,7 @@
       "source": "Yahoo! Finance Canada",
       "provider": "google_news_rss",
       "title_key": "onon nov 2026 37 500 call onon261106c00037500 stock price news quote history yahoo finance canada",
-      "s": 0.925991
+      "s": 0.92599
     },
     {
       "ts": "2026-10-31T00:55:57+00:00",
@@ -653,7 +1303,7 @@
       "source": "Yahoo! Finance Canada",
       "provider": "google_news_rss",
       "title_key": "onon nov 2026 36 500 call onon261106c00036500 stock price news quote history yahoo finance canada",
-      "s": 0.925518
+      "s": 0.925519
     },
     {
       "ts": "2026-10-31T00:55:33+00:00",
@@ -803,7 +1453,7 @@
       "source": "Simply Wall St",
       "provider": "google_news_rss",
       "title_key": "on holding onon could be 24 undervalued before q3 and mbapp china risk simply wall st",
-      "s": -0.210103
+      "s": -0.210104
     },
     {
       "ts": "2026-10-30T07:12:24+00:00",
@@ -913,7 +1563,7 @@
       "source": "Insider Monkey",
       "provider": "yahoo_public",
       "title_key": "deckers outdoor deck vs onon and nke can ugg and hoka growth drive a major re rating",
-      "s": 0.307743
+      "s": 0.307742
     },
     {
       "ts": "2026-10-29T17:19:32+00:00",
@@ -923,7 +1573,7 @@
       "source": "Yahoo Finance",
       "provider": "google_news_rss",
       "title_key": "deckers outdoor deck vs onon and nke can ugg and hoka growth drive a major re rating yahoo finance",
-      "s": 0.137927
+      "s": 0.137925
     },
     {
       "ts": "2026-10-29T12:43:23+00:00",
@@ -953,7 +1603,7 @@
       "source": "Motley Fool",
       "provider": "yahoo_public",
       "title_key": "monster beverage vs on holding which is the better growth stock",
-      "s": 0.823398
+      "s": 0.823397
     },
     {
       "ts": "2026-10-28T13:34:34+00:00",
@@ -973,7 +1623,7 @@
       "source": "Simply Wall St.",
       "provider": "yahoo_public",
       "title_key": "mbapp china backlash could be a game changer for on holding onon",
-      "s": 0.623512
+      "s": 0.623511
     },
     {
       "ts": "2026-10-28T06:08:00+00:00",
@@ -983,7 +1633,7 @@
       "source": "Yahoo Finance",
       "provider": "google_news_rss",
       "title_key": "mbapp china backlash could be a game changer for on holding onon yahoo finance",
-      "s": 0.717199
+      "s": 0.717198
     },
     {
       "ts": "2026-10-28T03:10:45+00:00",
@@ -1033,7 +1683,7 @@
       "source": "StocksToTrade",
       "provider": "google_news_rss",
       "title_key": "orion group holdings jumps 12 after earnings release stockstotrade",
-      "s": -0.601071
+      "s": -0.601073
     },
     {
       "ts": "2026-10-27T20:50:01+00:00",
@@ -1073,7 +1723,7 @@
       "source": "MarketBeat",
       "provider": "google_news_rss",
       "title_key": "on nyse onon shares gap down should you sell marketbeat",
-      "s": 0.126766
+      "s": 0.126765
     },
     {
       "ts": "2026-10-27T15:17:41+00:00",
@@ -1083,7 +1733,7 @@
       "source": "Investing.com",
       "provider": "yahoo_public",
       "title_key": "is the china risk real for on holding after mbapp backlash",
-      "s": 0.646279
+      "s": 0.646278
     },
     {
       "ts": "2026-10-27T15:00:12+00:00",
@@ -1133,7 +1783,7 @@
       "source": "Seeking Alpha",
       "provider": "google_news_rss",
       "title_key": "on holding falls after kylian mbapp controversy in china onon nyse seeking alpha",
-      "s": 0.066442
+      "s": 0.066441
     },
     {
       "ts": "2026-10-27T07:39:59+00:00",
@@ -1153,7 +1803,7 @@
       "source": "MarketBeat",
       "provider": "google_news_rss",
       "title_key": "on holding ag onon stock arnhold llc grows stake marketbeat",
-      "s": -0.816277
+      "s": -0.816276
     },
     {
       "ts": "2026-10-26T12:46:37+00:00",
@@ -1333,7 +1983,7 @@
       "source": "MarketBeat",
       "provider": "google_news_rss",
       "title_key": "investment house llc makes new investment in on holding ag onon marketbeat",
-      "s": 0.562249
+      "s": 0.562251
     },
     {
       "ts": "2026-10-23T09:31:28+00:00",
@@ -1353,7 +2003,7 @@
       "source": "MarketBeat",
       "provider": "google_news_rss",
       "title_key": "assenagon asset management s a acquires new stake in on holding ag onon marketbeat",
-      "s": 0.754899
+      "s": 0.7549
     },
     {
       "ts": "2026-10-23T07:00:00+00:00",
@@ -1433,7 +2083,7 @@
       "source": "Barrons.com",
       "provider": "yahoo_public",
       "title_key": "how ross and on holding can buck that retail funk",
-      "s": 0.632173
+      "s": 0.632174
     },
     {
       "ts": "2026-10-22T17:08:01+00:00",
@@ -1533,7 +2183,7 @@
       "source": "Yahoo Finance",
       "provider": "google_news_rss",
       "title_key": "on holding onon trades full price sales for volume will it pay off by 2029 yahoo finance",
-      "s": 0.871869
+      "s": 0.87187
     },
     {
       "ts": "2026-10-21T14:11:15+00:00",
@@ -1643,7 +2293,7 @@
       "source": "Yahoo! Finance Canada",
       "provider": "google_news_rss",
       "title_key": "onon nov 2026 28 000 put onon261106p00028000 interactive stock chart yahoo finance canada",
-      "s": 0.896353
+      "s": 0.896354
     },
     {
       "ts": "2026-10-20T04:45:15+00:00",
@@ -2163,7 +2813,7 @@
       "source": "Benzinga",
       "provider": "google_news_rss",
       "title_key": "on holding ag onon stock price quote news history benzinga",
-      "s": 0.92316
+      "s": 0.923161
     },
     {
       "ts": "2026-10-16T23:36:32+00:00",
@@ -2173,7 +2823,7 @@
       "source": "Stocktwits",
       "provider": "google_news_rss",
       "title_key": "why did xpev onon lhx stocks hit 52 week lows today stocktwits",
-      "s": 0.189737
+      "s": 0.189738
     },
     {
       "ts": "2026-10-16T21:08:07+00:00",
@@ -2203,7 +2853,7 @@
       "source": "Yahoo Finance",
       "provider": "google_news_rss",
       "title_key": "on holding onon falls more steeply than broader market what investors need to know yahoo finance",
-      "s": 0.074885
+      "s": 0.074884
     },
     {
       "ts": "2026-10-16T16:00:28+00:00",
@@ -2373,7 +3023,7 @@
       "source": "Insider Monkey",
       "provider": "yahoo_public",
       "title_key": "on holding onon targets nearly 7 billion in sales can premium pricing sustain growth",
-      "s": 0.060087
+      "s": 0.060086
     },
     {
       "ts": "2026-10-15T18:05:05+00:00",
@@ -2443,7 +3093,7 @@
       "source": "Yahoo Finance UK",
       "provider": "google_news_rss",
       "title_key": "onon oct 2026 35 000 put onon261023p00035000 interactive stock chart yahoo finance uk",
-      "s": 0.905695
+      "s": 0.905696
     },
     {
       "ts": "2026-10-14T08:26:14+00:00",
@@ -2593,7 +3243,7 @@
       "source": "Yahoo! Finance Canada",
       "provider": "google_news_rss",
       "title_key": "onon oct 2026 26 500 put onon261016p00026500 stock price news quote history yahoo finance canada",
-      "s": 0.926306
+      "s": 0.926305
     },
     {
       "ts": "2026-10-10T00:47:17+00:00",
@@ -2686,656 +3336,6 @@
       "s": 0.927041
     },
     {
-      "ts": "2026-10-10T00:33:11+00:00",
-      "title": "ONON Oct 2026 28.500 call (ONON261016C00028500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 28.500 call (ONON261016C00028500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE83M1p1Uk5DTV8xLVFFVHpraWdFMkhqYThWbUgwRGpPS0l3V0RKdFpGWHVtY2FpRFNkakUyRF9SdEV6bFhLSG1HY0kyYmdUNWdnbjgta2tKTmtJbmRHMkpiLTBUeUZLdw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 28 500 call onon261016c00028500 stock price news quote history yahoo finance canada",
-      "s": 0.926977
-    },
-    {
-      "ts": "2026-10-10T00:33:11+00:00",
-      "title": "ONON Oct 2026 27.000 put (ONON261016P00027000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 27.000 put (ONON261016P00027000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE01cWpfVmQ0NlVJTnNMUTRucjBaeGptalJXaWxvRlQ0c2d2ZzlLb3E1dDdvWG5RZldhbnNyTTdGN3EzUEdQV2xNc25QQUx4Ulc3NHFFeHV6c09uYU5FdmRqTTVIdVU1dw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 27 000 put onon261016p00027000 stock price news quote history yahoo finance canada",
-      "s": 0.925432
-    },
-    {
-      "ts": "2026-10-10T00:33:11+00:00",
-      "title": "ONON Oct 2026 24.500 call (ONON261016C00024500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 24.500 call (ONON261016C00024500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5SSVJ3YTBkdVhjdTEwVG1QY1BiaFQzeWRfa2o0NnhZbmhBTFJ6VWp6Sk4zUkg1TjBib0RFME12RDM4SVQ1MjQ2U29Qc2xrejB0TDQwa0RHQWlNZGFKc253SmtuTnR2UQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 24 500 call onon261016c00024500 stock price news quote history yahoo finance canada",
-      "s": 0.92835
-    },
-    {
-      "ts": "2026-10-10T00:29:13+00:00",
-      "title": "ONON Oct 2026 17.500 call (ONON261016C00017500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 17.500 call (ONON261016C00017500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5VM1h1UU45WGU2YTNYQVM4UGNhTXhBUE5IRTVZYVdpbVVxR29vakFKOHM3ZHFQMy1paXBLUFR3Q3hvdnZ1N1pXbzVEeTZRM3BCZWtxTDFyazl4X1BURGZjY3puSjZVZw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 17 500 call onon261016c00017500 stock price news quote history yahoo finance canada",
-      "s": 0.928099
-    },
-    {
-      "ts": "2026-10-10T00:25:46+00:00",
-      "title": "ONON Oct 2026 28.500 put (ONON261016P00028500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 28.500 put (ONON261016P00028500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5pMU5LajBmbjBNQmkxZ0pGMWwzbjY3dkNfb0w4ZHczamtDQzNGWHU0UkVFcHhZX3JWRGdBRnVnQ2U1OVdqa0F2dm15RkdtV1p2UWxRdjdINHB1VkhqQ0VPYXlleFNpdw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 28 500 put onon261016p00028500 stock price news quote history yahoo finance canada",
-      "s": 0.925385
-    },
-    {
-      "ts": "2026-10-10T00:25:45+00:00",
-      "title": "ONON Oct 2026 30.500 call (ONON261016C00030500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 30.500 call (ONON261016C00030500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5ick1NcEtEQktqazFobmJ3MThDLU9VMlFaSElqaUQ0V2FWanJjaWd6ODBwOWlHNXZkNVJhQ0RySXlCRXc4R1hGOTFFNlhpV3laSW1mZ1Roei11UVVhcVJSbVNVTGFzZw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 30 500 call onon261016c00030500 stock price news quote history yahoo finance canada",
-      "s": 0.926428
-    },
-    {
-      "ts": "2026-10-09T15:01:29+00:00",
-      "title": "ONON Oct 2026 17.000 put (ONON261009P00017000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 17.000 put (ONON261009P00017000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9lQlNZNmtGQUhETXFRcU00c1BnamZoTnpRLUpLUzFuZXhVS1pVT1QzSFhHbjJSMGpDQjlCTGxEYUEtSTVQcXFGelNSS0JsVzREd2JfMi1fa3lmMEpISG1iTG01N0JqQQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 17 000 put onon261009p00017000 stock price news quote and history yahoo finance uk",
-      "s": 0.925102
-    },
-    {
-      "ts": "2026-10-09T08:48:00+00:00",
-      "title": "Figs (FIGS) Soars 6.5%: Is Further Upside Left in the Stock?",
-      "summary": "Figs (FIGS) witnessed a jump in share price last session on above-average trading volume. The latest trend in earnings estimate revisions for the stock suggests that there could be more strength down the road.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/figs-figs-soars-6-5-084800034.html",
-      "source": "Zacks",
-      "provider": "yahoo_public",
-      "title_key": "figs figs soars 6 5 is further upside left in the stock",
-      "s": 0.253234
-    },
-    {
-      "ts": "2026-10-09T08:26:34+00:00",
-      "title": "ONON Oct 2026 21.000 call (ONON261009C00021000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 21.000 call (ONON261009C00021000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBNM2t0eTZVNEhDZVBBZXhUblNZVGNIZk0xaFppcUdldzhaWU51ZFJuWmd6MC1HUFhMdkJxZWZOeldhR3c3eFVEY1EwRjVqTnF0V3phWDVHeTI0YmdndUsxYnJqTHgzQQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 21 000 call onon261009c00021000 stock price news quote and history yahoo finance uk",
-      "s": 0.92541
-    },
-    {
-      "ts": "2026-10-09T07:00:00+00:00",
-      "title": "ONON Oct 2026 38.000 call (ONON261009C00038000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 38.000 call (ONON261009C00038000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFAteERYa2paY1cydm9mZ2Z2a0JYNHNaOFJPZ0dyZU9XZXBGRnR0RDZJWFhrenFDRi0xRHRzUXN5cG5QT3pxWDl4eHZ5ZVNHbU9NMWkzQ3lSMUxKb3JRZHVUc2pLUWdPQQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 38 000 call onon261009c00038000 stock price news quote and history yahoo finance uk",
-      "s": 0.924878
-    },
-    {
-      "ts": "2026-10-09T07:00:00+00:00",
-      "title": "ONON Oct 2026 27.000 put (ONON261009P00027000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 27.000 put (ONON261009P00027000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9TRzQ5WWpta1dhUnhTR3F0OWJiV0M3c3dTRS1FNkRLNDVPMm1GdDhGT1JyemFybjgzc1dDQzNGd0xWWk1FbG9xQnA4ZFpMeF9YM1NSTm54M3NCTi1BSlYxQ1FsdDR3QQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 27 000 put onon261009p00027000 stock price news quote and history yahoo finance uk",
-      "s": 0.923661
-    },
-    {
-      "ts": "2026-10-09T07:00:00+00:00",
-      "title": "ONON Oct 2026 24.500 call (ONON261009C00024500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 24.500 call (ONON261009C00024500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5Qa2plSGpLMmdWQXZVXy16Q3dsbEtjTzlPVTNRTDdXYTYxZVFKXzdoUUkzcWRra0s1X0xHcThTMnluUUcxbmVqMFZReTlzRzlUQ2NjdHJ3UzcwREVUOFhOWjExVjAzdw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 24 500 call onon261009c00024500 stock price news quote history yahoo finance canada",
-      "s": 0.928808
-    },
-    {
-      "ts": "2026-10-09T07:00:00+00:00",
-      "title": "ONON Oct 2026 17.000 call (ONON261009C00017000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 17.000 call (ONON261009C00017000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE84aTdqUUZRWXpKMlhQZXRKQmRhX0FLOEt0ZFNrd29Kd3FVblF3RTBhQnZZMTZuMkFlZE04Vm1kMVpUaEVxMmM0Rjh5bF8xWFI3TnltVU9kTG1qdHlDMzgyNVZ3VjFRZw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 17 000 call onon261009c00017000 stock price news quote history yahoo finance canada",
-      "s": 0.928619
-    },
-    {
-      "ts": "2026-10-09T01:42:18+00:00",
-      "title": "How Investors May Respond To On Holding (ONON) Earnings Estimates Rise - Simply Wall Street",
-      "summary": "How Investors May Respond To On Holding (ONON) Earnings Estimates Rise Simply Wall Street",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQSng3TXlNWFpWcXF0U0xlRDFkTldCSWw2NzZ5cUpCTWFqaDBSbUFOemVfNXFvUTFUVGNCVlJaTGh3MjZReDhwZnVuazVqcFZoV01BY1RqUktYdTJjcXJDUTRiNG5fUkFwQjhWeUJweDhWaDRncEJSTjNUX0g2MFZ1MFVjWTVscEtIT3JVRXp1R3h0TlRUNkVKU1c5WEdkZ1IwNDJuS0otMm96YkJ3eERHQlEyb1o1bVJLZ25mR1p4VmgzVUpqT1J4ZWFTbzVGUHFuMUHSAdcBQVVfeXFMTlE0TFFIV0JlMTVjYTJwblVSN3RsLUNMQl94T1hHMnVfWUxYaXl4SmdDUGJQZkRDMmlBQlprTnMxU0VPdmlNZ0s3NHRXLUtsUEVlVV92bWs1NVlnOHhzMVkxeFJmdm9Nb1VCdGFVOXctMExkOTdTNC1EbVZ2OVFCYjFyWkZ4dzQyTjVmSUJ3aDJsZWNTaUV2U05NTW9HZUROZldKTTFEXzg0Rk9vU2NNWFpCSVhxZF92TlRQTS14MmZLWWlBa0JMTmVFZml6bEFySFVrYnZUSGM?oc=5",
-      "source": "Simply Wall Street",
-      "provider": "google_news_rss",
-      "title_key": "how investors may respond to on holding onon earnings estimates rise simply wall street",
-      "s": 0.839044
-    },
-    {
-      "ts": "2026-10-09T00:20:29+00:00",
-      "title": "ONON Nov 2026 33.000 call (ONON261106C00033000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Nov 2026 33.000 call (ONON261106C00033000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBYdVFwOS1va2hod1E2X0tuUDhLbzdHTmNVMEdnTXFaUFI0UHZiQlg5YWY0US1LaDNTR0NqVkx0ZHBoblU5NUNHdHFHQjRnMTN2V1VLNG5wc29MZFlLa1A2clRXYkxnZw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon nov 2026 33 000 call onon261106c00033000 stock price news quote and history yahoo finance uk",
-      "s": 0.92503
-    },
-    {
-      "ts": "2026-10-08T21:00:05+00:00",
-      "title": "On Holding (ONON) Gains As Market Dips: What You Should Know",
-      "summary": "On Holding (ONON) closed at $34.04 in the latest trading session, marking a +2.47% move from the prior day.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-onon-gains-market-dips-210005929.html",
-      "source": "Zacks",
-      "provider": "yahoo_public",
-      "title_key": "on holding onon gains as market dips what you should know",
-      "s": 0.695395
-    },
-    {
-      "ts": "2026-10-08T21:00:05+00:00",
-      "title": "On Holding (ONON) Gains As Market Dips: What You Should Know - Yahoo Finance",
-      "summary": "On Holding (ONON) Gains As Market Dips: What You Should Know Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPcXhSWlRpaGw4cDA0ZnB2VGxxcE42a2dpaGwyeWNVQk85NjZRYUJnWTktem0zVjZ3N0FsNGZqZlFuRjZZWmM2bzhJYUtDbjc2WUZ4cTM4LThCSUEyVmYyYTBBaFBweGtOOXlKMXExaWRGTjZvV0NxcV9tV0JSbUpqbG80cWVqcElFUEdONTN1S1hKdE52OVhvZ29tZw?oc=5",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss",
-      "title_key": "on holding onon gains as market dips what you should know yahoo finance",
-      "s": -0.446632
-    },
-    {
-      "ts": "2026-10-08T18:09:44+00:00",
-      "title": "ONON Oct 2026 21.000 put (ONON261009P00021000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 21.000 put (ONON261009P00021000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1JSmhxTDh6LUVkeDFsc2dYNmRHdURxOWNXRUpmYUh4Nnc3VnJSeU4xcWRPbnNwX3FwVTB6UDBlbXVVZEdLYkRCMHdwOWRxUDIwZVhpSUZnNWl3Rml5ZklJc0oyRjMxQQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 21 000 put onon261009p00021000 stock price news quote and history yahoo finance uk",
-      "s": 0.923637
-    },
-    {
-      "ts": "2026-10-08T16:30:53+00:00",
-      "title": "ONON Oct 2026 38.000 put (ONON261009P00038000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 38.000 put (ONON261009P00038000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1EWC1xRWs4UVU5T090a2tBR1VLbXdUaFExNGM1MWNkSDgwQXI5aVRMUnlhal80T3BiMUpmbzZrTzVkcllpWjF0bWRzb2FFMks5SXVLbjkwMktwRnI5OEVRQU5pQWhLZw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 38 000 put onon261009p00038000 stock price news quote and history yahoo finance uk",
-      "s": 0.922929
-    },
-    {
-      "ts": "2026-10-08T14:58:16+00:00",
-      "title": "ONON Oct 2026 24.000 call (ONON261009C00024000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 24.000 call (ONON261009C00024000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE16LU9tZmYyQ1NCMmxickdpNU9JUHd3cUI2NXJiNExyazN1SVVWdVVmMGhBNy1DcTcwOE5DUGVfanVIdUNjUVNtcFJKTTBrUXNaQk5KRlJibmUxU2VfbDdQWkVIY0xYZw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 24 000 call onon261009c00024000 stock price news quote and history yahoo finance uk",
-      "s": 0.926288
-    },
-    {
-      "ts": "2026-10-08T10:23:00+00:00",
-      "title": "Nike and LVMH Took China for Granted—and Both Stocks Are Paying the Price",
-      "summary": "Fashion giants on both sides of the Atlantic are underestimating the Chinese shopper at their own peril.",
-      "url": "https://www.barrons.com/articles/nike-lvmh-stock-china-pressure-145be960?siteid=yhoof2&yptr=yahoo",
-      "source": "Barrons.com",
-      "provider": "yahoo_public",
-      "title_key": "nike and lvmh took china for granted and both stocks are paying the price",
-      "s": 0.046447
-    },
-    {
-      "ts": "2026-10-08T07:00:44+00:00",
-      "title": "ONON Oct 2026 20.000 put (ONON261009P00020000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 20.000 put (ONON261009P00020000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBfOUJiSHRaaDMwOThDVGM2cDlpV2RBcVVBMi1XWHhyUUlmbnIxUjFQZjc1SlNZUG5kdzU2c0wxN2FKc0Zhcm00SnY4Z1pWdXNGUV9TY0JNQndSQ0VYZU5GYWxrbkV2dw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 20 000 put onon261009p00020000 stock price news quote and history yahoo finance uk",
-      "s": 0.925528
-    },
-    {
-      "ts": "2026-10-08T07:00:00+00:00",
-      "title": "ONON Q2 2026 Earnings: Narrow EPS Beat Met With a 2.47% Share Gain - Net Profit Margin - https://www.dars.gov.et/",
-      "summary": "ONON Q2 2026 Earnings: Narrow EPS Beat Met With a 2.47% Share Gain - Net Profit Margin https://www.dars.gov.et/",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNbFM1YnVHcmhiZ2o4V3hUcFFzcUFlSW5xQzhCOGZicVctQ2ZIRmx5YjZDVTBQWEVVTGN0SFJReTNVMlZDS3BNVDZrVVpWdUtmUF92VDNfVXNGSTVxTTRxMkd0SVpndU9zcTAxSWkzb3I1dDM3alM5Vmg0aXdCa1dZM0RIQ0ktRHZBZ2RLNTJPWFRMRVpqVlRfc0VaN0o0OXJPdnZfaU56S0c?oc=5",
-      "source": "https://www.dars.gov.et/",
-      "provider": "google_news_rss",
-      "title_key": "onon q2 2026 earnings narrow eps beat met with a 2 47 share gain net profit margin",
-      "s": -0.427041
-    },
-    {
-      "ts": "2026-10-08T00:45:25+00:00",
-      "title": "ONON Oct 2026 23.500 call (ONON261009C00023500) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 23.500 call (ONON261009C00023500) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1JU25sWFc2VlRQajFrczZ1aFhhY2ozeXJXUzhCcHhrX2wxVmtqbk5XdURnNHR3NGFZRjdQemtQV1QyVEhRVUpTel9LelhKM1A5S0RRbzQ3WjRreXVLeGloSGtxZ0RVQQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 23 500 call onon261009c00023500 stock price news quote and history yahoo finance uk",
-      "s": 0.92603
-    },
-    {
-      "ts": "2026-10-07T17:04:06+00:00",
-      "title": "ONON Oct 2026 36.000 call (ONON261023C00036000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 36.000 call (ONON261023C00036000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1BcWd0MHljQ2dZNDNva2x6VWx3d1pXVzhMUUJ1aEE2RDhVc0RkbHJJZEtGMzBxaG9NdkVoakplZF9wSjhEYXhIY1QzaGQtc1BZdjBXOTRNVFRtQlZiQkcycFczcE9NZw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 36 000 call onon261023c00036000 stock price news quote and history yahoo finance uk",
-      "s": 0.924438
-    },
-    {
-      "ts": "2026-10-07T13:50:00+00:00",
-      "title": "On Holding Is Down Over 50% From Its All-Time High. Is a Push Into Football and Golf the Key to Unlocking Faster Growth?",
-      "summary": "On Holding just signed Kylian Mbappé and is launching into golf, but its own 2029 targets say the real growth engine is still running shoes.",
-      "url": "https://www.fool.com/investing/2026/10/07/on-holding-is-down-50-from-its-all-time-high-is-a/",
-      "source": "Motley Fool",
-      "provider": "yahoo_public",
-      "title_key": "on holding is down over 50 from its all time high is a push into football and golf the key to unlocking faster growth",
-      "s": 0.061691
-    },
-    {
-      "ts": "2026-10-07T12:00:05+00:00",
-      "title": "On Holding AG (ONON) is Attracting Investor Attention: Here is What You Should Know",
-      "summary": "On Holding (ONON) has received quite a bit of attention from Zacks.com users lately. Therefore, it is wise to be aware of the facts that can impact the stock's prospects.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-ag-onon-attracting-investor-120005856.html",
-      "source": "Zacks",
-      "provider": "yahoo_public",
-      "title_key": "on holding ag onon is attracting investor attention here is what you should know",
-      "s": 0.839731
-    },
-    {
-      "ts": "2026-10-07T12:00:05+00:00",
-      "title": "On Holding AG (ONON) is Attracting Investor Attention: Here is What You Should Know - Yahoo Finance",
-      "summary": "On Holding AG (ONON) is Attracting Investor Attention: Here is What You Should Know Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQQm1nRm9OSkJFNF9NMEpRZE1CNEdaVDlEQmo0Ynk2Yld0U1VuZ2ZMQnJuRHc4d2lJa0ZISHAzdlhxTTl1TmF0MWlVSDlBTEpOaWQ1YVFpT3piUmtxMy1mbk1EdVJhdTFPY1lNaWZmWE1VQTBYcnQzbll5MlUyT2UtY1g0ajVnRVVaQjlNcnc0NWtSaUVnWUFRTC1iWU9jRzB1cWc?oc=5",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss",
-      "title_key": "on holding ag onon is attracting investor attention here is what you should know yahoo finance",
-      "s": 0.836684
-    },
-    {
-      "ts": "2026-10-07T12:00:05+00:00",
-      "title": "On Holding AG (ONON) is Attracting Investor Attention: Here is What You Should Know - Yahoo Finance Singapore",
-      "summary": "On Holding AG (ONON) is Attracting Investor Attention: Here is What You Should Know Yahoo Finance Singapore",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOa21VdmxMRi1BNDNLXzRjcThhUU1idFR4bnRoYW95RXJXTWxsZ09Gcnk3N2dydXgyU2hJRGJOQUJBWVRjeGtBazZmbmNkZUllTVJKbVFQSnc0WWkwVU9YVkp5eHhBZ2lXdGZXZWFydllOQUw3UzRuSUxHLVlBUzBXeGU3eGhCLU5nZkQxRw?oc=5",
-      "source": "Yahoo Finance Singapore",
-      "provider": "google_news_rss",
-      "title_key": "on holding ag onon is attracting investor attention here is what you should know yahoo finance singapore",
-      "s": 0.834612
-    },
-    {
-      "ts": "2026-10-07T00:27:44+00:00",
-      "title": "ONON Oct 2026 18.000 call (ONON261009C00018000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 18.000 call (ONON261009C00018000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5neE83MWZ0a3U0SDR3R2VuWTVHNzl0T0VlZ0JWTmljcURLcGJDdXAwQi1QNmlydmZpNDF6cUJIelk5dVN6bWZpeWxUdnlCV09hN25aaXR0RVBFbWxab3g2TEFzY1BYdw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 18 000 call onon261009c00018000 stock price news quote and history yahoo finance uk",
-      "s": 0.926808
-    },
-    {
-      "ts": "2026-10-06T23:13:22+00:00",
-      "title": "Can On Holding (ONON) Justify Its Valuation Following Reaffirmed 2026 Guidance?",
-      "summary": "On Holding (NYSE:ONON) reaffirmed its earnings outlook for 2026 and guided to about 17% constant currency net sales growth for the third quarter, keeping investor attention firmly on its revenue trajectory. On Holding shares have climbed in the short term, with a 1-day share price return of 3.92% and a 7-day move of 12.12%, yet the stock is still down 29.44% on a year to date share price basis. The reaffirmed 2026 outlook and new lead independent director appointment appear to be feeding into...",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/holding-onon-justify-valuation-following-231322833.html",
-      "source": "Simply Wall St.",
-      "provider": "yahoo_public",
-      "title_key": "can on holding onon justify its valuation following reaffirmed 2026 guidance",
-      "s": 0.715669
-    },
-    {
-      "ts": "2026-10-06T23:13:22+00:00",
-      "title": "Can On Holding (ONON) Justify Its Valuation Following Reaffirmed 2026 Guidance? - Yahoo Finance",
-      "summary": "Can On Holding (ONON) Justify Its Valuation Following Reaffirmed 2026 Guidance? Yahoo Finance",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOYkFDWTdyc3dkUTJXWlRFNE5lcVRBWkk2S0xGUkZxZDhaM3c0U3daYmphSnZsY2RyWFMyWlZyMkhVUTdwNlZpZGVtLU5RX1hCMzVyQ3ZQRDcycmE0RzBYbFJraUV1ajduaW9XLXRqa01Zamd2SkZiVmhpbGN6dndEUVRKS29lSFJBb1VIOG8ycWZYTHhzZkp3cEFiNWZFRW5rZ05YZUdzNGk?oc=5",
-      "source": "Yahoo Finance",
-      "provider": "google_news_rss",
-      "title_key": "can on holding onon justify its valuation following reaffirmed 2026 guidance yahoo finance",
-      "s": 0.727134
-    },
-    {
-      "ts": "2026-10-06T18:29:48+00:00",
-      "title": "ONON Oct 2026 28.000 put (ONON261016P00028000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 28.000 put (ONON261016P00028000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5MTE0xaWdPaktWNEtkaExaV2xhRjE2eGMwcmpLb0dHTTNMQ3JOT3BweFJaXzM5UXpsQ0FhbFkyb1R6Yk9wVEtrRFZ6Ti1WU0lOUmU0TEUxaTBya0J5RGttMTQ5NXVkQQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 28 000 put onon261016p00028000 stock price news quote history yahoo finance canada",
-      "s": 0.9254
-    },
-    {
-      "ts": "2026-10-06T17:56:04+00:00",
-      "title": "ONON Oct 2026 25.000 put (ONON261009P00025000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 25.000 put (ONON261009P00025000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE43ekdMUVNQblZOZDIxVHYzRWxXd3BqZWpqbWFQbjdxSWtpV25wd2NYdFF0X2VjUUVycnNtdHRjcUFkaXpBWWJkWTBMd3VrVENkVmZObGlZSU82OUZtamdvQjlwOWNhdw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 25 000 put onon261009p00025000 stock price news quote and history yahoo finance uk",
-      "s": 0.924529
-    },
-    {
-      "ts": "2026-10-06T16:38:24+00:00",
-      "title": "ONON Oct 2026 26.000 put (ONON261009P00026000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 26.000 put (ONON261009P00026000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5sbGpaS0NHNVItUXlpMzduR0FKUjlqMVZSNHIxTFFpS3AxLUJwOFVTUnVURDV6dVFFVEp3R3A4dFpBSFJFMEJnU0lRUUlYTVRpd29aVGtDZ0tZRDM0VkZ0TjY4V3JMZw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 26 000 put onon261009p00026000 stock price news quote and history yahoo finance uk",
-      "s": 0.924242
-    },
-    {
-      "ts": "2026-10-06T16:28:19+00:00",
-      "title": "ONON Oct 2026 32.500 call (ONON261009C00032500) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 32.500 call (ONON261009C00032500) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1YcUxVUzk2N2pjY0VFY3JKekkwNkYzVmNCeWN0bjM5UVRPRHBmQkxzMmxJU0FXd05fLVViMi1LeVdsaVlXQXRNcHVhNjlrZHV0cFM0NmJIZ2ZGX3U1Q1pUNEdsVjUtZw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 32 500 call onon261009c00032500 stock price news quote and history yahoo finance uk",
-      "s": 0.925648
-    },
-    {
-      "ts": "2026-10-06T15:01:12+00:00",
-      "title": "ONON Oct 2026 32.000 call (ONON261009C00032000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 32.000 call (ONON261009C00032000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1obXk3SExTQVpZVlhCODlZRWZwN0lrbW92c21QUTJzOXUyc3pBYnVnd2Z6WV9kaGlsQTNwT2hlLWZvMV9KOVpMUm1qRnlWMHlnbUptOXNEcXBMaTNFbW9qSXd3SXhJQQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 32 000 call onon261009c00032000 stock price news quote and history yahoo finance uk",
-      "s": 0.925357
-    },
-    {
-      "ts": "2026-10-06T14:56:04+00:00",
-      "title": "ONON Oct 2026 19.000 call (ONON261009C00019000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 19.000 call (ONON261009C00019000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9KdGtxS21NSXlocEVGX1JRTGpFZjV6QXNpRlc2eHMyQ185eTN0RTExZThKMnpKNV9zRDBJZVZmUnJHXy1aMDNqRXpsbWVtYzh0UjhRamp5SVZ0Q2xsWkNnRE9JQ043UQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 19 000 call onon261009c00019000 stock price news quote and history yahoo finance uk",
-      "s": 0.92708
-    },
-    {
-      "ts": "2026-10-06T13:16:04+00:00",
-      "title": "ONON Oct 2026 17.000 call (ONON261009C00017000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 17.000 call (ONON261009C00017000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1ZajVISVBpT29obmo2b1RjdWJ6Y1pWcVMxdTBpTTRDLXlwNE1ZaVB4cDhUcnVXY2o0ckxsamNjMGpISU1xT3VETVZuUThZbTFGQy1KTkdyMHlESHhPU1BMeHBLRVdkQQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 17 000 call onon261009c00017000 stock price news quote and history yahoo finance uk",
-      "s": 0.927003
-    },
-    {
-      "ts": "2026-10-06T12:44:48+00:00",
-      "title": "ONON Oct 2026 25.500 call (ONON261009C00025500) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 25.500 call (ONON261009C00025500) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5QNHJVOWZaU3ZGeUpGTHluZnA0V2R0S1JXcENhczZQZ3p1djFDcDZublktVGFnQUVXUUdSTjJmTXNfdGVqLTJGTDR1bFowWkMzQzFjZXk3RFk4M0VEei1JeWJNVjlWUQ?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 25 500 call onon261009c00025500 stock price news quote and history yahoo finance uk",
-      "s": 0.926345
-    },
-    {
-      "ts": "2026-10-06T12:20:41+00:00",
-      "title": "ONON Oct 2026 22.000 call (ONON261009C00022000) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 22.000 call (ONON261009C00022000) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1OeVhvT2xCcFhQZFhlaVpzUk41OWZYWndfNTJIYjA1Y2doajZFSTVuUkJQWHpLRXRBMWtxLTNHSGdrWno1VVFSdVplZ2x4eFZpQjRJQmhGU2l5ZDZkUHVic01yTTh0dw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 22 000 call onon261009c00022000 stock price news quote and history yahoo finance uk",
-      "s": 0.925183
-    },
-    {
-      "ts": "2026-10-06T09:00:00+00:00",
-      "title": "Nscale Appoints Amy Banse to Board of Directors",
-      "summary": "Nscale Limited, the full-stack AI cloud platform, today announced the appointment of Amy Banse, a seasoned corporate executive and veteran board director, to its Board of Directors. Banse will also serve as Chair of the Compensation Committee.",
-      "url": "https://finance.yahoo.com/technology/ai/articles/nscale-appoints-amy-banse-board-090000225.html",
-      "source": "PR Newswire",
-      "provider": "yahoo_public",
-      "title_key": "nscale appoints amy banse to board of directors",
-      "s": 0.890781
-    },
-    {
-      "ts": "2026-10-06T07:00:00+00:00",
-      "title": "On Holding AG (ONON) Shares Surge 3.9% -- What GF Score of 79 Te - GuruFocus",
-      "summary": "On Holding AG (ONON) Shares Surge 3.9% -- What GF Score of 79 Te GuruFocus",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPem9ZTFN2MnFySHNoQmIxY0NmbFYwQUNqWGs0WVZSQnpKVWhtZjVFMFZHdm9GWkd6ZXZ5YlhEMjRXdGtBQV9xN1VmZnNRamRUR0RKdjh6RmM4QjZ4WkJxUHFsOG1DWWxIZ1BxUGxnXzI2d3o5Yk5qWG9GdGtqR0FuTElpanJvY3p3bVBNV25ucU9aeUpJejF0ZGpXVVRIajBWOGtUZUVHR0hlcmtqVnc?oc=5",
-      "source": "GuruFocus",
-      "provider": "google_news_rss",
-      "title_key": "on holding ag onon shares surge 3 9 what gf score of 79 te gurufocus",
-      "s": -0.91071
-    },
-    {
-      "ts": "2026-10-06T00:35:48+00:00",
-      "title": "Is On Holding (ONON) Undervalued Following Reaffirmed 2026 Guidance And Q3 Sales Targets? - Simply Wall Street",
-      "summary": "Is On Holding (ONON) Undervalued Following Reaffirmed 2026 Guidance And Q3 Sales Targets? Simply Wall Street",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQVFZJdHBsSVJmZEV3Q2FXYURCM0FsX21KcEZjaUtjTVpheU1tdEMzZVpmQVpJMGQ3ZjV1a2pfT0Y1Z0tVOXB5THB4TkNyMmtNWnV6cG5DNXZlakFfSU5FZ01Wek9CUnNHZDlfYVVzRXI3YzA2b01aTVFZRDV4dXRCUUliRXZQY0s5SktidUZuSVJ3M21BbkFuUHRfZVBZenJBWm1OZ3BmZDB1Y2dGRmhoeDR1ZWRVZTB4TnhwNGNHMHFkNkZTYUJMd3c2LXc1YTF4NnfSAdcBQVVfeXFMTWp3dXNhZktzcEl4TnJuQVBxMGhrREdpckVJVjdWLTlRWm1ZWlliMkdpY1VfQUJOZV8xMGVubkFOM3JlQUdabEF4V0oybWpJeExZb29uX2QzRUJCN3B1dmYwQU0xd0RqNm9zOHJZMWtLWmpDcTZIVXdaeUUxMlR6V2J1ZDVSSzM3TVlzT3RIeUhoa3l5S0poOW4yV3FXaXBDT0F0NDB1OGo3Y3o3ZXlwSk5lWHRweDBYTU02aXVpSW1jVHBTMjhOZVEzOVVndm9qNVBDUGY1MEU?oc=5",
-      "source": "Simply Wall Street",
-      "provider": "google_news_rss",
-      "title_key": "is on holding onon undervalued following reaffirmed 2026 guidance and q3 sales targets simply wall street",
-      "s": -0.782572
-    },
-    {
-      "ts": "2026-10-05T18:52:00+00:00",
-      "title": "Nike Stock Near 52-Week Lows: Can Its Dividend and Caitlin Clark Spark a Rebound?",
-      "summary": "Nike stock has now fallen nearly 50% in 2026, highlighting the considerable execution risk surrounding its turnaround in a weaker consumer retail environment.",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/nike-stock-near-52-week-185200962.html",
-      "source": "Zacks",
-      "provider": "yahoo_public",
-      "title_key": "nike stock near 52 week lows can its dividend and caitlin clark spark a rebound",
-      "s": -0.037638
-    },
-    {
-      "ts": "2026-10-05T07:00:00+00:00",
-      "title": "On Holding AG (ONON) Stock Up 3.3% and Still Undervalued -- GF S - GuruFocus",
-      "summary": "On Holding AG (ONON) Stock Up 3.3% and Still Undervalued -- GF S GuruFocus",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQSDV2RGNKeDYyYTg4QWdUYWFuUzNoeVNZZkFDTkNyaU5hQkloeFo1Z1hUSUY4bnE3czBBNldQMWcyM09aTlVNMU1hRTJUQTRRa25vRnhLcnE1d0FmZTF0S24tcHFSQ05JejliaVdIVTlxTTBYOC1vNE10enhUd2xiVWlLeU85aUJqaUFGelVHZkNZVjNSSDhoVkJaNXFvNnpDMFE1WGQxbmQzdw?oc=5",
-      "source": "GuruFocus",
-      "provider": "google_news_rss",
-      "title_key": "on holding ag onon stock up 3 3 and still undervalued gf s gurufocus",
-      "s": -0.916052
-    },
-    {
-      "ts": "2026-10-04T17:38:38+00:00",
-      "title": "ONON Oct 2026 25.500 call (ONON261009C00025500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 25.500 call (ONON261009C00025500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE82N1hzeTJZdEZGZlhqYlpPN2Z0cmFpWEI5QzBxMVg0N1hsdS11TzVpSG1ycF9LZk8xM0s0WjJOYVpVMWhaVjkxVXRrOThMRjVrcXRreW9QNF9DYXczYjBPMGdZTDd3Zw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 25 500 call onon261009c00025500 stock price news quote history yahoo finance canada",
-      "s": 0.928289
-    },
-    {
-      "ts": "2026-10-04T17:36:12+00:00",
-      "title": "ONON Oct 2026 39.000 put (ONON261009P00039000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 39.000 put (ONON261009P00039000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBORnRldlF4UkpVZ1Z3aF9kQkNQWWVsWFlfeXJocmJXNTA5RnI1ck1ORGppZVNVeTdIX1Z0S1BaRGdVa2Naeloxek9Wd2pwOGhBS2pFcUdhTGtNSHhFNkVlSU1xdVpSdw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 39 000 put onon261009p00039000 stock price news quote history yahoo finance canada",
-      "s": 0.925849
-    },
-    {
-      "ts": "2026-10-04T17:28:26+00:00",
-      "title": "ONON Oct 2026 37.000 put (ONON261009P00037000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 37.000 put (ONON261009P00037000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5NaEhzY1RJR20yNXFJQTFjNkxnR1ZZeHYyb25XaXU4Ri0xUVZtdk9Va2FlMUhGYzJ4ZFFSbmRQYVc3MHMzZEtHZURxblh0cl8wZm1GNzZaOGFYUWJmbGI1Slh4RnhQQQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 37 000 put onon261009p00037000 stock price news quote history yahoo finance canada",
-      "s": 0.925668
-    },
-    {
-      "ts": "2026-10-04T17:28:26+00:00",
-      "title": "ONON Oct 2026 22.000 call (ONON261009C00022000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 22.000 call (ONON261009C00022000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBCaFVrWmJKam1meGNzZDRCZ0lVc0tPcFFjbzZGaUlReWlLS2V6Y2J5NlUwV1RDeV9oUE8yWDFSUXBhR0pQSGRwRVZrSV9USWMwTU1JY2dhM1hSWVZkck5wUFlLcG9xUQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 22 000 call onon261009c00022000 stock price news quote history yahoo finance canada",
-      "s": 0.92698
-    },
-    {
-      "ts": "2026-10-04T17:28:26+00:00",
-      "title": "ONON Oct 2026 20.000 call (ONON261009C00020000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 20.000 call (ONON261009C00020000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5QQUlvTFdmd2YtMXZyZ18xNXhILThGNEJRYzAwdmVQQWJfdnppZWVmQ3NkZHdUTS1aU2VaSl85amcwQlhSTzJZNmJ1NmcyTGF6R0ZiaFNXT1JRX2NmblM5TkdnT1ZfZw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 20 000 call onon261009c00020000 stock price news quote history yahoo finance canada",
-      "s": 0.928667
-    },
-    {
-      "ts": "2026-10-04T17:28:26+00:00",
-      "title": "ONON Oct 2026 24.000 call (ONON261009C00024000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 24.000 call (ONON261009C00024000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9yWHRhc3lHa0xrb1pmSjNhamo5a0w0aWZWZ0tocEoza3p6WkljX29wOHU3T093NVdFck4wZVVleGlnRUs1dlNOQm5CR0ROQmUtaDRydGtNMjRWUnZzMU5mcUREajhRQQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 24 000 call onon261009c00024000 stock price news quote history yahoo finance canada",
-      "s": 0.928241
-    },
-    {
-      "ts": "2026-10-04T17:28:26+00:00",
-      "title": "ONON Oct 2026 18.000 call (ONON261009C00018000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 18.000 call (ONON261009C00018000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1ORWltbEJVUzI1UVlNa2ZUTnlQc0pEQXh3RDFPNWo2VFJxZkEwWXU4ZGdlb3hRUzZBVWI3TlhpUHd1ejVsYkhyX1ptdG9SX2pORTd3emtjekVOVGkyX0tfakM4NWtIQQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 18 000 call onon261009c00018000 stock price news quote history yahoo finance canada",
-      "s": 0.92843
-    },
-    {
-      "ts": "2026-10-04T17:28:26+00:00",
-      "title": "ONON Oct 2026 21.000 call (ONON261009C00021000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 21.000 call (ONON261009C00021000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE03UXpsYm1zVVNYN2pmb0lZVDBHVUtTQ2Zqb0VyQ0pydHZmcXJXTEs4c1ZfLUQ3R1dfdC1VbWkySFk5SDZNNUlHLTZBc0NuSXVpQktsSnhpclVCSUprNnR4Z1EzVjVWZw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 21 000 call onon261009c00021000 stock price news quote history yahoo finance canada",
-      "s": 0.9271
-    },
-    {
-      "ts": "2026-10-04T17:25:00+00:00",
-      "title": "Could Nike’s Brutal Sell-Off Finally Be Running Out of Steam?",
-      "summary": "Nike shares hit fresh lows after weak Q1 FY2027 results and soft guidance, but a strong balance sheet and debt reduction offer reasons to watch for a potential turnaround.",
-      "url": "https://www.marketbeat.com/articles/could-nikes-brutal-sell-off-finally-be-running-out-of-steam/?utm_source=yahoofinance&utm_medium=yahoofinance",
-      "source": "MarketBeat",
-      "provider": "yahoo_public",
-      "title_key": "could nike s brutal sell off finally be running out of steam",
-      "s": 0.100018
-    },
-    {
-      "ts": "2026-10-04T07:27:34+00:00",
-      "title": "ONON Nov 2026 20.000 put (ONON261120P00020000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Nov 2026 20.000 put (ONON261120P00020000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBYVXlmU2FsVWk4S09qWnd1TU5GbXE3SmhGRXNlU19qVlJ1elFRV3FzTWNQdGVWQVJhZWhLaUFNLVhFRjl0ZGZVRklVVWV1WnI0WGlRNUkweVF1WFQtc0swV0RCRGhKdw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon nov 2026 20 000 put onon261120p00020000 stock price news quote history yahoo finance canada",
-      "s": 0.926733
-    },
-    {
-      "ts": "2026-10-03T15:53:22+00:00",
-      "title": "ONON Oct 2026 30.500 call (ONON261009C00030500) stock price, news, quote and history - Yahoo Finance UK",
-      "summary": "ONON Oct 2026 30.500 call (ONON261009C00030500) stock price, news, quote and history Yahoo Finance UK",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1lTnFWcWNsUzZVRG84eFB4UHFxRDBTOEowZ2lySGtUQ0Jid1FCLVdYNWE4ZDBaRUNCM2I4Z1hnRndLc0pTUVRPNF83RlpGNFNKSldVcTMwTnNOeTY0QkVzVzc1aUZ4dw?oc=5",
-      "source": "Yahoo Finance UK",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 30 500 call onon261009c00030500 stock price news quote and history yahoo finance uk",
-      "s": 0.925047
-    },
-    {
-      "ts": "2026-10-03T11:45:19+00:00",
-      "title": "Nike’s Contrarian Strategy: Cut Volume, Restore Prestige",
-      "summary": "Nike is deliberately shrinking itself, slashing sales of its most iconic products and retreating from entire markets. Whether that painful gamble rebuilds the brand or just accelerates the decline is the question every shareholder now faces.",
-      "url": "https://247wallst.com/investing/2026/10/03/nikes-contrarian-strategy-cut-volume-restore-prestige/",
-      "source": "24/7 Wall St.",
-      "provider": "yahoo_public",
-      "title_key": "nike s contrarian strategy cut volume restore prestige",
-      "s": 0.570222
-    },
-    {
-      "ts": "2026-10-03T07:00:00+00:00",
-      "title": "Behavioral Patterns of ONON and Institutional Flows - Stock Traders Daily",
-      "summary": "Behavioral Patterns of ONON and Institutional Flows Stock Traders Daily",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNTER4clh4UG5DOFFyTFA3Z2NyRzhsR1R5Q2FKQU1McUd4eDNheDBpZFQ5NTJWVWp5eGFtNGcydW92YV9LN09RMGo1V2hhTEFfTmVTdWVqaC1McTdxUkpjSVZGY3RhQ2ZpczBIYk54NHlSQjlKUUlya0UzZFVaMUFrbjdESkc1VzFwRXJFS1FfT2IzZk9JVVhoNGRLb3lZYm5sSFJlLTA4VUVzaE1zWnJrOThrNVBMVnVkQ3JRMzlhWEw4LTVRZk00cm9B?oc=5",
-      "source": "Stock Traders Daily",
-      "provider": "google_news_rss",
-      "title_key": "behavioral patterns of onon and institutional flows stock traders daily",
-      "s": 0.87052
-    },
-    {
-      "ts": "2026-10-03T04:08:51+00:00",
-      "title": "ONON Oct 2026 28.000 put (ONON261009P00028000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 28.000 put (ONON261009P00028000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1mNENEV1I5ZGlWMXlWQjZORmZmUFYtNngyMGpjVzRDVHhtX3p4SXVVeEVmSkpxU0JBaGlLSlBVTkxZS0ZOSWMwaVNkNWtmdHJ2S3VZOFBQOENuME9pcXVqTHlHTnBaUQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 28 000 put onon261009p00028000 stock price news quote history yahoo finance canada",
-      "s": 0.925944
-    },
-    {
-      "ts": "2026-10-03T04:05:40+00:00",
-      "title": "ONON Oct 2026 35.000 put (ONON261009P00035000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 35.000 put (ONON261009P00035000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBmall0U2NUX0x0QktWcXUyODBDSWttc3l2akVydTk2c25OeWRoNFdJTW1EYTJaenBqbDNtMmJNVmlUYUsyT1N4RHRvMUV0bDBLS3l6SlhYM2RkZnFadk1lM2NPTGFTdw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 35 000 put onon261009p00035000 stock price news quote history yahoo finance canada",
-      "s": 0.925951
-    },
-    {
-      "ts": "2026-10-03T04:03:41+00:00",
-      "title": "ONON Oct 2026 22.000 put (ONON261009P00022000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 22.000 put (ONON261009P00022000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1wZWVoR1F5Q2xMdWJWUlVFMXFRMHVteHFNZlZRcEY2RFJNMU9pTDlvUzY5UlFkYUo4anU5TS1lakFJcEl4VVFDN19kTGRVYURLaTg2VmVTX1pYcmpaZW5wT3JyU2M4Zw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 22 000 put onon261009p00022000 stock price news quote history yahoo finance canada",
-      "s": 0.925613
-    },
-    {
-      "ts": "2026-10-03T01:30:31+00:00",
-      "title": "ONON Oct 2026 32.500 call (ONON261009C00032500) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 32.500 call (ONON261009C00032500) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9lTVo4UkxtQWlCNkNTei1BUmxpM2g3X1VsNTZ6SlZKUVhJaFB4blpleGM4a3ZCbnFCQURMREpKSXFiMzloQk5RZzluYTV5TVhWZWRhOThZUVdzYTVJQWYxakZCZ3R0QQ?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 32 500 call onon261009c00032500 stock price news quote history yahoo finance canada",
-      "s": 0.927874
-    },
-    {
-      "ts": "2026-10-03T01:28:42+00:00",
-      "title": "ONON Oct 2026 20.000 put (ONON261009P00020000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 20.000 put (ONON261009P00020000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE01aUVqZXNzdm53U2l6Qm9QRkhnWkNqemJZdkp4WGJ5SlVQcUhiWmVqV3ZYanhpRmtuaU1ua0c3V2NBQjRaNnY3N1FjdFdzYmdXTkdIdG40aVc1ckZDRDZJbTZ2SDNwdw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 20 000 put onon261009p00020000 stock price news quote history yahoo finance canada",
-      "s": 0.927284
-    },
-    {
-      "ts": "2026-10-03T01:28:41+00:00",
-      "title": "ONON Oct 2026 26.000 put (ONON261009P00026000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
-      "summary": "ONON Oct 2026 26.000 put (ONON261009P00026000) Stock Price, News, Quote & History Yahoo! Finance Canada",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBnSUdlQmtBVlcwMU50QWxqZmduUmdpVFFRZjQ3NFA3YlJNQ2hpMWg4dUZUMS1CUThJOWJXeHFzTGh3YzdZbFRQYm5pM29kN0pKSmt6Y1lmTHFEWE1QRmV1a3J2eE02Zw?oc=5",
-      "source": "Yahoo! Finance Canada",
-      "provider": "google_news_rss",
-      "title_key": "onon oct 2026 26 000 put onon261009p00026000 stock price news quote history yahoo finance canada",
-      "s": 0.926539
-    },
-    {
       "ts": "2026-09-30T23:19:05+00:00",
       "title": "ONON Oct 2026 27.000 put (ONON261002P00027000) Stock Price, News, Quote & History - Yahoo! Finance Canada",
       "summary": "ONON Oct 2026 27.000 put (ONON261002P00027000) Stock Price, News, Quote & History Yahoo! Finance Canada",
@@ -3373,7 +3373,7 @@
       "source": "MarketBeat",
       "provider": "google_news_rss",
       "title_key": "insider confidence is building in these 3 very different stocks marketbeat",
-      "s": -0.148501
+      "s": -0.1485
     },
     {
       "ts": "2026-08-26T07:00:00+00:00",
@@ -3383,7 +3383,7 @@
       "source": "Investing.com",
       "provider": "google_news_rss",
       "title_key": "on holding onon stock analysis oversold rsi meets a strong downtrend investing com",
-      "s": -0.061963
+      "s": -0.06196
     },
     {
       "ts": "2026-08-26T07:00:00+00:00",
@@ -3393,7 +3393,7 @@
       "source": "ChartMill",
       "provider": "google_news_rss",
       "title_key": "cheaper oil and a chip bid set the table before nvidia speaks chartmill",
-      "s": 0.008802
+      "s": 0.008803
     },
     {
       "ts": "2026-07-30T15:32:00+00:00",
@@ -3473,7 +3473,7 @@
       "source": "MarketBeat",
       "provider": "yahoo_public",
       "title_key": "these 3 beaten down stocks just saw 25 million in insider buying",
-      "s": 0.671766
+      "s": 0.671765
     },
     {
       "ts": "2026-05-27T18:52:00+00:00",
@@ -3483,7 +3483,7 @@
       "source": "Proactive",
       "provider": "yahoo_public",
       "title_key": "lululemon reaches truce with founder wilson but sales challenges linger jefferies says",
-      "s": -0.587628
+      "s": -0.587626
     },
     {
       "ts": "2026-04-30T19:54:00+00:00",
@@ -3493,7 +3493,7 @@
       "source": "Proactive",
       "provider": "yahoo_public",
       "title_key": "on holding q1 earnings seen as potential catalyst for valuation re rating says ubs",
-      "s": -0.888248
+      "s": -0.888247
     },
     {
       "ts": "2026-04-30T07:00:00+00:00",
@@ -3503,7 +3503,7 @@
       "source": "Seeking Alpha",
       "provider": "google_news_rss",
       "title_key": "on holding stock a strong business but a mispriced stock nyse onon seeking alpha",
-      "s": 0.66731
+      "s": 0.667311
     },
     {
       "ts": "2026-04-29T17:14:27+00:00",
@@ -3573,7 +3573,7 @@
       "source": "Footwear News",
       "provider": "yahoo_public",
       "title_key": "on s growth likely to come from asia and emea in 2026 as north american business matures",
-      "s": -0.73672
+      "s": -0.736719
     },
     {
       "ts": "2026-01-15T08:00:00+00:00",
@@ -3583,7 +3583,7 @@
       "source": "The Twelfth Magpie",
       "provider": "google_news_rss",
       "title_key": "forget rolls royce shares this top growth stock looks more attractive in 2026 the twelfth magpie",
-      "s": 0.17576
+      "s": 0.175761
     },
     {
       "ts": "2025-12-09T08:00:00+00:00",
@@ -3593,7 +3593,7 @@
       "source": "Quiver Quantitative",
       "provider": "google_news_rss",
       "title_key": "ishares systematic alternatives active etf holdings quiver quantitative",
-      "s": 0.82674
+      "s": 0.826741
     },
     {
       "ts": "2025-10-15T07:00:00+00:00",
