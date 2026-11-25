@@ -2,13 +2,10 @@
   "schema_version": 2,
   "symbol": "MLAB",
   "source_policy": "free_public_only",
-  "updated_at_utc": "2026-11-22T00:15:31.495322+00:00",
+  "updated_at_utc": "2026-11-25T09:33:11.618220+00:00",
   "price_source": "Yahoo Finance public market data via yfinance",
   "sentiment_source": "Scored retained Yahoo public + Google News RSS evidence; missing days remain missing",
   "date": [
-    "2021-11-22",
-    "2021-11-23",
-    "2021-11-24",
     "2021-11-26",
     "2021-11-29",
     "2021-11-30",
@@ -1260,12 +1257,11 @@
     "2026-11-17",
     "2026-11-18",
     "2026-11-19",
-    "2026-11-20"
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24"
   ],
   "price": [
-    311.29998779296875,
-    315.20001220703125,
-    315.25,
     312.79998779296875,
     313.30999755859375,
     308.7900085449219,
@@ -2517,12 +2513,11 @@
     134.60000610351562,
     137.80999755859375,
     133.41000366210938,
-    127.93000030517578
+    127.93000030517578,
+    133.35000610351562,
+    134.49000549316406
   ],
   "sentiment": [
-    null,
-    null,
-    null,
     null,
     null,
     null,
@@ -3115,7 +3110,7 @@
     null,
     null,
     null,
-    null,
+    0.670655,
     null,
     null,
     null,
@@ -3669,7 +3664,7 @@
     null,
     null,
     0.917455,
-    null,
+    0.912398,
     null,
     null,
     -0.141097,
@@ -3774,6 +3769,8 @@
     null,
     null,
     0.762049,
+    null,
+    null,
     null
   ],
   "sentiment_observed": [
@@ -4304,9 +4301,6 @@
     false,
     false,
     false,
-    false,
-    false,
-    false,
     true,
     false,
     false,
@@ -4358,7 +4352,6 @@
     false,
     false,
     true,
-    false,
     false,
     false,
     false,
@@ -4373,6 +4366,7 @@
     false,
     false,
     false,
+    true,
     false,
     false,
     false,
@@ -4926,7 +4920,7 @@
     false,
     false,
     true,
-    false,
+    true,
     false,
     false,
     true,
@@ -5031,6 +5025,8 @@
     false,
     false,
     true,
+    false,
+    false,
     false
   ]
 }
